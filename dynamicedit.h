@@ -21,6 +21,12 @@ class DynamicEdit : public QMultiLineEdit
 public:
     DynamicEdit(QWidget *parent = 0, const char *name = 0);
 
+    QSize sizeHint() const;
+
+protected:
+    bool focusNextPrevChild(bool next);
+    void keyPressEvent(QKeyEvent *e);
+
 private slots:
     bool adjustHeight();
 

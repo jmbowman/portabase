@@ -22,7 +22,7 @@ Crypto::Crypto(c4_Storage *outer, c4_Storage *inner) : container(outer), content
     hashfunc = hashFunctionFind("SHA-1");
     prng = randomGeneratorFind("FIPS 186");
     hashFunctionContextInit(&hfc, hashfunc);
-#ifndef DESKTOP
+#if !defined(Q_WS_WIN)
     // don't block on /dev/random waiting for enough entropy...
     setenv("BEECRYPT_ENTROPY", "urandom", 1);
 #endif

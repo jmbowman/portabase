@@ -14,6 +14,7 @@
 DynamicEdit::DynamicEdit(QWidget *parent, const char *name)
   : QTextEdit(parent, name), oldHeight(0)
 {
+    setTabChangesFocus(TRUE);
     connect(this, SIGNAL(textChanged()), this, SLOT(adjustHeight()));
     setTextFormat(Qt::PlainText);
     setWordWrap(QTextEdit::NoWrap);

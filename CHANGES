@@ -1,3 +1,13 @@
+2003-06-02  JMB  Dynamic string entry field bugfixes
+
+    Fixed a few usability problems with the new dynamic string entry
+    fields.  A horizontal scrollbar is never shown (it completely obscured
+    the text), it no longer defines a minimum width large enough to force
+    a horizontal scrollbar in the row editor, and tab and shift+tab can
+    once again be used to navigate between fields instead of adding a
+    tab to the displayed text.  (If you really want to add a tab, you
+    can copy and paste one from elsewhere.)
+
 2003-05-29  JMB  Dynamic multi-line string entry fields, CR-only CSV import
 
     Text boxes for string fields in the row editor now accept multiple
