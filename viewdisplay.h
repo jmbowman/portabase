@@ -46,6 +46,7 @@ public:
     void setSorting(QString name);
     void setFilter(QString name);
     void closeView();
+    void deleteAllRows();
 
 public slots:
     void addRow();

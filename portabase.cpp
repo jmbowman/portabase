@@ -48,6 +48,13 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     QString family = currentFont.family().lower();
     int size = currentFont.pointSize();
     Config conf("portabase");
+    conf.setGroup("General");
+    if (conf.readNumEntry("ConfirmDeletions", 0)) {
+        confirmDeletions = TRUE;
+    }
+    else {
+        confirmDeletions = FALSE;
+    }
     conf.setGroup("Font");
     family = conf.readEntry("Name", family);
     size = conf.readNumEntry("Size", size);
@@ -87,6 +94,12 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(act, SIGNAL(activated()), this, SLOT(dataExport()));
     act->addTo(file);
 
+    QIconSet deleteIcons = Resource::loadIconSet("trash");
+    act = new QAction(tr("Delete Rows In Filter"), deleteIcons,
+                      QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(deleteAllRows()));
+    act->addTo(file);
+
     act = new QAction(tr("Edit Columns"), QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(editColumns()));
     act->addTo(file);
@@ -106,7 +119,6 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(rowEditAction, SIGNAL(activated()), this, SLOT(editRow()));
     rowEditAction->addTo(toolbar);
 
-    QIconSet deleteIcons = Resource::loadIconSet("trash");
     rowDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null,
                                   0, this, 0);
     connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
@@ -211,6 +223,14 @@ void PortaBase::editPreferences()
         view->setFont(font);
         sort->setFont(font);
         filter->setFont(font);
+        Config conf("portabase");
+        conf.setGroup("General");
+        if (conf.readNumEntry("ConfirmDeletions", 0)) {
+            confirmDeletions = TRUE;
+        }
+        else {
+            confirmDeletions = FALSE;
+        }
     }
 }
 
@@ -356,7 +376,25 @@ void PortaBase::editRow()
 
 void PortaBase::deleteRow()
 {
+    if (confirmDeletions) {
+        if (QMessageBox::warning(this, tr("PortaBase"), tr("Delete this row?"),
+                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+            return;
+        }
+    }
     viewer->deleteRow();
+}
+
+void PortaBase::deleteAllRows()
+{
+    if (confirmDeletions) {
+        if (QMessageBox::warning(this, tr("PortaBase"),
+                                 tr("Delete all rows in the\ncurrent filter?"),
+                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+            return;
+        }
+    }
+    viewer->deleteAllRows();
 }
 
 void PortaBase::save()
@@ -657,6 +695,13 @@ void PortaBase::addFilter()
 
 void PortaBase::deleteView()
 {
+    if (confirmDeletions) {
+        if (QMessageBox::warning(this, tr("PortaBase"),
+                                 tr("Delete this view?"),
+                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+            return;
+        }
+    }
     viewer->closeView();
     db->deleteView(db->currentView());
     viewer->setView("_all");
@@ -666,6 +711,13 @@ void PortaBase::deleteView()
 
 void PortaBase::deleteSorting()
 {
+    if (confirmDeletions) {
+        if (QMessageBox::warning(this, tr("PortaBase"),
+                                 tr("Delete this sorting?"),
+                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+            return;
+        }
+    }
     db->deleteSorting(db->currentSorting());
     viewer->setSorting("");
     rebuildSortMenu();
@@ -674,6 +726,13 @@ void PortaBase::deleteSorting()
 
 void PortaBase::deleteFilter()
 {
+    if (confirmDeletions) {
+        if (QMessageBox::warning(this, tr("PortaBase"),
+                                 tr("Delete this filter?"),
+                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+            return;
+        }
+    }
     db->deleteFilter(db->currentFilter());
     viewer->setFilter("_allrows");
     rebuildFilterMenu();

@@ -11,6 +11,7 @@
 
 #include <qpe/config.h>
 #include <qapplication.h>
+#include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qfont.h>
 #include <qfontdatabase.h>
@@ -48,6 +49,17 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     new QLabel(tr("Sample"), fontGroup);
     sample = new QLabel(tr("Sample text"), fontGroup);
 
+    QGroupBox *generalGroup = new QGroupBox(1, Qt::Horizontal, tr("General"),
+                                            vbox);
+    confirmDeletions = new QCheckBox(tr("Confirm Deletions"), generalGroup);
+    Config conf("portabase");
+    conf.setGroup("General");
+    if (conf.readNumEntry("ConfirmDeletions", 0)) {
+        confirmDeletions->setChecked(TRUE);
+    }
+    else {
+        confirmDeletions->setChecked(FALSE);
+    }
     new QWidget(vbox);
 
     showMaximized();
@@ -91,6 +103,12 @@ void Preferences::updateSample(int sizeSelection)
 QFont Preferences::applyChanges()
 {
     Config conf("portabase");
+    conf.setGroup("General");
+    int confirm = 0;
+    if (confirmDeletions->isChecked()) {
+        confirm = 1;
+    }
+    conf.writeEntry("ConfirmDeletions", confirm);
     conf.setGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentItem()] / 10;

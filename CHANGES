@@ -1,10 +1,28 @@
-2002-11-17  JMB  Font selection
+2002-11-17  JMB  Font selection, empty date fields, delete confirmations,
+                 delete rows in filter
 
     There is now a preferences dialog (available under File->Preferences)
     which allows you to choose the font used throughout PortaBase.  This
     can be used, for example, to select a font capable of displaying
     Japanese characters or to choose a smaller font size in order to fit
     more information on the screen (although a bit less legibly).
+
+    Date fields can now be displayed as empty; either choose "None" as
+    the default value in the column editor or click the "None" button
+    next to the date in the row editor.  Empty dates are treated
+    internally as September 14, 1752 (the first day of the Gregorian
+    calendar), and behave accordingly in sorting, filtering, and column
+    statistics dialogs.
+
+    There is now an option to show delete confirmation dialogs whenever
+    you delete a row, view, sorting, or filter.  To enable these, check
+    "Delete Confirmations" under File->Preferences.
+
+    There is a new "Delete Rows In Filter" option in the "File" menu,
+    which deletes all rows that pass the current filter.  Thus you can
+    select the "All Rows" filter and purge the database in preparation
+    for a new CSV import, or use a filter to delete all rows where
+    a date field is earlier than a certain value, and so on.
 
 2002-11-16  JMB  Unicode support
 

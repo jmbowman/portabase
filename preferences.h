@@ -15,6 +15,7 @@
 #include <qdialog.h>
 #include <qfontdatabase.h>
 
+class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
@@ -44,6 +45,7 @@ private:
     QComboBox *fontName;
     QComboBox *fontSize;
     QLabel *sample;
+    QCheckBox *confirmDeletions;
 };
 
 #endif

@@ -41,6 +41,7 @@ public:
     void prepareData();
     QStringList getStatistics(int colIndex);
     QString getNote(int rowId, int colIndex);
+    void deleteAllRows();
 
 private:
     Database *db;

@@ -51,6 +51,7 @@ private slots:
     void addRow();
     void editRow();
     void deleteRow();
+    void deleteAllRows();
     void save();
     void dataImport();
     void dataExport();
@@ -113,6 +114,7 @@ private:
     QStringList filterNames;
     IntList filterIds;
     bool isEdited;
+    bool confirmDeletions;
 };
 
 #endif

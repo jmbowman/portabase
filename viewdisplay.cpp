@@ -306,6 +306,15 @@ void ViewDisplay::deleteRow()
     }
 }
 
+void ViewDisplay::deleteAllRows()
+{
+    view->deleteAllRows();
+    view->prepareData();
+    updateTable();
+    updateButtons();
+    setEdited(TRUE);
+}
+
 int ViewDisplay::selectedRowId()
 {
     QListViewItem *selected = table->selectedItem();

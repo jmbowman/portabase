@@ -150,6 +150,23 @@ int View::getId(int index)
     return Id (dbview[index]);
 }
 
+void View::deleteAllRows()
+{
+    // delete by descending ID so the IDs don't change with each deletion
+    c4_View sorted = dbview.SortOn(Id);
+    int count = dbview.GetSize();
+    int *ids = new int[count];
+    for (int i = 0; i < count; i++) {
+        ids[i] = Id (sorted[count - i - 1]);
+    }
+    // do deletions after obtaining all IDs so we don't need to worry about
+    // the view changing
+    for (int i = 0; i < count; i++) {
+        db->deleteRow(ids[i]);
+    }
+    delete[] ids;
+}
+
 QStringList View::getStatistics(int colIndex)
 {
     QStringList lines;
