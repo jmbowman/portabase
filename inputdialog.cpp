@@ -170,6 +170,7 @@ QString InputDialog::getText(const QString &caption, const QString &label,
     return result;
 }
 
+
 /*!
   Static convenience function to let the user select an item from a string list. \a caption is the text
   which is displayed in the title bar of the dialog. \a label is the text which

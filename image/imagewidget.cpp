@@ -1,7 +1,7 @@
 /*
  * imagewidget.cpp
  *
- * Changes (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * Changes (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * Original source:
 ************************************************************************
@@ -29,11 +29,12 @@
 
 #include <qimage.h>
 #include <qpainter.h>
+#include <qtimer.h>
 #include "imagewidget.h"
 #include "../view.h"
 
 ImageWidget::ImageWidget(QWidget *parent, const char *name, WFlags f)
-           : QWidget(parent, name, f), currentView(0), rowIndex(0), colIndex(0)
+           : QWidget(parent, name, f), currentView(0), rowIndex(0), colIndex(0), timer(0), slideshowDelay(0)
 {
     closing = FALSE;
     setBackgroundMode(NoBackground);
@@ -107,6 +108,7 @@ void ImageWidget::processArrow(int key)
     }
     int rowCount = currentView->getRowCount();
     bool changed = FALSE;
+    bool lastImage = FALSE;
     if (key == Key_Left || key == Key_Up) {
         if (rowIndex != 0) {
             rowIndex--;
@@ -118,14 +120,43 @@ void ImageWidget::processArrow(int key)
             rowIndex++;
             changed = TRUE;
         }
+        else {
+            lastImage = TRUE;
+        }
     }
     if (changed) {
-        int rowId = currentView->getId(rowIndex);
-        QImage image = currentView->getImage(rowId, colIndex);
-        pixmap.setOptimization(QPixmap::NormalOptim);
-        pixmap.convertFromImage(image);
-        repaint();
+        updateImage();
+        if (timer) {
+            timer->start(slideshowDelay * 1000);
+        }
     }
+    if (timer && lastImage) {
+        emit CancelPressed();
+        close();
+    }
+}
+
+void ImageWidget::updateImage()
+{
+    int rowId = currentView->getId(rowIndex);
+    QImage image = currentView->getImage(rowId, colIndex);
+    pixmap.setOptimization(QPixmap::NormalOptim);
+    pixmap.convertFromImage(image);
+    repaint();
+}
+
+void ImageWidget::slideshow(int delay)
+{
+    slideshowDelay = delay;
+    updateImage();
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(nextImage()));
+    timer->start(delay * 1000);
+}
+
+void ImageWidget::nextImage()
+{
+    processArrow(Key_Right);
 }
 
 void ImageWidget::closeEvent(QCloseEvent * e)

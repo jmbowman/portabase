@@ -1,7 +1,7 @@
 /*
  * imagewidget.h
  *
- * Changes (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * Changes (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * Original source:
 ************************************************************************
@@ -34,6 +34,7 @@
 #include <qpixmap.h>
 #include <qwidget.h>
 
+class QTimer;
 class View;
 
 class ImageWidget : public QWidget
@@ -45,6 +46,7 @@ class ImageWidget : public QWidget
 
     void setPixmap(QPixmap pm, bool resize=TRUE);
     void setView(View *view, int row, int column);
+    void slideshow(int delay);
 
 signals:
     void clicked();
@@ -58,14 +60,20 @@ protected:
     void closeEvent(QCloseEvent * e);
     bool closing;
 
+private slots:
+    void nextImage();
+
 private:
     void processArrow(int key);
+    void updateImage();
 
 private:
     QPixmap pixmap;
     View *currentView;
     int rowIndex;
     int colIndex;
+    QTimer *timer;
+    int slideshowDelay;
 };
 
 #endif

@@ -1,7 +1,7 @@
 /*
  * menuactions.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("Change Password", tr("Change Password"));
     textMap.insert("Import", tr("Import") + "...");
     textMap.insert("Export", tr("Export") + "...");
+    textMap.insert("Slideshow", tr("Slideshow") + "...");
     textMap.insert("Properties", tr("Properties"));
     textMap.insert("Preferences", tr("Preferences"));
     textMap.insert("Quit", tr("Quit"));
@@ -65,6 +66,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     menuTextMap.insert("Change Password", tr("C&hange Password"));
     menuTextMap.insert("Import", tr("&Import") + "...");
     menuTextMap.insert("Export", tr("E&xport") + "...");
+    menuTextMap.insert("Slideshow", tr("S&lideshow") + "...");
     menuTextMap.insert("Properties", tr("Proper&ties"));
     menuTextMap.insert("Preferences", tr("&Preferences"));
     menuTextMap.insert("Quit", tr("&Quit"));

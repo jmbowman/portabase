@@ -21,7 +21,6 @@ class Database;
 class DateWidget;
 class QCheckBox;
 class QComboBox;
-class QLabel;
 class QLineEdit;
 class QWidgetStack;
 class TimeWidget;

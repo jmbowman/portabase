@@ -1,7 +1,7 @@
 /*
  * portabase.h
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -91,6 +91,7 @@ private slots:
     void showHelp();
     void aboutPortaBase();
     void aboutQt();
+    void slideshow();
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -140,6 +141,7 @@ private:
     QAction *deleteRowsAction;
     QAction *editColsAction;
     QAction *manageEnumsAction;
+    QAction *slideshowAction;
     QAction *propsAction;
     QAction *prefsAction;
     QAction *closeAction;

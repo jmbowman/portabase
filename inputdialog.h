@@ -49,7 +49,7 @@ public:
     static QString getItem(const QString &caption, const QString &label,
                            const QStringList &list, int current = 0,
                            bool editable = TRUE, bool *ok = 0,
-                           QWidget *parent = 0, const char *name = 0 );
+                           QWidget *parent = 0, const char *name = 0);
 
 private slots:
     void tryAccept();

@@ -23,6 +23,9 @@ grep -w $EXT $QPEDIR/etc/mime.types |
                 exit 1
             fi
         else
+            echo "" >>$QPEDIR/etc/mime.types
+            sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba' $QPEDIR/etc/mime.types >$QPEDIR/etc/mime.types.new
+            mv $QPEDIR/etc/mime.types.new $QPEDIR/etc/mime.types
             echo "$NEWTYPE              $EXT" >>$QPEDIR/etc/mime.types
             exit 0
         fi
@@ -59,6 +62,9 @@ grep -w $EXT $QPEDIR/etc/mime.types |
                 exit 1
             fi
         else
+            echo "" >>$QPEDIR/etc/mime.types
+            sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba' $QPEDIR/etc/mime.types >$QPEDIR/etc/mime.types.new
+            mv $QPEDIR/etc/mime.types.new $QPEDIR/etc/mime.types
             echo "$NEWTYPE              $EXT" >>$QPEDIR/etc/mime.types
             exit 0
         fi

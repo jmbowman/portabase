@@ -1,7 +1,7 @@
 /*
  * viewdisplay.h
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,6 +57,7 @@ public:
     void deleteRow();
     bool editRow(int rowId=-1, bool copy=FALSE);
     void usePages(bool flag);
+    void slideshow();
 
 public slots:
     void viewRow();

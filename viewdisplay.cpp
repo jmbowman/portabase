@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@
 #include "view.h"
 #include "viewdisplay.h"
 #include "image/imageviewer.h"
+#include "image/slideshowdialog.h"
 
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0),
@@ -547,6 +548,29 @@ void ViewDisplay::showStatistics(int column)
                    QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
     mb.exec();
+}
+
+void ViewDisplay::slideshow()
+{
+    QStringList colNames = view->getColNames();
+    int *types = view->getColTypes();
+    int count = colNames.count();
+    QStringList imageCols;
+    for (int i = 0; i < count; i++) {
+        if (types[i] == IMAGE) {
+            imageCols.append(colNames[i]);
+        }
+    }
+    if (imageCols.count() == 0) {
+        QMessageBox::warning(this, tr("PortaBase"), tr("No image columns in this view"));
+        return;
+    }
+    if (view->getRowCount() == 0) {
+        QMessageBox::warning(this, tr("PortaBase"), tr("No rows in this view"));
+        return;
+    }
+    SlideshowDialog dialog(imageCols, view, this);
+    dialog.exec();
 }
 
 void ViewDisplay::keyReleaseEvent(QKeyEvent *e)

@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -162,6 +162,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(editColsAction, SIGNAL(activated()), this, SLOT(editColumns()));
     manageEnumsAction = ma->action("Edit Enums");
     connect(manageEnumsAction, SIGNAL(activated()), this, SLOT(editEnums()));
+    slideshowAction = ma->action("Slideshow");
+    connect(slideshowAction, SIGNAL(activated()), this, SLOT(slideshow()));
     propsAction = ma->action("Properties");
     connect(propsAction, SIGNAL(activated()), this, SLOT(viewProperties()));
     prefsAction = ma->action("Preferences");
@@ -811,6 +813,7 @@ void PortaBase::showDataViewer()
     deleteRowsAction->addTo(file);
     editColsAction->addTo(file);
     manageEnumsAction->addTo(file);
+    slideshowAction->addTo(file);
     propsAction->addTo(file);
     prefsAction->addTo(file);
     file->insertSeparator();
@@ -926,6 +929,11 @@ void PortaBase::closeEvent(QCloseEvent *e)
     else {
         e->accept();
     }
+}
+
+void PortaBase::slideshow()
+{
+    viewer->slideshow();
 }
 
 void PortaBase::addRow()

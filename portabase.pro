@@ -66,7 +66,8 @@ HEADERS         = portabase.h \
                   image/imageselector.h \
                   image/imageutils.h \
                   image/imageviewer.h \
-                  image/imagewidget.h
+                  image/imagewidget.h \
+                  image/slideshowdialog.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   inputdialog.cpp \
@@ -124,4 +125,5 @@ SOURCES         = main.cpp \
                   image/imageselector.cpp \
                   image/imageutils.cpp \
                   image/imageviewer.cpp \
-                  image/imagewidget.cpp
+                  image/imagewidget.cpp \
+                  image/slideshowdialog.cpp

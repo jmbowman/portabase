@@ -1,3 +1,18 @@
+2004-01-30  JMB  Slideshows
+
+    There is now a Slideshow item in the File menu; this lets you do a timed
+    slideshow over the images in one Image column of the current view.  Only
+    rows in the current filter are included, and they are shown in the order
+    of the current sorting.
+
+2004-01-27  JMB  More robust MIME type registration
+
+    Changed the postinst script used during Zaurus installation to check
+    for a missing newline at the end of the mime.types file before adding
+    entries for "application/portabase" and "text/x-csv".  Fixes cases where
+    the last installed program that added a new MIME type didn't end the
+    file correctly.
+
 2004-01-25  JMB  Translate date strings, fixed note button width, Row->Show
 
     Fixed the date display in the row editor, etc. to properly translate the
