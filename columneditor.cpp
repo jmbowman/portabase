@@ -26,6 +26,7 @@
 #include "database.h"
 #include "enumeditor.h"
 #include "notebutton.h"
+#include "numberwidget.h"
 
 ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
 {
@@ -64,6 +65,8 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
     defaultCheck = new QCheckBox(defaultStack);
     defaultLine = new QLineEdit(defaultStack);
     defaultNote = new NoteButton(tr("Default Note"), defaultStack);
+    defaultInteger = new NumberWidget(INTEGER, defaultStack);
+    defaultFloat = new NumberWidget(FLOAT, defaultStack);
     defaultDate = new QComboBox(FALSE, defaultStack);
     defaultDate->insertItem(tr("Today"));
     defaultDate->insertItem(tr("None"));
@@ -141,6 +144,12 @@ QString ColumnEditor::defaultValue()
     if (colType == BOOLEAN) {
         return defaultCheck->isChecked() ? "1" : "0";
     }
+    else if (colType == INTEGER) {
+        return defaultInteger->getValue();
+    }
+    else if (colType == FLOAT) {
+        return defaultFloat->getValue();
+    }
     else if (colType == NOTE) {
         return defaultNote->content();
     }
@@ -172,6 +181,13 @@ QString ColumnEditor::defaultValue()
 
 void ColumnEditor::setDefaultValue(QString newDefault)
 {
+    defaultLine->setText("");
+    defaultCheck->setChecked(FALSE);
+    defaultNote->setContent("");
+    defaultDate->setCurrentItem(0);
+    defaultTime->setCurrentItem(0);
+    defaultInteger->setValue("0");
+    defaultFloat->setValue("0");
     int colType = type();
     if (colType == BOOLEAN) {
         if (newDefault.toInt()) {
@@ -180,35 +196,19 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         else {
             defaultCheck->setChecked(FALSE);
         }
-        defaultLine->setText("");
-        defaultNote->setContent("");
-        defaultDate->setCurrentItem(0);
-        defaultTime->setCurrentItem(0);
     }
     else if (colType == NOTE) {
-        defaultLine->setText("");
-        defaultCheck->setChecked(FALSE);
         defaultNote->setContent(newDefault);
-        defaultDate->setCurrentItem(0);
-        defaultTime->setCurrentItem(0);
     }
     else if (colType == DATE) {
-        defaultLine->setText("");
-        defaultCheck->setChecked(FALSE);
-        defaultNote->setContent("");
         if (newDefault == "0") {
             defaultDate->setCurrentItem(0);
         }
         else {
             defaultDate->setCurrentItem(1);
         }
-        defaultTime->setCurrentItem(0);
     }
     else if (colType == TIME) {
-        defaultLine->setText("");
-        defaultCheck->setChecked(FALSE);
-        defaultNote->setContent("");
-        defaultDate->setCurrentItem(0);
         if (newDefault == "0") {
             defaultTime->setCurrentItem(0);
         }
@@ -217,21 +217,18 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         }
     }
     else if (colType >= FIRST_ENUM) {
-        defaultLine->setText("");
-        defaultCheck->setChecked(FALSE);
-        defaultNote->setContent("");
-        defaultDate->setCurrentItem(0);
-        defaultTime->setCurrentItem(0);
         QStringList options = db->listEnumOptions(colType);
         int selection = options.findIndex(newDefault);
         defaultEnum->setCurrentItem(selection);
     }
+    else if (colType == INTEGER) {
+        defaultInteger->setValue(newDefault);
+    }
+    else if (colType == FLOAT) {
+        defaultFloat->setValue(newDefault);
+    }
     else {
         defaultLine->setText(newDefault);
-        defaultCheck->setChecked(FALSE);
-        defaultNote->setContent("");
-        defaultDate->setCurrentItem(0);
-        defaultTime->setCurrentItem(0);
     }
 }
 
@@ -282,21 +279,13 @@ void ColumnEditor::updateDefaultWidget(int newType)
     else if (newType == TIME) {
         defaultStack->raiseWidget(defaultTime);
     }
+    else if (newType == INTEGER) {
+        defaultStack->raiseWidget(defaultInteger);
+    }
+    else if (newType == FLOAT) {
+        defaultStack->raiseWidget(defaultFloat);
+    }
     else {
         defaultStack->raiseWidget(defaultLine);
-        if (newType == INTEGER) {
-            bool ok;
-            defaultLine->text().toInt(&ok);
-            if (!ok) {
-                defaultLine->setText("0");
-            }
-        }
-        else if (newType == FLOAT) {
-            bool ok;
-            defaultLine->text().toDouble(&ok);
-            if (!ok) {
-                defaultLine->setText("0.0");
-            }
-        }
     }
 }

@@ -16,6 +16,7 @@
 
 class Database;
 class NoteButton;
+class NumberWidget;
 class QCheckBox;
 class QComboBox;
 class QLabel;
@@ -50,6 +51,8 @@ private:
     QCheckBox *defaultCheck;
     QLineEdit *defaultLine;
     NoteButton *defaultNote;
+    NumberWidget *defaultInteger;
+    NumberWidget *defaultFloat;
     QComboBox *defaultDate;
     QComboBox *defaultTime;
     QComboBox *defaultEnum;

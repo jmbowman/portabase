@@ -1,10 +1,17 @@
-2003-05-23  JMB  Alternate row shading
+2003-05-23  JMB  Alternate row shading, calculator widget
 
     Even and odd rows now use different background colors to make it easier
     to follow a row across the screen.  The default colors are white and
     light gray, but can be specified via buttons in the Preferences dialog.
     These colors are used in the data viewer, columns editor, view editor,
     and sorting editor.
+
+    At the end of each entry field for a numeric value (type integer or
+    decimal), there is a button which will launch a simple calculator,
+    starting with the currently displayed value.  Clicking OK will place
+    the current result into the entry field.  This makes it easier to enter
+    data that needs to be calculated before entry, and is often faster than
+    entering a number via the keyboard or an on-screen input method.
 
 2003-04-10  JMB  Windows CSV import bugfix
 

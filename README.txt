@@ -55,16 +55,20 @@ just follow the directions.
 Technical Info and Acknowledgements
 -----------------------------------
 PortaBase is written in C++, using the Qt and Qtopia libraries for GUI widgets,
-data structures, and communication with the PDA environment.  It uses the
-Metakit (http://www.equi4.com/metakit) embedded database library for data
-storage and manipulation.  It also uses an enhanced version of the
-QtaDatePicker widget developed by John McDonald, available from
-http://prdownloads.sourceforge.net/zaurus/.  The MobileDB import code was
-based on code from ZReader (http://www.codecubed.com/zreader/index.html).
-The CSV import code was based on code from KSpread
-(http://www.koffice.org/kspread/).  PortaBase uses the Beecrypt library
-(http://www.virtualunlimited.com/products/beecrypt/) for encryption
-algorithms and good random number generation.
+data structures, and communication with the PDA environment.  It also uses:
+- the Metakit (http://www.equi4.com/metakit) embedded database library for data
+storage and manipulation
+- an enhanced version of the QtaDatePicker widget developed by John McDonald,
+available from http://prdownloads.sourceforge.net/zaurus/
+- MobileDB import code based on code from ZReader
+(http://www.codecubed.com/zreader/index.html)
+- CSV import code based on code from KSpread (http://www.koffice.org/kspread/)
+- the Beecrypt library (http://www.virtualunlimited.com/products/beecrypt/)
+for encryption algorithms and good random number generation
+- the color picker dialog from HTML@Zaurus
+(http://www.codefactor.de/htmlAtZaurus.html), itself based on Qt's QColorDialog
+- a modified version of the calculator widget from KMyMoney2
+(http://kmymoney2.sourceforge.net/)
 
 License
 -------

@@ -23,6 +23,7 @@ class QCheckBox;
 class QComboBox;
 class QLineEdit;
 class NoteButton;
+class NumberWidget;
 class TimeWidget;
 
 typedef QValueList<QCheckBox*> CheckBoxList;
@@ -30,6 +31,7 @@ typedef QValueList<QLineEdit*> LineEditList;
 typedef QValueList<NoteButton*> NoteButtonList;
 typedef QValueList<DateWidget*> DateWidgetList;
 typedef QValueList<TimeWidget*> TimeWidgetList;
+typedef QValueList<NumberWidget*> NumberWidgetList;
 typedef QValueList<QComboBox*> ComboBoxList;
 
 class RowEditor: public QDialog
@@ -53,6 +55,7 @@ private:
     NoteButtonList noteButtons;
     DateWidgetList dateWidgets;
     TimeWidgetList timeWidgets;
+    NumberWidgetList numberWidgets;
     ComboBoxList comboBoxes;
 };
 

@@ -28,6 +28,7 @@
 #include "datatypes.h"
 #include "datewidget.h"
 #include "notebutton.h"
+#include "numberwidget.h"
 #include "roweditor.h"
 #include "timewidget.h"
 
@@ -56,12 +57,12 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
         }
         else {
             finished = TRUE;
-            int lineEditIndex = 0;
+            int numberWidgetIndex = 0;
             int timeWidgetIndex = 0;
             for (int i = 0; i < count; i++) {
                 int type = colTypes[i];
-                if (type == STRING || type == INTEGER || type == FLOAT) {
-                    QString value = lineEdits[lineEditIndex]->text();
+                if (type == INTEGER || type == FLOAT) {
+                    QString value = numberWidgets[numberWidgetIndex]->getValue();
                     QString error = db->isValidValue(type, value);
                     if (error != "") {
                         QString message = colNames[i] + " " + error;
@@ -69,7 +70,7 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
                         finished = FALSE;
                         break;
                     }
-                    lineEditIndex++;
+                    numberWidgetIndex++;
                 }
                 else if (type == TIME) {
                     QString value = timeWidgets[timeWidgetIndex]->getTime();
@@ -92,6 +93,7 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
         int noteButtonIndex = 0;
         int dateWidgetIndex = 0;
         int timeWidgetIndex = 0;
+        int numberWidgetIndex = 0;
         int comboBoxIndex = 0;
         for (int i = 0; i < count; i++) {
             int type = colTypes[i];
@@ -99,6 +101,10 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
                 int value = checkBoxes[checkBoxIndex]->isChecked() ? 1 : 0;
                 values.append(QString::number(value));
                 checkBoxIndex++;
+            }
+            else if (type == INTEGER || type == FLOAT) {
+                values.append(numberWidgets[numberWidgetIndex]->getValue());
+                numberWidgetIndex++;
             }
             else if (type == NOTE) {
                 values.append(noteButtons[noteButtonIndex]->content());
@@ -174,6 +180,11 @@ void RowEditor::addContent(int rowId)
                 box->setChecked(TRUE);
             }
             checkBoxes.append(box);
+        }
+        else if (type == INTEGER || type == FLOAT) {
+            NumberWidget *widget = new NumberWidget(type, grid);
+            widget->setValue(values[i]);
+            numberWidgets.append(widget);
         }
         else if (type == NOTE) {
             NoteButton *button = new NoteButton(name, grid);
