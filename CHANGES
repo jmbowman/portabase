@@ -1,9 +1,19 @@
-2003-01-04  JMB  File selector menu & toolbar, MobileDB import
+2003-01-04  JMB  File selector menu & toolbar, MobileDB import, better
+                 sizing of column and condition editor dialogs, file extension
+                 added for new files
 
     The file selector now has a "File" menu and 3 toolbar buttons; in
     addition to the previous functionality, these let you delete existing
     files.  The File menu also contains an option to create a new file
-    from the data in a MobileDB file.
+    from the data in a MobileDB file; MobileDB is a popular database
+    program for PalmOS, many reference database files and such can be
+    downloaded for it at no cost.
+
+    Applied a patch to improve sizing of the column editor and condition
+    editor dialogs; the hard-coded values didn't work well on the SL-C700.
+
+    Another patch for the SL-C700; new files now have the ".pob" extension
+    added so they show up correctly in the "Files" tab.
 
 2002-12-07  JMB  Time columns, date picker uses appropriate week start day
 

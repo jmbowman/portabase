@@ -11,8 +11,8 @@
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qgrid.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qlineedit.h>
 #include <qwidgetstack.h>
 #include "columneditor.h"
@@ -24,15 +24,15 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
 {
     db = dbase;
     setCaption(tr("PortaBase"));
-    QGrid *grid = new QGrid(2, this);
-    resize(200, 68);
-    grid->resize(size());
+    QGridLayout *grid = new QGridLayout(this, 3, 2);
 
-    new QLabel(tr("Name"), grid);
-    nameBox = new QLineEdit(grid);
+    grid->addWidget(new QLabel(tr("Name"), this), 0, 0);
+    nameBox = new QLineEdit(this);
+    grid->addWidget(nameBox, 0, 1);
 
-    new QLabel(tr("Type"), grid);
-    typeBox = new QComboBox(FALSE, grid);
+    grid->addWidget(new QLabel(tr("Type"), this), 1, 0);
+    typeBox = new QComboBox(FALSE, this);
+    grid->addWidget(typeBox, 1, 1);
     typeBox->insertItem(tr("String"));
     typeBox->insertItem(tr("Integer"));
     typeBox->insertItem(tr("Decimal"));
@@ -46,8 +46,10 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
             this, SLOT(updateDefaultWidget(int)));
     lastType = 0;
 
-    new QLabel(tr("Default"), grid);
-    defaultStack = new QWidgetStack(grid);
+    grid->addWidget(new QLabel(tr("Default"), this), 2, 0);
+    defaultStack = new QWidgetStack(this);
+    defaultStack->setMaximumHeight(typeBox->height());
+    grid->addWidget(defaultStack, 2, 1);
     defaultCheck = new QCheckBox(defaultStack);
     defaultLine = new QLineEdit(defaultStack);
     defaultNote = new NoteButton(tr("Default Note"), defaultStack);

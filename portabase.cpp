@@ -19,6 +19,7 @@
 #include <qaction.h>
 #include <qapplication.h>
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qfont.h>
 #include <qinputdialog.h>
 #include <qmainwindow.h>
@@ -311,6 +312,11 @@ void PortaBase::createFile(const DocLnk &f, int source)
             name = name.left(40);
         }
         doc->setName(name);
+        QString defaultFile = doc->file();
+        QFileInfo info(defaultFile);
+        // calling file() created an empty file, delete it now
+	QFile::remove(defaultFile);
+        doc->setFile(info.dirPath(true) + "/" + info.baseName() + ".pob");
     }
     else {
         ok = FALSE;

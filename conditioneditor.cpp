@@ -14,9 +14,9 @@
 #include <qdatetime.h>
 #include <qhbox.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
-#include <qvbox.h>
 #include <qwidgetstack.h>
 #include "condition.h"
 #include "conditioneditor.h"
@@ -28,11 +28,10 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
 {
     db = dbase;
     setCaption(tr("Condition Editor") + " - " + tr("PortaBase"));
-    QVBox *vbox = new QVBox(this);
-    resize(parent->width() - 10, 75);
-    vbox->resize(size());
+    QVBoxLayout *vbox = new QVBoxLayout(this);
 
-    QHBox *hbox = new QHBox(vbox);
+    QHBox *hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     columnList= new QComboBox(FALSE, hbox);
     columnList->insertItem(tr("Any text column"));
     colNames = db->listColumns();
@@ -47,7 +46,8 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
             this, SLOT(updateDisplay(int)));
     new QWidget(hbox);
 
-    hbox = new QHBox(vbox);
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     opList = new QComboBox(FALSE, hbox);
     stringOpList.append("=");
     stringOps.append(EQUALS);
@@ -81,16 +81,15 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     caseCheck = new QCheckBox(tr("Case sensitive"), hbox);
     new QWidget(hbox);
 
-    constantStack = new QWidgetStack(vbox);
+    constantStack = new QWidgetStack(this);
     constantStack->setMaximumHeight(columnList->height());
+    vbox->addWidget(constantStack);
     constantLine = new QLineEdit(constantStack);
     constantCheck = new QCheckBox(constantStack);
     constantDate = new DateWidget(constantStack);
     constantTime = new TimeWidget(constantStack);
     constantCombo = new QComboBox(FALSE, constantStack);
     constantStack->raiseWidget(constantLine);
-
-    new QWidget(vbox);
 }
 
 ConditionEditor::~ConditionEditor()
