@@ -13,7 +13,6 @@
 #include <qpe/filemanager.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
 #include <qaction.h>
@@ -25,6 +24,7 @@
 #include <qmainwindow.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
+#include <qtoolbar.h>
 #include <qwidgetstack.h>
 #include "condition.h"
 #include "conditioneditor.h"
@@ -61,14 +61,14 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     qApp->setFont(font);
     setFont(font);
 
-    QPEToolBar *bar = new QPEToolBar(this);
+    QToolBar *bar = new QToolBar(this);
 
     // "File" menu for the file selector
     bar->setHorizontalStretchable(TRUE);
     QPEMenuBar *mb = new QPEMenuBar(bar);
     selectorMenu = mb;
     QPopupMenu *selectorFile = new QPopupMenu(this);
-    selectorToolbar = new QPEToolBar(this);
+    selectorToolbar = new QToolBar(this);
 
     QIconSet addIcons = Resource::loadIconSet("new");
     QAction *act = new QAction(tr("New"), addIcons, QString::null, 0, this, 0);
@@ -109,7 +109,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     filter = new QPopupMenu(this);
     filter->setCheckable(TRUE);
 
-    toolbar = new QPEToolBar(this);
+    toolbar = new QToolBar(this);
 
     QIconSet saveIcons = Resource::loadIconSet("portabase/save");
     QPixmap disabledSave = Resource::loadPixmap("portabase/save_disabled");

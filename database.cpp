@@ -21,7 +21,7 @@
 #include "portabase.h"
 #include "view.h"
 
-Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcIndex("_fcindex"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
+Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
 {
     c4_View::_CaseSensitive = TRUE;
     checkedPixmap = Resource::loadPixmap("portabase/checked");
@@ -71,7 +71,7 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         sorts = file->GetAs("_sorts[_sname:S]");
         sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
         filters = file->GetAs("_filters[_fname:S]");
-        filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcindex:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
+        filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcposition:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
         enums = file->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
         enumOptions = file->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
         if (version < 3) {
@@ -86,7 +86,7 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         else {
             data = file->GetAs(formatString());
         }
-        if (version < 5) {
+        if (version < 6) {
             fixConditionIndices();
         }
         maxId = data.GetSize() - 1;
@@ -689,7 +689,7 @@ void Database::addFilter(Filter *filter)
         Condition *cond = filter->getCondition(i);
         c4_Row condRow;
         fcFilter (condRow) = utf8Name;
-        fcIndex (condRow) = i;
+        fcPosition (condRow) = i;
         fcColumn (condRow) = cond->getColName().utf8();
         fcOperator (condRow) = cond->getOperator();
         fcConstant (condRow) = cond->getConstant().utf8();
@@ -728,15 +728,15 @@ void Database::deleteFilterColumn(QString filterName, QString columnName)
     int removeIndex = filterConditions.Find(fcFilter [utf8FilterName]
                                             + fcColumn [utf8ColumnName]);
     while (removeIndex != -1) {
-        int position = fcIndex (filterConditions[removeIndex]);
+        int position = fcPosition (filterConditions[removeIndex]);
         position++;
         int nextIndex = filterConditions.Find(fcFilter [utf8FilterName]
-                                              + fcIndex [position]);
+                                              + fcPosition [position]);
         while (nextIndex != -1) {
-            fcIndex (filterConditions[nextIndex]) = position - 1;
+            fcPosition (filterConditions[nextIndex]) = position - 1;
             position++;
             nextIndex = filterConditions.Find(fcFilter [utf8FilterName]
-                                              + fcIndex [position]);
+                                              + fcPosition [position]);
         }
         filterConditions.RemoveAt(removeIndex);
         removeIndex = filterConditions.Find(fcFilter [utf8FilterName]
@@ -753,7 +753,7 @@ int Database::getConditionCount(QString filterName)
 Condition *Database::getCondition(QString filterName, int index)
 {
     int rowIndex = filterConditions.Find(fcFilter [filterName.utf8()]
-                                         + fcIndex [index]);
+                                         + fcPosition [index]);
     if (rowIndex == -1) {
         return new Condition(this);
     }
@@ -1404,7 +1404,7 @@ void Database::fixConditionIndices()
         int index = -1;
         for (int j = 0; j < conditionCount; j++) {
             index = filterConditions.Find(fcFilter [filterName], index + 1);
-            fcIndex (filterConditions[index]) = j;
+            fcPosition (filterConditions[index]) = j;
         }
     }
 }

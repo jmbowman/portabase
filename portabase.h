@@ -20,8 +20,8 @@
 class Database;
 class FileSelector;
 class QAction;
-class QPopupMenu;
 class QPEMenuBar;
+class QPopupMenu;
 class QToolButton;
 class QWidgetStack;
 class ViewDisplay;

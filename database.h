@@ -17,7 +17,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 5
+#define FILE_VERSION 6
 
 class Condition;
 class Filter;
@@ -166,7 +166,7 @@ private:
     c4_StringProp fName;
     // "_filterconditions" view
     c4_StringProp fcFilter;
-    c4_IntProp fcIndex;
+    c4_IntProp fcPosition;
     c4_StringProp fcColumn;
     c4_IntProp fcOperator;
     c4_StringProp fcConstant;

@@ -1,3 +1,13 @@
+2003-01-13  ################### PortaBase 1.4.1 ###################
+
+2003-01-13  JMB  Fixed upgrade of files that use filters
+
+    Converting any PortaBase file that used filters to a newer version
+    has often created corrupt files due to a bug in the filter conditions
+    table.  1.4 contained an attempted fix which didn't fully correct the
+    problem, this should (although already corrupted files still cannot
+    be opened.)
+
 2003-01-07  #################### PortaBase 1.4 ####################
 
 2003-01-07  JMB  Increased maximum rows per page, space launches row viewer
