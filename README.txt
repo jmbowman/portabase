@@ -1,4 +1,4 @@
-PortaBase 1.7 (May 2003)
+PortaBase 1.7 (June 2003)
 --------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on

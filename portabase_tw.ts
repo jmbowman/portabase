@@ -18,58 +18,15 @@
     <name>Calculator</name>
     <message>
         <source>PortaBase</source>
-        <translation type="unfinished">PortaBase</translation>
+        <translation>PortaBase</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">確定</translation>
+        <translation>確定</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
-    </message>
-</context>
-<context>
-    <name>ColorDialog</name>
-    <message>
-        <source>Hu&amp;e:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Sat:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Val:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Red:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bl&amp;ue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A&amp;lpha channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
-    </message>
-    <message>
-        <source>Choose color</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -340,11 +297,11 @@
     </message>
     <message>
         <source>Must have at least one option</source>
-        <translation>集合至少要有一個選項</translation>
+        <translation>集合至少要有一個項目</translation>
     </message>
     <message>
         <source>Option text</source>
-        <translation>選項文字內容</translation>
+        <translation>項目文字內容</translation>
     </message>
     <message>
         <source>Replace where used with:</source>
@@ -364,27 +321,27 @@
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished">排序</translation>
+        <translation>排序</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished">匯入</translation>
+        <translation>匯入</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">匯出</translation>
+        <translation>匯出</translation>
     </message>
     <message>
         <source>Text files</source>
-        <translation type="unfinished"></translation>
+        <translation>文字檔</translation>
     </message>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">選擇欲存檔之檔名</translation>
+        <translation>選擇欲儲存之檔名</translation>
     </message>
     <message>
         <source>Please select a file name</source>
-        <translation type="unfinished">請選擇一個檔名</translation>
+        <translation>請選擇一個檔名</translation>
     </message>
 </context>
 <context>
@@ -448,15 +405,15 @@ deleted:</source>
     <name>FileSelector</name>
     <message>
         <source>No file selected</source>
-        <translation type="obsolete">未選取任何檔案</translation>
+        <translation>未選取任何檔案</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="obsolete">PortaBase檔案</translation>
+        <translation>PortaBase檔案</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="obsolete">請選取一個檔案</translation>
+        <translation>請選取一個檔案</translation>
     </message>
 </context>
 <context>
@@ -518,65 +475,23 @@ deleted:</source>
     <name>HelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation type="obsolete">說明</translation>
+        <translation>說明</translation>
     </message>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
+        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="obsolete">上一頁</translation>
+        <translation>上一頁</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="obsolete">下一頁</translation>
+        <translation>下一頁</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-</context>
-<context>
-    <name>ImportDialog</name>
-    <message>
-        <source>Import rows from CSV file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import from MobileDB file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import from text file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import from XML file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation type="unfinished">PortaBase</translation>
-    </message>
-    <message>
-        <source>Text encoding</source>
-        <translation type="unfinished">文字編碼方式</translation>
-    </message>
-</context>
-<context>
-    <name>NewFileDialog</name>
-    <message>
-        <source>PortaBase</source>
-        <translation type="unfinished">PortaBase</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new file</source>
-        <translation type="unfinished">輸入檔案名稱</translation>
-    </message>
-    <message>
-        <source>Encrypted file</source>
-        <translation type="unfinished"></translation>
+        <translation>確定</translation>
     </message>
 </context>
 <context>
@@ -875,9 +790,9 @@ current filter?</source>
         <source>Web site at http://portabase.sourceforge.net</source>
         <translation>網址 http://portabase.sourceforge.net</translation>
     </message>
-    <message>
+   <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案已存在；要覆寫嗎？</translation>
     </message>
 </context>
 <context>
@@ -980,66 +895,7 @@ current filter?</source>
     </message>
     <message>
         <source>Row Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hu&amp;e:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Sat:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Val:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Red:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bl&amp;ue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A&amp;lpha channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Basic colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Custom colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Add to Custom Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>資料列背景色</translation>
     </message>
 </context>
 <context>
@@ -1257,7 +1113,7 @@ current filter?</source>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="obsolete">空間不足</translation>
+        <translation>空間不足</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -1266,55 +1122,55 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="obsolete">本程式無法建立組態資訊檔.請清出一些空間後再試一次</translation>
+        <translation>本程式無法建立組態資訊檔.請清出一些空間後再試一次</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="obsolete">內容以逗號分隔之文字檔</translation>
+        <translation>內容以逗號分隔之文字檔</translation>
     </message>
     <message>
         <source>MobileDB files</source>
-        <translation type="obsolete">MobileDB檔案</translation>
+        <translation>MobileDB檔案</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="obsolete">XML檔案</translation>
+        <translation>XML檔案</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="obsolete">請選取一個檔案</translation>
+        <translation>請選取一個檔案</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="obsolete">匯入</translation>
+        <translation>匯入</translation>
     </message>
     <message>
         <source>Text encoding</source>
-        <translation type="obsolete">文字編碼方式</translation>
+        <translation>文字編碼方式</translation>
     </message>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
+        <translation>PortaBase</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="obsolete">日</translation>
+        <translation>日</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="obsolete">月</translation>
+        <translation>月</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="obsolete">年</translation>
+        <translation>年</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="obsolete">下午</translation>
+        <translation>下午</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="obsolete">早上</translation>
+        <translation>早上</translation>
     </message>
     <message>
         <source>Error at</source>

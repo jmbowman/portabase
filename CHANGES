@@ -1,3 +1,8 @@
+2003-06-04  JMB  Columns editor bugfix
+
+    Fixed bug in columns editor where editing a column after adding one
+    of another type could result in incorrect data being displayed.
+
 2003-06-03  JMB  Taiwanese translation, updated Japanese UI translation
 
     Added a Taiwanese translation of the UI and help file provided by

@@ -288,4 +288,5 @@ void ColumnEditor::updateDefaultWidget(int newType)
     else {
         defaultStack->raiseWidget(defaultLine);
     }
+    lastType = typeBox->currentItem();
 }

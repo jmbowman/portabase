@@ -64,6 +64,8 @@ install: build
 	cp $(CURDIR)/desktop/icons/portabase/*.xpm $(CURDIR)/debian/portabase/usr/share/portabase/icons/portabase
 	cp $(CURDIR)/help/ja/html/portabase.html $(CURDIR)/debian/portabase/usr/share/doc/portabase/ja
 	cp $(CURDIR)/portabase_ja.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/ja/portabase.qm
+	cp $(CURDIR)/help/tw/html/portabase.html $(CURDIR)/debian/portabase/usr/share/doc/portabase/tw
+	cp $(CURDIR)/portabase_tw.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/tw/portabase.qm
 
 
 # Build architecture-independent files here.
