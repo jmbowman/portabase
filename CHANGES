@@ -1,3 +1,13 @@
+2003-07-23  JMB  Support for new Zaurus file navigation widget
+
+    PortaBase can now be built with support for Sharp's new file navigation
+    widget (available in the SL-5600, SL-5500 with the 3.10 ROM, and all
+    Japanese Linux-based Zaurus models).  This allows directory navigation
+    and creating files on the CF or SD cards without first saving them in
+    main memory, among other advantages.  Since the library containing this
+    widget is not available for older ROMs or OpenZaurus, the old Qtopia
+    file list widget is still supported as an option.
+
 2003-06-19  JMB  Calculated fields, view rename bugfix
 
     There is now a new column type called "Calculation", which represents

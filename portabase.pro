@@ -53,7 +53,8 @@ HEADERS         = portabase.h \
                   calc/calcnodeeditor.h \
                   calc/calcdateeditor.h \
                   calc/calceditor.h \
-                  calc/calcwidget.h
+                  calc/calcwidget.h \
+                  fileselector.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   inputdialog.cpp \
@@ -101,4 +102,5 @@ SOURCES         = main.cpp \
                   calc/calcnodeeditor.cpp \
                   calc/calcdateeditor.cpp \
                   calc/calceditor.cpp \
-                  calc/calcwidget.cpp
+                  calc/calcwidget.cpp \
+                  fileselector.cpp

@@ -12,10 +12,12 @@
 #ifndef PBFILESELECTOR_H
 #define PBFILESELECTOR_H
 
-#include <qpe/fileselector.h>
+#include <qpe/applnk.h>
+#include <sl/slfileselector.h>
+#include <qfileinfo.h>
 #include <qstringlist.h>
 
-class PBFileSelector : public FileSelector
+class PBFileSelector : public SlFileSelector
 {
     Q_OBJECT
 public:
@@ -24,14 +26,20 @@ public:
                    const char *name=0);
     ~PBFileSelector();
 
-    QString currentDir();
-    QStringList recent();
+    void reread();
+    const DocLnk *selected();
     bool copyFile(const DocLnk &src, const DocLnk &dst);
     bool renameFile(const DocLnk &src, const DocLnk &dst);
     void initFile(const DocLnk &doc);
 
+signals:
+    void fileSelected(const DocLnk &);
+
+private slots:
+    void passSelection(const QFileInfo &file);
+
 private:
-    void configureDocLnk(DocLnk &doclnk, const QString &name);
+    DocLnk selection;
 };
 
 #endif

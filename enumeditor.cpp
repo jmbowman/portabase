@@ -16,13 +16,20 @@
 #include "desktop/applnk.h"
 #include "desktop/filemanager.h"
 #include "desktop/importdialog.h"
+#include "desktop/newfiledialog.h"
 #include "desktop/qpeapplication.h"
 #include "desktop/resource.h"
 #else
 #include <qpe/applnk.h>
 #include <qpe/filemanager.h>
-#include "importdialog.h"
 #include "inputdialog.h"
+#if defined(SHARP)
+#include "sharp/importdialog.h"
+#include "sharp/newfiledialog.h"
+#else
+#include "importdialog.h"
+#include "newfiledialog.h"
+#endif
 #endif
 
 #include <qhbox.h>
@@ -190,46 +197,27 @@ void EnumEditor::importOptions()
 
 void EnumEditor::exportOptions()
 {
-    QString mimeType = "text/plain";
-    QString extension = ".txt";
-#if defined(Q_WS_WIN)
-    QString filter = tr("Text files") + " (*.txt)";
-#else
-    QString filter = QString::null;
-#endif
-#if defined(DESKTOP)
-    QString file = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
-                       filter, this, "export dialog",
-                       tr("Choose a filename to save under"));
-    if (!file.isEmpty()) {
-        DocLnk output;
-        output.setType(mimeType);
-        QFileInfo info(file);
-        output.setName(info.baseName());
-        output.setFile(info.dirPath(true) + "/" + info.baseName() + extension);
-#else
-    bool ok;
-    QString name = InputDialog::getText(tr("Export"),
-                                        tr("Please select a file name"),
-                                        QString::null, &ok, this);
-    if (ok && !name.isEmpty()) {
-        DocLnk output;
-        output.setType(mimeType);
-        if (name.length() > 40) {
-            name = name.left(40);
-        }
-        output.setName(name);
-#endif
-        QStringList options = listCurrentOptions();
-#if defined(Q_WS_WIN)
-        // use normal Windows line endings so Notepad, etc. are happy
-        QString lineEnd("\r\n");
-#else
-        QString lineEnd("\n");
-#endif
-        FileManager fm;
-        fm.saveFile(output, options.join(lineEnd) + lineEnd);
+    NewFileDialog filedlg(".txt", this);
+    if (!filedlg.exec()) {
+        return;
     }
+    DocLnk *output = filedlg.doc();
+    if (output == 0) {
+        return;
+    }
+    QStringList options = listCurrentOptions();
+#if defined(Q_WS_WIN)
+    // use normal Windows line endings so Notepad, etc. are happy
+    QString lineEnd("\r\n");
+#else
+    QString lineEnd("\n");
+#endif
+    FileManager fm;
+    fm.saveFile(*output, options.join(lineEnd) + lineEnd);
+#if defined(SHARP)
+    QFile::remove(output->linkFile());
+#endif
+    delete output;
 }
 
 void EnumEditor::addOption()

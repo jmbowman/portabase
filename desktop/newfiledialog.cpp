@@ -41,6 +41,13 @@ int NewFileDialog::exec()
     else if (ext == ".csv") {
         filter = QObject::tr("Comma Separated Value files") + " (*.csv)";
     }
+    else if (ext == ".txt") {
+#if defined(Q_WS_WIN)
+        filter = tr("Text files") + " (*.txt)";
+#else
+        filter = QString::null;
+#endif
+    }
     else {
         filter = QObject::tr("XML files") + " (*.xml)";
     }

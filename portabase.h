@@ -52,6 +52,8 @@ private slots:
     void copyFile();
     void renameFile();
     void refreshFileList();
+    void viewList();
+    void viewIcons();
     bool editColumns();
     void editEnums();
     void editPreferences();
@@ -119,6 +121,8 @@ private:
     QAction *refreshAction;
     QAction *importAction;
     QAction *quitAction;
+    QAction *viewListAction;
+    QAction *viewIconsAction;
     QAction *fileSaveAction;
     QAction *changePassAction;
     QAction *dataImportAction;

@@ -13,6 +13,7 @@
 #define FILESELECTOR_H
 
 #include <qlabel.h>
+#include <qstringlist.h>
 #include "applnk.h"
 
 class PBFileSelector : public QLabel
@@ -20,16 +21,23 @@ class PBFileSelector : public QLabel
     Q_OBJECT
 
 public:
-    PBFileSelector(const QString &mimefilter, QWidget *parent, const char *name=0);
+    PBFileSelector(const QString &dirPath, const QStringList &recentFiles,
+                   const QString &mimefilter, QWidget *parent,
+                   const char *name=0);
     ~PBFileSelector();
     void reread();
     const DocLnk *selected();
+    QString currentDir();
+    QStringList recent();
+    void initFile(const DocLnk &doc);
 
 signals:
     void fileSelected(const DocLnk &);
 
 private:
     QWidget *parentWidget;
+    QString lastDir;
+    QStringList files;
 };
 
 #endif

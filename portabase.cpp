@@ -13,7 +13,6 @@
 #include <qfiledialog.h>
 #include <qinputdialog.h>
 #include "desktop/config.h"
-#include "desktop/filemanager.h"
 #include "desktop/fileselector.h"
 #include "desktop/helpbrowser.h"
 #include "desktop/newfiledialog.h"
@@ -23,17 +22,23 @@
 #include "desktop/importdialog.h"
 #else
 #include <qpe/config.h>
-#include <qpe/filemanager.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/resource.h>
-#include "importdialog.h"
 #include "inputdialog.h"
-#include "newfiledialog.h"
+#if defined(SHARP)
+#include "sharp/fileselector.h"
+#include "sharp/importdialog.h"
+#include "sharp/newfiledialog.h"
+#else
 #include "fileselector.h"
+#include "importdialog.h"
+#include "newfiledialog.h"
+#endif
 #endif
 
 #include <qaction.h>
 #include <qapplication.h>
+#include <qdir.h>
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qfont.h>
@@ -134,6 +139,12 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     quitAction = new QAction(tr("Quit"), quitIcons, QString::null, 0, this);
     connect(quitAction, SIGNAL(activated()), this, SLOT(close()));
 
+    viewListAction = new QAction(tr("List"), QString::null, 0, this, 0, TRUE);
+    connect(viewListAction, SIGNAL(activated()), this, SLOT(viewList()));
+    viewIconsAction = new QAction(tr("Icons"), QString::null, 0, this, 0,
+                                  TRUE);
+    connect(viewIconsAction, SIGNAL(activated()), this, SLOT(viewIcons()));
+
     // File menu actions
     fileSaveAction = new QAction(tr("Save"), saveIcons,
                                  QString::null, 0, this);
@@ -233,9 +244,31 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     viewer = new ViewDisplay(this, mainStack);
     viewer->allowBooleanToggle(booleanToggle);
 
-    fileSelector = new PBFileSelector("application/portabase", mainStack);
+    conf.setGroup("Files");
+    QDir defaultDir = QDir::home();
+    defaultDir.cd("Documents");
+    QString lastDir = conf.readEntry("LastDir", defaultDir.absPath());
+    if (!QDir(lastDir).exists()) {
+        lastDir = defaultDir.absPath();
+    }
+    QStringList recent;
+    for (int i = 0; i < 5; i++) {
+        QString path = conf.readEntry(QString().sprintf("Recent%i", i), "");
+        if (!path.isEmpty()) {
+            recent.append(path);
+        }
+    }
+    fileSelector = new PBFileSelector(lastDir, recent,
+                                      "application/portabase", mainStack);
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(openFile(const DocLnk &)));
+    QString viewMode = conf.readEntry("View", "Icon");
+    if (viewMode == "Icon") {
+        viewIcons();
+    }
+    else {
+        viewList();
+    }
     fileOpen();
 #if defined(DESKTOP)
     resize(600, 400);
@@ -249,7 +282,18 @@ const QColor *PortaBase::oddRowColor = &Qt::lightGray;
 
 PortaBase::~PortaBase()
 {
-
+    Config conf("portabase");
+    conf.setGroup("Files");
+    QDir lastDir(fileSelector->currentDir());
+    conf.writeEntry("LastDir", lastDir.absPath());
+    QStringList files = fileSelector->recent();
+    while (files.count() < 5) {
+        files.append("");
+    }
+    for (int i = 0; i < 5; i++) {
+        conf.writeEntry(QString().sprintf("Recent%i", i), files[i]);
+    }
+    conf.writeEntry("View", viewIconsAction->isOn() ? "Icon" : "List");
 }
 
 bool PortaBase::editColumns()
@@ -378,8 +422,7 @@ void PortaBase::createFile(int source)
                              tr("Unable to create new file"));
         return;
     }
-    FileManager fm;
-    fm.saveFile(*doc, "");
+    fileSelector->initFile(*doc);
     int openResult;
     bool encrypt = filedlg.encryption();
     db = new Database(doc->file(), &openResult, encrypt ? 1 : 0);
@@ -546,8 +589,7 @@ void PortaBase::copyFile()
     if (ok && !name.isEmpty()) {
         DocLnk copy;
         configureDocLnk(copy, name);
-        FileManager fm;
-        ok = fm.copyFile(*selection, copy);
+        ok = fileSelector->copyFile(*selection, copy);
     }
     if (ok) {
         fileSelector->reread();
@@ -571,16 +613,15 @@ void PortaBase::renameFile()
     QString name = InputDialog::getText(tr("PortaBase"),
                                         tr("Enter the new file name"),
                                         QString::null, &ok, this);
-    if (ok && !name.isEmpty()) {
-        DocLnk copy;
-        configureDocLnk(copy, name);
-        FileManager fm;
-        // actual moving would be more efficient, but harder to implement...
-        ok = fm.copyFile(*selection, copy);
+    if (ok) {
+        ok = !name.isEmpty();
     }
     if (ok) {
-        QFile::remove(selection->file());
-        QFile::remove(selection->linkFile());
+        DocLnk copy;
+        configureDocLnk(copy, name);
+        ok = fileSelector->renameFile(*selection, copy);
+    }
+    if (ok) {
         fileSelector->reread();
     }
     else {
@@ -595,6 +636,30 @@ void PortaBase::refreshFileList()
 {
     fileSelector->reread();
     needsRefresh = FALSE;
+}
+
+void PortaBase::viewList()
+{
+#ifdef SHARP
+    fileSelector->setListView();
+    viewListAction->setOn(TRUE);
+    viewIconsAction->setOn(FALSE);
+    Config conf("portabase");
+    conf.setGroup("Files");
+    conf.writeEntry("View", "List");
+#endif
+}
+
+void PortaBase::viewIcons()
+{
+#ifdef SHARP
+    fileSelector->setIconView();
+    viewListAction->setOn(FALSE);
+    viewIconsAction->setOn(TRUE);
+    Config conf("portabase");
+    conf.setGroup("Files");
+    conf.writeEntry("View", "Icon");
+#endif
 }
 
 void PortaBase::updateCaption(const QString &name)
@@ -649,6 +714,15 @@ void PortaBase::showFileSelector()
     quitAction->addTo(file);
 
     menu->insertItem(tr("File"), file);
+
+#ifdef SHARP
+    view = new QPopupMenu(this);
+    view->setCheckable(TRUE);
+    viewListAction->addTo(view);
+    viewIconsAction->addTo(view);
+    menu->insertItem(tr("View"), view);
+#endif
+
 #ifdef DESKTOP
     help = new QPopupMenu(this);
     helpAction->addTo(help);
@@ -853,8 +927,7 @@ void PortaBase::dataExport()
     if (output == 0) {
         return;
     }
-    FileManager fm;
-    fm.saveFile(*output, "");
+    fileSelector->initFile(*output);
     if (extension == ".csv") {
         viewer->exportToCSV(output->file());
     }

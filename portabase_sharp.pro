@@ -2,12 +2,13 @@ TEMPLATE        = app
 #CONFIG         = qt warn_on debug
 CONFIG          = qt warn_on release
 TRANSLATIONS    = portabase_ja.ts portabase_tw.ts
-TMAKE_CC        = gcc-2.95
-TMAKE_CXX       = g++-2.95
+#TMAKE_CC        = gcc-2.95
+#TMAKE_CXX       = g++-2.95
 INCLUDEPATH     += $(QPEDIR)/include
 DEPENDPATH      += $(QPEDIR)/include
-LIBS            += -lqpe -lm -lmk4 -lbeecrypt
+LIBS            += -lqpe -lm -lmk4 -lbeecrypt -lsl -lzdtm
 TARGET          = portabase
+DEFINES         += SHARP
 HEADERS         = portabase.h \
                   inputdialog.h \
                   view.h \
@@ -18,7 +19,7 @@ HEADERS         = portabase.h \
                   columneditor.h \
                   roweditor.h \
                   csvutils.h \
-                  importdialog.h \
+                  sharp/importdialog.h \
                   vieweditor.h \
                   noteeditor.h \
                   notebutton.h \
@@ -43,7 +44,7 @@ HEADERS         = portabase.h \
                   bytestream.h \
                   crypto.h \
                   passdialog.h \
-                  newfiledialog.h \
+                  sharp/newfiledialog.h \
                   csverror.h \
                   shadedlistitem.h \
                   colordialog.h \
@@ -56,7 +57,7 @@ HEADERS         = portabase.h \
                   calc/calcdateeditor.h \
                   calc/calceditor.h \
                   calc/calcwidget.h \
-                  fileselector.h
+                  sharp/fileselector.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   inputdialog.cpp \
@@ -67,7 +68,7 @@ SOURCES         = main.cpp \
                   columneditor.cpp \
                   roweditor.cpp \
                   csvutils.cpp \
-                  importdialog.cpp \
+                  sharp/importdialog.cpp \
                   vieweditor.cpp \
                   noteeditor.cpp \
                   notebutton.cpp \
@@ -92,7 +93,7 @@ SOURCES         = main.cpp \
                   bytestream.cpp \
                   crypto.cpp \
                   passdialog.cpp \
-                  newfiledialog.cpp \
+                  sharp/newfiledialog.cpp \
                   csverror.cpp \
                   shadedlistitem.cpp \
                   colordialog.cpp \
@@ -105,4 +106,4 @@ SOURCES         = main.cpp \
                   calc/calcdateeditor.cpp \
                   calc/calceditor.cpp \
                   calc/calcwidget.cpp \
-                  fileselector.cpp
+                  sharp/fileselector.cpp

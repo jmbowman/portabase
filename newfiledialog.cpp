@@ -58,6 +58,9 @@ DocLnk *NewFileDialog::doc()
     else if (ext == ".csv") {
         f->setType("text/x-csv");
     }
+    else if (ext == ".txt") {
+        f->setType("text/plain");
+    }
     else {
         f->setType("text/xml");
     }
