@@ -506,12 +506,11 @@ void Database::deleteViewColumn(QString viewName, QString columnName)
 
 void Database::setViewColumnSequence(QString viewName, QStringList colNames)
 {
-    int i = 0;
-    int nextIndex = viewColumns.Find(vcView [viewName] + vcName [colNames[i]]);
-    while (nextIndex != -1) {
-        vcIndex (viewColumns[nextIndex]) = i;
-        i++;
+    int count = colNames.count();
+    int nextIndex = -1;
+    for (int i = 0; i < count; i++) {
         nextIndex = viewColumns.Find(vcView [viewName] + vcName [colNames[i]]);
+        vcIndex (viewColumns[nextIndex]) = i;
     }
 }
 
