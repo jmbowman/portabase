@@ -1,10 +1,14 @@
-2002-12-07  JMB  Time columns
+2002-12-07  JMB  Time columns, date picker uses appropriate week start day
 
     There is now a "Time" column type.  It uses the Qtopia system setting
     for 12/24 hour display preference, and there is a "Show Seconds"
     checkbox in the PortaBase preferences dialog.  Times in imported CSV
     files can be formatted in either 12 or 24 hour format, or in number
     of seconds past midnight, or -1 or blank for a "None" time.
+
+    The date picker calendar widget now uses the Qtopia system setting
+    for which day the week starts on (Sunday or Monday) and displays the
+    calendar appropriately.
 
 2002-12-01  JMB  Bugfix in filter condition indices, filtered export
 

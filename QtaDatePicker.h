@@ -73,6 +73,9 @@ private:
 	// Message box
 	QMessageBox *mbox;
 
+        // Week starts on Monday?
+        bool startMonday;
+
 private slots:
 	// 'OK' & 'Cancel' button handlers
 	void datePickerOk();

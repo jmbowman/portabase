@@ -1,6 +1,7 @@
 //
 //   Source file for the Qt Date Picker add-on
 //
+#include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qcombobox.h>
 #include <qdialog.h>
@@ -45,6 +46,11 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 
 	// Set the title
 	this->setCaption( tr("Select a date") );
+
+	// Find out what day the week starts on
+	Config qpeConfig("qpe");
+	qpeConfig.setGroup("Time");
+	startMonday = qpeConfig.readBoolEntry("MONDAY") ? 1 : 0;
 
 	// Create the main calendar table
 	calendarTable = new DatePickerTable( this );
@@ -95,13 +101,18 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 	tableHeader = new QHeader( this );
 	tableHeader->setGeometry( 13, 25, 154, 20 );
 	tableHeader->setOrientation( Horizontal );
-	tableHeader->addLabel( tr("S"), 22 );
+	if (!startMonday) {
+		tableHeader->addLabel( tr("S"), 22 );
+	}
 	tableHeader->addLabel( tr("M"), 22 );
 	tableHeader->addLabel( tr("T"), 22 );
 	tableHeader->addLabel( tr("W"), 22 );
 	tableHeader->addLabel( tr("T"), 22 );
 	tableHeader->addLabel( tr("F"), 22 );
 	tableHeader->addLabel( tr("S"), 22 );
+	if (startMonday) {
+		tableHeader->addLabel( tr("S"), 22 );
+	}
 
 	// Create the 'OK' button
 	okButton = new QPushButton( tr("OK"), this );
@@ -133,8 +144,14 @@ void QDatePicker::datePickerMonthArray( QDate *date )
 	tempDate->setYMD( date->year(), date->month(), 1 );
 	int nFirstDay = tempDate->dayOfWeek();
 	delete tempDate;
-	if ( nFirstDay == 7 ) // Qt uses Mon=1, Tue=2, etc. - Change Sunday to 0
+	if ( startMonday ) {
+		// Qt uses Mon=1, Tue=2, etc.
+		nFirstDay--;
+	}
+	else if ( nFirstDay == 7 ) {
+		// Change Sunday to 0
 		nFirstDay = 0;
+	}
 	int x = 0;
 	int y = 0;
 	int nDay = 1;
