@@ -1,3 +1,14 @@
+2003-07-30  JMB  Windows file association, build fixes
+
+    Set the installer to associate ".pob" files with PortaBase, so they
+    appear with the PortaBase icon and launch correctly when double-clicked.
+    You always get the English version when doing this; to get another
+    language by default, set the "LANG" environment variable to the correct
+    language code (this is a workaround for a bug in old Windows versions of
+    Qt; the language-specific menu items just run a batch script which does
+    this for you.)  Also fixed a few bugs in Windows-specific code that crept
+    in since 1.7.
+
 2003-07-25  JMB  French UI translation, other translation updates
 
     Added a translation of the user interface into French, contributed by

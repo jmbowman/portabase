@@ -10,7 +10,7 @@
  */
 
 #if defined(DESKTOP)
-#include "desktop/resource.h"
+#include "../desktop/resource.h"
 #endif
 
 #include <qlabel.h>

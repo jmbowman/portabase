@@ -9,6 +9,7 @@
  * (at your option) any later version.
  */
 
+#include <qmessagebox.h>
 #include <qobject.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +31,8 @@ Crypto::Crypto(c4_Storage *outer, c4_Storage *inner) : container(outer), content
     encryptParam = malloc(bcipher->paramsize);
     decryptParam = malloc(bcipher->paramsize);
     initVector = (byte*)malloc(bcipher->blocksize);
+    passHash = (byte*)malloc(hashfunc->digestsize);
+    dataHash = (byte*)malloc(hashfunc->digestsize);
     crypto = container->GetAs("_crypto[_criv:B,_crhash:B,_crdata:B]");
 }
 
@@ -40,6 +43,8 @@ Crypto::~Crypto()
     free(encryptParam);
     free(decryptParam);
     free(initVector);
+    free(passHash);
+    free(dataHash);
 }
 
 QString Crypto::open()
@@ -48,8 +53,7 @@ QString Crypto::open()
     c4_Bytes ivField = crIv (crypto[0]);
     memcpy(initVector, ivField.Contents(), ivField.Size());
     c4_Bytes hashField = crHash (crypto[0]);
-    mp32ninit(&dataHash, (uint32)(hashField.Size() / sizeof(uint32)),
-              (uint32*)(hashField.Contents()));
+    memcpy(dataHash, hashField.Contents(), hashField.Size());
     c4_Bytes dataField = crData (crypto[0]);
 
     // decrypt the data
@@ -57,7 +61,6 @@ QString Crypto::open()
     bool passError = false;
     byte *decrypted = decrypt((byte*)(dataField.Contents()), dataField.Size(),
                               &resultSize, &passError);
-    mp32nfree(&dataHash);
     if (passError) {
         return QObject::tr("Incorrect password");
     }
@@ -93,7 +96,7 @@ void Crypto::save()
     }
     c4_Row row;
     crIv (row) = c4_Bytes(initVector, bcipher->blocksize);
-    crHash (row) = c4_Bytes(dataHash.data, dataHash.size * sizeof(uint32));
+    crHash (row) = c4_Bytes(dataHash, hashfunc->digestsize);
     crData (row) = c4_Bytes(encrypted, encryptedSize);
     crypto.Add(row);
     free(encrypted);
@@ -106,14 +109,11 @@ QString Crypto::setPassword(const QString &pass, bool newPass)
     }
     password = pass;
     QCString utf8pass = pass.utf8();
-    mp32nzero(&passHash);
     hashFunctionContextUpdate(&hfc, (const byte*)(utf8pass.data()),
                               utf8pass.length());
-    hashFunctionContextDigest(&hfc, &passHash);
-    bcipher->setup(encryptParam, passHash.data, hashfunc->digestsize * 8,
-                   ENCRYPT);
-    bcipher->setup(decryptParam, passHash.data, hashfunc->digestsize * 8,
-                   DECRYPT);
+    hashFunctionContextDigest(&hfc, passHash);
+    bcipher->setup(encryptParam, passHash, hashfunc->digestsize * 8, ENCRYPT);
+    bcipher->setup(decryptParam, passHash, hashfunc->digestsize * 8, DECRYPT);
     return "";
 }
 
@@ -139,9 +139,8 @@ byte *Crypto::encrypt(byte *data, int size, int *resultSize)
     }
 
     // get the hash value of the padded data for later verification
-    mp32nzero(&dataHash);
     hashFunctionContextUpdate(&hfc, padded, *resultSize);
-    hashFunctionContextDigest(&hfc, &dataHash);
+    hashFunctionContextDigest(&hfc, dataHash);
 
     // prepare storage for the encrypted data
     byte *result = (byte*)malloc(*resultSize);
@@ -151,14 +150,13 @@ byte *Crypto::encrypt(byte *data, int size, int *resultSize)
     }
 
     // set the CBC initialization vector
-    randomGeneratorContextNext(&rgc, (uint32*)initVector,
-                               (bcipher->blocksize) / sizeof(uint32));
-    bcipher->setiv(encryptParam, (uint32*)initVector);
+    randomGeneratorContextNext(&rgc, initVector, bcipher->blocksize);
+    bcipher->setiv(encryptParam, initVector);
 
     // encrypt the data
     int blockCount = (*resultSize) / (bcipher->blocksize);
-    blockEncrypt(bcipher, encryptParam, CBC, blockCount, (uint32*)result,
-                 (uint32*)padded);
+    blockEncryptCBC(bcipher, encryptParam, (uint32_t*)result,
+                    (uint32_t*)padded, blockCount);
     free(padded);
     return result;
 }
@@ -178,22 +176,22 @@ byte *Crypto::decrypt(byte *data, int size, int *resultSize, bool *passError)
 
     // decrypt the data
     int blockCount = size / (bcipher->blocksize);
-    bcipher->setiv(decryptParam, (uint32*)initVector);
-    blockDecrypt(bcipher, decryptParam, CBC, blockCount, (uint32*)result,
-                 (uint32*)data);
+    bcipher->setiv(decryptParam, initVector);
+    blockDecryptCBC(bcipher, decryptParam, (uint32_t*)result, (uint32_t*)data,
+                    blockCount);
 
     // calculate and test the hash value of the decrypted data
-    mp32number testHash;
-    mp32nzero(&testHash);
+    byte *testHash = (byte*)malloc(hashfunc->digestsize);
     hashFunctionContextUpdate(&hfc, result, size);
-    hashFunctionContextDigest(&hfc, &testHash);
-    if (memcmp(testHash.data, dataHash.data, testHash.size * sizeof(uint32))
-            != 0) {
+    hashFunctionContextDigest(&hfc, testHash);
+    if (memcmp(testHash, dataHash, hashfunc->digestsize) != 0) {
         *passError = true;
         free(result);
+        free(testHash);
         return 0;
     }
 
+    free(testHash);
     // find out how much of the result is padding and return the result
     *resultSize = unpaddedLength(result, size);
     return result;
@@ -242,7 +240,7 @@ void Crypto::printBytes(QString label, byte *data, int size)
     printf(label + ":\n");
     QString dataString("");
     for (int i = 0; i < size; i++) {
-        dataString += QString::number((int)(data[i]), 16);
+        dataString += QString::number((int)(data[i]), 16).rightJustify(2, '0');
     }
     printf(dataString + "\n");
 }

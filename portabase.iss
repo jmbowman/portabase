@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=PortaBase
-AppVerName=PortaBase 1.7
+AppVerName=PortaBase 1.8
 AppPublisher=Jeremy Bowman
 AppPublisherURL=http://portabase.sourceforge.net
 AppSupportURL=http://portabase.sourceforge.net
@@ -11,6 +11,7 @@ AppUpdatesURL=http://portabase.sourceforge.net
 DefaultDirName={pf}\PortaBase
 DefaultGroupName=PortaBase
 AllowNoIcons=yes
+ChangesAssociations=yes
 LicenseFile=COPYING
 PrivilegesRequired=admin
 
@@ -19,13 +20,16 @@ Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "A
 
 [Files]
 Source: "portabase.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "package\portabase_fr.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "package\portabase_ja.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "package\portabase_tw.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "desktop\icons\*.*"; DestDir: "{app}\icons"; Flags: ignoreversion
 Source: "desktop\icons\portabase\*.*"; DestDir: "{app}\icons\portabase"; Flags: ignoreversion
 Source: "help\html\portabase.html"; DestDir: "{app}"; Flags: ignoreversion
+Source: "help\html\portabase.html"; DestDir: "{app}\fr"; Flags: ignoreversion
 Source: "help\ja\html\portabase.html"; DestDir: "{app}\ja"; Flags: ignoreversion
 Source: "help\tw\html\portabase.html"; DestDir: "{app}\tw"; Flags: ignoreversion
+Source: "portabase_fr.qm"; DestDir: "{app}\fr"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "portabase_ja.qm"; DestDir: "{app}\ja"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "portabase_tw.qm"; DestDir: "{app}\tw"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "CHANGES"; DestDir: "{app}"; Flags: ignoreversion
@@ -42,8 +46,15 @@ Filename: "{win}\portabase.ini"; Section: "General"; Key: "IconPath"; String: "{
 Filename: "{win}\portabase.ini"; Section: "General"; Key: "HelpPath"; String: "{app}"; Flags: uninsdeletesection
 Filename: "{app}\portabase.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://portabase.sourceforge.net"
 
+[Registry]
+Root: HKCR; Subkey: ".pob"; ValueType: string; ValueName: ""; ValueData: "PortaBaseFile"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "PortaBaseFile"; ValueType: string; ValueName: ""; ValueData: "PortaBase File"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "PortaBaseFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\PORTABASE.EXE,0"
+Root: HKCR; Subkey: "PortaBaseFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\PORTABASE.EXE"" -f ""%1"""
+
 [Icons]
 Name: "{group}\PortaBase"; Filename: "{app}\portabase.exe"
+Name: "{group}\PortaBase (fr)"; Filename: "{app}\portabase_fr.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase (ja)"; Filename: "{app}\portabase_ja.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase (tw)"; Filename: "{app}\portabase_tw.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase Home Page"; Filename: "{app}\portabase.url"

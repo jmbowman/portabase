@@ -36,8 +36,8 @@ private:
 
 private:
     QString password;
-    mp32number passHash;
-    mp32number dataHash;
+    byte *passHash;
+    byte *dataHash;
     const blockCipher *bcipher;
     const hashFunction *hashfunc;
     const randomGenerator *prng;

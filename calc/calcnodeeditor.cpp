@@ -37,8 +37,8 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
 #if defined(Q_WS_WIN)
     setSizeGripEnabled(TRUE);
     vbox->setMargin(8);
-    vbox->Widget(new QLabel("<center><b>" + tr("Calculation Node Editor")
-                            + "</b></center>", this));
+    vbox->addWidget(new QLabel("<center><b>" + tr("Calculation Node Editor")
+                               + "</b></center>", this));
 #endif
     group = new QButtonGroup(this);
     group->hide();
