@@ -36,6 +36,10 @@ ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
         // Japanese models, and some ebook users replace it...sigh
         mimeType = "chemical/x-pdb";
     }
+    else if (sourceType == OPTION_LIST) {
+        caption = tr("Import from text file");
+        mimeType = "text/plain";
+    }
     else {
         caption = tr("Import from XML file");
         mimeType = "text/xml";
@@ -43,7 +47,7 @@ ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
 
     setCaption(caption + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
-    if (sourceType == CSV_FILE) {
+    if (sourceType == CSV_FILE || sourceType == OPTION_LIST) {
         QHBox *hbox = new QHBox(this);
         vbox->addWidget(hbox);
         new QLabel(tr("Text encoding"), hbox);
@@ -88,6 +92,11 @@ bool ImportDialog::import(const QString &file)
             data = result[1];
         }
     }
+    else if (source == OPTION_LIST) {
+        ImportUtils utils;
+        error = utils.importTextLines(file, encodings->currentText(),
+                                      &options);
+    }
     else if (source == MOBILEDB_FILE) {
         ImportUtils utils;
         error = utils.importMobileDB(file, db);
@@ -125,4 +134,9 @@ int ImportDialog::exec()
         delete f;
     }
     return result;
+}
+
+QStringList ImportDialog::getOptions()
+{
+    return options;
 }

@@ -15,6 +15,7 @@
 #include <qobject.h>
 #include <qregexp.h>
 #include <qstringlist.h>
+#include <qtextstream.h>
 #include <qxml.h>
 #include "database.h"
 #include "datatypes.h"
@@ -32,7 +33,7 @@ ImportUtils::~ImportUtils()
 
 }
 
-QString ImportUtils::importMobileDB(QString filename, Database *db)
+QString ImportUtils::importMobileDB(const QString &filename, Database *db)
 {
     MobileDBFile mdb(filename);
     if (!mdb.read()) {
@@ -162,7 +163,7 @@ QStringList ImportUtils::convertMobileDBRow(QStringList values, int *types)
     return result;
 }
 
-QString ImportUtils::importXML(QString filename, Database *db)
+QString ImportUtils::importXML(const QString &filename, Database *db)
 {
     XMLImport importer(db);
     QFile file(filename);
@@ -172,4 +173,24 @@ QString ImportUtils::importXML(QString filename, Database *db)
     reader.setErrorHandler(&importer);
     reader.parse(source);
     return importer.formattedError();
+}
+
+QString ImportUtils::importTextLines(const QString &filename, const QString &encoding, QStringList *options)
+{
+    QFile f(filename);
+    if (!f.open(IO_ReadOnly)) {
+        return QObject::tr("Unable to open file");
+    }
+    QTextStream input(&f);
+    if (encoding == "Latin-1") {
+        input.setEncoding(QTextStream::Latin1);
+    }
+    else {
+        input.setEncoding(QTextStream::UnicodeUTF8);
+    }
+    while (!input.atEnd()) {
+        options->append(input.readLine());
+    }
+    f.close();
+    return "";
 }

@@ -22,8 +22,10 @@ public:
     ImportUtils();
     ~ImportUtils();
 
-    QString importMobileDB(QString filename, Database *db);
-    QString importXML(QString filename, Database *db);
+    QString importMobileDB(const QString &filename, Database *db);
+    QString importXML(const QString &filename, Database *db);
+    QString importTextLines(const QString &filename, const QString &encoding,
+                            QStringList *options);
 
 private:
     QStringList convertMobileDBRow(QStringList values, int *types);

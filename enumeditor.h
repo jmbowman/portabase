@@ -19,6 +19,10 @@
 #define RENAME_OPTION 1
 #define DELETE_OPTION 2
 
+#define NOT_SORTED 0
+#define ASCENDING 1
+#define DESCENDING 2
+
 class Database;
 class QLineEdit;
 class QListBox;
@@ -41,6 +45,9 @@ private:
     QStringList listCurrentOptions();
 
 private slots:
+    void sortOptions();
+    void importOptions();
+    void exportOptions();
     void addOption();
     void editOption();
     void deleteOption();
@@ -60,6 +67,7 @@ private:
     c4_IntProp eecType;
     c4_StringProp eecOldName;
     c4_StringProp eecNewName;
+    int sorting;
 };
 
 #endif

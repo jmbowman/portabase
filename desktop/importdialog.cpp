@@ -41,6 +41,9 @@ bool ImportDialog::exec()
     else if (source == MOBILEDB_FILE) {
         filter = QObject::tr("MobileDB files") + " (*.pdb)";
     }
+    else if (source == OPTION_LIST) {
+        filter = QString::null;
+    }
     else {
         filter = QObject::tr("XML files") + " (*.xml)";
     }
@@ -57,7 +60,7 @@ bool ImportDialog::exec()
     }
 
     QString encoding = "";
-    if (source == CSV_FILE) {
+    if (source == CSV_FILE || source == OPTION_LIST) {
         QStringList encodings;
         encodings.append("UTF-8");
         encodings.append("Latin-1");
@@ -83,6 +86,10 @@ bool ImportDialog::exec()
             data = result[1];
         }
     }
+    else if (source == OPTION_LIST) {
+        ImportUtils utils;
+        error = utils.importTextLines(file, encoding, &options);
+    }
     else if (source == MOBILEDB_FILE) {
         ImportUtils utils;
         error = utils.importMobileDB(file, db);
@@ -104,4 +111,9 @@ bool ImportDialog::exec()
     else {
         return TRUE;
     }
+}
+
+QStringList ImportDialog::getOptions()
+{
+    return options;
 }

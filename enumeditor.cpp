@@ -10,9 +10,18 @@
  */
 
 #if defined(DESKTOP)
+#include <qfiledialog.h>
+#include <qfileinfo.h>
 #include <qinputdialog.h>
+#include "desktop/applnk.h"
+#include "desktop/filemanager.h"
+#include "desktop/importdialog.h"
+#include "desktop/qpeapplication.h"
 #include "desktop/resource.h"
 #else
+#include <qpe/applnk.h>
+#include <qpe/filemanager.h>
+#include "importdialog.h"
 #include "inputdialog.h"
 #endif
 
@@ -28,7 +37,7 @@
 #include "enumeditor.h"
 
 EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname")
+  : QDialog(parent, name, TRUE, f), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
 {
     setCaption(tr("Enum Editor") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
@@ -43,6 +52,15 @@ EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
     vbox->addWidget(hbox);
     new QLabel(tr("Enum Name"), hbox);
     nameBox = new QLineEdit(hbox);
+
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
+    QPushButton *sortButton = new QPushButton(tr("Sort"), hbox);
+    connect(sortButton, SIGNAL(clicked()), this, SLOT(sortOptions()));
+    QPushButton *importButton = new QPushButton(tr("Import"), hbox);
+    connect(importButton, SIGNAL(clicked()), this, SLOT(importOptions()));
+    QPushButton *exportButton = new QPushButton(tr("Export"), hbox);
+    connect(exportButton, SIGNAL(clicked()), this, SLOT(exportOptions()));
 
     listBox = new QListBox(this);
     vbox->addWidget(listBox);
@@ -124,6 +142,96 @@ QString EnumEditor::getName()
     return nameBox->text();
 }
 
+void EnumEditor::sortOptions()
+{
+    c4_View sorted;
+    if (sorting == ASCENDING) {
+        sorting = DESCENDING;
+        sorted = info.SortOnReverse(eeiName, eeiName);
+    }
+    else {
+        sorting = ASCENDING;
+        sorted = info.SortOn(eeiName);
+    }
+    int count = sorted.GetSize();
+    for (int i = 0; i < count; i++) {
+        int index = info.Find(eeiName [eeiName (sorted[i])]
+                              + eeiIndex [eeiIndex (sorted[i])]);
+        eeiIndex (info[index]) = i;
+    }
+    updateList();
+}
+
+void EnumEditor::importOptions()
+{
+    ImportDialog dialog(OPTION_LIST, db, this);
+    if (!dialog.exec()) {
+        return;
+    }
+    QStringList lines = dialog.getOptions();
+    int count = lines.count();
+    int i;
+    int additions = 0;
+    for (i = 0; i < count; i++) {
+        QCString option = lines[i].utf8();
+        if (info.Find(eeiName [option]) != -1) {
+            continue;
+        }
+        changes.Add(eecIndex [changes.GetSize()] + eecType [ADD_OPTION]
+                 + eecOldName [""] + eecNewName [option]);
+        info.Add(eeiName [option] + eeiIndex [info.GetSize()]);
+        additions++;
+    }
+    if (additions > 0) {
+        updateList();
+        sorting = NOT_SORTED;
+    }
+}
+
+void EnumEditor::exportOptions()
+{
+    QString mimeType = "text/plain";
+    QString extension = ".txt";
+#if defined(Q_WS_WIN)
+    QString filter = tr("Text files") + " (*.txt)";
+#else
+    QString filter = QString::null;
+#endif
+#if defined(DESKTOP)
+    QString file = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
+                       filter, this, "export dialog",
+                       tr("Choose a filename to save under"));
+    if (!file.isEmpty()) {
+        DocLnk output;
+        output.setType(mimeType);
+        QFileInfo info(file);
+        output.setName(info.baseName());
+        output.setFile(info.dirPath(true) + "/" + info.baseName() + extension);
+#else
+    bool ok;
+    QString name = InputDialog::getText(tr("Export"),
+                                        tr("Please select a file name"),
+                                        QString::null, &ok, this);
+    if (ok && !name.isEmpty()) {
+        DocLnk output;
+        output.setType(mimeType);
+        if (name.length() > 40) {
+            name = name.left(40);
+        }
+        output.setName(name);
+#endif
+        QStringList options = listCurrentOptions();
+#if defined(Q_WS_WIN)
+        // use normal Windows line endings so Notepad, etc. are happy
+        QString lineEnd("\r\n");
+#else
+        QString lineEnd("\n");
+#endif
+        FileManager fm;
+        fm.saveFile(output, options.join(lineEnd) + lineEnd);
+    }
+}
+
 void EnumEditor::addOption()
 {
     bool ok = TRUE;
@@ -149,6 +257,7 @@ void EnumEditor::addOption()
                  + eecOldName [""] + eecNewName [utf8Text]);
         info.Add(eeiName [utf8Text] + eeiIndex [info.GetSize()]);
         updateList();
+        sorting = NOT_SORTED;
     }
 }
 
@@ -189,6 +298,7 @@ void EnumEditor::editOption()
                    + eecNewName [utf8NewText]);
         updateList();
         listBox->setCurrentItem(selected);
+        sorting = NOT_SORTED;
     }
 }
 
@@ -240,6 +350,7 @@ void EnumEditor::moveUp()
     eeiIndex (info[row2]) = selected;
     updateList();
     listBox->setCurrentItem(selected - 1);
+    sorting = NOT_SORTED;
 }
 
 void EnumEditor::moveDown()
@@ -255,6 +366,7 @@ void EnumEditor::moveDown()
     eeiIndex (info[row2]) = selected;
     updateList();
     listBox->setCurrentItem(selected + 1);
+    sorting = NOT_SORTED;
 }
 
 void EnumEditor::updateList()

@@ -1,3 +1,15 @@
+2003-05-28  JMB  Enum option sorting, import, and export
+
+    Added a button to the enum editor which sorts the enum's options in
+    alphabetical order.  Clicking once sorts in ascending order, clicking
+    again sorts in descending order.  Helps keep enums with many options
+    organized (such as a list of people's names).
+
+    The enum editor also has new import and export buttons.  Export creates
+    a text file with each option on a separate line.  Import opens such a
+    file and adds to the enum any lines from it which aren't already listed
+    as options.
+
 2003-05-24  JMB  Better menu handling in desktop versions
 
     In at least some versions of Qt3, the menu was present but no text was
