@@ -11,6 +11,10 @@
 #include <qheader.h>
 #include <qdatetime.h>
 #include <qmessagebox.h>
+
+class QComboBox;
+class QSpinBox;
+
 //
 //   Table object for the Qt 'Date Picker' add-on
 //
@@ -51,9 +55,9 @@ public:
 	// Table
 	DatePickerTable *calendarTable;
 private:
-	// Month & year labels
-	QLabel *monthLabel;
-	QLabel *yearLabel;
+	// Month & year displays
+	QComboBox *monthBox;
+	QSpinBox *yearBox;
 
 	// Table headers (days of the week)
 	QHeader *tableHeader;
@@ -61,10 +65,6 @@ private:
 	// 'OK' & 'Cancel' buttons
 	QButton *okButton;
 	QButton *cancelButton;
-
-	// 'Prev' & 'Next' year buttons
-	QButton *nextYearButton;
-	QButton *prevYearButton;
 
 	// 'Prev' & 'Next' month buttons
 	QButton *nextMonthButton;
@@ -85,9 +85,11 @@ private slots:
 	void datePickerNextMonth();
 	void datePickerPrevMonth();
 
-	// 'Prev' & 'Next' year button handlers
-	void datePickerNextYear();
-	void datePickerPrevYear();
+        // month combobox changed handler
+        void datePickerMonthChanged(int selection);
+
+	// year spinbox changed handler
+	void datePickerYearChanged(int year);
 
 };
 

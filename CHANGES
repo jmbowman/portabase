@@ -1,9 +1,15 @@
-2002-11-29  JMB  Optional checkbox toggle in data viewer
+2002-11-29  JMB  Optional checkbox toggle in data viewer, date selector
+                 enhancements
 
     Added a preference which when checked allows you to toggle boolean
     values directly in the data viewer by clicking the appropriate cell.
     This makes it more convenient to use PortaBase as a todo list, but
     also makes it easier to accidentally change data values.
+
+    Changed the date selector dialog so that the month is displayed as
+    a droplist and the year is displayed as a spinbox; thus both can
+    be changed directly to any desired value without having to
+    repeatedly press the next or previous buttons.
 
 2002-11-26  JMB  UTF-8 CSV file import
 
