@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <title>PortaBase 1.0</title>
+  <title>PortaBase 1.1</title>
 </head>
 <body>
 
-<div align="center"><h3>PortaBase 1.0</h3> - A portable database -</div>
+<div align="center"><h3>PortaBase 1.1</h3> - A portable database -</div>
 <br>
 <a href="#intro">1)Introduction</a><br>
 <a href="#file">2)File selector</a><br>
@@ -14,8 +14,9 @@
 <a href="#viewer">5)Data viewer</a><br>
 <a href="#rowedit">6)Row editor</a><br>
 <a href="#noteedit">7)Note editor/viewer</a><br>
-<a href="#import">8)Data import</a><br>
-<a href="#export">9)Data export</a><br>
+<a href="#sortedit">8)Sorting editor</a><br>
+<a href="#import">9)Data import</a><br>
+<a href="#export">10)Data export</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -23,9 +24,11 @@ PortaBase is a small database program for creating, browsing, and editing
 custom tables of data.  Typical uses are media inventories, reference
 charts, etc.  Notable features include:<br>
 <ul>
-  <li>String, Integer, Decimal, Boolean, and Note (multi-line text) column types</li>
+  <li>String, Integer, Decimal, Boolean, and Note (multi-line text) column
+      types</li>
   <li>Custom data views (subsets of the columns in any order)</li>
-  <li>Sort the rows by any column in ascending or descending order</li>
+  <li>Sort the rows by any combination of columns, each in ascending or
+      descending order</li>
   <li>Page navigation buttons, with custom number of rows per page</li>
   <li>Add, delete, rearrange, and rename columns at any time</li>
   <li>Specify default values for columns</li>
@@ -108,6 +111,7 @@ of this screen are:<br>
 <li><a href="#filemenu">File menu</a></li>
 <li><a href="#rowmenu">Row menu</a></li>
 <li><a href="#viewmenu">View menu</a></li>
+<li><a href="#sortmenu">Sort menu</a></li>
 <li><a href="#toolbar">Toolbar buttons</a></li>
 </ul>
 <a name="navi"><i>Navigation</i></a><br>
@@ -175,6 +179,27 @@ current database, with a check next to the one currently displayed.  To
 switch to a different view, simply select the one you want to see from
 the menu.<br>
 <br>
+<a name="sortmenu"><i>Sort menu</i></a><br>
+The "Sort" menu allows you to select and manage sorting configurations.
+The top section of this menu has three options:<br>
+<ul>
+<li><i>Add</i> - Add a new sorting to the database file.  Choosing this
+option launches the <a href="#sortedit">sorting editor</a> with no name
+specified and none of the columns checked.</li>
+<li><i>Edit</i> - Edit the currently used sorting (only available if a
+named sorting is in use).  Choosing this option launches the sorting
+editor with the current sorting's name and settings.</li>
+<li><i>Delete</i> - Delete the currently used sorting (only available if
+a named sorting is in use).</li>
+</ul>
+Below these items in the menu is a list of all the sortings defined for
+the current database, with a check next to the one currently in use
+(if any).  To change the way the rows are sorted, simply select the
+sorting configuration you want to use from the menu.  If you just want
+to sort by a single column that is displayed in the current view, it is
+probably faster to use the "click on a column label to sort" feature
+instead.<br>
+<br>
 <a name="toolbar"><i>Toolbar buttons</i></a><br>
 There is a toolbar of four buttons that provide quick access to commonly
 used operations.  These are:<br>
@@ -218,7 +243,29 @@ and hold for half a second or longer before releasing, a read-only version
 of the Note editor is shown.  Click either "OK" or "X" to dismiss it and
 return to the data viewer.<br>
 <br>
-<a name="import"><b>8)Data import</b></a><br>
+<a name="sortedit"><b>8)Sorting editor</b></a><br>
+Clicking on a column label in the data viewer is a convenient way to
+sort the database contents by a single column.  But sometimes you may want
+to sort by a combination of columns; sort by the content of column A, within
+groups of the same value of A sort by the content of column B, etc.  To do
+this or to sort by a column that isn't shown in the current view, you need
+to define a named sorting.<br>
+<br>
+Sortings are defined using the sorting editor dialog, which is very
+similar to the <a href="#viewedit">view editor</a> dialog.  At the top of
+the dialog is a text box containing the name of the sorting; changing this
+renames the sorting.  Below that is a table showing the names of all the
+columns in the database, with a checkbox next to each indicating whether
+or not it is to be sorted.  Click this checkbox to add or remove the column
+from the set of ones to be sorted.  The third column in the table shows either
+"Ascending" or "Descending" for checked rows, indicating which direction to
+sort in; click this indicator to change it to the opposite value.  At the
+bottom of the dialog are "Up" and "Down" buttons for moving the selected row
+up or down in the table, changing the sequence in which the columns are
+sorted.  Click "OK" to accept the currently shown settings or "X" to revert
+to the previous values (or to cancel adding a new sorting).<br>
+<br>
+<a name="import"><b>9)Data import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.
 This allows you to import data exported from a spreadsheet or another
 database program.  To do this:<br>
@@ -235,7 +282,7 @@ those columns must be appropriate for the specified column types.</li>
 other files can be added by repeating this process, or another copy of the
 same rows can be added by importing the same file again.</li>
 </ol>
-<a name="export"><b>9)Data export</b></a><br>
+<a name="export"><b>10)Data export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
 import, this allows you to move database content into a spreadsheet or
 other database program for further manipulation (among other uses).  To

@@ -1,4 +1,4 @@
-PortaBase 1.0 (October 2002)
+PortaBase 1.1 (October 2002)
 ----------------------------
 PortaBase (portable database) is a personal database application written for
 the Linux-based models of Sharp Zaurus PDA (and should work on any other Linux
@@ -6,10 +6,11 @@ PDA using the Qtopia environment.)
 
 The main features PortaBase currently has are:
 - One data table per file
-- String, Integer, Decimal, and Boolean column types
+- String, Integer, Decimal, Boolean, and Note (multi-line text) column types
 - Add, edit, and delete rows of data
 - Custom data views (subsets of the columns in any order)
-- Sort the rows by any column in ascending or descending order
+- Sort the rows by any combination of columns, each in ascending or descending
+  order
 - Page navigation buttons, with a custom number of rows per page
 - Add, delete, rearrange, and rename columns at any time
 - Specify default values for columns
@@ -17,9 +18,21 @@ The main features PortaBase currently has are:
 - Import data from CSV files
 - Export data to CSV files
 
-See the help file (help/portabase.html) for more information on features and
-usage.  This help file is also the online help for the application, available
-by clicking the "?" button at the top right of any screen in PortaBase.
+See the help file (help/html/portabase.html) for more information on features
+and usage.  This help file is also the online help for the application,
+available by clicking the "?" button at the top right of any screen in
+PortaBase.
+
+Installation
+------------
+Note that there are *two* packages that must be installed in order to run
+PortaBase; since many people didn't realize this for version 1.0, they are
+now only distributed together in a zip file along with this README file.  First
+install the libmetakit1 .ipk file onto the Zaurus, then install the
+portabase .ipk file.  (The MetaKit library is packaged separately because
+it is likely to be used by other applications in the near future.)  Once
+both packages have been installed, PortaBase can be launched from the
+Applications tab and the two .ipk files may be safely deleted.
 
 Technical Info
 --------------

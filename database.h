@@ -27,6 +27,7 @@ class Database
 public:
     Database(QString path, bool *ok);
     ~Database();
+
     QString currentView();
     View *getView(QString name);
     QStringList listViews();
@@ -34,6 +35,7 @@ public:
     void deleteView(QString name);
     void setViewColWidths(int *widths);
     void setViewRowsPerPage(int rpp);
+
     QStringList listColumns();
     int getIndex(QString column);
     void setIndex(QString column, int index);
@@ -51,7 +53,17 @@ public:
     void setViewColumnSequence(QString viewName, QStringList colNames);
     void updateDataFormat();
     QStringList getRow(int rowId);
+
+    QString currentSorting();
+    QStringList listSortings();
+    bool getSortingInfo(QString sortingName, QStringList *allCols,
+                        QStringList *descCols);
+    void addSorting(QString name, QStringList allCols, QStringList descCols);
+    void deleteSorting(QString name);
+    void deleteSortingColumn(QString sortName, QString columnName);
     c4_View sortData(QString column, bool ascending);
+    c4_View sortData(QString sortingName);
+
     QString addRow(QStringList values);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
@@ -62,6 +74,7 @@ public:
 
 private:
     int *listTypes();
+    c4_View createEmptyView(QStringList colNames);
     QString formatString();
 
 private:
@@ -71,6 +84,8 @@ private:
     c4_View columns;
     c4_View views;
     c4_View viewColumns;
+    c4_View sorts;
+    c4_View sortColumns;
     c4_View global;
     c4_View data;
     View *curView;
@@ -89,12 +104,17 @@ private:
     c4_IntProp vcIndex;
     c4_StringProp vcName;
     c4_IntProp vcWidth;
-    c4_IntProp vcSortIndex;
-    c4_IntProp vcAscending;
-    c4_StringProp vcFilter;
+    // "_sorts" view
+    c4_StringProp sName;
+    // "_sortcolumns" view
+    c4_StringProp scSort;
+    c4_IntProp scIndex;
+    c4_StringProp scName;
+    c4_IntProp scDesc;
     // "_global" view
     c4_IntProp gVersion;
     c4_StringProp gView;
+    c4_StringProp gSort;
 };
 
 #endif

@@ -43,6 +43,7 @@ public:
     void updateButtons();
     void saveViewSettings();
     void setView(QString name);
+    void setSorting(QString name);
     void closeView();
 
 public slots:

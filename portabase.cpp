@@ -26,6 +26,7 @@
 #include "importdialog.h"
 #include "inputdialog.h"
 #include "portabase.h"
+#include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
 
@@ -44,11 +45,15 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     QPopupMenu *row = new QPopupMenu(this);
     view = new QPopupMenu(this);
     view->setCheckable(TRUE);
+    sort = new QPopupMenu(this);
+    sort->setCheckable(TRUE);
 
     toolbar = new QPEToolBar(this);
 
-    fileSaveAction = new QAction(tr("Save"),
-                                 Resource::loadPixmap("portabase/save"),
+    QIconSet saveIcons = Resource::loadIconSet("portabase/save");
+    //QPixmap disabledSave = Resource::loadPixmap("portabase/save_disabled");
+    //saveIcons.setPixmap(disabledSave, QIconSet::Small, QIconSet::Disabled);
+    fileSaveAction = new QAction(tr("Save"), saveIcons,
                                  QString::null, 0, this, 0);
     connect(fileSaveAction, SIGNAL(activated()), this, SLOT(save()));
     fileSaveAction->addTo(toolbar);
@@ -96,9 +101,18 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
                                         SLOT(viewAllColumns()));
     connect(view, SIGNAL(activated(int)), this, SLOT(changeView(int)));
 
+    sort->insertItem(addIcons, tr("Add"), this, SLOT(addSorting()));
+    editSortId = sort->insertItem(editIcons, tr("Edit"),
+                                  this, SLOT(editSorting()));
+    deleteSortId = sort->insertItem(deleteIcons, tr("Delete"),
+                                    this, SLOT(deleteSorting()));
+    sort->insertSeparator();
+    connect(sort, SIGNAL(activated(int)), this, SLOT(changeSorting(int)));
+
     mb->insertItem(tr("File"), file);
     mb->insertItem(tr("Row"), row);
     mb->insertItem(tr("View"), view);
+    mb->insertItem(tr("Sort"), sort);
                                 
     mainStack = new QWidgetStack(this);
     setCentralWidget(mainStack);
@@ -133,6 +147,7 @@ bool PortaBase::editColumns()
             db->addView("_all", db->listColumns());
             viewer->setDatabase(db);
             rebuildViewMenu();
+            rebuildSortMenu();
         }
         else {
             viewAllColumns();
@@ -213,6 +228,7 @@ void PortaBase::openFile(const DocLnk &f)
     toolbar->show();
     updateCaption();
     rebuildViewMenu();
+    rebuildSortMenu();
 }
 
 void PortaBase::fileOpen()
@@ -344,6 +360,16 @@ void PortaBase::changeView(int id)
     }
 }
 
+void PortaBase::changeSorting(int id)
+{
+    int index = sortIds.findIndex(id);
+    if (index != -1) {
+        viewer->setSorting(sortNames[index]);
+        updateSortMenu();
+        setEdited(TRUE);
+    }
+}
+
 void PortaBase::rebuildViewMenu()
 {
     // remove old view names
@@ -361,6 +387,25 @@ void PortaBase::rebuildViewMenu()
         viewIds.append(id);
     }
     updateViewMenu();
+}
+
+void PortaBase::rebuildSortMenu()
+{
+    // remove old sorting names
+    int count = sortNames.count();
+    for (int i = 0; i < count; i++) {
+        sort->removeItem(sortIds[i]);
+    }
+    sortIds.clear();
+    // add new sorting names
+    sortNames = db->listSortings();
+    sortNames.remove("_single");
+    count = sortNames.count();
+    for (int i = 0; i < count; i++) {
+        int id = sort->insertItem(sortNames[i]);
+        sortIds.append(id);
+    }
+    updateSortMenu();
 }
 
 void PortaBase::updateViewMenu()
@@ -387,6 +432,28 @@ void PortaBase::updateViewMenu()
     }
 }
 
+void PortaBase::updateSortMenu()
+{
+    QString sortName = db->currentSorting();
+    if (sortName == "" || sortName == "_single") {
+        sort->setItemEnabled(editSortId, FALSE);
+        sort->setItemEnabled(deleteSortId, FALSE);
+    }
+    else {
+        sort->setItemEnabled(editSortId, TRUE);
+        sort->setItemEnabled(deleteSortId, TRUE);
+    }
+    int count = sortNames.count();
+    for (int i = 0; i < count; i++) {
+        if (sortName == sortNames[i]) {
+            sort->setItemChecked(sortIds[i], TRUE);
+        }
+        else {
+            sort->setItemChecked(sortIds[i], FALSE);
+        }
+    }
+}
+
 void PortaBase::editView()
 {
     ViewEditor editor;
@@ -404,6 +471,22 @@ void PortaBase::editView()
     }
 }
 
+void PortaBase::editSorting()
+{
+    SortEditor editor;
+    QString sortingName = db->currentSorting();
+    if (editor.edit(db, sortingName)) {
+        editor.applyChanges();
+        QString newName = editor.getName();
+        viewer->setSorting(newName);
+        // sort menu is unchanged unless the sorting's name changed
+        if (sortingName != newName) {
+            rebuildSortMenu();
+        }
+        setEdited(TRUE);
+    }
+}
+
 void PortaBase::addView()
 {
     ViewEditor editor;
@@ -416,13 +499,31 @@ void PortaBase::addView()
     }
 }
 
+void PortaBase::addSorting()
+{
+    SortEditor editor;
+    if (editor.edit(db, "")) {
+        editor.applyChanges();
+        viewer->setSorting(editor.getName());
+        rebuildSortMenu();
+        setEdited(TRUE);
+    }
+}
+
 void PortaBase::deleteView()
 {
     viewer->closeView();
     db->deleteView(db->currentView());
     viewer->setView("_all");
     rebuildViewMenu();
-    updateViewMenu();
+    setEdited(TRUE);
+}
+
+void PortaBase::deleteSorting()
+{
+    db->deleteSorting(db->currentSorting());
+    viewer->setSorting("");
+    rebuildSortMenu();
     setEdited(TRUE);
 }
 

@@ -237,6 +237,12 @@ void ViewDisplay::setView(QString name)
     updateButtons();
 }
 
+void ViewDisplay::setSorting(QString name)
+{
+    view->sort(name);
+    updateTable();
+}
+
 void ViewDisplay::closeView()
 {
     if (view) {
@@ -367,6 +373,7 @@ void ViewDisplay::sort(int column)
 {
     view->sort(column);
     updateTable();
+    portabase->updateSortMenu();
 }
 
 void ViewDisplay::showStatistics(int column)

@@ -37,6 +37,7 @@ public:
     QStringList getRow(int index);
     int getId(int index);
     void sort(int colIndex);
+    void sort(QString sortingName);
     void prepareData();
     QStringList getStatistics(int colIndex);
 
@@ -51,6 +52,7 @@ private:
     int rowsPerPage;
     int sortColumn;
     bool ascending;
+    QString sortName;
 };
 
 #endif

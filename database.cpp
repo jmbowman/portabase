@@ -19,19 +19,25 @@
 #include "portabase.h"
 #include "view.h"
 
-Database::Database(QString path, bool *ok) : curView(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcSortIndex("_vcsortindex"), vcAscending("_vcascending"), vcFilter("_vcfilter"), gVersion("_gversion"), gView("_gview")
+Database::Database(QString path, bool *ok) : curView(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), gVersion("_gversion"), gView("_gview"), gSort("_gsort")
 {
     checkedPixmap = Resource::loadPixmap("portabase/checked");
     uncheckedPixmap = Resource::loadPixmap("portabase/unchecked");
 
     file = new c4_Storage(path, TRUE);
-    global = file->GetAs("_global[_gversion:I,_gview:S]");
+    global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S]");
     if (global.GetSize() == 0) {
-        global.Add(gVersion [FILE_VERSION] + gView ["_all"]);
+        global.Add(gVersion [FILE_VERSION] + gView ["_all"] + gSort [""]);
         *ok = TRUE;
     }
     else if (gVersion (global[0]) > FILE_VERSION) {
         *ok = FALSE;
+    }
+    else if (gVersion (global[0]) == 1) {
+        // sorting name added in file version 2
+        gSort (global[0]) = "";
+        gVersion (global[0]) = FILE_VERSION;
+        *ok = TRUE;
     }
     else {
         *ok = TRUE;
@@ -39,7 +45,9 @@ Database::Database(QString path, bool *ok) : curView(0), Id("_id"), cIndex("_cin
     if (*ok) {
         columns = file->GetAs("_columns[_cindex:I,_cname:S,_ctype:I,_cdefault:S]");
         views = file->GetAs("_views[_vname:S,_vrpp:I]");
-        viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I,_vcsortindex:I,_vcascending:I,_vcfilter:S]");
+        viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I]");
+        sorts = file->GetAs("_sorts[_sname:S]");
+        sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
         data = file->GetAs(formatString());
         maxId = data.GetSize() - 1;
         *ok = TRUE;
@@ -110,9 +118,6 @@ void Database::addView(QString name, QStringList names)
         vcIndex (colRow) = i;
         vcName (colRow) = names[i];
         vcWidth (colRow) = 60;
-        vcSortIndex (colRow) = 0;
-        vcAscending (colRow) = 0;
-        vcFilter (colRow) = "";
         viewColumns.Add(colRow);
     }
 }
@@ -283,6 +288,12 @@ void Database::deleteColumn(QString name)
         QString viewName(vName (views[i]));
         deleteViewColumn(viewName, name);
     }
+    // remove the column from any sortings containing it
+    count = sorts.GetSize();
+    for (int i = 0; i < count; i++) {
+        QString sortName(sName (sorts[i]));
+        deleteSortingColumn(sortName, name);
+    }
     // remove the column from the definition
     columns.RemoveAt(index);
 }
@@ -294,6 +305,12 @@ void Database::renameColumn(QString oldName, QString newName)
     while (nextIndex != -1) {
         vcName (viewColumns[nextIndex]) = newName;
         nextIndex = viewColumns.Find(vcName [oldName]);
+    }
+    // rename the column in any sortings containing it
+    nextIndex = sortColumns.Find(scName [oldName]);
+    while (nextIndex != -1) {
+        scName (sortColumns[nextIndex]) = newName;
+        nextIndex = sortColumns.Find(scName [oldName]);
     }
     // rename the column in the format definition
     int index = columns.Find(cName [oldName]);
@@ -358,36 +375,152 @@ QStringList Database::getRow(int rowId)
     return results;
 }
 
+QString Database::currentSorting()
+{
+    QString sortName(gSort (global[0]));
+    return sortName;
+}
+
+QStringList Database::listSortings()
+{
+    c4_View sorted = sorts.SortOn(sName);
+    int size = sorted.GetSize();
+    QStringList list;
+    for (int i = 0; i < size; i++) {
+        QString name(sName (sorted[i]));
+        list.append(name);
+    }
+    return list;
+}
+
+bool Database::getSortingInfo(QString sortingName, QStringList *allCols,
+                              QStringList *descCols)
+{
+    c4_View temp = sortColumns.Select(scSort [sortingName]);
+    int count = temp.GetSize();
+    if (count == 0) {
+        // non-existent or empty sorting; nothing to do
+        return FALSE;
+    }
+    temp = temp.SortOn(scIndex);
+    for (int i = 0; i < count; i++) {
+        QString name(scName (temp[i]));
+        allCols->append(name);
+        if (scDesc (temp[i]) == 1) {
+            descCols->append(name);
+        }
+    }
+    return TRUE;
+}
+
+void Database::addSorting(QString name, QStringList allCols,
+                          QStringList descCols)
+{
+    sorts.Add(sName [name]);
+    int count = allCols.count();
+    for (int i = 0; i < count; i++) {
+        c4_Row colRow;
+        scSort (colRow) = name;
+        scIndex (colRow) = i;
+        scName (colRow) = allCols[i];
+        if (descCols.findIndex(allCols[i]) == -1) {
+            scDesc (colRow) = 0;
+        }
+        else {
+            scDesc (colRow) = 1;
+        }
+        sortColumns.Add(colRow);
+    }
+}
+
+void Database::deleteSorting(QString name)
+{
+    int index = sorts.Find(sName [name]);
+    if (index == -1) {
+        return;
+    }
+    sorts.RemoveAt(index);
+    // delete the sorting's columns
+    int nextIndex = sortColumns.Find(scSort [name]);
+    while (nextIndex != -1) {
+        sortColumns.RemoveAt(nextIndex);
+        nextIndex = sortColumns.Find(scSort [name]);
+    }
+}
+
+void Database::deleteSortingColumn(QString sortName, QString columnName)
+{
+    int removeIndex = sortColumns.Find(scSort [sortName]
+                                       + scName [columnName]);
+    if (removeIndex == -1) {
+        // no such column in this sorting
+        return;
+    }
+    int position = scIndex (sortColumns[removeIndex]);
+    position++;
+    int nextIndex = sortColumns.Find(scSort [sortName] + scIndex [position]);
+    while (nextIndex != -1) {
+        scIndex (sortColumns[nextIndex]) = position - 1;
+        position++;
+        nextIndex = sortColumns.Find(scSort [sortName] + scIndex [position]);
+    }
+    sortColumns.RemoveAt(removeIndex);
+}
+
 c4_View Database::sortData(QString column, bool ascending)
 {
-    int type = getType(column);
-    if (type == INTEGER || type == BOOLEAN) {
-        c4_IntProp prop(column);
-        if (ascending) {
-            return data.SortOn(prop);
-        }
-        else {
-            return data.SortOnReverse(prop, prop);
-        }
+    QStringList colNames;
+    colNames.append(column);
+    QStringList descNames;
+    if (!ascending) {
+        descNames.append(column);
     }
-    else if (type == FLOAT) {
-        c4_FloatProp prop(column);
-        if (ascending) {
-            return data.SortOn(prop);
-        }
-        else {
-            return data.SortOnReverse(prop, prop);
-        }
+    deleteSorting("_single");
+    addSorting("_single", colNames, descNames);
+    gSort (global[0]) = "_single";
+    c4_View sortView = createEmptyView(colNames);
+    if (ascending) {
+        return data.SortOn(sortView);
     }
     else {
-        c4_StringProp prop(column);
-        if (ascending) {
-            return data.SortOn(prop);
+        return data.SortOnReverse(sortView, sortView);
+    }
+}
+
+c4_View Database::sortData(QString sortingName)
+{
+    gSort (global[0]) = sortingName;
+    QStringList allCols;
+    QStringList descCols;
+    if (!getSortingInfo(sortingName, &allCols, &descCols)) {
+        return data;
+    }
+    c4_View allView = createEmptyView(allCols);
+    c4_View descView = createEmptyView(descCols);
+    return data.SortOnReverse(allView, descView);
+}
+
+c4_View Database::createEmptyView(QStringList colNames)
+{
+    int count = colNames.count();
+    c4_View result;
+    for (int i = 0; i < count; i++) {
+        QString name = colNames[i];
+        int type = getType(name);
+        if (type == INTEGER || type == BOOLEAN) {
+            c4_IntProp prop(name);
+            result.AddProperty(prop);
+        }
+        else if (type == FLOAT) {
+            c4_FloatProp prop(name);
+            result.AddProperty(prop);
         }
         else {
-            return data.SortOnReverse(prop, prop);
+            c4_StringProp prop(name);
+            result.AddProperty(prop);
         }
     }
+    return result;
 }
 
 QString Database::addRow(QStringList values)
@@ -487,9 +620,6 @@ void Database::addViewColumn(QString viewName, QString columnName)
     vcIndex (colRow) = cols.GetSize();
     vcName (colRow) = columnName;
     vcWidth (colRow) = 60;
-    vcSortIndex (colRow) = 0;
-    vcAscending (colRow) = 0;
-    vcFilter (colRow) = "";
     viewColumns.Add(colRow);
 }
 

@@ -19,7 +19,7 @@
 
 View::View(Database *parent, c4_View baseview, QStringList colNames, 
     int *types, int *widths, int rpp) : Id("_id"), sortColumn(-1),
-    ascending(TRUE)
+    ascending(TRUE), sortName("")
 {
     db = parent;
     dbview = baseview;
@@ -28,6 +28,7 @@ View::View(Database *parent, c4_View baseview, QStringList colNames,
     colWidths = widths;
     numCols = columns.count();
     rowsPerPage = rpp;
+    sort(db->currentSorting());
 }
 
 View::~View()
@@ -112,10 +113,19 @@ void View::sort(int colIndex)
     }
 }
 
+void View::sort(QString sortingName)
+{
+    sortColumn = -1;
+    sortName = sortingName;
+}
+
 void View::prepareData()
 {
     if (sortColumn != -1) {
         dbview = db->sortData(columns[sortColumn], ascending);
+    }
+    else if (sortName != "") {
+        dbview = db->sortData(sortName);
     }
 }
 
