@@ -80,11 +80,6 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     numberOpList.append(">=");
     numberOps.append(GREATEREQUAL);
 
-    enumOpList.append("=");
-    enumOps.append(EQUALS);
-    enumOpList.append("!=");
-    enumOps.append(NOTEQUAL);
-
     updateOpList();
     new QLabel("  ", hbox);
     caseCheck = new QCheckBox(tr("Case sensitive"), hbox);
@@ -175,7 +170,7 @@ void ConditionEditor::fillFields(Condition *condition)
         constantTime->setTime(constant.toInt());
     }
     else if (type >= FIRST_ENUM) {
-        int index = enumOps.findIndex(operation);
+        int index = numberOps.findIndex(operation);
         opList->setCurrentItem(index);
         QStringList options = db->listEnumOptions(type);
         constantCombo->clear();
@@ -273,11 +268,8 @@ void ConditionEditor::updateOpList()
     }
     opList->setEnabled(TRUE);
     if (dataType == INTEGER || dataType == FLOAT || dataType == DATE
-            || dataType == TIME) {
+            || dataType == TIME || dataType >= FIRST_ENUM) {
         opList->insertStringList(numberOpList);
-    }
-    else if (dataType >= FIRST_ENUM) {
-        opList->insertStringList(enumOpList);
     }
     else {
         opList->insertStringList(stringOpList);
@@ -349,7 +341,7 @@ void ConditionEditor::applyChanges(Condition *condition)
         condition->setCaseSensitive(FALSE);
     }
     else if (type >= FIRST_ENUM) {
-        condition->setOperator(enumOps[opList->currentItem()]);
+        condition->setOperator(numberOps[opList->currentItem()]);
         condition->setConstant(constantCombo->currentText());
         condition->setCaseSensitive(TRUE);
     }

@@ -98,6 +98,9 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         if (version < 7) {
             addDesktopStats();
         }
+        if (version < 8) {
+            addEnumDataIndices();
+        }
         maxId = data.GetSize() - 1;
     }
 }
@@ -315,10 +318,14 @@ void Database::setDefault(QString column, QString value)
     cDefault (columns[index]) = value.utf8();
 }
 
-QString Database::getColId(QString column)
+QString Database::getColId(QString column, int type)
 {
     int index = columns.Find(cName [column.utf8()]);
-    return makeColId(cId (columns[index]), cType (columns[index]));
+    int colType = type;
+    if (colType == -1) {
+        colType = cType (columns[index]);
+    }
+    return makeColId(cId (columns[index]), colType);
 }
 
 QString Database::isValidValue(int type, QString value)
@@ -437,6 +444,18 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal,
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
             stringProp (data[i]) = defaultVal.utf8();
+        }
+    }
+    else if (type >= FIRST_ENUM) {
+        c4_StringProp newProp(idString);
+        // separate column to store option indices for sorting & filtering
+        QString indexColId = makeColId(nextId, INTEGER);
+        c4_IntProp indexProp(indexColId);
+        QStringList options = listEnumOptions(type);
+        int defaultIndex = options.findIndex(defaultVal);
+        for (int i = 0; i < size; i++) {
+            newProp (data[i]) = defaultVal.utf8();
+            indexProp (data[i]) = defaultIndex;
         }
     }
     else {
@@ -676,6 +695,10 @@ c4_View Database::createEmptyView(QStringList colNames)
         int index = columns.Find(cName [colNames[i].utf8()]);
         int id = cId (columns[index]);
         int type = cType (columns[index]);
+        if (type >= FIRST_ENUM) {
+            // sort by option index, not alphabetically by text
+            type = INTEGER;
+        }
         QString idString = makeColId(id, type);
         if (type == INTEGER || type == BOOLEAN || type == DATE
                 || type == TIME) {
@@ -843,7 +866,7 @@ QString Database::addRow(QStringList values, int *rowId)
             return name + " " + error;
         }
         QString idString = makeColId(cId (temp[i]), type);
-        if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
+        if (type == STRING || type == NOTE) {
             c4_StringProp prop(idString);
             prop (row) = value.utf8();
         }
@@ -864,6 +887,15 @@ QString Database::addRow(QStringList values, int *rowId)
             QString stringColId = makeColId(cId (temp[i]), STRING);
             c4_StringProp stringProp(stringColId);
             stringProp (row) = value.utf8();
+        }
+        else if (type >= FIRST_ENUM) {
+            c4_StringProp prop(idString);
+            prop (row) = value.utf8();
+            // also need to save the option index
+            QString indexColId = makeColId(cId (temp[i]), INTEGER);
+            c4_IntProp indexProp(indexColId);
+            QStringList options = listEnumOptions(type);
+            indexProp (row) = options.findIndex(value);
         }
     }
     data.Add(row);
@@ -903,6 +935,15 @@ void Database::updateRow(int rowId, QStringList values)
             QString stringColId = makeColId(cId (temp[i]), STRING);
             c4_StringProp stringProp(stringColId);
             stringProp (data[index]) = values[i].utf8();
+        }
+        else if (type >= FIRST_ENUM) {
+            c4_StringProp prop(idString);
+            prop (data[index]) = values[i].utf8();
+            // also need to save the option index
+            QString indexColId = makeColId(cId (temp[i]), INTEGER);
+            c4_IntProp indexProp(indexColId);
+            QStringList options = listEnumOptions(type);
+            indexProp (data[index]) = options.findIndex(values[i]);
         }
     }
 }
@@ -1083,7 +1124,7 @@ void Database::deleteEnum(QString name)
     setEnumSequence(enumNames);
 }
 
-int Database::getEnumId(QString name)
+int Database::getEnumId(const QString &name)
 {
     int index = enums.Find(eName [name.utf8()]);
     return eId (enums[index]);
@@ -1095,7 +1136,7 @@ QString Database::getEnumName(int id)
     return QString::fromUtf8(eName (enums[index]));
 }
 
-QStringList Database::columnsUsingEnum(QString enumName)
+QStringList Database::columnsUsingEnum(const QString &enumName)
 {
     int enumId = getEnumId(enumName);
     c4_View cols = columns.Select(cType [enumId]);
@@ -1194,6 +1235,7 @@ void Database::setEnumOptionSequence(QString enumName, QStringList options)
                                      + eoText [options[i].utf8()]);
         eoIndex (enumOptions[index]) = i;
     }
+    updateEnumDataIndices(enumName);
 }
 
 QString Database::makeColId(int colId, int type)
@@ -1237,6 +1279,11 @@ QString Database::formatString(bool old)
             result += ":F";
             // add string representation column
             result += "," + makeColId(cId (row), STRING) + ":S";
+        }
+        else if (type >= FIRST_ENUM) {
+            result += ":S";
+            // add option index column
+            result += "," + makeColId(cId (row), INTEGER) + ":I";
         }
         else {
             result += ":S";
@@ -1542,5 +1589,38 @@ void Database::addDesktopStats()
     count = views.GetSize();
     for (i = 0; i < count; i++) {
         vDeskRpp (views[i]) = 25;
+    }
+}
+
+void Database::addEnumDataIndices()
+{
+    QStringList enumList = listEnums();
+    int count = enumList.count();
+    int i;
+    for (i = 0; i < count; i++) {
+        updateEnumDataIndices(enumList[i]);
+    }
+}
+
+void Database::updateEnumDataIndices(const QString &enumName)
+{
+    QStringList colNames = columnsUsingEnum(enumName);
+    int colCount = colNames.count();
+    int rowCount = data.GetSize();
+    int enumId = getEnumId(enumName);
+    QStringList options = listEnumOptions(enumId);
+    int i;
+    int j;
+    for (i = 0; i < colCount; i++) {
+        int colIndex = columns.Find(cName [colNames[i].utf8()]);
+        int idNum = cId (columns[colIndex]);
+        QString textColId = makeColId(idNum, STRING);
+        c4_StringProp textProp(textColId);
+        QString indexColId = makeColId(idNum, INTEGER);
+        c4_IntProp indexProp(indexColId);
+        for (j = 0; j < rowCount; j++) {
+            QString option = QString::fromUtf8(textProp (data[j]));
+            indexProp (data[j]) = options.findIndex(option);
+        }
     }
 }

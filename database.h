@@ -22,7 +22,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 7
+#define FILE_VERSION 8
 
 class Condition;
 class Filter;
@@ -53,7 +53,7 @@ public:
     int *listTypes();
     QString getDefault(QString column);
     void setDefault(QString column, QString value);
-    QString getColId(QString column);
+    QString getColId(QString column, int type=-1);
     QString isValidValue(int type, QString value);
     void addColumn(int index, QString name, int type, QString defaultVal,
                    int id=-1);
@@ -93,9 +93,9 @@ public:
     void addEnum(QString name, QStringList options, int index=-1, int id=-1);
     void renameEnum(QString oldName, QString newName);
     void deleteEnum(QString name);
-    int getEnumId(QString name);
+    int getEnumId(const QString &name);
     QString getEnumName(int id);
-    QStringList columnsUsingEnum(QString enumName);
+    QStringList columnsUsingEnum(const QString &enumName);
     void setEnumSequence(QStringList names);
     void addEnumOption(QString enumName, QString option, int index=-1);
     void renameEnumOption(QString enumName, QString oldName, QString newName);
@@ -130,6 +130,8 @@ private:
     void updateEncoding(c4_View &view);
     void fixConditionIndices();
     void addDesktopStats();
+    void addEnumDataIndices();
+    void updateEnumDataIndices(const QString &enumName);
 
 private:
     QPixmap checkedPixmap;

@@ -110,6 +110,12 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     fileDeleteAction = new QAction(tr("Delete") + "...", deleteIcons,
                                    QString::null, 0, this);
     connect(fileDeleteAction, SIGNAL(activated()), this, SLOT(deleteFile()));
+    fileCopyAction = new QAction(tr("Copy") + "...", copyIcons,QString::null,
+                                 0, this);
+    connect(fileCopyAction, SIGNAL(activated()), this, SLOT(copyFile()));
+    fileRenameAction = new QAction(tr("Rename") + "...", QString::null, 0,
+                                   this);
+    connect(fileRenameAction, SIGNAL(activated()), this, SLOT(renameFile()));
     refreshAction = new QAction(tr("Refresh"), QString::null, 0, this);
     connect(refreshAction, SIGNAL(activated()), this, SLOT(refreshFileList()));
     importAction = new QAction(tr("Import") + "...", QString::null, 0, this);
@@ -268,6 +274,9 @@ void PortaBase::editEnums()
         viewer->setDatabase(db);
         setEdited(TRUE);
     }
+    else {
+        viewer->setView(db->currentView());
+    }
 }
 
 void PortaBase::editPreferences()
@@ -355,16 +364,7 @@ void PortaBase::createFile(const DocLnk &f, int source)
                                         QString::null, &ok, this);
     if (ok && !name.isEmpty()) {
         doc = new DocLnk(f);
-        doc->setType("application/portabase");
-        if (name.length() > 40) {
-            name = name.left(40);
-        }
-        doc->setName(name);
-        QString defaultFile = doc->file();
-        QFileInfo info(defaultFile);
-        // calling file() created an empty file, delete it now
-	QFile::remove(defaultFile);
-        doc->setFile(info.dirPath(true) + "/" + info.baseName() + ".pob");
+        configureDocLnk(*doc, name);
     }
 #endif
     else {
@@ -400,6 +400,21 @@ void PortaBase::createFile(const DocLnk &f, int source)
         QMessageBox::warning(this, tr("PortaBase"),
                              tr("Unable to create new file"));
     }
+}
+
+void PortaBase::configureDocLnk(DocLnk &doclnk, const QString &name)
+{
+    doclnk.setType("application/portabase");
+    QString filename(name);
+    if (filename.length() > 40) {
+        filename = filename.left(40);
+    }
+    doclnk.setName(filename);
+    QString defaultFile = doclnk.file();
+    QFileInfo info(defaultFile);
+    // calling file() created an empty file, delete it now
+    QFile::remove(defaultFile);
+    doclnk.setFile(info.dirPath(true) + "/" + info.baseName() + ".pob");
 }
 
 void PortaBase::finishNewFile(Database *db)
@@ -471,12 +486,72 @@ void PortaBase::deleteFile()
                              + selection->name() + "\"\n"
                              + tr("Are you sure?"),
                              tr("Yes"), tr("No"), QString::null, 1) > 0) {
+        delete selection;
         return;
     }
     QFile::remove(selection->file());
     QFile::remove(selection->linkFile());
     delete selection;
     fileSelector->reread();
+}
+
+void PortaBase::copyFile()
+{
+#ifndef DESKTOP
+    const DocLnk *selection = fileSelector->selected();
+    if (selection == 0) {
+        return;
+    }
+    bool ok;
+    QString name = InputDialog::getText(tr("PortaBase"),
+                                        tr("Enter a name for the new file"),
+                                        QString::null, &ok, this);
+    if (ok && !name.isEmpty()) {
+        DocLnk copy;
+        configureDocLnk(copy, name);
+        FileManager fm;
+        ok = fm.copyFile(*selection, copy);
+    }
+    if (ok) {
+        fileSelector->reread();
+    }
+    else {
+        QMessageBox::warning(this, tr("PortaBase"),
+                             tr("Unable to create new file"));
+    }
+    delete selection;
+#endif
+}
+
+void PortaBase::renameFile()
+{
+#ifndef DESKTOP
+    const DocLnk *selection = fileSelector->selected();
+    if (selection == 0) {
+        return;
+    }
+    bool ok;
+    QString name = InputDialog::getText(tr("PortaBase"),
+                                        tr("Enter the new file name"),
+                                        QString::null, &ok, this);
+    if (ok && !name.isEmpty()) {
+        DocLnk copy;
+        configureDocLnk(copy, name);
+        FileManager fm;
+        // actual moving would be more efficient, but harder to implement...
+        ok = fm.copyFile(*selection, copy);
+    }
+    if (ok) {
+        QFile::remove(selection->file());
+        QFile::remove(selection->linkFile());
+        fileSelector->reread();
+    }
+    else {
+        QMessageBox::warning(this, tr("PortaBase"),
+                             tr("Unable to rename the file"));
+    }
+    delete selection;
+#endif
 }
 
 void PortaBase::refreshFileList()
@@ -526,6 +601,8 @@ void PortaBase::showFileSelector()
 #ifndef DESKTOP
     fileDeleteAction->addTo(file);
     fileDeleteAction->addTo(toolbar);
+    fileRenameAction->addTo(file);
+    fileCopyAction->addTo(file);
     refreshAction->addTo(file);
 #endif
     file->insertSeparator();

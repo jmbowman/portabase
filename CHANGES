@@ -1,3 +1,17 @@
+2003-02-27  JMB  Enum option index sorting/filtering, enum manager bugfix
+
+    Changed enum sorting to sort by option index instead of option text.
+    Enum filter conditions changed to match, allowing the full set of
+    numeric inequality operators.
+
+    Fixed a bug in the enum manager which caused a crash if you exited
+    without making any changes (bug introduced in 1.5).
+
+2003-02-26  JMB  File rename and copy menu items
+
+    The file selector's "File" menu now has "Rename" and "Copy" items
+    which do what you'd expect.  (Zaurus version only)
+
 2003-02-25  JMB  File->Row menu, row copy
 
     Added a "Row" submenu to the data viewer's "File" menu to replace the

@@ -45,7 +45,7 @@ public:
     static QString getOperatorText(int op);
 
 private:
-    c4_View filterInt(c4_View dbview);
+    c4_View filterInt(c4_View dbview, QString colId, int value);
     c4_View filterString(c4_View dbview);
     c4_View filterFloat(c4_View dbview);
 

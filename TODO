@@ -1,9 +1,7 @@
 File properties dialog (size, rows, etc.)
 Alternate-row shading
 Optional database file encryption
-Rename and copy file options
 Option to hide navigation bar (and show all rows)
 Option to show Notes as multiline edit fields in row editor
-"Copy row" menu item
 Pie chart of enum options in summary dialog
 Type letter to go to rows whose first text field in the view starts with it

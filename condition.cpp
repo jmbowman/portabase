@@ -91,7 +91,15 @@ c4_View Condition::filter(c4_View dbview)
     }
     int type = db->getType(colName);
     if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME) {
-        return filterInt(dbview);
+        QString colId = db->getColId(colName);
+        int value = constant.toInt();
+        return filterInt(dbview, colId, value);
+    }
+    else if (type >= FIRST_ENUM) {
+        QString colId = db->getColId(colName, INTEGER);
+        QStringList options = db->listEnumOptions(type);
+        int value = options.findIndex(constant);
+        return filterInt(dbview, colId, value);
     }
     else if (type == FLOAT) {
         return filterFloat(dbview);
@@ -101,10 +109,9 @@ c4_View Condition::filter(c4_View dbview)
     }
 }
 
-c4_View Condition::filterInt(c4_View dbview)
+c4_View Condition::filterInt(c4_View dbview, QString colId, int value)
 {
-    int value = constant.toInt();
-    c4_IntProp prop(db->getColId(colName));
+    c4_IntProp prop(colId);
     c4_View result = dbview.Clone();
     int size = dbview.GetSize();
     if (operation == EQUALS) {

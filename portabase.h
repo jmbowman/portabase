@@ -49,6 +49,8 @@ private slots:
     void openFile(const DocLnk &);
     void openFile();
     void deleteFile();
+    void copyFile();
+    void renameFile();
     void refreshFileList();
     bool editColumns();
     void editEnums();
@@ -87,6 +89,7 @@ protected:
 private:
     void fileOpen();
     void createFile(const DocLnk &f, int source);
+    void configureDocLnk(DocLnk &doclnk, const QString &name);
     void finishNewFile(Database *db);
     void updateCaption(const QString &name=QString::null);
     void rebuildViewMenu();
@@ -106,6 +109,8 @@ private:
     QAction *fileNewAction;
     QAction *fileOpenAction;
     QAction *fileDeleteAction;
+    QAction *fileCopyAction;
+    QAction *fileRenameAction;
     QAction *refreshAction;
     QAction *importAction;
     QAction *quitAction;
