@@ -3,6 +3,4 @@ Date column type
 Date and time column type
 Enumeration column type
 File properties dialog (size, rows, etc.)
-Disable save icon when file is unchanged (coded, need icon with better
-   disabled state)
 Alternate-row shading

@@ -1,7 +1,14 @@
-2002-10-30  JMB  Dialog resizing
+2002-10-30  JMB  Dialog resizing, save enable/disable, hold on row to edit
 
     All full-screen dialogs should now resize correctly when input methods
     are hidden or shown.
+
+    The save icon and menu item are now enabled only when there are unsaved
+    changes.  (Including changes of view, sorting, rows per page, etc.)
+
+    Pressing and holding on a row in the data viewer for 1/2 second or
+    longer now launches the row editor (except if you press in a Note
+    column; this still shows the Note viewer).
 
 2002-10-28  #################### PortaBase 1.1 ####################
 

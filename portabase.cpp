@@ -51,8 +51,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     toolbar = new QPEToolBar(this);
 
     QIconSet saveIcons = Resource::loadIconSet("portabase/save");
-    //QPixmap disabledSave = Resource::loadPixmap("portabase/save_disabled");
-    //saveIcons.setPixmap(disabledSave, QIconSet::Small, QIconSet::Disabled);
+    QPixmap disabledSave = Resource::loadPixmap("portabase/save_disabled");
+    saveIcons.setPixmap(disabledSave, QIconSet::Small, QIconSet::Disabled);
     fileSaveAction = new QAction(tr("Save"), saveIcons,
                                  QString::null, 0, this, 0);
     connect(fileSaveAction, SIGNAL(activated()), this, SLOT(save()));
@@ -530,8 +530,7 @@ void PortaBase::deleteSorting()
 void PortaBase::setEdited(bool y)
 {
     isEdited = y;
-    // current icon looks like crap disabled...need a better one
-    //fileSaveAction->setEnabled(y);
+    fileSaveAction->setEnabled(y);
 }
 
 void PortaBase::setRowSelected(bool y)
