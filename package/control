@@ -1,9 +1,9 @@
 Package: portabase
 Priority: optional
 Section: Applications
-Version: 1.5
+Version: 1.6
 Architecture: arm
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
-Depends: qpe-base, libmetakit1
+Depends: qpe-base
 Description: A portable database
  A simple database for personal use.

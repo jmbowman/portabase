@@ -22,7 +22,7 @@ public:
 
 private:
     int fromOtherFormat(int argc, char **argv);
-    int toXML(int argc, char **argv);
+    int toOtherFormat(int argc, char **argv);
     void printUsage();
 };
 

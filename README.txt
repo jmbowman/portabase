@@ -1,4 +1,4 @@
-PortaBase 1.5 (February 2003)
+PortaBase 1.6 (March 2003)
 ----------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
@@ -21,6 +21,7 @@ The main features PortaBase currently has are:
 - Import data from CSV, XML, and MobileDB files
 - Export data to CSV and XML files
 - Command-line format conversions (to and from XML, from MobileDB)
+- Data file encryption
 - Unicode support
 - Pick any available font to use throughout the application
 
@@ -29,27 +30,21 @@ and usage.  This help file is also the online help for the application,
 available by clicking the "?" button at the top right of any screen in
 PortaBase for the Zaurus, or Help->Help Contents in desktop PortaBase.
 
-Zaurus Installation
--------------------
-Note that there are *two* packages that must be installed in order to run
-PortaBase; since many people didn't realize this for version 1.0, they are
-now only distributed together in a zip file along with this README file.  First
-install the libmetakit1 .ipk file onto the Zaurus, then install the
-portabase .ipk file.  (The MetaKit library is packaged separately because
-it is likely to be used by other applications in the near future.)  Once
-both packages have been installed, PortaBase can be launched from the
-Applications tab and the two .ipk files may be safely deleted.
-
 Zaurus Upgrades
 ---------------
 To upgrade from a previous version of PortaBase, do the following:
 
-1) uninstall libmetakit1 and portabase (your data files will be left alone)
-2) install the new libmetakit1 and portabase .ipk files
-3) delete both .ipk files (you don't have to, but it frees up space)
+1) uninstall libmetakit1 (if upgrading from 1.5 or earlier) and portabase
+   (your data files will be left alone)
+2) install the new portabase .ipk file
+3) delete the .ipk file (you don't have to, but it frees up space)
 
-IMPORTANT NOTE: libmetakit1 has changed for PortaBase 1.4; unlike previous
-PortaBase upgrades, it must be upgraded in addition to the portabase package.
+IMPORTANT NOTE: Metakit is no longer installed as a separate library.
+PortaBase now also uses the Beecrypt encryption library, and installing
+each library separately makes things more complicated than most people
+would prefer.  Both libraries are now compiled into the PortaBase
+executable.  This also avoids the need to provide different versions for
+the US and newer Japanese Zaurus models.
 
 Windows Installation and Upgrades
 ---------------------------------
@@ -60,13 +55,15 @@ Technical Info and Acknowledgements
 -----------------------------------
 PortaBase is written in C++, using the Qt and Qtopia libraries for GUI widgets,
 data structures, and communication with the PDA environment.  It uses the
-MetaKit (http://www.equi4.com/metakit) embedded database library for data
+Metakit (http://www.equi4.com/metakit) embedded database library for data
 storage and manipulation.  It also uses an enhanced version of the
 QtaDatePicker widget developed by John McDonald, available from
 http://prdownloads.sourceforge.net/zaurus/.  The MobileDB import code was
 based on code from ZReader (http://www.codecubed.com/zreader/index.html).
 The CSV import code was based on code from KSpread
-(http://www.koffice.org/kspread/).
+(http://www.koffice.org/kspread/).  PortaBase uses the Beecrypt library
+(http://www.virtualunlimited.com/products/beecrypt/) for encryption
+algorithms and good random number generation.
 
 License
 -------

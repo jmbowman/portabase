@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=PortaBase
-AppVerName=PortaBase 1.5
+AppVerName=PortaBase 1.6
 AppPublisher=Jeremy Bowman
 AppPublisherURL=http://portabase.sourceforge.net
 AppSupportURL=http://portabase.sourceforge.net
@@ -27,6 +27,7 @@ Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion
 Source: "portabase.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "qt-mt230nc.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile
+Source: "beecrypt.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile
 Source: "msvcrt.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist uninsneveruninstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

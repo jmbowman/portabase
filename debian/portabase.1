@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH PORTABASE 1 "February 09, 2003"
+.TH PORTABASE 1 "March 12, 2003"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -22,7 +22,7 @@ portabase \- an easy\-to\-use personal database application
 [ \-h | \-\-help | \-f \fI<file>\fP ]
 .br
 .B portabase
-command [ options ] \fI<fromfile>\fP \fI<tofile>\fP
+command [ \-p password ] [ options ] \fI<fromfile>\fP \fI<tofile>\fP
 .SH DESCRIPTION
 \fIPortaBase\fP (portable database) is a personal database application
 originally written for the Linux\-based models of Sharp Zaurus PDA (and
@@ -59,6 +59,8 @@ PortaBase's features include:
 .PP
 \- Command\-line format conversions (to and from XML, from MobileDB)
 .PP
+\- Data file encryption
+.PP
 \- Unicode support
 .PP
 \- Pick any available font to use throughout the application
@@ -72,10 +74,22 @@ Create a new PortaBase file from the input XML file.
 \fBfrommobiledb\fP
 Create a new PortaBase file from the input MobileDB file.
 .TP
+\fBfromcsv\fP
+Add rows to an existing PortaBase file from the input CSV file.
+.TP
 \fBtoxml\fP
 Create a new XML file from the input PortaBase file.
+.TP
+\fBtocsv\fP
+Create a new CSV file from the input PortaBase file.
 .PP
-The toxml command accepts the following options:
+If an encrypted PortaBase file is to be read or created, the following
+option can be used immediately after the command:
+.TP
+\fB\-p\fP \fI<password>\fP
+Open or create the encrypted PortaBase file using the given password
+.PP
+The toxml and tocsv commands accept the following options:
 .TP
 \fB\-v\fP \fI<view>\fP
 Apply the named view before exporting.

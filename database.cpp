@@ -23,13 +23,14 @@
 #include <qregexp.h>
 #include <qstringlist.h>
 #include "condition.h"
+#include "crypto.h"
 #include "csvutils.h"
 #include "database.h"
 #include "filter.h"
 #include "view.h"
 #include "xmlexport.h"
 
-Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
+Database::Database(QString path, int *result, int encrypt) : crypto(0), version(0), newFile(FALSE), curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter"), gCrypt("_gcrypt")
 {
     c4_View::_CaseSensitive = TRUE;
     checkedPixmap = Resource::loadPixmap("portabase/checked");
@@ -40,20 +41,18 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
     showSeconds = pbConfig.readBoolEntry("ShowSeconds");
 
     file = new c4_Storage(path, TRUE);
-    global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S]");
-    int version = 0;
-    bool newFile = FALSE;
+    global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S,_gcrypt:I]");
     if (global.GetSize() == 0) {
         // new file, add global data
         global.Add(gVersion [FILE_VERSION] + gView ["_all"] + gSort [""]
-                   + gFilter ["_allrows"]);
-        *ok = TRUE;
+                   + gFilter ["_allrows"] + gCrypt [encrypt]);
+        *result = OPEN_SUCCESS;
         newFile = TRUE;
         version = FILE_VERSION;
     }
     else if (gVersion (global[0]) > FILE_VERSION) {
         // trying to open a newer version of the file format
-        *ok = FALSE;
+        *result = OPEN_NEWER_VERSION;
     }
     else {
         version = gVersion (global[0]);
@@ -65,49 +64,33 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
             // filters added in file version 3
             gFilter (global[0]) = "_allrows";
         }
+        if (version < 8) {
+            // encryption added in file version 8
+            gCrypt (global[0]) = 0;
+        }
         if (version < FILE_VERSION) {
             gVersion (global[0]) = FILE_VERSION;
         }
-        *ok = TRUE;
+        *result = OPEN_SUCCESS;
     }
-    if (*ok) {
-        columns = file->GetAs("_columns[_cindex:I,_cname:S,_ctype:I,_cdefault:S,_cid:I]");
-        views = file->GetAs("_views[_vname:S,_vrpp:I,_vdeskrpp:I,_vsort:S,_vfilter:S]");
-        viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I,_vcdeskwidth:I]");
-        sorts = file->GetAs("_sorts[_sname:S]");
-        sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
-        filters = file->GetAs("_filters[_fname:S]");
-        filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcposition:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
-        enums = file->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
-        enumOptions = file->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
-        if (version < 3 || newFile) {
-            filters.Add(fName ["_allrows"]);
-        }
-        if (version < 4) {
-            // adapt to using column IDs instead of names in data view
-            updateDataColumnFormat();
-            // change from Latin-1 to UTF-8
-            updateEncoding();
+    if (*result == OPEN_SUCCESS) {
+        if (gCrypt (global[0]) == 0) {
+            storage = file;
         }
         else {
-            data = file->GetAs(formatString());
+            storage = new c4_Storage();
+            crypto = new Crypto(file, storage);
+            *result = OPEN_ENCRYPTED;
         }
-        if (version < 6) {
-            fixConditionIndices();
-        }
-        if (version < 7) {
-            addDesktopStats();
-        }
-        if (version < 8) {
-            addEnumDataIndices();
-            addViewDefaults();
-        }
-        maxId = data.GetSize() - 1;
     }
 }
 
 Database::~Database()
 {
+    if (crypto) {
+        delete crypto;
+        delete storage;
+    }
     delete file;
     if (curView) {
         delete curView;
@@ -115,6 +98,73 @@ Database::~Database()
     if (curFilter) {
         delete curFilter;
     }
+}
+
+QString Database::load()
+{
+    if (crypto) {
+        if (!newFile) {
+            QString error = crypto->open();
+            if (error != "") {
+                return error;
+            }
+        }
+        // from now on, use global view from storage; the file's doesn't change
+        global = storage->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S,_gcrypt:I]");
+        if (newFile) {
+            global.Add(gVersion [FILE_VERSION] + gView ["_all"] + gSort [""]
+                       + gFilter ["_allrows"] + gCrypt [1]);
+        }
+    }
+    columns = storage->GetAs("_columns[_cindex:I,_cname:S,_ctype:I,_cdefault:S,_cid:I]");
+    views = storage->GetAs("_views[_vname:S,_vrpp:I,_vdeskrpp:I,_vsort:S,_vfilter:S]");
+    viewColumns = storage->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I,_vcdeskwidth:I]");
+    sorts = storage->GetAs("_sorts[_sname:S]");
+    sortColumns = storage->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
+    filters = storage->GetAs("_filters[_fname:S]");
+    filterConditions = storage->GetAs("_filterconditions[_fcfilter:S,_fcposition:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
+    enums = storage->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
+    enumOptions = storage->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
+    if (version < 3 || newFile) {
+        filters.Add(fName ["_allrows"]);
+    }
+    if (version < 4) {
+        // adapt to using column IDs instead of names in data view
+        updateDataColumnFormat();
+        // change from Latin-1 to UTF-8
+        updateEncoding();
+    }
+    else {
+        data = storage->GetAs(formatString());
+    }
+    if (version < 6) {
+        fixConditionIndices();
+    }
+    if (version < 7) {
+        addDesktopStats();
+    }
+    if (version < 8) {
+        addEnumDataIndices();
+        addViewDefaults();
+    }
+    maxId = data.GetSize() - 1;
+    return "";
+}
+
+bool Database::encrypted()
+{
+    return (crypto != 0);
+}
+
+QString Database::setPassword(const QString &pass, bool newPass)
+{
+    return crypto->setPassword(pass, newPass);
+}
+
+QString Database::changePassword(const QString &oldPass,
+                                 const QString &newPass)
+{
+    return crypto->changePassword(oldPass, newPass);
 }
 
 void Database::updateDateTimePrefs()
@@ -557,7 +607,7 @@ void Database::renameColumn(QString oldName, QString newName)
 
 void Database::updateDataFormat()
 {
-    data = file->GetAs(formatString());
+    data = storage->GetAs(formatString());
 }
 
 QStringList Database::getRow(int rowId)
@@ -1342,6 +1392,10 @@ QString Database::formatString(bool old)
 
 void Database::commit()
 {
+    if (crypto) {
+        storage->Commit();
+        crypto->save();
+    }
     file->Commit();
 }
 
@@ -1543,7 +1597,7 @@ void Database::updateDataColumnFormat()
 
     // Also, the original string representation of decimal fields is now
     // stored along with the floating point version
-    data = file->GetAs(formatString(TRUE));
+    data = storage->GetAs(formatString(TRUE));
     int colCount = columns.GetSize();
     int rowCount = data.GetSize();
     for (int i = 0; i < colCount; i++) {

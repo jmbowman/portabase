@@ -9,7 +9,6 @@
  * (at your option) any later version.
  */
 
-#include <qapplication.h>
 #include <qfile.h>
 #include <qstringlist.h>
 #include "commandline.h"
@@ -32,11 +31,17 @@ int CommandLine::process(int argc, char **argv)
     if (argv[1] == QCString("fromxml")) {
         return fromOtherFormat(argc, argv);
     }
+    else if (argv[1] == QCString("fromcsv")) {
+        return fromOtherFormat(argc, argv);
+    }
     else if (argv[1] == QCString("frommobiledb")) {
         return fromOtherFormat(argc, argv);
     }
     else if (argv[1] == QCString("toxml")) {
-        return toXML(argc, argv);
+        return toOtherFormat(argc, argv);
+    }
+    else if (argv[1] == QCString("tocsv")) {
+        return toOtherFormat(argc, argv);
     }
     else if (argv[1] == QCString("-h") || argv[1] == QCString("--help")) {
         printUsage();
@@ -50,23 +55,66 @@ int CommandLine::process(int argc, char **argv)
 
 int CommandLine::fromOtherFormat(int argc, char **argv)
 {
-    if (argc < 4) {
+    QStringList args;
+    for (int i = 0; i < argc; i++) {
+        args.append(argv[i]);
+    }
+    int numArgs = 4;
+    int passIndex = args.findIndex("-p");
+    if (passIndex != -1) {
+        if (argc < passIndex + 4) {
+            printUsage();
+            return 1;
+        }
+        numArgs += 2;
+    }
+    if (argc != numArgs) {
         printUsage();
-        qApp->exit(1);
         return 1;
     }
-    QString sourceFile(argv[2]);
-    QString pbFile(argv[3]);
-    bool ok;
-    Database *db = new Database(pbFile, &ok);
-    if (!ok) {
-        printf("Unable to create/initialize file\n");
+    QString sourceFile(argv[numArgs - 2]);
+    QString pbFile(argv[numArgs - 1]);
+    bool fromcsv = (argv[1] == QCString("fromcsv"));
+    if (fromcsv && !QFile::exists(pbFile)) {
+        printf("Named PortaBase file doesn't exist\n");
         return 1;
+    }
+    int openResult;
+    int encrypt = (passIndex != -1 && !fromcsv) ? 1 : 0;
+    Database *db = new Database(pbFile, &openResult, encrypt);
+    if (openResult == OPEN_NEWER_VERSION) {
+        if (fromcsv) {
+            printf("Unable to open PortaBase file\n");
+        }
+        else {
+            printf("Unable to create/initialize file\n");
+        }
+        return 1;
+    }
+    else if (openResult == OPEN_ENCRYPTED || (passIndex != -1 && !fromcsv)) {
+        QString error = db->setPassword(args[passIndex + 1], !fromcsv);
+        if (error != "") {
+            printf(error.local8Bit());
+            printf("\n");
+            return 1;
+        }
+        error = db->load();
+        if (error != "") {
+            printf(error.local8Bit());
+            printf("\n");
+            return 1;
+        }
+    }
+    else {
+        db->load();
     }
     QString error = "";
     ImportUtils utils;
     if (argv[1] == QCString("fromxml")) {
         error = utils.importXML(sourceFile, db);
+    }
+    else if (fromcsv) {
+        error = db->importFromCSV(sourceFile);
     }
     else {
         error = utils.importMobileDB(sourceFile, db);
@@ -74,7 +122,10 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
     if (error != "") {
         printf(error.local8Bit());
         printf("\n");
-        QFile::remove(pbFile);
+        if (!fromcsv) {
+            QFile::remove(pbFile);
+        }
+        delete db;
         return 1;
     }
     db->commit();
@@ -82,13 +133,21 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
     return 0;
 }
 
-int CommandLine::toXML(int argc, char **argv)
+int CommandLine::toOtherFormat(int argc, char **argv)
 {
     QStringList args;
     for (int i = 0; i < argc; i++) {
         args.append(argv[i]);
     }
     int numArgs = 4;
+    int passIndex = args.findIndex("-p");
+    if (passIndex != -1) {
+        if (argc < passIndex + 4) {
+            printUsage();
+            return 1;
+        }
+        numArgs += 2;
+    }
     int viewIndex = args.findIndex("-v");
     if (viewIndex != -1) {
         if (argc < viewIndex + 4) {
@@ -118,12 +177,33 @@ int CommandLine::toXML(int argc, char **argv)
         return 1;
     }
     QString pbFile(args[numArgs - 2]);
-    QString xmlFile(args[numArgs - 1]);
-    bool ok = FALSE;
-    Database *db = new Database(pbFile, &ok);
-    if (!ok) {
+    QString outputFile(args[numArgs - 1]);
+    int openResult;
+    Database *db = new Database(pbFile, &openResult);
+    if (openResult == OPEN_NEWER_VERSION) {
         printf("Error opening file: %s\n", argv[numArgs - 2]);
         return 1;
+    }
+    else if (openResult == OPEN_ENCRYPTED) {
+        if (passIndex == -1) {
+            printf("Encrypted file, must provide password\n");
+            return 1;
+        }
+        QString error = db->setPassword(args[passIndex + 1], FALSE);
+        if (error != "") {
+            printf(error.local8Bit());
+            printf("\n");
+            return 1;
+        }
+        error = db->load();
+        if (error != "") {
+            printf(error.local8Bit());
+            printf("\n");
+            return 1;
+        }
+    }
+    else {
+        db->load();
     }
     QString viewName = db->currentView();
     QString sortName = db->currentSorting();
@@ -151,7 +231,13 @@ int CommandLine::toXML(int argc, char **argv)
     }
     db->setGlobalInfo(viewName, sortName, filterName);
     View *view = db->getView(viewName);
-    view->exportToXML(xmlFile);
+    if (argv[1] == QCString("toxml")) {
+        view->exportToXML(outputFile);
+    }
+    else {
+        view->prepareData();
+        view->exportToCSV(outputFile);
+    }
     // view is deleted by Database destructor
     delete db;
     return 0;
@@ -160,11 +246,12 @@ int CommandLine::toXML(int argc, char **argv)
 void CommandLine::printUsage()
 {
     printf("Usage: portabase [-h | --help | -f file]\n");
-    printf("       portabase command [options] fromfile tofile\n");
-    printf("  where command is fromxml, toxml, or frommobiledb\n");
-    printf("  Valid options for toxml are:\n");
+    printf("       portabase command [-p password] [options] fromfile tofile\n");
+    printf("  where command is fromxml, toxml, fromcsv, tocsv, or frommobiledb\n");
+    printf("  Valid options for toxml and tocsv are:\n");
     printf("    -v viewname (apply this view before exporting)\n");
     printf("    -s sortname (apply this sorting before exporting)\n");
     printf("    -f filtername (apply this filter before exporting)\n");
+    printf("  When using fromcsv, \"tofile\" must be an existing PortaBase file.\n");
     printf("  Specify -h or --help to receive this message\n");
 }

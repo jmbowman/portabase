@@ -61,6 +61,7 @@ private slots:
     void copyRow();
     void deleteAllRows();
     void save();
+    void changePassword();
     void import();
     void dataImport();
     void dataExport();
@@ -115,6 +116,7 @@ private:
     QAction *importAction;
     QAction *quitAction;
     QAction *fileSaveAction;
+    QAction *changePassAction;
     QAction *dataImportAction;
     QAction *exportAction;
     QAction *deleteRowsAction;

@@ -26,20 +26,20 @@ will need the following:
 - Other packages as needed to satisfy the above requirements or create
   packages for your OS/distribution
 
-MetaKit Compilation
+Metakit Compilation
 -------------------
-To compile PortaBase, MetaKit must be compiled first.  PortaBase uses a
+To compile PortaBase, Metakit must be compiled first.  PortaBase uses a
 version of 2.4.8 patched to perform case-sensitive searches.  Therefore,
-the patch file metakit-2.4.8.patch must be applied to the MetaKit 2.4.8
+the patch file metakit-2.4.8.patch must be applied to the Metakit 2.4.8
 source tree before building.
 
-To build MetaKit for the desktop test environment, run dev-x86-qpe.sh and then
-follow the MetaKit installation instructions (in the MetaKit README file).
-Then copy the created libmk4.so (probably in /usr/local/lib unless you
-specified somewhere else) to /opt/Qtopia/lib/ so it can be found by PortaBase
-at runtime.
+To build Metakit for the desktop test environment, run dev-x86-qpe.sh and then
+follow the Metakit installation instructions (in the Metakit README file).
+Then copy the created libmk4.a (probably in /usr/local/lib unless you
+specified somewhere else) to /opt/Qtopia/lib/ so it can be found when
+compiling PortaBase.
 
-To build MetaKit for the Zaurus, use the instructions for the test environment
+To build Metakit for the Zaurus, use the instructions for the test environment
 (after cleaning out the results of that build, or from a different copy of the
 source directory) but with the following changes:
 
@@ -49,32 +49,49 @@ source directory) but with the following changes:
 NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ../unix/configure --prefix=/output/dir --host=arm-linux
 
 Replace "/output/dir" with the directory you want the build results to be
-placed in (probably not /usr/local this time).
-- Copy libmk4.so to /opt/Qtopia/sharp/lib instead of /opt/Qtopia/lib.
-- Run "arm-linux-strip libmk4.so" to remove debugging symbols and such in order
-  to reduce the size of the library.
+placed in (probably not /usr/local this time).  Then copy libmk4.a to
+/opt/Qtopia/sharp/lib instead of /opt/Qtopia/lib.
 
-To compile MetaKit for Windows, follow the instructions in MetaKit's README
+To compile Metakit for Windows, follow the instructions in Metakit's README
 file; be sure to build the static library version (mklib).  To compile
-MetaKit for use in Linux desktop PortaBase, just follow the README directions.
+Metakit for use in Linux desktop PortaBase, just follow the README directions.
+
+Beecrypt compilation
+--------------------
+Get the latest version of Beecrypt from CVS (PortaBase is currently using
+the code from March 1, 2003).  For the desktop versions of PortaBase, just
+follow the build instructions found in Beecrypt's INSTALL file.  For the
+Zaurus version, run the configure script as follows:
+
+NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux --enable-aio=no
+
+As with Metakit, replace /output/dir with the directory in which to place
+the results.  Copy libbeecrypt.a to the same place the Metakit library went.
+
+For Debian unstable, just install the latest versions of the beecrypt2 and
+beecrypt2-dev packages; you don't need to compile it yourself to compile
+the desktop version of PortaBase.
 
 PortaBase for Zaurus Compilation
 --------------------------------
-After compiling MetaKit as described above, PortaBase can be compiled in the
-usual manner for Qtopia applications.  Use tmake on portabase_test.pro for
-desktop testing and portabase.pro when building for the Zaurus; tmake usage is
-described in the compiler setup HOWTO mentioned above.  As with the MetaKit
-library file, arm-linux-strip should be run on the Arm version of the
-"portabase" executable in order to reduce its size.
+After compiling Metakit and Beecrypt as described above, PortaBase can be
+compiled in the usual manner for Qtopia applications.  Use tmake on
+portabase_test.pro for desktop testing and portabase.pro when building for
+the Zaurus; tmake usage is described in the compiler setup HOWTO mentioned
+above.  "arm-linux-strip" should be run on the Arm version of the "portabase"
+executable in order to reduce its size by removing unneeded debugging
+information and such.
 
 PortaBase for Windows Compilation, Packaging
 --------------------------------------------
-- Set up environment variables so that the headers and libraries for Qt and
-  MetaKit are available.  VC++ binaries must also be in the PATH, etc.
+- Set up environment variables so that the headers and libraries for Qt,
+  Metakit, and Beecrypt are available.  VC++ binaries must also be in the
+  PATH, etc.
 - Run "tmake -o Makefile portabase_win.pro"
 - Run "nmake"
 - Fix any environment variables that prevent nmake from finishing, retry...
-- Copy qt-mt230nc.dll and msvcrt.dll to the PortaBase source directory
+- Copy qt-mt230nc.dll, msvcrt.dll, and beecrypt.dll to the PortaBase source
+  directory
 - Open portabase.iss with Inno Setup and choose "Compile"
 
 Debian Package Building
@@ -91,8 +108,10 @@ Linux/UNIX compilation
 ----------------------
 - Set the QMAKESPEC and QTDIR environment variables as appropriate for your
   platform
-- Make sure the MetaKit static library (.a) is in your LD_LIBRARY_PATH, and
-  that the dynamic library (.so) isn't
+- Make sure the Metakit and Beecrypt static libraries (.a) are in your
+  LD_LIBRARY_PATH, and that the dynamic libraries (.so) aren't.  (For
+  Debian unstable, the beecrypt2 and beecrypt2-dev packages will set up
+  that library for you.)
 - Run qmake on portabase_desktop.pro
 - Run make
 
@@ -101,8 +120,6 @@ Package Building
 To create ".ipk" files for installation on the Zaurus, create the following
 directory hierarchy as root in a directory of your choice:
 
-/libmetakit1/CONTROL/control
-/libmetakit1/opt/QtPalmtop/lib/libmk4.so
 /portabase/CONTROL/control
 /portabase/CONTROL/postinst
 /portabase/opt/QtPalmtop/apps/Applications/portabase.desktop
@@ -117,17 +134,5 @@ directory hierarchy as root in a directory of your choice:
 /portabase/opt/QtPalmtop/pics/portabase/save_disabled.png
 /portabase/opt/QtPalmtop/pics/portabase/unchecked.png
 
-(where libmk4.so and portabase are the files you compiled and the "control"
-file under libmetakit1/CONTROL was copied from libmetakit1_control).  Finally,
-run ipkg-build on the libmetakit1 directory, then the portabase directory; this
-will create the desired .ipk files.
-
-NOTE: For some reason I don't understand yet, installing libmk4.so to
-the above location on the Japanese SL-B500 and SL-C700 models causes PortaBase
-and several other applications to fail to launch.  For these devices, the
-path of this file should instead be:
-
-/libmetakit1/usr/lib/libmk4.so
-
-Note that this makes it impossible to install the libmetakit1 package to a CF
-or SD card.
+Finally, run ipkg-build on the portabase directory; this will create the
+.ipk file.

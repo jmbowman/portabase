@@ -28,6 +28,7 @@
 #include <qpe/resource.h>
 #include "importdialog.h"
 #include "inputdialog.h"
+#include "newfiledialog.h"
 #endif
 
 #include <qaction.h>
@@ -47,6 +48,7 @@
 #include "enummanager.h"
 #include "filter.h"
 #include "filtereditor.h"
+#include "passdialog.h"
 #include "portabase.h"
 #include "preferences.h"
 #include "sorteditor.h"
@@ -127,6 +129,10 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     fileSaveAction = new QAction(tr("Save"), saveIcons,
                                  QString::null, 0, this);
     connect(fileSaveAction, SIGNAL(activated()), this, SLOT(save()));
+    changePassAction = new QAction(tr("Change Password"), QString::null, 0,
+                                   this);
+    connect(changePassAction, SIGNAL(activated()),
+            this, SLOT(changePassword()));
     dataImportAction = new QAction(tr("Import"), QString::null, 0, this);
     connect(dataImportAction, SIGNAL(activated()), this, SLOT(dataImport()));
     exportAction = new QAction(tr("Export"), QString::null, 0, this);
@@ -344,6 +350,7 @@ void PortaBase::import()
 void PortaBase::createFile(const DocLnk &f, int source)
 {
     bool ok = TRUE;
+    bool encrypt = FALSE;
 #if defined(DESKTOP)
     QString file = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
                        tr("PortaBase files") + " (*.pob)",
@@ -357,14 +364,29 @@ void PortaBase::createFile(const DocLnk &f, int source)
         doc->setName(info.baseName());
         doc->setFile(info.dirPath(TRUE) + "/" + info.baseName() + ".pob");
         QPEApplication::setDocumentDir(info.dirPath(TRUE));
+        QMessageBox crypt(tr("PortaBase"), tr("Encrypt the file?"),
+                          QMessageBox::NoIcon, QMessageBox::Yes,
+                          QMessageBox::No | QMessageBox::Default,
+                          QMessageBox::NoButton, this);
+        int result = crypt.exec();
+        if (result == QMessageBox::Cancel) {
+            ok = FALSE;
+        }
+        else if (result == QMessageBox::Yes) {
+            encrypt = TRUE;
+        }
     }
 #else
-    QString name = InputDialog::getText(tr("PortaBase"),
-                                        tr("Enter a name for the new file"),
-                                        QString::null, &ok, this);
-    if (ok && !name.isEmpty()) {
-        doc = new DocLnk(f);
-        configureDocLnk(*doc, name);
+    NewFileDialog filedlg(this);
+    ok = FALSE;
+    if (filedlg.exec()) {
+        QString name = filedlg.name();
+        if (!name.isEmpty()) {
+            doc = new DocLnk(f);
+            configureDocLnk(*doc, name);
+            encrypt = filedlg.encryption();
+            ok = TRUE;
+        }
     }
 #endif
     else {
@@ -373,15 +395,32 @@ void PortaBase::createFile(const DocLnk &f, int source)
     if (ok) {
         FileManager fm;
         fm.saveFile(*doc, "");
-        db = new Database(doc->file(), &ok);
-        if (source == NO_DATA) {
-            ok = editColumns();
+        int openResult;
+        db = new Database(doc->file(), &openResult, encrypt ? 1 : 0);
+        if (encrypt) {
+            PasswordDialog passdlg(db, NEW_PASSWORD, this);
+            bool finished = FALSE;
+            while (!finished) {
+                if (!passdlg.exec()) {
+                    finished = TRUE;
+                    ok = FALSE;
+                }
+                else {
+                    finished = passdlg.validate();
+                }
+            }
         }
-        else {
-            ImportDialog dialog(source, db, this);
-            ok = dialog.exec();
-            if (ok) {
-                finishNewFile(db);
+        if (ok) {
+            db->load();
+            if (source == NO_DATA) {
+                ok = editColumns();
+            }
+            else {
+                ImportDialog dialog(source, db, this);
+                ok = dialog.exec();
+                if (ok) {
+                    finishNewFile(db);
+                }
             }
         }
         if (ok) {
@@ -448,11 +487,26 @@ void PortaBase::openFile(const QString &f)
 
 void PortaBase::openFile(const DocLnk &f)
 {
-    bool ok = FALSE;
-    Database *temp = new Database(f.file(), &ok);
-    if (!ok) {
+    int openResult;
+    Database *temp = new Database(f.file(), &openResult);
+    if (openResult == OPEN_NEWER_VERSION) {
         QMessageBox::warning(this, tr("PortaBase"), tr("This file uses a newer version of the\nPortaBase format than this version\nof PortaBase supports; please\nupgrade"));
+        delete temp;
         return;
+    }
+    else if (openResult == OPEN_ENCRYPTED) {
+        PasswordDialog passdlg(temp, OPEN_PASSWORD, this);
+        if (!passdlg.exec()) {
+            delete temp;
+            return;
+        }
+        if (!passdlg.validate()) {
+            delete temp;
+            return;
+        }
+    }
+    else {
+        temp->load();
     }
     if (doc) {
         delete doc;
@@ -642,6 +696,9 @@ void PortaBase::showDataViewer()
     file = new QPopupMenu(this);
     file->insertItem(tr("Row"), row);
     fileSaveAction->addTo(file);
+    if (db->encrypted()) {
+        changePassAction->addTo(file);
+    }
     dataImportAction->addTo(file);
     exportAction->addTo(file);
     deleteRowsAction->addTo(file);
@@ -763,6 +820,16 @@ void PortaBase::save()
     viewer->saveViewSettings();
     db->commit();
     setEdited(FALSE);
+}
+
+void PortaBase::changePassword()
+{
+    PasswordDialog passdlg(db, CHANGE_PASSWORD, this);
+    if (passdlg.exec()) {
+        if (passdlg.validate()) {
+            setEdited(TRUE);
+        }
+    }
 }
 
 void PortaBase::dataImport()

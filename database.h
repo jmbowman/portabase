@@ -24,7 +24,12 @@
 
 #define FILE_VERSION 8
 
+#define OPEN_NEWER_VERSION 0
+#define OPEN_SUCCESS 1
+#define OPEN_ENCRYPTED 2
+
 class Condition;
+class Crypto;
 class Filter;
 class QDate;
 class QString;
@@ -34,9 +39,13 @@ class View;
 class Database
 {
 public:
-    Database(QString path, bool *ok);
+    Database(QString path, int *result, int encrypt=0);
     ~Database();
 
+    QString load();
+    bool encrypted();
+    QString setPassword(const QString &pass, bool newPass);
+    QString changePassword(const QString &oldPass, const QString &newPass);
     void updateDateTimePrefs();
     QString currentView();
     View *getView(QString name, bool applyDefaults=FALSE);
@@ -150,7 +159,13 @@ private:
     QString dateSeparator;
     bool ampm;
     bool showSeconds;
+    // the data file
     c4_Storage *file;
+    // also the data file if unencrypted, wrapped data otherwise
+    c4_Storage *storage;
+    Crypto *crypto;
+    int version;
+    bool newFile;
     c4_View columns;
     c4_View views;
     c4_View viewColumns;
@@ -213,6 +228,7 @@ private:
     c4_StringProp gView;
     c4_StringProp gSort;
     c4_StringProp gFilter;
+    c4_IntProp gCrypt;
 };
 
 #endif
