@@ -55,6 +55,7 @@ typedef QInputDialog InputDialog;
 #include "enummanager.h"
 #include "filter.h"
 #include "filtereditor.h"
+#include "menuactions.h"
 #include "passdialog.h"
 #include "pbdialog.h"
 #include "portabase.h"
@@ -104,6 +105,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     toolbar = new QToolBar(this);
     addToolBar(toolbar, QMainWindow::Top, FALSE);
 #endif
+    ma = new MenuActions(this);
 
     // menu and toolbar icon sets
     QIconSet addIcons = Resource::loadIconSet("new");
@@ -121,68 +123,58 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     QIconSet findIcons = Resource::loadIconSet("find");
 
     // file selector actions
-    fileNewAction = new QAction(tr("New"), addIcons, QString::null, 0, this);
+    fileNewAction = ma->action("New", addIcons);
     connect(fileNewAction, SIGNAL(activated()), this, SLOT(newFile()));
-    fileOpenAction = new QAction(tr("Open"), openIcons, QString::null, 0,
-                                 this);
+    fileOpenAction = ma->action("Open", openIcons);
     connect(fileOpenAction, SIGNAL(activated()), this, SLOT(openFile()));
-    fileDeleteAction = new QAction(tr("Delete") + "...", deleteIcons,
-                                   QString::null, 0, this);
+    fileDeleteAction = ma->action("Delete File", deleteIcons);
     connect(fileDeleteAction, SIGNAL(activated()), this, SLOT(deleteFile()));
-    fileCopyAction = new QAction(tr("Copy") + "...", copyIcons,QString::null,
-                                 0, this);
+    fileCopyAction = ma->action("Copy", copyIcons);
     connect(fileCopyAction, SIGNAL(activated()), this, SLOT(copyFile()));
-    fileRenameAction = new QAction(tr("Rename") + "...", QString::null, 0,
-                                   this);
+    fileRenameAction = ma->action("Rename");
     connect(fileRenameAction, SIGNAL(activated()), this, SLOT(renameFile()));
-    refreshAction = new QAction(tr("Refresh"), QString::null, 0, this);
+    refreshAction = ma->action("Refresh");
     connect(refreshAction, SIGNAL(activated()), this, SLOT(refreshFileList()));
-    importAction = new QAction(tr("Import") + "...", QString::null, 0, this);
+    importAction = ma->action("Import");
     connect(importAction, SIGNAL(activated()), this, SLOT(import()));
-    quitAction = new QAction(tr("Quit"), quitIcons, QString::null, 0, this);
+    quitAction = ma->action("Quit", quitIcons);
     connect(quitAction, SIGNAL(activated()), this, SLOT(close()));
 
-    viewListAction = new QAction(tr("List"), QString::null, 0, this, 0, TRUE);
+    viewListAction = ma->action("List", TRUE);
     connect(viewListAction, SIGNAL(activated()), this, SLOT(viewList()));
-    viewIconsAction = new QAction(tr("Icons"), QString::null, 0, this, 0,
-                                  TRUE);
+    viewIconsAction = ma->action("Icons", TRUE);
     connect(viewIconsAction, SIGNAL(activated()), this, SLOT(viewIcons()));
 
     // File menu actions
-    fileSaveAction = new QAction(tr("Save"), saveIcons,
-                                 QString::null, 0, this);
+    fileSaveAction = ma->action("Save", saveIcons);
     connect(fileSaveAction, SIGNAL(activated()), this, SLOT(save()));
-    changePassAction = new QAction(tr("Change Password"), QString::null, 0,
-                                   this);
+    changePassAction = ma->action("Change Password");
     connect(changePassAction, SIGNAL(activated()),
             this, SLOT(changePassword()));
-    dataImportAction = new QAction(tr("Import"), QString::null, 0, this);
+    dataImportAction = ma->action("Import");
     connect(dataImportAction, SIGNAL(activated()), this, SLOT(dataImport()));
-    exportAction = new QAction(tr("Export"), QString::null, 0, this);
+    exportAction = ma->action("Export");
     connect(exportAction, SIGNAL(activated()), this, SLOT(dataExport()));
-    deleteRowsAction = new QAction(tr("Delete Rows In Filter"), deleteIcons,
-                           QString::null, 0, this);
+    deleteRowsAction = ma->action("Delete Rows In Filter", deleteIcons);
     connect(deleteRowsAction, SIGNAL(activated()),
             this, SLOT(deleteAllRows()));
-    editColsAction = new QAction(tr("Edit Columns"), QString::null, 0, this);
+    editColsAction = ma->action("Edit Columns");
     connect(editColsAction, SIGNAL(activated()), this, SLOT(editColumns()));
-    manageEnumsAction = new QAction(tr("Edit Enums"), QString::null, 0, this);
+    manageEnumsAction = ma->action("Edit Enums");
     connect(manageEnumsAction, SIGNAL(activated()), this, SLOT(editEnums()));
-    prefsAction = new QAction(tr("Preferences"), QString::null, 0, this);
+    prefsAction = ma->action("Preferences");
     connect(prefsAction, SIGNAL(activated()), this, SLOT(editPreferences()));
-    closeAction = new QAction(tr("Close"), closeIcons, QString::null, 0, this);
+    closeAction = ma->action("Close", closeIcons);
     connect(closeAction, SIGNAL(activated()), this, SLOT(close()));
 
     // Row menu/toolbar actions
-    rowAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
+    rowAddAction = ma->action("Add", addIcons);
     connect(rowAddAction, SIGNAL(activated()), this, SLOT(addRow()));
-    rowEditAction = new QAction(tr("Edit"), editIcons, QString::null, 0,
-                                this);
+    rowEditAction = ma->action("Edit", editIcons);
     connect(rowEditAction, SIGNAL(activated()), this, SLOT(editRow()));
-    rowDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null,
-                                  0, this);
+    rowDeleteAction = ma->action("Delete", deleteIcons);
     connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
-    rowCopyAction = new QAction(tr("Copy"), copyIcons, QString::null, 0, this);
+    rowCopyAction = ma->action("Copy", copyIcons);
     connect(rowCopyAction, SIGNAL(activated()), this, SLOT(copyRow()));
     // this submenu doesn't get deleted when the menubar is cleared...
     row = new QPopupMenu(this);
@@ -192,54 +184,45 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     rowCopyAction->addTo(row);
 
     // View menu actions
-    viewAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
+    viewAddAction = ma->action("Add", addIcons);
     connect(viewAddAction, SIGNAL(activated()), this, SLOT(addView()));
-    viewEditAction = new QAction(tr("Edit"), editIcons, QString::null, 0,
-                                 this);
+    viewEditAction = ma->action("Edit", editIcons);
     connect(viewEditAction, SIGNAL(activated()), this, SLOT(editView()));
-    viewDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null, 0,
-                                   this);
+    viewDeleteAction = ma->action("Delete", deleteIcons);
     connect(viewDeleteAction, SIGNAL(activated()), this, SLOT(deleteView()));
-    viewAllColsAction = new QAction(tr("All Columns"), QString::null, 0, this,
-                                    0, TRUE);
+    viewAllColsAction = ma->action("All Columns", TRUE);
     connect(viewAllColsAction, SIGNAL(activated()),
             this, SLOT(viewAllColumns()));
 
     // Sort menu actions
-    sortAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
+    sortAddAction = ma->action(tr("Add"), addIcons);
     connect(sortAddAction, SIGNAL(activated()), this, SLOT(addSorting()));
-    sortEditAction = new QAction(tr("Edit"), editIcons, QString::null, 0,
-                                 this);
+    sortEditAction = ma->action("Edit", editIcons);
     connect(sortEditAction, SIGNAL(activated()), this, SLOT(editSorting()));
-    sortDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null, 0,
-                                   this);
+    sortDeleteAction = ma->action("Delete", deleteIcons);
     connect(sortDeleteAction, SIGNAL(activated()),
             this, SLOT(deleteSorting()));
 
     // Filter menu actions
-    findAction = new QAction(tr("Quick Filter"), findIcons, QString::null, 0,
-                             this);
+    findAction = ma->action("Quick Filter", findIcons);
     connect(findAction, SIGNAL(activated()), this, SLOT(simpleFilter()));
-    filterAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
+    filterAddAction = ma->action("Add", addIcons);
     connect(filterAddAction, SIGNAL(activated()), this, SLOT(addFilter()));
-    filterEditAction = new QAction(tr("Edit"), editIcons, QString::null, 0,
-                                 this);
+    filterEditAction = ma->action("Edit", editIcons);
     connect(filterEditAction, SIGNAL(activated()), this, SLOT(editFilter()));
-    filterDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null,
-                                     0, this);
+    filterDeleteAction = ma->action("Delete", deleteIcons);
     connect(filterDeleteAction, SIGNAL(activated()),
             this, SLOT(deleteFilter()));
-    filterAllRowsAction = new QAction(tr("All Rows"), QString::null, 0, this,
-                                      0, TRUE);
+    filterAllRowsAction = ma->action("All Rows", TRUE);
     connect(filterAllRowsAction, SIGNAL(activated()),
             this, SLOT(viewAllRows()));
 
     // Help menu actions
-    helpAction = new QAction(tr("Help Contents"), QString::null, 0, this);
+    helpAction = ma->action("Help Contents");
     connect(helpAction, SIGNAL(activated()), this, SLOT(showHelp()));
-    aboutAction = new QAction(tr("About PortaBase"), QString::null, 0, this);
+    aboutAction = ma->action("About PortaBase");
     connect(aboutAction, SIGNAL(activated()), this, SLOT(aboutPortaBase()));
-    aboutQtAction = new QAction(tr("About Qt"), QString::null, 0, this);
+    aboutQtAction = ma->action("About Qt");
     connect(aboutQtAction, SIGNAL(activated()), this, SLOT(aboutQt()));
                                 
     mainStack = new QWidgetStack(this);
@@ -635,6 +618,12 @@ void PortaBase::showFileSelector()
     viewIds.clear();
     sortIds.clear();
     filterIds.clear();
+    fileNewAction->setEnabled(TRUE);
+    fileOpenAction->setEnabled(TRUE);
+    fileSaveAction->setEnabled(FALSE);
+    closeAction->setEnabled(FALSE);
+    quitAction->setEnabled(TRUE);
+    findAction->setEnabled(FALSE);
 
     file = new QPopupMenu(this);
     fileNewAction->addTo(file);
@@ -650,7 +639,7 @@ void PortaBase::showFileSelector()
         recent->insertItem(recentFiles[i]);
     }
     connect(recent, SIGNAL(activated(int)), this, SLOT(openRecent(int)));
-    file->insertItem(tr("Open Recent"), recent);
+    file->insertItem(ma->menuText("Open Recent"), recent);
 #else
     fileDeleteAction->addTo(file);
     fileDeleteAction->addTo(toolbar);
@@ -664,14 +653,14 @@ void PortaBase::showFileSelector()
     file->insertSeparator();
     quitAction->addTo(file);
 
-    menu->insertItem(tr("File"), file);
+    menu->insertItem(ma->menuText("File"), file);
 
 #ifdef SHARP
     view = new QPopupMenu(this);
     view->setCheckable(TRUE);
     viewListAction->addTo(view);
     viewIconsAction->addTo(view);
-    menu->insertItem(tr("View"), view);
+    menu->insertItem(ma->menuText("View"), view);
 #endif
 
 #ifdef DESKTOP
@@ -680,7 +669,7 @@ void PortaBase::showFileSelector()
     help->insertSeparator();
     aboutAction->addTo(help);
     aboutQtAction->addTo(help);
-    menu->insertItem(tr("Help"), help);
+    menu->insertItem(ma->menuText("Help"), help);
 #endif
     if (needsRefresh) {
         fileSelector->reread();
@@ -693,6 +682,11 @@ void PortaBase::showDataViewer()
 {
     menu->clear();
     toolbar->clear();
+    fileNewAction->setEnabled(FALSE);
+    fileOpenAction->setEnabled(FALSE);
+    closeAction->setEnabled(TRUE);
+    quitAction->setEnabled(FALSE);
+    findAction->setEnabled(TRUE);
 
     // Toolbar
     QStringList shown;
@@ -745,7 +739,7 @@ void PortaBase::showDataViewer()
     count = underFile.count();
     for (i = 0; i < count; i++) {
         QString menuName = underFile[i];
-        file->insertItem(getMenuLabel(menuName), getMenuPointer(menuName));
+        file->insertItem(ma->menuText(menuName), getMenuPointer(menuName));
     }
     fileSaveAction->addTo(file);
     if (db->encrypted()) {
@@ -760,11 +754,11 @@ void PortaBase::showDataViewer()
     file->insertSeparator();
     closeAction->addTo(file);
 
-    menu->insertItem(tr("File"), file);
+    menu->insertItem(ma->menuText("File"), file);
     count = topLevel.count();
     for (i = 0; i < count; i++) {
         QString menuName = topLevel[i];
-        menu->insertItem(getMenuLabel(menuName), getMenuPointer(menuName));
+        menu->insertItem(ma->menuText(menuName), getMenuPointer(menuName));
     }
 #ifdef DESKTOP
     help = new QPopupMenu(this);
@@ -772,25 +766,9 @@ void PortaBase::showDataViewer()
     help->insertSeparator();
     aboutAction->addTo(help);
     aboutQtAction->addTo(help);
-    menu->insertItem(tr("Help"), help);
+    menu->insertItem(ma->menuText("Help"), help);
 #endif
     mainStack->raiseWidget(viewer);
-}
-
-QString PortaBase::getMenuLabel(const QString &menuName)
-{
-    if (menuName == "Row") {
-        return tr("Row");
-    }
-    else if (menuName == "View") {
-        return tr("View");
-    }
-    else if (menuName == "Sort") {
-        return tr("Sort");
-    }
-    else {
-        return tr("Filter");
-    }
 }
 
 QPopupMenu *PortaBase::getMenuPointer(const QString &menuName)

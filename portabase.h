@@ -20,6 +20,7 @@
 class Config;
 class Database;
 class DocLnk;
+class MenuActions;
 class PBFileSelector;
 class QAction;
 class QMenuBar;
@@ -104,7 +105,6 @@ private:
     void closeViewer();
     void showFileSelector();
     void showDataViewer();
-    QString getMenuLabel(const QString &menuName);
     QPopupMenu *getMenuPointer(const QString &menuName);
     QAction *getButtonAction(const QString &buttonName);
     QStringList getRecentFiles(Config &conf);
@@ -118,6 +118,7 @@ private:
     Database *db;
     QWidgetStack *mainStack;
     PBFileSelector *fileSelector;
+    MenuActions *ma;
     QMenuBar *menu;
     QToolBar *toolbar;
     QAction *fileNewAction;
