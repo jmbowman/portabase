@@ -1,4 +1,4 @@
-PortaBase 1.6 (March 2003)
+PortaBase 1.7 (May 2003)
 --------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
@@ -25,6 +25,8 @@ The main features PortaBase currently has are:
 - Data file encryption
 - Unicode support
 - Pick any available font to use throughout the application
+- User-specified alternating row background colors
+- Simple calculator widget for entering numeric data
 
 See the help file (help/html/portabase.html) for more information on features
 and usage.  This help file is also the online help for the application,

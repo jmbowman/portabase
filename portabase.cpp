@@ -1288,7 +1288,7 @@ void PortaBase::showHelp()
 
 void PortaBase::aboutPortaBase()
 {
-    QString message = tr("PortaBase") + " 1.6.1\n";
+    QString message = tr("PortaBase") + " 1.7\n";
     message += tr("Copyright (C)") + " 2002-2003 Jeremy Bowman\n\n";
     message += tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::information(this, tr("About PortaBase"), message);
