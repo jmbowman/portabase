@@ -30,6 +30,49 @@
     </message>
 </context>
 <context>
+    <name>ColorDialog</name>
+    <message>
+        <source>Hu&amp;e:</source>
+        <translation>H(&amp;E):</translation>
+    </message>
+    <message>
+        <source>&amp;Sat:</source>
+        <translation>&amp;S:</translation>
+    </message>
+    <message>
+        <source>&amp;Val:</source>
+        <translation>&amp;V:</translation>
+    </message>
+    <message>
+        <source>&amp;Red:</source>
+        <translation>赤(&amp;R):</translation>
+    </message>
+    <message>
+        <source>&amp;Green:</source>
+        <translation>緑(&amp;G):</translation>
+    </message>
+    <message>
+        <source>Bl&amp;ue:</source>
+        <translation>青(&amp;U):</translation>
+    </message>
+    <message>
+        <source>A&amp;lpha channel:</source>
+        <translation>アルファチャネル(&amp;L):</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>はい</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Choose color</source>
+        <translation>色を選択</translation>
+    </message>
+</context>
+<context>
     <name>ColumnEditor</name>
     <message>
         <source>PortaBase</source>
@@ -406,15 +449,15 @@ deleted:</source>
     <name>FileSelector</name>
     <message>
         <source>No file selected</source>
-        <translation>ファイルは選択されていません</translation>
+        <translation type="obsolete">ファイルは選択されていません</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation>PortaBaseファイル</translation>
+        <translation type="obsolete">PortaBaseファイル</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation>ファイルを選択して下さい</translation>
+        <translation type="obsolete">ファイルを選択して下さい</translation>
     </message>
 </context>
 <context>
@@ -476,41 +519,65 @@ deleted:</source>
     <name>HelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation>ヘルプ</translation>
+        <translation type="obsolete">ヘルプ</translation>
     </message>
     <message>
         <source>PortaBase</source>
-        <translation>PortaBase</translation>
+        <translation type="obsolete">PortaBase</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>戻る</translation>
+        <translation type="obsolete">戻る</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>進む</translation>
+        <translation type="obsolete">進む</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>はい</translation>
+        <translation type="obsolete">はい</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
+        <translation>PortaBase</translation>
+    </message>
+    <message>
+        <source>Import rows from CSV file</source>
+        <translation>CSVファイルからレコードをインポート</translation>
+    </message>
+    <message>
+        <source>Import from MobileDB file</source>
+        <translation>MobileDBファイルからインポート</translation>
+    </message>
+    <message>
+        <source>Import from text file</source>
+        <translation>テキストファイルからインポート</translation>
+    </message>
+    <message>
+        <source>Import from XML file</source>
+        <translation>XMLファイルからインポート</translation>
+    </message>
+    <message>
+        <source>Text encoding</source>
+        <translation>文字コード</translation>
     </message>
 </context>
 <context>
     <name>NewFileDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
+        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="obsolete">ファイルネームを入力して下さい</translation>
+        <translation>ファイルネームを入力して下さい</translation>
+    </message>
+    <message>
+        <source>Encrypted file</source>
+        <translation>暗号ファイル</translation>
     </message>
 </context>
 <context>
@@ -921,6 +988,65 @@ current filter?</source>
     </message>
 </context>
 <context>
+    <name>QColorDialog</name>
+    <message>
+        <source>Hu&amp;e:</source>
+        <translation>H(&amp;E):</translation>
+    </message>
+    <message>
+        <source>&amp;Sat:</source>
+        <translation>&amp;S:</translation>
+    </message>
+    <message>
+        <source>&amp;Val:</source>
+        <translation>&amp;V:</translation>
+    </message>
+    <message>
+        <source>&amp;Red:</source>
+        <translation>赤(&amp;R):</translation>
+    </message>
+    <message>
+        <source>&amp;Green:</source>
+        <translation>緑(&amp;G):</translation>
+    </message>
+    <message>
+        <source>Bl&amp;ue:</source>
+        <translation>青(&amp;U):</translation>
+    </message>
+    <message>
+        <source>A&amp;lpha channel:</source>
+        <translation>アルファチャネル(&amp;L):</translation>
+    </message>
+    <message>
+        <source>&amp;Basic colors</source>
+        <translation>基本色(&amp;B)</translation>
+    </message>
+    <message>
+        <source>&amp;Custom colors</source>
+        <translation>カスタム色(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Define Custom Colors &gt;&gt;</source>
+        <translation>カスタム色を作る(&amp;D) &gt;&gt;</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>はい</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>&amp;Add to Custom Colors</source>
+        <translation>カスタム色に追加(&amp;A)</translation>
+    </message>
+    <message>
+        <source>Select color</source>
+        <translation>色を選択</translation>
+    </message>
+</context>
+<context>
     <name>QDatePicker</name>
     <message>
         <source>Select a date</source>
@@ -1211,7 +1337,7 @@ current filter?</source>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>空き容量が足りません</translation>
+        <translation type="obsolete">空き容量が足りません</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -1220,7 +1346,7 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation>このプログラムの構成データ
+        <translation type="obsolete">このプログラムの構成データ
 を作るに問題がありました。
 
 空き容量を増やしてから
@@ -1228,43 +1354,43 @@ try again.</source>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation>カンマ区切りテキスト</translation>
+        <translation type="obsolete">カンマ区切りテキスト</translation>
     </message>
     <message>
         <source>MobileDB files</source>
-        <translation>MobileDBファイル</translation>
+        <translation type="obsolete">MobileDBファイル</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation>XMLファイル</translation>
+        <translation type="obsolete">XMLファイル</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation>ファイルを選択して下さい</translation>
+        <translation type="obsolete">ファイルを選択して下さい</translation>
     </message>
     <message>
         <source>PortaBase</source>
-        <translation>PortaBase</translation>
+        <translation type="obsolete">PortaBase</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>日</translation>
+        <translation type="obsolete">日</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>月</translation>
+        <translation type="obsolete">月</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>年</translation>
+        <translation type="obsolete">年</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>午後</translation>
+        <translation type="obsolete">午後</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>午前</translation>
+        <translation type="obsolete">午前</translation>
     </message>
     <message>
         <source>Error in row %1</source>
@@ -1300,11 +1426,11 @@ try again.</source>
     </message>
     <message>
         <source>Import</source>
-        <translation>インポート</translation>
+        <translation type="obsolete">インポート</translation>
     </message>
     <message>
         <source>Text encoding</source>
-        <translation>文字コード</translation>
+        <translation type="obsolete">文字コード</translation>
     </message>
 </context>
 <context>

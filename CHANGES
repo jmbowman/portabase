@@ -1,3 +1,9 @@
+2003-06-03  JMB  Taiwanese translation, updated Japanese UI translation
+
+    Added a Taiwanese translation of the UI and help file provided by
+    Jeng-Ping Lin.  Also updated the Japanese UI translation to include
+    phrases from the color selector dialog and such.
+
 2003-06-02  JMB  Dynamic string entry field bugfixes
 
     Fixed a few usability problems with the new dynamic string entry
