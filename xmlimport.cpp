@@ -10,6 +10,7 @@
  */
 
 #include <qobject.h>
+#include "calc/calcnode.h"
 #include "condition.h"
 #include "database.h"
 #include "filter.h"
@@ -29,7 +30,12 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     sections.append("sortcolumns");
     sections.append("filters");
     sections.append("filterconditions");
+    sections.append("calcs");
+    sections.append("calcnodes");
     sections.append("data");
+
+    optionalSections.append("calcs");
+    optionalSections.append("calcnodes");
 
     containers.append("global");
     containers.append("enum");
@@ -41,6 +47,8 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     containers.append("sortcolumn");
     containers.append("filter");
     containers.append("filtercondition");
+    containers.append("calc");
+    containers.append("calcnode");
     containers.append("r");
 
     dataFields.append("s");
@@ -50,6 +58,7 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     dataFields.append("n");
     dataFields.append("d");
     dataFields.append("t");
+    dataFields.append("c");
     dataFields.append("e");
 
     booleans.append("scdesc");
@@ -69,6 +78,12 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     nonNegativeIntegers.append("scindex");
     nonNegativeIntegers.append("fcposition");
     nonNegativeIntegers.append("fcoperator");
+    nonNegativeIntegers.append("calcid");
+    nonNegativeIntegers.append("calcdecimals");
+    nonNegativeIntegers.append("cnid");
+    nonNegativeIntegers.append("cnnodeid");
+    nonNegativeIntegers.append("cnparentid");
+    nonNegativeIntegers.append("cntype");
 
     positiveIntegers.append("gversion");
     positiveIntegers.append("eid");
@@ -145,12 +160,10 @@ bool XMLImport::startElement(const QString&, const QString&,
     }
     int sectionIndex = sections.findIndex(qName);
     if (sectionIndex != -1) {
-        if (sectionIndex > 0) {
-            QString previous = sections[sectionIndex - 1];
-            if (lastSection != previous) {
-                error = QObject::tr("Missing element") + ": " + previous;
-                return FALSE;
-            }
+        QString missing = missingSection(lastSection, sectionIndex);
+        if (missing != "") {
+            error = QObject::tr("Missing element") + ": " + missing;
+            return FALSE;
         }
         lastSection = qName;
     }
@@ -168,7 +181,7 @@ bool XMLImport::startElement(const QString&, const QString&,
         fields.clear();
     }
     if (qName == "enums" || qName == "views" || qName == "sorts"
-            || qName == "filters") {
+            || qName == "filters" || qName == "calcnodes") {
         indexMap.clear();
     }
     text = "";
@@ -230,8 +243,21 @@ bool XMLImport::endElement(const QString&, const QString&,
     else if (qName == "filterconditions") {
         return validateFilterConditions();
     }
+    else if (qName == "calc") {
+        return addCalc();
+    }
+    else if (qName == "calcnode") {
+        return addCalcNode();
+    }
+    else if (qName == "calcnodes") {
+        return validateCalcNodes();
+    }
     else if (qName == "r") {
         return addRow();
+    }
+    else if (qName == "data") {
+        db->calculateAll();
+        return TRUE;
     }
     else if (dataFields.findIndex(qName) != -1) {
         fields.insert(colId, text);
@@ -260,6 +286,25 @@ bool XMLImport::fatalError(const QXmlParseException &exception)
 void XMLImport::setDocumentLocator(QXmlLocator *locator)
 {
     xmlLocator = locator;
+}
+
+QString XMLImport::missingSection(const QString &before, int afterIndex)
+{
+    if (afterIndex == 0) {
+        // first section, there can't be one missing before it
+        return "";
+    }
+    QString previous = sections[afterIndex - 1];
+    if (before == previous) {
+        // no missing section
+        return "";
+    }
+    if (optionalSections.findIndex(previous) == -1) {
+        // missing non-optional section
+        return before;
+    }
+    // missing an optional section, see if anything earlier is missing
+    return missingSection(before, afterIndex - 1);
 }
 
 bool XMLImport::updateGlobalRecord()
@@ -342,7 +387,7 @@ bool XMLImport::addColumn()
     if (!validateName(cname)) {
         return FALSE;
     }
-    if (ctype > TIME) {
+    if (ctype > LAST_TYPE) {
         if (enumIds.findIndex(ctype) == -1) {
             error = QObject::tr("Invalid") + " ctype: "
                     + QString::number(ctype);
@@ -516,6 +561,64 @@ bool XMLImport::addFilterCondition()
     return TRUE;
 }
 
+bool XMLImport::addCalc()
+{
+    int calcid = getField("calcid").toInt();
+    int calcdecimals = getField("calcdecimals").toInt();
+    if (error != "") {
+        return FALSE;
+    }
+    int index = idList.findIndex(calcid);
+    if (index == -1) {
+        error = QObject::tr("Invalid") + " calcid: " + QString::number(calcid);
+        return FALSE;
+    }
+    QString colName = colNames[index];
+    int type = db->getType(colName);
+    if (type != CALC) {
+        error = QObject::tr("Invalid") + " calcid: " + QString::number(calcid);
+        return FALSE;
+    }
+    db->updateCalc(colName, 0, calcdecimals);
+    return TRUE;
+}
+
+bool XMLImport::addCalcNode()
+{
+    int cnid = getField("cnid").toInt();
+    int cnnodeid = getField("cnnodeid").toInt();
+    int cnparentid = getField("cnparentid").toInt();
+    int cntype = getField("cntype").toInt();
+    QString cnvalue = getField("cnvalue");
+    if (error != "") {
+        return FALSE;
+    }
+    int index = idList.findIndex(cnid);
+    if (index == -1) {
+        error = QObject::tr("Invalid") + " cnid: " + QString::number(cnid);
+        return FALSE;
+    }
+    QString colName = colNames[index];
+    int type = db->getType(colName);
+    if (type != CALC) {
+        error = QObject::tr("Invalid") + " cnid: " + QString::number(cnid);
+        return FALSE;
+    }
+    if (cnparentid >= cnnodeid && !(cnparentid == 0 && cnnodeid == 0)) {
+        error = QObject::tr("Invalid") + " cnparentid: "
+                + QString::number(cnparentid);
+        return FALSE;
+    }
+    if (!indexMap.contains(colName)) {
+        QMap<int,QString> mapping;
+        indexMap.insert(colName, mapping);
+    }
+    indexMap[colName].insert(cnnodeid, QString::number(cnparentid));
+    CalcNode node(cntype, cnvalue);
+    db->addCalcNode(cnid, &node, cnnodeid, cnparentid);
+    return TRUE;
+}
+
 bool XMLImport::addRow()
 {
     QStringList values;
@@ -664,6 +767,91 @@ bool XMLImport::validateFilterConditions()
         delete filter;
     }
     return TRUE;
+}
+
+bool XMLImport::validateCalcNodes()
+{
+    IndexMap::Iterator iter;
+    IntList nodeIds;
+    for (iter = indexMap.begin(); iter != indexMap.end(); ++iter) {
+        QMap<int,QString> mapping = iter.data();
+        QMap<int,QString>::Iterator iter2;
+        nodeIds.clear();
+        for (iter2 = mapping.begin(); iter2 != mapping.end(); ++iter2) {
+            nodeIds.append(iter2.key());
+        }
+        if (containsDuplicate(nodeIds, "cnnodeid")) {
+            return FALSE;
+        }
+        for (iter2 = mapping.begin(); iter2 != mapping.end(); ++iter2) {
+            QString parentId = iter2.data();
+            if (nodeIds.findIndex(parentId.toInt()) == -1) {
+                error = QObject::tr("Invalid") + " cnparentid: " + parentId;
+                return FALSE;
+            }
+        }
+        CalcNode *root = db->loadCalc(iter.key());
+        error = isValidCalcNode(root);
+        delete root;
+        if (error != "") {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+QString XMLImport::isValidCalcNode(CalcNode *node)
+{
+    int type = node->type();
+    if (type < 0 || (type > CALC_DATE_COLUMN && type < CALC_FIRST_OP)
+        || type > CALC_LAST_OP) {
+        return QObject::tr("Invalid") + " cntype: " + QString::number(type);
+    }
+    QString value = node->value();
+    if (type == CALC_CONSTANT) {
+        bool ok;
+        value.toDouble(&ok);
+        if (!ok) {
+            return QObject::tr("Invalid") + " cnvalue: " + value;
+        }
+    }
+    else if (type == CALC_DATE_CONSTANT) {
+        QString error = db->isValidValue(DATE, value);
+        if (error != "") {
+            return QObject::tr("Invalid") + " cnvalue: " + value;
+        }
+    }
+    else if (type == CALC_COLUMN) {
+        if (colNames.findIndex(value) == -1) {
+            return QObject::tr("Invalid") + " cnvalue: " + value;
+        }
+        int colType = db->getType(value);
+        if (colType != INTEGER && colType != FLOAT) {
+            return QObject::tr("Invalid") + " cnvalue: " + value;
+        }
+    }
+    else if (type == CALC_DATE_COLUMN) {
+        if (colNames.findIndex(value) == -1) {
+            return QObject::tr("Invalid") + " cnvalue: " + value;
+        }
+        if (db->getType(value) != DATE) {
+            return QObject::tr("Invalid") + " cnvalue: " + value;
+        }
+    }
+    CalcNodeList children = node->getChildren();
+    int count = children.count();
+    int max = node->maxChildren();
+    if (max != -1 && count > max) {
+        return QObject::tr("Too many child nodes for node type") + ": "
+               + QString::number(type);
+    }
+    for (int i = 0; i < count; i++) {
+        QString error = isValidCalcNode(children[i]);
+        if (error != "") {
+            return error;
+        }
+    }
+    return "";
 }
 
 bool XMLImport::isValidDefault(const QString &cname, int ctype,
@@ -899,6 +1087,8 @@ void XMLImport::buildParentsMap()
     parents.insert("filterconditions", "portabase");
     parents.insert("enums", "portabase");
     parents.insert("enumoptions", "portabase");
+    parents.insert("calcs", "portabase");
+    parents.insert("calcnodes", "portabase");
     parents.insert("data", "portabase");
 
     parents.insert("gversion", "global");
@@ -959,6 +1149,17 @@ void XMLImport::buildParentsMap()
     parents.insert("fcconstant", "filtercondition");
     parents.insert("fccase", "filtercondition");
 
+    parents.insert("calc", "calcs");
+    parents.insert("calcid", "calc");
+    parents.insert("calcdecimals", "calc");
+
+    parents.insert("calcnode", "calcnodes");
+    parents.insert("cnid", "calcnode");
+    parents.insert("cnnodeid", "calcnode");
+    parents.insert("cnparentid", "calcnode");
+    parents.insert("cntype", "calcnode");
+    parents.insert("cnvalue", "calcnode");
+
     parents.insert("r", "data");
     parents.insert("s", "r");
     parents.insert("i", "r");
@@ -967,5 +1168,6 @@ void XMLImport::buildParentsMap()
     parents.insert("n", "r");
     parents.insert("d", "r");
     parents.insert("t", "r");
+    parents.insert("c", "r");
     parents.insert("e", "r");
 }

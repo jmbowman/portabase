@@ -22,15 +22,17 @@
 #include <qlineedit.h>
 #include <qstringlist.h>
 #include <qwidgetstack.h>
+#include "calc/calceditor.h"
+#include "calc/calcnode.h"
 #include "columneditor.h"
 #include "database.h"
+#include "dbeditor.h"
 #include "enumeditor.h"
 #include "notebutton.h"
 #include "numberwidget.h"
 
-ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
+ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
 {
-    db = dbase;
     setCaption(tr("PortaBase"));
 #if defined(DESKTOP)
     QGridLayout *grid = new QGridLayout(this, 4, 2);
@@ -52,13 +54,15 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
     typeBox->insertItem(tr("Note"));
     typeBox->insertItem(tr("Date"));
     typeBox->insertItem(tr("Time"));
+    typeBox->insertItem(tr("Calculation"));
     typeBox->insertStringList(db->listEnums());
     typeBox->insertItem("(" + tr("New Enum") + ")");
     connect(typeBox, SIGNAL(activated(int)),
             this, SLOT(updateDefaultWidget(int)));
     lastType = 0;
 
-    grid->addWidget(new QLabel(tr("Default"), this), 2, 0);
+    defaultLabel = new QLabel(tr("Default"), this);
+    grid->addWidget(defaultLabel, 2, 0);
     defaultStack = new QWidgetStack(this);
     defaultStack->setMaximumHeight(typeBox->height());
     grid->addWidget(defaultStack, 2, 1);
@@ -74,6 +78,8 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
     defaultTime->insertItem(tr("Now"));
     defaultTime->insertItem(tr("None"));
     defaultEnum = new QComboBox(FALSE, defaultStack);
+    calcButton = new QPushButton(tr("Edit calculation"), defaultStack);
+    connect(calcButton, SIGNAL(clicked()), this, SLOT(editCalculation()));
     defaultStack->raiseWidget(defaultLine);
 
 #if defined(DESKTOP)
@@ -110,7 +116,7 @@ void ColumnEditor::setName(QString newName)
 int ColumnEditor::type()
 {
     int colType = typeBox->currentItem();
-    if (colType > TIME) {
+    if (colType > LAST_TYPE) {
         QString enumName = typeBox->text(colType);
         colType = db->getEnumId(enumName);
     }
@@ -170,6 +176,12 @@ QString ColumnEditor::defaultValue()
         else {
             return QString::number(-1);
         }
+    }
+    else if (colType == CALC) {
+        if (calcRoot == 0) {
+            return "";
+        }
+        return calcRoot->equation(db);
     }
     else if (colType >= FIRST_ENUM) {
         return defaultEnum->currentText();
@@ -232,6 +244,20 @@ void ColumnEditor::setDefaultValue(QString newDefault)
     }
 }
 
+CalcNode *ColumnEditor::calculation(int *decimals)
+{
+    if (decimals != 0) {
+        *decimals = calcDecimals;
+    }
+    return calcRoot;
+}
+
+void ColumnEditor::setCalculation(CalcNode *root, int decimals)
+{
+    calcRoot = root;
+    calcDecimals = decimals;
+}
+
 void ColumnEditor::setTypeEditable(bool flag)
 {
     typeBox->setEnabled(flag);
@@ -245,6 +271,7 @@ int ColumnEditor::exec()
 
 void ColumnEditor::updateDefaultWidget(int newType)
 {
+    defaultLabel->setText(tr("Default"));
     if (newType == typeBox->count() - 1) {
         // creating a new enum type
         EnumEditor editor(this);
@@ -258,7 +285,7 @@ void ColumnEditor::updateDefaultWidget(int newType)
             return;
         }
     }
-    if (newType > TIME) {
+    if (newType > LAST_TYPE) {
         QString enumName = typeBox->text(newType);
         int enumId = db->getEnumId(enumName);
         QStringList options = db->listEnumOptions(enumId);
@@ -285,8 +312,38 @@ void ColumnEditor::updateDefaultWidget(int newType)
     else if (newType == FLOAT) {
         defaultStack->raiseWidget(defaultFloat);
     }
+    else if (newType == CALC) {
+        defaultLabel->setText("");
+        defaultStack->raiseWidget(calcButton);
+    }
     else {
         defaultStack->raiseWidget(defaultLine);
     }
     lastType = typeBox->currentItem();
+}
+
+void ColumnEditor::editCalculation()
+{
+    int *types = dbEditor->columnTypes();
+    CalcEditor editor(db, name(), dbEditor->columnNames(), types, this);
+    if (calcRoot != 0) {
+        CalcNode *calcCopy = calcRoot->clone();
+        editor.load(calcCopy, calcDecimals);
+    }
+    if (editor.exec()) {
+        // delete the original, keep the edited copy
+        if (calcRoot != 0) {
+            delete calcRoot;
+        }
+        calcRoot = editor.getRootNode();
+        calcDecimals = editor.getDecimals();
+    }
+    else {
+        // keep the original, delete the edited copy
+        CalcNode *root = editor.getRootNode();
+        if (root != 0) {
+            delete root;
+        }
+    }
+    delete[] types;
 }

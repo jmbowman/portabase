@@ -22,6 +22,7 @@
 #include <qobject.h>
 #include <qregexp.h>
 #include <qstringlist.h>
+#include "calc/calcnode.h"
 #include "condition.h"
 #include "crypto.h"
 #include "csvutils.h"
@@ -30,7 +31,7 @@
 #include "view.h"
 #include "xmlexport.h"
 
-Database::Database(QString path, int *result, int encrypt) : crypto(0), version(0), newFile(FALSE), curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter"), gCrypt("_gcrypt")
+Database::Database(QString path, int *result, int encrypt) : crypto(0), version(0), newFile(FALSE), curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), calcId("_calcid"), calcDecimals("_calcdecimals"), cnId("_cnid"), cnNodeId("_cnnodeid"), cnParentId("_cnparentid"), cnType("_cntype"), cnValue("_cnvalue"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter"), gCrypt("_gcrypt")
 {
     c4_View::_CaseSensitive = TRUE;
     checkedPixmap = Resource::loadPixmap("portabase/checked");
@@ -125,6 +126,8 @@ QString Database::load()
     filterConditions = storage->GetAs("_filterconditions[_fcfilter:S,_fcposition:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
     enums = storage->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
     enumOptions = storage->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
+    calcs = storage->GetAs("_calcs[_calcid:I,_calcdecimals:I]");
+    calcNodes = storage->GetAs("_calcnodes[_cnid:I,_cnnodeid:I,_cnparentid:I,_cntype:I,_cnvalue:S]");
     if (version < 3 || newFile) {
         filters.Add(fName ["_allrows"]);
     }
@@ -227,7 +230,7 @@ View *Database::getView(QString name, bool applyDefaults)
 #endif
         int idNum = cId (columns[colIndex]);
         colIds.append(makeColId(idNum, types[i]));
-        if (types[i] == FLOAT) {
+        if (types[i] == FLOAT || types[i] == CALC) {
             floatStringIds.append(makeColId(idNum, STRING));
         }
         else {
@@ -397,6 +400,9 @@ int Database::getType(QString column)
 QString Database::getDefault(QString column)
 {
     int index = columns.Find(cName [column.utf8()]);
+    if (cType (columns[index]) == CALC) {
+        return "0";
+    }
     return QString::fromUtf8(cDefault (columns[index]));
 }
 
@@ -546,12 +552,13 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal,
             indexProp (data[i]) = defaultIndex;
         }
     }
-    else {
+    else if (type != CALC) {
         c4_StringProp newProp(idString);
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = utf8Value;
         }
     }
+    // calculation values get set after the calculation is saved
 }
 
 void Database::deleteColumn(QString name)
@@ -577,6 +584,10 @@ void Database::deleteColumn(QString name)
     for (i = 0; i < count; i++) {
         deleteFilterColumn(QString::fromUtf8(fName (filters[i])), name);
     }
+    // remove the column from any calculations containing it
+    deleteCalcColumn(name);
+    // if the column is a calculation, delete its definition
+    deleteCalc(cId (columns[index]));
     // remove the column from the definition
     columns.RemoveAt(index);
 }
@@ -603,6 +614,12 @@ void Database::renameColumn(QString oldName, QString newName)
         fcColumn (filterConditions[nextIndex]) = utf8NewName;
         nextIndex = filterConditions.Find(fcColumn [utf8OldName]);
     }
+    // rename the column in any calculations containing it
+    nextIndex = calcNodes.Find(cnValue [utf8OldName]);
+    while (nextIndex != -1) {
+        cnValue (calcNodes[nextIndex]) = utf8NewName;
+        nextIndex = calcNodes.Find(cnValue [utf8OldName]);
+    }
     // rename the column in the format definition
     int index = columns.Find(cName [utf8OldName]);
     cName (columns[index]) = utf8NewName;
@@ -622,7 +639,7 @@ QStringList Database::getRow(int rowId)
     c4_View temp = columns.SortOn(cIndex);
     for (int i = 0; i < numCols; i++) {
         int type = cType (temp[i]);
-        if (type == FLOAT) {
+        if (type == FLOAT || type == CALC) {
             // want the string representation for this
             type = STRING;
         }
@@ -799,7 +816,7 @@ c4_View Database::createEmptyView(QStringList colNames)
             c4_IntProp prop(idString);
             result.AddProperty(prop);
         }
-        else if (type == FLOAT) {
+        else if (type == FLOAT || type == CALC) {
             c4_FloatProp prop(idString);
             result.AddProperty(prop);
         }
@@ -994,13 +1011,14 @@ QString Database::addRow(QStringList values, int *rowId)
             c4_IntProp prop(idString);
             prop (row) = value.toInt();
         }
-        else if (type == FLOAT) {
+        else if (type == FLOAT || type == CALC) {
             c4_FloatProp prop(idString);
             prop (row) = value.toDouble();
-            // also need to save the string as entered
+            // also need to save the string representation
             QString stringColId = makeColId(cId (temp[i]), STRING);
             c4_StringProp stringProp(stringColId);
             stringProp (row) = value.utf8();
+            // when importing, remember to rerun the calculation after this
         }
         else if (type >= FIRST_ENUM) {
             c4_StringProp prop(idString);
@@ -1042,10 +1060,10 @@ void Database::updateRow(int rowId, QStringList values)
             c4_IntProp prop(idString);
             prop (data[index]) = value.toInt();
         }
-        else if (type == FLOAT) {
+        else if (type == FLOAT || type == CALC) {
             c4_FloatProp prop(idString);
             prop (data[index]) = values[i].toDouble();
-            // also need to save the string as entered
+            // also need to save the string representation
             QString stringColId = makeColId(cId (temp[i]), STRING);
             c4_StringProp stringProp(stringColId);
             stringProp (data[index]) = values[i].utf8();
@@ -1352,6 +1370,164 @@ void Database::setEnumOptionSequence(QString enumName, QStringList options)
     updateEnumDataIndices(enumName);
 }
 
+void Database::deleteCalcColumn(const QString &columnName)
+{
+    // delete all calculation nodes referring to this column
+    QCString utf8ColumnName = columnName.utf8();
+    int removeIndex = calcNodes.Find(cnValue [utf8ColumnName]);
+    // keep track of which calculations need to be redone
+    IntList redoIds;
+    while (removeIndex != -1) {
+        int colId = cnId (calcNodes[removeIndex]);
+        if (redoIds.findIndex(colId) == -1) {
+            redoIds.append(colId);
+        }
+        calcNodes.RemoveAt(removeIndex);
+        removeIndex = calcNodes.Find(cnValue [utf8ColumnName]);
+    }
+    // redo the appropriate calculations for all rows
+    int count = redoIds.count();
+    for (int i = 0; i < count; i++) {
+        int colId = redoIds[i];
+        int decimals = 2;
+        CalcNode *root = loadCalc(colId, &decimals);
+        calculateAll(colId, root, decimals);
+        delete root;
+    }
+}
+
+CalcNode *Database::loadCalc(const QString &colName, int *decimals)
+{
+    int index = columns.Find(cName [colName.utf8()]);
+    if (index == -1) {
+        return 0;
+    }
+    int colId = cId (columns[index]);
+    return loadCalc(colId, decimals);
+}
+
+CalcNode *Database::loadCalc(int colId, int *decimals)
+{
+    if (decimals != 0) {
+        int index = calcs.Find(calcId [colId]);
+        if (index != -1) {
+            *decimals = calcDecimals (calcs[index]);
+        }
+    }
+    c4_View nodes = calcNodes.Select(cnId [colId]);
+    int size = nodes.GetSize();
+    if (size == 0) {
+        return 0;
+    }
+    nodes = nodes.SortOn(cnNodeId);
+    int maxId = cnNodeId (nodes[size - 1]);
+    CalcNode **array = new CalcNode *[maxId + 1];
+    int id = cnNodeId (nodes[0]);
+    int type = cnType (nodes[0]);
+    QString value = QString::fromUtf8(cnValue (nodes[0]));
+    CalcNode *root = new CalcNode(type, value);
+    array[id] = root;
+    for (int i = 1; i < size; i++) {
+        id = cnNodeId (nodes[i]);
+        int parent = cnParentId (nodes[i]);
+        type = cnType (nodes[i]);
+        value = QString::fromUtf8(cnValue (nodes[i]));
+        CalcNode *node = new CalcNode(type, value);
+        array[id] = node;
+        CalcNode *parentNode = array[parent];
+        parentNode->addChild(node);
+    }
+    delete[] array;
+    return root;
+}
+
+void Database::deleteCalc(int colId)
+{
+    int removeIndex = calcNodes.Find(cnId [colId]);
+    while (removeIndex != -1) {
+        calcNodes.RemoveAt(removeIndex);
+        removeIndex = calcNodes.Find(cnId [colId]);
+    }
+    removeIndex = calcs.Find(calcId [colId]);
+    if (removeIndex != -1) {
+        calcs.RemoveAt(removeIndex);
+    }
+}
+
+void Database::calculateAll()
+{
+    int colCount = columns.GetSize();
+    int i;
+    for (i = 0; i < colCount; i++) {
+        int type = cType (columns[i]);
+        if (type == CALC) {
+            int colId = cId (columns[i]);
+            int decimals = 2;
+            CalcNode *root = loadCalc(colId, &decimals);
+            calculateAll(colId, root, decimals);
+            delete root;
+        }
+    }
+}
+
+void Database::calculateAll(int colId, CalcNode *root, int decimals)
+{
+    int size = data.GetSize();
+    QStringList colNames = listColumns();
+    c4_FloatProp floatProp(makeColId(colId, CALC));
+    c4_StringProp stringProp(makeColId(colId, STRING));
+    double value = 0;
+    for (int i = 0; i < size; i++) {
+        if (root != 0) {
+            QStringList row = getRow(i);
+            value = root->value(row, colNames);
+        }
+        floatProp (data[i]) = value;
+        stringProp (data[i]) = formatDouble(value, decimals).utf8();
+    }
+}
+
+QString Database::formatDouble(double value, int decimals)
+{
+    QString format("%.");
+    format += QString::number(decimals) + "f";
+    return QString().sprintf(format, value);
+}
+
+void Database::updateCalc(const QString &colName, CalcNode *root, int decimals)
+{
+    int index = columns.Find(cName [colName.utf8()]);
+    int colId = cId (columns[index]);
+    deleteCalc(colId);
+    c4_Row row;
+    calcId (row) = colId;
+    calcDecimals (row) = decimals;
+    calcs.Add(row);
+    addCalcNode(colId, root, 0, 0);
+    calculateAll(colId, root, decimals);
+}
+
+int Database::addCalcNode(int calcId, CalcNode *node, int nodeId, int parentId)
+{
+    if (node == 0) {
+        return 0;
+    }
+    c4_Row row;
+    cnId (row) = calcId;
+    cnNodeId (row) = nodeId;
+    cnParentId (row) = parentId;
+    cnType (row) = node->type();
+    cnValue (row) = node->value().utf8();
+    calcNodes.Add(row);
+    CalcNodeList children = node->getChildren();
+    int count = children.count();
+    int nextId = nodeId + 1;
+    for (int i = 0; i < count; i++) {
+        nextId = addCalcNode(calcId, children[i], nextId, nodeId);
+    }
+    return nextId;
+}
+
 QString Database::makeColId(int colId, int type)
 {
     QString result("_");
@@ -1359,7 +1535,7 @@ QString Database::makeColId(int colId, int type)
     if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME) {
         result += 'I';
     }
-    else if (type == FLOAT) {
+    else if (type == FLOAT || type == CALC) {
         result += 'F';
     }
     else {
@@ -1389,7 +1565,7 @@ QString Database::formatString(bool old)
                 || type == TIME) {
             result += ":I";
         }
-        else if (type == FLOAT) {
+        else if (type == FLOAT || type == CALC) {
             result += ":F";
             // add string representation column
             result += "," + makeColId(cId (row), STRING) + ":S";
@@ -1448,6 +1624,8 @@ void Database::exportToXML(QString filename, c4_View &fullView,
     xml.addView("filters", filters.SortOn(fName));
     xml.addView("filterconditions",
                 filterConditions.SortOn((fcFilter, fcPosition)));
+    xml.addView("calcs", calcs.SortOn(calcId));
+    xml.addView("calcnodes", calcNodes.SortOn((cnId, cnNodeId)));
     QStringList colIds;
     QStringList allCols = listColumns();
     int allColCount = allCols.count();
@@ -1458,7 +1636,7 @@ void Database::exportToXML(QString filename, c4_View &fullView,
     for (i = 0; i < count; i++) {
         int type = getType(cols[i]);
         types[i] = type;
-        type = (type == FLOAT) ? STRING : type;
+        type = (type == FLOAT || type == CALC) ? STRING : type;
         int index = columns.Find(cName [cols[i].utf8()]);
         ids[i] = cId (columns[index]);
         colIds.append(makeColId(ids[i], type));
@@ -1470,7 +1648,7 @@ void Database::exportToXML(QString filename, c4_View &fullView,
         }
         int type = getType(allCols[i]);
         types[colIndex] = type;
-        type = (type == FLOAT) ? STRING : type;
+        type = (type == FLOAT || type == CALC) ? STRING : type;
         int index = columns.Find(cName [allCols[i].utf8()]);
         ids[colIndex] = cId (columns[index]);
         colIds.append(makeColId(ids[colIndex], type));

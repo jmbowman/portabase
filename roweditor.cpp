@@ -30,6 +30,7 @@
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include <qscrollview.h>
+#include "calc/calcwidget.h"
 #include "database.h"
 #include "datatypes.h"
 #include "datewidget.h"
@@ -53,7 +54,6 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
 {
     db = subject;
     addContent(rowId);
-    int count = colNames.count();
     bool finished = FALSE;
     bool aborted = FALSE;
     while (!finished) {
@@ -62,78 +62,11 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
             aborted = TRUE;
         }
         else {
-            finished = TRUE;
-            int numberWidgetIndex = 0;
-            int timeWidgetIndex = 0;
-            for (int i = 0; i < count; i++) {
-                int type = colTypes[i];
-                if (type == INTEGER || type == FLOAT) {
-                    QString value = numberWidgets[numberWidgetIndex]->getValue();
-                    QString error = db->isValidValue(type, value);
-                    if (error != "") {
-                        QString message = colNames[i] + " " + error;
-                        QMessageBox::warning(this, tr("PortaBase"), message);
-                        finished = FALSE;
-                        break;
-                    }
-                    numberWidgetIndex++;
-                }
-                else if (type == TIME) {
-                    QString value = timeWidgets[timeWidgetIndex]->getTime();
-                    QString error = db->isValidValue(type, value);
-                    if (error != "") {
-                        QString message = colNames[i] + " " + error;
-                        QMessageBox::warning(this, tr("PortaBase"), message);
-                        finished = FALSE;
-                        break;
-                    }
-                    timeWidgetIndex++;
-                }
-            }
+            finished = isValid();
         }
     }
     if (!aborted) {
-        QStringList values;
-        int checkBoxIndex = 0;
-        int noteButtonIndex = 0;
-        int dateWidgetIndex = 0;
-        int timeWidgetIndex = 0;
-        int numberWidgetIndex = 0;
-        int comboBoxIndex = 0;
-        int dynamicEditIndex = 0;
-        for (int i = 0; i < count; i++) {
-            int type = colTypes[i];
-            if (type == BOOLEAN) {
-                int value = checkBoxes[checkBoxIndex]->isChecked() ? 1 : 0;
-                values.append(QString::number(value));
-                checkBoxIndex++;
-            }
-            else if (type == INTEGER || type == FLOAT) {
-                values.append(numberWidgets[numberWidgetIndex]->getValue());
-                numberWidgetIndex++;
-            }
-            else if (type == NOTE) {
-                values.append(noteButtons[noteButtonIndex]->content());
-                noteButtonIndex++;
-            }
-            else if (type == DATE) {
-                int dateInt = dateWidgets[dateWidgetIndex]->getDate();
-                values.append(QString::number(dateInt));
-                dateWidgetIndex++;
-            }
-            else if (type == TIME) {
-                values.append(timeWidgets[timeWidgetIndex]->getTime());
-                timeWidgetIndex++;
-            }
-            else if (type >= FIRST_ENUM) {
-                values.append(comboBoxes[comboBoxIndex]->currentText());
-                comboBoxIndex++;
-            }
-            else {
-                values.append(dynamicEdits[dynamicEditIndex]->text());
-                dynamicEditIndex++;
-            }
-        }
+        QStringList values = getRow();
         if (rowId == -1 || copy) {
             db->addRow(values);
         }
@@ -145,6 +78,92 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
     else {
         return FALSE;
     }
+}
+
+bool RowEditor::isValid()
+{
+    int count = colNames.count();
+    int numberWidgetIndex = 0;
+    int timeWidgetIndex = 0;
+    for (int i = 0; i < count; i++) {
+        int type = colTypes[i];
+        if (type == INTEGER || type == FLOAT) {
+            QString value = numberWidgets[numberWidgetIndex]->getValue();
+            QString error = db->isValidValue(type, value);
+            if (error != "") {
+                QString message = colNames[i] + " " + error;
+                QMessageBox::warning(this, tr("PortaBase"), message);
+                return FALSE;
+            }
+            numberWidgetIndex++;
+        }
+        else if (type == TIME) {
+            QString value = timeWidgets[timeWidgetIndex]->getTime();
+            QString error = db->isValidValue(type, value);
+            if (error != "") {
+                QString message = colNames[i] + " " + error;
+                QMessageBox::warning(this, tr("PortaBase"), message);
+                return FALSE;
+            }
+            timeWidgetIndex++;
+        }
+    }
+    return TRUE;
+}
+
+QStringList RowEditor::getRow(bool doCalcs)
+{
+    QStringList values;
+    int checkBoxIndex = 0;
+    int noteButtonIndex = 0;
+    int dateWidgetIndex = 0;
+    int timeWidgetIndex = 0;
+    int calcWidgetIndex = 0;
+    int numberWidgetIndex = 0;
+    int comboBoxIndex = 0;
+    int dynamicEditIndex = 0;
+    int count = colNames.count();
+    for (int i = 0; i < count; i++) {
+        int type = colTypes[i];
+        if (type == BOOLEAN) {
+            int value = checkBoxes[checkBoxIndex]->isChecked() ? 1 : 0;
+            values.append(QString::number(value));
+            checkBoxIndex++;
+        }
+        else if (type == INTEGER || type == FLOAT) {
+            values.append(numberWidgets[numberWidgetIndex]->getValue());
+            numberWidgetIndex++;
+        }
+        else if (type == NOTE) {
+            values.append(noteButtons[noteButtonIndex]->content());
+            noteButtonIndex++;
+        }
+        else if (type == DATE) {
+            int dateInt = dateWidgets[dateWidgetIndex]->getDate();
+            values.append(QString::number(dateInt));
+            dateWidgetIndex++;
+        }
+        else if (type == TIME) {
+            values.append(timeWidgets[timeWidgetIndex]->getTime());
+            timeWidgetIndex++;
+        }
+        else if (type == CALC) {
+            if (doCalcs) {
+                calcWidgets[calcWidgetIndex]->calculate();
+            }
+            values.append(calcWidgets[calcWidgetIndex]->getValue());
+            calcWidgetIndex++;
+        }
+        else if (type >= FIRST_ENUM) {
+            values.append(comboBoxes[comboBoxIndex]->currentText());
+            comboBoxIndex++;
+        }
+        else {
+            values.append(dynamicEdits[dynamicEditIndex]->text());
+            dynamicEditIndex++;
+        }
+    }
+    return values;
 }
 
 void RowEditor::addContent(int rowId)
@@ -217,6 +236,12 @@ void RowEditor::addContent(int rowId)
             widget->setTime(defaultTime);
             timeWidgets.append(widget);
         }
+        else if (type == CALC) {
+            CalcWidget *widget = new CalcWidget(db, name, colNames, this, grid);
+            layout->addWidget(widget, i, 1);
+            widget->setValue(values[i]);
+            calcWidgets.append(widget);
+        }
         else if (type >= FIRST_ENUM) {
             QComboBox *combo = new QComboBox(FALSE, grid);
             layout->addWidget(combo, i, 1);
@@ -250,7 +275,7 @@ void RowEditor::addContent(int rowId)
     vbox->setResizeMode(QLayout::FreeResize);
     QWidget *parent = parentWidget();
     setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height() / 2);
+    setMinimumHeight(parent->height());
     setIcon(Resource::loadPixmap("portabase"));
 #else
     showMaximized();

@@ -69,7 +69,7 @@ SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
     new QWidget(hbox);
     setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height() / 2);
+    setMinimumHeight(parent->height());
     setIcon(Resource::loadPixmap("portabase"));
 #else
     showMaximized();

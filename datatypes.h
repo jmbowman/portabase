@@ -21,6 +21,8 @@
 #define NOTE 4
 #define DATE 5
 #define TIME 6
+#define CALC 7
+#define LAST_TYPE 7
 
 #define FIRST_ENUM 100
 

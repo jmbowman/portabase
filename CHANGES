@@ -1,3 +1,10 @@
+2003-06-19  JMB  Calculated fields
+
+    There is now a new column type called "Calculation", which represents
+    a value derived from the values of other columns in the same row.  The
+    formula for this calculation is defined by the user in a dialog launched
+    by clicking a button in the column editor.
+
 2003-06-11  #################### PortaBase 1.7 ####################
 
 2003-06-04  JMB  Columns editor bugfix

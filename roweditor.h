@@ -17,6 +17,7 @@
 #include <qvaluelist.h>
 #include "datatypes.h"
 
+class CalcWidget;
 class Database;
 class DateWidget;
 class DynamicEdit;
@@ -33,6 +34,7 @@ typedef QValueList<TimeWidget*> TimeWidgetList;
 typedef QValueList<NumberWidget*> NumberWidgetList;
 typedef QValueList<QComboBox*> ComboBoxList;
 typedef QValueList<DynamicEdit*> DynamicEditList;
+typedef QValueList<CalcWidget*> CalcWidgetList;
 
 class RowEditor: public QDialog
 {
@@ -42,6 +44,8 @@ public:
     ~RowEditor();
 
     bool edit(Database *subject, int rowId=-1, bool copy=FALSE);
+    bool isValid();
+    QStringList getRow(bool doCalcs=TRUE);
 
 private:
     void addContent(int rowId);
@@ -57,6 +61,7 @@ private:
     NumberWidgetList numberWidgets;
     ComboBoxList comboBoxes;
     DynamicEditList dynamicEdits;
+    CalcWidgetList calcWidgets;
 };
 
 #endif

@@ -162,7 +162,7 @@ void ConditionEditor::fillFields(Condition *condition)
         opList->setCurrentItem(index);
         constantInteger->setValue(constant);
     }
-    else if (type == FLOAT) {
+    else if (type == FLOAT || type == CALC) {
         int index = numberOps.findIndex(operation);
         opList->setCurrentItem(index);
         constantFloat->setValue(constant);
@@ -224,7 +224,7 @@ void ConditionEditor::updateDisplay(int columnIndex)
         caseCheck->setChecked(FALSE);
         constantFloat->setValue("0");
     }
-    else if (type == FLOAT) {
+    else if (type == FLOAT || type == CALC) {
         constantStack->raiseWidget(constantFloat);
         constantLine->setText("");
         constantCheck->setChecked(FALSE);
@@ -300,7 +300,8 @@ void ConditionEditor::updateOpList()
     }
     opList->setEnabled(TRUE);
     if (dataType == INTEGER || dataType == FLOAT || dataType == DATE
-            || dataType == TIME || dataType >= FIRST_ENUM) {
+            || dataType == TIME || dataType == CALC
+            || dataType >= FIRST_ENUM) {
         opList->insertStringList(numberOpList);
     }
     else {
@@ -322,7 +323,7 @@ bool ConditionEditor::isValidConstant()
                 result = FALSE;
             }
         }
-        if (type == FLOAT) {
+        if (type == FLOAT || type == CALC) {
             QString error = db->isValidValue(type, constantFloat->getValue());
             if (error != "") {
                 QMessageBox::warning(this, tr("PortaBase"),
@@ -368,7 +369,7 @@ void ConditionEditor::applyChanges(Condition *condition)
         condition->setConstant(constantInteger->getValue());
         condition->setCaseSensitive(FALSE);
     }
-    else if (type == FLOAT) {
+    else if (type == FLOAT || type == CALC) {
         condition->setOperator(numberOps[opList->currentItem()]);
         condition->setConstant(constantFloat->getValue());
         condition->setCaseSensitive(FALSE);

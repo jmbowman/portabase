@@ -19,6 +19,7 @@
 #include <qpushbutton.h>
 #include <qregexp.h>
 #include <qvbox.h>
+#include "calc/calcnode.h"
 #include "columneditor.h"
 #include "database.h"
 #include "datatypes.h"
@@ -91,6 +92,13 @@ int DBEditor::edit(Database *subject)
         QString name = originalCols[i];
         int type = db->getType(name);
         QString defaultVal = db->getDefault(name);
+        if (type == CALC) {
+            CalcNode *root = db->loadCalc(name);
+            if (root != 0) {
+                defaultVal = root->equation(db);
+                delete root;
+            }
+        }
         info.Add(ceName [name.utf8()] + ceType [type]
                  + ceDefault [defaultVal.utf8()]
                  + ceOldIndex [i] + ceNewIndex [i]);
@@ -123,12 +131,24 @@ void DBEditor::addColumn()
         }
         
     }
+    int decimals = 2;
+    CalcNode *calcRoot = columnEditor->calculation(&decimals);
     if (!aborted) {
         int size = info.GetSize();
         info.Add(ceName [name.utf8()] + ceType [type]
                  + ceDefault[defaultVal.utf8()]
                  + ceOldIndex [-1] + ceNewIndex[size]);
+        if (type == CALC) {
+            calcMap.insert(name, calcRoot);
+            decimalsMap.insert(name, decimals);
+            columnEditor->setCalculation(0, 2);
+            calcRoot = 0;
+        }
         updateTable();
+    }
+    if (calcRoot != 0) {
+        delete calcRoot;
+        columnEditor->setCalculation(0, 2);
     }
 }
 
@@ -148,6 +168,22 @@ void DBEditor::editColumn()
     columnEditor->setType(type);
     columnEditor->setTypeEditable(FALSE);
     columnEditor->setDefaultValue(defaultVal);
+    CalcNode *calcRoot = 0;
+    int decimals = 2;
+    if (type == CALC) {
+        if (calcMap.contains(name)) {
+            calcRoot = calcMap[name];
+            decimals = decimalsMap[name];
+            // use a copy in case the edit is cancelled
+            if (calcRoot != 0) {
+                calcRoot = calcRoot->clone();
+            }
+        }
+        else {
+            calcRoot = db->loadCalc(name, &decimals);
+        }
+        columnEditor->setCalculation(calcRoot, decimals);
+    }
     bool finished = FALSE;
     bool aborted = FALSE;
     while (!finished) {
@@ -174,10 +210,29 @@ void DBEditor::editColumn()
             }
         }
     }
+    calcRoot = columnEditor->calculation(&decimals);
     if (!aborted) {
         ceName (info[index]) = name.utf8();
         ceDefault (info[index]) = defaultVal.utf8();
+        if (type == CALC) {
+            if (calcMap.contains(oldName)) {
+                CalcNode *oldRoot = calcMap[oldName];
+                if (oldRoot != 0) {
+                    delete oldRoot;
+                }
+                calcMap.remove(oldName);
+                decimalsMap.remove(oldName);
+            }
+            calcMap.insert(name, calcRoot);
+            decimalsMap.insert(name, decimals);
+            columnEditor->setCalculation(0, 2);
+            calcRoot = 0;
+        }
         updateTable();
+    }
+    if (calcRoot != 0) {
+        delete calcRoot;
+        columnEditor->setCalculation(0, 2);
     }
 }
 
@@ -241,6 +296,14 @@ void DBEditor::deleteColumn()
     int size = info.GetSize();
     for (int i = index; i < size; i++) {
         ceNewIndex (info[i]) = ceNewIndex (info[i]) - 1;
+    }
+    if (calcMap.contains(name)) {
+        CalcNode *calcRoot = calcMap[name];
+        if (calcRoot != 0) {
+            delete calcRoot;
+        }
+        calcMap.remove(name);
+        decimalsMap.remove(name);
     }
     updateTable();
 }
@@ -372,6 +435,9 @@ QString DBEditor::getTypeString(int type)
     else if (type == TIME) {
         return tr("Time");
     }
+    else if (type == CALC) {
+        return tr("Calculation");
+    }
     else {
         return db->getEnumName(type);
     }
@@ -399,8 +465,11 @@ void DBEditor::applyChanges()
         if (newIndex != oldIndex) {
             db->setIndex(oldName, newIndex);
         }
-        QString defaultVal = QString::fromUtf8(ceDefault (info[index]));
-        db->setDefault(oldName, defaultVal);
+        int type = ceType (info[index]);
+        if (type != CALC) {
+            QString defaultVal = QString::fromUtf8(ceDefault (info[index]));
+            db->setDefault(oldName, defaultVal);
+        }
     }
     // handle renames of original columns
     for (i = 0; i < oldCount; i++) {
@@ -421,9 +490,22 @@ void DBEditor::applyChanges()
         QString name = QString::fromUtf8(ceName (temp[i]));
         int type = ceType (temp[i]);
         QString defaultVal = QString::fromUtf8(ceDefault (temp[i]));
+        if (type == CALC) {
+            defaultVal = "";
+        }
         db->addColumn(index, name, type, defaultVal);
     }
     db->updateDataFormat();
+    // add and update calculations
+    NameCalcMap::Iterator iter;
+    for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
+        QString name = iter.key();
+        CalcNode *calcRoot = iter.data();
+        db->updateCalc(name, calcRoot, decimalsMap[name]);
+        if (calcRoot != 0) {
+            delete calcRoot;
+        }
+    }
 }
 
 void DBEditor::resizeEvent(QResizeEvent *event)
@@ -437,4 +519,26 @@ void DBEditor::resizeEvent(QResizeEvent *event)
         table->setColumnWidth(2, colWidth);
         resized = TRUE;
     }
+}
+
+QStringList DBEditor::columnNames()
+{
+    QStringList names;
+    c4_View temp = info.SortOn(ceNewIndex);
+    int size = temp.GetSize();
+    for (int i = 0; i < size; i++) {
+        names.append(QString::fromUtf8(ceName (temp[i])));
+    }
+    return names;
+}
+
+int *DBEditor::columnTypes()
+{
+    c4_View temp = info.SortOn(ceNewIndex);
+    int size = temp.GetSize();
+    int *types = new int[size];
+    for (int i = 0; i < size; i++) {
+        types[i] = ceType (temp[i]);
+    }
+    return types;
 }

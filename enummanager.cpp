@@ -66,7 +66,7 @@ EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFl
     new QWidget(hbox);
     vbox->setResizeMode(QLayout::FreeResize);
     setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height() / 2);
+    setMinimumHeight(parent->height());
     setIcon(Resource::loadPixmap("portabase"));
 #else
     showMaximized();

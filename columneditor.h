@@ -14,6 +14,8 @@
 
 #include <qdialog.h>
 
+class CalcNode;
+class DBEditor;
 class Database;
 class NoteButton;
 class NumberWidget;
@@ -21,13 +23,14 @@ class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
+class QPushButton;
 class QWidgetStack;
 
 class ColumnEditor: public QDialog
 {
     Q_OBJECT
 public:
-    ColumnEditor(Database *dbase, QWidget *parent = 0, const char *name = 0,
+    ColumnEditor(Database *dbase, DBEditor *parent = 0, const char *name = 0,
                  WFlags f = 0);
     ~ColumnEditor();
 
@@ -37,16 +40,21 @@ public:
     void setType(int newType);
     QString defaultValue();
     void setDefaultValue(QString newDefault);
+    CalcNode *calculation(int *decimals);
+    void setCalculation(CalcNode *root, int decimals);
     void setTypeEditable(bool flag);
     int exec();
 
 private slots:
     void updateDefaultWidget(int newType);
+    void editCalculation();
 
 private:
     Database *db;
+    DBEditor *dbEditor;
     QLineEdit *nameBox;
     QComboBox *typeBox;
+    QLabel *defaultLabel;
     QWidgetStack *defaultStack;
     QCheckBox *defaultCheck;
     QLineEdit *defaultLine;
@@ -56,6 +64,9 @@ private:
     QComboBox *defaultDate;
     QComboBox *defaultTime;
     QComboBox *defaultEnum;
+    QPushButton *calcButton;
+    CalcNode *calcRoot;
+    int calcDecimals;
     int lastType;
 };
 

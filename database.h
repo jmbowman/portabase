@@ -22,12 +22,13 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 9
+#define FILE_VERSION 10
 
 #define OPEN_NEWER_VERSION 0
 #define OPEN_SUCCESS 1
 #define OPEN_ENCRYPTED 2
 
+class CalcNode;
 class Condition;
 class Crypto;
 class Filter;
@@ -116,6 +117,11 @@ public:
     void deleteEnumOption(QString enumName, QString option, QString replace);
     void setEnumOptionSequence(QString enumName, QStringList options);
 
+    CalcNode *loadCalc(const QString &colName, int *decimals=0);
+    void updateCalc(const QString &colName, CalcNode *root, int decimals);
+    QString formatDouble(double value, int decimals=2);
+    void calculateAll();
+
     QString addRow(QStringList values, int *rowId = 0);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
@@ -134,6 +140,7 @@ public:
                      c4_View &filteredView, QStringList cols);
     void setGlobalInfo(const QString &view, const QString &sorting,
                        const QString &filter);
+    int addCalcNode(int calcId, CalcNode *root, int nodeId, int parentId);
 
 private:
     c4_View createEmptyView(QStringList colNames);
@@ -148,6 +155,10 @@ private:
     void addEnumDataIndices();
     void updateEnumDataIndices(const QString &enumName);
     void addViewDefaults();
+    CalcNode *loadCalc(int colId, int *decimals);
+    void deleteCalc(int colId);
+    void deleteCalcColumn(const QString &columnName);
+    void calculateAll(int colId, CalcNode *root, int decimals);
 
 private:
     QPixmap checkedPixmap;
@@ -176,6 +187,8 @@ private:
     c4_View filterConditions;
     c4_View enums;
     c4_View enumOptions;
+    c4_View calcs;
+    c4_View calcNodes;
     c4_View global;
     c4_View data;
     View *curView;
@@ -224,6 +237,15 @@ private:
     c4_IntProp eoEnum;
     c4_IntProp eoIndex;
     c4_StringProp eoText;
+    // "_calcs" view
+    c4_IntProp calcId;
+    c4_IntProp calcDecimals;
+    // "_calcnodes" view
+    c4_IntProp cnId;
+    c4_IntProp cnNodeId;
+    c4_IntProp cnParentId;
+    c4_IntProp cnType;
+    c4_StringProp cnValue;
     // "_global" view
     c4_IntProp gVersion;
     c4_StringProp gView;

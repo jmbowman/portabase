@@ -92,7 +92,7 @@ QStringList View::getRow(int index)
             int value = prop (row);
             results.append(QString::number(value));
         }
-        else if (type == FLOAT) {
+        else if (type == FLOAT || type == CALC) {
             // want the string version here
             c4_StringProp prop(fsIds[i]);
             results.append(QString::fromUtf8(prop (row)));
@@ -233,7 +233,7 @@ QStringList View::getStatistics(int colIndex)
         lines.append(QObject::tr("Minimum") + ": " + QString::number(min));
         lines.append(QObject::tr("Maximum") + ": " + QString::number(max));
     }
-    else if (type == FLOAT) {
+    else if (type == FLOAT || type == CALC) {
         c4_FloatProp prop(ids[colIndex]);
         c4_StringProp stringProp(fsIds[colIndex]);
         double value = prop (dbview[0]);

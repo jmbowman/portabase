@@ -17,6 +17,7 @@
 #include <qxml.h>
 #include "datatypes.h"
 
+class CalcNode;
 class Database;
 class Filter;
 
@@ -52,6 +53,8 @@ private:
     bool addSortColumn();
     bool addFilter();
     bool addFilterCondition();
+    bool addCalc();
+    bool addCalcNode();
     bool addRow();
     bool validateName(const QString &name);
     bool validateGlobal();
@@ -60,9 +63,12 @@ private:
     bool validateViewColumns();
     bool validateSortColumns();
     bool validateFilterConditions();
+    bool validateCalcNodes();
+    QString missingSection(const QString &before, int afterIndex);
     bool isValidDefault(const QString &cname, int ctype,
                         const QString &cdefault);
     bool isValidOperator(int type, int op, int cs);
+    QString isValidCalcNode(CalcNode *node);
     bool containsDuplicate(const QStringList &names, const QString &element);
     bool containsDuplicate(const IntList &names, const QString &element);
     bool validateIndexMap(const QString &intElement,
@@ -96,6 +102,7 @@ private:
     QString colId;
     QMap<QString,QString> parents;
     QStringList sections;
+    QStringList optionalSections;
     QStringList containers;
     QStringList dataFields;
     QStringList booleans;

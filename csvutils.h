@@ -13,6 +13,7 @@
 #define CSVUTILS_H
 
 #include <qstringlist.h>
+#include "calc/calcnode.h"
 #include "datatypes.h"
 
 class Database;
@@ -30,12 +31,13 @@ public:
     QString encodeCell(QString content);
 
 private:
-    void initializeCounts(Database *db);
+    void initialize(Database *db);
     bool addRow(Database *db);
 
 private:
     QChar m_textquote;
     QChar m_delimiter;
+    QStringList colNames;
     int colCount;
     int endStringCount;
     int rowNum;
@@ -43,6 +45,10 @@ private:
     QString rowString;
     QStringList row;
     IntList addedIds;
+    int *types;
+    CalcNodeList calcs;
+    IntList calcDecimals;
+    int calcCount;
 };
 
 #endif

@@ -101,7 +101,7 @@ c4_View Condition::filter(c4_View dbview)
         int value = options.findIndex(constant);
         return filterInt(dbview, colId, value);
     }
-    else if (type == FLOAT) {
+    else if (type == FLOAT || type == CALC) {
         return filterFloat(dbview);
     }
     else {

@@ -14,12 +14,17 @@
 
 #include <mk4.h>
 #include <qdialog.h>
+#include <qmap.h>
 #include <qstringlist.h>
 
+class CalcNode;
 class ColumnEditor;
 class Database;
 class QListView;
 class QVBox;
+
+typedef QMap<QString,CalcNode*> NameCalcMap;
+typedef QMap<QString,int> NameDecimalsMap;
 
 class DBEditor: public QDialog
 {
@@ -30,6 +35,8 @@ public:
 
     int edit(Database *subject);
     void applyChanges();
+    QStringList columnNames();
+    int *columnTypes();
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -56,6 +63,8 @@ private:
     QStringList originalCols;
     QStringList deletedCols;
     QStringList renamedCols;
+    NameCalcMap calcMap;
+    NameDecimalsMap decimalsMap;
     c4_View info;
     c4_StringProp ceName;
     c4_IntProp ceType;

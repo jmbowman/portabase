@@ -25,6 +25,7 @@ XMLExport::XMLExport(Database *source, QString filename, QStringList currentCols
     fieldElements.append("n");
     fieldElements.append("d");
     fieldElements.append("t");
+    fieldElements.append("c");
     file = new QFile(filename);
     file->open(IO_WriteOnly);
     output = new QTextStream(file);

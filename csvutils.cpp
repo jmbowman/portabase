@@ -16,20 +16,25 @@
 #include "csvutils.h"
 #include "database.h"
 
-CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(',')
+CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), types(0), calcCount(0)
 {
 
 }
 
 CSVUtils::~CSVUtils()
 {
-
+    if (types != 0) {
+        delete[] types;
+    }
+    for (int i = 0; i < calcCount; i++) {
+        delete calcs[i];
+    }
 }
 
 QStringList CSVUtils::parseFile(const QString &filename,
                                 const QString &encoding, Database *db)
 {
-    initializeCounts(db);
+    initialize(db);
     QFile f(filename);
     QStringList returnVal;
     if (!f.open(IO_ReadOnly)) {
@@ -210,32 +215,63 @@ QString CSVUtils::encodeCell(QString content)
     return result + "\"";
 }
 
-void CSVUtils::initializeCounts(Database *db)
+void CSVUtils::initialize(Database *db)
 {
-    QStringList colNames = db->listColumns();
+    colNames = db->listColumns();
+    if (types != 0) {
+        delete[] types;
+    }
+    types = db->listTypes();
     colCount = colNames.count();
     endStringCount = 0;
     int i;
     for (i = colCount - 1; i > -1; i--) {
-        int type = db->getType(colNames[i]);
+        int type = types[i];
         if (type != STRING && type != NOTE) {
             break;
         }
         endStringCount++;
     }
+    for (i = 0; i < calcCount; i++) {
+        delete calcs[i];
+    }
+    calcs.clear();
+    calcDecimals.clear();
+    for (i = 0; i < colCount; i++) {
+        if (types[i] == CALC) {
+            int decimals = 2;
+            calcs.append(db->loadCalc(colNames[i], &decimals));
+            calcDecimals.append(decimals);
+        }
+    }
+    calcCount = calcs.count();
 }
 
 bool CSVUtils::addRow(Database *db)
 {
     int countDiff = colCount - row.count();
+    int i;
     if (countDiff > 0 && countDiff <= endStringCount) {
         // last columns may have been blank in Excel or whatever...
-        int i;
         for (i = 0; i < countDiff; i++) {
             row.append("");
         }
     }
     int rowId = 0;
+    if (calcCount > 0) {
+        // calculate the derived values in the added row
+        int calcIndex = 0;
+        for (i = 0; i < colCount; i++) {
+            if (types[i] == CALC) {
+                double value = calcs[calcIndex]->value(row, colNames);
+                QStringList::iterator iter = row.at(i);
+                iter = row.remove(iter);
+                int decimals = calcDecimals[calcIndex];
+                row.insert(iter, db->formatDouble(value, decimals));
+                calcIndex++;
+            }
+        }
+    }
     message = db->addRow(row, &rowId);
     if (message != "") {
         message = QObject::tr("Error in row %1").arg(rowNum) + "\n" + message;
