@@ -31,7 +31,8 @@
 #include "viewdisplay.h"
 
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
-    WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0)
+    WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0),
+    booleanToggle(FALSE)
 {
     timer.start();
     stack = new QWidgetStack(this);
@@ -89,6 +90,11 @@ ViewDisplay::~ViewDisplay()
 void ViewDisplay::setEdited(bool y)
 {
     portabase->setEdited(y);
+}
+
+void ViewDisplay::allowBooleanToggle(bool flag)
+{
+    booleanToggle = flag;
 }
 
 void ViewDisplay::updateRowsPerPage(int rpp)
@@ -364,9 +370,17 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
     if (column != pressedIndex) {
         return;
     }
-    if (timer.elapsed() > 500) {
-        int *types = view->getColTypes();
-        if (types[column] == NOTE) {
+    int *types = view->getColTypes();
+    int type = types[column];
+    if (type == BOOLEAN && booleanToggle) {
+        QString colName = table->header()->label(column);
+        db->toggleBoolean(selectedRowId(), colName);
+        view->prepareData();
+        updateTable();
+        setEdited(TRUE);
+    }
+    else if (timer.elapsed() > 500) {
+        if (type == NOTE) {
             QString colName = table->header()->label(column);
             NoteEditor viewer(colName, this);
             viewer.setContent(view->getNote(selectedRowId(), column));

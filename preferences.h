@@ -46,6 +46,7 @@ private:
     QComboBox *fontSize;
     QLabel *sample;
     QCheckBox *confirmDeletions;
+    QCheckBox *booleanToggle;
 };
 
 #endif

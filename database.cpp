@@ -830,6 +830,16 @@ void Database::deleteRow(int id)
     maxId--;
 }
 
+void Database::toggleBoolean(int rowId, QString colName)
+{
+    int index = data.Find(Id [rowId]);
+    int colIndex = columns.Find(cName [colName.utf8()]);
+    QString idString = makeColId(cId (columns[colIndex]), BOOLEAN);
+    c4_IntProp prop(idString);
+    int value = prop (data[index]);
+    prop (data[index]) = (value == 1) ? 0 : 1;
+}
+
 QStringList Database::listViewColumns(QString viewName)
 {
     c4_View cols = viewColumns.Select(vcView [viewName.utf8()]);

@@ -1,3 +1,10 @@
+2002-11-29  JMB  Optional checkbox toggle in data viewer
+
+    Added a preference which when checked allows you to toggle boolean
+    values directly in the data viewer by clicking the appropriate cell.
+    This makes it more convenient to use PortaBase as a todo list, but
+    also makes it easier to accidentally change data values.
+
 2002-11-26  JMB  UTF-8 CSV file import
 
     Fixed a one-line bug which caused CSV files to be imported as Latin-1

@@ -96,6 +96,7 @@ public:
     QString addRow(QStringList values, int *rowId = 0);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
+    void toggleBoolean(int rowId, QString colName);
     void commit();
     QPixmap getCheckBoxPixmap(int checked);
     bool isNoneDate(QDate &date);

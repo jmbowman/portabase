@@ -47,6 +47,7 @@ public:
     void setFilter(QString name);
     void closeView();
     void deleteAllRows();
+    void allowBooleanToggle(bool flag);
 
 public slots:
     void addRow();
@@ -88,6 +89,7 @@ private:
     bool isEdited;
     int pressedIndex;
     QTime timer;
+    bool booleanToggle;
 };
 
 #endif

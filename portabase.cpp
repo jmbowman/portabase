@@ -50,11 +50,13 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     int size = currentFont.pointSize();
     Config conf("portabase");
     conf.setGroup("General");
+    confirmDeletions = FALSE;
     if (conf.readNumEntry("ConfirmDeletions", 0)) {
         confirmDeletions = TRUE;
     }
-    else {
-        confirmDeletions = FALSE;
+    booleanToggle = FALSE;
+    if (conf.readNumEntry("BooleanToggle", 0)) {
+        booleanToggle = TRUE;
     }
     conf.setGroup("Font");
     family = conf.readEntry("Name", family);
@@ -171,6 +173,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     setCentralWidget(mainStack);
 
     viewer = new ViewDisplay(this, mainStack);
+    viewer->allowBooleanToggle(booleanToggle);
 
     fileSelector = new FileSelector("application/portabase", mainStack,
                                     "fileselector", TRUE, FALSE);
@@ -247,6 +250,13 @@ void PortaBase::editPreferences()
         else {
             confirmDeletions = FALSE;
         }
+        if (conf.readNumEntry("BooleanToggle", 0)) {
+            booleanToggle = TRUE;
+        }
+        else {
+            booleanToggle = FALSE;
+        }
+        viewer->allowBooleanToggle(booleanToggle);
     }
 }
 

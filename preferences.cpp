@@ -51,7 +51,7 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
 
     QGroupBox *generalGroup = new QGroupBox(1, Qt::Horizontal, tr("General"),
                                             vbox);
-    confirmDeletions = new QCheckBox(tr("Confirm Deletions"), generalGroup);
+    confirmDeletions = new QCheckBox(tr("Confirm deletions"), generalGroup);
     Config conf("portabase");
     conf.setGroup("General");
     if (conf.readNumEntry("ConfirmDeletions", 0)) {
@@ -59,6 +59,14 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     }
     else {
         confirmDeletions->setChecked(FALSE);
+    }
+    booleanToggle = new QCheckBox(tr("Allow checkbox edit in data viewer"),
+                                  generalGroup);
+    if (conf.readNumEntry("BooleanToggle", 0)) {
+        booleanToggle->setChecked(TRUE);
+    }
+    else {
+        booleanToggle->setChecked(FALSE);
     }
     new QWidget(vbox);
 
@@ -109,6 +117,11 @@ QFont Preferences::applyChanges()
         confirm = 1;
     }
     conf.writeEntry("ConfirmDeletions", confirm);
+    int toggle = 0;
+    if (booleanToggle->isChecked()) {
+        toggle = 1;
+    }
+    conf.writeEntry("BooleanToggle", toggle);
     conf.setGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentItem()] / 10;

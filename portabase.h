@@ -116,6 +116,7 @@ private:
     IntList filterIds;
     bool isEdited;
     bool confirmDeletions;
+    bool booleanToggle;
 };
 
 #endif
