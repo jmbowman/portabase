@@ -102,6 +102,14 @@ QStringList View::getRow(int index)
     return results;
 }
 
+QString View::getNote(int rowId, int colIndex)
+{
+    int index = dbview.Find(Id [rowId]);
+    c4_StringProp prop(columns[colIndex]);
+    QString note(prop (dbview[index]));
+    return note;
+}
+
 void View::sort(int colIndex)
 {
     if (colIndex != sortColumn) {

@@ -170,6 +170,9 @@ void ViewDisplay::updateTable()
             if (type == BOOLEAN) {
                 item->setPixmap(j, db->getCheckBoxPixmap(data[j].toInt()));
             }
+            else if (type == NOTE) {
+                item->setText(j, data[j].replace(QRegExp("\n"), " "));
+            }
             else {
                 item->setText(j, data[j]);
             }
@@ -337,7 +340,7 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
         if (types[column] == NOTE) {
             QString colName = table->header()->label(column);
             NoteEditor viewer(colName, this);
-            viewer.setContent(item->text(column));
+            viewer.setContent(view->getNote(selectedRowId(), column));
             viewer.setReadOnly(TRUE);
             viewer.exec();
         }

@@ -40,6 +40,7 @@ public:
     void sort(QString sortingName);
     void prepareData();
     QStringList getStatistics(int colIndex);
+    QString getNote(int rowId, int colIndex);
 
 private:
     Database *db;
