@@ -321,6 +321,8 @@ void PortaBase::dataExport()
             name = name.left(40);
         }
         csv.setName(name);
+        FileManager fm;
+        fm.saveFile(csv, "");
         db->exportToCSV(csv.file());
     }
 }
