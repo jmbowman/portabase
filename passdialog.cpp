@@ -1,7 +1,7 @@
 /*
  * passdialog.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,9 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
 #include <qhbox.h>
 #include <qpushbutton.h>
-#include "desktop/resource.h"
 #endif
 
 #include <qlabel.h>
@@ -21,17 +20,16 @@
 #include <qmessagebox.h>
 #include "database.h"
 #include "passdialog.h"
-#include "pbdialog.h"
 
-PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(dbase), mode(dlgMode)
+PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, const char *name)
+  : QQDialog("", parent, name, TRUE), db(dbase), mode(dlgMode)
 {
-    setCaption(tr("PortaBase") + PBDialog::titleSuffix);
     // cheated a bit; ordered mode codes so this works
     int rows = mode + 1;
-#if defined(DESKTOP)
-    QGridLayout *grid = new QGridLayout(this, rows + 1, 2);
-#else
+#if defined(Q_WS_QWS)
     QGridLayout *grid = new QGridLayout(this, rows, 2);
+#else
+    QGridLayout *grid = new QGridLayout(this, rows + 1, 2);
 #endif
 
     int currentRow = 0;
@@ -68,7 +66,8 @@ PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, co
         currentRow++;
     }
 
-#if defined(DESKTOP)
+    int minWidth = -1;
+#if !defined(Q_WS_QWS)
     QHBox *hbox = new QHBox(this);
     new QWidget(hbox);
     QPushButton *okButton = new QPushButton(tr("OK"), hbox);
@@ -79,9 +78,9 @@ PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, co
     new QWidget(hbox);
     grid->addMultiCellWidget(hbox, currentRow, currentRow, 0, 1);
     grid->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(parent->width() / 2);
-    setIcon(Resource::loadPixmap("portabase"));
+    minWidth = parent->width() / 2;
 #endif
+    finishConstruction(FALSE, minWidth);
 }
 
 PasswordDialog::~PasswordDialog()

@@ -1,7 +1,7 @@
 /*
  * imageviewer.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,7 @@ class ImageViewer: public PBDialog
 {
     Q_OBJECT
 public:
-    ImageViewer(bool allowFullScreen, QWidget *parent, const char *name = 0,
-                WFlags f = 0);
+    ImageViewer(bool allowFullScreen, QWidget *parent, const char *name = 0);
     ~ImageViewer();
 
     void setImage(const QImage &image);

@@ -9,17 +9,19 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
+#include <qdragobject.h>
 #include <qinputdialog.h>
+#include <qmenubar.h>
 typedef QInputDialog InputDialog;
 #include "desktop/config.h"
 #include "desktop/fileselector.h"
 #include "desktop/helpbrowser.h"
-#include "desktop/newfiledialog.h"
-#include "desktop/qpeapplication.h"
-#include "desktop/qpemenubar.h"
-#include "desktop/resource.h"
 #include "desktop/importdialog.h"
+#include "desktop/newfiledialog.h"
+#include "desktop/oldconfig.h"
+#include "desktop/qpeapplication.h"
+#include "desktop/resource.h"
 #else
 #include <qpe/config.h>
 #include <qpe/qpemenubar.h>
@@ -56,9 +58,9 @@ typedef QInputDialog InputDialog;
 #include "filtereditor.h"
 #include "menuactions.h"
 #include "passdialog.h"
-#include "pbdialog.h"
 #include "portabase.h"
 #include "preferences.h"
+#include "qqdialog.h"
 #include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
@@ -66,44 +68,44 @@ typedef QInputDialog InputDialog;
 PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
   : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE), needsRefresh(FALSE)
 {
-#ifndef DESKTOP
+#if defined(Q_WS_QWS)
     setToolBarsMovable(FALSE);
 #endif
     QFont currentFont = qApp->font();
     QString family = currentFont.family().lower();
     int size = currentFont.pointSize();
-    Config conf("portabase");
-    conf.setGroup("General");
-    confirmDeletions = conf.readBoolEntry("ConfirmDeletions", TRUE);
-    booleanToggle = conf.readBoolEntry("BooleanToggle");
-    bool pagedDisplay = conf.readBoolEntry("PagedDisplay", TRUE);
-    conf.setGroup("Font");
-    family = conf.readEntry("Name", family);
-    size = conf.readNumEntry("Size", size);
+    Config *conf = getPreferences();
+    conf->setGroup("General");
+    confirmDeletions = conf->readBoolEntry("ConfirmDeletions", TRUE);
+    booleanToggle = conf->readBoolEntry("BooleanToggle");
+    bool pagedDisplay = conf->readBoolEntry("PagedDisplay", TRUE);
+    conf->setGroup("Font");
+    family = conf->readEntry("Name", family);
+    size = conf->readNumEntry("Size", size);
     QFont font(family, size);
     qApp->setFont(font);
     setFont(font);
 
-    conf.setGroup("Colors");
-    QString color = conf.readEntry("EvenRows", "#FFFFFF");
+    conf->setGroup("Colors");
+    QString color = conf->readEntry("EvenRows", "#FFFFFF");
     PortaBase::evenRowColor = new QColor(color);
-    color = conf.readEntry("OddRows", "#E0E0E0");
+    color = conf->readEntry("OddRows", "#E0E0E0");
     PortaBase::oddRowColor = new QColor(color);
 
     // menu and toolbar, shared between file selector and data viewer modes
-#if defined(DESKTOP)
-    menu = menuBar();
-    toolbar = new QToolBar(this);
-    addToolBar(toolbar, QMainWindow::Top, TRUE);
-    statusBar();
-    setIcon(Resource::loadPixmap("portabase"));
-#else
+#if defined(Q_WS_QWS)
     QToolBar *bar = new QToolBar(this);
     addToolBar(bar, QMainWindow::Top);
     bar->setHorizontalStretchable(TRUE);
     menu = new QPEMenuBar(bar);
     toolbar = new QToolBar(this);
     addToolBar(toolbar, QMainWindow::Top, FALSE);
+#else
+    menu = menuBar();
+    toolbar = new QToolBar(this);
+    addToolBar(toolbar, QMainWindow::Top, TRUE);
+    statusBar();
+    setIcon(Resource::loadPixmap("portabase"));
 #endif
     ma = new MenuActions(this);
 
@@ -114,7 +116,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     QIconSet copyIcons = Resource::loadIconSet("copy");
     QIconSet quitIcons = Resource::loadIconSet("quit_icon");
     QIconSet saveIcons = Resource::loadIconSet("portabase/save");
-#ifndef DESKTOP
+#if defined(Q_WS_QWS)
     QPixmap disabledSave = Resource::loadPixmap("portabase/save_disabled");
     saveIcons.setPixmap(disabledSave, QIconSet::Small, QIconSet::Disabled);
 #endif
@@ -239,19 +241,19 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     viewer->allowBooleanToggle(booleanToggle);
     viewer->usePages(pagedDisplay);
 
-    conf.setGroup("Files");
+    conf->setGroup("Files");
     QDir defaultDir = QDir::home();
     defaultDir.cd("Documents");
-    QString lastDir = conf.readEntry("LastDir", defaultDir.absPath());
+    QString lastDir = conf->readEntry("LastDir", defaultDir.absPath());
     if (!QDir(lastDir).exists()) {
         lastDir = defaultDir.absPath();
     }
-    QStringList recentFiles = getRecentFiles(conf);
+    QStringList recentFiles = getRecentFiles(*conf);
     fileSelector = new PBFileSelector(lastDir, recentFiles,
                                       "application/portabase", mainStack);
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(openFile(const DocLnk &)));
-    QString viewMode = conf.readEntry("View", "Icon");
+    QString viewMode = conf->readEntry("View", "Icon");
     if (viewMode == "Icon") {
         viewIcons();
     }
@@ -259,25 +261,27 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
         viewList();
     }
     fileOpen();
-#if defined(DESKTOP)
-    conf.setGroup("Geometry");
-    int xpos = conf.readNumEntry("X", -1);
-    int ypos = conf.readNumEntry("Y", -1);
+#if defined(Q_WS_QWS)
+    resize(200, 300);
+#else
+    conf->setGroup("Geometry");
+    int xpos = conf->readNumEntry("X", -1);
+    int ypos = conf->readNumEntry("Y", -1);
     if (xpos != -1 && ypos != -1) {
         move(xpos, ypos);
     }
-    if (conf.readBoolEntry("Maximized")) {
+    if (conf->readBoolEntry("Maximized")) {
         resize(600, 400);
         showMaximized();
     }
     else {
-        int w = conf.readNumEntry("Width", 600);
-        int h = conf.readNumEntry("Height", 400);
+        int w = conf->readNumEntry("Width", 600);
+        int h = conf->readNumEntry("Height", 400);
         resize(w, h);
     }
-#else
-    resize(200, 300);
+    setAcceptDrops(TRUE);
 #endif
+    delete conf;
 }
 
 const QColor *PortaBase::evenRowColor = &Qt::white;
@@ -291,7 +295,7 @@ PortaBase::~PortaBase()
     conf.writeEntry("LastDir", lastDir.absPath());
     conf.writeEntry("View", viewIconsAction->isOn() ? "Icon" : "List");
     updateRecentFiles(conf);
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
     conf.setGroup("Geometry");
     conf.writeEntry("Maximized", isMaximized());
     conf.writeEntry("X", x());
@@ -380,9 +384,12 @@ void PortaBase::viewProperties()
     message += tr("Filters") + ": " + QString::number(count) + "\n";
     count = db->listEnums().count();
     message += tr("Enums") + ": " + QString::number(count);
-    QString title = tr("File Properties") + " - " + tr("PortaBase")
-                    + PBDialog::titleSuffix;
-    QMessageBox::information(this, title, message);
+    QString title = tr("File Properties") + " - " + tr("PortaBase");
+    QMessageBox mb(title, message, QMessageBox::NoIcon,
+                   QMessageBox::Ok, QMessageBox::NoButton,
+                   QMessageBox::NoButton, this);
+    mb.setMinimumWidth(200);
+    mb.exec();
 }
 
 void PortaBase::editPreferences()
@@ -399,7 +406,7 @@ void PortaBase::editPreferences()
             rebuildSortMenu();
             rebuildFilterMenu();
         }
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
         help->setFont(font);
         fileSelector->setFont(font);
 #endif
@@ -420,7 +427,7 @@ void PortaBase::editPreferences()
 
 void PortaBase::newFile()
 {
-    createFile(NO_DATA);
+    createFile(NO_SOURCE);
 }
 
 void PortaBase::import()
@@ -429,7 +436,8 @@ void PortaBase::import()
     types.append(tr("XML"));
     types.append(tr("MobileDB"));
     bool ok = FALSE;
-    QString type = InputDialog::getItem(tr("Import"), tr("Import from:"),
+    QString type = InputDialog::getItem(tr("Import") + QQDialog::titleSuffix,
+                                        tr("Import from:"),
                                         types, 0, FALSE, &ok, this);
     if (!ok) {
         return;
@@ -477,7 +485,7 @@ void PortaBase::createFile(int source)
     }
     if (ok) {
         db->load();
-        if (source == NO_DATA) {
+        if (source == NO_SOURCE) {
             ok = editColumns();
         }
         else {
@@ -652,14 +660,14 @@ void PortaBase::openRecent(int id)
 void PortaBase::updateCaption(const QString &name)
 {
     if (!doc) {
-        setCaption(tr("PortaBase") + PBDialog::titleSuffix);
+        setCaption(tr("PortaBase") + QQDialog::titleSuffix);
     }
     else {
         QString s = name;
         if (s.isNull()) {
             s = doc->name();
         }
-        setCaption(s + " - " + tr("PortaBase") + PBDialog::titleSuffix);
+        setCaption(s + " - " + tr("PortaBase") + QQDialog::titleSuffix);
     }
 }
 
@@ -693,7 +701,13 @@ void PortaBase::showFileSelector()
     fileNewAction->addTo(toolbar);
     fileOpenAction->addTo(file);
     fileOpenAction->addTo(toolbar);
-#ifdef DESKTOP
+#if defined(Q_WS_QWS)
+    fileDeleteAction->addTo(file);
+    fileDeleteAction->addTo(toolbar);
+    fileRenameAction->addTo(file);
+    fileCopyAction->addTo(file);
+    refreshAction->addTo(file);
+#else
     recent = new QPopupMenu(this);
     Config conf("portabase");
     QStringList recentFiles = getRecentFiles(conf);
@@ -703,12 +717,6 @@ void PortaBase::showFileSelector()
     }
     connect(recent, SIGNAL(activated(int)), this, SLOT(openRecent(int)));
     file->insertItem(ma->menuText("Open Recent"), recent);
-#else
-    fileDeleteAction->addTo(file);
-    fileDeleteAction->addTo(toolbar);
-    fileRenameAction->addTo(file);
-    fileCopyAction->addTo(file);
-    refreshAction->addTo(file);
 #endif
     file->insertSeparator();
     importAction->addTo(file);
@@ -726,7 +734,7 @@ void PortaBase::showFileSelector()
     menu->insertItem(ma->menuText("View"), view);
 #endif
 
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
     help = new QPopupMenu(this);
     helpAction->addTo(help);
     help->insertSeparator();
@@ -825,7 +833,7 @@ void PortaBase::showDataViewer()
         QString menuName = topLevel[i];
         menu->insertItem(ma->menuText(menuName), getMenuPointer(menuName));
     }
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
     help = new QPopupMenu(this);
     helpAction->addTo(help);
     help->insertSeparator();
@@ -893,7 +901,7 @@ void PortaBase::updateRecentFiles(Config &conf)
     QStringList files = fileSelector->recent();
     int count = files.count();
     int i;
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
     recent->clear();
     for (i = 0; i < count; i++) {
         recent->insertItem(files[i]);
@@ -1012,7 +1020,8 @@ void PortaBase::dataExport()
     types.append(tr("CSV") + "(" + tr("rows in current filter") + ")");
     types.append(tr("XML"));
     bool ok = FALSE;
-    QString type = InputDialog::getItem(tr("Export"), tr("Export to:"),
+    QString type = InputDialog::getItem(tr("Export") + QQDialog::titleSuffix,
+                                        tr("Export to:"),
                                         types, 0, FALSE, &ok, this);
     if (!ok) {
         return;
@@ -1404,18 +1413,78 @@ QPixmap PortaBase::getNotePixmap()
 
 void PortaBase::showHelp()
 {
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
     HelpBrowser helpBrowser(this);
     helpBrowser.exec();
 #endif
 }
 
+#if !defined(Q_WS_QWS)
+void PortaBase::dragEnterEvent(QDragEnterEvent *event)
+{
+    event->accept(doc ? FALSE : QUriDrag::canDecode(event));
+}
+
+void PortaBase::dropEvent(QDropEvent *event)
+{
+    if (doc) {
+        return;
+    }
+    QStringList fileNames;
+    if (QUriDrag::decodeLocalFiles(event, fileNames)) {
+        QString file = fileNames[0];
+        bool valid = true;
+        if (file.length() < 5) {
+            valid = false;
+        }
+        else if (file.right(4) != ".pob") {
+            valid = false;
+        }
+        if (!valid) {
+            QMessageBox::warning(this, tr("PortaBase"),
+                                 tr("Not a PortaBase file"));
+            return;
+        }
+        openFile(file);
+    }
+}
+#endif
+
+Config *PortaBase::getPreferences()
+{
+#if defined(Q_WS_QWS)
+    return new Config("portabase");
+#else
+    Config *conf = new Config("portabase");
+    if (!conf->exists()) {
+        // new installation or upgrade from version using old preferences...
+        // try migrating from old format
+        OldConfig old("portabase");
+        old.migrate("Colors", *conf);
+        old.migrate("Files", *conf);
+        old.migrate("Font", *conf);
+        old.migrate("General", *conf);
+        // changes aren't saved until the QSettings object is deleted
+        delete conf;
+        conf = new Config("portabase");
+        Config qpe("qpe");
+        OldConfig oldQpe("qpe");
+        oldQpe.migrate("Date", qpe);
+        oldQpe.migrate("Time", qpe);
+    }
+    return conf;
+#endif
+}
+
 void PortaBase::aboutPortaBase()
 {
-    QString message = tr("PortaBase") + " 1.8\n";
-    message += tr("Copyright (C)") + " 2002-2003 Jeremy Bowman\n\n";
+    QString message = tr("PortaBase") + " 1.9\n";
+    message += tr("Copyright (C)") + " 2002-2004 Jeremy Bowman\n\n";
     message += tr("Web site at http://portabase.sourceforge.net");
-    QMessageBox::information(this, tr("About PortaBase"), message);
+    QMessageBox mb(tr("About PortaBase"), message, QMessageBox::NoIcon,
+                   QMessageBox::Ok, QMessageBox::NoButton,
+                   QMessageBox::NoButton, this);
+    mb.exec();
 }
 
 void PortaBase::aboutQt()

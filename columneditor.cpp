@@ -1,7 +1,7 @@
 /*
  * columneditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,9 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
 #include <qhbox.h>
 #include <qpushbutton.h>
-#include "desktop/resource.h"
 #endif
 
 #include <qcheckbox.h>
@@ -30,15 +29,14 @@
 #include "enumeditor.h"
 #include "notebutton.h"
 #include "numberwidget.h"
-#include "pbdialog.h"
 
-ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
+ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name)
+  : QQDialog("", parent, name, TRUE), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
 {
-    setCaption(tr("PortaBase") + PBDialog::titleSuffix);
-#if defined(DESKTOP)
-    QGridLayout *grid = new QGridLayout(this, 4, 2);
-#else
+#if defined(Q_WS_QWS)
     QGridLayout *grid = new QGridLayout(this, 3, 2);
+#else
+    QGridLayout *grid = new QGridLayout(this, 4, 2);
 #endif
 
     grid->addWidget(new QLabel(tr("Name"), this), 0, 0);
@@ -87,7 +85,8 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, 
     defaultBlank = new QWidget(defaultStack);
     defaultStack->raiseWidget(defaultLine);
 
-#if defined(DESKTOP)
+    int minWidth = -1;
+#if !defined(Q_WS_QWS)
     QHBox *hbox = new QHBox(this);
     new QWidget(hbox);
     QPushButton *okButton = new QPushButton(tr("OK"), hbox);
@@ -98,9 +97,9 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, 
     new QWidget(hbox);
     grid->addMultiCellWidget(hbox, 3, 3, 0, 1);
     grid->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(parent->width() / 2);
-    setIcon(Resource::loadPixmap("portabase"));
+    minWidth = parent->width() / 2;
 #endif
+    finishConstruction(FALSE, minWidth);
 }
 
 ColumnEditor::~ColumnEditor()

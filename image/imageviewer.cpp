@@ -1,7 +1,7 @@
 /*
  * imageviewer.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 #include "imagewidget.h"
 #include "../view.h"
 
-ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Image Viewer"), parent, name, f), fullScreen(0), currentView(0), rowIndex(0), colIndex(0)
+ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent, const char *name)
+    : PBDialog(tr("Image Viewer"), parent, name), fullScreen(0), currentView(0), rowIndex(0), colIndex(0)
 {
     QScrollView *scroll = new QScrollView(this, 0,
                                           WResizeNoErase|WNorthWestGravity);
@@ -30,7 +30,7 @@ ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent, const char *name
         connect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
     }
 
-    finishLayout(TRUE, FALSE);
+    finishLayout(TRUE, FALSE, TRUE, 0, 0);
 }
 
 ImageViewer::~ImageViewer()
@@ -44,8 +44,12 @@ void ImageViewer::setImage(const QImage &image)
     pm.setOptimization(QPixmap::NormalOptim);
     pm.convertFromImage(image);
     display->setPixmap(pm);
-#if defined(DESKTOP)
-    resize(pm.width() + 5, pm.height() + okCancelRow->height() + 5);
+    int margin = 5;
+#if defined(Q_WS_WIN)
+    margin += 16;
+#endif
+#if !defined(Q_WS_QWS)
+    resize(pm.width() + margin, pm.height() + okCancelRow->height() + margin);
 #endif
 }
 

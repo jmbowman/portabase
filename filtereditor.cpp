@@ -1,7 +1,7 @@
 /*
  * filtereditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
 #include "filter.h"
 #include "filtereditor.h"
 
-FilterEditor::FilterEditor(QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Filter Editor"), parent, name, f), db(0), filter(0)
+FilterEditor::FilterEditor(QWidget *parent, const char *name)
+    : PBDialog(tr("Filter Editor"), parent, name), db(0), filter(0)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);

@@ -1,7 +1,7 @@
 /*
  * colorbutton.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include <qcolordialog.h>
-#else
+#if defined(Q_WS_QWS)
 #include "colordialog.h"
+#else
+#include <qcolordialog.h>
 #endif
 
 #include "colorbutton.h"
@@ -46,10 +46,10 @@ void ColorButton::setColor(const QColor &color)
 
 void ColorButton::launchDialog()
 {
-#if defined(DESKTOP)
-    QColor color = QColorDialog::getColor(*currentColor, this);
-#else
+#if defined(Q_WS_QWS)
     QColor color = ColorDialog::getColor(*currentColor, this);
+#else
+    QColor color = QColorDialog::getColor(*currentColor, this);
 #endif
     if (color.isValid()) {
         setColor(color);

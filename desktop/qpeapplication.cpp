@@ -1,7 +1,7 @@
 /*
  * qpeapplication.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,20 +38,10 @@ QPEApplication::~QPEApplication()
 QString QPEApplication::iconDir()
 {
 #if defined(Q_WS_WIN)
-    const char *windir = getenv("WINDIR");
-    if (!windir) {
-	return "./icons/";
-    }
-    QString iniPath = QString(windir) + "/portabase.ini";
+    return qApp->applicationDirPath() + "/icons/";
 #else
-    QString iniPath = "/etc/portabase.conf";
+    return "/usr/share/portabase/icons/";
 #endif
-    if (!QFile::exists(iniPath)) {
-        return "./icons/";
-    }
-    Config conf(iniPath, Config::File);
-    conf.setGroup("General");
-    return conf.readEntry("IconPath", ".") + "/";
 }
 
 QString QPEApplication::helpDir()
@@ -67,20 +57,10 @@ QString QPEApplication::helpDir()
     }
     locale += "/";
 #if defined(Q_WS_WIN)
-    const char *windir = getenv("WINDIR");
-    if (!windir) {
-	return QString("./");
-    }
-    QString iniPath = QString(windir) + "/portabase.ini";
+    QString path = qApp->applicationDirPath() + "/";
 #else
-    QString iniPath = "/etc/portabase.conf";
+    QString path = "/usr/share/portabase/html/";
 #endif
-    if (!QFile::exists(iniPath)) {
-        return "./";
-    }
-    Config conf(iniPath, Config::File);
-    conf.setGroup("General");
-    QString path = conf.readEntry("HelpPath", ".") + "/";
     QDir dir(path + locale);
     if (dir.exists()) {
         path += locale;

@@ -1,7 +1,7 @@
 /*
  * pbdialog.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,37 +9,20 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/resource.h"
-#endif
-
 #include <qhbox.h>
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include "pbdialog.h"
 
 PBDialog::PBDialog(QString title, QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), okCancelRow(0)
+    : QQDialog(title, parent, name, TRUE, f), okCancelRow(0)
 {
     vbox = new QVBoxLayout(this);
-    if (title.isEmpty()) {
-        setCaption(tr("PortaBase") + PBDialog::titleSuffix);
-    }
-    else {
-        setCaption(title + " - " + tr("PortaBase") + PBDialog::titleSuffix);
-    }
 #if defined(Q_WS_WIN)
     setSizeGripEnabled(TRUE);
     vbox->setMargin(8);
 #endif
 }
-
-#if defined(Q_WS_WIN)
-// non-commercial Qt doesn't show the titlebar text unless this is present
-const QString PBDialog::titleSuffix = " - Qt";
-#else
-const QString PBDialog::titleSuffix = "";
-#endif
 
 PBDialog::~PBDialog()
 {
@@ -49,7 +32,7 @@ PBDialog::~PBDialog()
 void PBDialog::finishLayout(bool okButton, bool cancelButton, bool fullscreen,
                             int minWidth, int minHeight)
 {
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
     if (okButton || cancelButton) {
         QHBox *hbox = new QHBox(this);
         vbox->addWidget(hbox);
@@ -67,27 +50,8 @@ void PBDialog::finishLayout(bool okButton, bool cancelButton, bool fullscreen,
         vbox->setResizeMode(QLayout::FreeResize);
         okCancelRow = hbox;
     }
-    QWidget *parent = parentWidget();
-    if (fullscreen) {
-        int width = (minWidth == -1) ? parent->width() / 2 : minWidth;
-        int height = (minHeight == -1) ? parent->height() : minHeight;
-        setMinimumWidth(width);
-        setMinimumHeight(height);
-    }
-    else {
-        if (minWidth != -1) {
-            setMinimumWidth(minWidth);
-        }
-        if (minHeight != -1) {
-            setMinimumHeight(minHeight);
-        }
-    }
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    if (fullscreen) {
-        showMaximized();
-    }
 #endif
+    finishConstruction(fullscreen, minWidth, minHeight);
 }
 
 void PBDialog::addEditButtons(bool movementOnly)
@@ -101,7 +65,7 @@ void PBDialog::addEditButtons(bool movementOnly)
     }
     upButton = new QPushButton(tr("Up"), hbox);
     downButton = new QPushButton(tr("Down"), hbox);
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
     // leave a blank space before the OK and Cancel buttons
     vbox->addWidget(new QLabel(" ", this));
 #endif

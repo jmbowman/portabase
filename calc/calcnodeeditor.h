@@ -1,7 +1,7 @@
 /*
  * calcnodeeditor.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class CalcNodeEditor: public PBDialog
     Q_OBJECT
 public:
     CalcNodeEditor(const QStringList &colNames, int *colTypes, bool showOps,
-                   QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+                   QWidget *parent = 0, const char *name = 0);
     ~CalcNodeEditor();
 
     CalcNode *createNode();

@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/resource.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/resource.h>
+#else
+#include "desktop/resource.h"
 #endif
 
 #include <qapplication.h>
@@ -30,8 +30,8 @@
 #include "viewdisplay.h"
 #include "image/imageutils.h"
 
-RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name, WFlags f)
-  : PBDialog(tr("Row Viewer"), parent, name, f), db(dbase), display(parent), currentView(0)
+RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
+  : PBDialog(tr("Row Viewer"), parent, name), db(dbase), display(parent), currentView(0)
 {
     tv = new QTextView(this);
     vbox->addWidget(tv);

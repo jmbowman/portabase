@@ -1,7 +1,7 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #include "shadedlistitem.h"
 #include "vieweditor.h"
 
-ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("View Editor"), parent, name, f), db(0), resized(FALSE)
+ViewEditor::ViewEditor(QWidget *parent, const char *name)
+    : PBDialog(tr("View Editor"), parent, name), db(0), resized(FALSE)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
@@ -49,7 +49,10 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
     table->addColumn(tr("Include"));
     table->setColumnWidthMode(0, QListView::Manual);
     table->setColumnAlignment(0, Qt::AlignHCenter);
-    int colWidth = width() - table->columnWidth(0) - 5;
+    int colWidth = -1;
+#if !defined(Q_WS_WIN)
+    colWidth = width() - table->columnWidth(0) - 5;
+#endif
     table->addColumn(tr("Column Name"), colWidth);
     connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
             this, SLOT(tableClicked(QListViewItem*, const QPoint&, int)));

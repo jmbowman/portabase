@@ -1,7 +1,7 @@
 /*
  * calceditor.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ class CalcEditor: public PBDialog
 public:
     CalcEditor(Database *dbase, const QString &calcName,
                const QStringList &colNames, int *colTypes,
-               QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+               QWidget *parent = 0, const char *name = 0);
     ~CalcEditor();
     void load(CalcNode *root, int decimals);
     CalcNode *getRootNode();

@@ -1,7 +1,7 @@
 /*
  * helpbrowser.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,15 +12,15 @@
 #ifndef HELPBROWSER_H
 #define HELPBROWSER_H
 
-#include <qdialog.h>
+#include "pbdialog.h"
 
 class QTextBrowser;
 
-class HelpBrowser: public QDialog
+class HelpBrowser: public PBDialog
 {
     Q_OBJECT
 public:
-    HelpBrowser(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    HelpBrowser(QWidget *parent = 0, const char *name = 0);
     ~HelpBrowser();
 
 private slots:

@@ -1,7 +1,7 @@
 /*
  * filtereditor.h
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ class FilterEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    FilterEditor(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    FilterEditor(QWidget *parent = 0, const char *name = 0);
     ~FilterEditor();
 
     int edit(Database *subject, QString filterName);

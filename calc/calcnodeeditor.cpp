@@ -1,7 +1,7 @@
 /*
  * calcnodeeditor.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #include "../datatypes.h"
 #include "../numberwidget.h"
 
-CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool showOps, QWidget *parent, const char *name, WFlags f)
-  : PBDialog(tr("Calculation Node Editor"), parent, name, f)
+CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool showOps, QWidget *parent, const char *name)
+  : PBDialog(tr("Calculation Node Editor"), parent, name)
 {
     group = new QButtonGroup(this);
     group->hide();

@@ -1,7 +1,7 @@
 /*
  * sorteditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
 #include "shadedlistitem.h"
 #include "sorteditor.h"
 
-SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Sorting Editor"), parent, name, f), db(0), resized(FALSE)
+SortEditor::SortEditor(QWidget *parent, const char *name)
+    : PBDialog(tr("Sorting Editor"), parent, name), db(0), resized(FALSE)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
@@ -36,7 +36,10 @@ SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
     table->addColumn(tr("Sort"));
     table->setColumnWidthMode(0, QListView::Manual);
     table->setColumnAlignment(0, Qt::AlignHCenter);
-    int colWidth = (width() - table->columnWidth(0) - 5) / 2;
+    int colWidth = -1;
+#if !defined(Q_WS_WIN)
+    colWidth = (width() - table->columnWidth(0) - 5) / 2;
+#endif
     table->addColumn(tr("Column Name"), colWidth);
     table->addColumn(tr("Direction"), colWidth);
     connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),

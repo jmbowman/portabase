@@ -4,9 +4,19 @@ TRANSLATIONS    = portabase_ja.ts \
                   portabase_tw.ts \
                   portabase_fr.ts \
                   portabase_cs.ts
-LIBS            += -lm -lmk4 -lbeecrypt -ljpeg
 TARGET          = portabase
-DEFINES        += DESKTOP
+win32 {
+    DEFINES    += QT_DLL
+    RC_FILE     = portabase.rc
+    QMAKE_CXXFLAGS_RELEASE += /MD
+    INCLUDEPATH += D:\Devel\metakit-2.4.9.3\include \
+                   D:\Devel\jpeg-6b \
+                   D:\Devel
+    LIBS       += mk4vc60s.lib beecrypt.lib libjpeg.lib
+}
+else {
+    LIBS       += -lm -lmk4 -lbeecrypt -ljpeg
+}
 HEADERS         = portabase.h \
                   view.h \
                   viewdisplay.h \
@@ -40,7 +50,6 @@ HEADERS         = portabase.h \
                   desktop/fileselector.h \
                   desktop/importdialog.h \
                   desktop/qpeapplication.h \
-                  desktop/qpemenubar.h \
                   desktop/resource.h \
                   desktop/timestring.h \
                   desktop/helpbrowser.h \
@@ -71,7 +80,9 @@ HEADERS         = portabase.h \
                   image/imageutils.h \
                   image/imageviewer.h \
                   image/imagewidget.h \
-                  image/slideshowdialog.h
+                  image/slideshowdialog.h \
+                  desktop/oldconfig.h \
+                  qqdialog.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   view.cpp \
@@ -105,7 +116,6 @@ SOURCES         = main.cpp \
                   desktop/fileselector.cpp \
                   desktop/importdialog.cpp \
                   desktop/qpeapplication.cpp \
-                  desktop/qpemenubar.cpp \
                   desktop/resource.cpp \
                   desktop/timestring.cpp \
                   desktop/helpbrowser.cpp \
@@ -136,4 +146,6 @@ SOURCES         = main.cpp \
                   image/imageutils.cpp \
                   image/imageviewer.cpp \
                   image/imagewidget.cpp \
-                  image/slideshowdialog.cpp
+                  image/slideshowdialog.cpp \
+                  desktop/oldconfig.cpp \
+                  qqdialog.cpp

@@ -95,6 +95,10 @@ private slots:
 
 protected:
     void closeEvent(QCloseEvent *e);
+#if !defined(Q_WS_QWS)
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+#endif
 
 private:
     void fileOpen();
@@ -112,6 +116,7 @@ private:
     QAction *getButtonAction(const QString &buttonName);
     QStringList getRecentFiles(Config &conf);
     void updateRecentFiles(Config &conf);
+    Config *getPreferences();
 
 public:
     static const QColor *evenRowColor;

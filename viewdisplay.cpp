@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/resource.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/resource.h>
+#else
+#include "desktop/resource.h"
 #endif
 
 #include <math.h>

@@ -1,7 +1,7 @@
 /*
  * columneditor.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 #ifndef COLUMNEDITOR_H
 #define COLUMNEDITOR_H
 
-#include <qdialog.h>
+#include "qqdialog.h"
 
 class CalcNode;
 class DBEditor;
@@ -26,12 +26,11 @@ class QLineEdit;
 class QPushButton;
 class QWidgetStack;
 
-class ColumnEditor: public QDialog
+class ColumnEditor: public QQDialog
 {
     Q_OBJECT
 public:
-    ColumnEditor(Database *dbase, DBEditor *parent = 0, const char *name = 0,
-                 WFlags f = 0);
+    ColumnEditor(Database *dbase, DBEditor *parent = 0, const char *name = 0);
     ~ColumnEditor();
 
     QString name();

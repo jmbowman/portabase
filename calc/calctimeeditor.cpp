@@ -1,7 +1,7 @@
 /*
  * calcdateeditor.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 #include "../datatypes.h"
 #include "../timewidget.h"
 
-CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name, WFlags f)
-  : PBDialog(tr("Calculation Node Editor"), parent, name, f), db(dbase)
+CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name)
+  : PBDialog(tr("Calculation Node Editor"), parent, name), db(dbase)
 {
     group = new QButtonGroup(this);
     group->hide();

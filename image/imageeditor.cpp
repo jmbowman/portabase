@@ -1,7 +1,7 @@
 /*
  * imageeditor.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 #include "imagereader.h"
 #include "imagewidget.h"
 
-ImageEditor::ImageEditor(QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Image Editor"), parent, name, f), path("")
+ImageEditor::ImageEditor(QWidget *parent, const char *name)
+    : PBDialog(tr("Image Editor"), parent, name), path("")
 {
     paramsRow = new QHBox(this);
     vbox->addWidget(paramsRow);
@@ -93,9 +93,13 @@ int ImageEditor::edit(const QString &file)
     pm.setOptimization(QPixmap::NormalOptim);
     pm.convertFromImage(image);
     display->setPixmap(pm);
-#if defined(DESKTOP)
-    resize(QMAX(pm.width() + 5, width),
-           paramsRow->height() + pm.height() + okCancelRow->height() + 5);
+    int margin = 5;
+#if defined(Q_WS_WIN)
+    margin += 16;
+#endif
+#if !defined(Q_WS_QWS)
+    resize(QMAX(pm.width() + margin, paramsRow->sizeHint().width() + margin),
+           paramsRow->height() + pm.height() + okCancelRow->height() + margin);
 #endif
     return exec();
 }

@@ -1,7 +1,7 @@
 /*
  * numberwidget.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/resource.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/resource.h>
+#else
+#include "desktop/resource.h"
 #endif
 
 #include <qlineedit.h>

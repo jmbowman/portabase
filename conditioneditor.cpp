@@ -1,7 +1,7 @@
 /*
  * conditioneditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,8 @@
 #include "numberwidget.h"
 #include "timewidget.h"
 
-ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : PBDialog(tr("Condition Editor"),parent, name, f), dataType(STRING)
+ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *name)
+  : PBDialog(tr("Condition Editor"),parent, name), dataType(STRING)
 {
     db = dbase;
     QHBox *hbox = new QHBox(this);

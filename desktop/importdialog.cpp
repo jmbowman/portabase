@@ -1,7 +1,7 @@
 /*
  * importdialog.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,8 +20,10 @@
 #include "../csverror.h"
 #include "../database.h"
 #include "../importutils.h"
+#include "../qqdialog.h"
 
-ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent) : db(subject), parentWidget(parent), source(sourceType)
+ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent)
+  : db(subject), parentWidget(parent), source(sourceType)
 {
 
 }
@@ -69,7 +71,8 @@ bool ImportDialog::exec()
         encodings.append("UTF-8");
         encodings.append("Latin-1");
         bool ok;
-        encoding = QInputDialog::getItem(QObject::tr("Import"),
+        encoding = QInputDialog::getItem(QObject::tr("Import")
+                                         + QQDialog::titleSuffix,
                                          QObject::tr("Text encoding") + ":",
                                          encodings, 0, FALSE, &ok,
                                          parentWidget);

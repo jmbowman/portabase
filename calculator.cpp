@@ -28,19 +28,17 @@
 #include <qregexp.h>
 
 #include "calculator.h"
-#include "pbdialog.h"
 
 Calculator::Calculator(QWidget* parent, const char *name)
-  : QDialog(parent, name, TRUE)
+  : QQDialog("", parent, name, TRUE)
 {
     m_decimal = '.';
     m_result = "";
 
-    setCaption(tr("PortaBase") + PBDialog::titleSuffix);
-#if defined(DESKTOP)
-    int rows = 6;
-#else
+#if defined(Q_WS_QWS)
     int rows = 5;
+#else
+    int rows = 6;
 #endif
     QGridLayout* grid = new QGridLayout(this, rows, 5, 1, 2);
 
@@ -131,7 +129,7 @@ Calculator::Calculator(QWidget* parent, const char *name)
     connect(buttons[CLEAR], SIGNAL(clicked()), SLOT(clearClicked()));
     connect(buttons[CLEARALL], SIGNAL(clicked()), SLOT(clearAllClicked()));
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
     QHBox *hbox = new QHBox(this);
     new QWidget(hbox);
     QPushButton *okButton = new QPushButton(tr("OK"), hbox);
@@ -142,8 +140,8 @@ Calculator::Calculator(QWidget* parent, const char *name)
     new QWidget(hbox);
     grid->addMultiCellWidget(hbox, 5, 5, 0, 4);
     grid->setResizeMode(QLayout::FreeResize);
-    //setIcon(Resource::loadPixmap("portabase"));
 #endif
+    finishConstruction(FALSE);
 }
 
 Calculator::~Calculator()

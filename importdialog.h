@@ -1,7 +1,7 @@
 /*
  * importdialog.h
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 #include <qstringlist.h>
 
 // possible data sources
-#define NO_DATA 0
+#define NO_SOURCE 0
 #define CSV_FILE 1
 #define MOBILEDB_FILE 2
 #define XML_FILE 3

@@ -1,7 +1,7 @@
 /*
  * helpbrowser.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,8 +11,6 @@
 
 #include <qhbox.h>
 #include <qlabel.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
 #include <qtextbrowser.h>
 #include <qtoolbutton.h>
 #include "helpbrowser.h"
@@ -20,15 +18,9 @@
 #include "qpeapplication.h"
 #include "resource.h"
 
-HelpBrowser::HelpBrowser(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f)
+HelpBrowser::HelpBrowser(QWidget *parent, const char *name)
+  : PBDialog(tr("Help"), parent, name)
 {
-    setCaption(tr("Help") + " - " + tr("PortaBase") + PBDialog::titleSuffix);
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->setMargin(8);
-#endif
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
 
@@ -52,15 +44,7 @@ HelpBrowser::HelpBrowser(QWidget *parent, const char *name, WFlags f)
                                                    "text/html;charset=UTF-8");
     content->setSource(QPEApplication::helpDir() + "portabase.html");
 
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(600);
-    setMinimumHeight(400);
+    finishLayout(TRUE, FALSE, FALSE, 600, 400);
 }
 
 HelpBrowser::~HelpBrowser()

@@ -52,7 +52,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("Edit Columns", tr("Edit Columns"));
     textMap.insert("Edit Enums", tr("Edit Enums"));
     textMap.insert("Close", tr("Close"));
-#ifdef DESKTOP
+#if !defined(Q_WS_QWS)
     menuTextMap.insert("File", tr("&File"));
     menuTextMap.insert("View", tr("&View"));
     menuTextMap.insert("Row", tr("&Row"));

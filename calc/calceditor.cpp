@@ -1,7 +1,7 @@
 /*
  * calceditor.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@
 #include "calcnodeeditor.h"
 #include "calctimeeditor.h"
 
-CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Calculation Editor"), parent, name, f), db(dbase)
+CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name)
+    : PBDialog(tr("Calculation Editor"), parent, name), db(dbase)
 {
     QGrid *grid = new QGrid(2, this);
     vbox->addWidget(grid);
@@ -197,7 +197,7 @@ void CalcEditor::addNode()
     nodeEditor->reset();
     bool finished = FALSE;
     while (!finished) {
-#if !defined(DESKTOP)
+#if defined(Q_WS_QWS)
         nodeEditor->showMaximized();
 #endif
         if (!nodeEditor->exec()) {

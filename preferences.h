@@ -1,7 +1,7 @@
 /*
  * preferences.h
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
 #include "desktop/timestring.h"
 #endif
 
@@ -33,7 +33,7 @@ class Preferences: public PBDialog
 {
     Q_OBJECT
 public:
-    Preferences(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    Preferences(QWidget *parent = 0, const char *name = 0);
     ~Preferences();
 
     QFont applyChanges();
@@ -55,6 +55,7 @@ private:
     void addButtonsTab(QTabWidget *tabs);
     void moveSelectionUp(QListView *table);
     void moveSelectionDown(QListView *table);
+    void applyDateTimeChanges();
 
 private:
     QFontDatabase fontdb;
@@ -73,7 +74,7 @@ private:
     QSpinBox *rowsPerPage;
     ColorButton *evenButton;
     ColorButton *oddButton;
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
     PBDateFormat date_formats[4];
     QComboBox *dateFormatCombo;
     QComboBox *ampmCombo;

@@ -1,7 +1,7 @@
 /*
  * config.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,62 +12,40 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <qmap.h>
+#include <qsettings.h>
 #include <qstringlist.h>
-// included because of broken MS VC++ linker...QMap<QString,QString>
-#include <qxml.h>
 
-class Config
+class Config : public QSettings
 {
 public:
-    typedef QMap< QString, QString > ConfigGroup;
-    
-    enum Domain { File, User };
-    Config( const QString &name, Domain domain=User );
+    Config(const QString &name);
     ~Config();
 
-    bool operator == ( const Config & other ) const { return (filename == other.filename); }
-    bool operator != ( const Config & other ) const { return (filename != other.filename); }
-
-    bool hasKey( const QString &key ) const;
-    void setGroup( const QString &gname );
-    void writeEntry( const QString &key, const QString &value );
-    void writeEntry( const QString &key, int num );
-#ifdef Q_HAS_BOOL_TYPE
-    void writeEntry( const QString &key, bool b );
-#endif
-    void writeEntry( const QString &key, const QStringList &lst, const QChar &sep );
+    bool exists();
+    bool hasKey(const QString &key) const;
+    void setGroup(const QString &gname);
+    void writeEntry(const QString &key, const QString &value);
+    void writeEntry(const QString &key, int num);
+    void writeEntry(const QString &key, bool b);
+    void writeEntry(const QString &key, const QStringList &lst, const QChar &sep);
     
-    QString readEntry( const QString &key, const QString &deflt = QString::null ) const;
-    QString readEntryDirect( const QString &key, const QString &deflt = QString::null ) const;
-    int readNumEntry( const QString &key, int deflt = -1 ) const;
-    bool readBoolEntry( const QString &key, bool deflt = FALSE ) const;
-    QStringList readListEntry( const QString &key, const QChar &sep ) const;
+    QString readEntry(const QString &key, const QString &deflt = QString::null) const;
+    int readNumEntry(const QString &key, int deflt = -1) const;
+    bool readBoolEntry(const QString &key, bool deflt = FALSE) const;
+    QStringList readListEntry(const QString &key, const QChar &sep) const;
 
     // For compatibility, non-const versions.
-    QString readEntry( const QString &key, const QString &deflt );
-    QString readEntryDirect( const QString &key, const QString &deflt );
-    int readNumEntry( const QString &key, int deflt );
-    bool readBoolEntry( const QString &key, bool deflt );
-    QStringList readListEntry( const QString &key, const QChar &sep );
-    
-    void write( const QString &fn = QString::null );
-    
-protected:
-    void read();
-    bool parse( const QString &line );
+    QString readEntry(const QString &key, const QString &deflt);
+    int readNumEntry(const QString &key, int deflt);
+    bool readBoolEntry(const QString &key, bool deflt);
+    QStringList readListEntry(const QString &key, const QChar &sep);
 
-    QMap< QString, ConfigGroup > groups;
-    QMap< QString, ConfigGroup >::Iterator git;
-    QString filename;
-    bool changed;
-    static QString configFilename(const QString& name, Domain);
+private:
+    QString currentGroup;
 };
 
 inline QString Config::readEntry( const QString &key, const QString &deflt ) const
 { return ((Config*)this)->readEntry(key,deflt); }
-inline QString Config::readEntryDirect( const QString &key, const QString &deflt ) const
-{ return ((Config*)this)->readEntryDirect(key,deflt); }
 inline int Config::readNumEntry( const QString &key, int deflt ) const
 { return ((Config*)this)->readNumEntry(key,deflt); }
 inline bool Config::readBoolEntry( const QString &key, bool deflt ) const

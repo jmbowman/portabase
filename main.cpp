@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/qpeapplication.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/qpeapplication.h>
+#else
+#include "desktop/qpeapplication.h"
 #endif
 
 #include "commandline.h"

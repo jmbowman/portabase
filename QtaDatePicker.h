@@ -5,7 +5,7 @@
 #define QTADATEPICKER_H
 
 #include <qtableview.h>
-#include <qdialog.h>
+#include "pbdialog.h"
 
 class QComboBox;
 class QDate;
@@ -41,12 +41,12 @@ private:
 //
 //   Main dialog object for the Qt 'Date Picker' add-on
 //
-class QDatePicker: public QDialog
+class QDatePicker: public PBDialog
 {
     Q_OBJECT
 
 public:
-    QDatePicker(QDate *date);
+    QDatePicker(QDate *date, QWidget *parent = 0);
     ~QDatePicker();
 
     // Update the table

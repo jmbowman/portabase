@@ -1,7 +1,7 @@
 /*
  * enummanager.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,8 @@
 #include "enumeditor.h"
 #include "enummanager.h"
 
-EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFlags f) : PBDialog(tr("Enum Manager"), parent, name, f), contentChanged(FALSE), orderChanged(FALSE)
+EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name)
+  : PBDialog(tr("Enum Manager"), parent, name), contentChanged(FALSE), orderChanged(FALSE)
 {
     db = dbase;
     listBox = new QListBox(this);

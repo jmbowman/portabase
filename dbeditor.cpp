@@ -1,7 +1,7 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #include "portabase.h"
 #include "shadedlistitem.h"
 
-DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Columns Editor"),parent, name, f), db(0), ceName("_cename"),
+DBEditor::DBEditor(QWidget *parent, const char *name)
+    : PBDialog(tr("Columns Editor"),parent, name), db(0), ceName("_cename"),
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
       ceNewIndex("_cenewindex"), resized(FALSE)
 {
@@ -31,7 +31,10 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);
     table->header()->setMovingEnabled(FALSE);
-    int colWidth = width() / 3 - 2;
+    int colWidth = -1;
+#if !defined(Q_WS_WIN)
+    colWidth = width() / 3 - 2;
+#endif
     table->addColumn(tr("Name"), colWidth);
     table->addColumn(tr("Type"), colWidth);
     table->addColumn(tr("Default"), colWidth);

@@ -1,7 +1,7 @@
 /*
  * imageeditor.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ class ImageEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    ImageEditor(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    ImageEditor(QWidget *parent = 0, const char *name = 0);
     ~ImageEditor();
 
     int edit(const QString &file);

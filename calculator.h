@@ -23,7 +23,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <qdialog.h>
+#include "qqdialog.h"
 
 class QLabel;
 
@@ -41,7 +41,7 @@ class QLabel;
   * without having the user to re-type the data. See setInitialValues()
   * for details.
   */
-class Calculator : public QDialog  {
+class Calculator : public QQDialog  {
     Q_OBJECT
 public:
     Calculator(QWidget* parent = 0, const char *name = 0);

@@ -1,7 +1,7 @@
 /*
  * enumeditor.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,7 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
 #include <qfiledialog.h>
 #include <qfileinfo.h>
 #include <qinputdialog.h>
@@ -41,8 +41,8 @@ typedef QInputDialog InputDialog;
 #include "database.h"
 #include "enumeditor.h"
 
-EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
-  : PBDialog(tr("Enum Editor"), parent, name, f), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
+EnumEditor::EnumEditor(QWidget *parent, const char *name)
+  : PBDialog(tr("Enum Editor"), parent, name), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);

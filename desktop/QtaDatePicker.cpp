@@ -28,7 +28,8 @@ QDate *date;
 // Date picker main object dialog
 //
 //===================================================================
-QDatePicker::QDatePicker(QDate *inDate): QDialog(0, 0, TRUE)
+QDatePicker::QDatePicker(QDate *inDate, QWidget *parent)
+  : PBDialog(tr("Select a date"), parent, 0)
 {
     // Make sure we got a valid date
     date = inDate;
@@ -37,20 +38,12 @@ QDatePicker::QDatePicker(QDate *inDate): QDialog(0, 0, TRUE)
         close();
     }
 
-    // Disable the size gripper
-    this->setSizeGripEnabled(FALSE);
-
-    // Set the title
-    this->setCaption(tr("Select a date"));
-
     // Find out what day the week starts on
     Config qpeConfig("qpe");
     qpeConfig.setGroup("Time");
     startMonday = qpeConfig.readBoolEntry("MONDAY") ? 1 : 0;
 
     // Initialize the layout
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-    vbox->setResizeMode(QLayout::FreeResize);
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
 
@@ -97,7 +90,7 @@ QDatePicker::QDatePicker(QDate *inDate): QDialog(0, 0, TRUE)
     QHeader *tableHeader = new QHeader(this);
     vbox->addWidget(tableHeader, 0, Qt::AlignHCenter);
     tableHeader->setOrientation(Horizontal);
-    int h = 2 * font().pointSize();
+    int h = 3 * font().pointSize();
     int w = (int)(1.1 * h);
     if (!startMonday) {
         tableHeader->addLabel(tr("Su"), w);
@@ -137,6 +130,8 @@ QDatePicker::QDatePicker(QDate *inDate): QDialog(0, 0, TRUE)
 
     // Populate the month layout array
     this->datePickerMonthArray(date);
+
+    finishLayout(FALSE, FALSE, FALSE);
 }
 //
 // Destructor

@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "../desktop/config.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/config.h>
+#else
+#include "../desktop/config.h"
 #endif
 
 #include <qapplication.h>
@@ -24,7 +24,8 @@
 #include "imagewidget.h"
 #include "slideshowdialog.h"
 
-SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent, const char *name, WFlags f) : PBDialog(tr("Slideshow"), parent, name, f), fullScreen(0)
+SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent, const char *name)
+  : PBDialog(tr("Slideshow"), parent, name), fullScreen(0)
 {
     currentView = view;
     QGrid *grid = new QGrid(2, this);

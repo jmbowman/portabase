@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,10 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/config.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/config.h>
+#else
+#include "desktop/config.h"
 #endif
 
 #include <qdatetime.h>
@@ -174,10 +174,10 @@ QString Database::changePassword(const QString &oldPass,
 
 void Database::updateDateTimePrefs()
 {
-#if defined(DESKTOP)
-    PBDateFormat format = TimeString::currentDateFormat();
-#else
+#if defined(Q_WS_QWS)
     DateFormat format = TimeString::currentDateFormat();
+#else
+    PBDateFormat format = TimeString::currentDateFormat();
 #endif
     dateOrder = format.shortOrder();
     dateSeparator = format.separator();
@@ -195,10 +195,10 @@ View *Database::getView(const QString &name, bool applyDefaults,
                         bool setAsCurrent)
 {
     int index = views.Find(vName [name.utf8()]);
-#if defined(DESKTOP)
-    int rpp = vDeskRpp (views[index]);
-#else
+#if defined(Q_WS_QWS)
     int rpp = vRpp (views[index]);
+#else
+    int rpp = vDeskRpp (views[index]);
 #endif
     if (applyDefaults) {
         QString defaultSort = QString::fromUtf8(vSort (views[index]));
@@ -223,10 +223,10 @@ View *Database::getView(const QString &name, bool applyDefaults,
         names.append(colName);
         int colIndex = columns.Find(cName [colName.utf8()]);
         types[i] = cType (columns[colIndex]);
-#if defined(DESKTOP)
-        widths[i] = vcDeskWidth (cols[i]);
-#else
+#if defined(Q_WS_QWS)
         widths[i] = vcWidth (cols[i]);
+#else
+        widths[i] = vcDeskWidth (cols[i]);
 #endif
         int idNum = cId (columns[colIndex]);
         colIds.append(makeColId(idNum, types[i]));
@@ -280,12 +280,12 @@ void Database::addView(const QString &name, const QStringList &names,
     vName (row) = name.utf8();
     Config conf("portabase");
     conf.setGroup("General");
-#if defined(DESKTOP)
-    int defaultRpp = 13;
-    int defaultDeskRpp = conf.readNumEntry("RowsPerPage", 25);
-#else
+#if defined(Q_WS_QWS)
     int defaultRpp = conf.readNumEntry("RowsPerPage", 13);
     int defaultDeskRpp = 25;
+#else
+    int defaultRpp = 13;
+    int defaultDeskRpp = conf.readNumEntry("RowsPerPage", 25);
 #endif
     vRpp (row) = (rpp == -1) ? defaultRpp : rpp;
     vDeskRpp (row) = (deskrpp == -1) ? defaultDeskRpp : deskrpp;
@@ -340,10 +340,10 @@ void Database::setViewColWidths(int *widths)
     int i = 0;
     int colIndex = viewColumns.Find(vcView [viewName] + vcIndex [i]);
     while (colIndex != -1) {
-#if defined(DESKTOP)
-        vcDeskWidth (viewColumns[colIndex]) = widths[i];
-#else
+#if defined(Q_WS_QWS)
         vcWidth (viewColumns[colIndex]) = widths[i];
+#else
+        vcDeskWidth (viewColumns[colIndex]) = widths[i];
 #endif
         i++;
         colIndex = viewColumns.Find(vcView [viewName] + vcIndex [i]);
@@ -354,10 +354,10 @@ void Database::setViewRowsPerPage(int rpp)
 {
     QCString viewName(gView(global[0]));
     int index = views.Find(vName [viewName]);
-#if defined(DESKTOP)
-    vDeskRpp (views[index]) = rpp;
-#else
+#if defined(Q_WS_QWS)
     vRpp (views[index]) = rpp;
+#else
+    vDeskRpp (views[index]) = rpp;
 #endif
 }
 
@@ -1836,12 +1836,12 @@ QString Database::dateToString(const QDate &date)
         return "";
     }
     int *parts = new int[3];
-#if defined(DESKTOP)
-    PBDateFormat::Order ymd = PBDateFormat::YearMonthDay;
-    PBDateFormat::Order mdy = PBDateFormat::MonthDayYear;
-#else
+#if defined(Q_WS_QWS)
     DateFormat::Order ymd = DateFormat::YearMonthDay;
     DateFormat::Order mdy = DateFormat::MonthDayYear;
+#else
+    PBDateFormat::Order ymd = PBDateFormat::YearMonthDay;
+    PBDateFormat::Order mdy = PBDateFormat::MonthDayYear;
 #endif
     if (dateOrder == ymd) {
         parts[0] = date.year();

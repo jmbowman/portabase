@@ -123,7 +123,7 @@ char *ImageUtils::getImageData(QImage image, const QString &format,
 void ImageUtils::setExportPaths(const QString &filePath)
 {
     QFileInfo info(filePath);
-#if defined(DESKTOP) || defined(SHARP)
+#if !defined(Q_WS_QWS) || defined(SHARP)
     // Put image files in the same directory as the CSV/XML file
     jpegAbsPath = info.dirPath(TRUE) + "/";
     jpegRelPath = "";

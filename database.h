@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,17 +12,17 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#if defined(DESKTOP)
-#include "desktop/timestring.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/timestring.h>
+#else
+#include "desktop/timestring.h"
 #endif
 
 #include <mk4.h>
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 10
+#define FILE_VERSION 11
 
 #define OPEN_NEWER_VERSION 0
 #define OPEN_SUCCESS 1
@@ -175,10 +175,10 @@ private:
     void calculateAll(int colId, CalcNode *root, int decimals);
 
 private:
-#if defined(DESKTOP)
-    PBDateFormat::Order dateOrder;
-#else
+#if defined(Q_WS_QWS)
     DateFormat::Order dateOrder;
+#else
+    PBDateFormat::Order dateOrder;
 #endif
     QString dateSeparator;
     bool ampm;

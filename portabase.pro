@@ -5,6 +5,9 @@ TRANSLATIONS    = portabase_ja.ts \
                   portabase_tw.ts \
                   portabase_fr.ts \
                   portabase_cs.ts
+# Uncomment the next two lines when compiling for the test environment
+#TMAKE_CC        = gcc-2.95
+#TMAKE_CXX       = g++-2.95
 INCLUDEPATH     += $(QPEDIR)/include
 DEPENDPATH      += $(QPEDIR)/include
 LIBS            += -lqpe -lm -lmk4 -lbeecrypt -ljpeg
@@ -67,7 +70,8 @@ HEADERS         = portabase.h \
                   image/imageutils.h \
                   image/imageviewer.h \
                   image/imagewidget.h \
-                  image/slideshowdialog.h
+                  image/slideshowdialog.h \
+                  qqdialog.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   inputdialog.cpp \
@@ -126,4 +130,5 @@ SOURCES         = main.cpp \
                   image/imageutils.cpp \
                   image/imageviewer.cpp \
                   image/imagewidget.cpp \
-                  image/slideshowdialog.cpp
+                  image/slideshowdialog.cpp \
+                  qqdialog.cpp

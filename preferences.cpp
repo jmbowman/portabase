@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,12 +9,12 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/config.h"
-#include "desktop/resource.h"
-#else
+#if defined(Q_WS_QWS)
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#else
+#include "desktop/config.h"
+#include "desktop/resource.h"
 #endif
 
 #include <qapplication.h>
@@ -33,8 +33,8 @@
 #include "portabase.h"
 #include "preferences.h"
 
-Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
-    : PBDialog(tr("Preferences"), parent, name, f)
+Preferences::Preferences(QWidget *parent, const char *name)
+    : PBDialog(tr("Preferences"), parent, name)
 {
     QTabWidget *tabs = new QTabWidget(this);
     vbox->addWidget(tabs);
@@ -42,7 +42,7 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     addAppearanceTab(tabs);
     addMenusTab(tabs);
     addButtonsTab(tabs);
-    finishLayout();
+    finishLayout(TRUE, TRUE, TRUE, 400, 0);
 }
 
 Preferences::~Preferences()
@@ -95,14 +95,14 @@ void Preferences::addOptionsTab(QTabWidget *tabs)
     new QLabel(tr("Default rows per page"), hbox);
     rowsPerPage = new QSpinBox(hbox);
     rowsPerPage->setRange(1, 9999);
-#if defined(DESKTOP)
-    int defaultRows = 25;
-#else
+#if defined(Q_WS_QWS)
     int defaultRows = 13;
+#else
+    int defaultRows = 25;
 #endif
     rowsPerPage->setValue(conf.readNumEntry("RowsPerPage", defaultRows));
 
-#if defined(DESKTOP)
+#if !defined(Q_WS_QWS)
     QGroupBox *dateGroup = new QGroupBox(2, Qt::Horizontal,
                                          tr("Date and Time"), optionsTab);
     layout->addWidget(dateGroup);
@@ -124,7 +124,7 @@ void Preferences::addOptionsTab(QTabWidget *tabs)
     for (int i = 0; i < 4; i++) {
         dateFormatCombo->insertItem(date_formats[i].toNumberString());
         if (df == date_formats[i]) {
-	    currentdf = i;
+            currentdf = i;
         }
     }
     dateFormatCombo->setCurrentItem(currentdf);
@@ -152,10 +152,10 @@ void Preferences::addAppearanceTab(QTabWidget *tabs)
 {
     QWidget *appearanceTab = new QWidget(tabs);
     QVBoxLayout *layout = new QVBoxLayout(appearanceTab);
-#if defined(DESKTOP)
-    sizeFactor = 1;
-#else
+#if defined(Q_WS_QWS)
     sizeFactor = 10;
+#else
+    sizeFactor = 1;
 #endif
     QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"),
                                          appearanceTab);
@@ -462,18 +462,7 @@ void Preferences::updateSample(int sizeSelection)
 
 QFont Preferences::applyChanges()
 {
-#if defined(DESKTOP)
-    Config config("qpe");
-    config.setGroup("Date");
-    PBDateFormat df = date_formats[dateFormatCombo->currentItem()];
-    config.writeEntry("Separator", QString(df.separator()));
-    config.writeEntry("ShortOrder", df.shortOrder());
-    config.writeEntry("LongOrder", df.longOrder());
-    config.setGroup("Time");
-    config.writeEntry("AMPM", ampmCombo->currentItem());
-    config.writeEntry("MONDAY", weekStartCombo->currentItem());
-#endif
-
+    applyDateTimeChanges();
     Config conf("portabase");
     conf.setGroup("General");
     conf.writeEntry("ConfirmDeletions", confirmDeletions->isChecked());
@@ -533,4 +522,19 @@ QFont Preferences::applyChanges()
     QFont font(name, size);
     qApp->setFont(font);
     return font;
+}
+
+void Preferences::applyDateTimeChanges()
+{
+#if !defined(Q_WS_QWS)
+    Config config("qpe");
+    config.setGroup("Date");
+    PBDateFormat df = date_formats[dateFormatCombo->currentItem()];
+    config.writeEntry("Separator", QString(df.separator()));
+    config.writeEntry("ShortOrder", df.shortOrder());
+    config.writeEntry("LongOrder", df.longOrder());
+    config.setGroup("Time");
+    config.writeEntry("AMPM", ampmCombo->currentItem());
+    config.writeEntry("MONDAY", weekStartCombo->currentItem());
+#endif
 }

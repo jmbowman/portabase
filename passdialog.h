@@ -1,7 +1,7 @@
 /*
  * passdialog.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 #ifndef PASSDIALOG_H
 #define PASSDIALOG_H
 
-#include <qdialog.h>
+#include "qqdialog.h"
 
 #define OPEN_PASSWORD 0
 #define NEW_PASSWORD 1
@@ -21,12 +21,12 @@
 class Database;
 class QLineEdit;
 
-class PasswordDialog: public QDialog
+class PasswordDialog: public QQDialog
 {
     Q_OBJECT
 public:
     PasswordDialog(Database *dbase, int dlgMode, QWidget *parent = 0,
-                   const char *name = 0, WFlags f = 0);
+                   const char *name = 0);
     ~PasswordDialog();
 
     bool validate();

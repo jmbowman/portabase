@@ -27,7 +27,7 @@
 **
 *************************************************************************/
 
-
+#include <qdir.h>
 #include <qimage.h>
 #include <qsize.h>
 #include "imagereader.h"
@@ -41,7 +41,7 @@ JPEGReader::JPEGReader(const char *fileName)
     jpeg_create_decompress(&cinfo);
 
     // open file
-    jpegFile = fopen(fileName, "r");
+    jpegFile = fopen(fileName, "rb");
     if (!jpegFile) {
         fprintf(stderr, "JPEGReader: Can't open file %s\n", fileName);
         return;
@@ -156,7 +156,7 @@ void ImageReader::load(QString file, bool dimension)
         //jpeg image
         isJPEG = TRUE;
         //qDebug("loading jpeg " + file);
-        JPEGreader = new JPEGReader(file);
+        JPEGreader = new JPEGReader(QDir::convertSeparators(file));
     }
     else if (!dimension) {
         //qDebug("loading " + mimetype + " " + file);

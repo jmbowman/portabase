@@ -1,3 +1,24 @@
+2004-02-25  JMB  Assorted Windows fixes and code cleanup, file drag & drop
+
+    Fixed JPEG image loading on Windows, better default dialog sizes on the
+    desktop versions, removed "What's This" buttons from dialog title bars
+    since there is no content associated with them, and other assorted code
+    cleanup.
+
+    Also added support for opening a PortaBase file in the desktop versions
+    by dragging it onto the application window while there isn't another
+    file open.
+
+2004-01-31  JMB  Support for Qt 3.2.1 Non-Commercial Windows version
+
+    Updated the code to transition from using Qt 2.3.0 to Qt 3.2.1 on Windows.
+    Switched to use QSettings on all desktop versions in the process, which
+    lets preferences be stored in more appropriate locations on Windows and
+    Mac OS X.  This also allows proper language detection on Windows (so the
+    batch-script-per-language hack is no longer necessary).  Also allows
+    native look on Windows XP, and probably fixes a few other bugs in the
+    Windows version.
+
 2004-01-30  JMB  Slideshows
 
     There is now a Slideshow item in the File menu; this lets you do a timed
