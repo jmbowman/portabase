@@ -17,13 +17,14 @@
 #include <qwidgetstack.h>
 #include "columneditor.h"
 #include "datatypes.h"
+#include "notebutton.h"
 
 ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f)
 {
     setCaption(tr("PortaBase"));
     QGrid *grid = new QGrid(2, this);
-    resize(120, 68);
+    resize(200, 68);
     grid->resize(size());
 
     new QLabel(tr("Name"), grid);
@@ -35,6 +36,7 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     typeBox->insertItem(tr("Integer"));
     typeBox->insertItem(tr("Decimal"));
     typeBox->insertItem(tr("Boolean"));
+    typeBox->insertItem(tr("Note"));
     connect(typeBox, SIGNAL(activated(int)),
             this, SLOT(updateDefaultWidget(int)));
 
@@ -42,6 +44,7 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     defaultStack = new QWidgetStack(grid);
     defaultCheck = new QCheckBox(defaultStack);
     defaultLine = new QLineEdit(defaultStack);
+    defaultNote = new NoteButton(tr("Default Note"), defaultStack);
     defaultStack->raiseWidget(defaultLine);
 }
 
@@ -71,6 +74,9 @@ void ColumnEditor::setType(int newType)
     if (newType == BOOLEAN) {
         defaultStack->raiseWidget(defaultCheck);
     }
+    else if (newType == NOTE) {
+        defaultStack->raiseWidget(defaultNote);
+    }
     else {
         defaultStack->raiseWidget(defaultLine);
     }
@@ -78,8 +84,12 @@ void ColumnEditor::setType(int newType)
 
 QString ColumnEditor::defaultValue()
 {
-    if (type() == BOOLEAN) {
+    int colType = type();
+    if (colType == BOOLEAN) {
         return defaultCheck->isChecked() ? "1" : "0";
+    }
+    else if (colType == NOTE) {
+        return defaultNote->content();
     }
     else {
         return defaultLine->text();
@@ -88,7 +98,8 @@ QString ColumnEditor::defaultValue()
 
 void ColumnEditor::setDefaultValue(QString newDefault)
 {
-    if (type() == BOOLEAN) {
+    int colType = type();
+    if (colType == BOOLEAN) {
         if (newDefault.toInt()) {
             defaultCheck->setChecked(TRUE);
         }
@@ -96,10 +107,17 @@ void ColumnEditor::setDefaultValue(QString newDefault)
             defaultCheck->setChecked(FALSE);
         }
         defaultLine->setText("");
+        defaultNote->setContent("");
+    }
+    else if (colType == NOTE) {
+        defaultLine->setText("");
+        defaultCheck->setChecked(FALSE);
+        defaultNote->setContent(newDefault);
     }
     else {
         defaultLine->setText(newDefault);
         defaultCheck->setChecked(FALSE);
+        defaultNote->setContent("");
     }
 }
 
@@ -112,6 +130,9 @@ void ColumnEditor::updateDefaultWidget(int newType)
 {
     if (newType == BOOLEAN) {
         defaultStack->raiseWidget(defaultCheck);
+    }
+    else if (newType == NOTE) {
+        defaultStack->raiseWidget(defaultNote);
     }
     else {
         defaultStack->raiseWidget(defaultLine);

@@ -14,6 +14,7 @@
 
 #include <qpe/filemanager.h>
 #include <qmainwindow.h>
+#include <qpixmap.h>
 #include "datatypes.h"
 
 class Database;
@@ -35,6 +36,7 @@ public:
     void openFile(const QString &);
     void setEdited(bool y);
     void setRowSelected(bool y);
+    static QPixmap getNotePixmap();
 
 public slots:
     void setDocument(const QString&);

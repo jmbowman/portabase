@@ -331,6 +331,7 @@ void PortaBase::viewAllColumns()
 {
     viewer->setView("_all");
     updateViewMenu();
+    setEdited(TRUE);
 }
 
 void PortaBase::changeView(int id)
@@ -436,4 +437,9 @@ void PortaBase::setRowSelected(bool y)
 {
     rowEditAction->setEnabled(y);
     rowDeleteAction->setEnabled(y);
+}
+
+QPixmap PortaBase::getNotePixmap()
+{
+    return Resource::loadPixmap("txt");
 }

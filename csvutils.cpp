@@ -9,9 +9,13 @@
  * (at your option) any later version.
  */
 
+#include <qfile.h>
 #include <qregexp.h>
 #include <qstringlist.h>
+#include <qtextstream.h>
 #include "csvutils.h"
+#include "database.h"
+#include "portabase.h"
 
 CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(',')
 {
@@ -23,23 +27,29 @@ CSVUtils::~CSVUtils()
 
 }
 
-QStringList CSVUtils::getRow(QString line)
+QString CSVUtils::parseFile(QString filename, Database *db)
 {
-    QStringList result;
+    QFile f(filename);
+    if (!f.open(IO_ReadOnly)) {
+        return PortaBase::tr("Unable to open file");
+    }
+    QTextStream input(&f);
+    input.setEncoding(QTextStream::Locale);
+    int rowNum = 1;
+    QString message = "";
     enum { S_START, S_QUOTED_FIELD, S_MAYBE_END_OF_QUOTED_FIELD,
            S_END_OF_QUOTED_FIELD, S_MAYBE_NORMAL_FIELD,
            S_NORMAL_FIELD } state = S_START;
     QChar x;
+    QStringList row;
     QString field = "";
-    int length = line.length();
-    for (int i = 0; i < length; i++) {
-        x = line.at(i);
+    while (!input.atEnd()) {
+        input >> x; // read one char
 
         if (x == '\r') {
             // eat '\r', to handle DOS/WINDOWS files correctly
             continue;
         }
-
         switch (state)
         {
         case S_START :
@@ -47,7 +57,26 @@ QStringList CSVUtils::getRow(QString line)
                 state = S_QUOTED_FIELD;
             }
             else if (x == m_delimiter) {
-                result.append("");
+                row.append("");
+            }
+            else if (x == '\n') {
+                if (row.count() == 0) {
+                    // blank line, ignore it
+                    continue;
+                }
+                else {
+                    // row ended on a delimiter (empty cell)
+                    row.append("");
+                    field = "";
+                    message = db->addRow(row);
+                    if (message != "") {
+                        message = PortaBase::tr("Error in row") + " "
+                                  + QString::number(rowNum) + "\n" + message;
+                        break;
+                    }
+                    row.clear();
+                    rowNum++;
+                }
             }
             else {
                 field += x;
@@ -67,9 +96,19 @@ QStringList CSVUtils::getRow(QString line)
                 field += x;
                 state = S_QUOTED_FIELD;
             }
-            else if (x == m_delimiter) {
-                result.append(field);
+            else if (x == m_delimiter || x == '\n') {
+                row.append(field);
                 field = "";
+                if (x == '\n') {
+                    message = db->addRow(row);
+                    if (message != "") {
+                        message = PortaBase::tr("Error in row") + " "
+                                  + QString::number(rowNum) + "\n" + message;
+                        break;
+                    }
+                    row.clear();
+                    rowNum++;
+                }
                 state = S_START;
             }
             else {
@@ -77,9 +116,19 @@ QStringList CSVUtils::getRow(QString line)
             }
             break;
         case S_END_OF_QUOTED_FIELD :
-            if (x == m_delimiter) {
-                result.append(field);
+            if (x == m_delimiter || x == '\n') {
+                row.append(field);
                 field = "";
+                if (x == '\n') {
+                    message = db->addRow(row);
+                    if (message != "") {
+                        message = PortaBase::tr("Error in row") + " "
+                                  + QString::number(rowNum) + "\n" + message;
+                        break;
+                    }
+                    row.clear();
+                    rowNum++;
+                }
                 state = S_START;
             }
             else {
@@ -87,27 +136,48 @@ QStringList CSVUtils::getRow(QString line)
             }
             break;
         case S_MAYBE_NORMAL_FIELD :
-            if (x == m_textquote)
-            {
+            if (x == m_textquote) {
                 field = "";
                 state = S_QUOTED_FIELD;
                 break;
             }
         case S_NORMAL_FIELD :
             if (x == m_delimiter) {
-                result.append(field);
+                row.append(field);
                 field = "";
                 state = S_START;
+            }
+            else if (x == '\n') {
+                row.append(field);
+                field = "";
+                message = db->addRow(row);
+                if (message != "") {
+                    message = PortaBase::tr("Error in row") + " "
+                              + QString::number(rowNum) + "\n" + message;
+                    break;
+                }
+                row.clear();
+                rowNum++;
             }
             else {
                 field += x;
             }
         }
+        if (message != "") {
+            break;
+        }
     }
-    if (state != S_START) {
-        result.append(field);
+    if (message == "" && row.count() > 0) {
+        // last line doesn't end with '\n'
+        row.append(field);
+        message = db->addRow(row);
+        if (message != "") {
+            message = PortaBase::tr("Error in row") + " "
+                      + QString::number(rowNum) + "\n" + message;
+        }
     }
-    return result;
+    f.close();
+    return message;
 }
 
 QString CSVUtils::encodeRow(QStringList row)
@@ -125,7 +195,8 @@ QString CSVUtils::encodeRow(QStringList row)
 
 QString CSVUtils::encodeCell(QString content)
 {
-    if (content.contains('"') == 0 && content.contains(',') == 0) {
+    if (content.contains('"') == 0 && content.contains(',') == 0
+            && content.contains('\n') == 0) {
         return content;
     }
     QString result("\"");

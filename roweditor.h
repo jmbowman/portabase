@@ -19,9 +19,11 @@
 class Database;
 class QCheckBox;
 class QLineEdit;
+class NoteButton;
 
 typedef QValueList<QCheckBox*> CheckBoxList;
 typedef QValueList<QLineEdit*> LineEditList;
+typedef QValueList<NoteButton*> NoteButtonList;
 
 class RowEditor: public QDialog
 {
@@ -41,6 +43,7 @@ private:
     int *colTypes;
     LineEditList lineEdits;
     CheckBoxList checkBoxes;
+    NoteButtonList noteButtons;
 };
 
 #endif

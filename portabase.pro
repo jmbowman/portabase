@@ -1,8 +1,8 @@
 TEMPLATE        = app
 #CONFIG         = qt warn_on debug
 CONFIG          = qt warn_on release
-HEADERS         = portabase.h inputdialog.h view.h viewdisplay.h database.h datatypes.h dbeditor.h columneditor.h roweditor.h csvutils.h importdialog.h vieweditor.h
-SOURCES         = main.cpp portabase.cpp inputdialog.cpp view.cpp viewdisplay.cpp database.cpp dbeditor.cpp columneditor.cpp roweditor.cpp csvutils.cpp importdialog.cpp vieweditor.cpp
+HEADERS         = portabase.h inputdialog.h view.h viewdisplay.h database.h datatypes.h dbeditor.h columneditor.h roweditor.h csvutils.h importdialog.h vieweditor.h noteeditor.h notebutton.h
+SOURCES         = main.cpp portabase.cpp inputdialog.cpp view.cpp viewdisplay.cpp database.cpp dbeditor.cpp columneditor.cpp roweditor.cpp csvutils.cpp importdialog.cpp vieweditor.cpp noteeditor.cpp notebutton.cpp
 INCLUDEPATH     += $(QPEDIR)/include
 DEPENDPATH      += $(QPEDIR)/include
 LIBS            += -lqpe -lm -lmk4

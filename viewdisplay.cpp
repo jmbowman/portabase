@@ -24,6 +24,7 @@
 #include <qwidgetstack.h>
 #include "database.h"
 #include "datatypes.h"
+#include "noteeditor.h"
 #include "portabase.h"
 #include "roweditor.h"
 #include "view.h"
@@ -40,6 +41,10 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);
     connect(table, SIGNAL(selectionChanged()), this, SLOT(rowSelected()));
+    connect(table, SIGNAL(pressed(QListViewItem*, const QPoint&, int)),
+            this, SLOT(cellPressed(QListViewItem*, const QPoint&, int)));
+    connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
+            this, SLOT(cellReleased(QListViewItem*, const QPoint&, int)));
 
     QHeader *header = table->header();
     header->setClickEnabled(TRUE);
@@ -161,7 +166,8 @@ void ViewDisplay::updateTable()
         QStringList data = view->getRow(index);
         int count = data.count();
         for (int j = 0; j < count; j++) {
-            if (types[j] == BOOLEAN) {
+            int type = types[j];
+            if (type == BOOLEAN) {
                 item->setPixmap(j, db->getCheckBoxPixmap(data[j].toInt()));
             }
             else {
@@ -214,9 +220,16 @@ void ViewDisplay::setView(QString name)
     }
     view = db->getView(name);
     QStringList colNames = view->getColNames();
+    int *types = view->getColTypes();
     int count = colNames.count();
     for (int i = 0; i < count; i++) {
-        table->addColumn(colNames[i], view->getColWidth(i));
+        if (types[i] == NOTE) {
+            table->addColumn(PortaBase::getNotePixmap(), colNames[i],
+                             view->getColWidth(i));
+        }
+        else {
+            table->addColumn(colNames[i], view->getColWidth(i));
+        }
         table->setColumnWidthMode(i, QListView::Manual);
     }
     rowsPerPage->setValue(view->getRowsPerPage());
@@ -300,6 +313,31 @@ void ViewDisplay::rowSelected()
     portabase->setRowSelected(TRUE);
 }
 
+void ViewDisplay::cellPressed(QListViewItem *item, const QPoint &point,
+                              int column)
+{
+    pressedIndex = column;
+    timer.restart();
+}
+
+void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
+                               int column)
+{
+    if (column != pressedIndex) {
+        return;
+    }
+    if (timer.elapsed() > 500) {
+        int *types = view->getColTypes();
+        if (types[column] == NOTE) {
+            QString colName = table->header()->label(column);
+            NoteEditor viewer(colName, this);
+            viewer.setContent(item->text(column));
+            viewer.setReadOnly(TRUE);
+            viewer.exec();
+        }
+    }
+}
+
 void ViewDisplay::headerPressed(int column)
 {
     pressedIndex = column;
@@ -311,7 +349,7 @@ void ViewDisplay::headerReleased(int column)
     if (column != pressedIndex) {
         return;
     }
-    if (timer.elapsed() > 1000) {
+    if (timer.elapsed() > 500) {
         showStatistics(column);
     }
     else {

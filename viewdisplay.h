@@ -20,6 +20,8 @@ class PortaBase;
 class QHButtonGroup;
 class QLabel;
 class QListView;
+class QListViewItem;
+class QPoint;
 class QSpinBox;
 class QString;
 class QToolButton;
@@ -60,6 +62,8 @@ private slots:
     void previousPages();
     void updateRowsPerPage(int rpp);
     void rowSelected();
+    void cellPressed(QListViewItem *item, const QPoint &point, int column);
+    void cellReleased(QListViewItem *item, const QPoint &point, int column);
     void headerPressed(int column);
     void headerReleased(int column);
     void columnResized(int column, int oldWidth, int newWidth);

@@ -16,7 +16,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 1
+#define FILE_VERSION 2
 
 class QString;
 class QStringList;
@@ -52,7 +52,7 @@ public:
     void updateDataFormat();
     QStringList getRow(int rowId);
     c4_View sortData(QString column, bool ascending);
-    void addRow(QStringList values);
+    QString addRow(QStringList values);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
     void commit();

@@ -1,3 +1,17 @@
+2002-10-26  JMB  Note column type, minor bugfixes
+
+    Added support for "Note" columns (a.k.a. multi-line text fields).
+
+    Count change of view to "All Columns" as a change that the user should
+    be prompted to save before closing.
+
+    Removed help file sentence about ".csv" being appended to export files;
+    true in the test environment, but apparently not on the Zaurus.
+
+2002-10-22  JMB  View editor crash bugfix
+
+    Fixed a crash that occurred when saving changes to an existing view.
+
 2002-10-21  JMB  Fixed CSV export
 
     The text/x-csv directory is now created if it doesn't exist, and a

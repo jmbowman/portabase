@@ -12,6 +12,7 @@
 #ifndef CSVUTILS_H
 #define CSVUTILS_H
 
+class Database;
 class QString;
 class QStringList;
 
@@ -21,7 +22,7 @@ public:
     CSVUtils();
     ~CSVUtils();
 
-    QStringList getRow(QString line);
+    QString parseFile(QString filename, Database *db);
     QString encodeRow(QStringList row);
     QString encodeCell(QString content);
 

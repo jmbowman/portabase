@@ -92,7 +92,7 @@ QStringList View::getRow(int index)
             double value = prop (row);
             results.append(QString::number(value));
         }
-        else if (type == STRING) {
+        else if (type == STRING || type == NOTE) {
             c4_StringProp prop(name);
             QString value(prop (row));
             results.append(value);
@@ -184,7 +184,7 @@ QStringList View::getStatistics(int colIndex)
         lines.append(PortaBase::tr("Unchecked") + ": "
                      + QString::number(count - checked));
     }
-    else if (type == STRING) {
+    else if (type == STRING || type == NOTE) {
         c4_StringProp prop(name);
         QString value(prop (dbview[0]));
         int length = value.length();

@@ -17,6 +17,7 @@
 class QCheckBox;
 class QComboBox;
 class QLineEdit;
+class NoteButton;
 class QWidgetStack;
 
 class ColumnEditor: public QDialog
@@ -43,6 +44,7 @@ private:
     QWidgetStack *defaultStack;
     QCheckBox *defaultCheck;
     QLineEdit *defaultLine;
+    NoteButton *defaultNote;
 };
 
 #endif

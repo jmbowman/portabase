@@ -315,7 +315,7 @@ void Database::renameColumn(QString oldName, QString newName)
             newProp (data[i]) = oldProp (data[i]);
         }
     }
-    else if (type == STRING) {
+    else if (type == STRING || type == NOTE) {
         c4_StringProp oldProp(oldName);
         c4_StringProp newProp(newName);
         for (int i = 0; i < size; i++) {
@@ -349,7 +349,7 @@ QStringList Database::getRow(int rowId)
             double value = prop (row);
             results.append(QString::number(value));
         }
-        else if (type == STRING) {
+        else if (type == STRING || type == NOTE) {
             c4_StringProp prop(name);
             QString value(prop (row));
             results.append(value);
@@ -390,16 +390,23 @@ c4_View Database::sortData(QString column, bool ascending)
     }
 }
 
-void Database::addRow(QStringList values)
+QString Database::addRow(QStringList values)
 {
     c4_Row row;
     Id (row) = maxId + 1;
-    int count = columns.GetSize();
+    int count = values.count();
+    if (count != columns.GetSize()) {
+        return PortaBase::tr("Wrong number of columns");
+    }
     c4_View temp = columns.SortOn(cIndex);
     for (int i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString name(cName (temp[i]));
-        if (type == STRING) {
+        QString error = isValidValue(type, values[i]);
+        if (error != "") {
+            return name + " " + PortaBase::tr(error);
+        }
+        if (type == STRING || type == NOTE) {
             c4_StringProp prop(name);
             prop (row) = values[i];
         }
@@ -414,6 +421,7 @@ void Database::addRow(QStringList values)
     }
     data.Add(row);
     maxId++;
+    return "";
 }
 
 void Database::updateRow(int rowId, QStringList values)
@@ -424,7 +432,7 @@ void Database::updateRow(int rowId, QStringList values)
     for (int i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString name(cName (temp[i]));
-        if (type == STRING) {
+        if (type == STRING || type == NOTE) {
             c4_StringProp prop(name);
             prop (data[index]) = values[i];
         }
@@ -557,46 +565,8 @@ QPixmap Database::getCheckBoxPixmap(int checked)
 
 QString Database::importFromCSV(QString filename)
 {
-    QFile f(filename);
-    if (!f.open(IO_ReadOnly)) {
-        return PortaBase::tr("Unable to open file");
-    }
-    QTextStream input(&f);
-    input.setEncoding(QTextStream::Locale);
     CSVUtils csv;
-    QString line;
-    int colCount = columns.GetSize();
-    QStringList names = listColumns();
-    int *types = listTypes();
-    int rowNum = 1;
-    QString message = "";
-    while (!input.eof()) {
-        line = input.readLine();
-        QStringList values = csv.getRow(line);
-        if ((int)values.count() != colCount) {
-            message = PortaBase::tr("Error in line") + " "
-                      + QString::number(rowNum) + "\n"
-                      + PortaBase::tr("Wrong number of columns");
-            break;
-        }
-        for (int i = 0; i < colCount; i++) {
-            message = isValidValue(types[i], values[i]);
-            if (message != "") {
-                message = PortaBase::tr("Error in line") + " "
-                          + QString::number(rowNum) + "\n" + names[i] + " "
-                          + PortaBase::tr(message);
-                break;
-            }
-        }
-        if (message != "") {
-            break;
-        }
-        addRow(values);
-        rowNum++;
-    }
-    delete[] types;
-    f.close();
-    return message;
+    return csv.parseFile(filename, this);
 }
 
 void Database::exportToCSV(QString filename)

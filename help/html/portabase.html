@@ -13,8 +13,9 @@
 <a href="#viewedit">4)View editor</a><br>
 <a href="#viewer">5)Data viewer</a><br>
 <a href="#rowedit">6)Row editor</a><br>
-<a href="#import">7)Data import</a><br>
-<a href="#export">8)Data export</a><br>
+<a href="#noteedit">7)Note editor/viewer</a><br>
+<a href="#import">8)Data import</a><br>
+<a href="#export">9)Data export</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -22,7 +23,7 @@ PortaBase is a small database program for creating, browsing, and editing
 custom tables of data.  Typical uses are media inventories, reference
 charts, etc.  Notable features include:<br>
 <ul>
-  <li>String, Integer, Decimal, and Boolean column types</li>
+  <li>String, Integer, Decimal, Boolean, and Note (multi-line text) column types</li>
   <li>Custom data views (subsets of the columns in any order)</li>
   <li>Sort the rows by any column in ascending or descending order</li>
   <li>Page navigation buttons, with custom number of rows per page</li>
@@ -128,7 +129,7 @@ current view, click on the border between two column labels (or the right
 edge of the last column) and drag it to the desired location.  Clicking
 on a column label sorts all the rows by the content of that column in
 ascending order; clicking it again sorts in descending order.  If you
-press a column label and hold it for a second or more before releasing,
+press a column label and hold it for half a second or more before releasing,
 a dialog containing summary information for that column is displayed.<br>
 <br>
 <a name="filemenu"><i>File menu</i></a><br>
@@ -197,7 +198,27 @@ the current values are shown.  After editing the values as desired, click
 addition (if adding a row) or leave the current values unchanged (if
 editing a row).<br>
 <br>
-<a name="import"><b>7)Data import</b></a><br>
+<a name="noteedit"><b>7)Note editor/viewer</b></a><br>
+The "Note" column type is for blocks of text which may contain multiple
+lines (as opposed to the "String" type, which is better suited for
+relatively short single lines of text).  The larger size of the content
+of such columns merits its own (very simple) dialog.  Both in the row
+editor and in the default value section of the column editor, a Note
+value is shown as a button containing a note icon and the beginning of
+the Note's content (as much as will fit).  To see and/or change the
+full text, press this button; a full-screen text editor dialog will
+appear, showing the current text of the Note.  Click "OK" to accept any
+changes you have made or "X" to revert to the original content.<br>
+<br>
+Note columns are treated a little specially in the data viewer also.
+The column label for Note columns contains a note icon indicating that
+it is not just a String column.  The cells in the column each show as much
+of the Note content as will fit.  If you press on one of these cells
+and hold for half a second or longer before releasing, a read-only version
+of the Note editor is shown.  Click either "OK" or "X" to dismiss it and
+return to the data viewer.<br>
+<br>
+<a name="import"><b>8)Data import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.
 This allows you to import data exported from a spreadsheet or another
 database program.  To do this:<br>
@@ -214,15 +235,14 @@ those columns must be appropriate for the specified column types.</li>
 other files can be added by repeating this process, or another copy of the
 same rows can be added by importing the same file again.</li>
 </ol>
-<a name="export"><b>8)Data export</b></a><br>
+<a name="export"><b>9)Data export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
 import, this allows you to move database content into a spreadsheet or
 other database program for further manipulation (among other uses).  To
 export the current database's contents:<br>
 <ol>
 <li>Select "Export" from the "File" menu in the data viewer.</li>
-<li>Enter the name of the CSV file you wish to create.  ".csv" will be
-appended automatically, so you do not need to type it.</li>
+<li>Enter the name of the CSV file you wish to create.</li>
 <li>Click "OK" to complete the export, or the "X" button to cancel the
 operation.</li>
 </ol>

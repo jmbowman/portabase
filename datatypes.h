@@ -18,8 +18,8 @@
 #define INTEGER 1
 #define FLOAT 2
 #define BOOLEAN 3
-#define DATE 4
-#define NOTE 5
+#define NOTE 4
+#define DATE 5
 
 typedef QValueList<int> IntList;
 

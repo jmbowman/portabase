@@ -18,6 +18,7 @@
 #include <qscrollview.h>
 #include "database.h"
 #include "datatypes.h"
+#include "notebutton.h"
 #include "roweditor.h"
 
 RowEditor::RowEditor(QWidget *parent, const char *name, WFlags f)
@@ -50,7 +51,7 @@ bool RowEditor::edit(Database *subject, int rowId)
             int lineEditIndex = 0;
             for (int i = 0; i < count; i++) {
                 int type = colTypes[i];
-                if (type != BOOLEAN) {
+                if (type != BOOLEAN && type != NOTE) {
                     QString value = lineEdits[lineEditIndex]->text();
                     QString error = db->isValidValue(type, value);
                     if (error != "") {
@@ -68,11 +69,17 @@ bool RowEditor::edit(Database *subject, int rowId)
         QStringList values;
         int checkBoxIndex = 0;
         int lineEditIndex = 0;
+        int noteButtonIndex = 0;
         for (int i = 0; i < count; i++) {
-            if (colTypes[i] == BOOLEAN) {
+            int type = colTypes[i];
+            if (type == BOOLEAN) {
                 int value = checkBoxes[checkBoxIndex]->isChecked() ? 1 : 0;
                 values.append(QString::number(value));
                 checkBoxIndex++;
+            }
+            else if (type == NOTE) {
+                values.append(noteButtons[noteButtonIndex]->content());
+                noteButtonIndex++;
             }
             else {
                 values.append(lineEdits[lineEditIndex]->text());
@@ -126,6 +133,11 @@ void RowEditor::addContent(int rowId)
                 box->setChecked(TRUE);
             }
             checkBoxes.append(box);
+        }
+        else if (type == NOTE) {
+            NoteButton *button = new NoteButton(name, grid);
+            button->setContent(values[i]);
+            noteButtons.append(button);
         }
         else {
             lineEdits.append(new QLineEdit(values[i], grid));

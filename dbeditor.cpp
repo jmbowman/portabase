@@ -18,6 +18,7 @@
 #include "database.h"
 #include "datatypes.h"
 #include "dbeditor.h"
+#include "portabase.h"
 
 DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f), db(0), ceName("_cename"),
@@ -301,6 +302,9 @@ void DBEditor::updateTable()
             last->setText(2, "");
             last->setPixmap(2, db->getCheckBoxPixmap(defaultVal.toInt()));
         }
+        else if (type == NOTE) {
+            last->setPixmap(2, PortaBase::getNotePixmap());
+        }
     }
 }
 
@@ -315,8 +319,11 @@ QString DBEditor::getTypeString(int type)
     else if (type == FLOAT) {
         return tr("Decimal");
     }
-    else {
+    else if (type == BOOLEAN) {
         return tr("Boolean");
+    }
+    else {
+        return tr("Note");
     }
 }
 
