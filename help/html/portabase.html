@@ -118,6 +118,7 @@ The row of column labels has several features in addition to informing you of th
 <a name="filemenu"><i>File menu</i></a><br>
 The "File" menu contains options that apply to the database file as a whole.  These are:<br>
 <ul>
+<li><i>Row</i> - This submenu contains <a href="#rowmenu">actions</a> that apply to individual rows of data.  It would ideally be a top-level menu, but there isn't enough room for it on the screen of most Zaurus models.
 <li><i>Save</i> - Save any changes that have been made since the file was opened or last saved.  If you exit PortaBase without saving the most recent changes, those changes will be lost (a dialog will warn you if this is about to happen).  This option is disabled if no changes have been made since the current database was opened or last saved.</li>
 <li><i>Import</i> - Allows you to <a href="#import">import</a> rows from a CSV file.</li>
 <li><i>Export</i> - Allows you to <a href="#export">export</a> the current database content to a CSV or XML file.</li>
@@ -126,6 +127,13 @@ The "File" menu contains options that apply to the database file as a whole.  Th
 <li><i>Edit Enums</i> - Launches the <a href="#enummanage">enum manager</a>.</li>
 <li><i>Preferences</i> - Launches the <a href="#prefs">preferences dialog</a>.</li>
 <li><i>Close</i> - Close the current file; if there are unsaved changes, you will be asked if you want to save them.</li>
+</ul>
+<a name="rowmenu">The "Row" submenu contains the following actions:<br>
+<ul>
+<li><i>Add</i> - Add a new row of data (by launching the <a href="#rowedit">row editor</a>).</li>
+<li><i>Edit</i> - Edit the currently selected row of data (again using the row editor).</li>
+<li><i>Delete</i> - Delete the currently selected row of data.</li>
+<li><i>Copy</i> - Add a new row of data, but the row editor is pre-filled with the data in the currently selected row instead of the default values.</li>
 </ul>
 <a name="viewmenu"><i>View menu</i></a><br>
 The "View" menu allows you to select and manage views.  The top section of this menu has three options:<br>

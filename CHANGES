@@ -1,3 +1,13 @@
+2003-02-25  JMB  File->Row menu, row copy
+
+    Added a "Row" submenu to the data viewer's "File" menu to replace the
+    old top-level menu of the same name that was removed due to lack of
+    space.
+
+    Added a "Copy" action to the new Row menu, which launches the row
+    editor to create a new row, but filled with the currently selected
+    row's data instead of the default values.
+
 2003-02-24  JMB  Fixed XML import bug, command-line error message encoding
 
     The XML importer was retrieving column values by index instead of

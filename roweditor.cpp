@@ -42,7 +42,7 @@ RowEditor::~RowEditor()
 
 }
 
-bool RowEditor::edit(Database *subject, int rowId)
+bool RowEditor::edit(Database *subject, int rowId, bool copy)
 {
     db = subject;
     addContent(rowId);
@@ -122,7 +122,7 @@ bool RowEditor::edit(Database *subject, int rowId)
                 lineEditIndex++;
             }
         }
-        if (rowId == -1) {
+        if (rowId == -1 || copy) {
             db->addRow(values);
         }
         else {

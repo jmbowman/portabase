@@ -305,7 +305,7 @@ void ViewDisplay::addRow()
     }
 }
 
-bool ViewDisplay::editRow(int id)
+bool ViewDisplay::editRow(int id, bool copy)
 {
     int rowId = id;
     if (rowId == -1) {
@@ -313,7 +313,7 @@ bool ViewDisplay::editRow(int id)
     }
     if (rowId != -1) {
         RowEditor rowEditor(this);
-        if (rowEditor.edit(db, rowId)) {
+        if (rowEditor.edit(db, rowId, copy)) {
             view->prepareData();
             updateTable();
             updateButtons();

@@ -56,6 +56,7 @@ private slots:
     void addRow();
     void editRow();
     void deleteRow();
+    void copyRow();
     void deleteAllRows();
     void save();
     void import();
@@ -119,6 +120,7 @@ private:
     QAction *rowAddAction;
     QAction *rowEditAction;
     QAction *rowDeleteAction;
+    QAction *rowCopyAction;
     QAction *viewAddAction;
     QAction *viewEditAction;
     QAction *viewDeleteAction;
@@ -135,6 +137,7 @@ private:
     QAction *aboutAction;
     QAction *aboutQtAction;
     QPopupMenu *file;
+    QPopupMenu *row;
     QPopupMenu *view;
     QPopupMenu *sort;
     QPopupMenu *filter;

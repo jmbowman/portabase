@@ -90,6 +90,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     QIconSet addIcons = Resource::loadIconSet("new");
     QIconSet openIcons = Resource::loadIconSet("fileopen");
     QIconSet deleteIcons = Resource::loadIconSet("trash");
+    QIconSet copyIcons = Resource::loadIconSet("copy");
     QIconSet quitIcons = Resource::loadIconSet("quit_icon");
     QIconSet saveIcons = Resource::loadIconSet("portabase/save");
 #ifndef DESKTOP
@@ -137,7 +138,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     closeAction = new QAction(tr("Close"), closeIcons, QString::null, 0, this);
     connect(closeAction, SIGNAL(activated()), this, SLOT(close()));
 
-    // Toolbar actions
+    // Row menu/toolbar actions
     rowAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
     connect(rowAddAction, SIGNAL(activated()), this, SLOT(addRow()));
     rowEditAction = new QAction(tr("Edit"), editIcons, QString::null, 0,
@@ -146,6 +147,14 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     rowDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null,
                                   0, this);
     connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
+    rowCopyAction = new QAction(tr("Copy"), copyIcons, QString::null, 0, this);
+    connect(rowCopyAction, SIGNAL(activated()), this, SLOT(copyRow()));
+    // this submenu doesn't get deleted when the menubar is cleared...
+    row = new QPopupMenu(this);
+    rowAddAction->addTo(row);
+    rowEditAction->addTo(row);
+    rowDeleteAction->addTo(row);
+    rowCopyAction->addTo(row);
 
     // View menu actions
     viewAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
@@ -270,6 +279,7 @@ void PortaBase::editPreferences()
         viewer->updateButtonSizes();
         file->setFont(font);
         if (doc) {
+            row->setFont(font);
             view->setFont(font);
             sort->setFont(font);
             filter->setFont(font);
@@ -553,6 +563,7 @@ void PortaBase::showDataViewer()
 
     // File menu
     file = new QPopupMenu(this);
+    file->insertItem(tr("Row"), row);
     fileSaveAction->addTo(file);
     dataImportAction->addTo(file);
     exportAction->addTo(file);
@@ -651,6 +662,11 @@ void PortaBase::deleteRow()
         }
     }
     viewer->deleteRow();
+}
+
+void PortaBase::copyRow()
+{
+    viewer->editRow(-1, TRUE);
 }
 
 void PortaBase::deleteAllRows()
@@ -1078,6 +1094,7 @@ void PortaBase::setRowSelected(bool y)
 {
     rowEditAction->setEnabled(y);
     rowDeleteAction->setEnabled(y);
+    rowCopyAction->setEnabled(y);
 }
 
 QPixmap PortaBase::getNotePixmap()

@@ -52,11 +52,11 @@ public:
     void exportToCSV(QString filename);
     void exportToXML(QString filename);
     void allowBooleanToggle(bool flag);
-
-public slots:
     void addRow();
     void deleteRow();
-    bool editRow(int rowId=-1);
+    bool editRow(int rowId=-1, bool copy=FALSE);
+
+private slots:
     void viewRow();
 
 protected:
