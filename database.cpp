@@ -66,7 +66,7 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         sorts = file->GetAs("_sorts[_sname:S]");
         sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
         filters = file->GetAs("_filters[_fname:S]");
-        filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcindex,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
+        filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcindex:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
         enums = file->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
         enumOptions = file->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
         if (version < 3) {
@@ -80,6 +80,9 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         }
         else {
             data = file->GetAs(formatString());
+        }
+        if (version < 5) {
+            fixConditionIndices();
         }
         maxId = data.GetSize() - 1;
     }
@@ -1289,6 +1292,21 @@ void Database::updateEncoding(c4_View &view)
             for (int j = 0; j < rowCount; j++) {
                 sProp (view[j]) = QString(sProp (view[j])).utf8();
             }
+        }
+    }
+}
+
+void Database::fixConditionIndices()
+{
+    int filterCount = filters.GetSize();
+    for (int i = 0; i < filterCount; i++) {
+        QCString filterName(fName (filters[i]));
+        c4_View conditions = filterConditions.Select(fcFilter [filterName]);
+        int conditionCount = conditions.GetSize();
+        int index = -1;
+        for (int j = 0; j < conditionCount; j++) {
+            index = filterConditions.Find(fcFilter [filterName], index + 1);
+            fcIndex (filterConditions[index]) = j;
         }
     }
 }

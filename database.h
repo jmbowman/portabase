@@ -17,7 +17,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 4
+#define FILE_VERSION 5
 
 class Condition;
 class Filter;
@@ -114,6 +114,7 @@ private:
     void updateDataColumnFormat();
     void updateEncoding();
     void updateEncoding(c4_View &view);
+    void fixConditionIndices();
 
 private:
     QPixmap checkedPixmap;
