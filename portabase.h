@@ -21,7 +21,7 @@ class Database;
 class DocLnk;
 class FileSelector;
 class QAction;
-class QPEMenuBar;
+class QMenuBar;
 class QPopupMenu;
 class QToolButton;
 class QWidgetStack;
@@ -109,7 +109,7 @@ private:
     Database *db;
     QWidgetStack *mainStack;
     FileSelector *fileSelector;
-    QPEMenuBar *menu;
+    QMenuBar *menu;
     QToolBar *toolbar;
     QAction *fileNewAction;
     QAction *fileOpenAction;

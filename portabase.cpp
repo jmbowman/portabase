@@ -82,15 +82,17 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     PortaBase::oddRowColor = new QColor(color);
 
     // menu and toolbar, shared between file selector and data viewer modes
+#if defined(DESKTOP)
+    menu = menuBar();
+    toolbar = new QToolBar(this);
+    addToolBar(toolbar, QMainWindow::Top, TRUE);
+    statusBar();
+#else
     QToolBar *bar = new QToolBar(this);
     addToolBar(bar, QMainWindow::Top);
     bar->setHorizontalStretchable(TRUE);
     menu = new QPEMenuBar(bar);
     toolbar = new QToolBar(this);
-#if defined(DESKTOP)
-    addToolBar(toolbar, QMainWindow::Top, TRUE);
-    statusBar();
-#else
     addToolBar(toolbar, QMainWindow::Top, FALSE);
 #endif
 

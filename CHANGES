@@ -1,3 +1,9 @@
+2003-05-24  JMB  Better menu handling in desktop versions
+
+    In at least some versions of Qt3, the menu was present but no text was
+    shown.  Now using a more normal display method which seems to work more
+    reliably.
+
 2003-05-23  JMB  Alternate row shading, calculator widget
 
     Even and odd rows now use different background colors to make it easier
