@@ -1,3 +1,10 @@
+2003-01-04  JMB  File selector menu & toolbar, MobileDB import
+
+    The file selector now has a "File" menu and 3 toolbar buttons; in
+    addition to the previous functionality, these let you delete existing
+    files.  The File menu also contains an option to create a new file
+    from the data in a MobileDB file.
+
 2002-12-07  JMB  Time columns, date picker uses appropriate week start day
 
     There is now a "Time" column type.  It uses the Qtopia system setting

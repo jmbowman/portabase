@@ -18,8 +18,8 @@
 <a href="#noteedit">9)Note editor/viewer</a><br>
 <a href="#sortedit">10)Sorting editor</a><br>
 <a href="#filteredit">11)Filter editor</a><br>
-<a href="#import">12)Data import</a><br>
-<a href="#export">13)Data export</a><br>
+<a href="#import">12)CSV import</a><br>
+<a href="#export">13)CSV export</a><br>
 <a href="#prefs">14)Preferences dialog</a><br>
 <br>
 <br>
@@ -38,19 +38,24 @@ charts, etc.  Notable features include:<br>
   <li>Add, delete, rearrange, and rename columns at any time</li>
   <li>Specify default values for columns</li>
   <li>View summary statistics for columns (total, average, min, max, etc.)</li>
-  <li>Import data from CSV files</li>
+  <li>Import data from CSV and MobileDB files</li>
   <li>Export data to CSV files</li>
   <li>Unicode support</li>
   <li>Pick any available font to use throughout the application</li>
 </ul>
 <a name="file"><b>2)File selector</b></a><br>
 Unless the program was launched by clicking on a PortaBase file in the
-Documents tab, the first screen shown will be the file selector.  The
-"View" menu in the upper left allows you to select which category of
-files to view.  You may proceed by either clicking on a file to select
-it or by clicking the "New" icon in the upper right in order to create
-a new PortaBase file.<br>
-<br>
+Documents tab, the first screen shown will be the file selector.  You may
+open any listed file by clicking on it, or choose one of the following
+options from the "File" menu or toolbar:<br>
+<ul>
+  <li><i>New</i> - Create a new file</li>
+  <li><i>Open</i> - Open the selected file</li>
+  <li><i>Delete</i> - Delete the selected file</li>
+  <li><i>Import MobileDB File</i> - Create a new file from the data in a
+      MobileDB file.  You will be prompted to enter a name for the new file,
+      then select the MobileDB file to import.</li>
+</ul>
 <a name="columns"><b>3)Columns editor</b></a><br>
 Each PortaBase file contains one table of a user-defined format.  The
 format of this table is determined by a sequence of data columns,
@@ -377,7 +382,7 @@ condition, the row is considered to pass the condition.  Click "OK" to
 accept the currently shown settings or "X" to revert to the previous
 values (or to cancel adding a new filter).<br>
 <br>
-<a name="import"><b>12)Data import</b></a><br>
+<a name="import"><b>12)CSV import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.
 This allows you to import data exported from a spreadsheet or another
 database program.  To do this:<br>
@@ -403,7 +408,7 @@ Notes:<br>
     or the number of seconds past midnight.  Blank or -1 values are
     interpreted as "None".</li>
 </ol>
-<a name="export"><b>13)Data export</b></a><br>
+<a name="export"><b>13)CSV export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
 import, this allows you to move database content into a spreadsheet or
 other database program for further manipulation (among other uses).  To

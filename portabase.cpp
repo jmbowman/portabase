@@ -18,6 +18,7 @@
 
 #include <qaction.h>
 #include <qapplication.h>
+#include <qfile.h>
 #include <qfont.h>
 #include <qinputdialog.h>
 #include <qmainwindow.h>
@@ -66,10 +67,45 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     setFont(font);
 
     QPEToolBar *bar = new QPEToolBar(this);
-    bar->setHorizontalStretchable(TRUE);
-    menu = bar;
 
+    // "File" menu for the file selector
+    bar->setHorizontalStretchable(TRUE);
     QPEMenuBar *mb = new QPEMenuBar(bar);
+    selectorMenu = mb;
+    QPopupMenu *selectorFile = new QPopupMenu(this);
+    selectorToolbar = new QPEToolBar(this);
+
+    QIconSet addIcons = Resource::loadIconSet("new");
+    QAction *act = new QAction(tr("New"), addIcons, QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(newFile()));
+    act->addTo(selectorFile);
+    act->addTo(selectorToolbar);
+
+    QIconSet openIcons = Resource::loadIconSet("fileopen");
+    act = new QAction(tr("Open"), openIcons, QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(openFile()));
+    act->addTo(selectorFile);
+    act->addTo(selectorToolbar);
+
+    QIconSet deleteIcons = Resource::loadIconSet("trash");
+    act = new QAction(tr("Delete") + "...", deleteIcons, QString::null, 0,
+                      this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(deleteFile()));
+    act->addTo(selectorFile);
+    act->addTo(selectorToolbar);
+
+    selectorFile->insertSeparator();
+    act = new QAction(tr("Import MobileDB File") + "...", QString::null, 0,
+                      this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(importMobileDB()));
+    act->addTo(selectorFile);
+
+    mb->insertItem(tr("File"), selectorFile);
+
+    // Menus for the data viewer
+    mb = new QPEMenuBar(bar);
+    menu = mb;
+
     file = new QPopupMenu(this);
     view = new QPopupMenu(this);
     view->setCheckable(TRUE);
@@ -89,7 +125,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     fileSaveAction->addTo(toolbar);
     fileSaveAction->addTo(file);
 
-    QAction *act = new QAction(tr("Import"), QString::null, 0, this, 0);
+    act = new QAction(tr("Import"), QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(dataImport()));
     act->addTo(file);
 
@@ -97,7 +133,6 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(act, SIGNAL(activated()), this, SLOT(dataExport()));
     act->addTo(file);
 
-    QIconSet deleteIcons = Resource::loadIconSet("trash");
     act = new QAction(tr("Delete Rows In Filter"), deleteIcons,
                       QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(deleteAllRows()));
@@ -115,7 +150,6 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(act, SIGNAL(activated()), this, SLOT(editPreferences()));
     act->addTo(file);
 
-    QIconSet addIcons = Resource::loadIconSet("new");
     act = new QAction(tr("Add"), addIcons, QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(addRow()));
     act->addTo(toolbar);
@@ -176,9 +210,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     viewer->allowBooleanToggle(booleanToggle);
 
     fileSelector = new FileSelector("application/portabase", mainStack,
-                                    "fileselector", TRUE, FALSE);
-    connect(fileSelector, SIGNAL(newSelected(const DocLnk &)), this,
-            SLOT(newFile(const DocLnk &)));
+                                    "fileselector", FALSE, FALSE);
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(openFile(const DocLnk &)));
     fileOpen();
@@ -212,7 +244,9 @@ bool PortaBase::editColumns()
         }
         setEdited(TRUE);
         mainStack->raiseWidget(viewer);
+        selectorMenu->hide();
         menu->show();
+        selectorToolbar->hide();
         toolbar->show();
         return TRUE;
     }
@@ -252,11 +286,23 @@ void PortaBase::editPreferences()
     }
 }
 
-void PortaBase::newFile(const DocLnk &f)
+void PortaBase::newFile()
+{
+    DocLnk f;
+    createFile(f, NO_DATA);
+}
+
+void PortaBase::importMobileDB()
+{
+    DocLnk f;
+    createFile(f, MOBILEDB_FILE);
+}
+
+void PortaBase::createFile(const DocLnk &f, int source)
 {
     bool ok = FALSE;
-    QString name = InputDialog::getText(tr("New"),
-                                        tr("Please select a file name"),
+    QString name = InputDialog::getText(tr("PortaBase"),
+                                        tr("Enter a name for the new file"),
                                         QString::null, &ok, this);
     if (ok && !name.isEmpty()) {
         doc = new DocLnk(f);
@@ -273,7 +319,17 @@ void PortaBase::newFile(const DocLnk &f)
         FileManager fm;
         fm.saveFile(*doc, "");
         db = new Database(doc->file(), &ok);
-        if (editColumns()) {
+        if (source == NO_DATA) {
+            ok = editColumns();
+        }
+        else {
+            ImportDialog dialog(MOBILEDB_FILE, db, this);
+            ok = dialog.exec();
+            if (ok) {
+                finishNewFile(db);
+            }
+        }
+        if (ok) {
             updateCaption();
             // if not saved now, file is empty without later save...bad
             save();
@@ -286,6 +342,32 @@ void PortaBase::newFile(const DocLnk &f)
         QMessageBox::warning(this, tr("PortaBase"),
                              tr("Unable to create new file"));
     }
+}
+
+void PortaBase::finishNewFile(Database *db)
+{
+    viewer->setDatabase(db);
+    viewer->updateTable();
+    viewer->updateButtons();
+    rebuildViewMenu();
+    rebuildSortMenu();
+    rebuildFilterMenu();
+    setEdited(TRUE);
+    mainStack->raiseWidget(viewer);
+    selectorMenu->hide();
+    menu->show();
+    selectorToolbar->hide();
+    toolbar->show();
+}
+
+void PortaBase::openFile()
+{
+    const DocLnk *selection = fileSelector->selected();
+    if (selection == 0) {
+        return;
+    }
+    openFile(*selection);
+    delete selection;
 }
 
 void PortaBase::openFile(const QString &f)
@@ -313,7 +395,9 @@ void PortaBase::openFile(const DocLnk &f)
     db = temp;
     viewer->setDatabase(db);
     mainStack->raiseWidget(viewer);
+    selectorMenu->hide();
     menu->show();
+    selectorToolbar->hide();
     toolbar->show();
     updateCaption();
     rebuildViewMenu();
@@ -325,9 +409,29 @@ void PortaBase::fileOpen()
 {
     menu->hide();
     toolbar->hide();
+    selectorMenu->show();
+    selectorToolbar->show();
     mainStack->raiseWidget(fileSelector);
     fileSelector->reread();
     updateCaption();
+}
+
+void PortaBase::deleteFile()
+{
+    const DocLnk *selection = fileSelector->selected();
+    if (selection == 0) {
+        return;
+    }
+    if (QMessageBox::warning(this, tr("PortaBase"), tr("Delete") + " \""
+                             + selection->name() + "\"\n"
+                             + tr("Are you sure?"),
+                             tr("Yes"), tr("No"), QString::null, 1) > 0) {
+        return;
+    }
+    QFile::remove(selection->file());
+    QFile::remove(selection->linkFile());
+    delete selection;
+    fileSelector->reread();
 }
 
 void PortaBase::updateCaption(const QString &name)
@@ -349,6 +453,8 @@ void PortaBase::closeViewer()
     viewer->closeView();
     menu->hide();
     toolbar->hide();
+    selectorMenu->show();
+    selectorToolbar->show();
     fileSelector->reread();
     mainStack->raiseWidget(fileSelector);
     delete doc;
@@ -424,7 +530,7 @@ void PortaBase::save()
 
 void PortaBase::dataImport()
 {
-    ImportDialog dialog(db, this);
+    ImportDialog dialog(CSV_FILE, db, this);
     if (dialog.exec()) {
         viewer->updateTable();
         viewer->updateButtons();

@@ -14,6 +14,11 @@
 
 #include <qdialog.h>
 
+// possible data sources
+#define NO_DATA 0
+#define CSV_FILE 1
+#define MOBILEDB_FILE 2
+
 class Database;
 class DocLnk;
 class FileSelector;
@@ -22,8 +27,8 @@ class ImportDialog: public QDialog
 {
     Q_OBJECT
 public:
-    ImportDialog(Database *subject, QWidget *parent = 0, const char *name = 0,
-                 WFlags f = 0);
+    ImportDialog(int sourceType, Database *subject, QWidget *parent = 0,
+                 const char *name = 0, WFlags f = 0);
     ~ImportDialog();
 
 protected:
@@ -34,7 +39,8 @@ private slots:
 
 private:
     Database *db;
-    FileSelector *csvSelector;
+    FileSelector *selector;
+    int source;
 };
 
 #endif

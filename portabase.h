@@ -21,7 +21,7 @@ class Database;
 class FileSelector;
 class QAction;
 class QPopupMenu;
-class QToolBar;
+class QPEMenuBar;
 class QToolButton;
 class QWidgetStack;
 class ViewDisplay;
@@ -44,8 +44,10 @@ public slots:
     void setDocument(const QString&);
 
 private slots:
-    void newFile(const DocLnk &);
+    void newFile();
     void openFile(const DocLnk &);
+    void openFile();
+    void deleteFile();
     bool editColumns();
     void editEnums();
     void editPreferences();
@@ -54,6 +56,7 @@ private slots:
     void deleteRow();
     void deleteAllRows();
     void save();
+    void importMobileDB();
     void dataImport();
     void dataExport();
     void viewAllColumns();
@@ -77,6 +80,8 @@ protected:
 
 private:
     void fileOpen();
+    void createFile(const DocLnk &f, int source);
+    void finishNewFile(Database *db);
     void updateCaption(const QString &name=QString::null);
     void rebuildViewMenu();
     void updateViewMenu();
@@ -88,8 +93,10 @@ private:
     Database *db;
     QWidgetStack *mainStack;
     FileSelector *fileSelector;
-    QToolBar *menu;
+    QPEMenuBar *menu;
+    QPEMenuBar *selectorMenu;
     QToolBar *toolbar;
+    QToolBar *selectorToolbar;
     QAction *fileSaveAction;
     QAction *rowEditAction;
     QAction *rowDeleteAction;

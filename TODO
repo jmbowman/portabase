@@ -1,7 +1,7 @@
 File properties dialog (size, rows, etc.)
 Alternate-row shading
 Optional database file encryption
-File menu in file selector (delete, rename, copy format, etc.)
+Rename and copy file options
 Read-only row viewer
 Option to hide navigation bar (and show all rows)
 Option to show Notes as multiline edit fields in row editor
