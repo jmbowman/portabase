@@ -12,10 +12,10 @@
 #ifndef FILESELECTOR_H
 #define FILESELECTOR_H
 
-#include <qwidget.h>
+#include <qlabel.h>
 #include "applnk.h"
 
-class FileSelector : public QWidget
+class FileSelector : public QLabel
 {
     Q_OBJECT
 

@@ -32,6 +32,10 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     setCaption(tr("Columns Editor") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
     vbox->resize(size());
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    new QLabel("<center><b>" + tr("Columns Editor") + "</b></center>", vbox);
+#endif
     table = new QListView(vbox);
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);

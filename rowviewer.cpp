@@ -10,6 +10,7 @@
  */
 
 #if defined(DESKTOP)
+#include <qlabel.h>
 #include "desktop/resource.h"
 #else
 #include <qpe/resource.h>
@@ -29,8 +30,13 @@
 RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
   : QDialog(parent, name, TRUE, f), db(0), display(parent), colTypes(0)
 {
-    setCaption(tr("PortaBase") + " - " + tr("Row Viewer"));
+    setCaption(tr("Row Viewer") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Row Viewer")
+                               + "</b></center>", this));
+#endif
     tv = new QTextView(this);
     vbox->addWidget(tv);
     QHBox *hbox = new QHBox(this);
@@ -53,8 +59,8 @@ RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
     new QWidget(hbox);
     vbox->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height() / 2);
+    setMinimumWidth(3 * parent->width() / 4);
+    setMinimumHeight(3 * parent->height() / 4);
     setIcon(Resource::loadPixmap("portabase"));
 #else
     showMaximized();

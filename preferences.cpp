@@ -34,6 +34,10 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     setCaption(tr("Preferences") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
     vbox->resize(size());
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    new QLabel("<center><b>" + tr("Preferences") + "</b></center>", vbox);
+#endif
 #if defined(DESKTOP)
     sizeFactor = 1;
 #else

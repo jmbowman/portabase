@@ -34,6 +34,11 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     db = dbase;
     setCaption(tr("Condition Editor") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Condition Editor")
+                               + "</b></center>", this));
+#endif
 
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);

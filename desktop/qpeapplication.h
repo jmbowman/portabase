@@ -26,7 +26,7 @@ public:
     static QString documentDir();
     static void setDocumentDir(QString path);
 
-    void showMainDocumentWidget(QWidget*, bool nomax=FALSE);
+    void showMainDocumentWidget(QWidget*, bool nomax=TRUE);
 };
 
 #endif

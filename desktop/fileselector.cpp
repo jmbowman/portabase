@@ -15,9 +15,9 @@
 #include "qpeapplication.h"
 
 FileSelector::FileSelector(const QString &f, QWidget *parent, const char *name, bool newVisible, bool closeVisible)
-  : QWidget(parent, name), parentWidget(parent)
+  : QLabel(parent, name), parentWidget(parent)
 {
-
+    setText("<center>" + tr("No file selected") + "</center>");
 }
 
 FileSelector::~FileSelector()

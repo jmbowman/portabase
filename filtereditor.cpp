@@ -31,6 +31,12 @@ FilterEditor::FilterEditor(QWidget *parent, const char *name, WFlags f)
 {
     setCaption(tr("Filter Editor") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->setMargin(8);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Filter Editor")
+                               + "</b></center>", this));
+#endif
 
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);

@@ -29,6 +29,10 @@ SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
 {
     setCaption(tr("Sorting Editor") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    new QLabel("<center><b>" + tr("Sorting Editor") + "</b></center>", vbox);
+#endif
 
     QHBox *hbox = new QHBox(vbox);
     new QLabel(tr("Sorting Name"), hbox);

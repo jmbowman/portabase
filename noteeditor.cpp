@@ -11,6 +11,7 @@
 
 #if defined(DESKTOP)
 #include <qhbox.h>
+#include <qlabel.h>
 #include <qpushbutton.h>
 #include "desktop/config.h"
 #include "desktop/resource.h"
@@ -25,8 +26,13 @@
 NoteEditor::NoteEditor(QString colName, bool readOnly, QWidget *parent,
     const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
 {
-    setCaption(tr("PortaBase") + " - " + colName);
+    setCaption(colName + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->addWidget(new QLabel("<center><b>" + colName + "</b></center>",
+                               this));
+#endif
     textBox = new QMultiLineEdit(this);
     vbox->addWidget(textBox);
     textBox->setReadOnly(readOnly);
@@ -58,6 +64,7 @@ NoteEditor::NoteEditor(QString colName, bool readOnly, QWidget *parent,
 #else
     showMaximized();
 #endif
+    textBox->setFocus();
 }
 
 NoteEditor::~NoteEditor()

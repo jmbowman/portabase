@@ -39,7 +39,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     timer.start();
     stack = new QWidgetStack(this);
     setStretchFactor(stack, 1);
-    noResults = new QLabel(tr("No results"), stack);
+    noResults = new QLabel("<center>" + tr("No results") + "</center>", stack);
     table = new QListView(stack);
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);

@@ -29,6 +29,10 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
 {
     setCaption(tr("View Editor") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    new QLabel("<center><b>" + tr("View Editor") + "</b></center>", vbox);
+#endif
 
     QHBox *hbox = new QHBox(vbox);
     new QLabel(tr("View Name"), hbox);

@@ -10,6 +10,7 @@
  */
 
 #include <qhbox.h>
+#include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtextbrowser.h>
@@ -23,6 +24,12 @@ HelpBrowser::HelpBrowser(QWidget *parent, const char *name, WFlags f)
 {
     setCaption(tr("Help") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->setMargin(8);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Help") + "</b></center>",
+                               this));
+#endif
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
 

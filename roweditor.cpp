@@ -138,6 +138,11 @@ bool RowEditor::edit(Database *subject, int rowId)
 void RowEditor::addContent(int rowId)
 {
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Row Editor")
+                               + "</b></center>", this));
+#endif
     QScrollView *sv = new QScrollView(this);
     vbox->addWidget(sv);
     QGrid *grid = new QGrid(2, sv->viewport());

@@ -1,3 +1,17 @@
+2003-02-06  JMB  Assorted minor enhancements
+
+    Added size grips for dialogs on the Windows version.
+
+    Compensated for the lack of dialog titles in the Non-Commercial
+    version of Qt for Windows; each dialog on that platform now has the
+    dialog name in bold text just below the title bar.
+
+    The text area of the note editor now has the focus when the dialog
+    is shown (don't need to click or tab before starting to type).
+
+    The name entry field of the column editor now has the focus each time
+    it is shown.
+
 2003-02-03  JMB  XML export
 
     When you choose "Export" from the File menu, you now have the option

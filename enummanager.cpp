@@ -29,6 +29,12 @@ EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFl
     db = dbase;
     setCaption(tr("Enum Manager") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->setMargin(8);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Enum Manager")
+                               + "</b></center>", this));
+#endif
 
     listBox = new QListBox(this);
     vbox->addWidget(listBox);

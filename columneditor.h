@@ -37,6 +37,7 @@ public:
     QString defaultValue();
     void setDefaultValue(QString newDefault);
     void setTypeEditable(bool flag);
+    int exec();
 
 private slots:
     void updateDefaultWidget(int newType);

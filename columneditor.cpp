@@ -240,6 +240,12 @@ void ColumnEditor::setTypeEditable(bool flag)
     typeBox->setEnabled(flag);
 }
 
+int ColumnEditor::exec()
+{
+    nameBox->setFocus();
+    return QDialog::exec();
+}
+
 void ColumnEditor::updateDefaultWidget(int newType)
 {
     if (newType == typeBox->count() - 1) {

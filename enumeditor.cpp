@@ -32,6 +32,12 @@ EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
 {
     setCaption(tr("Enum Editor") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
+#if defined(Q_WS_WIN)
+    setSizeGripEnabled(TRUE);
+    vbox->setMargin(8);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Enum Editor")
+                               + "</b></center>", this));
+#endif
 
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
@@ -67,7 +73,7 @@ EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
     new QWidget(hbox);
     vbox->setResizeMode(QLayout::FreeResize);
     setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height() / 2);
+    setMinimumHeight(parent->height());
     setIcon(Resource::loadPixmap("portabase"));
 #else
     showMaximized();

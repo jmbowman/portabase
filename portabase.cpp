@@ -56,8 +56,9 @@
 PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
   : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE), needsRefresh(FALSE)
 {
+#ifndef DESKTOP
     setToolBarsMovable(FALSE);
-
+#endif
     QFont currentFont = qApp->font();
     QString family = currentFont.family().lower();
     int size = currentFont.pointSize();
@@ -80,6 +81,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     toolbar = new QToolBar(this);
 #if defined(DESKTOP)
     addToolBar(toolbar, QMainWindow::Top, TRUE);
+    statusBar();
 #else
     addToolBar(toolbar, QMainWindow::Top, FALSE);
 #endif
@@ -208,8 +210,11 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(openFile(const DocLnk &)));
     fileOpen();
-
+#if defined(DESKTOP)
+    resize(600, 400);
+#else
     resize(200, 300);
+#endif
 }
 
 PortaBase::~PortaBase()
