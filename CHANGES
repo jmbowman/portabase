@@ -1,3 +1,10 @@
+2002-11-30  JMB  Case sensitivity bugfix
+
+    Applied a patch to MetaKit that allows c4_View Finds and Selects to be
+    case sensitive (which I thought they already were).  This fixes
+    several bugs related to columns, views, sortings, and filters which
+    have names differing only by case.
+
 2002-11-29  JMB  Optional checkbox toggle in data viewer, date selector
                  enhancements
 
