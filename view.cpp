@@ -19,14 +19,15 @@
 #include "view.h"
 
 View::View(Database *parent, c4_View baseview, QStringList colNames, 
-    int *types, int *widths, int rpp) : Id("_id"), sortColumn(-1),
-    ascending(TRUE), sortName("")
+    int *types, int *widths, QStringList colIds, int rpp) : Id("_id"),
+    sortColumn(-1), ascending(TRUE), sortName("")
 {
     db = parent;
     dbview = baseview;
     columns = colNames;
     dataTypes = types;
     colWidths = widths;
+    ids = colIds;
     numCols = columns.count();
     rowsPerPage = rpp;
     sort(db->currentSorting());
@@ -82,25 +83,23 @@ QStringList View::getRow(int index)
     QStringList results;
     c4_RowRef row = dbview[index];
     for (int i = 0; i < numCols; i++) {
-        QString name = columns[i];
         int type = dataTypes[i];
         if (type == INTEGER || type == BOOLEAN) {
-            c4_IntProp prop(name);
+            c4_IntProp prop(ids[i]);
             int value = prop (row);
             results.append(QString::number(value));
         }
         else if (type == FLOAT) {
-            c4_FloatProp prop(name);
+            c4_FloatProp prop(ids[i]);
             double value = prop (row);
             results.append(QString::number(value));
         }
         else if (type == STRING || type == NOTE) {
-            c4_StringProp prop(name);
-            QString value(prop (row));
-            results.append(value);
+            c4_StringProp prop(ids[i]);
+            results.append(QString::fromUtf8(prop (row)));
         }
         else if (type == DATE) {
-            c4_IntProp prop(name);
+            c4_IntProp prop(ids[i]);
             int value = prop (row);
             results.append(db->dateToString(value));
         }
@@ -111,9 +110,8 @@ QStringList View::getRow(int index)
 QString View::getNote(int rowId, int colIndex)
 {
     int index = dbview.Find(Id [rowId]);
-    c4_StringProp prop(columns[colIndex]);
-    QString note(prop (dbview[index]));
-    return note;
+    c4_StringProp prop(ids[colIndex]);
+    return QString::fromUtf8(prop (dbview[index]));
 }
 
 void View::sort(int colIndex)
@@ -160,10 +158,9 @@ QStringList View::getStatistics(int colIndex)
         lines.append(PortaBase::tr("No data to summarize"));
         return lines;
     }
-    QString name = columns[colIndex];
     int type = dataTypes[colIndex];
     if (type == INTEGER) {
-        c4_IntProp prop(name);
+        c4_IntProp prop(ids[colIndex]);
         int value = prop (dbview[0]);
         int total = value;
         int min = value;
@@ -181,7 +178,7 @@ QStringList View::getStatistics(int colIndex)
         lines.append(PortaBase::tr("Maximum") + ": " + QString::number(max));
     }
     else if (type == FLOAT) {
-        c4_FloatProp prop(name);
+        c4_FloatProp prop(ids[colIndex]);
         double value = prop (dbview[0]);
         double total = value;
         double min = value;
@@ -199,7 +196,7 @@ QStringList View::getStatistics(int colIndex)
         lines.append(PortaBase::tr("Maximum") + ": " + QString::number(max));
     }
     else if (type == BOOLEAN) {
-        c4_IntProp prop(name);
+        c4_IntProp prop(ids[colIndex]);
         int checked = 0;
         for (int i = 0; i < count; i++) {
             int value = prop (dbview[i]);
@@ -213,7 +210,7 @@ QStringList View::getStatistics(int colIndex)
                      + QString::number(count - checked));
     }
     else if (type == DATE) {
-        c4_IntProp prop(name);
+        c4_IntProp prop(ids[colIndex]);
         int value = prop (dbview[0]);
         int min = value;
         int max = value;
@@ -226,14 +223,14 @@ QStringList View::getStatistics(int colIndex)
         lines.append(PortaBase::tr("Latest") + ": " + db->dateToString(max));
     }
     else if (type == STRING || type == NOTE) {
-        c4_StringProp prop(name);
-        QString value(prop (dbview[0]));
+        c4_StringProp prop(ids[colIndex]);
+        QString value = QString::fromUtf8(prop (dbview[0]));
         int length = value.length();
         int total = length;
         int min = length;
         int max = length;
         for (int i = 1; i < count; i++) {
-            QString svalue(prop (dbview[i]));
+            QString svalue = QString::fromUtf8(prop (dbview[i]));
             length = svalue.length();
             total += length;
             min = QMIN(min, length);

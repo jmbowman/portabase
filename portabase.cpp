@@ -9,6 +9,7 @@
  * (at your option) any later version.
  */
 
+#include <qpe/config.h>
 #include <qpe/filemanager.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpemenubar.h>
@@ -16,6 +17,8 @@
 #include <qpe/resource.h>
 
 #include <qaction.h>
+#include <qapplication.h>
+#include <qfont.h>
 #include <qinputdialog.h>
 #include <qmainwindow.h>
 #include <qmessagebox.h>
@@ -30,6 +33,7 @@
 #include "importdialog.h"
 #include "inputdialog.h"
 #include "portabase.h"
+#include "preferences.h"
 #include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
@@ -40,12 +44,23 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     doc = 0;
     setToolBarsMovable(FALSE);
 
+    QFont currentFont = qApp->font();
+    QString family = currentFont.family().lower();
+    int size = currentFont.pointSize();
+    Config conf("portabase");
+    conf.setGroup("Font");
+    family = conf.readEntry("Name", family);
+    size = conf.readNumEntry("Size", size);
+    QFont font(family, size);
+    qApp->setFont(font);
+    setFont(font);
+
     QPEToolBar *bar = new QPEToolBar(this);
     bar->setHorizontalStretchable(TRUE);
     menu = bar;
 
     QPEMenuBar *mb = new QPEMenuBar(bar);
-    QPopupMenu *file = new QPopupMenu(this);
+    file = new QPopupMenu(this);
     view = new QPopupMenu(this);
     view->setCheckable(TRUE);
     sort = new QPopupMenu(this);
@@ -74,6 +89,10 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
 
     act = new QAction(tr("Edit Columns"), QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(editColumns()));
+    act->addTo(file);
+
+    act = new QAction(tr("Preferences"), QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(editPreferences()));
     act->addTo(file);
 
     QIconSet addIcons = Resource::loadIconSet("new");
@@ -179,6 +198,19 @@ bool PortaBase::editColumns()
     }
     else {
         return FALSE;
+    }
+}
+
+void PortaBase::editPreferences()
+{
+    Preferences prefs;
+    if (prefs.exec()) {
+        QFont font = prefs.applyChanges();
+        setFont(font);
+        file->setFont(font);
+        view->setFont(font);
+        sort->setFont(font);
+        filter->setFont(font);
     }
 }
 

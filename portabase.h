@@ -47,6 +47,7 @@ private slots:
     void newFile(const DocLnk &);
     void openFile(const DocLnk &);
     bool editColumns();
+    void editPreferences();
     void addRow();
     void editRow();
     void deleteRow();
@@ -90,6 +91,7 @@ private:
     QAction *fileSaveAction;
     QAction *rowEditAction;
     QAction *rowDeleteAction;
+    QPopupMenu *file;
     QPopupMenu *view;
     QPopupMenu *sort;
     QPopupMenu *filter;

@@ -104,7 +104,7 @@ c4_View Condition::filter(c4_View dbview)
 c4_View Condition::filterInt(c4_View dbview)
 {
     int value = constant.toInt();
-    c4_IntProp prop(colName);
+    c4_IntProp prop(db->getColId(colName));
     c4_View result = dbview.Clone();
     int size = dbview.GetSize();
     if (operation == EQUALS) {
@@ -151,7 +151,7 @@ c4_View Condition::filterInt(c4_View dbview)
 c4_View Condition::filterFloat(c4_View dbview)
 {
     double value = constant.toDouble();
-    c4_FloatProp prop(colName);
+    c4_FloatProp prop(db->getColId(colName));
     c4_View result = dbview.Clone();
     int size = dbview.GetSize();
     if (operation == EQUALS) {
@@ -197,7 +197,7 @@ c4_View Condition::filterFloat(c4_View dbview)
 
 c4_View Condition::filterString(c4_View dbview)
 {
-    c4_StringProp prop(colName);
+    c4_StringProp prop(db->getColId(colName));
     c4_View result = dbview.Clone();
     int size = dbview.GetSize();
     QString target = constant;
@@ -206,11 +206,11 @@ c4_View Condition::filterString(c4_View dbview)
     }
     if (operation == EQUALS) {
         if (caseSensitive) {
-            result = dbview.Select(prop [target]);
+            result = dbview.Select(prop [target.utf8()]);
         }
         else {
             for (int i = 0; i < size; i++) {
-                QString value(prop (dbview[i]));
+                QString value = QString::fromUtf8(prop (dbview[i]));
                 if (value.lower() == target) {
                     result.Add(dbview[i]);
                 }
@@ -219,7 +219,7 @@ c4_View Condition::filterString(c4_View dbview)
     }
     else if (operation == CONTAINS) {
         for (int i = 0; i < size; i++) {
-            QString value(prop (dbview[i]));
+            QString value = QString::fromUtf8(prop (dbview[i]));
             if (value.contains(constant, caseSensitive) > 0) {
                 result.Add(dbview[i]);
             }
@@ -227,7 +227,7 @@ c4_View Condition::filterString(c4_View dbview)
     }
     else if (operation == STARTSWITH) {
         for (int i = 0; i < size; i++) {
-            QString value(prop (dbview[i]));
+            QString value = QString::fromUtf8(prop (dbview[i]));
             if (!caseSensitive) {
                 value = value.lower();
             }
@@ -238,7 +238,7 @@ c4_View Condition::filterString(c4_View dbview)
     }
     else if (operation == NOTEQUAL) {
         for (int i = 0; i < size; i++) {
-            QString value(prop (dbview[i]));
+            QString value = QString::fromUtf8(prop (dbview[i]));
             if (!caseSensitive) {
                 value = value.lower();
             }

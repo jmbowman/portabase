@@ -25,7 +25,7 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
       ceNewIndex("_cenewindex"), resized(FALSE)
 {
-    setCaption(tr("PortaBase") + " - " + tr("Columns Editor"));
+    setCaption(tr("Columns Editor") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
     vbox->resize(size());
     table = new QListView(vbox);
@@ -68,7 +68,8 @@ int DBEditor::edit(Database *subject)
         QString name = originalCols[i];
         int type = db->getType(name);
         QString defaultVal = db->getDefault(name);
-        info.Add(ceName [name] + ceType [type] + ceDefault [defaultVal]
+        info.Add(ceName [name.utf8()] + ceType [type]
+                 + ceDefault [defaultVal.utf8()]
                  + ceOldIndex [i] + ceNewIndex [i]);
     }
     updateTable();
@@ -101,7 +102,8 @@ void DBEditor::addColumn()
     }
     if (!aborted) {
         int size = info.GetSize();
-        info.Add(ceName [name] + ceType [type] + ceDefault[defaultVal]
+        info.Add(ceName [name.utf8()] + ceType [type]
+                 + ceDefault[defaultVal.utf8()]
                  + ceOldIndex [-1] + ceNewIndex[size]);
         updateTable();
     }
@@ -115,9 +117,9 @@ void DBEditor::editColumn()
     }
     QString name = item->text(0);
     QString oldName = name;
-    int index = info.Find(ceName [name]);
+    int index = info.Find(ceName [name.utf8()]);
     int type = ceType (info[index]);
-    QString defaultVal(ceDefault (info[index]));
+    QString defaultVal = QString::fromUtf8(ceDefault (info[index]));
 
     columnEditor->setName(name);
     columnEditor->setType(type);
@@ -150,8 +152,8 @@ void DBEditor::editColumn()
         }
     }
     if (!aborted) {
-        ceName (info[index]) = name;
-        ceDefault (info[index]) = defaultVal;
+        ceName (info[index]) = name.utf8();
+        ceDefault (info[index]) = defaultVal.utf8();
         updateTable();
     }
 }
@@ -177,7 +179,7 @@ bool DBEditor::isValidName(QString colName)
     bool result = TRUE;
     int size = info.GetSize();
     for (int i = 0; i < size; i++) {
-        QString name(ceName (info[i]));
+        QString name = QString::fromUtf8(ceName (info[i]));
         if (name == colName) {
             result = FALSE;
             break;
@@ -212,7 +214,7 @@ void DBEditor::deleteColumn()
         return;
     }
     QString name = item->text(0);
-    int index = info.Find(ceName [name]);
+    int index = info.Find(ceName [name.utf8()]);
     int oldIndex = ceOldIndex (info[index]);
     info.RemoveAt(index);
     if (oldIndex != -1) {
@@ -232,7 +234,7 @@ void DBEditor::moveUp()
         return;
     }
     QString name = item->text(0);
-    int row1 = info.Find(ceName [name]);
+    int row1 = info.Find(ceName [name.utf8()]);
     int index = ceNewIndex (info[row1]);
     if (index > 0) {
         int row2 = info.Find(ceNewIndex [index - 1]);
@@ -250,7 +252,7 @@ void DBEditor::moveDown()
         return;
     }
     QString name = item->text(0);
-    int row1 = info.Find(ceName [name]);
+    int row1 = info.Find(ceName [name.utf8()]);
     int index = ceNewIndex (info[row1]);
     int size = info.GetSize();
     if (index < size - 1) {
@@ -289,10 +291,10 @@ void DBEditor::updateTable()
     int size = temp.GetSize();
     QListViewItem *last = 0;
     for (int i = 0; i < size; i++) {
-        QString name(ceName (temp[i]));
+        QString name = QString::fromUtf8(ceName (temp[i]));
         int type = ceType (temp[i]);
         QString typeString = getTypeString(type);
-        QString defaultVal(ceDefault (temp[i]));
+        QString defaultVal = QString::fromUtf8(ceDefault (temp[i]));
         if (i == 0) {
             last = new QListViewItem(table, name, typeString, defaultVal);
         }
@@ -356,7 +358,7 @@ void DBEditor::applyChanges()
         if (newIndex != oldIndex) {
             db->setIndex(oldName, newIndex);
         }
-        QString defaultVal(ceDefault (info[index]));
+        QString defaultVal = QString::fromUtf8(ceDefault (info[index]));
         db->setDefault(oldName, defaultVal);
     }
     // handle renames of original columns
@@ -375,9 +377,9 @@ void DBEditor::applyChanges()
     int newCount = temp.GetSize();
     for (int i = 0; i < newCount; i++) {
         int index = ceNewIndex (temp[i]);
-        QString name(ceName (temp[i]));
+        QString name = QString::fromUtf8(ceName (temp[i]));
         int type = ceType (temp[i]);
-        QString defaultVal(ceDefault (temp[i]));
+        QString defaultVal = QString::fromUtf8(ceDefault (temp[i]));
         db->addColumn(index, name, type, defaultVal);
     }
     db->updateDataFormat();

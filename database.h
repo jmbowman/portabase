@@ -17,7 +17,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 3
+#define FILE_VERSION 4
 
 class Condition;
 class Filter;
@@ -46,6 +46,7 @@ public:
     int getType(QString column);
     QString getDefault(QString column);
     void setDefault(QString column, QString value);
+    QString getColId(QString column);
     QString isValidValue(int type, QString value);
     void addColumn(int index, QString name, int type, QString defaultVal);
     void renameColumn(QString oldName, QString newName);
@@ -91,7 +92,11 @@ public:
 private:
     int *listTypes();
     c4_View createEmptyView(QStringList colNames);
-    QString formatString();
+    QString makeColId(int id, int type);
+    QString formatString(bool old = FALSE);
+    void updateDataColumnFormat();
+    void updateEncoding();
+    void updateEncoding(c4_View &view);
 
 private:
     QPixmap checkedPixmap;
@@ -117,6 +122,7 @@ private:
     c4_StringProp cName;
     c4_IntProp cType;
     c4_StringProp cDefault;
+    c4_IntProp cId;
     // "_views" view
     c4_StringProp vName;
     c4_IntProp vRpp;

@@ -1,3 +1,25 @@
+2002-11-17  JMB  Font selection
+
+    There is now a preferences dialog (available under File->Preferences)
+    which allows you to choose the font used throughout PortaBase.  This
+    can be used, for example, to select a font capable of displaying
+    Japanese characters or to choose a smaller font size in order to fit
+    more information on the screen (although a bit less legibly).
+
+2002-11-16  JMB  Unicode support
+
+    The encoding for all text in PortaBase files has been changed from
+    Latin-1 to UTF-8; old files are automatically converted to the new
+    encoding when opened.  Unicode characters can now be used in row
+    data, column names, view names, filter names, etc.
+
+2002-11-12  JMB  Better handling of import failure
+
+    A failed CSV import now leaves the database in the same condition
+    it was in before the attempt.  Before, it was adding rows
+    processed before the error and not immediately updating the
+    display to show that this had happened.
+
 2002-11-10  #################### PortaBase 1.2 ####################
 
 2002-11-10  JMB  Date columns, crash fixes, toolbar changes

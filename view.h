@@ -24,7 +24,7 @@ class View
 {
 public:
     View(Database *parent, c4_View baseview, QStringList colNames,
-         int *types, int *widths, int rpp);
+         int *types, int *widths, QStringList colIds, int rpp);
     ~View();
     QStringList getColNames();
     int *getColTypes();
@@ -49,6 +49,7 @@ private:
     QStringList columns;
     int *dataTypes;
     int *colWidths;
+    QStringList ids;
     int numCols;
     int rowsPerPage;
     int sortColumn;
