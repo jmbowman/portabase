@@ -15,6 +15,21 @@
     </message>
 </context>
 <context>
+    <name>Calculator</name>
+    <message>
+        <source>PortaBase</source>
+        <translation>PortaBase</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>はい</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+</context>
+<context>
     <name>ColumnEditor</name>
     <message>
         <source>PortaBase</source>
@@ -303,6 +318,30 @@
     <message>
         <source>Cancel</source>
         <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation>ソート</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>インポート</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>エクスポート</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>テキストファイル</translation>
+    </message>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation>ファイルネームを選択して下さい</translation>
+    </message>
+    <message>
+        <source>Please select a file name</source>
+        <translation>ファイルネームを選択して下さい</translation>
     </message>
 </context>
 <context>
@@ -773,6 +812,10 @@ current filter?</source>
         <source>Web site at http://portabase.sourceforge.net</source>
         <translation>http://portabase.sourceforge.net</translation>
     </message>
+    <message>
+        <source>File already exists; overwrite it?</source>
+        <translation>ファイルは存在します…オーバーライトしますか?</translation>
+    </message>
 </context>
 <context>
     <name>Preferences</name>
@@ -871,6 +914,10 @@ current filter?</source>
     <message>
         <source>Cancel</source>
         <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Row Colors</source>
+        <translation>列の色</translation>
     </message>
 </context>
 <context>
