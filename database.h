@@ -22,7 +22,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 8
+#define FILE_VERSION 9
 
 #define OPEN_NEWER_VERSION 0
 #define OPEN_SUCCESS 1

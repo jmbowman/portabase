@@ -363,22 +363,33 @@ void PortaBase::createFile(const DocLnk &f, int source)
                        "new file dialog",
                        tr("Choose a filename to save under"));
     if (!file.isEmpty()) {
-        doc = new DocLnk(f);
-        doc->setType("application/portabase");
-        QFileInfo info(file);
-        doc->setName(info.baseName());
-        doc->setFile(info.dirPath(TRUE) + "/" + info.baseName() + ".pob");
-        QPEApplication::setDocumentDir(info.dirPath(TRUE));
-        QMessageBox crypt(tr("PortaBase"), tr("Encrypt the file?"),
-                          QMessageBox::NoIcon, QMessageBox::Yes,
-                          QMessageBox::No | QMessageBox::Default,
-                          QMessageBox::NoButton, this);
-        int result = crypt.exec();
-        if (result == QMessageBox::Cancel) {
-            ok = FALSE;
+        if (QFile::exists(file)) {
+            int overwrite = QMessageBox::warning(this, tr("PortaBase"),
+                                     tr("File already exists; overwrite it?"),
+                                     tr("Yes"), tr("No"),
+                                     QString::null, 1);
+            if (overwrite == 1) {
+                ok = FALSE;
+            }
         }
-        else if (result == QMessageBox::Yes) {
-            encrypt = TRUE;
+        if (ok) {
+            doc = new DocLnk(f);
+            doc->setType("application/portabase");
+            QFileInfo info(file);
+            doc->setName(info.baseName());
+            doc->setFile(info.dirPath(TRUE) + "/" + info.baseName() + ".pob");
+            QPEApplication::setDocumentDir(info.dirPath(TRUE));
+            QMessageBox crypt(tr("PortaBase"), tr("Encrypt the file?"),
+                              QMessageBox::NoIcon, QMessageBox::Yes,
+                              QMessageBox::No | QMessageBox::Default,
+                              QMessageBox::NoButton, this);
+            int result = crypt.exec();
+            if (result == QMessageBox::Cancel) {
+                ok = FALSE;
+            }
+            else if (result == QMessageBox::Yes) {
+                encrypt = TRUE;
+            }
         }
     }
 #else
@@ -1266,7 +1277,7 @@ void PortaBase::showHelp()
 
 void PortaBase::aboutPortaBase()
 {
-    QString message = tr("PortaBase") + " 1.5\n";
+    QString message = tr("PortaBase") + " 1.6.1\n";
     message += tr("Copyright (C)") + " 2002-2003 Jeremy Bowman\n\n";
     message += tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::information(this, tr("About PortaBase"), message);

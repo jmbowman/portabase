@@ -56,16 +56,19 @@ bool ImportDialog::exec()
         QPEApplication::setDocumentDir(info.dirPath(TRUE));
     }
 
-    QStringList encodings;
-    encodings.append("UTF-8");
-    encodings.append("Latin-1");
-    bool ok;
-    QString encoding = QInputDialog::getItem(QObject::tr("Import"),
-                                            QObject::tr("Text encoding") + ":",
-                                            encodings, 0, FALSE, &ok,
-                                            parentWidget);
-    if (!ok) {
-        return FALSE;
+    QString encoding = "";
+    if (source == CSV_FILE) {
+        QStringList encodings;
+        encodings.append("UTF-8");
+        encodings.append("Latin-1");
+        bool ok;
+        encoding = QInputDialog::getItem(QObject::tr("Import"),
+                                         QObject::tr("Text encoding") + ":",
+                                         encodings, 0, FALSE, &ok,
+                                         parentWidget);
+        if (!ok) {
+            return FALSE;
+        }
     }
 
     QString error;

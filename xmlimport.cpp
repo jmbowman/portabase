@@ -905,6 +905,8 @@ void XMLImport::buildParentsMap()
     parents.insert("gview", "global");
     parents.insert("gsort", "global");
     parents.insert("gfilter", "global");
+    // accidentally exported in 1.6, allow it and ignore it
+    parents.insert("gcrypt", "global");
 
     parents.insert("enum", "enums");
     parents.insert("eindex", "enum");

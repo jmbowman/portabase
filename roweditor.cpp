@@ -65,7 +65,7 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
                     QString error = db->isValidValue(type, value);
                     if (error != "") {
                         QString message = colNames[i] + " " + error;
-		        QMessageBox::warning(this, tr("PortaBase"), message);
+                        QMessageBox::warning(this, tr("PortaBase"), message);
                         finished = FALSE;
                         break;
                     }
@@ -76,7 +76,7 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
                     QString error = db->isValidValue(type, value);
                     if (error != "") {
                         QString message = colNames[i] + " " + error;
-		        QMessageBox::warning(this, tr("PortaBase"), message);
+                        QMessageBox::warning(this, tr("PortaBase"), message);
                         finished = FALSE;
                         break;
                     }

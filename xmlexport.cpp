@@ -50,6 +50,9 @@ void XMLExport::addGlobalView(c4_View &global)
     for (int i = 0; i < count; i++) {
         const c4_Property prop = global.NthProperty(i);
         QString name = getPropName(prop);
+        if (name == "gcrypt") {
+            continue;
+        }
         *output << (indent + "<" + name + ">");
         *output << getValue(global, "_" + name, prop.Type(), 0);
         *output << ("</" + name + ">\n");

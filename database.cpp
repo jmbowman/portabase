@@ -144,8 +144,11 @@ QString Database::load()
         addDesktopStats();
     }
     if (version < 8) {
-        addEnumDataIndices();
         addViewDefaults();
+    }
+    if (version < 9) {
+        // added in version 8, but may be out of synch due to an update bug
+        addEnumDataIndices();
     }
     maxId = data.GetSize() - 1;
     return "";
@@ -1025,7 +1028,7 @@ void Database::updateRow(int rowId, QStringList values)
     for (int i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString idString = makeColId(cId (temp[i]), type);
-        if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
+        if (type == STRING || type == NOTE) {
             c4_StringProp prop(idString);
             prop (data[index]) = values[i].utf8();
         }

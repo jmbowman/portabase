@@ -1,3 +1,23 @@
+2003-04-03  JMB  Enum update bugfix, file overwrite warning
+
+    When the value of an enum was changed, its index wasn't updated in the
+    data table, so it was sorted and filtered as if its value hadn't changed;
+    this has been corrected.
+
+    The desktop versions now launch a confirmation dialog if you choose an
+    existing file when selecting the path to a new PortaBase file.  Useful
+    if you accidentally click "New" instead of "Open" and don't realize it.
+
+2003-04-02  JMB  XML export bugfix, desktop import bugfix
+
+    Version 1.6 accidentally exported an element called "gcrypt" indicating
+    whether the source file was encrypted or not; this is no longer exported,
+    and the XML import will gracefully ignore it if present.
+
+    The desktop version of 1.6 prompted for a text encoding even when
+    importing XML files and MobileDB files; this wasn't necessary and is
+    no longer done.
+
 2003-03-30  #################### PortaBase 1.6 ####################
 
 2003-03-30  JMB  CSV import enhancements, menu update bugfix
