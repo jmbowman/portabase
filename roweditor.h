@@ -1,7 +1,7 @@
 /*
  * roweditor.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +13,7 @@
 #define ROWEDITOR_H
 
 #include <qdialog.h>
+#include <qstringlist.h>
 #include <qvaluelist.h>
 #include "datatypes.h"
 
@@ -21,7 +22,6 @@ class DateWidget;
 class QCheckBox;
 class QComboBox;
 class QLineEdit;
-class QScrollView;
 class NoteButton;
 class TimeWidget;
 
@@ -41,9 +41,6 @@ public:
 
     bool edit(Database *subject, int rowId = -1);
 
-protected:
-    void resizeEvent(QResizeEvent *event);
-
 private:
     void addContent(int rowId);
 
@@ -51,7 +48,6 @@ private:
     Database *db;
     QStringList colNames;
     int *colTypes;
-    QScrollView *sv;
     LineEditList lineEdits;
     CheckBoxList checkBoxes;
     NoteButtonList noteButtons;

@@ -1,7 +1,7 @@
 /*
  * condition.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -10,10 +10,10 @@
  */
 
 #include <mk4.h>
+#include <qobject.h>
 #include "condition.h"
 #include "database.h"
 #include "datatypes.h"
-#include "portabase.h"
 
 Condition::Condition(Database *dbase) : colName("_anytext"), operation(CONTAINS), constant(""), caseSensitive(FALSE), description("")
 {
@@ -262,7 +262,7 @@ void Condition::updateDescription()
 {
     int type = STRING;
     if (colName == "_anytext") {
-        description = PortaBase::tr("Any text column");
+        description = QObject::tr("Any text column");
     }
     else {
         description = colName;
@@ -271,10 +271,10 @@ void Condition::updateDescription()
     description += " ";
     if (type == BOOLEAN) {
         if (constant == "1") {
-            description += "is checked";
+            description += QObject::tr("is checked");
         }
         else {
-            description += "is not checked";
+            description += QObject::tr("is not checked");
         }
         return;
     }
@@ -299,10 +299,10 @@ QString Condition::getOperatorText(int op)
         return "=";
     }
     else if (op == CONTAINS) {
-        return PortaBase::tr("contains");
+        return QObject::tr("contains");
     }
     else if (op == STARTSWITH) {
-        return PortaBase::tr("starts with");
+        return QObject::tr("starts with");
     }
     else if (op == LESSTHAN) {
         return "<";

@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -165,12 +165,13 @@ void View::deleteAllRows()
     c4_View sorted = dbview.SortOn(Id);
     int count = dbview.GetSize();
     int *ids = new int[count];
-    for (int i = 0; i < count; i++) {
+    int i;
+    for (i = 0; i < count; i++) {
         ids[i] = Id (sorted[count - i - 1]);
     }
     // do deletions after obtaining all IDs so we don't need to worry about
     // the view changing
-    for (int i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         db->deleteRow(ids[i]);
     }
     delete[] ids;
@@ -318,14 +319,15 @@ QStringList View::getStatistics(int colIndex)
         QStringList options = db->listEnumOptions(type);
         int optionCount = options.count();
         int *tallies = new int[optionCount];
-        for (int i = 0; i < optionCount; i++) {
+        int i;
+        for (i = 0; i < optionCount; i++) {
             tallies[i] = 0;
         }
-        for (int i = 0; i < count; i++) {
+        for (i = 0; i < count; i++) {
             int index = options.findIndex(QString::fromUtf8(prop (dbview[i])));
             tallies[index] = tallies[index] + 1;
         }
-        for (int i = 0; i < optionCount; i++) {
+        for (i = 0; i < optionCount; i++) {
             lines.append(options[i] + ": " + QString::number(tallies[i]));
         }
         delete[] tallies;

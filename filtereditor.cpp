@@ -1,7 +1,7 @@
 /*
  * filtereditor.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,13 +9,17 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/resource.h"
+#endif
+
 #include <qhbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qlistbox.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
-#include <qvbox.h>
+#include <qlayout.h>
 #include "database.h"
 #include "condition.h"
 #include "conditioneditor.h"
@@ -26,15 +30,18 @@ FilterEditor::FilterEditor(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f), db(0), filter(0)
 {
     setCaption(tr("Filter Editor") + " - " + tr("PortaBase"));
-    vbox = new QVBox(this);
+    QVBoxLayout *vbox = new QVBoxLayout(this);
 
-    QHBox *hbox = new QHBox(vbox);
+    QHBox *hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     new QLabel(tr("Filter Name"), hbox);
     nameBox = new QLineEdit(hbox);
 
-    listBox = new QListBox(vbox);
+    listBox = new QListBox(this);
+    vbox->addWidget(listBox);
 
-    hbox = new QHBox(vbox);
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     QPushButton *addButton = new QPushButton(tr("Add"), hbox);
     connect(addButton, SIGNAL(clicked()), this, SLOT(addCondition()));
     QPushButton *editButton = new QPushButton(tr("Edit"), hbox);
@@ -46,7 +53,24 @@ FilterEditor::FilterEditor(QWidget *parent, const char *name, WFlags f)
     QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
+#if defined(DESKTOP)
+    vbox->addWidget(new QLabel(" ", this));
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    new QWidget(hbox);
+    vbox->setResizeMode(QLayout::FreeResize);
+    setMinimumWidth(parent->width() / 2);
+    setMinimumHeight(parent->height() / 2);
+    setIcon(Resource::loadPixmap("portabase"));
+#else
     showMaximized();
+#endif
 }
 
 FilterEditor::~FilterEditor()
@@ -186,10 +210,4 @@ void FilterEditor::applyChanges()
     db->deleteFilter(originalName);
     filter->setName(nameBox->text());
     db->addFilter(filter);
-}
-
-void FilterEditor::resizeEvent(QResizeEvent *event)
-{
-    QDialog::resizeEvent(event);
-    vbox->resize(size());
 }

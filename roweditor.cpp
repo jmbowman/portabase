@@ -1,7 +1,7 @@
 /*
  * roweditor.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,11 +9,18 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include <qhbox.h>
+#include <qpushbutton.h>
+#include "desktop/resource.h"
+#endif
+
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qdialog.h>
 #include <qgrid.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include <qscrollview.h>
@@ -25,7 +32,7 @@
 #include "timewidget.h"
 
 RowEditor::RowEditor(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), colTypes(0), sv(0)
+  : QDialog(parent, name, TRUE, f), db(0), colTypes(0)
 {
     setCaption(tr("Row Editor") + " - " + tr("PortaBase"));
 }
@@ -130,8 +137,9 @@ bool RowEditor::edit(Database *subject, int rowId)
 
 void RowEditor::addContent(int rowId)
 {
-    sv = new QScrollView(this);
-    sv->resize(size());
+    QVBoxLayout *vbox = new QVBoxLayout(this);
+    QScrollView *sv = new QScrollView(this);
+    vbox->addWidget(sv);
     QGrid *grid = new QGrid(2, sv->viewport());
     sv->addChild(grid);
     sv->setResizePolicy(QScrollView::AutoOneFit);
@@ -174,7 +182,11 @@ void RowEditor::addContent(int rowId)
         }
         else if (type == TIME) {
             TimeWidget *widget = new TimeWidget(grid);
-            widget->setTime(values[i].toInt());
+            int defaultTime = values[i].toInt();
+            if (defaultTime == 0) {
+                defaultTime = -2;
+            }
+            widget->setTime(defaultTime);
             timeWidgets.append(widget);
         }
         else if (type >= FIRST_ENUM) {
@@ -191,13 +203,23 @@ void RowEditor::addContent(int rowId)
     }
     new QWidget(grid);
     new QWidget(grid);
-    showMaximized();
-}
 
-void RowEditor::resizeEvent(QResizeEvent *event)
-{
-    QDialog::resizeEvent(event);
-    if (sv) {
-        sv->resize(size());
-    }
+#if defined(DESKTOP)
+    QHBox *hbox = new QHBox(this);
+    vbox->addWidget(hbox);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    new QWidget(hbox);
+    vbox->setResizeMode(QLayout::FreeResize);
+    QWidget *parent = parentWidget();
+    setMinimumWidth(parent->width() / 2);
+    setMinimumHeight(parent->height() / 2);
+    setIcon(Resource::loadPixmap("portabase"));
+#else
+    showMaximized();
+#endif
 }

@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,29 +9,31 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/config.h"
+#include "desktop/resource.h"
+#else
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#endif
+
 #include <qdatetime.h>
 #include <qmessagebox.h>
+#include <qobject.h>
+#include <qregexp.h>
 #include <qstringlist.h>
 #include "condition.h"
 #include "csvutils.h"
 #include "database.h"
 #include "filter.h"
-#include "portabase.h"
 #include "view.h"
 
-Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
+Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
 {
     c4_View::_CaseSensitive = TRUE;
     checkedPixmap = Resource::loadPixmap("portabase/checked");
     uncheckedPixmap = Resource::loadPixmap("portabase/unchecked");
-    DateFormat format = TimeString::currentDateFormat();
-    dateOrder = format.shortOrder();
-    dateSeparator = format.separator();
-    Config qpeConfig("qpe");
-    qpeConfig.setGroup("Time");
-    ampm = qpeConfig.readBoolEntry("AMPM");
+    updateDateTimePrefs();
     Config pbConfig("portabase");
     pbConfig.setGroup("General");
     showSeconds = pbConfig.readBoolEntry("ShowSeconds");
@@ -66,8 +68,8 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
     }
     if (*ok) {
         columns = file->GetAs("_columns[_cindex:I,_cname:S,_ctype:I,_cdefault:S,_cid:I]");
-        views = file->GetAs("_views[_vname:S,_vrpp:I]");
-        viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I]");
+        views = file->GetAs("_views[_vname:S,_vrpp:I,_vdeskrpp:I]");
+        viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I,_vcdeskwidth:I]");
         sorts = file->GetAs("_sorts[_sname:S]");
         sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
         filters = file->GetAs("_filters[_fname:S]");
@@ -89,6 +91,9 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         if (version < 6) {
             fixConditionIndices();
         }
+        if (version < 7) {
+            addDesktopStats();
+        }
         maxId = data.GetSize() - 1;
     }
 }
@@ -104,6 +109,20 @@ Database::~Database()
     }
 }
 
+void Database::updateDateTimePrefs()
+{
+#if defined(DESKTOP)
+    PBDateFormat format = TimeString::currentDateFormat();
+#else
+    DateFormat format = TimeString::currentDateFormat();
+#endif
+    dateOrder = format.shortOrder();
+    dateSeparator = format.separator();
+    Config qpeConfig("qpe");
+    qpeConfig.setGroup("Time");
+    ampm = qpeConfig.readBoolEntry("AMPM");
+}
+
 QString Database::currentView()
 {
     return QString::fromUtf8(gView(global[0]));
@@ -112,7 +131,11 @@ QString Database::currentView()
 View *Database::getView(QString name)
 {
     int index = views.Find(vName [name.utf8()]);
+#if defined(DESKTOP)
+    int rpp = vDeskRpp (views[index]);
+#else
     int rpp = vRpp (views[index]);
+#endif
     c4_View cols = viewColumns.Select(vcView [name.utf8()]);
     cols = cols.SortOn(vcIndex);
     int size = cols.GetSize();
@@ -126,7 +149,11 @@ View *Database::getView(QString name)
         names.append(name);
         int colIndex = columns.Find(cName [name.utf8()]);
         types[i] = cType (columns[colIndex]);
+#if defined(DESKTOP)
+        widths[i] = vcDeskWidth (cols[i]);
+#else
         widths[i] = vcWidth (cols[i]);
+#endif
         int idNum = cId (columns[colIndex]);
         colIds.append(makeColId(idNum, types[i]));
         if (types[i] == FLOAT) {
@@ -161,6 +188,7 @@ void Database::addView(QString name, QStringList names)
     c4_Row row;
     vName (row) = name.utf8();
     vRpp (row) = 13;
+    vDeskRpp (row) = 25;
     views.Add(row);
     int count = names.count();
     for (int i = 0; i < count; i++) {
@@ -169,6 +197,7 @@ void Database::addView(QString name, QStringList names)
         vcIndex (colRow) = i;
         vcName (colRow) = names[i].utf8();
         vcWidth (colRow) = 60;
+        vcDeskWidth (colRow) = 120;
         viewColumns.Add(colRow);
     }
 }
@@ -209,7 +238,11 @@ void Database::setViewColWidths(int *widths)
     int i = 0;
     int colIndex = viewColumns.Find(vcView [viewName] + vcIndex [i]);
     while (colIndex != -1) {
+#if defined(DESKTOP)
+        vcDeskWidth (viewColumns[colIndex]) = widths[i];
+#else
         vcWidth (viewColumns[colIndex]) = widths[i];
+#endif
         i++;
         colIndex = viewColumns.Find(vcView [viewName] + vcIndex [i]);
     }
@@ -219,7 +252,11 @@ void Database::setViewRowsPerPage(int rpp)
 {
     QCString viewName(gView(global[0]));
     int index = views.Find(vName [viewName]);
+#if defined(DESKTOP)
+    vDeskRpp (views[index]) = rpp;
+#else
     vRpp (views[index]) = rpp;
+#endif
 }
 
 QStringList Database::listColumns()
@@ -286,45 +323,45 @@ QString Database::isValidValue(int type, QString value)
         bool ok = FALSE;
         value.toInt(&ok);
         if (!ok) {
-            return "must be an integer";
+            return QObject::tr("must be an integer");
         }
     }
     else if (type == FLOAT) {
         bool ok = FALSE;
         value.toDouble(&ok);
         if (!ok) {
-            return "must be a decimal value";
+            return QObject::tr("must be a decimal value");
         }
     }
     else if (type == BOOLEAN) {
         bool ok = FALSE;
         int val = value.toInt(&ok);
         if (!ok || val < 0 || val > 1) {
-            return "must be 0 or 1";
+            return QObject::tr("must be 0 or 1");
         }
     }
     else if (type == DATE) {
         if (value.length() != 8) {
-            return "invalid date";
+            return QObject::tr("invalid date");
         }
         int y = value.left(4).toInt();
         int m = value.mid(4, 2).toInt();
         int d = value.right(2).toInt();
         if (!QDate::isValid(y, m, d)) {
-            return "invalid date";
+            return QObject::tr("invalid date");
         }
     }
     else if (type == TIME) {
         bool ok;
         parseTimeString(value, &ok);
         if (!ok) {
-            return "invalid time";
+            return QObject::tr("invalid time");
         }
     }
     else if (type >= FIRST_ENUM) {
         QStringList options = listEnumOptions(type);
         if (options.findIndex(value) == -1) {
-            return "no such option";
+            return QObject::tr("no such option");
         }
     }
     return "";
@@ -411,17 +448,18 @@ void Database::deleteColumn(QString name)
     }
     // remove the column from any views containing it
     int count = views.GetSize();
-    for (int i = 0; i < count; i++) {
+    int i;
+    for (i = 0; i < count; i++) {
         deleteViewColumn(QString::fromUtf8(vName (views[i])), name);
     }
     // remove the column from any sortings containing it
     count = sorts.GetSize();
-    for (int i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         deleteSortingColumn(QString::fromUtf8(sName (sorts[i])), name);
     }
     // remove the column from any filters containing it
     count = filters.GetSize();
-    for (int i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         deleteFilterColumn(QString::fromUtf8(fName (filters[i])), name);
     }
     // remove the column from the definition
@@ -777,7 +815,7 @@ QString Database::addRow(QStringList values, int *rowId)
     Id (row) = maxId + 1;
     int count = values.count();
     if (count != columns.GetSize()) {
-        return PortaBase::tr("Wrong number of columns");
+        return QObject::tr("Wrong number of columns");
     }
     c4_View temp = columns.SortOn(cIndex);
     for (int i = 0; i < count; i++) {
@@ -792,7 +830,7 @@ QString Database::addRow(QStringList values, int *rowId)
         }
         QString error = isValidValue(type, value);
         if (error != "") {
-            return name + " " + PortaBase::tr(error);
+            return name + " " + error;
         }
         QString idString = makeColId(cId (temp[i]), type);
         if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
@@ -909,6 +947,7 @@ void Database::addViewColumn(QString viewName, QString columnName)
     vcIndex (colRow) = cols.GetSize();
     vcName (colRow) = columnName.utf8();
     vcWidth (colRow) = 60;
+    vcDeskWidth (colRow) = 120;
     viewColumns.Add(colRow);
 }
 
@@ -974,7 +1013,8 @@ void Database::addEnum(QString name, QStringList options)
     int nextId = FIRST_ENUM;
     c4_View idsort = enums.SortOn(eId);
     int enumCount = enums.GetSize();
-    for (int i = 0; i < enumCount; i++) {
+    int i;
+    for (i = 0; i < enumCount; i++) {
         if (nextId == eId (idsort[i])) {
             nextId++;
         }
@@ -985,7 +1025,7 @@ void Database::addEnum(QString name, QStringList options)
     }
     enums.Add(eName [name.utf8()] + eId[nextId] + eIndex [enumCount]);
     int optionCount = options.count();
-    for (int i = 0; i < optionCount; i++) {
+    for (i = 0; i < optionCount; i++) {
         enumOptions.Add(eoEnum [nextId] + eoIndex [i]
                         + eoText [options[i].utf8()]);
     }
@@ -1005,10 +1045,11 @@ void Database::deleteEnum(QString name)
     c4_View deletions = columns.Select(cType [id]);
     int delCount = deletions.GetSize();
     QStringList deleteNames;
-    for (int i = 0; i < delCount; i++) {
+    int i;
+    for (i = 0; i < delCount; i++) {
         deleteNames.append(QString::fromUtf8(cName (deletions[i])));
     }
-    for (int i = 0; i < delCount; i++) {
+    for (i = 0; i < delCount; i++) {
         deleteColumn(deleteNames[i]);
     }
     // delete the enum's options
@@ -1225,12 +1266,19 @@ QString Database::dateToString(QDate &date)
         return "";
     }
     int *parts = new int[3];
-    if (dateOrder == DateFormat::YearMonthDay) {
+#if defined(DESKTOP)
+    PBDateFormat::Order ymd = PBDateFormat::YearMonthDay;
+    PBDateFormat::Order mdy = PBDateFormat::MonthDayYear;
+#else
+    DateFormat::Order ymd = DateFormat::YearMonthDay;
+    DateFormat::Order mdy = DateFormat::MonthDayYear;
+#endif
+    if (dateOrder == ymd) {
         parts[0] = date.year();
         parts[1] = date.month();
         parts[2] = date.day();
     }
-    else if (dateOrder == DateFormat::MonthDayYear) {
+    else if (dateOrder == mdy) {
         parts[0] = date.month();
         parts[1] = date.day();
         parts[2] = date.year();
@@ -1406,5 +1454,18 @@ void Database::fixConditionIndices()
             index = filterConditions.Find(fcFilter [filterName], index + 1);
             fcPosition (filterConditions[index]) = j;
         }
+    }
+}
+
+void Database::addDesktopStats()
+{
+    int count = viewColumns.GetSize();
+    int i;
+    for (i = 0; i < count; i++) {
+        vcDeskWidth (viewColumns[i]) = 2 * vcWidth (viewColumns[i]);
+    }
+    count = views.GetSize();
+    for (i = 0; i < count; i++) {
+        vDeskRpp (views[i]) = 25;
     }
 }

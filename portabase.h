@@ -1,7 +1,7 @@
 /*
  * portabase.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,12 +12,13 @@
 #ifndef PORTABASE_H
 #define PORTABASE_H
 
-#include <qpe/filemanager.h>
 #include <qmainwindow.h>
+#include <qstringlist.h>
 #include <qpixmap.h>
 #include "datatypes.h"
 
 class Database;
+class DocLnk;
 class FileSelector;
 class QAction;
 class QPEMenuBar;
@@ -74,6 +75,9 @@ private slots:
     void editFilter();
     void deleteFilter();
     void simpleFilter();
+    void showHelp();
+    void aboutPortaBase();
+    void aboutQt();
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -88,37 +92,58 @@ private:
     void rebuildSortMenu();
     void rebuildFilterMenu();
     void closeViewer();
+    void showFileSelector();
+    void showDataViewer();
 
 private:
     Database *db;
     QWidgetStack *mainStack;
     FileSelector *fileSelector;
     QPEMenuBar *menu;
-    QPEMenuBar *selectorMenu;
     QToolBar *toolbar;
-    QToolBar *selectorToolbar;
+    QAction *fileNewAction;
+    QAction *fileOpenAction;
+    QAction *fileDeleteAction;
+    QAction *importMobileDBAction;
+    QAction *quitAction;
     QAction *fileSaveAction;
+    QAction *dataImportAction;
+    QAction *dataExportAction;
+    QAction *deleteRowsAction;
+    QAction *editColsAction;
+    QAction *manageEnumsAction;
+    QAction *prefsAction;
+    QAction *closeAction;
+    QAction *rowAddAction;
     QAction *rowEditAction;
     QAction *rowDeleteAction;
+    QAction *viewAddAction;
+    QAction *viewEditAction;
+    QAction *viewDeleteAction;
+    QAction *viewAllColsAction;
+    QAction *sortAddAction;
+    QAction *sortEditAction;
+    QAction *sortDeleteAction;
+    QAction *findAction;
+    QAction *filterAddAction;
+    QAction *filterEditAction;
+    QAction *filterDeleteAction;
+    QAction *filterAllRowsAction;
+    QAction *helpAction;
+    QAction *aboutAction;
+    QAction *aboutQtAction;
     QPopupMenu *file;
     QPopupMenu *view;
     QPopupMenu *sort;
     QPopupMenu *filter;
+    QPopupMenu *help;
     DocLnk *doc;
     ViewDisplay *viewer;
     bool newdb;
-    int allColumnsViewId;
-    int editViewId;
-    int deleteViewId;
     QStringList viewNames;
     IntList viewIds;
-    int editSortId;
-    int deleteSortId;
     QStringList sortNames;
     IntList sortIds;
-    int allRowsFilterId;
-    int editFilterId;
-    int deleteFilterId;
     QStringList filterNames;
     IntList filterIds;
     bool isEdited;

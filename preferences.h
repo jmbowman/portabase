@@ -1,7 +1,7 @@
 /*
  * preferences.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,6 +11,10 @@
 
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
+
+#if defined(DESKTOP)
+#include "desktop/timestring.h"
+#endif
 
 #include <qdialog.h>
 #include <qfontdatabase.h>
@@ -42,12 +46,19 @@ private:
     QFontDatabase fontdb;
     QStringList fonts;
     QValueList<int> sizes;
+    int sizeFactor;
     QComboBox *fontName;
     QComboBox *fontSize;
     QLabel *sample;
     QCheckBox *confirmDeletions;
     QCheckBox *booleanToggle;
     QCheckBox *showSeconds;
+#if defined(DESKTOP)
+    PBDateFormat date_formats[4];
+    QComboBox *dateFormatCombo;
+    QComboBox *ampmCombo;
+    QComboBox *weekStartCombo;
+#endif
 };
 
 #endif

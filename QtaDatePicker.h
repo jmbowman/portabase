@@ -3,16 +3,16 @@
 //
 #ifndef QTADATEPICKER_H
 #define QTADATEPICKER_H
-#include <qdialog.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qtableview.h>
-#include <qpainter.h>
-#include <qheader.h>
-#include <qdatetime.h>
-#include <qmessagebox.h>
 
+#include <qtableview.h>
+#include <qdialog.h>
+
+class QButton;
 class QComboBox;
+class QDate;
+class QHeader;
+class QMessageBox;
+class QPainter;
 class QSpinBox;
 
 //

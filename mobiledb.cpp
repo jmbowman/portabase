@@ -1,7 +1,7 @@
 /*
  * mobiledb.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +46,8 @@ bool MobileDBFile::readMobileDBHeader() {
 
 	//count rows of data
 	rowcount = 0;
-	for (int i = 0; i < number_records; i++) {
+	int i;
+	for (i = 0; i < number_records; i++) {
 		if ((record_list[i].record_attributes & 0x7) == DATARECORD ||  
 		    (record_list[i].record_attributes & 0x7) == DATARECORD_HIDDEN) {
 			rowcount++;
@@ -94,7 +95,7 @@ bool MobileDBFile::readMobileDBHeader() {
 	}
 	p = raw_record + 7;
 	end = raw_record + recordSize;
-	for (int i = 0; i < colcount && p < end && *p != 0xff; i++) {
+	for (i = 0; i < colcount && p < end && *p != 0xff; i++) {
 		p++;
                 QString type = QString::fromLatin1((char*)p);
                 fieldtypes.append(type);
@@ -118,7 +119,7 @@ bool MobileDBFile::readMobileDBHeader() {
 	}
 	p = raw_record + 7;
 	end = raw_record + recordSize;
-	for (int i = 0; i < colcount && p < end && *p != 0xff; i++) {   
+	for (i = 0; i < colcount && p < end && *p != 0xff; i++) {   
 		int index  = *p;
 		p++;
                 QString length = QString::fromLatin1((char*)p);
@@ -169,16 +170,17 @@ void MobileDBFile::dumpMobileDBHeader()
 	printf("# Row %d\n", rowcount);	
 	printf("# Column %d\n", colcount);	
 	printf("Column Labels - ");
-	for (int i = 0; i < colcount; i++) {
+	int i;
+	for (i = 0; i < colcount; i++) {
 		printf("%s | ", fieldlabels[i].latin1());
 	}
 	printf("\n");
 	printf("Column Types - ");
-	for (int i = 0; i < colcount; i++) {
+	for (i = 0; i < colcount; i++) {
 		printf("%s | ", fieldtypes[i].latin1());
 	}
 	printf("Column Size - ");
-	for (int i = 0; i < colcount; i++) {
+	for (i = 0; i < colcount; i++) {
 		printf("%d | ", fieldlengths[i]);
 	}
 	printf("\n");

@@ -1,7 +1,7 @@
 /*
  * pdbfile.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -133,7 +133,8 @@ bool PDBFile::readRecordList()
 	}
 	record_list = new PDBFile::RecordInfo[number_records];
 	unsigned char record_buf[8];
-	for (int i = 0 ; i < number_records; i++) {
+        int i;
+	for (i = 0 ; i < number_records; i++) {
 		if (fd->readBlock((char*)record_buf,
                                   sizeof(record_buf)) == -1) {
 			return false;
@@ -144,7 +145,7 @@ bool PDBFile::readRecordList()
 		record_list[i].unique_id = toint(record_buf + 4);
 	}
 	//calculate record size
-	for(int i = 0 ; i < number_records - 1; i++) {
+	for (i = 0 ; i < number_records - 1; i++) {
 		record_list[i].record_size = record_list[i + 1].record_data_offset - record_list[i].record_data_offset;
 	}
 	record_list[number_records - 1].record_size = file_size - record_list[number_records - 1].record_data_offset;

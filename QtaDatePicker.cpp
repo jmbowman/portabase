@@ -1,19 +1,24 @@
 //
 //   Source file for the Qt Date Picker add-on
 //
+#if defined(DESKTOP)
+#include "desktop/config.h"
+#include "desktop/resource.h"
+#else
 #include <qpe/config.h>
 #include <qpe/resource.h>
-#include <qcombobox.h>
-#include <qdialog.h>
-#include <qpushbutton.h>
-#include <qtableview.h>
-#include <qpainter.h>
-#include <qheader.h>
-#include <qpixmap.h>
-#include <qdatetime.h>
-#include <qmessagebox.h>
-#include <qcolor.h>
+#endif
+
 #include <qbrush.h>
+#include <qcolor.h>
+#include <qcombobox.h>
+#include <qdatetime.h>
+#include <qhbox.h>
+#include <qheader.h>
+#include <qlayout.h>
+#include <qpainter.h>
+#include <qpixmap.h>
+#include <qpushbutton.h>
 #include <qspinbox.h>
 #include <stdio.h>
 #include "QtaDatePicker.h"
@@ -41,9 +46,6 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 	// Disable the size gripper
 	this->setSizeGripEnabled( FALSE );
 
-	// Set our size
-	this->resize( 180, 195 );
-
 	// Set the title
 	this->setCaption( tr("Select a date") );
 
@@ -52,19 +54,21 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 	qpeConfig.setGroup("Time");
 	startMonday = qpeConfig.readBoolEntry("MONDAY") ? 1 : 0;
 
-	// Create the main calendar table
-	calendarTable = new DatePickerTable( this );
-	calendarTable->setGeometry( 13, 46, 154, 120 );
+	// Initialize the layout
+	QVBoxLayout *vbox = new QVBoxLayout(this);
+	vbox->setResizeMode(QLayout::FreeResize);
+	QHBox *hbox = new QHBox(this);
+	vbox->addWidget(hbox);
 
-	// Set the year label
-	yearBox = new QSpinBox( 1753, 7000, 1, this );
-	yearBox->setValue( date->year() );
-	yearBox->setGeometry( 130, 1, 50, 22 );
-	connect(yearBox, SIGNAL(valueChanged(int)),
-                this, SLOT(datePickerYearChanged(int)));
+	// Create the 'prev' month button
+	prevMonthButton = new QPushButton(hbox);
+	QPixmap prevPixmap = Resource::loadPixmap("portabase/QtaDatePickerPrev");
+	prevMonthButton->setPixmap(prevPixmap);
+	connect(prevMonthButton, SIGNAL(clicked()), this, 
+		SLOT(datePickerPrevMonth()));
 
 	// Set the month label
-	monthBox = new QComboBox( FALSE, this );
+	monthBox = new QComboBox(FALSE, hbox);
 	monthBox->insertItem( tr("January") );
 	monthBox->insertItem( tr("February") );
 	monthBox->insertItem( tr("March") );
@@ -78,28 +82,25 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 	monthBox->insertItem( tr("November") );
 	monthBox->insertItem( tr("December") );
 	monthBox->setCurrentItem( date->month() - 1 );
-	monthBox->setGeometry( 21, 1, 87, 22 );
 	connect(monthBox, SIGNAL(activated(int)),
                 this, SLOT(datePickerMonthChanged(int)));
 
-	// Create the 'prev' & 'next' month buttons
-	prevMonthButton = new QPushButton( this );
-	QPixmap prevPixmap = Resource::loadPixmap("portabase/QtaDatePickerPrev");
-	prevMonthButton->setGeometry( 0, 1, 22, 22 );
-	prevMonthButton->setPixmap( prevPixmap );
-	connect( prevMonthButton, SIGNAL(clicked()), this, 
-		SLOT(datePickerPrevMonth()) );
-
-	nextMonthButton = new QPushButton( this );
+	// Create the 'next' month button
+	nextMonthButton = new QPushButton(hbox);
 	QPixmap nextPixmap = Resource::loadPixmap("portabase/QtaDatePickerNext");
-	nextMonthButton->setGeometry( 107, 1, 22, 22 );
-	nextMonthButton->setPixmap( nextPixmap );
-	connect( nextMonthButton, SIGNAL(clicked()), this, 
-		SLOT(datePickerNextMonth()) );
+	nextMonthButton->setPixmap(nextPixmap);
+	connect(nextMonthButton, SIGNAL(clicked()), this, 
+		SLOT(datePickerNextMonth()));
+
+	// Set the year label
+	yearBox = new QSpinBox(1753, 7000, 1, hbox);
+	yearBox->setValue(date->year());
+	connect(yearBox, SIGNAL(valueChanged(int)),
+                this, SLOT(datePickerYearChanged(int)));
 
 	// Add the day headers
 	tableHeader = new QHeader( this );
-	tableHeader->setGeometry( 13, 25, 154, 20 );
+        vbox->addWidget(tableHeader, 0, Qt::AlignHCenter);
 	tableHeader->setOrientation( Horizontal );
 	if (!startMonday) {
 		tableHeader->addLabel( tr("S"), 22 );
@@ -114,18 +115,31 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 		tableHeader->addLabel( tr("S"), 22 );
 	}
 
+	// Create the main calendar table
+	calendarTable = new DatePickerTable( this );
+        calendarTable->setMinimumWidth(154);
+        calendarTable->setMinimumHeight(120);
+        vbox->addWidget(calendarTable, 1, Qt::AlignHCenter);
+
+        hbox = new QHBox(this);
+        vbox->addWidget(hbox);
+        new QWidget(hbox);
+
 	// Create the 'OK' button
-	okButton = new QPushButton( tr("OK"), this );
-	okButton->setGeometry( 35, 170, 50, 25 );
+	okButton = new QPushButton(tr("OK"), hbox);
 	connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+        new QWidget(hbox);
 
 	// Create the 'Cancel' button
-	cancelButton = new QPushButton( tr("Cancel"), this );
-	cancelButton->setGeometry( 95, 170, 50, 25 );
+	cancelButton = new QPushButton(tr("Cancel"), hbox);
 	connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+        new QWidget(hbox);
 
 	// Populate the month layout array
 	this->datePickerMonthArray( date );
+#ifdef DEKSTOP
+	setIcon(Resource::loadPixmap("portabase"));
+#endif
 }
 //
 // Destructor
@@ -276,7 +290,7 @@ void QDatePicker::datePickerYearChanged(int year)
 //===================================================================
 
 // Constructor for table
-DatePickerTable::DatePickerTable( QWidget *parent ) 
+DatePickerTable::DatePickerTable( QWidget *parent )
 	: QTableView( parent )
 {
 	// Set the table layout

@@ -1,8 +1,9 @@
-PortaBase 1.4.1 (January 2003)
+PortaBase 1.5 (January 2003)
 ----------------------------
-PortaBase (portable database) is a personal database application written for
-the Linux-based models of Sharp Zaurus PDA (and should work on any other Linux
-PDA using the Qtopia environment.)
+PortaBase (portable database) is a personal database application originally
+written for the Linux-based models of Sharp Zaurus PDA (and should work on
+any other Linux PDA using the Qtopia environment.)  It can now also be
+run as a Linux or Windows desktop application.
 
 The main features PortaBase currently has are:
 - One data table per file
@@ -25,10 +26,10 @@ The main features PortaBase currently has are:
 See the help file (help/html/portabase.html) for more information on features
 and usage.  This help file is also the online help for the application,
 available by clicking the "?" button at the top right of any screen in
-PortaBase.
+PortaBase for the Zaurus, or Help->Help Contents in desktop PortaBase.
 
-Installation
-------------
+Zaurus Installation
+-------------------
 Note that there are *two* packages that must be installed in order to run
 PortaBase; since many people didn't realize this for version 1.0, they are
 now only distributed together in a zip file along with this README file.  First
@@ -38,8 +39,8 @@ it is likely to be used by other applications in the near future.)  Once
 both packages have been installed, PortaBase can be launched from the
 Applications tab and the two .ipk files may be safely deleted.
 
-Upgrades
---------
+Zaurus Upgrades
+---------------
 To upgrade from a previous version of PortaBase, do the following:
 
 1) uninstall libmetakit1 and portabase (your data files will be left alone)
@@ -48,6 +49,11 @@ To upgrade from a previous version of PortaBase, do the following:
 
 IMPORTANT NOTE: libmetakit1 has changed for PortaBase 1.4; unlike previous
 PortaBase upgrades, it must be upgraded in addition to the portabase package.
+
+Windows Installation and Upgrades
+---------------------------------
+Run the downloaded executable; it will launch the installation program,
+just follow the directions.
 
 Technical Info
 --------------

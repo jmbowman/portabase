@@ -1,3 +1,25 @@
+2003-01-28  JMB  Support use as a Linux or Windows desktop application
+
+    Made a wide variety of minor code changes that allow PortaBase to
+    be compiled for use as a Linux or Windows desktop application; I've
+    checked in the files needed to build a Debian package and a Windows
+    installer.  So PortaBase 1.5 will be released for the Zaurus,
+    Debian GNU/Linux, and Windows; data files created with any of these
+    versions can be opened with any of the others (and the desktop
+    versions store column widths and rows per page settings independent of
+    those used on the Zaurus, due to radically different screen sizes).
+    This should make it much easier to keep data synchronized between the
+    Zaurus and PCs, or PortaBase can be used as a standalone desktop
+    application.
+
+2003-01-26  JMB  Time column "Now" default bugfix, Qt NC license clause
+
+    Time columns which were set to "now" were using a default value of
+    midnight instead; should now work correctly.
+
+    Added an exception to the license to allow use of the Non-Commercial
+    version of Qt for Windows (not allowed using the unmodified GPL).
+
 2003-01-13  ################### PortaBase 1.4.1 ###################
 
 2003-01-13  JMB  Fixed upgrade of files that use filters

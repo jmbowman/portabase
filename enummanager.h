@@ -1,7 +1,7 @@
 /*
  * enummanager.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 
 class Database;
 class QListBox;
-class QVBox;
 
 class EnumManager: public QDialog
 {
@@ -28,9 +27,6 @@ public:
 
     void applyChanges();
 
-protected:
-    void resizeEvent(QResizeEvent *event);
-
 private slots:
     void addEnum();
     void editEnum();
@@ -39,7 +35,6 @@ private slots:
     void moveDown();
 
 private:
-    QVBox *vbox;
     QListBox *listBox;
     Database *db;
 };

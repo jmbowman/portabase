@@ -1,0 +1,3 @@
+?package(portabase):needs=x11 section=Apps/Databases\
+  title="PortaBase" command="portabase"\
+  icon="/usr/share/portabase/icons/portabase.xpm"

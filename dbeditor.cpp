@@ -1,13 +1,17 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
+#if defined(DESKTOP)
+#include <qlabel.h>
+#include "desktop/resource.h"
+#endif
 
 #include <qheader.h>
 #include <qlistview.h>
@@ -48,7 +52,21 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+
+#if defined(DESKTOP)
+    new QLabel(" ", vbox);
+    hbox = new QHBox(vbox);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    new QWidget(hbox);
+    setIcon(Resource::loadPixmap("portabase"));
+#else
     showMaximized();
+#endif
 }
 
 DBEditor::~DBEditor()
@@ -192,7 +210,7 @@ bool DBEditor::isValidDefault(int type, QString defaultVal)
     }
     QString error = db->isValidValue(type, defaultVal);
     if (error != "") {
-        QString message = tr("Default") + " " + tr(error);
+        QString message = tr("Default") + " " + error;
         QMessageBox::warning(this, tr("PortaBase"), message);
         return FALSE;
     }
@@ -354,7 +372,8 @@ void DBEditor::applyChanges()
 {
     // handle deletions of original columns
     int deleteCount = deletedCols.count();
-    for (int i = 0; i < deleteCount; i++) {
+    int i;
+    for (i = 0; i < deleteCount; i++) {
         QString name = deletedCols[i];
         db->deleteColumn(name);
     }
@@ -375,7 +394,7 @@ void DBEditor::applyChanges()
         db->setDefault(oldName, defaultVal);
     }
     // handle renames of original columns
-    for (int i = 0; i < oldCount; i++) {
+    for (i = 0; i < oldCount; i++) {
         QString oldName = originalCols[i];
         QString newName = renamedCols[i];
         if (oldName != newName) {
@@ -388,7 +407,7 @@ void DBEditor::applyChanges()
     // add new columns
     c4_View temp = info.Select(ceOldIndex [-1]);
     int newCount = temp.GetSize();
-    for (int i = 0; i < newCount; i++) {
+    for (i = 0; i < newCount; i++) {
         int index = ceNewIndex (temp[i]);
         QString name = QString::fromUtf8(ceName (temp[i]));
         int type = ceType (temp[i]);

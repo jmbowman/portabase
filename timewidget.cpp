@@ -1,7 +1,7 @@
 /*
  * timewidget.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,12 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/config.h"
+#else
 #include <qpe/config.h>
+#endif
+
 #include <qdatetime.h>
 #include <qlabel.h>
 #include <qlineedit.h>
@@ -77,24 +82,24 @@ void TimeWidget::setTime(int time)
     int hour = 0;
     int minute = 0;
     int second = 0;
-    if (time == -1) {
+    if (time < 0) {
         QTime now = QTime::currentTime();
         hour = now.hour();
         minute = now.minute();
         second = now.second();
-        if (!noneButton->isOn()) {
-            noneButton->setOn(TRUE);
-            noneToggle();
-        }
     }
     else {
         hour = time / 3600;
         minute = (time - hour * 3600) / 60;
         second = time - hour * 3600 - minute * 60;
-        if (noneButton->isOn()) {
-            noneButton->setOn(FALSE);
-            noneToggle();
-        }
+    }
+    bool none = FALSE;
+    if (time == -1) {
+        none = TRUE;
+    }
+    if (noneButton->isOn() != none) {
+        noneButton->setOn(none);
+        noneToggle();
     }
     if (ampmButton) {
         if (hour > 11) {

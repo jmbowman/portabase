@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 #include <qlabel.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
+#include <qregexp.h>
 #include <qspinbox.h>
 #include <qstringlist.h>
 #include <qtoolbutton.h>
@@ -84,6 +85,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     nextButton = new QToolButton(RightArrow, hbox);
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextPages()));
 
+    updateButtonSizes();
     currentPage = 1;
     firstPageButton = 1;
 }
@@ -91,6 +93,16 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
 ViewDisplay::~ViewDisplay()
 {
 
+}
+
+void ViewDisplay::updateButtonSizes()
+{
+    int buttonHeight = rowsPerPage->sizeHint().height();
+    prevButton->setFixedHeight(buttonHeight);
+    for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
+        pageButtons[i]->setFixedHeight(buttonHeight);
+    }
+    nextButton->setFixedHeight(buttonHeight);
 }
 
 void ViewDisplay::setEdited(bool y)
@@ -229,14 +241,15 @@ void ViewDisplay::setView(QString name)
     closeView();
     table->clear();
     int numCols = table->columns();
-    for (int i = 0; i < numCols; i++) {
+    int i;
+    for (i = 0; i < numCols; i++) {
         table->removeColumn(0);
     }
     view = db->getView(name);
     QStringList colNames = view->getColNames();
     int *types = view->getColTypes();
     int count = colNames.count();
-    for (int i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         if (types[i] == NOTE) {
             table->addColumn(PortaBase::getNotePixmap(), colNames[i],
                              view->getColWidth(i));
@@ -283,7 +296,7 @@ void ViewDisplay::saveViewSettings()
 
 void ViewDisplay::addRow()
 {
-    RowEditor rowEditor;
+    RowEditor rowEditor(this);
     if (rowEditor.edit(db, -1)) {
         view->prepareData();
         updateTable();
@@ -296,7 +309,7 @@ void ViewDisplay::editRow()
 {
     int rowId = selectedRowId();
     if (rowId != -1) {
-        RowEditor rowEditor;
+        RowEditor rowEditor(this);
         if (rowEditor.edit(db, rowId)) {
             view->prepareData();
             updateTable();
@@ -310,7 +323,7 @@ void ViewDisplay::viewRow()
 {
     int rowIndex = selectedRowIndex();
     if (rowIndex != -1) {
-        RowViewer rowViewer;
+        RowViewer rowViewer(this);
         rowViewer.viewRow(db, view, rowIndex);
     }
 }
@@ -411,9 +424,8 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
     else if (timer.elapsed() > 500) {
         if (type == NOTE) {
             QString colName = table->header()->label(column);
-            NoteEditor viewer(colName, this);
+            NoteEditor viewer(colName, TRUE, this);
             viewer.setContent(view->getNote(selectedRowId(), column));
-            viewer.setReadOnly(TRUE);
             viewer.exec();
         }
         else {

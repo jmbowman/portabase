@@ -1,7 +1,7 @@
 /*
  * viewdisplay.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,6 +42,7 @@ public:
     void setDatabase(Database *dbase);
     void updateTable();
     void updateButtons();
+    void updateButtonSizes();
     void saveViewSettings();
     void setView(QString name);
     void setSorting(QString name);

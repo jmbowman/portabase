@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,12 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/resource.h"
+#else
 #include <qpe/resource.h>
+#endif
+
 #include <qdialog.h>
 #include <qhbox.h>
 #include <qlayout.h>
@@ -36,7 +41,21 @@ RowViewer::RowViewer(QWidget *parent, const char *name, WFlags f)
     nextButton = new QPushButton(hbox);
     nextButton->setPixmap(Resource::loadPixmap("forward"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
+
+#if defined(DESKTOP)
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    vbox->setResizeMode(QLayout::FreeResize);
+    setMinimumWidth(parent->width() / 2);
+    setMinimumHeight(parent->height() / 2);
+    setIcon(Resource::loadPixmap("portabase"));
+#else
     showMaximized();
+#endif
 }
 
 RowViewer::~RowViewer()

@@ -1,7 +1,7 @@
 /*
  * datewidget.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,11 +9,21 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/resource.h"
+#else
 #include <qpe/resource.h>
+#endif
+
+#if QT_VERSION >= 300
+#include "desktop/QtaDatePicker.h"
+#else
+#include "QtaDatePicker.h"
+#endif
+
 #include <qdatetime.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
-#include "QtaDatePicker.h"
 #include "database.h"
 #include "datewidget.h"
 

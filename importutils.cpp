@@ -1,7 +1,7 @@
 /*
  * importutils.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,12 +11,13 @@
 
 #include <qdatetime.h>
 #include <qmessagebox.h>
+#include <qobject.h>
+#include <qregexp.h>
 #include <qstringlist.h>
 #include "database.h"
 #include "datatypes.h"
 #include "importutils.h"
 #include "mobiledb.h"
-#include "portabase.h"
 
 ImportUtils::ImportUtils()
 {
@@ -32,22 +33,18 @@ QString ImportUtils::importMobileDB(QString filename, Database *db)
 {
     MobileDBFile mdb(filename);
     if (!mdb.read()) {
-        return PortaBase::tr("Not a valid MobileDB file");
+        return QObject::tr("Not a valid MobileDB file");
     }
     QStringList names = mdb.field_labels();
     int colCount = names.count();
-    /*QString message = "";
-    for (int i = 0; i < colCount; i++) {
-        message += names[i] + "\n";
-    }
-    QMessageBox::information(0, "PortaBase", message);*/
     int rowCount = mdb.row_count();
     int *types = new int[colCount];
     QStringList mdbTypes = mdb.field_types();
     const int *fieldLengths = mdb.field_lengths();
     int *widths = new int[colCount];
     int enumCount = 0;
-    for (int i = 0; i < colCount; i++) {
+    int i;
+    for (i = 0; i < colCount; i++) {
         widths[i] = (fieldLengths[i] * 3) / 2;
         QString type = mdbTypes[i];
         char firstLetter = type[0].latin1();
@@ -98,22 +95,16 @@ QString ImportUtils::importMobileDB(QString filename, Database *db)
         db->addColumn(i, names[i], types[i], defaultVal);
     }
     db->updateDataFormat();
-    for (int i = 0; i < rowCount; i++) {
+    for (i = 0; i < rowCount; i++) {
         QStringList newRow = convertMobileDBRow(mdb.row(i), types);
         int rowColCount = newRow.count();
         if (rowColCount != colCount) {
             // may be some kind of note...ignore it
             continue;
         }
-        /*message = "";
-        int dataColCount = newRow.count();
-        for (int j = 0; j < dataColCount; j++) {
-            message += newRow[j] + "\n";
-        }
-        QMessageBox::information(0, "PortaBase", message);*/
         QString message = db->addRow(newRow);
         if (message != "") {
-            message = PortaBase::tr("Error in row") + " "
+            message = QObject::tr("Error in row") + " "
                       + QString::number(i + 1) + "\n" + message;
             return message;
         }

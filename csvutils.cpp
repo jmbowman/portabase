@@ -1,7 +1,7 @@
 /*
  * csvutils.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -10,13 +10,13 @@
  */
 
 #include <qfile.h>
+#include <qobject.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <qtextstream.h>
 #include "csvutils.h"
 #include "database.h"
 #include "datatypes.h"
-#include "portabase.h"
 
 CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(',')
 {
@@ -32,7 +32,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
 {
     QFile f(filename);
     if (!f.open(IO_ReadOnly)) {
-        return PortaBase::tr("Unable to open file");
+        return QObject::tr("Unable to open file");
     }
     QTextStream input(&f);
     input.setEncoding(QTextStream::UnicodeUTF8);
@@ -74,7 +74,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     int rowId = 0;
                     message = db->addRow(row, &rowId);
                     if (message != "") {
-                        message = PortaBase::tr("Error in row") + " "
+                        message = QObject::tr("Error in row") + " "
                                   + QString::number(rowNum) + "\n" + message;
                         break;
                     }
@@ -108,7 +108,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     int rowId = 0;
                     message = db->addRow(row, &rowId);
                     if (message != "") {
-                        message = PortaBase::tr("Error in row") + " "
+                        message = QObject::tr("Error in row") + " "
                                   + QString::number(rowNum) + "\n" + message;
                         break;
                     }
@@ -130,7 +130,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     int rowId = 0;
                     message = db->addRow(row, &rowId);
                     if (message != "") {
-                        message = PortaBase::tr("Error in row") + " "
+                        message = QObject::tr("Error in row") + " "
                                   + QString::number(rowNum) + "\n" + message;
                         break;
                     }
@@ -162,7 +162,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                 int rowId = 0;
                 message = db->addRow(row, &rowId);
                 if (message != "") {
-                    message = PortaBase::tr("Error in row") + " "
+                    message = QObject::tr("Error in row") + " "
                               + QString::number(rowNum) + "\n" + message;
                     break;
                 }
@@ -184,7 +184,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
         int rowId = 0;
         message = db->addRow(row, &rowId);
         if (message != "") {
-            message = PortaBase::tr("Error in row") + " "
+            message = QObject::tr("Error in row") + " "
                       + QString::number(rowNum) + "\n" + message;
         }
     }

@@ -1,9 +1,30 @@
-Development Environment
------------------------
+Zaurus Development Environment
+------------------------------
 To compile PortaBase (or do any other C++ development for the Zaurus), the
 standard Qtopia development environment is used.  Details can be found at:
 
 http://www.zauruszone.farplanet.net/howtos/linux_compiler_setup_howto.shtml
+
+Windows Development Environment
+-------------------------------
+To compile PortaBase for use as a Windows desktop application, you will
+need the following:
+- Visual C++ 6.0 (not .NET; this is the only compiler supported by Qt-NC)
+- Qt 2.3.0 Non-Commercial version for Windows; available from:
+  http://www.trolltech.com/developer/download/qt-win-noncomm.html
+- tmake, Trolltech's cross-platform Makefile builder; available from:
+  http://www.trolltech.com/developer/download/tmake.html
+- Inno Setup, if you wish to create the PortaBase installer; available from:
+  http://www.jrsoftware.org/isinfo.php
+
+Linux/UNIX Development Environment
+----------------------------------
+To compile PortaBase for use as a Linux or UNIX desktop application, you
+will need the following:
+- g++ (any relatively recent version should work)
+- The latest version of Qt 3 (including qmake and development headers)
+- Other packages as needed to satisfy the above requirements or create
+  packages for your OS/distribution
 
 MetaKit Compilation
 -------------------
@@ -33,13 +54,36 @@ placed in (probably not /usr/local this time).
 - Run "arm-linux-strip libmk4.so" to remove debugging symbols and such in order
   to reduce the size of the library.
 
-PortaBase Compilation
----------------------
+To compile MetaKit for Windows, follow the instructions in MetaKit's README
+file; be sure to build the static library version (mklib).  To compile
+MetaKit for use in Linux desktop PortaBase, just follow the README directions.
+
+PortaBase for Zaurus Compilation
+--------------------------------
 After compiling MetaKit as described above, PortaBase can be compiled in the
 usual manner for Qtopia applications.  Use tmake on portabase.pro as
 described in the compiler setup HOWTO mentioned above.  As with the MetaKit
 library file, arm-linux-strip should be run on the Arm version of the
 "portabase" executable in order to reduce its size.
+
+PortaBase for Windows Compilation, Packaging
+--------------------------------------------
+- Set up environment variables so that the headers and libraries for Qt and
+  MetaKit are available.  VC++ binaries must also be in the PATH, etc.
+- Run "tmake -o Makefile portabase_win.pro"
+- Run "nmake"
+- Fix any environment variables that prevent nmake from finishing, retry...
+- Copy qt-mt230nc.dll and msvcrt.dll to the PortaBase source directory
+- Open portabase.iss with Inno Setup and choose "Compile"
+
+Linux/UNIX compilation
+----------------------
+- Set the QMAKESPEC and QTDIR environment variables as appropriate for your
+  platform
+- Make sure the MetaKit static library (.a) is in your LD_LIBRARY_PATH, and
+  that the dynamic library (.so) isn't
+- Run qmake on portabase_desktop.pro
+- Run make
 
 Package Building
 ----------------
@@ -54,9 +98,9 @@ directory hierarchy as root in a directory of your choice:
 /portabase/opt/QtPalmtop/bin/portabase
 /portabase/opt/QtPalmtop/help/html/portabase.html
 /portabase/opt/QtPalmtop/pics/PortaBase.png
-/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerNext.png
-/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerPrev.png
-/portabase/opt/QtPalmtop/pics/portabase/calendar.png
+/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerNext.xpm
+/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerPrev.xpm
+/portabase/opt/QtPalmtop/pics/portabase/calendar.xpm
 /portabase/opt/QtPalmtop/pics/portabase/checked.png
 /portabase/opt/QtPalmtop/pics/portabase/save.png
 /portabase/opt/QtPalmtop/pics/portabase/save_disabled.png

@@ -1,0 +1,30 @@
+Source: portabase
+Section: x11
+Priority: optional
+Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
+Build-Depends: debhelper (>> 3.0.0), libqt3-dev, qt3-tools
+Standards-Version: 3.5.8
+
+Package: portabase
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: An easy-to-use personal database application
+ PortaBase is a program for conveniently managing one-table database files.
+ Originally developed for the Sharp Zaurus PDAs, it can now also be run as
+ a desktop application for Linux/UNIX and Windows.
+ .
+ Features include:
+  - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
+    and Enum column types
+  - Custom data views (subsets of the columns in any order)
+  - Filter the displayed rows using sets of conditions
+  - Sort the rows by any combination of columns, each in ascending or
+    descending
+    order
+  - Page navigation buttons, with a custom number of rows per page
+  - Add, delete, rearrange, and rename columns at any time
+  - Specify default values for columns
+  - View summary statistics for columns (total, average, min, max, etc.)
+  - Import data from CSV and MobileDB files
+  - Export data to CSV files
+  - Unicode support

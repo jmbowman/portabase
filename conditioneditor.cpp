@@ -1,13 +1,18 @@
 /*
  * conditioneditor.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
+
+#if defined(DESKTOP)
+#include <qpushbutton.h>
+#include "desktop/resource.h"
+#endif
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -89,6 +94,19 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     constantTime = new TimeWidget(constantStack);
     constantCombo = new QComboBox(FALSE, constantStack);
     constantStack->raiseWidget(constantLine);
+
+#if defined(DESKTOP)
+    hbox = new QHBox(this);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    new QWidget(hbox);
+    vbox->addWidget(hbox);
+    setIcon(Resource::loadPixmap("portabase"));
+#endif
 }
 
 ConditionEditor::~ConditionEditor()
@@ -271,7 +289,7 @@ bool ConditionEditor::isValidConstant()
             QString error = db->isValidValue(type, constantLine->text());
             if (error != "") {
                 QMessageBox::warning(this, tr("PortaBase"),
-                                     tr("Constant") + " " + tr(error));
+                                     tr("Constant") + " " + error);
                 result = FALSE;
             }
         }
@@ -279,7 +297,7 @@ bool ConditionEditor::isValidConstant()
             QString error = db->isValidValue(type, constantTime->getTime());
             if (error != "") {
                 QMessageBox::warning(this, tr("PortaBase"),
-                                     tr("Constant") + " " + tr(error));
+                                     tr("Constant") + " " + error);
                 result = FALSE;
             }
         }

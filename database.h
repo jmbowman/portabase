@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,12 +12,17 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include <mk4.h>
+#if defined(DESKTOP)
+#include "desktop/timestring.h"
+#else
 #include <qpe/timestring.h>
+#endif
+
+#include <mk4.h>
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 6
+#define FILE_VERSION 7
 
 class Condition;
 class Filter;
@@ -32,6 +37,7 @@ public:
     Database(QString path, bool *ok);
     ~Database();
 
+    void updateDateTimePrefs();
     QString currentView();
     View *getView(QString name);
     QStringList listViews();
@@ -117,11 +123,16 @@ private:
     void updateEncoding();
     void updateEncoding(c4_View &view);
     void fixConditionIndices();
+    void addDesktopStats();
 
 private:
     QPixmap checkedPixmap;
     QPixmap uncheckedPixmap;
+#if defined(DESKTOP)
+    PBDateFormat::Order dateOrder;
+#else
     DateFormat::Order dateOrder;
+#endif
     QString dateSeparator;
     bool ampm;
     bool showSeconds;
@@ -150,11 +161,13 @@ private:
     // "_views" view
     c4_StringProp vName;
     c4_IntProp vRpp;
+    c4_IntProp vDeskRpp;
     // "_viewcolumns" view
     c4_StringProp vcView;
     c4_IntProp vcIndex;
     c4_StringProp vcName;
     c4_IntProp vcWidth;
+    c4_IntProp vcDeskWidth;
     // "_sorts" view
     c4_StringProp sName;
     // "_sortcolumns" view

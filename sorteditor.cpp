@@ -1,13 +1,17 @@
 /*
  * sorteditor.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
+
+#if defined(DESKTOP)
+#include "desktop/resource.h"
+#endif
 
 #include <qhbox.h>
 #include <qheader.h>
@@ -48,7 +52,23 @@ SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+
+#if defined(DESKTOP)
+    new QLabel(" ", vbox);
+    hbox = new QHBox(vbox);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    new QWidget(hbox);
+    setMinimumWidth(parent->width() / 2);
+    setMinimumHeight(parent->height() / 2);
+    setIcon(Resource::loadPixmap("portabase"));
+#else
     showMaximized();
+#endif
 }
 
 SortEditor::~SortEditor()
@@ -274,10 +294,9 @@ void SortEditor::resizeEvent(QResizeEvent *event)
     QDialog::resizeEvent(event);
     vbox->resize(size());
     if (!resized) {
-        int colWidth = width() / 3 - 2;
-        table->setColumnWidth(0, colWidth);
-        table->setColumnWidth(1, colWidth);
-        table->setColumnWidth(2, colWidth);
+        int colWidth = vbox->width() - table->columnWidth(0) - 20;
+        table->setColumnWidth(1, colWidth / 2);
+        table->setColumnWidth(2, colWidth / 2);
         resized = TRUE;
     }
 }

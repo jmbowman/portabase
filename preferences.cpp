@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,15 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include <qhbox.h>
+#include <qpushbutton.h>
+#include "desktop/config.h"
+#include "desktop/resource.h"
+#else
 #include <qpe/config.h>
+#endif
+
 #include <qapplication.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -26,6 +34,11 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     setCaption(tr("Preferences") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
     vbox->resize(size());
+#if defined(DESKTOP)
+    sizeFactor = 1;
+#else
+    sizeFactor = 10;
+#endif
 
     QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"), vbox);
     new QLabel(tr("Name"), fontGroup);
@@ -36,12 +49,24 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     fontSize = new QComboBox(FALSE, fontGroup);
     connect(fontName, SIGNAL(activated(int)), this, SLOT(updateSizes(int)));
     QFont currentFont = qApp->font();
+    int fontCount = fonts.count();
     QString family = currentFont.family().lower();
-    int index = fonts.findIndex(family);
+    int index = -1;
+    int i;
+    for (i = 0; i < fontCount; i++) {
+        if (family == fonts[i].lower()) {
+            index = i;
+        }
+    }
+    // Windows defaults to a font not in QFontDatabase ???
+    if (index == -1) {
+        fontName->insertItem(currentFont.family());
+        index = fontName->count() - 1;
+    }
     fontName->setCurrentItem(index);
     updateSizes(index);
     int size = currentFont.pointSize();
-    index = sizes.findIndex(size * 10);
+    index = sizes.findIndex(size * sizeFactor);
     if (index > -1) {
         fontSize->setCurrentItem(index);
     }
@@ -60,9 +85,61 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     booleanToggle->setChecked(conf.readBoolEntry("BooleanToggle"));
     showSeconds = new QCheckBox(tr("Show seconds for times"), generalGroup);
     showSeconds->setChecked(conf.readBoolEntry("ShowSeconds"));
-    new QWidget(vbox);
 
+#if defined(DESKTOP)
+    QGroupBox *dateGroup = new QGroupBox(2, Qt::Horizontal,
+                                         tr("Date and Time"), vbox);
+    Config config("qpe");
+    config.setGroup("Date");
+    new QLabel(tr("Date format"), dateGroup);
+    PBDateFormat df(QChar(config.readEntry("Separator", "/")[0]),
+	    (PBDateFormat::Order)config.readNumEntry("ShortOrder",
+                                                  PBDateFormat::DayMonthYear),
+	    (PBDateFormat::Order)config.readNumEntry("LongOrder",
+                                                  PBDateFormat::DayMonthYear));
+    dateFormatCombo = new QComboBox(dateGroup);
+    int currentdf = 0;
+    date_formats[0] = PBDateFormat('/', PBDateFormat::MonthDayYear);
+    date_formats[1] = PBDateFormat('.', PBDateFormat::DayMonthYear);
+    date_formats[2] = PBDateFormat('-', PBDateFormat::YearMonthDay, 
+	    PBDateFormat::DayMonthYear);
+    date_formats[3] = PBDateFormat('/', PBDateFormat::DayMonthYear);
+    for (i = 0; i < 4; i++) {
+        dateFormatCombo->insertItem(date_formats[i].toNumberString());
+        if (df == date_formats[i]) {
+	    currentdf = i;
+        }
+    }
+    dateFormatCombo->setCurrentItem(currentdf);
+
+    config.setGroup("Time");
+    new QLabel(tr("Time format"), dateGroup);
+    ampmCombo = new QComboBox(dateGroup);
+    ampmCombo->insertItem(tr("24 hour"), 0);
+    ampmCombo->insertItem(tr("12 hour"), 1);
+    int show12hr = config.readBoolEntry("AMPM", TRUE) ? 1 : 0;
+    ampmCombo->setCurrentItem(show12hr);
+
+    new QLabel(tr("Weeks start on"), dateGroup);
+    weekStartCombo = new QComboBox(dateGroup);
+    weekStartCombo->insertItem(tr("Sunday"), 0);
+    weekStartCombo->insertItem(tr("Monday"), 1);
+    int startMonday =  config.readBoolEntry("MONDAY") ? 1 : 0;
+    weekStartCombo->setCurrentItem( startMonday );
+
+    QHBox *hbox = new QHBox(vbox);
+    new QWidget(hbox);
+    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    new QWidget(hbox);
+    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    new QWidget(hbox);
+    setIcon(Resource::loadPixmap("portabase"));
+#else
+    new QWidget(vbox);
     showMaximized();
+#endif
 }
 
 Preferences::~Preferences()
@@ -77,11 +154,17 @@ void Preferences::updateSizes(int selection)
         currentSize = sizes[fontSize->currentItem()];
     }
     sizes = fontdb.pointSizes(fontName->text(selection));
-    int newIndex = 0;
     int count = sizes.count();
+    if (count == 0) {
+        QFont currentFont = qApp->font();
+        int size = currentFont.pointSize();
+        sizes.append(size);
+        count = 1;
+    }
     fontSize->clear();
+    int newIndex = 0;
     for (int i = 0; i < count; i++) {
-        fontSize->insertItem(QString::number(sizes[i] / 10));
+        fontSize->insertItem(QString::number(sizes[i] / sizeFactor));
         if (sizes[i] <= currentSize) {
             newIndex = i;
         }
@@ -95,13 +178,25 @@ void Preferences::updateSizes(int selection)
 void Preferences::updateSample(int sizeSelection)
 {
     QString name = fontName->currentText();
-    int size = sizes[sizeSelection] / 10;
+    int size = sizes[sizeSelection] / sizeFactor;
     QFont font(name, size);
     sample->setFont(font);
 }
 
 QFont Preferences::applyChanges()
 {
+#if defined(DESKTOP)
+    Config config("qpe");
+    config.setGroup("Date");
+    PBDateFormat df = date_formats[dateFormatCombo->currentItem()];
+    config.writeEntry("Separator", QString(df.separator()));
+    config.writeEntry("ShortOrder", df.shortOrder());
+    config.writeEntry("LongOrder", df.longOrder());
+    config.setGroup("Time");
+    config.writeEntry("AMPM", ampmCombo->currentItem());
+    config.writeEntry("MONDAY", weekStartCombo->currentItem());
+#endif
+
     Config conf("portabase");
     conf.setGroup("General");
     conf.writeEntry("ConfirmDeletions", confirmDeletions->isChecked());
@@ -109,7 +204,7 @@ QFont Preferences::applyChanges()
     conf.writeEntry("ShowSeconds", showSeconds->isChecked());
     conf.setGroup("Font");
     QString name = fontName->currentText();
-    int size = sizes[fontSize->currentItem()] / 10;
+    int size = sizes[fontSize->currentItem()] / sizeFactor;
     conf.writeEntry("Name", name);
     conf.writeEntry("Size", size);
     QFont font(name, size);

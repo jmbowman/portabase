@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,12 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/qpeapplication.h"
+#else
 #include <qpe/qpeapplication.h>
+#endif
+
 #include "portabase.h"
 
 int main(int argc, char **argv) {
@@ -20,6 +25,5 @@ int main(int argc, char **argv) {
     if (argc == 3 && argv[1] == QCString("-f")) {
         pb.openFile(argv[2]);
     }
-    //app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
     return app.exec();
 }

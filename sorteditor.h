@@ -1,7 +1,7 @@
 /*
  * sorteditor.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +13,7 @@
 #define SORTEDITOR_H
 
 #include <qdialog.h>
+#include <qstringlist.h>
 
 class Database;
 class QLineEdit;
