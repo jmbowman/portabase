@@ -1,4 +1,4 @@
-PortaBase 1.3 (November 2002)
+PortaBase 1.4 (January 2003)
 ----------------------------
 PortaBase (portable database) is a personal database application written for
 the Linux-based models of Sharp Zaurus PDA (and should work on any other Linux
@@ -37,6 +37,17 @@ portabase .ipk file.  (The MetaKit library is packaged separately because
 it is likely to be used by other applications in the near future.)  Once
 both packages have been installed, PortaBase can be launched from the
 Applications tab and the two .ipk files may be safely deleted.
+
+Upgrades
+--------
+To upgrade from a previous version of PortaBase, do the following:
+
+1) uninstall libmetakit1 and portabase (your data files will be left alone)
+2) install the new libmetakit1 and portabase .ipk files
+3) delete both .ipk files (you don't have to, but it frees up space)
+
+IMPORTANT NOTE: libmetakit1 has changed for PortaBase 1.4; unlike previous
+PortaBase upgrades, it must be upgraded in addition to the portabase package.
 
 Technical Info
 --------------

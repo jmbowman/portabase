@@ -1,4 +1,16 @@
-2003-01-05  JMB  Row viewer
+2003-01-07  #################### PortaBase 1.4 ####################
+
+2003-01-07  JMB  Increased maximum rows per page, space launches row viewer
+
+    You can now show up to 9999 rows in a page instead of 999.  Whether
+    there's enough memory on the Zaurus to handle that many rows gracefully is
+    another question. ^_^
+
+    Just noticed that the center of the direction pad is treated as a
+    space bar instead of an enter key, so that now also works to launch the
+    row viewer.
+
+2003-01-05  JMB  Row viewer/browser
 
     Added a row viewer based on a patch I received.  To launch it, either
     double-tap on a row or press enter while the desired row is selcted.

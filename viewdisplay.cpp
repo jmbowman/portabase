@@ -64,7 +64,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
 
     QHBox *hbox = new QHBox(this);
     rowsPerPage = new QSpinBox(hbox);
-    rowsPerPage->setRange(1, 999);
+    rowsPerPage->setRange(1, 9999);
     rowsPerPage->setValue(13);
     connect(rowsPerPage, SIGNAL(valueChanged(int)), this,
             SLOT(updateRowsPerPage(int)));
@@ -470,4 +470,15 @@ void ViewDisplay::showStatistics(int column)
                    QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
     mb.exec();
+}
+
+void ViewDisplay::keyReleaseEvent(QKeyEvent *e)
+{
+    int key = e->key();
+    if (key == Qt::Key_Space) {
+        viewRow();
+    }
+    else {
+        e->ignore();
+    }
 }

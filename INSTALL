@@ -7,15 +7,13 @@ http://www.zauruszone.farplanet.net/howtos/linux_compiler_setup_howto.shtml
 
 MetaKit Compilation
 -------------------
-To compile PortaBase, MetaKit must be compiled first.  The latest official
-release (2.4.7 at time of writing) has a minor bug when compiled for the Arm
-processor used by the Zaurus; you therefore need the latest version from CVS
-(this version of PortaBase was built using the 2002/10/15 CVS content.)
-Instructions on accessing the MetaKit CVS repository are available on the
-MetaKit homepage (http://www.equi4.com/metakit).
+To compile PortaBase, MetaKit must be compiled first.  PortaBase uses a
+version of 2.4.8 patched to perform case-sensitive searches.  Therefore,
+the patch file metakit-2.4.8.patch must be applied to the MetaKit 2.4.8
+source tree before building.
 
 To build MetaKit for the desktop test environment, run dev-x86-qpe.sh and then
-follow the MetaKit installation instructions (in the README file from CVS).
+follow the MetaKit installation instructions (in the MetaKit README file).
 Then copy the created libmk4.so (probably in /usr/local/lib unless you
 specified somewhere else) to /opt/Qtopia/lib/ so it can be found by PortaBase
 at runtime.
@@ -68,3 +66,13 @@ directory hierarchy as root in a directory of your choice:
 file under libmetakit1/CONTROL was copied from libmetakit1_control).  Finally,
 run ipkg-build on the libmetakit1 directory, then the portabase directory; this
 will create the desired .ipk files.
+
+NOTE: For some reason I don't understand yet, installing libmk4.so to
+the above location on the Japanese SL-B500 and SL-C700 models causes PortaBase
+and several other applications to fail to launch.  For these devices, the
+path of this file should instead be:
+
+/libmetakit1/usr/lib/libmk4.so
+
+Note that this makes it impossible to install the libmetakit1 package to a CF
+or SD card.

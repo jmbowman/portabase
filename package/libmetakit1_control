@@ -1,7 +1,7 @@
 Package: libmetakit1
 Priority: optional
 Section: Misc
-Version: 2.4.7.cvs.20021015
+Version: 2.4.8.patched
 Architecture: arm
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
 Depends: libc6

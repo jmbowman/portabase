@@ -18,6 +18,7 @@
 class Database;
 class PortaBase;
 class QHButtonGroup;
+class QKeyEvent;
 class QLabel;
 class QListView;
 class QListViewItem;
@@ -55,6 +56,9 @@ public slots:
     void deleteRow();
     void editRow();
     void viewRow();
+
+protected:
+    void keyReleaseEvent(QKeyEvent *e);
 
 private:
     void setEdited(bool y);
