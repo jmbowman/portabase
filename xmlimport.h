@@ -88,6 +88,7 @@ private:
     IntList enumIds;
     QMap<int,int> columnMap;
     QStringList colNames;
+    IntList idList;
     int colCount;
     IndexMap indexMap;
     FilterMap filterMap;

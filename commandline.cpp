@@ -72,7 +72,8 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         error = utils.importMobileDB(sourceFile, db);
     }
     if (error != "") {
-        printf(error + "\n");
+        printf(error.local8Bit());
+        printf("\n");
         QFile::remove(pbFile);
         return 1;
     }

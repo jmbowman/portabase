@@ -1,3 +1,17 @@
+2003-02-24  JMB  Fixed XML import bug, command-line error message encoding
+
+    The XML importer was retrieving column values by index instead of
+    ID, leading to import failure in many cases; fixed.
+
+    Error messages shown during command-line usage should now be using
+    a reasonable encoding for the locale; hopefully this will allow the
+    display of Japanese text on the Japanese Zaurus models.
+
+2003-02-19  JMB  Better XML import error messages
+
+    Don't overwrite meaningful error message with useless generic error
+    message.  Fixes behavior on Zaurus and Windows.
+
 2003-02-12  #################### PortaBase 1.5 ####################
 
 2003-02-12  JMB  Assorted bug fixes and code cleanup

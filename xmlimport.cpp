@@ -114,6 +114,7 @@ bool XMLImport::startDocument()
     enumMap.clear();
     enumIds.clear();
     columnMap.clear();
+    idList.clear();
     filterMap.clear();
     return TRUE;
 }
@@ -250,7 +251,9 @@ bool XMLImport::characters(const QString &ch)
 
 bool XMLImport::fatalError(const QXmlParseException &exception)
 {
-    error = exception.message();
+    if (error == "") {
+        error = exception.message();
+    }
     return FALSE;
 }
 
@@ -515,7 +518,7 @@ bool XMLImport::addRow()
 {
     QStringList values;
     for (int i = 0; i < colCount; i++) {
-        values.append(getDataField(i));
+        values.append(getDataField(idList[i]));
     }
     if (error != "") {
         return FALSE;
@@ -585,7 +588,6 @@ bool XMLImport::validateColumns()
     if (containsDuplicate(colNames, "cname")) {
         return FALSE;
     }
-    IntList idList;
     colCount = columnMap.count();
     for (int i = 0; i < colCount; i++) {
         if (!columnMap.contains(i)) {
