@@ -8,6 +8,4 @@ Read-only row viewer
 Option to hide navigation bar (and show all rows)
 Option to show Notes as multiline edit fields in row editor
 Option to change a boolean value directly in the data viewer
-Confirm dialogs for deletions (of a row, view, sorting, or filter)
-"Delete all rows" menu item
 "Copy row" menu item

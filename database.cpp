@@ -109,19 +109,28 @@ View *Database::getView(QString name)
     int *types = new int[size];
     int *widths = new int[size];
     QStringList colIds;
+    QStringList floatStringIds;
     for (int i = 0; i < size; i++) {
         QString name = QString::fromUtf8(vcName (cols[i]));
         names.append(name);
         int colIndex = columns.Find(cName [name.utf8()]);
         types[i] = cType (columns[colIndex]);
         widths[i] = vcWidth (cols[i]);
-        colIds.append(makeColId(cId (columns[colIndex]), types[i]));
+        int idNum = cId (columns[colIndex]);
+        colIds.append(makeColId(idNum, types[i]));
+        if (types[i] == FLOAT) {
+            floatStringIds.append(makeColId(idNum, STRING));
+        }
+        else {
+            floatStringIds.append("");
+        }
     }
     if (curView) {
         delete curView;
     }
     gView(global[0]) = name.utf8();
-    curView = new View(this, data, names, types, widths, colIds, rpp);
+    curView = new View(this, data, names, types, widths, colIds,
+                       floatStringIds, rpp);
     return curView;
 }
 
@@ -338,9 +347,13 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal)
     }
     else if (type == FLOAT) {
         c4_FloatProp newProp(idString);
+        // separate column to store number strings as they are entered
+        QString stringColId = makeColId(nextId, STRING);
+        c4_StringProp stringProp(stringColId);
         double value = defaultVal.toDouble();
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
+            stringProp (data[i]) = defaultVal.utf8();
         }
     }
     else {
@@ -418,15 +431,14 @@ QStringList Database::getRow(int rowId)
     c4_View temp = columns.SortOn(cIndex);
     for (int i = 0; i < numCols; i++) {
         int type = cType (temp[i]);
+        if (type == FLOAT) {
+            // want the string representation for this
+            type = STRING;
+        }
         QString idString = makeColId(cId (temp[i]), type);
         if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(idString);
             int value = prop (row);
-            results.append(QString::number(value));
-        }
-        else if (type == FLOAT) {
-            c4_FloatProp prop(idString);
-            double value = prop (row);
             results.append(QString::number(value));
         }
         else if (type == STRING || type == NOTE) {
@@ -754,6 +766,10 @@ QString Database::addRow(QStringList values, int *rowId)
         else if (type == FLOAT) {
             c4_FloatProp prop(idString);
             prop (row) = value.toDouble();
+            // also need to save the string as entered
+            QString stringColId = makeColId(cId (temp[i]), STRING);
+            c4_StringProp stringProp(stringColId);
+            stringProp (row) = value.utf8();
         }
     }
     data.Add(row);
@@ -783,6 +799,10 @@ void Database::updateRow(int rowId, QStringList values)
         else if (type == FLOAT) {
             c4_FloatProp prop(idString);
             prop (data[index]) = values[i].toDouble();
+            // also need to save the string as entered
+            QString stringColId = makeColId(cId (temp[i]), STRING);
+            c4_StringProp stringProp(stringColId);
+            stringProp (data[index]) = values[i].utf8();
         }
     }
 }
@@ -902,6 +922,8 @@ QString Database::formatString(bool old)
         }
         else if (type == FLOAT) {
             result += ":F";
+            // add string representation column
+            result += "," + makeColId(cId (row), STRING) + ":S";
         }
         else {
             result += ":S";
@@ -993,6 +1015,9 @@ void Database::updateDataColumnFormat()
     // Starting in PortaBase 1.3, unique column IDs are used to identify
     // columns in the data view rather than their names; this allows
     // for unicode column names, since they don't appear in the format string
+
+    // Also, the original string representation of decimal fields is now
+    // stored along with the floating point version
     data = file->GetAs(formatString(TRUE));
     int colCount = columns.GetSize();
     int rowCount = data.GetSize();
@@ -1012,8 +1037,12 @@ void Database::updateDataColumnFormat()
         else if (type == FLOAT) {
             c4_FloatProp oldProp(name);
             c4_FloatProp newProp(idString);
+            QString stringColId = makeColId(i, STRING);
+            c4_StringProp stringProp(stringColId);
             for (int i = 0; i < rowCount; i++) {
-                newProp (data[i]) = oldProp (data[i]);
+                double value = oldProp (data[i]);
+                newProp (data[i]) = value;
+                stringProp (data[i]) = QString::number(value).utf8();
             }
         }
         else if (type == STRING || type == NOTE) {

@@ -1,3 +1,11 @@
+2002-11-19  JMB  Better precision on decimal fields
+
+    In previous releases, decimal fields were only shown with six
+    significant digits.  Now the entered string representation is stored
+    along with the floating point number obtained from it, so when browsing
+    the data or editing rows, these values are displayed exactly as they
+    were entered.
+
 2002-11-17  JMB  Font selection, empty date fields, delete confirmations,
                  delete rows in filter
 

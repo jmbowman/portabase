@@ -19,8 +19,8 @@
 #include "view.h"
 
 View::View(Database *parent, c4_View baseview, QStringList colNames, 
-    int *types, int *widths, QStringList colIds, int rpp) : Id("_id"),
-    sortColumn(-1), ascending(TRUE), sortName("")
+    int *types, int *widths, QStringList colIds, QStringList floatStringIds,
+    int rpp) : Id("_id"), sortColumn(-1), ascending(TRUE), sortName("")
 {
     db = parent;
     dbview = baseview;
@@ -28,6 +28,7 @@ View::View(Database *parent, c4_View baseview, QStringList colNames,
     dataTypes = types;
     colWidths = widths;
     ids = colIds;
+    fsIds = floatStringIds;
     numCols = columns.count();
     rowsPerPage = rpp;
     sort(db->currentSorting());
@@ -90,9 +91,9 @@ QStringList View::getRow(int index)
             results.append(QString::number(value));
         }
         else if (type == FLOAT) {
-            c4_FloatProp prop(ids[i]);
-            double value = prop (row);
-            results.append(QString::number(value));
+            // want the string version here
+            c4_StringProp prop(fsIds[i]);
+            results.append(QString::fromUtf8(prop (row)));
         }
         else if (type == STRING || type == NOTE) {
             c4_StringProp prop(ids[i]);
@@ -196,21 +197,30 @@ QStringList View::getStatistics(int colIndex)
     }
     else if (type == FLOAT) {
         c4_FloatProp prop(ids[colIndex]);
+        c4_StringProp stringProp(fsIds[colIndex]);
         double value = prop (dbview[0]);
         double total = value;
         double min = value;
         double max = value;
+        QString minString = QString::fromUtf8(stringProp (dbview[0]));
+        QString maxString = minString;
         for (int i = 1; i < count; i++) {
             double value = prop (dbview[i]);
             total += value;
-            min = QMIN(min, value);
-            max = QMAX(max, value);
+            if (value < min) {
+                min = value;
+                minString = QString::fromUtf8(stringProp (dbview[i]));
+            }
+            if (value > max) {
+                max = value;
+                maxString = QString::fromUtf8(stringProp (dbview[i]));
+            }
         }
         double mean = total / count;
         lines.append(PortaBase::tr("Total") + ": " + QString::number(total));
         lines.append(PortaBase::tr("Average") + ": " + QString::number(mean));
-        lines.append(PortaBase::tr("Minimum") + ": " + QString::number(min));
-        lines.append(PortaBase::tr("Maximum") + ": " + QString::number(max));
+        lines.append(PortaBase::tr("Minimum") + ": " + minString);
+        lines.append(PortaBase::tr("Maximum") + ": " + maxString);
     }
     else if (type == BOOLEAN) {
         c4_IntProp prop(ids[colIndex]);
