@@ -42,6 +42,7 @@ private:
 
 public:
     static QString getText(const QString &caption, const QString &label,
+                           QLineEdit::EchoMode echo,
                            const QString &text = QString::null,
                            bool *ok = 0, QWidget *parent = 0,
                            const char *name = 0);

@@ -9,71 +9,44 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/resource.h"
-#endif
-
 #include <qhbox.h>
 #include <qheader.h>
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
-#include <qvbox.h>
 #include "database.h"
+#include "portabase.h"
 #include "shadedlistitem.h"
 #include "sorteditor.h"
 
 SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), db(0), resized(FALSE)
+    : PBDialog(tr("Sorting Editor"), parent, name, f), db(0), resized(FALSE)
 {
-    setCaption(tr("Sorting Editor") + " - " + tr("PortaBase"));
-    vbox = new QVBox(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    new QLabel("<center><b>" + tr("Sorting Editor") + "</b></center>", vbox);
-#endif
-
-    QHBox *hbox = new QHBox(vbox);
+    QHBox *hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     new QLabel(tr("Sorting Name"), hbox);
     nameBox = new QLineEdit(hbox);
 
-    table = new QListView(vbox);
+    table = new QListView(this);
+    vbox->addWidget(table);
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);
     table->header()->setMovingEnabled(FALSE);
     table->addColumn(tr("Sort"));
     table->setColumnWidthMode(0, QListView::Manual);
     table->setColumnAlignment(0, Qt::AlignHCenter);
-    int colWidth = (vbox->width() - table->columnWidth(0) - 5) / 2;
+    int colWidth = (width() - table->columnWidth(0) - 5) / 2;
     table->addColumn(tr("Column Name"), colWidth);
     table->addColumn(tr("Direction"), colWidth);
     connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
             this, SLOT(tableClicked(QListViewItem*, const QPoint&, int)));
 
-    hbox = new QHBox(vbox);
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
+    addEditButtons(TRUE);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
-#if defined(DESKTOP)
-    new QLabel(" ", vbox);
-    hbox = new QHBox(vbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height());
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout();
     nameBox->setFocus();
 }
 
@@ -197,7 +170,7 @@ void SortEditor::updateTable()
         else {
             item = new ShadedListItem(i, table, item, "", name, direction);
         }
-        item->setPixmap(0, db->getCheckBoxPixmap(sorted));
+        item->setPixmap(0, PortaBase::getCheckBoxPixmap(sorted));
     }
 }
 
@@ -219,7 +192,7 @@ void SortEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
             sortCols.append(name);
             item->setText(2, tr("Ascending"));
         }
-        item->setPixmap(0, db->getCheckBoxPixmap(!sorted));
+        item->setPixmap(0, PortaBase::getCheckBoxPixmap(!sorted));
     }
     else if (column == 2) {
         QString name = item->text(1);
@@ -297,9 +270,8 @@ void SortEditor::applyChanges()
 void SortEditor::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
-    vbox->resize(size());
     if (!resized) {
-        int colWidth = vbox->width() - table->columnWidth(0) - 20;
+        int colWidth = width() - table->columnWidth(0) - 20;
         table->setColumnWidth(1, colWidth / 2);
         table->setColumnWidth(2, colWidth / 2);
         resized = TRUE;

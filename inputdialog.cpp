@@ -148,8 +148,8 @@ InputDialog::~InputDialog()
 */
 
 QString InputDialog::getText(const QString &caption, const QString &label,
-			     const QString &text, bool *ok, QWidget *parent,
-                             const char *name )
+                             QLineEdit::EchoMode, const QString &text,
+                             bool *ok, QWidget *parent, const char *name)
 {
     InputDialog *dlg = new InputDialog(label, parent, name, TRUE, LineEdit);
     dlg->setCaption(caption);

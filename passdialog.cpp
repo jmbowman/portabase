@@ -21,10 +21,11 @@
 #include <qmessagebox.h>
 #include "database.h"
 #include "passdialog.h"
+#include "pbdialog.h"
 
 PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(dbase), mode(dlgMode)
 {
-    setCaption(tr("PortaBase"));
+    setCaption(tr("PortaBase") + PBDialog::titleSuffix);
     // cheated a bit; ordered mode codes so this works
     int rows = mode + 1;
 #if defined(DESKTOP)

@@ -12,12 +12,12 @@
 #ifndef ENUMMANAGER_H
 #define ENUMMANAGER_H
 
-#include <qdialog.h>
+#include "pbdialog.h"
 
 class Database;
 class QListBox;
 
-class EnumManager: public QDialog
+class EnumManager: public PBDialog
 {
     Q_OBJECT
 public:

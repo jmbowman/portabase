@@ -10,15 +10,12 @@
  */
 
 #if defined(DESKTOP)
-#include <qlabel.h>
 #include "desktop/resource.h"
 #else
 #include <qpe/resource.h>
 #endif
 
-#include <qdialog.h>
 #include <qhbox.h>
-#include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtextview.h>
 #include "datatypes.h"
@@ -27,15 +24,8 @@
 #include "viewdisplay.h"
 
 RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), display(parent)
+  : PBDialog(tr("Row Viewer"), parent, name, f), display(parent)
 {
-    setCaption(tr("Row Viewer") + " - " + tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Row Viewer")
-                               + "</b></center>", this));
-#endif
     tv = new QTextView(this);
     vbox->addWidget(tv);
     QHBox *hbox = new QHBox(this);
@@ -50,20 +40,7 @@ RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
     nextButton->setPixmap(Resource::loadPixmap("forward"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
 
-#if defined(DESKTOP)
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(3 * parent->width() / 4);
-    setMinimumHeight(3 * parent->height() / 4);
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout(TRUE, FALSE);
     editButton->setFocus();
 }
 

@@ -9,10 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "../desktop/resource.h"
-#endif
-
 #include <qgrid.h>
 #include <qhbox.h>
 #include <qheader.h>
@@ -21,23 +17,16 @@
 #include <qlistview.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
-#include <qvbox.h>
 #include "calcdateeditor.h"
 #include "calceditor.h"
 #include "calcnode.h"
 #include "calcnodeeditor.h"
 
 CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), db(dbase)
+    : PBDialog(tr("Calculation Editor"), parent, name, f), db(dbase)
 {
-    setCaption(tr("Calculation Editor") + " - " + tr("PortaBase"));
-    vbox = new QVBox(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    new QLabel("<center><b>" + tr("Calculation Editor") + "</b></center>",
-               vbox);
-#endif
-    QGrid *grid = new QGrid(2, vbox);
+    QGrid *grid = new QGrid(2, this);
+    vbox->addWidget(grid);
     new QLabel(tr("Column Name") + ": ", grid);
     new QLabel(calcName, grid);
     new QLabel(tr("Equation") + ":", grid);
@@ -47,24 +36,20 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     new QLabel(tr("Decimal Places") + ":", grid);
     decimalsBox = new QSpinBox(0, 9, 1, grid);
     decimalsBox->setValue(2);
-    tree = new QListView(vbox);
+    tree = new QListView(this);
+    vbox->addWidget(tree);
     tree->setSorting(-1);
-    tree->addColumn("", vbox->width());
+    tree->addColumn("", 100);
     tree->setColumnWidthMode(0, QListView::Manual);
     tree->header()->hide();
     connect(tree, SIGNAL(currentChanged(QListViewItem*)),
             this, SLOT(updateButtons(QListViewItem*)));
 
-    QHBox *hbox = new QHBox(vbox);
-    addButton = new QPushButton(tr("Add"), hbox);
+    addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addNode()));
-    editButton = new QPushButton(tr("Edit"), hbox);
     connect(editButton, SIGNAL(clicked()), this, SLOT(editNode()));
-    deleteButton = new QPushButton(tr("Delete"), hbox);
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteNode()));
-    upButton = new QPushButton(tr("Up"), hbox);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
     updateButtons(0);
 
@@ -72,22 +57,8 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     valueEditor = new CalcNodeEditor(colNames, colTypes, FALSE, this);
     dateEditor = new CalcDateEditor(colNames, colTypes, this);
 
-#if defined(DESKTOP)
-    new QLabel(" ", vbox);
-    hbox = new QHBox(vbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    setIcon(Resource::loadPixmap("portabase"));
-    setMinimumWidth(parent->width());
-    setMinimumHeight(400);
-#else
-    showMaximized();
-#endif
+    finishLayout(TRUE, TRUE, TRUE, parent->width(), 400);
+    tree->setColumnWidth(0, width() - 2);
 }
 
 CalcEditor::~CalcEditor()
@@ -338,6 +309,5 @@ void CalcEditor::swap(QListViewItem *top, QListViewItem *bottom)
 void CalcEditor::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
-    vbox->resize(size());
     tree->setColumnWidth(0, width() - 2);
 }

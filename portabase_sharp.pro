@@ -60,7 +60,8 @@ HEADERS         = portabase.h \
                   calc/calcdateeditor.h \
                   calc/calceditor.h \
                   calc/calcwidget.h \
-                  sharp/fileselector.h
+                  sharp/fileselector.h \
+                  pbdialog.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   inputdialog.cpp \
@@ -109,4 +110,5 @@ SOURCES         = main.cpp \
                   calc/calcdateeditor.cpp \
                   calc/calceditor.cpp \
                   calc/calcwidget.cpp \
-                  sharp/fileselector.cpp
+                  sharp/fileselector.cpp \
+                  pbdialog.cpp

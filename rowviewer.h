@@ -12,10 +12,10 @@
 #ifndef ROWVIEWER_H
 #define ROWVIEWER_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
 #include <qvaluelist.h>
 #include "datatypes.h"
+#include "pbdialog.h"
 
 class QKeyEvent;
 class QPushButton;
@@ -23,7 +23,7 @@ class QTextView;
 class View;
 class ViewDisplay;
 
-class RowViewer: public QDialog
+class RowViewer: public PBDialog
 {
     Q_OBJECT
 public:

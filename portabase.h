@@ -37,6 +37,7 @@ public:
     void openFile(const QString &);
     void setEdited(bool y);
     void setRowSelected(bool y);
+    static QPixmap getCheckBoxPixmap(int checked);
     static QPixmap getNotePixmap();
     void updateSortMenu();
     void updateFilterMenu();

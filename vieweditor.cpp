@@ -9,10 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include "desktop/resource.h"
-#endif
-
 #include <qcombobox.h>
 #include <qhbox.h>
 #include <qheader.h>
@@ -20,70 +16,49 @@
 #include <qlineedit.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
-#include <qvbox.h>
 #include "database.h"
+#include "portabase.h"
 #include "shadedlistitem.h"
 #include "vieweditor.h"
 
 ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), db(0), resized(FALSE)
+    : PBDialog(tr("View Editor"), parent, name, f), db(0), resized(FALSE)
 {
-    setCaption(tr("View Editor") + " - " + tr("PortaBase"));
-    vbox = new QVBox(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    new QLabel("<center><b>" + tr("View Editor") + "</b></center>", vbox);
-#endif
-
-    QHBox *hbox = new QHBox(vbox);
+    QHBox *hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     new QLabel(tr("View Name"), hbox);
     nameBox = new QLineEdit(hbox);
 
-    hbox = new QHBox(vbox);
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     new QLabel(tr("Default Sorting"), hbox);
     sortingBox = new QComboBox(FALSE, hbox);
     hbox->setStretchFactor(sortingBox, 1);
 
-    hbox = new QHBox(vbox);
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     new QLabel(tr("Default Filter"), hbox);
     filterBox = new QComboBox(FALSE, hbox);
     hbox->setStretchFactor(filterBox, 1);
 
-    table = new QListView(vbox);
+    table = new QListView(this);
+    vbox->addWidget(table);
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);
     table->header()->setMovingEnabled(FALSE);
     table->addColumn(tr("Include"));
     table->setColumnWidthMode(0, QListView::Manual);
     table->setColumnAlignment(0, Qt::AlignHCenter);
-    int colWidth = vbox->width() - table->columnWidth(0) - 5;
+    int colWidth = width() - table->columnWidth(0) - 5;
     table->addColumn(tr("Column Name"), colWidth);
     connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
             this, SLOT(tableClicked(QListViewItem*, const QPoint&, int)));
 
-    hbox = new QHBox(vbox);
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
+    addEditButtons(TRUE);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
-#if defined(DESKTOP)
-    new QLabel(" ", vbox);
-    hbox = new QHBox(vbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height());
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout();
     nameBox->setFocus();
 }
 
@@ -237,7 +212,7 @@ void ViewEditor::updateTable()
         else {
             item = new ShadedListItem(i, table, item, "", name);
         }
-        item->setPixmap(0, db->getCheckBoxPixmap(isIncluded(name)));
+        item->setPixmap(0, PortaBase::getCheckBoxPixmap(isIncluded(name)));
     }
 }
 
@@ -256,7 +231,7 @@ void ViewEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
         else {
             includedNames.append(name);
         }
-        item->setPixmap(0, db->getCheckBoxPixmap(!included));
+        item->setPixmap(0, PortaBase::getCheckBoxPixmap(!included));
     }
 }
 
@@ -352,9 +327,8 @@ void ViewEditor::applyChanges()
 void ViewEditor::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
-    vbox->resize(size());
     if (!resized) {
-        int colWidth = vbox->width() - table->columnWidth(0) - 20;
+        int colWidth = width() - table->columnWidth(0) - 20;
         table->setColumnWidth(1, colWidth);
         resized = TRUE;
     }

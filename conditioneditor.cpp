@@ -9,17 +9,11 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include <qpushbutton.h>
-#include "desktop/resource.h"
-#endif
-
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qdatetime.h>
 #include <qhbox.h>
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include <qwidgetstack.h>
@@ -30,17 +24,9 @@
 #include "numberwidget.h"
 #include "timewidget.h"
 
-ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), dataType(STRING)
+ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : PBDialog(tr("Condition Editor"),parent, name, f), dataType(STRING)
 {
     db = dbase;
-    setCaption(tr("Condition Editor") + " - " + tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Condition Editor")
-                               + "</b></center>", this));
-#endif
-
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
     columnList= new QComboBox(FALSE, hbox);
@@ -98,18 +84,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     constantCombo = new QComboBox(FALSE, constantStack);
     constantStack->raiseWidget(constantLine);
 
-#if defined(DESKTOP)
-    hbox = new QHBox(this);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    vbox->addWidget(hbox);
-    setIcon(Resource::loadPixmap("portabase"));
-#endif
+    finishLayout(TRUE, TRUE, FALSE);
 }
 
 ConditionEditor::~ConditionEditor()

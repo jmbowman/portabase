@@ -12,11 +12,11 @@
 #ifndef NOTEEDITOR_H
 #define NOTEEDITOR_H
 
-#include <qdialog.h>
+#include "pbdialog.h"
 
 class QMultiLineEdit;
 
-class NoteEditor: public QDialog
+class NoteEditor: public PBDialog
 {
     Q_OBJECT
 public:

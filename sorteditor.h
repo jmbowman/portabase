@@ -12,17 +12,16 @@
 #ifndef SORTEDITOR_H
 #define SORTEDITOR_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
+#include "pbdialog.h"
 
 class Database;
 class QLineEdit;
 class QListView;
 class QListViewItem;
 class QPoint;
-class QVBox;
 
-class SortEditor: public QDialog
+class SortEditor: public PBDialog
 {
     Q_OBJECT
 public:
@@ -48,7 +47,6 @@ private slots:
     void moveDown();
 
 private:
-    QVBox *vbox;
     QLineEdit *nameBox;
     QListView *table;
     Database *db;

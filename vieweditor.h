@@ -12,8 +12,8 @@
 #ifndef VIEWEDITOR_H
 #define VIEWEDITOR_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
+#include "pbdialog.h"
 
 class Database;
 class QComboBox;
@@ -21,9 +21,8 @@ class QLineEdit;
 class QListView;
 class QListViewItem;
 class QPoint;
-class QVBox;
 
-class ViewEditor: public QDialog
+class ViewEditor: public PBDialog
 {
     Q_OBJECT
 public:
@@ -51,7 +50,6 @@ private slots:
     void moveDown();
 
 private:
-    QVBox *vbox;
     QLineEdit *nameBox;
     QComboBox *sortingBox;
     QComboBox *filterBox;

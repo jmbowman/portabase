@@ -13,12 +13,12 @@
 #include <qfiledialog.h>
 #include <qfileinfo.h>
 #include <qinputdialog.h>
+typedef QInputDialog InputDialog;
 #include "desktop/applnk.h"
 #include "desktop/filemanager.h"
 #include "desktop/importdialog.h"
 #include "desktop/newfiledialog.h"
 #include "desktop/qpeapplication.h"
-#include "desktop/resource.h"
 #else
 #include <qpe/applnk.h>
 #include <qpe/filemanager.h>
@@ -37,24 +37,13 @@
 #include <qlineedit.h>
 #include <qlistbox.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
 #include <qstringlist.h>
-#include <qlayout.h>
 #include "database.h"
 #include "enumeditor.h"
 
 EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
+  : PBDialog(tr("Enum Editor"), parent, name, f), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
 {
-    setCaption(tr("Enum Editor") + " - " + tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->setMargin(8);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Enum Editor")
-                               + "</b></center>", this));
-#endif
-
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
     new QLabel(tr("Enum Name"), hbox);
@@ -72,37 +61,14 @@ EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
     listBox = new QListBox(this);
     vbox->addWidget(listBox);
 
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    QPushButton *addButton = new QPushButton(tr("Add"), hbox);
+    addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addOption()));
-    QPushButton *editButton = new QPushButton(tr("Edit"), hbox);
     connect(editButton, SIGNAL(clicked()), this, SLOT(editOption()));
-    QPushButton *deleteButton = new QPushButton(tr("Delete"), hbox);
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteOption()));
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
-#if defined(DESKTOP)
-    vbox->addWidget(new QLabel(" ", this));
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height());
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout();
     nameBox->setFocus();
 }
 
@@ -225,14 +191,9 @@ void EnumEditor::addOption()
     bool ok = TRUE;
     QString text;
     while (ok) {
-#if defined(DESKTOP)
-        text = QInputDialog::getText(tr("Add"), tr("Option text"),
-                                     QLineEdit::Normal, QString::null,
-                                     &ok, this);
-#else
         text = InputDialog::getText(tr("Add"), tr("Option text"),
-                                    QString::null, &ok, this);
-#endif
+                                    QLineEdit::Normal, QString::null, &ok,
+                                    this);
         if (ok) {
             if (isValidOption(text)) {
                 break;
@@ -259,14 +220,9 @@ void EnumEditor::editOption()
     bool ok = TRUE;
     QString newText;
     while (ok) {
-#if defined(DESKTOP)
-        newText = QInputDialog::getText(tr("Edit"), tr("Option text"),
-                                        QLineEdit::Normal, originalText,
-                                        &ok, this);
-#else
         newText = InputDialog::getText(tr("Edit"), tr("Option text"),
-                                       originalText, &ok, this);
-#endif
+                                       QLineEdit::Normal, originalText, &ok,
+                                       this);
         if (ok) {
             if (newText == originalText) {
                 // clicked ok but left unchanged
@@ -307,15 +263,9 @@ void EnumEditor::deleteOption()
     bool ok = TRUE;
     QString replace("");
     if (!originalName.isEmpty()) {
-#if defined(DESKTOP)
-        replace = QInputDialog::getItem(tr("Delete"),
-                                        tr("Replace where used with:"),
-                                        options, 0, FALSE, &ok, this);
-#else
         replace = InputDialog::getItem(tr("Delete"),
                                        tr("Replace where used with:"),
                                        options, 0, FALSE, &ok, this);
-#endif
     }
     if (ok) {
         int rowIndex = info.Find(eeiIndex [selected]);

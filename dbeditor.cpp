@@ -8,17 +8,11 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
-#if defined(DESKTOP)
-#include <qlabel.h>
-#include "desktop/resource.h"
-#endif
 
 #include <qheader.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
 #include <qregexp.h>
-#include <qvbox.h>
 #include "calc/calcnode.h"
 #include "columneditor.h"
 #include "database.h"
@@ -28,18 +22,12 @@
 #include "shadedlistitem.h"
 
 DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), db(0), ceName("_cename"),
+    : PBDialog(tr("Columns Editor"),parent, name, f), db(0), ceName("_cename"),
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
       ceNewIndex("_cenewindex"), resized(FALSE)
 {
-    setCaption(tr("Columns Editor") + " - " + tr("PortaBase"));
-    vbox = new QVBox(this);
-    vbox->resize(size());
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    new QLabel("<center><b>" + tr("Columns Editor") + "</b></center>", vbox);
-#endif
-    table = new QListView(vbox);
+    table = new QListView(this);
+    vbox->addWidget(table);
     table->setAllColumnsShowFocus(TRUE);
     table->setSorting(-1);
     table->header()->setMovingEnabled(FALSE);
@@ -48,32 +36,14 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     table->addColumn(tr("Type"), colWidth);
     table->addColumn(tr("Default"), colWidth);
 
-    QHBox *hbox = new QHBox(vbox);
-    QPushButton *addButton = new QPushButton(tr("Add"), hbox);
+    addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addColumn()));
-    QPushButton *editButton = new QPushButton(tr("Edit"), hbox);
     connect(editButton, SIGNAL(clicked()), this, SLOT(editColumn()));
-    QPushButton *deleteButton = new QPushButton(tr("Delete"), hbox);
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteColumn()));
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
-#if defined(DESKTOP)
-    new QLabel(" ", vbox);
-    hbox = new QHBox(vbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout();
 }
 
 DBEditor::~DBEditor()
@@ -391,7 +361,8 @@ void DBEditor::updateTable()
         }
         if (type == BOOLEAN) {
             last->setText(2, "");
-            last->setPixmap(2, db->getCheckBoxPixmap(defaultVal.toInt()));
+            int checked = defaultVal.toInt();
+            last->setPixmap(2, PortaBase::getCheckBoxPixmap(checked));
         }
         else if (type == NOTE) {
             last->setPixmap(2, PortaBase::getNotePixmap());
@@ -518,7 +489,6 @@ void DBEditor::applyChanges()
 void DBEditor::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
-    vbox->resize(size());
     if (!resized) {
         int colWidth = width() / 3 - 2;
         table->setColumnWidth(0, colWidth);

@@ -63,7 +63,8 @@ HEADERS         = portabase.h \
                   calc/calcdateeditor.h \
                   calc/calceditor.h \
                   calc/calcwidget.h \
-                  desktop/newfiledialog.h
+                  desktop/newfiledialog.h \
+                  pbdialog.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   view.cpp \
@@ -118,4 +119,5 @@ SOURCES         = main.cpp \
                   calc/calcdateeditor.cpp \
                   calc/calceditor.cpp \
                   calc/calcwidget.cpp \
-                  desktop/newfiledialog.cpp
+                  desktop/newfiledialog.cpp \
+                  pbdialog.cpp

@@ -193,7 +193,8 @@ void ViewDisplay::updateTable()
         for (int j = 0; j < count; j++) {
             int type = types[j];
             if (type == BOOLEAN) {
-                item->setPixmap(j, db->getCheckBoxPixmap(data[j].toInt()));
+                int checked = data[j].toInt();
+                item->setPixmap(j, PortaBase::getCheckBoxPixmap(checked));
             }
             else if (type == NOTE || type == STRING) {
                 item->setText(j, data[j].replace(linefeed, " "));

@@ -16,19 +16,18 @@
 #include <qtextbrowser.h>
 #include <qtoolbutton.h>
 #include "helpbrowser.h"
+#include "pbdialog.h"
 #include "qpeapplication.h"
 #include "resource.h"
 
 HelpBrowser::HelpBrowser(QWidget *parent, const char *name, WFlags f)
   : QDialog(parent, name, TRUE, f)
 {
-    setCaption(tr("Help") + " - " + tr("PortaBase"));
+    setCaption(tr("Help") + " - " + tr("PortaBase") + PBDialog::titleSuffix);
     QVBoxLayout *vbox = new QVBoxLayout(this);
 #if defined(Q_WS_WIN)
     setSizeGripEnabled(TRUE);
     vbox->setMargin(8);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Help") + "</b></center>",
-                               this));
 #endif
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);

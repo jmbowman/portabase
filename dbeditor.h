@@ -13,20 +13,19 @@
 #define DBEDITOR_H
 
 #include <mk4.h>
-#include <qdialog.h>
 #include <qmap.h>
 #include <qstringlist.h>
+#include "pbdialog.h"
 
 class CalcNode;
 class ColumnEditor;
 class Database;
 class QListView;
-class QVBox;
 
 typedef QMap<QString,CalcNode*> NameCalcMap;
 typedef QMap<QString,int> NameDecimalsMap;
 
-class DBEditor: public QDialog
+class DBEditor: public PBDialog
 {
     Q_OBJECT
 public:
@@ -60,7 +59,6 @@ private slots:
 private:
     ColumnEditor *columnEditor;
     Database *db;
-    QVBox *vbox;
     QListView *table;
     QStringList originalCols;
     QStringList deletedCols;

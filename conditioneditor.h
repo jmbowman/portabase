@@ -12,9 +12,9 @@
 #ifndef CONDITIONEDITOR_H
 #define CONDITIONEDITOR_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
 #include "datatypes.h"
+#include "pbdialog.h"
 
 class Condition;
 class Database;
@@ -27,7 +27,7 @@ class QWidgetStack;
 class TimeWidget;
 class NumberWidget;
 
-class ConditionEditor: public QDialog
+class ConditionEditor: public PBDialog
 {
     Q_OBJECT
 public:

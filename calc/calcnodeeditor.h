@@ -12,8 +12,8 @@
 #ifndef CALCNODEEDITOR_H
 #define CALCNODEEDITOR_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
+#include "../pbdialog.h"
 
 class CalcNode;
 class NumberWidget;
@@ -21,7 +21,7 @@ class QButtonGroup;
 class QComboBox;
 class QListBox;
 
-class CalcNodeEditor: public QDialog
+class CalcNodeEditor: public PBDialog
 {
     Q_OBJECT
 public:

@@ -49,7 +49,8 @@ bool PBFileSelector::duplicate()
     bool ok;
     QString name = InputDialog::getText(tr("PortaBase"),
                                         tr("Enter a name for the new file"),
-                                        QString::null, &ok, this);
+                                        QLineEdit::Normal, QString::null,
+                                        &ok, this);
     if (ok && !name.isEmpty()) {
         DocLnk copy;
         configureDocLnk(copy, name);
@@ -76,7 +77,8 @@ bool PBFileSelector::rename()
     bool ok;
     QString name = InputDialog::getText(tr("PortaBase"),
                                         tr("Enter the new file name"),
-                                        QString::null, &ok, this);
+                                        QLineEdit::Normal, QString::null, &ok,
+                                        this);
     if (ok) {
         ok = !name.isEmpty();
     }

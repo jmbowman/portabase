@@ -12,6 +12,7 @@
 #if defined(DESKTOP)
 #include <qfiledialog.h>
 #include <qinputdialog.h>
+typedef QInputDialog InputDialog;
 #include "desktop/config.h"
 #include "desktop/fileselector.h"
 #include "desktop/helpbrowser.h"
@@ -55,6 +56,7 @@
 #include "filter.h"
 #include "filtereditor.h"
 #include "passdialog.h"
+#include "pbdialog.h"
 #include "portabase.h"
 #include "preferences.h"
 #include "sorteditor.h"
@@ -387,13 +389,8 @@ void PortaBase::import()
     types.append(tr("XML"));
     types.append(tr("MobileDB"));
     bool ok = FALSE;
-#if defined(DESKTOP)
-    QString type = QInputDialog::getItem(tr("Import"), tr("Import from:"),
-                                         types, 0, FALSE, &ok, this);
-#else
     QString type = InputDialog::getItem(tr("Import"), tr("Import from:"),
                                         types, 0, FALSE, &ok, this);
-#endif
     if (!ok) {
         return;
     }
@@ -492,7 +489,6 @@ void PortaBase::openFile()
 void PortaBase::openFile(const QString &f)
 {
     DocLnk nf(f);
-    //nf.setType("application/portabase");
     openFile(nf);
 }
 
@@ -603,14 +599,14 @@ void PortaBase::viewIcons()
 void PortaBase::updateCaption(const QString &name)
 {
     if (!doc) {
-        setCaption(tr("PortaBase"));
+        setCaption(tr("PortaBase") + PBDialog::titleSuffix);
     }
     else {
         QString s = name;
         if (s.isNull()) {
             s = doc->name();
         }
-        setCaption(s + " - " + tr("PortaBase"));
+        setCaption(s + " - " + tr("PortaBase") + PBDialog::titleSuffix);
     }
 }
 
@@ -843,13 +839,8 @@ void PortaBase::dataExport()
     types.append(tr("CSV") + "(" + tr("rows in current filter") + ")");
     types.append(tr("XML"));
     bool ok = FALSE;
-#if defined(DESKTOP)
-    QString type = QInputDialog::getItem(tr("Export"), tr("Export to:"),
-                                         types, 0, FALSE, &ok, this);
-#else
     QString type = InputDialog::getItem(tr("Export"), tr("Export to:"),
                                         types, 0, FALSE, &ok, this);
-#endif
     if (!ok) {
         return;
     }
@@ -1220,6 +1211,16 @@ void PortaBase::setRowSelected(bool y)
     rowEditAction->setEnabled(y);
     rowDeleteAction->setEnabled(y);
     rowCopyAction->setEnabled(y);
+}
+
+QPixmap PortaBase::getCheckBoxPixmap(int checked)
+{
+    if (checked) {
+        return Resource::loadPixmap("portabase/checked");
+    }
+    else {
+        return Resource::loadPixmap("portabase/unchecked");
+    }
 }
 
 QPixmap PortaBase::getNotePixmap()

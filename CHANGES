@@ -1,3 +1,13 @@
+2003-09-02  JMB  Windows titlebars fix, code cleanup
+
+    Added " - Qt" to the end of all window titles in the Windows version so
+    they will be displayed properly in the non-commercial version of Qt
+    (so the "title labels" at the top of each window in previous versions
+    added to work around this problem have been removed).
+
+    Also reorganized some of the code to make it smaller and easier to
+    maintain; this also eliminates some duplication in the translation files.
+
 2003-08-31  #################### PortaBase 1.8 ####################
 
 2003-08-21  JMB  Fixed Zaurus encryption bug

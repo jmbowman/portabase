@@ -30,10 +30,11 @@
 #include "enumeditor.h"
 #include "notebutton.h"
 #include "numberwidget.h"
+#include "pbdialog.h"
 
 ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
 {
-    setCaption(tr("PortaBase"));
+    setCaption(tr("PortaBase") + PBDialog::titleSuffix);
 #if defined(DESKTOP)
     QGridLayout *grid = new QGridLayout(this, 4, 2);
 #else

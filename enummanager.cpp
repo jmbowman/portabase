@@ -9,68 +9,28 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include <qlabel.h>
-#include "desktop/resource.h"
-#endif
-
-#include <qhbox.h>
 #include <qlistbox.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
 #include <qstringlist.h>
-#include <qlayout.h>
 #include "database.h"
 #include "enumeditor.h"
 #include "enummanager.h"
 
-EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), contentChanged(FALSE), orderChanged(FALSE)
+EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFlags f) : PBDialog(tr("Enum Manager"), parent, name, f), contentChanged(FALSE), orderChanged(FALSE)
 {
     db = dbase;
-    setCaption(tr("Enum Manager") + " - " + tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->setMargin(8);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Enum Manager")
-                               + "</b></center>", this));
-#endif
-
     listBox = new QListBox(this);
     vbox->addWidget(listBox);
     listBox->insertStringList(db->listEnums());
 
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    QPushButton *addButton = new QPushButton(tr("Add"), hbox);
+    addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addEnum()));
-    QPushButton *editButton = new QPushButton(tr("Edit"), hbox);
     connect(editButton, SIGNAL(clicked()), this, SLOT(editEnum()));
-    QPushButton *deleteButton = new QPushButton(tr("Delete"), hbox);
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteEnum()));
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
-#if defined(DESKTOP)
-    vbox->addWidget(new QLabel(" ", this));
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height());
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout();
 }
 
 EnumManager::~EnumManager()

@@ -16,17 +16,16 @@
 #include "desktop/timestring.h"
 #endif
 
-#include <qdialog.h>
 #include <qfontdatabase.h>
+#include "pbdialog.h"
 
 class ColorButton;
 class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
-class QVBoxLayout;
 
-class Preferences: public QDialog
+class Preferences: public PBDialog
 {
     Q_OBJECT
 public:
@@ -40,7 +39,6 @@ private slots:
     void updateSample(int selectedSize);
 
 private:
-    QVBoxLayout *vbox;
     QFontDatabase fontdb;
     QStringList fonts;
     QValueList<int> sizes;

@@ -12,15 +12,15 @@
 #ifndef CALCDATEEDITOR_H
 #define CALCDATEEDITOR_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
+#include "../pbdialog.h"
 
 class CalcNode;
 class DateWidget;
 class QButtonGroup;
 class QComboBox;
 
-class CalcDateEditor: public QDialog
+class CalcDateEditor: public PBDialog
 {
     Q_OBJECT
 public:

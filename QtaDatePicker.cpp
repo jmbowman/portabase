@@ -22,6 +22,7 @@
 #include <qspinbox.h>
 #include <stdio.h>
 #include "QtaDatePicker.h"
+#include "pbdialog.h"
 //
 // Globals
 //
@@ -47,7 +48,7 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
 	this->setSizeGripEnabled( FALSE );
 
 	// Set the title
-	this->setCaption( tr("Select a date") );
+	this->setCaption(tr("Select a date") + PBDialog::titleSuffix);
 
 	// Find out what day the week starts on
 	Config qpeConfig("qpe");

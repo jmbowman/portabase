@@ -12,9 +12,9 @@
 #ifndef CSV_ERROR_DIALOG_H
 #define CSV_ERROR_DIALOG_H
 
-#include <qdialog.h>
+#include "pbdialog.h"
 
-class CSVErrorDialog: public QDialog
+class CSVErrorDialog: public PBDialog
 {
     Q_OBJECT
 public:

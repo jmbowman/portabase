@@ -9,17 +9,9 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include "../desktop/resource.h"
-#endif
-
 #include <qbuttongroup.h>
 #include <qcombobox.h>
 #include <qgrid.h>
-#include <qhbox.h>
-#include <qlayout.h>
 #include <qlistbox.h>
 #include <qmessagebox.h>
 #include <qradiobutton.h>
@@ -30,16 +22,8 @@
 #include "../numberwidget.h"
 
 CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool showOps, QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f)
+  : PBDialog(tr("Calculation Node Editor"), parent, name, f)
 {
-    setCaption(tr("Calculation Node Editor") + " - " + tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->setMargin(8);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Calculation Node Editor")
-                               + "</b></center>", this));
-#endif
     group = new QButtonGroup(this);
     group->hide();
     QGrid *grid = new QGrid(2, this);
@@ -82,24 +66,8 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
         colButton->setEnabled(FALSE);
     }
 
-#if defined(DESKTOP)
-    vbox->addWidget(new QLabel(" ", this));
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    setMinimumWidth(parent->width() / 2);
-    if (showOps) {
-        setMinimumHeight(parent->height());
-    }
-    setIcon(Resource::loadPixmap("portabase"));
-#endif
+    int minHeight = showOps ? parent->height() : -1;
+    finishLayout(TRUE, TRUE, FALSE, parent->width() / 2, minHeight);
 }
 
 CalcNodeEditor::~CalcNodeEditor()

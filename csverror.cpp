@@ -9,26 +9,12 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include <qhbox.h>
-#include <qpushbutton.h>
-#include "desktop/resource.h"
-#endif
-
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qmultilineedit.h>
 #include "csverror.h"
 
-CSVErrorDialog::CSVErrorDialog(const QString &message, const QString &data, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
+CSVErrorDialog::CSVErrorDialog(const QString &message, const QString &data, QWidget *parent, const char *name, WFlags f) : PBDialog("", parent, name, f)
 {
-    setCaption(tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->setMargin(8);
-#endif
-
     vbox->addWidget(new QLabel(message, this));
     vbox->addWidget(new QLabel(tr("Problematic row") + ":", this));
 
@@ -38,16 +24,7 @@ CSVErrorDialog::CSVErrorDialog(const QString &message, const QString &data, QWid
     dataBox->setReadOnly(TRUE);
     vbox->addWidget(dataBox);
 
-#if defined(DESKTOP)
-    QHBox *hbox = new QHBox(this);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    vbox->addWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    setIcon(Resource::loadPixmap("portabase"));
-#endif
+    finishLayout(TRUE, FALSE, FALSE);
 }
 
 CSVErrorDialog::~CSVErrorDialog()

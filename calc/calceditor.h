@@ -12,9 +12,9 @@
 #ifndef CALCEDITOR_H
 #define CALCEDITOR_H
 
-#include <qdialog.h>
 #include <qmap.h>
 #include <qstringlist.h>
+#include "../pbdialog.h"
 
 class CalcDateEditor;
 class CalcNode;
@@ -25,11 +25,10 @@ class QListView;
 class QListViewItem;
 class QPushButton;
 class QSpinBox;
-class QVBox;
 
 typedef QMap<QListViewItem*,CalcNode*> NodeMap;
 
-class CalcEditor: public QDialog
+class CalcEditor: public PBDialog
 {
     Q_OBJECT
 public:
@@ -60,15 +59,9 @@ private:
 
 private:
     Database *db;
-    QVBox *vbox;
     QLineEdit *equation;
     QSpinBox *decimalsBox;
     QListView *tree;
-    QPushButton *addButton;
-    QPushButton *editButton;
-    QPushButton *deleteButton;
-    QPushButton *upButton;
-    QPushButton *downButton;
     NodeMap nodeMap;
     CalcNodeEditor *nodeEditor;
     CalcNodeEditor *valueEditor;

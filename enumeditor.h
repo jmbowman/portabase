@@ -13,7 +13,7 @@
 #define ENUMEDITOR_H
 
 #include <mk4.h>
-#include <qdialog.h>
+#include "pbdialog.h"
 
 #define ADD_OPTION 0
 #define RENAME_OPTION 1
@@ -27,7 +27,7 @@ class Database;
 class QLineEdit;
 class QListBox;
 
-class EnumEditor: public QDialog
+class EnumEditor: public PBDialog
 {
     Q_OBJECT
 public:

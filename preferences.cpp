@@ -10,9 +10,7 @@
  */
 
 #if defined(DESKTOP)
-#include <qpushbutton.h>
 #include "desktop/config.h"
-#include "desktop/resource.h"
 #else
 #include <qpe/config.h>
 #endif
@@ -25,27 +23,18 @@
 #include <qgroupbox.h>
 #include <qhbox.h>
 #include <qlabel.h>
-#include <qlayout.h>
 #include "colorbutton.h"
 #include "portabase.h"
 #include "preferences.h"
 
 Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f)
+    : PBDialog(tr("Preferences"), parent, name, f)
 {
-    setCaption(tr("Preferences") + " - " + tr("PortaBase"));
-    vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Preferences")
-                    + "</b></center>", this));
-#endif
 #if defined(DESKTOP)
     sizeFactor = 1;
 #else
     sizeFactor = 10;
 #endif
-
     QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"), this);
     vbox->addWidget(fontGroup);
     new QLabel(tr("Name"), fontGroup);
@@ -137,7 +126,7 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     date_formats[0] = PBDateFormat('/', PBDateFormat::MonthDayYear);
     date_formats[1] = PBDateFormat('.', PBDateFormat::DayMonthYear);
     date_formats[2] = PBDateFormat('-', PBDateFormat::YearMonthDay, 
-	    PBDateFormat::DayMonthYear);
+                                   PBDateFormat::DayMonthYear);
     date_formats[3] = PBDateFormat('/', PBDateFormat::DayMonthYear);
     for (i = 0; i < 4; i++) {
         dateFormatCombo->insertItem(date_formats[i].toNumberString());
@@ -161,21 +150,10 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     weekStartCombo->insertItem(tr("Monday"), 1);
     int startMonday =  config.readBoolEntry("MONDAY") ? 1 : 0;
     weekStartCombo->setCurrentItem( startMonday );
-
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    setIcon(Resource::loadPixmap("portabase"));
 #else
     vbox->addWidget(new QWidget(this));
-    showMaximized();
 #endif
+    finishLayout();
 }
 
 Preferences::~Preferences()

@@ -12,7 +12,7 @@
 #ifndef FILTEREDITOR_H
 #define FILTEREDITOR_H
 
-#include <qdialog.h>
+#include "pbdialog.h"
 
 class ConditionEditor;
 class Database;
@@ -20,7 +20,7 @@ class Filter;
 class QLineEdit;
 class QListBox;
 
-class FilterEditor: public QDialog
+class FilterEditor: public PBDialog
 {
     Q_OBJECT
 public:

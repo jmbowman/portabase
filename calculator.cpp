@@ -28,6 +28,7 @@
 #include <qregexp.h>
 
 #include "calculator.h"
+#include "pbdialog.h"
 
 Calculator::Calculator(QWidget* parent, const char *name)
   : QDialog(parent, name, TRUE)
@@ -35,7 +36,7 @@ Calculator::Calculator(QWidget* parent, const char *name)
     m_decimal = '.';
     m_result = "";
 
-    setCaption(tr("PortaBase"));
+    setCaption(tr("PortaBase") + PBDialog::titleSuffix);
 #if defined(DESKTOP)
     int rows = 6;
 #else

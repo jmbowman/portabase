@@ -12,10 +12,10 @@
 #ifndef ROWEDITOR_H
 #define ROWEDITOR_H
 
-#include <qdialog.h>
 #include <qstringlist.h>
 #include <qvaluelist.h>
 #include "datatypes.h"
+#include "pbdialog.h"
 
 class CalcWidget;
 class Database;
@@ -38,7 +38,7 @@ typedef QValueList<DynamicEdit*> DynamicEditList;
 typedef QValueList<CalcWidget*> CalcWidgetList;
 typedef QValueList<QLabel*> LabelList;
 
-class RowEditor: public QDialog
+class RowEditor: public PBDialog
 {
     Q_OBJECT
 public:

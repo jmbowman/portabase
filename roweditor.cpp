@@ -9,12 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(DESKTOP)
-#include <qhbox.h>
-#include <qpushbutton.h>
-#include "desktop/resource.h"
-#endif
-
 #if QT_VERSION >= 300
 #include "desktop/dynamicedit.h"
 #else
@@ -23,10 +17,8 @@
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qdialog.h>
 #include <qgrid.h>
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include <qscrollview.h>
@@ -40,9 +32,9 @@
 #include "timewidget.h"
 
 RowEditor::RowEditor(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), colTypes(0)
+  : PBDialog(tr("Row Editor"), parent, name, f), db(0), colTypes(0)
 {
-    setCaption(tr("Row Editor") + " - " + tr("PortaBase"));
+
 }
 
 RowEditor::~RowEditor()
@@ -173,12 +165,6 @@ QStringList RowEditor::getRow(bool doCalcs)
 
 void RowEditor::addContent(int rowId)
 {
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-#if defined(Q_WS_WIN)
-    setSizeGripEnabled(TRUE);
-    vbox->addWidget(new QLabel("<center><b>" + tr("Row Editor")
-                               + "</b></center>", this));
-#endif
     QScrollView *sv = new QScrollView(this);
     vbox->addWidget(sv);
     QWidget *grid = new QWidget(sv->viewport());
@@ -272,22 +258,5 @@ void RowEditor::addContent(int rowId)
     layout->addWidget(new QWidget(grid), count, 1);
     layout->setRowStretch(count, 1);
 
-#if defined(DESKTOP)
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    vbox->setResizeMode(QLayout::FreeResize);
-    QWidget *parent = parentWidget();
-    setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height());
-    setIcon(Resource::loadPixmap("portabase"));
-#else
-    showMaximized();
-#endif
+    finishLayout();
 }

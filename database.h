@@ -128,7 +128,6 @@ public:
     void deleteRow(int id);
     void toggleBoolean(int rowId, QString colName);
     void commit();
-    QPixmap getCheckBoxPixmap(int checked);
     bool isNoneDate(QDate &date);
     QString dateToString(int date);
     QString dateToString(QDate &date);
@@ -162,8 +161,6 @@ private:
     void calculateAll(int colId, CalcNode *root, int decimals);
 
 private:
-    QPixmap checkedPixmap;
-    QPixmap uncheckedPixmap;
 #if defined(DESKTOP)
     PBDateFormat::Order dateOrder;
 #else
