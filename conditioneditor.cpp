@@ -129,6 +129,7 @@ void ConditionEditor::fillFields(Condition *condition)
     }
     columnList->setCurrentItem(columnIndex);
     caseCheck->setChecked(condition->isCaseSensitive());
+    updateDisplay(columnIndex);
     if (type == BOOLEAN) {
         if (constant == "1") {
             constantCheck->setChecked(TRUE);
@@ -171,7 +172,6 @@ void ConditionEditor::fillFields(Condition *condition)
         opList->setCurrentItem(index);
         constantLine->setText(constant);
     }
-    updateDisplay(columnIndex);
 }
 
 void ConditionEditor::updateDisplay(int columnIndex)

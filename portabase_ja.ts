@@ -641,7 +641,7 @@ deleted:</source>
     </message>
     <message>
         <source>Open Recent</source>
-        <translation>最近を開く</translation>
+        <translation>最近使ったファイル</translation>
     </message>
     <message>
         <source>Save</source>
@@ -677,11 +677,11 @@ deleted:</source>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished">リスト</translation>
+        <translation>リスト</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished">アイコン</translation>
+        <translation>アイコン</translation>
     </message>
     <message>
         <source>Help Contents</source>
@@ -785,7 +785,7 @@ deleted:</source>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>最近を開く(&amp;R)</translation>
+        <translation>最近使ったファイル(&amp;R)</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -1254,7 +1254,7 @@ current filter?</source>
     </message>
     <message>
         <source>Appearance</source>
-        <translation>外観</translation>
+        <translation>表示</translation>
     </message>
     <message>
         <source>Top-level</source>

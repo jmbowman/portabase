@@ -49,6 +49,7 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
     viewNames.remove("_all");
     viewNames.prepend(MenuActions::tr("All Columns"));
     viewBox = new QComboBox(FALSE, hbox);
+    hbox->setStretchFactor(viewBox, 1);
     viewBox->insertStringList(viewNames);
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
 

@@ -1,7 +1,7 @@
 /*
  * pbfileselector.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,13 @@ PBFileSelector::PBFileSelector(const QString &, const QStringList &recentFiles, 
   : SlFileSelector("", f, parent, name)
 {
     setRecent(recentFiles);
+    int count = recentFiles.count();
+    for (int i = 0; i < count; i++) {
+        if (QFile::exists(recentFiles[i])) {
+            setCurrentFile(recentFiles[i]);
+            break;
+        }
+    }
     setSelected();
     connect(this, SIGNAL(fileSelected(const QFileInfo &)),
             this, SLOT(passSelection(const QFileInfo &)));

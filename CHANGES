@@ -1,3 +1,22 @@
+2004-03-29  #################### PortaBase 1.9 ####################
+
+2004-03-29  JMB  Translation updates, minor row viewer fix, etc.
+
+    Up-to-date versions of all translations, fixed the view selection
+    list in the row viewer to use more of the available width, and probably
+    some other things I don't remember.
+
+2004-03-27  JMB  Start in last used directory on recent Sharp ROMs
+
+    Based on a patch received from Usui Makoto, PortaBase for ROMs using
+    the newer file selector now starts with the directory containing the
+    last-viewed file shown.
+
+2004-03-13  JMB  Minor condition editor bugfix
+
+    Fixed the condition editor so that the previous value is correctly
+    selected when editing existing enum conditions.
+
 2004-03-05  JMB  Zaurus build fixes, translation file updates
 
     Fixed some places where compilation for the Zaurus broke during the
@@ -115,10 +134,10 @@
 
 2003-09-10  JMB  Menu shortcuts and accelerators in desktop versions
 
-    Added shortcuts (underlined letters which activate the item when that
-    key is pressed on the keyboard) and accelerators (like "Ctrl-N") for
+    Added accelerators (underlined letters which activate the item when that
+    key is pressed on the keyboard) and shortcuts (like "Ctrl-N") for
     menu items where appropriate in the desktop versions.  The Zaurus
-    versions work as before, since the underlining and accelerator labels
+    versions work as before, since the underlining and shortcut labels
     take up space and it is unusual to work primarily from the keyboard on a
     PDA (even on the C7x0 models).
 

@@ -44,47 +44,47 @@
     <name>CalcNode</name>
     <message>
         <source>Days_Between</source>
-        <translation type="unfinished">Jours_Entre</translation>
+        <translation>Jours_Entre</translation>
     </message>
     <message>
         <source>MAX</source>
-        <translation type="unfinished">MAX</translation>
+        <translation>MAX</translation>
     </message>
     <message>
         <source>MIN</source>
-        <translation type="unfinished">MIN</translation>
+        <translation>MIN</translation>
     </message>
     <message>
         <source>AVERAGE</source>
-        <translation type="unfinished">MOYENNE</translation>
+        <translation>MOYENNE</translation>
     </message>
     <message>
         <source>ABS</source>
-        <translation type="unfinished">ABS</translation>
+        <translation>ABS</translation>
     </message>
     <message>
         <source>SQRT</source>
-        <translation type="unfinished">SQRT</translation>
+        <translation>SQRT</translation>
     </message>
     <message>
         <source>LOG</source>
-        <translation type="unfinished">LOG</translation>
+        <translation>LOG</translation>
     </message>
     <message>
         <source>LN</source>
-        <translation type="unfinished">LN</translation>
+        <translation>LN</translation>
     </message>
     <message>
         <source>Seconds_Between</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondes_Entre</translation>
     </message>
     <message>
         <source>Minutes_Between</source>
-        <translation type="unfinished"></translation>
+        <translation>Minutes_Entre</translation>
     </message>
     <message>
         <source>Hours_Between</source>
-        <translation type="unfinished"></translation>
+        <translation>Heures_Entre</translation>
     </message>
 </context>
 <context>
@@ -114,15 +114,15 @@
     <name>CalcTimeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation type="unfinished">Éditeur de noeud de calcul</translation>
+        <translation>Éditeur de noeud de calcul</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">colonne</translation>
+        <translation>colonne</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished">Constante</translation>
+        <translation>Constante</translation>
     </message>
 </context>
 <context>
@@ -136,35 +136,35 @@
     <name>ColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation type="unfinished">&amp;Teinte :</translation>
+        <translation>&amp;Teinte :</translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation type="unfinished">&amp;Saturation :</translation>
+        <translation>&amp;Saturation :</translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation type="unfinished">&amp;Luminance :</translation>
+        <translation>&amp;Luminance :</translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation type="unfinished">&amp;Rouge :</translation>
+        <translation>&amp;Rouge :</translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation type="unfinished">&amp;Vert :</translation>
+        <translation>&amp;Vert :</translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation type="unfinished">Ble&amp;u :</translation>
+        <translation>Ble&amp;u :</translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation type="unfinished">Canal a&amp;lpha :</translation>
+        <translation>Canal a&amp;lpha :</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="unfinished">Sélection d&apos;une couleur</translation>
+        <translation>Sélection d&apos;une couleur</translation>
     </message>
 </context>
 <context>
@@ -247,30 +247,30 @@
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>image</translation>
     </message>
 </context>
 <context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
-        <translation type="unfinished">N&apos;importe quel</translation>
+        <translation>N&apos;importe quel</translation>
     </message>
     <message>
         <source>%1 is checked</source>
-        <translation type="unfinished">%1 est coché</translation>
+        <translation>%1 est coché</translation>
     </message>
     <message>
         <source>%1 is not checked</source>
-        <translation type="unfinished">%1 n&apos;est pas coché</translation>
+        <translation>%1 n&apos;est pas coché</translation>
     </message>
     <message>
         <source>%1 contains %2</source>
-        <translation type="unfinished">%1 contient %2</translation>
+        <translation>%1 contient %2</translation>
     </message>
     <message>
         <source>%1 starts with %2</source>
-        <translation type="unfinished">%1 démarre par %2</translation>
+        <translation>%1 démarre par %2</translation>
     </message>
 </context>
 <context>
@@ -304,19 +304,19 @@
     <name>Crypto</name>
     <message>
         <source>Incorrect password</source>
-        <translation type="unfinished">mot de passe incorrect</translation>
+        <translation>mot de passe incorrect</translation>
     </message>
     <message>
         <source>Error in decrypting data</source>
-        <translation type="unfinished">Erreur dans le décryptage des données</translation>
+        <translation>Erreur dans le décryptage des données</translation>
     </message>
     <message>
         <source>Error in loading data</source>
-        <translation type="unfinished">Erreur dans le chargement des données</translation>
+        <translation>Erreur dans le chargement des données</translation>
     </message>
     <message>
         <source>Password must be at least 6 characters long</source>
-        <translation type="unfinished">Le mot de passe doit faire au moins 6 car.</translation>
+        <translation>Le mot de passe doit faire au moins 6 car.</translation>
     </message>
 </context>
 <context>
@@ -334,84 +334,86 @@
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Lu</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Me</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Je</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Ve</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Fév</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Avr</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished">Mai</translation>
+        <translation>Mai</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Juin</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Juil</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Aou</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Sep</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Oct</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Déc</translation>
     </message>
     <message>
         <source>%1 %2 %3 %4</source>
         <comment>1=day of week, 2=month name, 3=day of month, 4=year</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 %3 %4
+
+1=jour de la semaine, 2=Nom du mois, 3=jour du mois, 4=année</translation>
     </message>
 </context>
 <context>
@@ -483,519 +485,519 @@ aussi effacées:</translation>
     <name>HelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Préc.</translation>
+        <translation>Préc.</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Suiv.</translation>
+        <translation>Suiv.</translation>
     </message>
 </context>
 <context>
     <name>ImageEditor</name>
     <message>
         <source>Image Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur d&apos;image</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished">Rafraîchir</translation>
+        <translation>Rafraîchir</translation>
     </message>
     <message>
         <source>Image is too large to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Image trop grande pour l&apos;importation</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format d&apos;image non supporté</translation>
     </message>
 </context>
 <context>
     <name>ImageSelector</name>
     <message>
         <source>Select an image</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner une image</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Vue</translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Delete the current image?</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer l&apos;image courante?</translation>
     </message>
 </context>
 <context>
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualisateur d&apos;image</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Text encoding</source>
-        <translation type="unfinished">Encodage du texte</translation>
+        <translation>Encodage du texte</translation>
     </message>
     <message>
         <source>Import rows from CSV file</source>
-        <translation type="unfinished">Importer enr.d&apos;un fichier CSV</translation>
+        <translation>Importer enr.d&apos;un fichier CSV</translation>
     </message>
     <message>
         <source>Import from MobileDB file</source>
-        <translation type="unfinished">Importer d&apos;un fichier MobileDB</translation>
+        <translation>Importer d&apos;un fichier MobileDB</translation>
     </message>
     <message>
         <source>Import from text file</source>
-        <translation type="unfinished">Importer d&apos;un fichier texte</translation>
+        <translation>Importer d&apos;un fichier texte</translation>
     </message>
     <message>
         <source>Import from XML file</source>
-        <translation type="unfinished">Importer d&apos;un fichier XML</translation>
+        <translation>Importer d&apos;un fichier XML</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
+        <translation>Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
     </message>
     <message>
         <source>MobileDB files</source>
-        <translation type="unfinished">Fichier MobileDB</translation>
+        <translation>Fichier MobileDB</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">Fichier XML</translation>
+        <translation>Fichier XML</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>images</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="unfinished">choisissez un fichier</translation>
+        <translation>choisissez un fichier</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished">Importer</translation>
+        <translation>Importer</translation>
     </message>
     <message>
         <source>Select an image</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner une image</translation>
     </message>
 </context>
 <context>
     <name>MenuActions</name>
     <message>
         <source>File</source>
-        <translation type="unfinished">Fichier</translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Vue</translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation type="unfinished">Enr.</translation>
+        <translation>Enr.</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished">Trier</translation>
+        <translation>Trier</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished">Filtrer</translation>
+        <translation>Filtrer</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>Open Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvir Récent</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Sauver</translation>
+        <translation>Sauver</translation>
     </message>
     <message>
         <source>Change Password</source>
-        <translation type="unfinished">Changer mot de passe</translation>
+        <translation>Changer mot de passe</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished">Importer</translation>
+        <translation>Importer</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">Exporter</translation>
+        <translation>Exporter</translation>
     </message>
     <message>
         <source>Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Diaporama</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Quitter</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished">Liste</translation>
+        <translation>Liste</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished">Icones</translation>
+        <translation>Icones</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished">Sommaire de l&apos;aide</translation>
+        <translation>Sommaire de l&apos;aide</translation>
     </message>
     <message>
         <source>About PortaBase</source>
-        <translation type="unfinished">À propos de Portabase</translation>
+        <translation>À propos de Portabase</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">À propos de Qt</translation>
+        <translation>À propos de Qt</translation>
     </message>
     <message>
         <source>Quick Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre Rapide</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Éditer</translation>
+        <translation>Éditer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished">Renomer</translation>
+        <translation>Renomer</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished">Rafraîchir</translation>
+        <translation>Rafraîchir</translation>
     </message>
     <message>
         <source>All Columns</source>
-        <translation type="unfinished">Toutes les colonnes</translation>
+        <translation>Toutes les colonnes</translation>
     </message>
     <message>
         <source>All Rows</source>
-        <translation type="unfinished">Toutes les lignes</translation>
+        <translation>Toutes les lignes</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">Copier</translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer</translation>
     </message>
     <message>
         <source>Delete Rows In Filter</source>
-        <translation type="unfinished">Effacer les rangées dans le filtre</translation>
+        <translation>Effacer les rangées dans le filtre</translation>
     </message>
     <message>
         <source>Edit Columns</source>
-        <translation type="unfinished">Éditer colonnes</translation>
+        <translation>Éditer colonnes</translation>
     </message>
     <message>
         <source>Edit Enums</source>
-        <translation type="unfinished">Éditer énumérations</translation>
+        <translation>Éditer énumérations</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vue</translation>
     </message>
     <message>
         <source>&amp;Row</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Enr</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trie</translation>
     </message>
     <message>
         <source>Fi&amp;lter</source>
-        <translation type="unfinished"></translation>
+        <translation>Fi&amp;ltre</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ouvrir</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir &amp;Recent</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sauver</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
-        <translation type="unfinished"></translation>
+        <translation>C&amp;hanger mot de passe</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importer</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;xporter</translation>
     </message>
     <message>
         <source>S&amp;lideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Di&amp;aporama</translation>
     </message>
     <message>
         <source>Proper&amp;ties</source>
-        <translation type="unfinished"></translation>
+        <translation>Proprié&amp;tés</translation>
     </message>
     <message>
         <source>&amp;Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Préférence</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>Help &amp;Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Contenu de l&apos;aide</translation>
     </message>
     <message>
         <source>&amp;About PortaBase</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Au sujet de Portabase</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Au sujet de &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre &amp;Rapide</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ajouter</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Editer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Effacer</translation>
     </message>
     <message>
         <source>All &amp;Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les &amp;Colonnes</translation>
     </message>
     <message>
         <source>All &amp;Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>tous les En&amp;r.</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">Cop&amp;ier</translation>
+        <translation>&amp;Copier</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Montrer</translation>
     </message>
     <message>
         <source>&amp;Delete Rows In Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Effacer les enr. dans le filtre</translation>
     </message>
     <message>
         <source>Edit &amp;Enums</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer les &amp;enumérations</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer &amp;colonnes</translation>
     </message>
 </context>
 <context>
     <name>NewFileDialog</name>
     <message>
         <source>Export</source>
-        <translation type="unfinished">Exporter</translation>
+        <translation>Exporter</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="unfinished">Entrez un nom pour le nouveau fichier</translation>
+        <translation>Entrez un nom pour le nouveau fichier</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="unfinished">Le fichier existe déjà; l&apos;écraser?</translation>
+        <translation>Le fichier existe déjà; l&apos;écraser?</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="unfinished">Crypter le fichier?</translation>
+        <translation>Crypter le fichier?</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">Fichiers portabase</translation>
+        <translation>Fichiers portabase</translation>
     </message>
     <message>
         <source>Text files</source>
-        <translation type="unfinished">Fichiers texte</translation>
+        <translation>Fichiers texte</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">Fichier XML</translation>
+        <translation>Fichier XML</translation>
     </message>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">Enregistrer sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
+        <translation>Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
     </message>
     <message>
         <source>Encrypted file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier crypté</translation>
     </message>
 </context>
 <context>
     <name>PBDialog</name>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom ne doit pas commencer par &apos;_&apos;</translation>
     </message>
     <message>
         <source>Duplicate name</source>
-        <translation type="unfinished">Le nom existe déjà</translation>
+        <translation>Le nom existe déjà</translation>
     </message>
     <message>
         <source>No name entered</source>
-        <translation type="unfinished">Aucun nom entré</translation>
+        <translation>Aucun nom entré</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Éditer</translation>
+        <translation>Éditer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Monter</translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Descendre</translation>
+        <translation>Descendre</translation>
     </message>
 </context>
 <context>
     <name>PBFileSelector</name>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished">Aucun fichier sélectionné</translation>
+        <translation>Aucun fichier sélectionné</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">Fichiers portabase</translation>
+        <translation>Fichiers portabase</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="unfinished">Choisissez un fichier</translation>
+        <translation>Choisissez un fichier</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="unfinished">Entrez un nom pour le nouveau fichier</translation>
+        <translation>Entrez un nom pour le nouveau fichier</translation>
     </message>
     <message>
         <source>Unable to create new file</source>
-        <translation type="unfinished">Impossible de créer le nouveau fichier</translation>
+        <translation>Impossible de créer le nouveau fichier</translation>
     </message>
     <message>
         <source>Enter the new file name</source>
-        <translation type="unfinished">Entrez le nouveau nom de fichier</translation>
+        <translation>Entrez le nouveau nom de fichier</translation>
     </message>
     <message>
         <source>Unable to rename the file</source>
-        <translation type="unfinished">Impossible de renommer le fichier</translation>
+        <translation>Impossible de renommer le fichier</translation>
     </message>
 </context>
 <context>
@@ -1108,47 +1110,47 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taille</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Enr.</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Colonnes</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Vues</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished"></translation>
+        <translation>Tris</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtres</translation>
     </message>
     <message>
         <source>Enums</source>
-        <translation type="unfinished"></translation>
+        <translation>Énums</translation>
     </message>
     <message>
         <source>File Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés du fichier</translation>
     </message>
     <message>
         <source>File does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;existe pas</translation>
     </message>
     <message>
         <source>Not a PortaBase file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce n&apos;est pas un fcihier Portabase</translation>
     </message>
 </context>
 <context>
@@ -1243,43 +1245,43 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Use pages in data viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la page dans le visualisateur de données</translation>
     </message>
     <message>
         <source>Default rows per page</source>
-        <translation type="unfinished"></translation>
+        <translation>Enr. par défaut par page</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Apparence</translation>
     </message>
     <message>
         <source>Top-level</source>
-        <translation type="unfinished"></translation>
+        <translation>Top level</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Menus</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer</translation>
     </message>
     <message>
         <source>Toolbar Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Boutton de la barre d&apos;outils</translation>
     </message>
     <message>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouttons</translation>
     </message>
 </context>
 <context>
@@ -1425,29 +1427,29 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Aujourd&apos;hui</translation>
+        <translation>Aujourd&apos;hui</translation>
     </message>
 </context>
 <context>
     <name>QFileDialog</name>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>All Files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>tous Tous les fichiers (*.*)</translation>
     </message>
 </context>
 <context>
     <name>QInputDialog</name>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -1485,11 +1487,11 @@ dans le filtre courant?</translation>
     <name>QMainWindow</name>
     <message>
         <source>Line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Customize...</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnaliser...</translation>
     </message>
 </context>
 <context>
@@ -1563,23 +1565,23 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">J</translation>
+        <translation>J</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished">M</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">pm</translation>
+        <translation>pm</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">am</translation>
+        <translation>am</translation>
     </message>
     <message>
         <source>Problematic row</source>
@@ -1595,14 +1597,14 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Missing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier manquant</translation>
     </message>
 </context>
 <context>
     <name>QQDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="unfinished">Portabase</translation>
+        <translation>Portabase</translation>
     </message>
 </context>
 <context>
@@ -1654,19 +1656,19 @@ dans le filtre courant?</translation>
     <name>SlideshowDialog</name>
     <message>
         <source>Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Diaporama</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">colonne</translation>
+        <translation>colonne</translation>
     </message>
     <message>
         <source>Delay between images</source>
-        <translation type="unfinished"></translation>
+        <translation>Délai entre 2 images</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>secondes</translation>
     </message>
 </context>
 <context>
@@ -1719,67 +1721,67 @@ dans le filtre courant?</translation>
     <name>View</name>
     <message>
         <source>No data to summarize</source>
-        <translation type="unfinished">Pas de date</translation>
+        <translation>Pas de date</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished">Total</translation>
+        <translation>Total</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished">Moyenne</translation>
+        <translation>Moyenne</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="unfinished">Minimum</translation>
+        <translation>Minimum</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="unfinished">Maximum</translation>
+        <translation>Maximum</translation>
     </message>
     <message>
         <source>Checked</source>
-        <translation type="unfinished">Vérifié</translation>
+        <translation>Vérifié</translation>
     </message>
     <message>
         <source>Unchecked</source>
-        <translation type="unfinished">Non vérifié</translation>
+        <translation>Non vérifié</translation>
     </message>
     <message>
         <source>Earliest</source>
-        <translation type="unfinished">le plus tôt</translation>
+        <translation>le plus tôt</translation>
     </message>
     <message>
         <source>Latest</source>
-        <translation type="unfinished">Le plus tard</translation>
+        <translation>Le plus tard</translation>
     </message>
     <message>
         <source>Total length</source>
-        <translation type="unfinished">longueur totale</translation>
+        <translation>longueur totale</translation>
     </message>
     <message>
         <source>characters</source>
-        <translation type="unfinished">caractères</translation>
+        <translation>caractères</translation>
     </message>
     <message>
         <source>Average length</source>
-        <translation type="unfinished">longueur moyenne</translation>
+        <translation>longueur moyenne</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished">Longueur minimum</translation>
+        <translation>Longueur minimum</translation>
     </message>
     <message>
         <source>Maximum length</source>
-        <translation type="unfinished">Longueur maximum</translation>
+        <translation>Longueur maximum</translation>
     </message>
     <message>
         <source>Image available</source>
-        <translation type="unfinished"></translation>
+        <translation>Images disponibles</translation>
     </message>
     <message>
         <source>No image</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;image</translation>
     </message>
 </context>
 <context>
@@ -1790,11 +1792,11 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>No image columns in this view</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;image dans cette vue</translation>
     </message>
     <message>
         <source>No rows in this filter</source>
-        <translation type="unfinished"></translation>
+        <translation>PAs d&apos;enr. avec ce filtre</translation>
     </message>
 </context>
 <context>
@@ -1836,83 +1838,83 @@ dans le filtre courant?</translation>
     <name>XMLImport</name>
     <message>
         <source>Error at</source>
-        <translation type="unfinished">Erreur à</translation>
+        <translation>Erreur à</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">ligne</translation>
+        <translation>ligne</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">colonne</translation>
+        <translation>colonne</translation>
     </message>
     <message>
         <source>only allowed as root element</source>
-        <translation type="unfinished">autorisé seulement comme élément racine</translation>
+        <translation>autorisé seulement comme élément racine</translation>
     </message>
     <message>
         <source>Unknown element</source>
-        <translation type="unfinished">élement inconnu</translation>
+        <translation>élement inconnu</translation>
     </message>
     <message>
         <source>%1 not allowed as child of %2</source>
-        <translation type="unfinished">%1 n&apos;est pas autorisé comme &quot;enfant&quot; de %2</translation>
+        <translation>%1 n&apos;est pas autorisé comme &quot;enfant&quot; de %2</translation>
     </message>
     <message>
         <source>Missing element</source>
-        <translation type="unfinished">Élement manquant</translation>
+        <translation>Élement manquant</translation>
     </message>
     <message>
         <source>&quot;c&quot; attribute is missing or non-integer</source>
-        <translation type="unfinished">l&apos;attribut &quot;c&quot; est manquant ou n&apos;est pas un entier </translation>
+        <translation>l&apos;attribut &quot;c&quot; est manquant ou n&apos;est pas un entier </translation>
     </message>
     <message>
         <source>Unsupported</source>
-        <translation type="unfinished">Non supporté</translation>
+        <translation>Non supporté</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation type="unfinished">Invalide</translation>
+        <translation>Invalide</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Dupliquer</translation>
+        <translation>Dupliquer</translation>
     </message>
     <message>
         <source>Missing</source>
-        <translation type="unfinished">Manquant</translation>
+        <translation>Manquant</translation>
     </message>
     <message>
         <source>Too many child nodes for node type</source>
-        <translation type="unfinished">Trop de noeuds enfant pour ce type de noeud</translation>
+        <translation>Trop de noeuds enfant pour ce type de noeud</translation>
     </message>
     <message>
         <source>Incorrect _all view column sequence</source>
-        <translation type="unfinished">Incorrect _all view column sequence</translation>
+        <translation>Incorrect _all view column sequence</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
-        <translation type="unfinished">doit-être 0 ou 1</translation>
+        <translation>doit-être 0 ou 1</translation>
     </message>
     <message>
         <source>must be an integer</source>
-        <translation type="unfinished">Doit-être un entier</translation>
+        <translation>Doit-être un entier</translation>
     </message>
     <message>
         <source>must be a non-negative integer</source>
-        <translation type="unfinished">doi-être un entier positif</translation>
+        <translation>doi-être un entier positif</translation>
     </message>
     <message>
         <source>must be a positive integer</source>
-        <translation type="unfinished">doi-être un entier positif</translation>
+        <translation>doi-être un entier positif</translation>
     </message>
     <message>
         <source>Duplicate element</source>
-        <translation type="unfinished">élement dupliqué</translation>
+        <translation>élement dupliqué</translation>
     </message>
     <message>
         <source>Missing data for column ID %1</source>
-        <translation type="unfinished">donnée pour la colonne ID %1 manquante</translation>
+        <translation>donnée pour la colonne ID %1 manquante</translation>
     </message>
 </context>
 </TS>

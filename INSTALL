@@ -165,9 +165,9 @@ files into the correct locations:
 
 2- The help files and UI translation files go into /usr/share/portabase, e.g.:
 
-/usr/share/doc/portabase/en/portabase.html
-/usr/share/doc/portabase/ja/portabase.html
-/usr/share/doc/portabase/ja/portabase.qm
+/usr/share/portabase/help/en/portabase.html
+/usr/share/portabase/help/ja/portabase.html
+/usr/share/portabase/i18n/ja/portabase.qm
 
 ...and so on.  (The portabase.qm files are created by running lrelease on
 portabase.pro.)
