@@ -19,6 +19,7 @@
 class CalcDateEditor;
 class CalcNode;
 class CalcNodeEditor;
+class CalcTimeEditor;
 class Database;
 class QLineEdit;
 class QListView;
@@ -66,6 +67,7 @@ private:
     CalcNodeEditor *nodeEditor;
     CalcNodeEditor *valueEditor;
     CalcDateEditor *dateEditor;
+    CalcTimeEditor *timeEditor;
 };
 
 #endif

@@ -39,6 +39,7 @@ private slots:
     void nextRow();
     void previousRow();
     void editRow();
+    void copyText();
 
 private:
     void updateContent();

@@ -1,3 +1,14 @@
+2003-09-08  JMB  Text copy from row viewer, time difference calculations
+
+    There is now a copy button in the row viewer which allows you to copy
+    the selected text (if any) to the clipboard.
+
+    Also added three new operators for calculated fields: "Seconds_Between",
+    "Minutes_Between", and "Hours_Between".  Each returns the difference
+    between two time columns, measured using the appropriate unit.  Fixed
+    some minor bugs in the calculation editor in the process (the equation
+    display and button status sometimes weren't updated correctly).
+
 2003-09-05  JMB  Toolbar button preferences
 
     Similar to the menu preferences, there is a new tab in the preferences

@@ -15,6 +15,8 @@
 #include <qpe/resource.h>
 #endif
 
+#include <qapplication.h>
+#include <qclipboard.h>
 #include <qhbox.h>
 #include <qpushbutton.h>
 #include <qtextview.h>
@@ -36,6 +38,9 @@ RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
     QPushButton *editButton = new QPushButton(hbox);
     editButton->setPixmap(Resource::loadPixmap("edit"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
+    QPushButton *copyButton = new QPushButton(hbox);
+    copyButton->setPixmap(Resource::loadPixmap("copy"));
+    connect(copyButton, SIGNAL(clicked()), this, SLOT(copyText()));
     nextButton = new QPushButton(hbox);
     nextButton->setPixmap(Resource::loadPixmap("forward"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
@@ -133,6 +138,14 @@ void RowViewer::editRow()
     int rowId = view->getId(index);
     if (display->editRow(rowId)) {
         accept();
+    }
+}
+
+void RowViewer::copyText()
+{
+    if (tv->hasSelectedText()) {
+        QClipboard *cb = QApplication::clipboard();
+        cb->setText(tv->selectedText());
     }
 }
 

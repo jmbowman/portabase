@@ -137,7 +137,9 @@ QStringList RowEditor::getRow(bool doCalcs)
             dateWidgetIndex++;
         }
         else if (type == TIME) {
-            values.append(timeWidgets[timeWidgetIndex]->getTime());
+            QString timeString = timeWidgets[timeWidgetIndex]->getTime();
+            bool ok;
+            values.append(db->parseTimeString(timeString, &ok));
             timeWidgetIndex++;
         }
         else if (type == CALC) {

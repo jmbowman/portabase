@@ -21,6 +21,7 @@
 #include "calceditor.h"
 #include "calcnode.h"
 #include "calcnodeeditor.h"
+#include "calctimeeditor.h"
 
 CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name, WFlags f)
     : PBDialog(tr("Calculation Editor"), parent, name, f), db(dbase)
@@ -56,6 +57,7 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     nodeEditor = new CalcNodeEditor(colNames, colTypes, TRUE, this);
     valueEditor = new CalcNodeEditor(colNames, colTypes, FALSE, this);
     dateEditor = new CalcDateEditor(colNames, colTypes, this);
+    timeEditor = new CalcTimeEditor(db, colNames, colTypes, this);
 
     finishLayout(TRUE, TRUE, TRUE, parent->width(), 400);
     tree->setColumnWidth(0, width() - 2);
@@ -70,7 +72,9 @@ void CalcEditor::load(CalcNode *root, int decimals)
 {
     addNode(0, root);
     if (root != 0) {
-        tree->setSelected(tree->firstChild(), TRUE);
+        QListViewItem *item = tree->firstChild();
+        tree->setSelected(item, TRUE);
+        updateButtons(item);
     }
     updateEquation();
     decimalsBox->setValue(decimals);
@@ -157,7 +161,8 @@ void CalcEditor::addNode()
     QListViewItem *parent = tree->selectedItem();
     if (parent != 0) {
         CalcNode *parentNode = nodeMap[parent];
-        if (parentNode->type() == CALC_DAYS) {
+        int type = parentNode->type();
+        if (type == CALC_DAYS) {
             dateEditor->reset();
             if (!dateEditor->exec()) {
                 return;
@@ -165,6 +170,27 @@ void CalcEditor::addNode()
             CalcNode *node = dateEditor->createNode();
             addNode(parent, node);
             parentNode->addChild(node);
+            updateButtons(parent);
+            updateEquation();
+            return;
+        }
+        else if (type == CALC_SECONDS || type == CALC_MINUTES
+                 || type == CALC_HOURS) {
+            timeEditor->reset();
+            bool finished = FALSE;
+            while (!finished) {
+                if (!timeEditor->exec()) {
+                    return;
+                }
+                else {
+                    finished = timeEditor->isValid();
+                }
+            }
+            CalcNode *node = timeEditor->createNode();
+            addNode(parent, node);
+            parentNode->addChild(node);
+            updateButtons(parent);
+            updateEquation();
             return;
         }
     }
@@ -216,6 +242,19 @@ void CalcEditor::editNode()
             }
         }
         valueEditor->updateNode(node);
+    }
+    else if (type == CALC_TIME_COLUMN || type == CALC_TIME_CONSTANT) {
+        timeEditor->setNode(node);
+        bool finished = FALSE;
+        while (!finished) {
+            if (!timeEditor->exec()) {
+                return;
+            }
+            else {
+                finished = timeEditor->isValid();
+            }
+        }
+        timeEditor->updateNode(node);
     }
     else {
         dateEditor->setNode(node);

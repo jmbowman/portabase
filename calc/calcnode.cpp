@@ -70,10 +70,10 @@ bool CalcNode::allowsEdit()
 
 double CalcNode::value(const QStringList &row, const QStringList &colNames)
 {
-    if (nodeType == CALC_CONSTANT) {
+    if (nodeType == CALC_CONSTANT || nodeType == CALC_TIME_CONSTANT) {
         return nodeValue.toDouble();
     }
-    if (nodeType == CALC_COLUMN) {
+    if (nodeType == CALC_COLUMN || nodeType == CALC_TIME_COLUMN) {
         int index = colNames.findIndex(nodeValue);
         return row[index].toDouble();
     }
@@ -149,6 +149,26 @@ double CalcNode::value(const QStringList &row, const QStringList &colNames)
     else if (nodeType == CALC_LN) {
         result = log(children[0]->value(row, colNames));
     }
+    else if (nodeType == CALC_SECONDS) {
+        if (count == 2) {
+            result = children[1]->value(row, colNames);
+            result -= children[0]->value(row, colNames);
+        }
+    }
+    else if (nodeType == CALC_MINUTES) {
+        if (count == 2) {
+            result = children[1]->value(row, colNames);
+            result -= children[0]->value(row, colNames);
+        }
+        result /= 60;
+    }
+    else if (nodeType == CALC_HOURS) {
+        if (count == 2) {
+            result = children[1]->value(row, colNames);
+            result -= children[0]->value(row, colNames);
+        }
+        result /= 3600;
+    }
     return result;
 }
 
@@ -181,9 +201,12 @@ QString CalcNode::description(Database *db, int type, const QString &value)
         case CALC_CONSTANT:
         case CALC_COLUMN:
         case CALC_DATE_COLUMN:
+        case CALC_TIME_COLUMN:
             return value;
         case CALC_DATE_CONSTANT:
             return db->dateToString(value.toInt());
+        case CALC_TIME_CONSTANT:
+            return db->timeToString(value.toInt());
         case CALC_ADD:
             return "+";
         case CALC_SUBTRACT:
@@ -208,6 +231,12 @@ QString CalcNode::description(Database *db, int type, const QString &value)
             return QObject::tr("LOG");
         case CALC_LN:
             return QObject::tr("LN");
+        case CALC_SECONDS:
+            return QObject::tr("Seconds_Between");
+        case CALC_MINUTES:
+            return QObject::tr("Minutes_Between");
+        case CALC_HOURS:
+            return QObject::tr("Hours_Between");
         default:
             return "";
     }
@@ -219,13 +248,21 @@ QString CalcNode::equation(Database *db, bool useParens)
     QString opString;
     int count = children.count();
     int i;
+    bool needsSecondParam = FALSE;
     switch (nodeType) {
         case CALC_CONSTANT:
         case CALC_COLUMN:
         case CALC_DATE_COLUMN:
         case CALC_DATE_CONSTANT:
+        case CALC_TIME_COLUMN:
+        case CALC_TIME_CONSTANT:
             return description(db);
         case CALC_DAYS:
+        case CALC_SECONDS:
+        case CALC_MINUTES:
+        case CALC_HOURS:
+            needsSecondParam = TRUE;
+            // fall through to next case
         case CALC_MAX:
         case CALC_MIN:
         case CALC_AVERAGE:
@@ -242,6 +279,9 @@ QString CalcNode::equation(Database *db, bool useParens)
             }
             for (i = 1; i < count; i++) {
                 result += "," + children[i]->equation(db, FALSE);
+            }
+            if (count == 1 && needsSecondParam) {
+                result += ",?";
             }
             result += ")";
             return result;
@@ -329,6 +369,9 @@ int CalcNode::maxChildren()
         case CALC_SUBTRACT:
         case CALC_DIVIDE:
         case CALC_DAYS:
+        case CALC_SECONDS:
+        case CALC_MINUTES:
+        case CALC_HOURS:
             return 2;
         case CALC_ABS:
         case CALC_SQRT:
@@ -355,7 +398,8 @@ bool CalcNode::deleteColumn(const QString &name)
     for (i = 0; i < count; i++) {
         removeChild(removals[i]);
     }
-    if (nodeType == CALC_COLUMN || nodeType == CALC_DATE_COLUMN) {
+    if (nodeType == CALC_COLUMN || nodeType == CALC_DATE_COLUMN
+            || nodeType == CALC_TIME_COLUMN) {
         if (nodeValue == name) {
             return TRUE;
         }
@@ -369,7 +413,8 @@ void CalcNode::renameColumn(const QString &oldName, const QString &newName)
     for (int i = 0; i < count; i++) {
         children[i]->renameColumn(oldName, newName);
     }
-    if (nodeType == CALC_COLUMN || nodeType == CALC_DATE_COLUMN) {
+    if (nodeType == CALC_COLUMN || nodeType == CALC_DATE_COLUMN
+            || nodeType == CALC_TIME_COLUMN) {
         if (nodeValue == oldName) {
             nodeValue = newName;
         }

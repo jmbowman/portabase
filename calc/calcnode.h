@@ -16,6 +16,8 @@
 #define CALC_COLUMN 1
 #define CALC_DATE_CONSTANT 2
 #define CALC_DATE_COLUMN 3
+#define CALC_TIME_CONSTANT 4
+#define CALC_TIME_COLUMN 5
 
 #define CALC_FIRST_OP 20
 #define CALC_ADD 20
@@ -30,7 +32,10 @@
 #define CALC_SQRT 29
 #define CALC_LOG 30
 #define CALC_LN 31
-#define CALC_LAST_OP 31
+#define CALC_SECONDS 32
+#define CALC_MINUTES 33
+#define CALC_HOURS 34
+#define CALC_LAST_OP 34
 
 #include <qstringlist.h>
 
