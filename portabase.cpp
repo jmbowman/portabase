@@ -52,14 +52,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     int size = currentFont.pointSize();
     Config conf("portabase");
     conf.setGroup("General");
-    confirmDeletions = FALSE;
-    if (conf.readNumEntry("ConfirmDeletions", 0)) {
-        confirmDeletions = TRUE;
-    }
-    booleanToggle = FALSE;
-    if (conf.readNumEntry("BooleanToggle", 0)) {
-        booleanToggle = TRUE;
-    }
+    confirmDeletions = conf.readBoolEntry("ConfirmDeletions");
+    booleanToggle = conf.readBoolEntry("BooleanToggle");
     conf.setGroup("Font");
     family = conf.readEntry("Name", family);
     size = conf.readNumEntry("Size", size);
@@ -279,10 +273,10 @@ void PortaBase::editPreferences()
         filter->setFont(font);
         Config conf("portabase");
         conf.setGroup("General");
-        confirmDeletions = conf.readBoolEntry("ConfirmDeletions", FALSE);
-        booleanToggle = conf.readBoolEntry("BooleanToggle", FALSE);
+        confirmDeletions = conf.readBoolEntry("ConfirmDeletions");
+        booleanToggle = conf.readBoolEntry("BooleanToggle");
         viewer->allowBooleanToggle(booleanToggle);
-        db->setShowSeconds(conf.readBoolEntry("ShowSeconds", FALSE));
+        db->setShowSeconds(conf.readBoolEntry("ShowSeconds"));
         viewer->updateTable();
     }
 }
