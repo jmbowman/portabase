@@ -59,6 +59,7 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     dataFields.append("d");
     dataFields.append("t");
     dataFields.append("c");
+    dataFields.append("q");
     dataFields.append("e");
 
     booleans.append("scdesc");
@@ -68,6 +69,7 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     integers.append("i");
     integers.append("d");
     integers.append("t");
+    integers.append("q");
 
     nonNegativeIntegers.append("eindex");
     nonNegativeIntegers.append("eoindex");
@@ -628,7 +630,7 @@ bool XMLImport::addRow()
     if (error != "") {
         return FALSE;
     }
-    error = db->addRow(values);
+    error = db->addRow(values, 0, TRUE);
     return (error == "");
 }
 
@@ -1169,5 +1171,6 @@ void XMLImport::buildParentsMap()
     parents.insert("d", "r");
     parents.insert("t", "r");
     parents.insert("c", "r");
+    parents.insert("q", "r");
     parents.insert("e", "r");
 }

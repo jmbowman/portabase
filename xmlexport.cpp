@@ -26,6 +26,7 @@ XMLExport::XMLExport(Database *source, QString filename, QStringList currentCols
     fieldElements.append("d");
     fieldElements.append("t");
     fieldElements.append("c");
+    fieldElements.append("q");
     file = new QFile(filename);
     file->open(IO_WriteOnly);
     output = new QTextStream(file);
@@ -109,7 +110,7 @@ void XMLExport::addDataView(c4_View &fullView, c4_View &filteredView,
     for (i = 0; i < colCount; i++) {
         int type = colTypes[i];
         if (type == INTEGER || type == BOOLEAN || type == DATE
-                || type == TIME) {
+                || type == TIME || type == SEQUENCE) {
             typeChars[i] = 'I';
         }
         else {

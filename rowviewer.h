@@ -17,7 +17,6 @@
 #include <qvaluelist.h>
 #include "datatypes.h"
 
-class Database;
 class QKeyEvent;
 class QPushButton;
 class QTextView;
@@ -31,7 +30,7 @@ public:
     RowViewer(ViewDisplay *parent = 0, const char *name = 0, WFlags f = 0);
     ~RowViewer();
 
-    void viewRow(Database *subject, View *currentView, int rowIndex);
+    void viewRow(View *currentView, int rowIndex);
 
 protected:
     void keyReleaseEvent(QKeyEvent *e);
@@ -46,13 +45,10 @@ private:
     QString prepareString(QString content);
 
 private:
-    Database *db;
     View *view;
     ViewDisplay *display;
     int index;
     int rowCount;
-    QStringList colNames;
-    int *colTypes;
     QPushButton *nextButton;
     QPushButton *prevButton;
     QTextView *tv;

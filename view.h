@@ -12,6 +12,7 @@
 #ifndef VIEW_H
 #define VIEW_H
 
+#include <mk4.h>
 #include "datatypes.h"
 
 class c4_IntProp;

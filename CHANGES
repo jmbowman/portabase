@@ -1,3 +1,15 @@
+2003-07-24  JMB  Sequence columns, row viewer obeys current view
+
+    There is now a "Sequence" column type; this is an integer field which
+    starts at a specified number and assigns each new row a value one greater
+    than the last.  Useful for automatically assigning row identification
+    numbers, among other things.
+
+    The row viewer now only shows the fields included in the current view,
+    which can be useful when dealing with databases containing many fields.
+    To see all fields in the row viewer as before, just select the "All
+    Columns" view before launching it.
+
 2003-07-23  JMB  Support for new Zaurus file navigation widget
 
     PortaBase can now be built with support for Sharp's new file navigation

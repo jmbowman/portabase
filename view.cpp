@@ -87,7 +87,7 @@ QStringList View::getRow(int index)
     c4_RowRef row = dbview[index];
     for (int i = 0; i < numCols; i++) {
         int type = dataTypes[i];
-        if (type == INTEGER || type == BOOLEAN) {
+        if (type == INTEGER || type == BOOLEAN || type == SEQUENCE) {
             c4_IntProp prop(ids[i]);
             int value = prop (row);
             results.append(QString::number(value));
@@ -215,7 +215,7 @@ QStringList View::getStatistics(int colIndex)
         return lines;
     }
     int type = dataTypes[colIndex];
-    if (type == INTEGER) {
+    if (type == INTEGER || type == SEQUENCE) {
         c4_IntProp prop(ids[colIndex]);
         int value = prop (dbview[0]);
         int total = value;

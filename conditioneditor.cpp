@@ -157,7 +157,7 @@ void ConditionEditor::fillFields(Condition *condition)
             constantCheck->setChecked(FALSE);
         }
     }
-    else if (type == INTEGER) {
+    else if (type == INTEGER || type == SEQUENCE) {
         int index = numberOps.findIndex(operation);
         opList->setCurrentItem(index);
         constantInteger->setValue(constant);
@@ -212,7 +212,7 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantInteger->setValue("0");
         constantFloat->setValue("0");
     }
-    else if (type == INTEGER) {
+    else if (type == INTEGER || type == SEQUENCE) {
         constantStack->raiseWidget(constantInteger);
         constantLine->setText("");
         constantCheck->setChecked(FALSE);
@@ -315,7 +315,7 @@ bool ConditionEditor::isValidConstant()
     int index = columnList->currentItem();
     if (index > 0) {
         int type = types[index - 1];
-        if (type == INTEGER) {
+        if (type == INTEGER || type == SEQUENCE) {
             QString error = db->isValidValue(type, constantInteger->getValue());
             if (error != "") {
                 QMessageBox::warning(this, tr("PortaBase"),
@@ -364,7 +364,7 @@ void ConditionEditor::applyChanges(Condition *condition)
         }
         condition->setCaseSensitive(FALSE);
     }
-    else if (type == INTEGER) {
+    else if (type == INTEGER || type == SEQUENCE) {
         condition->setOperator(numberOps[opList->currentItem()]);
         condition->setConstant(constantInteger->getValue());
         condition->setCaseSensitive(FALSE);

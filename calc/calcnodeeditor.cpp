@@ -23,6 +23,7 @@
 #include <qlistbox.h>
 #include <qmessagebox.h>
 #include <qradiobutton.h>
+#include <qvbox.h>
 #include "calcnode.h"
 #include "calcnodeeditor.h"
 #include "../datatypes.h"
@@ -50,7 +51,7 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
     int i;
     for (i = 0; i < count; i++) {
         int type = colTypes[i];
-        if (type == INTEGER || type == FLOAT) {
+        if (type == INTEGER || type == FLOAT || type == SEQUENCE) {
             columnList->insertItem(colNames[i]);
         }
     }
@@ -61,7 +62,9 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
     number = new NumberWidget(FLOAT, grid);
 
     if (showOps) {
-        group->insert(new QRadioButton(tr("Operation"), grid), 2);
+        QVBox *panel = new QVBox(grid);
+        group->insert(new QRadioButton(tr("Operation"), panel), 2);
+        new QWidget(panel);
         opList = new QListBox(grid);
         opList->insertStringList(CalcNode::listOperations());
         connect(opList, SIGNAL(selectionChanged()),

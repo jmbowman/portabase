@@ -8,7 +8,7 @@ run as a Linux or Windows desktop application.
 The main features PortaBase currently has are:
 - One data table per file
 - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
-  Calculation, and Enum column types
+  Calculation, Sequence, and Enum column types
 - Add, edit, and delete rows of data
 - Custom data views (subsets of the columns in any order)
 - Filter the displayed rows using sets of conditions

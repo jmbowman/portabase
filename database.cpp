@@ -424,7 +424,7 @@ QString Database::getColId(QString column, int type)
 
 QString Database::isValidValue(int type, QString value)
 {
-    if (type == INTEGER) {
+    if (type == INTEGER || type == SEQUENCE) {
         bool ok = FALSE;
         value.toInt(&ok);
         if (!ok) {
@@ -503,6 +503,15 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal,
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
         }
+    }
+    else if (type == SEQUENCE) {
+        c4_IntProp newProp(idString);
+        int value = defaultVal.toInt();
+        for (int i = 0; i < size; i++) {
+            newProp (data[i]) = value;
+            value++;
+        }
+        setDefault(name, QString::number(value));
     }
     else if (type == DATE) {
         c4_IntProp newProp(idString);
@@ -645,7 +654,7 @@ QStringList Database::getRow(int rowId)
         }
         QString idString = makeColId(cId (temp[i]), type);
         if (type == INTEGER || type == BOOLEAN || type == DATE
-                || type == TIME) {
+                || type == TIME || type == SEQUENCE) {
             c4_IntProp prop(idString);
             int value = prop (row);
             results.append(QString::number(value));
@@ -812,7 +821,7 @@ c4_View Database::createEmptyView(QStringList colNames)
         }
         QString idString = makeColId(id, type);
         if (type == INTEGER || type == BOOLEAN || type == DATE
-                || type == TIME) {
+                || type == TIME || type == SEQUENCE) {
             c4_IntProp prop(idString);
             result.AddProperty(prop);
         }
@@ -959,7 +968,8 @@ Condition *Database::getCondition(QString filterName, int index)
     return condition;
 }
 
-QString Database::addRow(QStringList values, int *rowId)
+QString Database::addRow(QStringList values, int *rowId,
+                         bool acceptSequenceVals)
 {
     c4_Row row;
     Id (row) = maxId + 1;
@@ -1004,6 +1014,17 @@ QString Database::addRow(QStringList values, int *rowId)
         else if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(idString);
             prop (row) = value.toInt();
+        }
+        else if (type == SEQUENCE) {
+            c4_IntProp prop(idString);
+            if (acceptSequenceVals) {
+                prop (row) = value.toInt();
+            }
+            else {
+                int nextValue = getDefault(name).toInt();
+                prop (row) = nextValue;
+                setDefault(name, QString::number(nextValue + 1));
+            }
         }
         else if (type == TIME) {
             bool ok;
@@ -1077,6 +1098,7 @@ void Database::updateRow(int rowId, QStringList values)
             QStringList options = listEnumOptions(type);
             indexProp (data[index]) = options.findIndex(values[i]);
         }
+        // NOTE: sequence fields never get updated
     }
 }
 
@@ -1532,7 +1554,8 @@ QString Database::makeColId(int colId, int type)
 {
     QString result("_");
     // include column type in case of clash with deleted column of other type
-    if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME) {
+    if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME
+            || type == SEQUENCE) {
         result += 'I';
     }
     else if (type == FLOAT || type == CALC) {
@@ -1562,7 +1585,7 @@ QString Database::formatString(bool old)
             result += makeColId(cId (row), type);
         }
         if (type == INTEGER || type == BOOLEAN || type == DATE
-                || type == TIME) {
+                || type == TIME || type == SEQUENCE) {
             result += ":I";
         }
         else if (type == FLOAT || type == CALC) {

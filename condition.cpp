@@ -90,7 +90,8 @@ c4_View Condition::filter(c4_View dbview)
         return result;
     }
     int type = db->getType(colName);
-    if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME) {
+    if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME
+            || type == SEQUENCE) {
         QString colId = db->getColId(colName);
         int value = constant.toInt();
         return filterInt(dbview, colId, value);
@@ -279,10 +280,10 @@ void Condition::updateDescription()
     }
     if (type == BOOLEAN) {
         if (constant == "1") {
-            description = arg1 + " " + QObject::tr("is checked");
+            description = QObject::tr("%1 is checked").arg(arg1);
         }
         else {
-            description = arg1 + " " + QObject::tr("is not checked");
+            description = QObject::tr("%1 is not checked").arg(arg1);
         }
         return;
     }

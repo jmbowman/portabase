@@ -331,7 +331,7 @@ void ViewDisplay::viewRow()
     int rowIndex = selectedRowIndex();
     if (rowIndex != -1) {
         RowViewer rowViewer(this);
-        rowViewer.viewRow(db, view, rowIndex);
+        rowViewer.viewRow(view, rowIndex);
     }
 }
 

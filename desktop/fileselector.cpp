@@ -33,7 +33,8 @@ const DocLnk *PBFileSelector::selected()
                        parentWidget, "file selector", tr("Choose a file"));
     if (!file.isEmpty()) {
         QFileInfo info(file);
-        QPEApplication::setDocumentDir(info.dirPath(TRUE));
+        lastDir = info.dirPath(TRUE);
+        QPEApplication::setDocumentDir(lastDir);
         files.prepend(info.absFilePath());
         if (files.count() > 5) {
             files.remove(files.fromLast());

@@ -21,14 +21,13 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtextview.h>
-#include "database.h"
 #include "datatypes.h"
 #include "rowviewer.h"
 #include "view.h"
 #include "viewdisplay.h"
 
 RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), display(parent), colTypes(0)
+  : QDialog(parent, name, TRUE, f), display(parent)
 {
     setCaption(tr("Row Viewer") + " - " + tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
@@ -73,17 +72,11 @@ RowViewer::~RowViewer()
 
 }
 
-void RowViewer::viewRow(Database *subject, View *currentView, int rowIndex)
+void RowViewer::viewRow(View *currentView, int rowIndex)
 {
-    db = subject;
     view = currentView;
     index = rowIndex;
     rowCount = view->getRowCount();
-    colNames = db->listColumns();
-    if (colTypes) {
-        delete[] colTypes;
-    }
-    colTypes = db->listTypes();
     updateContent();
     exec();
 }
@@ -92,8 +85,10 @@ void RowViewer::updateContent()
 {
     prevButton->setEnabled(index != 0);
     nextButton->setEnabled(index != rowCount - 1);
-    QStringList values = db->getRow(view->getId(index));
+    QStringList values = view->getRow(index);
     QString str = "<qt><table cellspacing=0>";
+    QStringList colNames = view->getColNames();
+    int *colTypes = view->getColTypes();
     int count = colNames.count();
     for (int i = 0; i < count; i++) {
         str += "<tr><td><font color=#0000ff>";
@@ -109,12 +104,6 @@ void RowViewer::updateContent()
                 QString path = Resource::findPixmap("portabase/unchecked");
                 str += "<img src=\"" + path + "\">";
             }
-        }
-        else if (type == DATE) {
-            str += db->dateToString(values[i].toInt());
-        }
-        else if (type == TIME) {
-            str += db->timeToString(values[i].toInt());
         }
         else {
             str += prepareString(values[i]);

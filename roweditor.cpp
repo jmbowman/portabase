@@ -122,6 +122,7 @@ QStringList RowEditor::getRow(bool doCalcs)
     int numberWidgetIndex = 0;
     int comboBoxIndex = 0;
     int dynamicEditIndex = 0;
+    int labelIndex = 0;
     int count = colNames.count();
     for (int i = 0; i < count; i++) {
         int type = colTypes[i];
@@ -153,6 +154,10 @@ QStringList RowEditor::getRow(bool doCalcs)
             }
             values.append(calcWidgets[calcWidgetIndex]->getValue());
             calcWidgetIndex++;
+        }
+        else if (type == SEQUENCE) {
+            values.append(sequenceLabels[labelIndex]->text());
+            labelIndex++;
         }
         else if (type >= FIRST_ENUM) {
             values.append(comboBoxes[comboBoxIndex]->currentText());
@@ -241,6 +246,11 @@ void RowEditor::addContent(int rowId)
             layout->addWidget(widget, i, 1);
             widget->setValue(values[i]);
             calcWidgets.append(widget);
+        }
+        else if (type == SEQUENCE) {
+            QLabel *label = new QLabel(values[i], grid);
+            layout->addWidget(label, i, 1);
+            sequenceLabels.append(label);
         }
         else if (type >= FIRST_ENUM) {
             QComboBox *combo = new QComboBox(FALSE, grid);

@@ -23,6 +23,7 @@ class DateWidget;
 class DynamicEdit;
 class QCheckBox;
 class QComboBox;
+class QLabel;
 class NoteButton;
 class NumberWidget;
 class TimeWidget;
@@ -35,6 +36,7 @@ typedef QValueList<NumberWidget*> NumberWidgetList;
 typedef QValueList<QComboBox*> ComboBoxList;
 typedef QValueList<DynamicEdit*> DynamicEditList;
 typedef QValueList<CalcWidget*> CalcWidgetList;
+typedef QValueList<QLabel*> LabelList;
 
 class RowEditor: public QDialog
 {
@@ -62,6 +64,7 @@ private:
     ComboBoxList comboBoxes;
     DynamicEditList dynamicEdits;
     CalcWidgetList calcWidgets;
+    LabelList sequenceLabels;
 };
 
 #endif

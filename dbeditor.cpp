@@ -438,6 +438,9 @@ QString DBEditor::getTypeString(int type)
     else if (type == CALC) {
         return tr("Calculation");
     }
+    else if (type == SEQUENCE) {
+        return tr("Sequence");
+    }
     else {
         return db->getEnumName(type);
     }

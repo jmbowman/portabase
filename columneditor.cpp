@@ -55,6 +55,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, 
     typeBox->insertItem(tr("Date"));
     typeBox->insertItem(tr("Time"));
     typeBox->insertItem(tr("Calculation"));
+    typeBox->insertItem(tr("Sequence"));
     typeBox->insertStringList(db->listEnums());
     typeBox->insertItem("(" + tr("New Enum") + ")");
     connect(typeBox, SIGNAL(activated(int)),
@@ -80,6 +81,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, 
     defaultEnum = new QComboBox(FALSE, defaultStack);
     calcButton = new QPushButton(tr("Edit calculation"), defaultStack);
     connect(calcButton, SIGNAL(clicked()), this, SLOT(editCalculation()));
+    defaultSequence = new NumberWidget(INTEGER, defaultStack);
     defaultStack->raiseWidget(defaultLine);
 
 #if defined(DESKTOP)
@@ -183,6 +185,9 @@ QString ColumnEditor::defaultValue()
         }
         return calcRoot->equation(db);
     }
+    else if (colType == SEQUENCE) {
+        return defaultSequence->getValue();
+    }
     else if (colType >= FIRST_ENUM) {
         return defaultEnum->currentText();
     }
@@ -200,6 +205,7 @@ void ColumnEditor::setDefaultValue(QString newDefault)
     defaultTime->setCurrentItem(0);
     defaultInteger->setValue("0");
     defaultFloat->setValue("0");
+    defaultSequence->setValue("0");
     int colType = type();
     if (colType == BOOLEAN) {
         if (newDefault.toInt()) {
@@ -239,6 +245,9 @@ void ColumnEditor::setDefaultValue(QString newDefault)
     else if (colType == FLOAT) {
         defaultFloat->setValue(newDefault);
     }
+    else if (colType == SEQUENCE) {
+        defaultSequence->setValue(newDefault);
+    }
     else {
         defaultLine->setText(newDefault);
     }
@@ -261,6 +270,7 @@ void ColumnEditor::setCalculation(CalcNode *root, int decimals)
 void ColumnEditor::setTypeEditable(bool flag)
 {
     typeBox->setEnabled(flag);
+    defaultSequence->setEnabled(flag);
 }
 
 int ColumnEditor::exec()
@@ -315,6 +325,10 @@ void ColumnEditor::updateDefaultWidget(int newType)
     else if (newType == CALC) {
         defaultLabel->setText("");
         defaultStack->raiseWidget(calcButton);
+    }
+    else if (newType == SEQUENCE) {
+        defaultLabel->setText(tr("Next value"));
+        defaultStack->raiseWidget(defaultSequence);
     }
     else {
         defaultStack->raiseWidget(defaultLine);
