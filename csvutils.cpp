@@ -28,11 +28,13 @@ CSVUtils::~CSVUtils()
 
 }
 
-QString CSVUtils::parseFile(QString filename, Database *db)
+QStringList CSVUtils::parseFile(QString filename, Database *db)
 {
     QFile f(filename);
+    QStringList returnVal;
     if (!f.open(IO_ReadOnly)) {
-        return QObject::tr("Unable to open file");
+        returnVal.append(QObject::tr("Unable to open file"));
+        return returnVal;
     }
     QTextStream input(&f);
     input.setEncoding(QTextStream::UnicodeUTF8);
@@ -42,6 +44,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
            S_END_OF_QUOTED_FIELD, S_MAYBE_NORMAL_FIELD,
            S_NORMAL_FIELD } state = S_START;
     QChar x;
+    QString rowString = "";
     QStringList row;
     QString field = "";
     // store IDs of added rows; if there's an error, delete them
@@ -53,6 +56,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
             // eat '\r', to handle DOS/WINDOWS files correctly
             continue;
         }
+        rowString += x;
         switch (state)
         {
         case S_START :
@@ -74,12 +78,13 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     int rowId = 0;
                     message = db->addRow(row, &rowId);
                     if (message != "") {
-                        message = QObject::tr("Error in row") + " "
-                                  + QString::number(rowNum) + "\n" + message;
+                        message = QObject::tr("Error in row %1").arg(rowNum)
+                                  + "\n" + message;
                         break;
                     }
                     addedIds.append(rowId);
                     row.clear();
+                    rowString = "";
                     rowNum++;
                 }
             }
@@ -108,12 +113,13 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     int rowId = 0;
                     message = db->addRow(row, &rowId);
                     if (message != "") {
-                        message = QObject::tr("Error in row") + " "
-                                  + QString::number(rowNum) + "\n" + message;
+                        message = QObject::tr("Error in row %1").arg(rowNum)
+                                  + "\n" + message;
                         break;
                     }
                     addedIds.append(rowId);
                     row.clear();
+                    rowString = "";
                     rowNum++;
                 }
                 state = S_START;
@@ -130,12 +136,13 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     int rowId = 0;
                     message = db->addRow(row, &rowId);
                     if (message != "") {
-                        message = QObject::tr("Error in row") + " "
-                                  + QString::number(rowNum) + "\n" + message;
+                        message = QObject::tr("Error in row %1").arg(rowNum)
+                                  + "\n" + message;
                         break;
                     }
                     addedIds.append(rowId);
                     row.clear();
+                    rowString = "";
                     rowNum++;
                 }
                 state = S_START;
@@ -162,12 +169,13 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                 int rowId = 0;
                 message = db->addRow(row, &rowId);
                 if (message != "") {
-                    message = QObject::tr("Error in row") + " "
-                              + QString::number(rowNum) + "\n" + message;
+                    message = QObject::tr("Error in row %1").arg(rowNum)
+                              + "\n" + message;
                     break;
                 }
                 addedIds.append(rowId);
                 row.clear();
+                rowString = "";
                 rowNum++;
             }
             else {
@@ -184,8 +192,8 @@ QString CSVUtils::parseFile(QString filename, Database *db)
         int rowId = 0;
         message = db->addRow(row, &rowId);
         if (message != "") {
-            message = QObject::tr("Error in row") + " "
-                      + QString::number(rowNum) + "\n" + message;
+            message = QObject::tr("Error in row %1").arg(rowNum)
+            + "\n" + message;
         }
     }
     if (message != "") {
@@ -194,9 +202,11 @@ QString CSVUtils::parseFile(QString filename, Database *db)
         for (int i = count - 1; i > -1; i--) {
             db->deleteRow(addedIds[i]);
         }
+        returnVal.append(message);
+        returnVal.append(rowString);
     }
     f.close();
-    return message;
+    return returnVal;
 }
 
 QString CSVUtils::encodeRow(QStringList row)

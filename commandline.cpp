@@ -10,6 +10,7 @@
  */
 
 #include <qfile.h>
+#include <qobject.h>
 #include <qstringlist.h>
 #include "commandline.h"
 #include "database.h"
@@ -109,12 +110,20 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         db->load();
     }
     QString error = "";
+    QString data = "";
     ImportUtils utils;
     if (argv[1] == QCString("fromxml")) {
         error = utils.importXML(sourceFile, db);
     }
     else if (fromcsv) {
-        error = db->importFromCSV(sourceFile);
+        QStringList result = db->importFromCSV(sourceFile);
+        int count = result.count();
+        if (count > 0) {
+            error = result[0];
+        }
+        if (count > 1) {
+            data = result[1];
+        }
     }
     else {
         error = utils.importMobileDB(sourceFile, db);
@@ -122,6 +131,11 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
     if (error != "") {
         printf(error.local8Bit());
         printf("\n");
+        if (data != "") {
+            printf((QObject::tr("Problematic row") + ":\n").local8Bit());
+            printf(data.local8Bit());
+            printf("\n");
+        }
         if (!fromcsv) {
             QFile::remove(pbFile);
         }

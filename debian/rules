@@ -36,7 +36,7 @@ build-stamp: configure-stamp
 
 	# Add here commands to compile the package.
 	$(MAKE)
-
+	lrelease portabase_desktop.pro
 	touch build-stamp
 
 clean:
@@ -62,6 +62,8 @@ install: build
 	cp $(CURDIR)/desktop/icons/*.xpm $(CURDIR)/debian/portabase/usr/share/portabase/icons
 	cp $(CURDIR)/desktop/icons/portabase/*.png $(CURDIR)/debian/portabase/usr/share/portabase/icons/portabase
 	cp $(CURDIR)/desktop/icons/portabase/*.xpm $(CURDIR)/debian/portabase/usr/share/portabase/icons/portabase
+	cp $(CURDIR)/help/ja/html/portabase.html $(CURDIR)/debian/portabase/usr/share/doc/portabase/ja
+	cp $(CURDIR)/portabase_ja.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/ja/portabase.qm
 
 
 # Build architecture-independent files here.

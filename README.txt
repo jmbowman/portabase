@@ -1,5 +1,5 @@
 PortaBase 1.6 (March 2003)
-----------------------------
+--------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
 any other Linux PDA using the Qtopia environment.)  It can now also be

@@ -139,8 +139,8 @@ bool XMLImport::startElement(const QString&, const QString&,
     }
     parent = ancestors[count - 1];
     if (parents[qName] != parent) {
-        error = qName + " " + QObject::tr("not allowed as child of") + " "
-                + parent;
+        error = QObject::tr("%1 not allowed as child of %2");
+        error = error.arg(qName).arg(parent);
         return FALSE;
     }
     int sectionIndex = sections.findIndex(qName);
@@ -881,7 +881,7 @@ QString XMLImport::getDataField(int columnId)
 {
     QString idString = QString::number(columnId);
     if (!fields.contains(idString)) {
-        error = QObject::tr("Missing data for column ID") + ": " + idString;
+        error = QObject::tr("Missing data for column ID %1").arg(idString);
         return "";
     }
     return fields[idString];

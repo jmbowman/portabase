@@ -20,7 +20,8 @@
 
 int main(int argc, char **argv) {
     QPEApplication app(argc, argv);
-    if (argc > 1 && argv[1] != QCString("-f")) {
+    if (argc > 1 && argv[1] != QCString("-f")
+            && argv[1] != QCString("-qcop")) {
         CommandLine commandLine;
         return commandLine.process(argc, argv);
     }

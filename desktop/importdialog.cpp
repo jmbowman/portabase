@@ -13,8 +13,10 @@
 #include <qfileinfo.h>
 #include <qmessagebox.h>
 #include <qobject.h>
+#include <qstringlist.h>
 #include "importdialog.h"
 #include "qpeapplication.h"
+#include "../csverror.h"
 #include "../database.h"
 #include "../importutils.h"
 
@@ -53,8 +55,16 @@ bool ImportDialog::exec()
         QPEApplication::setDocumentDir(info.dirPath(TRUE));
     }
     QString error;
+    QString data = "";
     if (source == CSV_FILE) {
-        error = db->importFromCSV(file);
+        QStringList result = db->importFromCSV(file);
+        int count = result.count();
+        if (count > 0) {
+            error = result[0];
+        }
+        if (count > 1) {
+            data = result[1];
+        }
     }
     else if (source == MOBILEDB_FILE) {
         ImportUtils utils;
@@ -65,7 +75,13 @@ bool ImportDialog::exec()
         error = utils.importXML(file, db);
     }
     if (error != "") {
-        QMessageBox::warning(0, QObject::tr("PortaBase"), error);
+        if (data == "") {
+            QMessageBox::warning(0, QObject::tr("PortaBase"), error);
+        }
+        else {
+            CSVErrorDialog dialog(error, data, 0);
+            dialog.exec();
+        }
         return FALSE;
     }
     else {

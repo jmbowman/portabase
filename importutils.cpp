@@ -107,8 +107,8 @@ QString ImportUtils::importMobileDB(QString filename, Database *db)
         }
         QString message = db->addRow(newRow);
         if (message != "") {
-            message = QObject::tr("Error in row") + " "
-                      + QString::number(i + 1) + "\n" + message;
+            message = QObject::tr("Error in row %1").arg(i + 1)
+                      + "\n" + message;
             return message;
         }
     }

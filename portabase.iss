@@ -22,6 +22,8 @@ Source: "portabase.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "desktop\icons\*.*"; DestDir: "{app}\icons"; Flags: ignoreversion
 Source: "desktop\icons\portabase\*.*"; DestDir: "{app}\icons\portabase"; Flags: ignoreversion
 Source: "help\html\portabase.html"; DestDir: "{app}"; Flags: ignoreversion
+Source: "help\ja\html\portabase.html"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "portabase_ja.qm"; DestDir: "{app}\ja"; Flags: ignoreversion
 Source: "CHANGES"; DestDir: "{app}"; Flags: ignoreversion
 Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion
 Source: "portabase.ico"; DestDir: "{app}"; Flags: ignoreversion

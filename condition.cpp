@@ -268,63 +268,64 @@ QString Condition::getDescription()
 void Condition::updateDescription()
 {
     int type = STRING;
+    QString arg1;
+    QString arg2;
     if (colName == "_anytext") {
-        description = QObject::tr("Any text column");
+        arg1 = QObject::tr("Any text column");
     }
     else {
-        description = colName;
+        arg1 = colName;
         type = db->getType(colName);
     }
-    description += " ";
     if (type == BOOLEAN) {
         if (constant == "1") {
-            description += QObject::tr("is checked");
+            description = arg1 + " " + QObject::tr("is checked");
         }
         else {
-            description += QObject::tr("is not checked");
+            description = arg1 + " " + QObject::tr("is not checked");
         }
         return;
     }
-    description += getOperatorText(operation) + " ";
     if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
-        description += "\"" + constant + "\"";
+        arg2 = "\"" + constant + "\"";
     }
     else if (type == DATE) {
-        description += db->dateToString(constant.toInt());
+        arg2 = db->dateToString(constant.toInt());
     }
     else if (type == TIME) {
-        description += db->timeToString(constant.toInt());
+        arg2 = db->timeToString(constant.toInt());
     }
     else {
-        description += constant;
+        arg2 = constant;
     }
+    description = getOperatorText(operation).arg(arg1).arg(arg2);
 }
 
 QString Condition::getOperatorText(int op)
 {
     if (op == EQUALS) {
-        return "=";
+        return "%1 = %2";
     }
     else if (op == CONTAINS) {
-        return QObject::tr("contains");
+        return QObject::tr("%1 contains %2");
     }
     else if (op == STARTSWITH) {
-        return QObject::tr("starts with");
+        return QObject::tr("%1 starts with %2");
     }
     else if (op == LESSTHAN) {
-        return "<";
+        return "%1 < %2";
     }
     else if (op == GREATERTHAN) {
-        return ">";
+        return "%1 > %2";
     }
     else if (op == LESSEQUAL) {
-        return "<=";
+        return "%1 <= %2";
     }
     else if (op == GREATEREQUAL) {
-        return ">=";
+        return "%1 >= %2";
     }
     else if (op == NOTEQUAL) {
-        return "!=";
+        return "%1 != %2";
     }
     // shouldn't get here
     return "";

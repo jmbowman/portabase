@@ -22,7 +22,7 @@ public:
     CSVUtils();
     ~CSVUtils();
 
-    QString parseFile(QString filename, Database *db);
+    QStringList parseFile(QString filename, Database *db);
     QString encodeRow(QStringList row);
     QString encodeCell(QString content);
 

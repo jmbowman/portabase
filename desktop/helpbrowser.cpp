@@ -49,6 +49,8 @@ HelpBrowser::HelpBrowser(QWidget *parent, const char *name, WFlags f)
     hbox->setStretchFactor(filler, 1);
     content = new QTextBrowser(this);
     vbox->addWidget(content);
+    content->mimeSourceFactory()->setExtensionType("html",
+                                                   "text/html;charset=UTF-8");
     content->setSource(QPEApplication::helpDir() + "portabase.html");
 
     hbox = new QHBox(this);

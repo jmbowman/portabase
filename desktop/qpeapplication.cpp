@@ -11,6 +11,8 @@
 
 #include <qdir.h>
 #include <qfile.h>
+#include <qtextcodec.h>
+#include <qtranslator.h>
 #include <stdlib.h>
 #include "config.h"
 #include "qpeapplication.h"
@@ -19,6 +21,13 @@ QPEApplication::QPEApplication(int& argc, char **argv, Type t)
     : QApplication(argc, argv, t)
 {
     connect(this, SIGNAL(lastWindowClosed()), this, SLOT(quit()));
+    QTranslator *trans = new QTranslator(this);
+    if (trans->load(helpDir() + "portabase.qm")) {
+        installTranslator(trans);
+    }
+    else {
+        delete trans;
+    }
 }
 
 QPEApplication::~QPEApplication()
@@ -47,10 +56,20 @@ QString QPEApplication::iconDir()
 
 QString QPEApplication::helpDir()
 {
+    QString locale = QTextCodec::locale();
+    int i  = locale.find(".");
+    if (i > 0) {
+        locale = locale.left(i);
+    }
+    i = locale.find("_");
+    if (i > 0) {
+        locale = locale.left(i);
+    }
+    locale += "/";
 #if defined(Q_WS_WIN)
     const char *windir = getenv("WINDIR");
     if (!windir) {
-	return "./";
+	return QString("./");
     }
     QString iniPath = QString(windir) + "/portabase.ini";
 #else
@@ -61,7 +80,12 @@ QString QPEApplication::helpDir()
     }
     Config conf(iniPath, Config::File);
     conf.setGroup("General");
-    return conf.readEntry("HelpPath", ".") + "/";
+    QString path = conf.readEntry("HelpPath", ".") + "/";
+    QDir dir(path + locale);
+    if (dir.exists()) {
+        path += locale;
+    }
+    return path;
 }
 
 QString QPEApplication::documentDir()

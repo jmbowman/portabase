@@ -944,11 +944,25 @@ QString Database::addRow(QStringList values, int *rowId)
     c4_Row row;
     Id (row) = maxId + 1;
     int count = values.count();
-    if (count != columns.GetSize()) {
-        return QObject::tr("Wrong number of columns");
+    int colCount = columns.GetSize();
+    int i;
+    if (count > colCount) {
+        QString error = QObject::tr("Excess columns") + ":\n";
+        for (i = colCount; i < count; i++) {
+            error += "\"" + values[i] + "\"\n";
+        }
+        return error;
+    }
+    else if (count < colCount) {
+        QString error = QObject::tr("Missing columns") + ":\n";
+        QStringList colNames = listColumns();
+        for (i = count; i < colCount; i++) {
+            error += colNames[i] + "\n";
+        }
+        return error;
     }
     c4_View temp = columns.SortOn(cIndex);
-    for (int i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString name = QString::fromUtf8(cName (temp[i]));
         QString value = values[i];
@@ -1409,7 +1423,7 @@ QPixmap Database::getCheckBoxPixmap(int checked)
     }
 }
 
-QString Database::importFromCSV(QString filename)
+QStringList Database::importFromCSV(QString filename)
 {
     CSVUtils csv;
     return csv.parseFile(filename, this);

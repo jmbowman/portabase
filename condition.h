@@ -42,9 +42,9 @@ public:
     c4_View filter(c4_View dbview);
     QString getDescription();
     void updateDescription();
-    static QString getOperatorText(int op);
 
 private:
+    static QString getOperatorText(int op);
     c4_View filterInt(c4_View dbview, QString colId, int value);
     c4_View filterString(c4_View dbview);
     c4_View filterFloat(c4_View dbview);

@@ -1,7 +1,7 @@
 /*
  * importdialog.cpp
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,6 +11,8 @@
 
 #include <qpe/fileselector.h>
 #include <qmessagebox.h>
+#include <qstringlist.h>
+#include "csverror.h"
 #include "database.h"
 #include "importdialog.h"
 #include "importutils.h"
@@ -61,8 +63,16 @@ void ImportDialog::import(const DocLnk &f)
 bool ImportDialog::import(const QString &file)
 {
     QString error;
+    QString data = "";
     if (source == CSV_FILE) {
-        error = db->importFromCSV(file);
+        QStringList result = db->importFromCSV(file);
+        int count = result.count();
+        if (count > 0) {
+            error = result[0];
+        }
+        if (count > 1) {
+            data = result[1];
+        }
     }
     else if (source == MOBILEDB_FILE) {
         ImportUtils utils;
@@ -74,7 +84,13 @@ bool ImportDialog::import(const QString &file)
     }
     importDone = TRUE;
     if (error != "") {
-        QMessageBox::warning(this, tr("PortaBase"), error);
+        if (data == "") {
+            QMessageBox::warning(this, tr("PortaBase"), error);
+        }
+        else {
+            CSVErrorDialog dialog(error, data, this);
+            dialog.exec();
+        }
         return FALSE;
     }
     return TRUE;

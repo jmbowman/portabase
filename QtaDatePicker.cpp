@@ -103,16 +103,16 @@ QDatePicker::QDatePicker( QDate *inDate ): QDialog( 0, 0, TRUE )
         vbox->addWidget(tableHeader, 0, Qt::AlignHCenter);
 	tableHeader->setOrientation( Horizontal );
 	if (!startMonday) {
-		tableHeader->addLabel( tr("S"), 22 );
+		tableHeader->addLabel( tr("Su"), 22 );
 	}
 	tableHeader->addLabel( tr("M"), 22 );
-	tableHeader->addLabel( tr("T"), 22 );
+	tableHeader->addLabel( tr("Tu"), 22 );
 	tableHeader->addLabel( tr("W"), 22 );
-	tableHeader->addLabel( tr("T"), 22 );
+	tableHeader->addLabel( tr("Th"), 22 );
 	tableHeader->addLabel( tr("F"), 22 );
-	tableHeader->addLabel( tr("S"), 22 );
+	tableHeader->addLabel( tr("Sa"), 22 );
 	if (startMonday) {
-		tableHeader->addLabel( tr("S"), 22 );
+		tableHeader->addLabel( tr("Su"), 22 );
 	}
 
 	// Create the main calendar table

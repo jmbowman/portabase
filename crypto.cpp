@@ -9,7 +9,6 @@
  * (at your option) any later version.
  */
 
-#include <qmessagebox.h>
 #include <qobject.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,6 +22,10 @@ Crypto::Crypto(c4_Storage *outer, c4_Storage *inner) : container(outer), content
     hashfunc = hashFunctionFind("SHA-1");
     prng = randomGeneratorFind("FIPS 186");
     hashFunctionContextInit(&hfc, hashfunc);
+#ifndef DESKTOP
+    // don't block on /dev/random waiting for enough entropy...
+    setenv("BEECRYPT_ENTROPY", "urandom", 1);
+#endif
     randomGeneratorContextInit(&rgc, prng);
     encryptParam = malloc(bcipher->paramsize);
     decryptParam = malloc(bcipher->paramsize);
