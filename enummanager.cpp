@@ -79,8 +79,8 @@ void EnumManager::deleteEnum()
             msg += "\n     " + deleteCols[i];
         }
         msg += "\n" + tr("Continue?");
-        int choice = QMessageBox::warning(this, tr("PortaBase"), msg,
-                                          tr("Yes"), tr("No"));
+        int choice = QMessageBox::warning(this, QQDialog::tr("PortaBase"), msg,
+                                          QObject::tr("Yes"), QObject::tr("No"));
         if (choice != 0) {
             return;
         }

@@ -35,9 +35,9 @@ DBEditor::DBEditor(QWidget *parent, const char *name)
 #if !defined(Q_WS_WIN)
     colWidth = width() / 3 - 2;
 #endif
-    table->addColumn(tr("Name"), colWidth);
-    table->addColumn(tr("Type"), colWidth);
-    table->addColumn(tr("Default"), colWidth);
+    table->addColumn(ColumnEditor::tr("Name"), colWidth);
+    table->addColumn(ColumnEditor::tr("Type"), colWidth);
+    table->addColumn(ColumnEditor::tr("Default"), colWidth);
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addColumn()));
@@ -228,8 +228,8 @@ bool DBEditor::isValidDefault(int type, QString defaultVal)
     }
     QString error = db->isValidValue(type, defaultVal);
     if (error != "") {
-        QString message = tr("Default") + " " + error;
-        QMessageBox::warning(this, tr("PortaBase"), message);
+        QString message = ColumnEditor::tr("Default") + " " + error;
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
         return FALSE;
     }
     else {
@@ -354,18 +354,18 @@ void DBEditor::updateTable()
         }
         else if (type == DATE) {
             if (defaultVal == "0") {
-                last->setText(2, tr("Today"));
+                last->setText(2, ColumnEditor::tr("Today"));
             }
             else {
-                last->setText(2, tr("None"));
+                last->setText(2, ColumnEditor::tr("None"));
             }
         }
         else if (type == TIME) {
             if (defaultVal == "0") {
-                last->setText(2, tr("Now"));
+                last->setText(2, ColumnEditor::tr("Now"));
             }
             else {
-                last->setText(2, tr("None"));
+                last->setText(2, ColumnEditor::tr("None"));
             }
         }
     }
@@ -374,34 +374,34 @@ void DBEditor::updateTable()
 QString DBEditor::getTypeString(int type)
 {
     if (type == STRING) {
-        return tr("String");
+        return ColumnEditor::tr("String");
     }
     else if (type == INTEGER) {
-        return tr("Integer");
+        return ColumnEditor::tr("Integer");
     }
     else if (type == FLOAT) {
-        return tr("Decimal");
+        return ColumnEditor::tr("Decimal");
     }
     else if (type == BOOLEAN) {
-        return tr("Boolean");
+        return ColumnEditor::tr("Boolean");
     }
     else if (type == NOTE) {
-        return tr("Note");
+        return ColumnEditor::tr("Note");
     }
     else if (type == DATE) {
-        return tr("Date");
+        return ColumnEditor::tr("Date");
     }
     else if (type == TIME) {
-        return tr("Time");
+        return ColumnEditor::tr("Time");
     }
     else if (type == CALC) {
-        return tr("Calculation");
+        return ColumnEditor::tr("Calculation");
     }
     else if (type == SEQUENCE) {
-        return tr("Sequence");
+        return ColumnEditor::tr("Sequence");
     }
     else if (type == IMAGE) {
-        return tr("Image");
+        return ColumnEditor::tr("Image");
     }
     else {
         return db->getEnumName(type);

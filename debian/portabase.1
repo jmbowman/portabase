@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH PORTABASE 1 "August 3, 2003"
+.TH PORTABASE 1 "March 3, 2004"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -34,7 +34,7 @@ PortaBase's features include:
 \- One data table per file
 .PP
 \- String, Integer, Decimal, Boolean, Note (multi\-line text), Date,
-  Time, Calculation, Sequence, and Enum column types
+  Time, Calculation, Sequence, Image, and Enum column types
 .PP
 \- Add, edit, and delete rows of data
 .PP
@@ -114,15 +114,8 @@ Open the specified file.
 \fB\-h\fP, \fB\-\-help\fP
 Display usage instructions.
 .SH FILES
-/etc/portabase.conf \- general configuration settings for all users.
-Contains the paths where application icons and the help file are found.
-.PP
-\fB$HOME\fP/.portabase/portabase.conf \- user\-specific settings.  Stores
+\fB$HOME\fP/.qt/portabaserc \- user\-specific settings.  Stores
 information on font, checkbox editing, delete confirmations, etc.
-.PP
-\fB$HOME\fP/.portabase/qpe.conf \- user\-specific settings which on the
-Zaurus are part of the system settings shared by all applications.
-Stores date format, week start day, etc.
 .SH AUTHOR
 This manual page was written by Jeremy Bowman <jmbowman@alum.mit.edu>,
 for the Debian GNU/Linux system (but may be used by others).

@@ -9,17 +9,17 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/resource.h>
-#else
-#include "desktop/resource.h"
-#endif
-
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include "calculator.h"
 #include "datatypes.h"
 #include "numberwidget.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/resource.h>
+#else
+#include "desktop/resource.h"
+#endif
 
 NumberWidget::NumberWidget(int type, QWidget *parent, const char *name, WFlags f)
   : QHBox(parent, name, f), dataType(type)

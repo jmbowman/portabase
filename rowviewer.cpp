@@ -9,12 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/resource.h>
-#else
-#include "desktop/resource.h"
-#endif
-
 #include <qapplication.h>
 #include <qcombobox.h>
 #include <qclipboard.h>
@@ -24,11 +18,18 @@
 #include <qtextview.h>
 #include "database.h"
 #include "datatypes.h"
+#include "menuactions.h"
 #include "portabase.h"
 #include "rowviewer.h"
 #include "view.h"
 #include "viewdisplay.h"
 #include "image/imageutils.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/resource.h>
+#else
+#include "desktop/resource.h"
+#endif
 
 RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
   : PBDialog(tr("Row Viewer"), parent, name), db(dbase), display(parent), currentView(0)
@@ -46,7 +47,7 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
 
     QStringList viewNames = db->listViews();
     viewNames.remove("_all");
-    viewNames.prepend(PortaBase::tr("All Columns"));
+    viewNames.prepend(MenuActions::tr("All Columns"));
     viewBox = new QComboBox(FALSE, hbox);
     viewBox->insertStringList(viewNames);
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));

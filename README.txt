@@ -1,4 +1,4 @@
-PortaBase 1.8 (August 2003)
+PortaBase 1.9 (March 2004)
 ---------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
@@ -8,7 +8,7 @@ run as a Linux or Windows desktop application.
 The main features PortaBase currently has are:
 - One data table per file
 - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
-  Calculation, Sequence, and Enum column types
+  Calculation, Sequence, Image, and Enum column types
 - Add, edit, and delete rows of data
 - Custom data views (subsets of the columns in any order)
 - Filter the displayed rows using sets of conditions
@@ -27,6 +27,7 @@ The main features PortaBase currently has are:
 - Pick any available font to use throughout the application
 - User-specified alternating row background colors
 - Simple calculator widget for entering numeric data
+- Customizable menu and toolbar configuration
 
 See the help file (help/html/portabase.html) for more information on features
 and usage.  This help file is also the online help for the application,
@@ -43,9 +44,9 @@ To upgrade from a previous version of PortaBase, do the following:
 3) delete the .ipk file (you don't have to, but it frees up space)
 
 IMPORTANT NOTE: Metakit is no longer installed as a separate library.
-PortaBase now also uses the Beecrypt encryption library, and installing
+PortaBase now also uses the BeeCrypt and libjpeg libraries, and installing
 each library separately makes things more complicated than most people
-would prefer.  Both libraries are now compiled into the PortaBase
+would prefer.  All these libraries are now compiled into the PortaBase
 executable.
 
 Windows Installation and Upgrades
@@ -64,12 +65,14 @@ available from http://prdownloads.sourceforge.net/zaurus/
 - MobileDB import code based on code from ZReader
 (http://www.codecubed.com/zreader/index.html)
 - CSV import code based on code from KSpread (http://www.koffice.org/kspread/)
-- the Beecrypt library (http://www.virtualunlimited.com/products/beecrypt/)
+- the BeeCrypt library (http://www.virtualunlimited.com/products/beecrypt/)
 for encryption algorithms and good random number generation
 - the color picker dialog from HTML@Zaurus
 (http://www.codefactor.de/htmlAtZaurus.html), itself based on Qt's QColorDialog
 - a modified version of the calculator widget from KMyMoney2
 (http://kmymoney2.sourceforge.net/)
+- libjpeg (http://www.ijg.org) for efficient loading and manipulation of JPEG
+image files
 
 License
 -------

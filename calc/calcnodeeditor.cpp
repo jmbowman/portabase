@@ -140,7 +140,7 @@ bool CalcNodeEditor::isValid()
     bool ok = FALSE;
     number->getValue().toDouble(&ok);
     if (!ok) {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("Constant must be a decimal value"));
     }
     return ok;

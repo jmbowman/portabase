@@ -12,14 +12,14 @@
 #ifndef QQDIALOG_H
 #define QQDIALOG_H
 
+#include <qdialog.h>
+
 #if !defined(Q_WS_QWS)
 // get rid of "What's This" button
 #define DEFAULT_FLAGS WStyle_Customize | WStyle_NormalBorder | WStyle_Title | WStyle_SysMenu
 #else
 #define DEFAULT_FLAGS 0
 #endif
-
-#include <qdialog.h>
 
 class QQDialog: public QDialog
 {

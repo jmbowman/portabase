@@ -6,5 +6,5 @@ Abstract: This document describes what PortaBase is
 Section: Apps/Databases
 
 Format: HTML
-Index: /usr/share/doc/portabase/portabase.html
-Files: /usr/share/doc/portabase/portabase.html
+Index: /usr/share/portabase/help/en/portabase.html
+Files: /usr/share/portabase/help/en/portabase.html

@@ -9,7 +9,6 @@
  * (at your option) any later version.
  */
 
-#include <qobject.h>
 #include "calc/calcnode.h"
 #include "condition.h"
 #include "database.h"
@@ -17,7 +16,7 @@
 #include "pbdialog.h"
 #include "xmlimport.h"
 
-XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("")
+XMLImport::XMLImport(Database *dbase) : QObject(), QXmlDefaultHandler(), db(dbase), error("")
 {
     buildParentsMap();
 
@@ -110,10 +109,10 @@ QString XMLImport::errorString()
 QString XMLImport::formattedError()
 {
     if (error != "") {
-        QString fullError = QObject::tr("Error at") + ": ";
-        fullError += QObject::tr("Line") + " ";
+        QString fullError = tr("Error at") + ": ";
+        fullError += tr("Line") + " ";
         fullError += QString::number(xmlLocator->lineNumber()) + ", ";
-        fullError += QObject::tr("Column") + " ";
+        fullError += tr("Column") + " ";
         fullError += QString::number(xmlLocator->columnNumber()) + "\n";
         fullError += error;
         return fullError;
@@ -148,17 +147,17 @@ bool XMLImport::startElement(const QString&, const QString&,
             return TRUE;
         }
         else {
-            error = "portabase " + QObject::tr("only allowed as root element");
+            error = "portabase " + tr("only allowed as root element");
             return FALSE;
         }
     }
     if (!parents.contains(qName)) {
-        error = QObject::tr("Unknown element") + ": " + qName;
+        error = tr("Unknown element") + ": " + qName;
         return FALSE;
     }
     parent = ancestors[count - 1];
     if (parents[qName] != parent) {
-        error = QObject::tr("%1 not allowed as child of %2");
+        error = tr("%1 not allowed as child of %2");
         error = error.arg(qName).arg(parent);
         return FALSE;
     }
@@ -166,7 +165,7 @@ bool XMLImport::startElement(const QString&, const QString&,
     if (sectionIndex != -1) {
         QString missing = missingSection(lastSection, sectionIndex);
         if (missing != "") {
-            error = QObject::tr("Missing element") + ": " + missing;
+            error = tr("Missing element") + ": " + missing;
             return FALSE;
         }
         lastSection = qName;
@@ -177,7 +176,7 @@ bool XMLImport::startElement(const QString&, const QString&,
         colId = atts.value("c");
         colId.toInt(&ok);
         if (!ok) {
-            error = QObject::tr("\"c\" attribute is missing or non-integer");
+            error = tr("\"c\" attribute is missing or non-integer");
             return FALSE;
         }
     }
@@ -321,8 +320,7 @@ bool XMLImport::updateGlobalRecord()
         return FALSE;
     }
     if (gversion < 7 || gversion > FILE_VERSION) {
-        error = QObject::tr("Unsupported") + " gversion: "
-                + QString::number(gversion);
+        error = tr("Unsupported") + " gversion: " + QString::number(gversion);
         return FALSE;
     }
     db->setGlobalInfo(gview, gsort, gfilter);
@@ -341,11 +339,11 @@ bool XMLImport::addEnum()
         return FALSE;
     }
     if (eid < FIRST_ENUM) {
-        error = QObject::tr("Invalid") + " eid: " + QString::number(eid);
+        error = tr("Invalid") + " eid: " + QString::number(eid);
         return FALSE;
     }
     if (indexMap.contains(ename)) {
-        error = QObject::tr("Duplicate") + " ename: " + ename;
+        error = tr("Duplicate") + " ename: " + ename;
         return FALSE;
     }
     QMap<int,QString> mapping;
@@ -370,7 +368,7 @@ bool XMLImport::addEnumOption()
         return FALSE;
     }
     if (enumIds.findIndex(eoenum) == -1) {
-        error = QObject::tr("Invalid") + " eoenum: " + idString;
+        error = tr("Invalid") + " eoenum: " + idString;
         return FALSE;
     }
     indexMap[idString].insert(eoindex, eotext);
@@ -393,8 +391,7 @@ bool XMLImport::addColumn()
     }
     if (ctype > LAST_TYPE) {
         if (enumIds.findIndex(ctype) == -1) {
-            error = QObject::tr("Invalid") + " ctype: "
-                    + QString::number(ctype);
+            error = tr("Invalid") + " ctype: " + QString::number(ctype);
             return FALSE;
         }
     }
@@ -422,7 +419,7 @@ bool XMLImport::addView()
         }
     }
     if (indexMap.contains(vname)) {
-        error = QObject::tr("Duplicate") + " vname: " + vname;
+        error = tr("Duplicate") + " vname: " + vname;
         return FALSE;
     }
     QMap<int,QString> mapping;
@@ -444,11 +441,11 @@ bool XMLImport::addViewColumn()
         return FALSE;
     }
     if (!indexMap.contains(vcview)) {
-        error = QObject::tr("Invalid") + " vcview: " + vcview;
+        error = tr("Invalid") + " vcview: " + vcview;
         return FALSE;
     }
     if (colNames.findIndex(vcname) == -1) {
-        error = QObject::tr("Invalid") + " vcname: " + vcname;
+        error = tr("Invalid") + " vcname: " + vcname;
         return FALSE;
     }
     indexMap[vcview].insert(vcindex, vcname);
@@ -468,7 +465,7 @@ bool XMLImport::addSort()
         }
     }
     if (indexMap.contains(sname)) {
-        error = QObject::tr("Duplicate") + " sname: " + sname;
+        error = tr("Duplicate") + " sname: " + sname;
         return FALSE;
     }
     QMap<int,QString> mapping;
@@ -486,11 +483,11 @@ bool XMLImport::addSortColumn()
         return FALSE;
     }
     if (!indexMap.contains(scsort)) {
-        error = QObject::tr("Invalid") + " scsort: " + scsort;
+        error = tr("Invalid") + " scsort: " + scsort;
         return FALSE;
     }
     if (colNames.findIndex(scname) == -1) {
-        error = QObject::tr("Invalid") + " scname: " + scname;
+        error = tr("Invalid") + " scname: " + scname;
         return FALSE;
     }
     if (scdesc == 1) {
@@ -513,7 +510,7 @@ bool XMLImport::addFilter()
         }
     }
     if (indexMap.contains(fname)) {
-        error = QObject::tr("Duplicate") + " fname: " + fname;
+        error = tr("Duplicate") + " fname: " + fname;
         return FALSE;
     }
     QMap<int,QString> mapping;
@@ -535,19 +532,19 @@ bool XMLImport::addFilterCondition()
         return FALSE;
     }
     if (!indexMap.contains(fcfilter)) {
-        error = QObject::tr("Invalid") + " fcfilter: " + fcfilter;
+        error = tr("Invalid") + " fcfilter: " + fcfilter;
         return FALSE;
     }
     int ctype = STRING;
     if (fccolumn != "_anytext") {
         if (colNames.findIndex(fccolumn) == -1) {
-            error = QObject::tr("Invalid") + " fccolumn: " + fccolumn;
+            error = tr("Invalid") + " fccolumn: " + fccolumn;
             return FALSE;
         }
         ctype = db->getType(fccolumn);
         QString errMsg = db->isValidValue(ctype, fcconstant);
         if (errMsg != "") {
-            error = QObject::tr("Invalid") + " fcconstant: " + fcconstant + "("
+            error = tr("Invalid") + " fcconstant: " + fcconstant + "("
                     + errMsg + ")";
             return FALSE;
         }
@@ -574,13 +571,13 @@ bool XMLImport::addCalc()
     }
     int index = idList.findIndex(calcid);
     if (index == -1) {
-        error = QObject::tr("Invalid") + " calcid: " + QString::number(calcid);
+        error = tr("Invalid") + " calcid: " + QString::number(calcid);
         return FALSE;
     }
     QString colName = colNames[index];
     int type = db->getType(colName);
     if (type != CALC) {
-        error = QObject::tr("Invalid") + " calcid: " + QString::number(calcid);
+        error = tr("Invalid") + " calcid: " + QString::number(calcid);
         return FALSE;
     }
     db->updateCalc(colName, 0, calcdecimals);
@@ -599,18 +596,17 @@ bool XMLImport::addCalcNode()
     }
     int index = idList.findIndex(cnid);
     if (index == -1) {
-        error = QObject::tr("Invalid") + " cnid: " + QString::number(cnid);
+        error = tr("Invalid") + " cnid: " + QString::number(cnid);
         return FALSE;
     }
     QString colName = colNames[index];
     int type = db->getType(colName);
     if (type != CALC) {
-        error = QObject::tr("Invalid") + " cnid: " + QString::number(cnid);
+        error = tr("Invalid") + " cnid: " + QString::number(cnid);
         return FALSE;
     }
     if (cnparentid >= cnnodeid && !(cnparentid == 0 && cnnodeid == 0)) {
-        error = QObject::tr("Invalid") + " cnparentid: "
-                + QString::number(cnparentid);
+        error = tr("Invalid") + " cnparentid: " + QString::number(cnparentid);
         return FALSE;
     }
     if (!indexMap.contains(colName)) {
@@ -654,21 +650,21 @@ bool XMLImport::validateGlobal()
     if (gview != "_all") {
         QStringList views = db->listViews();
         if (views.findIndex(gview) == -1) {
-            error = QObject::tr("Invalid") + " gview: " + gview;
+            error = tr("Invalid") + " gview: " + gview;
             return FALSE;
         }
     }
     if (gsort != "") {
         QStringList sortings = db->listSortings();
         if (sortings.findIndex(gsort) == -1) {
-            error = QObject::tr("Invalid") + " gsort: " + gsort;
+            error = tr("Invalid") + " gsort: " + gsort;
             return FALSE;
         }
     }
     if (gfilter != "_allrows") {
         QStringList filters = db->listFilters();
         if (filters.findIndex(gfilter) == -1) {
-            error = QObject::tr("Invalid") + " gfilter: " + gfilter;
+            error = tr("Invalid") + " gfilter: " + gfilter;
             return FALSE;
         }
     }
@@ -680,7 +676,7 @@ bool XMLImport::validateEnums()
     int count = enumMap.count();
     for (int i = 0; i < count; i++) {
         if (!enumMap.contains(i)) {
-            error = QObject::tr("Missing") + " eindex: " + QString::number(i);
+            error = tr("Missing") + " eindex: " + QString::number(i);
             return FALSE;
         }
         enumIds.append(enumMap[i]);
@@ -700,7 +696,7 @@ bool XMLImport::validateColumns()
     colCount = columnMap.count();
     for (int i = 0; i < colCount; i++) {
         if (!columnMap.contains(i)) {
-            error = QObject::tr("Missing") + " cindex: " + QString::number(i);
+            error = tr("Missing") + " cindex: " + QString::number(i);
             return FALSE;
         }
         idList.append(columnMap[i]);
@@ -715,7 +711,7 @@ bool XMLImport::validateColumns()
 bool XMLImport::validateViewColumns()
 {
     if (!indexMap.contains("_all")) {
-        error = QObject::tr("Missing") + " vcview: _all";
+        error = tr("Missing") + " vcview: _all";
         return FALSE;
     }
     if (!validateIndexMap("vcindex", "vcname")) {
@@ -790,7 +786,7 @@ bool XMLImport::validateCalcNodes()
         for (iter2 = mapping.begin(); iter2 != mapping.end(); ++iter2) {
             QString parentId = iter2.data();
             if (nodeIds.findIndex(parentId.toInt()) == -1) {
-                error = QObject::tr("Invalid") + " cnparentid: " + parentId;
+                error = tr("Invalid") + " cnparentid: " + parentId;
                 return FALSE;
             }
         }
@@ -809,44 +805,44 @@ QString XMLImport::isValidCalcNode(CalcNode *node)
     int type = node->type();
     if (type < 0 || (type > CALC_DATE_COLUMN && type < CALC_FIRST_OP)
         || type > CALC_LAST_OP) {
-        return QObject::tr("Invalid") + " cntype: " + QString::number(type);
+        return tr("Invalid") + " cntype: " + QString::number(type);
     }
     QString value = node->value();
     if (type == CALC_CONSTANT) {
         bool ok;
         value.toDouble(&ok);
         if (!ok) {
-            return QObject::tr("Invalid") + " cnvalue: " + value;
+            return tr("Invalid") + " cnvalue: " + value;
         }
     }
     else if (type == CALC_DATE_CONSTANT) {
         QString error = db->isValidValue(DATE, value);
         if (error != "") {
-            return QObject::tr("Invalid") + " cnvalue: " + value;
+            return tr("Invalid") + " cnvalue: " + value;
         }
     }
     else if (type == CALC_COLUMN) {
         if (colNames.findIndex(value) == -1) {
-            return QObject::tr("Invalid") + " cnvalue: " + value;
+            return tr("Invalid") + " cnvalue: " + value;
         }
         int colType = db->getType(value);
         if (colType != INTEGER && colType != FLOAT) {
-            return QObject::tr("Invalid") + " cnvalue: " + value;
+            return tr("Invalid") + " cnvalue: " + value;
         }
     }
     else if (type == CALC_DATE_COLUMN) {
         if (colNames.findIndex(value) == -1) {
-            return QObject::tr("Invalid") + " cnvalue: " + value;
+            return tr("Invalid") + " cnvalue: " + value;
         }
         if (db->getType(value) != DATE) {
-            return QObject::tr("Invalid") + " cnvalue: " + value;
+            return tr("Invalid") + " cnvalue: " + value;
         }
     }
     CalcNodeList children = node->getChildren();
     int count = children.count();
     int max = node->maxChildren();
     if (max != -1 && count > max) {
-        return QObject::tr("Too many child nodes for node type") + ": "
+        return tr("Too many child nodes for node type") + ": "
                + QString::number(type);
     }
     for (int i = 0; i < count; i++) {
@@ -862,7 +858,7 @@ bool XMLImport::isValidDefault(const QString &cname, int ctype,
                                const QString &cdefault)
 {
     // in case it's needed...
-    QString errorMsg = QObject::tr("Invalid") + " cdefault: " + cdefault
+    QString errorMsg = tr("Invalid") + " cdefault: " + cdefault
                        + " (" + cname + ")";
     if (ctype == DATE) {
         bool ok = FALSE;
@@ -899,8 +895,8 @@ bool XMLImport::isValidDefault(const QString &cname, int ctype,
 bool XMLImport::isValidOperator(int type, int op, int cs)
 {
     // in case it's needed...
-    QString opError = QObject::tr("Invalid") + " fcoperator: "
-            + QString::number(op) + " (ctype = " + QString::number(type) + ")";
+    QString opError = tr("Invalid") + " fcoperator: " + QString::number(op)
+                      + " (ctype = " + QString::number(type) + ")";
     if (type == BOOLEAN) {
         if (op != EQUALS) {
             error = opError;
@@ -913,9 +909,9 @@ bool XMLImport::isValidOperator(int type, int op, int cs)
             return FALSE;
         }
         if (cs == 0) {
-            error = QObject::tr("Invalid") + " fccase: 0 (ctype = "
+            error = tr("Invalid") + " fccase: 0 (ctype = "
                     + QString::number(type) + ")";
-
+            return FALSE;
         }
     }
     else if (type == STRING || type == NOTE) {
@@ -945,7 +941,7 @@ bool XMLImport::containsDuplicate(const QStringList &names,
         QString name = *iter;
         iter = copy.remove(iter);
         if (copy.findIndex(name) != -1) {
-            error = QObject::tr("Duplicate") + " " + element + ": " + name;
+            error = tr("Duplicate") + " " + element + ": " + name;
             return TRUE;
         }
     }
@@ -961,7 +957,7 @@ bool XMLImport::containsDuplicate(const IntList &items, const QString &element)
         int item = *iter;
         iter = copy.remove(iter);
         if (copy.findIndex(item) != -1) {
-            error = QObject::tr("Duplicate") + " " + element + ": "
+            error = tr("Duplicate") + " " + element + ": "
                     + QString::number(item);
             return TRUE;
         }
@@ -981,7 +977,7 @@ bool XMLImport::validateIndexMap(const QString &indexElement,
         itemList.clear();
         for (i = 0; i < indexCount; i++) {
             if (!mapping.contains(i)) {
-                error = QObject::tr("Missing") + " " + indexElement + ": "
+                error = tr("Missing") + " " + indexElement + ": "
                         + QString::number(i);
                 return FALSE;
             }
@@ -994,7 +990,8 @@ bool XMLImport::validateIndexMap(const QString &indexElement,
         }
         if (iter.key() == "_all") {
             if (itemList != colNames) {
-                error = QObject::tr("Incorrect _all view column sequence");
+                error = tr("Incorrect _all view column sequence");
+                return FALSE;
             }
         }
         if (containsDuplicate(itemList, stringElement)) {
@@ -1014,7 +1011,7 @@ bool XMLImport::setField(const QString &name)
         bool ok = FALSE;
         int value = text.toInt(&ok);
         if (!ok || value < 0 || value > 1) {
-            error = name + ": " + QObject::tr("must be 0 or 1");
+            error = name + ": " + tr("must be 0 or 1");
             return FALSE;
         }
     }
@@ -1022,7 +1019,7 @@ bool XMLImport::setField(const QString &name)
         bool ok = FALSE;
         text.toInt(&ok);
         if (!ok) {
-            error = name + ": " + QObject::tr("must be an integer");
+            error = name + ": " + tr("must be an integer");
             return FALSE;
         }
     }
@@ -1030,8 +1027,7 @@ bool XMLImport::setField(const QString &name)
         bool ok = FALSE;
         int value = text.toInt(&ok);
         if (!ok || value < 0) {
-            error = name + ": "
-                    + QObject::tr("must be a non-negative integer");
+            error = name + ": " + tr("must be a non-negative integer");
             return FALSE;
         }
     }
@@ -1039,12 +1035,12 @@ bool XMLImport::setField(const QString &name)
         bool ok = FALSE;
         int value = text.toInt(&ok);
         if (!ok || value <= 0) {
-            error = name + ": " + QObject::tr("must be a positive integer");
+            error = name + ": " + tr("must be a positive integer");
             return FALSE;
         }
     }
     if (parent != "r" && fields.contains(name)) {
-        error = QObject::tr("Duplicate element") + ": " + name;
+        error = tr("Duplicate element") + ": " + name;
         return FALSE;
     }
     fields.insert(name, text);
@@ -1054,7 +1050,7 @@ bool XMLImport::setField(const QString &name)
 QString XMLImport::getField(const QString &name)
 {
     if (!fields.contains(name)) {
-        error = QObject::tr("Missing element") + ": " + name;
+        error = tr("Missing element") + ": " + name;
         return "";
     }
     return fields[name];
@@ -1073,7 +1069,7 @@ QString XMLImport::getDataField(int columnId)
 {
     QString idString = QString::number(columnId);
     if (!fields.contains(idString)) {
-        error = QObject::tr("Missing data for column ID %1").arg(idString);
+        error = tr("Missing data for column ID %1").arg(idString);
         return "";
     }
     return fields[idString];

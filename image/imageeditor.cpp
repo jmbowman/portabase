@@ -32,6 +32,12 @@ ImageEditor::ImageEditor(QWidget *parent, const char *name)
     new QLabel(tr("Height"), paramsRow);
     heightBox = new QSpinBox(1, 600, 1, paramsRow);
 
+#if defined(Q_WS_QWS)
+    // Need a second row due to smaller screen size...
+    paramsRow = new QHBox(this);
+    vbox->addWidget(paramsRow);
+#endif
+
     new QLabel(tr("Rotate"), paramsRow);
     rotateBox = new QComboBox(FALSE, paramsRow);
     rotateBox->insertItem("0");
@@ -75,7 +81,7 @@ int ImageEditor::edit(const QString &file)
         // I doubt if many people have 6400 x 4800 images, but it's probably
         // only a matter of time before digital cameras get there...
         if (scaleDenom > 8 || format != "JPEG") {
-            QMessageBox::warning(this, PBDialog::tr("PortaBase"),
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Image is too large to import"));
             return QDialog::Rejected;
         }
@@ -93,11 +99,11 @@ int ImageEditor::edit(const QString &file)
     pm.setOptimization(QPixmap::NormalOptim);
     pm.convertFromImage(image);
     display->setPixmap(pm);
+#if !defined(Q_WS_QWS)
     int margin = 5;
 #if defined(Q_WS_WIN)
     margin += 16;
 #endif
-#if !defined(Q_WS_QWS)
     resize(QMAX(pm.width() + margin, paramsRow->sizeHint().width() + margin),
            paramsRow->height() + pm.height() + okCancelRow->height() + margin);
 #endif

@@ -9,6 +9,33 @@
  * (at your option) any later version.
  */
 
+#include <qaction.h>
+#include <qapplication.h>
+#include <qdir.h>
+#include <qfile.h>
+#include <qfileinfo.h>
+#include <qfont.h>
+#include <qmainwindow.h>
+#include <qmessagebox.h>
+#include <qpopupmenu.h>
+#include <qtoolbar.h>
+#include <qwidgetstack.h>
+#include "condition.h"
+#include "conditioneditor.h"
+#include "database.h"
+#include "dbeditor.h"
+#include "enummanager.h"
+#include "filter.h"
+#include "filtereditor.h"
+#include "menuactions.h"
+#include "passdialog.h"
+#include "portabase.h"
+#include "preferences.h"
+#include "qqdialog.h"
+#include "sorteditor.h"
+#include "viewdisplay.h"
+#include "vieweditor.h"
+
 #if !defined(Q_WS_QWS)
 #include <qdragobject.h>
 #include <qinputdialog.h>
@@ -37,33 +64,6 @@ typedef QInputDialog InputDialog;
 #include "newfiledialog.h"
 #endif
 #endif
-
-#include <qaction.h>
-#include <qapplication.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qfont.h>
-#include <qmainwindow.h>
-#include <qmessagebox.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
-#include <qwidgetstack.h>
-#include "condition.h"
-#include "conditioneditor.h"
-#include "database.h"
-#include "dbeditor.h"
-#include "enummanager.h"
-#include "filter.h"
-#include "filtereditor.h"
-#include "menuactions.h"
-#include "passdialog.h"
-#include "portabase.h"
-#include "preferences.h"
-#include "qqdialog.h"
-#include "sorteditor.h"
-#include "viewdisplay.h"
-#include "vieweditor.h"
 
 PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
   : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE), needsRefresh(FALSE)
@@ -204,7 +204,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
             this, SLOT(viewAllColumns()));
 
     // Sort menu actions
-    sortAddAction = ma->action(tr("Add"), addIcons);
+    sortAddAction = ma->action("Add", addIcons);
     connect(sortAddAction, SIGNAL(activated()), this, SLOT(addSorting()));
     sortEditAction = ma->action("Edit", editIcons);
     connect(sortEditAction, SIGNAL(activated()), this, SLOT(editSorting()));
@@ -384,7 +384,7 @@ void PortaBase::viewProperties()
     message += tr("Filters") + ": " + QString::number(count) + "\n";
     count = db->listEnums().count();
     message += tr("Enums") + ": " + QString::number(count);
-    QString title = tr("File Properties") + " - " + tr("PortaBase");
+    QString title = tr("File Properties") + " - " + QQDialog::tr("PortaBase");
     QMessageBox mb(title, message, QMessageBox::NoIcon,
                    QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
@@ -436,7 +436,7 @@ void PortaBase::import()
     types.append(tr("XML"));
     types.append(tr("MobileDB"));
     bool ok = FALSE;
-    QString type = InputDialog::getItem(tr("Import") + QQDialog::titleSuffix,
+    QString type = InputDialog::getItem(MenuActions::tr("Import") + QQDialog::titleSuffix,
                                         tr("Import from:"),
                                         types, 0, FALSE, &ok, this);
     if (!ok) {
@@ -462,7 +462,7 @@ void PortaBase::createFile(int source)
         }
     }
     if (!ok) {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("Unable to create new file"));
         return;
     }
@@ -546,7 +546,8 @@ void PortaBase::openFile(const DocLnk &f)
     int openResult;
     Database *temp = new Database(f.file(), &openResult);
     if (openResult == OPEN_NEWER_VERSION) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("This file uses a newer version of the\nPortaBase format than this version\nof PortaBase supports; please\nupgrade"));
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+                             tr("This file uses a newer version of the\nPortaBase format than this version\nof PortaBase supports; please\nupgrade"));
         delete temp;
         return;
     }
@@ -594,10 +595,11 @@ void PortaBase::deleteFile()
     if (selection == 0) {
         return;
     }
-    if (QMessageBox::warning(this, tr("PortaBase"), tr("Delete") + " \""
-                             + selection->name() + "\"\n"
+    if (QMessageBox::warning(this, QQDialog::tr("PortaBase"), tr("Delete")
+                             + " \"" + selection->name() + "\"\n"
                              + tr("Are you sure?"),
-                             tr("Yes"), tr("No"), QString::null, 1) > 0) {
+                             QObject::tr("Yes"), QObject::tr("No"),
+                             QString::null, 1) > 0) {
         delete selection;
         return;
     }
@@ -651,7 +653,8 @@ void PortaBase::openRecent(int id)
 {
     QString path = recent->text(id);
     if (!QFile::exists(path)) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("File does not exist"));
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+                             tr("File does not exist"));
         return;
     }
     openFile(path);
@@ -660,14 +663,14 @@ void PortaBase::openRecent(int id)
 void PortaBase::updateCaption(const QString &name)
 {
     if (!doc) {
-        setCaption(tr("PortaBase") + QQDialog::titleSuffix);
+        setCaption(QQDialog::tr("PortaBase") + QQDialog::titleSuffix);
     }
     else {
         QString s = name;
         if (s.isNull()) {
             s = doc->name();
         }
-        setCaption(s + " - " + tr("PortaBase") + QQDialog::titleSuffix);
+        setCaption(s + " - " + QQDialog::tr("PortaBase") + QQDialog::titleSuffix);
     }
 }
 
@@ -899,9 +902,9 @@ void PortaBase::updateRecentFiles(Config &conf)
 {
     conf.setGroup("Files");
     QStringList files = fileSelector->recent();
-    int count = files.count();
     int i;
 #if !defined(Q_WS_QWS)
+    int count = files.count();
     recent->clear();
     for (i = 0; i < count; i++) {
         recent->insertItem(files[i]);
@@ -924,9 +927,10 @@ void PortaBase::closeEvent(QCloseEvent *e)
 {
     if (mainStack->visibleWidget() == viewer) {
         if (isEdited) {
-            int choice = QMessageBox::warning(this, tr("PortaBase"),
+            int choice = QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                               tr("Save changes?"),
-                                              tr("Yes"), tr("No"));
+                                              QObject::tr("Yes"),
+                                              QObject::tr("No"));
             if (choice == 0) {
                 save();
             }
@@ -957,8 +961,9 @@ void PortaBase::editRow()
 void PortaBase::deleteRow()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, tr("PortaBase"), tr("Delete this row?"),
-                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+                                 tr("Delete this row?"), QObject::tr("Yes"),
+                                 QObject::tr("No"), QString::null, 1) > 0) {
             return;
         }
     }
@@ -978,9 +983,10 @@ void PortaBase::viewRow()
 void PortaBase::deleteAllRows()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, tr("PortaBase"),
+        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Delete all rows in the\ncurrent filter?"),
-                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+                                 QObject::tr("Yes"), QObject::tr("No"),
+                                 QString::null, 1) > 0) {
             return;
         }
     }
@@ -1020,7 +1026,7 @@ void PortaBase::dataExport()
     types.append(tr("CSV") + "(" + tr("rows in current filter") + ")");
     types.append(tr("XML"));
     bool ok = FALSE;
-    QString type = InputDialog::getItem(tr("Export") + QQDialog::titleSuffix,
+    QString type = InputDialog::getItem(MenuActions::tr("Export") + QQDialog::titleSuffix,
                                         tr("Export to:"),
                                         types, 0, FALSE, &ok, this);
     if (!ok) {
@@ -1319,9 +1325,10 @@ void PortaBase::addFilter()
 void PortaBase::deleteView()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, tr("PortaBase"),
+        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Delete this view?"),
-                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+                                 QObject::tr("Yes"), QObject::tr("No"),
+                                 QString::null, 1) > 0) {
             return;
         }
     }
@@ -1335,9 +1342,10 @@ void PortaBase::deleteView()
 void PortaBase::deleteSorting()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, tr("PortaBase"),
+        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Delete this sorting?"),
-                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+                                 QObject::tr("Yes"), QObject::tr("No"),
+                                 QString::null, 1) > 0) {
             return;
         }
     }
@@ -1350,9 +1358,10 @@ void PortaBase::deleteSorting()
 void PortaBase::deleteFilter()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, tr("PortaBase"),
+        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Delete this filter?"),
-                                 tr("Yes"), tr("No"), QString::null, 1) > 0) {
+                                 QObject::tr("Yes"), QObject::tr("No"),
+                                 QString::null, 1) > 0) {
             return;
         }
     }
@@ -1441,7 +1450,7 @@ void PortaBase::dropEvent(QDropEvent *event)
             valid = false;
         }
         if (!valid) {
-            QMessageBox::warning(this, tr("PortaBase"),
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Not a PortaBase file"));
             return;
         }
@@ -1478,16 +1487,16 @@ Config *PortaBase::getPreferences()
 
 void PortaBase::aboutPortaBase()
 {
-    QString message = tr("PortaBase") + " 1.9\n";
+    QString message = QQDialog::tr("PortaBase") + " 1.9\n";
     message += tr("Copyright (C)") + " 2002-2004 Jeremy Bowman\n\n";
     message += tr("Web site at http://portabase.sourceforge.net");
-    QMessageBox mb(tr("About PortaBase"), message, QMessageBox::NoIcon,
-                   QMessageBox::Ok, QMessageBox::NoButton,
+    QMessageBox mb(MenuActions::tr("About PortaBase"), message,
+                   QMessageBox::NoIcon, QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
     mb.exec();
 }
 
 void PortaBase::aboutQt()
 {
-    QMessageBox::aboutQt(this, tr("PortaBase"));
+    QMessageBox::aboutQt(this, QQDialog::tr("PortaBase"));
 }

@@ -1,7 +1,7 @@
 /*
  * newfiledialog.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
 #include <qfileinfo.h>
 #include <qmessagebox.h>
 #include "newfiledialog.h"
+#include "../qqdialog.h"
 
 NewFileDialog::NewFileDialog(const QString &extension, QWidget *parent, const char *name, WFlags f) : SlFileDialog(TRUE, parent, name, TRUE, f), ext(extension), encrypted(FALSE)
 {
@@ -37,15 +38,16 @@ int NewFileDialog::exec()
     QFileInfo info(path);
     path = info.dirPath(true) + "/" + info.baseName() + ext;
     if (QFile::exists(path)) {
-        int overwrite = QMessageBox::warning(this, tr("PortaBase"),
+        int overwrite = QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                             tr("File already exists; overwrite it?"),
-                            tr("Yes"), tr("No"), QString::null, 1);
+                            QObject::tr("Yes"), QObject::tr("No"),
+                            QString::null, 1);
         if (overwrite == 1) {
             return QDialog::Rejected;
         }
     }
     if (ext == ".pob") {
-        QMessageBox crypt(tr("PortaBase"), tr("Encrypt the file?"),
+        QMessageBox crypt(QQDialog::tr("PortaBase"), tr("Encrypt the file?"),
                           QMessageBox::NoIcon, QMessageBox::Yes,
                           QMessageBox::No | QMessageBox::Default,
                           QMessageBox::NoButton, this);

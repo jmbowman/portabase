@@ -135,7 +135,7 @@ void ImageUtils::setExportPaths(const QString &filePath)
     // currently in Documents/text/x-csv or Documents/text/xml
     baseDir.cdUp();
     baseDir.cdUp();
-    Qstring basePath = baseDir.absPath();
+    QString basePath = baseDir.absPath();
     jpegAbsPath = basePath + "/image/jpeg/";
     jpegRelPath = "../../image/jpeg/";
     pngAbsPath = basePath + "/image/png/";

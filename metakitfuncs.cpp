@@ -40,9 +40,9 @@ int compareUsingLocale(const char *s1, const char *s2)
     return compareStrings(QString::fromUtf8(s1), QString::fromUtf8(s2));
 }
 
+#if defined(Q_WS_WIN)
 int windowsFileOpen(const char *filename, int flags)
 {
-#if defined(Q_WS_WIN)
     QString name = QString::fromUtf8(filename);
     if (QApplication::winVersion() & Qt::WV_NT_based) {
         return _wopen(name.ucs2(), flags);
@@ -50,7 +50,10 @@ int windowsFileOpen(const char *filename, int flags)
     else {
         return _open(name.latin1(), flags);
     }
-#else
-    return -1;
-#endif
 }
+#else
+int windowsFileOpen(const char *, int)
+{
+    return -1;
+}
+#endif

@@ -34,6 +34,8 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("Properties", tr("Properties"));
     textMap.insert("Preferences", tr("Preferences"));
     textMap.insert("Quit", tr("Quit"));
+    textMap.insert("List", tr("List"));
+    textMap.insert("Icons", tr("Icons"));
     textMap.insert("Help Contents", tr("Help Contents"));
     textMap.insert("About PortaBase", tr("About PortaBase"));
     textMap.insert("About Qt", tr("About Qt"));
@@ -82,7 +84,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     menuTextMap.insert("Copy", tr("&Copy") + "...");
     menuTextMap.insert("Show", tr("&Show"));
     menuTextMap.insert("Delete Rows In Filter", tr("&Delete Rows In Filter"));
-    menuTextMap.insert("Edit Columns", tr("Edit Co&lumns"));
+    menuTextMap.insert("Edit Columns", tr("Edit Col&umns"));
     menuTextMap.insert("Edit Enums", tr("Edit &Enums"));
     menuTextMap.insert("Close", tr("&Close"));
 

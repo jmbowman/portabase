@@ -15,7 +15,7 @@ Description: An easy-to-use personal database application
  .
  Features include:
   - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
-    Calculation, Sequence, and Enum column types
+    Calculation, Sequence, Image, and Enum column types
   - Custom data views (subsets of the columns in any order)
   - Filter the displayed rows using sets of conditions
   - Sort the rows by any combination of columns, each in ascending or

@@ -1,7 +1,7 @@
 /*
  * condition.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,13 +21,15 @@
 #define GREATEREQUAL 6
 #define NOTEQUAL 7
 
+#include <qobject.h>
 #include <qstringlist.h>
 
 class c4_View;
 class Database;
 
-class Condition
+class Condition : public QObject
 {
+    Q_OBJECT
 public:
     Condition(Database *dbase);
     ~Condition();

@@ -9,11 +9,6 @@
  * (at your option) any later version.
  */
 
-#if !defined(Q_WS_QWS)
-#include <qhbox.h>
-#include <qpushbutton.h>
-#endif
-
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -29,6 +24,12 @@
 #include "enumeditor.h"
 #include "notebutton.h"
 #include "numberwidget.h"
+#include "pbdialog.h"
+
+#if !defined(Q_WS_QWS)
+#include <qhbox.h>
+#include <qpushbutton.h>
+#endif
 
 ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name)
   : QQDialog("", parent, name, TRUE), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
@@ -89,10 +90,10 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name)
 #if !defined(Q_WS_QWS)
     QHBox *hbox = new QHBox(this);
     new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
     new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
     new QWidget(hbox);
     grid->addMultiCellWidget(hbox, 3, 3, 0, 1);

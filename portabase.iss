@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=PortaBase
-AppVerName=PortaBase 1.8
+AppVerName=PortaBase 1.9
 AppPublisher=Jeremy Bowman
 AppPublisherURL=http://portabase.sourceforge.net
 AppSupportURL=http://portabase.sourceforge.net
@@ -14,40 +14,43 @@ AllowNoIcons=yes
 ChangesAssociations=yes
 LicenseFile=COPYING
 PrivilegesRequired=admin
+SolidCompression=yes
+OutputBaseFilename=portabase_1.9
+VersionInfoVersion=1.9
+ShowLanguageDialog=auto
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
 
 [Files]
-Source: "portabase.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "package\portabase_cs.bat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "package\portabase_fr.bat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "package\portabase_ja.bat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "package\portabase_tw.bat"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Release\portabase.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "desktop\icons\*.*"; DestDir: "{app}\icons"; Flags: ignoreversion
 Source: "desktop\icons\portabase\*.*"; DestDir: "{app}\icons\portabase"; Flags: ignoreversion
-Source: "help\html\portabase.html"; DestDir: "{app}"; Flags: ignoreversion
-Source: "help\html\portabase.html"; DestDir: "{app}\cs"; Flags: ignoreversion
-Source: "help\html\portabase.html"; DestDir: "{app}\fr"; Flags: ignoreversion
-Source: "help\ja\html\portabase.html"; DestDir: "{app}\ja"; Flags: ignoreversion
-Source: "help\tw\html\portabase.html"; DestDir: "{app}\tw"; Flags: ignoreversion
-Source: "portabase_cs.qm"; DestDir: "{app}\cs"; DestName: "portabase.qm"; Flags: ignoreversion
-Source: "portabase_fr.qm"; DestDir: "{app}\fr"; DestName: "portabase.qm"; Flags: ignoreversion
-Source: "portabase_ja.qm"; DestDir: "{app}\ja"; DestName: "portabase.qm"; Flags: ignoreversion
-Source: "portabase_tw.qm"; DestDir: "{app}\tw"; DestName: "portabase.qm"; Flags: ignoreversion
+Source: "help\html\portabase.html"; DestDir: "{app}\help\en"; Flags: ignoreversion
+Source: "help\ja\html\portabase.html"; DestDir: "{app}\help\ja"; Flags: ignoreversion
+Source: "help\tw\html\portabase.html"; DestDir: "{app}\help\zh_TW"; Flags: ignoreversion
+Source: "portabase_cs.qm"; DestDir: "{app}\i18n\cs"; DestName: "portabase.qm"; Flags: ignoreversion
+Source: "portabase_fr.qm"; DestDir: "{app}\i18n\fr"; DestName: "portabase.qm"; Flags: ignoreversion
+Source: "portabase_ja.qm"; DestDir: "{app}\i18n\ja"; DestName: "portabase.qm"; Flags: ignoreversion
+Source: "portabase_zh_TW.qm"; DestDir: "{app}\i18n\zh_TW"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "CHANGES"; DestDir: "{app}"; Flags: ignoreversion
 Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion
 Source: "portabase.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
-Source: "qt-mt230nc.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile
+Source: "Release\qt-mtnc321.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile
 Source: "beecrypt.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "msvcrt.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist uninsneveruninstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [INI]
-Filename: "{win}\portabase.ini"; Section: "General"; Key: "IconPath"; String: "{app}\icons"; Flags: uninsdeletesection
-Filename: "{win}\portabase.ini"; Section: "General"; Key: "HelpPath"; String: "{app}"; Flags: uninsdeletesection
 Filename: "{app}\portabase.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://portabase.sourceforge.net"
+
+[Languages]
+Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "cs"; MessagesFile: "Czech-5-4.1.8.isl"
+Name: "fr"; MessagesFile: "French-15-4.1.8.isl"
+Name: "ja"; MessagesFile: "Japanese-3-4.1.8.isl"
+Name: "zh_TW"; MessagesFile: "ChineseTrad-3-4.1.8.isl"
 
 [Registry]
 Root: HKCR; Subkey: ".pob"; ValueType: string; ValueName: ""; ValueData: "PortaBaseFile"; Flags: uninsdeletevalue
@@ -57,10 +60,6 @@ Root: HKCR; Subkey: "PortaBaseFile\shell\open\command"; ValueType: string; Value
 
 [Icons]
 Name: "{group}\PortaBase"; Filename: "{app}\portabase.exe"
-Name: "{group}\PortaBase (cs)"; Filename: "{app}\portabase_cs.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
-Name: "{group}\PortaBase (fr)"; Filename: "{app}\portabase_fr.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
-Name: "{group}\PortaBase (ja)"; Filename: "{app}\portabase_ja.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
-Name: "{group}\PortaBase (tw)"; Filename: "{app}\portabase_tw.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase Home Page"; Filename: "{app}\portabase.url"
 Name: "{group}\Uninstall PortaBase"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\PortaBase"; Filename: "{app}\portabase.exe"; Tasks: desktopicon
@@ -70,5 +69,4 @@ Filename: "{app}\portabase.exe"; Description: "Launch PortaBase"; Flags: nowait 
 
 [UninstallDelete]
 Type: files; Name: "{app}\portabase.url"
-Type: files; Name: "{win}\portabase.ini"
 

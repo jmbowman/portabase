@@ -1,7 +1,7 @@
 /*
  * newfiledialog.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,13 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include "newfiledialog.h"
+#include "qqdialog.h"
 
 NewFileDialog::NewFileDialog(const QString &extension, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
 {
     ext = extension;
     if (ext == ".pob") {
-        setCaption(tr("PortaBase"));
+        setCaption(QQDialog::tr("PortaBase"));
     }
     else {
         setCaption(tr("Export"));

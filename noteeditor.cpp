@@ -9,14 +9,14 @@
  * (at your option) any later version.
  */
 
+#include <qmultilineedit.h>
+#include "noteeditor.h"
+
 #if defined(Q_WS_QWS)
 #include <qpe/config.h>
 #else
 #include "desktop/config.h"
 #endif
-
-#include <qmultilineedit.h>
-#include "noteeditor.h"
 
 NoteEditor::NoteEditor(QString colName, bool readOnly, QWidget *parent,
     const char *name) : PBDialog(colName, parent, name)

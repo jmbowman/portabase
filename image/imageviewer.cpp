@@ -44,11 +44,11 @@ void ImageViewer::setImage(const QImage &image)
     pm.setOptimization(QPixmap::NormalOptim);
     pm.convertFromImage(image);
     display->setPixmap(pm);
+#if !defined(Q_WS_QWS)
     int margin = 5;
 #if defined(Q_WS_WIN)
     margin += 16;
 #endif
-#if !defined(Q_WS_QWS)
     resize(pm.width() + margin, pm.height() + okCancelRow->height() + margin);
 #endif
 }

@@ -9,11 +9,11 @@
  * (at your option) any later version.
  */
 
+#include "qqdialog.h"
+
 #if !defined(Q_WS_QWS)
 #include "desktop/resource.h"
 #endif
-
-#include "qqdialog.h"
 
 QQDialog::QQDialog(QString title, QWidget *parent, const char *name, bool modal, WFlags f)
     : QDialog(parent, name, modal, f)

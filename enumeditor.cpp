@@ -9,6 +9,16 @@
  * (at your option) any later version.
  */
 
+#include <qhbox.h>
+#include <qlabel.h>
+#include <qlineedit.h>
+#include <qlistbox.h>
+#include <qmessagebox.h>
+#include <qstringlist.h>
+#include "database.h"
+#include "enumeditor.h"
+#include "metakitfuncs.h"
+
 #if !defined(Q_WS_QWS)
 #include <qfiledialog.h>
 #include <qfileinfo.h>
@@ -31,16 +41,6 @@ typedef QInputDialog InputDialog;
 #include "newfiledialog.h"
 #endif
 #endif
-
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qlistbox.h>
-#include <qmessagebox.h>
-#include <qstringlist.h>
-#include "database.h"
-#include "enumeditor.h"
-#include "metakitfuncs.h"
 
 EnumEditor::EnumEditor(QWidget *parent, const char *name)
   : PBDialog(tr("Enum Editor"), parent, name), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
@@ -99,7 +99,7 @@ int EnumEditor::edit(Database *subject, QString enumName)
                 break;
             }
             else {
-                QMessageBox::warning(this, tr("PortaBase"),
+                QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                      tr("Must have at least one option"));
                 result = exec();
             }
@@ -194,7 +194,7 @@ void EnumEditor::addOption()
     bool ok = TRUE;
     QString text;
     while (ok) {
-        text = InputDialog::getText(tr("Add"), tr("Option text"),
+        text = InputDialog::getText(PBDialog::tr("Add"), tr("Option text"),
                                     QLineEdit::Normal, QString::null, &ok,
                                     this);
         if (ok) {
@@ -223,7 +223,7 @@ void EnumEditor::editOption()
     bool ok = TRUE;
     QString newText;
     while (ok) {
-        newText = InputDialog::getText(tr("Edit"), tr("Option text"),
+        newText = InputDialog::getText(PBDialog::tr("Edit"), tr("Option text"),
                                        QLineEdit::Normal, originalText, &ok,
                                        this);
         if (ok) {
@@ -256,7 +256,7 @@ void EnumEditor::deleteOption()
         return;
     }
     if (!originalName.isEmpty() && info.GetSize() == 1) {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("Must have at least one option"));
         return;
     }
@@ -266,7 +266,7 @@ void EnumEditor::deleteOption()
     bool ok = TRUE;
     QString replace("");
     if (!originalName.isEmpty()) {
-        replace = InputDialog::getItem(tr("Delete"),
+        replace = InputDialog::getItem(PBDialog::tr("Delete"),
                                        tr("Replace where used with:"),
                                        options, 0, FALSE, &ok, this);
     }
@@ -333,7 +333,7 @@ bool EnumEditor::isValidOption(QString option)
 {
     if (!option.isEmpty()) {
         if (option[0] == '_') {
-            QMessageBox::warning(this, PBDialog::tr("PortaBase"),
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  PBDialog::tr("Name must not start with '_'"));
             return FALSE;
         }
@@ -341,7 +341,7 @@ bool EnumEditor::isValidOption(QString option)
     // check for other options with same text
     QStringList options = listCurrentOptions();
     if (options.findIndex(option) != -1) {
-        QMessageBox::warning(this, PBDialog::tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              PBDialog::tr("Duplicate name"));
         return FALSE;
     }

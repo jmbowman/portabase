@@ -30,9 +30,10 @@ will need the following:
 Metakit Compilation
 -------------------
 To compile PortaBase, Metakit must be compiled first.  PortaBase uses a
-version of 2.4.9.3 patched to allow case-sensitive searches and
-locale-sensitive sorting.  Therefore, the patch file metakit-2.4.9.3.patch
-must be applied to the Metakit 2.4.9.3 source tree before building.
+version of 2.4.9.3 patched to allow case-sensitive searches, locale-sensitive
+sorting, and unicode filename support where available.  Therefore, the patch
+file metakit-2.4.9.3.patch must be applied to the Metakit 2.4.9.3 source tree
+before building.
 
 To build Metakit for the desktop test environment, run dev-x86-qpe.sh and then
 follow the Metakit installation instructions (in the Metakit README file).
@@ -60,21 +61,29 @@ Metakit for use in Linux desktop PortaBase, just follow the README directions.
 BeeCrypt compilation
 --------------------
 Get BeeCrypt version 3.1.0.  For the desktop versions of PortaBase, just
-follow the build instructions found in Beecrypt's INSTALL file.  For the
+follow the build instructions found in BeeCrypt's INSTALL file.  For the
 Zaurus version, run the configure script as follows:
 
-NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux --enable-aio=no --with-javaglue=no --enable-static --enable-optimized=no
+NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux --enable-aio=no
 
 As with Metakit, replace /output/dir with the directory in which to place
 the results.  Copy libbeecrypt.a to the same place the Metakit library went.
 
 libjpeg compilation
 -------------------
-Get version 6b from http://www.ijg.org.  For the desktop versions, follow the
-build instructions from the install.doc file that comes with the source code.
-For the Zaurus version, run the configure script as follows:
+For desktop Linux, this is probably already on your system; just make sure to
+install the appropriate dev package if it hasn't already been installed (for
+Debian this is libjpeg62-dev).  For Windows, get version 6b from
+http://www.ijg.org and follow the build instructions from the install.doc file
+that comes with the source code. For the Zaurus version, it's easiest to just
+use the Debian arm package for libjpeg62-dev; after downloading the .deb file,
+you can extract the necessary files by running:
 
-NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux
+ar x libjpeg62-dev_6b-9_arm.deb
+tar xzf data.tar.gz
+
+Move libjpeg.a to /opt/Qtopia/sharp/lib and the include files to
+/opt/Qtopia/sharp/include.
 
 Note that if you're attempting to compile using Borland C++, you'll have to
 make a few changes to the code: see http://www.bcbdev.com/articles/jpeg.htm
@@ -82,29 +91,33 @@ for details.
 
 PortaBase for Zaurus Compilation
 --------------------------------
-After compiling Metakit and Beecrypt as described above, PortaBase can be
-compiled in the usual manner for Qtopia applications.  Use tmake on
-portabase_test.pro for desktop testing and portabase.pro when building for
-the Zaurus; tmake usage is described in the compiler setup HOWTO mentioned
-above.  "arm-linux-strip" should be run on the Arm version of the
-"portabase" executable in order to reduce its size by removing unneeded
-debugging information and such.
+After compiling Metakit, BeeCrypt, and libjpeg as described above, PortaBase
+can be compiled in the usual manner for Qtopia applications.  Use tmake on
+portabase.pro; tmake usage is described in the compiler setup HOWTO mentioned
+above.  Use "qtopia" as one of the CONFIG parameters in the file.
+"arm-linux-strip" should be run on the resulting "portabase" executable in
+order to reduce its size by removing unneeded debugging information and such.
 
 To compile a version with support for the file navigation widget on
-newer Sharp ROMs, use portabase_sharp.pro instead.  You will also need the
-development files for Sharp's custom Zaurus libraries; these are available
-from the following (Japanese) page:
+newer Sharp ROMs, replace the "qtopia" CONFIG parameter with "sharp".  You
+will also need the development files for Sharp's custom Zaurus libraries;
+these are available from the following (Japanese) page:
 
 http://developer.ezaurus.com/sl_j/doc/reference.htm
+
+To compile for the desktop Qtopia test environment, add "test" to the list of
+CONFIG parameters.
 
 PortaBase for Windows Compilation, Packaging
 --------------------------------------------
 - Install Qt version 3.2 or newer and configure it (make sure the "bin"
   directory is in your path and that the QTDIR and QMAKESPEC environment
   variables are set correctly).
-- Adjust the value of INCLUDEPATH in portabase_desktop.pro as needed to locate
-  the library header files on your system.
-- Run "qmake -t vcapp -o portabase.dsp portabase_desktop.pro"
+- Adjust the value of INCLUDEPATH in portabase.pro as needed to locate the
+  library header files on your system.
+- Make sure that "desktop" is among the CONFIG parameters in portabase.pro
+  (and that "qtopia", "sharp", and "test" aren't).
+- Run "qmake -t vcapp -o portabase.dsp portabase.pro"
 - Copy beecrypt.dll, beecrypt.lib, libjpeg.lib, and mk4vc60s.lib to the
   PortaBase source directory.
 - Open the generated portabase.dsp file in Visual C++, and from
@@ -113,7 +126,7 @@ PortaBase for Windows Compilation, Packaging
 - Copy qt-mtnc321.dll from Qt's "lib" directory to the Release subdirectory
   created by Visual C++.
 - Copy msvcrt.dll to the PortaBase source directory.
-- Run "lrelease portabase_desktop.pro" to generate the UI translation files.
+- Run "lrelease portabase.pro" to generate the UI translation files.
 - Open portabase.iss with Inno Setup and choose "Compile"
 
 Debian Package Building
@@ -130,9 +143,11 @@ Linux/UNIX compilation
 ----------------------
 - Set the QMAKESPEC and QTDIR environment variables as appropriate for your
   platform
-- Make sure the Metakit and Beecrypt static libraries (.a) are in your
+- Make sure the Metakit and BeeCrypt static libraries (.a) are in your
   LD_LIBRARY_PATH, and that the other library files (.so, .la, etc.) aren't.
-- Run qmake on portabase_desktop.pro
+- Make sure that "desktop" is among the CONFIG parameters in portabase.pro
+  (and that "qtopia", "sharp", and "test" aren't).
+- Run qmake on portabase.pro
 - Run make
 
 Linux/UNIX installation
@@ -154,8 +169,8 @@ files into the correct locations:
 /usr/share/doc/portabase/ja/portabase.html
 /usr/share/doc/portabase/ja/portabase.qm
 
-...and so on.  (The portabase.qm files are created by running lrelease on the
-.pro file.)
+...and so on.  (The portabase.qm files are created by running lrelease on
+portabase.pro.)
 
 Package Building
 ----------------
@@ -168,17 +183,19 @@ directory hierarchy as root in a directory of your choice:
 /portabase/opt/QtPalmtop/bin/portabase
 /portabase/opt/QtPalmtop/help/en/html/portabase.html
 /portabase/opt/QtPalmtop/help/ja/html/portabase.html
-/portabase/opt/QtPalmtop/help/tw/html/portabase.html
+/portabase/opt/QtPalmtop/help/zh_TW/html/portabase.html
 /portabase/opt/QtPalmtop/i18n/cs/portabase.qm
 /portabase/opt/QtPalmtop/i18n/fr/portabase.qm
 /portabase/opt/QtPalmtop/i18n/ja/portabase.qm
-/portabase/opt/QtPalmtop/i18n/tw/portabase.qm
+/portabase/opt/QtPalmtop/i18n/zh_TW/portabase.qm
 /portabase/opt/QtPalmtop/pics/PortaBase.png
 /portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerNext.xpm
 /portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerPrev.xpm
 /portabase/opt/QtPalmtop/pics/portabase/calc.png
 /portabase/opt/QtPalmtop/pics/portabase/calendar.xpm
 /portabase/opt/QtPalmtop/pics/portabase/checked.png
+/portabase/opt/QtPalmtop/pics/portabase/image.png
+/portabase/opt/QtPalmtop/pics/portabase/note.png
 /portabase/opt/QtPalmtop/pics/portabase/save.png
 /portabase/opt/QtPalmtop/pics/portabase/save_disabled.png
 /portabase/opt/QtPalmtop/pics/portabase/unchecked.png

@@ -28,6 +28,7 @@
 #include <qregexp.h>
 
 #include "calculator.h"
+#include "pbdialog.h"
 
 Calculator::Calculator(QWidget* parent, const char *name)
   : QQDialog("", parent, name, TRUE)
@@ -132,10 +133,10 @@ Calculator::Calculator(QWidget* parent, const char *name)
 #if !defined(Q_WS_QWS)
     QHBox *hbox = new QHBox(this);
     new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
     new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
     new QWidget(hbox);
     grid->addMultiCellWidget(hbox, 5, 5, 0, 4);

@@ -1,5 +1,5 @@
 /*
- * imagewidget.cpp
+ * imageselector.cpp
  *
  * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
@@ -8,16 +8,6 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
-
-#if !defined(Q_WS_QWS)
-#include "../desktop/importdialog.h"
-#else
-#if defined(SHARP)
-#include "../sharp/importdialog.h"
-#else
-#include "../importdialog.h"
-#endif
-#endif
 
 #include <qbuffer.h>
 #include <qcstring.h>
@@ -28,11 +18,21 @@
 #include <qpushbutton.h>
 #include <stdlib.h>
 #include "../database.h"
-#include "../pbdialog.h"
+#include "../qqdialog.h"
 #include "imageeditor.h"
 #include "imageselector.h"
 #include "imageutils.h"
 #include "imageviewer.h"
+
+#if !defined(Q_WS_QWS)
+#include "../desktop/importdialog.h"
+#else
+#if defined(SHARP)
+#include "../sharp/importdialog.h"
+#else
+#include "../importdialog.h"
+#endif
+#endif
 
 ImageSelector::ImageSelector(Database *dbase, QWidget *parent, const char *name)
     : QWidgetStack(parent, name), db(dbase), format(""), changed(FALSE)
@@ -108,7 +108,7 @@ void ImageSelector::viewImage()
 
 void ImageSelector::deleteImage()
 {
-    int ok = QMessageBox::warning(this, PBDialog::tr("PortaBase"),
+    int ok = QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                   tr("Delete the current image?"),
                                   QObject::tr("Yes"), QObject::tr("No"),
                                   QString::null, 1);

@@ -1,7 +1,7 @@
 /*
  * condition.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -10,12 +10,11 @@
  */
 
 #include <mk4.h>
-#include <qobject.h>
 #include "condition.h"
 #include "database.h"
 #include "datatypes.h"
 
-Condition::Condition(Database *dbase) : colName("_anytext"), operation(CONTAINS), constant(""), caseSensitive(FALSE), description("")
+Condition::Condition(Database *dbase) : QObject(), colName("_anytext"), operation(CONTAINS), constant(""), caseSensitive(FALSE), description("")
 {
     db = dbase;
 }
@@ -272,7 +271,7 @@ void Condition::updateDescription()
     QString arg1;
     QString arg2;
     if (colName == "_anytext") {
-        arg1 = QObject::tr("Any text column");
+        arg1 = tr("Any text column");
     }
     else {
         arg1 = colName;
@@ -280,10 +279,10 @@ void Condition::updateDescription()
     }
     if (type == BOOLEAN) {
         if (constant == "1") {
-            description = QObject::tr("%1 is checked").arg(arg1);
+            description = tr("%1 is checked").arg(arg1);
         }
         else {
-            description = QObject::tr("%1 is not checked").arg(arg1);
+            description = tr("%1 is not checked").arg(arg1);
         }
         return;
     }
@@ -308,10 +307,10 @@ QString Condition::getOperatorText(int op)
         return "%1 = %2";
     }
     else if (op == CONTAINS) {
-        return QObject::tr("%1 contains %2");
+        return tr("%1 contains %2");
     }
     else if (op == STARTSWITH) {
-        return QObject::tr("%1 starts with %2");
+        return tr("%1 starts with %2");
     }
     else if (op == LESSTHAN) {
         return "%1 < %2";

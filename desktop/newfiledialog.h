@@ -1,7 +1,7 @@
 /*
  * newfiledialog.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,12 +12,14 @@
 #ifndef NEWFILEDIALOG_H
 #define NEWFILEDIALOG_H
 
+#include <qobject.h>
 #include <qstring.h>
 
 class DocLnk;
 
-class NewFileDialog
+class NewFileDialog : public QObject
 {
+    Q_OBJECT
 public:
     NewFileDialog(const QString & extension, QWidget *parent = 0);
     ~NewFileDialog();

@@ -1,7 +1,10 @@
 etc
 usr/bin
+usr/share/portabase/help/en
+usr/share/portabase/help/ja
+usr/share/portabase/help/zh_TW
 usr/share/portabase/icons/portabase
-usr/share/doc/portabase/cs
-usr/share/doc/portabase/fr
-usr/share/doc/portabase/ja
-usr/share/doc/portabase/tw
+usr/share/portabase/i18n/cs
+usr/share/portabase/i18n/fr
+usr/share/portabase/i18n/ja
+usr/share/portabase/i18n/zh_TW

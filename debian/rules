@@ -24,7 +24,7 @@ endif
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	qmake -o Makefile portabase_desktop.pro
+	qmake -o Makefile portabase.pro
 
 	touch configure-stamp
 
@@ -36,7 +36,7 @@ build-stamp: configure-stamp
 
 	# Add here commands to compile the package.
 	$(MAKE)
-	lrelease portabase_desktop.pro
+	lrelease portabase.pro
 	touch build-stamp
 
 clean:
@@ -57,17 +57,17 @@ install: build
 
 	# Add here commands to install the package into debian/portabase.
 	cp $(CURDIR)/portabase $(CURDIR)/debian/portabase/usr/bin
-	cp $(CURDIR)/package/portabase.conf $(CURDIR)/debian/portabase/etc
 	cp $(CURDIR)/desktop/icons/*.png $(CURDIR)/debian/portabase/usr/share/portabase/icons
 	cp $(CURDIR)/desktop/icons/*.xpm $(CURDIR)/debian/portabase/usr/share/portabase/icons
 	cp $(CURDIR)/desktop/icons/portabase/*.png $(CURDIR)/debian/portabase/usr/share/portabase/icons/portabase
 	cp $(CURDIR)/desktop/icons/portabase/*.xpm $(CURDIR)/debian/portabase/usr/share/portabase/icons/portabase
-	cp $(CURDIR)/portabase_cs.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/cs/portabase.qm
-	cp $(CURDIR)/portabase_fr.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/fr/portabase.qm
-	cp $(CURDIR)/help/ja/html/portabase.html $(CURDIR)/debian/portabase/usr/share/doc/portabase/ja
-	cp $(CURDIR)/portabase_ja.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/ja/portabase.qm
-	cp $(CURDIR)/help/tw/html/portabase.html $(CURDIR)/debian/portabase/usr/share/doc/portabase/tw
-	cp $(CURDIR)/portabase_tw.qm $(CURDIR)/debian/portabase/usr/share/doc/portabase/tw/portabase.qm
+	cp $(CURDIR)/help/html/portabase.html $(CURDIR)/debian/portabase/usr/share/portabase/help/en
+	cp $(CURDIR)/portabase_cs.qm $(CURDIR)/debian/portabase/usr/share/portabase/i18n/cs/portabase.qm
+	cp $(CURDIR)/portabase_fr.qm $(CURDIR)/debian/portabase/usr/share/portabase/i18n/fr/portabase.qm
+	cp $(CURDIR)/help/ja/html/portabase.html $(CURDIR)/debian/portabase/usr/share/portabase/help/ja
+	cp $(CURDIR)/portabase_ja.qm $(CURDIR)/debian/portabase/usr/share/portabase/i18n/ja/portabase.qm
+	cp $(CURDIR)/help/tw/html/portabase.html $(CURDIR)/debian/portabase/usr/share/portabase/help/zh_TW
+	cp $(CURDIR)/portabase_zh_TW.qm $(CURDIR)/debian/portabase/usr/share/portabase/i18n/zh_TW/portabase.qm
 
 
 # Build architecture-independent files here.

@@ -1,7 +1,7 @@
 /*
  * calcnode.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 #include "calcnode.h"
 #include "../database.h"
 
-CalcNode::CalcNode(int type, const QString &value) : nodeType(type)
+CalcNode::CalcNode(int type, const QString &value) : QObject(), nodeType(type)
 {
     nodeValue = value;
 }
@@ -216,27 +216,27 @@ QString CalcNode::description(Database *db, int type, const QString &value)
         case CALC_DIVIDE:
             return "/";
         case CALC_DAYS:
-            return QObject::tr("Days_Between");
+            return tr("Days_Between");
         case CALC_MAX:
-            return QObject::tr("MAX");
+            return tr("MAX");
         case CALC_MIN:
-            return QObject::tr("MIN");
+            return tr("MIN");
         case CALC_AVERAGE:
-            return QObject::tr("AVERAGE");
+            return tr("AVERAGE");
         case CALC_ABS:
-            return QObject::tr("ABS");
+            return tr("ABS");
         case CALC_SQRT:
-            return QObject::tr("SQRT");
+            return tr("SQRT");
         case CALC_LOG:
-            return QObject::tr("LOG");
+            return tr("LOG");
         case CALC_LN:
-            return QObject::tr("LN");
+            return tr("LN");
         case CALC_SECONDS:
-            return QObject::tr("Seconds_Between");
+            return tr("Seconds_Between");
         case CALC_MINUTES:
-            return QObject::tr("Minutes_Between");
+            return tr("Minutes_Between");
         case CALC_HOURS:
-            return QObject::tr("Hours_Between");
+            return tr("Hours_Between");
         default:
             return "";
     }

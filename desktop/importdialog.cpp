@@ -13,7 +13,6 @@
 #include <qfileinfo.h>
 #include <qinputdialog.h>
 #include <qmessagebox.h>
-#include <qobject.h>
 #include <qstringlist.h>
 #include "importdialog.h"
 #include "qpeapplication.h"
@@ -23,7 +22,7 @@
 #include "../qqdialog.h"
 
 ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent)
-  : db(subject), parentWidget(parent), source(sourceType)
+  : QObject(), db(subject), parentWidget(parent), source(sourceType)
 {
 
 }
@@ -37,25 +36,24 @@ bool ImportDialog::exec()
 {
     QString filter;
     if (source == CSV_FILE) {
-        filter = QObject::tr("Text files with comma separated values")
-                     + " (*.csv)";
+        filter = tr("Text files with comma separated values") + " (*.csv)";
     }
     else if (source == MOBILEDB_FILE) {
-        filter = QObject::tr("MobileDB files") + " (*.pdb)";
+        filter = tr("MobileDB files") + " (*.pdb)";
     }
     else if (source == OPTION_LIST) {
         filter = QString::null;
     }
     else if (source == XML_FILE) {
-        filter = QObject::tr("XML files") + " (*.xml)";
+        filter = tr("XML files") + " (*.xml)";
     }
     else {
-        filter = QObject::tr("Images") + " (*.jpg *.jpeg *.png)";
+        filter = tr("Images") + " (*.jpg *.jpeg *.png)";
     }
     QString file = QFileDialog::getOpenFileName(QPEApplication::documentDir(),
                                                 filter, parentWidget,
                                                 "import dialog",
-                                                QObject::tr("Choose a file"));
+                                                tr("Choose a file"));
     if (file.isEmpty()) {
         return FALSE;
     }
@@ -71,9 +69,9 @@ bool ImportDialog::exec()
         encodings.append("UTF-8");
         encodings.append("Latin-1");
         bool ok;
-        encoding = QInputDialog::getItem(QObject::tr("Import")
+        encoding = QInputDialog::getItem(tr("Import")
                                          + QQDialog::titleSuffix,
-                                         QObject::tr("Text encoding") + ":",
+                                         tr("Text encoding") + ":",
                                          encodings, 0, FALSE, &ok,
                                          parentWidget);
         if (!ok) {
@@ -107,7 +105,7 @@ bool ImportDialog::exec()
     }
     if (error != "") {
         if (data == "") {
-            QMessageBox::warning(0, QObject::tr("PortaBase"), error);
+            QMessageBox::warning(0, QQDialog::tr("PortaBase"), error);
         }
         else {
             CSVErrorDialog dialog(error, data, 0);

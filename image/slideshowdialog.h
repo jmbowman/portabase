@@ -13,7 +13,7 @@
 #define SLIDESHOWDIALOG_H
 
 #include <qstringlist.h>
-#include "pbdialog.h"
+#include "../pbdialog.h"
 
 class ImageWidget;
 class QComboBox;

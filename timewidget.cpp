@@ -9,18 +9,18 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/config.h>
-#else
-#include "desktop/config.h"
-#endif
-
 #include <qdatetime.h>
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 #include "timewidget.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/config.h>
+#else
+#include "desktop/config.h"
+#endif
 
 TimeWidget::TimeWidget(QWidget *parent, const char *name, WFlags f)
     : QHBox(parent, name, f)
@@ -155,9 +155,9 @@ void TimeWidget::ampmToggle()
 {
     pm = !pm;
     if (pm) {
-        ampmButton->setText("PM");
+        ampmButton->setText(tr("PM"));
     }
     else {
-        ampmButton->setText("AM");
+        ampmButton->setText(tr("AM"));
     }
 }

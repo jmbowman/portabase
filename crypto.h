@@ -1,7 +1,7 @@
 /*
  * crypto.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,10 +14,12 @@
 
 #include <beecrypt/beecrypt.h>
 #include <mk4.h>
+#include <qobject.h>
 #include <qstring.h>
 
-class Crypto
+class Crypto : public QObject
 {
+    Q_OBJECT
 public:
     Crypto(c4_Storage *outer, c4_Storage *inner);
     ~Crypto();

@@ -21,7 +21,7 @@
 #include "../database.h"
 #include "importdialog.h"
 #include "../importutils.h"
-#include "../pbdialog.h"
+#include "../qqdialog.h"
 
 ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
   const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(subject), importDone(FALSE)
@@ -52,7 +52,7 @@ ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
         mimeType = "image/jpeg;image/png";
     }
 
-    setCaption(caption + " - " + PBDialog::tr("PortaBase"));
+    setCaption(caption + " - " + QQDialog::tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
     if (sourceType == CSV_FILE || sourceType == OPTION_LIST) {
         QHBox *hbox = new QHBox(this);
@@ -123,7 +123,7 @@ bool ImportDialog::import(const QString &file)
     importDone = TRUE;
     if (error != "") {
         if (data == "") {
-            QMessageBox::warning(this, PBDialog::tr("PortaBase"), error);
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
         }
         else {
             CSVErrorDialog dialog(error, data, this);

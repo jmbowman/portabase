@@ -120,7 +120,7 @@ QDatePicker::QDatePicker(QDate *inDate, QWidget *parent)
     new QWidget(hbox);
 
     // Create the 'OK' button
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
     new QWidget(hbox);
 
@@ -130,7 +130,7 @@ QDatePicker::QDatePicker(QDate *inDate, QWidget *parent)
     new QWidget(hbox);
 
     // Create the 'Cancel' button
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
     new QWidget(hbox);
 

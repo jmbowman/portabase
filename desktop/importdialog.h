@@ -1,7 +1,7 @@
 /*
  * importdialog.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,11 +22,14 @@
 #define OPTION_LIST 4
 #define IMAGE_FILE 5
 
+#include <qobject.h>
+
 class Database;
 class QWidget;
 
-class ImportDialog
+class ImportDialog : QObject
 {
+    Q_OBJECT
 public:
     ImportDialog(int sourceType, Database *subject, QWidget *parent = 0);
     ~ImportDialog();

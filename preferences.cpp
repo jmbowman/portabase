@@ -9,14 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/config.h>
-#include <qpe/resource.h>
-#else
-#include "desktop/config.h"
-#include "desktop/resource.h"
-#endif
-
 #include <qapplication.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -30,8 +22,18 @@
 #include <qspinbox.h>
 #include <qtabwidget.h>
 #include "colorbutton.h"
+#include "menuactions.h"
+#include "pbdialog.h"
 #include "portabase.h"
 #include "preferences.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/config.h>
+#include <qpe/resource.h>
+#else
+#include "desktop/config.h"
+#include "desktop/resource.h"
+#endif
 
 Preferences::Preferences(QWidget *parent, const char *name)
     : PBDialog(tr("Preferences"), parent, name)
@@ -215,13 +217,13 @@ void Preferences::addMenusTab(QTabWidget *tabs)
     menuTable->addColumn(tr("Menu"));
 
     menuList.append("Row");
-    menuLabelList.append(PortaBase::tr("Row"));
+    menuLabelList.append(MenuActions::tr("Row"));
     menuList.append("View");
-    menuLabelList.append(PortaBase::tr("View"));
+    menuLabelList.append(MenuActions::tr("View"));
     menuList.append("Sort");
-    menuLabelList.append(PortaBase::tr("Sort"));
+    menuLabelList.append(MenuActions::tr("Sort"));
     menuList.append("Filter");
-    menuLabelList.append(PortaBase::tr("Filter"));
+    menuLabelList.append(MenuActions::tr("Filter"));
 
     QStringList topLevel;
     QStringList underFile;
@@ -249,9 +251,9 @@ void Preferences::addMenusTab(QTabWidget *tabs)
 
     QHBox *hbox = new QHBox(menusTab);
     layout->addWidget(hbox);
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
+    QPushButton *upButton = new QPushButton(PBDialog::tr("Up"), hbox);
     connect(upButton, SIGNAL(clicked()), this, SLOT(menuUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
+    QPushButton *downButton = new QPushButton(PBDialog::tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(menuDown()));
 
     tabs->addTab(menusTab, tr("Menus"));
@@ -271,27 +273,27 @@ void Preferences::addButtonsTab(QTabWidget *tabs)
     buttonTable->addColumn(tr("Toolbar Button"));
 
     buttonList.append("Save");
-    buttonLabelList.append(PortaBase::tr("Save"));
+    buttonLabelList.append(MenuActions::tr("Save"));
     buttonResourceList.append("portabase/save");
 
     buttonList.append("Add");
-    buttonLabelList.append(PortaBase::tr("Add"));
+    buttonLabelList.append(MenuActions::tr("Add"));
     buttonResourceList.append("new");
 
     buttonList.append("Edit");
-    buttonLabelList.append(PortaBase::tr("Edit"));
+    buttonLabelList.append(MenuActions::tr("Edit"));
     buttonResourceList.append("edit");
 
     buttonList.append("Copy");
-    buttonLabelList.append(PortaBase::tr("Copy"));
+    buttonLabelList.append(MenuActions::tr("Copy"));
     buttonResourceList.append("copy");
 
     buttonList.append("Delete");
-    buttonLabelList.append(PortaBase::tr("Delete"));
+    buttonLabelList.append(MenuActions::tr("Delete"));
     buttonResourceList.append("trash");
 
     buttonList.append("QuickFilter");
-    buttonLabelList.append(PortaBase::tr("Quick Filter"));
+    buttonLabelList.append(MenuActions::tr("Quick Filter"));
     buttonResourceList.append("find");
 
     QStringList shown;
@@ -322,9 +324,9 @@ void Preferences::addButtonsTab(QTabWidget *tabs)
 
     QHBox *hbox = new QHBox(buttonsTab);
     layout->addWidget(hbox);
-    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
+    QPushButton *upButton = new QPushButton(PBDialog::tr("Up"), hbox);
     connect(upButton, SIGNAL(clicked()), this, SLOT(buttonUp()));
-    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
+    QPushButton *downButton = new QPushButton(PBDialog::tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(buttonDown()));
 
     tabs->addTab(buttonsTab, tr("Buttons"));

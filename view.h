@@ -1,7 +1,7 @@
 /*
  * view.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
 
 #include <mk4.h>
 #include <qimage.h>
+#include <qobject.h>
 #include "datatypes.h"
 
 class c4_IntProp;
@@ -22,8 +23,9 @@ class Database;
 class QString;
 class QStringList;
 
-class View
+class View : public QObject
 {
+    Q_OBJECT
 public:
     View(QString name, Database *parent, c4_View baseview,
          QStringList colNames, int *types, int *widths, QStringList colIds,

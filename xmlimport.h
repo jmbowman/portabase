@@ -13,6 +13,7 @@
 #define XMLIMPORT_H
 
 #include <qmap.h>
+#include <qobject.h>
 #include <qstringlist.h>
 #include <qxml.h>
 #include "datatypes.h"
@@ -24,8 +25,9 @@ class Filter;
 typedef QMap<QString,QMap<int,QString> > IndexMap;
 typedef QMap<QString,Filter*> FilterMap;
 
-class XMLImport : public QXmlDefaultHandler
+class XMLImport : public QObject, public QXmlDefaultHandler
 {
+    Q_OBJECT
 public:
     XMLImport(Database *dbase);
     ~XMLImport();

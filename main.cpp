@@ -9,14 +9,14 @@
  * (at your option) any later version.
  */
 
+#include "commandline.h"
+#include "portabase.h"
+
 #if defined(Q_WS_QWS)
 #include <qpe/qpeapplication.h>
 #else
 #include "desktop/qpeapplication.h"
 #endif
-
-#include "commandline.h"
-#include "portabase.h"
 
 int main(int argc, char **argv) {
     QPEApplication app(argc, argv);

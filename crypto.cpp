@@ -1,7 +1,7 @@
 /*
  * crypto.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -10,7 +10,6 @@
  */
 
 #include <qmessagebox.h>
-#include <qobject.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "bytestream.h"
@@ -18,7 +17,7 @@
 #include <beecrypt/blockmode.h>
 #include <beecrypt/endianness.h>
 
-Crypto::Crypto(c4_Storage *outer, c4_Storage *inner) : container(outer), content(inner), crIv("_criv"), crHash("_crhash"), crData("_crdata")
+Crypto::Crypto(c4_Storage *outer, c4_Storage *inner) : QObject(), container(outer), content(inner), crIv("_criv"), crHash("_crhash"), crData("_crdata")
 {
     bcipher = blockCipherFind("Blowfish");
     hashfunc = hashFunctionFind("SHA-1");
@@ -69,17 +68,17 @@ QString Crypto::open(int version)
         free(data);
     }
     if (passError) {
-        return QObject::tr("Incorrect password");
+        return tr("Incorrect password");
     }
     if (!decrypted) {
-        return QObject::tr("Error in decrypting data");
+        return tr("Error in decrypting data");
     }
 
     // load the decrypted data into the storage object
     ByteStream input(decrypted, resultSize);
     if (!content->LoadFrom(input)) {
         free(decrypted);
-        return QObject::tr("Error in loading data");
+        return tr("Error in loading data");
     }
     free(decrypted);
     return "";
@@ -112,7 +111,7 @@ void Crypto::save()
 QString Crypto::setPassword(const QString &pass, bool newPass)
 {
     if (newPass && pass.length() < 6) {
-        return QObject::tr("Password must be at least 6 characters long");
+        return tr("Password must be at least 6 characters long");
     }
     password = pass;
     QCString utf8pass = pass.utf8();
@@ -127,7 +126,7 @@ QString Crypto::setPassword(const QString &pass, bool newPass)
 QString Crypto::changePassword(const QString &oldPass, const QString &newPass)
 {
     if (oldPass != password) {
-        return QObject::tr("Incorrect password");
+        return tr("Incorrect password");
     }
     return setPassword(newPass, TRUE);
 }

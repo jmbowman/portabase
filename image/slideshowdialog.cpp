@@ -9,12 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/config.h>
-#else
-#include "../desktop/config.h"
-#endif
-
 #include <qapplication.h>
 #include <qcombobox.h>
 #include <qgrid.h>
@@ -23,6 +17,12 @@
 #include "../view.h"
 #include "imagewidget.h"
 #include "slideshowdialog.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/config.h>
+#else
+#include "../desktop/config.h"
+#endif
 
 SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent, const char *name)
   : PBDialog(tr("Slideshow"), parent, name), fullScreen(0)

@@ -12,13 +12,13 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#if !defined(Q_WS_QWS)
-#include "desktop/timestring.h"
-#endif
-
 #include <qfontdatabase.h>
 #include <qpixmap.h>
 #include "pbdialog.h"
+
+#if !defined(Q_WS_QWS)
+#include "desktop/timestring.h"
+#endif
 
 class ColorButton;
 class QCheckBox;

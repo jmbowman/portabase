@@ -9,6 +9,12 @@
  * (at your option) any later version.
  */
 
+#include <qdatetime.h>
+#include <qlabel.h>
+#include <qpushbutton.h>
+#include "database.h"
+#include "datewidget.h"
+
 #if defined(Q_WS_QWS)
 #include <qpe/resource.h>
 #else
@@ -20,12 +26,6 @@
 #else
 #include "QtaDatePicker.h"
 #endif
-
-#include <qdatetime.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include "database.h"
-#include "datewidget.h"
 
 DateWidget::DateWidget(QWidget *parent, const char *name, WFlags f)
     : QHBox(parent, name, f)
@@ -106,10 +106,12 @@ void DateWidget::updateDisplay()
 
 QString DateWidget::toString(QDate &date)
 {
-    QString result = days[date.dayOfWeek() - 1] + " ";
-    result += months[date.month() - 1] + " " + QString::number(date.day());
-    result += " " + QString::number(date.year());
-    return result;
+    QString result = tr("%1 %2 %3 %4",
+                        "1=day of week, 2=month name, 3=day of month, 4=year");
+    result = result.arg(days[date.dayOfWeek() - 1]);
+    result = result.arg(months[date.month() - 1]);
+    result = result.arg(date.day());
+    return result.arg(date.year());
 }
 
 bool DateWidget::isNoneDate(QDate &date)

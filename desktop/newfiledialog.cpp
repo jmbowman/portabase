@@ -1,7 +1,7 @@
 /*
  * newfiledialog.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,12 +14,13 @@
 #include <qfiledialog.h>
 #include <qfileinfo.h>
 #include <qmessagebox.h>
-#include <qobject.h>
 #include "applnk.h"
 #include "newfiledialog.h"
 #include "qpeapplication.h"
+#include "../qqdialog.h"
 
-NewFileDialog::NewFileDialog(const QString &extension, QWidget *parent) : parentWidget(parent), encrypted(FALSE)
+NewFileDialog::NewFileDialog(const QString &extension, QWidget *parent)
+  : QObject(), parentWidget(parent), encrypted(FALSE)
 {
     filename = "";
     ext = extension;
@@ -36,31 +37,31 @@ int NewFileDialog::exec()
     encrypted = FALSE;
     QString filter;
     if (ext == ".pob") {
-        filter = QObject::tr("PortaBase files") + " (*.pob)";
+        filter = tr("PortaBase files") + " (*.pob)";
     }
     else if (ext == ".csv") {
-        filter = QObject::tr("Comma Separated Value files") + " (*.csv)";
+        filter = tr("Text files with comma separated values") + " (*.csv)";
     }
     else if (ext == ".txt") {
 #if defined(Q_WS_WIN)
-        filter = QObject::tr("Text files") + " (*.txt)";
+        filter = tr("Text files") + " (*.txt)";
 #else
         filter = QString::null;
 #endif
     }
     else {
-        filter = QObject::tr("XML files") + " (*.xml)";
+        filter = tr("XML files") + " (*.xml)";
     }
     filename = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
                    filter, parentWidget, "new file dialog",
-                   QObject::tr("Choose a filename to save under"));
+                   tr("Choose a filename to save under"));
     if (filename.isEmpty()) {
         return QDialog::Rejected;
     }
     if (QFile::exists(filename)) {
         int overwrite = QMessageBox::warning(parentWidget,
-                             QObject::tr("PortaBase"),
-                             QObject::tr("File already exists; overwrite it?"),
+                             QQDialog::tr("PortaBase"),
+                             tr("File already exists; overwrite it?"),
                              QObject::tr("Yes"), QObject::tr("No"),
                              QString::null, 1);
         if (overwrite == 1) {
@@ -68,8 +69,8 @@ int NewFileDialog::exec()
         }
     }
     if (ext == ".pob") {
-        QMessageBox crypt(QObject::tr("PortaBase"),
-                          QObject::tr("Encrypt the file?"),
+        QMessageBox crypt(QQDialog::tr("PortaBase"),
+                          tr("Encrypt the file?"),
                           QMessageBox::NoIcon, QMessageBox::Yes,
                           QMessageBox::No | QMessageBox::Default,
                           QMessageBox::NoButton, parentWidget);

@@ -9,17 +9,18 @@
  * (at your option) any later version.
  */
 
-#if !defined(Q_WS_QWS)
-#include <qhbox.h>
-#include <qpushbutton.h>
-#endif
-
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
 #include "database.h"
 #include "passdialog.h"
+#include "pbdialog.h"
+
+#if !defined(Q_WS_QWS)
+#include <qhbox.h>
+#include <qpushbutton.h>
+#endif
 
 PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, const char *name)
   : QQDialog("", parent, name, TRUE), db(dbase), mode(dlgMode)
@@ -70,10 +71,10 @@ PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, co
 #if !defined(Q_WS_QWS)
     QHBox *hbox = new QHBox(this);
     new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(tr("OK"), hbox);
+    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
     new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), hbox);
+    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
     new QWidget(hbox);
     grid->addMultiCellWidget(hbox, currentRow, currentRow, 0, 1);
@@ -94,25 +95,25 @@ bool PasswordDialog::validate()
     if (mode == OPEN_PASSWORD) {
         QString error = db->setPassword(password, FALSE);
         if (error != "") {
-            QMessageBox::warning(this, tr("PortaBase"), error);
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
             return FALSE;
         }
         error = db->load();
         if (error != "") {
-            QMessageBox::warning(this, tr("PortaBase"), error);
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
             return FALSE;
         }
     }
     else if (mode == NEW_PASSWORD) {
         QString repeatPassword = repeatPass->text();
         if (password != repeatPassword) {
-            QMessageBox::warning(this, tr("PortaBase"),
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Repeated password doesn't match"));
             return FALSE;
         }
         QString error = db->setPassword(password, TRUE);
         if (error != "") {
-            QMessageBox::warning(this, tr("PortaBase"), error);
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
             return FALSE;
         }
     }
@@ -120,13 +121,13 @@ bool PasswordDialog::validate()
         QString oldPassword = oldPass->text();
         QString repeatPassword = repeatPass->text();
         if (password != repeatPassword) {
-            QMessageBox::warning(this, tr("PortaBase"),
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                  tr("Repeated password doesn't match"));
             return FALSE;
         }
         QString error = db->changePassword(oldPassword, password);
         if (error != "") {
-            QMessageBox::warning(this, tr("PortaBase"), error);
+            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
             return FALSE;
         }
     }

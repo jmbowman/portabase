@@ -17,6 +17,7 @@
 #include <qpixmap.h>
 #include <qdrawutil.h>
 #include <qpe/qpeapplication.h>
+#include "pbdialog.h"
 
 
 static bool initrgb = FALSE;
@@ -486,10 +487,10 @@ ColorDialogPrivate::ColorDialogPrivate( ColorDialog *dialog ) :
 	buttons = new QHBoxLayout( rightLay );
 
     QPushButton *ok, *cancel;
-    ok = new QPushButton( ColorDialog::tr("OK"), dialog );
+    ok = new QPushButton( PBDialog::tr("OK"), dialog );
     connect( ok, SIGNAL(clicked()), dialog, SLOT(accept()) );
     ok->setDefault(TRUE);
-    cancel = new QPushButton( ColorDialog::tr("Cancel"), dialog );
+    cancel = new QPushButton( PBDialog::tr("Cancel"), dialog );
     connect( cancel, SIGNAL(clicked()), dialog, SLOT(reject()) );
     buttons->addWidget( ok );
     buttons->addWidget( cancel );
@@ -513,7 +514,7 @@ QColor ColorDialog::getColor( QColor initial, QWidget *parent,
     else if ( qApp->mainWidget() && qApp->mainWidget()->icon() && !qApp->mainWidget()->icon()->isNull() )
 	dlg->setIcon( *qApp->mainWidget()->icon() );*/
 
-    dlg->setCaption( ColorDialog::tr( "Choose color" ) );
+    dlg->setCaption( ColorDialog::tr( "Select color" ) );
     dlg->setColor( initial );
     int resultCode = dlg->exec();
     QColor::leaveAllocContext();

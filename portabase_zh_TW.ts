@@ -3,76 +3,76 @@
     <name>CSVErrorDialog</name>
     <message>
         <source>Problematic row</source>
-        <translation>Problémový záznam</translation>
+        <translation>問題列</translation>
     </message>
 </context>
 <context>
     <name>CalcDateEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Editor dílčích početních operací</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>Sloupec</translation>
+        <translation>欄</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation>Konstanta</translation>
+        <translation>常數</translation>
     </message>
 </context>
 <context>
     <name>CalcEditor</name>
     <message>
         <source>Calculation Editor</source>
-        <translation>Editor výpočtů</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Column Name</source>
-        <translation>Jméno sloupce</translation>
+        <translation>欄位名稱</translation>
     </message>
     <message>
         <source>Equation</source>
-        <translation>Matematický vztah</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Decimal Places</source>
-        <translation>Desetinná místa</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CalcNode</name>
     <message>
         <source>Days_Between</source>
-        <translation type="unfinished">Počet_dnů_mezi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MAX</source>
-        <translation type="unfinished">MAX</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MIN</source>
-        <translation type="unfinished">MIN</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>AVERAGE</source>
-        <translation type="unfinished">PRŮMĚR</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ABS</source>
-        <translation type="unfinished">ABS</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SQRT</source>
-        <translation type="unfinished">ODMOCNINA</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>LOG</source>
-        <translation type="unfinished">LOG</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>LN</source>
-        <translation type="unfinished">LN</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Seconds_Between</source>
@@ -91,159 +91,159 @@
     <name>CalcNodeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Editor dílčích početních operací</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>Sloupec</translation>
+        <translation>欄</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation>Konstanta</translation>
+        <translation>常數</translation>
     </message>
     <message>
         <source>Operation</source>
-        <translation>Operace</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Constant must be a decimal value</source>
-        <translation>Konstanta musí být číslo v desítkové soustavě</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CalcTimeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation type="unfinished">Editor dílčích početních operací</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">Sloupec</translation>
+        <translation type="unfinished">欄</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation type="unfinished">Konstanta</translation>
+        <translation type="unfinished">常數</translation>
     </message>
 </context>
 <context>
     <name>CalcWidget</name>
     <message>
         <source>Update</source>
-        <translation>Aktualizovat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation>&amp;Odstín:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation>&amp;Sytost:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation>&amp;Hodnota:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation>&amp;Červená:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation>&amp;Zelená:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation>&amp;Modrá:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation>A&amp;lfa kanál:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="unfinished">Výběr barvy</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ColumnEditor</name>
     <message>
         <source>Name</source>
-        <translation>Jméno</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation>型別</translation>
     </message>
     <message>
         <source>String</source>
-        <translation>Řetězec</translation>
+        <translation>字串</translation>
     </message>
     <message>
         <source>Integer</source>
-        <translation>Integer</translation>
+        <translation>整數</translation>
     </message>
     <message>
         <source>Decimal</source>
-        <translation>Číslo v desítkové soustavě</translation>
+        <translation>十進數</translation>
     </message>
     <message>
         <source>Boolean</source>
-        <translation>Booleánský</translation>
+        <translation>布林值</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Poznámka</translation>
+        <translation>多行文字項</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation>日期</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Čas</translation>
+        <translation>時間</translation>
     </message>
     <message>
         <source>New Enum</source>
-        <translation>Nový typ pole</translation>
+        <translation>自訂集合</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Výchozí</translation>
+        <translation>預設值</translation>
     </message>
     <message>
         <source>Default Note</source>
-        <translation>Výchozí poznámka</translation>
+        <translation>預設之多行文字項</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Dnes</translation>
+        <translation>今日</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Není</translation>
+        <translation>無</translation>
     </message>
     <message>
         <source>Now</source>
-        <translation>Nyní</translation>
+        <translation>現在</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Výpočet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sequence</source>
-        <translation>Sekvence</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit calculation</source>
-        <translation>Editovat výpočet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next value</source>
-        <translation>Další hodnota</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image</source>
@@ -254,83 +254,83 @@
     <name>Condition</name>
     <message>
         <source>Any text column</source>
-        <translation type="unfinished">Jakýkoli sloupec</translation>
+        <translation type="unfinished">任何文字欄位</translation>
     </message>
     <message>
         <source>%1 is checked</source>
-        <translation type="unfinished">%1 je vybrán</translation>
+        <translation type="unfinished">%1已選取</translation>
     </message>
     <message>
         <source>%1 is not checked</source>
-        <translation type="unfinished">%1 není vybrán</translation>
+        <translation type="unfinished">%1未選取</translation>
     </message>
     <message>
         <source>%1 contains %2</source>
-        <translation type="unfinished">%1 obsahuje %2</translation>
+        <translation type="unfinished">%1包含%2</translation>
     </message>
     <message>
         <source>%1 starts with %2</source>
-        <translation type="unfinished">%1 začíná na %2</translation>
+        <translation type="unfinished">%1的開頭是%2</translation>
     </message>
 </context>
 <context>
     <name>ConditionEditor</name>
     <message>
         <source>Condition Editor</source>
-        <translation>Editor podmínek</translation>
+        <translation>條件編輯器</translation>
     </message>
     <message>
         <source>Any text column</source>
-        <translation>Jakýkoli sloupec</translation>
+        <translation>任何文字欄位</translation>
     </message>
     <message>
         <source>contains</source>
-        <translation>obsahuje</translation>
+        <translation>包含</translation>
     </message>
     <message>
         <source>starts with</source>
-        <translation>začíná na </translation>
+        <translation>首字為</translation>
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation>Rozlišovat VELKÁ/malá písmena</translation>
+        <translation>大小寫視為不同</translation>
     </message>
     <message>
         <source>Constant</source>
-        <translation>Konstanta</translation>
+        <translation>常數</translation>
     </message>
 </context>
 <context>
     <name>Crypto</name>
     <message>
         <source>Incorrect password</source>
-        <translation type="unfinished">Nesprávné heslo</translation>
+        <translation type="unfinished">密碼錯誤</translation>
     </message>
     <message>
         <source>Error in decrypting data</source>
-        <translation type="unfinished">Chyba při dešifrování dat</translation>
+        <translation type="unfinished">資料解密時發生錯誤</translation>
     </message>
     <message>
         <source>Error in loading data</source>
-        <translation type="unfinished">Chyba při načítání dat</translation>
+        <translation type="unfinished">載入資料時發生錯誤</translation>
     </message>
     <message>
         <source>Password must be at least 6 characters long</source>
-        <translation type="unfinished">Heslo musí obsahovat minimálně 6 znaků</translation>
+        <translation type="unfinished">密碼至少要6個字</translation>
     </message>
 </context>
 <context>
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>Editor sloupců</translation>
+        <translation>欄位編輯器</translation>
     </message>
 </context>
 <context>
     <name>DateWidget</name>
     <message>
         <source>None</source>
-        <translation>Není</translation>
+        <translation>無</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -378,7 +378,7 @@
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished">Květen</translation>
+        <translation type="unfinished">五月</translation>
     </message>
     <message>
         <source>Jun</source>
@@ -418,79 +418,78 @@
     <name>EnumEditor</name>
     <message>
         <source>Enum Editor</source>
-        <translation>Editor typů polí</translation>
+        <translation>集合編輯器</translation>
     </message>
     <message>
         <source>Enum Name</source>
-        <translation>Jméno typu pole</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation>Seřadit</translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation>Importovat</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>集合名稱</translation>
     </message>
     <message>
         <source>Must have at least one option</source>
-        <translation>Musí být zadána alespoň 1 volba</translation>
+        <translation>集合至少要有一個項目</translation>
     </message>
     <message>
         <source>Option text</source>
-        <translation>Text volby</translation>
+        <translation>項目文字內容</translation>
     </message>
     <message>
         <source>Replace where used with:</source>
-        <translation>Nahradit výskyt čím:</translation>
+        <translation>將原本之處取代為</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation>排序</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>匯入</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>匯出</translation>
     </message>
 </context>
 <context>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Manažer typů polí</translation>
+        <translation>集合管理員</translation>
     </message>
     <message>
         <source>The following columns which
 use this enum will also be
 deleted:</source>
-        <translation>Následující sloupce s výskytem
-tohoto typu pole budou smazány:</translation>
+        <translation>使用此一集合的欄位也會被刪除</translation>
     </message>
     <message>
         <source>Continue?</source>
-        <translation>Pokračovat?</translation>
+        <translation>繼續?</translation>
     </message>
 </context>
 <context>
     <name>FilterEditor</name>
     <message>
         <source>Filter Editor</source>
-        <translation>Editor filtrů</translation>
+        <translation>篩選編輯器</translation>
     </message>
     <message>
         <source>Filter Name</source>
-        <translation>Jméno filtru</translation>
+        <translation>篩選名稱</translation>
     </message>
 </context>
 <context>
     <name>HelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation>Nápověda</translation>
+        <translation type="unfinished">說明</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Zpět</translation>
+        <translation type="unfinished">上一頁</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Vpřed</translation>
+        <translation type="unfinished">下一頁</translation>
     </message>
 </context>
 <context>
@@ -513,7 +512,7 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished">Načíst znovu</translation>
+        <translation type="unfinished">重新整理</translation>
     </message>
     <message>
         <source>Image is too large to import</source>
@@ -532,7 +531,7 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Náhled</translation>
+        <translation type="unfinished">景觀</translation>
     </message>
     <message>
         <source>Change</source>
@@ -540,7 +539,7 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation type="unfinished">刪除</translation>
     </message>
     <message>
         <source>Delete the current image?</source>
@@ -558,39 +557,19 @@ tohoto typu pole budou smazány:</translation>
     <name>ImportDialog</name>
     <message>
         <source>Text encoding</source>
-        <translation>Kódování textu</translation>
-    </message>
-    <message>
-        <source>Import rows from CSV file</source>
-        <translation>Importovat záznamy ze souboru CSV</translation>
-    </message>
-    <message>
-        <source>Import from MobileDB file</source>
-        <translation>Importovat ze souboru MobileDB</translation>
-    </message>
-    <message>
-        <source>Import from text file</source>
-        <translation>Importovat z textového souboru</translation>
-    </message>
-    <message>
-        <source>Import from XML file</source>
-        <translation>Importovat ze souboru XML</translation>
-    </message>
-    <message>
-        <source>Select an image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">文字編碼方式</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Soubory hodnot oddělených čárkami</translation>
+        <translation type="unfinished">內容以逗號分隔之文字檔</translation>
     </message>
     <message>
         <source>MobileDB files</source>
-        <translation type="unfinished">Soubory MobileDB</translation>
+        <translation type="unfinished">MobileDB檔案</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">XML soubory</translation>
+        <translation type="unfinished">XML檔案</translation>
     </message>
     <message>
         <source>Images</source>
@@ -598,94 +577,86 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="unfinished">Vyberte soubor</translation>
+        <translation type="unfinished">請選取一個檔案</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished">Importovat</translation>
+        <translation type="unfinished">匯入</translation>
+    </message>
+    <message>
+        <source>Import rows from CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from MobileDB file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from text file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from XML file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuActions</name>
     <message>
-        <source>Import</source>
-        <translation type="unfinished">Importovat</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation type="unfinished">Exportovat</translation>
-    </message>
-    <message>
-        <source>About PortaBase</source>
-        <translation type="unfinished">O aplikaci PortaBase</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation type="unfinished">Záznam</translation>
+        <source>File</source>
+        <translation type="unfinished">檔案</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Náhled</translation>
+        <translation type="unfinished">景觀</translation>
+    </message>
+    <message>
+        <source>Row</source>
+        <translation type="unfinished">資料列</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">排序</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished">Filtr</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished">Uložit</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished">Přidat</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished">Editovat</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="unfinished">Kopírovat</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
-    </message>
-    <message>
-        <source>Quick Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Columns</source>
-        <translation type="unfinished">Všechny sloupce</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="unfinished">Soubor</translation>
+        <translation type="unfinished">篩選</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Nápověda</translation>
+        <translation type="unfinished">說明</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nový</translation>
+        <translation type="unfinished">新增</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Otevřít</translation>
+        <translation type="unfinished">開啟</translation>
     </message>
     <message>
         <source>Open Recent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Save</source>
+        <translation type="unfinished">儲存</translation>
+    </message>
+    <message>
         <source>Change Password</source>
-        <translation type="unfinished">Změnit heslo</translation>
+        <translation type="unfinished">變更密碼</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished">匯入</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished">匯出</translation>
     </message>
     <message>
         <source>Slideshow</source>
@@ -697,11 +668,11 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation type="unfinished">偏好設定</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Ukončit</translation>
+        <translation type="unfinished">結束</translation>
     </message>
     <message>
         <source>List</source>
@@ -713,23 +684,51 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished">Obsah nápovědy</translation>
+        <translation type="unfinished">說明內容</translation>
+    </message>
+    <message>
+        <source>About PortaBase</source>
+        <translation type="unfinished">關於PortaBase</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">O Qt</translation>
+        <translation type="unfinished">關於Qt</translation>
+    </message>
+    <message>
+        <source>Quick Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">新增</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">編輯</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">刪除</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished">Přejmenovat</translation>
+        <translation type="unfinished">重新命名</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished">Načíst znovu</translation>
+        <translation type="unfinished">重新整理</translation>
+    </message>
+    <message>
+        <source>All Columns</source>
+        <translation type="unfinished">所有欄位</translation>
     </message>
     <message>
         <source>All Rows</source>
-        <translation type="unfinished">Všechny záznamy</translation>
+        <translation type="unfinished">所有資料列</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">複製</translation>
     </message>
     <message>
         <source>Show</source>
@@ -737,19 +736,19 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Delete Rows In Filter</source>
-        <translation type="unfinished">Smazat záznamy vyhovující aktuálnímu filtru</translation>
+        <translation type="unfinished">刪除篩選中的所有資料列</translation>
     </message>
     <message>
         <source>Edit Columns</source>
-        <translation type="unfinished">Editor sloupců</translation>
+        <translation type="unfinished">編輯欄位</translation>
     </message>
     <message>
         <source>Edit Enums</source>
-        <translation type="unfinished">Editor typů polí</translation>
+        <translation type="unfinished">編輯集合</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Zavřít</translation>
+        <translation type="unfinished">關閉</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -857,7 +856,7 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Kopírovat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Show</source>
@@ -868,10 +867,6 @@ tohoto typu pole budou smazány:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Col&amp;umns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit &amp;Enums</source>
         <translation type="unfinished"></translation>
     </message>
@@ -879,156 +874,160 @@ tohoto typu pole budou smazány:</translation>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Col&amp;umns</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewFileDialog</name>
     <message>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation type="unfinished">匯出</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation>Vyberte jméno nového souboru</translation>
+        <translation type="unfinished">輸入檔案名稱</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation>Soubor již existuje; chcete jej přepsat?</translation>
+        <translation type="unfinished">檔案已存在；要覆寫嗎?</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation>Zašifrovat tento soubor?</translation>
+        <translation type="unfinished">檔案要加密嗎?</translation>
+    </message>
+    <message>
+        <source>PortaBase files</source>
+        <translation type="unfinished">PortaBase檔案</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation type="unfinished">文字檔</translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation type="unfinished">XML檔案</translation>
+    </message>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation type="unfinished">內容以逗號分隔之文字檔</translation>
     </message>
     <message>
         <source>Encrypted file</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation type="unfinished">Soubory PortaBase</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation type="unfinished">Soubory hodnot oddělených čárkami</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation type="unfinished">Textové soubory</translation>
-    </message>
-    <message>
-        <source>XML files</source>
-        <translation type="unfinished">XML soubory</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation type="unfinished">Vyberte jméno ukládaného souboru</translation>
-    </message>
 </context>
 <context>
     <name>PBDialog</name>
     <message>
-        <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">Zrušit</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Nahoru</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Dolů</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished">Přidat</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished">Editovat</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
-    </message>
-    <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation type="unfinished">Jméno nesmí začínat znakem &apos;_&apos;</translation>
+        <translation type="unfinished">名稱首字不可為&apos;_&apos;</translation>
     </message>
     <message>
         <source>Duplicate name</source>
-        <translation type="unfinished">Duplikované jméno</translation>
+        <translation type="unfinished">名稱已存在</translation>
     </message>
     <message>
         <source>No name entered</source>
-        <translation type="unfinished">Není zadáno žádné jméno</translation>
+        <translation type="unfinished">未輸入名稱</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">確定</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">新增</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">編輯</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">刪除</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">往上</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">往下</translation>
     </message>
 </context>
 <context>
     <name>PBFileSelector</name>
     <message>
-        <source>Enter a name for the new file</source>
-        <translation>Vyberte jméno nového souboru</translation>
-    </message>
-    <message>
-        <source>Unable to create new file</source>
-        <translation>Nelze vytvořit nový soubor</translation>
-    </message>
-    <message>
-        <source>Enter the new file name</source>
-        <translation>Zadejte jméno nového souboru</translation>
-    </message>
-    <message>
-        <source>Unable to rename the file</source>
-        <translation>Nelze přejmenovat soubor</translation>
-    </message>
-    <message>
         <source>No file selected</source>
-        <translation>Není vybrán žádný soubor</translation>
+        <translation type="unfinished">未選取任何檔案</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation>Soubory PortaBase</translation>
+        <translation type="unfinished">PortaBase檔案</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation>Vyberte soubor</translation>
+        <translation type="unfinished">請選取一個檔案</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new file</source>
+        <translation type="unfinished">輸入檔案名稱</translation>
+    </message>
+    <message>
+        <source>Unable to create new file</source>
+        <translation type="unfinished">無法建立新檔</translation>
+    </message>
+    <message>
+        <source>Enter the new file name</source>
+        <translation type="unfinished">輸入檔案名稱</translation>
+    </message>
+    <message>
+        <source>Unable to rename the file</source>
+        <translation type="unfinished">無法將檔案重新命名</translation>
     </message>
 </context>
 <context>
     <name>PasswordDialog</name>
     <message>
         <source>Old password</source>
-        <translation>Staré heslo</translation>
+        <translation>舊密碼</translation>
     </message>
     <message>
         <source>New password</source>
-        <translation>Nové heslo</translation>
+        <translation>新密碼</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Heslo</translation>
+        <translation>密碼</translation>
     </message>
     <message>
         <source>Repeat password</source>
-        <translation>Heslo znovu</translation>
+        <translation>再輸入一次密碼</translation>
     </message>
     <message>
         <source>Repeat new password</source>
-        <translation>Nové heslo znovu</translation>
+        <translation>再輸入一次新密碼</translation>
     </message>
     <message>
         <source>Repeated password doesn&apos;t match</source>
-        <translation>Zadaná hesla nesouhlasí</translation>
+        <translation>輸入的密碼不合</translation>
     </message>
 </context>
 <context>
     <name>PortaBase</name>
     <message>
         <source>Delete</source>
-        <translation>Smazat</translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <source>XML</source>
@@ -1040,79 +1039,75 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Import from:</source>
-        <translation>Importovat z:</translation>
+        <translation>選擇匯入格式</translation>
     </message>
     <message>
         <source>Unable to create new file</source>
-        <translation>Nelze vytvořit nový soubor</translation>
+        <translation>無法建立新檔</translation>
     </message>
     <message>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
 upgrade</source>
-        <translation>Tento soubor používá novější verzi
-formátu PortaBase než Vaše verze
-PortaBase podporuje; prosíme,
-proveďte upgrade</translation>
+        <translation>此檔案使用較新版本的PortaBase格式;請升級</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation>Jste si jist/-a?</translation>
+        <translation>你確定嗎?</translation>
     </message>
     <message>
         <source>Save changes?</source>
-        <translation>Uložit změny?</translation>
+        <translation>儲存變更嗎?</translation>
     </message>
     <message>
         <source>Delete this row?</source>
-        <translation>Smazat tento záznam?</translation>
+        <translation>刪除此列嗎?</translation>
     </message>
     <message>
         <source>Delete all rows in the
 current filter?</source>
-        <translation>Smazat všechny záznamy 
-vyhovující filtru?</translation>
+        <translation>刪除目前篩選中的所有資料列嗎?</translation>
     </message>
     <message>
         <source>CSV</source>
-        <translation>CSV  </translation>
+        <translation>CSV</translation>
     </message>
     <message>
         <source>rows in current filter</source>
-        <translation>záznamy vyhovující filtru</translation>
+        <translation>目前篩選中的所有資料列</translation>
     </message>
     <message>
         <source>Export to:</source>
-        <translation>Exportovat do:</translation>
+        <translation>選擇匯出格式</translation>
     </message>
     <message>
         <source>Delete this view?</source>
-        <translation>Smazat toto zobrazení?</translation>
+        <translation>刪除此一景觀嗎?</translation>
     </message>
     <message>
         <source>Delete this sorting?</source>
-        <translation>Smazat toto seřazení?</translation>
+        <translation>刪除此一排序方式嗎?</translation>
     </message>
     <message>
         <source>Delete this filter?</source>
-        <translation>Smazat tento filtr?</translation>
+        <translation>刪除此一篩選嗎?</translation>
     </message>
     <message>
         <source>Copyright (C)</source>
-        <translation>Copyright (C)</translation>
+        <translation>版權所有 (C)</translation>
     </message>
     <message>
         <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Domovská stránka: http://portabase.sourceforge.net</translation>
+        <translation>網址 http://portabase.sourceforge.net</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Jméno</translation>
+        <translation type="unfinished">名稱</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation type="unfinished">大小</translation>
     </message>
     <message>
         <source>Rows</source>
@@ -1155,91 +1150,91 @@ vyhovující filtru?</translation>
     <name>Preferences</name>
     <message>
         <source>Preferences</source>
-        <translation>Nastavení</translation>
+        <translation>偏好設定</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Písmo</translation>
+        <translation>字型</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Jméno</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <source>Sample</source>
-        <translation>Ukázka</translation>
+        <translation>範例</translation>
     </message>
     <message>
         <source>Sample text</source>
-        <translation>Ukázkový text</translation>
+        <translation>範例文字</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Všeobecné</translation>
+        <translation>一般事項</translation>
     </message>
     <message>
         <source>Confirm deletions</source>
-        <translation>Vyžadovat potvrzení mazání</translation>
+        <translation>刪除前先詢問</translation>
     </message>
     <message>
         <source>Allow checkbox edit in data viewer</source>
-        <translation>Povolit editaci přepínačů v prohlížeči dat</translation>
+        <translation>允許在資料檢視器中編輯核對盒</translation>
     </message>
     <message>
         <source>Show seconds for times</source>
-        <translation>Zobrazovat vteřiny</translation>
+        <translation>時間格式中包含秒</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
-        <translation>Zalamovat poznámky</translation>
+        <translation>多行文字項自動換行</translation>
     </message>
     <message>
         <source>at whitespace</source>
-        <translation>v mezerách</translation>
+        <translation>空白處</translation>
     </message>
     <message>
         <source>anywhere</source>
-        <translation>kdekoli</translation>
-    </message>
-    <message>
-        <source>Row Colors</source>
-        <translation>Barvy řádků</translation>
+        <translation>最後一個位置</translation>
     </message>
     <message>
         <source>Date and Time</source>
-        <translation>Datum a čas</translation>
+        <translation>日期與時間</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation>Formát datumu</translation>
+        <translation>日期格式</translation>
     </message>
     <message>
         <source>Time format</source>
-        <translation>Formát času</translation>
+        <translation>時間格式</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation>24-hodinový</translation>
+        <translation>24小時制</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation>12-hodinový</translation>
+        <translation>12小時制</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation>Týden začíná </translation>
+        <translation>每星期的第一天是</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>nedělí</translation>
+        <translation>星期天</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>pondělím</translation>
+        <translation>星期一</translation>
+    </message>
+    <message>
+        <source>Row Colors</source>
+        <translation>資料列背景色</translation>
     </message>
     <message>
         <source>Use pages in data viewer</source>
@@ -1286,199 +1281,199 @@ vyhovující filtru?</translation>
     <name>QColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation>&amp;Odstín:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation>&amp;Sytost:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation>&amp;Hodnota:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation>&amp;Červená:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation>&amp;Zelená:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation>&amp;Modrá:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation>A&amp;lfa kanál:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Basic colors</source>
-        <translation>Základní &amp;barvy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Custom colors</source>
-        <translation>&amp;Uživatelské barvy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation>&amp;Definice uživatelských barev &gt;&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Add to Custom Colors</source>
-        <translation>Přid&amp;at do uživatelských barev</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Výběr barvy</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QDatePicker</name>
     <message>
         <source>Select a date</source>
-        <translation>Vyberte datum</translation>
+        <translation>選擇日期</translation>
     </message>
     <message>
         <source>January</source>
-        <translation>Leden</translation>
+        <translation>一月</translation>
     </message>
     <message>
         <source>February</source>
-        <translation>Únor</translation>
+        <translation>二月</translation>
     </message>
     <message>
         <source>March</source>
-        <translation>Březen</translation>
+        <translation>三月</translation>
     </message>
     <message>
         <source>April</source>
-        <translation>Duben</translation>
+        <translation>四月</translation>
     </message>
     <message>
         <source>May</source>
-        <translation>Květen</translation>
+        <translation>五月</translation>
     </message>
     <message>
         <source>June</source>
-        <translation>Červen</translation>
+        <translation>六月</translation>
     </message>
     <message>
         <source>July</source>
-        <translation>Červenec</translation>
+        <translation>七月</translation>
     </message>
     <message>
         <source>August</source>
-        <translation>Srpen</translation>
+        <translation>八月</translation>
     </message>
     <message>
         <source>September</source>
-        <translation>Září</translation>
+        <translation>九月</translation>
     </message>
     <message>
         <source>October</source>
-        <translation>Říjen</translation>
+        <translation>十月</translation>
     </message>
     <message>
         <source>November</source>
-        <translation>Listopad</translation>
+        <translation>十一月</translation>
     </message>
     <message>
         <source>December</source>
-        <translation>Prosinec</translation>
+        <translation>十二月</translation>
     </message>
     <message>
         <source>Su</source>
-        <translation>Ne</translation>
+        <translation>星期日</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>Po</translation>
+        <translation>星期一</translation>
     </message>
     <message>
         <source>Tu</source>
-        <translation>Út</translation>
+        <translation>星期二</translation>
     </message>
     <message>
         <source>W</source>
-        <translation>St</translation>
+        <translation>星期三</translation>
     </message>
     <message>
         <source>Th</source>
-        <translation>Čt</translation>
+        <translation>星期四</translation>
     </message>
     <message>
         <source>F</source>
-        <translation>Pá</translation>
+        <translation>星期五</translation>
     </message>
     <message>
         <source>Sa</source>
-        <translation>So</translation>
+        <translation>星期六</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Dnes</translation>
+        <translation type="unfinished">今日</translation>
     </message>
 </context>
 <context>
     <name>QFileDialog</name>
     <message>
         <source>All Files (*)</source>
-        <translation>Všechny soubory (*)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All Files (*.*)</source>
-        <translation>Všechny soubory (*.*)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QInputDialog</name>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QLineEdit</name>
     <message>
         <source>&amp;Undo</source>
-        <translation>Vrátit zpět akc&amp;i</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation>&amp;Zrušit vrácení akce</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation>Vystřihnou&amp;t</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>&amp;Kopírovat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Vložit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Vymazat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Vybrat vše</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1496,102 +1491,102 @@ vyhovující filtru?</translation>
     <name>QMessageBox</name>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Ano</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Ne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for multiplatform GUI &amp;amp; application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants.&lt;br&gt;Qt is also available for embedded devices.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; for more information.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;O Qt&lt;/h3&gt;&lt;p&gt;Program využívá Qt verze %1.&lt;/p&gt;&lt;p&gt;Qt je prostředí pro vývoj multiplatformního &amp;amp; uživatelského rozhraní.&lt;/p&gt;&lt;p&gt;Qt umožňuje přenositelnost zdroje mezi MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linuxem a všemi většími komerčními variantami Unixu.&lt;br&gt;Qt je také dostupný pro přenosná komunikační zařízení.&lt;/p&gt;&lt;p&gt;Qt je produktem firmy Trolltech. Navštivte &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; - zde naleznete více informací.&lt;/p&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>must be an integer</source>
-        <translation>musí být integer</translation>
+        <translation>須為整數</translation>
     </message>
     <message>
         <source>must be a decimal value</source>
-        <translation>musí být číslo v desítkové soustavě</translation>
+        <translation>須為十進數</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
-        <translation>musí být 0 nebo 1</translation>
+        <translation>須為0或1</translation>
     </message>
     <message>
         <source>invalid date</source>
-        <translation>neplatné datum</translation>
+        <translation>日期不正確</translation>
     </message>
     <message>
         <source>invalid time</source>
-        <translation>neplatný čas</translation>
+        <translation>時間不正確</translation>
     </message>
     <message>
         <source>no such option</source>
-        <translation>neexistující podmínka</translation>
+        <translation>無此一選項</translation>
     </message>
     <message>
         <source>Excess columns</source>
-        <translation>Přebývající sloupce</translation>
+        <translation>欄位過多</translation>
     </message>
     <message>
         <source>Missing columns</source>
-        <translation>Chybějící sloupce</translation>
+        <translation>欄位不足</translation>
     </message>
     <message>
         <source>Unable to open file</source>
-        <translation>Nelze otevřít soubor</translation>
+        <translation>無法開啟檔案</translation>
     </message>
     <message>
         <source>Error in row %1</source>
-        <translation>Chyba v záznamu %1</translation>
+        <translation>第%1資料列有錯</translation>
     </message>
     <message>
         <source>Not a valid MobileDB file</source>
-        <translation>Není platným souborem MobileDB</translation>
+        <translation>不正確的MobileDB檔案</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="unfinished">日</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="unfinished">月</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>R</translation>
+        <translation type="unfinished">年</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>odpoledne</translation>
+        <translation type="unfinished">下午</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>dopoledne</translation>
+        <translation type="unfinished">早上</translation>
     </message>
     <message>
         <source>Problematic row</source>
-        <translation>Problémový záznam</translation>
+        <translation>問題列</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ano</translation>
+        <translation>是</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Ne</translation>
+        <translation>否</translation>
     </message>
     <message>
         <source>Missing file</source>
@@ -1609,45 +1604,45 @@ vyhovující filtru?</translation>
     <name>QTextEdit</name>
     <message>
         <source>&amp;Undo</source>
-        <translation>Vrátit zpět akc&amp;i</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation>&amp;Zrušit vrácení akce</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation>Vystřihnou&amp;t</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>&amp;Kopírovat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Vložit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Vymazat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Vybrat vše</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RowEditor</name>
     <message>
         <source>Row Editor</source>
-        <translation>Editor záznamů</translation>
+        <translation>列編輯器</translation>
     </message>
 </context>
 <context>
     <name>RowViewer</name>
     <message>
         <source>Row Viewer</source>
-        <translation>Prohlížeč záznamů</translation>
+        <translation>列檢視器</translation>
     </message>
 </context>
 <context>
@@ -1658,7 +1653,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">Sloupec</translation>
+        <translation type="unfinished">欄</translation>
     </message>
     <message>
         <source>Delay between images</source>
@@ -1673,105 +1668,105 @@ vyhovující filtru?</translation>
     <name>SortEditor</name>
     <message>
         <source>Sorting Editor</source>
-        <translation>Editor pořadí</translation>
+        <translation>排序方式編輯器</translation>
     </message>
     <message>
         <source>Sorting Name</source>
-        <translation>Jméno pořadí</translation>
+        <translation>排序方式名稱</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation>Řadit</translation>
+        <translation>排序</translation>
     </message>
     <message>
         <source>Column Name</source>
-        <translation>Jméno sloupce</translation>
+        <translation>欄位名稱</translation>
     </message>
     <message>
         <source>Direction</source>
-        <translation>Směr řazení</translation>
+        <translation>順序</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation>Vzestupný</translation>
+        <translation>遞增</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation>Sestupný</translation>
+        <translation>遞減</translation>
     </message>
 </context>
 <context>
     <name>TimeWidget</name>
     <message>
         <source>AM</source>
-        <translation>Ráno/dopoledne</translation>
+        <translation>早上</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Neuvádět</translation>
+        <translation>無</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>Odpoledne/večer</translation>
+        <translation>下午</translation>
     </message>
 </context>
 <context>
     <name>View</name>
     <message>
         <source>No data to summarize</source>
-        <translation type="unfinished">Žádná data k sumarizaci</translation>
+        <translation type="unfinished">無資料可供統計</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished">Celkem</translation>
+        <translation type="unfinished">加總</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished">Průměr</translation>
+        <translation type="unfinished">平均</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="unfinished">Minimum</translation>
+        <translation type="unfinished">最小值</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="unfinished">Maximum</translation>
+        <translation type="unfinished">最大值</translation>
     </message>
     <message>
         <source>Checked</source>
-        <translation type="unfinished">Vybraný</translation>
+        <translation type="unfinished">已選取</translation>
     </message>
     <message>
         <source>Unchecked</source>
-        <translation type="unfinished">Nevybraný</translation>
+        <translation type="unfinished">未選取</translation>
     </message>
     <message>
         <source>Earliest</source>
-        <translation type="unfinished">Předešlý</translation>
+        <translation type="unfinished">最前面的</translation>
     </message>
     <message>
         <source>Latest</source>
-        <translation type="unfinished">Následující</translation>
+        <translation type="unfinished">最後面的</translation>
     </message>
     <message>
         <source>Total length</source>
-        <translation type="unfinished">Celková délka</translation>
+        <translation type="unfinished">總長</translation>
     </message>
     <message>
         <source>characters</source>
-        <translation type="unfinished">znaků</translation>
+        <translation type="unfinished">字元</translation>
     </message>
     <message>
         <source>Average length</source>
-        <translation type="unfinished">Průměrná délka</translation>
+        <translation type="unfinished">平均長度</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished">Minimální délka</translation>
+        <translation type="unfinished">最小長度</translation>
     </message>
     <message>
         <source>Maximum length</source>
-        <translation type="unfinished">Maximální délka</translation>
+        <translation type="unfinished">最大長度</translation>
     </message>
     <message>
         <source>Image available</source>
@@ -1786,7 +1781,7 @@ vyhovující filtru?</translation>
     <name>ViewDisplay</name>
     <message>
         <source>No results</source>
-        <translation>Bez výsledku</translation>
+        <translation>無資料</translation>
     </message>
     <message>
         <source>No image columns in this view</source>
@@ -1801,118 +1796,118 @@ vyhovující filtru?</translation>
     <name>ViewEditor</name>
     <message>
         <source>View Editor</source>
-        <translation>Editor náhledů</translation>
+        <translation>景觀編輯器</translation>
     </message>
     <message>
         <source>View Name</source>
-        <translation>Jméno náhledu</translation>
+        <translation>景觀名稱</translation>
     </message>
     <message>
         <source>Default Sorting</source>
-        <translation>Výchozí pořadí</translation>
+        <translation>預設排序方式</translation>
     </message>
     <message>
         <source>Default Filter</source>
-        <translation>Výchozí filtr</translation>
+        <translation>預設篩選</translation>
     </message>
     <message>
         <source>Include</source>
-        <translation>Zahrnout</translation>
+        <translation>包含</translation>
     </message>
     <message>
         <source>Column Name</source>
-        <translation>Jméno sloupce</translation>
+        <translation>欄位名稱</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Není</translation>
+        <translation>無</translation>
     </message>
     <message>
         <source>All Rows</source>
-        <translation>Všechny záznamy</translation>
+        <translation>所有資料列</translation>
     </message>
 </context>
 <context>
     <name>XMLImport</name>
     <message>
         <source>Error at</source>
-        <translation type="unfinished">Chyba  </translation>
+        <translation type="unfinished">錯誤</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">Řádek</translation>
+        <translation type="unfinished">行</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">Sloupec</translation>
+        <translation type="unfinished">欄</translation>
     </message>
     <message>
         <source>only allowed as root element</source>
-        <translation type="unfinished">je povolen pouze jako kořenový prvek</translation>
+        <translation type="unfinished">只可為根元素</translation>
     </message>
     <message>
         <source>Unknown element</source>
-        <translation type="unfinished">Neznámý prvek</translation>
+        <translation type="unfinished">未知元素</translation>
     </message>
     <message>
         <source>%1 not allowed as child of %2</source>
-        <translation type="unfinished">%1 není povoleno vnořit do %2</translation>
+        <translation type="unfinished">%1不得為%2的子層級</translation>
     </message>
     <message>
         <source>Missing element</source>
-        <translation type="unfinished">Chybějící prvek</translation>
+        <translation type="unfinished">元素不足</translation>
     </message>
     <message>
         <source>&quot;c&quot; attribute is missing or non-integer</source>
-        <translation type="unfinished">atribut &quot;c&quot; chybí nebo není integer</translation>
+        <translation type="unfinished">&quot;c&quot;屬性不見或是非整數</translation>
     </message>
     <message>
         <source>Unsupported</source>
-        <translation type="unfinished">Nepodporované</translation>
+        <translation type="unfinished">尚未支援</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation type="unfinished">Neplatné</translation>
+        <translation type="unfinished">不正確的</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Duplikované</translation>
+        <translation type="unfinished">重複的</translation>
     </message>
     <message>
         <source>Missing</source>
-        <translation type="unfinished">Chybějící</translation>
+        <translation type="unfinished">消失不見</translation>
     </message>
     <message>
         <source>Too many child nodes for node type</source>
-        <translation type="unfinished">Příliš mnoho vnořených operací pro daný typ operace</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Incorrect _all view column sequence</source>
-        <translation type="unfinished">Nesprávné pořadí sloupců</translation>
+        <translation type="unfinished">所有景觀欄位順序不正確</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
-        <translation type="unfinished">musí být 0 nebo 1</translation>
+        <translation type="unfinished">須為0或1</translation>
     </message>
     <message>
         <source>must be an integer</source>
-        <translation type="unfinished">musí být integer</translation>
+        <translation type="unfinished">須為整數</translation>
     </message>
     <message>
         <source>must be a non-negative integer</source>
-        <translation type="unfinished">nesmí být záporný integer</translation>
+        <translation type="unfinished">不得為負整數</translation>
     </message>
     <message>
         <source>must be a positive integer</source>
-        <translation type="unfinished">musí být kladný integer</translation>
+        <translation type="unfinished">須為整正數</translation>
     </message>
     <message>
         <source>Duplicate element</source>
-        <translation type="unfinished">Duplikovaný prvek</translation>
+        <translation type="unfinished">重複的元素</translation>
     </message>
     <message>
         <source>Missing data for column ID %1</source>
-        <translation type="unfinished">Chybějící data ve sloupci ID %1</translation>
+        <translation type="unfinished">ID %1之欄位缺少資料</translation>
     </message>
 </context>
 </TS>

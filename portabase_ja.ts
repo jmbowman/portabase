@@ -2,16 +2,8 @@
 <context>
     <name>CSVErrorDialog</name>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
         <source>Problematic row</source>
         <translation>問題のレコード</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
     </message>
 </context>
 <context>
@@ -21,10 +13,6 @@
         <translation>計算ノード編集</translation>
     </message>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
         <source>Column</source>
         <translation>フィールド</translation>
     </message>
@@ -32,24 +20,12 @@
         <source>Constant</source>
         <translation>固定値</translation>
     </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
 </context>
 <context>
     <name>CalcEditor</name>
     <message>
         <source>Calculation Editor</source>
         <translation>計算値編集</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Column Name</source>
@@ -63,33 +39,52 @@
         <source>Decimal Places</source>
         <translation>小数点以下の桁数</translation>
     </message>
+</context>
+<context>
+    <name>CalcNode</name>
     <message>
-        <source>Add</source>
-        <translation>作成</translation>
+        <source>Days_Between</source>
+        <translation>Days_Between</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation>編集</translation>
+        <source>MAX</source>
+        <translation>MAX</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>削除</translation>
+        <source>MIN</source>
+        <translation>MIN</translation>
     </message>
     <message>
-        <source>Up</source>
-        <translation>上げる</translation>
+        <source>AVERAGE</source>
+        <translation>AVERAGE</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation>下げる</translation>
+        <source>ABS</source>
+        <translation>ABS</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
+        <source>SQRT</source>
+        <translation>SQRT</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
+        <source>LOG</source>
+        <translation>LOG</translation>
+    </message>
+    <message>
+        <source>LN</source>
+        <translation>LN</translation>
+    </message>
+    <message>
+        <source>Seconds_Between</source>
+        <translation>Seconds_Between</translation>
+    </message>
+    <message>
+        <source>Minutes_Between</source>
+        <translation>Minutes_Between</translation>
+    </message>
+    <message>
+        <source>Hours_Between</source>
+        <translation>Hours_Between</translation>
     </message>
 </context>
 <context>
@@ -97,10 +92,6 @@
     <message>
         <source>Calculation Node Editor</source>
         <translation>計算ノード編集</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Column</source>
@@ -115,16 +106,23 @@
         <translation>演算子</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
         <source>Constant must be a decimal value</source>
         <translation>固定値は数値でなければなりません</translation>
+    </message>
+</context>
+<context>
+    <name>CalcTimeEditor</name>
+    <message>
+        <source>Calculation Node Editor</source>
+        <translation>計算ノード編集</translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation>フィールド</translation>
+    </message>
+    <message>
+        <source>Constant</source>
+        <translation>固定値</translation>
     </message>
 </context>
 <context>
@@ -132,21 +130,6 @@
     <message>
         <source>Update</source>
         <translation>更新</translation>
-    </message>
-</context>
-<context>
-    <name>Calculator</name>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
     </message>
 </context>
 <context>
@@ -180,24 +163,12 @@
         <translation>アルファチャネル(&amp;L):</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <source>Choose color</source>
+        <source>Select color</source>
         <translation>色を選択</translation>
     </message>
 </context>
 <context>
     <name>ColumnEditor</name>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
     <message>
         <source>Name</source>
         <translation>名前</translation>
@@ -259,14 +230,6 @@
         <translation>今</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
         <source>Calculation</source>
         <translation>計算値</translation>
     </message>
@@ -282,16 +245,39 @@
         <source>Next value</source>
         <translation>次の番号</translation>
     </message>
+    <message>
+        <source>Image</source>
+        <translation>画像</translation>
+    </message>
+</context>
+<context>
+    <name>Condition</name>
+    <message>
+        <source>Any text column</source>
+        <translation>テキストフィールドのどれか</translation>
+    </message>
+    <message>
+        <source>%1 is checked</source>
+        <translation>%1は真</translation>
+    </message>
+    <message>
+        <source>%1 is not checked</source>
+        <translation>%1は偽</translation>
+    </message>
+    <message>
+        <source>%1 contains %2</source>
+        <translation>%1に%2はあります</translation>
+    </message>
+    <message>
+        <source>%1 starts with %2</source>
+        <translation>%1の先頭に%2はあります</translation>
+    </message>
 </context>
 <context>
     <name>ConditionEditor</name>
     <message>
         <source>Condition Editor</source>
         <translation>条件編集</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Any text column</source>
@@ -313,13 +299,24 @@
         <source>Constant</source>
         <translation>固定値</translation>
     </message>
+</context>
+<context>
+    <name>Crypto</name>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
+        <source>Incorrect password</source>
+        <translation>パスワードが違います</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
+        <source>Error in decrypting data</source>
+        <translation>暗号化の解除でエラー発生</translation>
+    </message>
+    <message>
+        <source>Error in loading data</source>
+        <translation>データロードにエラー発生</translation>
+    </message>
+    <message>
+        <source>Password must be at least 6 characters long</source>
+        <translation>パスワードは6文字以上にしてください</translation>
     </message>
 </context>
 <context>
@@ -328,116 +325,93 @@
         <source>Columns Editor</source>
         <translation>フォーマット編集</translation>
     </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>名前</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>データタイプ</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>デフォルト値</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>作成</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>上げる</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>下げる</translation>
-    </message>
-    <message>
-        <source>No name entered</source>
-        <translation>名前を入力して下さい</translation>
-    </message>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
-    </message>
-    <message>
-        <source>Duplicate name</source>
-        <translation>デュプリケート名前</translation>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation>今日</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>なし</translation>
-    </message>
-    <message>
-        <source>Now</source>
-        <translation>今</translation>
-    </message>
-    <message>
-        <source>String</source>
-        <translation>文字列</translation>
-    </message>
-    <message>
-        <source>Integer</source>
-        <translation>整数値</translation>
-    </message>
-    <message>
-        <source>Decimal</source>
-        <translation>数値</translation>
-    </message>
-    <message>
-        <source>Boolean</source>
-        <translation>真偽</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation>ノート</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>日付</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>時刻</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation>計算値</translation>
-    </message>
-    <message>
-        <source>Sequence</source>
-        <translation>順番列</translation>
-    </message>
 </context>
 <context>
     <name>DateWidget</name>
     <message>
         <source>None</source>
         <translation>なし</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation>月曜</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation>火曜</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation>水曜</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation>木曜</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation>金曜</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation>土曜</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation>日曜</translation>
+    </message>
+    <message>
+        <source>Jan</source>
+        <translation>１月</translation>
+    </message>
+    <message>
+        <source>Feb</source>
+        <translation>２月</translation>
+    </message>
+    <message>
+        <source>Mar</source>
+        <translation>３月</translation>
+    </message>
+    <message>
+        <source>Apr</source>
+        <translation>４月</translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation>５月</translation>
+    </message>
+    <message>
+        <source>Jun</source>
+        <translation>６月</translation>
+    </message>
+    <message>
+        <source>Jul</source>
+        <translation>７月</translation>
+    </message>
+    <message>
+        <source>Aug</source>
+        <translation>８月</translation>
+    </message>
+    <message>
+        <source>Sep</source>
+        <translation>９月</translation>
+    </message>
+    <message>
+        <source>Oct</source>
+        <translation>１０月</translation>
+    </message>
+    <message>
+        <source>Nov</source>
+        <translation>１１月</translation>
+    </message>
+    <message>
+        <source>Dec</source>
+        <translation>１２月</translation>
+    </message>
+    <message>
+        <source>%1 %2 %3 %4</source>
+        <comment>1=day of week, 2=month name, 3=day of month, 4=year</comment>
+        <translation>%1%4年%2%3日</translation>
     </message>
 </context>
 <context>
@@ -447,32 +421,8 @@
         <translation>列挙編集</translation>
     </message>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
         <source>Enum Name</source>
         <translation>列挙の名前</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>作成</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>上げる</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>下げる</translation>
     </message>
     <message>
         <source>Must have at least one option</source>
@@ -485,26 +435,6 @@
     <message>
         <source>Replace where used with:</source>
         <translation>使われている所をこれに変える:</translation>
-    </message>
-    <message>
-        <source>No name entered</source>
-        <translation>名前を入力して下さい</translation>
-    </message>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
-    </message>
-    <message>
-        <source>Duplicate name</source>
-        <translation>デュプリケート名前</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -526,30 +456,6 @@
         <translation>列挙管理</translation>
     </message>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>作成</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>上げる</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>下げる</translation>
-    </message>
-    <message>
         <source>The following columns which
 use this enum will also be
 deleted:</source>
@@ -560,22 +466,6 @@ deleted:</source>
         <source>Continue?</source>
         <translation>続ける?</translation>
     </message>
-    <message>
-        <source>Yes</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>いいえ</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
 </context>
 <context>
     <name>FilterEditor</name>
@@ -584,52 +474,8 @@ deleted:</source>
         <translation>フィルター編集</translation>
     </message>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
         <source>Filter Name</source>
         <translation>フィルターの名前</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>作成</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>上げる</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>下げる</translation>
-    </message>
-    <message>
-        <source>No name entered</source>
-        <translation>名前を入力して下さい</translation>
-    </message>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
-    </message>
-    <message>
-        <source>Duplicate name</source>
-        <translation>デュプリケート名前</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
     </message>
 </context>
 <context>
@@ -639,10 +485,6 @@ deleted:</source>
         <translation>ヘルプ</translation>
     </message>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
         <source>Back</source>
         <translation>戻る</translation>
     </message>
@@ -650,17 +492,70 @@ deleted:</source>
         <source>Forward</source>
         <translation>進む</translation>
     </message>
+</context>
+<context>
+    <name>ImageEditor</name>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
+        <source>Image Editor</source>
+        <translation>画像編集</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>幅</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation>高さ</translation>
+    </message>
+    <message>
+        <source>Rotate</source>
+        <translation>回転</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>再読み込み</translation>
+    </message>
+    <message>
+        <source>Image is too large to import</source>
+        <translation>画像は大き過ぎる</translation>
+    </message>
+    <message>
+        <source>Unsupported image format</source>
+        <translation>非対応の画像フォマット</translation>
+    </message>
+</context>
+<context>
+    <name>ImageSelector</name>
+    <message>
+        <source>Select an image</source>
+        <translation>画像を選択して下さい</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>表示</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>変更</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>Delete the current image?</source>
+        <translation>この画像を削除しますか?</translation>
+    </message>
+</context>
+<context>
+    <name>ImageViewer</name>
+    <message>
+        <source>Image Viewer</source>
+        <translation>画像表示</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
     <message>
         <source>Import rows from CSV file</source>
         <translation>CSVファイルからレコードをインポート</translation>
@@ -681,13 +576,312 @@ deleted:</source>
         <source>Text encoding</source>
         <translation>文字コード</translation>
     </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation>カンマ区切りテキスト</translation>
+    </message>
+    <message>
+        <source>MobileDB files</source>
+        <translation>MobileDBファイル</translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation>XMLファイル</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation>画像ファイル</translation>
+    </message>
+    <message>
+        <source>Choose a file</source>
+        <translation>ファイルを選択して下さい</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>インポート</translation>
+    </message>
+    <message>
+        <source>Select an image</source>
+        <translation>画像を選択して下さい</translation>
+    </message>
+</context>
+<context>
+    <name>MenuActions</name>
+    <message>
+        <source>File</source>
+        <translation>ファイル</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>ビュー</translation>
+    </message>
+    <message>
+        <source>Row</source>
+        <translation>レコード</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation>ソート</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>フィルター</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>ヘルプ</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>新規</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>開く</translation>
+    </message>
+    <message>
+        <source>Open Recent</source>
+        <translation>最近を開く</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Change Password</source>
+        <translation>パスワード変更</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>インポート</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>エクスポート</translation>
+    </message>
+    <message>
+        <source>Slideshow</source>
+        <translation>スライドショー</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation>プロパティ</translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation>設定</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>終了</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="unfinished">リスト</translation>
+    </message>
+    <message>
+        <source>Icons</source>
+        <translation type="unfinished">アイコン</translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation>ヘルプ目次</translation>
+    </message>
+    <message>
+        <source>About PortaBase</source>
+        <translation>PortaBaseについて</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Qtについて</translation>
+    </message>
+    <message>
+        <source>Quick Filter</source>
+        <translation>簡易フィルター</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>作成</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation>リネーム</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>再読み込み</translation>
+    </message>
+    <message>
+        <source>All Columns</source>
+        <translation>全てのフィールド</translation>
+    </message>
+    <message>
+        <source>All Rows</source>
+        <translation>全てのレコード</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>コピー</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>表示</translation>
+    </message>
+    <message>
+        <source>Delete Rows In Filter</source>
+        <translation>フィルターに含まれるレコードを削除</translation>
+    </message>
+    <message>
+        <source>Edit Columns</source>
+        <translation>フォーマット編集</translation>
+    </message>
+    <message>
+        <source>Edit Enums</source>
+        <translation>列挙管理</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>ファイル(&amp;F)</translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation>ビュー(&amp;V)</translation>
+    </message>
+    <message>
+        <source>&amp;Row</source>
+        <translation>レコード(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Sort</source>
+        <translation>ソート(&amp;S)</translation>
+    </message>
+    <message>
+        <source>Fi&amp;lter</source>
+        <translation>フィルター(&amp;l)</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>ヘルプ(&amp;H)</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>新規(&amp;N)</translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>開く(&amp;O)</translation>
+    </message>
+    <message>
+        <source>Open &amp;Recent</source>
+        <translation>最近を開く(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>保存(&amp;S)</translation>
+    </message>
+    <message>
+        <source>C&amp;hange Password</source>
+        <translation>パスワード変更(&amp;H)</translation>
+    </message>
+    <message>
+        <source>&amp;Import</source>
+        <translation>インポート(&amp;I)</translation>
+    </message>
+    <message>
+        <source>E&amp;xport</source>
+        <translation>エクスポート(&amp;X)</translation>
+    </message>
+    <message>
+        <source>S&amp;lideshow</source>
+        <translation>スライドショー(&amp;L)</translation>
+    </message>
+    <message>
+        <source>Proper&amp;ties</source>
+        <translation>プロパティ(&amp;T)</translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation>設定(&amp;P)</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>終了(&amp;Q)</translation>
+    </message>
+    <message>
+        <source>Help &amp;Contents</source>
+        <translation>ヘルプ目次(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;About PortaBase</source>
+        <translation>PortaBaseについて(&amp;A)</translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation>Qtについて(&amp;Q)</translation>
+    </message>
+    <message>
+        <source>&amp;Quick Filter</source>
+        <translation>簡易フィルター(&amp;Q)</translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation>作成(&amp;A)</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation>編集(&amp;E)</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>削除(&amp;D)</translation>
+    </message>
+    <message>
+        <source>All &amp;Columns</source>
+        <translation>全てのフィールド(&amp;C)</translation>
+    </message>
+    <message>
+        <source>All &amp;Rows</source>
+        <translation>全てのレコード(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>コピー(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Show</source>
+        <translation>表示(&amp;S)</translation>
+    </message>
+    <message>
+        <source>&amp;Delete Rows In Filter</source>
+        <translation>フィルターに含まれるレコードを削除(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Edit &amp;Enums</source>
+        <translation>列挙管理(&amp;E)</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>閉じる(&amp;C)</translation>
+    </message>
+    <message>
+        <source>Edit Col&amp;umns</source>
+        <translation>フォーマット編集(&amp;U)</translation>
+    </message>
 </context>
 <context>
     <name>NewFileDialog</name>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
     <message>
         <source>Enter a name for the new file</source>
         <translation>ファイルネームを入力して下さい</translation>
@@ -705,23 +899,43 @@ deleted:</source>
         <translation>ファイルは存在します…オーバーライトしますか?</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>いいえ</translation>
-    </message>
-    <message>
         <source>Encrypt the file?</source>
         <translation>ファイルを暗号化しますか?</translation>
     </message>
+    <message>
+        <source>PortaBase files</source>
+        <translation>PortaBaseファイル</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>テキストファイル</translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation>XMLファイル</translation>
+    </message>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation>ファイルネームを選択して下さい</translation>
+    </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation>カンマ区切りテキスト</translation>
+    </message>
 </context>
 <context>
-    <name>NoteEditor</name>
+    <name>PBDialog</name>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
+        <source>Name must not start with &apos;_&apos;</source>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
+    </message>
+    <message>
+        <source>Duplicate name</source>
+        <translation>デュプリケート名前</translation>
+    </message>
+    <message>
+        <source>No name entered</source>
+        <translation>名前を入力して下さい</translation>
     </message>
     <message>
         <source>OK</source>
@@ -730,6 +944,26 @@ deleted:</source>
     <message>
         <source>Cancel</source>
         <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>作成</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>削除</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation>上げる</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation>下げる</translation>
     </message>
 </context>
 <context>
@@ -745,10 +979,6 @@ deleted:</source>
     <message>
         <source>Choose a file</source>
         <translation>ファイルを選択して下さい</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
@@ -770,10 +1000,6 @@ deleted:</source>
 <context>
     <name>PasswordDialog</name>
     <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
         <source>Old password</source>
         <translation>現パスワード</translation>
     </message>
@@ -794,14 +1020,6 @@ deleted:</source>
         <translation>新パスワードを繰り返す</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
         <source>Repeated password doesn&apos;t match</source>
         <translation>パスワードとその繰り返しは合わない</translation>
     </message>
@@ -809,84 +1027,8 @@ deleted:</source>
 <context>
     <name>PortaBase</name>
     <message>
-        <source>New</source>
-        <translation>新規</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>開く</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>削除</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation>ファイル</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>保存</translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation>インポート</translation>
-    </message>
-    <message>
-        <source>Delete Rows In Filter</source>
-        <translation>フィルターに含まれるレコードを削除</translation>
-    </message>
-    <message>
-        <source>Edit Columns</source>
-        <translation>フォーマット編集</translation>
-    </message>
-    <message>
-        <source>Edit Enums</source>
-        <translation>列挙管理</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation>設定</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>作成</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>All Columns</source>
-        <translation>全てのフィールド</translation>
-    </message>
-    <message>
-        <source>Quick</source>
-        <translation>簡易</translation>
-    </message>
-    <message>
-        <source>All Rows</source>
-        <translation>全てのレコード</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>ビュー</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation>ソート</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>フィルター</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new file</source>
-        <translation>ファイルネームを入力して下さい</translation>
     </message>
     <message>
         <source>Unable to create new file</source>
@@ -906,14 +1048,6 @@ PortaBaseバージョンより新しい…
         <translation>削除しますか?</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>いいえ</translation>
-    </message>
-    <message>
         <source>Save changes?</source>
         <translation>変更をセーブしますか?</translation>
     </message>
@@ -928,10 +1062,6 @@ current filter?</source>
 を全て削除しますか?</translation>
     </message>
     <message>
-        <source>Export</source>
-        <translation>エクスポート</translation>
-    </message>
-    <message>
         <source>Delete this view?</source>
         <translation>このビューを削除しますか?</translation>
     </message>
@@ -944,42 +1074,6 @@ current filter?</source>
         <translation>このフィルターを削除しますか?</translation>
     </message>
     <message>
-        <source>Copy</source>
-        <translation>コピー</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation>リネーム</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation>再読み込み</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>終了</translation>
-    </message>
-    <message>
-        <source>Change Password</source>
-        <translation>パスワード変更</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <source>Help Contents</source>
-        <translation>ヘルプ目次</translation>
-    </message>
-    <message>
-        <source>About PortaBase</source>
-        <translation>PortaBaseについて</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Qtについて</translation>
-    </message>
-    <message>
         <source>XML</source>
         <translation>XML</translation>
     </message>
@@ -990,22 +1084,6 @@ current filter?</source>
     <message>
         <source>Import from:</source>
         <translation>インポートされるファイル:</translation>
-    </message>
-    <message>
-        <source>Enter the new file name</source>
-        <translation>ファイルネームを入力して下さい</translation>
-    </message>
-    <message>
-        <source>Unable to rename the file</source>
-        <translation>リネーム出来ませんでした</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation>レコード</translation>
     </message>
     <message>
         <source>CSV</source>
@@ -1028,12 +1106,48 @@ current filter?</source>
         <translation>http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>List</source>
-        <translation>リスト</translation>
+        <source>Name</source>
+        <translation>名前</translation>
     </message>
     <message>
-        <source>Icons</source>
-        <translation>アイコン</translation>
+        <source>Size</source>
+        <translation>サイズ</translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>レコード数</translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>フィールド数</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>ビュー数</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>ソーティング数</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>フィルター数</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>列挙数</translation>
+    </message>
+    <message>
+        <source>File Properties</source>
+        <translation>ファイルのプロパティ</translation>
+    </message>
+    <message>
+        <source>File does not exist</source>
+        <translation>ファイルは存在しません</translation>
+    </message>
+    <message>
+        <source>Not a PortaBase file</source>
+        <translation>PortaBaseファイルではありません</translation>
     </message>
 </context>
 <context>
@@ -1041,10 +1155,6 @@ current filter?</source>
     <message>
         <source>Preferences</source>
         <translation>設定</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Font</source>
@@ -1127,16 +1237,48 @@ current filter?</source>
         <translation>月曜日</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
         <source>Row Colors</source>
         <translation>レコード色</translation>
+    </message>
+    <message>
+        <source>Use pages in data viewer</source>
+        <translation>データ表示にページを使う</translation>
+    </message>
+    <message>
+        <source>Default rows per page</source>
+        <translation>デフォルトページごとのレコード数</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>オプション</translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation>外観</translation>
+    </message>
+    <message>
+        <source>Top-level</source>
+        <translation>第一レベル</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation>メニュー</translation>
+    </message>
+    <message>
+        <source>Menus</source>
+        <translation>メニューバー</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>表示</translation>
+    </message>
+    <message>
+        <source>Toolbar Button</source>
+        <translation>ボタン</translation>
+    </message>
+    <message>
+        <source>Buttons</source>
+        <translation>ツールバー</translation>
     </message>
 </context>
 <context>
@@ -1190,10 +1332,6 @@ current filter?</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <source>&amp;Add To Custom Colors</source>
-        <translation>カスタム色に追加(&amp;A)</translation>
-    </message>
-    <message>
         <source>&amp;Add to Custom Colors</source>
         <translation>カスタム色に追加(&amp;A)</translation>
     </message>
@@ -1210,51 +1348,51 @@ current filter?</source>
     </message>
     <message>
         <source>January</source>
-        <translation>一月</translation>
+        <translation>１月</translation>
     </message>
     <message>
         <source>February</source>
-        <translation>二月</translation>
+        <translation>２月</translation>
     </message>
     <message>
         <source>March</source>
-        <translation>三月</translation>
+        <translation>３月</translation>
     </message>
     <message>
         <source>April</source>
-        <translation>四月</translation>
+        <translation>４月</translation>
     </message>
     <message>
         <source>May</source>
-        <translation>五月</translation>
+        <translation>５月</translation>
     </message>
     <message>
         <source>June</source>
-        <translation>六月</translation>
+        <translation>６月</translation>
     </message>
     <message>
         <source>July</source>
-        <translation>七月</translation>
+        <translation>７月</translation>
     </message>
     <message>
         <source>August</source>
-        <translation>八月</translation>
+        <translation>８月</translation>
     </message>
     <message>
         <source>September</source>
-        <translation>九月</translation>
+        <translation>９月</translation>
     </message>
     <message>
         <source>October</source>
-        <translation>十月</translation>
+        <translation>１０月</translation>
     </message>
     <message>
         <source>November</source>
-        <translation>十一月</translation>
+        <translation>１１月</translation>
     </message>
     <message>
         <source>December</source>
-        <translation>十二月</translation>
+        <translation>１２月</translation>
     </message>
     <message>
         <source>M</source>
@@ -1267,14 +1405,6 @@ current filter?</source>
     <message>
         <source>F</source>
         <translation>金</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
     </message>
     <message>
         <source>Su</source>
@@ -1291,6 +1421,32 @@ current filter?</source>
     <message>
         <source>Sa</source>
         <translation>土</translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation>今日</translation>
+    </message>
+</context>
+<context>
+    <name>QFileDialog</name>
+    <message>
+        <source>All Files (*)</source>
+        <translation>全てのファイル(*)</translation>
+    </message>
+    <message>
+        <source>All Files (*.*)</source>
+        <translation>全てのファイル(*.*)</translation>
+    </message>
+</context>
+<context>
+    <name>QInputDialog</name>
+    <message>
+        <source>OK</source>
+        <translation>はい</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
     </message>
 </context>
 <context>
@@ -1325,6 +1481,17 @@ current filter?</source>
     </message>
 </context>
 <context>
+    <name>QMainWindow</name>
+    <message>
+        <source>Line up</source>
+        <translation>並べる</translation>
+    </message>
+    <message>
+        <source>Customize...</source>
+        <translation>カスタマイズ...</translation>
+    </message>
+</context>
+<context>
     <name>QMessageBox</name>
     <message>
         <source>OK</source>
@@ -1342,32 +1509,122 @@ current filter?</source>
         <source>&amp;No</source>
         <translation>いいえ(&amp;N)</translation>
     </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for multiplatform GUI &amp;amp; application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants.&lt;br&gt;Qt is also available for embedded devices.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; for more information.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Qtについて&lt;/h3&gt;&lt;p&gt;このプログラムはQtバージョン%1を使います.&lt;/p&gt;&lt;p&gt;Qtはマルチプラットフォームグイとアプリケーション開発のためのC++ツールキット。&lt;/p&gt;&lt;p&gt;Qtのお蔭で、同じソースコードはMS&amp;nbsp;Windows、Mac&amp;nbsp;OS&amp;nbsp;X、Linux、と全ての主要な商業Unix種類で使えます。&lt;br&gt;Qtは組み込みプラットフォームにも使えます。&lt;/p&gt;&lt;p&gt;QtはTrolltechの作品。詳しい情報は&lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt;を参照して下さい。&lt;/p&gt;</translation>
+    </message>
 </context>
 <context>
-    <name>QMultiLineEdit</name>
+    <name>QObject</name>
     <message>
-        <source>Undo</source>
-        <translation>元に戻す</translation>
+        <source>must be an integer</source>
+        <translation>整数値でなければなりません</translation>
     </message>
     <message>
-        <source>Redo</source>
-        <translation>やり直す</translation>
+        <source>must be a decimal value</source>
+        <translation>数値でなければなりません</translation>
     </message>
     <message>
-        <source>Cut</source>
-        <translation>切り取り</translation>
+        <source>must be 0 or 1</source>
+        <translation>0か1でなければなりません</translation>
     </message>
     <message>
-        <source>Copy</source>
-        <translation>コピー</translation>
+        <source>invalid date</source>
+        <translation>入力された日付が不正です</translation>
     </message>
     <message>
-        <source>Paste</source>
-        <translation>張り付け</translation>
+        <source>invalid time</source>
+        <translation>入力された時刻が不正です</translation>
     </message>
     <message>
-        <source>Paste special...</source>
-        <translation>張り付け...</translation>
+        <source>no such option</source>
+        <translation>入力された値が列挙値にありません</translation>
+    </message>
+    <message>
+        <source>Unable to open file</source>
+        <translation>ファイルを開けません</translation>
+    </message>
+    <message>
+        <source>Not a valid MobileDB file</source>
+        <translation>MobileDBファイルではありません</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation>日</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <translation>月</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation>年</translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation>午後</translation>
+    </message>
+    <message>
+        <source>AM</source>
+        <translation>午前</translation>
+    </message>
+    <message>
+        <source>Error in row %1</source>
+        <translation>行%1にエラー発生</translation>
+    </message>
+    <message>
+        <source>Excess columns</source>
+        <translation>余計なフィールド</translation>
+    </message>
+    <message>
+        <source>Missing columns</source>
+        <translation>不在フィールド</translation>
+    </message>
+    <message>
+        <source>Problematic row</source>
+        <translation>問題のレコード</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>はい</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>いいえ</translation>
+    </message>
+    <message>
+        <source>Missing file</source>
+        <translation>ファイルは存在しません</translation>
+    </message>
+</context>
+<context>
+    <name>QQDialog</name>
+    <message>
+        <source>PortaBase</source>
+        <translation>PortaBase</translation>
+    </message>
+</context>
+<context>
+    <name>QTextEdit</name>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>元に戻す(&amp;U)</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>やり直す(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>切り取り(&amp;T)</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>コピー(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>張り付け(&amp;P)</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1379,7 +1636,86 @@ current filter?</source>
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>RowEditor</name>
+    <message>
+        <source>Row Editor</source>
+        <translation>レコード編集</translation>
+    </message>
+</context>
+<context>
+    <name>RowViewer</name>
+    <message>
+        <source>Row Viewer</source>
+        <translation>レコード表示</translation>
+    </message>
+</context>
+<context>
+    <name>SlideshowDialog</name>
+    <message>
+        <source>Slideshow</source>
+        <translation>スライドショー</translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation>フィールド</translation>
+    </message>
+    <message>
+        <source>Delay between images</source>
+        <translation>画像間隔</translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation>秒</translation>
+    </message>
+</context>
+<context>
+    <name>SortEditor</name>
+    <message>
+        <source>Sorting Editor</source>
+        <translation>ソーティング編集</translation>
+    </message>
+    <message>
+        <source>Sorting Name</source>
+        <translation>ソーティングの名前</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation>ソート</translation>
+    </message>
+    <message>
+        <source>Column Name</source>
+        <translation>フィールド名</translation>
+    </message>
+    <message>
+        <source>Direction</source>
+        <translation>昇順 / 降順</translation>
+    </message>
+    <message>
+        <source>Ascending</source>
+        <translation>昇順</translation>
+    </message>
+    <message>
+        <source>Descending</source>
+        <translation>降順</translation>
+    </message>
+</context>
+<context>
+    <name>TimeWidget</name>
+    <message>
+        <source>AM</source>
+        <translation>午前</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>なし</translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation>午後</translation>
+    </message>
+</context>
+<context>
+    <name>View</name>
     <message>
         <source>No data to summarize</source>
         <translation>データがありません</translation>
@@ -1437,41 +1773,66 @@ current filter?</source>
         <translation>最大文字数</translation>
     </message>
     <message>
-        <source>must be an integer</source>
-        <translation>整数値でなければなりません</translation>
+        <source>Image available</source>
+        <translation>画像あり</translation>
     </message>
     <message>
-        <source>must be a decimal value</source>
-        <translation>数値でなければなりません</translation>
+        <source>No image</source>
+        <translation>画像なし</translation>
+    </message>
+</context>
+<context>
+    <name>ViewDisplay</name>
+    <message>
+        <source>No results</source>
+        <translation>結果なし</translation>
     </message>
     <message>
-        <source>must be 0 or 1</source>
-        <translation>0か1でなければなりません</translation>
+        <source>No image columns in this view</source>
+        <translation>このビューに画像フィルドはありません</translation>
     </message>
     <message>
-        <source>invalid date</source>
-        <translation>入力された日付が不正です</translation>
+        <source>No rows in this filter</source>
+        <translation>このフィルターにレコードはありません</translation>
+    </message>
+</context>
+<context>
+    <name>ViewEditor</name>
+    <message>
+        <source>View Editor</source>
+        <translation>ビュー編集</translation>
     </message>
     <message>
-        <source>invalid time</source>
-        <translation>入力された時刻が不正です</translation>
+        <source>View Name</source>
+        <translation>ビューの名前</translation>
     </message>
     <message>
-        <source>no such option</source>
-        <translation>入力された値が列挙値にありません</translation>
+        <source>Default Sorting</source>
+        <translation>デフォルトソーティング</translation>
     </message>
     <message>
-        <source>Unable to open file</source>
-        <translation>ファイルを開けません</translation>
+        <source>Default Filter</source>
+        <translation>デフォルトフィルター</translation>
     </message>
     <message>
-        <source>Any text column</source>
-        <translation>テキストフィールドのどれか</translation>
+        <source>Include</source>
+        <translation>含める</translation>
     </message>
     <message>
-        <source>Not a valid MobileDB file</source>
-        <translation>MobileDBファイルではありません</translation>
+        <source>Column Name</source>
+        <translation>フィールド名</translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation>なし</translation>
+    </message>
+    <message>
+        <source>All Rows</source>
+        <translation>全てのレコード</translation>
+    </message>
+</context>
+<context>
+    <name>XMLImport</name>
     <message>
         <source>Error at</source>
         <translation>エラー発生</translation>
@@ -1482,7 +1843,7 @@ current filter?</source>
     </message>
     <message>
         <source>Column</source>
-        <translation>列</translation>
+        <translation>フィールド</translation>
     </message>
     <message>
         <source>only allowed as root element</source>
@@ -1491,6 +1852,10 @@ current filter?</source>
     <message>
         <source>Unknown element</source>
         <translation>不明要素</translation>
+    </message>
+    <message>
+        <source>%1 not allowed as child of %2</source>
+        <translation>%1は%2の子であることはありません</translation>
     </message>
     <message>
         <source>Missing element</source>
@@ -1513,20 +1878,24 @@ current filter?</source>
         <translation>デュプリケート</translation>
     </message>
     <message>
-        <source>No name entered</source>
-        <translation>名前はありません</translation>
-    </message>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
-    </message>
-    <message>
         <source>Missing</source>
         <translation>不在</translation>
     </message>
     <message>
+        <source>Too many child nodes for node type</source>
+        <translation>子ノードの数は多過ぎる</translation>
+    </message>
+    <message>
         <source>Incorrect _all view column sequence</source>
         <translation>_allビューのフィールド順番が間違っています</translation>
+    </message>
+    <message>
+        <source>must be 0 or 1</source>
+        <translation>0か1でなければなりません</translation>
+    </message>
+    <message>
+        <source>must be an integer</source>
+        <translation>整数値でなければなりません</translation>
     </message>
     <message>
         <source>must be a non-negative integer</source>
@@ -1541,414 +1910,8 @@ current filter?</source>
         <translation>デュプリケート要素</translation>
     </message>
     <message>
-        <source>Incorrect password</source>
-        <translation>パスワードが違います</translation>
-    </message>
-    <message>
-        <source>Error in decrypting data</source>
-        <translation>暗号化の解除でエラー発生</translation>
-    </message>
-    <message>
-        <source>Error in loading data</source>
-        <translation>データロードにエラー発生</translation>
-    </message>
-    <message>
-        <source>Password must be at least 6 characters long</source>
-        <translation>パスワードは6文字以上にしてください</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation>空き容量が足りません</translation>
-    </message>
-    <message>
-        <source>There was a problem creating
-Configuration Information 
-for this program.
-
-Please free up some space and
-try again.</source>
-        <translation>このプログラムの構成データ
-を作るに問題がありました。
-
-空き容量を増やしてから
-やり直して下さい。</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>カンマ区切りテキスト</translation>
-    </message>
-    <message>
-        <source>MobileDB files</source>
-        <translation>MobileDBファイル</translation>
-    </message>
-    <message>
-        <source>XML files</source>
-        <translation>XMLファイル</translation>
-    </message>
-    <message>
-        <source>Choose a file</source>
-        <translation>ファイルを選択して下さい</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>日</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation>月</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation>年</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>午後</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation>午前</translation>
-    </message>
-    <message>
-        <source>Error in row %1</source>
-        <translation>行%1にエラー発生</translation>
-    </message>
-    <message>
-        <source>%1 contains %2</source>
-        <translation>%1に%2はあります</translation>
-    </message>
-    <message>
-        <source>%1 starts with %2</source>
-        <translation>%1の先頭に%2はあります</translation>
-    </message>
-    <message>
-        <source>%1 not allowed as child of %2</source>
-        <translation>%1は%2の子であることはありません</translation>
-    </message>
-    <message>
         <source>Missing data for column ID %1</source>
         <translation>フィールド%1のデータは不在</translation>
-    </message>
-    <message>
-        <source>Excess columns</source>
-        <translation>余計なフィールド</translation>
-    </message>
-    <message>
-        <source>Missing columns</source>
-        <translation>不在フィールド</translation>
-    </message>
-    <message>
-        <source>Problematic row</source>
-        <translation>問題のレコード</translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation>インポート</translation>
-    </message>
-    <message>
-        <source>Text encoding</source>
-        <translation>文字コード</translation>
-    </message>
-    <message>
-        <source>%1 is checked</source>
-        <translation>%1は真</translation>
-    </message>
-    <message>
-        <source>%1 is not checked</source>
-        <translation>%1は偽</translation>
-    </message>
-    <message>
-        <source>Too many child nodes for node type</source>
-        <translation>子ノードの数は多過ぎる</translation>
-    </message>
-    <message>
-        <source>Days_Between</source>
-        <translation>Days_Between</translation>
-    </message>
-    <message>
-        <source>MAX</source>
-        <translation>MAX</translation>
-    </message>
-    <message>
-        <source>MIN</source>
-        <translation>MIN</translation>
-    </message>
-    <message>
-        <source>AVERAGE</source>
-        <translation>AVERAGE</translation>
-    </message>
-    <message>
-        <source>ABS</source>
-        <translation>ABS</translation>
-    </message>
-    <message>
-        <source>SQRT</source>
-        <translation>SQRT</translation>
-    </message>
-    <message>
-        <source>LOG</source>
-        <translation>LOG</translation>
-    </message>
-    <message>
-        <source>LN</source>
-        <translation>LN</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation>PortaBaseファイル</translation>
-    </message>
-    <message>
-        <source>Comma Separated Value files</source>
-        <translation>カンマ区切りテキスト</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>テキストファイル</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation>ファイルネームを選択して下さい</translation>
-    </message>
-    <message>
-        <source>File already exists; overwrite it?</source>
-        <translation>ファイルは存在します…オーバーライトしますか?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>いいえ</translation>
-    </message>
-    <message>
-        <source>Encrypt the file?</source>
-        <translation>ファイルを暗号化しますか?</translation>
-    </message>
-</context>
-<context>
-    <name>QTextEdit</name>
-    <message>
-        <source>&amp;Undo</source>
-        <translation>元に戻す(&amp;U)</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation>やり直す(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t</source>
-        <translation>切り取り(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation>コピー(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation>張り付け(&amp;P)</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation>クリア</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>全て選択</translation>
-    </message>
-</context>
-<context>
-    <name>RowEditor</name>
-    <message>
-        <source>Row Editor</source>
-        <translation>レコード編集</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-</context>
-<context>
-    <name>RowViewer</name>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>Row Viewer</source>
-        <translation>レコード表示</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-</context>
-<context>
-    <name>SortEditor</name>
-    <message>
-        <source>Sorting Editor</source>
-        <translation>ソーティング編集</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>Sorting Name</source>
-        <translation>ソーティングの名前</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation>ソート</translation>
-    </message>
-    <message>
-        <source>Column Name</source>
-        <translation>フィールド名</translation>
-    </message>
-    <message>
-        <source>Direction</source>
-        <translation>昇順 / 降順</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>上げる</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>下げる</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation>昇順</translation>
-    </message>
-    <message>
-        <source>Descending</source>
-        <translation>降順</translation>
-    </message>
-    <message>
-        <source>No name entered</source>
-        <translation>名前を入力して下さい</translation>
-    </message>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
-    </message>
-    <message>
-        <source>Duplicate name</source>
-        <translation>デュプリケート名前</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-</context>
-<context>
-    <name>TimeWidget</name>
-    <message>
-        <source>AM</source>
-        <translation>午前</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>なし</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>午後</translation>
-    </message>
-</context>
-<context>
-    <name>ViewDisplay</name>
-    <message>
-        <source>No results</source>
-        <translation>結果なし</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-</context>
-<context>
-    <name>ViewEditor</name>
-    <message>
-        <source>View Editor</source>
-        <translation>ビュー編集</translation>
-    </message>
-    <message>
-        <source>PortaBase</source>
-        <translation>PortaBase</translation>
-    </message>
-    <message>
-        <source>View Name</source>
-        <translation>ビューの名前</translation>
-    </message>
-    <message>
-        <source>Include</source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <source>Column Name</source>
-        <translation>フィールド名</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation>上げる</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation>下げる</translation>
-    </message>
-    <message>
-        <source>No name entered</source>
-        <translation>名前を入力して下さい</translation>
-    </message>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
-    </message>
-    <message>
-        <source>Duplicate name</source>
-        <translation>デュプリケート名前</translation>
-    </message>
-    <message>
-        <source>Default Sorting</source>
-        <translation>デフォルトソーティング</translation>
-    </message>
-    <message>
-        <source>Default Filter</source>
-        <translation>デフォルトフィルター</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>なし</translation>
-    </message>
-    <message>
-        <source>All Rows</source>
-        <translation>全てのレコード</translation>
     </message>
 </context>
 </TS>

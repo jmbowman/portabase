@@ -32,7 +32,7 @@
 #include <qimage.h>
 #include <qsize.h>
 #include "imagereader.h"
-#include "metakitfuncs.h"
+#include "../metakitfuncs.h"
 
 #if defined(Q_WS_WIN)
 #include <fcntl.h>
@@ -56,7 +56,7 @@ JPEGReader::JPEGReader(const QString &fileName)
     jpegFile = fopen(QFile::encodeName(fileName), "rb");
 #endif
     if (!jpegFile) {
-        fprintf(stderr, "JPEGReader: Can't open file %s\n", fileName);
+        fprintf(stderr, "JPEGReader: Can't open file %s\n", fileName.latin1());
         return;
     }
     jpeg_stdio_src(&cinfo, jpegFile);

@@ -9,12 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/config.h>
-#else
-#include "desktop/config.h"
-#endif
-
 #include <qdatetime.h>
 #include <qfile.h>
 #include <qfileinfo.h>
@@ -34,6 +28,12 @@
 #include "metakitfuncs.h"
 #include "view.h"
 #include "xmlexport.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/config.h>
+#else
+#include "desktop/config.h"
+#endif
 
 Database::Database(QString path, int *result, int encrypt) : crypto(0), version(0), newFile(FALSE), curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), calcId("_calcid"), calcDecimals("_calcdecimals"), cnId("_cnid"), cnNodeId("_cnnodeid"), cnParentId("_cnparentid"), cnType("_cntype"), cnValue("_cnvalue"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter"), gCrypt("_gcrypt")
 {

@@ -75,7 +75,7 @@ bool PBDialog::validateName(const QString &newName, const QString &oldName,
                             const QStringList &otherNames)
 {
     if (newName.isEmpty()) {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("No name entered"));
         return FALSE;
     }
@@ -84,7 +84,7 @@ bool PBDialog::validateName(const QString &newName, const QString &oldName,
         return TRUE;
     }
     if (newName[0] == '_') {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("Name must not start with '_'"));
         return FALSE;
     }
@@ -98,7 +98,7 @@ bool PBDialog::validateName(const QString &newName, const QString &oldName,
         }
     }
     if (!result) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("Duplicate name"));
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"), tr("Duplicate name"));
     }
     return result;
 }

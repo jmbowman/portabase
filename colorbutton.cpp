@@ -9,13 +9,13 @@
  * (at your option) any later version.
  */
 
+#include "colorbutton.h"
+
 #if defined(Q_WS_QWS)
 #include "colordialog.h"
 #else
 #include <qcolordialog.h>
 #endif
-
-#include "colorbutton.h"
 
 ColorButton::ColorButton(const QColor &color, QWidget *parent, const char *name)
     : QPushButton(parent, name)

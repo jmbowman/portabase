@@ -1,7 +1,7 @@
 /*
  * calcnode.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@
 #define CALC_HOURS 34
 #define CALC_LAST_OP 34
 
+#include <qobject.h>
 #include <qstringlist.h>
 
 class CalcNode;
@@ -44,8 +45,9 @@ class Database;
 
 typedef QValueList<CalcNode*> CalcNodeList;
 
-class CalcNode
+class CalcNode : public QObject
 {
+    Q_OBJECT
 public:
     CalcNode(int type, const QString &value);
     ~CalcNode();

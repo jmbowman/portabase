@@ -33,7 +33,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     columnList= new QComboBox(FALSE, hbox);
     columnList->insertItem(tr("Any text column"));
     QStringList tempNames = db->listColumns();
-    int count = colNames.count();
+    int count = tempNames.count();
     IntList tempTypes = db->listTypes();
     for (int i = 0; i < count; i++) {
         if (tempTypes[i] != IMAGE) {
@@ -298,7 +298,7 @@ bool ConditionEditor::isValidConstant()
         if (type == INTEGER || type == SEQUENCE) {
             QString error = db->isValidValue(type, constantInteger->getValue());
             if (error != "") {
-                QMessageBox::warning(this, tr("PortaBase"),
+                QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                      tr("Constant") + " " + error);
                 result = FALSE;
             }
@@ -306,7 +306,7 @@ bool ConditionEditor::isValidConstant()
         if (type == FLOAT || type == CALC) {
             QString error = db->isValidValue(type, constantFloat->getValue());
             if (error != "") {
-                QMessageBox::warning(this, tr("PortaBase"),
+                QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                      tr("Constant") + " " + error);
                 result = FALSE;
             }
@@ -314,7 +314,7 @@ bool ConditionEditor::isValidConstant()
         else if (type == TIME) {
             QString error = db->isValidValue(type, constantTime->getTime());
             if (error != "") {
-                QMessageBox::warning(this, tr("PortaBase"),
+                QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                                      tr("Constant") + " " + error);
                 result = FALSE;
             }

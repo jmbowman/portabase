@@ -9,12 +9,6 @@
  * (at your option) any later version.
  */
 
-#if QT_VERSION >= 300
-#include "desktop/dynamicedit.h"
-#else
-#include "dynamicedit.h"
-#endif
-
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qgrid.h>
@@ -31,6 +25,12 @@
 #include "numberwidget.h"
 #include "roweditor.h"
 #include "timewidget.h"
+
+#if QT_VERSION >= 300
+#include "desktop/dynamicedit.h"
+#else
+#include "dynamicedit.h"
+#endif
 
 RowEditor::RowEditor(QWidget *parent, const char *name)
   : PBDialog(tr("Row Editor"), parent, name), db(0)
@@ -92,7 +92,7 @@ bool RowEditor::isValid()
             QString error = db->isValidValue(type, value);
             if (error != "") {
                 QString message = colNames[i] + " " + error;
-                QMessageBox::warning(this, tr("PortaBase"), message);
+                QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
                 return FALSE;
             }
             numberWidgetIndex++;
@@ -102,7 +102,7 @@ bool RowEditor::isValid()
             QString error = db->isValidValue(type, value);
             if (error != "") {
                 QString message = colNames[i] + " " + error;
-                QMessageBox::warning(this, tr("PortaBase"), message);
+                QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
                 return FALSE;
             }
             timeWidgetIndex++;

@@ -9,12 +9,6 @@
  * (at your option) any later version.
  */
 
-#if defined(Q_WS_QWS)
-#include <qpe/resource.h>
-#else
-#include "desktop/resource.h"
-#endif
-
 #include <math.h>
 
 #include <qhbox.h>
@@ -40,6 +34,12 @@
 #include "viewdisplay.h"
 #include "image/imageviewer.h"
 #include "image/slideshowdialog.h"
+
+#if defined(Q_WS_QWS)
+#include <qpe/resource.h>
+#else
+#include "desktop/resource.h"
+#endif
 
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0),
@@ -544,7 +544,7 @@ void ViewDisplay::showStatistics(int column)
         content += stats[i] + "<br/>";
     }
     content += "</qt>";
-    QMessageBox mb(tr("PortaBase"), content, QMessageBox::NoIcon,
+    QMessageBox mb(QQDialog::tr("PortaBase"), content, QMessageBox::NoIcon,
                    QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
     mb.exec();
@@ -562,11 +562,13 @@ void ViewDisplay::slideshow()
         }
     }
     if (imageCols.count() == 0) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("No image columns in this view"));
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+                             tr("No image columns in this view"));
         return;
     }
     if (view->getRowCount() == 0) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("No rows in this view"));
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+                             tr("No rows in this filter"));
         return;
     }
     SlideshowDialog dialog(imageCols, view, this);

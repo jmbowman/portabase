@@ -16,6 +16,7 @@
 #include <qmessagebox.h>
 #include "fileselector.h"
 #include "inputdialog.h"
+#include "qqdialog.h"
 
 PBFileSelector::PBFileSelector(const QString &, const QStringList &, const QString &f, QWidget *parent, const char *name)
   : FileSelector(f, parent, name, FALSE, FALSE)
@@ -47,7 +48,7 @@ bool PBFileSelector::duplicate()
         return FALSE;
     }
     bool ok;
-    QString name = InputDialog::getText(tr("PortaBase"),
+    QString name = InputDialog::getText(QQDialog::tr("PortaBase"),
                                         tr("Enter a name for the new file"),
                                         QLineEdit::Normal, QString::null,
                                         &ok, this);
@@ -61,7 +62,7 @@ bool PBFileSelector::duplicate()
         reread();
     }
     else {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("Unable to create new file"));
     }
     delete selection;
@@ -75,7 +76,7 @@ bool PBFileSelector::rename()
         return FALSE;
     }
     bool ok;
-    QString name = InputDialog::getText(tr("PortaBase"),
+    QString name = InputDialog::getText(QQDialog::tr("PortaBase"),
                                         tr("Enter the new file name"),
                                         QLineEdit::Normal, QString::null, &ok,
                                         this);
@@ -100,7 +101,7 @@ bool PBFileSelector::rename()
         reread();
     }
     else {
-        QMessageBox::warning(this, tr("PortaBase"),
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
                              tr("Unable to rename the file"));
     }
     delete selection;

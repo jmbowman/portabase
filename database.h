@@ -12,15 +12,15 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <mk4.h>
+#include <qpixmap.h>
+#include "datatypes.h"
+
 #if defined(Q_WS_QWS)
 #include <qpe/timestring.h>
 #else
 #include "desktop/timestring.h"
 #endif
-
-#include <mk4.h>
-#include <qpixmap.h>
-#include "datatypes.h"
 
 #define FILE_VERSION 11
 

@@ -125,7 +125,7 @@ bool CalcTimeEditor::isValid()
     QString error = db->isValidValue(TIME, time);
     if (error != "") {
         QString message = tr("Constant") + ": " + error;
-        QMessageBox::warning(this, tr("PortaBase"), message);
+        QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
         return FALSE;
     }
     return TRUE;
