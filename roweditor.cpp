@@ -15,6 +15,12 @@
 #include "desktop/resource.h"
 #endif
 
+#if QT_VERSION >= 300
+#include "desktop/dynamicedit.h"
+#else
+#include "dynamicedit.h"
+#endif
+
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qdialog.h>
@@ -89,12 +95,12 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
     if (!aborted) {
         QStringList values;
         int checkBoxIndex = 0;
-        int lineEditIndex = 0;
         int noteButtonIndex = 0;
         int dateWidgetIndex = 0;
         int timeWidgetIndex = 0;
         int numberWidgetIndex = 0;
         int comboBoxIndex = 0;
+        int dynamicEditIndex = 0;
         for (int i = 0; i < count; i++) {
             int type = colTypes[i];
             if (type == BOOLEAN) {
@@ -124,8 +130,8 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
                 comboBoxIndex++;
             }
             else {
-                values.append(lineEdits[lineEditIndex]->text());
-                lineEditIndex++;
+                values.append(dynamicEdits[dynamicEditIndex]->text());
+                dynamicEditIndex++;
             }
         }
         if (rowId == -1 || copy) {
@@ -151,12 +157,13 @@ void RowEditor::addContent(int rowId)
 #endif
     QScrollView *sv = new QScrollView(this);
     vbox->addWidget(sv);
-    QGrid *grid = new QGrid(2, sv->viewport());
+    QWidget *grid = new QWidget(sv->viewport());
     sv->addChild(grid);
     sv->setResizePolicy(QScrollView::AutoOneFit);
     grid->resize(sv->visibleWidth(), sv->visibleHeight());
     colNames = db->listColumns();
     int count = colNames.count();
+    QGridLayout *layout = new QGridLayout(grid, count + 1, 2);
     QStringList values;
     if (rowId != -1) {
         values = db->getRow(rowId);
@@ -173,9 +180,10 @@ void RowEditor::addContent(int rowId)
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
         int type = colTypes[i];
-        new QLabel(name, grid);
+        layout->addWidget(new QLabel(name, grid), i, 0);
         if (type == BOOLEAN) {
             QCheckBox *box = new QCheckBox(grid);
+            layout->addWidget(box, i, 1);
             if (values[i].toInt()) {
                 box->setChecked(TRUE);
             }
@@ -183,21 +191,25 @@ void RowEditor::addContent(int rowId)
         }
         else if (type == INTEGER || type == FLOAT) {
             NumberWidget *widget = new NumberWidget(type, grid);
+            layout->addWidget(widget, i, 1);
             widget->setValue(values[i]);
             numberWidgets.append(widget);
         }
         else if (type == NOTE) {
             NoteButton *button = new NoteButton(name, grid);
+            layout->addWidget(button, i, 1);
             button->setContent(values[i]);
             noteButtons.append(button);
         }
         else if (type == DATE) {
             DateWidget *widget = new DateWidget(grid);
+            layout->addWidget(widget, i, 1);
             widget->setDate(values[i].toInt());
             dateWidgets.append(widget);
         }
         else if (type == TIME) {
             TimeWidget *widget = new TimeWidget(grid);
+            layout->addWidget(widget, i, 1);
             int defaultTime = values[i].toInt();
             if (defaultTime == 0) {
                 defaultTime = -2;
@@ -207,6 +219,7 @@ void RowEditor::addContent(int rowId)
         }
         else if (type >= FIRST_ENUM) {
             QComboBox *combo = new QComboBox(FALSE, grid);
+            layout->addWidget(combo, i, 1);
             QStringList options = db->listEnumOptions(type);
             combo->insertStringList(options);
             int index = options.findIndex(values[i]);
@@ -214,11 +227,15 @@ void RowEditor::addContent(int rowId)
             comboBoxes.append(combo);
         }
         else {
-            lineEdits.append(new QLineEdit(values[i], grid));
+            DynamicEdit *edit = new DynamicEdit(grid);
+            layout->addWidget(edit, i, 1);
+            edit->setText(values[i]);
+            dynamicEdits.append(edit);
         }
     }
-    new QWidget(grid);
-    new QWidget(grid);
+    layout->addWidget(new QWidget(grid), count, 0);
+    layout->addWidget(new QWidget(grid), count, 1);
+    layout->setRowStretch(count, 1);
 
 #if defined(DESKTOP)
     QHBox *hbox = new QHBox(this);

@@ -19,20 +19,20 @@
 
 class Database;
 class DateWidget;
+class DynamicEdit;
 class QCheckBox;
 class QComboBox;
-class QLineEdit;
 class NoteButton;
 class NumberWidget;
 class TimeWidget;
 
 typedef QValueList<QCheckBox*> CheckBoxList;
-typedef QValueList<QLineEdit*> LineEditList;
 typedef QValueList<NoteButton*> NoteButtonList;
 typedef QValueList<DateWidget*> DateWidgetList;
 typedef QValueList<TimeWidget*> TimeWidgetList;
 typedef QValueList<NumberWidget*> NumberWidgetList;
 typedef QValueList<QComboBox*> ComboBoxList;
+typedef QValueList<DynamicEdit*> DynamicEditList;
 
 class RowEditor: public QDialog
 {
@@ -50,13 +50,13 @@ private:
     Database *db;
     QStringList colNames;
     int *colTypes;
-    LineEditList lineEdits;
     CheckBoxList checkBoxes;
     NoteButtonList noteButtons;
     DateWidgetList dateWidgets;
     TimeWidgetList timeWidgets;
     NumberWidgetList numberWidgets;
     ComboBoxList comboBoxes;
+    DynamicEditList dynamicEdits;
 };
 
 #endif

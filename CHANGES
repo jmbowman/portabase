@@ -1,3 +1,12 @@
+2003-05-29  JMB  Auto-height multi-line string entry fields
+
+    Text boxes for string fields in the row editor now accept multiple
+    lines of input; pressing return causes the height of the input field
+    to grow by one row.  This is basically the way that text entry fields
+    work in many PalmOS and Psion applications, except that word wrap isn't
+    enabled (Qt doesn't estimate the width of text lines accurately enough
+    to reliably calculate the number of lines needed).
+
 2003-05-28  JMB  Enum option sorting, import, and export
 
     Added a button to the enum editor which sorts the enum's options in

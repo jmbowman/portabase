@@ -42,6 +42,8 @@ PortaBase is a small database program for creating, browsing, and editing custom
   <li>Command-line format conversions (to and from XML, to and from CSV, from MobileDB)</li>
   <li>Unicode support</li>
   <li>Pick any available font to use throughout the application</li>
+  <li>User-specified alternating row background colors</li>
+  <li>Simple calculator widget for entering numeric data</li>
 </ul>
 <a name="file"><b>2)File selector</b></a><br>
 Unless the program was launched by clicking on a PortaBase file in the Documents tab, the first screen shown will be the file selector.  You may open any listed file by clicking on it (in the Zaurus version), or choose one of the following options from the "File" menu or toolbar:<br>
@@ -90,6 +92,12 @@ This dialog lets you define the name and list of options for an enum column type
 <li><i>Delete</i> - Delete the currently selected option.  A dialog will ask you to pick the value to use wherever this option was being used.</li>
 <li><i>Up</i> - Move the currently selected option up one position in the list (and hence in the selection droplist as well).</li>
 <li><i>Down</i> - Move the currently selected option down one position in the list (and hence in the selection droplist as well).</li>
+</ul>
+Just below the enum name are more buttons which allow you to change the list of options:<br>
+<ul>
+<li><i>Sort</i> - Sort the options in alphabetical order.  Click the button again to reverse the sorting order.</li>
+<li><i>Import</i> - Add options from a text file; this file should have each option on a separate line.  Options in the file which are already in the enum will not be duplicated.</li>
+<li><i>Export</i> - Create a text file listing the current enum options, one on each line.</li>
 </ul>
 Click "OK" to accept any changes that were made or "X"/"Cancel" to leave the options unchanged (or cancel adding a new enum).<br>
 <br>
@@ -177,7 +185,13 @@ There is a toolbar of four buttons that provide quick access to commonly used op
 <li><i>Delete</i> - Same as "Delete" in the <a href="#rowmenu">Row menu</a>.</li>
 </ul>
 <a name="rowedit"><b>8)Row editor</b></a><br>
-The row editor is shown whenever a row of data is added or edited.  It has one row for each column in the database; on the left is the name of the column, and on the right is its current value.  When adding a new row of data, the default values are shown; when editing an existing row of data, the current values are shown.  To edit the value of a date field, click the button to the left of the current value display; this launches a calendar widget which allows you to select a new date.  After editing the values as desired, click "OK" to accept the currently displayed values, or "X"/"Cancel" to cancel the row addition (if adding a row) or leave the current values unchanged (if editing a row).<br>
+The row editor is shown whenever a row of data is added or edited.  It has one row for each column in the database; on the left is the name of the column, and on the right is its current value.  When adding a new row of data, the default values are shown; when editing an existing row of data, the current values are shown.  Some comments about editing certain data types:<br>
+<ul>
+<li>String fields may contain multiple lines of text; press return to add a line to the entry field.</li>
+<li>To edit the value of a date field, click the button to the left of the current value display; this launches a calendar widget which allows you to select a new date.</li>
+<li>To the right of each integer and decimal entry field is a button which launches a simple calculator you can use as a keypad or to calculate the number to be entered; clicking "OK" puts the current value into the entry field.</li>
+</ul>
+After editing the values as desired, click "OK" to accept the currently displayed values, or "X"/"Cancel" to cancel the row addition (if adding a row) or leave the current values unchanged (if editing a row).<br>
 <br>
 <a name="rowview"><b>9)Row viewer</b></a><br>
 The row viewer is a dialog designed to conveniently see all of the data for one row at a time.  Like the row editor, it has the column labels on the left and values on the right.  But the values are not editable, and they wrap so you don't have to scroll horizontally to see everything.  The complete content of note fields is shown as well, instead of just the first few words.  Pressing the left and right arrows at the bottom of the screen or the left and right directions on the direction pad allows you to navigate between rows in the current view.  Pressing the edit button at the bottom of the screen lets you launch the row editor for the current row; if you click "OK" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer.<br>
@@ -224,6 +238,7 @@ This dialog allows you to set your preferences for the PortaBase application.  I
 <ul>
 <li><a href="#fontprefs">Font</a></li>
 <li><a href="#generalprefs">General</a></li>
+<li><a href="#rowcolors">Row Colors</a></li>
 <li><a href="#datetimeprefs">Date and Time</a> (PC versions only)</li>
 </ul>
 <a name="fontprefs"><i>Font</i></a><br>
@@ -237,6 +252,9 @@ The "General" section contains the following options:<br>
 <li><i>Show Seconds</i> - This lets you choose whether or not to display the number of seconds for time columns in the data viewer, row viewer, etc.</li>
 <li><i>Wrap Notes</i> - Checking this enables automatic wrapping of text in the Note editor/viewer, avoiding the need to manually enter linebreaks.  By default it wraps only at whitespace, but you can change the droplist value to force wrapping at the end of lines whether spaces are present or not.  (This is particularly useful for languages like Japanese which tend not to use spaces.)</li>
 </ul>
+<a name="rowcolors"><i>Row Colors</i></a><br>
+This section contains two buttons which allow you to choose the colors which will be used for the backgrounds of rows in the data viewer, columns editor, view editor, and sorting editor.  Each button shows one of the current colors; clicking on one launches a color selection dialog in which you can pick a different color to use.
+<br>
 <a name="datetimeprefs"><i>Date and Time</i></a><br>
 This section is present only in the PC versions of PortaBase, because on the Zaurus PortaBase uses the system date and time settings.  But since there is not a good cross-platform way to retrieve this information from desktop PCs, the following must be specified:<br>
 <ul>

@@ -189,13 +189,14 @@ void ViewDisplay::updateTable()
         }
         QStringList data = view->getRow(index);
         int count = data.count();
+        QRegExp linefeed("\n");
         for (int j = 0; j < count; j++) {
             int type = types[j];
             if (type == BOOLEAN) {
                 item->setPixmap(j, db->getCheckBoxPixmap(data[j].toInt()));
             }
-            else if (type == NOTE) {
-                item->setText(j, data[j].replace(QRegExp("\n"), " "));
+            else if (type == NOTE || type == STRING) {
+                item->setText(j, data[j].replace(linefeed, " "));
             }
             else {
                 item->setText(j, data[j]);
