@@ -1,10 +1,16 @@
-2002-11-19  JMB  Better precision on decimal fields
+2002-11-19  JMB  Better precision on decimal fields, "default defaults"
 
     In previous releases, decimal fields were only shown with six
     significant digits.  Now the entered string representation is stored
     along with the floating point number obtained from it, so when browsing
     the data or editing rows, these values are displayed exactly as they
     were entered.
+
+    When adding a new column and you pick either Integer or Decimal as the
+    type, the current content (if any) of the default value entry box is
+    examined; if not valid for the new type it is replaced with 0 (for
+    integers) or 0.0 (for decimals).  This way you aren't forced to enter
+    a default value if you don't care what it is.
 
 2002-11-17  JMB  Font selection, empty date fields, delete confirmations,
                  delete rows in filter

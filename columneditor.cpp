@@ -75,18 +75,7 @@ int ColumnEditor::type()
 void ColumnEditor::setType(int newType)
 {
     typeBox->setCurrentItem(newType);
-    if (newType == BOOLEAN) {
-        defaultStack->raiseWidget(defaultCheck);
-    }
-    else if (newType == NOTE) {
-        defaultStack->raiseWidget(defaultNote);
-    }
-    else if (newType == DATE) {
-        defaultStack->raiseWidget(defaultDate);
-    }
-    else {
-        defaultStack->raiseWidget(defaultLine);
-    }
+    updateDefaultWidget(newType);
 }
 
 QString ColumnEditor::defaultValue()
@@ -169,5 +158,19 @@ void ColumnEditor::updateDefaultWidget(int newType)
     }
     else {
         defaultStack->raiseWidget(defaultLine);
+        if (newType == INTEGER) {
+            bool ok;
+            defaultLine->text().toInt(&ok);
+            if (!ok) {
+                defaultLine->setText("0");
+            }
+        }
+        else if (newType == FLOAT) {
+            bool ok;
+            defaultLine->text().toDouble(&ok);
+            if (!ok) {
+                defaultLine->setText("0.0");
+            }
+        }
     }
 }
