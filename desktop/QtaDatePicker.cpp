@@ -1,9 +1,9 @@
 //
 //   Source file for the Qt Date Picker add-on
 //
-#include "desktop/config.h"
-#include "desktop/resource.h"
-#include "desktop/QtaDatePicker.h"
+#include "config.h"
+#include "resource.h"
+#include "QtaDatePicker.h"
 
 #include <qbrush.h>
 #include <qcolor.h>
