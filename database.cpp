@@ -947,6 +947,11 @@ void Database::exportToCSV(QString filename)
     f.close();
 }
 
+bool Database::isNoneDate(QDate &date)
+{
+    return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
+}
+
 QString Database::dateToString(int date)
 {
     int y = date / 10000;
@@ -958,6 +963,9 @@ QString Database::dateToString(int date)
 
 QString Database::dateToString(QDate &date)
 {
+    if (isNoneDate(date)) {
+        return "";
+    }
     int *parts = new int[3];
     if (dateOrder == DateFormat::YearMonthDay) {
         parts[0] = date.year();

@@ -28,6 +28,8 @@ DateWidget::DateWidget(QWidget *parent, const char *name, WFlags f)
     int height = button->height();
     button->setMaximumWidth(height);
     setMaximumHeight(height);
+    noneButton = new QPushButton(tr("None"), this);
+    connect(noneButton, SIGNAL(clicked()), this, SLOT(setToNone()));
 }
 
 DateWidget::~DateWidget()
@@ -52,21 +54,48 @@ void DateWidget::setDate(int date)
         int d = date - y * 10000 - m * 100;
         dateObj.setYMD(y, m, d);
     }
-    display->setText(dateObj.toString());
+    updateDisplay();
 }
 
 void DateWidget::setDate(QDate &date)
 {
     dateObj.setYMD(date.year(), date.month(), date.day());
-    display->setText(dateObj.toString());
+    updateDisplay();
+}
+
+void DateWidget::updateDisplay()
+{
+    if (isNoneDate(dateObj)) {
+        display->setText("               ");
+        noneButton->setEnabled(FALSE);
+    }
+    else {
+        display->setText(dateObj.toString());
+        noneButton->setEnabled(TRUE);
+    }
+}
+
+bool DateWidget::isNoneDate(QDate &date)
+{
+    return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
+}
+
+void DateWidget::setToNone()
+{
+    dateObj.setYMD(1752, 9, 14);
+    updateDisplay();
 }
 
 void DateWidget::launchSelector()
 {
     QDate tempDate(dateObj.year(), dateObj.month(), dateObj.day());
+    if (isNoneDate(tempDate)) {
+        QDate today = QDate::currentDate();
+        tempDate.setYMD(today.year(), today.month(), today.day());
+    }
     QDatePicker selector(&tempDate);
     if (selector.exec()) {
         dateObj.setYMD(tempDate.year(), tempDate.month(), tempDate.day());
-        display->setText(dateObj.toString());
+        updateDisplay();
     }
 }

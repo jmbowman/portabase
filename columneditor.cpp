@@ -46,7 +46,9 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     defaultCheck = new QCheckBox(defaultStack);
     defaultLine = new QLineEdit(defaultStack);
     defaultNote = new NoteButton(tr("Default Note"), defaultStack);
-    defaultDate = new QLabel("  " + tr("Today"), defaultStack);
+    defaultDate = new QComboBox(FALSE, defaultStack);
+    defaultDate->insertItem(tr("Today"));
+    defaultDate->insertItem(tr("None"));
     defaultStack->raiseWidget(defaultLine);
 }
 
@@ -97,7 +99,13 @@ QString ColumnEditor::defaultValue()
         return defaultNote->content();
     }
     else if (colType == DATE) {
-        return QString::number(TODAY);
+        int selection = defaultDate->currentItem();
+        if (selection == TODAY) {
+            return QString::number(0);
+        }
+        else {
+            return QString::number(17520914);
+        }
     }
     else {
         return defaultLine->text();
@@ -116,21 +124,30 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         }
         defaultLine->setText("");
         defaultNote->setContent("");
+        defaultDate->setCurrentItem(0);
     }
     else if (colType == NOTE) {
         defaultLine->setText("");
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent(newDefault);
+        defaultDate->setCurrentItem(0);
     }
     else if (colType == DATE) {
         defaultLine->setText("");
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent("");
+        if (newDefault == "0") {
+            defaultDate->setCurrentItem(0);
+        }
+        else {
+            defaultDate->setCurrentItem(1);
+        }
     }
     else {
         defaultLine->setText(newDefault);
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent("");
+        defaultDate->setCurrentItem(0);
     }
 }
 

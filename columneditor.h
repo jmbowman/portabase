@@ -46,7 +46,7 @@ private:
     QCheckBox *defaultCheck;
     QLineEdit *defaultLine;
     NoteButton *defaultNote;
-    QLabel *defaultDate;
+    QComboBox *defaultDate;
 };
 
 #endif

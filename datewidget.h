@@ -17,6 +17,7 @@
 
 class Database;
 class QLabel;
+class QPushButton;
 
 class DateWidget: public QHBox
 {
@@ -31,10 +32,16 @@ public:
 
 private slots:
     void launchSelector();
+    void setToNone();
+
+private:
+    bool isNoneDate(QDate &date);
+    void updateDisplay();
 
 private:
     QDate dateObj;
     QLabel *display;
+    QPushButton *noneButton;
 };
 
 #endif

@@ -23,6 +23,7 @@
 
 // default date codes
 #define TODAY 0
+#define NONE 1
 
 typedef QValueList<int> IntList;
 

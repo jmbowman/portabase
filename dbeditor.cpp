@@ -310,7 +310,12 @@ void DBEditor::updateTable()
             last->setPixmap(2, PortaBase::getNotePixmap());
         }
         else if (type == DATE) {
-            last->setText(2, tr("Today"));
+            if (defaultVal == "0") {
+                last->setText(2, tr("Today"));
+            }
+            else {
+                last->setText(2, tr("None"));
+            }
         }
     }
 }

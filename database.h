@@ -84,6 +84,7 @@ public:
     void deleteRow(int id);
     void commit();
     QPixmap getCheckBoxPixmap(int checked);
+    bool isNoneDate(QDate &date);
     QString dateToString(int date);
     QString dateToString(QDate &date);
     QString importFromCSV(QString filename);
