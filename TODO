@@ -1,0 +1,11 @@
+Multiple column sorting
+Filtering/Searching
+Date column type
+Date and time column type
+Enumeration column type
+Multiline text column type (separate input/view dialog)
+File properties dialog (size, rows, etc.)
+Cut, Copy, and Paste in text fields
+Disable save icon when file is unchanged (coded, need icon with better
+   disabled state)
+Alternate-row shading

@@ -1,0 +1,43 @@
+PortaBase 1.0 (October 2002)
+----------------------------
+PortaBase (portable database) is a personal database application written for
+the Linux-based models of Sharp Zaurus PDA (and should work on any other Linux
+PDA using the Qtopia environment.)
+
+The main features PortaBase currently has are:
+- One data table per file
+- String, Integer, Decimal, and Boolean column types
+- Add, edit, and delete rows of data
+- Custom data views (subsets of the columns in any order)
+- Sort the rows by any column in ascending or descending order
+- Page navigation buttons, with a custom number of rows per page
+- Add, delete, rearrange, and rename columns at any time
+- Specify default values for columns
+- View summary statistics for columns (total, average, min, max, etc.)
+- Import data from CSV files
+- Export data to CSV files
+
+See the help file (help/portabase.html) for more information on features and
+usage.  This help file is also the online help for the application, available
+by clicking the "?" button at the top right of any screen in PortaBase.
+
+Technical Info
+--------------
+PortaBase is written in C++, using the Qt and Qtopia libraries for GUI widgets,
+data structures, and communication with the PDA environment.  It uses the
+MetaKit (http://www.equi4.com/metakit) embedded database library for data
+storage and manipulation.
+
+License
+-------
+PortaBase is is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
+
+Web site
+--------
+http://portabase.sourceforge.net
+
+------------------------------------------------------------------------------
+-- Jeremy Bowman <jmbowman@alum.mit.edu>

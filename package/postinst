@@ -1,0 +1,73 @@
+#!/bin/sh
+
+NEWTYPE=application/portabase
+EXT=pob
+
+T=${NEWTYPE%/*}
+S=${NEWTYPE#*/}
+
+grep -w $EXT $QPEDIR/etc/mime.types |
+(
+    read TYPE EXTS
+    if [ -z "$TYPE" ]
+    then
+        if grep -q "^$NEWTYPE[  ]" $QPEDIR/etc/mime.types || grep -q "^$NEWTYPE$" $QPEDIR/etc/mime.types
+        then
+            if sed -e '/^'$T"\\/"$S'[   ]/ s/$/ '$EXT'/' <$QPEDIR/etc/mime.types >$QPEDIR/etc/mime.types.new ||
+               sed -e '/^'$T"\\/"$S'$/ s/$/             '$EXT'/' <$QPEDIR/etc/mime.types >$QPEDIR/etc/mime.types.new
+            then
+                mv $QPEDIR/etc/mime.types.new $QPEDIR/etc/mime.types
+                exit 0
+            else
+                echo >&2 "Internal MIME type update error"
+                exit 1
+            fi
+        else
+            echo "$NEWTYPE              $EXT" >>$QPEDIR/etc/mime.types
+            exit 0
+        fi
+    elif [ "$TYPE" = "$NEWTYPE" ]
+    then
+        #echo "Already done"
+        exit 0
+    else
+        echo >&2 "$EXT already assigned to $TYPE"
+        exit 1
+    fi
+)
+
+NEWTYPE=text/x-csv
+EXT=csv
+
+T=${NEWTYPE%/*}
+S=${NEWTYPE#*/}
+
+grep -w $EXT $QPEDIR/etc/mime.types |
+(
+    read TYPE EXTS
+    if [ -z "$TYPE" ]
+    then
+        if grep -q "^$NEWTYPE[  ]" $QPEDIR/etc/mime.types || grep -q "^$NEWTYPE$" $QPEDIR/etc/mime.types
+        then
+            if sed -e '/^'$T"\\/"$S'[   ]/ s/$/ '$EXT'/' <$QPEDIR/etc/mime.types >$QPEDIR/etc/mime.types.new ||
+               sed -e '/^'$T"\\/"$S'$/ s/$/             '$EXT'/' <$QPEDIR/etc/mime.types >$QPEDIR/etc/mime.types.new
+            then
+                mv $QPEDIR/etc/mime.types.new $QPEDIR/etc/mime.types
+                exit 0
+            else
+                echo >&2 "Internal MIME type update error"
+                exit 1
+            fi
+        else
+            echo "$NEWTYPE              $EXT" >>$QPEDIR/etc/mime.types
+            exit 0
+        fi
+    elif [ "$TYPE" = "$NEWTYPE" ]
+    then
+        #echo "Already done"
+        exit 0
+    else
+        echo >&2 "$EXT already assigned to $TYPE"
+        exit 1
+    fi
+)

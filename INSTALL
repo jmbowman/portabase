@@ -1,0 +1,64 @@
+Development Environment
+-----------------------
+To compile PortaBase (or do any other C++ development for the Zaurus), the
+standard Qtopia development environment is used.  Details can be found at:
+
+http://www.zauruszone.farplanet.net/howtos/linux_compiler_setup_howto.shtml
+
+MetaKit Compilation
+-------------------
+To compile PortaBase, MetaKit must be compiled first.  The latest official
+release (2.4.7 at time of writing) has a minor bug when compiled for the Arm
+processor used by the Zaurus; you therefore need the latest version from CVS
+(this version of PortaBase was built using the 2002/10/15 CVS content.)
+Instructions on accessing the MetaKit CVS repository are available on the
+MetaKit homepage (http://www.equi4.com/metakit).
+
+To build MetaKit for the desktop test environment, run dev-x86-qpe.sh and then
+follow the MetaKit installation instructions (in the README file from CVS).
+Then copy the created libmk4.so (probably in /usr/local/lib unless you
+specified somewhere else) to /opt/Qtopia/lib/ so it can be found by PortaBase
+at runtime.
+
+To build MetaKit for the Zaurus, use the instructions for the test environment
+(after cleaning out the results of that build, or from a different copy of the source directory) but with the following changes:
+
+- Run dev-arm-qpe.sh instead of dev-x86-qpe.sh.
+- Instead of running ../unix/configure, run:
+
+NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ../unix/configure --prefix=/output/dir --host=arm-linux
+
+Replace "/output/dir" with the directory you want the build results to be placed in (probably not /usr/local this time).
+- Copy libmk4.so to /opt/Qtopia/sharp/lib instead of /opt/Qtopia/lib.
+- Run "arm-linux-strip libmk4.so" to remove debugging symbols and such in order
+to reduce the size of the library.
+
+PortaBase Compilation
+---------------------
+After compiling MetaKit as described above, PortaBase can be compiled in the
+usual manner for Qtopia applications.  Use tmake on portabase.pro as
+described in the compiler setup HOWTO mentioned above.  As with the MetaKit
+library file, arm-linux-strip should be run on the Arm version of the
+"portabase" executable in order to reduce its size.
+
+Package Building
+----------------
+To create ".ipk" files for installation on the Zaurus, create the following
+directory hierarchy as root in a directory of your choice:
+
+/libmetakit1/CONTROL/control
+/libmetakit1/opt/QtPalmtop/lib/libmk4.so
+/portabase/CONTROL/control
+/portabase/CONTROL/postinst
+/portabase/opt/QtPalmtop/apps/Applications/portabase.desktop
+/portabase/opt/QtPalmtop/bin/portabase
+/portabase/opt/QtPalmtop/help/html/portabase.html
+/portabase/opt/QtPalmtop/pics/PortaBase.png
+/portabase/opt/QtPalmtop/pics/portabase/checked.png
+/portabase/opt/QtPalmtop/pics/portabase/save.png
+/portabase/opt/QtPalmtop/pics/portabase/unchecked.png
+
+(where libmk4.so and portabase are the files you compiled and the "control"
+file under libmetakit1/CONTROL was copied from libmetakit1_control).  Finally,
+run ipkg-build on the libmetakit1 directory, then the portabase directory; this
+will create the desired .ipk files.

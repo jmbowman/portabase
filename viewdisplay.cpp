@@ -1,0 +1,348 @@
+/*
+ * viewdisplay.cpp
+ *
+ * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
+
+#include <math.h>
+
+#include <qhbox.h>
+#include <qhbuttongroup.h>
+#include <qheader.h>
+#include <qlabel.h>
+#include <qlistview.h>
+#include <qmessagebox.h>
+#include <qspinbox.h>
+#include <qstringlist.h>
+#include <qtoolbutton.h>
+#include <qvbox.h>
+#include <qwidgetstack.h>
+#include "database.h"
+#include "datatypes.h"
+#include "portabase.h"
+#include "roweditor.h"
+#include "view.h"
+#include "viewdisplay.h"
+
+ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
+    WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0)
+{
+    timer.start();
+    stack = new QWidgetStack(this);
+    setStretchFactor(stack, 1);
+    noResults = new QLabel(tr("No results"), stack);
+    table = new QListView(stack);
+    table->setAllColumnsShowFocus(TRUE);
+    table->setSorting(-1);
+    connect(table, SIGNAL(selectionChanged()), this, SLOT(rowSelected()));
+
+    QHeader *header = table->header();
+    header->setClickEnabled(TRUE);
+    header->setMovingEnabled(FALSE);
+    connect(header, SIGNAL(pressed(int)), this, SLOT(headerPressed(int)));
+    connect(header, SIGNAL(released(int)), this, SLOT(headerReleased(int)));
+    connect(header, SIGNAL(sizeChange(int, int, int)),
+            this, SLOT(columnResized(int, int, int)));
+    stack->raiseWidget(noResults);
+
+    QHBox *hbox = new QHBox(this);
+    rowsPerPage = new QSpinBox(hbox);
+    rowsPerPage->setRange(1, 999);
+    rowsPerPage->setValue(13);
+    connect(rowsPerPage, SIGNAL(valueChanged(int)), this,
+            SLOT(updateRowsPerPage(int)));
+
+    prevButton = new QToolButton(LeftArrow, hbox);
+    connect(prevButton, SIGNAL(clicked()), this, SLOT(previousPages()));
+    buttonGroup = new QHButtonGroup(hbox);
+    buttonGroup->hide();
+    buttonGroup->setExclusive(TRUE);
+    for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
+        pageButtons[i] = new QToolButton(hbox);
+        pageButtons[i]->setToggleButton(TRUE);
+        pageButtons[i]->setUsesTextLabel(TRUE);
+        buttonGroup->insert(pageButtons[i], i);
+    }
+    connect(buttonGroup, SIGNAL(clicked(int)), this, SLOT(changePage(int)));
+    nextButton = new QToolButton(RightArrow, hbox);
+    connect(nextButton, SIGNAL(clicked()), this, SLOT(nextPages()));
+
+    currentPage = 1;
+    firstPageButton = 1;
+}
+
+ViewDisplay::~ViewDisplay()
+{
+
+}
+
+void ViewDisplay::setEdited(bool y)
+{
+    portabase->setEdited(y);
+}
+
+void ViewDisplay::updateRowsPerPage(int rpp)
+{
+    if (rpp < 1) {
+        rowsPerPage->setValue(1);
+    }
+    currentPage = 1;
+    firstPageButton = 1;
+    updateTable();
+    updateButtons();
+    setEdited(TRUE);
+}
+
+void ViewDisplay::changePage(int id)
+{
+    int newPage = firstPageButton + id;
+    if (newPage == currentPage) {
+        return;
+    }
+    currentPage = newPage;
+    updateTable();
+}
+
+void ViewDisplay::nextPages()
+{
+    firstPageButton += PAGE_BUTTON_COUNT;
+    currentPage = firstPageButton;
+    updateTable();
+    updateButtons();
+}
+
+void ViewDisplay::previousPages()
+{
+    firstPageButton -= PAGE_BUTTON_COUNT;
+    firstPageButton = QMAX(firstPageButton, 1);
+    if (currentPage >= firstPageButton + PAGE_BUTTON_COUNT) {
+        currentPage = firstPageButton;
+    }
+    updateTable();
+    updateButtons();
+}
+
+void ViewDisplay::updateTable()
+{
+    view->prepareData();
+    int rpp = rowsPerPage->value();
+    int index = (currentPage - 1) * rpp;
+    int rowCount = view->getRowCount();
+    int rows = QMIN(rpp, rowCount - index);
+    if (rows <= 0 && rowCount > 0) {
+        // past end of rows due to deletion or filtering, move to last page
+        int pageCount = rowCount / rpp;
+        if (rowCount > pageCount * rpp) {
+            pageCount++;
+        }
+        currentPage = pageCount;
+        index = (currentPage - 1) * rpp;
+        rows = QMIN(rpp, rowCount - index);
+        if (firstPageButton > currentPage) {
+            firstPageButton -= PAGE_BUTTON_COUNT;
+            firstPageButton = QMAX(firstPageButton, 1);
+        }
+    }
+    table->clear();
+    int *types = view->getColTypes();
+    QListViewItem *item = 0;
+    for (int i = 0; i < rows; i++) {
+        if (i == 0) {
+            item = new QListViewItem(table);
+        }
+        else {
+            item = new QListViewItem(table, item);
+        }
+        QStringList data = view->getRow(index);
+        int count = data.count();
+        for (int j = 0; j < count; j++) {
+            if (types[j] == BOOLEAN) {
+                item->setPixmap(j, db->getCheckBoxPixmap(data[j].toInt()));
+            }
+            else {
+                item->setText(j, data[j]);
+            }
+        }
+        index++;
+    }
+    if (rows > 0) {
+        stack->raiseWidget(table);
+    }
+    else {
+        stack->raiseWidget(noResults);
+    }
+    portabase->setRowSelected(FALSE);
+}
+
+void ViewDisplay::updateButtons()
+{
+    int rpp = rowsPerPage->value();
+    double totalPages = ceil((double)(view->getRowCount()) / (double)rpp);
+    prevButton->setEnabled(firstPageButton > 1);
+    nextButton->setEnabled(totalPages >= firstPageButton + PAGE_BUTTON_COUNT);
+    int page = firstPageButton;
+    for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
+        pageButtons[i]->setOn(page == currentPage);
+        pageButtons[i]->setEnabled(totalPages >= page);
+        pageButtons[i]->setTextLabel(QString::number(page), FALSE);
+        page++;
+    }
+}
+
+void ViewDisplay::setDatabase(Database *dbase)
+{
+    closeView();
+    db = dbase;
+    currentPage = 1;
+    firstPageButton = 1;
+    setView(db->currentView());
+    setEdited(FALSE);
+}
+
+void ViewDisplay::setView(QString name)
+{
+    closeView();
+    table->clear();
+    int numCols = table->columns();
+    for (int i = 0; i < numCols; i++) {
+        table->removeColumn(0);
+    }
+    view = db->getView(name);
+    QStringList colNames = view->getColNames();
+    int count = colNames.count();
+    for (int i = 0; i < count; i++) {
+        table->addColumn(colNames[i], view->getColWidth(i));
+        table->setColumnWidthMode(i, QListView::Manual);
+    }
+    rowsPerPage->setValue(view->getRowsPerPage());
+    updateTable();
+    updateButtons();
+}
+
+void ViewDisplay::closeView()
+{
+    if (view) {
+        saveViewSettings();
+        view = 0;
+    }
+}
+
+void ViewDisplay::saveViewSettings()
+{
+    view->saveColWidths();
+    view->setRowsPerPage(rowsPerPage->value());
+}
+
+void ViewDisplay::addRow()
+{
+    RowEditor rowEditor;
+    if (rowEditor.edit(db, -1)) {
+        updateTable();
+        updateButtons();
+        setEdited(TRUE);
+    }
+}
+
+void ViewDisplay::editRow()
+{
+    int rowId = selectedRowId();
+    if (rowId != -1) {
+        RowEditor rowEditor;
+        if (rowEditor.edit(db, rowId)) {
+            updateTable();
+            updateButtons();
+            setEdited(TRUE);
+        }
+    }
+}
+
+void ViewDisplay::deleteRow()
+{
+    int rowId = selectedRowId();
+    if (rowId != -1) {
+        db->deleteRow(rowId);
+        updateTable();
+        updateButtons();
+        setEdited(TRUE);
+    }
+}
+
+int ViewDisplay::selectedRowId()
+{
+    QListViewItem *selected = table->selectedItem();
+    if (!selected) {
+        return -1;
+    }
+    int rpp = rowsPerPage->value();
+    int index = 0;
+    QListViewItem *item = table->firstChild();
+    if (item != selected) {
+        QListViewItem *next = item->nextSibling();
+        while (next) {
+            index++;
+            if (next == selected) {
+                break;
+            }
+            next = next->nextSibling();
+        }
+    }
+    int startIndex = (currentPage - 1) * rpp;
+    return view->getId(startIndex + index);
+}
+
+void ViewDisplay::rowSelected()
+{
+    portabase->setRowSelected(TRUE);
+}
+
+void ViewDisplay::headerPressed(int column)
+{
+    pressedIndex = column;
+    timer.restart();
+}
+
+void ViewDisplay::headerReleased(int column)
+{
+    if (column != pressedIndex) {
+        return;
+    }
+    if (timer.elapsed() > 1000) {
+        showStatistics(column);
+    }
+    else {
+        sort(column);
+    }
+}
+
+void ViewDisplay::columnResized(int column, int oldWidth, int newWidth)
+{
+    view->setColWidth(column, newWidth);
+    setEdited(TRUE);
+}
+
+void ViewDisplay::sort(int column)
+{
+    view->sort(column);
+    updateTable();
+}
+
+void ViewDisplay::showStatistics(int column)
+{
+    QStringList stats = view->getStatistics(column);
+    QString content("<qt><center><b>");
+    content += table->header()->label(column) + "</b></center>";
+    int count = stats.count();
+    for (int i = 0; i < count; i++) {
+        content += stats[i] + "<br/>";
+    }
+    content += "</qt>";
+    QMessageBox mb(tr("PortaBase"), content, QMessageBox::NoIcon,
+                   QMessageBox::Ok, QMessageBox::NoButton,
+                   QMessageBox::NoButton, this);
+    mb.exec();
+}

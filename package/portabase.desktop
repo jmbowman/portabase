@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=A Personal Database Program
+Exec=portabase
+Icon=PortaBase
+Type=Application
+MimeType=application/portabase
+Name=PortaBase
+CanFastload=1

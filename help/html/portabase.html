@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>PortaBase 1.0</title>
+</head>
+<body>
+
+<div align="center"><h3>PortaBase 1.0</h3> - A portable database -</div>
+<br>
+<a href="#intro">1)Introduction</a><br>
+<a href="#file">2)File selector</a><br>
+<a href="#columns">3)Columns editor</a><br>
+<a href="#viewedit">4)View editor</a><br>
+<a href="#viewer">5)Data viewer</a><br>
+<a href="#rowedit">6)Row editor</a><br>
+<a href="#import">7)Data import</a><br>
+<a href="#export">8)Data export</a><br>
+<br>
+<br>
+<a name="intro"><b>1)Introduction</b></a><br>
+PortaBase is a small database program for creating, browsing, and editing
+custom tables of data.  Typical uses are media inventories, reference
+charts, etc.  Notable features include:<br>
+<ul>
+  <li>String, Integer, Decimal, and Boolean column types</li>
+  <li>Custom data views (subsets of the columns in any order)</li>
+  <li>Sort the rows by any column in ascending or descending order</li>
+  <li>Page navigation buttons, with custom number of rows per page</li>
+  <li>Add, delete, rearrange, and rename columns at any time</li>
+  <li>Specify default values for columns</li>
+  <li>View summary statistics for columns (total, average, min, max, etc.)</li>
+  <li>Import data from CSV files</li>
+  <li>Export data to CSV files</li>
+</ul>
+<a name="file"><b>2)File selector</b></a><br>
+Unless the program was launched by clicking on a PortaBase file in the
+Documents tab, the first screen shown will be the file selector.  The
+"View" menu in the upper left allows you to select which category of
+files to view.  You may proceed by either clicking on a file to select
+it or by clicking the "New" icon in the upper right in order to create
+a new PortaBase file.<br>
+<br>
+<a name="columns"><b>3)Columns editor</b></a><br>
+Each PortaBase file contains one table of a user-defined format.  The
+format of this table is determined by a sequence of data columns,
+each of which has its own name, data type, and default value.
+When creating a new PortaBase file, this dialog is shown so the data
+columns can be defined.  The columns of an existing file can also be
+edited at any time using this dialog by selecting the "Edit Columns"
+item in the "File" menu of the <a href="#viewer">data viewer</a>.<br>
+<br>
+The current column definitions are displayed as rows in a list, in
+the order in which they appear in the <a href="#rowedit">row editor</a>.
+These column definitions are manipulated using the buttons at the bottom
+of the dialog:<br>
+<ul>
+<li><i>Add</i> - Create a new column definition at the end of the
+list.  A small dialog is shown which allows you to enter the name,
+data type, and default value of the new column.  The default value
+is what will be entered for this column in any already existing data
+rows, and it will appear in the row editor when adding new rows as
+well.</li>
+<li><i>Edit</i> - Edit the currently selected column definition.
+Note that the data type cannot be changed.  If the default value
+is changed, the new default will appear in the row editor when
+adding new rows; existing rows are unaffected.</li>
+<li><i>Delete</i> - Delete the currently selected column definition.
+All data stored in that column will be lost.</li>
+<li><i>Up</i> - Move the currently selected column up one position
+in the list (and hence in the row editor as well).</li>
+<li><i>Down</i> - Move the currently selected column down one position
+in the list (and hence in the row editor as well).</li>
+</ul>
+None of the changes made to the table format are applied until the
+"OK" button is pressed; if the "X" button is pressed instead, the
+changes are discarded and the file format is left as it was.  If the
+"X" button is pressed while defining the columns of a new file, the
+file creation is aborted; otherwise, pressing either of the dialog
+closing buttons takes you to the <a href="#viewer">data viewer.</a><br>
+<br>
+<a name="viewedit"><b>4)View editor</b></a><br>
+Whenever you browse a database's content in the <a href="#viewer">data
+viewer</a>, you are looking at one "view" of the data.  A view is a
+subset of the columns in the database, displayed in a particular order
+and with specified display widths.  Each database has a default "All
+Columns" view which shows all the columns in the database in the same
+order as they appear in the <a href="rowedit">row editor</a>.<br>
+<br>
+Views are defined using the view editor dialog.  At the top of the
+dialog is a text box containing the name of the view; changing this
+renames the view.  Below that is a table showing the names of all the
+columns in the database, with a checkbox next to each indicating whether
+or not it is included in this view.  Click this checkbox to include or
+exclude the column.  At the bottom of the dialog are "Up" and "Down"
+buttons for moving the selected row up or down in the table, changing
+the order of the columns in the view.  Click "OK" to accept the
+currently shown settings or "X" to revert to the previous values (or to
+cancel adding a new view).<br>
+<br>
+<a name="viewer"><b>5)Data viewer</b></a><br>
+This is the main screen of the application, where you can browse the
+database's content and launch most of the other dialogs.  The contents
+of this screen are:<br>
+<ul>
+<li><a href="#navi">Rows display and navigation</a></li>
+<li><a href="#labels">Column labels</a></li>
+<li><a href="#filemenu">File menu</a></li>
+<li><a href="#rowmenu">Row menu</a></li>
+<li><a href="#viewmenu">View menu</a></li>
+<li><a href="#toolbar">Toolbar buttons</a></li>
+</ul>
+<a name="navi"><i>Navigation</i></a><br>
+Most of the data viewer screen is occupied by a table showing one view
+of a set of rows in the database.  The spin box at the bottom left of
+the screen specifies the maximum number of rows to display at once for
+the current view; you can edit this to be any positive integer (setting
+it low enough eliminates the scrollbar on the right of the display
+table, giving a little more horizontal space).  To the right of this
+"rows per page" box are the page navigation buttons.  Click on one of
+the numbered buttons to go to that page of rows; the current page is
+shown pressed.  Click on the arrow buttons at the ends to show the
+page buttons for the next or previous five pages.<br>
+<br>
+<a name="labels"><i>Column labels</i></a><br>
+The row of column labels has several features in addition to informing
+you of the column names. To change the widths of the columns in the
+current view, click on the border between two column labels (or the right
+edge of the last column) and drag it to the desired location.  Clicking
+on a column label sorts all the rows by the content of that column in
+ascending order; clicking it again sorts in descending order.  If you
+press a column label and hold it for a second or more before releasing,
+a dialog containing summary information for that column is displayed.<br>
+<br>
+<a name="filemenu"><i>File menu</i></a><br>
+The "File" menu contains options that apply to the database file as a
+whole.  These are:<br>
+<ul>
+<li><i>Save</i> - Save any changes that have been made since the file
+was opened or last saved.  If you exit PortaBase without saving the most
+recent changes, those changes will be lost (a dialog will warn you if
+this is about to happen).</li>
+<li><i>Import</i> - Allows you to <a href="#import">import</a> rows from
+a CSV file.</li>
+<li><i>Export</i> - Allows you to <a href="#export">export</a> the
+current database content to a CSV file.</li>
+<li><i>Edit Columns</i> - Launches the <a href="#columns">columns
+editor</a>.</li>
+</ul>
+<a name="rowmenu"><i>Row menu</i></a><br>
+The "Row" menu contains options that let you manipulate rows of data.
+These are:
+<ul>
+<li><i>Add</i> - Add a new row of data (by launching the
+<a href="#rowedit">row editor</a>).</li>
+<li><i>Edit</i> - Edit the currently selected row of data (again using
+the <a href="#rowedit">row editor</a>).</li>
+<li><i>Delete</i> - Delete the currently selected row of data.</li>
+</ul>
+<a name="viewmenu"><i>View menu</i></a><br>
+The "View" menu allows you to select and manage views.  The top section
+of this menu has three options:<br>
+<ul>
+<li><i>Add</i> - Add a new view to the database file.  Choosing this
+option launches the view editor with no name specified and none of the
+columns checked.</li>
+<li><i>Edit</i> - Edit the currently displayed view.  Choosing this
+option launches the view editor with the current view's name and column
+sequence.  The "All Columns" view cannot be edited.</li>
+<li><i>Delete</i> - Delete the currently displayed view and switch to
+the "All Columns" view.  The "All Columns" view cannot be deleted.</li>
+</ul>
+Below these items in the menu is a list of all the views defined for the
+current database, with a check next to the one currently displayed.  To
+switch to a different view, simply select the one you want to see from
+the menu.<br>
+<br>
+<a name="toolbar"><i>Toolbar buttons</i></a><br>
+There is a toolbar of four buttons that provide quick access to commonly
+used operations.  These are:<br>
+<ul>
+<li><i>Save</i> - Same as "Save" in the <a href="#filemenu">File
+menu</a>.</li>
+<li><i>Add</i> - Same as "Add" in the <a href="#rowmenu">Row
+menu</a>.</li>
+<li><i>Edit</i> - Same as "Edit" in the <a href="#rowmenu">Row
+menu</a>.</li>
+<li><i>Delete</i> - Same as "Delete" in the <a href="#rowmenu">Row
+menu</a>.</li>
+</ul>
+<a name="rowedit"><b>6)Row editor</b></a><br>
+The row editor is shown whenever a row of data is added or edited.  It has
+one row for each column in the database; on the left is the name of the
+column, and on the right is its current value.  When adding a new row of
+data, the default values are shown; when editing an existing row of data,
+the current values are shown.  After editing the values as desired, click
+"OK" to accept the currently displayed values, or "X" to cancel the row
+addition (if adding a row) or leave the current values unchanged (if
+editing a row).<br>
+<br>
+<a name="import"><b>7)Data import</b></a><br>
+PortaBase can import rows of data from CSV (Comma-Separated Value) files.
+This allows you to import data exported from a spreadsheet or another
+database program.  To do this:<br>
+<ol>
+<li>Open the PortaBase file you want to import the data into.  If you
+wish to import the data into a new file, create a new file and
+define a column structure that matches that of the data to be imported.</li>
+<li>From the "File" menu in the <a href="#viewer">data viewer</a>, select
+"Import".  A file selector will appear showing all the CSV files that
+are available; pick the one you want to import from.  The CSV file must have
+the same number of columns as the open database file, and the values in
+those columns must be appropriate for the specified column types.</li>
+<li>The rows in the imported file are added to the database.  Rows from
+other files can be added by repeating this process, or another copy of the
+same rows can be added by importing the same file again.</li>
+</ol>
+<a name="export"><b>8)Data export</b></a><br>
+PortaBase can also export database rows to CSV files.  The inverse of data
+import, this allows you to move database content into a spreadsheet or
+other database program for further manipulation (among other uses).  To
+export the current database's contents:<br>
+<ol>
+<li>Select "Export" from the "File" menu in the data viewer.</li>
+<li>Enter the name of the CSV file you wish to create.  ".csv" will be
+appended automatically, so you do not need to type it.</li>
+<li>Click "OK" to complete the export, or the "X" button to cancel the
+operation.</li>
+</ol>
+----<br>
+Copyright 2002 by Jeremy Bowman.<br>
+(jmbowman@alum.mit.edu)
+</body>
+</html>
