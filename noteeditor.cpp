@@ -12,7 +12,10 @@
 #if defined(DESKTOP)
 #include <qhbox.h>
 #include <qpushbutton.h>
+#include "desktop/config.h"
 #include "desktop/resource.h"
+#else
+#include <qpe/config.h>
 #endif
 
 #include <qlayout.h>
@@ -27,6 +30,14 @@ NoteEditor::NoteEditor(QString colName, bool readOnly, QWidget *parent,
     textBox = new QMultiLineEdit(this);
     vbox->addWidget(textBox);
     textBox->setReadOnly(readOnly);
+    Config conf("portabase");
+    conf.setGroup("General");
+    if (conf.readBoolEntry("NoteWrap", TRUE)) {
+        textBox->setWordWrap(QMultiLineEdit::WidgetWidth);
+        if (conf.readBoolEntry("WrapAnywhere")) {
+            textBox->setWrapPolicy(QMultiLineEdit::Anywhere);
+        }
+    }
 
 #if defined(DESKTOP)
     QHBox *hbox = new QHBox(this);

@@ -1,3 +1,10 @@
+2003-01-30  JMB  Allow word wrap in Note editor/viewer
+
+    The Note editor/viewer now uses word wrapping by default; this can
+    be disabled in the preferences dialog.  There is also a preference
+    setting which allows wrapping to be done even between non-whitespace
+    characters (useful for languages like Japanese).
+
 2003-01-28  JMB  Support use as a Linux or Windows desktop application
 
     Made a wide variety of minor code changes that allow PortaBase to

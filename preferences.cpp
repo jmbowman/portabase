@@ -85,6 +85,17 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     booleanToggle->setChecked(conf.readBoolEntry("BooleanToggle"));
     showSeconds = new QCheckBox(tr("Show seconds for times"), generalGroup);
     showSeconds->setChecked(conf.readBoolEntry("ShowSeconds"));
+    QHBox *hbox = new QHBox(generalGroup);
+    noteWrap = new QCheckBox(tr("Wrap Notes"), hbox);
+    noteWrap->setChecked(conf.readBoolEntry("NoteWrap", TRUE));
+    wrapType = new QComboBox(hbox);
+    wrapType->insertItem(tr("at whitespace"));
+    wrapType->insertItem(tr("anywhere"));
+    if (conf.readBoolEntry("WrapAnywhere")) {
+        wrapType->setCurrentItem(1);
+    }
+    wrapType->setEnabled(noteWrap->isChecked());
+    connect(noteWrap, SIGNAL(toggled(bool)), wrapType, SLOT(setEnabled(bool)));
 
 #if defined(DESKTOP)
     QGroupBox *dateGroup = new QGroupBox(2, Qt::Horizontal,
@@ -127,7 +138,7 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     int startMonday =  config.readBoolEntry("MONDAY") ? 1 : 0;
     weekStartCombo->setCurrentItem( startMonday );
 
-    QHBox *hbox = new QHBox(vbox);
+    hbox = new QHBox(vbox);
     new QWidget(hbox);
     QPushButton *okButton = new QPushButton(tr("OK"), hbox);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
@@ -202,6 +213,8 @@ QFont Preferences::applyChanges()
     conf.writeEntry("ConfirmDeletions", confirmDeletions->isChecked());
     conf.writeEntry("BooleanToggle", booleanToggle->isChecked());
     conf.writeEntry("ShowSeconds", showSeconds->isChecked());
+    conf.writeEntry("NoteWrap", noteWrap->isChecked());
+    conf.writeEntry("WrapAnywhere", wrapType->currentItem() == 1);
     conf.setGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentItem()] / sizeFactor;

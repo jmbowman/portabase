@@ -53,6 +53,8 @@ private:
     QCheckBox *confirmDeletions;
     QCheckBox *booleanToggle;
     QCheckBox *showSeconds;
+    QCheckBox *noteWrap;
+    QComboBox *wrapType;
 #if defined(DESKTOP)
     PBDateFormat date_formats[4];
     QComboBox *dateFormatCombo;

@@ -25,7 +25,7 @@
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
-PortaBase is a small database program for creating, browsing, and editing custom tables of data.  Typical uses are media inventories, reference charts, etc.  Notable features include:<br>
+PortaBase is a small database program for creating, browsing, and editing custom tables of data.  Typical uses are media inventories, reference charts, TODO lists, shopping lists, etc.  Notable features include:<br>
 <ul>
   <li>String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time, and Enum column types</li>
   <li>Custom data views (subsets of the columns in any order)</li>
@@ -40,7 +40,6 @@ PortaBase is a small database program for creating, browsing, and editing custom
   <li>Unicode support</li>
   <li>Pick any available font to use throughout the application</li>
 </ul>
-Note: 
 <a name="file"><b>2)File selector</b></a><br>
 Unless the program was launched by clicking on a PortaBase file in the Documents tab, the first screen shown will be the file selector.  You may open any listed file by clicking on it (in the Zaurus version), or choose one of the following options from the "File" menu or toolbar:<br>
 <ul>
@@ -60,7 +59,7 @@ The current column definitions are displayed as rows in a list, in the order in 
 <li><i>Up</i> - Move the currently selected column up one position in the list (and hence in the row editor as well).</li>
 <li><i>Down</i> - Move the currently selected column down one position in the list (and hence in the row editor as well).</li>
 </ul>
-None of the changes made to the table format are applied until the "OK" button is pressed; if the "X" button is pressed instead, the changes are discarded and the file format is left as it was.  If the "X" button is pressed while defining the columns of a new file, the file creation is aborted; otherwise, pressing either of the dialog closing buttons takes you to the <a href="#viewer">data viewer.</a><br>
+None of the changes made to the table format are applied until the "OK" button is pressed; if the "X"/"Cancel" button is pressed instead, the changes are discarded and the file format is left as it was.  If the "X"/"Cancel" button is pressed while defining the columns of a new file, the file creation is aborted; otherwise, pressing either of the dialog closing buttons takes you to the <a href="#viewer">data viewer.</a><br>
 <br>
 <a name="enummanage"><b>4)Enum manager</b></a><br>
 PortaBase supports enum column types, in which each value in the column is one of a set of possible string values.  The enum manager dialog lets you create, edit, delete, and change the listing order of these enums.<br>
@@ -73,7 +72,7 @@ Most of the dialog is occupied by a list of the currently defined enums. At the 
 <li><i>Up</i> - Move the currently selected enum up one position in the list (and hence in the column editor's type list as well).</li>
 <li><i>Down</i> - Move the currently selected enum down one position in the list (and hence in the column editor's type list as well).</li>
 </ul>
-Click "OK" to apply any changes made to the enum listing order or "X" to leave the sequence unchanged (other than any added or deleted enums).<br>
+Click "OK" to apply any changes made to the enum listing order or "X"/"Cancel" to leave the sequence unchanged (other than any added or deleted enums).<br>
 <br>
 <a name="enumedit"><b>5)Enum editor</b></a><br>
 This dialog lets you define the name and list of options for an enum column type.  It has a list of the enum's options and the same set of buttons as most of the other editor dialogs:<br>
@@ -84,12 +83,12 @@ This dialog lets you define the name and list of options for an enum column type
 <li><i>Up</i> - Move the currently selected option up one position in the list (and hence in the selection droplist as well).</li>
 <li><i>Down</i> - Move the currently selected option down one position in the list (and hence in the selection droplist as well).</li>
 </ul>
-Click "OK" to accept any changes that were made or "X" to leave the options unchanged (or cancel adding a new enum).<br>
+Click "OK" to accept any changes that were made or "X"/"Cancel" to leave the options unchanged (or cancel adding a new enum).<br>
 <br>
 <a name="viewedit"><b>6)View editor</b></a><br>
 Whenever you browse a database's content in the <a href="#viewer">data viewer</a>, you are looking at one "view" of the data.  A view is a subset of the columns in the database, displayed in a particular order and with specified display widths.  Each database has a default "All Columns" view which shows all the columns in the database in the same order as they appear in the <a href="rowedit">row editor</a>.<br>
 <br>
-Views are defined using the view editor dialog.  At the top of the dialog is a text box containing the name of the view; changing this renames the view.  Below that is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is included in this view.  Click this checkbox to include or exclude the column.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the order of the columns in the view.  Click "OK" to accept the currently shown settings or "X" to revert to the previous values (or to cancel adding a new view).<br>
+Views are defined using the view editor dialog.  At the top of the dialog is a text box containing the name of the view; changing this renames the view.  Below that is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is included in this view.  Click this checkbox to include or exclude the column.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the order of the columns in the view.  Click "OK" to accept the currently shown settings or "X"/"Cancel" to revert to the previous values (or to cancel adding a new view).<br>
 <br>
 <a name="viewer"><b>7)Data viewer</b></a><br>
 This is the main screen of the application, where you can browse the database's content and launch most of the other dialogs.  The contents of this screen are:<br>
@@ -160,25 +159,25 @@ There is a toolbar of four buttons that provide quick access to commonly used op
 <li><i>Delete</i> - Same as "Delete" in the <a href="#rowmenu">Row menu</a>.</li>
 </ul>
 <a name="rowedit"><b>8)Row editor</b></a><br>
-The row editor is shown whenever a row of data is added or edited.  It has one row for each column in the database; on the left is the name of the column, and on the right is its current value.  When adding a new row of data, the default values are shown; when editing an existing row of data, the current values are shown.  To edit the value of a date field, click the button to the left of the current value display; this launches a calendar widget which allows you to select a new date.  After editing the values as desired, click "OK" to accept the currently displayed values, or "X" to cancel the row addition (if adding a row) or leave the current values unchanged (if editing a row).<br>
+The row editor is shown whenever a row of data is added or edited.  It has one row for each column in the database; on the left is the name of the column, and on the right is its current value.  When adding a new row of data, the default values are shown; when editing an existing row of data, the current values are shown.  To edit the value of a date field, click the button to the left of the current value display; this launches a calendar widget which allows you to select a new date.  After editing the values as desired, click "OK" to accept the currently displayed values, or "X"/"Cancel" to cancel the row addition (if adding a row) or leave the current values unchanged (if editing a row).<br>
 <br>
 <a name="rowview"><b>9)Row viewer</b></a><br>
 The row viewer is a dialog designed to conveniently see all of the data for one row at a time.  Like the row editor, it has the column labels on the left and values on the right.  But the values are not editable, and they wrap so you don't have to scroll horizontally to see everything.  The complete content of note fields is shown as well, instead of just the first few words.  Pressing the left and right arrows at the bottom of the screen or the left and right directions on the direction pad allows you to navigate between rows in the current view.<br>
 <br>
 <a name="noteedit"><b>10)Note editor/viewer</b></a><br>
-The "Note" column type is for blocks of text which may contain multiple lines (as opposed to the "String" type, which is better suited for relatively short single lines of text).  The larger size of the content of such columns merits its own (very simple) dialog.  Both in the row editor and in the default value section of the column editor, a Note value is shown as a button containing a note icon and the beginning of the Note's content (as much as will fit).  To see and/or change the full text, press this button; a full-screen text editor dialog will appear, showing the current text of the Note.  Click "OK" to accept any changes you have made or "X" to revert to the original content.<br>
+The "Note" column type is for blocks of text which may contain multiple lines (as opposed to the "String" type, which is better suited for relatively short single lines of text).  The larger size of the content of such columns merits its own (very simple) dialog.  Both in the row editor and in the default value section of the column editor, a Note value is shown as a button containing a note icon and the beginning of the Note's content (as much as will fit).  To see and/or change the full text, press this button; a full-screen text editor dialog will appear, showing the current text of the Note.  Click "OK" to accept any changes you have made or "X"/"Cancel" to revert to the original content.<br>
 <br>
-Note columns are treated a little specially in the data viewer also. The column label for Note columns contains a note icon indicating that it is not just a String column.  The cells in the column each show as much of the Note content as will fit.  If you press on one of these cells and hold for half a second or longer before releasing, a read-only version of the Note editor is shown.  Click either "OK" or "X" to dismiss it and return to the data viewer.<br>
+Note columns are treated a little specially in the data viewer also. The column label for Note columns contains a note icon indicating that it is not just a String column.  The cells in the column each show as much of the Note content as will fit.  If you press on one of these cells and hold for half a second or longer before releasing, a read-only version of the Note editor is shown.  Click either "OK" or "X"/"Cancel" to dismiss it and return to the data viewer.<br>
 <br>
 <a name="sortedit"><b>11)Sorting editor</b></a><br>
 Clicking on a column label in the data viewer is a convenient way to sort the database contents by a single column.  But sometimes you may want to sort by a combination of columns; sort by the content of column A, within groups of the same value of A sort by the content of column B, etc.  To do this or to sort by a column that isn't shown in the current view, you need to define a named sorting.<br>
 <br>
-Sortings are defined using the sorting editor dialog, which is very similar to the <a href="#viewedit">view editor</a> dialog.  At the top of the dialog is a text box containing the name of the sorting; changing this renames the sorting.  Below that is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is to be sorted.  Click this checkbox to add or remove the column from the set of ones to be sorted.  The third column in the table shows either "Ascending" or "Descending" for checked rows, indicating which direction to sort in; click this indicator to change it to the opposite value.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the sequence in which the columns are sorted.  The rows are sorted by the topmost checked column first, rows with the same value in that column are sorted by the next highest checked column, etc.  Click "OK" to accept the currently shown settings or "X" to revert to the previous values (or to cancel adding a new sorting).<br>
+Sortings are defined using the sorting editor dialog, which is very similar to the <a href="#viewedit">view editor</a> dialog.  At the top of the dialog is a text box containing the name of the sorting; changing this renames the sorting.  Below that is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is to be sorted.  Click this checkbox to add or remove the column from the set of ones to be sorted.  The third column in the table shows either "Ascending" or "Descending" for checked rows, indicating which direction to sort in; click this indicator to change it to the opposite value.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the sequence in which the columns are sorted.  The rows are sorted by the topmost checked column first, rows with the same value in that column are sorted by the next highest checked column, etc.  Click "OK" to accept the currently shown settings or "X"/"Cancel" to revert to the previous values (or to cancel adding a new sorting).<br>
 <br>
 <a name="filteredit"><b>12)Filter editor</b></a><br>
 This dialog allows you to define filters which are used to select which rows to display in the data viewer.  A filter may be as simple as "count = 1" or something more complicated like "any text column contains 'java', chapters > 10, pages <= 400, and instock is checked".  When you choose a filter from the "Filter" menu, the data viewer is updated to show only the rows which match the conditions you have defined.<br>
 <br>
-At the top of the dialog is a text box containing the name of the filter; changing this renames the filter.  Below that is a list of the conditions which make up the filter; a row must satisfy all of these conditions in order to pass the filter.  "Add", "Edit", "Delete", "Up", and "Down" buttons let you edit the condition list in basically the same way as the columns editor works.  But instead of the column editor dialog, a condition editor dialog is launched by the "Add" and "Edit" buttons.  This dialog lets you choose the column whose value to compare, the comparison operation to use, and the constant value to compare against.  For text comparisons, there is also a checkbox that lets you indicate whether the comparison should be case sensitive or not.  Instead of a single column, you can choose to compare the value of "Any text column"; if the value of any String or Note column in a row satisfies such a condition, the row is considered to pass the condition.  Click "OK" to accept the currently shown settings or "X" to revert to the previous values (or to cancel adding a new filter).<br>
+At the top of the dialog is a text box containing the name of the filter; changing this renames the filter.  Below that is a list of the conditions which make up the filter; a row must satisfy all of these conditions in order to pass the filter.  "Add", "Edit", "Delete", "Up", and "Down" buttons let you edit the condition list in basically the same way as the columns editor works.  But instead of the column editor dialog, a condition editor dialog is launched by the "Add" and "Edit" buttons.  This dialog lets you choose the column whose value to compare, the comparison operation to use, and the constant value to compare against.  For text comparisons, there is also a checkbox that lets you indicate whether the comparison should be case sensitive or not.  Instead of a single column, you can choose to compare the value of "Any text column"; if the value of any String or Note column in a row satisfies such a condition, the row is considered to pass the condition.  Click "OK" to accept the currently shown settings or "X"/"Cancel" to revert to the previous values (or to cancel adding a new filter).<br>
 <br>
 <a name="import"><b>13)CSV import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.  This allows you to import data exported from a spreadsheet or another database program.  To do this:<br>
@@ -199,10 +198,34 @@ PortaBase can also export database rows to CSV files.  The inverse of data impor
 <ol>
 <li>Select "Export" from the "File" menu in the data viewer.</li>
 <li>Enter the name of the CSV file you wish to create.</li>
-<li>Click "OK" to complete the export, or the "X" button to cancel the operation.</li>
+<li>Click "OK" to complete the export, or the "X"/"Cancel" button to cancel the operation.</li>
 </ol>
 <a name="prefs"><b>15)Preferences dialog</b></a><br>
-This dialog allows you to set your preferences for the PortaBase application.  In the "Font" section you can pick any font that has been installed on your PDA, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may pick, for example "unifont, 16" in order to display Japanese characters, or "smallsmooth, 9" in order to fit more text on the screen.  In the "General" section there is a checkbox labeled "Delete confirmations"; check this to show a confirmation dialog whenever you attempt to delete a row, view, sorting, or filter so as to make it less likely that you will accidentally delete something when you meant to click on something else.  There is also a checkbox labeled "Allow checkbox edit in data viewer", which is not checked by default; check it to allow toggling of boolean values shown in the data viewer by clicking on the appropriate cell.  (This makes it more convenient to use PortaBase as a todo list or such, but also makes it easier to accidentally change a data value.)  Finally, there is a "Show Seconds" checkbox which lets you choose whether or not to display the number of seconds for time columns in the data viewer.  Click "OK" to accept the shown preferences, or the "X" button to leave them unchanged.<br>
+This dialog allows you to set your preferences for the PortaBase application.  It consists of the following sections:<br>
+<ul>
+<li><a href="#fontprefs">Font</a></li>
+<li><a href="#generalprefs">General</a></li>
+<li><a href="#datetimeprefs">Date and Time</a> (PC versions only)</li>
+</ul>
+<a name="fontprefs"><i>Font</i></a><br>
+In the "Font" section you can pick any font that is available for use, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may pick, for example "unifont, 16" in order to display Japanese characters, or "smallsmooth, 9" in order to fit more text on the screen.<br>
+<br>
+<a name="generalprefs"><i>General</i></a><br>
+The "General" section contains the following options:<br>
+<ul>
+<li><i>Delete confirmations</i> - Check this to show a confirmation dialog whenever you attempt to delete a row, view, sorting, or filter.  This makes it less likely that you will accidentally delete something when you meant to click on something else.</li>
+<li><i>Allow checkbox edit in data viewer</i> - Check this to allow toggling of boolean values shown in the data viewer by clicking on the appropriate cell.  This makes it more convenient to use PortaBase as a todo list or such, but also makes it easier to accidentally change a data value.</li>
+<li><i>Show Seconds</i> - This lets you choose whether or not to display the number of seconds for time columns in the data viewer, row viewer, etc.</li>
+<li><i>Wrap Notes</i> - Checking this enables automatic wrapping of text in the Note editor/viewer, avoiding the need to manually enter linebreaks.  By default it wraps only at whitespace, but you can change the droplist value to force wrapping at the end of lines whether spaces are present or not.  (This is particularly useful for languages like Japanese which tend not to use spaces.)</li>
+</ul>
+<a name="datetimeprefs"><i>Date and Time</i></a><br>
+This section is present only in the PC versions of PortaBase, because on the Zaurus PortaBase uses the system date and time settings.  But since there is not a good cross-platform way to retrieve this information from desktop PCs, the following must be specified:<br>
+<ul>
+<li><i>Date format</i> - The type of formatting to use for date values in the data viewer, row viewer, etc.</li>
+<li><i>Time format</i> - Whether 24 hour times or 12 hour (AM/PM) times should be shown.</li>
+<li><i>Weeks start on</i> - The first day of the week; this affects the appearance of the date entry dialog.</li>
+</ul>
+Click "OK" to accept the shown preferences, or the "X"/"Cancel" button to leave them unchanged.<br>
 ----<br>
 Copyright 2002-2003 by Jeremy Bowman.<br>
 (jmbowman@alum.mit.edu)
