@@ -102,6 +102,9 @@ private:
     void closeViewer();
     void showFileSelector();
     void showDataViewer();
+    QString getMenuLabel(const QString &menuName);
+    QPopupMenu *getMenuPointer(const QString &menuName);
+    QAction *getButtonAction(const QString &buttonName);
 
 public:
     static const QColor *evenRowColor;

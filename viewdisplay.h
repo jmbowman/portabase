@@ -17,6 +17,7 @@
 
 class Database;
 class PortaBase;
+class QHBox;
 class QHButtonGroup;
 class QKeyEvent;
 class QLabel;
@@ -55,6 +56,7 @@ public:
     void addRow();
     void deleteRow();
     bool editRow(int rowId=-1, bool copy=FALSE);
+    void usePages(bool flag);
 
 private slots:
     void viewRow();
@@ -86,6 +88,7 @@ private:
     QWidgetStack *stack;
     QListView *table;
     QLabel *noResults;
+    QHBox *buttonRow;
     QSpinBox *rowsPerPage;
     QToolButton *prevButton;
     QToolButton *nextButton;
@@ -99,6 +102,7 @@ private:
     int pressedIndex;
     QTime timer;
     bool booleanToggle;
+    bool paged;
 };
 
 #endif

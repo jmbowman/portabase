@@ -28,31 +28,35 @@ public:
 
     bool operator == ( const Config & other ) const { return (filename == other.filename); }
     bool operator != ( const Config & other ) const { return (filename != other.filename); }
-    
+
+    bool hasKey( const QString &key ) const;
     void setGroup( const QString &gname );
     void writeEntry( const QString &key, const QString &value );
     void writeEntry( const QString &key, int num );
 #ifdef Q_HAS_BOOL_TYPE
     void writeEntry( const QString &key, bool b );
 #endif
+    void writeEntry( const QString &key, const QStringList &lst, const QChar &sep );
     
     QString readEntry( const QString &key, const QString &deflt = QString::null ) const;
     QString readEntryDirect( const QString &key, const QString &deflt = QString::null ) const;
     int readNumEntry( const QString &key, int deflt = -1 ) const;
     bool readBoolEntry( const QString &key, bool deflt = FALSE ) const;
+    QStringList readListEntry( const QString &key, const QChar &sep ) const;
 
     // For compatibility, non-const versions.
     QString readEntry( const QString &key, const QString &deflt );
     QString readEntryDirect( const QString &key, const QString &deflt );
     int readNumEntry( const QString &key, int deflt );
     bool readBoolEntry( const QString &key, bool deflt );
+    QStringList readListEntry( const QString &key, const QChar &sep );
     
     void write( const QString &fn = QString::null );
     
 protected:
     void read();
     bool parse( const QString &line );
-    
+
     QMap< QString, ConfigGroup > groups;
     QMap< QString, ConfigGroup >::Iterator git;
     QString filename;
@@ -68,5 +72,7 @@ inline int Config::readNumEntry( const QString &key, int deflt ) const
 { return ((Config*)this)->readNumEntry(key,deflt); }
 inline bool Config::readBoolEntry( const QString &key, bool deflt ) const
 { return ((Config*)this)->readBoolEntry(key,deflt); }
+inline QStringList Config::readListEntry( const QString &key, const QChar &sep ) const
+{ return ((Config*)this)->readListEntry(key,sep); }
 
 #endif

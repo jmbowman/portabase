@@ -17,6 +17,7 @@
 #endif
 
 #include <qfontdatabase.h>
+#include <qpixmap.h>
 #include "pbdialog.h"
 
 class ColorButton;
@@ -24,6 +25,8 @@ class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
+class QListView;
+class QTabWidget;
 
 class Preferences: public PBDialog
 {
@@ -33,10 +36,24 @@ public:
     ~Preferences();
 
     QFont applyChanges();
+    static void menuConfiguration(QStringList &top, QStringList &file);
+    static void buttonConfiguration(QStringList &shown, QStringList &hidden);
 
 private slots:
     void updateSizes(int selected);
     void updateSample(int selectedSize);
+    void menuUp();
+    void menuDown();
+    void buttonUp();
+    void buttonDown();
+
+private:
+    void addOptionsTab(QTabWidget *tabs);
+    void addAppearanceTab(QTabWidget *tabs);
+    void addMenusTab(QTabWidget *tabs);
+    void addButtonsTab(QTabWidget *tabs);
+    void moveSelectionUp(QListView *table);
+    void moveSelectionDown(QListView *table);
 
 private:
     QFontDatabase fontdb;
@@ -51,6 +68,7 @@ private:
     QCheckBox *showSeconds;
     QCheckBox *noteWrap;
     QComboBox *wrapType;
+    QCheckBox *pagedDisplay;
     ColorButton *evenButton;
     ColorButton *oddButton;
 #if defined(DESKTOP)
@@ -59,6 +77,13 @@ private:
     QComboBox *ampmCombo;
     QComboBox *weekStartCombo;
 #endif
+    QStringList menuList;
+    QStringList menuLabelList;
+    QListView *menuTable;
+    QStringList buttonList;
+    QStringList buttonLabelList;
+    QStringList buttonResourceList;
+    QListView *buttonTable;
 };
 
 #endif

@@ -1,3 +1,24 @@
+2003-09-05  JMB  Toolbar button preferences
+
+    Similar to the menu preferences, there is a new tab in the preferences
+    dialog which allows selection and ordering of the buttons to be shown
+    in the toolbar.  Current options are Save, Add, Edit, Copy, Delete, and
+    Quick Filter.
+
+2003-09-04  JMB  Menu layout preferences
+
+    You can now choose which among the Row, View, Sort, and Filter menus
+    you want to appear as top-level menus and which you want to put as
+    submenus under the File menu instead.  You can also choose the order
+    in which to arrange these menus.  There is a new tab in the preferences
+    dialog for configuring this.
+
+2003-09-03  JMB  Added non-paged display option
+
+    Added a new checkbox in the preferences dialog which allows you to turn
+    off paging in the data viewer, so all rows in the current filter are
+    displayed on one page and the row of navigation buttons is hidden.
+
 2003-09-02  JMB  Windows titlebars fix, code cleanup
 
     Added " - Qt" to the end of all window titles in the Windows version so

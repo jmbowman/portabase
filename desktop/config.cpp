@@ -50,6 +50,14 @@ Config::~Config()
 	write();
 }
 
+bool Config::hasKey( const QString &key ) const
+{
+    if ( groups.end() == git )
+	return FALSE;
+    ConfigGroup::ConstIterator it = ( *git ).find( key );
+    return it != ( *git ).end();
+}
+
 void Config::setGroup( const QString &gname )
 {
     QMap< QString, ConfigGroup>::Iterator it = groups.find( gname );
@@ -89,6 +97,15 @@ void Config::writeEntry( const QString &key, bool b )
 }
 #endif
 
+void Config::writeEntry( const QString &key, const QStringList &lst, const QChar &sep )
+{
+    QString s;
+    QStringList::ConstIterator it = lst.begin();
+    for ( ; it != lst.end(); ++it )
+	s += *it + sep;
+    writeEntry( key, s );
+}
+
 QString Config::readEntry( const QString &key, const QString &deflt )
 {
     return readEntryDirect( key, deflt );
@@ -123,6 +140,15 @@ bool Config::readBoolEntry( const QString &key, bool deflt )
 	return deflt;
     else
 	return (bool)s.toInt();
+}
+
+QStringList Config::readListEntry( const QString &key, const QChar &sep )
+{
+    QString s = readEntry( key );
+    if ( s.isEmpty() )
+	return QStringList();
+    else
+	return QStringList::split( sep, s );
 }
 
 void Config::write( const QString &fn )

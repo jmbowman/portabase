@@ -35,7 +35,7 @@
 
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0),
-    booleanToggle(FALSE)
+    booleanToggle(FALSE), paged(TRUE)
 {
     timer.start();
     stack = new QWidgetStack(this);
@@ -54,7 +54,6 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     connect(table, SIGNAL(returnPressed(QListViewItem*)),
             this, SLOT(viewRow()));
 
-
     QHeader *header = table->header();
     header->setClickEnabled(TRUE);
     header->setMovingEnabled(FALSE);
@@ -64,26 +63,26 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
             this, SLOT(columnResized(int, int, int)));
     stack->raiseWidget(noResults);
 
-    QHBox *hbox = new QHBox(this);
-    rowsPerPage = new QSpinBox(hbox);
+    buttonRow = new QHBox(this);
+    rowsPerPage = new QSpinBox(buttonRow);
     rowsPerPage->setRange(1, 9999);
     rowsPerPage->setValue(13);
     connect(rowsPerPage, SIGNAL(valueChanged(int)), this,
             SLOT(updateRowsPerPage(int)));
 
-    prevButton = new QToolButton(LeftArrow, hbox);
+    prevButton = new QToolButton(LeftArrow, buttonRow);
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousPages()));
-    buttonGroup = new QHButtonGroup(hbox);
+    buttonGroup = new QHButtonGroup(buttonRow);
     buttonGroup->hide();
     buttonGroup->setExclusive(TRUE);
     for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
-        pageButtons[i] = new QToolButton(hbox);
+        pageButtons[i] = new QToolButton(buttonRow);
         pageButtons[i]->setToggleButton(TRUE);
         pageButtons[i]->setUsesTextLabel(TRUE);
         buttonGroup->insert(pageButtons[i], i);
     }
     connect(buttonGroup, SIGNAL(clicked(int)), this, SLOT(changePage(int)));
-    nextButton = new QToolButton(RightArrow, hbox);
+    nextButton = new QToolButton(RightArrow, buttonRow);
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextPages()));
 
     updateButtonSizes();
@@ -94,6 +93,26 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
 ViewDisplay::~ViewDisplay()
 {
 
+}
+
+void ViewDisplay::usePages(bool flag)
+{
+    if (paged == flag) {
+        return;
+    }
+    paged = flag;
+    if (paged) {
+        buttonRow->show();
+    }
+    else {
+        buttonRow->hide();
+        currentPage = 1;
+        firstPageButton = 1;
+    }
+    if (view != 0) {
+        updateTable();
+        updateButtons();
+    }
 }
 
 void ViewDisplay::updateButtonSizes()
@@ -159,10 +178,14 @@ void ViewDisplay::previousPages()
 
 void ViewDisplay::updateTable()
 {
-    int rpp = rowsPerPage->value();
-    int index = (currentPage - 1) * rpp;
     int rowCount = view->getRowCount();
-    int rows = QMIN(rpp, rowCount - index);
+    int rows = rowCount;
+    int index = 0;
+    int rpp = rowsPerPage->value();
+    if (paged) {
+        index = (currentPage - 1) * rpp;
+        rows = QMIN(rpp, rowCount - index);
+    }
     if (rows <= 0 && rowCount > 0) {
         // past end of rows due to deletion or filtering, move to last page
         int pageCount = rowCount / rpp;
@@ -180,6 +203,7 @@ void ViewDisplay::updateTable()
     table->clear();
     int *types = view->getColTypes();
     QListViewItem *item = 0;
+    QRegExp linefeed("\n");
     for (int i = 0; i < rows; i++) {
         if (i == 0) {
             item = new ShadedListItem(0, table);
@@ -189,7 +213,6 @@ void ViewDisplay::updateTable()
         }
         QStringList data = view->getRow(index);
         int count = data.count();
-        QRegExp linefeed("\n");
         for (int j = 0; j < count; j++) {
             int type = types[j];
             if (type == BOOLEAN) {
@@ -216,6 +239,9 @@ void ViewDisplay::updateTable()
 
 void ViewDisplay::updateButtons()
 {
+    if (!paged) {
+        return;
+    }
     int rpp = rowsPerPage->value();
     double totalPages = ceil((double)(view->getRowCount()) / (double)rpp);
     prevButton->setEnabled(firstPageButton > 1);
@@ -373,7 +399,6 @@ int ViewDisplay::selectedRowIndex()
     if (!selected) {
         return -1;
     }
-    int rpp = rowsPerPage->value();
     int index = 0;
     QListViewItem *item = table->firstChild();
     if (item != selected) {
@@ -386,6 +411,10 @@ int ViewDisplay::selectedRowIndex()
             next = next->nextSibling();
         }
     }
+    if (!paged) {
+        return index;
+    }
+    int rpp = rowsPerPage->value();
     int startIndex = (currentPage - 1) * rpp;
     return startIndex + index;
 }

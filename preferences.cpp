@@ -11,8 +11,10 @@
 
 #if defined(DESKTOP)
 #include "desktop/config.h"
+#include "desktop/resource.h"
 #else
 #include <qpe/config.h>
+#include <qpe/resource.h>
 #endif
 
 #include <qapplication.h>
@@ -22,7 +24,10 @@
 #include <qfontdatabase.h>
 #include <qgroupbox.h>
 #include <qhbox.h>
+#include <qheader.h>
 #include <qlabel.h>
+#include <qlistview.h>
+#include <qtabwidget.h>
 #include "colorbutton.h"
 #include "portabase.h"
 #include "preferences.h"
@@ -30,54 +35,32 @@
 Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     : PBDialog(tr("Preferences"), parent, name, f)
 {
-#if defined(DESKTOP)
-    sizeFactor = 1;
-#else
-    sizeFactor = 10;
-#endif
-    QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"), this);
-    vbox->addWidget(fontGroup);
-    new QLabel(tr("Name"), fontGroup);
-    fontName = new QComboBox(FALSE, fontGroup);
-    fonts = fontdb.families();
-    fontName->insertStringList(fonts);
-    new QLabel(tr("Size"), fontGroup);
-    fontSize = new QComboBox(FALSE, fontGroup);
-    connect(fontName, SIGNAL(activated(int)), this, SLOT(updateSizes(int)));
-    QFont currentFont = qApp->font();
-    int fontCount = fonts.count();
-    QString family = currentFont.family().lower();
-    int index = -1;
-    int i;
-    for (i = 0; i < fontCount; i++) {
-        if (family == fonts[i].lower()) {
-            index = i;
-        }
-    }
-    // Windows defaults to a font not in QFontDatabase ???
-    if (index == -1) {
-        fontName->insertItem(currentFont.family());
-        index = fontName->count() - 1;
-    }
-    fontName->setCurrentItem(index);
-    updateSizes(index);
-    int size = currentFont.pointSize();
-    index = sizes.findIndex(size * sizeFactor);
-    if (index > -1) {
-        fontSize->setCurrentItem(index);
-    }
-    connect(fontSize, SIGNAL(activated(int)), this, SLOT(updateSample(int)));
-    new QLabel(tr("Sample"), fontGroup);
-    sample = new QLabel(tr("Sample text"), fontGroup);
+    QTabWidget *tabs = new QTabWidget(this);
+    vbox->addWidget(tabs);
+    addOptionsTab(tabs);
+    addAppearanceTab(tabs);
+    addMenusTab(tabs);
+    addButtonsTab(tabs);
+    finishLayout();
+}
 
+Preferences::~Preferences()
+{
+
+}
+
+void Preferences::addOptionsTab(QTabWidget *tabs)
+{
+    QWidget *optionsTab = new QWidget(tabs);
+    QVBoxLayout *layout = new QVBoxLayout(optionsTab);
     QGroupBox *generalGroup = new QGroupBox(1, Qt::Horizontal, tr("General"),
-                                            this);
-    vbox->addWidget(generalGroup);
+                                            optionsTab);
+    layout->addWidget(generalGroup);
     Config conf("portabase");
     conf.setGroup("General");
     QHBox *hbox = new QHBox(generalGroup);
     confirmDeletions = new QCheckBox(tr("Confirm deletions"), hbox);
-    confirmDeletions->setChecked(conf.readBoolEntry("ConfirmDeletions"));
+    confirmDeletions->setChecked(conf.readBoolEntry("ConfirmDeletions", TRUE));
     QWidget *filler = new QWidget(hbox);
     hbox->setStretchFactor(filler, 1);
     hbox = new QHBox(generalGroup);
@@ -92,6 +75,11 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     filler = new QWidget(hbox);
     hbox->setStretchFactor(filler, 1);
     hbox = new QHBox(generalGroup);
+    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), hbox);
+    pagedDisplay->setChecked(conf.readBoolEntry("PagedDisplay", TRUE));
+    filler = new QWidget(hbox);
+    hbox->setStretchFactor(filler, 1);
+    hbox = new QHBox(generalGroup);
     noteWrap = new QCheckBox(tr("Wrap Notes"), hbox);
     noteWrap->setChecked(conf.readBoolEntry("NoteWrap", TRUE));
     wrapType = new QComboBox(hbox);
@@ -103,16 +91,10 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     wrapType->setEnabled(noteWrap->isChecked());
     connect(noteWrap, SIGNAL(toggled(bool)), wrapType, SLOT(setEnabled(bool)));
 
-    QGroupBox *colorGroup = new QGroupBox(2, Qt::Horizontal, tr("Row Colors"),
-                                          this);
-    vbox->addWidget(colorGroup);
-    evenButton = new ColorButton(*PortaBase::evenRowColor, colorGroup);
-    oddButton = new ColorButton(*PortaBase::oddRowColor, colorGroup);
-
 #if defined(DESKTOP)
     QGroupBox *dateGroup = new QGroupBox(2, Qt::Horizontal,
-                                         tr("Date and Time"), this);
-    vbox->addWidget(dateGroup);
+                                         tr("Date and Time"), optionsTab);
+    layout->addWidget(dateGroup);
     Config config("qpe");
     config.setGroup("Date");
     new QLabel(tr("Date format"), dateGroup);
@@ -125,10 +107,10 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     int currentdf = 0;
     date_formats[0] = PBDateFormat('/', PBDateFormat::MonthDayYear);
     date_formats[1] = PBDateFormat('.', PBDateFormat::DayMonthYear);
-    date_formats[2] = PBDateFormat('-', PBDateFormat::YearMonthDay, 
+    date_formats[2] = PBDateFormat('-', PBDateFormat::YearMonthDay,
                                    PBDateFormat::DayMonthYear);
     date_formats[3] = PBDateFormat('/', PBDateFormat::DayMonthYear);
-    for (i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
         dateFormatCombo->insertItem(date_formats[i].toNumberString());
         if (df == date_formats[i]) {
 	    currentdf = i;
@@ -150,15 +132,285 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     weekStartCombo->insertItem(tr("Monday"), 1);
     int startMonday =  config.readBoolEntry("MONDAY") ? 1 : 0;
     weekStartCombo->setCurrentItem( startMonday );
-#else
-    vbox->addWidget(new QWidget(this));
 #endif
-    finishLayout();
+    layout->addWidget(new QWidget(optionsTab), 1);
+    tabs->addTab(optionsTab, tr("Options"));
 }
 
-Preferences::~Preferences()
+void Preferences::addAppearanceTab(QTabWidget *tabs)
 {
+    QWidget *appearanceTab = new QWidget(tabs);
+    QVBoxLayout *layout = new QVBoxLayout(appearanceTab);
+#if defined(DESKTOP)
+    sizeFactor = 1;
+#else
+    sizeFactor = 10;
+#endif
+    QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"),
+                                         appearanceTab);
+    layout->addWidget(fontGroup);
+    new QLabel(tr("Name"), fontGroup);
+    fontName = new QComboBox(FALSE, fontGroup);
+    fonts = fontdb.families();
+    fontName->insertStringList(fonts);
+    new QLabel(tr("Size"), fontGroup);
+    fontSize = new QComboBox(FALSE, fontGroup);
+    connect(fontName, SIGNAL(activated(int)), this, SLOT(updateSizes(int)));
+    QFont currentFont = qApp->font();
+    int fontCount = fonts.count();
+    QString family = currentFont.family().lower();
+    int index = -1;
+    for (int i = 0; i < fontCount; i++) {
+        if (family == fonts[i].lower()) {
+            index = i;
+        }
+    }
+    // Windows defaults to a font not in QFontDatabase ???
+    if (index == -1) {
+        fontName->insertItem(currentFont.family());
+        index = fontName->count() - 1;
+    }
+    fontName->setCurrentItem(index);
+    updateSizes(index);
+    int size = currentFont.pointSize();
+    index = sizes.findIndex(size * sizeFactor);
+    if (index > -1) {
+        fontSize->setCurrentItem(index);
+    }
+    connect(fontSize, SIGNAL(activated(int)), this, SLOT(updateSample(int)));
+    new QLabel(tr("Sample"), fontGroup);
+    sample = new QLabel(tr("Sample text"), fontGroup);
 
+    QGroupBox *colorGroup = new QGroupBox(2, Qt::Horizontal, tr("Row Colors"),
+                                          appearanceTab);
+    layout->addWidget(colorGroup);
+    evenButton = new ColorButton(*PortaBase::evenRowColor, colorGroup);
+    oddButton = new ColorButton(*PortaBase::oddRowColor, colorGroup);
+    layout->addWidget(new QWidget(appearanceTab), 1);
+    tabs->addTab(appearanceTab, tr("Appearance"));
+}
+
+void Preferences::addMenusTab(QTabWidget *tabs)
+{
+    QWidget *menusTab = new QWidget(tabs);
+    QVBoxLayout *layout = new QVBoxLayout(menusTab);
+
+    menuTable = new QListView(menusTab);
+    layout->addWidget(menuTable);
+    menuTable->setAllColumnsShowFocus(TRUE);
+    menuTable->setSorting(-1);
+    menuTable->header()->setMovingEnabled(FALSE);
+    menuTable->addColumn(tr("Top-level"));
+    menuTable->addColumn(tr("Menu"));
+
+    menuList.append("Row");
+    menuLabelList.append(PortaBase::tr("Row"));
+    menuList.append("View");
+    menuLabelList.append(PortaBase::tr("View"));
+    menuList.append("Sort");
+    menuLabelList.append(PortaBase::tr("Sort"));
+    menuList.append("Filter");
+    menuLabelList.append(PortaBase::tr("Filter"));
+
+    QStringList topLevel;
+    QStringList underFile;
+    menuConfiguration(topLevel, underFile);
+    // need to use this instead of menuList to get the sequence correct
+    QStringList allMenus = topLevel + underFile;
+
+    int count = allMenus.count();
+    QCheckListItem *item = 0;
+    QCheckListItem *lastItem = 0;
+    int index;
+    for (int i = 0; i < count; i++) {
+        item = new QCheckListItem(menuTable, "", QCheckListItem::CheckBox);
+        QString menu = allMenus[i];
+        index = menuList.findIndex(menu);
+        item->setText(1, menuLabelList[index]);
+        if (topLevel.findIndex(menu) != -1) {
+            item->setOn(TRUE);
+        }
+        if (lastItem != 0) {
+            item->moveItem(lastItem);
+        }
+        lastItem = item;
+    }
+
+    QHBox *hbox = new QHBox(menusTab);
+    layout->addWidget(hbox);
+    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
+    connect(upButton, SIGNAL(clicked()), this, SLOT(menuUp()));
+    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
+    connect(downButton, SIGNAL(clicked()), this, SLOT(menuDown()));
+
+    tabs->addTab(menusTab, tr("Menus"));
+}
+
+void Preferences::addButtonsTab(QTabWidget *tabs)
+{
+    QWidget *buttonsTab = new QWidget(tabs);
+    QVBoxLayout *layout = new QVBoxLayout(buttonsTab);
+
+    buttonTable = new QListView(buttonsTab);
+    layout->addWidget(buttonTable);
+    buttonTable->setAllColumnsShowFocus(TRUE);
+    buttonTable->setSorting(-1);
+    buttonTable->header()->setMovingEnabled(FALSE);
+    buttonTable->addColumn(tr("Show"));
+    buttonTable->addColumn(tr("Toolbar Button"));
+
+    buttonList.append("Save");
+    buttonLabelList.append(PortaBase::tr("Save"));
+    buttonResourceList.append("portabase/save");
+
+    buttonList.append("Add");
+    buttonLabelList.append(PortaBase::tr("Add"));
+    buttonResourceList.append("new");
+
+    buttonList.append("Edit");
+    buttonLabelList.append(PortaBase::tr("Edit"));
+    buttonResourceList.append("edit");
+
+    buttonList.append("Copy");
+    buttonLabelList.append(PortaBase::tr("Copy"));
+    buttonResourceList.append("copy");
+
+    buttonList.append("Delete");
+    buttonLabelList.append(PortaBase::tr("Delete"));
+    buttonResourceList.append("trash");
+
+    buttonList.append("QuickFilter");
+    buttonLabelList.append(PortaBase::tr("Quick Filter"));
+    buttonResourceList.append("find");
+
+    QStringList shown;
+    QStringList hidden;
+    buttonConfiguration(shown, hidden);
+    // need to use this instead of buttonList to get the sequence correct
+    QStringList allButtons = shown + hidden;
+
+    int count = allButtons.count();
+    QCheckListItem *item = 0;
+    QCheckListItem *lastItem = 0;
+    int index;
+    for (int i = 0; i < count; i++) {
+        item = new QCheckListItem(buttonTable, "", QCheckListItem::CheckBox);
+        QString button = allButtons[i];
+        index = buttonList.findIndex(button);
+        item->setText(1, buttonLabelList[index]);
+        QPixmap pixmap = Resource::loadPixmap(buttonResourceList[index]);
+        item->setPixmap(1, pixmap);
+        if (shown.findIndex(button) != -1) {
+            item->setOn(TRUE);
+        }
+        if (lastItem != 0) {
+            item->moveItem(lastItem);
+        }
+        lastItem = item;
+    }
+
+    QHBox *hbox = new QHBox(buttonsTab);
+    layout->addWidget(hbox);
+    QPushButton *upButton = new QPushButton(tr("Up"), hbox);
+    connect(upButton, SIGNAL(clicked()), this, SLOT(buttonUp()));
+    QPushButton *downButton = new QPushButton(tr("Down"), hbox);
+    connect(downButton, SIGNAL(clicked()), this, SLOT(buttonDown()));
+
+    tabs->addTab(buttonsTab, tr("Buttons"));
+}
+
+void Preferences::menuUp()
+{
+    moveSelectionUp(menuTable);
+}
+
+void Preferences::menuDown()
+{
+    moveSelectionDown(menuTable);
+}
+
+void Preferences::menuConfiguration(QStringList &top, QStringList &file)
+{
+    Config conf("portabase");
+    conf.setGroup("Layout");
+    top += conf.readListEntry("TopLevelMenus", ',');
+    file += conf.readListEntry("UnderFileMenus", ',');
+    // if menu preferences aren't set yet, use the original configuration
+    if (top.count() == 0 && file.count() == 0) {
+        top.append("View");
+        top.append("Sort");
+        top.append("Filter");
+        file.append("Row");
+    }
+}
+
+void Preferences::buttonUp()
+{
+    moveSelectionUp(buttonTable);
+}
+
+void Preferences::buttonDown()
+{
+    moveSelectionDown(buttonTable);
+}
+
+void Preferences::buttonConfiguration(QStringList &shown, QStringList &hidden)
+{
+    Config conf("portabase");
+    conf.setGroup("Layout");
+    if (conf.hasKey("ToolbarButtons")) {
+        shown += conf.readListEntry("ToolbarButtons", ',');
+    }
+    else {
+        // button preferences aren't set yet, use the original configuration
+        shown.append("Save");
+        shown.append("Add");
+        shown.append("Edit");
+        shown.append("Delete");
+    }
+    QStringList allButtons;
+    allButtons.append("Save");
+    allButtons.append("Add");
+    allButtons.append("Edit");
+    allButtons.append("Copy");
+    allButtons.append("Delete");
+    allButtons.append("QuickFilter");
+    int count = allButtons.count();
+    for (int i = 0; i < count; i++) {
+        QString button = allButtons[i];
+        if (shown.findIndex(button) == -1) {
+            hidden.append(button);
+        }
+    }
+}
+
+void Preferences::moveSelectionUp(QListView *table)
+{
+    QListViewItem *item = table->selectedItem();
+    if (item == 0) {
+        return;
+    }
+    QListViewItem *sibling = table->firstChild();
+    QListViewItem *before = 0;
+    while (sibling != item && sibling != 0) {
+        before = sibling;
+        sibling = sibling->nextSibling();
+    }
+    if (before != 0) {
+        before->moveItem(item);
+    }
+}
+
+void Preferences::moveSelectionDown(QListView *table)
+{
+    QListViewItem *item = table->selectedItem();
+    if (item == 0) {
+        return;
+    }
+    QListViewItem *after = item->nextSibling();
+    if (after != 0) {
+        item->moveItem(after);
+    }
 }
 
 void Preferences::updateSizes(int selection)
@@ -216,6 +468,7 @@ QFont Preferences::applyChanges()
     conf.writeEntry("ConfirmDeletions", confirmDeletions->isChecked());
     conf.writeEntry("BooleanToggle", booleanToggle->isChecked());
     conf.writeEntry("ShowSeconds", showSeconds->isChecked());
+    conf.writeEntry("PagedDisplay", pagedDisplay->isChecked());
     conf.writeEntry("NoteWrap", noteWrap->isChecked());
     conf.writeEntry("WrapAnywhere", wrapType->currentItem() == 1);
 
@@ -226,6 +479,39 @@ QFont Preferences::applyChanges()
     const QColor oddColor = oddButton->getColor();
     PortaBase::oddRowColor = new QColor(oddColor);
     conf.writeEntry("OddRows", oddColor.name());
+
+    conf.setGroup("Layout");
+    QStringList topLevel;
+    QStringList underFile;
+    QCheckListItem *item = (QCheckListItem*)menuTable->firstChild();
+    int index;
+    while (item != 0) {
+        QString label = item->text(1);
+        index = menuLabelList.findIndex(label);
+        QString menu = menuList[index];
+        if (item->isOn()) {
+            topLevel.append(menu);
+        }
+        else {
+            underFile.append(menu);
+        }
+        item = (QCheckListItem*)item->nextSibling();
+    }
+    conf.writeEntry("TopLevelMenus", topLevel, ',');
+    conf.writeEntry("UnderFileMenus", underFile, ',');
+
+    QStringList buttons;
+    item = (QCheckListItem*)buttonTable->firstChild();
+    while (item != 0) {
+        QString label = item->text(1);
+        index = buttonLabelList.findIndex(label);
+        QString button = buttonList[index];
+        if (item->isOn()) {
+            buttons.append(button);
+        }
+        item = (QCheckListItem*)item->nextSibling();
+    }
+    conf.writeEntry("ToolbarButtons", buttons, ',');
 
     conf.setGroup("Font");
     QString name = fontName->currentText();

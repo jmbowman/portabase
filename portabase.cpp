@@ -74,8 +74,9 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     int size = currentFont.pointSize();
     Config conf("portabase");
     conf.setGroup("General");
-    confirmDeletions = conf.readBoolEntry("ConfirmDeletions");
+    confirmDeletions = conf.readBoolEntry("ConfirmDeletions", TRUE);
     booleanToggle = conf.readBoolEntry("BooleanToggle");
+    bool pagedDisplay = conf.readBoolEntry("PagedDisplay", TRUE);
     conf.setGroup("Font");
     family = conf.readEntry("Name", family);
     size = conf.readNumEntry("Size", size);
@@ -216,7 +217,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
             this, SLOT(deleteSorting()));
 
     // Filter menu actions
-    findAction = new QAction(tr("Quick"), findIcons, QString::null, 0, this);
+    findAction = new QAction(tr("Quick Filter"), findIcons, QString::null, 0,
+                             this);
     connect(findAction, SIGNAL(activated()), this, SLOT(simpleFilter()));
     filterAddAction = new QAction(tr("Add"), addIcons, QString::null, 0, this);
     connect(filterAddAction, SIGNAL(activated()), this, SLOT(addFilter()));
@@ -245,6 +247,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
 
     viewer = new ViewDisplay(this, mainStack);
     viewer->allowBooleanToggle(booleanToggle);
+    viewer->usePages(pagedDisplay);
 
     conf.setGroup("Files");
     QDir defaultDir = QDir::home();
@@ -356,10 +359,10 @@ void PortaBase::editPreferences()
         viewer->updateButtonSizes();
         file->setFont(font);
         if (doc) {
-            row->setFont(font);
-            view->setFont(font);
-            sort->setFont(font);
-            filter->setFont(font);
+            showDataViewer();
+            rebuildViewMenu();
+            rebuildSortMenu();
+            rebuildFilterMenu();
         }
 #ifdef DESKTOP
         help->setFont(font);
@@ -369,7 +372,9 @@ void PortaBase::editPreferences()
         conf.setGroup("General");
         confirmDeletions = conf.readBoolEntry("ConfirmDeletions");
         booleanToggle = conf.readBoolEntry("BooleanToggle");
+        bool pagedDisplay = conf.readBoolEntry("PagedDisplay");
         viewer->allowBooleanToggle(booleanToggle);
+        viewer->usePages(pagedDisplay);
         if (doc) {
             db->setShowSeconds(conf.readBoolEntry("ShowSeconds"));
             db->updateDateTimePrefs();
@@ -678,26 +683,15 @@ void PortaBase::showDataViewer()
     toolbar->clear();
 
     // Toolbar
-    fileSaveAction->addTo(toolbar);
-    rowAddAction->addTo(toolbar);
-    rowEditAction->addTo(toolbar);
-    rowDeleteAction->addTo(toolbar);
-
-    // File menu
-    file = new QPopupMenu(this);
-    file->insertItem(tr("Row"), row);
-    fileSaveAction->addTo(file);
-    if (db->encrypted()) {
-        changePassAction->addTo(file);
+    QStringList shown;
+    QStringList hidden;
+    Preferences::buttonConfiguration(shown, hidden);
+    int count = shown.count();
+    int i;
+    for (i = 0; i < count; i++) {
+        QAction *action = getButtonAction(shown[i]);
+        action->addTo(toolbar);
     }
-    dataImportAction->addTo(file);
-    exportAction->addTo(file);
-    deleteRowsAction->addTo(file);
-    editColsAction->addTo(file);
-    manageEnumsAction->addTo(file);
-    prefsAction->addTo(file);
-    file->insertSeparator();
-    closeAction->addTo(file);
 
     // View menu
     view = new QPopupMenu(this);
@@ -729,10 +723,37 @@ void PortaBase::showDataViewer()
     filterAllRowsAction->addTo(filter);
     connect(filter, SIGNAL(activated(int)), this, SLOT(changeFilter(int)));
 
+    // Load menu preferences
+    QStringList topLevel;
+    QStringList underFile;
+    Preferences::menuConfiguration(topLevel, underFile);
+
+    // File menu
+    file = new QPopupMenu(this);
+    count = underFile.count();
+    for (i = 0; i < count; i++) {
+        QString menuName = underFile[i];
+        file->insertItem(getMenuLabel(menuName), getMenuPointer(menuName));
+    }
+    fileSaveAction->addTo(file);
+    if (db->encrypted()) {
+        changePassAction->addTo(file);
+    }
+    dataImportAction->addTo(file);
+    exportAction->addTo(file);
+    deleteRowsAction->addTo(file);
+    editColsAction->addTo(file);
+    manageEnumsAction->addTo(file);
+    prefsAction->addTo(file);
+    file->insertSeparator();
+    closeAction->addTo(file);
+
     menu->insertItem(tr("File"), file);
-    menu->insertItem(tr("View"), view);
-    menu->insertItem(tr("Sort"), sort);
-    menu->insertItem(tr("Filter"), filter);
+    count = topLevel.count();
+    for (i = 0; i < count; i++) {
+        QString menuName = topLevel[i];
+        menu->insertItem(getMenuLabel(menuName), getMenuPointer(menuName));
+    }
 #ifdef DESKTOP
     help = new QPopupMenu(this);
     helpAction->addTo(help);
@@ -742,6 +763,60 @@ void PortaBase::showDataViewer()
     menu->insertItem(tr("Help"), help);
 #endif
     mainStack->raiseWidget(viewer);
+}
+
+QString PortaBase::getMenuLabel(const QString &menuName)
+{
+    if (menuName == "Row") {
+        return tr("Row");
+    }
+    else if (menuName == "View") {
+        return tr("View");
+    }
+    else if (menuName == "Sort") {
+        return tr("Sort");
+    }
+    else {
+        return tr("Filter");
+    }
+}
+
+QPopupMenu *PortaBase::getMenuPointer(const QString &menuName)
+{
+    if (menuName == "Row") {
+        return row;
+    }
+    else if (menuName == "View") {
+        return view;
+    }
+    else if (menuName == "Sort") {
+        return sort;
+    }
+    else {
+        return filter;
+    }
+}
+
+QAction *PortaBase::getButtonAction(const QString &buttonName)
+{
+    if (buttonName == "Save") {
+        return fileSaveAction;
+    }
+    else if (buttonName == "Add") {
+        return rowAddAction;
+    }
+    else if (buttonName == "Edit") {
+        return rowEditAction;
+    }
+    else if (buttonName == "Copy") {
+        return rowCopyAction;
+    }
+    else if (buttonName == "Delete") {
+        return rowDeleteAction;
+    }
+    else {
+        return findAction;
+    }
 }
 
 void PortaBase::setDocument(const QString &fileref)
