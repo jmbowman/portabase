@@ -110,7 +110,10 @@ PortaBase for Windows Compilation, Packaging
 - Open the generated portabase.dsp file in Visual C++, and from
   "Build->Set Active Configuration..." select "portabase - Win32 Release".
 - Execute the build.
+- Copy qt-mtnc321.dll from Qt's "lib" directory to the Release subdirectory
+  created by Visual C++.
 - Copy msvcrt.dll to the PortaBase source directory.
+- Run "lrelease portabase_desktop.pro" to generate the UI translation files.
 - Open portabase.iss with Inno Setup and choose "Compile"
 
 Debian Package Building

@@ -48,7 +48,7 @@ class QString;
 class JPEGReader
 {
 public:
-    JPEGReader(const char *fileName);
+    JPEGReader(const QString &fileName);
     virtual ~JPEGReader();
     virtual int imageWidth();
     virtual int imageHeight();

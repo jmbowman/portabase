@@ -28,11 +28,17 @@
 *************************************************************************/
 
 #include <qdir.h>
+#include <qfile.h>
 #include <qimage.h>
 #include <qsize.h>
 #include "imagereader.h"
+#include "metakitfuncs.h"
 
-JPEGReader::JPEGReader(const char *fileName)
+#if defined(Q_WS_WIN)
+#include <fcntl.h>
+#endif
+
+JPEGReader::JPEGReader(const QString &fileName)
 {
     scaleDenom = 1;
 
@@ -41,7 +47,14 @@ JPEGReader::JPEGReader(const char *fileName)
     jpeg_create_decompress(&cinfo);
 
     // open file
-    jpegFile = fopen(fileName, "rb");
+#if defined(Q_WS_WIN)
+    int fd = windowsFileOpen(fileName.utf8(), _O_BINARY | _O_RDONLY);
+    if (fd != -1) {
+        jpegFile = _fdopen(fd, "rb");
+    }
+#else
+    jpegFile = fopen(QFile::encodeName(fileName), "rb");
+#endif
     if (!jpegFile) {
         fprintf(stderr, "JPEGReader: Can't open file %s\n", fileName);
         return;
