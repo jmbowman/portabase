@@ -13,6 +13,7 @@
 #define DATABASE_H
 
 #include <mk4.h>
+#include <qpe/timestring.h>
 #include <qpixmap.h>
 #include "datatypes.h"
 
@@ -20,6 +21,7 @@
 
 class Condition;
 class Filter;
+class QDate;
 class QString;
 class QStringList;
 class View;
@@ -81,6 +83,8 @@ public:
     void deleteRow(int id);
     void commit();
     QPixmap getCheckBoxPixmap(int checked);
+    QString dateToString(int date);
+    QString dateToString(QDate &date);
     QString importFromCSV(QString filename);
     void exportToCSV(QString filename);
 
@@ -92,6 +96,8 @@ private:
 private:
     QPixmap checkedPixmap;
     QPixmap uncheckedPixmap;
+    DateFormat::Order dateOrder;
+    QString dateSeparator;
     c4_Storage *file;
     c4_View columns;
     c4_View views;

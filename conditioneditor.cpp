@@ -11,6 +11,7 @@
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
+#include <qdatetime.h>
 #include <qhbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
@@ -20,6 +21,7 @@
 #include "condition.h"
 #include "conditioneditor.h"
 #include "database.h"
+#include "datewidget.h"
 
 ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), dataType(STRING)
 {
@@ -76,6 +78,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     constantStack = new QWidgetStack(vbox);
     constantLine = new QLineEdit(constantStack);
     constantCheck = new QCheckBox(constantStack);
+    constantDate = new DateWidget(constantStack);
     constantStack->raiseWidget(constantLine);
 }
 
@@ -129,6 +132,11 @@ void ConditionEditor::fillFields(Condition *condition)
         opList->setCurrentItem(index);
         constantLine->setText(constant);
     }
+    else if (type == DATE) {
+        int index = numberOps.findIndex(operation);
+        opList->setCurrentItem(index);
+        constantDate->setDate(constant.toInt());
+    }
     else {
         int index = stringOps.findIndex(operation);
         opList->setCurrentItem(index);
@@ -146,11 +154,22 @@ void ConditionEditor::updateDisplay(int columnIndex)
     if (type == BOOLEAN) {
         constantStack->raiseWidget(constantCheck);
         constantLine->setText("");
+        QDate today = QDate::currentDate();
+        constantDate->setDate(today);
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
     }
     else if (type == INTEGER || type == FLOAT) {
         constantStack->raiseWidget(constantLine);
+        constantCheck->setChecked(FALSE);
+        QDate today = QDate::currentDate();
+        constantDate->setDate(today);
+        caseCheck->hide();
+        caseCheck->setChecked(FALSE);
+    }
+    else if (type == DATE) {
+        constantStack->raiseWidget(constantDate);
+        constantLine->setText("");
         constantCheck->setChecked(FALSE);
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
@@ -158,6 +177,8 @@ void ConditionEditor::updateDisplay(int columnIndex)
     else {
         constantStack->raiseWidget(constantLine);
         constantCheck->setChecked(FALSE);
+        QDate today = QDate::currentDate();
+        constantDate->setDate(today);
         caseCheck->show();
     }
     if (type != dataType) {
@@ -175,7 +196,7 @@ void ConditionEditor::updateOpList()
         return;
     }
     opList->setEnabled(TRUE);
-    if (dataType == INTEGER || dataType == FLOAT) {
+    if (dataType == INTEGER || dataType == FLOAT || dataType == DATE) {
         int count = numberOpList.count();
         for (int i = 0; i < count; i++) {
             opList->insertItem(numberOpList[i]);
@@ -231,6 +252,11 @@ void ConditionEditor::applyChanges(Condition *condition)
     else if (type == INTEGER || type == FLOAT) {
         condition->setOperator(numberOps[opList->currentItem()]);
         condition->setConstant(constantLine->text());
+        condition->setCaseSensitive(FALSE);
+    }
+    else if (type == DATE) {
+        condition->setOperator(numberOps[opList->currentItem()]);
+        condition->setConstant(QString::number(constantDate->getDate()));
         condition->setCaseSensitive(FALSE);
     }
     else {

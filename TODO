@@ -1,5 +1,4 @@
-Date column type
-Date and time column type
+Date/time column type
 Enumeration column type
 File properties dialog (size, rows, etc.)
 Alternate-row shading
@@ -11,4 +10,4 @@ Option to show Notes as multiline edit fields in row editor
 Option to change a boolean value directly in the data viewer
 Confirm dialogs for deletions (of a row, view, sorting, or filter)
 "Delete all rows" menu item
-"Copy row" action
+"Copy row" menu item

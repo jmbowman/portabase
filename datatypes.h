@@ -21,6 +21,9 @@
 #define NOTE 4
 #define DATE 5
 
+// default date codes
+#define TODAY 0
+
 typedef QValueList<int> IntList;
 
 #endif

@@ -76,11 +76,6 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(act, SIGNAL(activated()), this, SLOT(editColumns()));
     act->addTo(file);
 
-    QIconSet findIcons = Resource::loadIconSet("find");
-    act = new QAction(tr("Find"), findIcons, QString::null, 0, this, 0);
-    connect(act, SIGNAL(activated()), this, SLOT(simpleFilter()));
-    act->addTo(toolbar);
-
     QIconSet addIcons = Resource::loadIconSet("new");
     act = new QAction(tr("Add"), addIcons, QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(addRow()));
@@ -116,6 +111,11 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     sort->insertSeparator();
     connect(sort, SIGNAL(activated(int)), this, SLOT(changeSorting(int)));
 
+    QIconSet findIcons = Resource::loadIconSet("find");
+    act = new QAction(tr("Quick"), findIcons, QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(simpleFilter()));
+    act->addTo(filter);
+
     filter->insertItem(addIcons, tr("Add"), this, SLOT(addFilter()));
     editFilterId = filter->insertItem(editIcons, tr("Edit"),
                                       this, SLOT(editFilter()));
@@ -129,7 +129,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     mb->insertItem(tr("File"), file);
     mb->insertItem(tr("View"), view);
     mb->insertItem(tr("Sort"), sort);
-    mb->insertItem(tr("Find"), filter);
+    mb->insertItem(tr("Filter"), filter);
                                 
     mainStack = new QWidgetStack(this);
     setCentralWidget(mainStack);

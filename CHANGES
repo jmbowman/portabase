@@ -1,3 +1,18 @@
+2002-11-10  #################### PortaBase 1.2 ####################
+
+2002-11-10  JMB  Date columns, crash fixes, toolbar changes
+
+    Added support for date columns; values are entered using a calendar
+    widget.
+
+    Fixed bugs in the data viewer, sorting editor, and view editor which
+    could cause a crash if you clicked in the wrong place.
+
+    Due to space considerations, made some changes to the menus and
+    toolbar.  The "Find" menu was renamed "Filter", and the "Find"
+    toolbar button was moved to the "Quick" option under the "Filter"
+    menu.
+
 2002-11-09  JMB  Filtering, "All Columns" sequence bugfix
 
     Added the "Find" menu, providing support for multiple-condition

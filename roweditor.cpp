@@ -18,6 +18,7 @@
 #include <qscrollview.h>
 #include "database.h"
 #include "datatypes.h"
+#include "datewidget.h"
 #include "notebutton.h"
 #include "roweditor.h"
 
@@ -49,7 +50,7 @@ bool RowEditor::edit(Database *subject, int rowId)
             int lineEditIndex = 0;
             for (int i = 0; i < count; i++) {
                 int type = colTypes[i];
-                if (type != BOOLEAN && type != NOTE) {
+                if (type != BOOLEAN && type != NOTE && type != DATE) {
                     QString value = lineEdits[lineEditIndex]->text();
                     QString error = db->isValidValue(type, value);
                     if (error != "") {
@@ -68,6 +69,7 @@ bool RowEditor::edit(Database *subject, int rowId)
         int checkBoxIndex = 0;
         int lineEditIndex = 0;
         int noteButtonIndex = 0;
+        int dateWidgetIndex = 0;
         for (int i = 0; i < count; i++) {
             int type = colTypes[i];
             if (type == BOOLEAN) {
@@ -78,6 +80,11 @@ bool RowEditor::edit(Database *subject, int rowId)
             else if (type == NOTE) {
                 values.append(noteButtons[noteButtonIndex]->content());
                 noteButtonIndex++;
+            }
+            else if (type == DATE) {
+                int dateInt = dateWidgets[dateWidgetIndex]->getDate();
+                values.append(QString::number(dateInt));
+                dateWidgetIndex++;
             }
             else {
                 values.append(lineEdits[lineEditIndex]->text());
@@ -136,6 +143,11 @@ void RowEditor::addContent(int rowId)
             NoteButton *button = new NoteButton(name, grid);
             button->setContent(values[i]);
             noteButtons.append(button);
+        }
+        else if (type == DATE) {
+            DateWidget *widget = new DateWidget(grid);
+            widget->setDate(values[i].toInt());
+            dateWidgets.append(widget);
         }
         else {
             lineEdits.append(new QLineEdit(values[i], grid));

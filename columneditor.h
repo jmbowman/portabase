@@ -16,6 +16,7 @@
 
 class QCheckBox;
 class QComboBox;
+class QLabel;
 class QLineEdit;
 class NoteButton;
 class QWidgetStack;
@@ -45,6 +46,7 @@ private:
     QCheckBox *defaultCheck;
     QLineEdit *defaultLine;
     NoteButton *defaultNote;
+    QLabel *defaultDate;
 };
 
 #endif

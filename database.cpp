@@ -10,6 +10,7 @@
  */
 
 #include <qpe/resource.h>
+#include <qdatetime.h>
 #include <qfile.h>
 #include <qmessagebox.h>
 #include <qstringlist.h>
@@ -25,6 +26,9 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
 {
     checkedPixmap = Resource::loadPixmap("portabase/checked");
     uncheckedPixmap = Resource::loadPixmap("portabase/unchecked");
+    DateFormat format = TimeString::currentDateFormat();
+    dateOrder = format.shortOrder();
+    dateSeparator = format.separator();
 
     file = new c4_Storage(path, TRUE);
     global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S]");
@@ -261,6 +265,17 @@ QString Database::isValidValue(int type, QString value)
             return "must be 0 or 1";
         }
     }
+    else if (type == DATE) {
+        if (value.length() != 8) {
+            return "invalid date";
+        }
+        int y = value.left(4).toInt();
+        int m = value.mid(4, 2).toInt();
+        int d = value.right(2).toInt();
+        if (!QDate::isValid(y, m, d)) {
+            return "invalid date";
+        }
+    }
     return "";
 }
 
@@ -273,6 +288,17 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal)
     if (type == INTEGER || type == BOOLEAN) {
         c4_IntProp newProp(name);
         int value = defaultVal.toInt();
+        for (int i = 0; i < size; i++) {
+            newProp (data[i]) = value;
+        }
+    }
+    else if (type == DATE) {
+        c4_IntProp newProp(name);
+        int value = defaultVal.toInt();
+        if (value == TODAY) {
+            QDate date = QDate::currentDate();
+            value = date.year() * 10000 + date.month() * 100 + date.day();
+        }
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
         }
@@ -347,7 +373,7 @@ void Database::renameColumn(QString oldName, QString newName)
     // create a new data column, copying the contents of the old
     int type = cType (columns[index]);
     int size = data.GetSize();
-    if (type == INTEGER || type == BOOLEAN) {
+    if (type == INTEGER || type == BOOLEAN || type == DATE) {
         c4_IntProp oldProp(oldName);
         c4_IntProp newProp(newName);
         for (int i = 0; i < size; i++) {
@@ -385,7 +411,7 @@ QStringList Database::getRow(int rowId)
     for (int i = 0; i < numCols; i++) {
         QString name(cName (temp[i]));
         int type = cType (temp[i]);
-        if (type == INTEGER || type == BOOLEAN) {
+        if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(name);
             int value = prop (row);
             results.append(QString::number(value));
@@ -542,7 +568,7 @@ c4_View Database::createEmptyView(QStringList colNames)
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
         int type = getType(name);
-        if (type == INTEGER || type == BOOLEAN) {
+        if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(name);
             result.AddProperty(prop);
         }
@@ -693,21 +719,28 @@ QString Database::addRow(QStringList values)
     for (int i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString name(cName (temp[i]));
-        QString error = isValidValue(type, values[i]);
+        QString value = values[i];
+        if (type == DATE) {
+            // strip out common formatting characters (used in CSV import)
+            value = value.replace(QRegExp("/"), "");
+            value = value.replace(QRegExp("-"), "");
+            value = value.replace(QRegExp("\\."), "");
+        }
+        QString error = isValidValue(type, value);
         if (error != "") {
             return name + " " + PortaBase::tr(error);
         }
         if (type == STRING || type == NOTE) {
             c4_StringProp prop(name);
-            prop (row) = values[i];
+            prop (row) = value;
         }
-        else if (type == INTEGER || type == BOOLEAN) {
+        else if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(name);
-            prop (row) = values[i].toInt();
+            prop (row) = value.toInt();
         }
         else if (type == FLOAT) {
             c4_FloatProp prop(name);
-            prop (row) = values[i].toDouble();
+            prop (row) = value.toDouble();
         }
     }
     data.Add(row);
@@ -727,7 +760,7 @@ void Database::updateRow(int rowId, QStringList values)
             c4_StringProp prop(name);
             prop (data[index]) = values[i];
         }
-        else if (type == INTEGER || type == BOOLEAN) {
+        else if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(name);
             prop (data[index]) = values[i].toInt();
         }
@@ -822,7 +855,7 @@ QString Database::formatString()
         QString name(cName (row));
         result += name;
         int type = cType(row);
-        if (type == INTEGER || type == BOOLEAN) {
+        if (type == INTEGER || type == BOOLEAN || type == DATE) {
             result += ":I";
         }
         else if (type == FLOAT) {
@@ -870,4 +903,37 @@ void Database::exportToCSV(QString filename)
         output << csv.encodeRow(row);
     }
     f.close();
+}
+
+QString Database::dateToString(int date)
+{
+    int y = date / 10000;
+    int m = (date - y * 10000) / 100;
+    int d = date - y * 10000 - m * 100;
+    QDate dateObj(y, m, d);
+    return dateToString(dateObj);
+}
+
+QString Database::dateToString(QDate &date)
+{
+    int *parts = new int[3];
+    if (dateOrder == DateFormat::YearMonthDay) {
+        parts[0] = date.year();
+        parts[1] = date.month();
+        parts[2] = date.day();
+    }
+    else if (dateOrder == DateFormat::MonthDayYear) {
+        parts[0] = date.month();
+        parts[1] = date.day();
+        parts[2] = date.year();
+    }
+    else {
+        parts[0] = date.day();
+        parts[1] = date.month();
+        parts[2] = date.year();
+    }
+    QString result = QString::number(parts[0]) + dateSeparator;
+    result += QString::number(parts[1]) + dateSeparator;
+    result += QString::number(parts[2]);
+    return result;
 }

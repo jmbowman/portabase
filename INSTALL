@@ -21,17 +21,19 @@ specified somewhere else) to /opt/Qtopia/lib/ so it can be found by PortaBase
 at runtime.
 
 To build MetaKit for the Zaurus, use the instructions for the test environment
-(after cleaning out the results of that build, or from a different copy of the source directory) but with the following changes:
+(after cleaning out the results of that build, or from a different copy of the
+source directory) but with the following changes:
 
 - Run dev-arm-qpe.sh instead of dev-x86-qpe.sh.
 - Instead of running ../unix/configure, run:
 
 NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ../unix/configure --prefix=/output/dir --host=arm-linux
 
-Replace "/output/dir" with the directory you want the build results to be placed in (probably not /usr/local this time).
+Replace "/output/dir" with the directory you want the build results to be
+placed in (probably not /usr/local this time).
 - Copy libmk4.so to /opt/Qtopia/sharp/lib instead of /opt/Qtopia/lib.
 - Run "arm-linux-strip libmk4.so" to remove debugging symbols and such in order
-to reduce the size of the library.
+  to reduce the size of the library.
 
 PortaBase Compilation
 ---------------------
@@ -54,6 +56,9 @@ directory hierarchy as root in a directory of your choice:
 /portabase/opt/QtPalmtop/bin/portabase
 /portabase/opt/QtPalmtop/help/html/portabase.html
 /portabase/opt/QtPalmtop/pics/PortaBase.png
+/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerNext.png
+/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerPrev.png
+/portabase/opt/QtPalmtop/pics/portabase/calendar.png
 /portabase/opt/QtPalmtop/pics/portabase/checked.png
 /portabase/opt/QtPalmtop/pics/portabase/save.png
 /portabase/opt/QtPalmtop/pics/portabase/save_disabled.png

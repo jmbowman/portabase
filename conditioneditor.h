@@ -17,6 +17,7 @@
 
 class Condition;
 class Database;
+class DateWidget;
 class QCheckBox;
 class QComboBox;
 class QLabel;
@@ -55,6 +56,7 @@ private:
     QWidgetStack *constantStack;
     QLineEdit *constantLine;
     QCheckBox *constantCheck;
+    DateWidget *constantDate;
     QCheckBox *caseCheck;
     int dataType;
 };

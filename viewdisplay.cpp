@@ -337,6 +337,10 @@ void ViewDisplay::rowSelected()
 void ViewDisplay::cellPressed(QListViewItem *item, const QPoint &point,
                               int column)
 {
+    if (item == 0) {
+        // no row selected
+        return;
+    }
     pressedIndex = column;
     timer.restart();
 }
@@ -344,6 +348,10 @@ void ViewDisplay::cellPressed(QListViewItem *item, const QPoint &point,
 void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
                                int column)
 {
+    if (item == 0) {
+        // no row selected
+        return;
+    }
     if (column != pressedIndex) {
         return;
     }

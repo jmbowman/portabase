@@ -17,6 +17,7 @@
 #include "datatypes.h"
 
 class Database;
+class DateWidget;
 class QCheckBox;
 class QLineEdit;
 class QScrollView;
@@ -25,6 +26,7 @@ class NoteButton;
 typedef QValueList<QCheckBox*> CheckBoxList;
 typedef QValueList<QLineEdit*> LineEditList;
 typedef QValueList<NoteButton*> NoteButtonList;
+typedef QValueList<DateWidget*> DateWidgetList;
 
 class RowEditor: public QDialog
 {
@@ -49,6 +51,7 @@ private:
     LineEditList lineEdits;
     CheckBoxList checkBoxes;
     NoteButtonList noteButtons;
+    DateWidgetList dateWidgets;
 };
 
 #endif

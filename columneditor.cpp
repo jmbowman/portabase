@@ -37,6 +37,7 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     typeBox->insertItem(tr("Decimal"));
     typeBox->insertItem(tr("Boolean"));
     typeBox->insertItem(tr("Note"));
+    typeBox->insertItem(tr("Date"));
     connect(typeBox, SIGNAL(activated(int)),
             this, SLOT(updateDefaultWidget(int)));
 
@@ -45,6 +46,7 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     defaultCheck = new QCheckBox(defaultStack);
     defaultLine = new QLineEdit(defaultStack);
     defaultNote = new NoteButton(tr("Default Note"), defaultStack);
+    defaultDate = new QLabel("  " + tr("Today"), defaultStack);
     defaultStack->raiseWidget(defaultLine);
 }
 
@@ -77,6 +79,9 @@ void ColumnEditor::setType(int newType)
     else if (newType == NOTE) {
         defaultStack->raiseWidget(defaultNote);
     }
+    else if (newType == DATE) {
+        defaultStack->raiseWidget(defaultDate);
+    }
     else {
         defaultStack->raiseWidget(defaultLine);
     }
@@ -90,6 +95,9 @@ QString ColumnEditor::defaultValue()
     }
     else if (colType == NOTE) {
         return defaultNote->content();
+    }
+    else if (colType == DATE) {
+        return QString::number(TODAY);
     }
     else {
         return defaultLine->text();
@@ -114,6 +122,11 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent(newDefault);
     }
+    else if (colType == DATE) {
+        defaultLine->setText("");
+        defaultCheck->setChecked(FALSE);
+        defaultNote->setContent("");
+    }
     else {
         defaultLine->setText(newDefault);
         defaultCheck->setChecked(FALSE);
@@ -133,6 +146,9 @@ void ColumnEditor::updateDefaultWidget(int newType)
     }
     else if (newType == NOTE) {
         defaultStack->raiseWidget(defaultNote);
+    }
+    else if (newType == DATE) {
+        defaultStack->raiseWidget(defaultDate);
     }
     else {
         defaultStack->raiseWidget(defaultLine);
