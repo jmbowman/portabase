@@ -467,21 +467,6 @@ void PortaBase::createFile(int source)
     }
 }
 
-void PortaBase::configureDocLnk(DocLnk &doclnk, const QString &name)
-{
-    doclnk.setType("application/portabase");
-    QString filename(name);
-    if (filename.length() > 40) {
-        filename = filename.left(40);
-    }
-    doclnk.setName(filename);
-    QString defaultFile = doclnk.file();
-    QFileInfo info(defaultFile);
-    // calling file() created an empty file, delete it now
-    QFile::remove(defaultFile);
-    doclnk.setFile(info.dirPath(true) + "/" + info.baseName() + ".pob");
-}
-
 void PortaBase::finishNewFile(Database *db)
 {
     viewer->setDatabase(db);
@@ -507,7 +492,7 @@ void PortaBase::openFile()
 void PortaBase::openFile(const QString &f)
 {
     DocLnk nf(f);
-    nf.setType("application/portabase");
+    //nf.setType("application/portabase");
     openFile(nf);
 }
 
@@ -577,59 +562,12 @@ void PortaBase::deleteFile()
 
 void PortaBase::copyFile()
 {
-#ifndef DESKTOP
-    const DocLnk *selection = fileSelector->selected();
-    if (selection == 0) {
-        return;
-    }
-    bool ok;
-    QString name = InputDialog::getText(tr("PortaBase"),
-                                        tr("Enter a name for the new file"),
-                                        QString::null, &ok, this);
-    if (ok && !name.isEmpty()) {
-        DocLnk copy;
-        configureDocLnk(copy, name);
-        ok = fileSelector->copyFile(*selection, copy);
-    }
-    if (ok) {
-        fileSelector->reread();
-    }
-    else {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Unable to create new file"));
-    }
-    delete selection;
-#endif
+    fileSelector->duplicate();
 }
 
 void PortaBase::renameFile()
 {
-#ifndef DESKTOP
-    const DocLnk *selection = fileSelector->selected();
-    if (selection == 0) {
-        return;
-    }
-    bool ok;
-    QString name = InputDialog::getText(tr("PortaBase"),
-                                        tr("Enter the new file name"),
-                                        QString::null, &ok, this);
-    if (ok) {
-        ok = !name.isEmpty();
-    }
-    if (ok) {
-        DocLnk copy;
-        configureDocLnk(copy, name);
-        ok = fileSelector->renameFile(*selection, copy);
-    }
-    if (ok) {
-        fileSelector->reread();
-    }
-    else {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Unable to rename the file"));
-    }
-    delete selection;
-#endif
+    fileSelector->rename();
 }
 
 void PortaBase::refreshFileList()
@@ -1299,7 +1237,7 @@ void PortaBase::showHelp()
 
 void PortaBase::aboutPortaBase()
 {
-    QString message = tr("PortaBase") + " 1.7\n";
+    QString message = tr("PortaBase") + " 1.8\n";
     message += tr("Copyright (C)") + " 2002-2003 Jeremy Bowman\n\n";
     message += tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::information(this, tr("About PortaBase"), message);

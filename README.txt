@@ -1,5 +1,5 @@
-PortaBase 1.7 (June 2003)
---------------------------
+PortaBase 1.8 (August 2003)
+---------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
 any other Linux PDA using the Qtopia environment.)  It can now also be
@@ -46,8 +46,7 @@ IMPORTANT NOTE: Metakit is no longer installed as a separate library.
 PortaBase now also uses the Beecrypt encryption library, and installing
 each library separately makes things more complicated than most people
 would prefer.  Both libraries are now compiled into the PortaBase
-executable.  This also avoids the need to provide different versions for
-the US and newer Japanese Zaurus models.
+executable.
 
 Windows Installation and Upgrades
 ---------------------------------

@@ -28,8 +28,6 @@ public:
 
     void reread();
     const DocLnk *selected();
-    bool copyFile(const DocLnk &src, const DocLnk &dst);
-    bool renameFile(const DocLnk &src, const DocLnk &dst);
     void initFile(const DocLnk &doc);
 
 signals:

@@ -62,6 +62,8 @@ public:
     void moveChild(CalcNode *child, CalcNode *after);
     CalcNode *clone();
     int maxChildren();
+    bool deleteColumn(const QString &name);
+    void renameColumn(const QString &oldName, const QString &newName);
 
 private:
     static QString description(Database *db, int type, const QString &value);

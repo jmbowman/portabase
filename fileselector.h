@@ -26,8 +26,8 @@ public:
 
     QString currentDir();
     QStringList recent();
-    bool copyFile(const DocLnk &src, const DocLnk &dst);
-    bool renameFile(const DocLnk &src, const DocLnk &dst);
+    bool duplicate();
+    bool rename();
     void initFile(const DocLnk &doc);
 
 private:

@@ -126,12 +126,14 @@ double CalcNode::value(const QStringList &row, const QStringList &colNames)
         }
     }
     else if (nodeType == CALC_MAX) {
-        for (i = 0; i < count; i++) {
+        result = children[0]->value(row, colNames);
+        for (i = 1; i < count; i++) {
             result = QMAX(result, children[i]->value(row, colNames));
         }
     }
     else if (nodeType == CALC_MIN) {
-        for (i = 0; i < count; i++) {
+        result = children[0]->value(row, colNames);
+        for (i = 1; i < count; i++) {
             result = QMIN(result, children[i]->value(row, colNames));
         }
     }
@@ -335,5 +337,41 @@ int CalcNode::maxChildren()
             return 1;
         default:
             return -1;
+    }
+}
+
+bool CalcNode::deleteColumn(const QString &name)
+{
+    int count = children.count();
+    int i;
+    CalcNodeList removals;
+    for (i = 0; i < count; i++) {
+        CalcNode *child = children[i];
+        if (child->deleteColumn(name)) {
+            removals.append(child);
+        }
+    }
+    count = removals.count();
+    for (i = 0; i < count; i++) {
+        removeChild(removals[i]);
+    }
+    if (nodeType == CALC_COLUMN || nodeType == CALC_DATE_COLUMN) {
+        if (nodeValue == name) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void CalcNode::renameColumn(const QString &oldName, const QString &newName)
+{
+    int count = children.count();
+    for (int i = 0; i < count; i++) {
+        children[i]->renameColumn(oldName, newName);
+    }
+    if (nodeType == CALC_COLUMN || nodeType == CALC_DATE_COLUMN) {
+        if (nodeValue == oldName) {
+            nodeValue = newName;
+        }
     }
 }

@@ -22,7 +22,7 @@ public:
     Crypto(c4_Storage *outer, c4_Storage *inner);
     ~Crypto();
 
-    QString open();
+    QString open(int version);
     void save();
     QString setPassword(const QString &pass, bool newPass);
     QString changePassword(const QString &oldPass, const QString &newPass);
@@ -33,6 +33,7 @@ private:
     byte *pad(byte *data, int dataSize, int *newSize);
     int unpaddedLength(byte *data, int size);
     void printBytes(QString label, byte *data, int size);
+    void invertIfNecessary(byte *data, int size, int version);
 
 private:
     QString password;

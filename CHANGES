@@ -1,3 +1,42 @@
+2003-08-31  #################### PortaBase 1.8 ####################
+
+2003-08-21  JMB  Fixed Zaurus encryption bug
+
+    I think I finally found the cause of the crash on opening some encrypted
+    files on the Zaurus and fixed it.
+
+2003-08-20  JMB  Better save icon for SL-C7x0 series
+
+    Added a larger version of the save icon for use on the 640x480 display
+    of the Zaurus SL-C7x0 models.
+
+2003-08-19  JMB  French UI update, file creation bugfix, Japanese help fix
+
+    Incorporated the latest UI updates from Eric Santonacci, and fixed a
+    bug in creating new files that showed up on my SL-C760 but not in the
+    test environment (glad I got that before releasing...)  Also discovered
+    that the Japanese help file often (always?) got overwritten by the
+    English one due to linking differences between the US and Japan Zaurus
+    models...fixed so the correct help file always gets shown.
+
+2003-08-11  JMB  Czech UI translation, Japanese translation updates
+
+    Added a Czech translation of the user interface (provided by Jaromir
+    Mara), integrated the latest Japanese help updates provided by
+    Tsukamoto-san, and made a few tweaks to the Japanese UI translation.
+
+2003-08-10  JMB  Columns editor bugfixes, MIN/MAX bugfix
+
+    Calculation fields weren't being properly updated when columns that
+    they referenced were renamed or deleted; fixed this.  Also fixed
+    a bug in MIN and MAX calculations.
+
+2003-08-03  JMB  New Zaurus file navigation bugfixes
+
+    Fixed a few bugs with support for the file navigation widget on newer
+    ROMs (now that I got around to actually testing it on a 3.10-installed
+    SL-5500).
+
 2003-07-30  JMB  Windows file association, build fixes
 
     Set the installer to associate ".pob" files with PortaBase, so they

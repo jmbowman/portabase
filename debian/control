@@ -2,7 +2,7 @@ Source: portabase
 Section: x11
 Priority: optional
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
-Build-Depends: debhelper (>> 4.0.0), libqt3-headers, libqt3-mt-dev, beecrypt2-dev
+Build-Depends: debhelper (>> 4.0.0), libqt3-headers, libqt3-mt-dev
 Standards-Version: 3.5.8
 
 Package: portabase
@@ -15,7 +15,7 @@ Description: An easy-to-use personal database application
  .
  Features include:
   - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
-    and Enum column types
+    Calculation, Sequence, and Enum column types
   - Custom data views (subsets of the columns in any order)
   - Filter the displayed rows using sets of conditions
   - Sort the rows by any combination of columns, each in ascending or

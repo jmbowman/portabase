@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Problematic row</source>
-        <translation>Rangée problématique</translation>
+        <translation>Enr. problématique</translation>
     </message>
     <message>
         <source>OK</source>
@@ -18,7 +18,7 @@
     <name>CalcDateEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur de noeud de calcul</translation>
     </message>
     <message>
         <source>PortaBase</source>
@@ -45,7 +45,7 @@
     <name>CalcEditor</name>
     <message>
         <source>Calculation Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur de calcul</translation>
     </message>
     <message>
         <source>PortaBase</source>
@@ -57,11 +57,11 @@
     </message>
     <message>
         <source>Equation</source>
-        <translation type="unfinished"></translation>
+        <translation>Équation</translation>
     </message>
     <message>
         <source>Decimal Places</source>
-        <translation type="unfinished"></translation>
+        <translation>Places des décimales</translation>
     </message>
     <message>
         <source>Add</source>
@@ -89,14 +89,14 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>Éditeur de calcul</translation>
     </message>
 </context>
 <context>
     <name>CalcNodeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur de noeud de calcul</translation>
     </message>
     <message>
         <source>PortaBase</source>
@@ -112,7 +112,7 @@
     </message>
     <message>
         <source>Operation</source>
-        <translation type="unfinished"></translation>
+        <translation>Opération</translation>
     </message>
     <message>
         <source>OK</source>
@@ -124,14 +124,14 @@
     </message>
     <message>
         <source>Constant must be a decimal value</source>
-        <translation type="unfinished"></translation>
+        <translation>Une constante doit-être une valeur décimale</translation>
     </message>
 </context>
 <context>
     <name>CalcWidget</name>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour</translation>
     </message>
 </context>
 <context>
@@ -153,11 +153,43 @@
     <name>ColorDialog</name>
     <message>
         <source>OK</source>
-        <translation type="obsolete">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">Annuler</translation>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <source>Hu&amp;e:</source>
+        <translation>&amp;Teinte :</translation>
+    </message>
+    <message>
+        <source>&amp;Sat:</source>
+        <translation>&amp;Saturation :</translation>
+    </message>
+    <message>
+        <source>&amp;Val:</source>
+        <translation>&amp;Luminance :</translation>
+    </message>
+    <message>
+        <source>&amp;Red:</source>
+        <translation>&amp;Rouge :</translation>
+    </message>
+    <message>
+        <source>&amp;Green:</source>
+        <translation>&amp;Vert :</translation>
+    </message>
+    <message>
+        <source>Bl&amp;ue:</source>
+        <translation>Ble&amp;u :</translation>
+    </message>
+    <message>
+        <source>A&amp;lpha channel:</source>
+        <translation>Canal a&amp;lpha :</translation>
+    </message>
+    <message>
+        <source>Choose color</source>
+        <translation>Sélection d&apos;une couleur</translation>
     </message>
 </context>
 <context>
@@ -236,19 +268,19 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>Sequence</source>
-        <translation type="unfinished"></translation>
+        <translation>Séquence</translation>
     </message>
     <message>
         <source>Edit calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer un calcul</translation>
     </message>
     <message>
         <source>Next value</source>
-        <translation type="unfinished"></translation>
+        <translation>Val. suiv.</translation>
     </message>
 </context>
 <context>
@@ -394,11 +426,11 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcul</translation>
     </message>
     <message>
         <source>Sequence</source>
-        <translation type="unfinished"></translation>
+        <translation>Séquence</translation>
     </message>
 </context>
 <context>
@@ -628,42 +660,58 @@ aussi effacées:</translation>
     <name>ImportDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">Portabase</translation>
+        <translation>Portabase</translation>
     </message>
     <message>
         <source>Text encoding</source>
-        <translation type="obsolete">Encodage du texte</translation>
+        <translation>Encodage du texte</translation>
+    </message>
+    <message>
+        <source>Import rows from CSV file</source>
+        <translation>Importer enr.d&apos;un fichier CSV</translation>
+    </message>
+    <message>
+        <source>Import from MobileDB file</source>
+        <translation>Importer d&apos;un fichier MobileDB</translation>
+    </message>
+    <message>
+        <source>Import from text file</source>
+        <translation>Importer d&apos;un fichier texte</translation>
+    </message>
+    <message>
+        <source>Import from XML file</source>
+        <translation>Importer d&apos;un fichier XML</translation>
     </message>
 </context>
 <context>
     <name>NewFileDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">Portabase</translation>
+        <translation>Portabase</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="obsolete">Exporter</translation>
+        <translation>Exporter</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="obsolete">Entrez un nom pour le nouveau fichier</translation>
+        <translation>Entrez un nom pour le nouveau fichier</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="obsolete">Le fichier existe déjà; l&apos;écraser?</translation>
+        <translation>Le fichier existe déjà; l&apos;écraser?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="obsolete">Oui</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="obsolete">Non</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="obsolete">Crypter le fichier?</translation>
+        <translation>Crypter le fichier?</translation>
     </message>
 </context>
 <context>
@@ -694,6 +742,26 @@ aussi effacées:</translation>
     <message>
         <source>Choose a file</source>
         <translation>Choisissez un fichier</translation>
+    </message>
+    <message>
+        <source>PortaBase</source>
+        <translation>Portabase</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new file</source>
+        <translation>Entrez un nom pour le nouveau fichier</translation>
+    </message>
+    <message>
+        <source>Unable to create new file</source>
+        <translation>Impossible de créer le nouveau fichier</translation>
+    </message>
+    <message>
+        <source>Enter the new file name</source>
+        <translation>Entrez le nouveau nom de fichier</translation>
+    </message>
+    <message>
+        <source>Unable to rename the file</source>
+        <translation>Impossible de renommer le fichier</translation>
     </message>
 </context>
 <context>
@@ -896,7 +964,7 @@ supporté; mettez à jour SVP</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation>Rangée</translation>
+        <translation>Enr.</translation>
     </message>
     <message>
         <source>View</source>
@@ -938,7 +1006,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Please select a file name</source>
-        <translation type="obsolete">Sélectionnez un nom de fichier SVP</translation>
+        <translation>Sélectionnez un nom de fichier SVP</translation>
     </message>
     <message>
         <source>Delete this view?</source>
@@ -962,11 +1030,11 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Icones</translation>
     </message>
 </context>
 <context>
@@ -1017,11 +1085,11 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Wrap Notes</translation>
     </message>
     <message>
         <source>at whitespace</source>
-        <translation type="unfinished"></translation>
+        <translation>at whitespace</translation>
     </message>
     <message>
         <source>anywhere</source>
@@ -1076,59 +1144,63 @@ dans le filtre courant?</translation>
     <name>QColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Teinte :</translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saturation :</translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Luminance :</translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rouge :</translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vert :</translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ble&amp;u :</translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal a&amp;lpha :</translation>
     </message>
     <message>
         <source>&amp;Basic colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs de &amp;base</translation>
     </message>
     <message>
         <source>&amp;Custom colors</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Couleurs personnalisées</translation>
     </message>
     <message>
         <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir des &amp;couleurs personnalisées &gt;&gt;</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <source>&amp;Add To Custom Colors</source>
+        <translation>&amp;Ajouter aux couleurs personnalisées</translation>
     </message>
     <message>
         <source>&amp;Add to Custom Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ajouter aux couleurs personnalisées</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection d&apos;une couleur</translation>
     </message>
 </context>
 <context>
@@ -1220,6 +1292,95 @@ dans le filtre courant?</translation>
     <message>
         <source>Cancel</source>
         <translation>Annuler</translation>
+    </message>
+</context>
+<context>
+    <name>QLineEdit</name>
+    <message>
+        <source>Clear</source>
+        <translation>Effacer</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Tout sélectionner</translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>A&amp;nnuler Annuler</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>Co&amp;uper</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>Cop&amp;ier</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>Co&amp;ller</translation>
+    </message>
+</context>
+<context>
+    <name>QMessageBox</name>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Oui</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Non</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for multiplatform GUI &amp;amp; application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants.&lt;br&gt;Qt is also available for embedded devices.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; for more information.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;À propos de Qt&lt;/h3&gt;&lt;p&gt;Ce programme utilise Qt version %1.&lt;/p&gt;&lt;p&gt;Qt est une boîte à outils C++ pour le développement multi-plateforme d&apos;applications graphiques. Qt permet de porter un même code source sur MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux et toutes les versions commerciales majeures.&lt;br&gt;Qt est aussi disponible pour les systèmes embarqués.&lt;/p&gt;&lt;p&gt;Qt est un produit de Trolltech. Consultez &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; pour de plus amples renseignements.&lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QMultiLineEdit</name>
+    <message>
+        <source>Undo</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>Annuler Annuler</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation>Couper</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Copier</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation>Coller</translation>
+    </message>
+    <message>
+        <source>Paste special...</source>
+        <translation>Collage spécial...</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>Effacer</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Tout sélectionner</translation>
     </message>
 </context>
 <context>
@@ -1507,39 +1668,39 @@ Libérez de l&apos;espace et réessayez.</translation>
     </message>
     <message>
         <source>Too many child nodes for node type</source>
-        <translation type="unfinished"></translation>
+        <translation>Trop de noeuds enfant pour ce type de noeud</translation>
     </message>
     <message>
         <source>Days_Between</source>
-        <translation type="unfinished"></translation>
+        <translation>Jours_Entre</translation>
     </message>
     <message>
         <source>MAX</source>
-        <translation type="unfinished"></translation>
+        <translation>MAX</translation>
     </message>
     <message>
         <source>MIN</source>
-        <translation type="unfinished"></translation>
+        <translation>MIN</translation>
     </message>
     <message>
         <source>AVERAGE</source>
-        <translation type="unfinished"></translation>
+        <translation>MOYENNE</translation>
     </message>
     <message>
         <source>ABS</source>
-        <translation type="unfinished"></translation>
+        <translation>ABS</translation>
     </message>
     <message>
         <source>SQRT</source>
-        <translation type="unfinished"></translation>
+        <translation>SQRT</translation>
     </message>
     <message>
         <source>LOG</source>
-        <translation type="unfinished"></translation>
+        <translation>LOG</translation>
     </message>
     <message>
         <source>LN</source>
-        <translation type="unfinished"></translation>
+        <translation>LN</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -1572,6 +1733,37 @@ Libérez de l&apos;espace et réessayez.</translation>
     <message>
         <source>Encrypt the file?</source>
         <translation>Crypter le fichier?</translation>
+    </message>
+</context>
+<context>
+    <name>QTextEdit</name>
+    <message>
+        <source>Clear</source>
+        <translation>Effacer</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Tout sélectionner</translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>A&amp;nnuler Annuler</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>Co&amp;uper</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>Cop&amp;ier</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>Co&amp;ller</translation>
     </message>
 </context>
 <context>

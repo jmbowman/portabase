@@ -22,7 +22,7 @@ Linux/UNIX Development Environment
 To compile PortaBase for use as a Linux or UNIX desktop application, you
 will need the following:
 - g++ (any relatively recent version should work)
-- The latest version of Qt 3 (including qmake and development headers)
+- A recent version of Qt 3 (including qmake and development headers)
 - Other packages as needed to satisfy the above requirements or create
   packages for your OS/distribution
 
@@ -58,19 +58,14 @@ Metakit for use in Linux desktop PortaBase, just follow the README directions.
 
 Beecrypt compilation
 --------------------
-Get the latest version of Beecrypt from CVS (PortaBase is currently using
-the code from March 1, 2003).  For the desktop versions of PortaBase, just
+Get Beecrypt version 3.0.0.  For the desktop versions of PortaBase, just
 follow the build instructions found in Beecrypt's INSTALL file.  For the
 Zaurus version, run the configure script as follows:
 
-NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux --enable-aio=no
+NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux --enable-aio=no --with-javaglue=no --enable-static --enable-optimized=no
 
 As with Metakit, replace /output/dir with the directory in which to place
 the results.  Copy libbeecrypt.a to the same place the Metakit library went.
-
-For Debian unstable, just install the latest versions of the beecrypt2 and
-beecrypt2-dev packages; you don't need to compile it yourself to compile
-the desktop version of PortaBase.
 
 PortaBase for Zaurus Compilation
 --------------------------------
@@ -78,9 +73,16 @@ After compiling Metakit and Beecrypt as described above, PortaBase can be
 compiled in the usual manner for Qtopia applications.  Use tmake on
 portabase_test.pro for desktop testing and portabase.pro when building for
 the Zaurus; tmake usage is described in the compiler setup HOWTO mentioned
-above.  "arm-linux-strip" should be run on the Arm version of the "portabase"
-executable in order to reduce its size by removing unneeded debugging
-information and such.
+above.  "arm-linux-strip" should be run on the Arm version of the
+"portabase" executable in order to reduce its size by removing unneeded
+debugging information and such.
+
+To compile a version with support for the file navigation widget on
+newer Sharp ROMs, use portabase_sharp.pro instead.  You will also need the
+development files for Sharp's custom Zaurus libraries; these are available
+from the following (Japanese) page:
+
+http://developer.ezaurus.com/sl_j/doc/reference.htm
 
 PortaBase for Windows Compilation, Packaging
 --------------------------------------------
@@ -99,7 +101,7 @@ Debian Package Building
 To create a Debian package for the desktop version of PortaBase, follow
 the normal process for building a Debian package:
 - Unpack the source tarball
-- Move the resulting "portabase" directory to "portabase-1.5" (or whatever
+- Move the resulting "portabase" directory to "portabase-1.8" (or whatever
   the current version number is)
 - From the root source directory, either run "dpkg-buildpackage" as root
   or run "dpkg-buildpackage -rfakeroot" (if you have fakeroot installed)
@@ -109,11 +111,34 @@ Linux/UNIX compilation
 - Set the QMAKESPEC and QTDIR environment variables as appropriate for your
   platform
 - Make sure the Metakit and Beecrypt static libraries (.a) are in your
-  LD_LIBRARY_PATH, and that the dynamic libraries (.so) aren't.  (For
-  Debian unstable, the beecrypt2 and beecrypt2-dev packages will set up
-  that library for you.)
+  LD_LIBRARY_PATH, and that the other library files (.so, .la, etc.) aren't.
 - Run qmake on portabase_desktop.pro
 - Run make
+
+Linux/UNIX installation
+-----------------------
+If you aren't building a Debian package, you'll need to manually copy some
+files into the correct locations.  The first is portabase.conf, which needs
+to be copied from the "package" directory into /etc.  This file specifies
+where to find the rest of the files PortaBase needs:
+
+1- One directory for all the icons from the "desktop/icons" directory; by
+default these end up as:
+
+/usr/share/portabase/icons/close.png
+/usr/share/portabase/icons/portabase/save.png
+
+...and so forth.
+
+2- Another directory for the help files and UI translation files; by default
+these are:
+
+/usr/share/doc/portabase/portabase.html
+/usr/share/doc/portabase/ja/portabase.html
+/usr/share/doc/portabase/ja/portabase.qm
+
+...and so on.  (The portabase.qm files are created by running lrelease on the
+.pro file.)
 
 Package Building
 ----------------
@@ -124,19 +149,26 @@ directory hierarchy as root in a directory of your choice:
 /portabase/CONTROL/postinst
 /portabase/opt/QtPalmtop/apps/Applications/portabase.desktop
 /portabase/opt/QtPalmtop/bin/portabase
-/portabase/opt/QtPalmtop/help/html/portabase.html
+/portabase/opt/QtPalmtop/help/en/html/portabase.html
 /portabase/opt/QtPalmtop/help/ja/html/portabase.html
+/portabase/opt/QtPalmtop/help/tw/html/portabase.html
+/portabase/opt/QtPalmtop/i18n/cs/portabase.qm
+/portabase/opt/QtPalmtop/i18n/fr/portabase.qm
 /portabase/opt/QtPalmtop/i18n/ja/portabase.qm
+/portabase/opt/QtPalmtop/i18n/tw/portabase.qm
 /portabase/opt/QtPalmtop/pics/PortaBase.png
 /portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerNext.xpm
 /portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerPrev.xpm
+/portabase/opt/QtPalmtop/pics/portabase/calc.png
 /portabase/opt/QtPalmtop/pics/portabase/calendar.xpm
 /portabase/opt/QtPalmtop/pics/portabase/checked.png
 /portabase/opt/QtPalmtop/pics/portabase/save.png
 /portabase/opt/QtPalmtop/pics/portabase/save_disabled.png
 /portabase/opt/QtPalmtop/pics/portabase/unchecked.png
+/portabase/opt/QtPalmtop/pics144/portabase/save.png
+/portabase/opt/QtPalmtop/pics144/portabase/save_disabled.png
 
-(portabase.qm is created by running lrelease on the .pro file.)
+(The portabase.qm files are created by running lrelease on the .pro file.)
 
 Finally, run ipkg-build on the portabase directory; this will create the
 .ipk file.

@@ -29,6 +29,8 @@ public:
     const DocLnk *selected();
     QString currentDir();
     QStringList recent();
+    bool duplicate();
+    bool rename();
     void initFile(const DocLnk &doc);
 
 signals:

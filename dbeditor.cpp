@@ -78,7 +78,13 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
 
 DBEditor::~DBEditor()
 {
-
+    NameCalcMap::Iterator iter;
+    for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
+        CalcNode *calcRoot = iter.data();
+        if (calcRoot != 0) {
+            delete calcRoot;
+        }
+    }
 }
 
 int DBEditor::edit(Database *subject)
@@ -93,10 +99,12 @@ int DBEditor::edit(Database *subject)
         int type = db->getType(name);
         QString defaultVal = db->getDefault(name);
         if (type == CALC) {
-            CalcNode *root = db->loadCalc(name);
+            int decimals = 2;
+            CalcNode *root = db->loadCalc(name, &decimals);
+            calcMap.insert(name, root);
+            decimalsMap.insert(name, decimals);
             if (root != 0) {
                 defaultVal = root->equation(db);
-                delete root;
             }
         }
         info.Add(ceName [name.utf8()] + ceType [type]
@@ -171,16 +179,11 @@ void DBEditor::editColumn()
     CalcNode *calcRoot = 0;
     int decimals = 2;
     if (type == CALC) {
-        if (calcMap.contains(name)) {
-            calcRoot = calcMap[name];
-            decimals = decimalsMap[name];
-            // use a copy in case the edit is cancelled
-            if (calcRoot != 0) {
-                calcRoot = calcRoot->clone();
-            }
-        }
-        else {
-            calcRoot = db->loadCalc(name, &decimals);
+        calcRoot = calcMap[name];
+        decimals = decimalsMap[name];
+        // use a copy in case the edit is cancelled
+        if (calcRoot != 0) {
+            calcRoot = calcRoot->clone();
         }
         columnEditor->setCalculation(calcRoot, decimals);
     }
@@ -203,6 +206,7 @@ void DBEditor::editColumn()
                     if (oldIndex != -1) {
                         renamedCols[oldIndex] = name;
                     }
+                    renameColumnRefs(oldName, name);
                 }
             }
             else {
@@ -215,14 +219,12 @@ void DBEditor::editColumn()
         ceName (info[index]) = name.utf8();
         ceDefault (info[index]) = defaultVal.utf8();
         if (type == CALC) {
-            if (calcMap.contains(oldName)) {
-                CalcNode *oldRoot = calcMap[oldName];
-                if (oldRoot != 0) {
-                    delete oldRoot;
-                }
-                calcMap.remove(oldName);
-                decimalsMap.remove(oldName);
+            CalcNode *oldRoot = calcMap[oldName];
+            if (oldRoot != 0) {
+                delete oldRoot;
             }
+            calcMap.remove(oldName);
+            decimalsMap.remove(oldName);
             calcMap.insert(name, calcRoot);
             decimalsMap.insert(name, decimals);
             columnEditor->setCalculation(0, 2);
@@ -305,6 +307,7 @@ void DBEditor::deleteColumn()
         calcMap.remove(name);
         decimalsMap.remove(name);
     }
+    deleteColumnRefs(name);
     updateTable();
 }
 
@@ -509,6 +512,7 @@ void DBEditor::applyChanges()
             delete calcRoot;
         }
     }
+    calcMap.clear();
 }
 
 void DBEditor::resizeEvent(QResizeEvent *event)
@@ -544,4 +548,44 @@ int *DBEditor::columnTypes()
         types[i] = ceType (temp[i]);
     }
     return types;
+}
+
+void DBEditor::renameColumnRefs(const QString &oldName, const QString &newName)
+{
+    NameCalcMap::Iterator iter;
+    for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
+        QString calcName = iter.key();
+        CalcNode *calcRoot = iter.data();
+        if (calcRoot != 0) {
+            int index = info.Find(ceName [calcName.utf8()]);
+            calcRoot->renameColumn(oldName, newName);
+            ceDefault (info[index]) = calcRoot->equation(db).utf8();
+        }
+    }
+}
+
+void DBEditor::deleteColumnRefs(const QString &name)
+{
+    NameCalcMap::Iterator iter;
+    QStringList deletions;
+    for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
+        QString calcName = iter.key();
+        CalcNode *calcRoot = iter.data();
+        if (calcRoot != 0) {
+            int index = info.Find(ceName [calcName.utf8()]);
+            if (calcRoot->deleteColumn(name)) {
+                delete calcRoot;
+                deletions.append(calcName);
+                ceDefault (info[index]) = "";
+            }
+            else {
+                ceDefault (info[index]) = calcRoot->equation(db).utf8();
+            }
+        }
+    }
+    int count = deletions.count();
+    for (int i = 0; i < count; i++) {
+        calcMap.remove(deletions[i]);
+        calcMap.insert(deletions[i], 0);
+    }
 }

@@ -1,6 +1,9 @@
 TEMPLATE        = app
 CONFIG         += qt warn_on release
-TRANSLATIONS    = portabase_ja.ts portabase_tw.ts portabase_fr.ts
+TRANSLATIONS    = portabase_ja.ts \
+                  portabase_tw.ts \
+                  portabase_fr.ts \
+                  portabase_cs.ts
 LIBS           += mk4vc60s.lib beecrypt.lib
 TARGET          = portabase
 DEFINES        += DESKTOP QT_DLL

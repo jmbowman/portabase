@@ -16,6 +16,7 @@
 #include "bytestream.h"
 #include "crypto.h"
 #include <beecrypt/blockmode.h>
+#include <beecrypt/endianness.h>
 
 Crypto::Crypto(c4_Storage *outer, c4_Storage *inner) : container(outer), content(inner), crIv("_criv"), crHash("_crhash"), crData("_crdata")
 {
@@ -47,20 +48,26 @@ Crypto::~Crypto()
     free(dataHash);
 }
 
-QString Crypto::open()
+QString Crypto::open(int version)
 {
     // load raw data from the file
     c4_Bytes ivField = crIv (crypto[0]);
     memcpy(initVector, ivField.Contents(), ivField.Size());
     c4_Bytes hashField = crHash (crypto[0]);
     memcpy(dataHash, hashField.Contents(), hashField.Size());
+    invertIfNecessary(dataHash, hashField.Size(), version);
     c4_Bytes dataField = crData (crypto[0]);
 
     // decrypt the data
     int resultSize = 0;
     bool passError = false;
-    byte *decrypted = decrypt((byte*)(dataField.Contents()), dataField.Size(),
-                              &resultSize, &passError);
+    byte *data = (byte*)malloc(dataField.Size());
+    memcpy(data, dataField.Contents(), dataField.Size());
+    byte *decrypted = decrypt(data, dataField.Size(), &resultSize,
+                              &passError);
+    if (data) {
+        free(data);
+    }
     if (passError) {
         return QObject::tr("Incorrect password");
     }
@@ -243,4 +250,17 @@ void Crypto::printBytes(QString label, byte *data, int size)
         dataString += QString::number((int)(data[i]), 16).rightJustify(2, '0');
     }
     printf(dataString + "\n");
+}
+
+void Crypto::invertIfNecessary(byte *data, int size, int version)
+{
+    // upgraded to Beecrypt 3.0.0 in PortaBase 1.8 / file version 10
+    if (version >= 10) {
+        return;
+    }
+    uint32_t *temp = (uint32_t*)data;
+    int count = size / sizeof(uint32_t);
+    for (int i = 0; i < count; i++) {
+        temp[i] = swapu32(temp[i]);
+    }
 }

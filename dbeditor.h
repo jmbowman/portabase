@@ -47,6 +47,8 @@ private:
     bool isValidName(QString colName);
     bool isValidDefault(int type, QString defaultVal);
     void selectRow(QString colName);
+    void renameColumnRefs(const QString &oldName, const QString &newName);
+    void deleteColumnRefs(const QString &name);
 
 private slots:
     void addColumn();

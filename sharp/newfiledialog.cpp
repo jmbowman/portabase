@@ -10,7 +10,6 @@
  */
 
 #include <qpe/applnk.h>
-#include <qpe/config.h>
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qmessagebox.h>
@@ -20,9 +19,7 @@ NewFileDialog::NewFileDialog(const QString &extension, QWidget *parent, const ch
 {
     setMimeType(mimeType());
     setNewDirEnabled(TRUE);
-    Config conf("portabase");
-    conf.setGroup("Files");
-    setIconViewType(conf.readEntry("View", "Icon") == "Icon");
+    setIconViewType(FALSE);
 }
 
 NewFileDialog::~NewFileDialog()
@@ -63,6 +60,13 @@ int NewFileDialog::exec()
     return result;
 }
 
+void NewFileDialog::accept()
+{
+    // at least the version on the SL-C760 seems to not do much by itself...
+    SlFileDialog::accept();
+    QDialog::accept();
+}
+
 DocLnk *NewFileDialog::doc()
 {
     QString path = getFilePath();
@@ -70,7 +74,7 @@ DocLnk *NewFileDialog::doc()
         return 0;
     }
     DocLnk *f = new DocLnk();
-    f->setType(mimeType());
+    //f->setType(mimeType());
     QFileInfo info(path);
     f->setName(info.baseName());
     f->setFile(info.dirPath(true) + "/" + info.baseName() + ext);

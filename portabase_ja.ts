@@ -26,7 +26,7 @@
     </message>
     <message>
         <source>Column</source>
-        <translation>列</translation>
+        <translation>フィールド</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -38,14 +38,14 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>計算ノード</translation>
+        <translation>キャンセル</translation>
     </message>
 </context>
 <context>
     <name>CalcEditor</name>
     <message>
         <source>Calculation Editor</source>
-        <translation>計算編集</translation>
+        <translation>計算値編集</translation>
     </message>
     <message>
         <source>PortaBase</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Equation</source>
-        <translation>方程式</translation>
+        <translation>数式</translation>
     </message>
     <message>
         <source>Decimal Places</source>
@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>Column</source>
-        <translation>列</translation>
+        <translation>フィールド</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -153,43 +153,43 @@
     <name>ColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation type="obsolete">H(&amp;E):</translation>
+        <translation>H(&amp;E):</translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation type="obsolete">&amp;S:</translation>
+        <translation>&amp;S:</translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation type="obsolete">&amp;V:</translation>
+        <translation>&amp;V:</translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation type="obsolete">赤(&amp;R):</translation>
+        <translation>赤(&amp;R):</translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation type="obsolete">緑(&amp;G):</translation>
+        <translation>緑(&amp;G):</translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation type="obsolete">青(&amp;U):</translation>
+        <translation>青(&amp;U):</translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation type="obsolete">アルファチャネル(&amp;L):</translation>
+        <translation>アルファチャネル(&amp;L):</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="obsolete">はい</translation>
+        <translation>はい</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <source>Choose color</source>
-        <translation type="obsolete">色を選択</translation>
+        <translation>色を選択</translation>
     </message>
 </context>
 <context>
@@ -268,7 +268,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>計算</translation>
+        <translation>計算値</translation>
     </message>
     <message>
         <source>Sequence</source>
@@ -426,7 +426,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>計算</translation>
+        <translation>計算値</translation>
     </message>
     <message>
         <source>Sequence</source>
@@ -659,62 +659,62 @@ deleted:</source>
     <name>ImportDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
+        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Import rows from CSV file</source>
-        <translation type="obsolete">CSVファイルからレコードをインポート</translation>
+        <translation>CSVファイルからレコードをインポート</translation>
     </message>
     <message>
         <source>Import from MobileDB file</source>
-        <translation type="obsolete">MobileDBファイルからインポート</translation>
+        <translation>MobileDBファイルからインポート</translation>
     </message>
     <message>
         <source>Import from text file</source>
-        <translation type="obsolete">テキストファイルからインポート</translation>
+        <translation>テキストファイルからインポート</translation>
     </message>
     <message>
         <source>Import from XML file</source>
-        <translation type="obsolete">XMLファイルからインポート</translation>
+        <translation>XMLファイルからインポート</translation>
     </message>
     <message>
         <source>Text encoding</source>
-        <translation type="obsolete">文字コード</translation>
+        <translation>文字コード</translation>
     </message>
 </context>
 <context>
     <name>NewFileDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
+        <translation>PortaBase</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="obsolete">ファイルネームを入力して下さい</translation>
+        <translation>ファイルネームを入力して下さい</translation>
     </message>
     <message>
         <source>Encrypted file</source>
-        <translation type="obsolete">暗号ファイル</translation>
+        <translation>暗号ファイル</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="obsolete">エクスポート</translation>
+        <translation>エクスポート</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="obsolete">ファイルは存在します…オーバーライトしますか?</translation>
+        <translation>ファイルは存在します…オーバーライトしますか?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="obsolete">はい</translation>
+        <translation>はい</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="obsolete">いいえ</translation>
+        <translation>いいえ</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="obsolete">ファイルを暗号化しますか?</translation>
+        <translation>ファイルを暗号化しますか?</translation>
     </message>
 </context>
 <context>
@@ -745,6 +745,26 @@ deleted:</source>
     <message>
         <source>Choose a file</source>
         <translation>ファイルを選択して下さい</translation>
+    </message>
+    <message>
+        <source>PortaBase</source>
+        <translation>PortaBase</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new file</source>
+        <translation>ファイルネームを入力して下さい</translation>
+    </message>
+    <message>
+        <source>Unable to create new file</source>
+        <translation>ファイルを作れませんでした</translation>
+    </message>
+    <message>
+        <source>Enter the new file name</source>
+        <translation>ファイルネームを入力して下さい</translation>
+    </message>
+    <message>
+        <source>Unable to rename the file</source>
+        <translation>リネーム出来ませんでした</translation>
     </message>
 </context>
 <context>
@@ -1013,7 +1033,7 @@ current filter?</source>
     </message>
     <message>
         <source>Icons</source>
-        <translation>更新</translation>
+        <translation>アイコン</translation>
     </message>
 </context>
 <context>
@@ -1116,66 +1136,70 @@ current filter?</source>
     </message>
     <message>
         <source>Row Colors</source>
-        <translation>列の色</translation>
+        <translation>レコード色</translation>
     </message>
 </context>
 <context>
     <name>QColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation type="obsolete">H(&amp;E):</translation>
+        <translation>H(&amp;E):</translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation type="obsolete">&amp;S:</translation>
+        <translation>&amp;S:</translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation type="obsolete">&amp;V:</translation>
+        <translation>&amp;V:</translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation type="obsolete">赤(&amp;R):</translation>
+        <translation>赤(&amp;R):</translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation type="obsolete">緑(&amp;G):</translation>
+        <translation>緑(&amp;G):</translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation type="obsolete">青(&amp;U):</translation>
+        <translation>青(&amp;U):</translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation type="obsolete">アルファチャネル(&amp;L):</translation>
+        <translation>アルファチャネル(&amp;L):</translation>
     </message>
     <message>
         <source>&amp;Basic colors</source>
-        <translation type="obsolete">基本色(&amp;B)</translation>
+        <translation>基本色(&amp;B)</translation>
     </message>
     <message>
         <source>&amp;Custom colors</source>
-        <translation type="obsolete">カスタム色(&amp;C)</translation>
+        <translation>カスタム色(&amp;C)</translation>
     </message>
     <message>
         <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">カスタム色を作る(&amp;D) &gt;&gt;</translation>
+        <translation>カスタム色を作る(&amp;D) &gt;&gt;</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="obsolete">はい</translation>
+        <translation>はい</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="obsolete">キャンセル</translation>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>&amp;Add To Custom Colors</source>
+        <translation>カスタム色に追加(&amp;A)</translation>
     </message>
     <message>
         <source>&amp;Add to Custom Colors</source>
-        <translation type="obsolete">カスタム色に追加(&amp;A)</translation>
+        <translation>カスタム色に追加(&amp;A)</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="obsolete">色を選択</translation>
+        <translation>色を選択</translation>
     </message>
 </context>
 <context>
@@ -1267,6 +1291,91 @@ current filter?</source>
     <message>
         <source>Sa</source>
         <translation>土</translation>
+    </message>
+</context>
+<context>
+    <name>QLineEdit</name>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>元に戻す(&amp;U)</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>やり直す(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>切り取り(&amp;T)</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>コピー(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>張り付け(&amp;P)</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>クリア</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>全て選択</translation>
+    </message>
+</context>
+<context>
+    <name>QMessageBox</name>
+    <message>
+        <source>OK</source>
+        <translation>はい</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>はい(&amp;Y)</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>いいえ(&amp;N)</translation>
+    </message>
+</context>
+<context>
+    <name>QMultiLineEdit</name>
+    <message>
+        <source>Undo</source>
+        <translation>元に戻す</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>やり直す</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation>切り取り</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>コピー</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation>張り付け</translation>
+    </message>
+    <message>
+        <source>Paste special...</source>
+        <translation>張り付け...</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>クリア</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>全て選択</translation>
     </message>
 </context>
 <context>
@@ -1619,6 +1728,37 @@ try again.</source>
     <message>
         <source>Encrypt the file?</source>
         <translation>ファイルを暗号化しますか?</translation>
+    </message>
+</context>
+<context>
+    <name>QTextEdit</name>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>元に戻す(&amp;U)</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>やり直す(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>切り取り(&amp;T)</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>コピー(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>張り付け(&amp;P)</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>クリア</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>全て選択</translation>
     </message>
 </context>
 <context>

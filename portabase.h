@@ -92,7 +92,6 @@ protected:
 private:
     void fileOpen();
     void createFile(int source);
-    void configureDocLnk(DocLnk &doclnk, const QString &name);
     void finishNewFile(Database *db);
     void updateCaption(const QString &name=QString::null);
     void rebuildViewMenu();

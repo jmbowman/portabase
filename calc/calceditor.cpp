@@ -43,6 +43,7 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     new QLabel(tr("Equation") + ":", grid);
     equation = new QLineEdit(grid);
     equation->setReadOnly(TRUE);
+    equation->setFrame(FALSE);
     new QLabel(tr("Decimal Places") + ":", grid);
     decimalsBox = new QSpinBox(0, 9, 1, grid);
     decimalsBox->setValue(2);

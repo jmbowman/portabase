@@ -40,25 +40,88 @@ QStringList PBFileSelector::recent()
     return QStringList();
 }
 
-bool PBFileSelector::copyFile(const DocLnk &src, const DocLnk &dst)
+bool PBFileSelector::duplicate()
 {
-    FileManager fm;
-    return fm.copyFile(src, dst);
+    const DocLnk *selection = selected();
+    if (selection == 0) {
+        return FALSE;
+    }
+    bool ok;
+    QString name = InputDialog::getText(tr("PortaBase"),
+                                        tr("Enter a name for the new file"),
+                                        QString::null, &ok, this);
+    if (ok && !name.isEmpty()) {
+        DocLnk copy;
+        configureDocLnk(copy, name);
+        FileManager fm;
+        ok = fm.copyFile(*selection, copy);
+    }
+    if (ok) {
+        reread();
+    }
+    else {
+        QMessageBox::warning(this, tr("PortaBase"),
+                             tr("Unable to create new file"));
+    }
+    delete selection;
+    return ok;
 }
 
-bool PBFileSelector::renameFile(const DocLnk &src, const DocLnk &dst)
+bool PBFileSelector::rename()
 {
-    // actual moving would be more efficient, but harder to implement...
-    if (copyFile(src, dst)) {
-        QFile::remove(src.file());
-        QFile::remove(src.linkFile());
-        return TRUE;
+    const DocLnk *selection = selected();
+    if (selection == 0) {
+        return FALSE;
     }
-    return FALSE;
+    bool ok;
+    QString name = InputDialog::getText(tr("PortaBase"),
+                                        tr("Enter the new file name"),
+                                        QString::null, &ok, this);
+    if (ok) {
+        ok = !name.isEmpty();
+    }
+    if (ok) {
+        DocLnk copy;
+        configureDocLnk(copy, name);
+        // actual moving would be more efficient, but harder to implement...
+        FileManager fm;
+        if (fm.copyFile(*selection, copy)) {
+            QFile::remove(selection->file());
+            QFile::remove(selection->linkFile());
+            ok = TRUE;
+        }
+        else {
+            ok = FALSE;
+        }
+    }
+    if (ok) {
+        reread();
+    }
+    else {
+        QMessageBox::warning(this, tr("PortaBase"),
+                             tr("Unable to rename the file"));
+    }
+    delete selection;
+    return ok;
 }
 
 void PBFileSelector::initFile(const DocLnk &doc)
 {
     FileManager fm;
     fm.saveFile(doc, "");
+}
+
+void PBFileSelector::configureDocLnk(DocLnk &doclnk, const QString &name)
+{
+    doclnk.setType("application/portabase");
+    QString filename(name);
+    if (filename.length() > 40) {
+        filename = filename.left(40);
+    }
+    doclnk.setName(filename);
+    QString defaultFile = doclnk.file();
+    QFileInfo info(defaultFile);
+    // calling file() created an empty file, delete it now
+    QFile::remove(defaultFile);
+    doclnk.setFile(info.dirPath(true) + "/" + info.baseName() + ".pob");
 }

@@ -105,7 +105,7 @@ QString Database::load()
 {
     if (crypto) {
         if (!newFile) {
-            QString error = crypto->open();
+            QString error = crypto->open(version);
             if (error != "") {
                 return error;
             }

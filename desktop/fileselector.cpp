@@ -59,6 +59,18 @@ QStringList PBFileSelector::recent()
     return files;
 }
 
+bool PBFileSelector::duplicate()
+{
+    // never gets called in the desktop version
+    return FALSE;
+}
+
+bool PBFileSelector::rename()
+{
+    // never gets called in the desktop version
+    return FALSE;
+}
+
 void PBFileSelector::initFile(const DocLnk &doc)
 {
     FileManager fm;

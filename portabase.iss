@@ -20,15 +20,18 @@ Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "A
 
 [Files]
 Source: "portabase.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "package\portabase_cs.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "package\portabase_fr.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "package\portabase_ja.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "package\portabase_tw.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "desktop\icons\*.*"; DestDir: "{app}\icons"; Flags: ignoreversion
 Source: "desktop\icons\portabase\*.*"; DestDir: "{app}\icons\portabase"; Flags: ignoreversion
 Source: "help\html\portabase.html"; DestDir: "{app}"; Flags: ignoreversion
+Source: "help\html\portabase.html"; DestDir: "{app}\cs"; Flags: ignoreversion
 Source: "help\html\portabase.html"; DestDir: "{app}\fr"; Flags: ignoreversion
 Source: "help\ja\html\portabase.html"; DestDir: "{app}\ja"; Flags: ignoreversion
 Source: "help\tw\html\portabase.html"; DestDir: "{app}\tw"; Flags: ignoreversion
+Source: "portabase_cs.qm"; DestDir: "{app}\cs"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "portabase_fr.qm"; DestDir: "{app}\fr"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "portabase_ja.qm"; DestDir: "{app}\ja"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "portabase_tw.qm"; DestDir: "{app}\tw"; DestName: "portabase.qm"; Flags: ignoreversion
@@ -37,7 +40,7 @@ Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion
 Source: "portabase.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "qt-mt230nc.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile
-Source: "beecrypt.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile
+Source: "beecrypt.dll"; DestDir: "{sys}"; Flags: sharedfile
 Source: "msvcrt.dll"; DestDir: "{sys}"; Flags: onlyifdoesntexist uninsneveruninstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
@@ -54,6 +57,7 @@ Root: HKCR; Subkey: "PortaBaseFile\shell\open\command"; ValueType: string; Value
 
 [Icons]
 Name: "{group}\PortaBase"; Filename: "{app}\portabase.exe"
+Name: "{group}\PortaBase (cs)"; Filename: "{app}\portabase_cs.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase (fr)"; Filename: "{app}\portabase_fr.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase (ja)"; Filename: "{app}\portabase_ja.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase (tw)"; Filename: "{app}\portabase_tw.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized

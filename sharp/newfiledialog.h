@@ -28,6 +28,9 @@ public:
     bool encryption();
     int exec();
 
+protected slots:
+    void accept();
+
 private:
     QString mimeType();
 

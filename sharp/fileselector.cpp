@@ -10,8 +10,8 @@
  */
 
 #include <qpe/config.h>
-#include <qpe/filemanager.h>
 #include <qdir.h>
+#include <qfile.h>
 #include "fileselector.h"
 
 PBFileSelector::PBFileSelector(const QString &, const QStringList &recentFiles, const QString &f, QWidget *parent, const char *name)
@@ -45,45 +45,25 @@ const DocLnk *PBFileSelector::selected()
     QFileInfo info(path);
     DocLnk *f = new DocLnk();
     f->setName(info.baseName());
-    f->setFile(path);
     f->setType("application/portabase");
+    f->setFile(path);
     return f;
 }
 
 void PBFileSelector::passSelection(const QFileInfo &file)
 {
     selection.setName(file.baseName());
-    selection.setFile(file.absFilePath());
     selection.setType("application/portabase");
+    selection.setFile(file.absFilePath());
     emit fileSelected(selection);
-}
-
-bool PBFileSelector::copyFile(const DocLnk &src, const DocLnk &dst)
-{
-    FileManager fm;
-    bool ok = fm.copyFile(src, dst);
-    if (ok) {
-        QFile::remove(dst.linkFile());
-    }
-    return ok;
-}
-
-bool PBFileSelector::renameFile(const DocLnk &src, const DocLnk &dst)
-{
-    // actual moving would be more efficient, but harder to implement...
-    if (copyFile(src, dst)) {
-        QFile::remove(src.file());
-        // just in case there is one, copied from an old ROM or whatever
-        QFile::remove(src.linkFile());
-        return TRUE;
-    }
-    return FALSE;
 }
 
 void PBFileSelector::initFile(const DocLnk &doc)
 {
-    FileManager fm;
-    fm.saveFile(doc, "");
-    // don't need .desktop files in the newer ROMs
-    QFile::remove(doc.linkFile());
+    QFile file(doc.file());
+    if (!file.open(IO_WriteOnly|IO_Raw)) {
+	return;
+    }
+    file.writeBlock("", 0);
+    file.close();
 }

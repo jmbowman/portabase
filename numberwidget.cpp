@@ -26,7 +26,7 @@ NumberWidget::NumberWidget(int type, QWidget *parent, const char *name, WFlags f
 {
     entryField = new QLineEdit(this);
     QPushButton *button = new QPushButton(this);
-    button->setPixmap(Resource::loadPixmap("calculator"));
+    button->setPixmap(Resource::loadPixmap("portabase/calculator"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchCalculator()));
     int height = button->height();
     setMaximumHeight(height);
