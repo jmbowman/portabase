@@ -341,6 +341,9 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
             viewer.setReadOnly(TRUE);
             viewer.exec();
         }
+        else {
+            editRow();
+        }
     }
 }
 
@@ -374,6 +377,7 @@ void ViewDisplay::sort(int column)
     view->sort(column);
     updateTable();
     portabase->updateSortMenu();
+    setEdited(TRUE);
 }
 
 void ViewDisplay::showStatistics(int column)
