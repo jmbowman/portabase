@@ -7,7 +7,7 @@ TRANSLATIONS    = portabase_cs.ts \
                   portabase_zh_TW.ts
 # determine which version to compile for
 # options are desktop, qtopia, or sharp (add "test" for the test environment)
-CONFIG         += qtopia
+CONFIG         += desktop
 
 # Files common between all versions
 HEADERS         = portabase.h \

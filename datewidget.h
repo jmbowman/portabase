@@ -14,6 +14,7 @@
 
 #include <qdatetime.h>
 #include <qhbox.h>
+#include <qstringlist.h>
 
 class Database;
 class QLabel;

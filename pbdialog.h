@@ -14,6 +14,7 @@
 
 #include <qlayout.h>
 #include <qpushbutton.h>
+#include <qstringlist.h>
 #include "qqdialog.h"
 
 class QHBox;
