@@ -71,7 +71,7 @@ bool ImportDialog::exec()
         }
     }
 
-    QString error;
+    QString error = "";
     QString data = "";
     if (source == CSV_FILE) {
         QStringList result = db->importFromCSV(file, encoding);

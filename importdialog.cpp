@@ -76,7 +76,7 @@ void ImportDialog::import(const DocLnk &f)
 
 bool ImportDialog::import(const QString &file)
 {
-    QString error;
+    QString error = "";
     QString data = "";
     if (source == CSV_FILE) {
         QStringList result = db->importFromCSV(file, encodings->currentText());

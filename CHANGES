@@ -1,3 +1,9 @@
+2003-04-10  JMB  Windows CSV import bugfix
+
+    In version 1.6, importing a CSV file on the Windows version would produce
+    an empty error dialog and fail to update the display even though the
+    import was successful; this has been corrected.
+
 2003-04-03  JMB  Enum update bugfix, file overwrite warning
 
     When the value of an enum was changed, its index wasn't updated in the
