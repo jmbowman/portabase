@@ -53,7 +53,7 @@
 #include "vieweditor.h"
 
 PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
-    : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE)
+  : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE), needsRefresh(FALSE)
 {
     setToolBarsMovable(FALSE);
 
@@ -106,6 +106,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     fileDeleteAction = new QAction(tr("Delete") + "...", deleteIcons,
                                    QString::null, 0, this);
     connect(fileDeleteAction, SIGNAL(activated()), this, SLOT(deleteFile()));
+    refreshAction = new QAction(tr("Refresh"), QString::null, 0, this);
+    connect(refreshAction, SIGNAL(activated()), this, SLOT(refreshFileList()));
     importMobileDBAction = new QAction(tr("Import MobileDB File") + "...",
                                        QString::null, 0, this);
     connect(importMobileDBAction, SIGNAL(activated()),
@@ -262,9 +264,11 @@ void PortaBase::editPreferences()
         setFont(font);
         viewer->updateButtonSizes();
         file->setFont(font);
-        view->setFont(font);
-        sort->setFont(font);
-        filter->setFont(font);
+        if (doc) {
+            view->setFont(font);
+            sort->setFont(font);
+            filter->setFont(font);
+        }
 #ifdef DESKTOP
         help->setFont(font);
 #endif
@@ -273,9 +277,11 @@ void PortaBase::editPreferences()
         confirmDeletions = conf.readBoolEntry("ConfirmDeletions");
         booleanToggle = conf.readBoolEntry("BooleanToggle");
         viewer->allowBooleanToggle(booleanToggle);
-        db->setShowSeconds(conf.readBoolEntry("ShowSeconds"));
-        db->updateDateTimePrefs();
-        viewer->updateTable();
+        if (doc) {
+            db->setShowSeconds(conf.readBoolEntry("ShowSeconds"));
+            db->updateDateTimePrefs();
+            viewer->updateTable();
+        }
     }
 }
 
@@ -347,6 +353,7 @@ void PortaBase::createFile(const DocLnk &f, int source)
             updateCaption();
             // if not saved now, file is empty without later save...bad
             save();
+            needsRefresh = TRUE;
         }
         else {
             doc->removeFiles();
@@ -435,6 +442,12 @@ void PortaBase::deleteFile()
     fileSelector->reread();
 }
 
+void PortaBase::refreshFileList()
+{
+    fileSelector->reread();
+    needsRefresh = FALSE;
+}
+
 void PortaBase::updateCaption(const QString &name)
 {
     if (!doc) {
@@ -464,7 +477,7 @@ void PortaBase::showFileSelector()
 {
     menu->clear();
     toolbar->clear();
-    QPopupMenu *file = new QPopupMenu(this);
+    file = new QPopupMenu(this);
     fileNewAction->addTo(file);
     fileNewAction->addTo(toolbar);
     fileOpenAction->addTo(file);
@@ -472,22 +485,27 @@ void PortaBase::showFileSelector()
 #ifndef DESKTOP
     fileDeleteAction->addTo(file);
     fileDeleteAction->addTo(toolbar);
+    refreshAction->addTo(file);
 #endif
     file->insertSeparator();
     importMobileDBAction->addTo(file);
+    prefsAction->addTo(file);
     file->insertSeparator();
     quitAction->addTo(file);
 
     menu->insertItem(tr("File"), file);
 #ifdef DESKTOP
-    QPopupMenu *help = new QPopupMenu(this);
+    help = new QPopupMenu(this);
     helpAction->addTo(help);
     help->insertSeparator();
     aboutAction->addTo(help);
     aboutQtAction->addTo(help);
     menu->insertItem(tr("Help"), help);
 #endif
-    fileSelector->reread();
+    if (needsRefresh) {
+        fileSelector->reread();
+        needsRefresh = FALSE;
+    }
     mainStack->raiseWidget(fileSelector);
 }
 

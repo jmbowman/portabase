@@ -22,12 +22,13 @@ class QKeyEvent;
 class QPushButton;
 class QTextView;
 class View;
+class ViewDisplay;
 
 class RowViewer: public QDialog
 {
     Q_OBJECT
 public:
-    RowViewer(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    RowViewer(ViewDisplay *parent = 0, const char *name = 0, WFlags f = 0);
     ~RowViewer();
 
     void viewRow(Database *subject, View *currentView, int rowIndex);
@@ -38,6 +39,7 @@ protected:
 private slots:
     void nextRow();
     void previousRow();
+    void editRow();
 
 private:
     void updateContent();
@@ -46,6 +48,7 @@ private:
 private:
     Database *db;
     View *view;
+    ViewDisplay *display;
     int index;
     int rowCount;
     QStringList colNames;

@@ -24,9 +24,10 @@
 #include "datatypes.h"
 #include "rowviewer.h"
 #include "view.h"
+#include "viewdisplay.h"
 
-RowViewer::RowViewer(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), colTypes(0)
+RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
+  : QDialog(parent, name, TRUE, f), db(0), display(parent), colTypes(0)
 {
     setCaption(tr("PortaBase") + " - " + tr("Row Viewer"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
@@ -37,7 +38,9 @@ RowViewer::RowViewer(QWidget *parent, const char *name, WFlags f)
     prevButton = new QPushButton(hbox);
     prevButton->setPixmap(Resource::loadPixmap("back"));
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
-    new QWidget(hbox);
+    QPushButton *editButton = new QPushButton(hbox);
+    editButton->setPixmap(Resource::loadPixmap("edit"));
+    connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
     nextButton = new QPushButton(hbox);
     nextButton->setPixmap(Resource::loadPixmap("forward"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
@@ -56,6 +59,7 @@ RowViewer::RowViewer(QWidget *parent, const char *name, WFlags f)
 #else
     showMaximized();
 #endif
+    editButton->setFocus();
 }
 
 RowViewer::~RowViewer()
@@ -150,6 +154,14 @@ void RowViewer::previousRow()
 {
     index--;
     updateContent();
+}
+
+void RowViewer::editRow()
+{
+    int rowId = view->getId(index);
+    if (display->editRow(rowId)) {
+        accept();
+    }
 }
 
 void RowViewer::keyReleaseEvent(QKeyEvent *e)

@@ -1,9 +1,25 @@
-2003-01-30  JMB  Allow word wrap in Note editor/viewer
+2003-01-30  JMB  Allow word wrap in Note editor/viewer, added Preferences
+                 and Refresh options to file selector menu, edit button in
+                 row viewer
 
     The Note editor/viewer now uses word wrapping by default; this can
     be disabled in the preferences dialog.  There is also a preference
     setting which allows wrapping to be done even between non-whitespace
     characters (useful for languages like Japanese).
+
+    The Preferences dialog can now be launched from the file selector's
+    "File" menu, so you don't need to open a file before changing your
+    application settings.
+
+    Added an edit button to the row viewer, so you can edit the currently
+    visible row without first returning to the data viewer.
+
+    Added a "Refresh" option to the file selector menu to check for
+    recently added or deleted files.  This wasn't being done when
+    re-launching the program if "Fast load" was enabled.  Also, this is no
+    longer done automatically after closing a non-new file, because it can
+    be slow (especially when using a CF and/or SD card).  Zaurus version
+    only.
 
 2003-01-28  JMB  Support use as a Linux or Windows desktop application
 

@@ -305,9 +305,12 @@ void ViewDisplay::addRow()
     }
 }
 
-void ViewDisplay::editRow()
+bool ViewDisplay::editRow(int id)
 {
-    int rowId = selectedRowId();
+    int rowId = id;
+    if (rowId == -1) {
+        rowId = selectedRowId();
+    }
     if (rowId != -1) {
         RowEditor rowEditor(this);
         if (rowEditor.edit(db, rowId)) {
@@ -315,8 +318,10 @@ void ViewDisplay::editRow()
             updateTable();
             updateButtons();
             setEdited(TRUE);
+            return TRUE;
         }
     }
+    return FALSE;
 }
 
 void ViewDisplay::viewRow()

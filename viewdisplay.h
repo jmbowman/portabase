@@ -55,7 +55,7 @@ public:
 public slots:
     void addRow();
     void deleteRow();
-    void editRow();
+    bool editRow(int rowId=-1);
     void viewRow();
 
 protected:

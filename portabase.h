@@ -49,6 +49,7 @@ private slots:
     void openFile(const DocLnk &);
     void openFile();
     void deleteFile();
+    void refreshFileList();
     bool editColumns();
     void editEnums();
     void editPreferences();
@@ -104,6 +105,7 @@ private:
     QAction *fileNewAction;
     QAction *fileOpenAction;
     QAction *fileDeleteAction;
+    QAction *refreshAction;
     QAction *importMobileDBAction;
     QAction *quitAction;
     QAction *fileSaveAction;
@@ -149,6 +151,7 @@ private:
     bool isEdited;
     bool confirmDeletions;
     bool booleanToggle;
+    bool needsRefresh;
 };
 
 #endif
