@@ -22,6 +22,7 @@
 #include <qpushbutton.h>
 #include <qvbox.h>
 #include "database.h"
+#include "shadedlistitem.h"
 #include "sorteditor.h"
 
 SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
@@ -191,10 +192,10 @@ void SortEditor::updateTable()
             }
         }
         if (i == 0) {
-            item = new QListViewItem(table, "", name, direction);
+            item = new ShadedListItem(0, table, "", name, direction);
         }
         else {
-            item = new QListViewItem(table, item, "", name, direction);
+            item = new ShadedListItem(i, table, item, "", name, direction);
         }
         item->setPixmap(0, db->getCheckBoxPixmap(sorted));
     }

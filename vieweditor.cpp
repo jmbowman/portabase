@@ -23,6 +23,7 @@
 #include <qpushbutton.h>
 #include <qvbox.h>
 #include "database.h"
+#include "shadedlistitem.h"
 #include "vieweditor.h"
 
 ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
@@ -231,10 +232,10 @@ void ViewEditor::updateTable()
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
         if (i == 0) {
-            item = new QListViewItem(table, "", name);
+            item = new ShadedListItem(0, table, "", name);
         }
         else {
-            item = new QListViewItem(table, item, "", name);
+            item = new ShadedListItem(i, table, item, "", name);
         }
         item->setPixmap(0, db->getCheckBoxPixmap(isIncluded(name)));
     }

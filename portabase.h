@@ -101,6 +101,10 @@ private:
     void showFileSelector();
     void showDataViewer();
 
+public:
+    static const QColor *evenRowColor;
+    static const QColor *oddRowColor;
+
 private:
     Database *db;
     QWidgetStack *mainStack;

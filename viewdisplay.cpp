@@ -29,6 +29,7 @@
 #include "portabase.h"
 #include "roweditor.h"
 #include "rowviewer.h"
+#include "shadedlistitem.h"
 #include "view.h"
 #include "viewdisplay.h"
 
@@ -181,10 +182,10 @@ void ViewDisplay::updateTable()
     QListViewItem *item = 0;
     for (int i = 0; i < rows; i++) {
         if (i == 0) {
-            item = new QListViewItem(table);
+            item = new ShadedListItem(0, table);
         }
         else {
-            item = new QListViewItem(table, item);
+            item = new ShadedListItem(i, table, item);
         }
         QStringList data = view->getRow(index);
         int count = data.count();

@@ -1,3 +1,11 @@
+2003-05-23  JMB  Alternate row shading
+
+    Even and odd rows now use different background colors to make it easier
+    to follow a row across the screen.  The default colors are white and
+    light gray, but can be specified via buttons in the Preferences dialog.
+    These colors are used in the data viewer, columns editor, view editor,
+    and sorting editor.
+
 2003-04-10  JMB  Windows CSV import bugfix
 
     In version 1.6, importing a CSV file on the Windows version would produce

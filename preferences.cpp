@@ -10,7 +10,6 @@
  */
 
 #if defined(DESKTOP)
-#include <qhbox.h>
 #include <qpushbutton.h>
 #include "desktop/config.h"
 #include "desktop/resource.h"
@@ -24,19 +23,22 @@
 #include <qfont.h>
 #include <qfontdatabase.h>
 #include <qgroupbox.h>
+#include <qhbox.h>
 #include <qlabel.h>
-#include <qvbox.h>
+#include <qlayout.h>
+#include "colorbutton.h"
+#include "portabase.h"
 #include "preferences.h"
 
 Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f)
 {
     setCaption(tr("Preferences") + " - " + tr("PortaBase"));
-    vbox = new QVBox(this);
-    vbox->resize(size());
+    vbox = new QVBoxLayout(this);
 #if defined(Q_WS_WIN)
     setSizeGripEnabled(TRUE);
-    new QLabel("<center><b>" + tr("Preferences") + "</b></center>", vbox);
+    vbox->addWidget(new QLabel("<center><b>" + tr("Preferences")
+                    + "</b></center>", this));
 #endif
 #if defined(DESKTOP)
     sizeFactor = 1;
@@ -44,7 +46,8 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     sizeFactor = 10;
 #endif
 
-    QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"), vbox);
+    QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"), this);
+    vbox->addWidget(fontGroup);
     new QLabel(tr("Name"), fontGroup);
     fontName = new QComboBox(FALSE, fontGroup);
     fonts = fontdb.families();
@@ -79,7 +82,8 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     sample = new QLabel(tr("Sample text"), fontGroup);
 
     QGroupBox *generalGroup = new QGroupBox(1, Qt::Horizontal, tr("General"),
-                                            vbox);
+                                            this);
+    vbox->addWidget(generalGroup);
     Config conf("portabase");
     conf.setGroup("General");
     QHBox *hbox = new QHBox(generalGroup);
@@ -110,9 +114,16 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     wrapType->setEnabled(noteWrap->isChecked());
     connect(noteWrap, SIGNAL(toggled(bool)), wrapType, SLOT(setEnabled(bool)));
 
+    QGroupBox *colorGroup = new QGroupBox(2, Qt::Horizontal, tr("Row Colors"),
+                                          this);
+    vbox->addWidget(colorGroup);
+    evenButton = new ColorButton(*PortaBase::evenRowColor, colorGroup);
+    oddButton = new ColorButton(*PortaBase::oddRowColor, colorGroup);
+
 #if defined(DESKTOP)
     QGroupBox *dateGroup = new QGroupBox(2, Qt::Horizontal,
-                                         tr("Date and Time"), vbox);
+                                         tr("Date and Time"), this);
+    vbox->addWidget(dateGroup);
     Config config("qpe");
     config.setGroup("Date");
     new QLabel(tr("Date format"), dateGroup);
@@ -151,7 +162,8 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     int startMonday =  config.readBoolEntry("MONDAY") ? 1 : 0;
     weekStartCombo->setCurrentItem( startMonday );
 
-    hbox = new QHBox(vbox);
+    hbox = new QHBox(this);
+    vbox->addWidget(hbox);
     new QWidget(hbox);
     QPushButton *okButton = new QPushButton(tr("OK"), hbox);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
@@ -161,7 +173,7 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     new QWidget(hbox);
     setIcon(Resource::loadPixmap("portabase"));
 #else
-    new QWidget(vbox);
+    vbox->addWidget(new QWidget(this));
     showMaximized();
 #endif
 }
@@ -228,6 +240,15 @@ QFont Preferences::applyChanges()
     conf.writeEntry("ShowSeconds", showSeconds->isChecked());
     conf.writeEntry("NoteWrap", noteWrap->isChecked());
     conf.writeEntry("WrapAnywhere", wrapType->currentItem() == 1);
+
+    conf.setGroup("Colors");
+    const QColor evenColor = evenButton->getColor();
+    PortaBase::evenRowColor = new QColor(evenColor);
+    conf.writeEntry("EvenRows", evenColor.name());
+    const QColor oddColor = oddButton->getColor();
+    PortaBase::oddRowColor = new QColor(oddColor);
+    conf.writeEntry("OddRows", oddColor.name());
+
     conf.setGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentItem()] / sizeFactor;
@@ -236,10 +257,4 @@ QFont Preferences::applyChanges()
     QFont font(name, size);
     qApp->setFont(font);
     return font;
-}
-
-void Preferences::resizeEvent(QResizeEvent *event)
-{
-    QDialog::resizeEvent(event);
-    vbox->resize(size());
 }

@@ -24,6 +24,7 @@
 #include "datatypes.h"
 #include "dbeditor.h"
 #include "portabase.h"
+#include "shadedlistitem.h"
 
 DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f), db(0), ceName("_cename"),
@@ -316,11 +317,11 @@ void DBEditor::updateTable()
             defaultVal = defaultVal.replace(QRegExp("\n"), " ");
         }
         if (i == 0) {
-            last = new QListViewItem(table, name, typeString, defaultVal);
+            last = new ShadedListItem(0, table, name, typeString, defaultVal);
         }
         else {
-            last = new QListViewItem(table, last, name, typeString,
-                                     defaultVal);
+            last = new ShadedListItem(i, table, last, name, typeString,
+                                      defaultVal);
         }
         if (type == BOOLEAN) {
             last->setText(2, "");

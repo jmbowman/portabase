@@ -19,11 +19,12 @@
 #include <qdialog.h>
 #include <qfontdatabase.h>
 
+class ColorButton;
 class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
-class QVBox;
+class QVBoxLayout;
 
 class Preferences: public QDialog
 {
@@ -34,15 +35,12 @@ public:
 
     QFont applyChanges();
 
-protected:
-    void resizeEvent(QResizeEvent *event);
-
 private slots:
     void updateSizes(int selected);
     void updateSample(int selectedSize);
 
 private:
-    QVBox *vbox;
+    QVBoxLayout *vbox;
     QFontDatabase fontdb;
     QStringList fonts;
     QValueList<int> sizes;
@@ -55,6 +53,8 @@ private:
     QCheckBox *showSeconds;
     QCheckBox *noteWrap;
     QComboBox *wrapType;
+    ColorButton *evenButton;
+    ColorButton *oddButton;
 #if defined(DESKTOP)
     PBDateFormat date_formats[4];
     QComboBox *dateFormatCombo;

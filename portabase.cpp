@@ -75,6 +75,12 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     qApp->setFont(font);
     setFont(font);
 
+    conf.setGroup("Colors");
+    QString color = conf.readEntry("EvenRows", "#FFFFFF");
+    PortaBase::evenRowColor = new QColor(color);
+    color = conf.readEntry("OddRows", "#E0E0E0");
+    PortaBase::oddRowColor = new QColor(color);
+
     // menu and toolbar, shared between file selector and data viewer modes
     QToolBar *bar = new QToolBar(this);
     addToolBar(bar, QMainWindow::Top);
@@ -235,6 +241,9 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     resize(200, 300);
 #endif
 }
+
+const QColor *PortaBase::evenRowColor = &Qt::white;
+const QColor *PortaBase::oddRowColor = &Qt::lightGray;
 
 PortaBase::~PortaBase()
 {
