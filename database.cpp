@@ -190,7 +190,7 @@ QString Database::currentView()
     return QString::fromUtf8(gView(global[0]));
 }
 
-View *Database::getView(QString name, bool applyDefaults)
+View *Database::getView(QString name, bool applyDefaults, bool setAsCurrent)
 {
     int index = views.Find(vName [name.utf8()]);
 #if defined(DESKTOP)
@@ -235,13 +235,16 @@ View *Database::getView(QString name, bool applyDefaults)
             floatStringIds.append("");
         }
     }
-    if (curView) {
+    if (curView && setAsCurrent) {
         delete curView;
     }
-    gView(global[0]) = name.utf8();
-    curView = new View(this, data, names, types, widths, colIds,
-                       floatStringIds, rpp);
-    return curView;
+    View *view = new View(name, this, data, names, types, widths, colIds,
+                          floatStringIds, rpp);
+    if (setAsCurrent) {
+        gView(global[0]) = name.utf8();
+        curView = view;
+    }
+    return view;
 }
 
 QString Database::getDefaultSort(const QString &viewName)

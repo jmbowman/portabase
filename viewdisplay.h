@@ -98,7 +98,6 @@ private:
     View *view;
     int currentPage;
     int firstPageButton;
-    bool isEdited;
     int pressedIndex;
     QTime timer;
     bool booleanToggle;

@@ -16,17 +16,20 @@
 #endif
 
 #include <qapplication.h>
+#include <qcombobox.h>
 #include <qclipboard.h>
 #include <qhbox.h>
 #include <qpushbutton.h>
 #include <qtextview.h>
+#include "database.h"
 #include "datatypes.h"
+#include "portabase.h"
 #include "rowviewer.h"
 #include "view.h"
 #include "viewdisplay.h"
 
-RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
-  : PBDialog(tr("Row Viewer"), parent, name, f), display(parent)
+RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name, WFlags f)
+  : PBDialog(tr("Row Viewer"), parent, name, f), db(dbase), display(parent), currentView(0)
 {
     tv = new QTextView(this);
     vbox->addWidget(tv);
@@ -38,6 +41,14 @@ RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
     QPushButton *editButton = new QPushButton(hbox);
     editButton->setPixmap(Resource::loadPixmap("edit"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
+
+    QStringList viewNames = db->listViews();
+    viewNames.remove("_all");
+    viewNames.prepend(PortaBase::tr("All Columns"));
+    viewBox = new QComboBox(FALSE, hbox);
+    viewBox->insertStringList(viewNames);
+    connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
+
     QPushButton *copyButton = new QPushButton(hbox);
     copyButton->setPixmap(Resource::loadPixmap("copy"));
     connect(copyButton, SIGNAL(clicked()), this, SLOT(copyText()));
@@ -51,12 +62,32 @@ RowViewer::RowViewer(ViewDisplay *parent, const char *name, WFlags f)
 
 RowViewer::~RowViewer()
 {
-
+    if (currentView) {
+        delete currentView;
+    }
 }
 
-void RowViewer::viewRow(View *currentView, int rowIndex)
+void RowViewer::viewRow(View *originalView, int rowIndex)
 {
-    view = currentView;
+    view = originalView;
+    if (currentView) {
+        delete currentView;
+    }
+    QString viewName = view->getName();
+    currentView = db->getView(viewName, FALSE, FALSE);
+    currentView->copyStateFrom(view);
+    if (viewName == "_all") {
+        viewBox->setCurrentItem(0);
+    }
+    else {
+        int count = viewBox->count();
+        for (int i = 1; i < count; i++) {
+            if (viewBox->text(i) == viewName) {
+                viewBox->setCurrentItem(i);
+                break;
+            }
+        }
+    }
     index = rowIndex;
     rowCount = view->getRowCount();
     updateContent();
@@ -67,10 +98,10 @@ void RowViewer::updateContent()
 {
     prevButton->setEnabled(index != 0);
     nextButton->setEnabled(index != rowCount - 1);
-    QStringList values = view->getRow(index);
+    QStringList values = currentView->getRow(index);
+    QStringList colNames = currentView->getColNames();
+    int *colTypes = currentView->getColTypes();
     QString str = "<qt><table cellspacing=0>";
-    QStringList colNames = view->getColNames();
-    int *colTypes = view->getColTypes();
     int count = colNames.count();
     for (int i = 0; i < count; i++) {
         str += "<tr><td><font color=#0000ff>";
@@ -147,6 +178,20 @@ void RowViewer::copyText()
         QClipboard *cb = QApplication::clipboard();
         cb->setText(tv->selectedText());
     }
+}
+
+void RowViewer::viewChanged(int index)
+{
+    if (currentView) {
+        delete currentView;
+    }
+    QString name = viewBox->text(index);
+    if (index == 0) {
+        name = "_all";
+    }
+    currentView = db->getView(name, FALSE, FALSE);
+    currentView->copyStateFrom(view);
+    updateContent();
 }
 
 void RowViewer::keyReleaseEvent(QKeyEvent *e)

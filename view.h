@@ -24,10 +24,12 @@ class QStringList;
 class View
 {
 public:
-    View(Database *parent, c4_View baseview, QStringList colNames,
-         int *types, int *widths, QStringList colIds,
+    View(QString name, Database *parent, c4_View baseview,
+         QStringList colNames, int *types, int *widths, QStringList colIds,
          QStringList floatStringIds, int rpp);
     ~View();
+
+    QString getName();
     QStringList getColNames();
     int *getColTypes();
     int getColWidth(int index);
@@ -46,8 +48,10 @@ public:
     void deleteAllRows();
     void exportToCSV(QString filename);
     void exportToXML(QString filename);
+    void copyStateFrom(View *otherView);
 
 private:
+    QString viewName;
     Database *db;
     c4_View dbview;
     c4_IntProp Id;

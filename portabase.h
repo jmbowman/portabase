@@ -17,6 +17,7 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
+class Config;
 class Database;
 class DocLnk;
 class PBFileSelector;
@@ -55,6 +56,7 @@ private slots:
     void refreshFileList();
     void viewList();
     void viewIcons();
+    void openRecent(int id);
     bool editColumns();
     void editEnums();
     void editPreferences();
@@ -105,6 +107,8 @@ private:
     QString getMenuLabel(const QString &menuName);
     QPopupMenu *getMenuPointer(const QString &menuName);
     QAction *getButtonAction(const QString &buttonName);
+    QStringList getRecentFiles(Config &conf);
+    void updateRecentFiles(Config &conf);
 
 public:
     static const QColor *evenRowColor;
@@ -155,6 +159,7 @@ private:
     QAction *aboutAction;
     QAction *aboutQtAction;
     QPopupMenu *file;
+    QPopupMenu *recent;
     QPopupMenu *row;
     QPopupMenu *view;
     QPopupMenu *sort;
@@ -162,7 +167,6 @@ private:
     QPopupMenu *help;
     DocLnk *doc;
     ViewDisplay *viewer;
-    bool newdb;
     QStringList viewNames;
     IntList viewIds;
     QStringList sortNames;

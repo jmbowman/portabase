@@ -20,9 +20,7 @@
 #include "filter.h"
 #include "view.h"
 
-View::View(Database *parent, c4_View baseview, QStringList colNames, 
-    int *types, int *widths, QStringList colIds, QStringList floatStringIds,
-    int rpp) : Id("_id"), sortColumn(-1), ascending(TRUE), sortName("")
+View::View(QString name, Database *parent, c4_View baseview, QStringList colNames, int *types, int *widths, QStringList colIds, QStringList floatStringIds, int rpp) : viewName(name), Id("_id"), sortColumn(-1), ascending(TRUE), sortName("")
 {
     db = parent;
     dbview = baseview;
@@ -40,6 +38,11 @@ View::~View()
 {
     delete[] dataTypes;
     delete[] colWidths;
+}
+
+QString View::getName()
+{
+    return viewName;
 }
 
 QStringList View::getColNames()
@@ -347,4 +350,12 @@ QStringList View::getStatistics(int colIndex)
         delete[] tallies;
     }
     return lines;
+}
+
+void View::copyStateFrom(View *otherView)
+{
+    sortColumn = otherView->sortColumn;
+    ascending = otherView->ascending;
+    sortName = otherView->sortName;
+    prepareData();
 }

@@ -1,3 +1,14 @@
+2003-09-09  JMB  View selector in row viewer, desktop recent files menu
+
+    The row viewer now has a droplist from which any of the defined views
+    can be chosen; the selection of displayed fields is then updated to match
+    that view.
+
+    The "recently opened files" list which is tracked starting in version 1.8
+    for the benefit of the file browser on the new sharp ROMs is now also
+    available as an "Open Recent" submenu under the "File" menu in the
+    desktop versions of PortaBase.
+
 2003-09-08  JMB  Text copy from row viewer, time difference calculations
 
     There is now a copy button in the row viewer which allows you to copy

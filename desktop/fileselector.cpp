@@ -35,9 +35,12 @@ const DocLnk *PBFileSelector::selected()
         QFileInfo info(file);
         lastDir = info.dirPath(TRUE);
         QPEApplication::setDocumentDir(lastDir);
-        files.prepend(info.absFilePath());
-        if (files.count() > 5) {
-            files.remove(files.fromLast());
+        QString path = info.absFilePath();
+        if (files.findIndex(path) == -1) {
+            files.prepend(path);
+            if (files.count() > 5) {
+                files.remove(files.fromLast());
+            }
         }
         return new DocLnk(file);
     }

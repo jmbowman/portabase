@@ -17,6 +17,8 @@
 #include "datatypes.h"
 #include "pbdialog.h"
 
+class Database;
+class QComboBox;
 class QKeyEvent;
 class QPushButton;
 class QTextView;
@@ -27,7 +29,8 @@ class RowViewer: public PBDialog
 {
     Q_OBJECT
 public:
-    RowViewer(ViewDisplay *parent = 0, const char *name = 0, WFlags f = 0);
+    RowViewer(Database *dbase, ViewDisplay *parent = 0, const char *name = 0,
+              WFlags f = 0);
     ~RowViewer();
 
     void viewRow(View *currentView, int rowIndex);
@@ -40,19 +43,23 @@ private slots:
     void previousRow();
     void editRow();
     void copyText();
+    void viewChanged(int index);
 
 private:
     void updateContent();
     QString prepareString(QString content);
 
 private:
+    Database *db;
     View *view;
     ViewDisplay *display;
+    QComboBox *viewBox;
     int index;
     int rowCount;
     QPushButton *nextButton;
     QPushButton *prevButton;
     QTextView *tv;
+    View *currentView;
 };
 
 #endif

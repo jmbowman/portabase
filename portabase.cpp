@@ -256,14 +256,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     if (!QDir(lastDir).exists()) {
         lastDir = defaultDir.absPath();
     }
-    QStringList recent;
-    for (int i = 0; i < 5; i++) {
-        QString path = conf.readEntry(QString().sprintf("Recent%i", i), "");
-        if (!path.isEmpty()) {
-            recent.append(path);
-        }
-    }
-    fileSelector = new PBFileSelector(lastDir, recent,
+    QStringList recentFiles = getRecentFiles(conf);
+    fileSelector = new PBFileSelector(lastDir, recentFiles,
                                       "application/portabase", mainStack);
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(openFile(const DocLnk &)));
@@ -291,14 +285,8 @@ PortaBase::~PortaBase()
     conf.setGroup("Files");
     QDir lastDir(fileSelector->currentDir());
     conf.writeEntry("LastDir", lastDir.absPath());
-    QStringList files = fileSelector->recent();
-    while (files.count() < 5) {
-        files.append("");
-    }
-    for (int i = 0; i < 5; i++) {
-        conf.writeEntry(QString().sprintf("Recent%i", i), files[i]);
-    }
     conf.writeEntry("View", viewIconsAction->isOn() ? "Icon" : "List");
+    updateRecentFiles(conf);
 }
 
 bool PortaBase::editColumns()
@@ -471,6 +459,8 @@ void PortaBase::createFile(int source)
 
 void PortaBase::finishNewFile(Database *db)
 {
+    Config conf("portabase");
+    updateRecentFiles(conf);
     viewer->setDatabase(db);
     viewer->updateTable();
     viewer->updateButtons();
@@ -529,6 +519,8 @@ void PortaBase::openFile(const DocLnk &f)
     }
     db = temp;
     viewer->setDatabase(db);
+    Config conf("portabase");
+    updateRecentFiles(conf);
     showDataViewer();
     updateCaption();
     rebuildViewMenu();
@@ -601,6 +593,16 @@ void PortaBase::viewIcons()
 #endif
 }
 
+void PortaBase::openRecent(int id)
+{
+    QString path = recent->text(id);
+    if (!QFile::exists(path)) {
+        QMessageBox::warning(this, tr("PortaBase"), tr("File does not exist"));
+        return;
+    }
+    openFile(path);
+}
+
 void PortaBase::updateCaption(const QString &name)
 {
     if (!doc) {
@@ -639,7 +641,17 @@ void PortaBase::showFileSelector()
     fileNewAction->addTo(toolbar);
     fileOpenAction->addTo(file);
     fileOpenAction->addTo(toolbar);
-#ifndef DESKTOP
+#ifdef DESKTOP
+    recent = new QPopupMenu(this);
+    Config conf("portabase");
+    QStringList recentFiles = getRecentFiles(conf);
+    int count = recentFiles.count();
+    for (int i = 0; i < count; i++) {
+        recent->insertItem(recentFiles[i]);
+    }
+    connect(recent, SIGNAL(activated(int)), this, SLOT(openRecent(int)));
+    file->insertItem(tr("Open Recent"), recent);
+#else
     fileDeleteAction->addTo(file);
     fileDeleteAction->addTo(toolbar);
     fileRenameAction->addTo(file);
@@ -816,6 +828,39 @@ QAction *PortaBase::getButtonAction(const QString &buttonName)
     }
     else {
         return findAction;
+    }
+}
+
+QStringList PortaBase::getRecentFiles(Config &conf)
+{
+    conf.setGroup("Files");
+    QStringList recentFiles;
+    for (int i = 0; i < 5; i++) {
+        QString path = conf.readEntry(QString().sprintf("Recent%i", i), "");
+        if (!path.isEmpty()) {
+            recentFiles.append(path);
+        }
+    }
+    return recentFiles;
+}
+
+void PortaBase::updateRecentFiles(Config &conf)
+{
+    conf.setGroup("Files");
+    QStringList files = fileSelector->recent();
+    int count = files.count();
+    int i;
+#ifdef DESKTOP
+    recent->clear();
+    for (i = 0; i < count; i++) {
+        recent->insertItem(files[i]);
+    }
+#endif
+    while (files.count() < 5) {
+        files.append("");
+    }
+    for (i = 0; i < 5; i++) {
+        conf.writeEntry(QString().sprintf("Recent%i", i), files[i]);
     }
 }
 

@@ -49,7 +49,8 @@ public:
     QString changePassword(const QString &oldPass, const QString &newPass);
     void updateDateTimePrefs();
     QString currentView();
-    View *getView(QString name, bool applyDefaults=FALSE);
+    View *getView(QString name, bool applyDefaults=FALSE,
+                  bool setAsCurrent=TRUE);
     QString getDefaultSort(const QString &viewName);
     QString getDefaultFilter(const QString &viewName);
     QStringList listViews();
