@@ -31,7 +31,7 @@ public:
     QString encodeCell(QString content);
 
 private:
-    void initialize(Database *db);
+    void initialize(Database *db, const QString &filename);
     bool addRow(Database *db);
 
 private:
@@ -45,7 +45,7 @@ private:
     QString rowString;
     QStringList row;
     IntList addedIds;
-    int *types;
+    IntList types;
     CalcNodeList calcs;
     IntList calcDecimals;
     int calcCount;

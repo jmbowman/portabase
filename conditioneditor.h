@@ -49,7 +49,7 @@ private:
 private:
     Database *db;
     QStringList colNames;
-    int *types;
+    IntList types;
     IntList stringOps;
     IntList numberOps;
     QComboBox *columnList;

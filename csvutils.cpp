@@ -10,22 +10,20 @@
  */
 
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qobject.h>
 #include <qregexp.h>
 #include <qtextstream.h>
 #include "csvutils.h"
 #include "database.h"
 
-CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), types(0), calcCount(0)
+CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), calcCount(0)
 {
 
 }
 
 CSVUtils::~CSVUtils()
 {
-    if (types != 0) {
-        delete[] types;
-    }
     for (int i = 0; i < calcCount; i++) {
         delete calcs[i];
     }
@@ -34,7 +32,7 @@ CSVUtils::~CSVUtils()
 QStringList CSVUtils::parseFile(const QString &filename,
                                 const QString &encoding, Database *db)
 {
-    initialize(db);
+    initialize(db, filename);
     QFile f(filename);
     QStringList returnVal;
     if (!f.open(IO_ReadOnly)) {
@@ -215,12 +213,9 @@ QString CSVUtils::encodeCell(QString content)
     return result + "\"";
 }
 
-void CSVUtils::initialize(Database *db)
+void CSVUtils::initialize(Database *db, const QString &filename)
 {
     colNames = db->listColumns();
-    if (types != 0) {
-        delete[] types;
-    }
     types = db->listTypes();
     colCount = colNames.count();
     endStringCount = 0;
@@ -245,6 +240,8 @@ void CSVUtils::initialize(Database *db)
         }
     }
     calcCount = calcs.count();
+    QFileInfo info(filename);
+    db->setImportBasePath(info.dirPath(TRUE) + "/");
 }
 
 bool CSVUtils::addRow(Database *db)

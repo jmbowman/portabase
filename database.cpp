@@ -11,18 +11,19 @@
 
 #if defined(DESKTOP)
 #include "desktop/config.h"
-#include "desktop/resource.h"
 #else
 #include <qpe/config.h>
-#include <qpe/resource.h>
 #endif
 
 #include <qdatetime.h>
+#include <qfileinfo.h>
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <qregexp.h>
 #include <qstringlist.h>
+#include <stdlib.h>
 #include "calc/calcnode.h"
+#include "image/imageutils.h"
 #include "condition.h"
 #include "crypto.h"
 #include "csvutils.h"
@@ -190,7 +191,8 @@ QString Database::currentView()
     return QString::fromUtf8(gView(global[0]));
 }
 
-View *Database::getView(QString name, bool applyDefaults, bool setAsCurrent)
+View *Database::getView(const QString &name, bool applyDefaults,
+                        bool setAsCurrent)
 {
     int index = views.Find(vName [name.utf8()]);
 #if defined(DESKTOP)
@@ -215,11 +217,11 @@ View *Database::getView(QString name, bool applyDefaults, bool setAsCurrent)
     int *types = new int[size];
     int *widths = new int[size];
     QStringList colIds;
-    QStringList floatStringIds;
+    QStringList stringColIds;
     for (int i = 0; i < size; i++) {
-        QString name = QString::fromUtf8(vcName (cols[i]));
-        names.append(name);
-        int colIndex = columns.Find(cName [name.utf8()]);
+        QString colName = QString::fromUtf8(vcName (cols[i]));
+        names.append(colName);
+        int colIndex = columns.Find(cName [colName.utf8()]);
         types[i] = cType (columns[colIndex]);
 #if defined(DESKTOP)
         widths[i] = vcDeskWidth (cols[i]);
@@ -228,18 +230,18 @@ View *Database::getView(QString name, bool applyDefaults, bool setAsCurrent)
 #endif
         int idNum = cId (columns[colIndex]);
         colIds.append(makeColId(idNum, types[i]));
-        if (types[i] == FLOAT || types[i] == CALC) {
-            floatStringIds.append(makeColId(idNum, STRING));
+        if (types[i] == FLOAT || types[i] == CALC || types[i] == IMAGE) {
+            stringColIds.append(makeColId(idNum, STRING));
         }
         else {
-            floatStringIds.append("");
+            stringColIds.append("");
         }
     }
     if (curView && setAsCurrent) {
         delete curView;
     }
     View *view = new View(name, this, data, names, types, widths, colIds,
-                          floatStringIds, rpp);
+                          stringColIds, rpp);
     if (setAsCurrent) {
         gView(global[0]) = name.utf8();
         curView = view;
@@ -302,7 +304,7 @@ void Database::addView(const QString &name, const QStringList &names,
     }
 }
 
-void Database::deleteView(QString name)
+void Database::deleteView(const QString &name)
 {
     QCString utf8Name = name.utf8();
     int index = views.Find(vName [utf8Name]);
@@ -315,7 +317,7 @@ void Database::deleteView(QString name)
     }
 }
 
-void Database::renameView(QString oldName, QString newName)
+void Database::renameView(const QString &oldName, const QString &newName)
 {
     if (newName == oldName) {
         return;
@@ -378,36 +380,37 @@ QStringList Database::listColumns()
     return list;
 }
 
-int *Database::listTypes()
+IntList Database::listTypes()
 {
     c4_View sorted = columns.SortOn(cIndex);
     int size = sorted.GetSize();
-    int *list = new int[size];
+    IntList list;
     for (int i = 0; i < size; i++) {
-        list[i] = cType (sorted[i]);
+        int type = cType (sorted[i]);
+        list.append(type);
     }
     return list;
 }
 
-int Database::getIndex(QString column)
+int Database::getIndex(const QString &column)
 {
     int index = columns.Find(cName [column.utf8()]);
     return cIndex (columns[index]);
 }
 
-void Database::setIndex(QString column, int index)
+void Database::setIndex(const QString &column, int index)
 {
     int i = columns.Find(cName [column.utf8()]);
     cIndex (columns[i]) = index;
 }
 
-int Database::getType(QString column)
+int Database::getType(const QString &column)
 {
     int index = columns.Find(cName [column.utf8()]);
     return cType (columns[index]);
 }
 
-QString Database::getDefault(QString column)
+QString Database::getDefault(const QString &column)
 {
     int index = columns.Find(cName [column.utf8()]);
     if (cType (columns[index]) == CALC) {
@@ -416,13 +419,13 @@ QString Database::getDefault(QString column)
     return QString::fromUtf8(cDefault (columns[index]));
 }
 
-void Database::setDefault(QString column, QString value)
+void Database::setDefault(const QString &column, const QString &value)
 {
     int index = columns.Find(cName [column.utf8()]);
     cDefault (columns[index]) = value.utf8();
 }
 
-QString Database::getColId(QString column, int type)
+QString Database::getColId(const QString &column, int type)
 {
     int index = columns.Find(cName [column.utf8()]);
     int colType = type;
@@ -432,7 +435,7 @@ QString Database::getColId(QString column, int type)
     return makeColId(cId (columns[index]), colType);
 }
 
-QString Database::isValidValue(int type, QString value)
+QString Database::isValidValue(int type, const QString &value)
 {
     if (type == INTEGER || type == SEQUENCE) {
         bool ok = FALSE;
@@ -482,8 +485,8 @@ QString Database::isValidValue(int type, QString value)
     return "";
 }
 
-void Database::addColumn(int index, QString name, int type, QString defaultVal,
-                         int id)
+void Database::addColumn(int index, const QString &name, int type,
+                         const QString &defaultVal, int id)
 {
     QCString utf8Value = defaultVal.utf8();
     int nextId = id;
@@ -559,6 +562,16 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal,
             stringProp (data[i]) = defaultVal.utf8();
         }
     }
+    else if (type == IMAGE) {
+        c4_BytesProp newProp(idString);
+        // separate column to store image type
+        QString stringColId = makeColId(nextId, STRING);
+        c4_StringProp stringProp(stringColId);
+        for (int i = 0; i < size; i++) {
+            newProp (data[i]) = c4_Bytes();
+            stringProp (data[i]) = "";
+        }
+    }
     else if (type >= FIRST_ENUM) {
         c4_StringProp newProp(idString);
         // separate column to store option indices for sorting & filtering
@@ -580,7 +593,7 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal,
     // calculation values get set after the calculation is saved
 }
 
-void Database::deleteColumn(QString name)
+void Database::deleteColumn(const QString &name)
 {
     // first make sure it exists
     int index = columns.Find(cName [name.utf8()]);
@@ -611,7 +624,7 @@ void Database::deleteColumn(QString name)
     columns.RemoveAt(index);
 }
 
-void Database::renameColumn(QString oldName, QString newName)
+void Database::renameColumn(const QString &oldName, const QString &newName)
 {
     QCString utf8OldName = oldName.utf8();
     QCString utf8NewName = newName.utf8();
@@ -649,7 +662,7 @@ void Database::updateDataFormat()
     data = storage->GetAs(formatString());
 }
 
-QStringList Database::getRow(int rowId)
+QStringList Database::getRow(int rowId, ImageUtils *utils)
 {
     QStringList results;
     int index = data.Find(Id [rowId]);
@@ -658,7 +671,15 @@ QStringList Database::getRow(int rowId)
     c4_View temp = columns.SortOn(cIndex);
     for (int i = 0; i < numCols; i++) {
         int type = cType (temp[i]);
-        if (type == FLOAT || type == CALC) {
+        if (utils && (type == IMAGE)) {
+            QString colName = QString::fromUtf8(cName (temp[i]));
+            QString idString = makeColId(cId (temp[i]), STRING);
+            c4_StringProp prop(idString);
+            QString format = QString::fromUtf8(prop (row));
+            results.append(utils->exportImage(this, rowId, colName, format));
+            continue;
+        }
+        if (type == FLOAT || type == CALC || type == IMAGE) {
             // want the string representation for this
             type = STRING;
         }
@@ -693,7 +714,7 @@ QStringList Database::listSortings()
     return list;
 }
 
-bool Database::getSortingInfo(QString sortingName, QStringList *allCols,
+bool Database::getSortingInfo(const QString &sortingName, QStringList *allCols,
                               QStringList *descCols)
 {
     c4_View temp = sortColumns.Select(scSort [sortingName.utf8()]);
@@ -713,8 +734,8 @@ bool Database::getSortingInfo(QString sortingName, QStringList *allCols,
     return TRUE;
 }
 
-void Database::addSorting(QString name, QStringList allCols,
-                          QStringList descCols)
+void Database::addSorting(const QString &name, const QStringList &allCols,
+                          const QStringList &descCols)
 {
     QCString utf8Name = name.utf8();
     sorts.Add(sName [utf8Name]);
@@ -734,7 +755,7 @@ void Database::addSorting(QString name, QStringList allCols,
     }
 }
 
-void Database::deleteSorting(QString name)
+void Database::deleteSorting(const QString &name)
 {
     QCString utf8Name = name.utf8();
     int index = sorts.Find(sName [utf8Name]);
@@ -756,7 +777,8 @@ void Database::deleteSorting(QString name)
     }
 }
 
-void Database::deleteSortingColumn(QString sortName, QString columnName)
+void Database::deleteSortingColumn(const QString &sortName,
+                                   const QString &columnName)
 {
     QCString utf8SortName = sortName.utf8();
     int removeIndex = sortColumns.Find(scSort [utf8SortName]
@@ -783,7 +805,7 @@ c4_View Database::getData()
     return data;
 }
 
-c4_View Database::sortData(c4_View filteredData, QString column,
+c4_View Database::sortData(c4_View filteredData, const QString &column,
                            bool ascending)
 {
     QStringList colNames;
@@ -804,7 +826,7 @@ c4_View Database::sortData(c4_View filteredData, QString column,
     }
 }
 
-c4_View Database::sortData(c4_View filteredData, QString sortingName)
+c4_View Database::sortData(c4_View filteredData, const QString &sortingName)
 {
     gSort (global[0]) = sortingName.utf8();
     QStringList allCols;
@@ -817,7 +839,7 @@ c4_View Database::sortData(c4_View filteredData, QString sortingName)
     return filteredData.SortOnReverse(allView, descView);
 }
 
-c4_View Database::createEmptyView(QStringList colNames)
+c4_View Database::createEmptyView(const QStringList &colNames)
 {
     int count = colNames.count();
     c4_View result;
@@ -828,6 +850,10 @@ c4_View Database::createEmptyView(QStringList colNames)
         if (type >= FIRST_ENUM) {
             // sort by option index, not alphabetically by text
             type = INTEGER;
+        }
+        else if (type == IMAGE) {
+            // sort by image type
+            type = STRING;
         }
         QString idString = makeColId(id, type);
         if (type == INTEGER || type == BOOLEAN || type == DATE
@@ -863,7 +889,7 @@ QStringList Database::listFilters()
     return list;
 }
 
-Filter *Database::getFilter(QString name)
+Filter *Database::getFilter(const QString &name)
 {
     if (curFilter) {
         if (QString::fromUtf8(gFilter (global[0])) == name) {
@@ -905,7 +931,7 @@ void Database::addFilter(Filter *filter, bool setAsCurrent)
     }
 }
 
-void Database::deleteFilter(QString name)
+void Database::deleteFilter(const QString &name)
 {
     QCString utf8Name = name.utf8();
     int index = filters.Find(fName [utf8Name]);
@@ -928,7 +954,8 @@ void Database::deleteFilter(QString name)
     getFilter("_allrows");
 }
 
-void Database::deleteFilterColumn(QString filterName, QString columnName)
+void Database::deleteFilterColumn(const QString &filterName,
+                                  const QString &columnName)
 {
     QCString utf8FilterName = filterName.utf8();
     QCString utf8ColumnName = columnName.utf8();
@@ -951,13 +978,13 @@ void Database::deleteFilterColumn(QString filterName, QString columnName)
     }
 }
 
-int Database::getConditionCount(QString filterName)
+int Database::getConditionCount(const QString &filterName)
 {
     c4_View conditions = filterConditions.Select(fcFilter [filterName.utf8()]);
     return conditions.GetSize();
 }
 
-Condition *Database::getCondition(QString filterName, int index)
+Condition *Database::getCondition(const QString &filterName, int index)
 {
     int rowIndex = filterConditions.Find(fcFilter [filterName.utf8()]
                                          + fcPosition [index]);
@@ -1058,6 +1085,42 @@ QString Database::addRow(QStringList values, int *rowId,
             stringProp (row) = value.utf8();
             // when importing, remember to rerun the calculation after this
         }
+        else if (type == IMAGE) {
+            c4_BytesProp prop(idString);
+            // also need to enter the image type
+            QString stringColId = makeColId(cId (temp[i]), STRING);
+            c4_StringProp stringProp(stringColId);
+            if (value == "PNG" || value == "JPEG" || value == "") {
+                // adding from the row editor, or an empty import field
+                prop (row) = c4_Bytes();
+                stringProp (row) = value;
+            }
+            else {
+                // importing an image named in an imported file
+                QString path = value;
+                QFileInfo info(path);
+                if (info.isRelative()) {
+                    // compensate for location of imported file
+                    path = importBasePath + value;
+                }
+                if (!QFile::exists(path)) {
+                    return QObject::tr("Missing file") + ":\n" + value;
+                }
+                ImageUtils utils;
+                bool resized = FALSE;
+                QImage image = utils.load(path, &resized);
+                if (image.isNull()) {
+                    return utils.getErrorMessage() + ":\n" + value;
+                }
+                QString format = utils.getFormat();
+                int size;
+                char *data = ImageUtils::getImageData(image, format, path,
+                                                      resized, &size);
+                prop (row) = c4_Bytes(data, size);
+                stringProp (row) = format;
+                free(data);
+            }
+        }
         else if (type >= FIRST_ENUM) {
             c4_StringProp prop(idString);
             prop (row) = value.utf8();
@@ -1076,13 +1139,17 @@ QString Database::addRow(QStringList values, int *rowId,
     return "";
 }
 
-void Database::updateRow(int rowId, QStringList values)
+void Database::updateRow(int rowId, const QStringList &values)
 {
     int index = data.Find(Id [rowId]);
     int count = columns.GetSize();
     c4_View temp = columns.SortOn(cIndex);
     for (int i = 0; i < count; i++) {
         int type = cType (temp[i]);
+        if (type == IMAGE) {
+            // only updating the image format for now
+            type = STRING;
+        }
         QString idString = makeColId(cId (temp[i]), type);
         if (type == STRING || type == NOTE) {
             c4_StringProp prop(idString);
@@ -1134,7 +1201,7 @@ void Database::deleteRow(int id)
     maxId--;
 }
 
-void Database::toggleBoolean(int rowId, QString colName)
+void Database::toggleBoolean(int rowId, const QString &colName)
 {
     int index = data.Find(Id [rowId]);
     int colIndex = columns.Find(cName [colName.utf8()]);
@@ -1144,7 +1211,38 @@ void Database::toggleBoolean(int rowId, QString colName)
     prop (data[index]) = (value == 1) ? 0 : 1;
 }
 
-QStringList Database::listViewColumns(QString viewName)
+char *Database::getBinaryField(int rowId, const QString &colName, int *size)
+{
+    int index = data.Find(Id [rowId]);
+    int colIndex = columns.Find(cName [colName.utf8()]);
+    QString idString = makeColId(cId (columns[colIndex]), IMAGE);
+    c4_BytesProp prop(idString);
+    c4_Bytes field = prop (data[index]);
+    *size = field.Size();
+    char *contents = 0;
+    if (*size > 0) {
+        contents = (char*)malloc(*size);
+        memcpy(contents, field.Contents(), *size);
+    }
+    return contents;
+}
+
+void Database::setBinaryField(int rowId, const QString &colName,
+                              char *dataArray, int size)
+{
+    int index = data.Find(Id [rowId]);
+    int colIndex = columns.Find(cName [colName.utf8()]);
+    QString idString = makeColId(cId (columns[colIndex]), IMAGE);
+    c4_BytesProp prop(idString);
+    if (size > 0) {
+        prop (data[index]) = c4_Bytes(dataArray, size);
+    }
+    else {
+        prop (data[index]) = c4_Bytes();
+    }
+}
+
+QStringList Database::listViewColumns(const QString &viewName)
 {
     c4_View cols = viewColumns.Select(vcView [viewName.utf8()]);
     cols = cols.SortOn(vcIndex);
@@ -1156,7 +1254,8 @@ QStringList Database::listViewColumns(QString viewName)
     return names;
 }
 
-void Database::addViewColumn(QString viewName, QString columnName, int index,
+void Database::addViewColumn(const QString &viewName,
+                             const QString &columnName, int index,
                              int width, int deskwidth)
 {
     QCString utf8ViewName = viewName.utf8();
@@ -1174,7 +1273,8 @@ void Database::addViewColumn(QString viewName, QString columnName, int index,
     viewColumns.Add(colRow);
 }
 
-void Database::deleteViewColumn(QString viewName, QString columnName)
+void Database::deleteViewColumn(const QString &viewName,
+                                const QString &columnName)
 {
     QCString utf8ViewName = viewName.utf8();
     int removeIndex = viewColumns.Find(vcView [utf8ViewName]
@@ -1196,7 +1296,8 @@ void Database::deleteViewColumn(QString viewName, QString columnName)
     viewColumns.RemoveAt(removeIndex);
 }
 
-void Database::setViewColumnSequence(QString viewName, QStringList colNames)
+void Database::setViewColumnSequence(const QString &viewName,
+                                     const QStringList &colNames)
 {
     int count = colNames.count();
     int nextIndex = -1;
@@ -1231,7 +1332,8 @@ QStringList Database::listEnumOptions(int id)
     return list;
 }
 
-void Database::addEnum(QString name, QStringList options, int index, int id)
+void Database::addEnum(const QString &name, const QStringList &options,
+                       int index, int id)
 {
     int enumCount = enums.GetSize();
     int nextIndex = index;
@@ -1261,13 +1363,13 @@ void Database::addEnum(QString name, QStringList options, int index, int id)
     }
 }
 
-void Database::renameEnum(QString oldName, QString newName)
+void Database::renameEnum(const QString &oldName, const QString &newName)
 {
     int index = enums.Find(eName [oldName.utf8()]);
     eName (enums[index]) = newName.utf8();
 }
 
-void Database::deleteEnum(QString name)
+void Database::deleteEnum(const QString &name)
 {
     int index = enums.Find(eName [name.utf8()]);
     int id = eId (enums[index]);
@@ -1320,7 +1422,7 @@ QStringList Database::columnsUsingEnum(const QString &enumName)
     return colNames;
 }
 
-void Database::setEnumSequence(QStringList names)
+void Database::setEnumSequence(const QStringList &names)
 {
     int count = names.count();
     for (int i = 0; i < count; i++) {
@@ -1329,7 +1431,7 @@ void Database::setEnumSequence(QStringList names)
     }
 }
 
-void Database::addEnumOption(QString enumName, QString option, int index)
+void Database::addEnumOption(const QString &enumName, const QString &option, int index)
 {
     int enumId = getEnumId(enumName);
     int optionIndex = index;
@@ -1341,8 +1443,8 @@ void Database::addEnumOption(QString enumName, QString option, int index)
                     + eoText [option.utf8()]);
 }
 
-void Database::renameEnumOption(QString enumName, QString oldName,
-                                QString newName)
+void Database::renameEnumOption(const QString &enumName,
+                                const QString &oldName, const QString &newName)
 {
     int enumId = getEnumId(enumName);
     // rename it in the option definition
@@ -1352,8 +1454,8 @@ void Database::renameEnumOption(QString enumName, QString oldName,
     replaceEnumOption(enumId, oldName, newName);
 }
 
-void Database::deleteEnumOption(QString enumName, QString option,
-                                QString replace)
+void Database::deleteEnumOption(const QString &enumName, const QString &option,
+                                const QString &replace)
 {
     int enumId = getEnumId(enumName);
     // delete the option definition
@@ -1363,8 +1465,8 @@ void Database::deleteEnumOption(QString enumName, QString option,
     replaceEnumOption(enumId, option, replace);
 }
 
-void Database::replaceEnumOption(int enumId, QString oldOption,
-                                 QString newOption)
+void Database::replaceEnumOption(int enumId, const QString &oldOption,
+                                 const QString &newOption)
 {
     QCString utf8OldOption = oldOption.utf8();
     QCString utf8NewOption = newOption.utf8();
@@ -1397,7 +1499,8 @@ void Database::replaceEnumOption(int enumId, QString oldOption,
     }
 }
 
-void Database::setEnumOptionSequence(QString enumName, QStringList options)
+void Database::setEnumOptionSequence(const QString &enumName,
+                                     const QStringList &options)
 {
     int enumId = getEnumId(enumName);
     int count = options.count();
@@ -1578,6 +1681,9 @@ QString Database::makeColId(int colId, int type)
     else if (type == FLOAT || type == CALC) {
         result += 'F';
     }
+    else if (type == IMAGE) {
+        result += 'B';
+    }
     else {
         result += 'S';
     }
@@ -1610,6 +1716,11 @@ QString Database::formatString(bool old)
             // add string representation column
             result += "," + makeColId(cId (row), STRING) + ":S";
         }
+        else if (type == IMAGE) {
+            result += ":B";
+            // add image type column
+            result += "," + makeColId(cId (row), STRING) + ":S";
+        }
         else if (type >= FIRST_ENUM) {
             result += ":S";
             // add option index column
@@ -1630,6 +1741,11 @@ void Database::commit()
         crypto->save();
     }
     file->Commit();
+}
+
+void Database::setImportBasePath(const QString &path)
+{
+    importBasePath = path;
 }
 
 QStringList Database::importFromCSV(const QString &filename,
@@ -1657,6 +1773,7 @@ void Database::exportToXML(QString filename, c4_View &fullView,
     xml.addView("calcs", calcs.SortOn(calcId));
     xml.addView("calcnodes", calcNodes.SortOn((cnId, cnNodeId)));
     QStringList colIds;
+    QStringList colNames;
     QStringList allCols = listColumns();
     int allColCount = allCols.count();
     int *types = new int[allColCount];
@@ -1666,10 +1783,13 @@ void Database::exportToXML(QString filename, c4_View &fullView,
     for (i = 0; i < count; i++) {
         int type = getType(cols[i]);
         types[i] = type;
-        type = (type == FLOAT || type == CALC) ? STRING : type;
+        if (type == FLOAT || type == CALC || type == IMAGE) {
+            type = STRING;
+        }
         int index = columns.Find(cName [cols[i].utf8()]);
         ids[i] = cId (columns[index]);
         colIds.append(makeColId(ids[i], type));
+        colNames.append(cols[i]);
     }
     int colIndex = count;
     for (i = 0; i < allColCount; i++) {
@@ -1682,9 +1802,10 @@ void Database::exportToXML(QString filename, c4_View &fullView,
         int index = columns.Find(cName [allCols[i].utf8()]);
         ids[colIndex] = cId (columns[index]);
         colIds.append(makeColId(ids[colIndex], type));
+        colNames.append(allCols[i]);
         colIndex++;
     }
-    xml.addDataView(fullView, filteredView, ids, types, colIds);
+    xml.addDataView(fullView, filteredView, ids, types, colIds, colNames);
 }
 
 void Database::setGlobalInfo(const QString &view, const QString &sorting,
@@ -1695,7 +1816,7 @@ void Database::setGlobalInfo(const QString &view, const QString &sorting,
     gFilter (global[0]) = filter.utf8();
 }
 
-bool Database::isNoneDate(QDate &date)
+bool Database::isNoneDate(const QDate &date)
 {
     return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
 }
@@ -1709,7 +1830,7 @@ QString Database::dateToString(int date)
     return dateToString(dateObj);
 }
 
-QString Database::dateToString(QDate &date)
+QString Database::dateToString(const QDate &date)
 {
     if (isNoneDate(date)) {
         return "";

@@ -31,12 +31,16 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     vbox->addWidget(hbox);
     columnList= new QComboBox(FALSE, hbox);
     columnList->insertItem(tr("Any text column"));
-    colNames = db->listColumns();
+    QStringList tempNames = db->listColumns();
     int count = colNames.count();
-    types = db->listTypes();
+    IntList tempTypes = db->listTypes();
     for (int i = 0; i < count; i++) {
-        QString name = colNames[i];
-        columnList->insertItem(name);
+        if (tempTypes[i] != IMAGE) {
+            QString name = tempNames[i];
+            colNames.append(name);
+            types.append(tempTypes[i]);
+            columnList->insertItem(name);
+        }
     }
     connect(columnList, SIGNAL(activated(int)),
             this, SLOT(updateDisplay(int)));
@@ -89,7 +93,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
 
 ConditionEditor::~ConditionEditor()
 {
-    delete[] types;
+
 }
 
 int ConditionEditor::edit(Condition *condition)

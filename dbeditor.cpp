@@ -210,30 +210,12 @@ void DBEditor::editColumn()
 
 bool DBEditor::isValidName(QString colName)
 {
-    if (colName.isEmpty()) {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("No name entered"));
-        return FALSE;
-    }
-    if (colName[0] == '_') {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Name must not start with '_'"));
-        return FALSE;
-    }
-    // check for other columns with same name
-    bool result = TRUE;
+    QStringList nameList;
     int size = info.GetSize();
     for (int i = 0; i < size; i++) {
-        QString name = QString::fromUtf8(ceName (info[i]));
-        if (name == colName) {
-            result = FALSE;
-            break;
-        }
+        nameList.append(QString::fromUtf8(ceName (info[i])));
     }
-    if (!result) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("Duplicate name"));
-    }
-    return result;
+    return validateName(colName, "", nameList);
 }
 
 bool DBEditor::isValidDefault(int type, QString defaultVal)
@@ -414,6 +396,9 @@ QString DBEditor::getTypeString(int type)
     }
     else if (type == SEQUENCE) {
         return tr("Sequence");
+    }
+    else if (type == IMAGE) {
+        return tr("Image");
     }
     else {
         return db->getEnumName(type);

@@ -57,6 +57,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, 
     typeBox->insertItem(tr("Time"));
     typeBox->insertItem(tr("Calculation"));
     typeBox->insertItem(tr("Sequence"));
+    typeBox->insertItem(tr("Image"));
     typeBox->insertStringList(db->listEnums());
     typeBox->insertItem("(" + tr("New Enum") + ")");
     connect(typeBox, SIGNAL(activated(int)),
@@ -83,6 +84,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name, 
     calcButton = new QPushButton(tr("Edit calculation"), defaultStack);
     connect(calcButton, SIGNAL(clicked()), this, SLOT(editCalculation()));
     defaultSequence = new NumberWidget(INTEGER, defaultStack);
+    defaultBlank = new QWidget(defaultStack);
     defaultStack->raiseWidget(defaultLine);
 
 #if defined(DESKTOP)
@@ -188,6 +190,9 @@ QString ColumnEditor::defaultValue()
     }
     else if (colType == SEQUENCE) {
         return defaultSequence->getValue();
+    }
+    else if (colType == IMAGE) {
+        return "";
     }
     else if (colType >= FIRST_ENUM) {
         return defaultEnum->currentText();
@@ -330,6 +335,10 @@ void ColumnEditor::updateDefaultWidget(int newType)
     else if (newType == SEQUENCE) {
         defaultLabel->setText(tr("Next value"));
         defaultStack->raiseWidget(defaultSequence);
+    }
+    else if (newType == IMAGE) {
+        defaultLabel->setText("");
+        defaultStack->raiseWidget(defaultBlank);
     }
     else {
         defaultStack->raiseWidget(defaultLine);

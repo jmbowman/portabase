@@ -23,7 +23,8 @@
 #define TIME 6
 #define CALC 7
 #define SEQUENCE 8
-#define LAST_TYPE 8
+#define IMAGE 9
+#define LAST_TYPE 9
 
 #define FIRST_ENUM 100
 

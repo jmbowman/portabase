@@ -21,6 +21,7 @@
 #include "../database.h"
 #include "importdialog.h"
 #include "../importutils.h"
+#include "../pbdialog.h"
 
 ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
   const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(subject), importDone(FALSE)
@@ -42,12 +43,16 @@ ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
         caption = tr("Import from text file");
         mimeType = "text/plain";
     }
-    else {
+    else if (sourceType == XML_FILE) {
         caption = tr("Import from XML file");
         mimeType = "text/xml";
     }
+    else {
+        caption = tr("Select an image");
+        mimeType = "image/jpeg;image/png";
+    }
 
-    setCaption(caption + " - " + tr("PortaBase"));
+    setCaption(caption + " - " + PBDialog::tr("PortaBase"));
     QVBoxLayout *vbox = new QVBoxLayout(this);
     if (sourceType == CSV_FILE || sourceType == OPTION_LIST) {
         QHBox *hbox = new QHBox(this);
@@ -89,6 +94,7 @@ void ImportDialog::import(const QFileInfo &f)
 
 bool ImportDialog::import(const QString &file)
 {
+    path = file;
     QString error = "";
     QString data = "";
     if (source == CSV_FILE) {
@@ -110,14 +116,14 @@ bool ImportDialog::import(const QString &file)
         ImportUtils utils;
         error = utils.importMobileDB(file, db);
     }
-    else {
+    else if (source == XML_FILE) {
         ImportUtils utils;
         error = utils.importXML(file, db);
     }
     importDone = TRUE;
     if (error != "") {
         if (data == "") {
-            QMessageBox::warning(this, tr("PortaBase"), error);
+            QMessageBox::warning(this, PBDialog::tr("PortaBase"), error);
         }
         else {
             CSVErrorDialog dialog(error, data, this);
@@ -148,4 +154,9 @@ int ImportDialog::exec()
 QStringList ImportDialog::getOptions()
 {
     return options;
+}
+
+QString ImportDialog::getPath()
+{
+    return path;
 }

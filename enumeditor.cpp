@@ -315,42 +315,23 @@ void EnumEditor::updateList()
 
 bool EnumEditor::hasValidName()
 {
-    QString name = nameBox->text();
-    if (name.isEmpty()) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("No name entered"));
-        return FALSE;
-    }
-    if (name == originalName) {
-        // hasn't changed and isn't empty, must be valid
-        return TRUE;
-    }
-    if (name[0] == '_') {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Name must not start with '_'"));
-        return FALSE;
-    }
-    // check for other enums with same name
-    QStringList enumNames = db->listEnums();
-    if (enumNames.findIndex(name) != -1) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("Duplicate name"));
-        return FALSE;
-    }
-    return TRUE;
+    return validateName(nameBox->text(), originalName, db->listEnums());
 }
 
 bool EnumEditor::isValidOption(QString option)
 {
     if (!option.isEmpty()) {
         if (option[0] == '_') {
-            QMessageBox::warning(this, tr("PortaBase"),
-                                 tr("Name must not start with '_'"));
+            QMessageBox::warning(this, PBDialog::tr("PortaBase"),
+                                 PBDialog::tr("Name must not start with '_'"));
             return FALSE;
         }
     }
     // check for other options with same text
     QStringList options = listCurrentOptions();
     if (options.findIndex(option) != -1) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("Duplicate name"));
+        QMessageBox::warning(this, PBDialog::tr("PortaBase"),
+                             PBDialog::tr("Duplicate name"));
         return FALSE;
     }
     return TRUE;

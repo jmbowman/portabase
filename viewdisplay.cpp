@@ -9,6 +9,12 @@
  * (at your option) any later version.
  */
 
+#if defined(DESKTOP)
+#include "desktop/resource.h"
+#else
+#include <qpe/resource.h>
+#endif
+
 #include <math.h>
 
 #include <qhbox.h>
@@ -32,6 +38,7 @@
 #include "shadedlistitem.h"
 #include "view.h"
 #include "viewdisplay.h"
+#include "image/imageviewer.h"
 
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
     WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0),
@@ -218,6 +225,14 @@ void ViewDisplay::updateTable()
             if (type == BOOLEAN) {
                 int checked = data[j].toInt();
                 item->setPixmap(j, PortaBase::getCheckBoxPixmap(checked));
+            }
+            else if (type == IMAGE) {
+                if (data[j] == "") {
+                    item->setText(j, "");
+                }
+                else {
+                    item->setPixmap(j, Resource::loadPixmap("find"));
+                }
             }
             else if (type == NOTE || type == STRING) {
                 item->setText(j, data[j].replace(linefeed, " "));
@@ -454,19 +469,29 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint&, int column)
     }
     int *types = view->getColTypes();
     int type = types[column];
+    int rowId = selectedRowId();
+    QString colName = table->header()->label(column);
     if (type == BOOLEAN && booleanToggle) {
-        QString colName = table->header()->label(column);
-        db->toggleBoolean(selectedRowId(), colName);
+        db->toggleBoolean(rowId, colName);
         view->prepareData();
         updateTable();
         setEdited(TRUE);
     }
     else if (timer.elapsed() > 500) {
         if (type == NOTE) {
-            QString colName = table->header()->label(column);
             NoteEditor viewer(colName, TRUE, this);
-            viewer.setContent(view->getNote(selectedRowId(), column));
+            viewer.setContent(view->getNote(rowId, column));
             viewer.exec();
+        }
+        else if (type == IMAGE) {
+            QString format = view->getImageFormat(rowId, column);
+            if (format != "") {
+                QImage image = view->getImage(rowId, column);
+                ImageViewer viewer(TRUE, this);
+                viewer.setView(view, selectedRowIndex(), column);
+                viewer.setImage(image);
+                viewer.exec();
+            }
         }
         else {
             editRow();

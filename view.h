@@ -13,6 +13,7 @@
 #define VIEW_H
 
 #include <mk4.h>
+#include <qimage.h>
 #include "datatypes.h"
 
 class c4_IntProp;
@@ -26,7 +27,7 @@ class View
 public:
     View(QString name, Database *parent, c4_View baseview,
          QStringList colNames, int *types, int *widths, QStringList colIds,
-         QStringList floatStringIds, int rpp);
+         QStringList stringColIds, int rpp);
     ~View();
 
     QString getName();
@@ -45,6 +46,8 @@ public:
     void prepareData();
     QStringList getStatistics(int colIndex);
     QString getNote(int rowId, int colIndex);
+    QString getImageFormat(int rowId, int colIndex);
+    QImage getImage(int rowId, int colIndex);
     void deleteAllRows();
     void exportToCSV(QString filename);
     void exportToXML(QString filename);
@@ -59,7 +62,7 @@ private:
     int *dataTypes;
     int *colWidths;
     QStringList ids;
-    QStringList fsIds;
+    QStringList scIds;
     int numCols;
     int rowsPerPage;
     int sortColumn;

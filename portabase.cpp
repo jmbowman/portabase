@@ -10,7 +10,6 @@
  */
 
 #if defined(DESKTOP)
-#include <qfiledialog.h>
 #include <qinputdialog.h>
 typedef QInputDialog InputDialog;
 #include "desktop/config.h"
@@ -97,6 +96,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     toolbar = new QToolBar(this);
     addToolBar(toolbar, QMainWindow::Top, TRUE);
     statusBar();
+    setIcon(Resource::loadPixmap("portabase"));
 #else
     QToolBar *bar = new QToolBar(this);
     addToolBar(bar, QMainWindow::Top);
@@ -429,7 +429,6 @@ void PortaBase::import()
     if (!ok) {
         return;
     }
-    DocLnk f;
     if (type == types[0]) {
         createFile(XML_FILE);
     }

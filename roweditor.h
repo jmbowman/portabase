@@ -24,6 +24,7 @@ class DynamicEdit;
 class QCheckBox;
 class QComboBox;
 class QLabel;
+class ImageSelector;
 class NoteButton;
 class NumberWidget;
 class TimeWidget;
@@ -37,6 +38,7 @@ typedef QValueList<QComboBox*> ComboBoxList;
 typedef QValueList<DynamicEdit*> DynamicEditList;
 typedef QValueList<CalcWidget*> CalcWidgetList;
 typedef QValueList<QLabel*> LabelList;
+typedef QValueList<ImageSelector*> ImageSelectorList;
 
 class RowEditor: public PBDialog
 {
@@ -55,7 +57,7 @@ private:
 private:
     Database *db;
     QStringList colNames;
-    int *colTypes;
+    IntList colTypes;
     CheckBoxList checkBoxes;
     NoteButtonList noteButtons;
     DateWidgetList dateWidgets;
@@ -65,6 +67,7 @@ private:
     DynamicEditList dynamicEdits;
     CalcWidgetList calcWidgets;
     LabelList sequenceLabels;
+    ImageSelectorList imageSelectors;
 };
 
 #endif

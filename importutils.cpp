@@ -11,6 +11,7 @@
 
 #include <qdatetime.h>
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <qregexp.h>
@@ -165,6 +166,8 @@ QStringList ImportUtils::convertMobileDBRow(QStringList values, int *types)
 
 QString ImportUtils::importXML(const QString &filename, Database *db)
 {
+    QFileInfo info(filename);
+    db->setImportBasePath(info.dirPath(TRUE) + "/");
     XMLImport importer(db);
     QFile file(filename);
     QXmlInputSource source(file);

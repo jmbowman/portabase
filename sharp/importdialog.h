@@ -36,6 +36,7 @@ public:
     ~ImportDialog();
     int exec();
     QStringList getOptions();
+    QString getPath();
 
 private slots:
     void import(const QFileInfo &);
@@ -50,6 +51,7 @@ private:
     int source;
     bool importDone;
     QStringList options;
+    QString path;
 };
 
 #endif

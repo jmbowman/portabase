@@ -66,6 +66,7 @@ private:
     QComboBox *defaultEnum;
     QPushButton *calcButton;
     NumberWidget *defaultSequence;
+    QWidget *defaultBlank;
     CalcNode *calcRoot;
     int calcDecimals;
     int lastType;

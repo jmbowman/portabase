@@ -237,35 +237,7 @@ void ViewEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
 
 bool ViewEditor::hasValidName()
 {
-    QString name = nameBox->text();
-    if (name.isEmpty()) {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("No name entered"));
-        return FALSE;
-    }
-    if (name == originalName) {
-        // hasn't changed and isn't empty, must be valid
-        return TRUE;
-    }
-    if (name[0] == '_') {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Name must not start with '_'"));
-        return FALSE;
-    }
-    // check for other views with same name
-    bool result = TRUE;
-    QStringList viewNames = db->listViews();
-    int count = viewNames.count();
-    for (int i = 0; i < count; i++) {
-        if (name == viewNames[i]) {
-            result = FALSE;
-            break;
-        }
-    }
-    if (!result) {
-        QMessageBox::warning(this, tr("PortaBase"), tr("Duplicate name"));
-    }
-    return result;
+    return validateName(nameBox->text(), originalName, db->listViews());
 }
 
 int ViewEditor::isIncluded(QString name)

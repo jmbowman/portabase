@@ -27,6 +27,7 @@ XMLExport::XMLExport(Database *source, QString filename, QStringList currentCols
     fieldElements.append("t");
     fieldElements.append("c");
     fieldElements.append("q");
+    fieldElements.append("p");
     file = new QFile(filename);
     file->open(IO_WriteOnly);
     output = new QTextStream(file);
@@ -34,6 +35,7 @@ XMLExport::XMLExport(Database *source, QString filename, QStringList currentCols
     *output << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     *output << "<portabase>\n";
     indent = indentUnit;
+    utils.setExportPaths(filename);
 }
 
 XMLExport::~XMLExport()
@@ -98,7 +100,8 @@ void XMLExport::addView(QString name, c4_View view)
 }
 
 void XMLExport::addDataView(c4_View &fullView, c4_View &filteredView,
-                            int *colIds, int *colTypes, QStringList idStrings)
+                            int *colIds, int *colTypes, QStringList idStrings,
+                            QStringList colNames)
 {
     *output << (indent + "<data>\n");
     indent += indentUnit;
@@ -139,9 +142,12 @@ void XMLExport::addDataView(c4_View &fullView, c4_View &filteredView,
                 QString stringRep = db->dateToString(value.toInt());
                 *output << ("\" s=\"" + stringRep);
             }
-            if (element == "t") {
+            else if (element == "t") {
                 QString stringRep = db->timeToString(value.toInt());
                 *output << ("\" s=\"" + stringRep);
+            }
+            else if (element == "p") {
+                value = utils.exportImage(db, rowId, colNames[j], value);
             }
             if (j >= viewColCount) {
                 *output << "\" h=\"y";

@@ -4,7 +4,7 @@ TRANSLATIONS    = portabase_ja.ts \
                   portabase_tw.ts \
                   portabase_fr.ts \
                   portabase_cs.ts
-LIBS           += mk4vc60s.lib beecrypt.lib
+LIBS           += mk4vc60s.lib beecrypt.lib jpeg.lib
 TARGET          = portabase
 DEFINES        += DESKTOP QT_DLL
 TMAKE_CXXFLAGS += /MD
@@ -66,7 +66,13 @@ HEADERS         = portabase.h \
                   desktop/newfiledialog.h \
                   pbdialog.h \
                   calc/calctimeeditor.h \
-                  menuactions.h
+                  menuactions.h \
+                  image/imageeditor.h \
+                  image/imagereader.h \
+                  image/imageselector.h \
+                  image/imageutils.h \
+                  image/imageviewer.h \
+                  image/imagewidget.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   view.cpp \
@@ -124,4 +130,10 @@ SOURCES         = main.cpp \
                   desktop/newfiledialog.cpp \
                   pbdialog.cpp \
                   calc/calctimeeditor.cpp \
-                  menuactions.cpp
+                  menuactions.cpp \
+                  image/imageeditor.cpp \
+                  image/imagereader.cpp \
+                  image/imageselector.cpp \
+                  image/imageutils.cpp \
+                  image/imageviewer.cpp \
+                  image/imagewidget.cpp

@@ -44,8 +44,11 @@ bool ImportDialog::exec()
     else if (source == OPTION_LIST) {
         filter = QString::null;
     }
-    else {
+    else if (source == XML_FILE) {
         filter = QObject::tr("XML files") + " (*.xml)";
+    }
+    else {
+        filter = QObject::tr("Images") + " (*.jpg *.jpeg *.png)";
     }
     QString file = QFileDialog::getOpenFileName(QPEApplication::documentDir(),
                                                 filter, parentWidget,
@@ -57,6 +60,7 @@ bool ImportDialog::exec()
     else {
         QFileInfo info(file);
         QPEApplication::setDocumentDir(info.dirPath(TRUE));
+        path = info.absFilePath();
     }
 
     QString encoding = "";
@@ -94,7 +98,7 @@ bool ImportDialog::exec()
         ImportUtils utils;
         error = utils.importMobileDB(file, db);
     }
-    else {
+    else if (source == XML_FILE) {
         ImportUtils utils;
         error = utils.importXML(file, db);
     }
@@ -116,4 +120,9 @@ bool ImportDialog::exec()
 QStringList ImportDialog::getOptions()
 {
     return options;
+}
+
+QString ImportDialog::getPath()
+{
+    return path;
 }

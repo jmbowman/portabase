@@ -1,3 +1,10 @@
+2003-10-06  JMB  Image columns
+
+    There is now an "Image" column type; each entry in such a column is
+    either empty or contains a copy of a JPEG or PNG image.  These images
+    can be seen in the row viewer, by clicking on a "View" button in the
+    row editor, and via a click-and-hold on an icon in the data viewer.
+
 2003-09-15  JMB  Date picker enhancements
 
     Changed the date picker so it is sized according to the size of the

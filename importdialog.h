@@ -21,6 +21,7 @@
 #define MOBILEDB_FILE 2
 #define XML_FILE 3
 #define OPTION_LIST 4
+#define IMAGE_FILE 5
 
 class Database;
 class DocLnk;
@@ -36,6 +37,7 @@ public:
     ~ImportDialog();
     int exec();
     QStringList getOptions();
+    QString getPath();
 
 private slots:
     void import(const DocLnk &);
@@ -50,6 +52,7 @@ private:
     int source;
     bool importDone;
     QStringList options;
+    QString path;
 };
 
 #endif

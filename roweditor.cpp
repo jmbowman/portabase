@@ -23,6 +23,7 @@
 #include <qmessagebox.h>
 #include <qscrollview.h>
 #include "calc/calcwidget.h"
+#include "image/imageselector.h"
 #include "database.h"
 #include "datatypes.h"
 #include "datewidget.h"
@@ -32,7 +33,7 @@
 #include "timewidget.h"
 
 RowEditor::RowEditor(QWidget *parent, const char *name, WFlags f)
-  : PBDialog(tr("Row Editor"), parent, name, f), db(0), colTypes(0)
+  : PBDialog(tr("Row Editor"), parent, name, f), db(0)
 {
 
 }
@@ -59,11 +60,18 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
     }
     if (!aborted) {
         QStringList values = getRow();
+        int id;
         if (rowId == -1 || copy) {
-            db->addRow(values);
+            db->addRow(values, &id);
         }
         else {
             db->updateRow(rowId, values);
+            id = rowId;
+        }
+        int count = imageSelectors.count();
+        for (int i = 0; i < count; i++) {
+            ImageSelector *widget = imageSelectors[i];
+            widget->saveImage(id);
         }
         return TRUE;
     }
@@ -115,6 +123,7 @@ QStringList RowEditor::getRow(bool doCalcs)
     int comboBoxIndex = 0;
     int dynamicEditIndex = 0;
     int labelIndex = 0;
+    int imageSelectorIndex = 0;
     int count = colNames.count();
     for (int i = 0; i < count; i++) {
         int type = colTypes[i];
@@ -153,6 +162,11 @@ QStringList RowEditor::getRow(bool doCalcs)
             values.append(sequenceLabels[labelIndex]->text());
             labelIndex++;
         }
+        else if (type == IMAGE) {
+            ImageSelector *widget = imageSelectors[imageSelectorIndex];
+            values.append(widget->getFormat());
+            imageSelectorIndex++;
+        }
         else if (type >= FIRST_ENUM) {
             values.append(comboBoxes[comboBoxIndex]->currentText());
             comboBoxIndex++;
@@ -184,9 +198,6 @@ void RowEditor::addContent(int rowId)
         for (int i = 0; i < count; i++) {
             values.append(db->getDefault(colNames[i]));
         }
-    }
-    if (colTypes) {
-        delete[] colTypes;
     }
     colTypes = db->listTypes();
     for (int i = 0; i < count; i++) {
@@ -239,6 +250,13 @@ void RowEditor::addContent(int rowId)
             QLabel *label = new QLabel(values[i], grid);
             layout->addWidget(label, i, 1);
             sequenceLabels.append(label);
+        }
+        else if (type == IMAGE) {
+            ImageSelector *widget = new ImageSelector(db, grid);
+            layout->addWidget(widget, i, 1);
+            widget->setField(rowId, name);
+            widget->setFormat(values[i]);
+            imageSelectors.append(widget);
         }
         else if (type >= FIRST_ENUM) {
             QComboBox *combo = new QComboBox(FALSE, grid);

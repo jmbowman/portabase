@@ -14,6 +14,7 @@
 #include "condition.h"
 #include "database.h"
 #include "filter.h"
+#include "pbdialog.h"
 #include "xmlimport.h"
 
 XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("")
@@ -60,6 +61,7 @@ XMLImport::XMLImport(Database *dbase) : QXmlDefaultHandler(), db(dbase), error("
     dataFields.append("t");
     dataFields.append("c");
     dataFields.append("q");
+    dataFields.append("p");
     dataFields.append("e");
 
     booleans.append("scdesc");
@@ -637,11 +639,11 @@ bool XMLImport::addRow()
 bool XMLImport::validateName(const QString &name)
 {
     if (name.isEmpty()) {
-        error = QObject::tr("No name entered");
+        error = PBDialog::tr("No name entered");
         return FALSE;
     }
     if (name.startsWith("_")) {
-        error = QObject::tr("Name must not start with '_'") + ": " + name;
+        error = PBDialog::tr("Name must not start with '_'") + ": " + name;
         return FALSE;
     }
     return TRUE;
@@ -1172,5 +1174,6 @@ void XMLImport::buildParentsMap()
     parents.insert("t", "r");
     parents.insert("c", "r");
     parents.insert("q", "r");
+    parents.insert("p", "r");
     parents.insert("e", "r");
 }

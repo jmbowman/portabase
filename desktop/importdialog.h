@@ -20,6 +20,7 @@
 #define MOBILEDB_FILE 2
 #define XML_FILE 3
 #define OPTION_LIST 4
+#define IMAGE_FILE 5
 
 class Database;
 class QWidget;
@@ -32,12 +33,14 @@ public:
 
     bool exec();
     QStringList getOptions();
+    QString getPath();
 
 private:
     Database *db;
     QWidget *parentWidget;
     int source;
     QStringList options;
+    QString path;
 };
 
 #endif

@@ -14,6 +14,7 @@
 
 #include <mk4.h>
 #include <qstringlist.h>
+#include "image/imageutils.h"
 
 class QFile;
 class QString;
@@ -30,7 +31,8 @@ public:
     void addGlobalView(c4_View &global);
     void addView(QString name, c4_View view);
     void addDataView(c4_View &fullView, c4_View &filteredView, int *colIds,
-                     int *colTypes, QStringList idStrings);
+                     int *colTypes, QStringList idStrings,
+                     QStringList colNames);
 
 private:
     QString getPropName(const c4_Property prop);
@@ -44,6 +46,7 @@ private:
     QStringList fieldElements;
     QFile *file;
     QTextStream *output;
+    ImageUtils utils;
 };
 
 #endif

@@ -15,10 +15,11 @@
 
 #include <qhbox.h>
 #include <qlabel.h>
+#include <qmessagebox.h>
 #include "pbdialog.h"
 
 PBDialog::PBDialog(QString title, QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f)
+    : QDialog(parent, name, TRUE, f), okCancelRow(0)
 {
     vbox = new QVBoxLayout(this);
     if (title.isEmpty()) {
@@ -64,6 +65,7 @@ void PBDialog::finishLayout(bool okButton, bool cancelButton, bool fullscreen,
             new QWidget(hbox);
         }
         vbox->setResizeMode(QLayout::FreeResize);
+        okCancelRow = hbox;
     }
     QWidget *parent = parentWidget();
     if (fullscreen) {
@@ -103,4 +105,36 @@ void PBDialog::addEditButtons(bool movementOnly)
     // leave a blank space before the OK and Cancel buttons
     vbox->addWidget(new QLabel(" ", this));
 #endif
+}
+
+bool PBDialog::validateName(const QString &newName, const QString &oldName,
+                            const QStringList &otherNames)
+{
+    if (newName.isEmpty()) {
+        QMessageBox::warning(this, tr("PortaBase"),
+                             tr("No name entered"));
+        return FALSE;
+    }
+    if (newName == oldName) {
+        // hasn't changed and isn't empty, must be valid
+        return TRUE;
+    }
+    if (newName[0] == '_') {
+        QMessageBox::warning(this, tr("PortaBase"),
+                             tr("Name must not start with '_'"));
+        return FALSE;
+    }
+    // check for other items with same name
+    bool result = TRUE;
+    int count = otherNames.count();
+    for (int i = 0; i < count; i++) {
+        if (newName == otherNames[i]) {
+            result = FALSE;
+            break;
+        }
+    }
+    if (!result) {
+        QMessageBox::warning(this, tr("PortaBase"), tr("Duplicate name"));
+    }
+    return result;
 }

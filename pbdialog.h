@@ -16,6 +16,8 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 
+class QHBox;
+
 class PBDialog: public QDialog
 {
     Q_OBJECT
@@ -23,6 +25,9 @@ public:
     PBDialog(QString title, QWidget *parent = 0, const char *name = 0,
              WFlags f = 0);
     ~PBDialog();
+
+    bool validateName(const QString &newName, const QString &oldName,
+                      const QStringList &otherNames);
 
 protected:
     void finishLayout(bool okButton=TRUE, bool cancelButton=TRUE,
@@ -35,6 +40,7 @@ public:
 
 protected:
     QVBoxLayout *vbox;
+    QHBox *okCancelRow;
     QPushButton *addButton;
     QPushButton *editButton;
     QPushButton *deleteButton;

@@ -32,6 +32,7 @@ class CalcNode;
 class Condition;
 class Crypto;
 class Filter;
+class ImageUtils;
 class QDate;
 class QString;
 class QStringList;
@@ -49,7 +50,7 @@ public:
     QString changePassword(const QString &oldPass, const QString &newPass);
     void updateDateTimePrefs();
     QString currentView();
-    View *getView(QString name, bool applyDefaults=FALSE,
+    View *getView(const QString &name, bool applyDefaults=FALSE,
                   bool setAsCurrent=TRUE);
     QString getDefaultSort(const QString &viewName);
     QString getDefaultFilter(const QString &viewName);
@@ -57,66 +58,73 @@ public:
     void addView(const QString &name, const QStringList &names,
                  const QString &defaultSort, const QString &defaultFilter,
                  int rpp=-1, int deskrpp=-1);
-    void deleteView(QString name);
+    void deleteView(const QString &name);
     void setViewColWidths(int *widths);
     void setViewRowsPerPage(int rpp);
     void setViewDefaults(const QString &sorting, const QString &filter);
 
     QStringList listColumns();
-    int getIndex(QString column);
-    void setIndex(QString column, int index);
-    int getType(QString column);
-    int *listTypes();
-    QString getDefault(QString column);
-    void setDefault(QString column, QString value);
-    QString getColId(QString column, int type=-1);
-    QString isValidValue(int type, QString value);
-    void addColumn(int index, QString name, int type, QString defaultVal,
-                   int id=-1);
-    void renameColumn(QString oldName, QString newName);
-    void deleteColumn(QString name);
-    void renameView(QString oldName, QString newName);
-    QStringList listViewColumns(QString viewName);
-    void addViewColumn(QString viewName, QString columnName, int index=-1,
-                       int width=-1, int deskwidth=-1);
-    void deleteViewColumn(QString viewName, QString columnName);
-    void setViewColumnSequence(QString viewName, QStringList colNames);
+    int getIndex(const QString &column);
+    void setIndex(const QString &column, int index);
+    int getType(const QString &column);
+    IntList listTypes();
+    QString getDefault(const QString &column);
+    void setDefault(const QString &column, const QString &value);
+    QString getColId(const QString &column, int type=-1);
+    QString isValidValue(int type, const QString &value);
+    void addColumn(int index, const QString &name, int type,
+                   const QString &defaultVal, int id=-1);
+    void renameColumn(const QString &oldName, const QString &newName);
+    void deleteColumn(const QString &name);
+    void renameView(const QString &oldName, const QString &newName);
+    QStringList listViewColumns(const QString &viewName);
+    void addViewColumn(const QString &viewName, const QString &columnName,
+                       int index=-1, int width=-1, int deskwidth=-1);
+    void deleteViewColumn(const QString &viewName, const QString &columnName);
+    void setViewColumnSequence(const QString &viewName,
+                               const QStringList &colNames);
     void updateDataFormat();
-    QStringList getRow(int rowId);
+    QStringList getRow(int rowId, ImageUtils *utils=0);
 
     QString currentSorting();
     QStringList listSortings();
-    bool getSortingInfo(QString sortingName, QStringList *allCols,
+    bool getSortingInfo(const QString &sortingName, QStringList *allCols,
                         QStringList *descCols);
-    void addSorting(QString name, QStringList allCols, QStringList descCols);
-    void deleteSorting(QString name);
-    void deleteSortingColumn(QString sortName, QString columnName);
+    void addSorting(const QString &name, const QStringList &allCols,
+                    const QStringList &descCols);
+    void deleteSorting(const QString &name);
+    void deleteSortingColumn(const QString &sortName, const QString &columnName);
     c4_View getData();
-    c4_View sortData(c4_View filteredData, QString column, bool ascending);
-    c4_View sortData(c4_View filteredData, QString sortingName);
+    c4_View sortData(c4_View filteredData, const QString &column, bool ascending);
+    c4_View sortData(c4_View filteredData, const QString &sortingName);
 
     QString currentFilter();
     QStringList listFilters();
-    Filter *getFilter(QString name);
+    Filter *getFilter(const QString &name);
     void addFilter(Filter *filter, bool setAsCurrent=TRUE);
-    void deleteFilter(QString name);
-    void deleteFilterColumn(QString filterName, QString columnName);
-    int getConditionCount(QString filterName);
-    Condition *getCondition(QString filterName, int index);
+    void deleteFilter(const QString &name);
+    void deleteFilterColumn(const QString &filterName, const QString &columnName);
+    int getConditionCount(const QString &filterName);
+    Condition *getCondition(const QString &filterName, int index);
 
     QStringList listEnums();
     QStringList listEnumOptions(int id);
-    void addEnum(QString name, QStringList options, int index=-1, int id=-1);
-    void renameEnum(QString oldName, QString newName);
-    void deleteEnum(QString name);
+    void addEnum(const QString &name, const QStringList &options,
+                 int index=-1, int id=-1);
+    void renameEnum(const QString &oldName, const QString &newName);
+    void deleteEnum(const QString &name);
     int getEnumId(const QString &name);
     QString getEnumName(int id);
     QStringList columnsUsingEnum(const QString &enumName);
-    void setEnumSequence(QStringList names);
-    void addEnumOption(QString enumName, QString option, int index=-1);
-    void renameEnumOption(QString enumName, QString oldName, QString newName);
-    void deleteEnumOption(QString enumName, QString option, QString replace);
-    void setEnumOptionSequence(QString enumName, QStringList options);
+    void setEnumSequence(const QStringList &names);
+    void addEnumOption(const QString &enumName, const QString &option,
+                       int index=-1);
+    void renameEnumOption(const QString &enumName, const QString &oldName,
+                          const QString &newName);
+    void deleteEnumOption(const QString &enumName, const QString &option,
+                          const QString &replace);
+    void setEnumOptionSequence(const QString &enumName,
+                               const QStringList &options);
 
     CalcNode *loadCalc(const QString &colName, int *decimals=0);
     void updateCalc(const QString &colName, CalcNode *root, int decimals);
@@ -125,16 +133,20 @@ public:
 
     QString addRow(QStringList values, int *rowId=0,
                    bool acceptSequenceVals=FALSE, bool fromcsv=FALSE);
-    void updateRow(int rowId, QStringList values);
+    void updateRow(int rowId, const QStringList &values);
     void deleteRow(int id);
-    void toggleBoolean(int rowId, QString colName);
+    void toggleBoolean(int rowId, const QString &colName);
+    char *getBinaryField(int rowId, const QString &colName, int *size);
+    void setBinaryField(int rowId, const QString &colName, char *dataArray,
+                        int size);
     void commit();
-    bool isNoneDate(QDate &date);
+    bool isNoneDate(const QDate &date);
     QString dateToString(int date);
-    QString dateToString(QDate &date);
+    QString dateToString(const QDate &date);
     QString timeToString(int time);
     QString parseTimeString(QString value, bool *ok);
     void setShowSeconds(bool show);
+    void setImportBasePath(const QString &path);
     QStringList importFromCSV(const QString &filename,
                               const QString &encoding);
     void exportToXML(QString filename, c4_View &fullView,
@@ -144,8 +156,9 @@ public:
     int addCalcNode(int calcId, CalcNode *root, int nodeId, int parentId);
 
 private:
-    c4_View createEmptyView(QStringList colNames);
-    void replaceEnumOption(int enumId, QString oldOption, QString newOption);
+    c4_View createEmptyView(const QStringList &colNames);
+    void replaceEnumOption(int enumId, const QString &oldOption,
+                           const QString &newOption);
     QString makeColId(int id, int type);
     QString formatString(bool old = FALSE);
     void updateDataColumnFormat();
@@ -177,6 +190,7 @@ private:
     Crypto *crypto;
     int version;
     bool newFile;
+    QString importBasePath;
     c4_View columns;
     c4_View views;
     c4_View viewColumns;

@@ -62,7 +62,13 @@ HEADERS         = portabase.h \
                   fileselector.h \
                   pbdialog.h \
                   calc/calctimeeditor.h \
-                  menuactions.h
+                  menuactions.h \
+                  image/imageeditor.h \
+                  image/imagereader.h \
+                  image/imageselector.h \
+                  image/imageutils.h \
+                  image/imageviewer.h \
+                  image/imagewidget.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   inputdialog.cpp \
@@ -114,4 +120,10 @@ SOURCES         = main.cpp \
                   fileselector.cpp \
                   pbdialog.cpp \
                   calc/calctimeeditor.cpp \
-                  menuactions.cpp
+                  menuactions.cpp \
+                  image/imageeditor.cpp \
+                  image/imagereader.cpp \
+                  image/imageselector.cpp \
+                  image/imageutils.cpp \
+                  image/imageviewer.cpp \
+                  image/imagewidget.cpp

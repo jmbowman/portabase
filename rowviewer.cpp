@@ -19,6 +19,7 @@
 #include <qcombobox.h>
 #include <qclipboard.h>
 #include <qhbox.h>
+#include <qmime.h>
 #include <qpushbutton.h>
 #include <qtextview.h>
 #include "database.h"
@@ -27,6 +28,7 @@
 #include "rowviewer.h"
 #include "view.h"
 #include "viewdisplay.h"
+#include "image/imageutils.h"
 
 RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name, WFlags f)
   : PBDialog(tr("Row Viewer"), parent, name, f), db(dbase), display(parent), currentView(0)
@@ -64,6 +66,11 @@ RowViewer::~RowViewer()
 {
     if (currentView) {
         delete currentView;
+    }
+    // free up memory used by images that were shown
+    int count = usedImageIds.count();
+    for (int i = 0; i < count; i++) {
+        tv->mimeSourceFactory()->setImage(usedImageIds[i], QImage());
     }
 }
 
@@ -103,6 +110,7 @@ void RowViewer::updateContent()
     int *colTypes = currentView->getColTypes();
     QString str = "<qt><table cellspacing=0>";
     int count = colNames.count();
+    int imageIndex = 0;
     for (int i = 0; i < count; i++) {
         str += "<tr><td><font color=#0000ff>";
         str += prepareString(colNames[i]);
@@ -116,6 +124,21 @@ void RowViewer::updateContent()
             else {
                 QString path = Resource::findPixmap("portabase/unchecked");
                 str += "<img src=\"" + path + "\">";
+            }
+        }
+        else if (type == IMAGE) {
+            QString format = values[i];
+            if (format != "") {
+                int rowId = currentView->getId(index);
+                QString name = colNames[i];
+                QImage image = ImageUtils::load(db, rowId, name, format);
+                QString imageId = QString("image%1").arg(imageIndex);
+                tv->mimeSourceFactory()->setImage(imageId, image);
+                str += "<img src=\"" + imageId + "\">";
+                if (!usedImageIds.contains(imageId)) {
+                    usedImageIds.append(imageId);
+                }
+                imageIndex++;
             }
         }
         else {

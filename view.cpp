@@ -19,8 +19,9 @@
 #include "datatypes.h"
 #include "filter.h"
 #include "view.h"
+#include "image/imageutils.h"
 
-View::View(QString name, Database *parent, c4_View baseview, QStringList colNames, int *types, int *widths, QStringList colIds, QStringList floatStringIds, int rpp) : viewName(name), Id("_id"), sortColumn(-1), ascending(TRUE), sortName("")
+View::View(QString name, Database *parent, c4_View baseview, QStringList colNames, int *types, int *widths, QStringList colIds, QStringList stringColIds, int rpp) : viewName(name), Id("_id"), sortColumn(-1), ascending(TRUE), sortName("")
 {
     db = parent;
     dbview = baseview;
@@ -28,7 +29,7 @@ View::View(QString name, Database *parent, c4_View baseview, QStringList colName
     dataTypes = types;
     colWidths = widths;
     ids = colIds;
-    fsIds = floatStringIds;
+    scIds = stringColIds;
     numCols = columns.count();
     rowsPerPage = rpp;
     sort(db->currentSorting());
@@ -95,9 +96,9 @@ QStringList View::getRow(int index)
             int value = prop (row);
             results.append(QString::number(value));
         }
-        else if (type == FLOAT || type == CALC) {
+        else if (type == FLOAT || type == CALC || type == IMAGE) {
             // want the string version here
-            c4_StringProp prop(fsIds[i]);
+            c4_StringProp prop(scIds[i]);
             results.append(QString::fromUtf8(prop (row)));
         }
         else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
@@ -123,6 +124,20 @@ QString View::getNote(int rowId, int colIndex)
     int index = dbview.Find(Id [rowId]);
     c4_StringProp prop(ids[colIndex]);
     return QString::fromUtf8(prop (dbview[index]));
+}
+
+QString View::getImageFormat(int rowId, int colIndex)
+{
+    int index = dbview.Find(Id [rowId]);
+    c4_StringProp prop(scIds[colIndex]);
+    return QString::fromUtf8(prop (dbview[index]));
+}
+
+QImage View::getImage(int rowId, int colIndex)
+{
+    QString colName = columns[colIndex];
+    QString format = getImageFormat(rowId, colIndex);
+    return ImageUtils::load(db, rowId, colName, format);
 }
 
 void View::sort(int colIndex)
@@ -187,8 +202,10 @@ void View::exportToCSV(QString filename)
     output.setEncoding(QTextStream::UnicodeUTF8);
     CSVUtils csv;
     int size = dbview.GetSize();
+    ImageUtils utils;
+    utils.setExportPaths(filename);
     for (int i = 0; i < size; i++) {
-        QStringList row = db->getRow(Id (dbview[i]));
+        QStringList row = db->getRow(Id (dbview[i]), &utils);
         output << csv.encodeRow(row);
     }
     f.close();
@@ -238,7 +255,7 @@ QStringList View::getStatistics(int colIndex)
     }
     else if (type == FLOAT || type == CALC) {
         c4_FloatProp prop(ids[colIndex]);
-        c4_StringProp stringProp(fsIds[colIndex]);
+        c4_StringProp stringProp(scIds[colIndex]);
         double value = prop (dbview[0]);
         double total = value;
         double min = value;
@@ -330,6 +347,20 @@ QStringList View::getStatistics(int colIndex)
         lines.append(QObject::tr("Maximum length") + ": "
                      + QString::number(max) + " "
                      + QObject::tr("characters"));
+    }
+    else if (type == IMAGE) {
+        c4_StringProp stringProp(scIds[colIndex]);
+        int missing = 0;
+        for (int i = 0; i < count; i++) {
+            QString value(stringProp (dbview[i]));
+            if (value == "") {
+                missing++;
+            }
+        }
+        lines.append(QObject::tr("Image available") + ": "
+                     + QString::number(count - missing));
+        lines.append(QObject::tr("No image") + ": "
+                     + QString::number(missing));
     }
     else if (type >= FIRST_ENUM) {
         c4_StringProp prop(ids[colIndex]);

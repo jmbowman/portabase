@@ -60,6 +60,7 @@ private:
     QPushButton *prevButton;
     QTextView *tv;
     View *currentView;
+    QStringList usedImageIds;
 };
 
 #endif
