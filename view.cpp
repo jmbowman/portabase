@@ -95,7 +95,7 @@ QStringList View::getRow(int index)
             c4_StringProp prop(fsIds[i]);
             results.append(QString::fromUtf8(prop (row)));
         }
-        else if (type == STRING || type == NOTE) {
+        else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(ids[i]);
             results.append(QString::fromUtf8(prop (row)));
         }
@@ -276,6 +276,23 @@ QStringList View::getStatistics(int colIndex)
         lines.append(PortaBase::tr("Maximum length") + ": "
                      + QString::number(max) + " "
                      + PortaBase::tr("characters"));
+    }
+    else if (type >= FIRST_ENUM) {
+        c4_StringProp prop(ids[colIndex]);
+        QStringList options = db->listEnumOptions(type);
+        int optionCount = options.count();
+        int *tallies = new int[optionCount];
+        for (int i = 0; i < optionCount; i++) {
+            tallies[i] = 0;
+        }
+        for (int i = 0; i < count; i++) {
+            int index = options.findIndex(QString::fromUtf8(prop (dbview[i])));
+            tallies[index] = tallies[index] + 1;
+        }
+        for (int i = 0; i < optionCount; i++) {
+            lines.append(options[i] + ": " + QString::number(tallies[i]));
+        }
+        delete[] tallies;
     }
     return lines;
 }

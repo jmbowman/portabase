@@ -1,24 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <title>PortaBase 1.2</title>
+  <title>PortaBase 1.3</title>
 </head>
 <body>
 
-<div align="center"><h3>PortaBase 1.2</h3> - A portable database -</div>
+<div align="center"><h3>PortaBase 1.3</h3> - A portable database -</div>
 <br>
 <a href="#intro">1)Introduction</a><br>
 <a href="#file">2)File selector</a><br>
 <a href="#columns">3)Columns editor</a><br>
-<a href="#viewedit">4)View editor</a><br>
-<a href="#viewer">5)Data viewer</a><br>
-<a href="#rowedit">6)Row editor</a><br>
-<a href="#noteedit">7)Note editor/viewer</a><br>
-<a href="#sortedit">8)Sorting editor</a><br>
-<a href="#filteredit">9)Filter editor</a><br>
-<a href="#import">10)Data import</a><br>
-<a href="#export">11)Data export</a><br>
-<a href="#prefs">12)Preferences dialog</a><br>
+<a href="#enummanage">4)Enum manager</a><br>
+<a href="#enumedit">5)Enum editor</a><br>
+<a href="#viewedit">6)View editor</a><br>
+<a href="#viewer">7)Data viewer</a><br>
+<a href="#rowedit">8)Row editor</a><br>
+<a href="#noteedit">9)Note editor/viewer</a><br>
+<a href="#sortedit">10)Sorting editor</a><br>
+<a href="#filteredit">11)Filter editor</a><br>
+<a href="#import">12)Data import</a><br>
+<a href="#export">13)Data export</a><br>
+<a href="#prefs">14)Preferences dialog</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -26,8 +28,8 @@ PortaBase is a small database program for creating, browsing, and editing
 custom tables of data.  Typical uses are media inventories, reference
 charts, etc.  Notable features include:<br>
 <ul>
-  <li>String, Integer, Decimal, Boolean, Note (multi-line text), and Date
-      column types</li>
+  <li>String, Integer, Decimal, Boolean, Note (multi-line text), Date, and
+      Enum column types</li>
   <li>Custom data views (subsets of the columns in any order)</li>
   <li>Filter the displayed rows using sets of conditions</li>
   <li>Sort the rows by any combination of columns, each in ascending or
@@ -65,7 +67,9 @@ of the dialog:<br>
 <ul>
 <li><i>Add</i> - Create a new column definition at the end of the
 list.  A small dialog is shown which allows you to enter the name,
-data type, and default value of the new column.  The default value
+data type, and default value of the new column.  (If you select "(New
+ Enum)" from the type list in this dialog, the <a href="#enumedit">enum
+editor</a> will be launched to allow you to add one.)  The default value
 is what will be entered for this column in any already existing data
 rows, and it will appear in the row editor when adding new rows as
 well.</li>
@@ -87,7 +91,55 @@ changes are discarded and the file format is left as it was.  If the
 file creation is aborted; otherwise, pressing either of the dialog
 closing buttons takes you to the <a href="#viewer">data viewer.</a><br>
 <br>
-<a name="viewedit"><b>4)View editor</b></a><br>
+<a name="enummanage"><b>4)Enum manager</b></a><br>
+PortaBase supports enum column types, in which each value in the column
+is one of a set of possible string values.  The enum manager dialog lets
+you create, edit, delete, and change the listing order of these enums.<br>
+<br>
+Most of the dialog is occupied by a list of the currently defined enums.
+At the bottom is a row of buttons identical to those in the
+<a href="#columns">columns editor</a>:<br>
+<ul>
+<li><i>Add</i> - Launch the <a href="#enumedit">enum editor</a> to
+define a new enum.  Note that the new enum will be added when "OK" is
+clicked in the editor dialog, not when the "OK" button is clicked in
+this dialog.</li>
+<li><i>Edit</i> - Launch the enum editor to edit the currently selected
+enum.  As when adding, edits are applied as soon as "OK" is clicked in
+the editor dialog.</li>
+<li><i>Delete</i> - Delete the currently selected enum.  If there are
+columns of this enum type, a dialog will warn you that these would also
+be deleted and ask if you want to continue.  The enum (and any associated
+colums) will be deleted immediately, not when "OK" is clicked.</li>
+<li><i>Up</i> - Move the currently selected enum up one position
+in the list (and hence in the column editor's type list as well).</li>
+<li><i>Down</i> - Move the currently selected enum down one position
+in the list (and hence in the column editor's type list as well).</li>
+</ul>
+Click "OK" to apply any changes made to the enum listing order or "X" to
+leave the sequence unchanged (other than any added or deleted enums).<br>
+<br>
+<a name="enumedit"><b>5)Enum editor</b></a><br>
+This dialog lets you define the name and list of options for an enum
+column type.  It has a list of the enum's options and the same set of
+buttons as most of the other editor dialogs:<br>
+<ul>
+<li><i>Add</i> - Add a new option; a dialog will appear for you to enter
+the option text into.</li>
+<li><i>Edit</i> - Change the text of an existing enum option.  All
+existing uses of this option will be updated to the new text.</li>
+<li><i>Delete</i> - Delete the currently selected option.  A dialog
+will ask you to pick the value to use wherever this option was being
+used.</li>
+<li><i>Up</i> - Move the currently selected option up one position
+in the list (and hence in the selection droplist as well).</li>
+<li><i>Down</i> - Move the currently selected option down one position
+in the list (and hence in the selection droplist as well).</li>
+</ul>
+Click "OK" to accept any changes that were made or "X" to leave the
+options unchanged (or cancel adding a new enum).<br>
+<br>
+<a name="viewedit"><b>6)View editor</b></a><br>
 Whenever you browse a database's content in the <a href="#viewer">data
 viewer</a>, you are looking at one "view" of the data.  A view is a
 subset of the columns in the database, displayed in a particular order
@@ -106,7 +158,7 @@ the order of the columns in the view.  Click "OK" to accept the
 currently shown settings or "X" to revert to the previous values (or to
 cancel adding a new view).<br>
 <br>
-<a name="viewer"><b>5)Data viewer</b></a><br>
+<a name="viewer"><b>7)Data viewer</b></a><br>
 This is the main screen of the application, where you can browse the
 database's content and launch most of the other dialogs.  The contents
 of this screen are:<br>
@@ -166,6 +218,8 @@ current database content to a CSV file.</li>
 by the filter currently in use.</li>
 <li><i>Edit Columns</i> - Launches the <a href="#columns">columns
 editor</a>.</li>
+<li><i>Edit Enums</i> - Launches the <a href="#enummanage">enum
+manager</a>.</li>
 <li><i>Preferences</i> - Launches the <a href="#prefs">preferences
 dialog</a>.</li>
 </ul>
@@ -242,7 +296,7 @@ menu</a>.</li>
 <li><i>Delete</i> - Same as "Delete" in the <a href="#rowmenu">Row
 menu</a>.</li>
 </ul>
-<a name="rowedit"><b>6)Row editor</b></a><br>
+<a name="rowedit"><b>8)Row editor</b></a><br>
 The row editor is shown whenever a row of data is added or edited.  It has
 one row for each column in the database; on the left is the name of the
 column, and on the right is its current value.  When adding a new row of
@@ -254,7 +308,7 @@ values as desired, click "OK" to accept the currently displayed values,
 or "X" to cancel the row addition (if adding a row) or leave the current
 values unchanged (if editing a row).<br>
 <br>
-<a name="noteedit"><b>7)Note editor/viewer</b></a><br>
+<a name="noteedit"><b>9)Note editor/viewer</b></a><br>
 The "Note" column type is for blocks of text which may contain multiple
 lines (as opposed to the "String" type, which is better suited for
 relatively short single lines of text).  The larger size of the content
@@ -274,7 +328,7 @@ and hold for half a second or longer before releasing, a read-only version
 of the Note editor is shown.  Click either "OK" or "X" to dismiss it and
 return to the data viewer.<br>
 <br>
-<a name="sortedit"><b>8)Sorting editor</b></a><br>
+<a name="sortedit"><b>10)Sorting editor</b></a><br>
 Clicking on a column label in the data viewer is a convenient way to
 sort the database contents by a single column.  But sometimes you may want
 to sort by a combination of columns; sort by the content of column A, within
@@ -298,7 +352,7 @@ the same value in that column are sorted by the next highest checked column,
 etc.  Click "OK" to accept the currently shown settings or "X" to revert
 to the previous values (or to cancel adding a new sorting).<br>
 <br>
-<a name="filteredit"><b>9)Filter editor</b></a><br>
+<a name="filteredit"><b>11)Filter editor</b></a><br>
 This dialog allows you to define filters which are used to select which
 rows to display in the data viewer.  A filter may be as simple as
 "count = 1" or something more complicated like "any text column contains
@@ -323,7 +377,7 @@ condition, the row is considered to pass the condition.  Click "OK" to
 accept the currently shown settings or "X" to revert to the previous
 values (or to cancel adding a new filter).<br>
 <br>
-<a name="import"><b>10)Data import</b></a><br>
+<a name="import"><b>12)Data import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.
 This allows you to import data exported from a spreadsheet or another
 database program.  To do this:<br>
@@ -346,7 +400,7 @@ Notes:<br>
 <li>Date fields may be formated as YYYYMMDD, YYYY/MM/DD, YYYY-MM-DD, or
     YYYY.MM.DD</li>
 </ol>
-<a name="export"><b>11)Data export</b></a><br>
+<a name="export"><b>13)Data export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
 import, this allows you to move database content into a spreadsheet or
 other database program for further manipulation (among other uses).  To
@@ -357,7 +411,7 @@ export the current database's contents:<br>
 <li>Click "OK" to complete the export, or the "X" button to cancel the
 operation.</li>
 </ol>
-<a name="prefs"><b>12)Preferences dialog</b></a><br>
+<a name="prefs"><b>14)Preferences dialog</b></a><br>
 This dialog allows you to set your preferences for the PortaBase
 application.  In the "Font" section you can pick any font that has been
 installed on your PDA, in any size it is available in.  That font will then

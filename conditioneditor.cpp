@@ -28,7 +28,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     db = dbase;
     setCaption(tr("Condition Editor") + " - " + tr("PortaBase"));
     QVBox *vbox = new QVBox(this);
-    resize(parent->width() - 10, 70);
+    resize(parent->width() - 10, 75);
     vbox->resize(size());
 
     QHBox *hbox = new QHBox(vbox);
@@ -70,16 +70,25 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     numberOpList.append(">=");
     numberOps.append(GREATEREQUAL);
 
+    enumOpList.append("=");
+    enumOps.append(EQUALS);
+    enumOpList.append("!=");
+    enumOps.append(NOTEQUAL);
+
     updateOpList();
     new QLabel("  ", hbox);
     caseCheck = new QCheckBox(tr("Case sensitive"), hbox);
     new QWidget(hbox);
 
     constantStack = new QWidgetStack(vbox);
+    constantStack->setMaximumHeight(columnList->height());
     constantLine = new QLineEdit(constantStack);
     constantCheck = new QCheckBox(constantStack);
     constantDate = new DateWidget(constantStack);
+    constantCombo = new QComboBox(FALSE, constantStack);
     constantStack->raiseWidget(constantLine);
+
+    new QWidget(vbox);
 }
 
 ConditionEditor::~ConditionEditor()
@@ -137,6 +146,15 @@ void ConditionEditor::fillFields(Condition *condition)
         opList->setCurrentItem(index);
         constantDate->setDate(constant.toInt());
     }
+    else if (type >= FIRST_ENUM) {
+        int index = enumOps.findIndex(operation);
+        opList->setCurrentItem(index);
+        QStringList options = db->listEnumOptions(type);
+        constantCombo->clear();
+        constantCombo->insertStringList(options);
+        index = options.findIndex(constant);
+        constantCombo->setCurrentItem(index);
+    }
     else {
         int index = stringOps.findIndex(operation);
         opList->setCurrentItem(index);
@@ -174,6 +192,17 @@ void ConditionEditor::updateDisplay(int columnIndex)
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
     }
+    else if (type >= FIRST_ENUM) {
+        constantCombo->clear();
+        constantCombo->insertStringList(db->listEnumOptions(type));
+        constantStack->raiseWidget(constantCombo);
+        constantLine->setText("");
+        constantCheck->setChecked(FALSE);
+        QDate today = QDate::currentDate();
+        constantDate->setDate(today);
+        caseCheck->hide();
+        caseCheck->setChecked(FALSE);
+    }
     else {
         constantStack->raiseWidget(constantLine);
         constantCheck->setChecked(FALSE);
@@ -200,6 +229,12 @@ void ConditionEditor::updateOpList()
         int count = numberOpList.count();
         for (int i = 0; i < count; i++) {
             opList->insertItem(numberOpList[i]);
+        }
+    }
+    else if (dataType >= FIRST_ENUM) {
+        int count = enumOpList.count();
+        for (int i = 0; i < count; i++) {
+            opList->insertItem(enumOpList[i]);
         }
     }
     else {
@@ -258,6 +293,11 @@ void ConditionEditor::applyChanges(Condition *condition)
         condition->setOperator(numberOps[opList->currentItem()]);
         condition->setConstant(QString::number(constantDate->getDate()));
         condition->setCaseSensitive(FALSE);
+    }
+    else if (type >= FIRST_ENUM) {
+        condition->setOperator(enumOps[opList->currentItem()]);
+        condition->setConstant(constantCombo->currentText());
+        condition->setCaseSensitive(TRUE);
     }
     else {
         condition->setOperator(stringOps[opList->currentItem()]);

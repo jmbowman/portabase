@@ -16,12 +16,13 @@
 #include <qlineedit.h>
 #include <qwidgetstack.h>
 #include "columneditor.h"
-#include "datatypes.h"
+#include "database.h"
+#include "enumeditor.h"
 #include "notebutton.h"
 
-ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f)
+ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
 {
+    db = dbase;
     setCaption(tr("PortaBase"));
     QGrid *grid = new QGrid(2, this);
     resize(200, 68);
@@ -38,8 +39,11 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     typeBox->insertItem(tr("Boolean"));
     typeBox->insertItem(tr("Note"));
     typeBox->insertItem(tr("Date"));
+    typeBox->insertStringList(db->listEnums());
+    typeBox->insertItem("(" + tr("New Enum") + ")");
     connect(typeBox, SIGNAL(activated(int)),
             this, SLOT(updateDefaultWidget(int)));
+    lastType = 0;
 
     new QLabel(tr("Default"), grid);
     defaultStack = new QWidgetStack(grid);
@@ -49,6 +53,7 @@ ColumnEditor::ColumnEditor(QWidget *parent, const char *name, WFlags f)
     defaultDate = new QComboBox(FALSE, defaultStack);
     defaultDate->insertItem(tr("Today"));
     defaultDate->insertItem(tr("None"));
+    defaultEnum = new QComboBox(FALSE, defaultStack);
     defaultStack->raiseWidget(defaultLine);
 }
 
@@ -69,13 +74,33 @@ void ColumnEditor::setName(QString newName)
 
 int ColumnEditor::type()
 {
-    return typeBox->currentItem();
+    int colType = typeBox->currentItem();
+    if (colType > DATE) {
+        QString enumName = typeBox->text(colType);
+        colType = db->getEnumId(enumName);
+    }
+    return colType;
 }
 
 void ColumnEditor::setType(int newType)
 {
-    typeBox->setCurrentItem(newType);
-    updateDefaultWidget(newType);
+    if (newType == lastType) {
+        return;
+    }
+    int index = newType;
+    if (newType >= FIRST_ENUM) {
+        QString enumName = db->getEnumName(newType);
+        int count = typeBox->count() - 1;
+        for (int i = DATE + 1; i < count; i++) {
+            if (typeBox->text(i) == enumName) {
+                index = i;
+                break;
+            }
+        }
+    }
+    typeBox->setCurrentItem(index);
+    updateDefaultWidget(index);
+    lastType = index;
 }
 
 QString ColumnEditor::defaultValue()
@@ -95,6 +120,9 @@ QString ColumnEditor::defaultValue()
         else {
             return QString::number(17520914);
         }
+    }
+    else if (colType >= FIRST_ENUM) {
+        return defaultEnum->currentText();
     }
     else {
         return defaultLine->text();
@@ -132,6 +160,15 @@ void ColumnEditor::setDefaultValue(QString newDefault)
             defaultDate->setCurrentItem(1);
         }
     }
+    else if (colType >= FIRST_ENUM) {
+        defaultLine->setText("");
+        defaultCheck->setChecked(FALSE);
+        defaultNote->setContent("");
+        defaultDate->setCurrentItem(0);
+        QStringList options = db->listEnumOptions(colType);
+        int selection = options.findIndex(newDefault);
+        defaultEnum->setCurrentItem(selection);
+    }
     else {
         defaultLine->setText(newDefault);
         defaultCheck->setChecked(FALSE);
@@ -147,7 +184,29 @@ void ColumnEditor::setTypeEditable(bool flag)
 
 void ColumnEditor::updateDefaultWidget(int newType)
 {
-    if (newType == BOOLEAN) {
+    if (newType == typeBox->count() - 1) {
+        // creating a new enum type
+        EnumEditor editor(this);
+        if (editor.edit(db, "")) {
+            editor.applyChanges();
+            typeBox->insertItem(editor.getName(), newType);
+            typeBox->setCurrentItem(newType);
+        }
+        else {
+            typeBox->setCurrentItem(lastType);
+            return;
+        }
+    }
+    if (newType > DATE) {
+        QString enumName = typeBox->text(newType);
+        int enumId = db->getEnumId(enumName);
+        QStringList options = db->listEnumOptions(enumId);
+        defaultEnum->clear();
+        defaultEnum->insertStringList(options);
+        defaultEnum->setCurrentItem(0);
+        defaultStack->raiseWidget(defaultEnum);
+    }
+    else if (newType == BOOLEAN) {
         defaultStack->raiseWidget(defaultCheck);
     }
     else if (newType == NOTE) {

@@ -1,3 +1,12 @@
+2002-11-25  #################### PortaBase 1.3 ####################
+
+2002-11-24  JMB  Enum columns
+
+    Added support for enum columns (otherwise known as enumerations,
+    pop-ups, string lists, etc.)  There is a new "Edit Enums" item in the
+    "File" menu, and as a shortcut enums can be defined when creating a
+    new column by selecting "(New Enum)" as the type.
+
 2002-11-19  JMB  Better precision on decimal fields, "default defaults"
 
     In previous releases, decimal fields were only shown with six

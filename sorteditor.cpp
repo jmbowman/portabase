@@ -229,11 +229,6 @@ bool SortEditor::hasValidName()
                              tr("Name must not start with '_'"));
         return FALSE;
     }
-    if (name.find(':') != -1) {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Name must not contain ':'"));
-        return FALSE;
-    }
     // check for other views with same name
     bool result = TRUE;
     QStringList sortingNames = db->listSortings();

@@ -19,6 +19,7 @@
 class Database;
 class DateWidget;
 class QCheckBox;
+class QComboBox;
 class QLineEdit;
 class QScrollView;
 class NoteButton;
@@ -27,6 +28,7 @@ typedef QValueList<QCheckBox*> CheckBoxList;
 typedef QValueList<QLineEdit*> LineEditList;
 typedef QValueList<NoteButton*> NoteButtonList;
 typedef QValueList<DateWidget*> DateWidgetList;
+typedef QValueList<QComboBox*> ComboBoxList;
 
 class RowEditor: public QDialog
 {
@@ -52,6 +54,7 @@ private:
     CheckBoxList checkBoxes;
     NoteButtonList noteButtons;
     DateWidgetList dateWidgets;
+    ComboBoxList comboBoxes;
 };
 
 #endif

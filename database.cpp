@@ -22,7 +22,7 @@
 #include "portabase.h"
 #include "view.h"
 
-Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcIndex("_fcindex"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
+Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcIndex("_fcindex"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
 {
     checkedPixmap = Resource::loadPixmap("portabase/checked");
     uncheckedPixmap = Resource::loadPixmap("portabase/unchecked");
@@ -66,6 +66,8 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
         filters = file->GetAs("_filters[_fname:S]");
         filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcindex,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
+        enums = file->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
+        enumOptions = file->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
         if (version < 3) {
             filters.Add(fName ["_allrows"]);
         }
@@ -303,6 +305,12 @@ QString Database::isValidValue(int type, QString value)
             return "invalid date";
         }
     }
+    else if (type >= FIRST_ENUM) {
+        QStringList options = listEnumOptions(type);
+        if (options.findIndex(value) == -1) {
+            return "no such option";
+        }
+    }
     return "";
 }
 
@@ -441,7 +449,7 @@ QStringList Database::getRow(int rowId)
             int value = prop (row);
             results.append(QString::number(value));
         }
-        else if (type == STRING || type == NOTE) {
+        else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(idString);
             results.append(QString::fromUtf8(prop (row)));
         }
@@ -755,7 +763,7 @@ QString Database::addRow(QStringList values, int *rowId)
             return name + " " + PortaBase::tr(error);
         }
         QString idString = makeColId(cId (temp[i]), type);
-        if (type == STRING || type == NOTE) {
+        if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(idString);
             prop (row) = value.utf8();
         }
@@ -788,7 +796,7 @@ void Database::updateRow(int rowId, QStringList values)
     for (int i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString idString = makeColId(cId (temp[i]), type);
-        if (type == STRING || type == NOTE) {
+        if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(idString);
             prop (data[index]) = values[i].utf8();
         }
@@ -881,6 +889,194 @@ void Database::setViewColumnSequence(QString viewName, QStringList colNames)
         nextIndex = viewColumns.Find(vcView [utf8ViewName]
                                      + vcName [colNames[i].utf8()]);
         vcIndex (viewColumns[nextIndex]) = i;
+    }
+}
+
+QStringList Database::listEnums()
+{
+    c4_View sorted = enums.SortOn(eIndex);
+    int size = sorted.GetSize();
+    QStringList list;
+    for (int i = 0; i < size; i++) {
+        list.append(QString::fromUtf8(eName (sorted[i])));
+    }
+    return list;
+}
+
+QStringList Database::listEnumOptions(int id)
+{
+    c4_View options = enumOptions.Select(eoEnum [id]);
+    options = options.SortOn(eoIndex);
+    int size = options.GetSize();
+    QStringList list;
+    for (int i = 0; i < size; i++) {
+        list.append(QString::fromUtf8(eoText (options[i])));
+    }
+    return list;
+}
+
+void Database::addEnum(QString name, QStringList options)
+{
+    int nextId = FIRST_ENUM;
+    c4_View idsort = enums.SortOn(eId);
+    int enumCount = enums.GetSize();
+    for (int i = 0; i < enumCount; i++) {
+        if (nextId == eId (idsort[i])) {
+            nextId++;
+        }
+        else {
+            // found a gap in the ID sequence (an enum was deleted)
+            break;
+        }
+    }
+    enums.Add(eName [name.utf8()] + eId[nextId] + eIndex [enumCount]);
+    int optionCount = options.count();
+    for (int i = 0; i < optionCount; i++) {
+        enumOptions.Add(eoEnum [nextId] + eoIndex [i]
+                        + eoText [options[i].utf8()]);
+    }
+}
+
+void Database::renameEnum(QString oldName, QString newName)
+{
+    int index = enums.Find(eName [oldName.utf8()]);
+    eName (enums[index]) = newName.utf8();
+}
+
+void Database::deleteEnum(QString name)
+{
+    int index = enums.Find(eName [name.utf8()]);
+    int id = eId (enums[index]);
+    // delete all columns of this enum type
+    c4_View deletions = columns.Select(cType [id]);
+    int delCount = deletions.GetSize();
+    QStringList deleteNames;
+    for (int i = 0; i < delCount; i++) {
+        deleteNames.append(QString::fromUtf8(cName (deletions[i])));
+    }
+    for (int i = 0; i < delCount; i++) {
+        deleteColumn(deleteNames[i]);
+    }
+    // delete the enum's options
+    int nextIndex = enumOptions.Find(eoEnum [id]);
+    while (nextIndex != -1) {
+        enumOptions.RemoveAt(nextIndex);
+        nextIndex = enumOptions.Find(eoEnum [id]);
+    }
+    // delete the enum definition and update the position indices
+    QStringList enumNames = listEnums();
+    enums.RemoveAt(index);
+    enumNames.remove(name);
+    setEnumSequence(enumNames);
+}
+
+int Database::getEnumId(QString name)
+{
+    int index = enums.Find(eName [name.utf8()]);
+    return eId (enums[index]);
+}
+
+QString Database::getEnumName(int id)
+{
+    int index = enums.Find(eId [id]);
+    return QString::fromUtf8(eName (enums[index]));
+}
+
+QStringList Database::columnsUsingEnum(QString enumName)
+{
+    int enumId = getEnumId(enumName);
+    c4_View cols = columns.Select(cType [enumId]);
+    cols = cols.SortOn(cIndex);
+    int count = cols.GetSize();
+    QStringList colNames;
+    for (int i = 0; i < count; i++) {
+        colNames.append(QString::fromUtf8(cName (cols[i])));
+    }
+    return colNames;
+}
+
+void Database::setEnumSequence(QStringList names)
+{
+    int count = names.count();
+    for (int i = 0; i < count; i++) {
+        int index = enums.Find(eName [names[i].utf8()]);
+        eIndex (enums[index]) = i;
+    }
+}
+
+void Database::addEnumOption(QString enumName, QString option)
+{
+    int enumId = getEnumId(enumName);
+    c4_View options = enumOptions.Select(eoEnum [enumId]);
+    int optionCount = options.GetSize();
+    enumOptions.Add(eoEnum [enumId] + eoIndex [optionCount]
+                    + eoText [option.utf8()]);
+}
+
+void Database::renameEnumOption(QString enumName, QString oldName,
+                                QString newName)
+{
+    int enumId = getEnumId(enumName);
+    // rename it in the option definition
+    int index = enumOptions.Find(eoEnum [enumId] + eoText [oldName.utf8()]);
+    eoText (enumOptions[index]) = newName.utf8();
+    // rename it everywhere else
+    replaceEnumOption(enumId, oldName, newName);
+}
+
+void Database::deleteEnumOption(QString enumName, QString option,
+                                QString replace)
+{
+    int enumId = getEnumId(enumName);
+    // delete the option definition
+    int index = enumOptions.Find(eoEnum [enumId] + eoText [option.utf8()]);
+    enumOptions.RemoveAt(index);
+    // handle the substitution everywhere else
+    replaceEnumOption(enumId, option, replace);
+}
+
+void Database::replaceEnumOption(int enumId, QString oldOption,
+                                 QString newOption)
+{
+    QCString utf8OldOption = oldOption.utf8();
+    QCString utf8NewOption = newOption.utf8();
+    // replace it for any enum columns where it is the default value
+    int nextIndex = columns.Find(cType [enumId] + cDefault [utf8OldOption]);
+    while (nextIndex != -1) {
+        cDefault (columns[nextIndex]) = utf8NewOption;
+        nextIndex = columns.Find(cType [enumId] + cDefault [utf8OldOption]);
+    }
+    // for the rest we need to loop through all columns of this enum type
+    c4_View cols = columns.Select(cType [enumId]);
+    int colCount = cols.GetSize();
+    for (int i = 0; i < colCount; i++) {
+        // replace it in any data fields that use it
+        QString idString = makeColId(cId (cols[i]), enumId);
+        c4_StringProp prop(idString);
+        nextIndex = data.Find(prop [utf8OldOption]);
+        while (nextIndex != -1) {
+            prop (data[nextIndex]) = utf8NewOption;
+            nextIndex = data.Find(prop [utf8OldOption]);
+        }
+        // replace it in any conditions that use it
+        nextIndex = filterConditions.Find(fcColumn [cName (cols[i])]
+                                          + fcConstant [utf8OldOption]);
+        while (nextIndex != -1) {
+            fcConstant (filterConditions[nextIndex]) = utf8NewOption;
+            nextIndex = filterConditions.Find(fcColumn [cName (cols[i])]
+                                              + fcConstant [utf8OldOption]);
+        }
+    }
+}
+
+void Database::setEnumOptionSequence(QString enumName, QStringList options)
+{
+    int enumId = getEnumId(enumName);
+    int count = options.count();
+    for (int i = 0; i < count; i++) {
+        int index = enumOptions.Find(eoEnum [enumId]
+                                     + eoText [options[i].utf8()]);
+        eoIndex (enumOptions[index]) = i;
     }
 }
 

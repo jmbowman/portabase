@@ -28,6 +28,7 @@
 #include "conditioneditor.h"
 #include "database.h"
 #include "dbeditor.h"
+#include "enummanager.h"
 #include "filter.h"
 #include "filtereditor.h"
 #include "importdialog.h"
@@ -102,6 +103,10 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
 
     act = new QAction(tr("Edit Columns"), QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(editColumns()));
+    act->addTo(file);
+
+    act = new QAction(tr("Edit Enums"), QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(editEnums()));
     act->addTo(file);
 
     act = new QAction(tr("Preferences"), QString::null, 0, this, 0);
@@ -211,6 +216,17 @@ bool PortaBase::editColumns()
     else {
         return FALSE;
     }
+}
+
+void PortaBase::editEnums()
+{
+    EnumManager manager(db, this);
+    viewer->closeView();
+    if (manager.exec()) {
+        manager.applyChanges();
+    }
+    viewer->setDatabase(db);
+    setEdited(TRUE);
 }
 
 void PortaBase::editPreferences()

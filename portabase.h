@@ -47,6 +47,7 @@ private slots:
     void newFile(const DocLnk &);
     void openFile(const DocLnk &);
     bool editColumns();
+    void editEnums();
     void editPreferences();
     void addRow();
     void editRow();

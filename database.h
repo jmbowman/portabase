@@ -79,6 +79,20 @@ public:
     int getConditionCount(QString filterName);
     Condition *getCondition(QString filterName, int index);
 
+    QStringList listEnums();
+    QStringList listEnumOptions(int id);
+    void addEnum(QString name, QStringList options);
+    void renameEnum(QString oldName, QString newName);
+    void deleteEnum(QString name);
+    int getEnumId(QString name);
+    QString getEnumName(int id);
+    QStringList columnsUsingEnum(QString enumName);
+    void setEnumSequence(QStringList names);
+    void addEnumOption(QString enumName, QString option);
+    void renameEnumOption(QString enumName, QString oldName, QString newName);
+    void deleteEnumOption(QString enumName, QString option, QString replace);
+    void setEnumOptionSequence(QString enumName, QStringList options);
+
     QString addRow(QStringList values, int *rowId = 0);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
@@ -93,6 +107,7 @@ public:
 private:
     int *listTypes();
     c4_View createEmptyView(QStringList colNames);
+    void replaceEnumOption(int enumId, QString oldOption, QString newOption);
     QString makeColId(int id, int type);
     QString formatString(bool old = FALSE);
     void updateDataColumnFormat();
@@ -112,6 +127,8 @@ private:
     c4_View sortColumns;
     c4_View filters;
     c4_View filterConditions;
+    c4_View enums;
+    c4_View enumOptions;
     c4_View global;
     c4_View data;
     View *curView;
@@ -148,6 +165,14 @@ private:
     c4_IntProp fcOperator;
     c4_StringProp fcConstant;
     c4_IntProp fcCase;
+    // "_enums" view
+    c4_StringProp eName;
+    c4_IntProp eId;
+    c4_IntProp eIndex;
+    // "_enumoptions" view
+    c4_IntProp eoEnum;
+    c4_IntProp eoIndex;
+    c4_StringProp eoText;
     // "_global" view
     c4_IntProp gVersion;
     c4_StringProp gView;

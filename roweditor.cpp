@@ -10,6 +10,7 @@
  */
 
 #include <qcheckbox.h>
+#include <qcombobox.h>
 #include <qdialog.h>
 #include <qgrid.h>
 #include <qlabel.h>
@@ -50,7 +51,7 @@ bool RowEditor::edit(Database *subject, int rowId)
             int lineEditIndex = 0;
             for (int i = 0; i < count; i++) {
                 int type = colTypes[i];
-                if (type != BOOLEAN && type != NOTE && type != DATE) {
+                if (type == STRING || type == INTEGER || type == FLOAT) {
                     QString value = lineEdits[lineEditIndex]->text();
                     QString error = db->isValidValue(type, value);
                     if (error != "") {
@@ -70,6 +71,7 @@ bool RowEditor::edit(Database *subject, int rowId)
         int lineEditIndex = 0;
         int noteButtonIndex = 0;
         int dateWidgetIndex = 0;
+        int comboBoxIndex = 0;
         for (int i = 0; i < count; i++) {
             int type = colTypes[i];
             if (type == BOOLEAN) {
@@ -85,6 +87,10 @@ bool RowEditor::edit(Database *subject, int rowId)
                 int dateInt = dateWidgets[dateWidgetIndex]->getDate();
                 values.append(QString::number(dateInt));
                 dateWidgetIndex++;
+            }
+            else if (type >= FIRST_ENUM) {
+                values.append(comboBoxes[comboBoxIndex]->currentText());
+                comboBoxIndex++;
             }
             else {
                 values.append(lineEdits[lineEditIndex]->text());
@@ -148,6 +154,14 @@ void RowEditor::addContent(int rowId)
             DateWidget *widget = new DateWidget(grid);
             widget->setDate(values[i].toInt());
             dateWidgets.append(widget);
+        }
+        else if (type >= FIRST_ENUM) {
+            QComboBox *combo = new QComboBox(FALSE, grid);
+            QStringList options = db->listEnumOptions(type);
+            combo->insertStringList(options);
+            int index = options.findIndex(values[i]);
+            combo->setCurrentItem(index);
+            comboBoxes.append(combo);
         }
         else {
             lineEdits.append(new QLineEdit(values[i], grid));

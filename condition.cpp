@@ -279,7 +279,7 @@ void Condition::updateDescription()
         return;
     }
     description += getOperatorText(operation) + " ";
-    if (type == STRING || type == NOTE) {
+    if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
         description += "\"" + constant + "\"";
     }
     else if (type == DATE) {

@@ -37,8 +37,6 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     table->addColumn(tr("Type"), colWidth);
     table->addColumn(tr("Default"), colWidth);
 
-    columnEditor = new ColumnEditor(this);
-
     QHBox *hbox = new QHBox(vbox);
     QPushButton *addButton = new QPushButton(tr("Add"), hbox);
     connect(addButton, SIGNAL(clicked()), this, SLOT(addColumn()));
@@ -61,6 +59,7 @@ DBEditor::~DBEditor()
 int DBEditor::edit(Database *subject)
 {
     db = subject;
+    columnEditor = new ColumnEditor(db, this);
     originalCols = db->listColumns();
     renamedCols = db->listColumns();
     int count = originalCols.count();
@@ -170,11 +169,6 @@ bool DBEditor::isValidName(QString colName)
                              tr("Name must not start with '_'"));
         return FALSE;
     }
-    if (colName.find(':') != -1) {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Name must not contain ':'"));
-        return FALSE;
-    }
     // check for other columns with same name
     bool result = TRUE;
     int size = info.GetSize();
@@ -193,7 +187,7 @@ bool DBEditor::isValidName(QString colName)
 
 bool DBEditor::isValidDefault(int type, QString defaultVal)
 {
-    if (type == DATE) {
+    if (type == DATE || type >= FIRST_ENUM) {
         return TRUE;
     }
     QString error = db->isValidValue(type, defaultVal);
@@ -337,8 +331,11 @@ QString DBEditor::getTypeString(int type)
     else if (type == NOTE) {
         return tr("Note");
     }
-    else {
+    else if (type == DATE) {
         return tr("Date");
+    }
+    else {
+        return db->getEnumName(type);
     }
 }
 

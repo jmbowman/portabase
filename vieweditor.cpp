@@ -23,7 +23,7 @@
 ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f), db(0), resized(FALSE)
 {
-    setCaption(tr("PortaBase") + " - " + tr("View Editor"));
+    setCaption(tr("View Editor") + " - " + tr("PortaBase"));
     vbox = new QVBox(this);
 
     QHBox *hbox = new QHBox(vbox);
@@ -201,11 +201,6 @@ bool ViewEditor::hasValidName()
     if (name[0] == '_') {
         QMessageBox::warning(this, tr("PortaBase"),
                              tr("Name must not start with '_'"));
-        return FALSE;
-    }
-    if (name.find(':') != -1) {
-        QMessageBox::warning(this, tr("PortaBase"),
-                             tr("Name must not contain ':'"));
         return FALSE;
     }
     // check for other views with same name

@@ -6,8 +6,8 @@ PDA using the Qtopia environment.)
 
 The main features PortaBase currently has are:
 - One data table per file
-- String, Integer, Decimal, Boolean, Note (multi-line text), and Date column
-  types
+- String, Integer, Decimal, Boolean, Note (multi-line text), Date, and Enum
+  column types
 - Add, edit, and delete rows of data
 - Custom data views (subsets of the columns in any order)
 - Filter the displayed rows using sets of conditions
@@ -19,6 +19,8 @@ The main features PortaBase currently has are:
 - View summary statistics for columns (total, average, min, max, etc.)
 - Import data from CSV files
 - Export data to CSV files
+- Unicode support
+- Pick any available font to use throughout the application
 
 See the help file (help/html/portabase.html) for more information on features
 and usage.  This help file is also the online help for the application,

@@ -49,14 +49,17 @@ private:
     int *types;
     IntList stringOps;
     IntList numberOps;
+    IntList enumOps;
     QComboBox *columnList;
     QComboBox *opList;
     QStringList stringOpList;
     QStringList numberOpList;
+    QStringList enumOpList;
     QWidgetStack *constantStack;
     QLineEdit *constantLine;
     QCheckBox *constantCheck;
     DateWidget *constantDate;
+    QComboBox *constantCombo;
     QCheckBox *caseCheck;
     int dataType;
 };

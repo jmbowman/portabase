@@ -21,6 +21,8 @@
 #define NOTE 4
 #define DATE 5
 
+#define FIRST_ENUM 100
+
 // default date codes
 #define TODAY 0
 #define NONE 1
