@@ -401,8 +401,7 @@ void ViewDisplay::rowSelected()
     portabase->setRowSelected(TRUE);
 }
 
-void ViewDisplay::cellPressed(QListViewItem *item, const QPoint &point,
-                              int column)
+void ViewDisplay::cellPressed(QListViewItem *item, const QPoint&, int column)
 {
     if (item == 0) {
         // no row selected
@@ -412,8 +411,7 @@ void ViewDisplay::cellPressed(QListViewItem *item, const QPoint &point,
     timer.restart();
 }
 
-void ViewDisplay::cellReleased(QListViewItem *item, const QPoint &point,
-                               int column)
+void ViewDisplay::cellReleased(QListViewItem *item, const QPoint&, int column)
 {
     if (item == 0) {
         // no row selected
@@ -463,7 +461,7 @@ void ViewDisplay::headerReleased(int column)
     }
 }
 
-void ViewDisplay::columnResized(int column, int oldWidth, int newWidth)
+void ViewDisplay::columnResized(int column, int, int newWidth)
 {
     view->setColWidth(column, newWidth);
     setEdited(TRUE);

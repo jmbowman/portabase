@@ -41,7 +41,7 @@ public:
     QString currentView();
     View *getView(QString name);
     QStringList listViews();
-    void addView(QString name, QStringList names);
+    void addView(QString name, QStringList names, int rpp=-1, int deskrpp=-1);
     void deleteView(QString name);
     void setViewColWidths(int *widths);
     void setViewRowsPerPage(int rpp);
@@ -55,12 +55,14 @@ public:
     void setDefault(QString column, QString value);
     QString getColId(QString column);
     QString isValidValue(int type, QString value);
-    void addColumn(int index, QString name, int type, QString defaultVal);
+    void addColumn(int index, QString name, int type, QString defaultVal,
+                   int id=-1);
     void renameColumn(QString oldName, QString newName);
     void deleteColumn(QString name);
     void renameView(QString oldName, QString newName);
     QStringList listViewColumns(QString viewName);
-    void addViewColumn(QString viewName, QString columnName);
+    void addViewColumn(QString viewName, QString columnName, int index=-1,
+                       int width=-1, int deskwidth=-1);
     void deleteViewColumn(QString viewName, QString columnName);
     void setViewColumnSequence(QString viewName, QStringList colNames);
     void updateDataFormat();
@@ -80,7 +82,7 @@ public:
     QString currentFilter();
     QStringList listFilters();
     Filter *getFilter(QString name);
-    void addFilter(Filter *filter);
+    void addFilter(Filter *filter, bool setAsCurrent=TRUE);
     void deleteFilter(QString name);
     void deleteFilterColumn(QString filterName, QString columnName);
     int getConditionCount(QString filterName);
@@ -88,14 +90,14 @@ public:
 
     QStringList listEnums();
     QStringList listEnumOptions(int id);
-    void addEnum(QString name, QStringList options);
+    void addEnum(QString name, QStringList options, int index=-1, int id=-1);
     void renameEnum(QString oldName, QString newName);
     void deleteEnum(QString name);
     int getEnumId(QString name);
     QString getEnumName(int id);
     QStringList columnsUsingEnum(QString enumName);
     void setEnumSequence(QStringList names);
-    void addEnumOption(QString enumName, QString option);
+    void addEnumOption(QString enumName, QString option, int index=-1);
     void renameEnumOption(QString enumName, QString oldName, QString newName);
     void deleteEnumOption(QString enumName, QString option, QString replace);
     void setEnumOptionSequence(QString enumName, QStringList options);
@@ -115,6 +117,8 @@ public:
     QString importFromCSV(QString filename);
     void exportToXML(QString filename, c4_View &fullView,
                      c4_View &filteredView, QStringList cols);
+    void setGlobalInfo(const QString &view, const QString &sorting,
+                       const QString &filter);
 
 private:
     c4_View createEmptyView(QStringList colNames);

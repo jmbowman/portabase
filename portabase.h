@@ -58,7 +58,7 @@ private slots:
     void deleteRow();
     void deleteAllRows();
     void save();
-    void importMobileDB();
+    void import();
     void dataImport();
     void dataExport();
     void viewAllColumns();
@@ -106,7 +106,7 @@ private:
     QAction *fileOpenAction;
     QAction *fileDeleteAction;
     QAction *refreshAction;
-    QAction *importMobileDBAction;
+    QAction *importAction;
     QAction *quitAction;
     QAction *fileSaveAction;
     QAction *dataImportAction;

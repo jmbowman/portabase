@@ -11,14 +11,13 @@
 
 #include <mk4.h>
 #include <qfile.h>
-#include <qmessagebox.h>
+#include <qobject.h>
 #include <qstringlist.h>
 #include <qtextstream.h>
 #include "csvutils.h"
 #include "database.h"
 #include "datatypes.h"
 #include "filter.h"
-#include "portabase.h"
 #include "view.h"
 
 View::View(Database *parent, c4_View baseview, QStringList colNames, 
@@ -212,7 +211,7 @@ QStringList View::getStatistics(int colIndex)
     QStringList lines;
     int count = getRowCount();
     if (count == 0) {
-        lines.append(PortaBase::tr("No data to summarize"));
+        lines.append(QObject::tr("No data to summarize"));
         return lines;
     }
     int type = dataTypes[colIndex];
@@ -229,10 +228,10 @@ QStringList View::getStatistics(int colIndex)
             max = QMAX(max, value);
         }
         float mean = total / (float)count;
-        lines.append(PortaBase::tr("Total") + ": " + QString::number(total));
-        lines.append(PortaBase::tr("Average") + ": " + QString::number(mean));
-        lines.append(PortaBase::tr("Minimum") + ": " + QString::number(min));
-        lines.append(PortaBase::tr("Maximum") + ": " + QString::number(max));
+        lines.append(QObject::tr("Total") + ": " + QString::number(total));
+        lines.append(QObject::tr("Average") + ": " + QString::number(mean));
+        lines.append(QObject::tr("Minimum") + ": " + QString::number(min));
+        lines.append(QObject::tr("Maximum") + ": " + QString::number(max));
     }
     else if (type == FLOAT) {
         c4_FloatProp prop(ids[colIndex]);
@@ -256,10 +255,10 @@ QStringList View::getStatistics(int colIndex)
             }
         }
         double mean = total / count;
-        lines.append(PortaBase::tr("Total") + ": " + QString::number(total));
-        lines.append(PortaBase::tr("Average") + ": " + QString::number(mean));
-        lines.append(PortaBase::tr("Minimum") + ": " + minString);
-        lines.append(PortaBase::tr("Maximum") + ": " + maxString);
+        lines.append(QObject::tr("Total") + ": " + QString::number(total));
+        lines.append(QObject::tr("Average") + ": " + QString::number(mean));
+        lines.append(QObject::tr("Minimum") + ": " + minString);
+        lines.append(QObject::tr("Maximum") + ": " + maxString);
     }
     else if (type == BOOLEAN) {
         c4_IntProp prop(ids[colIndex]);
@@ -270,9 +269,9 @@ QStringList View::getStatistics(int colIndex)
                 checked++;
             }
         }
-        lines.append(PortaBase::tr("Checked") + ": "
+        lines.append(QObject::tr("Checked") + ": "
                      + QString::number(checked));
-        lines.append(PortaBase::tr("Unchecked") + ": "
+        lines.append(QObject::tr("Unchecked") + ": "
                      + QString::number(count - checked));
     }
     else if (type == DATE) {
@@ -285,8 +284,8 @@ QStringList View::getStatistics(int colIndex)
             min = QMIN(min, value);
             max = QMAX(max, value);
         }
-        lines.append(PortaBase::tr("Earliest") + ": " + db->dateToString(min));
-        lines.append(PortaBase::tr("Latest") + ": " + db->dateToString(max));
+        lines.append(QObject::tr("Earliest") + ": " + db->dateToString(min));
+        lines.append(QObject::tr("Latest") + ": " + db->dateToString(max));
     }
     else if (type == TIME) {
         c4_IntProp prop(ids[colIndex]);
@@ -298,8 +297,8 @@ QStringList View::getStatistics(int colIndex)
             min = QMIN(min, value);
             max = QMAX(max, value);
         }
-        lines.append(PortaBase::tr("Earliest") + ": " + db->timeToString(min));
-        lines.append(PortaBase::tr("Latest") + ": " + db->timeToString(max));
+        lines.append(QObject::tr("Earliest") + ": " + db->timeToString(min));
+        lines.append(QObject::tr("Latest") + ": " + db->timeToString(max));
     }
     else if (type == STRING || type == NOTE) {
         c4_StringProp prop(ids[colIndex]);
@@ -316,18 +315,18 @@ QStringList View::getStatistics(int colIndex)
             max = QMAX(max, length);
         }
         float mean = total / (float)count;
-        lines.append(PortaBase::tr("Total length") + ": "
+        lines.append(QObject::tr("Total length") + ": "
                      + QString::number(total) + " "
-                     + PortaBase::tr("characters"));
-        lines.append(PortaBase::tr("Average length") + ": "
+                     + QObject::tr("characters"));
+        lines.append(QObject::tr("Average length") + ": "
                      + QString::number(mean) + " "
-                     + PortaBase::tr("characters"));
-        lines.append(PortaBase::tr("Minimum length") + ": "
+                     + QObject::tr("characters"));
+        lines.append(QObject::tr("Minimum length") + ": "
                      + QString::number(min) + " "
-                     + PortaBase::tr("characters"));
-        lines.append(PortaBase::tr("Maximum length") + ": "
+                     + QObject::tr("characters"));
+        lines.append(QObject::tr("Maximum length") + ": "
                      + QString::number(max) + " "
-                     + PortaBase::tr("characters"));
+                     + QObject::tr("characters"));
     }
     else if (type >= FIRST_ENUM) {
         c4_StringProp prop(ids[colIndex]);

@@ -111,10 +111,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(fileDeleteAction, SIGNAL(activated()), this, SLOT(deleteFile()));
     refreshAction = new QAction(tr("Refresh"), QString::null, 0, this);
     connect(refreshAction, SIGNAL(activated()), this, SLOT(refreshFileList()));
-    importMobileDBAction = new QAction(tr("Import MobileDB File") + "...",
-                                       QString::null, 0, this);
-    connect(importMobileDBAction, SIGNAL(activated()),
-            this, SLOT(importMobileDB()));
+    importAction = new QAction(tr("Import") + "...", QString::null, 0, this);
+    connect(importAction, SIGNAL(activated()), this, SLOT(import()));
     quitAction = new QAction(tr("Quit"), quitIcons, QString::null, 0, this);
     connect(quitAction, SIGNAL(activated()), this, SLOT(close()));
 
@@ -257,8 +255,10 @@ void PortaBase::editEnums()
     if (manager.exec()) {
         manager.applyChanges();
     }
-    viewer->setDatabase(db);
-    setEdited(TRUE);
+    if (manager.changesMade()) {
+        viewer->setDatabase(db);
+        setEdited(TRUE);
+    }
 }
 
 void PortaBase::editPreferences()
@@ -276,6 +276,7 @@ void PortaBase::editPreferences()
         }
 #ifdef DESKTOP
         help->setFont(font);
+        fileSelector->setFont(font);
 #endif
         Config conf("portabase");
         conf.setGroup("General");
@@ -296,10 +297,29 @@ void PortaBase::newFile()
     createFile(f, NO_DATA);
 }
 
-void PortaBase::importMobileDB()
+void PortaBase::import()
 {
+    QStringList types;
+    types.append(tr("XML"));
+    types.append(tr("MobileDB"));
+    bool ok = FALSE;
+#if defined(DESKTOP)
+    QString type = QInputDialog::getItem(tr("Import"), tr("Import from:"),
+                                         types, 0, FALSE, &ok, this);
+#else
+    QString type = InputDialog::getItem(tr("Import"), tr("Import from:"),
+                                        types, 0, FALSE, &ok, this);
+#endif
+    if (!ok) {
+        return;
+    }
     DocLnk f;
-    createFile(f, MOBILEDB_FILE);
+    if (type == types[0]) {
+        createFile(f, XML_FILE);
+    }
+    else {
+        createFile(f, MOBILEDB_FILE);
+    }
 }
 
 void PortaBase::createFile(const DocLnk &f, int source)
@@ -348,7 +368,7 @@ void PortaBase::createFile(const DocLnk &f, int source)
             ok = editColumns();
         }
         else {
-            ImportDialog dialog(MOBILEDB_FILE, db, this);
+            ImportDialog dialog(source, db, this);
             ok = dialog.exec();
             if (ok) {
                 finishNewFile(db);
@@ -361,6 +381,8 @@ void PortaBase::createFile(const DocLnk &f, int source)
             needsRefresh = TRUE;
         }
         else {
+            delete db;
+            db = 0;
             doc->removeFiles();
         }
     }
@@ -482,6 +504,10 @@ void PortaBase::showFileSelector()
 {
     menu->clear();
     toolbar->clear();
+    viewIds.clear();
+    sortIds.clear();
+    filterIds.clear();
+
     file = new QPopupMenu(this);
     fileNewAction->addTo(file);
     fileNewAction->addTo(toolbar);
@@ -493,7 +519,7 @@ void PortaBase::showFileSelector()
     refreshAction->addTo(file);
 #endif
     file->insertSeparator();
-    importMobileDBAction->addTo(file);
+    importAction->addTo(file);
     prefsAction->addTo(file);
     file->insertSeparator();
     quitAction->addTo(file);
@@ -760,7 +786,7 @@ void PortaBase::changeFilter(int id)
 void PortaBase::rebuildViewMenu()
 {
     // remove old view names
-    int count = viewNames.count();
+    int count = viewIds.count();
     int i;
     for (i = 0; i < count; i++) {
         view->removeItem(viewIds[i]);
@@ -780,7 +806,7 @@ void PortaBase::rebuildViewMenu()
 void PortaBase::rebuildSortMenu()
 {
     // remove old sorting names
-    int count = sortNames.count();
+    int count = sortIds.count();
     int i;
     for (i = 0; i < count; i++) {
         sort->removeItem(sortIds[i]);
@@ -800,7 +826,7 @@ void PortaBase::rebuildSortMenu()
 void PortaBase::rebuildFilterMenu()
 {
     // remove old filter names
-    int count = filterNames.count();
+    int count = filterIds.count();
     int i;
     for (i = 0; i < count; i++) {
         filter->removeItem(filterIds[i]);

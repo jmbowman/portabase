@@ -1,3 +1,35 @@
+2003-02-12  #################### PortaBase 1.5 ####################
+
+2003-02-12  JMB  Assorted bug fixes and code cleanup
+
+    In the process of testing the code for a 1.5 release, fixed an
+    assortment of minor usability bugs, compiler warnings, and so on.
+
+2003-02-10  JMB  Import file selector crash fix
+
+    Fixed a crash when clicking "OK" in the import file selector instead
+    of clicking on one of the listed files.  (Zaurus version only)
+
+2003-02-09  JMB  XML import, command-line format conversions,
+                 minor enum manager enhancement
+
+    New PortaBase files can now be created from PortaBase-format XML files
+    as well as MobileDB files; the file selector's File->Import option
+    now covers both cases.  This means that PortaBase content can now
+    be exported to XML, edited by hand or by script, and imported back in
+    as a new file.  Or files can be programatically generated, including
+    views, filters, etc.
+
+    PortaBase can now be used from the command line to create PortaBase
+    files from XML or MobileDB files, and to export PortaBase files to XML
+    (optionally specifying the view, sorting, and/or filter to apply first).
+    This should make it fairly easy to write scripts that create or
+    manipulate PortaBase data files.  Check the help file or run
+    "portabase -h" for details on the syntax.
+
+    The enum manager now doesn't mark the file as needing to be saved unless
+    a change was actually performed.
+
 2003-02-06  JMB  Assorted minor enhancements
 
     Added size grips for dialogs on the Windows version.

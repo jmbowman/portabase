@@ -21,8 +21,6 @@ class PDBFile {
 			PDBFile(QString);
 			virtual ~PDBFile();
 			virtual bool read();
-			void dumpHeader();
-			void dumpRecordList();
 			virtual QString pdbname();
 	protected:
 		struct RecordInfo { 

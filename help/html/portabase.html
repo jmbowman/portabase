@@ -22,6 +22,7 @@
 <a href="#import">13)CSV import</a><br>
 <a href="#export">14)Data export</a><br>
 <a href="#prefs">15)Preferences dialog</a><br>
+<a href="#commandline">16)Command line usage</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -35,8 +36,9 @@ PortaBase is a small database program for creating, browsing, and editing custom
   <li>Add, delete, rearrange, and rename columns at any time</li>
   <li>Specify default values for columns</li>
   <li>View summary statistics for columns (total, average, min, max, etc.)</li>
-  <li>Import data from CSV and MobileDB files</li>
+  <li>Import data from CSV, XML, and MobileDB files</li>
   <li>Export data to CSV and XML files</li>
+  <li>Command-line format conversions (to and from XML, from MobileDB)</li>
   <li>Unicode support</li>
   <li>Pick any available font to use throughout the application</li>
 </ul>
@@ -47,8 +49,9 @@ Unless the program was launched by clicking on a PortaBase file in the Documents
   <li><i>Open</i> - Open the selected file</li>
   <li><i>Delete</i> - Delete the selected file (only on the Zaurus version)</li>
   <li><i>Refresh</i> - Refresh the file list to discover any recently added or deleted files (only on the Zaurus version).</li>
-  <li><i>Import MobileDB File</i> - Create a new file from the data in a MobileDB file.  You will be prompted to enter a name for the new file, then select the MobileDB file to import.</li>
+  <li><i>Import</i> - Create a new file from the data in an XML or MobileDB file.  You will be prompted for the type of file to import, a name for the new file to create, then the file to import.  See the PortaBase home page for more information about the XML format used.</li>
   <li><i>Preferences</i> - Launches the <a href="#prefs">preferences dialog</a>.</li>
+  <li><i>Quit</i> - Close PortaBase.</li>
 </ul>
 <a name="columns"><b>3)Columns editor</b></a><br>
 Each PortaBase file contains one table of a user-defined format.  The format of this table is determined by a sequence of data columns, each of which has its own name, data type, and default value. When creating a new PortaBase file, this dialog is shown so the data columns can be defined.  The columns of an existing file can also be edited at any time using this dialog by selecting the "Edit Columns" item in the "File" menu of the <a href="#viewer">data viewer</a>.<br>
@@ -122,6 +125,7 @@ The "File" menu contains options that apply to the database file as a whole.  Th
 <li><i>Edit Columns</i> - Launches the <a href="#columns">columns editor</a>.</li>
 <li><i>Edit Enums</i> - Launches the <a href="#enummanage">enum manager</a>.</li>
 <li><i>Preferences</i> - Launches the <a href="#prefs">preferences dialog</a>.</li>
+<li><i>Close</i> - Close the current file; if there are unsaved changes, you will be asked if you want to save them.</li>
 </ul>
 <a name="viewmenu"><i>View menu</i></a><br>
 The "View" menu allows you to select and manage views.  The top section of this menu has three options:<br>
@@ -229,6 +233,22 @@ This section is present only in the PC versions of PortaBase, because on the Zau
 <li><i>Weeks start on</i> - The first day of the week; this affects the appearance of the date entry dialog.</li>
 </ul>
 Click "OK" to accept the shown preferences, or the "X"/"Cancel" button to leave them unchanged.<br>
+<br>
+<a name="commandline"><b>16)Command line usage</b></a><br>
+PortaBase can be used from a Linux/Zaurus terminal or DOS prompt to import or export data without needing to go through the graphical interface.  This can be particularly useful if you want to write scripts that automatically generate, update, or otherwise manipulate PortaBase data files.  Run "portabase -h" for usage instructions; in summary, you can do the following:<br>
+<ul>
+<li><code>portabase fromxml </code><i>xmlfile pobfile</i> - Create a new PortaBase data file at "pobfile" from the PortaBase-format XML file located at "xmlfile".</li>
+<li><code>portabase frommobiledb </code><i>mdbfile pobfile</i> - Create a new PortaBase data file at "pobfile" from the MobileDB file located at "mdbfile".</li>
+<li><code>portabase toxml </code><i>pobfile xmlfile</i> - Create a new XML file at "xmlfile" from the PortaBase data file located at "pobfile".</li>
+</ul>
+The following options can be used between "toxml" and the PortaBase file to export from:<br>
+<ul>
+<li><code>-v </code><i>view</i> - Apply the named view before exporting</li>
+<li><code>-s </code><i>sorting</i> - Apply the named sorting before exporting</li>
+<li><code>-f </code><i>filter</i> - Apply the named filter before exporting</li>
+</ul>
+For more information about the PortaBase XML format and tools for doing useful things with it (like converting to HTML), see the PortaBase homepage (http://portabase.sourceforge.net).
+<br>
 ----<br>
 Copyright 2002-2003 by Jeremy Bowman.<br>
 (jmbowman@alum.mit.edu)

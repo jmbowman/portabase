@@ -16,7 +16,7 @@
 #include "importutils.h"
 
 ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
-    const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(subject)
+  const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(subject), importDone(FALSE)
 {
     source = sourceType;
     QString caption;
@@ -25,15 +25,19 @@ ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
         caption = tr("Import rows from CSV file");
         mimeType = "text/x-csv";
     }
-    else {
+    else if (sourceType == MOBILEDB_FILE) {
         caption = tr("Import from MobileDB file");
         // the SL-5500 has this associated with .pdb...not sure about
         // Japanese models, and some ebook users replace it...sigh
         mimeType = "chemical/x-pdb";
     }
+    else {
+        caption = tr("Import from XML file");
+        mimeType = "text/xml";
+    }
     setCaption(caption + " - " + tr("PortaBase"));
     selector = new FileSelector(mimeType, this, "importselector",
-                                   FALSE, FALSE );
+                                FALSE, FALSE );
     connect(selector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(import(const DocLnk &)));
     showMaximized();
@@ -46,25 +50,55 @@ ImportDialog::~ImportDialog()
 
 void ImportDialog::import(const DocLnk &f)
 {
+    if (import(f.file())) {
+        accept();
+    }
+    else {
+        reject();
+    }
+}
+
+bool ImportDialog::import(const QString &file)
+{
     QString error;
     if (source == CSV_FILE) {
-        error = db->importFromCSV(f.file());
+        error = db->importFromCSV(file);
+    }
+    else if (source == MOBILEDB_FILE) {
+        ImportUtils utils;
+        error = utils.importMobileDB(file, db);
     }
     else {
         ImportUtils utils;
-        error = utils.importMobileDB(f.file(), db);
+        error = utils.importXML(file, db);
     }
+    importDone = TRUE;
     if (error != "") {
         QMessageBox::warning(this, tr("PortaBase"), error);
-        reject();
+        return FALSE;
     }
-    else {
-        accept();
-    }
+    return TRUE;
 }
 
 void ImportDialog::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
     selector->resize(size());
+}
+
+int ImportDialog::exec()
+{
+    int result = QDialog::exec();
+    if (result && !importDone) {
+        // "OK" was clicked...see if there is a selected file
+        const DocLnk *f = selector->selected();
+        if (!f) {
+            return QDialog::Rejected;
+        }
+        if (!import(f->file())) {
+            result = QDialog::Rejected;
+        }
+        delete f;
+    }
+    return result;
 }

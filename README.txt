@@ -18,8 +18,9 @@ The main features PortaBase currently has are:
 - Add, delete, rearrange, and rename columns at any time
 - Specify default values for columns
 - View summary statistics for columns (total, average, min, max, etc.)
-- Import data from CSV and MobileDB files
+- Import data from CSV, XML, and MobileDB files
 - Export data to CSV and XML files
+- Command-line format conversions (to and from XML, from MobileDB)
 - Unicode support
 - Pick any available font to use throughout the application
 
@@ -55,8 +56,8 @@ Windows Installation and Upgrades
 Run the downloaded executable; it will launch the installation program,
 just follow the directions.
 
-Technical Info
---------------
+Technical Info and Acknowledgements
+-----------------------------------
 PortaBase is written in C++, using the Qt and Qtopia libraries for GUI widgets,
 data structures, and communication with the PDA environment.  It uses the
 MetaKit (http://www.equi4.com/metakit) embedded database library for data
@@ -64,6 +65,8 @@ storage and manipulation.  It also uses an enhanced version of the
 QtaDatePicker widget developed by John McDonald, available from
 http://prdownloads.sourceforge.net/zaurus/.  The MobileDB import code was
 based on code from ZReader (http://www.codecubed.com/zreader/index.html).
+The CSV import code was based on code from KSpread
+(http://www.koffice.org/kspread/).
 
 License
 -------

@@ -26,7 +26,7 @@ public:
     void setName(QString newName);
     int getConditionCount();
     Condition *getCondition(int index);
-    void addCondition(Condition *condition);
+    void addCondition(Condition *condition, int index=-1);
     void deleteCondition(int index);
     bool moveConditionUp(int index);
     bool moveConditionDown(int index);

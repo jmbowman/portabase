@@ -24,7 +24,7 @@
 #include "enumeditor.h"
 #include "enummanager.h"
 
-EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
+EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), contentChanged(FALSE), orderChanged(FALSE)
 {
     db = dbase;
     setCaption(tr("Enum Manager") + " - " + tr("PortaBase"));
@@ -84,6 +84,7 @@ void EnumManager::addEnum()
     if (enumEditor.edit(db, "")) {
         enumEditor.applyChanges();
         listBox->insertItem(enumEditor.getName());
+        contentChanged = TRUE;
     }
 }
 
@@ -98,6 +99,7 @@ void EnumManager::editEnum()
     if (enumEditor.edit(db, enumName)) {
         enumEditor.applyChanges();
         listBox->changeItem(enumEditor.getName(), selected);
+        contentChanged = TRUE;
     }
 }
 
@@ -124,6 +126,7 @@ void EnumManager::deleteEnum()
     }
     db->deleteEnum(enumName);
     listBox->removeItem(selected);
+    contentChanged = TRUE;
 }
 
 void EnumManager::moveUp()
@@ -136,6 +139,7 @@ void EnumManager::moveUp()
     listBox->removeItem(selected);
     listBox->insertItem(enumName, selected - 1);
     listBox->setCurrentItem(selected - 1);
+    orderChanged = TRUE;
 }
 
 void EnumManager::moveDown()
@@ -149,14 +153,24 @@ void EnumManager::moveDown()
     listBox->removeItem(selected);
     listBox->insertItem(enumName, selected + 1);
     listBox->setCurrentItem(selected + 1);
+    orderChanged = TRUE;
 }
 
 void EnumManager::applyChanges()
 {
+    if (!orderChanged && !contentChanged) {
+        return;
+    }
     QStringList names;
     int count = listBox->count();
     for (int i = 0; i < count; i++) {
         names.append(listBox->text(i));
     }
     db->setEnumSequence(names);
+    contentChanged = TRUE;
+}
+
+bool EnumManager::changesMade()
+{
+    return contentChanged;
 }

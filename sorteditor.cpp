@@ -73,6 +73,7 @@ SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
 #else
     showMaximized();
 #endif
+    nameBox->setFocus();
 }
 
 SortEditor::~SortEditor()
@@ -199,8 +200,7 @@ void SortEditor::updateTable()
     }
 }
 
-void SortEditor::tableClicked(QListViewItem *item, const QPoint &point,
-                              int column)
+void SortEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
 {
     if (item == 0) {
         // no row selected

@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH PORTABASE 1 "January 27, 2003"
+.TH PORTABASE 1 "February 09, 2003"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -19,7 +19,10 @@
 portabase \- an easy\-to\-use personal database application
 .SH SYNOPSIS
 .B portabase
-[ \-f \fI<file>\fP ]
+[ \-h | \-\-help | \-f \fI<file>\fP ]
+.br
+.B portabase
+command [ options ] \fI<fromfile>\fP \fI<tofile>\fP
 .SH DESCRIPTION
 \fIPortaBase\fP (portable database) is a personal database application
 originally written for the Linux\-based models of Sharp Zaurus PDA (and
@@ -50,18 +53,46 @@ PortaBase's features include:
 .PP
 \- View summary statistics for columns (total, average, min, max, etc.)
 .PP
-\- Import data from CSV and MobileDB files
+\- Import data from CSV, XML, and MobileDB files
 .PP
-\- Export data to CSV files
+\- Export data to CSV and XML files
+.PP
+\- Command\-line format conversions (to and from XML, from MobileDB)
 .PP
 \- Unicode support
 .PP
 \- Pick any available font to use throughout the application
+.SH COMMANDS
+\fIPortaBase\fP uses the following commands to indicate a command-line
+file conversion:
+.TP
+\fBfromxml\fP
+Create a new PortaBase file from the input XML file.
+.TP
+\fBfrommobiledb\fP
+Create a new PortaBase file from the input MobileDB file.
+.TP
+\fBtoxml\fP
+Create a new XML file from the input PortaBase file.
+.PP
+The toxml command accepts the following options:
+.TP
+\fB\-v\fP \fI<view>\fP
+Apply the named view before exporting.
+.TP
+\fB\-s\fP \fI<sorting>\fP
+Apply the named sorting before exporting.
+.TP
+\fB\-f\fP \fI<filter>\fP
+Apply the named filter before exporting.
 .SH OPTIONS
-\fIPortaBase\fP accepts the following option:
+\fIPortaBase\fP accepts the following options:
 .TP
 \fB\-f\fP \fI<file>\fP
 Open the specified file.
+.TP
+\fB\-h\fP, \fB\-\-help\fP
+Display usage instructions.
 .SH FILES
 /etc/portabase.conf \- general configuration settings for all users.
 Contains the paths where application icons and the help file are found.

@@ -10,14 +10,17 @@
  */
 
 #include <qdatetime.h>
+#include <qfile.h>
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <qregexp.h>
 #include <qstringlist.h>
+#include <qxml.h>
 #include "database.h"
 #include "datatypes.h"
 #include "importutils.h"
 #include "mobiledb.h"
+#include "xmlimport.h"
 
 ImportUtils::ImportUtils()
 {
@@ -157,4 +160,16 @@ QStringList ImportUtils::convertMobileDBRow(QStringList values, int *types)
         result.append(value);
     }
     return result;
+}
+
+QString ImportUtils::importXML(QString filename, Database *db)
+{
+    XMLImport importer(db);
+    QFile file(filename);
+    QXmlInputSource source(file);
+    QXmlSimpleReader reader;
+    reader.setContentHandler(&importer);
+    reader.setErrorHandler(&importer);
+    reader.parse(source);
+    return importer.formattedError();
 }

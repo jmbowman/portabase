@@ -23,6 +23,7 @@ public:
     ~ImportUtils();
 
     QString importMobileDB(QString filename, Database *db);
+    QString importXML(QString filename, Database *db);
 
 private:
     QStringList convertMobileDBRow(QStringList values, int *types);

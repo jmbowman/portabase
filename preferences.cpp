@@ -80,16 +80,25 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
 
     QGroupBox *generalGroup = new QGroupBox(1, Qt::Horizontal, tr("General"),
                                             vbox);
-    confirmDeletions = new QCheckBox(tr("Confirm deletions"), generalGroup);
     Config conf("portabase");
     conf.setGroup("General");
-    confirmDeletions->setChecked(conf.readBoolEntry("ConfirmDeletions"));
-    booleanToggle = new QCheckBox(tr("Allow checkbox edit in data viewer"),
-                                  generalGroup);
-    booleanToggle->setChecked(conf.readBoolEntry("BooleanToggle"));
-    showSeconds = new QCheckBox(tr("Show seconds for times"), generalGroup);
-    showSeconds->setChecked(conf.readBoolEntry("ShowSeconds"));
     QHBox *hbox = new QHBox(generalGroup);
+    confirmDeletions = new QCheckBox(tr("Confirm deletions"), hbox);
+    confirmDeletions->setChecked(conf.readBoolEntry("ConfirmDeletions"));
+    QWidget *filler = new QWidget(hbox);
+    hbox->setStretchFactor(filler, 1);
+    hbox = new QHBox(generalGroup);
+    booleanToggle = new QCheckBox(tr("Allow checkbox edit in data viewer"),
+                                  hbox);
+    booleanToggle->setChecked(conf.readBoolEntry("BooleanToggle"));
+    filler = new QWidget(hbox);
+    hbox->setStretchFactor(filler, 1);
+    hbox = new QHBox(generalGroup);
+    showSeconds = new QCheckBox(tr("Show seconds for times"), hbox);
+    showSeconds->setChecked(conf.readBoolEntry("ShowSeconds"));
+    filler = new QWidget(hbox);
+    hbox->setStretchFactor(filler, 1);
+    hbox = new QHBox(generalGroup);
     noteWrap = new QCheckBox(tr("Wrap Notes"), hbox);
     noteWrap->setChecked(conf.readBoolEntry("NoteWrap", TRUE));
     wrapType = new QComboBox(hbox);

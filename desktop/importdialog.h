@@ -16,6 +16,7 @@
 #define NO_DATA 0
 #define CSV_FILE 1
 #define MOBILEDB_FILE 2
+#define XML_FILE 3
 
 class Database;
 class QWidget;

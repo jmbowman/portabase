@@ -78,6 +78,7 @@ EnumEditor::EnumEditor(QWidget *parent, const char *name, WFlags f)
 #else
     showMaximized();
 #endif
+    nameBox->setFocus();
 }
 
 EnumEditor::~EnumEditor()

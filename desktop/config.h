@@ -14,6 +14,8 @@
 
 #include <qmap.h>
 #include <qstringlist.h>
+// included because of broken MS VC++ linker...QMap<QString,QString>
+#include <qxml.h>
 
 class Config
 {

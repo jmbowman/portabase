@@ -2,7 +2,7 @@ Source: portabase
 Section: x11
 Priority: optional
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
-Build-Depends: debhelper (>> 3.0.0), libqt3-headers, libqt3-mt-dev
+Build-Depends: debhelper (>> 4.0.0), libqt3-headers, libqt3-mt-dev
 Standards-Version: 3.5.8
 
 Package: portabase
@@ -19,12 +19,12 @@ Description: An easy-to-use personal database application
   - Custom data views (subsets of the columns in any order)
   - Filter the displayed rows using sets of conditions
   - Sort the rows by any combination of columns, each in ascending or
-    descending
-    order
+    descending order
   - Page navigation buttons, with a custom number of rows per page
   - Add, delete, rearrange, and rename columns at any time
   - Specify default values for columns
   - View summary statistics for columns (total, average, min, max, etc.)
-  - Import data from CSV and MobileDB files
-  - Export data to CSV files
+  - Import data from CSV, XML, and MobileDB files
+  - Export data to CSV and XML files
+  - Command-line format conversions (to and from XML, from MobileDB)
   - Unicode support

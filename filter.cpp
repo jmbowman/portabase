@@ -57,10 +57,13 @@ Condition *Filter::getCondition(int index)
     return (Condition*)pointer;
 }
 
-void Filter::addCondition(Condition *condition)
+void Filter::addCondition(Condition *condition, int index)
 {
-    int index = mapping.GetSize();
-    mapping.Add(mIndex [index] + mPointer [(int)condition]);
+    int nextIndex = index;
+    if (nextIndex == -1) {
+        nextIndex = mapping.GetSize();
+    }
+    mapping.Add(mIndex [nextIndex] + mPointer [(int)condition]);
 }
 
 void Filter::deleteCondition(int index)

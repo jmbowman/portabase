@@ -17,7 +17,6 @@ class MobileDBFile : public PDBFile {
 	public:
 		MobileDBFile(QString f);
 		virtual ~MobileDBFile();
-		void dumpMobileDBHeader();
 		bool read();
 		int row_count();
 		int col_count();

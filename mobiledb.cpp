@@ -160,32 +160,6 @@ int MobileDBFile::col_count()
 	return colcount;
 }
 
-void MobileDBFile::dumpMobileDBHeader()
-{ 
-	if (!valid_mdb) {
-		printf("Invalid MobileDB Header\n");
-		return;
-	}
-	printf("Version %d\n", version);	
-	printf("# Row %d\n", rowcount);	
-	printf("# Column %d\n", colcount);	
-	printf("Column Labels - ");
-	int i;
-	for (i = 0; i < colcount; i++) {
-		printf("%s | ", fieldlabels[i].latin1());
-	}
-	printf("\n");
-	printf("Column Types - ");
-	for (i = 0; i < colcount; i++) {
-		printf("%s | ", fieldtypes[i].latin1());
-	}
-	printf("Column Size - ");
-	for (i = 0; i < colcount; i++) {
-		printf("%d | ", fieldlengths[i]);
-	}
-	printf("\n");
-}
-
 QStringList MobileDBFile::row(int i)
 {
 	QStringList rowdata;
@@ -241,4 +215,3 @@ QStringList MobileDBFile::field_labels()
 {
 	return fieldlabels;
 }
-

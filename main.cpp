@@ -15,15 +15,22 @@
 #include <qpe/qpeapplication.h>
 #endif
 
+#include "commandline.h"
 #include "portabase.h"
 
 int main(int argc, char **argv) {
     QPEApplication app(argc, argv);
-    PortaBase pb;
-    pb.setCaption("PortaBase");
-    app.showMainDocumentWidget(&pb);
-    if (argc == 3 && argv[1] == QCString("-f")) {
-        pb.openFile(argv[2]);
+    if (argc > 1 && argv[1] != QCString("-f")) {
+        CommandLine commandLine;
+        return commandLine.process(argc, argv);
     }
-    return app.exec();
+    else {
+        PortaBase pb;
+        pb.setCaption("PortaBase");
+        app.showMainDocumentWidget(&pb);
+        if (argc == 3 && argv[1] == QCString("-f")) {
+            pb.openFile(argv[2]);
+        }
+        return app.exec();
+    }
 }

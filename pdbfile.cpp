@@ -151,34 +151,3 @@ bool PDBFile::readRecordList()
 	record_list[number_records - 1].record_size = file_size - record_list[number_records - 1].record_data_offset;
 	return true;
 }
-
-void PDBFile::dumpHeader() {
-	printf("PDB File -> %s\n", pdb_name);
-	printf("FILE Attributes-> %x\n", file_attributes);
-	printf("Version -> %d\n", version);
-	time_t t = palm2unix_time(create_date);
-	printf("Creation Date -> %s", ctime(&t));
-	t = palm2unix_time(modification_date);
-	printf("Modification Date -> %s", ctime(&t));
-	t = palm2unix_time(backup_date);
-	printf("Backup Date -> %s", ctime(&t));
-	printf("Modification Number -> %d\n", modification_number);
-	printf("AppInfo Offset -> %o\n", appinfo_offset);
-	printf("SortInfo Offset -> %o\n", sortinfo_offset);
-	printf("DB Type -> %s\n", db_type);
-	printf("Creator Id -> %s\n", create_id);
-	printf("Unique Seed -> %d\n", unique_seed);
-	printf("Next Record List Id -> %d\n", next_record_list_id);
-	printf("Number of Records -> %d\n", number_records);
-}
-
-void PDBFile::dumpRecordList() {
-	printf("Record List\nOffset\tAttributes\tUniqueId\n");
-	for(int i = 0 ; i < number_records; i++ ) {
-		printf("%d\t%d\t%x\t\%d\t%x\n", i,
-			record_list[i].record_data_offset,
-			record_list[i].record_attributes >> 4 ,
-			record_list[i].record_attributes & 0x7,
-			record_list[i].unique_id);
-	}
-}

@@ -77,6 +77,7 @@ FilterEditor::FilterEditor(QWidget *parent, const char *name, WFlags f)
 #else
     showMaximized();
 #endif
+    nameBox->setFocus();
 }
 
 FilterEditor::~FilterEditor()

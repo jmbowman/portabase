@@ -42,11 +42,14 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
     file = new c4_Storage(path, TRUE);
     global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S]");
     int version = 0;
+    bool newFile = FALSE;
     if (global.GetSize() == 0) {
         // new file, add global data
         global.Add(gVersion [FILE_VERSION] + gView ["_all"] + gSort [""]
                    + gFilter ["_allrows"]);
         *ok = TRUE;
+        newFile = TRUE;
+        version = FILE_VERSION;
     }
     else if (gVersion (global[0]) > FILE_VERSION) {
         // trying to open a newer version of the file format
@@ -77,7 +80,7 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcposition:I,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
         enums = file->GetAs("_enums[_ename:S,_eid:I,_eindex:I]");
         enumOptions = file->GetAs("_enumoptions[_eoenum:I,_eoindex:I,_eotext:S]");
-        if (version < 3) {
+        if (version < 3 || newFile) {
             filters.Add(fName ["_allrows"]);
         }
         if (version < 4) {
@@ -184,12 +187,12 @@ QStringList Database::listViews()
     return list;
 }
 
-void Database::addView(QString name, QStringList names)
+void Database::addView(QString name, QStringList names, int rpp, int deskrpp)
 {
     c4_Row row;
     vName (row) = name.utf8();
-    vRpp (row) = 13;
-    vDeskRpp (row) = 25;
+    vRpp (row) = (rpp == -1) ? 13 : rpp;
+    vDeskRpp (row) = (deskrpp == -1) ? 25 : deskrpp;
     views.Add(row);
     int count = names.count();
     for (int i = 0; i < count; i++) {
@@ -368,20 +371,24 @@ QString Database::isValidValue(int type, QString value)
     return "";
 }
 
-void Database::addColumn(int index, QString name, int type, QString defaultVal)
+void Database::addColumn(int index, QString name, int type, QString defaultVal,
+                         int id)
 {
     QCString utf8Value = defaultVal.utf8();
-    // Find the next available column ID number
-    int nextId = 0;
-    c4_View idsort = columns.SortOn(cId);
-    int colCount = columns.GetSize();
-    for (int i = 0; i < colCount; i++) {
-        if (nextId == cId (idsort[i])) {
-            nextId++;
-        }
-        else {
-            // found a gap in the ID sequence (a column was deleted)
-            break;
+    int nextId = id;
+    if (nextId == -1) {
+        nextId = 0;
+        // Find the next available column ID number
+        c4_View idsort = columns.SortOn(cId);
+        int colCount = columns.GetSize();
+        for (int i = 0; i < colCount; i++) {
+            if (nextId == cId (idsort[i])) {
+                nextId++;
+            }
+            else {
+                // found a gap in the ID sequence (a column was deleted)
+                break;
+            }
         }
     }
     columns.Add(cIndex [index] + cName [name.utf8()] + cType [type]
@@ -718,7 +725,7 @@ Filter *Database::getFilter(QString name)
     return curFilter;
 }
 
-void Database::addFilter(Filter *filter)
+void Database::addFilter(Filter *filter, bool setAsCurrent)
 {
     QString name = filter->getName();
     QCString utf8Name = name.utf8();
@@ -740,7 +747,9 @@ void Database::addFilter(Filter *filter)
         }
         filterConditions.Add(condRow);
     }
-    getFilter(name);
+    if (setAsCurrent) {
+        getFilter(name);
+    }
 }
 
 void Database::deleteFilter(QString name)
@@ -935,7 +944,8 @@ QStringList Database::listViewColumns(QString viewName)
     return names;
 }
 
-void Database::addViewColumn(QString viewName, QString columnName)
+void Database::addViewColumn(QString viewName, QString columnName, int index,
+                             int width, int deskwidth)
 {
     QCString utf8ViewName = viewName.utf8();
     if (views.Find(vName [utf8ViewName]) == -1) {
@@ -945,10 +955,10 @@ void Database::addViewColumn(QString viewName, QString columnName)
     c4_View cols = viewColumns.Select(vcView [utf8ViewName]);
     c4_Row colRow;
     vcView (colRow) = utf8ViewName;
-    vcIndex (colRow) = cols.GetSize();
+    vcIndex (colRow) = (index == -1) ? cols.GetSize() : index;
     vcName (colRow) = columnName.utf8();
-    vcWidth (colRow) = 60;
-    vcDeskWidth (colRow) = 120;
+    vcWidth (colRow) = (width == -1) ? 60 : width;
+    vcDeskWidth (colRow) = (deskwidth == -1) ? 120 : deskwidth;
     viewColumns.Add(colRow);
 }
 
@@ -1009,22 +1019,29 @@ QStringList Database::listEnumOptions(int id)
     return list;
 }
 
-void Database::addEnum(QString name, QStringList options)
+void Database::addEnum(QString name, QStringList options, int index, int id)
 {
-    int nextId = FIRST_ENUM;
-    c4_View idsort = enums.SortOn(eId);
     int enumCount = enums.GetSize();
+    int nextIndex = index;
+    if (nextIndex == -1) {
+        nextIndex = enumCount;
+    }
+    int nextId = id;
     int i;
-    for (i = 0; i < enumCount; i++) {
-        if (nextId == eId (idsort[i])) {
-            nextId++;
-        }
-        else {
-            // found a gap in the ID sequence (an enum was deleted)
-            break;
+    if (nextId == -1) {
+        nextId = FIRST_ENUM;
+        c4_View idsort = enums.SortOn(eId);
+        for (i = 0; i < enumCount; i++) {
+            if (nextId == eId (idsort[i])) {
+                nextId++;
+            }
+            else {
+                // found a gap in the ID sequence (an enum was deleted)
+                break;
+            }
         }
     }
-    enums.Add(eName [name.utf8()] + eId[nextId] + eIndex [enumCount]);
+    enums.Add(eName [name.utf8()] + eId[nextId] + eIndex [nextIndex]);
     int optionCount = options.count();
     for (i = 0; i < optionCount; i++) {
         enumOptions.Add(eoEnum [nextId] + eoIndex [i]
@@ -1100,12 +1117,15 @@ void Database::setEnumSequence(QStringList names)
     }
 }
 
-void Database::addEnumOption(QString enumName, QString option)
+void Database::addEnumOption(QString enumName, QString option, int index)
 {
     int enumId = getEnumId(enumName);
-    c4_View options = enumOptions.Select(eoEnum [enumId]);
-    int optionCount = options.GetSize();
-    enumOptions.Add(eoEnum [enumId] + eoIndex [optionCount]
+    int optionIndex = index;
+    if (optionIndex == -1) {
+        c4_View options = enumOptions.Select(eoEnum [enumId]);
+        optionIndex = options.GetSize();
+    }
+    enumOptions.Add(eoEnum [enumId] + eoIndex [optionIndex]
                     + eoText [option.utf8()]);
 }
 
@@ -1252,6 +1272,8 @@ void Database::exportToXML(QString filename, c4_View &fullView,
 {
     XMLExport xml(this, filename, cols);
     xml.addGlobalView(global);
+    xml.addView("enums", enums.SortOn(eIndex));
+    xml.addView("enumoptions", enumOptions.SortOn((eoEnum, eoIndex)));
     xml.addView("columns", columns.SortOn(cIndex));
     xml.addView("views", views.SortOn(vName));
     xml.addView("viewcolumns", viewColumns.SortOn((vcView, vcIndex)));
@@ -1260,8 +1282,6 @@ void Database::exportToXML(QString filename, c4_View &fullView,
     xml.addView("filters", filters.SortOn(fName));
     xml.addView("filterconditions",
                 filterConditions.SortOn((fcFilter, fcPosition)));
-    xml.addView("enums", enums.SortOn(eIndex));
-    xml.addView("enumoptions", enumOptions.SortOn((eoEnum, eoIndex)));
     QStringList colIds;
     QStringList allCols = listColumns();
     int allColCount = allCols.count();
@@ -1291,6 +1311,14 @@ void Database::exportToXML(QString filename, c4_View &fullView,
         colIndex++;
     }
     xml.addDataView(fullView, filteredView, ids, types, colIds);
+}
+
+void Database::setGlobalInfo(const QString &view, const QString &sorting,
+                             const QString &filter)
+{
+    gView (global[0]) = view.utf8();
+    gSort (global[0]) = sorting.utf8();
+    gFilter (global[0]) = filter.utf8();
 }
 
 bool Database::isNoneDate(QDate &date)

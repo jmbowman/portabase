@@ -18,6 +18,7 @@
 #define NO_DATA 0
 #define CSV_FILE 1
 #define MOBILEDB_FILE 2
+#define XML_FILE 3
 
 class Database;
 class DocLnk;
@@ -30,6 +31,7 @@ public:
     ImportDialog(int sourceType, Database *subject, QWidget *parent = 0,
                  const char *name = 0, WFlags f = 0);
     ~ImportDialog();
+    int exec();
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -38,9 +40,13 @@ private slots:
     void import(const DocLnk &);
 
 private:
+    bool import(const QString &file);
+
+private:
     Database *db;
     FileSelector *selector;
     int source;
+    bool importDone;
 };
 
 #endif

@@ -72,6 +72,7 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
 #else
     showMaximized();
 #endif
+    nameBox->setFocus();
 }
 
 ViewEditor::~ViewEditor()
@@ -190,8 +191,7 @@ void ViewEditor::updateTable()
     }
 }
 
-void ViewEditor::tableClicked(QListViewItem *item, const QPoint &point,
-                              int column)
+void ViewEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
 {
     if (item == 0) {
         // no row selected

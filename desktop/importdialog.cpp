@@ -35,8 +35,11 @@ bool ImportDialog::exec()
         filter = QObject::tr("Text files with comma separated values")
                      + " (*.csv)";
     }
-    else {
+    else if (source == MOBILEDB_FILE) {
         filter = QObject::tr("MobileDB files") + " (*.pdb)";
+    }
+    else {
+        filter = QObject::tr("XML files") + " (*.xml)";
     }
     QString file = QFileDialog::getOpenFileName(QPEApplication::documentDir(),
                                                 filter, parentWidget,
@@ -53,9 +56,13 @@ bool ImportDialog::exec()
     if (source == CSV_FILE) {
         error = db->importFromCSV(file);
     }
-    else {
+    else if (source == MOBILEDB_FILE) {
         ImportUtils utils;
         error = utils.importMobileDB(file, db);
+    }
+    else {
+        ImportUtils utils;
+        error = utils.importXML(file, db);
     }
     if (error != "") {
         QMessageBox::warning(0, QObject::tr("PortaBase"), error);

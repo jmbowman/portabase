@@ -61,7 +61,8 @@ MetaKit for use in Linux desktop PortaBase, just follow the README directions.
 PortaBase for Zaurus Compilation
 --------------------------------
 After compiling MetaKit as described above, PortaBase can be compiled in the
-usual manner for Qtopia applications.  Use tmake on portabase.pro as
+usual manner for Qtopia applications.  Use tmake on portabase_test.pro for
+desktop testing and portabase.pro when building for the Zaurus; tmake usage is
 described in the compiler setup HOWTO mentioned above.  As with the MetaKit
 library file, arm-linux-strip should be run on the Arm version of the
 "portabase" executable in order to reduce its size.
@@ -75,6 +76,16 @@ PortaBase for Windows Compilation, Packaging
 - Fix any environment variables that prevent nmake from finishing, retry...
 - Copy qt-mt230nc.dll and msvcrt.dll to the PortaBase source directory
 - Open portabase.iss with Inno Setup and choose "Compile"
+
+Debian Package Building
+-----------------------
+To create a Debian package for the desktop version of PortaBase, follow
+the normal process for building a Debian package:
+- Unpack the source tarball
+- Move the resulting "portabase" directory to "portabase-1.5" (or whatever
+  the current version number is)
+- From the root source directory, either run "dpkg-buildpackage" as root
+  or run "dpkg-buildpackage -rfakeroot" (if you have fakeroot installed)
 
 Linux/UNIX compilation
 ----------------------

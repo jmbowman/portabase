@@ -26,6 +26,7 @@ public:
     ~EnumManager();
 
     void applyChanges();
+    bool changesMade();
 
 private slots:
     void addEnum();
@@ -37,6 +38,8 @@ private slots:
 private:
     QListBox *listBox;
     Database *db;
+    bool contentChanged;
+    bool orderChanged;
 };
 
 #endif
