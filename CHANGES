@@ -1,0 +1,6 @@
+2002-10-21  JMB  Fixed CSV export
+
+    The text/x-csv directory is now created if it doesn't exist, and a
+    ".desktop" file is created so the CSV file appears in the Documents tab.
+
+2002-10-19  #################### PortaBase 1.0 ####################
