@@ -169,6 +169,10 @@ void ViewEditor::updateTable()
 void ViewEditor::tableClicked(QListViewItem *item, const QPoint &point,
                               int column)
 {
+    if (item == 0) {
+        // no row selected
+        return;
+    }
     if (column == 0) {
         QString name = item->text(1);
         int included = isIncluded(name);
