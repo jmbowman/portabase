@@ -272,6 +272,14 @@ void EnumEditor::deleteOption()
         info.RemoveAt(rowIndex);
         changes.Add(eecIndex [changes.GetSize()] + eecType [DELETE_OPTION]
                     + eecOldName [name.utf8()] + eecNewName [replace.utf8()]);
+        // update position indices
+        int count = info.GetSize();
+        for (int i = 0; i < count; i++) {
+            int index = eeiIndex (info[i]);
+            if (index > selected) {
+                eeiIndex (info[i]) = index - 1;
+            }
+        }
         updateList();
     }
 }

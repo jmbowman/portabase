@@ -1,3 +1,8 @@
+2003-10-07  JMB  Enum editor bugfix
+
+    Until now, deleting two options in the enum editor before clicking "OK"
+    had a good chance of crashing PortaBase; fixed it to work properly.
+
 2003-10-06  JMB  Image columns
 
     There is now an "Image" column type; each entry in such a column is
