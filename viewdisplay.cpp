@@ -359,6 +359,11 @@ void ViewDisplay::exportToCSV(QString filename)
     view->exportToCSV(filename);
 }
 
+void ViewDisplay::exportToXML(QString filename)
+{
+    view->exportToXML(filename);
+}
+
 int ViewDisplay::selectedRowIndex()
 {
     QListViewItem *selected = table->selectedItem();

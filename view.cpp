@@ -192,6 +192,21 @@ void View::exportToCSV(QString filename)
     f.close();
 }
 
+void View::exportToXML(QString filename)
+{
+    c4_View fullView = db->getData();
+    if (sortColumn != -1) {
+        fullView = db->sortData(fullView, columns[sortColumn], ascending);
+    }
+    else {
+        // if sortName is "", just returns the unsorted data
+        fullView = db->sortData(fullView, sortName);
+    }
+    Filter *filter = db->getFilter(db->currentFilter());
+    c4_View currView = filter->apply(fullView);
+    db->exportToXML(filename, fullView, currView, columns);
+}
+
 QStringList View::getStatistics(int colIndex)
 {
     QStringList lines;

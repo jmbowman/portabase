@@ -1,4 +1,4 @@
-PortaBase 1.5 (January 2003)
+PortaBase 1.5 (February 2003)
 ----------------------------
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
@@ -19,7 +19,7 @@ The main features PortaBase currently has are:
 - Specify default values for columns
 - View summary statistics for columns (total, average, min, max, etc.)
 - Import data from CSV and MobileDB files
-- Export data to CSV files
+- Export data to CSV and XML files
 - Unicode support
 - Pick any available font to use throughout the application
 

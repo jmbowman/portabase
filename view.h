@@ -44,6 +44,7 @@ public:
     QString getNote(int rowId, int colIndex);
     void deleteAllRows();
     void exportToCSV(QString filename);
+    void exportToXML(QString filename);
 
 private:
     Database *db;

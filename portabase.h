@@ -110,7 +110,7 @@ private:
     QAction *quitAction;
     QAction *fileSaveAction;
     QAction *dataImportAction;
-    QAction *dataExportAction;
+    QAction *exportAction;
     QAction *deleteRowsAction;
     QAction *editColsAction;
     QAction *manageEnumsAction;

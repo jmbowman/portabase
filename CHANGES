@@ -1,3 +1,13 @@
+2003-02-03  JMB  XML export
+
+    When you choose "Export" from the File menu, you now have the option
+    of exporting to XML.  The exported XML file contains all the
+    information needed to completely recreate the data file as the user
+    experiences it (including views, filters, etc.)  It can also be used
+    to generate HTML via XSLT files, or manipulated in any other way
+    XML is normally handled.  A few examples and more info will be posted
+    on the web site along with the version 1.5 release.
+
 2003-01-30  JMB  Allow word wrap in Note editor/viewer, added Preferences
                  and Refresh options to file selector menu, edit button in
                  row viewer

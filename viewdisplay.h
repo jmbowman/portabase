@@ -50,6 +50,7 @@ public:
     void closeView();
     void deleteAllRows();
     void exportToCSV(QString filename);
+    void exportToXML(QString filename);
     void allowBooleanToggle(bool flag);
 
 public slots:

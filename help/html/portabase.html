@@ -20,7 +20,7 @@
 <a href="#sortedit">11)Sorting editor</a><br>
 <a href="#filteredit">12)Filter editor</a><br>
 <a href="#import">13)CSV import</a><br>
-<a href="#export">14)CSV export</a><br>
+<a href="#export">14)Data export</a><br>
 <a href="#prefs">15)Preferences dialog</a><br>
 <br>
 <br>
@@ -36,7 +36,7 @@ PortaBase is a small database program for creating, browsing, and editing custom
   <li>Specify default values for columns</li>
   <li>View summary statistics for columns (total, average, min, max, etc.)</li>
   <li>Import data from CSV and MobileDB files</li>
-  <li>Export data to CSV files</li>
+  <li>Export data to CSV and XML files</li>
   <li>Unicode support</li>
   <li>Pick any available font to use throughout the application</li>
 </ul>
@@ -117,7 +117,7 @@ The "File" menu contains options that apply to the database file as a whole.  Th
 <ul>
 <li><i>Save</i> - Save any changes that have been made since the file was opened or last saved.  If you exit PortaBase without saving the most recent changes, those changes will be lost (a dialog will warn you if this is about to happen).  This option is disabled if no changes have been made since the current database was opened or last saved.</li>
 <li><i>Import</i> - Allows you to <a href="#import">import</a> rows from a CSV file.</li>
-<li><i>Export</i> - Allows you to <a href="#export">export</a> the current database content to a CSV file.</li>
+<li><i>Export</i> - Allows you to <a href="#export">export</a> the current database content to a CSV or XML file.</li>
 <li><i>Delete Rows In Filter</i> - Deletes all rows which are included by the filter currently in use.</li>
 <li><i>Edit Columns</i> - Launches the <a href="#columns">columns editor</a>.</li>
 <li><i>Edit Enums</i> - Launches the <a href="#enummanage">enum manager</a>.</li>
@@ -195,11 +195,12 @@ Notes:<br>
 <li>Date fields may be formated as YYYYMMDD, YYYY/MM/DD, YYYY-MM-DD, or YYYY.MM.DD</li>
 <li>Time fields may be formated as HH:MM:SS, HH:MM:SS AM, HH:MM, HH:MM AM, or the number of seconds past midnight.  Blank or -1 values are interpreted as "None".</li>
 </ol>
-<a name="export"><b>14)CSV export</b></a><br>
-PortaBase can also export database rows to CSV files.  The inverse of data import, this allows you to move database content into a spreadsheet or other database program for further manipulation (among other uses).  To export the current database's contents:<br>
+<a name="export"><b>14)Data export</b></a><br>
+PortaBase currently supports export to two formats: CSV and XML.  The inverse of data import, this allows you to move database content into a spreadsheet, text editor, other database program, etc. for further manipulation.  To export the current database's contents:<br>
 <ol>
 <li>Select "Export" from the "File" menu in the data viewer.</li>
-<li>Enter the name of the CSV file you wish to create.</li>
+<li>Choose the format you want to export to from the droplist.  If you export to CSV, only the rows passing the current filter will be exported.  If you export to XML, the entire database structure (including column definitions, views, filters, etc.) will be exported; note that the result may be over twice the size of the actual data file, so make sure you have enough free storage space.</li>
+<li>Enter the name of the CSV or XML file you wish to create.</li>
 <li>Click "OK" to complete the export, or the "X"/"Cancel" button to cancel the operation.</li>
 </ol>
 <a name="prefs"><b>15)Preferences dialog</b></a><br>

@@ -11,6 +11,7 @@
 
 #if defined(DESKTOP)
 #include <qfiledialog.h>
+#include <qinputdialog.h>
 #include "desktop/config.h"
 #include "desktop/filemanager.h"
 #include "desktop/fileselector.h"
@@ -121,9 +122,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(fileSaveAction, SIGNAL(activated()), this, SLOT(save()));
     dataImportAction = new QAction(tr("Import"), QString::null, 0, this);
     connect(dataImportAction, SIGNAL(activated()), this, SLOT(dataImport()));
-    dataExportAction = new QAction(tr("Export Rows In Filter"), QString::null,
-                                   0, this);
-    connect(dataExportAction, SIGNAL(activated()), this, SLOT(dataExport()));
+    exportAction = new QAction(tr("Export"), QString::null, 0, this);
+    connect(exportAction, SIGNAL(activated()), this, SLOT(dataExport()));
     deleteRowsAction = new QAction(tr("Delete Rows In Filter"), deleteIcons,
                            QString::null, 0, this);
     connect(deleteRowsAction, SIGNAL(activated()),
@@ -524,7 +524,7 @@ void PortaBase::showDataViewer()
     file = new QPopupMenu(this);
     fileSaveAction->addTo(file);
     dataImportAction->addTo(file);
-    dataExportAction->addTo(file);
+    exportAction->addTo(file);
     deleteRowsAction->addTo(file);
     editColsAction->addTo(file);
     manageEnumsAction->addTo(file);
@@ -653,39 +653,59 @@ void PortaBase::dataImport()
 
 void PortaBase::dataExport()
 {
+    QStringList types;
+    types.append(tr("CSV") + "(" + tr("rows in current filter") + ")");
+    types.append(tr("XML"));
+    bool ok = FALSE;
+#if defined(DESKTOP)
+    QString type = QInputDialog::getItem(tr("Export"), tr("Export to:"),
+                                         types, 0, FALSE, &ok, this);
+#else
+    QString type = InputDialog::getItem(tr("Export"), tr("Export to:"),
+                                        types, 0, FALSE, &ok, this);
+#endif
+    if (!ok) {
+        return;
+    }
+    QString mimeType = "text/x-csv";
+    QString extension = ".csv";
+    QString filter = tr("Comma Separated Value files") + " (*.csv)";
+    if (type == types[1]) {
+        mimeType = "text/xml";
+        extension = ".xml";
+        filter = tr("XML files") + " (*.xml)";
+    }
 #if defined(DESKTOP)
     QString file = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
-                     tr("Text files with comma separated values") + " (*.csv)",
-                     this,
-                     "csv export dialog",
-                     tr("Choose a filename to save under"));
+                       filter, this, "export dialog",
+                       tr("Choose a filename to save under"));
     if (!file.isEmpty()) {
-        DocLnk csv;
-        csv.setType("text/x-csv");
+        DocLnk output;
+        output.setType(mimeType);
         QFileInfo info(file);
-        csv.setName(info.baseName());
-        csv.setFile(info.dirPath(true) + "/" + info.baseName() + ".csv");
-        FileManager fm;
-        fm.saveFile(csv, "");
-        viewer->exportToCSV(csv.file());
-    }
+        output.setName(info.baseName());
+        output.setFile(info.dirPath(true) + "/" + info.baseName() + extension);
 #else
-    bool ok = FALSE;
     QString name = InputDialog::getText(tr("Export"),
                                         tr("Please select a file name"),
                                         QString::null, &ok, this);
     if (ok && !name.isEmpty()) {
-        DocLnk csv;
-        csv.setType("text/x-csv");
+        DocLnk output;
+        output.setType(mimeType);
         if (name.length() > 40) {
             name = name.left(40);
         }
-        csv.setName(name);
-        FileManager fm;
-        fm.saveFile(csv, "");
-        viewer->exportToCSV(csv.file());
-    }
+        output.setName(name);
 #endif
+        FileManager fm;
+        fm.saveFile(output, "");
+        if (extension == ".csv") {
+            viewer->exportToCSV(output.file());
+        }
+        else {
+            viewer->exportToXML(output.file());
+        }
+    }
 }
 
 void PortaBase::viewAllColumns()

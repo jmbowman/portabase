@@ -27,6 +27,7 @@
 #include "database.h"
 #include "filter.h"
 #include "view.h"
+#include "xmlexport.h"
 
 Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
 {
@@ -1244,6 +1245,52 @@ QString Database::importFromCSV(QString filename)
 {
     CSVUtils csv;
     return csv.parseFile(filename, this);
+}
+
+void Database::exportToXML(QString filename, c4_View &fullView,
+                           c4_View &filteredView, QStringList cols)
+{
+    XMLExport xml(this, filename, cols);
+    xml.addGlobalView(global);
+    xml.addView("columns", columns.SortOn(cIndex));
+    xml.addView("views", views.SortOn(vName));
+    xml.addView("viewcolumns", viewColumns.SortOn((vcView, vcIndex)));
+    xml.addView("sorts", sorts.SortOn(sName));
+    xml.addView("sortcolumns", sortColumns.SortOn((scSort, scIndex)));
+    xml.addView("filters", filters.SortOn(fName));
+    xml.addView("filterconditions",
+                filterConditions.SortOn((fcFilter, fcPosition)));
+    xml.addView("enums", enums.SortOn(eIndex));
+    xml.addView("enumoptions", enumOptions.SortOn((eoEnum, eoIndex)));
+    QStringList colIds;
+    QStringList allCols = listColumns();
+    int allColCount = allCols.count();
+    int *types = new int[allColCount];
+    int *ids = new int[allColCount];
+    int count = cols.count();
+    int i;
+    for (i = 0; i < count; i++) {
+        int type = getType(cols[i]);
+        types[i] = type;
+        type = (type == FLOAT) ? STRING : type;
+        int index = columns.Find(cName [cols[i].utf8()]);
+        ids[i] = cId (columns[index]);
+        colIds.append(makeColId(ids[i], type));
+    }
+    int colIndex = count;
+    for (i = 0; i < allColCount; i++) {
+        if (cols.findIndex(allCols[i]) != -1) {
+            continue;
+        }
+        int type = getType(allCols[i]);
+        types[colIndex] = type;
+        type = (type == FLOAT) ? STRING : type;
+        int index = columns.Find(cName [allCols[i].utf8()]);
+        ids[colIndex] = cId (columns[index]);
+        colIds.append(makeColId(ids[colIndex], type));
+        colIndex++;
+    }
+    xml.addDataView(fullView, filteredView, ids, types, colIds);
 }
 
 bool Database::isNoneDate(QDate &date)

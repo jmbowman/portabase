@@ -2,7 +2,7 @@ Source: portabase
 Section: x11
 Priority: optional
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
-Build-Depends: debhelper (>> 3.0.0), libqt3-dev, qt3-tools
+Build-Depends: debhelper (>> 3.0.0), libqt3-headers, libqt3-mt-dev
 Standards-Version: 3.5.8
 
 Package: portabase

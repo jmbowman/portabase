@@ -113,6 +113,8 @@ public:
     QString parseTimeString(QString value, bool *ok);
     void setShowSeconds(bool show);
     QString importFromCSV(QString filename);
+    void exportToXML(QString filename, c4_View &fullView,
+                     c4_View &filteredView, QStringList cols);
 
 private:
     c4_View createEmptyView(QStringList colNames);
