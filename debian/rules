@@ -59,6 +59,7 @@ install: build
 	cp $(CURDIR)/portabase $(CURDIR)/debian/portabase/usr/bin
 	cp $(CURDIR)/package/portabase.conf $(CURDIR)/debian/portabase/etc
 	cp $(CURDIR)/desktop/icons/*.png $(CURDIR)/debian/portabase/usr/share/portabase/icons
+	cp $(CURDIR)/desktop/icons/*.xpm $(CURDIR)/debian/portabase/usr/share/portabase/icons
 	cp $(CURDIR)/desktop/icons/portabase/* $(CURDIR)/debian/portabase/usr/share/portabase/icons/portabase
 
 
