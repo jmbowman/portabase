@@ -43,6 +43,7 @@ public:
     QStringList getStatistics(int colIndex);
     QString getNote(int rowId, int colIndex);
     void deleteAllRows();
+    void exportToCSV(QString filename);
 
 private:
     Database *db;

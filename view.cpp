@@ -10,8 +10,11 @@
  */
 
 #include <mk4.h>
+#include <qfile.h>
 #include <qmessagebox.h>
 #include <qstringlist.h>
+#include <qtextstream.h>
+#include "csvutils.h"
 #include "database.h"
 #include "datatypes.h"
 #include "filter.h"
@@ -166,6 +169,21 @@ void View::deleteAllRows()
         db->deleteRow(ids[i]);
     }
     delete[] ids;
+}
+
+void View::exportToCSV(QString filename)
+{
+    QFile f(filename);
+    f.open(IO_WriteOnly);
+    QTextStream output(&f);
+    output.setEncoding(QTextStream::UnicodeUTF8);
+    CSVUtils csv;
+    int size = dbview.GetSize();
+    for (int i = 0; i < size; i++) {
+        QStringList row = db->getRow(Id (dbview[i]));
+        output << csv.encodeRow(row);
+    }
+    f.close();
 }
 
 QStringList View::getStatistics(int colIndex)

@@ -11,10 +11,8 @@
 
 #include <qpe/resource.h>
 #include <qdatetime.h>
-#include <qfile.h>
 #include <qmessagebox.h>
 #include <qstringlist.h>
-#include <qtextstream.h>
 #include "condition.h"
 #include "csvutils.h"
 #include "database.h"
@@ -1162,21 +1160,6 @@ QString Database::importFromCSV(QString filename)
 {
     CSVUtils csv;
     return csv.parseFile(filename, this);
-}
-
-void Database::exportToCSV(QString filename)
-{
-    QFile f(filename);
-    f.open(IO_WriteOnly);
-    QTextStream output(&f);
-    output.setEncoding(QTextStream::UnicodeUTF8);
-    CSVUtils csv;
-    int size = data.GetSize();
-    for (int i = 0; i < size; i++) {
-        QStringList row = getRow(i);
-        output << csv.encodeRow(row);
-    }
-    f.close();
 }
 
 bool Database::isNoneDate(QDate &date)

@@ -93,7 +93,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(act, SIGNAL(activated()), this, SLOT(dataImport()));
     act->addTo(file);
 
-    act = new QAction(tr("Export"), QString::null, 0, this, 0);
+    act = new QAction(tr("Export Rows In Filter"), QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(dataExport()));
     act->addTo(file);
 
@@ -455,7 +455,7 @@ void PortaBase::dataExport()
         csv.setName(name);
         FileManager fm;
         fm.saveFile(csv, "");
-        db->exportToCSV(csv.file());
+        viewer->exportToCSV(csv.file());
     }
 }
 

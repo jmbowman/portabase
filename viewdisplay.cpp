@@ -321,6 +321,11 @@ void ViewDisplay::deleteAllRows()
     setEdited(TRUE);
 }
 
+void ViewDisplay::exportToCSV(QString filename)
+{
+    view->exportToCSV(filename);
+}
+
 int ViewDisplay::selectedRowId()
 {
     QListViewItem *selected = table->selectedItem();

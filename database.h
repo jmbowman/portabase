@@ -103,7 +103,6 @@ public:
     QString dateToString(int date);
     QString dateToString(QDate &date);
     QString importFromCSV(QString filename);
-    void exportToCSV(QString filename);
 
 private:
     int *listTypes();
