@@ -1,9 +1,12 @@
-2003-06-19  JMB  Calculated fields
+2003-06-19  JMB  Calculated fields, view rename bugfix
 
     There is now a new column type called "Calculation", which represents
     a value derived from the values of other columns in the same row.  The
     formula for this calculation is defined by the user in a dialog launched
     by clicking a button in the column editor.
+
+    Version 1.6 introduced a bug where attempting to rename a view would
+    crash PortaBase; just fixed this.
 
 2003-06-11  #################### PortaBase 1.7 ####################
 

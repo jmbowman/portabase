@@ -325,10 +325,10 @@ void ViewEditor::applyChanges()
         db->addView(viewName, sequence, defaultSort, defaultFilter);
         return;
     }
+    db->setViewDefaults(defaultSort, defaultFilter);
     if (viewName != originalName) {
         db->renameView(originalName, viewName);
     }
-    db->setViewDefaults(defaultSort, defaultFilter);
     QStringList sequence;
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
