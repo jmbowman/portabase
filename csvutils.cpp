@@ -54,12 +54,21 @@ QStringList CSVUtils::parseFile(const QString &filename,
     QString field = "";
     // store IDs of added rows; if there's an error, delete them
     addedIds.clear();
+    bool crLast = FALSE;
     while (!input.atEnd()) {
         input >> x; // read one char
 
         if (x == '\r') {
-            // eat '\r', to handle DOS/WINDOWS files correctly
+            // treat as '\n', and watch for a following real '\n'
+            crLast = TRUE;
+            x = '\n';
+        }
+        else if (crLast && x == '\n') {
+            crLast = FALSE;
             continue;
+        }
+        else {
+            crLast = FALSE;
         }
         rowString += x;
         switch (state)

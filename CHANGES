@@ -1,4 +1,4 @@
-2003-05-29  JMB  Auto-height multi-line string entry fields
+2003-05-29  JMB  Dynamic multi-line string entry fields, CR-only CSV import
 
     Text boxes for string fields in the row editor now accept multiple
     lines of input; pressing return causes the height of the input field
@@ -6,6 +6,11 @@
     work in many PalmOS and Psion applications, except that word wrap isn't
     enabled (Qt doesn't estimate the width of text lines accurately enough
     to reliably calculate the number of lines needed).
+
+    PortaBase now correctly imports CSV files which use only carriage
+    returns for line endings.  This is the format used by old MacOS versions
+    and at least some Psion data export utilities, maybe by other software
+    as well.
 
 2003-05-28  JMB  Enum option sorting, import, and export
 
