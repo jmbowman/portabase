@@ -1,5 +1,5 @@
 /*
- * fileselector.h
+ * newfiledialog.h
  *
  * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
@@ -9,27 +9,28 @@
  * (at your option) any later version.
  */
 
-#ifndef FILESELECTOR_H
-#define FILESELECTOR_H
+#ifndef NEWFILEDIALOG_H
+#define NEWFILEDIALOG_H
 
-#include <qlabel.h>
-#include "applnk.h"
+#include <qstring.h>
 
-class PBFileSelector : public QLabel
+class DocLnk;
+
+class NewFileDialog
 {
-    Q_OBJECT
-
 public:
-    PBFileSelector(const QString &mimefilter, QWidget *parent, const char *name=0);
-    ~PBFileSelector();
-    void reread();
-    const DocLnk *selected();
+    NewFileDialog(const QString & extension, QWidget *parent = 0);
+    ~NewFileDialog();
 
-signals:
-    void fileSelected(const DocLnk &);
+    int exec();
+    DocLnk *doc();
+    bool encryption();
 
 private:
+    QString ext;
     QWidget *parentWidget;
+    QString filename;
+    bool encrypted;
 };
 
 #endif

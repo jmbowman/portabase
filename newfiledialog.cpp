@@ -9,22 +9,35 @@
  * (at your option) any later version.
  */
 
+#include <qpe/applnk.h>
 #include <qcheckbox.h>
+#include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include "newfiledialog.h"
 
-NewFileDialog::NewFileDialog(QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
+NewFileDialog::NewFileDialog(const QString &extension, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f)
 {
-    setCaption(tr("PortaBase"));
+    ext = extension;
+    if (ext == ".pob") {
+        setCaption(tr("PortaBase"));
+    }
+    else {
+        setCaption(tr("Export"));
+    }
     QVBoxLayout *vbox = new QVBoxLayout(this);
     QLabel *label = new QLabel(tr("Enter a name for the new file"), this);
     vbox->addWidget(label);
     nameBox = new QLineEdit(this);
     vbox->addWidget(nameBox);
-    encrypt = new QCheckBox(tr("Encrypted file"), this);
-    vbox->addWidget(encrypt);
+    if (ext == ".pob") {
+        encrypt = new QCheckBox(tr("Encrypted file"), this);
+        vbox->addWidget(encrypt);
+    }
+    else {
+        encrypt = 0;
+    }
 }
 
 NewFileDialog::~NewFileDialog()
@@ -32,12 +45,38 @@ NewFileDialog::~NewFileDialog()
 
 }
 
-QString NewFileDialog::name()
+DocLnk *NewFileDialog::doc()
 {
-    return nameBox->text();
+    QString name = nameBox->text();
+    if (name.isEmpty()) {
+        return 0;
+    }
+    DocLnk *f = new DocLnk();
+    if (ext == ".pob") {
+        f->setType("application/portabase");
+    }
+    else if (ext == ".csv") {
+        f->setType("text/x-csv");
+    }
+    else {
+        f->setType("text/xml");
+    }
+    if (name.length() > 40) {
+        name = name.left(40);
+    }
+    f->setName(name);
+    QString defaultFile = f->file();
+    QFileInfo info(defaultFile);
+    // calling file() created an empty file, delete it now
+    QFile::remove(defaultFile);
+    f->setFile(info.dirPath(true) + "/" + info.baseName() + ext);
+    return f;
 }
 
 bool NewFileDialog::encryption()
 {
+    if (encrypt == 0) {
+        return FALSE;
+    }
     return encrypt->isChecked();
 }

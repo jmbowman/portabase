@@ -14,18 +14,18 @@
 #include "fileselector.h"
 #include "qpeapplication.h"
 
-FileSelector::FileSelector(const QString&, QWidget *parent, const char *name, bool, bool)
+PBFileSelector::PBFileSelector(const QString&, QWidget *parent, const char *name)
   : QLabel(parent, name), parentWidget(parent)
 {
     setText("<center>" + tr("No file selected") + "</center>");
 }
 
-FileSelector::~FileSelector()
+PBFileSelector::~PBFileSelector()
 {
 
 }
 
-const DocLnk *FileSelector::selected()
+const DocLnk *PBFileSelector::selected()
 {
     QString file = QFileDialog::getOpenFileName(QPEApplication::documentDir(),
                        tr("PortaBase files") + " (*.pob)",
@@ -38,7 +38,7 @@ const DocLnk *FileSelector::selected()
     return 0;
 }
 
-void FileSelector::reread()
+void PBFileSelector::reread()
 {
     // don't need to do anything since there's no file list displayed
 }

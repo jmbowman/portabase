@@ -16,6 +16,7 @@
 #include "desktop/filemanager.h"
 #include "desktop/fileselector.h"
 #include "desktop/helpbrowser.h"
+#include "desktop/newfiledialog.h"
 #include "desktop/qpeapplication.h"
 #include "desktop/qpemenubar.h"
 #include "desktop/resource.h"
@@ -23,12 +24,12 @@
 #else
 #include <qpe/config.h>
 #include <qpe/filemanager.h>
-#include <qpe/fileselector.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/resource.h>
 #include "importdialog.h"
 #include "inputdialog.h"
 #include "newfiledialog.h"
+#include "fileselector.h"
 #endif
 
 #include <qaction.h>
@@ -232,8 +233,7 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     viewer = new ViewDisplay(this, mainStack);
     viewer->allowBooleanToggle(booleanToggle);
 
-    fileSelector = new FileSelector("application/portabase", mainStack,
-                                    "fileselector", FALSE, FALSE);
+    fileSelector = new PBFileSelector("application/portabase", mainStack);
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(openFile(const DocLnk &)));
     fileOpen();
@@ -334,8 +334,7 @@ void PortaBase::editPreferences()
 
 void PortaBase::newFile()
 {
-    DocLnk f;
-    createFile(f, NO_DATA);
+    createFile(NO_DATA);
 }
 
 void PortaBase::import()
@@ -356,115 +355,72 @@ void PortaBase::import()
     }
     DocLnk f;
     if (type == types[0]) {
-        createFile(f, XML_FILE);
+        createFile(XML_FILE);
     }
     else {
-        createFile(f, MOBILEDB_FILE);
+        createFile(MOBILEDB_FILE);
     }
 }
 
-void PortaBase::createFile(const DocLnk &f, int source)
+void PortaBase::createFile(int source)
 {
-    bool ok = TRUE;
-    bool encrypt = FALSE;
-#if defined(DESKTOP)
-    QString file = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
-                       tr("PortaBase files") + " (*.pob)",
-                       this,
-                       "new file dialog",
-                       tr("Choose a filename to save under"));
-    if (!file.isEmpty()) {
-        if (QFile::exists(file)) {
-            int overwrite = QMessageBox::warning(this, tr("PortaBase"),
-                                     tr("File already exists; overwrite it?"),
-                                     tr("Yes"), tr("No"),
-                                     QString::null, 1);
-            if (overwrite == 1) {
-                ok = FALSE;
-            }
-        }
-        if (ok) {
-            doc = new DocLnk(f);
-            doc->setType("application/portabase");
-            QFileInfo info(file);
-            doc->setName(info.baseName());
-            doc->setFile(info.dirPath(TRUE) + "/" + info.baseName() + ".pob");
-            QPEApplication::setDocumentDir(info.dirPath(TRUE));
-            QMessageBox crypt(tr("PortaBase"), tr("Encrypt the file?"),
-                              QMessageBox::NoIcon, QMessageBox::Yes,
-                              QMessageBox::No | QMessageBox::Default,
-                              QMessageBox::NoButton, this);
-            int result = crypt.exec();
-            if (result == QMessageBox::Cancel) {
-                ok = FALSE;
-            }
-            else if (result == QMessageBox::Yes) {
-                encrypt = TRUE;
-            }
-        }
-    }
-#else
-    NewFileDialog filedlg(this);
-    ok = FALSE;
+    bool ok = FALSE;
+    NewFileDialog filedlg(".pob", this);
     if (filedlg.exec()) {
-        QString name = filedlg.name();
-        if (!name.isEmpty()) {
-            doc = new DocLnk(f);
-            configureDocLnk(*doc, name);
-            encrypt = filedlg.encryption();
+        DocLnk *file = filedlg.doc();
+        if (file != 0) {
+            doc = file;
             ok = TRUE;
         }
     }
-#endif
-    else {
-        ok = FALSE;
-    }
-    if (ok) {
-        FileManager fm;
-        fm.saveFile(*doc, "");
-        int openResult;
-        db = new Database(doc->file(), &openResult, encrypt ? 1 : 0);
-        if (encrypt) {
-            PasswordDialog passdlg(db, NEW_PASSWORD, this);
-            bool finished = FALSE;
-            while (!finished) {
-                if (!passdlg.exec()) {
-                    finished = TRUE;
-                    ok = FALSE;
-                }
-                else {
-                    finished = passdlg.validate();
-                }
-            }
-        }
-        if (ok) {
-            db->load();
-            if (source == NO_DATA) {
-                ok = editColumns();
-            }
-            else {
-                ImportDialog dialog(source, db, this);
-                ok = dialog.exec();
-                if (ok) {
-                    finishNewFile(db);
-                }
-            }
-        }
-        if (ok) {
-            updateCaption();
-            // if not saved now, file is empty without later save...bad
-            save();
-            needsRefresh = TRUE;
-        }
-        else {
-            delete db;
-            db = 0;
-            doc->removeFiles();
-        }
-    }
-    else {
+    if (!ok) {
         QMessageBox::warning(this, tr("PortaBase"),
                              tr("Unable to create new file"));
+        return;
+    }
+    FileManager fm;
+    fm.saveFile(*doc, "");
+    int openResult;
+    bool encrypt = filedlg.encryption();
+    db = new Database(doc->file(), &openResult, encrypt ? 1 : 0);
+    if (encrypt) {
+        PasswordDialog passdlg(db, NEW_PASSWORD, this);
+        bool finished = FALSE;
+        while (!finished) {
+            if (!passdlg.exec()) {
+                finished = TRUE;
+                ok = FALSE;
+            }
+            else {
+                finished = passdlg.validate();
+            }
+        }
+    }
+    if (ok) {
+        db->load();
+        if (source == NO_DATA) {
+            ok = editColumns();
+        }
+        else {
+            ImportDialog dialog(source, db, this);
+            ok = dialog.exec();
+            if (ok) {
+                finishNewFile(db);
+            }
+        }
+    }
+    if (ok) {
+        updateCaption();
+        // if not saved now, file is empty without later save...bad
+        save();
+        needsRefresh = TRUE;
+    }
+    else {
+        delete db;
+        db = 0;
+        doc->removeFiles();
+        delete doc;
+        doc = 0;
     }
 }
 
@@ -885,45 +841,27 @@ void PortaBase::dataExport()
     if (!ok) {
         return;
     }
-    QString mimeType = "text/x-csv";
     QString extension = ".csv";
-    QString filter = tr("Comma Separated Value files") + " (*.csv)";
     if (type == types[1]) {
-        mimeType = "text/xml";
         extension = ".xml";
-        filter = tr("XML files") + " (*.xml)";
     }
-#if defined(DESKTOP)
-    QString file = QFileDialog::getSaveFileName(QPEApplication::documentDir(),
-                       filter, this, "export dialog",
-                       tr("Choose a filename to save under"));
-    if (!file.isEmpty()) {
-        DocLnk output;
-        output.setType(mimeType);
-        QFileInfo info(file);
-        output.setName(info.baseName());
-        output.setFile(info.dirPath(true) + "/" + info.baseName() + extension);
-#else
-    QString name = InputDialog::getText(tr("Export"),
-                                        tr("Please select a file name"),
-                                        QString::null, &ok, this);
-    if (ok && !name.isEmpty()) {
-        DocLnk output;
-        output.setType(mimeType);
-        if (name.length() > 40) {
-            name = name.left(40);
-        }
-        output.setName(name);
-#endif
-        FileManager fm;
-        fm.saveFile(output, "");
-        if (extension == ".csv") {
-            viewer->exportToCSV(output.file());
-        }
-        else {
-            viewer->exportToXML(output.file());
-        }
+    NewFileDialog filedlg(extension, this);
+    if (!filedlg.exec()) {
+        return;
     }
+    DocLnk *output = filedlg.doc();
+    if (output == 0) {
+        return;
+    }
+    FileManager fm;
+    fm.saveFile(*output, "");
+    if (extension == ".csv") {
+        viewer->exportToCSV(output->file());
+    }
+    else {
+        viewer->exportToXML(output->file());
+    }
+    delete output;
 }
 
 void PortaBase::viewAllColumns()

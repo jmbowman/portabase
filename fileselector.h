@@ -1,5 +1,5 @@
 /*
- * fileselector.h
+ * pbfileselector.h
  *
  * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
@@ -9,27 +9,17 @@
  * (at your option) any later version.
  */
 
-#ifndef FILESELECTOR_H
-#define FILESELECTOR_H
+#ifndef PBFILESELECTOR_H
+#define PBFILESELECTOR_H
 
-#include <qlabel.h>
-#include "applnk.h"
+#include <qpe/fileselector.h>
 
-class PBFileSelector : public QLabel
+class PBFileSelector : public FileSelector
 {
     Q_OBJECT
-
 public:
     PBFileSelector(const QString &mimefilter, QWidget *parent, const char *name=0);
     ~PBFileSelector();
-    void reread();
-    const DocLnk *selected();
-
-signals:
-    void fileSelected(const DocLnk &);
-
-private:
-    QWidget *parentWidget;
 };
 
 #endif

@@ -19,7 +19,7 @@
 
 class Database;
 class DocLnk;
-class FileSelector;
+class PBFileSelector;
 class QAction;
 class QMenuBar;
 class QPopupMenu;
@@ -89,7 +89,7 @@ protected:
 
 private:
     void fileOpen();
-    void createFile(const DocLnk &f, int source);
+    void createFile(int source);
     void configureDocLnk(DocLnk &doclnk, const QString &name);
     void finishNewFile(Database *db);
     void updateCaption(const QString &name=QString::null);
@@ -108,7 +108,7 @@ public:
 private:
     Database *db;
     QWidgetStack *mainStack;
-    FileSelector *fileSelector;
+    PBFileSelector *fileSelector;
     QMenuBar *menu;
     QToolBar *toolbar;
     QAction *fileNewAction;

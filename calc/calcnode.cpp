@@ -232,7 +232,12 @@ QString CalcNode::equation(Database *db, bool useParens)
         case CALC_LOG:
         case CALC_LN:
             result = description(db) + "(";
-            result += (count == 0) ? "?" : children[0]->equation(db, FALSE);
+            if (count == 0) {
+                result += "?";
+            }
+            else {
+                result += children[0]->equation(db, FALSE);
+            }
             for (i = 1; i < count; i++) {
                 result += "," + children[i]->equation(db, FALSE);
             }
@@ -242,10 +247,20 @@ QString CalcNode::equation(Database *db, bool useParens)
         case CALC_SUBTRACT:
         case CALC_MULTIPLY:
         case CALC_DIVIDE:
-            result = (count == 0) ? "?" : children[0]->equation(db, TRUE);
+            if (count == 0) {
+                result = "?";
+            }
+            else {
+                result = children[0]->equation(db, TRUE);
+            }
             opString = " " + description(db) + " ";
             result += opString;
-            result += (count < 2) ? "?" : children[1]->equation(db, TRUE);
+            if (count < 2) {
+                result += "?";
+            }
+            else {
+                result += children[1]->equation(db, TRUE);
+            }
             for (i = 2; i < count; i++) {
                 result += opString + children[i]->equation(db, TRUE);
             }

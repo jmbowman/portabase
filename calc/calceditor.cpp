@@ -42,9 +42,10 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     new QLabel(calcName, grid);
     new QLabel(tr("Equation") + ":", grid);
     equation = new QLineEdit(grid);
+    equation->setReadOnly(TRUE);
     new QLabel(tr("Decimal Places") + ":", grid);
     decimalsBox = new QSpinBox(0, 9, 1, grid);
-    equation->setReadOnly(TRUE);
+    decimalsBox->setValue(2);
     tree = new QListView(vbox);
     tree->setSorting(-1);
     tree->addColumn("", vbox->width());
@@ -175,7 +176,7 @@ void CalcEditor::updateButtons(QListViewItem *item)
 void CalcEditor::updateEquation()
 {
      CalcNode *root = getRootNode();
-     QString eq = (root == 0) ? "" : root->equation(db);
+     QString eq = (root == 0) ? QString("") : root->equation(db);
      equation->setText(eq);
 }
 
@@ -198,6 +199,9 @@ void CalcEditor::addNode()
     nodeEditor->reset();
     bool finished = FALSE;
     while (!finished) {
+#if !defined(DESKTOP)
+        nodeEditor->showMaximized();
+#endif
         if (!nodeEditor->exec()) {
             return;
         }

@@ -264,7 +264,7 @@ bool CSVUtils::addRow(Database *db)
         for (i = 0; i < colCount; i++) {
             if (types[i] == CALC) {
                 double value = calcs[calcIndex]->value(row, colNames);
-                QStringList::iterator iter = row.at(i);
+                QStringList::Iterator iter = row.at(i);
                 iter = row.remove(iter);
                 int decimals = calcDecimals[calcIndex];
                 row.insert(iter, db->formatDouble(value, decimals));
