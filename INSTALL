@@ -56,6 +56,7 @@ directory hierarchy as root in a directory of your choice:
 /portabase/opt/QtPalmtop/pics/PortaBase.png
 /portabase/opt/QtPalmtop/pics/portabase/checked.png
 /portabase/opt/QtPalmtop/pics/portabase/save.png
+/portabase/opt/QtPalmtop/pics/portabase/save_disabled.png
 /portabase/opt/QtPalmtop/pics/portabase/unchecked.png
 
 (where libmk4.so and portabase are the files you compiled and the "control"

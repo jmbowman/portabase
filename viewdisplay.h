@@ -44,6 +44,7 @@ public:
     void saveViewSettings();
     void setView(QString name);
     void setSorting(QString name);
+    void setFilter(QString name);
     void closeView();
 
 public slots:

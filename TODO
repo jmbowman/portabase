@@ -1,6 +1,14 @@
-Filtering/Searching
 Date column type
 Date and time column type
 Enumeration column type
 File properties dialog (size, rows, etc.)
 Alternate-row shading
+Optional database file encryption
+File menu in file selector (delete, rename, copy format, etc.)
+Read-only row viewer
+Option to hide navigation bar (and show all rows)
+Option to show Notes as multiline edit fields in row editor
+Option to change a boolean value directly in the data viewer
+Confirm dialogs for deletions (of a row, view, sorting, or filter)
+"Delete all rows" menu item
+"Copy row" action

@@ -1,3 +1,25 @@
+2002-11-09  JMB  Filtering, "All Columns" sequence bugfix
+
+    Added the "Find" menu, providing support for multiple-condition
+    filters using an interface very similar to that of views and sortings.
+    Removed the "Row" menu in order to make room for it.
+
+    Also added the "Find" toolbar button, which is a faster way to create
+    a 1-condition temporary filter.
+
+    Fixed a bug introduced by the "All Columns" view updating feature that
+    caused a crash when creating a new database.
+
+2002-11-01  JMB  Improved Note field display, update "All Columns" sequence
+
+    Note fields are now shown as intended in the data viewer; as many
+    characters from the start of the note as will fit are shown, with
+    linebreaks converted to spaces.  In 1.1 only one row of the note was
+    being shown, and not necessarily the first one.
+
+    The "All Columns" view now tracks changes to the sequence of columns so
+    it matches the order in the columns editor and row editor.
+
 2002-10-30  JMB  Dialog resizing, save enable/disable, hold on row to edit
 
     All full-screen dialogs should now resize correctly when input methods

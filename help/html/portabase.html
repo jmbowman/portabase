@@ -15,8 +15,9 @@
 <a href="#rowedit">6)Row editor</a><br>
 <a href="#noteedit">7)Note editor/viewer</a><br>
 <a href="#sortedit">8)Sorting editor</a><br>
-<a href="#import">9)Data import</a><br>
-<a href="#export">10)Data export</a><br>
+<a href="#filteredit">9)Filter editor</a><br>
+<a href="#import">10)Data import</a><br>
+<a href="#export">11)Data export</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -27,6 +28,7 @@ charts, etc.  Notable features include:<br>
   <li>String, Integer, Decimal, Boolean, and Note (multi-line text) column
       types</li>
   <li>Custom data views (subsets of the columns in any order)</li>
+  <li>Filter the displayed rows using sets of conditions</li>
   <li>Sort the rows by any combination of columns, each in ascending or
       descending order</li>
   <li>Page navigation buttons, with custom number of rows per page</li>
@@ -109,9 +111,9 @@ of this screen are:<br>
 <li><a href="#navi">Rows display and navigation</a></li>
 <li><a href="#labels">Column labels</a></li>
 <li><a href="#filemenu">File menu</a></li>
-<li><a href="#rowmenu">Row menu</a></li>
 <li><a href="#viewmenu">View menu</a></li>
 <li><a href="#sortmenu">Sort menu</a></li>
+<li><a href="#findmenu">Find menu</a></li>
 <li><a href="#toolbar">Toolbar buttons</a></li>
 </ul>
 <a name="navi"><i>Row display and navigation</i></a><br>
@@ -141,7 +143,8 @@ edge of the last column) and drag it to the desired location.  Clicking
 on a column label sorts all the rows by the content of that column in
 ascending order; clicking it again sorts in descending order.  If you
 press a column label and hold it for half a second or more before releasing,
-a dialog containing summary information for that column is displayed.<br>
+a dialog containing summary information for that column is displayed;
+only rows that pass the current filter are included in the summary.<br>
 <br>
 <a name="filemenu"><i>File menu</i></a><br>
 The "File" menu contains options that apply to the database file as a
@@ -158,16 +161,6 @@ a CSV file.</li>
 current database content to a CSV file.</li>
 <li><i>Edit Columns</i> - Launches the <a href="#columns">columns
 editor</a>.</li>
-</ul>
-<a name="rowmenu"><i>Row menu</i></a><br>
-The "Row" menu contains options that let you manipulate rows of data.
-These are:
-<ul>
-<li><i>Add</i> - Add a new row of data (by launching the
-<a href="#rowedit">row editor</a>).</li>
-<li><i>Edit</i> - Edit the currently selected row of data (again using
-the <a href="#rowedit">row editor</a>).</li>
-<li><i>Delete</i> - Delete the currently selected row of data.</li>
 </ul>
 <a name="viewmenu"><i>View menu</i></a><br>
 The "View" menu allows you to select and manage views.  The top section
@@ -208,12 +201,33 @@ to sort by a single column that is displayed in the current view, it is
 probably faster to use the "click on a column label to sort" feature
 instead.<br>
 <br>
+<a name="findmenu"><i>Find menu</i></a><br>
+The "Find" menu contains options that let you choose which rows of data
+to display.  The top section of this menu has three options:<br>
+<ul>
+<li><i>Add</i> - Define a new data filter; this launches the
+<a href="#filteredit">filter editor</a> with no name and no conditions
+defined.</li>
+<li><i>Edit</i> - Edit the currently selected data filter (again using
+the <a href="#filteredit">filter editor</a>).  The "All Rows" filter
+cannot be edited.</li>
+<li><i>Delete</i> - Delete the currently selected data filter.  The
+"All Rows" filter cannot be deleted.</li>
+</ul>
+Below these items in the menu is a list of all the filters defined for
+the current database, with a check next to the one currently in use
+(if any).  To select a different filter, simply select the one you want
+to use from the menu.<br>
+<br>
 <a name="toolbar"><i>Toolbar buttons</i></a><br>
 There is a toolbar of four buttons that provide quick access to commonly
 used operations.  These are:<br>
 <ul>
 <li><i>Save</i> - Same as "Save" in the <a href="#filemenu">File
 menu</a>.</li>
+<li><i>Find</i> - Lets you quickly define and use a temporary one-condition
+filter.  To see all rows again (or use another defined filter), choose
+the appropriate filter from the "Find" menu.</li>
 <li><i>Add</i> - Same as "Add" in the <a href="#rowmenu">Row
 menu</a>.</li>
 <li><i>Edit</i> - Same as "Edit" in the <a href="#rowmenu">Row
@@ -275,7 +289,33 @@ the same value in that column are sorted by the next highest checked column,
 etc.  Click "OK" to accept the currently shown settings or "X" to revert
 to the previous values (or to cancel adding a new sorting).<br>
 <br>
-<a name="import"><b>9)Data import</b></a><br>
+<a name="filteredit"><b>9)Filter editor</b></a><br>
+This dialog allows you to define filters which are used to select which
+rows to display in the data viewer.  A filter may be as simple as
+"count = 1" or something more complicated like "any text column contains
+'java', chapters > 10, pages <= 400, and instock is checked".  When you
+choose a filter from the "Find" menu or create a temporary one using the
+"Find" button on the toolbar, the data viewer is updated to show only
+the rows which match the conditions you have defined.<br>
+<br>
+At the top of the dialog is a text box containing the name of the filter;
+changing this renames the filter.  Below that is a list of the conditions
+which make up the filter; a row must satisfy all of these conditions in
+order to pass the filter.  "Add", "Edit", "Delete", "Up", and "Down"
+buttons let you edit the condition list in basically the same way as
+the columns editor works.  But instead of the column editor dialog, a
+condition editor dialog is launched by the "Add" and "Edit" buttons.
+This dialog lets you choose the column whose value to compare, the
+comparison operation to use, and the constant value to compare against.
+For text comparisons, there is also a checkbox that lets you indicate
+whether the comparison should be case sensitive or not.  Instead of a
+single column, you can choose to compare the value of "Any text column";
+if the value of any String or Note column in a row satisfies such a
+condition, the row is considered to pass the condition.  Click "OK" to
+accept the currently shown settings or "X" to revert to the previous
+values (or to cancel adding a new filter).<br>
+<br>
+<a name="import"><b>10)Data import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.
 This allows you to import data exported from a spreadsheet or another
 database program.  To do this:<br>
@@ -292,7 +332,7 @@ those columns must be appropriate for the specified column types.</li>
 other files can be added by repeating this process, or another copy of the
 same rows can be added by importing the same file again.</li>
 </ol>
-<a name="export"><b>10)Data export</b></a><br>
+<a name="export"><b>11)Data export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
 import, this allows you to move database content into a spreadsheet or
 other database program for further manipulation (among other uses).  To

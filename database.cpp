@@ -14,32 +14,42 @@
 #include <qmessagebox.h>
 #include <qstringlist.h>
 #include <qtextstream.h>
+#include "condition.h"
 #include "csvutils.h"
 #include "database.h"
+#include "filter.h"
 #include "portabase.h"
 #include "view.h"
 
-Database::Database(QString path, bool *ok) : curView(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), gVersion("_gversion"), gView("_gview"), gSort("_gsort")
+Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), vName("_vname"), vRpp("_vrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcIndex("_fcindex"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
 {
     checkedPixmap = Resource::loadPixmap("portabase/checked");
     uncheckedPixmap = Resource::loadPixmap("portabase/unchecked");
 
     file = new c4_Storage(path, TRUE);
-    global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S]");
+    global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S]");
+    int version = 0;
     if (global.GetSize() == 0) {
-        global.Add(gVersion [FILE_VERSION] + gView ["_all"] + gSort [""]);
+        // new file, add global data
+        global.Add(gVersion [FILE_VERSION] + gView ["_all"] + gSort [""]
+                   + gFilter ["_allrows"]);
         *ok = TRUE;
     }
     else if (gVersion (global[0]) > FILE_VERSION) {
+        // trying to open a newer version of the file format
         *ok = FALSE;
     }
-    else if (gVersion (global[0]) == 1) {
-        // sorting name added in file version 2
-        gSort (global[0]) = "";
-        gVersion (global[0]) = FILE_VERSION;
-        *ok = TRUE;
-    }
     else {
+        version = gVersion (global[0]);
+        if (version < 2) {
+            // sorting name added in file version 2
+            gSort (global[0]) = "";
+        }
+        if (version < 3) {
+            // filters added in file version 3
+            gFilter (global[0]) = "_allrows";
+            gVersion (global[0]) = FILE_VERSION;
+        }
         *ok = TRUE;
     }
     if (*ok) {
@@ -48,9 +58,13 @@ Database::Database(QString path, bool *ok) : curView(0), Id("_id"), cIndex("_cin
         viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I]");
         sorts = file->GetAs("_sorts[_sname:S]");
         sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
+        filters = file->GetAs("_filters[_fname:S]");
+        filterConditions = file->GetAs("_filterconditions[_fcfilter:S,_fcindex,_fccolumn:S,_fcoperator:I,_fcconstant:S,_fccase:I]");
+        if (version < 3) {
+            filters.Add(fName ["_allrows"]);
+        }
         data = file->GetAs(formatString());
         maxId = data.GetSize() - 1;
-        *ok = TRUE;
     }
 }
 
@@ -59,6 +73,9 @@ Database::~Database()
     delete file;
     if (curView) {
         delete curView;
+    }
+    if (curFilter) {
+        delete curFilter;
     }
 }
 
@@ -294,6 +311,12 @@ void Database::deleteColumn(QString name)
         QString sortName(sName (sorts[i]));
         deleteSortingColumn(sortName, name);
     }
+    // remove the column from any filters containing it
+    count = filters.GetSize();
+    for (int i = 0; i < count; i++) {
+        QString filterName(fName (filters[i]));
+        deleteFilterColumn(filterName, name);
+    }
     // remove the column from the definition
     columns.RemoveAt(index);
 }
@@ -311,6 +334,12 @@ void Database::renameColumn(QString oldName, QString newName)
     while (nextIndex != -1) {
         scName (sortColumns[nextIndex]) = newName;
         nextIndex = sortColumns.Find(scName [oldName]);
+    }
+    // rename the column in any filters containing it
+    nextIndex = filterConditions.Find(fcColumn [oldName]);
+    while (nextIndex != -1) {
+        fcColumn (filterConditions[nextIndex]) = newName;
+        nextIndex = filterConditions.Find(fcColumn [oldName]);
     }
     // rename the column in the format definition
     int index = columns.Find(cName [oldName]);
@@ -467,7 +496,13 @@ void Database::deleteSortingColumn(QString sortName, QString columnName)
     sortColumns.RemoveAt(removeIndex);
 }
 
-c4_View Database::sortData(QString column, bool ascending)
+c4_View Database::getData()
+{
+    return data;
+}
+
+c4_View Database::sortData(c4_View filteredData, QString column,
+                           bool ascending)
 {
     QStringList colNames;
     colNames.append(column);
@@ -480,24 +515,24 @@ c4_View Database::sortData(QString column, bool ascending)
     gSort (global[0]) = "_single";
     c4_View sortView = createEmptyView(colNames);
     if (ascending) {
-        return data.SortOn(sortView);
+        return filteredData.SortOn(sortView);
     }
     else {
-        return data.SortOnReverse(sortView, sortView);
+        return filteredData.SortOnReverse(sortView, sortView);
     }
 }
 
-c4_View Database::sortData(QString sortingName)
+c4_View Database::sortData(c4_View filteredData, QString sortingName)
 {
     gSort (global[0]) = sortingName;
     QStringList allCols;
     QStringList descCols;
     if (!getSortingInfo(sortingName, &allCols, &descCols)) {
-        return data;
+        return filteredData;
     }
     c4_View allView = createEmptyView(allCols);
     c4_View descView = createEmptyView(descCols);
-    return data.SortOnReverse(allView, descView);
+    return filteredData.SortOnReverse(allView, descView);
 }
 
 c4_View Database::createEmptyView(QStringList colNames)
@@ -521,6 +556,129 @@ c4_View Database::createEmptyView(QStringList colNames)
         }
     }
     return result;
+}
+
+QString Database::currentFilter()
+{
+    QString filterName(gFilter (global[0]));
+    return filterName;
+}
+
+QStringList Database::listFilters()
+{
+    c4_View sorted = filters.SortOn(fName);
+    int size = sorted.GetSize();
+    QStringList list;
+    for (int i = 0; i < size; i++) {
+        QString name(fName (sorted[i]));
+        list.append(name);
+    }
+    return list;
+}
+
+Filter *Database::getFilter(QString name)
+{
+    if (curFilter) {
+        if (gFilter (global[0]) == name) {
+            return curFilter;
+        }
+        else {
+            delete curFilter;
+        }
+    }
+    gFilter (global[0]) = name;
+    curFilter = new Filter(this, name);
+    return curFilter;
+}
+
+void Database::addFilter(Filter *filter)
+{
+    QString name = filter->getName();
+    filters.Add(fName [name]);
+    int count = filter->getConditionCount();
+    for (int i = 0; i < count; i++) {
+        Condition *cond = filter->getCondition(i);
+        c4_Row condRow;
+        fcFilter (condRow) = name;
+        fcIndex (condRow) = i;
+        fcColumn (condRow) = cond->getColName();
+        fcOperator (condRow) = cond->getOperator();
+        fcConstant (condRow) = cond->getConstant();
+        if (cond->isCaseSensitive()) {
+            fcCase (condRow) = 1;
+        }
+        else {
+            fcCase (condRow) = 0;
+        }
+        filterConditions.Add(condRow);
+    }
+    getFilter(name);
+}
+
+void Database::deleteFilter(QString name)
+{
+    int index = filters.Find(fName [name]);
+    if (index == -1) {
+        return;
+    }
+    filters.RemoveAt(index);
+    // delete the filter's conditions
+    int nextIndex = filterConditions.Find(fcFilter [name]);
+    while (nextIndex != -1) {
+        filterConditions.RemoveAt(nextIndex);
+        nextIndex = filterConditions.Find(fcFilter [name]);
+    }
+    getFilter("_allrows");
+}
+
+void Database::deleteFilterColumn(QString filterName, QString columnName)
+{
+    int removeIndex = filterConditions.Find(fcFilter [filterName]
+                                            + fcColumn [columnName]);
+    while (removeIndex != -1) {
+        int position = fcIndex (filterConditions[removeIndex]);
+        position++;
+        int nextIndex = filterConditions.Find(fcFilter [filterName]
+                                              + fcIndex [position]);
+        while (nextIndex != -1) {
+            fcIndex (filterConditions[nextIndex]) = position - 1;
+            position++;
+            nextIndex = filterConditions.Find(fcFilter [filterName]
+                                              + fcIndex [position]);
+        }
+        filterConditions.RemoveAt(removeIndex);
+        removeIndex = filterConditions.Find(fcFilter [filterName]
+                                            + fcColumn [columnName]);
+    }
+}
+
+int Database::getConditionCount(QString filterName)
+{
+    c4_View conditions = filterConditions.Select(fcFilter [filterName]);
+    return conditions.GetSize();
+}
+
+Condition *Database::getCondition(QString filterName, int index)
+{
+    int rowIndex = filterConditions.Find(fcFilter [filterName]
+                                         + fcIndex [index]);
+    if (rowIndex == -1) {
+        return new Condition(this);
+    }
+    c4_RowRef row = filterConditions[rowIndex];
+    Condition *condition = new Condition(this);
+    QString colName(fcColumn (row));
+    condition->setColName(colName);
+    condition->setOperator(fcOperator (row));
+    QString constant(fcConstant (row));
+    condition->setConstant(constant);
+    if (fcCase (row) == 1) {
+        condition->setCaseSensitive(TRUE);
+    }
+    else {
+        condition->setCaseSensitive(FALSE);
+    }
+    return condition;
 }
 
 QString Database::addRow(QStringList values)

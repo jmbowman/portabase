@@ -38,6 +38,7 @@ public:
     void setRowSelected(bool y);
     static QPixmap getNotePixmap();
     void updateSortMenu();
+    void updateFilterMenu();
 
 public slots:
     void setDocument(const QString&);
@@ -61,6 +62,12 @@ private slots:
     void addSorting();
     void editSorting();
     void deleteSorting();
+    void viewAllRows();
+    void changeFilter(int index);
+    void addFilter();
+    void editFilter();
+    void deleteFilter();
+    void simpleFilter();
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -71,6 +78,7 @@ private:
     void rebuildViewMenu();
     void updateViewMenu();
     void rebuildSortMenu();
+    void rebuildFilterMenu();
     void closeViewer();
 
 private:
@@ -84,6 +92,7 @@ private:
     QAction *rowDeleteAction;
     QPopupMenu *view;
     QPopupMenu *sort;
+    QPopupMenu *filter;
     DocLnk *doc;
     ViewDisplay *viewer;
     bool newdb;
@@ -96,6 +105,11 @@ private:
     int deleteSortId;
     QStringList sortNames;
     IntList sortIds;
+    int allRowsFilterId;
+    int editFilterId;
+    int deleteFilterId;
+    QStringList filterNames;
+    IntList filterIds;
     bool isEdited;
 };
 

@@ -372,7 +372,6 @@ void DBEditor::applyChanges()
         db->addColumn(index, name, type, defaultVal);
     }
     db->updateDataFormat();
-    db->setViewColumnSequence("_all", db->listColumns());
 }
 
 void DBEditor::resizeEvent(QResizeEvent *event)

@@ -14,6 +14,7 @@
 #include <qstringlist.h>
 #include "database.h"
 #include "datatypes.h"
+#include "filter.h"
 #include "portabase.h"
 #include "view.h"
 
@@ -129,11 +130,15 @@ void View::sort(QString sortingName)
 
 void View::prepareData()
 {
+    dbview = db->getData();
+    Filter *filter = db->getFilter(db->currentFilter());
+    dbview = filter->apply(dbview);
     if (sortColumn != -1) {
-        dbview = db->sortData(columns[sortColumn], ascending);
+        dbview = db->sortData(dbview, columns[sortColumn], ascending);
     }
-    else if (sortName != "") {
-        dbview = db->sortData(sortName);
+    else {
+        // if sortName is "", just returns the unsorted data
+        dbview = db->sortData(dbview, sortName);
     }
 }
 

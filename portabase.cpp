@@ -21,8 +21,12 @@
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 #include <qwidgetstack.h>
+#include "condition.h"
+#include "conditioneditor.h"
 #include "database.h"
 #include "dbeditor.h"
+#include "filter.h"
+#include "filtereditor.h"
 #include "importdialog.h"
 #include "inputdialog.h"
 #include "portabase.h"
@@ -42,11 +46,12 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
 
     QPEMenuBar *mb = new QPEMenuBar(bar);
     QPopupMenu *file = new QPopupMenu(this);
-    QPopupMenu *row = new QPopupMenu(this);
     view = new QPopupMenu(this);
     view->setCheckable(TRUE);
     sort = new QPopupMenu(this);
     sort->setCheckable(TRUE);
+    filter = new QPopupMenu(this);
+    filter->setCheckable(TRUE);
 
     toolbar = new QPEToolBar(this);
 
@@ -71,25 +76,27 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(act, SIGNAL(activated()), this, SLOT(editColumns()));
     act->addTo(file);
 
+    QIconSet findIcons = Resource::loadIconSet("find");
+    act = new QAction(tr("Find"), findIcons, QString::null, 0, this, 0);
+    connect(act, SIGNAL(activated()), this, SLOT(simpleFilter()));
+    act->addTo(toolbar);
+
     QIconSet addIcons = Resource::loadIconSet("new");
     act = new QAction(tr("Add"), addIcons, QString::null, 0, this, 0);
     connect(act, SIGNAL(activated()), this, SLOT(addRow()));
     act->addTo(toolbar);
-    act->addTo(row);
 
     QIconSet editIcons = Resource::loadIconSet("edit");
     rowEditAction = new QAction(tr("Edit"), editIcons, QString::null, 0,
                                 this, 0);
     connect(rowEditAction, SIGNAL(activated()), this, SLOT(editRow()));
     rowEditAction->addTo(toolbar);
-    rowEditAction->addTo(row);
 
     QIconSet deleteIcons = Resource::loadIconSet("trash");
     rowDeleteAction = new QAction(tr("Delete"), deleteIcons, QString::null,
                                   0, this, 0);
     connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
     rowDeleteAction->addTo(toolbar);
-    rowDeleteAction->addTo(row);
 
     view->insertItem(addIcons, tr("Add"), this, SLOT(addView()));
     editViewId = view->insertItem(editIcons, tr("Edit"),
@@ -109,10 +116,20 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     sort->insertSeparator();
     connect(sort, SIGNAL(activated(int)), this, SLOT(changeSorting(int)));
 
+    filter->insertItem(addIcons, tr("Add"), this, SLOT(addFilter()));
+    editFilterId = filter->insertItem(editIcons, tr("Edit"),
+                                      this, SLOT(editFilter()));
+    deleteFilterId = filter->insertItem(deleteIcons, tr("Delete"),
+                                        this, SLOT(deleteFilter()));
+    filter->insertSeparator();
+    allRowsFilterId = filter->insertItem(tr("All Rows"), this,
+                                         SLOT(viewAllRows()));
+    connect(filter, SIGNAL(activated(int)), this, SLOT(changeFilter(int)));
+
     mb->insertItem(tr("File"), file);
-    mb->insertItem(tr("Row"), row);
     mb->insertItem(tr("View"), view);
     mb->insertItem(tr("Sort"), sort);
+    mb->insertItem(tr("Find"), filter);
                                 
     mainStack = new QWidgetStack(this);
     setCentralWidget(mainStack);
@@ -148,8 +165,10 @@ bool PortaBase::editColumns()
             viewer->setDatabase(db);
             rebuildViewMenu();
             rebuildSortMenu();
+            rebuildFilterMenu();
         }
         else {
+            db->setViewColumnSequence("_all", db->listColumns());
             viewAllColumns();
         }
         setEdited(TRUE);
@@ -229,6 +248,7 @@ void PortaBase::openFile(const DocLnk &f)
     updateCaption();
     rebuildViewMenu();
     rebuildSortMenu();
+    rebuildFilterMenu();
 }
 
 void PortaBase::fileOpen()
@@ -350,6 +370,13 @@ void PortaBase::viewAllColumns()
     setEdited(TRUE);
 }
 
+void PortaBase::viewAllRows()
+{
+    viewer->setFilter("_allrows");
+    updateFilterMenu();
+    setEdited(TRUE);
+}
+
 void PortaBase::changeView(int id)
 {
     int index = viewIds.findIndex(id);
@@ -366,6 +393,16 @@ void PortaBase::changeSorting(int id)
     if (index != -1) {
         viewer->setSorting(sortNames[index]);
         updateSortMenu();
+        setEdited(TRUE);
+    }
+}
+
+void PortaBase::changeFilter(int id)
+{
+    int index = filterIds.findIndex(id);
+    if (index != -1) {
+        viewer->setFilter(filterNames[index]);
+        updateFilterMenu();
         setEdited(TRUE);
     }
 }
@@ -406,6 +443,26 @@ void PortaBase::rebuildSortMenu()
         sortIds.append(id);
     }
     updateSortMenu();
+}
+
+void PortaBase::rebuildFilterMenu()
+{
+    // remove old filter names
+    int count = filterNames.count();
+    for (int i = 0; i < count; i++) {
+        filter->removeItem(filterIds[i]);
+    }
+    filterIds.clear();
+    // add new filter names
+    filterNames = db->listFilters();
+    filterNames.remove("_allrows");
+    filterNames.remove("_simple");
+    count = filterNames.count();
+    for (int i = 0; i < count; i++) {
+        int id = filter->insertItem(filterNames[i]);
+        filterIds.append(id);
+    }
+    updateFilterMenu();
 }
 
 void PortaBase::updateViewMenu()
@@ -454,6 +511,35 @@ void PortaBase::updateSortMenu()
     }
 }
 
+void PortaBase::updateFilterMenu()
+{
+    QString filterName = db->currentFilter();
+    if (filterName == "_allrows") {
+        filter->setItemChecked(allRowsFilterId, TRUE);
+        filter->setItemEnabled(editFilterId, FALSE);
+        filter->setItemEnabled(deleteFilterId, FALSE);
+    }
+    else if (filterName == "_simple") {
+        filter->setItemChecked(allRowsFilterId, FALSE);
+        filter->setItemEnabled(editFilterId, FALSE);
+        filter->setItemEnabled(deleteFilterId, FALSE);
+    }
+    else {
+        filter->setItemChecked(allRowsFilterId, FALSE);
+        filter->setItemEnabled(editFilterId, TRUE);
+        filter->setItemEnabled(deleteFilterId, TRUE);
+    }
+    int count = filterNames.count();
+    for (int i = 0; i < count; i++) {
+        if (filterName == filterNames[i]) {
+            filter->setItemChecked(filterIds[i], TRUE);
+        }
+        else {
+            filter->setItemChecked(filterIds[i], FALSE);
+        }
+    }
+}
+
 void PortaBase::editView()
 {
     ViewEditor editor;
@@ -487,6 +573,22 @@ void PortaBase::editSorting()
     }
 }
 
+void PortaBase::editFilter()
+{
+    FilterEditor editor;
+    QString filterName = db->currentFilter();
+    if (editor.edit(db, filterName)) {
+        editor.applyChanges();
+        QString newName = editor.getName();
+        viewer->setFilter(newName);
+        // filter menu is unchanged unless the filter's name changed
+        if (filterName != newName) {
+            rebuildFilterMenu();
+        }
+        setEdited(TRUE);
+    }
+}
+
 void PortaBase::addView()
 {
     ViewEditor editor;
@@ -510,6 +612,17 @@ void PortaBase::addSorting()
     }
 }
 
+void PortaBase::addFilter()
+{
+    FilterEditor editor;
+    if (editor.edit(db, "")) {
+        editor.applyChanges();
+        viewer->setFilter(editor.getName());
+        rebuildFilterMenu();
+        setEdited(TRUE);
+    }
+}
+
 void PortaBase::deleteView()
 {
     viewer->closeView();
@@ -525,6 +638,34 @@ void PortaBase::deleteSorting()
     viewer->setSorting("");
     rebuildSortMenu();
     setEdited(TRUE);
+}
+
+void PortaBase::deleteFilter()
+{
+    db->deleteFilter(db->currentFilter());
+    viewer->setFilter("_allrows");
+    rebuildFilterMenu();
+    setEdited(TRUE);
+}
+
+void PortaBase::simpleFilter()
+{
+    ConditionEditor editor(db, this);
+    Condition *condition = db->getCondition("_simple", 0);
+    if (editor.edit(condition)) {
+        editor.applyChanges(condition);
+        db->deleteFilter("_simple");
+        Filter *filter = new Filter(db, "_simple");
+        filter->addCondition(condition);
+        db->addFilter(filter);
+        delete filter;
+        viewer->setFilter("_simple");
+        updateFilterMenu();
+        setEdited(TRUE);
+    }
+    else {
+        delete condition;
+    }
 }
 
 void PortaBase::setEdited(bool y)

@@ -134,7 +134,6 @@ void ViewDisplay::previousPages()
 
 void ViewDisplay::updateTable()
 {
-    view->prepareData();
     int rpp = rowsPerPage->value();
     int index = (currentPage - 1) * rpp;
     int rowCount = view->getRowCount();
@@ -236,6 +235,7 @@ void ViewDisplay::setView(QString name)
         table->setColumnWidthMode(i, QListView::Manual);
     }
     rowsPerPage->setValue(view->getRowsPerPage());
+    view->prepareData();
     updateTable();
     updateButtons();
 }
@@ -243,7 +243,16 @@ void ViewDisplay::setView(QString name)
 void ViewDisplay::setSorting(QString name)
 {
     view->sort(name);
+    view->prepareData();
     updateTable();
+}
+
+void ViewDisplay::setFilter(QString name)
+{
+    db->getFilter(name);
+    view->prepareData();
+    updateTable();
+    updateButtons();
 }
 
 void ViewDisplay::closeView()
@@ -264,6 +273,7 @@ void ViewDisplay::addRow()
 {
     RowEditor rowEditor;
     if (rowEditor.edit(db, -1)) {
+        view->prepareData();
         updateTable();
         updateButtons();
         setEdited(TRUE);
@@ -276,6 +286,7 @@ void ViewDisplay::editRow()
     if (rowId != -1) {
         RowEditor rowEditor;
         if (rowEditor.edit(db, rowId)) {
+            view->prepareData();
             updateTable();
             updateButtons();
             setEdited(TRUE);
@@ -288,6 +299,7 @@ void ViewDisplay::deleteRow()
     int rowId = selectedRowId();
     if (rowId != -1) {
         db->deleteRow(rowId);
+        view->prepareData();
         updateTable();
         updateButtons();
         setEdited(TRUE);
@@ -378,6 +390,7 @@ void ViewDisplay::columnResized(int column, int oldWidth, int newWidth)
 void ViewDisplay::sort(int column)
 {
     view->sort(column);
+    view->prepareData();
     updateTable();
     portabase->updateSortMenu();
     setEdited(TRUE);

@@ -16,8 +16,10 @@
 #include <qpixmap.h>
 #include "datatypes.h"
 
-#define FILE_VERSION 2
+#define FILE_VERSION 3
 
+class Condition;
+class Filter;
 class QString;
 class QStringList;
 class View;
@@ -61,8 +63,18 @@ public:
     void addSorting(QString name, QStringList allCols, QStringList descCols);
     void deleteSorting(QString name);
     void deleteSortingColumn(QString sortName, QString columnName);
-    c4_View sortData(QString column, bool ascending);
-    c4_View sortData(QString sortingName);
+    c4_View getData();
+    c4_View sortData(c4_View filteredData, QString column, bool ascending);
+    c4_View sortData(c4_View filteredData, QString sortingName);
+
+    QString currentFilter();
+    QStringList listFilters();
+    Filter *getFilter(QString name);
+    void addFilter(Filter *filter);
+    void deleteFilter(QString name);
+    void deleteFilterColumn(QString filterName, QString columnName);
+    int getConditionCount(QString filterName);
+    Condition *getCondition(QString filterName, int index);
 
     QString addRow(QStringList values);
     void updateRow(int rowId, QStringList values);
@@ -86,9 +98,12 @@ private:
     c4_View viewColumns;
     c4_View sorts;
     c4_View sortColumns;
+    c4_View filters;
+    c4_View filterConditions;
     c4_View global;
     c4_View data;
     View *curView;
+    Filter *curFilter;
     int maxId;
     c4_IntProp Id;
     // "_columns" view
@@ -111,10 +126,20 @@ private:
     c4_IntProp scIndex;
     c4_StringProp scName;
     c4_IntProp scDesc;
+    // "_filters" view
+    c4_StringProp fName;
+    // "_filterconditions" view
+    c4_StringProp fcFilter;
+    c4_IntProp fcIndex;
+    c4_StringProp fcColumn;
+    c4_IntProp fcOperator;
+    c4_StringProp fcConstant;
+    c4_IntProp fcCase;
     // "_global" view
     c4_IntProp gVersion;
     c4_StringProp gView;
     c4_StringProp gSort;
+    c4_StringProp gFilter;
 };
 
 #endif
