@@ -1,3 +1,24 @@
+2004-02-27  JMB  Localization improvements
+
+    Made several changes that let PortaBase work better for non-English
+    languages.  First, it should now correctly open files with names that
+    use characters beyond Latin-1 or files in directories whose names contain
+    such characters (except in Windows 95, 98, and Me which I believe simply
+    don't support this).
+
+    Also patched Metakit to enable locale-sensitive sorting.  For example,
+    when running on a Japanese system it sorts in "a-i-u-e-o" order with
+    hiragana before katakana and kanji, and it should sort accented characters
+    correctly when using a locale such as French or German.  Note that this
+    does mean that the sorting order of string and note fields may change
+    depending on the locale of the computer or PDA you run PortaBase on;
+    that's probably what most people want, though.
+
+    Finally, loading of translation and help files on the desktop versions
+    was fixed so that full locale codes can be used instead of only 2-letter
+    language codes; for example, a distinction can now be made between zh_CN
+    and zh_TW.
+
 2004-02-25  JMB  Assorted Windows fixes and code cleanup, file drag & drop
 
     Fixed JPEG image loading on Windows, better default dialog sizes on the

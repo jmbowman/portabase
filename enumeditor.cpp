@@ -40,6 +40,7 @@ typedef QInputDialog InputDialog;
 #include <qstringlist.h>
 #include "database.h"
 #include "enumeditor.h"
+#include "metakitfuncs.h"
 
 EnumEditor::EnumEditor(QWidget *parent, const char *name)
   : PBDialog(tr("Enum Editor"), parent, name), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
@@ -118,6 +119,7 @@ QString EnumEditor::getName()
 void EnumEditor::sortOptions()
 {
     c4_View sorted;
+    c4_View::stringCompareFunc = compareUsingLocale;
     if (sorting == ASCENDING) {
         sorting = DESCENDING;
         sorted = info.SortOnReverse(eeiName, eeiName);
@@ -126,6 +128,7 @@ void EnumEditor::sortOptions()
         sorting = ASCENDING;
         sorted = info.SortOn(eeiName);
     }
+    c4_View::stringCompareFunc = strcmp;
     int count = sorted.GetSize();
     for (int i = 0; i < count; i++) {
         int index = info.Find(eeiName [eeiName (sorted[i])]

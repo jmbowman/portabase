@@ -25,8 +25,12 @@ public:
     static QString helpDir();
     static QString documentDir();
     static void setDocumentDir(QString path);
+    static QString translationFile();
 
     void showMainDocumentWidget(QWidget*, bool nomax=TRUE);
+
+private:
+    static QStringList languageList();
 };
 
 #endif

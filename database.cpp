@@ -16,12 +16,14 @@
 #endif
 
 #include <qdatetime.h>
+#include <qfile.h>
 #include <qfileinfo.h>
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <stdlib.h>
+#include <string.h>
 #include "calc/calcnode.h"
 #include "image/imageutils.h"
 #include "condition.h"
@@ -29,18 +31,23 @@
 #include "csvutils.h"
 #include "database.h"
 #include "filter.h"
+#include "metakitfuncs.h"
 #include "view.h"
 #include "xmlexport.h"
 
 Database::Database(QString path, int *result, int encrypt) : crypto(0), version(0), newFile(FALSE), curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), calcId("_calcid"), calcDecimals("_calcdecimals"), cnId("_cnid"), cnNodeId("_cnnodeid"), cnParentId("_cnparentid"), cnType("_cntype"), cnValue("_cnvalue"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter"), gCrypt("_gcrypt")
 {
-    c4_View::_CaseSensitive = TRUE;
+    c4_Storage::win32FileOpenFunc = windowsFileOpen;
     updateDateTimePrefs();
     Config pbConfig("portabase");
     pbConfig.setGroup("General");
     showSeconds = pbConfig.readBoolEntry("ShowSeconds");
 
-    file = new c4_Storage(path, TRUE);
+#if defined(Q_WS_WIN)
+    file = new c4_Storage(path.utf8(), TRUE);
+#else
+    file = new c4_Storage(QFile::encodeName(path), TRUE);
+#endif
     global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S,_gcrypt:I]");
     if (global.GetSize() == 0) {
         // new file, add global data
@@ -263,7 +270,9 @@ QString Database::getDefaultFilter(const QString &viewName)
 
 QStringList Database::listViews()
 {
+    c4_View::stringCompareFunc = compareUsingLocale;
     c4_View sorted = views.SortOn(vName);
+    c4_View::stringCompareFunc = strcmp;
     int size = sorted.GetSize();
     QStringList list;
     for (int i = 0; i < size; i++) {
@@ -705,7 +714,9 @@ QString Database::currentSorting()
 
 QStringList Database::listSortings()
 {
+    c4_View::stringCompareFunc = compareUsingLocale;
     c4_View sorted = sorts.SortOn(sName);
+    c4_View::stringCompareFunc = strcmp;
     int size = sorted.GetSize();
     QStringList list;
     for (int i = 0; i < size; i++) {
@@ -818,12 +829,14 @@ c4_View Database::sortData(c4_View filteredData, const QString &column,
     addSorting("_single", colNames, descNames);
     gSort (global[0]) = "_single";
     c4_View sortView = createEmptyView(colNames);
+    c4_View::stringCompareFunc = compareUsingLocale;
     if (ascending) {
         return filteredData.SortOn(sortView);
     }
     else {
         return filteredData.SortOnReverse(sortView, sortView);
     }
+    c4_View::stringCompareFunc = strcmp;
 }
 
 c4_View Database::sortData(c4_View filteredData, const QString &sortingName)
@@ -836,7 +849,9 @@ c4_View Database::sortData(c4_View filteredData, const QString &sortingName)
     }
     c4_View allView = createEmptyView(allCols);
     c4_View descView = createEmptyView(descCols);
+    c4_View::stringCompareFunc = compareUsingLocale;
     return filteredData.SortOnReverse(allView, descView);
+    c4_View::stringCompareFunc = strcmp;
 }
 
 c4_View Database::createEmptyView(const QStringList &colNames)
@@ -880,7 +895,9 @@ QString Database::currentFilter()
 
 QStringList Database::listFilters()
 {
+    c4_View::stringCompareFunc = compareUsingLocale;
     c4_View sorted = filters.SortOn(fName);
+    c4_View::stringCompareFunc = strcmp;
     int size = sorted.GetSize();
     QStringList list;
     for (int i = 0; i < size; i++) {
@@ -1760,6 +1777,7 @@ void Database::exportToXML(QString filename, c4_View &fullView,
 {
     XMLExport xml(this, filename, cols);
     xml.addGlobalView(global);
+    c4_View::stringCompareFunc = compareUsingLocale;
     xml.addView("enums", enums.SortOn(eIndex));
     xml.addView("enumoptions", enumOptions.SortOn((eoEnum, eoIndex)));
     xml.addView("columns", columns.SortOn(cIndex));
@@ -1806,6 +1824,7 @@ void Database::exportToXML(QString filename, c4_View &fullView,
         colIndex++;
     }
     xml.addDataView(fullView, filteredView, ids, types, colIds, colNames);
+    c4_View::stringCompareFunc = strcmp;
 }
 
 void Database::setGlobalInfo(const QString &view, const QString &sorting,

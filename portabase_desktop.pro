@@ -82,7 +82,8 @@ HEADERS         = portabase.h \
                   image/imagewidget.h \
                   image/slideshowdialog.h \
                   desktop/oldconfig.h \
-                  qqdialog.h
+                  qqdialog.h \
+                  metakitfuncs.h
 SOURCES         = main.cpp \
                   portabase.cpp \
                   view.cpp \
@@ -148,4 +149,5 @@ SOURCES         = main.cpp \
                   image/imagewidget.cpp \
                   image/slideshowdialog.cpp \
                   desktop/oldconfig.cpp \
-                  qqdialog.cpp
+                  qqdialog.cpp \
+                  metakitfuncs.cpp
