@@ -253,7 +253,21 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     }
     fileOpen();
 #if defined(DESKTOP)
-    resize(600, 400);
+    conf.setGroup("Geometry");
+    int xpos = conf.readNumEntry("X", -1);
+    int ypos = conf.readNumEntry("Y", -1);
+    if (xpos != -1 && ypos != -1) {
+        move(xpos, ypos);
+    }
+    if (conf.readBoolEntry("Maximized")) {
+        resize(600, 400);
+        showMaximized();
+    }
+    else {
+        int w = conf.readNumEntry("Width", 600);
+        int h = conf.readNumEntry("Height", 400);
+        resize(w, h);
+    }
 #else
     resize(200, 300);
 #endif
@@ -270,6 +284,14 @@ PortaBase::~PortaBase()
     conf.writeEntry("LastDir", lastDir.absPath());
     conf.writeEntry("View", viewIconsAction->isOn() ? "Icon" : "List");
     updateRecentFiles(conf);
+#ifdef DESKTOP
+    conf.setGroup("Geometry");
+    conf.writeEntry("Maximized", isMaximized());
+    conf.writeEntry("X", x());
+    conf.writeEntry("Y", y());
+    conf.writeEntry("Width", width());
+    conf.writeEntry("Height", height());
+#endif
 }
 
 bool PortaBase::editColumns()

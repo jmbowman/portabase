@@ -970,7 +970,7 @@ Condition *Database::getCondition(QString filterName, int index)
 }
 
 QString Database::addRow(QStringList values, int *rowId,
-                         bool acceptSequenceVals)
+                         bool acceptSequenceVals, bool fromcsv)
 {
     c4_Row row;
     Id (row) = maxId + 1;
@@ -1005,7 +1005,14 @@ QString Database::addRow(QStringList values, int *rowId,
         }
         QString error = isValidValue(type, value);
         if (error != "") {
-            return name + " " + error;
+            // convert blank numbers in CSV import to the default value
+            if (fromcsv && (value == "")
+                    && (type == INTEGER || type == FLOAT)) {
+                value = getDefault(name);
+            }
+            else {
+                return name + " " + error;
+            }
         }
         QString idString = makeColId(cId (temp[i]), type);
         if (type == STRING || type == NOTE) {

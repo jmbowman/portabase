@@ -272,7 +272,7 @@ bool CSVUtils::addRow(Database *db)
             }
         }
     }
-    message = db->addRow(row, &rowId);
+    message = db->addRow(row, &rowId, FALSE, TRUE);
     if (message != "") {
         message = QObject::tr("Error in row %1").arg(rowNum) + "\n" + message;
         return FALSE;

@@ -1,3 +1,13 @@
+2003-09-11  JMB  CSV import enhancement, save/restore window geometry
+
+    During CSV import, a blank in an integer or decimal column now gets
+    replaced with the default value for that column.  Some other database
+    programs seem to allow blanks in number fields, so this should help
+    import data from those.
+
+    The desktop versions now save the location and size of the main window
+    when PortaBase is closed and restore them when it is launched again.
+
 2003-09-10  JMB  Menu shortcuts and accelerators in desktop versions
 
     Added shortcuts (underlined letters which activate the item when that

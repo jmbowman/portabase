@@ -123,8 +123,8 @@ public:
     QString formatDouble(double value, int decimals=2);
     void calculateAll();
 
-    QString addRow(QStringList values, int *rowId = 0,
-                   bool acceptSequenceVals = FALSE);
+    QString addRow(QStringList values, int *rowId=0,
+                   bool acceptSequenceVals=FALSE, bool fromcsv=FALSE);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
     void toggleBoolean(int rowId, QString colName);
