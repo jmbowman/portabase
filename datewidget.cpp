@@ -30,11 +30,30 @@
 DateWidget::DateWidget(QWidget *parent, const char *name, WFlags f)
     : QHBox(parent, name, f)
 {
+    days.append(tr("Mon"));
+    days.append(tr("Tue"));
+    days.append(tr("Wed"));
+    days.append(tr("Thu"));
+    days.append(tr("Fri"));
+    days.append(tr("Sat"));
+    days.append(tr("Sun"));
+    months.append(tr("Jan"));
+    months.append(tr("Feb"));
+    months.append(tr("Mar"));
+    months.append(tr("Apr"));
+    months.append(tr("May"));
+    months.append(tr("Jun"));
+    months.append(tr("Jul"));
+    months.append(tr("Aug"));
+    months.append(tr("Sep"));
+    months.append(tr("Oct"));
+    months.append(tr("Nov"));
+    months.append(tr("Dec"));
     dateObj = QDate::currentDate();
     QPushButton *button = new QPushButton(this);
     button->setPixmap(Resource::loadPixmap("portabase/calendar"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchSelector()));
-    display = new QLabel(dateObj.toString(), this);
+    display = new QLabel(toString(dateObj), this);
     int height = button->height();
     button->setMaximumWidth(height);
     setMaximumHeight(height);
@@ -80,9 +99,17 @@ void DateWidget::updateDisplay()
         noneButton->setEnabled(FALSE);
     }
     else {
-        display->setText(dateObj.toString());
+        display->setText(toString(dateObj));
         noneButton->setEnabled(TRUE);
     }
+}
+
+QString DateWidget::toString(QDate &date)
+{
+    QString result = days[date.dayOfWeek() - 1] + " ";
+    result += months[date.month() - 1] + " " + QString::number(date.day());
+    result += " " + QString::number(date.year());
+    return result;
 }
 
 bool DateWidget::isNoneDate(QDate &date)

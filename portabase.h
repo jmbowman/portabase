@@ -66,6 +66,7 @@ private slots:
     void editRow();
     void deleteRow();
     void copyRow();
+    void viewRow();
     void deleteAllRows();
     void save();
     void changePassword();
@@ -146,6 +147,7 @@ private:
     QAction *rowEditAction;
     QAction *rowDeleteAction;
     QAction *rowCopyAction;
+    QAction *rowViewAction;
     QAction *viewAddAction;
     QAction *viewEditAction;
     QAction *viewDeleteAction;

@@ -58,7 +58,7 @@ public:
     bool editRow(int rowId=-1, bool copy=FALSE);
     void usePages(bool flag);
 
-private slots:
+public slots:
     void viewRow();
 
 protected:

@@ -46,6 +46,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("All Columns", tr("All Columns"));
     textMap.insert("All Rows", tr("All Rows"));
     textMap.insert("Copy", tr("Copy") + "...");
+    textMap.insert("Show", tr("Show"));
     textMap.insert("Delete Rows In Filter", tr("Delete Rows In Filter"));
     textMap.insert("Edit Columns", tr("Edit Columns"));
     textMap.insert("Edit Enums", tr("Edit Enums"));
@@ -77,6 +78,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     menuTextMap.insert("All Columns", tr("All &Columns"));
     menuTextMap.insert("All Rows", tr("All &Rows"));
     menuTextMap.insert("Copy", tr("&Copy") + "...");
+    menuTextMap.insert("Show", tr("&Show"));
     menuTextMap.insert("Delete Rows In Filter", tr("&Delete Rows In Filter"));
     menuTextMap.insert("Edit Columns", tr("Edit Co&lumns"));
     menuTextMap.insert("Edit Enums", tr("Edit &Enums"));

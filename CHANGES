@@ -1,3 +1,15 @@
+2004-01-25  JMB  Translate date strings, fixed note button width, Row->Show
+
+    Fixed the date display in the row editor, etc. to properly translate the
+    day and month names.
+
+    Reduced the amount of text shown on the button for note fields in the row
+    editor; as it was, the button was often too wide and caused a horizontal
+    scrollbar to be shown.
+
+    Added a Row->Show menu item which launches the row viewer for the
+    currently selected row.
+
 2003-10-07  JMB  Enum editor bugfix
 
     Until now, deleting two options in the enum editor before clicking "OK"

@@ -231,7 +231,7 @@ void ViewDisplay::updateTable()
                     item->setText(j, "");
                 }
                 else {
-                    item->setPixmap(j, Resource::loadPixmap("find"));
+                    item->setPixmap(j, Resource::loadPixmap("portabase/image"));
                 }
             }
             else if (type == NOTE || type == STRING) {

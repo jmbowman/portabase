@@ -37,11 +37,14 @@ private slots:
 private:
     bool isNoneDate(QDate &date);
     void updateDisplay();
+    QString toString(QDate &date);
 
 private:
     QDate dateObj;
     QLabel *display;
     QPushButton *noneButton;
+    QStringList days;
+    QStringList months;
 };
 
 #endif

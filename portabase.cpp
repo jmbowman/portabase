@@ -178,12 +178,15 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
     rowCopyAction = ma->action("Copy", copyIcons);
     connect(rowCopyAction, SIGNAL(activated()), this, SLOT(copyRow()));
+    rowViewAction = ma->action("Show");
+    connect(rowViewAction, SIGNAL(activated()), this, SLOT(viewRow()));
     // this submenu doesn't get deleted when the menubar is cleared...
     row = new QPopupMenu(this);
     rowAddAction->addTo(row);
     rowEditAction->addTo(row);
     rowDeleteAction->addTo(row);
     rowCopyAction->addTo(row);
+    rowViewAction->addTo(row);
 
     // View menu actions
     viewAddAction = ma->action("Add", addIcons);
@@ -951,6 +954,11 @@ void PortaBase::copyRow()
     viewer->editRow(-1, TRUE);
 }
 
+void PortaBase::viewRow()
+{
+    viewer->viewRow();
+}
+
 void PortaBase::deleteAllRows()
 {
     if (confirmDeletions) {
@@ -1368,6 +1376,7 @@ void PortaBase::setRowSelected(bool y)
     rowEditAction->setEnabled(y);
     rowDeleteAction->setEnabled(y);
     rowCopyAction->setEnabled(y);
+    rowViewAction->setEnabled(y);
 }
 
 QPixmap PortaBase::getCheckBoxPixmap(int checked)
@@ -1382,7 +1391,7 @@ QPixmap PortaBase::getCheckBoxPixmap(int checked)
 
 QPixmap PortaBase::getNotePixmap()
 {
-    return Resource::loadPixmap("txt");
+    return Resource::loadPixmap("portabase/note");
 }
 
 void PortaBase::showHelp()

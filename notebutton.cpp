@@ -36,7 +36,7 @@ void NoteButton::setContent(QString text)
     noteContent = text;
     QString buttonText = text.replace(QRegExp("\n"), " ");
     QFontMetrics metrics = fontMetrics();
-    int available = width() - 40 - metrics.width("...");
+    int available = width() - 60 - metrics.width("...");
     int length = buttonText.length();
     for (int i = 0; i < length; i++) {
         if (metrics.width(buttonText, i + 1) > available) {
