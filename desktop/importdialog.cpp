@@ -11,6 +11,7 @@
 
 #include <qfiledialog.h>
 #include <qfileinfo.h>
+#include <qinputdialog.h>
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <qstringlist.h>
@@ -54,10 +55,23 @@ bool ImportDialog::exec()
         QFileInfo info(file);
         QPEApplication::setDocumentDir(info.dirPath(TRUE));
     }
+
+    QStringList encodings;
+    encodings.append("UTF-8");
+    encodings.append("Latin-1");
+    bool ok;
+    QString encoding = QInputDialog::getItem(QObject::tr("Import"),
+                                            QObject::tr("Text encoding") + ":",
+                                            encodings, 0, FALSE, &ok,
+                                            parentWidget);
+    if (!ok) {
+        return FALSE;
+    }
+
     QString error;
     QString data = "";
     if (source == CSV_FILE) {
-        QStringList result = db->importFromCSV(file);
+        QStringList result = db->importFromCSV(file, encoding);
         int count = result.count();
         if (count > 0) {
             error = result[0];

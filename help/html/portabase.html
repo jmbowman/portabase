@@ -201,7 +201,7 @@ At the top of the dialog is a text box containing the name of the filter; changi
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.  This allows you to import data exported from a spreadsheet or another database program.  To do this:<br>
 <ol>
 <li>Open the PortaBase file you want to import the data into.  If you wish to import the data into a new file, create a new file and define a column structure that matches that of the data to be imported.</li>
-<li>From the "File" menu in the <a href="#viewer">data viewer</a>, select "Import".  A file selector will appear showing all the CSV files that are available; pick the one you want to import from.  The CSV file must have the same number of columns as the open database file, and the values in those columns must be appropriate for the specified column types.</li>
+<li>From the "File" menu in the <a href="#viewer">data viewer</a>, select "Import".  A file selector will appear showing all the CSV files that are available; pick the one you want to import from.  The CSV file must have the same number of columns as the open database file, and the values in those columns must be appropriate for the specified column types.  You may specify the encoding of the text file in order to import non-ASCII characters correctly; the default is UTF-8 (which supports text in many languages), but you may also choose Latin-1 (which is used by most software configured for use primarily with Western European languages).</li>
 <li>The rows in the imported file are added to the database.  Rows from other files can be added by repeating this process, or another copy of the same rows can be added by importing the same file again.</li>
 </ol>
 Notes:<br>

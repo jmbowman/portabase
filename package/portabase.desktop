@@ -6,3 +6,4 @@ Type=Application
 MimeType=application/portabase
 Name=PortaBase
 CanFastload=1
+HidePrivilege=1

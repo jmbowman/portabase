@@ -69,6 +69,14 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         }
         numArgs += 2;
     }
+    int encIndex = args.findIndex("-e");
+    if (encIndex != -1) {
+        if (argc < encIndex + 4) {
+            printUsage();
+            return 1;
+        }
+        numArgs += 2;
+    }
     if (argc != numArgs) {
         printUsage();
         return 1;
@@ -116,7 +124,11 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         error = utils.importXML(sourceFile, db);
     }
     else if (fromcsv) {
-        QStringList result = db->importFromCSV(sourceFile);
+        QString encoding = "UTF-8";
+        if (encIndex != -1) {
+            encoding = args[encIndex + 1];
+        }
+        QStringList result = db->importFromCSV(sourceFile, encoding);
         int count = result.count();
         if (count > 0) {
             error = result[0];
@@ -266,6 +278,8 @@ void CommandLine::printUsage()
     printf("    -v viewname (apply this view before exporting)\n");
     printf("    -s sortname (apply this sorting before exporting)\n");
     printf("    -f filtername (apply this filter before exporting)\n");
+    printf("  There is one option for fromcsv:\n");
+    printf("    -e encoding (UTF-8 or Latin-1; default is UTF-8)\n");
     printf("  When using fromcsv, \"tofile\" must be an existing PortaBase file.\n");
     printf("  Specify -h or --help to receive this message\n");
 }

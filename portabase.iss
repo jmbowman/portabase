@@ -19,11 +19,12 @@ Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "A
 
 [Files]
 Source: "portabase.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "package\portabase_ja.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "desktop\icons\*.*"; DestDir: "{app}\icons"; Flags: ignoreversion
 Source: "desktop\icons\portabase\*.*"; DestDir: "{app}\icons\portabase"; Flags: ignoreversion
 Source: "help\html\portabase.html"; DestDir: "{app}"; Flags: ignoreversion
 Source: "help\ja\html\portabase.html"; DestDir: "{app}\ja"; Flags: ignoreversion
-Source: "portabase_ja.qm"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "portabase_ja.qm"; DestDir: "{app}\ja"; DestName: "portabase.qm"; Flags: ignoreversion
 Source: "CHANGES"; DestDir: "{app}"; Flags: ignoreversion
 Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion
 Source: "portabase.ico"; DestDir: "{app}"; Flags: ignoreversion
@@ -40,6 +41,7 @@ Filename: "{app}\portabase.url"; Section: "InternetShortcut"; Key: "URL"; String
 
 [Icons]
 Name: "{group}\PortaBase"; Filename: "{app}\portabase.exe"
+Name: "{group}\PortaBase (ja)"; Filename: "{app}\portabase_ja.bat"; WorkingDir: "{app}"; IconFilename: "{app}\portabase.ico"; Flags: runminimized
 Name: "{group}\PortaBase Home Page"; Filename: "{app}\portabase.url"
 Name: "{group}\Uninstall PortaBase"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\PortaBase"; Filename: "{app}\portabase.exe"; Tasks: desktopicon

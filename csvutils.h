@@ -12,9 +12,11 @@
 #ifndef CSVUTILS_H
 #define CSVUTILS_H
 
+#include <qstringlist.h>
+#include "datatypes.h"
+
 class Database;
 class QString;
-class QStringList;
 
 class CSVUtils
 {
@@ -22,13 +24,25 @@ public:
     CSVUtils();
     ~CSVUtils();
 
-    QStringList parseFile(QString filename, Database *db);
+    QStringList parseFile(const QString &filename, const QString &encoding,
+                          Database *db);
     QString encodeRow(QStringList row);
     QString encodeCell(QString content);
 
 private:
+    void initializeCounts(Database *db);
+    bool addRow(Database *db);
+
+private:
     QChar m_textquote;
     QChar m_delimiter;
+    int colCount;
+    int endStringCount;
+    int rowNum;
+    QString message;
+    QString rowString;
+    QStringList row;
+    IntList addedIds;
 };
 
 #endif

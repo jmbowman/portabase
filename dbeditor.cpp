@@ -17,6 +17,7 @@
 #include <qlistview.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
+#include <qregexp.h>
 #include <qvbox.h>
 #include "columneditor.h"
 #include "database.h"
@@ -311,6 +312,9 @@ void DBEditor::updateTable()
         int type = ceType (temp[i]);
         QString typeString = getTypeString(type);
         QString defaultVal = QString::fromUtf8(ceDefault (temp[i]));
+        if (type == NOTE) {
+            defaultVal = defaultVal.replace(QRegExp("\n"), " ");
+        }
         if (i == 0) {
             last = new QListViewItem(table, name, typeString, defaultVal);
         }

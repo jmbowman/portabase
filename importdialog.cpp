@@ -10,6 +10,9 @@
  */
 
 #include <qpe/fileselector.h>
+#include <qcombobox.h>
+#include <qlabel.h>
+#include <qlayout.h>
 #include <qmessagebox.h>
 #include <qstringlist.h>
 #include "csverror.h"
@@ -37,9 +40,20 @@ ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
         caption = tr("Import from XML file");
         mimeType = "text/xml";
     }
+
     setCaption(caption + " - " + tr("PortaBase"));
+    QVBoxLayout *vbox = new QVBoxLayout(this);
+    if (sourceType == CSV_FILE) {
+        QHBox *hbox = new QHBox(this);
+        vbox->addWidget(hbox);
+        new QLabel(tr("Text encoding"), hbox);
+        encodings = new QComboBox(FALSE, hbox);
+        encodings->insertItem("UTF-8");
+        encodings->insertItem("Latin-1");
+    }
     selector = new FileSelector(mimeType, this, "importselector",
-                                FALSE, FALSE );
+                                FALSE, FALSE);
+    vbox->addWidget(selector);
     connect(selector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(import(const DocLnk &)));
     showMaximized();
@@ -65,7 +79,7 @@ bool ImportDialog::import(const QString &file)
     QString error;
     QString data = "";
     if (source == CSV_FILE) {
-        QStringList result = db->importFromCSV(file);
+        QStringList result = db->importFromCSV(file, encodings->currentText());
         int count = result.count();
         if (count > 0) {
             error = result[0];
@@ -94,12 +108,6 @@ bool ImportDialog::import(const QString &file)
         return FALSE;
     }
     return TRUE;
-}
-
-void ImportDialog::resizeEvent(QResizeEvent *event)
-{
-    QDialog::resizeEvent(event);
-    selector->resize(size());
 }
 
 int ImportDialog::exec()

@@ -34,11 +34,11 @@
     </message>
     <message>
         <source>Integer</source>
-        <translation>数値</translation>
+        <translation>整数値</translation>
     </message>
     <message>
         <source>Decimal</source>
-        <translation>十進数値</translation>
+        <translation>数値</translation>
     </message>
     <message>
         <source>Boolean</source>
@@ -176,7 +176,7 @@
     </message>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は禁止</translation>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
     </message>
     <message>
         <source>Duplicate name</source>
@@ -200,11 +200,11 @@
     </message>
     <message>
         <source>Integer</source>
-        <translation>数値</translation>
+        <translation>整数値</translation>
     </message>
     <message>
         <source>Decimal</source>
-        <translation>十進数値</translation>
+        <translation>数値</translation>
     </message>
     <message>
         <source>Boolean</source>
@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は禁止</translation>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
     </message>
     <message>
         <source>Duplicate name</source>
@@ -418,7 +418,7 @@ deleted:</source>
     </message>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は禁止</translation>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
     </message>
     <message>
         <source>Duplicate name</source>
@@ -454,6 +454,24 @@ deleted:</source>
     <message>
         <source>OK</source>
         <translation>はい</translation>
+    </message>
+</context>
+<context>
+    <name>ImportDialog</name>
+    <message>
+        <source>PortaBase</source>
+        <translation type="obsolete">PortaBase</translation>
+    </message>
+</context>
+<context>
+    <name>NewFileDialog</name>
+    <message>
+        <source>PortaBase</source>
+        <translation type="obsolete">PortaBase</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new file</source>
+        <translation type="obsolete">ファイルネームを入力して下さい</translation>
     </message>
 </context>
 <context>
@@ -566,7 +584,7 @@ deleted:</source>
     </message>
     <message>
         <source>Quick</source>
-        <translation>簡単</translation>
+        <translation>簡易</translation>
     </message>
     <message>
         <source>All Rows</source>
@@ -741,7 +759,7 @@ current filter?</source>
     </message>
     <message>
         <source>Comma Separated Value files</source>
-        <translation>値がコンマで区切られたテキストファイル</translation>
+        <translation>カンマ区切りテキスト</translation>
     </message>
     <message>
         <source>XML files</source>
@@ -788,31 +806,31 @@ current filter?</source>
     </message>
     <message>
         <source>General</source>
-        <translation>雑多</translation>
+        <translation>全般</translation>
     </message>
     <message>
         <source>Confirm deletions</source>
-        <translation>削除を確認する</translation>
+        <translation>削除時の確認</translation>
     </message>
     <message>
         <source>Allow checkbox edit in data viewer</source>
-        <translation>詳細表示で真偽のトグルは可能</translation>
+        <translation>データビューアでチェックボックスの変更を許可</translation>
     </message>
     <message>
         <source>Show seconds for times</source>
-        <translation>時刻に秒を示す</translation>
+        <translation>秒を表示</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
-        <translation>ノートのワードラップ</translation>
+        <translation>ノートの折返し位置</translation>
     </message>
     <message>
         <source>at whitespace</source>
-        <translation>字間で</translation>
+        <translation>空白位置で</translation>
     </message>
     <message>
         <source>anywhere</source>
-        <translation>表示の幅で</translation>
+        <translation>行末で</translation>
     </message>
     <message>
         <source>Date and Time</source>
@@ -836,7 +854,7 @@ current filter?</source>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation>週間の最初日</translation>
+        <translation>週の先頭</translation>
     </message>
     <message>
         <source>Sunday</source>
@@ -958,7 +976,7 @@ current filter?</source>
     <name>QObject</name>
     <message>
         <source>No data to summarize</source>
-        <translation>データはありません</translation>
+        <translation>データがありません</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1014,27 +1032,27 @@ current filter?</source>
     </message>
     <message>
         <source>must be an integer</source>
-        <translation>数値の筈</translation>
+        <translation>整数値でなければなりません</translation>
     </message>
     <message>
         <source>must be a decimal value</source>
-        <translation>十進数値の筈</translation>
+        <translation>数値でなければなりません</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
-        <translation>0か1かの筈</translation>
+        <translation>0か1でなければなりません</translation>
     </message>
     <message>
         <source>invalid date</source>
-        <translation>そんな日付はありません</translation>
+        <translation>入力された日付が不正です</translation>
     </message>
     <message>
         <source>invalid time</source>
-        <translation>そんな時刻はありません</translation>
+        <translation>入力された時刻が不正です</translation>
     </message>
     <message>
         <source>no such option</source>
-        <translation>そんな選択肢はありません</translation>
+        <translation>入力された値が列挙値にありません</translation>
     </message>
     <message>
         <source>Wrong number of columns</source>
@@ -1042,7 +1060,7 @@ current filter?</source>
     </message>
     <message>
         <source>Unable to open file</source>
-        <translation>ファイルを開けられません</translation>
+        <translation>ファイルを開けません</translation>
     </message>
     <message>
         <source>Any text column</source>
@@ -1086,7 +1104,7 @@ current filter?</source>
     </message>
     <message>
         <source>&quot;c&quot; attribute is missing or non-integer</source>
-        <translation>&quot;c&quot;属性は不在、または数値ではない</translation>
+        <translation>&quot;c&quot;属性は不在、または整数値ではない</translation>
     </message>
     <message>
         <source>Unsupported</source>
@@ -1106,7 +1124,7 @@ current filter?</source>
     </message>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は禁止</translation>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
     </message>
     <message>
         <source>Missing</source>
@@ -1114,15 +1132,15 @@ current filter?</source>
     </message>
     <message>
         <source>Incorrect _all view column sequence</source>
-        <translation>_allビューのフィールド順番は間違っている</translation>
+        <translation>_allビューのフィールド順番が間違っています</translation>
     </message>
     <message>
         <source>must be a non-negative integer</source>
-        <translation>負数ではない筈</translation>
+        <translation>負の数は使えません</translation>
     </message>
     <message>
         <source>must be a positive integer</source>
-        <translation>正数の筈</translation>
+        <translation>正数しか使えません</translation>
     </message>
     <message>
         <source>Duplicate element</source>
@@ -1130,11 +1148,11 @@ current filter?</source>
     </message>
     <message>
         <source>Incorrect password</source>
-        <translation>パスワードが違う</translation>
+        <translation>パスワードが違います</translation>
     </message>
     <message>
         <source>Error in decrypting data</source>
-        <translation>デクリプトにエラー発生</translation>
+        <translation>暗号化の解除でエラー発生</translation>
     </message>
     <message>
         <source>Error in loading data</source>
@@ -1142,11 +1160,11 @@ current filter?</source>
     </message>
     <message>
         <source>Password must be at least 6 characters long</source>
-        <translation>パスワードは少なくとも6文字の筈</translation>
+        <translation>パスワードは6文字以上にしてください</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>空き容量が足りない</translation>
+        <translation>空き容量が足りません</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -1163,7 +1181,7 @@ try again.</source>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation>値がコンマで区切られたテキストファイル</translation>
+        <translation>カンマ区切りテキスト</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -1232,6 +1250,14 @@ try again.</source>
     <message>
         <source>Problematic row</source>
         <translation>問題のレコード</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>インポート</translation>
+    </message>
+    <message>
+        <source>Text encoding</source>
+        <translation>文字コード</translation>
     </message>
 </context>
 <context>
@@ -1316,7 +1342,7 @@ try again.</source>
     </message>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は禁止</translation>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
     </message>
     <message>
         <source>Duplicate name</source>
@@ -1373,7 +1399,7 @@ try again.</source>
     </message>
     <message>
         <source>Include</source>
-        <translation>含める</translation>
+        <translation>表示</translation>
     </message>
     <message>
         <source>Column Name</source>
@@ -1393,7 +1419,7 @@ try again.</source>
     </message>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>名前の先頭に&apos;_&apos;は禁止</translation>
+        <translation>名前の先頭に&apos;_&apos;は使えません</translation>
     </message>
     <message>
         <source>Duplicate name</source>

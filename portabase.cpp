@@ -255,13 +255,18 @@ bool PortaBase::editColumns()
             rebuildViewMenu();
             rebuildSortMenu();
             rebuildFilterMenu();
+            setEdited(TRUE);
+            showDataViewer();
         }
         else {
             db->setViewColumnSequence("_all", db->listColumns());
             viewAllColumns();
+            setEdited(TRUE);
+            showDataViewer();
+            rebuildViewMenu();
+            rebuildSortMenu();
+            rebuildFilterMenu();
         }
-        setEdited(TRUE);
-        showDataViewer();
         return TRUE;
     }
     else {

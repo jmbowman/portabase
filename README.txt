@@ -20,7 +20,8 @@ The main features PortaBase currently has are:
 - View summary statistics for columns (total, average, min, max, etc.)
 - Import data from CSV, XML, and MobileDB files
 - Export data to CSV and XML files
-- Command-line format conversions (to and from XML, from MobileDB)
+- Command-line format conversions (to and from XML, to and from CSV,
+  from MobileDB)
 - Data file encryption
 - Unicode support
 - Pick any available font to use throughout the application

@@ -128,7 +128,8 @@ public:
     QString timeToString(int time);
     QString parseTimeString(QString value, bool *ok);
     void setShowSeconds(bool show);
-    QStringList importFromCSV(QString filename);
+    QStringList importFromCSV(const QString &filename,
+                              const QString &encoding);
     void exportToXML(QString filename, c4_View &fullView,
                      c4_View &filteredView, QStringList cols);
     void setGlobalInfo(const QString &view, const QString &sorting,

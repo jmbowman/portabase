@@ -12,11 +12,9 @@
 #include <qfile.h>
 #include <qobject.h>
 #include <qregexp.h>
-#include <qstringlist.h>
 #include <qtextstream.h>
 #include "csvutils.h"
 #include "database.h"
-#include "datatypes.h"
 
 CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(',')
 {
@@ -28,8 +26,10 @@ CSVUtils::~CSVUtils()
 
 }
 
-QStringList CSVUtils::parseFile(QString filename, Database *db)
+QStringList CSVUtils::parseFile(const QString &filename,
+                                const QString &encoding, Database *db)
 {
+    initializeCounts(db);
     QFile f(filename);
     QStringList returnVal;
     if (!f.open(IO_ReadOnly)) {
@@ -37,18 +37,23 @@ QStringList CSVUtils::parseFile(QString filename, Database *db)
         return returnVal;
     }
     QTextStream input(&f);
-    input.setEncoding(QTextStream::UnicodeUTF8);
-    int rowNum = 1;
-    QString message = "";
+    if (encoding == "Latin-1") {
+        input.setEncoding(QTextStream::Latin1);
+    }
+    else {
+        input.setEncoding(QTextStream::UnicodeUTF8);
+    }
+    rowNum = 1;
+    message = "";
     enum { S_START, S_QUOTED_FIELD, S_MAYBE_END_OF_QUOTED_FIELD,
            S_END_OF_QUOTED_FIELD, S_MAYBE_NORMAL_FIELD,
            S_NORMAL_FIELD } state = S_START;
     QChar x;
-    QString rowString = "";
-    QStringList row;
+    rowString = "";
+    row.clear();
     QString field = "";
     // store IDs of added rows; if there's an error, delete them
-    IntList addedIds;
+    addedIds.clear();
     while (!input.atEnd()) {
         input >> x; // read one char
 
@@ -75,17 +80,9 @@ QStringList CSVUtils::parseFile(QString filename, Database *db)
                     // row ended on a delimiter (empty cell)
                     row.append("");
                     field = "";
-                    int rowId = 0;
-                    message = db->addRow(row, &rowId);
-                    if (message != "") {
-                        message = QObject::tr("Error in row %1").arg(rowNum)
-                                  + "\n" + message;
+                    if (!addRow(db)) {
                         break;
                     }
-                    addedIds.append(rowId);
-                    row.clear();
-                    rowString = "";
-                    rowNum++;
                 }
             }
             else {
@@ -110,17 +107,9 @@ QStringList CSVUtils::parseFile(QString filename, Database *db)
                 row.append(field);
                 field = "";
                 if (x == '\n') {
-                    int rowId = 0;
-                    message = db->addRow(row, &rowId);
-                    if (message != "") {
-                        message = QObject::tr("Error in row %1").arg(rowNum)
-                                  + "\n" + message;
+                    if (!addRow(db)) {
                         break;
                     }
-                    addedIds.append(rowId);
-                    row.clear();
-                    rowString = "";
-                    rowNum++;
                 }
                 state = S_START;
             }
@@ -133,17 +122,9 @@ QStringList CSVUtils::parseFile(QString filename, Database *db)
                 row.append(field);
                 field = "";
                 if (x == '\n') {
-                    int rowId = 0;
-                    message = db->addRow(row, &rowId);
-                    if (message != "") {
-                        message = QObject::tr("Error in row %1").arg(rowNum)
-                                  + "\n" + message;
+                    if (!addRow(db)) {
                         break;
                     }
-                    addedIds.append(rowId);
-                    row.clear();
-                    rowString = "";
-                    rowNum++;
                 }
                 state = S_START;
             }
@@ -166,17 +147,9 @@ QStringList CSVUtils::parseFile(QString filename, Database *db)
             else if (x == '\n') {
                 row.append(field);
                 field = "";
-                int rowId = 0;
-                message = db->addRow(row, &rowId);
-                if (message != "") {
-                    message = QObject::tr("Error in row %1").arg(rowNum)
-                              + "\n" + message;
+                if (!addRow(db)) {
                     break;
                 }
-                addedIds.append(rowId);
-                row.clear();
-                rowString = "";
-                rowNum++;
             }
             else {
                 field += x;
@@ -189,12 +162,7 @@ QStringList CSVUtils::parseFile(QString filename, Database *db)
     if (message == "" && row.count() > 0) {
         // last line doesn't end with '\n'
         row.append(field);
-        int rowId = 0;
-        message = db->addRow(row, &rowId);
-        if (message != "") {
-            message = QObject::tr("Error in row %1").arg(rowNum)
-            + "\n" + message;
-        }
+        addRow(db);
     }
     if (message != "") {
         // an error was encountered; delete any rows that were added
@@ -231,4 +199,42 @@ QString CSVUtils::encodeCell(QString content)
     QString result("\"");
     result += content.replace(QRegExp("\""), "\"\"");
     return result + "\"";
+}
+
+void CSVUtils::initializeCounts(Database *db)
+{
+    QStringList colNames = db->listColumns();
+    colCount = colNames.count();
+    endStringCount = 0;
+    int i;
+    for (i = colCount - 1; i > -1; i--) {
+        int type = db->getType(colNames[i]);
+        if (type != STRING && type != NOTE) {
+            break;
+        }
+        endStringCount++;
+    }
+}
+
+bool CSVUtils::addRow(Database *db)
+{
+    int countDiff = colCount - row.count();
+    if (countDiff > 0 && countDiff <= endStringCount) {
+        // last columns may have been blank in Excel or whatever...
+        int i;
+        for (i = 0; i < countDiff; i++) {
+            row.append("");
+        }
+    }
+    int rowId = 0;
+    message = db->addRow(row, &rowId);
+    if (message != "") {
+        message = QObject::tr("Error in row %1").arg(rowNum) + "\n" + message;
+        return FALSE;
+    }
+    addedIds.append(rowId);
+    row.clear();
+    rowString = "";
+    rowNum++;
+    return TRUE;
 }

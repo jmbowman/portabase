@@ -23,6 +23,7 @@
 class Database;
 class DocLnk;
 class FileSelector;
+class QComboBox;
 
 class ImportDialog: public QDialog
 {
@@ -33,9 +34,6 @@ public:
     ~ImportDialog();
     int exec();
 
-protected:
-    void resizeEvent(QResizeEvent *event);
-
 private slots:
     void import(const DocLnk &);
 
@@ -44,6 +42,7 @@ private:
 
 private:
     Database *db;
+    QComboBox *encodings;
     FileSelector *selector;
     int source;
     bool importDone;

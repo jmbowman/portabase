@@ -1,3 +1,21 @@
+2003-03-30  #################### PortaBase 1.6 ####################
+
+2003-03-30  JMB  CSV import enhancements, menu update bugfix
+
+    If an imported row doesn't have enough columns and the last few
+    columns are strings or notes, PortaBase now treats those fields as
+    empty strings.  (There often aren't enough delimiters at the end of
+    lines ending with blank fields when exporting from programs like Excel,
+    this just corrects for that.)
+
+    CSV files can now be imported as either UTF-8 or Latin-1; this avoids
+    the need for users importing files exported from other programs in
+    Latin-1 to use another program to perform an encoding conversion.
+
+    In version 1.5, making changes in the format editor would clear the
+    view, sorting, and filter lists from the menus without restoring them;
+    they are now populated correctly again.
+
 2003-03-27  JMB  Japanese UI translation, better CSV import error messages
 
     The entire PortaBase interface has now been translated into Japanese.

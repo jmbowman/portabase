@@ -1423,10 +1423,11 @@ QPixmap Database::getCheckBoxPixmap(int checked)
     }
 }
 
-QStringList Database::importFromCSV(QString filename)
+QStringList Database::importFromCSV(const QString &filename,
+                                    const QString &encoding)
 {
     CSVUtils csv;
-    return csv.parseFile(filename, this);
+    return csv.parseFile(filename, encoding, this);
 }
 
 void Database::exportToXML(QString filename, c4_View &fullView,
