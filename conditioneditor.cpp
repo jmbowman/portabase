@@ -36,10 +36,9 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     columnList->insertItem(tr("Any text column"));
     colNames = db->listColumns();
     int count = colNames.count();
-    types = new int[count];
+    types = db->listTypes();
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
-        types[i] = db->getType(name);
         columnList->insertItem(name);
     }
     connect(columnList, SIGNAL(activated(int)),

@@ -52,11 +52,13 @@ public:
 
 public slots:
     void addRow();
-    void editRow();
     void deleteRow();
+    void editRow();
+    void viewRow();
 
 private:
     void setEdited(bool y);
+    int selectedRowIndex();
     int selectedRowId();
     void sort(int column);
     void showStatistics(int column);

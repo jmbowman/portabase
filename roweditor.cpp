@@ -150,11 +150,10 @@ void RowEditor::addContent(int rowId)
     if (colTypes) {
         delete[] colTypes;
     }
-    colTypes = new int[count];
+    colTypes = db->listTypes();
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
-        int type = db->getType(name);
-        colTypes[i] = type;
+        int type = colTypes[i];
         new QLabel(name, grid);
         if (type == BOOLEAN) {
             QCheckBox *box = new QCheckBox(grid);

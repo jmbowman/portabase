@@ -44,6 +44,7 @@ public:
     int getIndex(QString column);
     void setIndex(QString column, int index);
     int getType(QString column);
+    int *listTypes();
     QString getDefault(QString column);
     void setDefault(QString column, QString value);
     QString getColId(QString column);
@@ -108,7 +109,6 @@ public:
     QString importFromCSV(QString filename);
 
 private:
-    int *listTypes();
     c4_View createEmptyView(QStringList colNames);
     void replaceEnumOption(int enumId, QString oldOption, QString newOption);
     QString makeColId(int id, int type);

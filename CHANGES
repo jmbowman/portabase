@@ -1,3 +1,10 @@
+2003-01-05  JMB  Row viewer
+
+    Added a row viewer based on a patch I received.  To launch it, either
+    double-tap on a row or press enter while the desired row is selcted.
+    Includes next and previous buttons to navigate between rows in the
+    current view (left and right on the direction pad also work).
+
 2003-01-04  JMB  File selector menu & toolbar, MobileDB import, better
                  sizing of column and condition editor dialogs, file extension
                  added for new files

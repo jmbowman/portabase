@@ -27,6 +27,7 @@
 #include "noteeditor.h"
 #include "portabase.h"
 #include "roweditor.h"
+#include "rowviewer.h"
 #include "view.h"
 #include "viewdisplay.h"
 
@@ -46,6 +47,11 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
             this, SLOT(cellPressed(QListViewItem*, const QPoint&, int)));
     connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
             this, SLOT(cellReleased(QListViewItem*, const QPoint&, int)));
+    connect(table, SIGNAL(doubleClicked(QListViewItem*)),
+            this, SLOT(viewRow()));
+    connect(table, SIGNAL(returnPressed(QListViewItem*)),
+            this, SLOT(viewRow()));
+
 
     QHeader *header = table->header();
     header->setClickEnabled(TRUE);
@@ -300,6 +306,15 @@ void ViewDisplay::editRow()
     }
 }
 
+void ViewDisplay::viewRow()
+{
+    int rowIndex = selectedRowIndex();
+    if (rowIndex != -1) {
+        RowViewer rowViewer;
+        rowViewer.viewRow(db, view, rowIndex);
+    }
+}
+
 void ViewDisplay::deleteRow()
 {
     int rowId = selectedRowId();
@@ -326,7 +341,7 @@ void ViewDisplay::exportToCSV(QString filename)
     view->exportToCSV(filename);
 }
 
-int ViewDisplay::selectedRowId()
+int ViewDisplay::selectedRowIndex()
 {
     QListViewItem *selected = table->selectedItem();
     if (!selected) {
@@ -346,7 +361,16 @@ int ViewDisplay::selectedRowId()
         }
     }
     int startIndex = (currentPage - 1) * rpp;
-    return view->getId(startIndex + index);
+    return startIndex + index;
+}
+
+int ViewDisplay::selectedRowId()
+{
+    int index = selectedRowIndex();
+    if (index == -1) {
+        return -1;
+    }
+    return view->getId(index);
 }
 
 void ViewDisplay::rowSelected()

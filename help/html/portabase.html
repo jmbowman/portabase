@@ -15,12 +15,13 @@
 <a href="#viewedit">6)View editor</a><br>
 <a href="#viewer">7)Data viewer</a><br>
 <a href="#rowedit">8)Row editor</a><br>
-<a href="#noteedit">9)Note editor/viewer</a><br>
-<a href="#sortedit">10)Sorting editor</a><br>
-<a href="#filteredit">11)Filter editor</a><br>
-<a href="#import">12)CSV import</a><br>
-<a href="#export">13)CSV export</a><br>
-<a href="#prefs">14)Preferences dialog</a><br>
+<a hrev="#rowview">9)Row viewer</a><br>
+<a href="#noteedit">10)Note editor/viewer</a><br>
+<a href="#sortedit">11)Sorting editor</a><br>
+<a href="#filteredit">12)Filter editor</a><br>
+<a href="#import">13)CSV import</a><br>
+<a href="#export">14)CSV export</a><br>
+<a href="#prefs">15)Preferences dialog</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -194,6 +195,8 @@ on a cell in a Note column, the <a href="#noteedit">note viewer</a> is
 displayed showing the content of that note.  If you do it in any other
 type of column, the <a href="#rowedit">row editor</a> for the row you
 clicked on is launched.<br>
+Double-tapping on a row or pressing enter while a row is selected launches
+the <a href="#rowview">row viewer</a>.<br>
 <br>
 <a name="labels"><i>Column labels</i></a><br>
 The row of column labels has several features in addition to informing
@@ -313,7 +316,17 @@ values as desired, click "OK" to accept the currently displayed values,
 or "X" to cancel the row addition (if adding a row) or leave the current
 values unchanged (if editing a row).<br>
 <br>
-<a name="noteedit"><b>9)Note editor/viewer</b></a><br>
+<a name="rowview"><b>9)Row viewer</b></a><br>
+The row viewer is a dialog designed to conveniently see all of the data for
+one row at a time.  Like the row editor, it has the column labels on the
+left and values on the right.  But the values are not editable, and they
+wrap so you don't have to scroll horizontally to see everything.  The
+complete content of note fields is shown as well, instead of just the
+first few words.  Pressing the left and right arrows at the bottom of the
+screen or the left and right directions on the direction pad allows you
+to navigate between rows in the current view.
+<br>
+<a name="noteedit"><b>10)Note editor/viewer</b></a><br>
 The "Note" column type is for blocks of text which may contain multiple
 lines (as opposed to the "String" type, which is better suited for
 relatively short single lines of text).  The larger size of the content
@@ -333,7 +346,7 @@ and hold for half a second or longer before releasing, a read-only version
 of the Note editor is shown.  Click either "OK" or "X" to dismiss it and
 return to the data viewer.<br>
 <br>
-<a name="sortedit"><b>10)Sorting editor</b></a><br>
+<a name="sortedit"><b>11)Sorting editor</b></a><br>
 Clicking on a column label in the data viewer is a convenient way to
 sort the database contents by a single column.  But sometimes you may want
 to sort by a combination of columns; sort by the content of column A, within
@@ -357,7 +370,7 @@ the same value in that column are sorted by the next highest checked column,
 etc.  Click "OK" to accept the currently shown settings or "X" to revert
 to the previous values (or to cancel adding a new sorting).<br>
 <br>
-<a name="filteredit"><b>11)Filter editor</b></a><br>
+<a name="filteredit"><b>12)Filter editor</b></a><br>
 This dialog allows you to define filters which are used to select which
 rows to display in the data viewer.  A filter may be as simple as
 "count = 1" or something more complicated like "any text column contains
@@ -382,7 +395,7 @@ condition, the row is considered to pass the condition.  Click "OK" to
 accept the currently shown settings or "X" to revert to the previous
 values (or to cancel adding a new filter).<br>
 <br>
-<a name="import"><b>12)CSV import</b></a><br>
+<a name="import"><b>13)CSV import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.
 This allows you to import data exported from a spreadsheet or another
 database program.  To do this:<br>
@@ -408,7 +421,7 @@ Notes:<br>
     or the number of seconds past midnight.  Blank or -1 values are
     interpreted as "None".</li>
 </ol>
-<a name="export"><b>13)CSV export</b></a><br>
+<a name="export"><b>14)CSV export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
 import, this allows you to move database content into a spreadsheet or
 other database program for further manipulation (among other uses).  To
@@ -419,7 +432,7 @@ export the current database's contents:<br>
 <li>Click "OK" to complete the export, or the "X" button to cancel the
 operation.</li>
 </ol>
-<a name="prefs"><b>14)Preferences dialog</b></a><br>
+<a name="prefs"><b>15)Preferences dialog</b></a><br>
 This dialog allows you to set your preferences for the PortaBase
 application.  In the "Font" section you can pick any font that has been
 installed on your PDA, in any size it is available in.  That font will then

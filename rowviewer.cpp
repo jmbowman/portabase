@@ -1,0 +1,152 @@
+/*
+ * rowviewer.cpp
+ *
+ * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
+
+#include <qpe/resource.h>
+#include <qdialog.h>
+#include <qhbox.h>
+#include <qlayout.h>
+#include <qpushbutton.h>
+#include <qtextview.h>
+#include "database.h"
+#include "datatypes.h"
+#include "rowviewer.h"
+#include "view.h"
+
+RowViewer::RowViewer(QWidget *parent, const char *name, WFlags f)
+  : QDialog(parent, name, TRUE, f), db(0), colTypes(0)
+{
+    setCaption(tr("PortaBase") + " - " + tr("Row Viewer"));
+    QVBoxLayout *vbox = new QVBoxLayout(this);
+    tv = new QTextView(this);
+    vbox->addWidget(tv);
+    QHBox *hbox = new QHBox(this);
+    vbox->addWidget(hbox);
+    prevButton = new QPushButton(hbox);
+    prevButton->setPixmap(Resource::loadPixmap("back"));
+    connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
+    new QWidget(hbox);
+    nextButton = new QPushButton(hbox);
+    nextButton->setPixmap(Resource::loadPixmap("forward"));
+    connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
+    showMaximized();
+}
+
+RowViewer::~RowViewer()
+{
+
+}
+
+void RowViewer::viewRow(Database *subject, View *currentView, int rowIndex)
+{
+    db = subject;
+    view = currentView;
+    index = rowIndex;
+    rowCount = view->getRowCount();
+    colNames = db->listColumns();
+    if (colTypes) {
+        delete[] colTypes;
+    }
+    colTypes = db->listTypes();
+    updateContent();
+    exec();
+}
+
+void RowViewer::updateContent()
+{
+    prevButton->setEnabled(index != 0);
+    nextButton->setEnabled(index != rowCount - 1);
+    QStringList values = db->getRow(view->getId(index));
+    QString str = "<qt><table cellspacing=0>";
+    int count = colNames.count();
+    for (int i = 0; i < count; i++) {
+        str += "<tr><td><font color=#0000ff>";
+        str += prepareString(colNames[i]);
+        str += ":</font></td><td>";
+        int type = colTypes[i];
+        if (type == BOOLEAN) {
+            if (values[i].toInt()) {
+                QString path = Resource::findPixmap("portabase/checked");
+                str += "<img src=\"" + path + "\">";
+            }
+            else {
+                QString path = Resource::findPixmap("portabase/unchecked");
+                str += "<img src=\"" + path + "\">";
+            }
+        }
+        else if (type == DATE) {
+            str += db->dateToString(values[i].toInt());
+        }
+        else if (type == TIME) {
+            str += db->timeToString(values[i].toInt());
+        }
+        else {
+            str += prepareString(values[i]);
+        }
+        str += "</td></tr>";
+    }
+    str += "</table></qt>";
+    tv->setText(str);
+}
+
+QString RowViewer::prepareString(QString content)
+{
+    QString result = "";
+    int length = content.length();
+    for (int i = 0; i < length; i++) {
+        const QChar c = content[i];
+        if (c == '\n') {
+            result += "<br>";
+        }
+        else if (c == '<') {
+            result += "&lt;";
+        }
+        else if (c == '>') {
+            result += "&gt;";
+        }
+        else if (c == '&') {
+            result += "&amp;";
+        }
+        else {
+            result += c;
+        }
+    }
+    return result;
+}
+
+void RowViewer::nextRow()
+{
+    index++;
+    updateContent();
+}
+
+void RowViewer::previousRow()
+{
+    index--;
+    updateContent();
+}
+
+void RowViewer::keyReleaseEvent(QKeyEvent *e)
+{
+    int key = e->key();
+    if (key == Qt::Key_Left) {
+        if (index != 0) {
+            previousRow();
+        }
+    }
+    else if (key == Qt::Key_Right) {
+        if (index != rowCount - 1) {
+            nextRow();
+        }
+    }
+    else {
+        e->ignore();
+    }
+}
