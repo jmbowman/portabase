@@ -26,6 +26,7 @@ class QComboBox;
 class QFont;
 class QLabel;
 class QListView;
+class QSpinBox;
 class QTabWidget;
 
 class Preferences: public PBDialog
@@ -69,6 +70,7 @@ private:
     QCheckBox *noteWrap;
     QComboBox *wrapType;
     QCheckBox *pagedDisplay;
+    QSpinBox *rowsPerPage;
     ColorButton *evenButton;
     ColorButton *oddButton;
 #if defined(DESKTOP)

@@ -60,6 +60,7 @@ private slots:
     void openRecent(int id);
     bool editColumns();
     void editEnums();
+    void viewProperties();
     void editPreferences();
     void addRow();
     void editRow();
@@ -138,6 +139,7 @@ private:
     QAction *deleteRowsAction;
     QAction *editColsAction;
     QAction *manageEnumsAction;
+    QAction *propsAction;
     QAction *prefsAction;
     QAction *closeAction;
     QAction *rowAddAction;

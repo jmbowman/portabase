@@ -276,8 +276,17 @@ void Database::addView(const QString &name, const QStringList &names,
 {
     c4_Row row;
     vName (row) = name.utf8();
-    vRpp (row) = (rpp == -1) ? 13 : rpp;
-    vDeskRpp (row) = (deskrpp == -1) ? 25 : deskrpp;
+    Config conf("portabase");
+    conf.setGroup("General");
+#if defined(DESKTOP)
+    int defaultRpp = 13;
+    int defaultDeskRpp = conf.readNumEntry("RowsPerPage", 25);
+#else
+    int defaultRpp = conf.readNumEntry("RowsPerPage", 13);
+    int defaultDeskRpp = 25;
+#endif
+    vRpp (row) = (rpp == -1) ? defaultRpp : rpp;
+    vDeskRpp (row) = (deskrpp == -1) ? defaultDeskRpp : deskrpp;
     vSort (row) = defaultSort.utf8();
     vFilter (row) = defaultFilter.utf8();
     views.Add(row);

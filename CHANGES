@@ -1,3 +1,11 @@
+2003-09-12  JMB  Default rows per page preference, file properties dialog
+
+    There is now a spinbox in the preferences dialog which lets you set the
+    default number of rows per page to use for new views.
+
+    There is also a new file properties dialog which gives basic statistics
+    about the current file (name, file size, number of rows, etc.)
+
 2003-09-11  JMB  CSV import enhancement, save/restore window geometry
 
     During CSV import, a blank in an integer or decimal column now gets

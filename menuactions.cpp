@@ -30,6 +30,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("Change Password", tr("Change Password"));
     textMap.insert("Import", tr("Import") + "...");
     textMap.insert("Export", tr("Export") + "...");
+    textMap.insert("Properties", tr("Properties"));
     textMap.insert("Preferences", tr("Preferences"));
     textMap.insert("Quit", tr("Quit"));
     textMap.insert("Help Contents", tr("Help Contents"));
@@ -63,6 +64,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     menuTextMap.insert("Change Password", tr("C&hange Password"));
     menuTextMap.insert("Import", tr("&Import") + "...");
     menuTextMap.insert("Export", tr("E&xport") + "...");
+    menuTextMap.insert("Properties", tr("Proper&ties"));
     menuTextMap.insert("Preferences", tr("&Preferences"));
     menuTextMap.insert("Quit", tr("&Quit"));
     menuTextMap.insert("Help Contents", tr("Help &Contents"));
@@ -76,7 +78,7 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     menuTextMap.insert("All Rows", tr("All &Rows"));
     menuTextMap.insert("Copy", tr("&Copy") + "...");
     menuTextMap.insert("Delete Rows In Filter", tr("&Delete Rows In Filter"));
-    menuTextMap.insert("Edit Columns", tr("Edi&t Columns"));
+    menuTextMap.insert("Edit Columns", tr("Edit Co&lumns"));
     menuTextMap.insert("Edit Enums", tr("Edit &Enums"));
     menuTextMap.insert("Close", tr("&Close"));
 

@@ -162,6 +162,8 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     connect(editColsAction, SIGNAL(activated()), this, SLOT(editColumns()));
     manageEnumsAction = ma->action("Edit Enums");
     connect(manageEnumsAction, SIGNAL(activated()), this, SLOT(editEnums()));
+    propsAction = ma->action("Properties");
+    connect(propsAction, SIGNAL(activated()), this, SLOT(viewProperties()));
     prefsAction = ma->action("Preferences");
     connect(prefsAction, SIGNAL(activated()), this, SLOT(editPreferences()));
     closeAction = ma->action("Close", closeIcons);
@@ -341,6 +343,41 @@ void PortaBase::editEnums()
     else {
         viewer->setView(db->currentView());
     }
+}
+
+void PortaBase::viewProperties()
+{
+    QString message = tr("Name") + ": " + doc->name() + "\n";
+    QFile file(doc->file());
+    int size = file.size();
+    QString sizeString;
+    if (size < 1024) {
+        sizeString = QString::number(size) + " b";
+    }
+    else {
+        size /= 1024;
+        sizeString = QString::number(size) + " Kb";
+    }
+    message += tr("Size") + ": " + sizeString + "\n";
+    int count = db->getData().GetSize();
+    message += tr("Rows") + ": " + QString::number(count) + "\n";
+    count = db->listColumns().count();
+    message += tr("Columns") + ": " + QString::number(count) + "\n";
+    count = db->listViews().count();
+    message += tr("Views") + ": " + QString::number(count) + "\n";
+    QStringList sortings = db->listSortings();
+    sortings.remove("_single");
+    count = sortings.count();
+    message += tr("Sortings") + ": " + QString::number(count) + "\n";
+    QStringList filters = db->listFilters();
+    filters.remove("_simple");
+    count = filters.count();
+    message += tr("Filters") + ": " + QString::number(count) + "\n";
+    count = db->listEnums().count();
+    message += tr("Enums") + ": " + QString::number(count);
+    QString title = tr("File Properties") + " - " + tr("PortaBase")
+                    + PBDialog::titleSuffix;
+    QMessageBox::information(this, title, message);
 }
 
 void PortaBase::editPreferences()
@@ -772,6 +809,7 @@ void PortaBase::showDataViewer()
     deleteRowsAction->addTo(file);
     editColsAction->addTo(file);
     manageEnumsAction->addTo(file);
+    propsAction->addTo(file);
     prefsAction->addTo(file);
     file->insertSeparator();
     closeAction->addTo(file);

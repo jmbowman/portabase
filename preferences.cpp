@@ -27,6 +27,7 @@
 #include <qheader.h>
 #include <qlabel.h>
 #include <qlistview.h>
+#include <qspinbox.h>
 #include <qtabwidget.h>
 #include "colorbutton.h"
 #include "portabase.h"
@@ -90,6 +91,16 @@ void Preferences::addOptionsTab(QTabWidget *tabs)
     }
     wrapType->setEnabled(noteWrap->isChecked());
     connect(noteWrap, SIGNAL(toggled(bool)), wrapType, SLOT(setEnabled(bool)));
+    hbox = new QHBox(generalGroup);
+    new QLabel(tr("Default rows per page"), hbox);
+    rowsPerPage = new QSpinBox(hbox);
+    rowsPerPage->setRange(1, 9999);
+#if defined(DESKTOP)
+    int defaultRows = 25;
+#else
+    int defaultRows = 13;
+#endif
+    rowsPerPage->setValue(conf.readNumEntry("RowsPerPage", defaultRows));
 
 #if defined(DESKTOP)
     QGroupBox *dateGroup = new QGroupBox(2, Qt::Horizontal,
@@ -471,6 +482,7 @@ QFont Preferences::applyChanges()
     conf.writeEntry("PagedDisplay", pagedDisplay->isChecked());
     conf.writeEntry("NoteWrap", noteWrap->isChecked());
     conf.writeEntry("WrapAnywhere", wrapType->currentItem() == 1);
+    conf.writeEntry("RowsPerPage", rowsPerPage->value());
 
     conf.setGroup("Colors");
     const QColor evenColor = evenButton->getColor();
