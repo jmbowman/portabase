@@ -15,6 +15,7 @@
 #include <qtextstream.h>
 #include "csvutils.h"
 #include "database.h"
+#include "datatypes.h"
 #include "portabase.h"
 
 CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(',')
@@ -43,6 +44,8 @@ QString CSVUtils::parseFile(QString filename, Database *db)
     QChar x;
     QStringList row;
     QString field = "";
+    // store IDs of added rows; if there's an error, delete them
+    IntList addedIds;
     while (!input.atEnd()) {
         input >> x; // read one char
 
@@ -68,12 +71,14 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                     // row ended on a delimiter (empty cell)
                     row.append("");
                     field = "";
-                    message = db->addRow(row);
+                    int rowId = 0;
+                    message = db->addRow(row, &rowId);
                     if (message != "") {
                         message = PortaBase::tr("Error in row") + " "
                                   + QString::number(rowNum) + "\n" + message;
                         break;
                     }
+                    addedIds.append(rowId);
                     row.clear();
                     rowNum++;
                 }
@@ -100,12 +105,14 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                 row.append(field);
                 field = "";
                 if (x == '\n') {
-                    message = db->addRow(row);
+                    int rowId = 0;
+                    message = db->addRow(row, &rowId);
                     if (message != "") {
                         message = PortaBase::tr("Error in row") + " "
                                   + QString::number(rowNum) + "\n" + message;
                         break;
                     }
+                    addedIds.append(rowId);
                     row.clear();
                     rowNum++;
                 }
@@ -120,12 +127,14 @@ QString CSVUtils::parseFile(QString filename, Database *db)
                 row.append(field);
                 field = "";
                 if (x == '\n') {
-                    message = db->addRow(row);
+                    int rowId = 0;
+                    message = db->addRow(row, &rowId);
                     if (message != "") {
                         message = PortaBase::tr("Error in row") + " "
                                   + QString::number(rowNum) + "\n" + message;
                         break;
                     }
+                    addedIds.append(rowId);
                     row.clear();
                     rowNum++;
                 }
@@ -150,12 +159,14 @@ QString CSVUtils::parseFile(QString filename, Database *db)
             else if (x == '\n') {
                 row.append(field);
                 field = "";
-                message = db->addRow(row);
+                int rowId = 0;
+                message = db->addRow(row, &rowId);
                 if (message != "") {
                     message = PortaBase::tr("Error in row") + " "
                               + QString::number(rowNum) + "\n" + message;
                     break;
                 }
+                addedIds.append(rowId);
                 row.clear();
                 rowNum++;
             }
@@ -170,10 +181,18 @@ QString CSVUtils::parseFile(QString filename, Database *db)
     if (message == "" && row.count() > 0) {
         // last line doesn't end with '\n'
         row.append(field);
-        message = db->addRow(row);
+        int rowId = 0;
+        message = db->addRow(row, &rowId);
         if (message != "") {
             message = PortaBase::tr("Error in row") + " "
                       + QString::number(rowNum) + "\n" + message;
+        }
+    }
+    if (message != "") {
+        // an error was encountered; delete any rows that were added
+        int count = addedIds.count();
+        for (int i = count - 1; i > -1; i--) {
+            db->deleteRow(addedIds[i]);
         }
     }
     f.close();

@@ -78,7 +78,7 @@ public:
     int getConditionCount(QString filterName);
     Condition *getCondition(QString filterName, int index);
 
-    QString addRow(QStringList values);
+    QString addRow(QStringList values, int *rowId = 0);
     void updateRow(int rowId, QStringList values);
     void deleteRow(int id);
     void commit();

@@ -707,7 +707,7 @@ Condition *Database::getCondition(QString filterName, int index)
     return condition;
 }
 
-QString Database::addRow(QStringList values)
+QString Database::addRow(QStringList values, int *rowId)
 {
     c4_Row row;
     Id (row) = maxId + 1;
@@ -745,6 +745,9 @@ QString Database::addRow(QStringList values)
     }
     data.Add(row);
     maxId++;
+    if (rowId != 0) {
+        *rowId = maxId;
+    }
     return "";
 }
 
