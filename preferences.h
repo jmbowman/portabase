@@ -47,6 +47,7 @@ private:
     QLabel *sample;
     QCheckBox *confirmDeletions;
     QCheckBox *booleanToggle;
+    QCheckBox *showSeconds;
 };
 
 #endif

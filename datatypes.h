@@ -20,11 +20,13 @@
 #define BOOLEAN 3
 #define NOTE 4
 #define DATE 5
+#define TIME 6
 
 #define FIRST_ENUM 100
 
-// default date codes
+// default date and time codes
 #define TODAY 0
+#define NOW 0
 #define NONE 1
 
 typedef QValueList<int> IntList;

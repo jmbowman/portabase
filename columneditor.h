@@ -50,6 +50,7 @@ private:
     QLineEdit *defaultLine;
     NoteButton *defaultNote;
     QComboBox *defaultDate;
+    QComboBox *defaultTime;
     QComboBox *defaultEnum;
     int lastType;
 };

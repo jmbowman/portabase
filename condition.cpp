@@ -90,7 +90,7 @@ c4_View Condition::filter(c4_View dbview)
         return result;
     }
     int type = db->getType(colName);
-    if (type == INTEGER || type == BOOLEAN || type == DATE) {
+    if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME) {
         return filterInt(dbview);
     }
     else if (type == FLOAT) {
@@ -284,6 +284,9 @@ void Condition::updateDescription()
     }
     else if (type == DATE) {
         description += db->dateToString(constant.toInt());
+    }
+    else if (type == TIME) {
+        description += db->timeToString(constant.toInt());
     }
     else {
         description += constant;

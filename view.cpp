@@ -107,6 +107,11 @@ QStringList View::getRow(int index)
             int value = prop (row);
             results.append(db->dateToString(value));
         }
+        else if (type == TIME) {
+            c4_IntProp prop(ids[i]);
+            int value = prop (row);
+            results.append(db->timeToString(value));
+        }
     }
     return results;
 }
@@ -266,6 +271,19 @@ QStringList View::getStatistics(int colIndex)
         }
         lines.append(PortaBase::tr("Earliest") + ": " + db->dateToString(min));
         lines.append(PortaBase::tr("Latest") + ": " + db->dateToString(max));
+    }
+    else if (type == TIME) {
+        c4_IntProp prop(ids[colIndex]);
+        int value = prop (dbview[0]);
+        int min = value;
+        int max = value;
+        for (int i = 1; i < count; i++) {
+            int value = prop (dbview[i]);
+            min = QMIN(min, value);
+            max = QMAX(max, value);
+        }
+        lines.append(PortaBase::tr("Earliest") + ": " + db->timeToString(min));
+        lines.append(PortaBase::tr("Latest") + ": " + db->timeToString(max));
     }
     else if (type == STRING || type == NOTE) {
         c4_StringProp prop(ids[colIndex]);

@@ -187,7 +187,7 @@ bool DBEditor::isValidName(QString colName)
 
 bool DBEditor::isValidDefault(int type, QString defaultVal)
 {
-    if (type == DATE || type >= FIRST_ENUM) {
+    if (type == DATE || type == TIME || type >= FIRST_ENUM) {
         return TRUE;
     }
     QString error = db->isValidValue(type, defaultVal);
@@ -311,6 +311,14 @@ void DBEditor::updateTable()
                 last->setText(2, tr("None"));
             }
         }
+        else if (type == TIME) {
+            if (defaultVal == "0") {
+                last->setText(2, tr("Now"));
+            }
+            else {
+                last->setText(2, tr("None"));
+            }
+        }
     }
 }
 
@@ -333,6 +341,9 @@ QString DBEditor::getTypeString(int type)
     }
     else if (type == DATE) {
         return tr("Date");
+    }
+    else if (type == TIME) {
+        return tr("Time");
     }
     else {
         return db->getEnumName(type);

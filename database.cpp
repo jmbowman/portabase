@@ -9,6 +9,7 @@
  * (at your option) any later version.
  */
 
+#include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qdatetime.h>
 #include <qmessagebox.h>
@@ -28,6 +29,12 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
     DateFormat format = TimeString::currentDateFormat();
     dateOrder = format.shortOrder();
     dateSeparator = format.separator();
+    Config qpeConfig("qpe");
+    qpeConfig.setGroup("Time");
+    ampm = qpeConfig.readBoolEntry("AMPM");
+    Config pbConfig("portabase");
+    pbConfig.setGroup("General");
+    showSeconds = pbConfig.readBoolEntry("ShowSeconds");
 
     file = new c4_Storage(path, TRUE);
     global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S]");
@@ -307,6 +314,13 @@ QString Database::isValidValue(int type, QString value)
             return "invalid date";
         }
     }
+    else if (type == TIME) {
+        bool ok;
+        parseTimeString(value, &ok);
+        if (!ok) {
+            return "invalid time";
+        }
+    }
     else if (type >= FIRST_ENUM) {
         QStringList options = listEnumOptions(type);
         if (options.findIndex(value) == -1) {
@@ -350,6 +364,20 @@ void Database::addColumn(int index, QString name, int type, QString defaultVal)
         if (value == TODAY) {
             QDate date = QDate::currentDate();
             value = date.year() * 10000 + date.month() * 100 + date.day();
+        }
+        for (int i = 0; i < size; i++) {
+            newProp (data[i]) = value;
+        }
+    }
+    else if (type == TIME) {
+        c4_IntProp newProp(idString);
+        int value = defaultVal.toInt();
+        if (value == NOW) {
+            QTime time = QTime::currentTime();
+            value = time.hour() * 3600 + time.minute() * 60 + time.second();
+        }
+        else {
+            value = -1;
         }
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
@@ -446,7 +474,8 @@ QStringList Database::getRow(int rowId)
             type = STRING;
         }
         QString idString = makeColId(cId (temp[i]), type);
-        if (type == INTEGER || type == BOOLEAN || type == DATE) {
+        if (type == INTEGER || type == BOOLEAN || type == DATE
+                || type == TIME) {
             c4_IntProp prop(idString);
             int value = prop (row);
             results.append(QString::number(value));
@@ -602,7 +631,8 @@ c4_View Database::createEmptyView(QStringList colNames)
         int id = cId (columns[index]);
         int type = cType (columns[index]);
         QString idString = makeColId(id, type);
-        if (type == INTEGER || type == BOOLEAN || type == DATE) {
+        if (type == INTEGER || type == BOOLEAN || type == DATE
+                || type == TIME) {
             c4_IntProp prop(idString);
             result.AddProperty(prop);
         }
@@ -773,6 +803,12 @@ QString Database::addRow(QStringList values, int *rowId)
             c4_IntProp prop(idString);
             prop (row) = value.toInt();
         }
+        else if (type == TIME) {
+            bool ok;
+            value = parseTimeString(value, &ok);
+            c4_IntProp prop(idString);
+            prop (row) = value.toInt();
+        }
         else if (type == FLOAT) {
             c4_FloatProp prop(idString);
             prop (row) = value.toDouble();
@@ -805,6 +841,12 @@ void Database::updateRow(int rowId, QStringList values)
         else if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(idString);
             prop (data[index]) = values[i].toInt();
+        }
+        else if (type == TIME) {
+            bool ok;
+            QString value = parseTimeString(values[i], &ok);
+            c4_IntProp prop(idString);
+            prop (data[index]) = value.toInt();
         }
         else if (type == FLOAT) {
             c4_FloatProp prop(idString);
@@ -1096,7 +1138,7 @@ QString Database::makeColId(int colId, int type)
 {
     QString result("_");
     // include column type in case of clash with deleted column of other type
-    if (type == INTEGER || type == BOOLEAN || type == DATE) {
+    if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME) {
         result += 'I';
     }
     else if (type == FLOAT) {
@@ -1125,7 +1167,8 @@ QString Database::formatString(bool old)
         else {
             result += makeColId(cId (row), type);
         }
-        if (type == INTEGER || type == BOOLEAN || type == DATE) {
+        if (type == INTEGER || type == BOOLEAN || type == DATE
+                || type == TIME) {
             result += ":I";
         }
         else if (type == FLOAT) {
@@ -1201,6 +1244,78 @@ QString Database::dateToString(QDate &date)
     result += QString::number(parts[1]) + dateSeparator;
     result += QString::number(parts[2]);
     return result;
+}
+
+QString Database::parseTimeString(QString value, bool *ok)
+{
+    // check for imported blank
+    if (value == "") {
+        *ok = TRUE;
+        return "-1";
+    }
+    int length = value.length();
+    int firstColon = value.find(':');
+    if (firstColon == -1) {
+        // assume it's a number of seconds, as used internally
+        int totalSeconds = value.toInt(ok);
+        if (!(*ok) || totalSeconds < -1 || totalSeconds > 86399) {
+            *ok = FALSE;
+        }
+        return value;
+    }
+    // from here on is used only when importing
+    if (firstColon < 1 || length < firstColon + 3) {
+        *ok = FALSE;
+        return value;
+    }
+    int hours = value.left(firstColon).toInt(ok);
+    if (!(*ok)) {
+        return value;
+    }
+    int minutes = value.mid(firstColon + 1, 2).toInt(ok);
+    if (!(*ok)) {
+        return value;
+    }
+    int seconds = 0;
+    int secondColon = value.find(':', firstColon + 1);
+    if (secondColon != -1 && length > secondColon + 2) {
+        seconds = value.mid(secondColon + 1, 2).toInt(ok);
+        if (!(*ok)) {
+            return value;
+        }
+    }
+    if (value.find("pm", 0, FALSE) != -1) {
+        if (hours < 12) {
+            hours += 12;
+        }
+    }
+    else if (value.find("am", 0, FALSE) != -1 && hours == 12) {
+        hours = 0;
+    }
+    QTime time;
+    if (!time.setHMS(hours, minutes, seconds)) {
+        *ok = FALSE;
+        return value;
+    }
+    QTime midnight;
+    int totalSeconds = midnight.secsTo(time);
+    *ok = TRUE;
+    return QString::number(totalSeconds);
+}
+
+QString Database::timeToString(int time)
+{
+    if (time == -1) {
+        return "";
+    }
+    QTime midnight;
+    QTime timeObj = midnight.addSecs(time);
+    return TimeString::timeString(timeObj, ampm, showSeconds);
+}
+
+void Database::setShowSeconds(bool show)
+{
+    showSeconds = show;
 }
 
 void Database::updateDataColumnFormat()

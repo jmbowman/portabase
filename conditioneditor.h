@@ -23,6 +23,7 @@ class QComboBox;
 class QLabel;
 class QLineEdit;
 class QWidgetStack;
+class TimeWidget;
 
 class ConditionEditor: public QDialog
 {
@@ -59,6 +60,7 @@ private:
     QLineEdit *constantLine;
     QCheckBox *constantCheck;
     DateWidget *constantDate;
+    TimeWidget *constantTime;
     QComboBox *constantCombo;
     QCheckBox *caseCheck;
     int dataType;

@@ -54,20 +54,13 @@ Preferences::Preferences(QWidget *parent, const char *name, WFlags f)
     confirmDeletions = new QCheckBox(tr("Confirm deletions"), generalGroup);
     Config conf("portabase");
     conf.setGroup("General");
-    if (conf.readNumEntry("ConfirmDeletions", 0)) {
-        confirmDeletions->setChecked(TRUE);
-    }
-    else {
-        confirmDeletions->setChecked(FALSE);
-    }
+    confirmDeletions->setChecked(conf.readBoolEntry("ConfirmDeletions",
+                                                    FALSE));
     booleanToggle = new QCheckBox(tr("Allow checkbox edit in data viewer"),
                                   generalGroup);
-    if (conf.readNumEntry("BooleanToggle", 0)) {
-        booleanToggle->setChecked(TRUE);
-    }
-    else {
-        booleanToggle->setChecked(FALSE);
-    }
+    booleanToggle->setChecked(conf.readBoolEntry("BooleanToggle", FALSE));
+    showSeconds = new QCheckBox(tr("Show seconds for times"), generalGroup);
+    showSeconds->setChecked(conf.readBoolEntry("ShowSeconds", FALSE));
     new QWidget(vbox);
 
     showMaximized();
@@ -122,6 +115,11 @@ QFont Preferences::applyChanges()
         toggle = 1;
     }
     conf.writeEntry("BooleanToggle", toggle);
+    int seconds = 0;
+    if (showSeconds->isChecked()) {
+        seconds = 1;
+    }
+    conf.writeEntry("ShowSeconds", seconds);
     conf.setGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentItem()] / 10;

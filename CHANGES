@@ -1,3 +1,11 @@
+2002-12-07  JMB  Time columns
+
+    There is now a "Time" column type.  It uses the Qtopia system setting
+    for 12/24 hour display preference, and there is a "Show Seconds"
+    checkbox in the PortaBase preferences dialog.  Times in imported CSV
+    files can be formatted in either 12 or 24 hour format, or in number
+    of seconds past midnight, or -1 or blank for a "None" time.
+
 2002-12-01  JMB  Bugfix in filter condition indices, filtered export
 
     The data column for filter condition position indices had been declared

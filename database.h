@@ -102,6 +102,9 @@ public:
     bool isNoneDate(QDate &date);
     QString dateToString(int date);
     QString dateToString(QDate &date);
+    QString timeToString(int time);
+    QString parseTimeString(QString value, bool *ok);
+    void setShowSeconds(bool show);
     QString importFromCSV(QString filename);
 
 private:
@@ -120,6 +123,8 @@ private:
     QPixmap uncheckedPixmap;
     DateFormat::Order dateOrder;
     QString dateSeparator;
+    bool ampm;
+    bool showSeconds;
     c4_Storage *file;
     c4_View columns;
     c4_View views;

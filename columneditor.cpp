@@ -39,6 +39,7 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
     typeBox->insertItem(tr("Boolean"));
     typeBox->insertItem(tr("Note"));
     typeBox->insertItem(tr("Date"));
+    typeBox->insertItem(tr("Time"));
     typeBox->insertStringList(db->listEnums());
     typeBox->insertItem("(" + tr("New Enum") + ")");
     connect(typeBox, SIGNAL(activated(int)),
@@ -53,6 +54,9 @@ ColumnEditor::ColumnEditor(Database *dbase, QWidget *parent, const char *name, W
     defaultDate = new QComboBox(FALSE, defaultStack);
     defaultDate->insertItem(tr("Today"));
     defaultDate->insertItem(tr("None"));
+    defaultTime = new QComboBox(FALSE, defaultStack);
+    defaultTime->insertItem(tr("Now"));
+    defaultTime->insertItem(tr("None"));
     defaultEnum = new QComboBox(FALSE, defaultStack);
     defaultStack->raiseWidget(defaultLine);
 }
@@ -75,7 +79,7 @@ void ColumnEditor::setName(QString newName)
 int ColumnEditor::type()
 {
     int colType = typeBox->currentItem();
-    if (colType > DATE) {
+    if (colType > TIME) {
         QString enumName = typeBox->text(colType);
         colType = db->getEnumId(enumName);
     }
@@ -91,7 +95,7 @@ void ColumnEditor::setType(int newType)
     if (newType >= FIRST_ENUM) {
         QString enumName = db->getEnumName(newType);
         int count = typeBox->count() - 1;
-        for (int i = DATE + 1; i < count; i++) {
+        for (int i = TIME + 1; i < count; i++) {
             if (typeBox->text(i) == enumName) {
                 index = i;
                 break;
@@ -121,6 +125,15 @@ QString ColumnEditor::defaultValue()
             return QString::number(17520914);
         }
     }
+    else if (colType == TIME) {
+        int selection = defaultTime->currentItem();
+        if (selection == NOW) {
+            return QString::number(0);
+        }
+        else {
+            return QString::number(-1);
+        }
+    }
     else if (colType >= FIRST_ENUM) {
         return defaultEnum->currentText();
     }
@@ -142,12 +155,14 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         defaultLine->setText("");
         defaultNote->setContent("");
         defaultDate->setCurrentItem(0);
+        defaultTime->setCurrentItem(0);
     }
     else if (colType == NOTE) {
         defaultLine->setText("");
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent(newDefault);
         defaultDate->setCurrentItem(0);
+        defaultTime->setCurrentItem(0);
     }
     else if (colType == DATE) {
         defaultLine->setText("");
@@ -159,12 +174,26 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         else {
             defaultDate->setCurrentItem(1);
         }
+        defaultTime->setCurrentItem(0);
+    }
+    else if (colType == TIME) {
+        defaultLine->setText("");
+        defaultCheck->setChecked(FALSE);
+        defaultNote->setContent("");
+        defaultDate->setCurrentItem(0);
+        if (newDefault == "0") {
+            defaultTime->setCurrentItem(0);
+        }
+        else {
+            defaultTime->setCurrentItem(1);
+        }
     }
     else if (colType >= FIRST_ENUM) {
         defaultLine->setText("");
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent("");
         defaultDate->setCurrentItem(0);
+        defaultTime->setCurrentItem(0);
         QStringList options = db->listEnumOptions(colType);
         int selection = options.findIndex(newDefault);
         defaultEnum->setCurrentItem(selection);
@@ -174,6 +203,7 @@ void ColumnEditor::setDefaultValue(QString newDefault)
         defaultCheck->setChecked(FALSE);
         defaultNote->setContent("");
         defaultDate->setCurrentItem(0);
+        defaultTime->setCurrentItem(0);
     }
 }
 
@@ -197,7 +227,7 @@ void ColumnEditor::updateDefaultWidget(int newType)
             return;
         }
     }
-    if (newType > DATE) {
+    if (newType > TIME) {
         QString enumName = typeBox->text(newType);
         int enumId = db->getEnumId(enumName);
         QStringList options = db->listEnumOptions(enumId);
@@ -214,6 +244,9 @@ void ColumnEditor::updateDefaultWidget(int newType)
     }
     else if (newType == DATE) {
         defaultStack->raiseWidget(defaultDate);
+    }
+    else if (newType == TIME) {
+        defaultStack->raiseWidget(defaultTime);
     }
     else {
         defaultStack->raiseWidget(defaultLine);

@@ -22,6 +22,7 @@
 #include "datewidget.h"
 #include "notebutton.h"
 #include "roweditor.h"
+#include "timewidget.h"
 
 RowEditor::RowEditor(QWidget *parent, const char *name, WFlags f)
   : QDialog(parent, name, TRUE, f), db(0), colTypes(0), sv(0)
@@ -49,6 +50,7 @@ bool RowEditor::edit(Database *subject, int rowId)
         else {
             finished = TRUE;
             int lineEditIndex = 0;
+            int timeWidgetIndex = 0;
             for (int i = 0; i < count; i++) {
                 int type = colTypes[i];
                 if (type == STRING || type == INTEGER || type == FLOAT) {
@@ -62,6 +64,17 @@ bool RowEditor::edit(Database *subject, int rowId)
                     }
                     lineEditIndex++;
                 }
+                else if (type == TIME) {
+                    QString value = timeWidgets[timeWidgetIndex]->getTime();
+                    QString error = db->isValidValue(type, value);
+                    if (error != "") {
+                        QString message = colNames[i] + " " + error;
+		        QMessageBox::warning(this, tr("PortaBase"), message);
+                        finished = FALSE;
+                        break;
+                    }
+                    timeWidgetIndex++;
+                }
             }
         }
     }
@@ -71,6 +84,7 @@ bool RowEditor::edit(Database *subject, int rowId)
         int lineEditIndex = 0;
         int noteButtonIndex = 0;
         int dateWidgetIndex = 0;
+        int timeWidgetIndex = 0;
         int comboBoxIndex = 0;
         for (int i = 0; i < count; i++) {
             int type = colTypes[i];
@@ -87,6 +101,10 @@ bool RowEditor::edit(Database *subject, int rowId)
                 int dateInt = dateWidgets[dateWidgetIndex]->getDate();
                 values.append(QString::number(dateInt));
                 dateWidgetIndex++;
+            }
+            else if (type == TIME) {
+                values.append(timeWidgets[timeWidgetIndex]->getTime());
+                timeWidgetIndex++;
             }
             else if (type >= FIRST_ENUM) {
                 values.append(comboBoxes[comboBoxIndex]->currentText());
@@ -154,6 +172,11 @@ void RowEditor::addContent(int rowId)
             DateWidget *widget = new DateWidget(grid);
             widget->setDate(values[i].toInt());
             dateWidgets.append(widget);
+        }
+        else if (type == TIME) {
+            TimeWidget *widget = new TimeWidget(grid);
+            widget->setTime(values[i].toInt());
+            timeWidgets.append(widget);
         }
         else if (type >= FIRST_ENUM) {
             QComboBox *combo = new QComboBox(FALSE, grid);

@@ -244,19 +244,11 @@ void PortaBase::editPreferences()
         filter->setFont(font);
         Config conf("portabase");
         conf.setGroup("General");
-        if (conf.readNumEntry("ConfirmDeletions", 0)) {
-            confirmDeletions = TRUE;
-        }
-        else {
-            confirmDeletions = FALSE;
-        }
-        if (conf.readNumEntry("BooleanToggle", 0)) {
-            booleanToggle = TRUE;
-        }
-        else {
-            booleanToggle = FALSE;
-        }
+        confirmDeletions = conf.readBoolEntry("ConfirmDeletions", FALSE);
+        booleanToggle = conf.readBoolEntry("BooleanToggle", FALSE);
         viewer->allowBooleanToggle(booleanToggle);
+        db->setShowSeconds(conf.readBoolEntry("ShowSeconds", FALSE));
+        viewer->updateTable();
     }
 }
 

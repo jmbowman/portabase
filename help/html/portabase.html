@@ -28,8 +28,8 @@ PortaBase is a small database program for creating, browsing, and editing
 custom tables of data.  Typical uses are media inventories, reference
 charts, etc.  Notable features include:<br>
 <ul>
-  <li>String, Integer, Decimal, Boolean, Note (multi-line text), Date, and
-      Enum column types</li>
+  <li>String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
+      and Enum column types</li>
   <li>Custom data views (subsets of the columns in any order)</li>
   <li>Filter the displayed rows using sets of conditions</li>
   <li>Sort the rows by any combination of columns, each in ascending or
@@ -399,6 +399,9 @@ Notes:<br>
 <li>Boolean fields must have a value of either 0 or 1</li>
 <li>Date fields may be formated as YYYYMMDD, YYYY/MM/DD, YYYY-MM-DD, or
     YYYY.MM.DD</li>
+<li>Time fields may be formated as HH:MM:SS, HH:MM:SS AM, HH:MM, HH:MM AM,
+    or the number of seconds past midnight.  Blank or -1 values are
+    interpreted as "None".</li>
 </ol>
 <a name="export"><b>13)Data export</b></a><br>
 PortaBase can also export database rows to CSV files.  The inverse of data
@@ -427,8 +430,10 @@ checkbox edit in data viewer", which is not checked by default; check it
 to allow toggling of boolean values shown in the data viewer by clicking on
 the appropriate cell.  (This makes it more convenient to use PortaBase
 as a todo list or such, but also makes it easier to accidentally change a
-data value.)  Click "OK" to accept the shown preferences, or the "X" button
-to leave them unchanged.<br>
+data value.)  Finally, there is a "Show Seconds" checkbox which lets you
+choose whether or not to display the number of seconds for time columns in
+the data viewer.  Click "OK" to accept the shown preferences, or the "X"
+button to leave them unchanged.<br>
 ----<br>
 Copyright 2002 by Jeremy Bowman.<br>
 (jmbowman@alum.mit.edu)

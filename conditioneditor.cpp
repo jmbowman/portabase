@@ -22,6 +22,7 @@
 #include "conditioneditor.h"
 #include "database.h"
 #include "datewidget.h"
+#include "timewidget.h"
 
 ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *name, WFlags f) : QDialog(parent, name, TRUE, f), dataType(STRING)
 {
@@ -85,6 +86,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, const char *n
     constantLine = new QLineEdit(constantStack);
     constantCheck = new QCheckBox(constantStack);
     constantDate = new DateWidget(constantStack);
+    constantTime = new TimeWidget(constantStack);
     constantCombo = new QComboBox(FALSE, constantStack);
     constantStack->raiseWidget(constantLine);
 
@@ -146,6 +148,11 @@ void ConditionEditor::fillFields(Condition *condition)
         opList->setCurrentItem(index);
         constantDate->setDate(constant.toInt());
     }
+    else if (type == TIME) {
+        int index = numberOps.findIndex(operation);
+        opList->setCurrentItem(index);
+        constantTime->setTime(constant.toInt());
+    }
     else if (type >= FIRST_ENUM) {
         int index = enumOps.findIndex(operation);
         opList->setCurrentItem(index);
@@ -174,6 +181,8 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantLine->setText("");
         QDate today = QDate::currentDate();
         constantDate->setDate(today);
+        QTime now = QTime::currentTime();
+        constantTime->setTime(now);
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
     }
@@ -182,6 +191,8 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantCheck->setChecked(FALSE);
         QDate today = QDate::currentDate();
         constantDate->setDate(today);
+        QTime now = QTime::currentTime();
+        constantTime->setTime(now);
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
     }
@@ -189,6 +200,17 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantStack->raiseWidget(constantDate);
         constantLine->setText("");
         constantCheck->setChecked(FALSE);
+        QTime now = QTime::currentTime();
+        constantTime->setTime(now);
+        caseCheck->hide();
+        caseCheck->setChecked(FALSE);
+    }
+    else if (type == TIME) {
+        constantStack->raiseWidget(constantTime);
+        constantLine->setText("");
+        constantCheck->setChecked(FALSE);
+        QDate today = QDate::currentDate();
+        constantDate->setDate(today);
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
     }
@@ -200,6 +222,8 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantCheck->setChecked(FALSE);
         QDate today = QDate::currentDate();
         constantDate->setDate(today);
+        QTime now = QTime::currentTime();
+        constantTime->setTime(now);
         caseCheck->hide();
         caseCheck->setChecked(FALSE);
     }
@@ -208,6 +232,8 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantCheck->setChecked(FALSE);
         QDate today = QDate::currentDate();
         constantDate->setDate(today);
+        QTime now = QTime::currentTime();
+        constantTime->setTime(now);
         caseCheck->show();
     }
     if (type != dataType) {
@@ -225,23 +251,15 @@ void ConditionEditor::updateOpList()
         return;
     }
     opList->setEnabled(TRUE);
-    if (dataType == INTEGER || dataType == FLOAT || dataType == DATE) {
-        int count = numberOpList.count();
-        for (int i = 0; i < count; i++) {
-            opList->insertItem(numberOpList[i]);
-        }
+    if (dataType == INTEGER || dataType == FLOAT || dataType == DATE
+            || dataType == TIME) {
+        opList->insertStringList(numberOpList);
     }
     else if (dataType >= FIRST_ENUM) {
-        int count = enumOpList.count();
-        for (int i = 0; i < count; i++) {
-            opList->insertItem(enumOpList[i]);
-        }
+        opList->insertStringList(enumOpList);
     }
     else {
-        int count = stringOpList.count();
-        for (int i = 0; i < count; i++) {
-            opList->insertItem(stringOpList[i]);
-        }
+        opList->insertStringList(stringOpList);
     }
 }
 
@@ -253,6 +271,14 @@ bool ConditionEditor::isValidConstant()
         int type = types[index - 1];
         if (type == INTEGER || type == FLOAT) {
             QString error = db->isValidValue(type, constantLine->text());
+            if (error != "") {
+                QMessageBox::warning(this, tr("PortaBase"),
+                                     tr("Constant") + " " + tr(error));
+                result = FALSE;
+            }
+        }
+        else if (type == TIME) {
+            QString error = db->isValidValue(type, constantTime->getTime());
             if (error != "") {
                 QMessageBox::warning(this, tr("PortaBase"),
                                      tr("Constant") + " " + tr(error));
@@ -292,6 +318,13 @@ void ConditionEditor::applyChanges(Condition *condition)
     else if (type == DATE) {
         condition->setOperator(numberOps[opList->currentItem()]);
         condition->setConstant(QString::number(constantDate->getDate()));
+        condition->setCaseSensitive(FALSE);
+    }
+    else if (type == TIME) {
+        condition->setOperator(numberOps[opList->currentItem()]);
+        bool ok;
+        condition->setConstant(db->parseTimeString(constantTime->getTime(),
+                                                   &ok));
         condition->setCaseSensitive(FALSE);
     }
     else if (type >= FIRST_ENUM) {
