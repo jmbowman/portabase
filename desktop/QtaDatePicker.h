@@ -7,11 +7,8 @@
 #include <qgridview.h>
 #include <qdialog.h>
 
-class QButton;
 class QComboBox;
 class QDate;
-class QHeader;
-class QMessageBox;
 class QPainter;
 class QSpinBox;
 
@@ -23,20 +20,23 @@ class DatePickerTable: public QGridView
     Q_OBJECT
 
 public:
-	DatePickerTable( QWidget *parent=0 );
-	void updateTable();
-	void updateCurRowCol( int, int );
+    DatePickerTable(int w, int h, QWidget *parent=0);
+    void updateTable();
+    void updateCurRowCol(int, int);
+    void updateTodayRowCol(int, int);
+
 private:
-	// The mandatory 'paint cell'
-	void paintCell( QPainter *, int, int );
+    // The mandatory 'paint cell'
+    void paintCell(QPainter *, int, int);
 
-	// A table cell selection handler
-	void mousePressEvent( QMouseEvent * );
+    // A table cell selection handler
+    void mousePressEvent(QMouseEvent *);
 
-	// Row & column
-	int nCurRow, nCurCol;
+    // Selection row & column
+    int nCurRow, nCurCol;
 
-private slots:
+    // Today row & column
+    int todayRow, todayCol;
 };
 //
 //   Main dialog object for the Qt 'Date Picker' add-on
@@ -46,54 +46,39 @@ class QDatePicker: public QDialog
     Q_OBJECT
 
 public:
-	QDatePicker( QDate *date );
-	~QDatePicker();
+    QDatePicker(QDate *date);
+    ~QDatePicker();
 
-	// Update the table
-	void datePickerUpdateTable( );
+    // Update the table
+    void datePickerUpdateTable();
 
-	// Table
-	DatePickerTable *calendarTable;
 private:
-	// Month & year displays
-	QComboBox *monthBox;
-	QSpinBox *yearBox;
+    // Month & year displays
+    QComboBox *monthBox;
+    QSpinBox *yearBox;
 
-	// Table headers (days of the week)
-	QHeader *tableHeader;
+    // Table
+    DatePickerTable *calendarTable;
 
-	// 'OK' & 'Cancel' buttons
-	QButton *okButton;
-	QButton *cancelButton;
-
-	// 'Prev' & 'Next' month buttons
-	QButton *nextMonthButton;
-	QButton *prevMonthButton;
-
-	// Message box
-	QMessageBox *mbox;
-
-        // Week starts on Monday?
-        bool startMonday;
+    // Week starts on Monday?
+    bool startMonday;
 
 private slots:
-	// 'OK' & 'Cancel' button handlers
-	void datePickerOk();
-	void datePickerCancel();
+    // Populate the month array
+    void datePickerMonthArray(QDate *date);
 
-	// Populate the month array
-	void datePickerMonthArray( QDate *date );
+    // 'Prev' & 'Next' month button handlers
+    void datePickerNextMonth();
+    void datePickerPrevMonth();
 
-	// 'Prev' & 'Next' month button handlers
-	void datePickerNextMonth();
-	void datePickerPrevMonth();
+    // month combobox changed handler
+    void datePickerMonthChanged(int selection);
 
-        // month combobox changed handler
-        void datePickerMonthChanged(int selection);
+    // year spinbox changed handler
+    void datePickerYearChanged(int year);
 
-	// year spinbox changed handler
-	void datePickerYearChanged(int year);
-
+    // 'Today' button handler
+    void gotoToday();
 };
 
 

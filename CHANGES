@@ -1,3 +1,12 @@
+2003-09-15  JMB  Date picker enhancements
+
+    Changed the date picker so it is sized according to the size of the
+    current font (especially important on the C7x0 models, where the fixed
+    size was really too small).
+
+    Also changed it to highlight the current date, and added a "Today"
+    button to automatically jump to that date.
+
 2003-09-12  JMB  Default rows per page preference, file properties dialog
 
     There is now a spinbox in the preferences dialog which lets you set the
