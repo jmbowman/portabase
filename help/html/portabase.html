@@ -114,7 +114,7 @@ of this screen are:<br>
 <li><a href="#sortmenu">Sort menu</a></li>
 <li><a href="#toolbar">Toolbar buttons</a></li>
 </ul>
-<a name="navi"><i>Navigation</i></a><br>
+<a name="navi"><i>Row display and navigation</i></a><br>
 Most of the data viewer screen is occupied by a table showing one view
 of a set of rows in the database.  The spin box at the bottom left of
 the screen specifies the maximum number of rows to display at once for
@@ -125,6 +125,13 @@ table, giving a little more horizontal space).  To the right of this
 the numbered buttons to go to that page of rows; the current page is
 shown pressed.  Click on the arrow buttons at the ends to show the
 page buttons for the next or previous five pages.<br>
+<br>
+Clicking on a cell in the data display and holding down for 1/2 second
+or longer before releasing executes special functions.  If you do this
+on a cell in a Note column, the <a href="#noteedit">note viewer</a> is
+displayed showing the content of that note.  If you do it in any other
+type of column, the <a href="#rowedit">row editor</a> for the row you
+clicked on is launched.<br>
 <br>
 <a name="labels"><i>Column labels</i></a><br>
 The row of column labels has several features in addition to informing
@@ -143,7 +150,8 @@ whole.  These are:<br>
 <li><i>Save</i> - Save any changes that have been made since the file
 was opened or last saved.  If you exit PortaBase without saving the most
 recent changes, those changes will be lost (a dialog will warn you if
-this is about to happen).</li>
+this is about to happen).  This option is disabled if no changes have been
+made since the current database was opened or last saved.</li>
 <li><i>Import</i> - Allows you to <a href="#import">import</a> rows from
 a CSV file.</li>
 <li><i>Export</i> - Allows you to <a href="#export">export</a> the
@@ -262,7 +270,9 @@ from the set of ones to be sorted.  The third column in the table shows either
 sort in; click this indicator to change it to the opposite value.  At the
 bottom of the dialog are "Up" and "Down" buttons for moving the selected row
 up or down in the table, changing the sequence in which the columns are
-sorted.  Click "OK" to accept the currently shown settings or "X" to revert
+sorted.  The rows are sorted by the topmost checked column first, rows with
+the same value in that column are sorted by the next highest checked column,
+etc.  Click "OK" to accept the currently shown settings or "X" to revert
 to the previous values (or to cancel adding a new sorting).<br>
 <br>
 <a name="import"><b>9)Data import</b></a><br>
