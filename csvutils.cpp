@@ -35,7 +35,7 @@ QString CSVUtils::parseFile(QString filename, Database *db)
         return PortaBase::tr("Unable to open file");
     }
     QTextStream input(&f);
-    input.setEncoding(QTextStream::Locale);
+    input.setEncoding(QTextStream::UnicodeUTF8);
     int rowNum = 1;
     QString message = "";
     enum { S_START, S_QUOTED_FIELD, S_MAYBE_END_OF_QUOTED_FIELD,
