@@ -13,6 +13,7 @@
 #include "desktop/resource.h"
 #endif
 
+#include <qcombobox.h>
 #include <qhbox.h>
 #include <qheader.h>
 #include <qlabel.h>
@@ -37,6 +38,16 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
     QHBox *hbox = new QHBox(vbox);
     new QLabel(tr("View Name"), hbox);
     nameBox = new QLineEdit(hbox);
+
+    hbox = new QHBox(vbox);
+    new QLabel(tr("Default Sorting"), hbox);
+    sortingBox = new QComboBox(FALSE, hbox);
+    hbox->setStretchFactor(sortingBox, 1);
+
+    hbox = new QHBox(vbox);
+    new QLabel(tr("Default Filter"), hbox);
+    filterBox = new QComboBox(FALSE, hbox);
+    hbox->setStretchFactor(filterBox, 1);
 
     table = new QListView(vbox);
     table->setAllColumnsShowFocus(TRUE);
@@ -67,7 +78,7 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
     new QWidget(hbox);
     setMinimumWidth(parent->width() / 2);
-    setMinimumHeight(parent->height() / 2);
+    setMinimumHeight(parent->height());
     setIcon(Resource::loadPixmap("portabase"));
 #else
     showMaximized();
@@ -80,18 +91,56 @@ ViewEditor::~ViewEditor()
 
 }
 
-int ViewEditor::edit(Database *subject, QString viewName,
-                     QStringList currentCols)
+int ViewEditor::edit(Database *subject, const QString &viewName,
+                     QStringList currentCols, const QString &defaultSort,
+                     const QString &defaultFilter)
 {
     db = subject;
     originalName = viewName;
     nameBox->setText(viewName);
+
+    sortingBox->clear();
+    sortingBox->insertItem(tr("None"));
+    QStringList sortings = db->listSortings();
+    sortings.remove("_single");
+    sortingBox->insertStringList(sortings);
+    int count = sortingBox->count();
+    int i;
+    if (defaultSort != "_none") {
+        for (i = 1; i < count; i++) {
+            if (sortingBox->text(i) == defaultSort) {
+                sortingBox->setCurrentItem(i);
+                break;
+            }
+        }
+    }
+
+    filterBox->clear();
+    filterBox->insertItem(tr("None"));
+    filterBox->insertItem(tr("All Rows"));
+    QStringList filters = db->listFilters();
+    filters.remove("_simple");
+    filters.remove("_allrows");
+    filterBox->insertStringList(filters);
+    if (defaultFilter == "_allrows") {
+        filterBox->setCurrentItem(1);
+    }
+    else if (defaultFilter != "_none") {
+        count = filterBox->count();
+        for (i = 2; i < count; i++) {
+            if (filterBox->text(i) == defaultFilter) {
+                filterBox->setCurrentItem(i);
+                break;
+            }
+        }
+    }
+
     colNames = db->listColumns();
     oldNames = currentCols;
     includedNames = currentCols;
     // move the current view columns to the top of the list, in correct order
-    int count = currentCols.count();
-    for (int i = count - 1; i > -1; i--) {
+    count = currentCols.count();
+    for (i = count - 1; i > -1; i--) {
         QString name = currentCols[i];
         colNames.remove(name);
         colNames.prepend(name);
@@ -251,6 +300,17 @@ int ViewEditor::isIncluded(QString name)
 void ViewEditor::applyChanges()
 {
     QString viewName = nameBox->text();
+    QString defaultSort = sortingBox->currentText();
+    if (sortingBox->currentItem() == 0) {
+        defaultSort = "_none";
+    }
+    QString defaultFilter = filterBox->currentText();
+    if (filterBox->currentItem() == 0) {
+        defaultFilter = "_none";
+    }
+    else if (filterBox->currentItem() == 1) {
+        defaultFilter = "_allrows";
+    }
     int count = colNames.count();
     if (originalName == "") {
         // new view, just add it and return
@@ -261,12 +321,13 @@ void ViewEditor::applyChanges()
                 sequence.append(name);
             }
         }
-        db->addView(viewName, sequence);
+        db->addView(viewName, sequence, defaultSort, defaultFilter);
         return;
     }
     if (viewName != originalName) {
         db->renameView(originalName, viewName);
     }
+    db->setViewDefaults(defaultSort, defaultFilter);
     QStringList sequence;
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];

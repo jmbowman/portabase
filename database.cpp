@@ -29,7 +29,7 @@
 #include "view.h"
 #include "xmlexport.h"
 
-Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
+Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"), cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"), vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"), vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"), vcWidth("_vcwidth"), vcDeskWidth("_vcdeskwidth"), sName("_sname"), scSort("_scsort"), scIndex("_scindex"), scName("_scname"), scDesc("_scdesc"), fName("_fname"), fcFilter("_fcfilter"), fcPosition("_fcposition"), fcColumn("_fccolumn"), fcOperator("_fcoperator"), fcConstant("_fcconstant"), fcCase("_fccase"), eName("_ename"), eId("_eid"), eIndex("_eindex"), eoEnum("_eoenum"), eoIndex("_eoindex"), eoText("_eotext"), gVersion("_gversion"), gView("_gview"), gSort("_gsort"), gFilter("_gfilter")
 {
     c4_View::_CaseSensitive = TRUE;
     checkedPixmap = Resource::loadPixmap("portabase/checked");
@@ -72,7 +72,7 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
     }
     if (*ok) {
         columns = file->GetAs("_columns[_cindex:I,_cname:S,_ctype:I,_cdefault:S,_cid:I]");
-        views = file->GetAs("_views[_vname:S,_vrpp:I,_vdeskrpp:I]");
+        views = file->GetAs("_views[_vname:S,_vrpp:I,_vdeskrpp:I,_vsort:S,_vfilter:S]");
         viewColumns = file->GetAs("_viewcolumns[_vcview:S,_vcindex:I,_vcname:S,_vcwidth:I,_vcdeskwidth:I]");
         sorts = file->GetAs("_sorts[_sname:S]");
         sortColumns = file->GetAs("_sortcolumns[_scsort:S,_scindex:I,_scname:S,_scdesc:I]");
@@ -100,6 +100,7 @@ Database::Database(QString path, bool *ok) : curView(0), curFilter(0), Id("_id")
         }
         if (version < 8) {
             addEnumDataIndices();
+            addViewDefaults();
         }
         maxId = data.GetSize() - 1;
     }
@@ -135,7 +136,7 @@ QString Database::currentView()
     return QString::fromUtf8(gView(global[0]));
 }
 
-View *Database::getView(QString name)
+View *Database::getView(QString name, bool applyDefaults)
 {
     int index = views.Find(vName [name.utf8()]);
 #if defined(DESKTOP)
@@ -143,6 +144,16 @@ View *Database::getView(QString name)
 #else
     int rpp = vRpp (views[index]);
 #endif
+    if (applyDefaults) {
+        QString defaultSort = QString::fromUtf8(vSort (views[index]));
+        QString defaultFilter = QString::fromUtf8(vFilter (views[index]));
+        if (defaultSort != "_none") {
+            gSort (global[0]) = defaultSort.utf8();
+        }
+        if (defaultFilter != "_none") {
+            getFilter(defaultFilter);
+        }
+    }
     c4_View cols = viewColumns.Select(vcView [name.utf8()]);
     cols = cols.SortOn(vcIndex);
     int size = cols.GetSize();
@@ -179,6 +190,18 @@ View *Database::getView(QString name)
     return curView;
 }
 
+QString Database::getDefaultSort(const QString &viewName)
+{
+    int index = views.Find(vName [viewName.utf8()]);
+    return QString::fromUtf8(vSort (views[index]));
+}
+
+QString Database::getDefaultFilter(const QString &viewName)
+{
+    int index = views.Find(vName [viewName.utf8()]);
+    return QString::fromUtf8(vFilter (views[index]));
+}
+
 QStringList Database::listViews()
 {
     c4_View sorted = views.SortOn(vName);
@@ -190,12 +213,16 @@ QStringList Database::listViews()
     return list;
 }
 
-void Database::addView(QString name, QStringList names, int rpp, int deskrpp)
+void Database::addView(const QString &name, const QStringList &names,
+                       const QString &defaultSort,
+                       const QString &defaultFilter, int rpp, int deskrpp)
 {
     c4_Row row;
     vName (row) = name.utf8();
     vRpp (row) = (rpp == -1) ? 13 : rpp;
     vDeskRpp (row) = (deskrpp == -1) ? 25 : deskrpp;
+    vSort (row) = defaultSort.utf8();
+    vFilter (row) = defaultFilter.utf8();
     views.Add(row);
     int count = names.count();
     for (int i = 0; i < count; i++) {
@@ -264,6 +291,14 @@ void Database::setViewRowsPerPage(int rpp)
 #else
     vRpp (views[index]) = rpp;
 #endif
+}
+
+void Database::setViewDefaults(const QString &sorting, const QString &filter)
+{
+    QCString viewName(gView (global[0]));
+    int index = views.Find(vName [viewName]);
+    vSort (views[index]) = sorting.utf8();
+    vFilter (views[index]) = filter.utf8();
 }
 
 QStringList Database::listColumns()
@@ -624,6 +659,12 @@ void Database::deleteSorting(QString name)
         sortColumns.RemoveAt(nextIndex);
         nextIndex = sortColumns.Find(scSort [utf8Name]);
     }
+    // check for any views using it as a default
+    nextIndex = views.Find(vSort [utf8Name]);
+    while (nextIndex != -1) {
+        vSort (views[nextIndex]) = "_none";
+        nextIndex = views.Find(vSort [utf8Name]);
+    }
 }
 
 void Database::deleteSortingColumn(QString sortName, QString columnName)
@@ -788,6 +829,12 @@ void Database::deleteFilter(QString name)
     while (nextIndex != -1) {
         filterConditions.RemoveAt(nextIndex);
         nextIndex = filterConditions.Find(fcFilter [utf8Name]);
+    }
+    // check for any views using it as a default
+    nextIndex = views.Find(vFilter [utf8Name]);
+    while (nextIndex != -1) {
+        vFilter (views[nextIndex]) = "_none";
+        nextIndex = views.Find(vFilter [utf8Name]);
     }
     getFilter("_allrows");
 }
@@ -1622,5 +1669,15 @@ void Database::updateEnumDataIndices(const QString &enumName)
             QString option = QString::fromUtf8(textProp (data[j]));
             indexProp (data[j]) = options.findIndex(option);
         }
+    }
+}
+
+void Database::addViewDefaults()
+{
+    int count = views.GetSize();
+    int i;
+    for (i = 0; i < count; i++) {
+        vSort (views[i]) = "_none";
+        vFilter (views[i]) = "_none";
     }
 }

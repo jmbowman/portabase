@@ -236,7 +236,7 @@ void ViewDisplay::setDatabase(Database *dbase)
     setEdited(FALSE);
 }
 
-void ViewDisplay::setView(QString name)
+void ViewDisplay::setView(QString name, bool applyDefaults)
 {
     closeView();
     table->clear();
@@ -245,7 +245,7 @@ void ViewDisplay::setView(QString name)
     for (i = 0; i < numCols; i++) {
         table->removeColumn(0);
     }
-    view = db->getView(name);
+    view = db->getView(name, applyDefaults);
     QStringList colNames = view->getColNames();
     int *types = view->getColTypes();
     int count = colNames.count();

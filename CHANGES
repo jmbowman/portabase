@@ -1,3 +1,13 @@
+2003-02-28  JMB  Default sortings and filters for views
+
+    You can now specify a default sorting and/or filter for each view
+    (except the "All Columns" view, which cannot be edited).  This makes
+    it faster to switch to commonly used view/sorting/filter combinations.
+    If the defaults are not "None", they are applied when switching to
+    the view; you can then freely change the sorting and filter again.
+    If "None", the current sorting and filter are retained, as it has always
+    worked.
+
 2003-02-27  JMB  Enum option index sorting/filtering, enum manager bugfix
 
     Changed enum sorting to sort by option index instead of option text.

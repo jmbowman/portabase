@@ -39,12 +39,17 @@ public:
 
     void updateDateTimePrefs();
     QString currentView();
-    View *getView(QString name);
+    View *getView(QString name, bool applyDefaults=FALSE);
+    QString getDefaultSort(const QString &viewName);
+    QString getDefaultFilter(const QString &viewName);
     QStringList listViews();
-    void addView(QString name, QStringList names, int rpp=-1, int deskrpp=-1);
+    void addView(const QString &name, const QStringList &names,
+                 const QString &defaultSort, const QString &defaultFilter,
+                 int rpp=-1, int deskrpp=-1);
     void deleteView(QString name);
     void setViewColWidths(int *widths);
     void setViewRowsPerPage(int rpp);
+    void setViewDefaults(const QString &sorting, const QString &filter);
 
     QStringList listColumns();
     int getIndex(QString column);
@@ -132,6 +137,7 @@ private:
     void addDesktopStats();
     void addEnumDataIndices();
     void updateEnumDataIndices(const QString &enumName);
+    void addViewDefaults();
 
 private:
     QPixmap checkedPixmap;
@@ -170,6 +176,8 @@ private:
     c4_StringProp vName;
     c4_IntProp vRpp;
     c4_IntProp vDeskRpp;
+    c4_StringProp vSort;
+    c4_StringProp vFilter;
     // "_viewcolumns" view
     c4_StringProp vcView;
     c4_IntProp vcIndex;

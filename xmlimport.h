@@ -69,6 +69,7 @@ private:
                           const QString &stringElement);
     bool setField(const QString &name);
     QString getField(const QString &name);
+    QString getOptionalField(const QString &name, const QString &defaultVal);
     QString getDataField(int columnId);
 
 private:

@@ -244,7 +244,7 @@ bool PortaBase::editColumns()
         editor.applyChanges();
         QStringList views = db->listViews();
         if (views.count() == 0) {
-            db->addView("_all", db->listColumns());
+            db->addView("_all", db->listColumns(), "_none", "_none");
             viewer->setDatabase(db);
             rebuildViewMenu();
             rebuildSortMenu();
@@ -850,8 +850,11 @@ void PortaBase::changeView(int id)
 {
     int index = viewIds.findIndex(id);
     if (index != -1) {
-        viewer->setView(viewNames[index]);
+        viewer->setView(viewNames[index], TRUE);
         updateViewMenu();
+        // there might be a default sorting and/or filter...
+        updateSortMenu();
+        updateFilterMenu();
         setEdited(TRUE);
     }
 }
@@ -1016,11 +1019,13 @@ void PortaBase::editView()
 {
     ViewEditor editor(this);
     QString viewName = db->currentView();
-    if (editor.edit(db, viewName, db->listViewColumns(viewName))) {
+    if (editor.edit(db, viewName, db->listViewColumns(viewName),
+                    db->getDefaultSort(viewName),
+                    db->getDefaultFilter(viewName))) {
         viewer->closeView();
         editor.applyChanges();
         QString newName = editor.getName();
-        viewer->setView(newName);
+        viewer->setView(newName, TRUE);
         // view menu is unchanged unless the view's name changed
         if (viewName != newName) {
             rebuildViewMenu();
@@ -1065,9 +1070,9 @@ void PortaBase::addView()
 {
     ViewEditor editor(this);
     QStringList empty;
-    if (editor.edit(db, "", empty)) {
+    if (editor.edit(db, "", empty, "_none", "_none")) {
         editor.applyChanges();
-        viewer->setView(editor.getName());
+        viewer->setView(editor.getName(), TRUE);
         rebuildViewMenu();
         setEdited(TRUE);
     }

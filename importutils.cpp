@@ -112,7 +112,7 @@ QString ImportUtils::importMobileDB(QString filename, Database *db)
             return message;
         }
     }
-    db->addView("_all", db->listColumns());
+    db->addView("_all", db->listColumns(), "_none", "_none");
     db->setViewColWidths(widths);
     delete[] types;
     delete[] widths;

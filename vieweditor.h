@@ -16,7 +16,7 @@
 #include <qstringlist.h>
 
 class Database;
-class QCheckBox;
+class QComboBox;
 class QLineEdit;
 class QListView;
 class QListViewItem;
@@ -30,7 +30,9 @@ public:
     ViewEditor(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
     ~ViewEditor();
 
-    int edit(Database *subject, QString viewName, QStringList currentCols);
+    int edit(Database *subject, const QString &viewName,
+             QStringList currentCols, const QString &defaultSort,
+             const QString &defaultFilter);
     void applyChanges();
     QString getName();
 
@@ -51,6 +53,8 @@ private slots:
 private:
     QVBox *vbox;
     QLineEdit *nameBox;
+    QComboBox *sortingBox;
+    QComboBox *filterBox;
     QListView *table;
     Database *db;
     QString originalName;

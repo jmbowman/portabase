@@ -44,7 +44,7 @@ public:
     void updateButtons();
     void updateButtonSizes();
     void saveViewSettings();
-    void setView(QString name);
+    void setView(QString name, bool applyDefaults=FALSE);
     void setSorting(QString name);
     void setFilter(QString name);
     void closeView();

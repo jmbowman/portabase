@@ -365,6 +365,8 @@ bool XMLImport::addView()
     if (error != "") {
         return FALSE;
     }
+    QString defaultSort = getOptionalField("vsort", "_none");
+    QString defaultFilter = getOptionalField("vfilter", "_none");
     if (vname != "_all") {
         if (!validateName(vname)) {
             return FALSE;
@@ -378,7 +380,7 @@ bool XMLImport::addView()
     indexMap.insert(vname, mapping);
     // empty column list; view columns will be added later
     QStringList cols;
-    db->addView(vname, cols, vrpp, vdeskrpp);
+    db->addView(vname, cols, defaultSort, defaultFilter, vrpp, vdeskrpp);
     return TRUE;
 }
 
@@ -866,6 +868,15 @@ QString XMLImport::getField(const QString &name)
     return fields[name];
 }
 
+QString XMLImport::getOptionalField(const QString &name,
+                                    const QString &defaultVal)
+{
+    if (!fields.contains(name)) {
+        return defaultVal;
+    }
+    return fields[name];
+}
+
 QString XMLImport::getDataField(int columnId)
 {
     QString idString = QString::number(columnId);
@@ -916,6 +927,8 @@ void XMLImport::buildParentsMap()
     parents.insert("vname", "view");
     parents.insert("vrpp", "view");
     parents.insert("vdeskrpp", "view");
+    parents.insert("vsort", "view");
+    parents.insert("vfilter", "view");
 
     parents.insert("viewcolumn", "viewcolumns");
     parents.insert("vcview", "viewcolumn");
