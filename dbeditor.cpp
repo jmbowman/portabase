@@ -191,6 +191,9 @@ bool DBEditor::isValidName(QString colName)
 
 bool DBEditor::isValidDefault(int type, QString defaultVal)
 {
+    if (type == DATE) {
+        return TRUE;
+    }
     QString error = db->isValidValue(type, defaultVal);
     if (error != "") {
         QString message = tr("Default") + " " + tr(error);
@@ -304,6 +307,9 @@ void DBEditor::updateTable()
         else if (type == NOTE) {
             last->setPixmap(2, PortaBase::getNotePixmap());
         }
+        else if (type == DATE) {
+            last->setText(2, tr("Today"));
+        }
     }
 }
 
@@ -321,8 +327,11 @@ QString DBEditor::getTypeString(int type)
     else if (type == BOOLEAN) {
         return tr("Boolean");
     }
-    else {
+    else if (type == NOTE) {
         return tr("Note");
+    }
+    else {
+        return tr("Date");
     }
 }
 
