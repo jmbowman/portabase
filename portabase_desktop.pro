@@ -1,6 +1,6 @@
 TEMPLATE        = app
 CONFIG         += qt warn_on release thread
-TRANSLATIONS    = portabase_ja.ts portabase_tw.ts
+TRANSLATIONS    = portabase_ja.ts portabase_tw.ts portabase_fr.ts
 LIBS            += -lm -lmk4 -lbeecrypt
 TARGET          = portabase
 DEFINES        += DESKTOP

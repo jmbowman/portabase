@@ -43,7 +43,7 @@ int NewFileDialog::exec()
     }
     else if (ext == ".txt") {
 #if defined(Q_WS_WIN)
-        filter = tr("Text files") + " (*.txt)";
+        filter = QObject::tr("Text files") + " (*.txt)";
 #else
         filter = QString::null;
 #endif

@@ -1,7 +1,7 @@
 TEMPLATE        = app
 CONFIG         += qt warn_on release
-TRANSLATIONS    = portabase_ja.ts portabase_tw.ts
-LIBS            += mk4vc60s.lib beecrypt.lib
+TRANSLATIONS    = portabase_ja.ts portabase_tw.ts portabase_fr.ts
+LIBS           += mk4vc60s.lib beecrypt.lib
 TARGET          = portabase
 DEFINES        += DESKTOP QT_DLL
 TMAKE_CXXFLAGS += /MD
@@ -43,8 +43,10 @@ HEADERS         = portabase.h \
                   desktop/resource.h \
                   desktop/timestring.h \
                   desktop/helpbrowser.h \
-                  xmlexport.h xmlimport.h \
-                  commandline.h bytestream.h \
+                  xmlexport.h \
+                  xmlimport.h \
+                  commandline.h \
+                  bytestream.h \
                   crypto.h \
                   passdialog.h \
                   csverror.h \
@@ -84,8 +86,8 @@ SOURCES         = main.cpp \
                   pdbfile.cpp \
                   mobiledb.cpp \
                   importutils.cpp \
-                  rowviewer.cpp Q\
-                  taDatePicker.cpp \
+                  rowviewer.cpp \
+                  QtaDatePicker.cpp \
                   desktop/applnk.cpp \
                   desktop/config.cpp \
                   desktop/filemanager.cpp \
@@ -96,11 +98,16 @@ SOURCES         = main.cpp \
                   desktop/resource.cpp \
                   desktop/timestring.cpp \
                   desktop/helpbrowser.cpp \
-                  xmlexport.cpp xmlimport.cpp \
-                  commandline.cpp bytestream.cpp \
-                  crypto.cpp passdialog.cpp \
-                  csverror.cpp shadedlistitem.cpp \
-                  colorbutton.cpp calculator.cpp \
+                  xmlexport.cpp \
+                  xmlimport.cpp \
+                  commandline.cpp \
+                  bytestream.cpp \
+                  crypto.cpp \
+                  passdialog.cpp \
+                  csverror.cpp \
+                  shadedlistitem.cpp \
+                  colorbutton.cpp \
+                  calculator.cpp \
                   numberwidget.cpp \
                   dynamicedit.cpp \
                   calc/calcnode.cpp \

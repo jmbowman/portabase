@@ -1,3 +1,9 @@
+2003-07-25  JMB  French UI translation, other translation updates
+
+    Added a translation of the user interface into French, contributed by
+    Eric Santonacci.  Also updated the Japanese UI translation and did
+    some cleanup work on the Taiwanese UI translation file.
+
 2003-07-24  JMB  Sequence columns, row viewer obeys current view
 
     There is now a "Sequence" column type; this is an integer field which

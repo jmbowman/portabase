@@ -1,7 +1,7 @@
 TEMPLATE        = app
 #CONFIG         = qt warn_on debug
 CONFIG          = qt warn_on release
-TRANSLATIONS    = portabase_ja.ts portabase_tw.ts
+TRANSLATIONS    = portabase_ja.ts portabase_tw.ts portabase_fr.ts
 #TMAKE_CC        = gcc-2.95
 #TMAKE_CXX       = g++-2.95
 INCLUDEPATH     += $(QPEDIR)/include

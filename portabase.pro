@@ -1,7 +1,7 @@
 TEMPLATE        = app
 #CONFIG         = qt warn_on debug
 CONFIG          = qt warn_on release
-TRANSLATIONS    = portabase_ja.ts portabase_tw.ts
+TRANSLATIONS    = portabase_ja.ts portabase_tw.ts portabase_fr.ts
 INCLUDEPATH     += $(QPEDIR)/include
 DEPENDPATH      += $(QPEDIR)/include
 LIBS            += -lqpe -lm -lmk4 -lbeecrypt
