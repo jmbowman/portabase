@@ -16,10 +16,8 @@ NoteEditor::NoteEditor(QString colName, QWidget *parent, const char *name,
     WFlags f) : QDialog(parent, name, TRUE, f)
 {
     setCaption(tr("PortaBase") + " - " + colName);
-    showMaximized();
-    hide();
     textBox = new QMultiLineEdit(this);
-    textBox->resize(size());
+    showMaximized();
 }
 
 NoteEditor::~NoteEditor()
@@ -40,4 +38,10 @@ void NoteEditor::setContent(QString text)
 void NoteEditor::setReadOnly(bool y)
 {
     textBox->setReadOnly(y);
+}
+
+void NoteEditor::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    textBox->resize(size());
 }

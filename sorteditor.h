@@ -19,6 +19,7 @@ class QLineEdit;
 class QListView;
 class QListViewItem;
 class QPoint;
+class QVBox;
 
 class SortEditor: public QDialog
 {
@@ -30,6 +31,9 @@ public:
     int edit(Database *subject, QString sortingName);
     void applyChanges();
     QString getName();
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private:
     void updateTable();
@@ -43,6 +47,7 @@ private slots:
     void moveDown();
 
 private:
+    QVBox *vbox;
     QLineEdit *nameBox;
     QListView *table;
     Database *db;
@@ -50,6 +55,7 @@ private:
     QStringList colNames;
     QStringList sortCols;
     QStringList descCols;
+    bool resized;
 };
 
 #endif

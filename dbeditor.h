@@ -18,6 +18,7 @@
 class ColumnEditor;
 class Database;
 class QListView;
+class QVBox;
 
 class DBEditor: public QDialog
 {
@@ -28,6 +29,9 @@ public:
 
     int edit(Database *subject);
     void applyChanges();
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private:
     void updateTable();
@@ -46,6 +50,7 @@ private slots:
 private:
     ColumnEditor *columnEditor;
     Database *db;
+    QVBox *vbox;
     QListView *table;
     QStringList originalCols;
     QStringList deletedCols;
@@ -56,6 +61,7 @@ private:
     c4_StringProp ceDefault;
     c4_IntProp ceOldIndex;
     c4_IntProp ceNewIndex;
+    bool resized;
 };
 
 #endif

@@ -17,14 +17,12 @@
 ImportDialog::ImportDialog(Database *subject, QWidget *parent,
     const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(subject)
 {
-    setCaption(tr("PortaBase") + " - " + tr("Import rows from CSV file"));
-    showMaximized();
-    hide();
+    setCaption(tr("Import rows from CSV file") + " - " + tr("PortaBase"));
     csvSelector = new FileSelector("text/x-csv", this, "csvselector",
                                    FALSE, FALSE );
     connect(csvSelector, SIGNAL(fileSelected(const DocLnk &)), this,
             SLOT(import(const DocLnk &)));
-    csvSelector->resize(size());
+    showMaximized();
 }
 
 ImportDialog::~ImportDialog()
@@ -42,4 +40,10 @@ void ImportDialog::import(const DocLnk &f)
     else {
         accept();
     }
+}
+
+void ImportDialog::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    csvSelector->resize(size());
 }

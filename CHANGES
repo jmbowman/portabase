@@ -1,3 +1,8 @@
+2002-10-30  JMB  Dialog resizing
+
+    All full-screen dialogs should now resize correctly when input methods
+    are hidden or shown.
+
 2002-10-28  #################### PortaBase 1.1 ####################
 
 2002-10-28  JMB  Multiple column sorting

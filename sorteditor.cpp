@@ -21,13 +21,10 @@
 #include "sorteditor.h"
 
 SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), db(0)
+    : QDialog(parent, name, TRUE, f), db(0), resized(FALSE)
 {
     setCaption(tr("Sorting Editor") + " - " + tr("PortaBase"));
-    showMaximized();
-    hide();
-    QVBox *vbox = new QVBox(this);
-    vbox->resize(size());
+    vbox = new QVBox(this);
 
     QHBox *hbox = new QHBox(vbox);
     new QLabel(tr("Sorting Name"), hbox);
@@ -51,6 +48,7 @@ SortEditor::SortEditor(QWidget *parent, const char *name, WFlags f)
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    showMaximized();
 }
 
 SortEditor::~SortEditor()
@@ -270,4 +268,17 @@ void SortEditor::applyChanges()
     }
     db->deleteSorting(originalName);
     db->addSorting(sortingName, orderedSort, orderedDesc);
+}
+
+void SortEditor::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    vbox->resize(size());
+    if (!resized) {
+        int colWidth = width() / 3 - 2;
+        table->setColumnWidth(0, colWidth);
+        table->setColumnWidth(1, colWidth);
+        table->setColumnWidth(2, colWidth);
+        resized = TRUE;
+    }
 }

@@ -20,6 +20,7 @@ class QLineEdit;
 class QListView;
 class QListViewItem;
 class QPoint;
+class QVBox;
 
 class ViewEditor: public QDialog
 {
@@ -31,6 +32,9 @@ public:
     int edit(Database *subject, QString viewName, QStringList currentCols);
     void applyChanges();
     QString getName();
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private:
     void updateTable();
@@ -44,6 +48,7 @@ private slots:
     void moveDown();
 
 private:
+    QVBox *vbox;
     QLineEdit *nameBox;
     QListView *table;
     Database *db;
@@ -51,6 +56,7 @@ private:
     QStringList colNames;
     QStringList oldNames;
     QStringList includedNames;
+    bool resized;
 };
 
 #endif

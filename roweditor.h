@@ -19,6 +19,7 @@
 class Database;
 class QCheckBox;
 class QLineEdit;
+class QScrollView;
 class NoteButton;
 
 typedef QValueList<QCheckBox*> CheckBoxList;
@@ -34,6 +35,9 @@ public:
 
     bool edit(Database *subject, int rowId = -1);
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
 private:
     void addContent(int rowId);
 
@@ -41,6 +45,7 @@ private:
     Database *db;
     QStringList colNames;
     int *colTypes;
+    QScrollView *sv;
     LineEditList lineEdits;
     CheckBoxList checkBoxes;
     NoteButtonList noteButtons;

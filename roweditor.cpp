@@ -22,11 +22,9 @@
 #include "roweditor.h"
 
 RowEditor::RowEditor(QWidget *parent, const char *name, WFlags f)
-  : QDialog(parent, name, TRUE, f), db(0), colTypes(0)
+  : QDialog(parent, name, TRUE, f), db(0), colTypes(0), sv(0)
 {
-    setCaption(tr("PortaBase") + " - " + tr("Row Editor"));
-    showMaximized();
-    hide();
+    setCaption(tr("Row Editor") + " - " + tr("PortaBase"));
 }
 
 RowEditor::~RowEditor()
@@ -101,7 +99,7 @@ bool RowEditor::edit(Database *subject, int rowId)
 
 void RowEditor::addContent(int rowId)
 {
-    QScrollView *sv = new QScrollView(this);
+    sv = new QScrollView(this);
     sv->resize(size());
     QGrid *grid = new QGrid(2, sv->viewport());
     sv->addChild(grid);
@@ -145,4 +143,13 @@ void RowEditor::addContent(int rowId)
     }
     new QWidget(grid);
     new QWidget(grid);
+    showMaximized();
+}
+
+void RowEditor::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    if (sv) {
+        sv->resize(size());
+    }
 }

@@ -26,6 +26,9 @@ public:
                  WFlags f = 0);
     ~ImportDialog();
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
 private slots:
     void import(const DocLnk &);
 

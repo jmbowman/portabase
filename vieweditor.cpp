@@ -21,13 +21,10 @@
 #include "vieweditor.h"
 
 ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
-    : QDialog(parent, name, TRUE, f), db(0)
+    : QDialog(parent, name, TRUE, f), db(0), resized(FALSE)
 {
     setCaption(tr("PortaBase") + " - " + tr("View Editor"));
-    showMaximized();
-    hide();
-    QVBox *vbox = new QVBox(this);
-    vbox->resize(size());
+    vbox = new QVBox(this);
 
     QHBox *hbox = new QHBox(vbox);
     new QLabel(tr("View Name"), hbox);
@@ -50,6 +47,7 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name, WFlags f)
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    showMaximized();
 }
 
 ViewEditor::~ViewEditor()
@@ -264,4 +262,15 @@ void ViewEditor::applyChanges()
         }
     }
     db->setViewColumnSequence(viewName, sequence);
+}
+
+void ViewEditor::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    vbox->resize(size());
+    if (!resized) {
+        int colWidth = vbox->width() - table->columnWidth(0) - 20;
+        table->setColumnWidth(1, colWidth);
+        resized = TRUE;
+    }
 }

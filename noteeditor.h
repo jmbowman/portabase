@@ -28,6 +28,9 @@ public:
     void setContent(QString text);
     void setReadOnly(bool y);
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
 private:
     QMultiLineEdit *textBox;
 };

@@ -23,12 +23,10 @@
 DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     : QDialog(parent, name, TRUE, f), db(0), ceName("_cename"),
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
-      ceNewIndex("_cenewindex")
+      ceNewIndex("_cenewindex"), resized(FALSE)
 {
     setCaption(tr("PortaBase") + " - " + tr("Columns Editor"));
-    showMaximized();
-    hide();
-    QVBox *vbox = new QVBox(this);
+    vbox = new QVBox(this);
     vbox->resize(size());
     table = new QListView(vbox);
     table->setAllColumnsShowFocus(TRUE);
@@ -52,6 +50,7 @@ DBEditor::DBEditor(QWidget *parent, const char *name, WFlags f)
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     QPushButton *downButton = new QPushButton(tr("Down"), hbox);
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    showMaximized();
 }
 
 DBEditor::~DBEditor()
@@ -373,4 +372,17 @@ void DBEditor::applyChanges()
         db->addColumn(index, name, type, defaultVal);
     }
     db->updateDataFormat();
+}
+
+void DBEditor::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    vbox->resize(size());
+    if (!resized) {
+        int colWidth = width() / 3 - 2;
+        table->setColumnWidth(0, colWidth);
+        table->setColumnWidth(1, colWidth);
+        table->setColumnWidth(2, colWidth);
+        resized = TRUE;
+    }
 }
