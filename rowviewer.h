@@ -22,6 +22,7 @@ class QComboBox;
 class QKeyEvent;
 class QPushButton;
 class QTextView;
+class QToolButton;
 class View;
 class ViewDisplay;
 
@@ -55,8 +56,13 @@ private:
     QComboBox *viewBox;
     int index;
     int rowCount;
+#if defined(Q_OS_MACX)
+    QToolButton *nextButton;
+    QToolButton *prevButton;
+#else
     QPushButton *nextButton;
     QPushButton *prevButton;
+#endif
     QTextView *tv;
     View *currentView;
     QStringList usedImageIds;

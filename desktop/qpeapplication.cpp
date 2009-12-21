@@ -41,7 +41,11 @@ QString QPEApplication::iconDir()
 #if defined(Q_WS_WIN)
     return qApp->applicationDirPath() + "/icons/";
 #else
+#if defined(Q_OS_MACX)
+    return QPEApplication::resourcePath() + "icons/";
+#else
     return "/usr/share/portabase/icons/";
+#endif
 #endif
 }
 
@@ -83,16 +87,21 @@ QStringList QPEApplication::languageList()
 QString QPEApplication::translationFile()
 {
     QStringList langs = QPEApplication::languageList();
+    QString suffix = "/portabase.qm";
 #if defined(Q_WS_WIN)
     QString path = qApp->applicationDirPath() + "/i18n/";
 #else
+#if defined(Q_OS_MACX)
+    QString path = QPEApplication::resourcePath();
+    suffix = ".lproj/portabase.qm";
+#else
     QString path = "/usr/share/portabase/i18n/";
 #endif
-    QString filename = "/portabase.qm";
+#endif
     int count = langs.count();
     for (int i = 0; i < count; i++) {
-        if (QFile::exists(path + langs[i] + filename)) {
-            return path + langs[i] + filename;
+        if (QFile::exists(path + langs[i] + suffix)) {
+            return path + langs[i] + suffix;
         }
     }
     // No appropriate translation file, just use what's in the code
@@ -102,20 +111,26 @@ QString QPEApplication::translationFile()
 QString QPEApplication::helpDir()
 {
     QStringList langs = QPEApplication::languageList();
+    QString suffix = "/";
 #if defined(Q_WS_WIN)
     QString path = qApp->applicationDirPath() + "/help/";
 #else
+#if defined(Q_OS_MACX)
+    QString path = QPEApplication::resourcePath();
+    suffix = ".lproj/";
+#else
     QString path = "/usr/share/portabase/help/";
+#endif
 #endif
     int count = langs.count();
     for (int i = 0; i < count; i++) {
         QDir dir(path + langs[i]);
         if (dir.exists()) {
-            return path + langs[i] + "/";
+            return path + langs[i] + suffix;
         }
     }
     // Default to English, will usually be present
-    return path + "en/";
+    return path + "en" + suffix;
 }
 
 void QPEApplication::showMainDocumentWidget(QWidget* mw, bool nomaximize)
@@ -127,3 +142,10 @@ void QPEApplication::showMainDocumentWidget(QWidget* mw, bool nomaximize)
         mw->show();
     }
 }
+
+#if defined(Q_OS_MACX)
+QString QPEApplication::resourcePath()
+{
+    return qApp->applicationDirPath() + "/../Resources/";
+}
+#endif

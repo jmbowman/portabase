@@ -3,7 +3,7 @@ PortaBase 1.9 (March 2004)
 PortaBase (portable database) is a personal database application originally
 written for the Linux-based models of Sharp Zaurus PDA (and should work on
 any other Linux PDA using the Qtopia environment.)  It can now also be
-run as a Linux or Windows desktop application.
+run as a Linux, Mac OS X, or Windows desktop application.
 
 The main features PortaBase currently has are:
 - One data table per file
@@ -53,6 +53,11 @@ Windows Installation and Upgrades
 ---------------------------------
 Run the downloaded executable; it will launch the installation program,
 just follow the directions.
+
+Mac OS X Installation
+---------------------
+Extract the application bundle from the downloaded archive and put it where
+you want it.
 
 Technical Info and Acknowledgements
 -----------------------------------

@@ -1,3 +1,10 @@
+2004-05-06  JMB  Mac OS X support
+
+    Lots of little code tweaks to make PortaBase work properly and look
+    reasonably native on Mac OS X.  Also added the files needed to generate
+    an application bundle.  This is the code that was submitted to
+    Trolltech's Qt/Mac application developer contest.
+
 2004-03-29  #################### PortaBase 1.9 ####################
 
 2004-03-29  JMB  Translation updates, minor row viewer fix, etc.

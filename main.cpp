@@ -18,6 +18,10 @@
 #include "desktop/qpeapplication.h"
 #endif
 
+#if defined(Q_OS_MACX)
+#include "mac/eventhandlers.h"
+#endif
+
 int main(int argc, char **argv) {
     QPEApplication app(argc, argv);
     if (argc > 1 && argv[1] != QCString("-f")
@@ -32,6 +36,12 @@ int main(int argc, char **argv) {
         if (argc == 3 && argv[1] == QCString("-f")) {
             pb.openFile(argv[2]);
         }
+#if defined(Q_OS_MACX)
+        pbInstance = &pb;
+        // need this in order to open files launched from Finder
+        AEInstallEventHandler(kCoreEventClass, kAEOpenDocuments,
+                              NewAEEventHandlerUPP(odocHandler), 0, false);
+#endif
         return app.exec();
     }
 }

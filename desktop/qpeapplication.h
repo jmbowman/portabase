@@ -1,7 +1,7 @@
 /*
  * qpeapplication.h
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,9 @@ public:
 
 private:
     static QStringList languageList();
+#if defined(Q_OS_MACX)
+    static QString resourcePath();
+#endif
 };
 
 #endif

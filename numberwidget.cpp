@@ -11,6 +11,7 @@
 
 #include <qlineedit.h>
 #include <qpushbutton.h>
+#include <qtoolbutton.h>
 #include "calculator.h"
 #include "datatypes.h"
 #include "numberwidget.h"
@@ -25,7 +26,11 @@ NumberWidget::NumberWidget(int type, QWidget *parent, const char *name, WFlags f
   : QHBox(parent, name, f), dataType(type)
 {
     entryField = new QLineEdit(this);
+#if defined(Q_OS_MACX)
+    QToolButton *button = new QToolButton(this);
+#else
     QPushButton *button = new QPushButton(this);
+#endif
     button->setPixmap(Resource::loadPixmap("portabase/calculator"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchCalculator()));
     int height = button->height();

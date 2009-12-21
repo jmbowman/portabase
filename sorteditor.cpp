@@ -25,7 +25,7 @@ SortEditor::SortEditor(QWidget *parent, const char *name)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
-    new QLabel(tr("Sorting Name"), hbox);
+    new QLabel(tr("Sorting Name") + " ", hbox);
     nameBox = new QLineEdit(hbox);
 
     table = new QListView(this);

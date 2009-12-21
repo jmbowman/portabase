@@ -25,7 +25,7 @@ FilterEditor::FilterEditor(QWidget *parent, const char *name)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
-    new QLabel(tr("Filter Name"), hbox);
+    new QLabel(tr("Filter Name") + " ", hbox);
     nameBox = new QLineEdit(hbox);
 
     listBox = new QListBox(this);

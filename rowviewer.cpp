@@ -16,6 +16,7 @@
 #include <qmime.h>
 #include <qpushbutton.h>
 #include <qtextview.h>
+#include <qtoolbutton.h>
 #include "database.h"
 #include "datatypes.h"
 #include "menuactions.h"
@@ -38,10 +39,18 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
     vbox->addWidget(tv);
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
+#if defined(Q_OS_MACX)
+    prevButton = new QToolButton(hbox);
+#else
     prevButton = new QPushButton(hbox);
+#endif
     prevButton->setPixmap(Resource::loadPixmap("back"));
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
+#if defined(Q_OS_MACX)
+    QToolButton *editButton = new QToolButton(hbox);
+#else
     QPushButton *editButton = new QPushButton(hbox);
+#endif
     editButton->setPixmap(Resource::loadPixmap("edit"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
 
@@ -53,10 +62,18 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
     viewBox->insertStringList(viewNames);
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
 
+#if defined(Q_OS_MACX)
+    QToolButton *copyButton = new QToolButton(hbox);
+#else
     QPushButton *copyButton = new QPushButton(hbox);
+#endif
     copyButton->setPixmap(Resource::loadPixmap("copy"));
     connect(copyButton, SIGNAL(clicked()), this, SLOT(copyText()));
+#if defined(Q_OS_MACX)
+    nextButton = new QToolButton(hbox);
+#else
     nextButton = new QPushButton(hbox);
+#endif
     nextButton->setPixmap(Resource::loadPixmap("forward"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
 

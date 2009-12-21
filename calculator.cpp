@@ -71,12 +71,14 @@ Calculator::Calculator(QWidget* parent, const char *name)
     buttons[PLUSMINUS] = new QPushButton("+-", this);
     buttons[PERCENT] = new QPushButton("%", this);
 
-    int buttonWidth = 30;
     int i;
+#if !defined(Q_OS_MACX)
+    int buttonWidth = 30;
     for (i = 0; i < MAX_BUTTONS; i++) {
         buttons[i]->setMinimumWidth(buttonWidth);
         buttons[i]->setMaximumWidth(buttonWidth);
     }
+#endif
 
     grid->addWidget(buttons[7], 1, 0);
     grid->addWidget(buttons[8], 1, 1);

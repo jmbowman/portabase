@@ -26,6 +26,15 @@ will need the following:
 - A recent version of Qt 3 (including qmake and development headers)
 - Other packages as needed to satisfy the above requirements or create
   packages for your OS/distribution
+  
+Mac OS X Development Environment
+--------------------------------
+To compile PortaBase for use as a Mac OS X desktop application, you will
+need the following:
+- Mac OS X Jaguar (10.2) or higher
+- The Apple developer tools (which are on one of the CDs that come with
+  Panther, and are available from http://developer.apple.com)
+- A recent version of Qt 3
 
 Metakit Compilation
 -------------------
@@ -33,7 +42,10 @@ To compile PortaBase, Metakit must be compiled first.  PortaBase uses a
 version of 2.4.9.3 patched to allow case-sensitive searches, locale-sensitive
 sorting, and unicode filename support where available.  Therefore, the patch
 file metakit-2.4.9.3.patch must be applied to the Metakit 2.4.9.3 source tree
-before building.
+before building.  When building for Mac OS X, however, a more recent version
+from CVS is necessary in order to avoid a build problem present in the older
+code; for the Qt/Mac developer contest, an already-patched Metakit source
+code tarball (metakit.tar.gz) has been included for convenience.
 
 To build Metakit for the desktop test environment, run dev-x86-qpe.sh and then
 follow the Metakit installation instructions (in the Metakit README file).
@@ -56,7 +68,8 @@ placed in (probably not /usr/local this time).  Then copy libmk4.a to
 
 To compile Metakit for Windows, follow the instructions in Metakit's README
 file; be sure to build the static library version (mklib).  To compile
-Metakit for use in Linux desktop PortaBase, just follow the README directions.
+Metakit for use in Linux or Mac OS X desktop PortaBase, just follow the
+README directions (the "UNIX" instructions in both cases).
 
 BeeCrypt compilation
 --------------------
@@ -73,10 +86,11 @@ libjpeg compilation
 -------------------
 For desktop Linux, this is probably already on your system; just make sure to
 install the appropriate dev package if it hasn't already been installed (for
-Debian this is libjpeg62-dev).  For Windows, get version 6b from
+Debian this is libjpeg62-dev).  For Windows and Mac OS X, get version 6b from
 http://www.ijg.org and follow the build instructions from the install.doc file
-that comes with the source code. For the Zaurus version, it's easiest to just
-use the Debian arm package for libjpeg62-dev; after downloading the .deb file,
+that comes with the source code (at least on Mac OS X, remember to run "make
+install-lib" at the end).  For the Zaurus version, it's easiest to just use
+the Debian arm package for libjpeg62-dev; after downloading the .deb file,
 you can extract the necessary files by running:
 
 ar x libjpeg62-dev_6b-9_arm.deb
@@ -172,6 +186,26 @@ files into the correct locations:
 ...and so on.  (The portabase.qm files are created by running lrelease on
 portabase.pro.)
 
+Mac OS X compilation
+--------------------
+- Install Qt version 3.2 or newer and configure it, as per the directions
+  in its INSTALL file.  Newer versions are better, as this port is
+  relatively new and many bugs have been fixed recently.
+- Make sure the BeeCrypt and libjpeg static libraries (.a) are in
+  /usr/local/lib, and that the other library files (.dylib, .la, etc.)
+  aren't.  Run ranlib on both of these files, e.g.
+  "sudo ranlib /usr/local/lib/libjpeg.a".  The Metakit shared library
+  file (libmk4.dylib) should be here also.
+- Make sure that "desktop" is among the CONFIG parameters in portabase.pro
+  (and that "qtopia", "sharp", and "test" aren't).
+- Run qmake on portabase.pro
+- Run make
+- Enter the "mac" subdirectory and run "./build_bundle.sh".  This will
+  create the PortaBase application bundle in that directory (copying and
+  appropriately linking the PortaBase executable and the Metakit shared
+  library file in the process).  You can now run it and move it wherever
+  you'd like.
+
 Package Building
 ----------------
 To create ".ipk" files for installation on the Zaurus, create the following
@@ -185,6 +219,7 @@ directory hierarchy as root in a directory of your choice:
 /portabase/opt/QtPalmtop/help/ja/html/portabase.html
 /portabase/opt/QtPalmtop/help/zh_TW/html/portabase.html
 /portabase/opt/QtPalmtop/i18n/cs/portabase.qm
+/portabase/opt/QtPalmtop/i18n/de/portabase.qm
 /portabase/opt/QtPalmtop/i18n/fr/portabase.qm
 /portabase/opt/QtPalmtop/i18n/ja/portabase.qm
 /portabase/opt/QtPalmtop/i18n/zh_TW/portabase.qm

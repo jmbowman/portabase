@@ -26,7 +26,7 @@ ViewEditor::ViewEditor(QWidget *parent, const char *name)
 {
     QHBox *hbox = new QHBox(this);
     vbox->addWidget(hbox);
-    new QLabel(tr("View Name"), hbox);
+    new QLabel(tr("View Name") + " ", hbox);
     nameBox = new QLineEdit(hbox);
 
     hbox = new QHBox(this);

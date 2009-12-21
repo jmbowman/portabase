@@ -2,6 +2,7 @@ TEMPLATE        = app
 CONFIG         += qt warn_on release
 TARGET          = portabase
 TRANSLATIONS    = portabase_cs.ts \
+                  portabase_de.ts \
                   portabase_fr.ts \
                   portabase_ja.ts \
                   portabase_zh_TW.ts
@@ -196,3 +197,8 @@ win32:QMAKE_CXXFLAGS_RELEASE += /MD
 win32:INCLUDEPATH            += D:\Devel\metakit-2.4.9.3\include \
                                 D:\Devel\jpeg-6b \
                                 D:\Devel
+
+# Stuff for Mac OS X
+macx:HEADERS += mac/eventhandlers.h
+macx:LIBS    += -framework ApplicationServices
+macx:LIBS    += -framework CoreServices

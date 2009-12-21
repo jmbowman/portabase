@@ -23,25 +23,29 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("Sort", tr("Sort"));
     textMap.insert("Filter", tr("Filter"));
     textMap.insert("Help", tr("Help"));
-    textMap.insert("New", tr("New"));
-    textMap.insert("Open", tr("Open"));
+    textMap.insert("New", tr("New") + "...");
+    textMap.insert("Open", tr("Open") + "...");
     textMap.insert("Open Recent", tr("Open Recent"));
     textMap.insert("Save", tr("Save"));
-    textMap.insert("Change Password", tr("Change Password"));
+    textMap.insert("Change Password", tr("Change Password") + "...");
     textMap.insert("Import", tr("Import") + "...");
     textMap.insert("Export", tr("Export") + "...");
     textMap.insert("Slideshow", tr("Slideshow") + "...");
-    textMap.insert("Properties", tr("Properties"));
-    textMap.insert("Preferences", tr("Preferences"));
+    textMap.insert("Properties", tr("Properties") + "...");
+    textMap.insert("Preferences", tr("Preferences") + "...");
     textMap.insert("Quit", tr("Quit"));
     textMap.insert("List", tr("List"));
     textMap.insert("Icons", tr("Icons"));
+#if defined(Q_OS_MACX)
+    textMap.insert("Help Contents", tr("PortaBase Help"));
+#else
     textMap.insert("Help Contents", tr("Help Contents"));
+#endif
     textMap.insert("About PortaBase", tr("About PortaBase"));
     textMap.insert("About Qt", tr("About Qt"));
-    textMap.insert("Quick Filter", tr("Quick Filter"));
-    textMap.insert("Add", tr("Add"));
-    textMap.insert("Edit", tr("Edit"));
+    textMap.insert("Quick Filter", tr("Quick Filter") + "...");
+    textMap.insert("Add", tr("Add") + "...");
+    textMap.insert("Edit", tr("Edit") + "...");
     textMap.insert("Delete", tr("Delete"));
     textMap.insert("Delete File", tr("Delete") + "...");
     textMap.insert("Rename", tr("Rename") + "...");
@@ -49,10 +53,10 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     textMap.insert("All Columns", tr("All Columns"));
     textMap.insert("All Rows", tr("All Rows"));
     textMap.insert("Copy", tr("Copy") + "...");
-    textMap.insert("Show", tr("Show"));
+    textMap.insert("Show", tr("Show") + "...");
     textMap.insert("Delete Rows In Filter", tr("Delete Rows In Filter"));
-    textMap.insert("Edit Columns", tr("Edit Columns"));
-    textMap.insert("Edit Enums", tr("Edit Enums"));
+    textMap.insert("Edit Columns", tr("Edit Columns") + "...");
+    textMap.insert("Edit Enums", tr("Edit Enums") + "...");
     textMap.insert("Close", tr("Close"));
 #if !defined(Q_WS_QWS)
     menuTextMap.insert("File", tr("&File"));
@@ -61,34 +65,42 @@ MenuActions::MenuActions(QObject *parent, const char *name)
     menuTextMap.insert("Sort", tr("&Sort"));
     menuTextMap.insert("Filter", tr("Fi&lter"));
     menuTextMap.insert("Help", tr("&Help"));
-    menuTextMap.insert("New", tr("&New"));
-    menuTextMap.insert("Open", tr("&Open"));
+    menuTextMap.insert("New", tr("&New") + "...");
+    menuTextMap.insert("Open", tr("&Open") + "...");
     menuTextMap.insert("Open Recent", tr("Open &Recent"));
     menuTextMap.insert("Save", tr("&Save"));
-    menuTextMap.insert("Change Password", tr("C&hange Password"));
+    menuTextMap.insert("Change Password", tr("C&hange Password") + "...");
     menuTextMap.insert("Import", tr("&Import") + "...");
     menuTextMap.insert("Export", tr("E&xport") + "...");
     menuTextMap.insert("Slideshow", tr("S&lideshow") + "...");
-    menuTextMap.insert("Properties", tr("Proper&ties"));
-    menuTextMap.insert("Preferences", tr("&Preferences"));
+    menuTextMap.insert("Properties", tr("Proper&ties") + "...");
+    menuTextMap.insert("Preferences", tr("&Preferences") + "...");
     menuTextMap.insert("Quit", tr("&Quit"));
+#if defined(Q_OS_MACX)
+    menuTextMap.insert("Help Contents", tr("PortaBase Help"));
+#else
     menuTextMap.insert("Help Contents", tr("Help &Contents"));
+#endif
     menuTextMap.insert("About PortaBase", tr("&About PortaBase"));
     menuTextMap.insert("About Qt", tr("About &Qt"));
-    menuTextMap.insert("Quick Filter", tr("&Quick Filter"));
-    menuTextMap.insert("Add", tr("&Add"));
-    menuTextMap.insert("Edit", tr("&Edit"));
+    menuTextMap.insert("Quick Filter", tr("&Quick Filter") + "...");
+    menuTextMap.insert("Add", tr("&Add") + "...");
+    menuTextMap.insert("Edit", tr("&Edit") + "...");
     menuTextMap.insert("Delete", tr("&Delete"));
     menuTextMap.insert("All Columns", tr("All &Columns"));
     menuTextMap.insert("All Rows", tr("All &Rows"));
     menuTextMap.insert("Copy", tr("&Copy") + "...");
-    menuTextMap.insert("Show", tr("&Show"));
+    menuTextMap.insert("Show", tr("&Show") + "...");
     menuTextMap.insert("Delete Rows In Filter", tr("&Delete Rows In Filter"));
-    menuTextMap.insert("Edit Columns", tr("Edit Col&umns"));
-    menuTextMap.insert("Edit Enums", tr("Edit &Enums"));
+    menuTextMap.insert("Edit Columns", tr("Edit Col&umns") + "...");
+    menuTextMap.insert("Edit Enums", tr("Edit &Enums") + "...");
     menuTextMap.insert("Close", tr("&Close"));
 
+#if defined(Q_OS_MACX)
+    accelMap.insert("Help Contents", CTRL+Key_Question);
+#else
     accelMap.insert("Help Contents", Key_F1);
+#endif
     accelMap.insert("New", CTRL+Key_N);
     accelMap.insert("Open", CTRL+Key_O);
     accelMap.insert("Save", CTRL+Key_S);

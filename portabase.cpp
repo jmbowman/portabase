@@ -68,23 +68,25 @@ typedef QInputDialog InputDialog;
 PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
   : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE), needsRefresh(FALSE)
 {
-#if defined(Q_WS_QWS)
+#if defined(Q_WS_QWS) || defined(Q_OS_MACX)
     setToolBarsMovable(FALSE);
 #endif
-    QFont currentFont = qApp->font();
-    QString family = currentFont.family().lower();
-    int size = currentFont.pointSize();
     Config *conf = getPreferences();
     conf->setGroup("General");
     confirmDeletions = conf->readBoolEntry("ConfirmDeletions", TRUE);
     booleanToggle = conf->readBoolEntry("BooleanToggle");
     bool pagedDisplay = conf->readBoolEntry("PagedDisplay", TRUE);
+#if !defined(Q_OS_MACX)
+    QFont currentFont = qApp->font();
+    QString family = currentFont.family().lower();
+    int size = currentFont.pointSize();
     conf->setGroup("Font");
     family = conf->readEntry("Name", family);
     size = conf->readNumEntry("Size", size);
     QFont font(family, size);
     qApp->setFont(font);
     setFont(font);
+#endif
 
     conf->setGroup("Colors");
     QString color = conf->readEntry("EvenRows", "#FFFFFF");
@@ -104,8 +106,10 @@ PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
     menu = menuBar();
     toolbar = new QToolBar(this);
     addToolBar(toolbar, QMainWindow::Top, TRUE);
-    statusBar();
     setIcon(Resource::loadPixmap("portabase"));
+#if !defined(Q_OS_MACX)
+    statusBar();
+#endif
 #endif
     ma = new MenuActions(this);
 
@@ -397,16 +401,18 @@ void PortaBase::editPreferences()
     Preferences prefs(this);
     if (prefs.exec()) {
         QFont font = prefs.applyChanges();
+#if !defined(Q_OS_MACX)
         setFont(font);
         viewer->updateButtonSizes();
         file->setFont(font);
+#endif
         if (doc) {
             showDataViewer();
             rebuildViewMenu();
             rebuildSortMenu();
             rebuildFilterMenu();
         }
-#if !defined(Q_WS_QWS)
+#if !defined(Q_WS_QWS) && !defined(Q_OS_MACX)
         help->setFont(font);
         fileSelector->setFont(font);
 #endif
@@ -537,6 +543,9 @@ void PortaBase::openFile()
 
 void PortaBase::openFile(const QString &f)
 {
+    if (doc) {
+        return;
+    }
     DocLnk nf(f);
     openFile(nf);
 }
@@ -740,7 +749,9 @@ void PortaBase::showFileSelector()
 #if !defined(Q_WS_QWS)
     help = new QPopupMenu(this);
     helpAction->addTo(help);
+#if !defined(Q_OS_MACX)
     help->insertSeparator();
+#endif
     aboutAction->addTo(help);
     aboutQtAction->addTo(help);
     menu->insertItem(ma->menuText("Help"), help);
@@ -839,7 +850,9 @@ void PortaBase::showDataViewer()
 #if !defined(Q_WS_QWS)
     help = new QPopupMenu(this);
     helpAction->addTo(help);
+#if !defined(Q_OS_MACX)
     help->insertSeparator();
+#endif
     aboutAction->addTo(help);
     aboutQtAction->addTo(help);
     menu->insertItem(ma->menuText("Help"), help);

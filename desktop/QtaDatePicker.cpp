@@ -16,6 +16,7 @@
 #include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
+#include <qtoolbutton.h>
 #include <stdio.h>
 //
 // Globals
@@ -48,9 +49,13 @@ QDatePicker::QDatePicker(QDate *inDate, QWidget *parent)
     vbox->addWidget(hbox);
 
     // Create the 'prev' month button
+#if defined(Q_OS_MACX)
+    QToolButton *prevMonthButton = new QToolButton(Qt::LeftArrow, hbox);
+#else
     QPushButton *prevMonthButton = new QPushButton(hbox);
     QPixmap prevPixmap = Resource::loadPixmap("portabase/QtaDatePickerPrev");
     prevMonthButton->setPixmap(prevPixmap);
+#endif
     connect(prevMonthButton, SIGNAL(clicked()),
             this, SLOT(datePickerPrevMonth()));
 
@@ -74,9 +79,13 @@ QDatePicker::QDatePicker(QDate *inDate, QWidget *parent)
             this, SLOT(datePickerMonthChanged(int)));
 
     // Create the 'next' month button
+#if defined(Q_OS_MACX)
+    QToolButton *nextMonthButton = new QToolButton(Qt::RightArrow, hbox);
+#else
     QPushButton *nextMonthButton = new QPushButton(hbox);
     QPixmap nextPixmap = Resource::loadPixmap("portabase/QtaDatePickerNext");
     nextMonthButton->setPixmap(nextPixmap);
+#endif
     connect(nextMonthButton, SIGNAL(clicked()),
             this, SLOT(datePickerNextMonth()));
 

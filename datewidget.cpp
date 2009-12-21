@@ -12,6 +12,7 @@
 #include <qdatetime.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
+#include <qtoolbutton.h>
 #include "database.h"
 #include "datewidget.h"
 
@@ -50,7 +51,11 @@ DateWidget::DateWidget(QWidget *parent, const char *name, WFlags f)
     months.append(tr("Nov"));
     months.append(tr("Dec"));
     dateObj = QDate::currentDate();
+#if defined(Q_OS_MACX)
+    QToolButton *button = new QToolButton(this);
+#else
     QPushButton *button = new QPushButton(this);
+#endif
     button->setPixmap(Resource::loadPixmap("portabase/calendar"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchSelector()));
     display = new QLabel(toString(dateObj), this);

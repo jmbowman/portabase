@@ -159,6 +159,9 @@ void Preferences::addAppearanceTab(QTabWidget *tabs)
 #else
     sizeFactor = 1;
 #endif
+#if !defined(Q_OS_MACX)
+    // on the Mac, the application font seems to revert to system default
+    // under a variety of conditions; no point in showing this
     QGroupBox *fontGroup = new QGroupBox(2, Qt::Horizontal, tr("Font"),
                                          appearanceTab);
     layout->addWidget(fontGroup);
@@ -193,6 +196,7 @@ void Preferences::addAppearanceTab(QTabWidget *tabs)
     connect(fontSize, SIGNAL(activated(int)), this, SLOT(updateSample(int)));
     new QLabel(tr("Sample"), fontGroup);
     sample = new QLabel(tr("Sample text"), fontGroup);
+#endif
 
     QGroupBox *colorGroup = new QGroupBox(2, Qt::Horizontal, tr("Row Colors"),
                                           appearanceTab);
@@ -516,6 +520,7 @@ QFont Preferences::applyChanges()
     }
     conf.writeEntry("ToolbarButtons", buttons, ',');
 
+#if !defined(Q_OS_MACX)
     conf.setGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentItem()] / sizeFactor;
@@ -524,6 +529,9 @@ QFont Preferences::applyChanges()
     QFont font(name, size);
     qApp->setFont(font);
     return font;
+#else
+    return font();
+#endif
 }
 
 void Preferences::applyDateTimeChanges()
