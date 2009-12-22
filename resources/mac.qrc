@@ -1,0 +1,37 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource prefix="/icons">
+     <file alias="checked.png">icons/checked.png</file>
+     <file alias="unchecked.png">icons/unchecked.png</file>
+     <file alias="add.png">icons/mac/add.png</file>
+     <file alias="back.png">icons/mac/back.png</file>
+     <file alias="calculator.png">icons/mac/calculator.png</file>
+     <file alias="calendar.png">icons/mac/calendar.png</file>
+     <file alias="close.png">icons/mac/close.png</file>
+     <file alias="copy_row.png">icons/mac/copy_row.png</file>
+     <file alias="copy_text.png">icons/mac/copy_text.png</file>
+     <file alias="delete.png">icons/mac/delete.png</file>
+     <file alias="document_small.png">icons/mac/document_small.png</file>
+     <file alias="document_large.png">icons/mac/document_large.png</file>
+     <file alias="edit.png">icons/mac/edit.png</file>
+     <file alias="find.png">icons/mac/find.png</file>
+     <file alias="forward.png">icons/mac/forward.png</file>
+     <file alias="image.png">icons/mac/image.png</file>
+     <file alias="new.png">icons/mac/new.png</file>
+     <file alias="note.png">icons/mac/note.png</file>
+     <file alias="open.png">icons/mac/open.png</file>
+     <file alias="quit.png">icons/mac/quit.png</file>
+     <file alias="refresh.png">icons/mac/refresh.png</file>
+     <file alias="save.png">icons/mac/save.png</file>
+ </qresource>
+ <qresource>
+     <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>
+     <file>help/html/PortaBase.html</file>
+ </qresource>
+ <qresource lang="ja">
+     <file alias="help/html/PortaBase.html">help/ja/html/PortaBase.html</file>
+ </qresource>
+ <qresource lang="zh_TW">
+     <file alias="help/html/PortaBase.html">help/tw/html/PortaBase.html</file>
+ </qresource>
+ </RCC>
+ 

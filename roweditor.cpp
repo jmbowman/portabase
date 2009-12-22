@@ -1,7 +1,7 @@
 /*
  * roweditor.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,50 +9,58 @@
  * (at your option) any later version.
  */
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qgrid.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qmessagebox.h>
-#include <qscrollview.h>
+/** @file roweditor.cpp
+ * Source file for RowEditor
+ */
+
+#include <QApplication>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QLabel>
+#include <QLayout>
+#include <QMessageBox>
+#include <QScrollArea>
 #include "calc/calcwidget.h"
 #include "image/imageselector.h"
 #include "database.h"
 #include "datatypes.h"
 #include "datewidget.h"
+#include "dynamicedit.h"
+#include "factory.h"
 #include "notebutton.h"
 #include "numberwidget.h"
 #include "roweditor.h"
 #include "timewidget.h"
 
-#if QT_VERSION >= 300
-#include "desktop/dynamicedit.h"
-#else
-#include "dynamicedit.h"
-#endif
-
-RowEditor::RowEditor(QWidget *parent, const char *name)
-  : PBDialog(tr("Row Editor"), parent, name), db(0)
+/**
+ * Constructor.
+ *
+ * @param parent This dialog's parent widget
+ */
+RowEditor::RowEditor(QWidget *parent)
+  : PBDialog(tr("Row Editor"), parent), db(0)
 {
 
 }
 
-RowEditor::~RowEditor()
-{
-
-}
-
+/**
+ * Launch the dialog to edit (or copy) a particular row of the database.
+ *
+ * @param subject The database being modified
+ * @param rowId The ID of the row to edit
+ * @param copy True if the row should be copied rather than edited
+ * @return True if any changes made in the dialog were committed
+ */
 bool RowEditor::edit(Database *subject, int rowId, bool copy)
 {
     db = subject;
     addContent(rowId);
-    bool finished = FALSE;
-    bool aborted = FALSE;
+    bool finished = false;
+    bool aborted = false;
     while (!finished) {
         if (!exec()) {
-            finished = TRUE;
-            aborted = TRUE;
+            finished = true;
+            aborted = true;
         }
         else {
             finished = isValid();
@@ -73,13 +81,20 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
             ImageSelector *widget = imageSelectors[i];
             widget->saveImage(id);
         }
-        return TRUE;
+        return true;
     }
     else {
-        return FALSE;
+        return false;
     }
 }
 
+/**
+ * Determine if all of the values entered in the dialog were acceptable
+ * for their respective data types.  In particular, validation is performed
+ * for integer, float, and time fields.
+ *
+ * @return True if all the values validated successfully, false otherwise
+ */
 bool RowEditor::isValid()
 {
     int count = colNames.count();
@@ -90,27 +105,33 @@ bool RowEditor::isValid()
         if (type == INTEGER || type == FLOAT) {
             QString value = numberWidgets[numberWidgetIndex]->getValue();
             QString error = db->isValidValue(type, value);
-            if (error != "") {
+            if (!error.isEmpty()) {
                 QString message = colNames[i] + " " + error;
-                QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
-                return FALSE;
+                QMessageBox::warning(this, qApp->applicationName(), message);
+                return false;
             }
             numberWidgetIndex++;
         }
         else if (type == TIME) {
             QString value = timeWidgets[timeWidgetIndex]->getTime();
             QString error = db->isValidValue(type, value);
-            if (error != "") {
+            if (!error.isEmpty()) {
                 QString message = colNames[i] + " " + error;
-                QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
-                return FALSE;
+                QMessageBox::warning(this, qApp->applicationName(), message);
+                return false;
             }
             timeWidgetIndex++;
         }
     }
-    return TRUE;
+    return true;
 }
 
+/**
+ * Get the row of data as currently shown in the dialog.
+ *
+ * @param doCalcs True if calculated fields should be recalculated
+ * @return The row of data this dialog was editing
+ */
 QStringList RowEditor::getRow(bool doCalcs)
 {
     QStringList values;
@@ -172,24 +193,28 @@ QStringList RowEditor::getRow(bool doCalcs)
             comboBoxIndex++;
         }
         else {
-            values.append(dynamicEdits[dynamicEditIndex]->text());
+            values.append(dynamicEdits[dynamicEditIndex]->toPlainText());
             dynamicEditIndex++;
         }
     }
     return values;
 }
 
+/**
+ * Populate this dialog with the appropriate field editor widgets for the
+ * database's columns, and set them to match the data in the specified row.
+ *
+ * @param rowId The data row to be edited or copied
+ */
 void RowEditor::addContent(int rowId)
 {
-    QScrollView *sv = new QScrollView(this);
-    vbox->addWidget(sv);
-    QWidget *grid = new QWidget(sv->viewport());
-    sv->addChild(grid);
-    sv->setResizePolicy(QScrollView::AutoOneFit);
-    grid->resize(sv->visibleWidth(), sv->visibleHeight());
+    QScrollArea *sa = new QScrollArea(this);
+    vbox->addWidget(sa);
+    QWidget *grid = new QWidget();
+    sa->setWidgetResizable(true);
     colNames = db->listColumns();
     int count = colNames.count();
-    QGridLayout *layout = new QGridLayout(grid, count + 1, 2);
+    QGridLayout *layout = Factory::gridLayout(grid, true);
     QStringList values;
     if (rowId != -1) {
         values = db->getRow(rowId);
@@ -203,12 +228,12 @@ void RowEditor::addContent(int rowId)
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
         int type = colTypes[i];
-        layout->addWidget(new QLabel(name, grid), i, 0);
+        layout->addWidget(new QLabel(name + " ", grid), i, 0);
         if (type == BOOLEAN) {
             QCheckBox *box = new QCheckBox(grid);
             layout->addWidget(box, i, 1);
             if (values[i].toInt()) {
-                box->setChecked(TRUE);
+                box->setChecked(true);
             }
             checkBoxes.append(box);
         }
@@ -259,24 +284,24 @@ void RowEditor::addContent(int rowId)
             imageSelectors.append(widget);
         }
         else if (type >= FIRST_ENUM) {
-            QComboBox *combo = new QComboBox(FALSE, grid);
+            QComboBox *combo = new QComboBox(grid);
             layout->addWidget(combo, i, 1);
             QStringList options = db->listEnumOptions(type);
-            combo->insertStringList(options);
-            int index = options.findIndex(values[i]);
-            combo->setCurrentItem(index);
+            combo->addItems(options);
+            int index = options.indexOf(values[i]);
+            combo->setCurrentIndex(index);
             comboBoxes.append(combo);
         }
         else {
             DynamicEdit *edit = new DynamicEdit(grid);
             layout->addWidget(edit, i, 1);
-            edit->setText(values[i]);
+            edit->setPlainText(values[i]);
             dynamicEdits.append(edit);
         }
     }
-    layout->addWidget(new QWidget(grid), count, 0);
-    layout->addWidget(new QWidget(grid), count, 1);
+    layout->addWidget(new QWidget(grid), count, 0, 1, 2);
     layout->setRowStretch(count, 1);
+    sa->setWidget(grid);
 
-    finishLayout();
+    finishLayout(true, true, 400, 400);
 }

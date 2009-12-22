@@ -1,7 +1,7 @@
 /*
  * metakitfuncs.h
  *
- * (c) 2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,8 +9,10 @@
  * (at your option) any later version.
  */
 
-#include <qstring.h>
+/** @file metakitfuncs.h
+ * Header file for replacement Metakit string comparison function
+ */
 
-int compareStrings(const QString &s1, const QString &s2);
+#include <QString>
+
 int compareUsingLocale(const char *s1, const char *s2);
-int windowsFileOpen(const char *filename, int flags);

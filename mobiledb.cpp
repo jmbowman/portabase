@@ -1,7 +1,7 @@
 /*
  * mobiledb.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,8 +9,11 @@
  * (at your option) any later version.
  */
 
-#include <qfile.h>
-#include <qstringlist.h>
+/** @file mobiledb.cpp
+ * Source file for MobileDBFile
+ */
+
+#include <QFile>
 #include "mobiledb.h"
 
 #define FIELDLABELS 1
@@ -20,20 +23,30 @@
 #define DATATYPE 5
 #define FIELDLENGTHS 6 
 
-MobileDBFile::MobileDBFile(QString f) : PDBFile(f), valid_mdb(false), colcount(0), rowcount(0)
+/**
+ * Constructor.
+ *
+ * @param f Path to the MobileDB file to be parsed
+ */
+MobileDBFile::MobileDBFile(const QString &f) : PDBFile(f), colcount(0), rowcount(0)
 {
 
 }
 
-MobileDBFile::~MobileDBFile()
-{
-
-}
-
+/**
+ * Open the PDB file and load basic metadata about the database from it.
+ *
+ * @return True if successfully parsed, false otherwise
+ */
 bool MobileDBFile::read() {
-	return (valid_mdb = (PDBFile::read() ? readMobileDBHeader() : false));
+	return (PDBFile::read() ? readMobileDBHeader() : false);
 }
 
+/**
+ * Parse the MobileDB database metadata from the PDB file.
+ *
+ * @return True if successfully parsed, false otherwise
+ */
 bool MobileDBFile::readMobileDBHeader() { 
 	if (strcmp((const char *)db_type, "Mdb1") != 0) {
 		return false;
@@ -58,10 +71,10 @@ bool MobileDBFile::readMobileDBHeader() {
 	if (record_id < 0) {
 		return false;
 	}
-        unsigned int recordSize = record_list[record_id].record_size;
-	fd->at(record_list[record_id].record_data_offset);
+    unsigned int recordSize = record_list[record_id].record_size;
+	fd->seek(record_list[record_id].record_data_offset);
 	unsigned char *raw_record = new unsigned char [recordSize];
-	if (fd->readBlock((char*)raw_record, recordSize) == -1) {
+	if (fd->read((char*)raw_record, recordSize) == -1) {
 		return false;
 	}
 	if (!verify_recordhdr(raw_record)) {
@@ -73,7 +86,7 @@ bool MobileDBFile::readMobileDBHeader() {
 	while (p < end && *p != 0xff ) { 
 		colcount++;
 		p++;
-                QString label = QString::fromLatin1((char*)p);
+        QString label = QString::fromLatin1((char*)p);
 		fieldlabels.append(label);
 		p += label.length() + 1;
 	};
@@ -84,10 +97,10 @@ bool MobileDBFile::readMobileDBHeader() {
 	if (record_id < 0) {
 		return false;
 	}
-        recordSize = record_list[record_id].record_size;
-	fd->at(record_list[record_id].record_data_offset);
+    recordSize = record_list[record_id].record_size;
+	fd->seek(record_list[record_id].record_data_offset);
 	raw_record = new unsigned char [recordSize];
-	if (fd->readBlock((char*)raw_record, recordSize) == -1) {
+	if (fd->read((char*)raw_record, recordSize) == -1) {
 		return false;
 	}
 	if (!verify_recordhdr(raw_record)) {
@@ -97,8 +110,8 @@ bool MobileDBFile::readMobileDBHeader() {
 	end = raw_record + recordSize;
 	for (i = 0; i < colcount && p < end && *p != 0xff; i++) {
 		p++;
-                QString type = QString::fromLatin1((char*)p);
-                fieldtypes.append(type);
+        QString type = QString::fromLatin1((char*)p);
+        fieldtypes.append(type);
 		p += type.length() + 1;
 	};
 	delete [] raw_record;
@@ -108,10 +121,10 @@ bool MobileDBFile::readMobileDBHeader() {
 	if (record_id < 0) {
 		return false;
 	}
-        recordSize = record_list[record_id].record_size;
-	fd->at(record_list[record_id].record_data_offset);
+    recordSize = record_list[record_id].record_size;
+	fd->seek(record_list[record_id].record_data_offset);
 	raw_record = new unsigned char [recordSize];
-	if (fd->readBlock((char*)raw_record, recordSize) == -1) {
+	if (fd->read((char*)raw_record, recordSize) == -1) {
 		return false;
 	}
 	if (!verify_recordhdr(raw_record)) {
@@ -122,7 +135,7 @@ bool MobileDBFile::readMobileDBHeader() {
 	for (i = 0; i < colcount && p < end && *p != 0xff; i++) {   
 		int index  = *p;
 		p++;
-                QString length = QString::fromLatin1((char*)p);
+        QString length = QString::fromLatin1((char*)p);
 		fieldlengths[index] = length.toInt();
 		p += length.length() + 1;
 	};
@@ -130,11 +143,22 @@ bool MobileDBFile::readMobileDBHeader() {
 	return true;	
 }
 
+/**
+ * Get the number of rows in the database.
+ *
+ * @return The number of database rows
+ */
 int MobileDBFile::row_count()
 {
 	return rowcount;
 }
 
+/**
+ * Get the index of the PDB database record which contains the specified
+ * type of data.
+ *
+ * @param cat_num The ID of the type of data to retrieve
+ */
 int MobileDBFile::record_category(int cat_num)
 {
 	for (int i = 0; i < number_records; i++) {
@@ -145,6 +169,11 @@ int MobileDBFile::record_category(int cat_num)
 	return -1;
 }
 
+/**
+ * Make sure that the header of the provided PDB record data is valid.
+ *
+ * @return True if the data is valid, false otherwise.
+ */
 bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) { 
 	if (raw_record[0] != 0xff || raw_record[1] != 0xff ||
 		raw_record[2] != 0xff || raw_record[3] != 0x01 
@@ -155,11 +184,22 @@ bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) {
 	return true;
 }
 
+/**
+ * Get the number of columns in the database.
+ *
+ * @return The number of database columns.
+ */
 int MobileDBFile::col_count()
 {
 	return colcount;
 }
 
+/**
+ * Get the specified row of the database.
+ *
+ * @param i The index of the row to retrieve
+ * @return List of column values for the desired row
+ */
 QStringList MobileDBFile::row(int i)
 {
 	QStringList rowdata;
@@ -179,10 +219,10 @@ QStringList MobileDBFile::row(int i)
 			}
 		}
 	}
-	fd->at(record_list[i].record_data_offset);
-        unsigned int recordSize = record_list[i].record_size;
+	fd->seek(record_list[i].record_data_offset);
+    unsigned int recordSize = record_list[i].record_size;
 	unsigned char *raw_record = new unsigned char [recordSize];
-	if (fd->readBlock((char*)raw_record, recordSize) == -1) {
+	if (fd->read((char*)raw_record, recordSize) == -1) {
 		return rowdata;
 	}
 	//unpack row data;
@@ -193,7 +233,7 @@ QStringList MobileDBFile::row(int i)
 	unsigned char *end = raw_record + recordSize;
 	for(int x = 0; x < colcount && p < end && *p != 0xff; x++) { 
 		p++;
-                QString cell = QString::fromLatin1((char*)p);
+        QString cell = QString::fromLatin1((char*)p);
 		rowdata.append(cell);
 		p += cell.length() + 1;
 	};
@@ -201,16 +241,31 @@ QStringList MobileDBFile::row(int i)
 	return rowdata;
 }
 	
-
+/**
+ * Get the Column types (as MobileDB understands them) of all columns in the
+ * database.
+ *
+ * @return List of the database's column types
+ */
 QStringList MobileDBFile::field_types()
 {
 	return fieldtypes;
 }
 
-const int * MobileDBFile::field_lengths() {
-       	return fieldlengths;
+/**
+ * Get the display widths for the database columns, in pixels.
+ *
+ * @return List of column display widths
+ */
+const int *MobileDBFile::field_lengths() {
+    return fieldlengths;
 }
 
+/**
+ * Get the names of each column in the database.
+ *
+ * @return List of column names
+ */
 QStringList MobileDBFile::field_labels()
 {
 	return fieldlabels;

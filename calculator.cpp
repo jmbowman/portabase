@@ -1,84 +1,82 @@
-/***************************************************************************
-                          kmymoneycalculator.cpp  -  description
-                             -------------------
-    begin                : Sat Oct 19 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
- ***************************************************************************/
+/*
+ * calculator.cpp (based on kmymoneycalculator.cpp, by Thomas Baumgart)
+ *
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/** @file calculator.cpp
+ * Source file for Calculator
+ */
 
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qsignalmapper.h>
-#include <qregexp.h>
+#include <QDialogButtonBox>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QToolButton>
+#include <QSignalMapper>
+#include <QRegExp>
 
 #include "calculator.h"
-#include "pbdialog.h"
 
-Calculator::Calculator(QWidget* parent, const char *name)
-  : QQDialog("", parent, name, TRUE)
+/**
+ * Constructor.
+ * @param parent The dialog's parent widget, if any.
+ */
+Calculator::Calculator(QWidget* parent)
+  : QQDialog("", parent)
 {
+    setSizeGripEnabled(false);
     m_decimal = '.';
     m_result = "";
 
-#if defined(Q_WS_QWS)
-    int rows = 5;
-#else
-    int rows = 6;
-#endif
-    QGridLayout* grid = new QGridLayout(this, rows, 5, 1, 2);
+    QGridLayout* grid = new QGridLayout(this);
+    setLayout(grid);
+    grid->setMargin(1);
+    grid->setSpacing(2);
+    grid->setSizeConstraint(QLayout::SetFixedSize);
 
     display = new QLabel(this);
-    display->setBackgroundColor(QColor("#BDFFB4"));
+    display->setAutoFillBackground(true);
+    QPalette displayPalette(display->palette());
+    displayPalette.setColor(QPalette::Window, Qt::white);
+    display->setPalette(displayPalette);
 
-    display->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+    display->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    grid->addMultiCellWidget(display, 0, 0, 0, 4);
-
-    buttons[0] = new QPushButton("0", this);
-    buttons[1] = new QPushButton("1", this);
-    buttons[2] = new QPushButton("2", this);
-    buttons[3] = new QPushButton("3", this);
-    buttons[4] = new QPushButton("4", this);
-    buttons[5] = new QPushButton("5", this);
-    buttons[6] = new QPushButton("6", this);
-    buttons[7] = new QPushButton("7", this);
-    buttons[8] = new QPushButton("8", this);
-    buttons[9] = new QPushButton("9", this);
-    buttons[PLUS] = new QPushButton("+", this);
-    buttons[MINUS] = new QPushButton("-", this);
-    buttons[STAR] = new QPushButton("X", this);
-    buttons[DECIMAL] = new QPushButton(m_decimal, this);
-    buttons[EQUAL] = new QPushButton("=", this);
-    buttons[SLASH] = new QPushButton("/", this);
-    buttons[CLEAR] = new QPushButton("C", this);
-    buttons[CLEARALL] = new QPushButton("AC", this);
-    buttons[PLUSMINUS] = new QPushButton("+-", this);
-    buttons[PERCENT] = new QPushButton("%", this);
+    grid->addWidget(display, 0, 0, 1, 5);
 
     int i;
-#if !defined(Q_OS_MACX)
-    int buttonWidth = 30;
     for (i = 0; i < MAX_BUTTONS; i++) {
-        buttons[i]->setMinimumWidth(buttonWidth);
-        buttons[i]->setMaximumWidth(buttonWidth);
+        buttons[i] = new QToolButton(this);
+        buttons[i]->setSizePolicy(QSizePolicy::MinimumExpanding,
+                                  QSizePolicy::Fixed);
     }
-#endif
+    buttons[0]->setText("0");
+    buttons[1]->setText("1");
+    buttons[2]->setText("2");
+    buttons[3]->setText("3");
+    buttons[4]->setText("4");
+    buttons[5]->setText("5");
+    buttons[6]->setText("6");
+    buttons[7]->setText("7");
+    buttons[8]->setText("8");
+    buttons[9]->setText("9");
+    buttons[PLUS]->setText("+");
+    buttons[MINUS]->setText("-");
+    buttons[STAR]->setText("X");
+    buttons[DECIMAL]->setText(m_decimal);
+    buttons[EQUAL]->setText("=");
+    buttons[SLASH]->setText("/");
+    buttons[CLEAR]->setText("C");
+    buttons[CLEARALL]->setText("AC");
+    buttons[PLUSMINUS]->setText("+-");
+    buttons[PERCENT]->setText("%");
 
     grid->addWidget(buttons[7], 1, 0);
     grid->addWidget(buttons[8], 1, 1);
@@ -101,6 +99,11 @@ Calculator::Calculator(QWidget* parent, const char *name)
     grid->addWidget(buttons[PERCENT], 2, 4);
     grid->addWidget(buttons[CLEAR], 1, 3);
     grid->addWidget(buttons[CLEARALL], 1, 4);
+    
+    int colWidth = buttons[CLEARALL]->sizeHint().width();
+    for (i = 0; i < 5; i++) {
+        grid->setColumnMinimumWidth(i, colWidth);
+    }
 
     buttons[EQUAL]->setFocus();
 
@@ -132,26 +135,20 @@ Calculator::Calculator(QWidget* parent, const char *name)
     connect(buttons[CLEAR], SIGNAL(clicked()), SLOT(clearClicked()));
     connect(buttons[CLEARALL], SIGNAL(clicked()), SLOT(clearAllClicked()));
 
-#if !defined(Q_WS_QWS)
-    QHBox *hbox = new QHBox(this);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    grid->addMultiCellWidget(hbox, 5, 5, 0, 4);
-    grid->setResizeMode(QLayout::FreeResize);
-#endif
-    finishConstruction(FALSE);
+    QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok
+                                                | QDialogButtonBox::Cancel;
+    QDialogButtonBox *box = new QDialogButtonBox(buttons, Qt::Horizontal, this);
+    grid->addWidget(box, 5, 0, 1, 5);
+    connect(box, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(box, SIGNAL(rejected()), this, SLOT(reject()));
+    finishConstruction();
 }
 
-Calculator::~Calculator()
-{
-
-}
-
+/**
+ * Append the digit represented by the parameter to the current operand
+ *
+ * @param button Integer value of the digit to be added in the range [0..9]
+ */
 void Calculator::digitClicked(int button)
 {
     operand += QChar(button + 0x30);
@@ -161,12 +158,16 @@ void Calculator::digitClicked(int button)
     changeDisplay(operand);
 }
 
+/**
+ * Appends a period (comma) to initialize the fractional
+ * part of an operand. The period is only appended once.
+ */
 void Calculator::decimalClicked()
 {
     if (operand.length() == 0) {
         operand = "0";
     }
-    if (operand.contains('.', FALSE) == 0) {
+    if (operand.contains('.') == 0) {
         operand += '.';
     }
     if (operand.length() > 16) {
@@ -175,6 +176,9 @@ void Calculator::decimalClicked()
     changeDisplay(operand);
 }
 
+/**
+ * Reverse the sign of the current operand.
+ */
 void Calculator::plusminusClicked()
 {
     if (operand.length() == 0 && m_result.length() > 0) {
@@ -191,6 +195,11 @@ void Calculator::plusminusClicked()
     }
 }
 
+/**
+ * Start the operation contained in the parameter.
+ *
+ * @param button The Qt::Keycode for the button pressed or clicked
+ */
 void Calculator::calculationClicked(int button)
 {
     if (operand.length() == 0 && op != 0 && button == EQUAL) {
@@ -245,6 +254,9 @@ void Calculator::calculationClicked(int button)
     operand = "";
 }
 
+/**
+ * Clear the current operand.
+ */
 void Calculator::clearClicked()
 {
     if (operand.length() > 0) {
@@ -258,6 +270,9 @@ void Calculator::clearClicked()
     }
 }
 
+/**
+ * Clear all registers.
+ */
 void Calculator::clearAllClicked()
 {
     operand = "";
@@ -265,6 +280,9 @@ void Calculator::clearAllClicked()
     changeDisplay("0");
 }
 
+/**
+ * Execute the percent operation.
+ */
 void Calculator::percentClicked()
 {
     if (op != 0) {
@@ -277,16 +295,27 @@ void Calculator::percentClicked()
     }
 }
 
+/**
+ * Extract the result of the last calculation. The fractional part is
+ * separated from the integral part by the character setup using setDecimal().
+ *
+ * @return The result of the last operation
+ */
 const QString Calculator::result() const
 {
     QString txt = operand;
-    if (operand == "") {
+    if (operand.isEmpty()) {
         txt = m_result;
     }
     txt.replace(QRegExp("\\."), m_decimal);
     return txt;
 }
 
+/**
+ * Update the display of the calculator.
+ *
+ * @param str The new display contents
+ */
 void Calculator::changeDisplay(const QString& str)
 {
     QString txt = str;
@@ -352,6 +381,11 @@ void Calculator::keyPressEvent(QKeyEvent* ev)
     }
 }
 
+/**
+ * Preset the first operand.
+ *
+ * @param value The operand's value
+ */
 void Calculator::setInitialValue(const QString& value)
 {
     // setup operand

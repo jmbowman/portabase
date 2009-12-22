@@ -1,60 +1,62 @@
 /*
- * imagewidget.cpp
+ * imagewidget.cpp (based on code from TxImage)
  *
- * Changes (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003 by Pierpaolo Di Panfilo <pippo_dp@libero.it>
+ * (c) 2003 by Cristian Di Panfilo <cridipan@virgilio.it>
  *
- * Original source:
-************************************************************************
-** TxImage - Image Viewer
-** Copyright (C) 2003
-** Pierpaolo Di Panfilo <pippo_dp@libero.it>
-** Cristian Di Panfilo <cridipan@virgilio.it>
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-** Library General Public License for more details.  To obtain a
-** copy of the GNU Library General Public License, write to the Free
-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-**
-** Any permitted reproduction of these routines, in whole or in part,
-** must bear this legend.
-**
-*************************************************************************/
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
 
-#include <qimage.h>
-#include <qpainter.h>
-#include <qtimer.h>
+/** @file imagewidget.cpp
+ * Source file for ImageWidget
+ */
+
+#include <QImage>
+#include <QKeyEvent>
+#include <QPainter>
+#include <QTimer>
 #include "imagewidget.h"
 #include "../view.h"
 
-ImageWidget::ImageWidget(QWidget *parent, const char *name, WFlags f)
-           : QWidget(parent, name, f), currentView(0), rowIndex(0), colIndex(0), timer(0), slideshowDelay(0)
+/**
+ * Constructor.
+ *
+ * @param parent This widget's parent widget (0 if it is to be full-screen)
+ */
+ImageWidget::ImageWidget(QWidget *parent)
+           : QWidget(parent), currentView(0), rowIndex(0), colIndex(0), timer(0), slideshowDelay(0)
 {
-    closing = FALSE;
-    setBackgroundMode(NoBackground);
+    closing = false;
+    setAttribute(Qt::WA_NoSystemBackground);
 }
 
-ImageWidget::~ImageWidget()
-{
-
-}
-
+/**
+ * Set the image to be displayed.
+ *
+ * @param pm The image data
+ * @param res True if the widget may need to be resized to accomodate the new
+ *            image, false otherwise (like when shown full-screen)
+ */
 void ImageWidget::setPixmap(QPixmap pm, bool res)
 {
     pixmap = pm;
-    // res says if the widget needs to be resized
-    // TRUE in imageviewer, FALSE for fullscreen show (slideshow)
     if (res) {
         resize(pm.width(), pm.height());
     }
 }
 
+/**
+ * Set the currently selected database view.  Used to determine the sequence
+ * of images to show when using slideshows or the arrow keys.
+ *
+ * @param view The database view currently in use
+ * @param row The index of the table row to start at
+ * @param column The index of the table column to start at
+ */
 void ImageWidget::setView(View *view, int row, int column)
 {
     currentView = view;
@@ -62,66 +64,81 @@ void ImageWidget::setView(View *view, int row, int column)
     colIndex = column;
 }
 
+/**
+ * Draw the image on the widget as prompted.
+ */
 void ImageWidget::paintEvent(QPaintEvent *)
 {
     if (closing) {
         return;
     }
-    else if (!pixmap.isNull()) {
-       int x = (width() - pixmap.width()) / 2;
-       int y = (height() - pixmap.height()) / 2;
-       bitBlt(this, x, y, &pixmap, 0, 0, pixmap.width(),
-              pixmap.height(), CopyROP);
+    QPainter p(this);
+    if (!pixmap.isNull()) {
+        p.drawPixmap(rect(), pixmap, pixmap.rect());
     }
     else {
-        QPainter p(this);
         p.fillRect(rect(), QColor(0, 0, 0));
     }
 }
 
+/**
+ * Generate a "clicked()" signal when the appropriate mouse action is taken.
+ */
 void ImageWidget::mouseReleaseEvent(QMouseEvent *)
 {
     emit clicked();
 }
 
+/**
+ * Check each key press to see if it represented a navigation or exit command.
+ *
+ * @param keyEvent The event which was fired
+ */
 void ImageWidget::keyReleaseEvent(QKeyEvent *keyEvent)
 {
     int key = keyEvent->key();
 
-    if (key == Key_Escape) {
+    if (key == Qt::Key_Escape) {
         emit CancelPressed();
         close();
     }
-    else if (key == Key_Enter) {
+    else if (key == Qt::Key_Enter) {
         emit OKPressed();
     }
-    else if (key == Key_Left || key == Key_Right || key == Key_Up || key == Key_Down) {
+    else if (key == Qt::Key_Left || key == Qt::Key_Right || key == Qt::Key_Up
+          || key == Qt::Key_Down) {
         processArrow(key);
     }
     keyEvent->accept();
 }
 
+/**
+ * Handle arrow key presses by moving to the next or previous image in the
+ * column being viewed, as appropriate.
+ *
+ * @param key The arrow key which was pressed
+ */
 void ImageWidget::processArrow(int key)
 {
     if (!currentView) {
         return;
     }
     int rowCount = currentView->getRowCount();
-    bool changed = FALSE;
-    bool lastImage = FALSE;
-    if (key == Key_Left || key == Key_Up) {
+    bool changed = false;
+    bool lastImage = false;
+    if (key == Qt::Key_Left || key == Qt::Key_Up) {
         if (rowIndex != 0) {
             rowIndex--;
-            changed = TRUE;
+            changed = true;
         }
     }
-    else if (key == Key_Right || key == Key_Down) {
+    else if (key == Qt::Key_Right || key == Qt::Key_Down) {
         if (rowIndex != rowCount - 1) {
             rowIndex++;
-            changed = TRUE;
+            changed = true;
         }
         else {
-            lastImage = TRUE;
+            lastImage = true;
         }
     }
     if (changed) {
@@ -136,15 +153,23 @@ void ImageWidget::processArrow(int key)
     }
 }
 
+/**
+ * Update the displayed image to reflect any changes in the current view,
+ * row index, and/or column index.
+ */
 void ImageWidget::updateImage()
 {
     int rowId = currentView->getId(rowIndex);
     QImage image = currentView->getImage(rowId, colIndex);
-    pixmap.setOptimization(QPixmap::NormalOptim);
-    pixmap.convertFromImage(image);
+    pixmap = QPixmap::fromImage(image);
     repaint();
 }
 
+/**
+ * Start a slideshow with the specified delay between images.
+ *
+ * @param delay The number of seconds between images
+ */
 void ImageWidget::slideshow(int delay)
 {
     slideshowDelay = delay;
@@ -154,14 +179,21 @@ void ImageWidget::slideshow(int delay)
     timer->start(delay * 1000);
 }
 
+/**
+ * Go to the next image in a slideshow.
+ */
 void ImageWidget::nextImage()
 {
-    processArrow(Key_Right);
+    processArrow(Qt::Key_Right);
 }
 
-void ImageWidget::closeEvent(QCloseEvent * e)
+/**
+ * Don't bother to continue painting an image if this widget is being closed.
+ * 
+ * @param e The window close event
+ */
+void ImageWidget::closeEvent(QCloseEvent *e)
 {
-    closing = TRUE;
-    pixmap.resize(0, 0);
+    closing = true;
     e->accept();
 }

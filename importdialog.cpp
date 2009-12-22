@@ -1,7 +1,7 @@
 /*
  * importdialog.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,87 +9,91 @@
  * (at your option) any later version.
  */
 
-#include <qpe/fileselector.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qmessagebox.h>
-#include <qstringlist.h>
+/** @file importdialog.cpp
+ * Source file for ImportDialog
+ */
+
+#include <QApplication>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QSettings>
+#include <QStringList.h>
+#include "importdialog.h"
 #include "csverror.h"
 #include "database.h"
-#include "importdialog.h"
 #include "importutils.h"
-#include "qqdialog.h"
+#include "qqutil/qqmenuhelper.h"
 
-ImportDialog::ImportDialog(int sourceType, Database *subject, QWidget *parent,
-  const char *name, WFlags f) : QDialog(parent, name, TRUE, f), db(subject), importDone(FALSE)
+/**
+ * Constructor.
+ *
+ * @param sourceType The type of file to open and import from
+ * @param subject The database to import into
+ * @param parent The widget to use as the parent of any dialogs launched
+ */
+ImportDialog::ImportDialog(DataSource sourceType, Database *subject, QWidget *parent)
+  : QObject(), db(subject), parentWidget(parent), source(sourceType)
 {
-    source = sourceType;
-    QString caption;
-    QString mimeType;
-    if (sourceType == CSV_FILE) {
-        caption = tr("Import rows from CSV file");
-        mimeType = "text/x-csv";
+
+}
+
+/**
+ * Launch the open file dialog and import data from the selected file, if
+ * any.
+ *
+ * @return 1 if data was imported, 0 otherwise
+ */
+bool ImportDialog::exec()
+{
+    QString filter;
+    if (source == CSV) {
+        filter = tr("Text files with comma separated values") + " (*.csv)";
     }
-    else if (sourceType == MOBILEDB_FILE) {
-        caption = tr("Import from MobileDB file");
-        // the SL-5500 has this associated with .pdb...not sure about
-        // Japanese models, and some ebook users replace it...sigh
-        mimeType = "chemical/x-pdb";
+    else if (source == MobileDB) {
+        filter = tr("MobileDB files") + " (*.pdb)";
     }
-    else if (sourceType == OPTION_LIST) {
-        caption = tr("Import from text file");
-        mimeType = "text/plain";
+    else if (source == OptionList) {
+        filter = QString::null;
     }
-    else if (sourceType == XML_FILE) {
-        caption = tr("Import from XML file");
-        mimeType = "text/xml";
+    else if (source == XML) {
+        filter = tr("XML files") + " (*.xml)";
     }
     else {
-        caption = tr("Select an image");
-        mimeType = "image/jpeg;image/png";
+        filter = tr("Images") + " (*.jpg *.jpeg *.png)";
     }
-
-    setCaption(caption + " - " + QQDialog::tr("PortaBase"));
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-    if (sourceType == CSV_FILE || sourceType == OPTION_LIST) {
-        QHBox *hbox = new QHBox(this);
-        vbox->addWidget(hbox);
-        new QLabel(tr("Text encoding"), hbox);
-        encodings = new QComboBox(FALSE, hbox);
-        encodings->insertItem("UTF-8");
-        encodings->insertItem("Latin-1");
-    }
-    selector = new FileSelector(mimeType, this, "importselector",
-                                FALSE, FALSE);
-    vbox->addWidget(selector);
-    connect(selector, SIGNAL(fileSelected(const DocLnk &)), this,
-            SLOT(import(const DocLnk &)));
-    showMaximized();
-}
-
-ImportDialog::~ImportDialog()
-{
-
-}
-
-void ImportDialog::import(const DocLnk &f)
-{
-    if (import(f.file())) {
-        accept();
+    QSettings settings;
+    QString lastDir = QQMenuHelper::getLastDir(&settings);
+    QString file = QFileDialog::getOpenFileName(parentWidget,
+                 tr("Choose a file"), lastDir, filter);
+    if (file.isEmpty()) {
+        return false;
     }
     else {
-        reject();
+        QFileInfo info(file);
+        settings.setValue("Files/LastDir", info.absolutePath());
+        path = info.absoluteFilePath();
     }
-}
 
-bool ImportDialog::import(const QString &file)
-{
-    path = file;
+    QString encoding = "";
+    if (source == CSV || source == OptionList) {
+        QStringList encodings;
+        encodings.append("UTF-8");
+        encodings.append("Latin-1");
+        bool ok;
+        encoding = QInputDialog::getItem(parentWidget, tr("Import"),
+                                         tr("Text encoding") + ":",
+                                         encodings, 0, false, &ok);
+        if (!ok) {
+            return false;
+        }
+    }
+
     QString error = "";
     QString data = "";
-    if (source == CSV_FILE) {
-        QStringList result = db->importFromCSV(file, encodings->currentText());
+    if (source == CSV) {
+        QStringList result = db->importFromCSV(file, encoding);
         int count = result.count();
         if (count > 0) {
             error = result[0];
@@ -98,55 +102,48 @@ bool ImportDialog::import(const QString &file)
             data = result[1];
         }
     }
-    else if (source == OPTION_LIST) {
+    else if (source == OptionList) {
         ImportUtils utils;
-        error = utils.importTextLines(file, encodings->currentText(),
-                                      &options);
+        error = utils.importTextLines(file, encoding, &options);
     }
-    else if (source == MOBILEDB_FILE) {
+    else if (source == MobileDB) {
         ImportUtils utils;
         error = utils.importMobileDB(file, db);
     }
-    else if (source == XML_FILE) {
+    else if (source == XML) {
         ImportUtils utils;
         error = utils.importXML(file, db);
     }
-    importDone = TRUE;
-    if (error != "") {
-        if (data == "") {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
+    if (!error.isEmpty()) {
+        if (data.isEmpty()) {
+            QMessageBox::warning(0, qApp->applicationName(), error);
         }
         else {
-            CSVErrorDialog dialog(error, data, this);
+            CSVErrorDialog dialog(error, data, 0);
             dialog.exec();
         }
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    else {
+        return true;
+    }
 }
 
-int ImportDialog::exec()
-{
-    int result = QDialog::exec();
-    if (result && !importDone) {
-        // "OK" was clicked...see if there is a selected file
-        const DocLnk *f = selector->selected();
-        if (!f) {
-            return QDialog::Rejected;
-        }
-        if (!import(f->file())) {
-            result = QDialog::Rejected;
-        }
-        delete f;
-    }
-    return result;
-}
-
+/**
+ * Get the list of enumeration options that were imported, if applicable.
+ *
+ * @return A list of enumeration option values
+ */
 QStringList ImportDialog::getOptions()
 {
     return options;
 }
 
+/**
+ * Get the absolute path of the file that was imported, if any.
+ *
+ * @return The imported file's absolute path
+ */
 QString ImportDialog::getPath()
 {
     return path;

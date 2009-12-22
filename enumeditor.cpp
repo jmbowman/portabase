@@ -1,7 +1,7 @@
 /*
  * enumeditor.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,58 +9,60 @@
  * (at your option) any later version.
  */
 
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qlistbox.h>
-#include <qmessagebox.h>
-#include <qstringlist.h>
+/** @file enumeditor.cpp
+ * Source file for EnumEditor
+ */
+
+#include <QApplication>
+#include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QInputDialog>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QSettings>
+#include <QTextStream>
 #include "database.h"
 #include "enumeditor.h"
-#include "metakitfuncs.h"
-
-#if !defined(Q_WS_QWS)
-#include <qfiledialog.h>
-#include <qfileinfo.h>
-#include <qinputdialog.h>
-typedef QInputDialog InputDialog;
-#include "desktop/applnk.h"
-#include "desktop/filemanager.h"
-#include "desktop/importdialog.h"
-#include "desktop/newfiledialog.h"
-#include "desktop/qpeapplication.h"
-#else
-#include <qpe/applnk.h>
-#include <qpe/filemanager.h>
-#include "inputdialog.h"
-#if defined(SHARP)
-#include "sharp/importdialog.h"
-#include "sharp/newfiledialog.h"
-#else
+#include "factory.h"
 #include "importdialog.h"
-#include "newfiledialog.h"
-#endif
-#endif
+#include "metakitfuncs.h"
+#include "qqutil/qqmenuhelper.h"
 
-EnumEditor::EnumEditor(QWidget *parent, const char *name)
-  : PBDialog(tr("Enum Editor"), parent, name), db(0), eeiName("_eeiname"), eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"), eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NOT_SORTED)
+/**
+ * Constructor.
+ *
+ * @param parent This dialog's parent widget, if any
+ */
+EnumEditor::EnumEditor(QWidget *parent)
+  : PBDialog(tr("Enum Editor"), parent), db(0), eeiName("_eeiname"),
+  eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"),
+  eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NotSorted)
 {
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QLabel(tr("Enum Name"), hbox);
-    nameBox = new QLineEdit(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(this);
+    vbox->addLayout(hbox);
+    hbox->addWidget(new QLabel(tr("Enum Name") + " ", this));
+    nameBox = new QLineEdit(this);
+    hbox->addWidget(nameBox);
 
-    hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    QPushButton *sortButton = new QPushButton(tr("Sort"), hbox);
+    hbox = Factory::hBoxLayout(this);
+    vbox->addLayout(hbox);
+    QPushButton *sortButton = new QPushButton(tr("Sort"), this);
+    hbox->addWidget(sortButton);
     connect(sortButton, SIGNAL(clicked()), this, SLOT(sortOptions()));
-    QPushButton *importButton = new QPushButton(tr("Import"), hbox);
+    QPushButton *importButton = new QPushButton(tr("Import"), this);
+    hbox->addWidget(importButton);
     connect(importButton, SIGNAL(clicked()), this, SLOT(importOptions()));
-    QPushButton *exportButton = new QPushButton(tr("Export"), hbox);
+    QPushButton *exportButton = new QPushButton(tr("Export"), this);
+    hbox->addWidget(exportButton);
     connect(exportButton, SIGNAL(clicked()), this, SLOT(exportOptions()));
 
-    listBox = new QListBox(this);
-    vbox->addWidget(listBox);
+    listWidget = Factory::listWidget(this);
+    vbox->addWidget(listWidget);
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addOption()));
@@ -73,12 +75,15 @@ EnumEditor::EnumEditor(QWidget *parent, const char *name)
     nameBox->setFocus();
 }
 
-EnumEditor::~EnumEditor()
-{
-
-}
-
-int EnumEditor::edit(Database *subject, QString enumName)
+/**
+ * Launch this dialog to edit the named enumeration in the specified database
+ * (it may be a new enumeration with a blank name).
+ *
+ * @param subject The database being edited
+ * @param enumName The initial name of the enumeration to create or edit
+ * @return 1 if the dialog's changes are to be committed, 0 otherwise
+ */
+int EnumEditor::edit(Database *subject, const QString &enumName)
 {
     db = subject;
     originalName = enumName;
@@ -88,7 +93,7 @@ int EnumEditor::edit(Database *subject, QString enumName)
         QStringList options = db->listEnumOptions(enumId);
         int optionCount = options.count();
         for (int i = 0; i < optionCount; i++) {
-            info.Add(eeiName [options[i].utf8()] + eeiIndex [i]);
+            info.Add(eeiName [options[i].toUtf8()] + eeiIndex [i]);
         }
         updateList();
     }
@@ -99,7 +104,7 @@ int EnumEditor::edit(Database *subject, QString enumName)
                 break;
             }
             else {
-                QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+                QMessageBox::warning(this, qApp->applicationName(),
                                      tr("Must have at least one option"));
                 result = exec();
             }
@@ -111,21 +116,31 @@ int EnumEditor::edit(Database *subject, QString enumName)
     return result;
 }
 
+/**
+ * Get the latest specified name for the enumeration.
+ *
+ * @return The enumeration's name
+ */
 QString EnumEditor::getName()
 {
     return nameBox->text();
 }
 
+/**
+ * Sort the listed options; triggered by the "Sort" button.  Sorts first
+ * in ascending order, then descending if the button is clicked again before
+ * any other changes are made.
+ */
 void EnumEditor::sortOptions()
 {
     c4_View sorted;
     c4_View::stringCompareFunc = compareUsingLocale;
-    if (sorting == ASCENDING) {
-        sorting = DESCENDING;
+    if (sorting == Ascending) {
+        sorting = Descending;
         sorted = info.SortOnReverse(eeiName, eeiName);
     }
     else {
-        sorting = ASCENDING;
+        sorting = Ascending;
         sorted = info.SortOn(eeiName);
     }
     c4_View::stringCompareFunc = strcmp;
@@ -138,9 +153,13 @@ void EnumEditor::sortOptions()
     updateList();
 }
 
+/**
+ * Import a list of options from the lines of a text file.  Triggered by the
+ * "Import" button.
+ */
 void EnumEditor::importOptions()
 {
-    ImportDialog dialog(OPTION_LIST, db, this);
+    ImportDialog dialog(ImportDialog::OptionList, db, this);
     if (!dialog.exec()) {
         return;
     }
@@ -149,7 +168,7 @@ void EnumEditor::importOptions()
     int i;
     int additions = 0;
     for (i = 0; i < count; i++) {
-        QCString option = lines[i].utf8();
+        QByteArray option = lines[i].toUtf8();
         if (info.Find(eeiName [option]) != -1) {
             continue;
         }
@@ -160,43 +179,50 @@ void EnumEditor::importOptions()
     }
     if (additions > 0) {
         updateList();
-        sorting = NOT_SORTED;
+        sorting = NotSorted;
     }
 }
 
+/**
+ * Export the current list of options to a text file.  Triggered by the
+ * "Export" button.
+ */
 void EnumEditor::exportOptions()
 {
-    NewFileDialog filedlg(".txt", this);
-    if (!filedlg.exec()) {
-        return;
-    }
-    DocLnk *output = filedlg.doc();
-    if (output == 0) {
+    QSettings settings;
+    QString lastDir = QQMenuHelper::getLastDir(&settings);
+    QString filename = QFileDialog::getSaveFileName(this,
+        QQMenuHelper::tr("Choose a filename to save under"), lastDir);
+    if (filename.isEmpty()) {
         return;
     }
     QStringList options = listCurrentOptions();
-#if defined(Q_WS_WIN)
-    // use normal Windows line endings so Notepad, etc. are happy
-    QString lineEnd("\r\n");
-#else
-    QString lineEnd("\n");
-#endif
-    FileManager fm;
-    fm.saveFile(*output, options.join(lineEnd) + lineEnd);
-#if defined(SHARP)
-    QFile::remove(output->linkFile());
-#endif
-    delete output;
+    QFile file(filename);
+    if (file.open(QFile::WriteOnly | QFile::Truncate | QFile::Text)) {
+        QTextStream stream(&file);
+        foreach (QString option, options) {
+            stream << option << endl;
+        }
+        file.close();
+    }
+    else {
+        QMessageBox::warning(this, qApp->applicationName(),
+                             QObject::tr("Unable to open file"));
+    }
+    settings.setValue("Files/LastDir", QFileInfo(filename).absolutePath());
 }
 
+/**
+ * Add a new option to the end of the list.  Triggered by the "Add" button.
+ */
 void EnumEditor::addOption()
 {
-    bool ok = TRUE;
+    bool ok = true;
     QString text;
     while (ok) {
-        text = InputDialog::getText(PBDialog::tr("Add"), tr("Option text"),
-                                    QLineEdit::Normal, QString::null, &ok,
-                                    this);
+        text = QInputDialog::getText(this, PBDialog::tr("Add"),
+                                     tr("Option text"), QLineEdit::Normal,
+                                     QString::null, &ok);
         if (ok) {
             if (isValidOption(text)) {
                 break;
@@ -204,32 +230,35 @@ void EnumEditor::addOption()
         }
     }
     if (ok) {
-        QCString utf8Text = text.utf8();
+        QByteArray utf8Text = text.toUtf8();
         changes.Add(eecIndex [changes.GetSize()] + eecType [ADD_OPTION]
                  + eecOldName [""] + eecNewName [utf8Text]);
         info.Add(eeiName [utf8Text] + eeiIndex [info.GetSize()]);
         updateList();
-        sorting = NOT_SORTED;
+        sorting = NotSorted;
     }
 }
 
+/**
+ * Edit the currently selected option.  Triggered by the "Edit" button.
+ */
 void EnumEditor::editOption()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected == -1) {
         return;
     }
-    QString originalText = listBox->text(selected);
-    bool ok = TRUE;
+    QString originalText = listWidget->currentItem()->text();
+    bool ok = true;
     QString newText;
     while (ok) {
-        newText = InputDialog::getText(PBDialog::tr("Edit"), tr("Option text"),
-                                       QLineEdit::Normal, originalText, &ok,
-                                       this);
+        newText = QInputDialog::getText(this, PBDialog::tr("Edit"),
+                                        tr("Option text"), QLineEdit::Normal,
+                                        originalText, &ok);
         if (ok) {
             if (newText == originalText) {
                 // clicked ok but left unchanged
-                ok = FALSE;
+                ok = false;
             }
             else if (isValidOption(newText)) {
                 break;
@@ -237,44 +266,47 @@ void EnumEditor::editOption()
         }
     }
     if (ok) {
-        QCString utf8NewText = newText.utf8();
+        QByteArray utf8NewText = newText.toUtf8();
         int rowIndex = info.Find(eeiIndex [selected]);
         eeiName (info[rowIndex]) = utf8NewText;
         changes.Add(eecIndex [changes.GetSize()] + eecType [RENAME_OPTION]
-                   + eecOldName [originalText.utf8()]
+                   + eecOldName [originalText.toUtf8()]
                    + eecNewName [utf8NewText]);
         updateList();
-        listBox->setCurrentItem(selected);
-        sorting = NOT_SORTED;
+        listWidget->setCurrentRow(selected);
+        sorting = NotSorted;
     }
 }
 
+/**
+ * Delete the currently selected option.  Triggered by the "Delete" button.
+ */
 void EnumEditor::deleteOption()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected == -1) {
         return;
     }
     if (!originalName.isEmpty() && info.GetSize() == 1) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        QMessageBox::warning(this, qApp->applicationName(),
                              tr("Must have at least one option"));
         return;
     }
-    QString name = listBox->text(selected);
-    QStringList options = listCurrentOptions();
-    options.remove(name);
-    bool ok = TRUE;
+    QString name = listWidget->currentItem()->text();
+    bool ok = true;
     QString replace("");
     if (!originalName.isEmpty()) {
-        replace = InputDialog::getItem(PBDialog::tr("Delete"),
-                                       tr("Replace where used with:"),
-                                       options, 0, FALSE, &ok, this);
+        QStringList options = listCurrentOptions();
+        options.removeOne(name);
+        replace = QInputDialog::getItem(this, PBDialog::tr("Delete"),
+                                        tr("Replace where used with:"),
+                                        options, 0, false, &ok);
     }
     if (ok) {
         int rowIndex = info.Find(eeiIndex [selected]);
         info.RemoveAt(rowIndex);
         changes.Add(eecIndex [changes.GetSize()] + eecType [DELETE_OPTION]
-                    + eecOldName [name.utf8()] + eecNewName [replace.utf8()]);
+                    + eecOldName [name.toUtf8()] + eecNewName [replace.toUtf8()]);
         // update position indices
         int count = info.GetSize();
         for (int i = 0; i < count; i++) {
@@ -287,9 +319,13 @@ void EnumEditor::deleteOption()
     }
 }
 
+/**
+ * Move the selected option up by one in the list.  Triggered by the "Up"
+ * button.
+ */
 void EnumEditor::moveUp()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected < 1) {
         return;
     }
@@ -298,13 +334,17 @@ void EnumEditor::moveUp()
     eeiIndex (info[row1]) = selected - 1;
     eeiIndex (info[row2]) = selected;
     updateList();
-    listBox->setCurrentItem(selected - 1);
-    sorting = NOT_SORTED;
+    listWidget->setCurrentRow(selected - 1);
+    sorting = NotSorted;
 }
 
+/**
+ * Move the selected option down by one in the list.  Triggered by the "Down"
+ * button.
+ */
 void EnumEditor::moveDown()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     int optionCount = info.GetSize();
     if (selected == -1 || selected == optionCount - 1) {
         return;
@@ -314,44 +354,61 @@ void EnumEditor::moveDown()
     eeiIndex (info[row1]) = selected + 1;
     eeiIndex (info[row2]) = selected;
     updateList();
-    listBox->setCurrentItem(selected + 1);
-    sorting = NOT_SORTED;
+    listWidget->setCurrentRow(selected + 1);
+    sorting = NotSorted;
 }
 
+/**
+ * Update the displayed list of options.
+ */
 void EnumEditor::updateList()
 {
-    listBox->clear();
-    listBox->insertStringList(listCurrentOptions());
+    listWidget->clear();
+    listWidget->addItems(listCurrentOptions());
 }
 
+/**
+ * Determine if the currently entered enumeration name is valid or not.
+ * Prevents name clashes with other enumerations and names that begin with an
+ * underscore.
+ *
+ * @return True if valid, false otherwise.
+ */
 bool EnumEditor::hasValidName()
 {
     return validateName(nameBox->text(), originalName, db->listEnums());
 }
 
-bool EnumEditor::isValidOption(QString option)
+/**
+ * Determine if the specified text is a valid option or not.  Prohibits
+ * duplicate entries and values that begin with an underscore.
+ */
+bool EnumEditor::isValidOption(const QString &option)
 {
     if (!option.isEmpty()) {
         if (option[0] == '_') {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+            QMessageBox::warning(this, qApp->applicationName(),
                                  PBDialog::tr("Name must not start with '_'"));
-            return FALSE;
+            return false;
         }
     }
     // check for other options with same text
     QStringList options = listCurrentOptions();
-    if (options.findIndex(option) != -1) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+    if (options.contains(option)) {
+        QMessageBox::warning(this, qApp->applicationName(),
                              PBDialog::tr("Duplicate name"));
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
+/**
+ * Apply the changes that were made in the dialog to the database.
+ */
 void EnumEditor::applyChanges()
 {
     QString enumName = nameBox->text();
-    if (originalName == "") {
+    if (originalName.isEmpty()) {
         db->addEnum(enumName, listCurrentOptions());
         return;
     }
@@ -377,6 +434,11 @@ void EnumEditor::applyChanges()
     db->setEnumOptionSequence(enumName, listCurrentOptions());
 }
 
+/**
+ * List the currently specified options in order.
+ *
+ * @return The list of options
+ */
 QStringList EnumEditor::listCurrentOptions()
 {
     QStringList options;

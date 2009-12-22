@@ -1,12 +1,16 @@
 /*
  * enumeditor.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
+ */
+
+/** @file enumeditor.h
+ * Header file for EnumEditor
  */
 
 #ifndef ENUMEDITOR_H
@@ -19,29 +23,28 @@
 #define RENAME_OPTION 1
 #define DELETE_OPTION 2
 
-#define NOT_SORTED 0
-#define ASCENDING 1
-#define DESCENDING 2
-
 class Database;
 class QLineEdit;
-class QListBox;
+class QListWidget;
 
+/**
+ * Dialog for editing the name and option list of an enumerated column type.
+ * Used by EnumManager.
+ */
 class EnumEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    EnumEditor(QWidget *parent = 0, const char *name = 0);
-    ~EnumEditor();
+    EnumEditor(QWidget *parent = 0);
 
-    int edit(Database *subject, QString enumName);
+    int edit(Database *subject, const QString &enumName);
     void applyChanges();
     QString getName();
 
 private:
     void updateList();
     bool hasValidName();
-    bool isValidOption(QString option);
+    bool isValidOption(const QString &option);
     QStringList listCurrentOptions();
 
 private slots:
@@ -55,19 +58,25 @@ private slots:
     void moveDown();
 
 private:
-    QLineEdit *nameBox;
-    QListBox *listBox;
-    Database *db;
-    QString originalName;
-    c4_View info;
-    c4_StringProp eeiName;
-    c4_IntProp eeiIndex;
-    c4_View changes;
-    c4_IntProp eecIndex;
-    c4_IntProp eecType;
-    c4_StringProp eecOldName;
-    c4_StringProp eecNewName;
-    int sorting;
+    /** Enumeration of option sorting states */
+    enum OptionSorting {
+        NotSorted = 0,
+        Ascending = 1,
+        Descending = 2
+    };
+    QLineEdit *nameBox; /**< Entry field for the enumeration's name */
+    QListWidget *listWidget; /**< Display of the enumeration options */
+    Database *db; /**< The database being edited */
+    QString originalName; /**< The name of the enumeration before editing started */
+    c4_View info; /**< Data table for the current enumeration options */
+    c4_StringProp eeiName; /**< Column for enumeration option names */
+    c4_IntProp eeiIndex; /**< Column for enumeration option position indices */
+    c4_View changes; /**< Data table for changes made to enumeration options */
+    c4_IntProp eecIndex; /**< Column for the sequence of changes made */
+    c4_IntProp eecType; /**< Column for the type of changes made */
+    c4_StringProp eecOldName; /**< Column for the original names of options */
+    c4_StringProp eecNewName; /**< Column for the new names of options */
+    OptionSorting sorting; /**< The type of option sorting currently in use */
 };
 
 #endif

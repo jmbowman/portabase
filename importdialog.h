@@ -1,7 +1,7 @@
 /*
  * importdialog.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,50 +9,48 @@
  * (at your option) any later version.
  */
 
+/** @file importdialog.h
+ * Header file for ImportDialog
+ */
+
 #ifndef IMPORT_DIALOG_H
 #define IMPORT_DIALOG_H
 
-#include <qdialog.h>
-#include <qstringlist.h>
-
-// possible data sources
-#define NO_SOURCE 0
-#define CSV_FILE 1
-#define MOBILEDB_FILE 2
-#define XML_FILE 3
-#define OPTION_LIST 4
-#define IMAGE_FILE 5
+#include <QObject>
+#include <QStringList>
 
 class Database;
-class DocLnk;
-class FileSelector;
-class QComboBox;
+class QWidget;
 
-class ImportDialog: public QDialog
+/**
+ * Wrapper for the file open dialog which imports data from the selected
+ * file.
+ */
+class ImportDialog : QObject
 {
     Q_OBJECT
 public:
-    ImportDialog(int sourceType, Database *subject, QWidget *parent = 0,
-                 const char *name = 0, WFlags f = 0);
-    ~ImportDialog();
-    int exec();
+    /** Enumeration of possible types of files to import from */
+    enum DataSource {
+        NoSource = 0,
+        CSV = 1,
+        MobileDB = 2,
+        XML = 3,
+        OptionList = 4,
+        Image = 5
+    };
+    ImportDialog(DataSource sourceType, Database *subject, QWidget *parent = 0);
+
+    bool exec();
     QStringList getOptions();
     QString getPath();
 
-private slots:
-    void import(const DocLnk &);
-
 private:
-    bool import(const QString &file);
-
-private:
-    Database *db;
-    QComboBox *encodings;
-    FileSelector *selector;
-    int source;
-    bool importDone;
-    QStringList options;
-    QString path;
+    Database *db; /**< The database that is in use */
+    QWidget *parentWidget; /**< This dialog's parent widget */
+    DataSource source; /**< The type of file being imported from */
+    QStringList options; /**< List of imported enumeration options, if any */
+    QString path; /**< The absolute path of the file that was imported */
 };
 
 #endif

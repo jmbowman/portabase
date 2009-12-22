@@ -1,7 +1,7 @@
 /*
  * preferences.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,84 +9,68 @@
  * (at your option) any later version.
  */
 
+/** @file preferences.h
+ * Header file for Preferences
+ */
+
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#include <qfontdatabase.h>
-#include <qpixmap.h>
+#include <QFontDatabase>
+#include <QPixmap>
+#include "datatypes.h"
 #include "pbdialog.h"
 
-#if !defined(Q_WS_QWS)
-#include "desktop/timestring.h"
-#endif
-
-class ColorButton;
+class QtColorPicker;
 class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
-class QListView;
 class QSpinBox;
 class QTabWidget;
 
+/**
+ * Application preferences dialog.  Contains settings for time and date
+ * formatting, font name and size, text wrapping in notes, data grid paging
+ * options, etc.
+ */
 class Preferences: public PBDialog
 {
     Q_OBJECT
 public:
-    Preferences(QWidget *parent = 0, const char *name = 0);
-    ~Preferences();
+    Preferences(QWidget *parent = 0);
 
     QFont applyChanges();
-    static void menuConfiguration(QStringList &top, QStringList &file);
-    static void buttonConfiguration(QStringList &shown, QStringList &hidden);
 
 private slots:
     void updateSizes(int selected);
     void updateSample(int selectedSize);
-    void menuUp();
-    void menuDown();
-    void buttonUp();
-    void buttonDown();
 
 private:
     void addOptionsTab(QTabWidget *tabs);
     void addAppearanceTab(QTabWidget *tabs);
-    void addMenusTab(QTabWidget *tabs);
-    void addButtonsTab(QTabWidget *tabs);
-    void moveSelectionUp(QListView *table);
-    void moveSelectionDown(QListView *table);
-    void applyDateTimeChanges();
+    void configureColorPicker(QtColorPicker *picker);
 
 private:
-    QFontDatabase fontdb;
-    QStringList fonts;
-    QValueList<int> sizes;
-    int sizeFactor;
-    QComboBox *fontName;
-    QComboBox *fontSize;
-    QLabel *sample;
-    QCheckBox *confirmDeletions;
-    QCheckBox *booleanToggle;
-    QCheckBox *showSeconds;
-    QCheckBox *noteWrap;
-    QComboBox *wrapType;
-    QCheckBox *pagedDisplay;
-    QSpinBox *rowsPerPage;
-    ColorButton *evenButton;
-    ColorButton *oddButton;
-#if !defined(Q_WS_QWS)
-    PBDateFormat date_formats[4];
-    QComboBox *dateFormatCombo;
-    QComboBox *ampmCombo;
-    QComboBox *weekStartCombo;
-#endif
-    QStringList menuList;
-    QStringList menuLabelList;
-    QListView *menuTable;
-    QStringList buttonList;
-    QStringList buttonLabelList;
-    QStringList buttonResourceList;
-    QListView *buttonTable;
+    QFontDatabase fontdb; /**< System font database */
+    IntList sizes; /**< List of displayed font sizes */
+    QComboBox *fontName; /**< Font name selection list */
+    QComboBox *fontSize; /**< Font size selection list */
+    QLabel *sample; /**< Sample of text using the selected font */
+    QCheckBox *confirmDeletions; /**< Option to display confirmation dialogs for item deletions */
+    QCheckBox *booleanToggle; /**< Option to toggle boolean fields by clicking on them in the data viewer */
+    QCheckBox *showSeconds; /**< Option to show seconds for time fields */
+    QCheckBox *noteWrap; /**< Option to autowrap text in the node editor */
+    QComboBox *wrapType; /**< Option to force note text wrapping at line end rather than whitespace */
+    QCheckBox *pagedDisplay; /**< Option to pages of data rows, rather than all in a scrolling list */
+    QSpinBox *rowsPerPage; /**< Number of rows to display on each page of the data view */
+    QCheckBox *smallScreen; /**< Option to use settings for PDA/phone-sized screens */
+    QtColorPicker *evenButton; /**< Button to select the color of even rows */
+    QtColorPicker *oddButton; /**< Button to select the color of odd rows */
+    QStringList dateFormats; /**< List of standard date formatting styles */
+    QComboBox *dateFormatCombo; /**< Date format selection list */
+    QComboBox *ampmCombo; /**< Option to show AM/PM times rather than 24-hour times */
+    QComboBox *weekStartCombo; /**< First day of the week selection list */
 };
 
 #endif

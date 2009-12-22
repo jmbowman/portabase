@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,16 +9,23 @@
  * (at your option) any later version.
  */
 
-#include <qapplication.h>
-#include <qcombobox.h>
-#include <qclipboard.h>
-#include <qhbox.h>
-#include <qmime.h>
-#include <qpushbutton.h>
-#include <qtextview.h>
-#include <qtoolbutton.h>
+/** @file rowviewer.cpp
+ * Source file for RowViewer
+ */
+
+#include <QApplication>
+#include <QComboBox>
+#include <QClipboard>
+#include <QIcon>
+#include <QKeyEvent>
+#include <QLayout>
+#include <QToolButton>
+#include <QTextDocument>
+#include <QTextEdit>
+#include <QUrl>
 #include "database.h"
 #include "datatypes.h"
+#include "factory.h"
 #include "menuactions.h"
 #include "portabase.h"
 #include "rowviewer.h"
@@ -26,73 +33,78 @@
 #include "viewdisplay.h"
 #include "image/imageutils.h"
 
-#if defined(Q_WS_QWS)
-#include <qpe/resource.h>
-#else
-#include "desktop/resource.h"
-#endif
-
-RowViewer::RowViewer(Database *dbase, ViewDisplay *parent, const char *name)
-  : PBDialog(tr("Row Viewer"), parent, name), db(dbase), display(parent), currentView(0)
+/**
+ * Constructor.
+ *
+ * @param dbase The database being viewed
+ * @param parent The view display widget which is this dialog's parent
+ */
+RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
+  : PBDialog(tr("Row Viewer"), parent), db(dbase), display(parent), currentView(0)
 {
-    tv = new QTextView(this);
+    tv = new QTextEdit(this);
+    tv->setReadOnly(true);
+    // Make the boolean value images available in case we need them
+    tv->document()->addResource(QTextDocument::ImageResource,
+                                QUrl("img://icons/checked.png"),
+                                QPixmap(":/icons/checked.png"));
+    tv->document()->addResource(QTextDocument::ImageResource,
+                                QUrl("img://icons/unchecked.png"),
+                                QPixmap(":/icons/unchecked.png"));
     vbox->addWidget(tv);
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-#if defined(Q_OS_MACX)
-    prevButton = new QToolButton(hbox);
-#else
-    prevButton = new QPushButton(hbox);
-#endif
-    prevButton->setPixmap(Resource::loadPixmap("back"));
+    
+    QHBoxLayout *hbox = Factory::hBoxLayout(this);
+    vbox->addLayout(hbox);
+    prevButton = new QToolButton(this);
+    prevButton->setIcon(QIcon(":/icons/back.png"));
+    prevButton->setToolTip(tr("Previous row"));
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
-#if defined(Q_OS_MACX)
-    QToolButton *editButton = new QToolButton(hbox);
-#else
-    QPushButton *editButton = new QPushButton(hbox);
-#endif
-    editButton->setPixmap(Resource::loadPixmap("edit"));
+    hbox->addWidget(prevButton);
+    QToolButton *editButton = new QToolButton(this);
+    editButton->setIcon(QIcon(":/icons/edit.png"));
+    editButton->setToolTip(tr("Edit this row"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
+    hbox->addWidget(editButton);
 
     QStringList viewNames = db->listViews();
-    viewNames.remove("_all");
+    viewNames.removeAll("_all");
     viewNames.prepend(MenuActions::tr("All Columns"));
-    viewBox = new QComboBox(FALSE, hbox);
-    hbox->setStretchFactor(viewBox, 1);
-    viewBox->insertStringList(viewNames);
+    viewBox = new QComboBox(this);
+    viewBox->addItems(viewNames);
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
+    hbox->addWidget(viewBox, 1);
 
-#if defined(Q_OS_MACX)
-    QToolButton *copyButton = new QToolButton(hbox);
-#else
-    QPushButton *copyButton = new QPushButton(hbox);
-#endif
-    copyButton->setPixmap(Resource::loadPixmap("copy"));
-    connect(copyButton, SIGNAL(clicked()), this, SLOT(copyText()));
-#if defined(Q_OS_MACX)
-    nextButton = new QToolButton(hbox);
-#else
-    nextButton = new QPushButton(hbox);
-#endif
-    nextButton->setPixmap(Resource::loadPixmap("forward"));
+    QToolButton *copyButton = new QToolButton(this);
+    copyButton->setIcon(QIcon(":/icons/copy_text.png"));
+    copyButton->setToolTip(tr("Copy the selected text"));
+    connect(copyButton, SIGNAL(clicked()), tv, SLOT(copy()));
+    hbox->addWidget(copyButton);
+    nextButton = new QToolButton(this);
+    nextButton->setIcon(QIcon(":/icons/forward.png"));
+    nextButton->setToolTip(tr("Next row"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
+    hbox->addWidget(nextButton);
 
-    finishLayout(TRUE, FALSE);
+    finishLayout(true, false);
     editButton->setFocus();
 }
 
+/**
+ * Destructor.
+ */
 RowViewer::~RowViewer()
 {
     if (currentView) {
         delete currentView;
     }
-    // free up memory used by images that were shown
-    int count = usedImageIds.count();
-    for (int i = 0; i < count; i++) {
-        tv->mimeSourceFactory()->setImage(usedImageIds[i], QImage());
-    }
 }
 
+/**
+ * Launch this dialog to view a particular record.
+ *
+ * @param originalView The currently selected view
+ * @param rowIndex Index within the current filter of the record to view
+ */
 void RowViewer::viewRow(View *originalView, int rowIndex)
 {
     view = originalView;
@@ -100,16 +112,16 @@ void RowViewer::viewRow(View *originalView, int rowIndex)
         delete currentView;
     }
     QString viewName = view->getName();
-    currentView = db->getView(viewName, FALSE, FALSE);
+    currentView = db->getView(viewName, false, false);
     currentView->copyStateFrom(view);
     if (viewName == "_all") {
-        viewBox->setCurrentItem(0);
+        viewBox->setCurrentIndex(0);
     }
     else {
         int count = viewBox->count();
         for (int i = 1; i < count; i++) {
-            if (viewBox->text(i) == viewName) {
-                viewBox->setCurrentItem(i);
+            if (viewBox->itemText(i) == viewName) {
+                viewBox->setCurrentIndex(i);
                 break;
             }
         }
@@ -120,6 +132,9 @@ void RowViewer::viewRow(View *originalView, int rowIndex)
     exec();
 }
 
+/**
+ * Update the display based on which record is now to be shown, etc.
+ */
 void RowViewer::updateContent()
 {
     prevButton->setEnabled(index != 0);
@@ -137,23 +152,22 @@ void RowViewer::updateContent()
         int type = colTypes[i];
         if (type == BOOLEAN) {
             if (values[i].toInt()) {
-                QString path = Resource::findPixmap("portabase/checked");
-                str += "<img src=\"" + path + "\">";
+                str += "<img src=\"img://icons/checked.png\">";
             }
             else {
-                QString path = Resource::findPixmap("portabase/unchecked");
-                str += "<img src=\"" + path + "\">";
+                str += "<img src=\"img://icons/unchecked.png\">";
             }
         }
         else if (type == IMAGE) {
             QString format = values[i];
-            if (format != "") {
+            if (!format.isEmpty()) {
                 int rowId = currentView->getId(index);
                 QString name = colNames[i];
                 QImage image = ImageUtils::load(db, rowId, name, format);
-                QString imageId = QString("image%1").arg(imageIndex);
-                tv->mimeSourceFactory()->setImage(imageId, image);
-                str += "<img src=\"" + imageId + "\">";
+                QString imageId = QString("img://image%1").arg(imageIndex);
+                tv->document()->addResource(QTextDocument::ImageResource,
+                                            QUrl(imageId), image);
+                str += QString("<img src=\"%1\">").arg(imageId);
                 if (!usedImageIds.contains(imageId)) {
                     usedImageIds.append(imageId);
                 }
@@ -166,10 +180,16 @@ void RowViewer::updateContent()
         str += "</td></tr>";
     }
     str += "</table></qt>";
-    tv->setText(str);
+    tv->setHtml(str);
 }
 
-QString RowViewer::prepareString(QString content)
+/**
+ * Format the provided field value for insertion into an HTML table cell.
+ *
+ * @param content The field value from the database
+ * @return An HTML fragment suitable for use in the display widget
+ */
+QString RowViewer::prepareString(const QString &content)
 {
     QString result = "";
     int length = content.length();
@@ -194,18 +214,29 @@ QString RowViewer::prepareString(QString content)
     return result;
 }
 
+/**
+ * Display the next record in the current filter.  Called when the next record
+ * button is clicked.
+ */
 void RowViewer::nextRow()
 {
     index++;
     updateContent();
 }
 
+/**
+ * Display the previous record in the current filter.  Called when the
+ * previous record button is clicked.
+ */
 void RowViewer::previousRow()
 {
     index--;
     updateContent();
 }
 
+/**
+ * Launch the row editor to edit the currently displayed record.
+ */
 void RowViewer::editRow()
 {
     int rowId = view->getId(index);
@@ -214,28 +245,32 @@ void RowViewer::editRow()
     }
 }
 
-void RowViewer::copyText()
-{
-    if (tv->hasSelectedText()) {
-        QClipboard *cb = QApplication::clipboard();
-        cb->setText(tv->selectedText());
-    }
-}
-
+/**
+ * Update the data display to reflect a change in the selected database view.
+ *
+ * @param index The index of the newly selected view in the selection list
+ */
 void RowViewer::viewChanged(int index)
 {
     if (currentView) {
         delete currentView;
     }
-    QString name = viewBox->text(index);
+    QString name = viewBox->itemText(index);
     if (index == 0) {
         name = "_all";
     }
-    currentView = db->getView(name, FALSE, FALSE);
+    currentView = db->getView(name, false, false);
     currentView->copyStateFrom(view);
     updateContent();
 }
 
+/**
+ * Handler for keyboard key release events.  Ensures that pressing the left
+ * and right arrows navigate to the previous and next records in the filter,
+ * respectively.
+ *
+ * @param e The keyboard event which occurred
+ */
 void RowViewer::keyReleaseEvent(QKeyEvent *e)
 {
     int key = e->key();

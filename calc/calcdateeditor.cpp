@@ -1,7 +1,7 @@
 /*
  * calcdateeditor.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,101 +9,132 @@
  * (at your option) any later version.
  */
 
-#include <qbuttongroup.h>
-#include <qcombobox.h>
-#include <qdatetime.h>
-#include <qgrid.h>
-#include <qhbox.h>
-#include <qradiobutton.h>
-#include "calcnode.h"
+/** @file calcdateeditor.cpp
+ * Source file for CalcDateEditor
+ */
+
+#include <QButtonGroup>
+#include <QComboBox>
+#include <QDateTime>
+#include <QLayout>
+#include <QRadioButton>
 #include "calcdateeditor.h"
+#include "calcnode.h"
 #include "../datatypes.h"
 #include "../datewidget.h"
 
-CalcDateEditor::CalcDateEditor(const QStringList &colNames, int *colTypes, QWidget *parent, const char *name)
-  : PBDialog(tr("Calculation Node Editor"), parent, name)
+/**
+ * Constructor.
+ *
+ * @param colNames The names of all columns in the database
+ * @param colTypes The type IDs of all columns in the database
+ * @param parent This dialog's parent widget
+ */
+CalcDateEditor::CalcDateEditor(const QStringList &colNames, int *colTypes, QWidget *parent)
+  : PBDialog(tr("Calculation Node Editor"), parent)
 {
     group = new QButtonGroup(this);
-    group->hide();
-    QGrid *grid = new QGrid(2, this);
-    vbox->addWidget(grid);
-    QRadioButton *colButton = new QRadioButton(tr("Column"), grid);
-    group->insert(colButton, 0);
-    columnList = new QComboBox(FALSE, grid);
+    QGridLayout *grid = new QGridLayout(this);
+    vbox->addLayout(grid);
+    QRadioButton *colButton = new QRadioButton(tr("Column"), this);
+    grid->addWidget(colButton, 0, 0);
+    group->addButton(colButton, 0);
+    columnList = new QComboBox(this);
+    columnList->setEditable(false);
     int count = colNames.count();
     int i;
     for (i = 0; i < count; i++) {
         int type = colTypes[i];
         if (type == DATE) {
-            columnList->insertItem(colNames[i]);
+            columnList->addItem(colNames[i]);
         }
     }
+    grid->addWidget(columnList, 0, 1);
 
-    group->insert(new QRadioButton(tr("Constant"), grid), 1);
-    dateWidget = new DateWidget(grid);
+    QRadioButton *constantButton = new QRadioButton(tr("Constant"), this);
+    grid->addWidget(constantButton, 1, 0);
+    group->addButton(constantButton, 1);
+    dateWidget = new DateWidget(this);
+    grid->addWidget(dateWidget, 1, 1);
 
     if (columnList->count() > 0) {
-        group->setButton(0);
+        group->button(0)->setChecked(true);
     }
     else {
         // no date columns, so can't select one
-        group->setButton(1);
-        colButton->setEnabled(FALSE);
+        group->button(1)->setChecked(true);
+        colButton->setEnabled(false);
     }
 
-    finishLayout(TRUE, TRUE, FALSE, parent->width() / 2);
+    finishLayout();
 }
 
-CalcDateEditor::~CalcDateEditor()
-{
-
-}
-
+/**
+ * Reset the dialog widgets to their default values.  Used when relaunching
+ * it for a different node.
+ */
 void CalcDateEditor::reset()
 {
-    group->setButton(0);
+    group->button(0)->setChecked(true);
     if (columnList->count() > 0) {
-        columnList->setCurrentItem(0);
+        columnList->setCurrentIndex(0);
     }
     QDate today = QDate::currentDate();
     dateWidget->setDate(today);
 }
 
+/**
+ * Create a calculation node based on this dialog's current settings.
+ *
+ * @return The newly-created calculation node
+ */
 CalcNode *CalcDateEditor::createNode()
 {
-    CalcNode *node = new CalcNode(0, "");
+    CalcNode *node = new CalcNode(CalcNode::DateConstant, "");
     updateNode(node);
     return node;
 }
 
+/**
+ * Update the specified node with the values currently specified in this
+ * dialog.
+ *
+ * @param node The node to be updated
+ */
 void CalcDateEditor::updateNode(CalcNode *node)
 {
-    int selection = group->id(group->selected());
+    int selection = group->checkedId();
     if (selection == 0) {
-        node->setType(CALC_DATE_COLUMN);
+        node->setType(CalcNode::DateColumn);
         node->setValue(columnList->currentText());
     }
     else {
-        node->setType(CALC_DATE_CONSTANT);
+        node->setType(CalcNode::DateConstant);
         node->setValue(QString::number(dateWidget->getDate()));
     }
 }
 
+/**
+ * Populate this dialog's widgets with the values corresponding to the
+ * provided calculation node.
+ *
+ * @param node The node whose settings are to be displayed
+ */
 void CalcDateEditor::setNode(CalcNode *node)
 {
     reset();
     int type = node->type();
     QString value = node->value();
-    if (type == CALC_DATE_CONSTANT) {
-        group->setButton(1);
+    if (type == CalcNode::DateConstant) {
+        group->button(1)->setChecked(true);
         dateWidget->setDate(value.toInt());
     }
-    else if (type == CALC_DATE_COLUMN) {
-        group->setButton(0);
+    else if (type == CalcNode::DateColumn) {
+        group->button(0)->setChecked(true);
         int count = columnList->count();
         for (int i = 0; i < count; i++) {
-            if (columnList->text(i) == value) {
-                columnList->setCurrentItem(i);
+            if (columnList->itemText(i) == value) {
+                columnList->setCurrentIndex(i);
                 break;
             }
         }

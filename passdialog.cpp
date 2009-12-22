@@ -1,7 +1,7 @@
 /*
  * passdialog.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,57 +9,48 @@
  * (at your option) any later version.
  */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qmessagebox.h>
+/** @file passdialog.cpp
+ * Source file for PasswordDialog
+ */
+
+#include <QApplication>
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QMessageBox>
 #include "database.h"
 #include "passdialog.h"
 #include "pbdialog.h"
+#include "encryption/crypto.h"
 
-#if !defined(Q_WS_QWS)
-#include <qhbox.h>
-#include <qpushbutton.h>
-#endif
-
-PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, const char *name)
-  : QQDialog("", parent, name, TRUE), db(dbase), mode(dlgMode)
+/**
+ * Constructor.
+ *
+ * @param dbase The database being created, opened, or modified
+ * @param dlgMode The mode in which this dialog will be used
+ * @param parent This dialog's parent widget
+ */
+PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *parent)
+  : QQDialog("", parent), db(dbase), mode(dlgMode)
 {
-    // cheated a bit; ordered mode codes so this works
-    int rows = mode + 1;
-#if defined(Q_WS_QWS)
-    QGridLayout *grid = new QGridLayout(this, rows, 2);
-#else
-    QGridLayout *grid = new QGridLayout(this, rows + 1, 2);
-#endif
-
+    QGridLayout *grid = new QGridLayout(this);
     int currentRow = 0;
-    if (mode == CHANGE_PASSWORD) {
+    if (mode == ChangePassword) {
         grid->addWidget(new QLabel(tr("Old password") + ":", this), 0, 0);
         oldPass = new QLineEdit(this);
         oldPass->setEchoMode(QLineEdit::Password);
         grid->addWidget(oldPass, 0, 1);
         currentRow++;
     }
-    QString label;
-    if (mode == CHANGE_PASSWORD) {
-        label = tr("New password");
-    }
-    else {
-        label = tr("Password");
-    }
+    QString label((mode == ChangePassword) ? tr("New password") : tr("Password"));
     grid->addWidget(new QLabel(label + ":", this), currentRow, 0);
     pass = new QLineEdit(this);
     pass->setEchoMode(QLineEdit::Password);
     grid->addWidget(pass, currentRow, 1);
     currentRow++;
-    if (mode != OPEN_PASSWORD) {
-        if (mode == NEW_PASSWORD) {
-            label = tr("Repeat password");
-        }
-        else {
-            label = tr("Repeat new password");
-        }
+    if (mode != OpenFile) {
+        label = (mode == NewPassword) ? tr("Repeat password") : tr("Repeat new password");
         grid->addWidget(new QLabel(label + ":", this), currentRow, 0);
         repeatPass = new QLineEdit(this);
         repeatPass->setEchoMode(QLineEdit::Password);
@@ -67,69 +58,64 @@ PasswordDialog::PasswordDialog(Database *dbase, int dlgMode, QWidget *parent, co
         currentRow++;
     }
 
-    int minWidth = -1;
-#if !defined(Q_WS_QWS)
-    QHBox *hbox = new QHBox(this);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    grid->addMultiCellWidget(hbox, currentRow, currentRow, 0, 1);
-    grid->setResizeMode(QLayout::FreeResize);
-    minWidth = parent->width() / 2;
-#endif
-    finishConstruction(FALSE, minWidth);
+    QDialogButtonBox::StandardButtons buttons(QDialogButtonBox::Ok |
+                                              QDialogButtonBox::Cancel);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(buttons,
+                                                       Qt::Horizontal, this);
+    grid->addWidget(buttonBox, currentRow, 0, 2, 1);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    setLayout(grid);
 }
 
-PasswordDialog::~PasswordDialog()
-{
-
-}
-
+/**
+ * Validate the entered password(s).  May fail if the incorrect password for
+ * an existing file is entered, if two newly-entered passwords don't match,
+ * if a newly-specified password isn't deemed suitable, etc.
+ *
+ * @return True if the password(s) have been accepted, false otherwise
+ */
 bool PasswordDialog::validate()
 {
     QString password = pass->text();
-    if (mode == OPEN_PASSWORD) {
-        QString error = db->setPassword(password, FALSE);
-        if (error != "") {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
-            return FALSE;
+    if (mode == OpenFile) {
+        QString error = db->encryption()->setPassword(password, false);
+        if (!error.isEmpty()) {
+            QMessageBox::warning(this, qApp->applicationName(), error);
+            return false;
         }
         error = db->load();
-        if (error != "") {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
-            return FALSE;
+        if (!error.isEmpty()) {
+            QMessageBox::warning(this, qApp->applicationName(), error);
+            return false;
         }
     }
-    else if (mode == NEW_PASSWORD) {
+    else if (mode == NewPassword) {
         QString repeatPassword = repeatPass->text();
         if (password != repeatPassword) {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+            QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Repeated password doesn't match"));
-            return FALSE;
+            return false;
         }
-        QString error = db->setPassword(password, TRUE);
-        if (error != "") {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
-            return FALSE;
+        QString error = db->encryption()->setPassword(password, true);
+        if (!error.isEmpty()) {
+            QMessageBox::warning(this, qApp->applicationName(), error);
+            return false;
         }
     }
     else {
         QString oldPassword = oldPass->text();
         QString repeatPassword = repeatPass->text();
         if (password != repeatPassword) {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+            QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Repeated password doesn't match"));
-            return FALSE;
+            return false;
         }
-        QString error = db->changePassword(oldPassword, password);
-        if (error != "") {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"), error);
-            return FALSE;
+        QString error = db->encryption()->changePassword(oldPassword, password);
+        if (!error.isEmpty()) {
+            QMessageBox::warning(this, qApp->applicationName(), error);
+            return false;
         }
     }
-    return TRUE;
+    return true;
 }

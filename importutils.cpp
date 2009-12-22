@@ -1,7 +1,7 @@
 /*
  * importutils.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,31 +9,41 @@
  * (at your option) any later version.
  */
 
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qmessagebox.h>
-#include <qobject.h>
-#include <qregexp.h>
-#include <qstringlist.h>
-#include <qtextstream.h>
-#include <qxml.h>
+/** @file importutils.cpp
+ * Source file for ImportUtils
+ */
+
+#include <QDateTime>
+#include <QFile>
+#include <QFileInfo>
+#include <QObject>
+#include <QRegExp>
+#include <QStringList>
+#include <QTextStream>
+#include <QXmlInputSource>
+#include <QXmlSimpleReader>
 #include "database.h"
 #include "datatypes.h"
 #include "importutils.h"
 #include "mobiledb.h"
 #include "xmlimport.h"
 
+/**
+ * Constructor.
+ */
 ImportUtils::ImportUtils()
 {
 
 }
 
-ImportUtils::~ImportUtils()
-{
-
-}
-
+/**
+ * Import data from a MobileDB file into a new PortaBase file.
+ *
+ * @param filename The path to the MobileDB file to be imported
+ * @param db The PortaBase database to import into
+ * @return An error message if there was a problem importing the data, an
+ *         empty string otherwise
+ */
 QString ImportUtils::importMobileDB(const QString &filename, Database *db)
 {
     MobileDBFile mdb(filename);
@@ -52,7 +62,7 @@ QString ImportUtils::importMobileDB(const QString &filename, Database *db)
     for (i = 0; i < colCount; i++) {
         widths[i] = (fieldLengths[i] * 3) / 2;
         QString type = mdbTypes[i];
-        char firstLetter = type[0].latin1();
+        char firstLetter = type[0].toLatin1();
         QString defaultVal = "0";
         if (firstLetter == 'I') {
             types[i] = INTEGER;
@@ -83,11 +93,11 @@ QString ImportUtils::importMobileDB(const QString &filename, Database *db)
             enumCount++;
             QStringList options;
             type = type.right(type.length() - 1);
-            int sepIndex = type.find(';');
+            int sepIndex = type.indexOf(';');
             while (sepIndex != -1) {
                 options.append(type.left(sepIndex));
                 type = type.right(type.length() - sepIndex - 1);
-                sepIndex = type.find(';');
+                sepIndex = type.indexOf(';');
             }
             options.append(type);
             db->addEnum(names[i], options);
@@ -108,7 +118,7 @@ QString ImportUtils::importMobileDB(const QString &filename, Database *db)
             continue;
         }
         QString message = db->addRow(newRow);
-        if (message != "") {
+        if (!message.isEmpty()) {
             message = QObject::tr("Error in row %1").arg(i + 1)
                       + "\n" + message;
             return message;
@@ -121,6 +131,14 @@ QString ImportUtils::importMobileDB(const QString &filename, Database *db)
     return "";
 }
 
+/**
+ * Convert a row of MobileDB data fields into values suitable for use
+ * as a PortaBase data row.
+ *
+ * @param values A row of values from a MobileDB file
+ * @param types The column type IDs of the PortaBase file being imported into
+ * @return A row of data formatted correctly for importing into PortaBase
+ */
 QStringList ImportUtils::convertMobileDBRow(QStringList values, int *types)
 {
     QStringList result;
@@ -164,13 +182,23 @@ QStringList ImportUtils::convertMobileDBRow(QStringList values, int *types)
     return result;
 }
 
+/**
+ * Import data from an XML file into a new PortaBase file.  The XML file must
+ * be in the format described at
+ * http://portabase.sourceforge.net/portabase_xml.html.
+ *
+ * @param filename The path to the XML file to be imported
+ * @param db The PortaBase database to import into
+ * @return An error message if there was a problem importing the data, an
+ *         empty string otherwise
+ */
 QString ImportUtils::importXML(const QString &filename, Database *db)
 {
     QFileInfo info(filename);
-    db->setImportBasePath(info.dirPath(TRUE) + "/");
+    db->setImportBasePath(info.absolutePath() + "/");
     XMLImport importer(db);
     QFile file(filename);
-    QXmlInputSource source(file);
+    QXmlInputSource source(&file);
     QXmlSimpleReader reader;
     reader.setContentHandler(&importer);
     reader.setErrorHandler(&importer);
@@ -178,19 +206,25 @@ QString ImportUtils::importXML(const QString &filename, Database *db)
     return importer.formattedError();
 }
 
+/**
+ * Import lines of text from a file, typically for use as the options of an
+ * enumerated column type.
+ *
+ * @param filename The path of the file to import from
+ * @param encoding The text encoding to read the file as, such as "Latin-1"
+ *                 or "UTF-8"
+ * @param options The list to be populated with the imported text lines
+ * @return An error message if there was a problem importing the data, an
+ *         empty string otherwise
+ */
 QString ImportUtils::importTextLines(const QString &filename, const QString &encoding, QStringList *options)
 {
     QFile f(filename);
-    if (!f.open(IO_ReadOnly)) {
+    if (!f.open(QFile::ReadOnly | QFile::Text)) {
         return QObject::tr("Unable to open file");
     }
     QTextStream input(&f);
-    if (encoding == "Latin-1") {
-        input.setEncoding(QTextStream::Latin1);
-    }
-    else {
-        input.setEncoding(QTextStream::UnicodeUTF8);
-    }
+    input.setCodec(encoding.toLatin1());
     while (!input.atEnd()) {
         options->append(input.readLine());
     }

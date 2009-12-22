@@ -1,7 +1,7 @@
 /*
  * slideshowdialog.h
  *
- * (c) 2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,14 @@
  * (at your option) any later version.
  */
 
+/** @file slideshowdialog.h
+ * Header file for SlideshowDialog
+ */
+
 #ifndef SLIDESHOWDIALOG_H
 #define SLIDESHOWDIALOG_H
 
-#include <qstringlist.h>
+#include <QStringList>
 #include "../pbdialog.h"
 
 class ImageWidget;
@@ -20,22 +24,25 @@ class QComboBox;
 class QSpinBox;
 class View;
 
+/**
+ * Dialog which shows the available options for an image slideshow, and then
+ * begins it if requested.  Primarily allows selecting the column of images
+ * to iterate over and the number of seconds to wait between each image.
+ */
 class SlideshowDialog: public PBDialog
 {
     Q_OBJECT
 public:
-    SlideshowDialog(QStringList columns, View *view, QWidget *parent = 0,
-                    const char *name = 0);
-    ~SlideshowDialog();
+    SlideshowDialog(QStringList columns, View *view, QWidget *parent = 0);
 
 protected slots:
     void accept();
 
 private:
-    QComboBox *columnList;
-    QSpinBox *delayBox;
-    View *currentView;
-    ImageWidget *fullScreen;
+    QComboBox *columnList; /**< List of the available image columns */
+    QSpinBox *delayBox; /**< The current delay in seconds */
+    View *currentView; /**< The database view currently in use */
+    ImageWidget *fullScreen; /**< The widget used to display the slideshow */
 };
 
 #endif

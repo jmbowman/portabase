@@ -1,7 +1,7 @@
 /*
  * vieweditor.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,57 +9,53 @@
  * (at your option) any later version.
  */
 
+/** @file vieweditor.h
+ * Header file for ViewEditor
+ */
+
 #ifndef VIEWEDITOR_H
 #define VIEWEDITOR_H
 
-#include <qstringlist.h>
+#include <QStringList>
 #include "pbdialog.h"
 
 class Database;
 class QComboBox;
 class QLineEdit;
-class QListView;
-class QListViewItem;
-class QPoint;
+class QTreeWidget;
+class QTreeWidgetItem;
 
+/**
+ * Dialog for editing a database view.
+ */
 class ViewEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    ViewEditor(QWidget *parent = 0, const char *name = 0);
-    ~ViewEditor();
+    ViewEditor(QWidget *parent = 0);
 
     int edit(Database *subject, const QString &viewName,
-             QStringList currentCols, const QString &defaultSort,
+             const QStringList &currentCols, const QString &defaultSort,
              const QString &defaultFilter);
     void applyChanges();
     QString getName();
 
-protected:
-    void resizeEvent(QResizeEvent *event);
-
 private:
     void updateTable();
-    void selectRow(QString name);
-    int isIncluded(QString name);
-    bool hasValidName();
 
 private slots:
-    void tableClicked(QListViewItem *item, const QPoint &point, int column);
+    void tableClicked(QTreeWidgetItem *item, int column);
     void moveUp();
     void moveDown();
 
 private:
-    QLineEdit *nameBox;
-    QComboBox *sortingBox;
-    QComboBox *filterBox;
-    QListView *table;
-    Database *db;
-    QString originalName;
-    QStringList colNames;
-    QStringList oldNames;
-    QStringList includedNames;
-    bool resized;
+    QLineEdit *nameBox; /**< Entry field for the view's name */
+    QComboBox *sortingBox; /**< Default sorting name selection list */
+    QComboBox *filterBox; /**< Default filter name selection list */
+    QTreeWidget *table; /**< Display of the list of database columns */
+    Database *db; /**< The database being edited */
+    QString originalName; /**< The initial name of the view being edited */
+    QStringList oldNames; /**< The initial ordered list of columns in the view */
 };
 
 #endif

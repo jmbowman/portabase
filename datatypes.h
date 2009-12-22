@@ -1,7 +1,7 @@
 /*
  * datatypes.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,14 @@
  * (at your option) any later version.
  */
 
+/** @file datatypes.h
+ * Header file containing various data type declarations
+ */
+
 #ifndef DATATYPES_H
 #define DATATYPES_H
 
-#include <qvaluelist.h>
+#include <QList>
 
 #define STRING 0
 #define INTEGER 1
@@ -31,8 +35,7 @@
 // default date and time codes
 #define TODAY 0
 #define NOW 0
-#define NONE 1
 
-typedef QValueList<int> IntList;
+typedef QList<int> IntList;
 
 #endif

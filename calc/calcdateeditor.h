@@ -1,7 +1,7 @@
 /*
  * calcdateeditor.h
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,10 +9,14 @@
  * (at your option) any later version.
  */
 
+/** @file calcdateeditor.h
+ * Header file for CalcDateEditor
+ */
+
 #ifndef CALCDATEEDITOR_H
 #define CALCDATEEDITOR_H
 
-#include <qstringlist.h>
+#include <QStringList>
 #include "../pbdialog.h"
 
 class CalcNode;
@@ -20,13 +24,16 @@ class DateWidget;
 class QButtonGroup;
 class QComboBox;
 
+/**
+ * Dialog for specifying a date node in the formula for a calculated column.
+ * Can be either a date column reference or a constant value.
+ */
 class CalcDateEditor: public PBDialog
 {
     Q_OBJECT
 public:
     CalcDateEditor(const QStringList &colNames, int *colTypes,
-                   QWidget *parent = 0, const char *name = 0);
-    ~CalcDateEditor();
+                   QWidget *parent = 0);
 
     CalcNode *createNode();
     void setNode(CalcNode *node);
@@ -34,9 +41,9 @@ public:
     void updateNode(CalcNode *node);
 
 private:
-    QButtonGroup *group;
-    QComboBox *columnList;
-    DateWidget *dateWidget;
+    QButtonGroup *group; /**< Radio button group (Column/Constant) */
+    QComboBox *columnList; /**< Widget for selecting a date column */
+    DateWidget *dateWidget; /**< Widget for specifying a date constant */
 };
 
 #endif

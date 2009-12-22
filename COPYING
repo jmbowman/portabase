@@ -168,11 +168,6 @@ access to copy from a designated place, then offering equivalent
 access to copy the source code from the same place counts as
 distribution of the source code, even though third parties are not
 compelled to copy the source along with the object code.
-
-As a special exception, Jeremy Bowman gives permission to link this
-program with Qt non-commercial edition, and distribute the resulting
-executable, without including the source code for the Qt non-commercial
-edition in the source distribution.
 
   4. You may not copy, modify, sublicense, or distribute the Program
 except as expressly provided under this License.  Any attempt

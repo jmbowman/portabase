@@ -1,50 +1,43 @@
 /*
- * imagewidget.h
+ * imagewidget.h (based on code from TxImage)
  *
- * Changes (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003 by Pierpaolo Di Panfilo <pippo_dp@libero.it>
+ * (c) 2003 by Cristian Di Panfilo <cridipan@virgilio.it>
  *
- * Original source:
-************************************************************************
-** TxImage - Image Viewer
-** Copyright (C) 2003
-** Pierpaolo Di Panfilo <pippo_dp@libero.it>
-** Cristian Di Panfilo <cridipan@virgilio.it>
-**
-** This program is free software; you can redistribute it and/or modify
-** it under the terms of the GNU General Public License as published by
-** the Free Software Foundation; either version 2 of the License, or
-** (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-** Library General Public License for more details.  To obtain a
-** copy of the GNU Library General Public License, write to the Free
-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-**
-** Any permitted reproduction of these routines, in whole or in part,
-** must bear this legend.
-**
-*************************************************************************/
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
 
+/** @file imagewidget.h
+ * Header file for ImageWidget
+ */
 
-#ifndef _IMAGEWIDGET_H
-#define _IMAGEWIDGET_H
+#ifndef IMAGEWIDGET_H
+#define IMAGEWIDGET_H
 
-#include <qpixmap.h>
-#include <qwidget.h>
+#include <QPixmap>
+#include <QWidget>
 
 class QTimer;
 class View;
 
+/**
+ * A widget for viewing one image at a time from a column in a View.
+ * Pressing the left or up arrow key switches to the image in the same column
+ * of the previous row (if any) in the View, pressing the right or down arrow
+ * key goes to the next image in the other direction.  Can be displayed
+ * fullscreen.
+ */
 class ImageWidget : public QWidget
 {
     Q_OBJECT
  public:
-    ImageWidget(QWidget *parent, const char *name=0, WFlags f=0);
-    ~ImageWidget();
+    ImageWidget(QWidget *parent);
 
-    void setPixmap(QPixmap pm, bool resize=TRUE);
+    void setPixmap(QPixmap pm, bool resize=true);
     void setView(View *view, int row, int column);
     void slideshow(int delay);
 
@@ -68,12 +61,12 @@ private:
     void updateImage();
 
 private:
-    QPixmap pixmap;
-    View *currentView;
-    int rowIndex;
-    int colIndex;
-    QTimer *timer;
-    int slideshowDelay;
+    QPixmap pixmap; /**< The image being shown */
+    View *currentView; /**< The database view in use */
+    int rowIndex; /**< The table row index of the current image */
+    int colIndex; /**< The table column index of the current image */
+    QTimer *timer; /**< Timer used in slideshows */
+    int slideshowDelay; /**< The delay in seconds between images in a slideshow */
 };
 
 #endif

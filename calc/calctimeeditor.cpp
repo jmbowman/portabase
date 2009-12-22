@@ -1,7 +1,7 @@
 /*
  * calcdateeditor.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,84 +9,111 @@
  * (at your option) any later version.
  */
 
-#include <qbuttongroup.h>
-#include <qcombobox.h>
-#include <qdatetime.h>
-#include <qgrid.h>
-#include <qhbox.h>
-#include <qmessagebox.h>
-#include <qradiobutton.h>
+/** @file calctimeeditor.cpp
+ * Source file for CalcTimeEditor
+ */
+
+#include <QApplication>
+#include <QButtonGroup>
+#include <QComboBox>
+#include <QDateTime>
+#include <QLayout>
+#include <QMessageBox>
+#include <QRadioButton>
 #include "calcnode.h"
 #include "calctimeeditor.h"
 #include "../database.h"
 #include "../datatypes.h"
 #include "../timewidget.h"
 
-CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name)
-  : PBDialog(tr("Calculation Node Editor"), parent, name), db(dbase)
+/**
+ * Constructor.
+ *
+ * @param dbase The database being edited
+ * @param colNames Ordered list of all the database's column names
+ * @param colTypes Ordered list of all the database's column types
+ * @param parent This dialog's parent widget
+ */
+CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int *colTypes, QWidget *parent)
+  : PBDialog(tr("Calculation Node Editor"), parent), db(dbase)
 {
     group = new QButtonGroup(this);
-    group->hide();
-    QGrid *grid = new QGrid(2, this);
-    vbox->addWidget(grid);
-    QRadioButton *colButton = new QRadioButton(tr("Column"), grid);
-    group->insert(colButton, 0);
-    columnList = new QComboBox(FALSE, grid);
+    QGridLayout *grid = new QGridLayout(this);
+    vbox->addLayout(grid);
+    QRadioButton *colButton = new QRadioButton(tr("Column"), this);
+    grid->addWidget(colButton, 0, 0);
+    group->addButton(colButton, 0);
+    columnList = new QComboBox(this);
+    grid->addWidget(columnList, 0, 1);
     int count = colNames.count();
     int i;
     for (i = 0; i < count; i++) {
         int type = colTypes[i];
         if (type == TIME) {
-            columnList->insertItem(colNames[i]);
+            columnList->addItem(colNames[i]);
         }
     }
 
-    group->insert(new QRadioButton(tr("Constant"), grid), 1);
-    timeWidget = new TimeWidget(grid);
+    QRadioButton *constantButton = new QRadioButton(tr("Constant"), this);
+    grid->addWidget(constantButton, 1, 0);
+    group->addButton(constantButton, 1);
+    timeWidget = new TimeWidget(this);
+    grid->addWidget(timeWidget, 1, 1);
 
     if (columnList->count() > 0) {
-        group->setButton(0);
+        group->button(0)->setChecked(true);
     }
     else {
         // no date columns, so can't select one
-        group->setButton(1);
-        colButton->setEnabled(FALSE);
+        group->button(1)->setChecked(true);
+        colButton->setEnabled(false);
     }
 
-    finishLayout(TRUE, TRUE, FALSE, parent->width() / 2);
+    finishLayout(parent->width() / 2);
 }
 
-CalcTimeEditor::~CalcTimeEditor()
-{
-
-}
-
+/**
+ * Reset the dialog's entry widgets to their default values.  Typically used
+ * when relaunching it for a different node.
+ */
 void CalcTimeEditor::reset()
 {
-    group->setButton(0);
+    group->button(0)->setChecked(true);
     if (columnList->count() > 0) {
-        columnList->setCurrentItem(0);
+        columnList->setCurrentIndex(0);
     }
     QTime now = QTime::currentTime();
     timeWidget->setTime(now);
 }
 
+/**
+ * Create a new calculation node and set it's properties to match those
+ * currently selected in this dialog.
+ *
+ * @return The newly created and configured node
+ */
 CalcNode *CalcTimeEditor::createNode()
 {
-    CalcNode *node = new CalcNode(0, "");
+    CalcNode *node = new CalcNode(CalcNode::TimeConstant, "");
     updateNode(node);
     return node;
 }
 
+/**
+ * Set the properties of the provided node to match those currently
+ * selected in this dialog.
+ *
+ * @param node The node to be updated
+ */
 void CalcTimeEditor::updateNode(CalcNode *node)
 {
-    int selection = group->id(group->selected());
+    int selection = group->checkedId();
     if (selection == 0) {
-        node->setType(CALC_TIME_COLUMN);
+        node->setType(CalcNode::TimeColumn);
         node->setValue(columnList->currentText());
     }
     else {
-        node->setType(CALC_TIME_CONSTANT);
+        node->setType(CalcNode::TimeConstant);
         QString timeString = timeWidget->getTime();
         bool ok;
         QString time = db->parseTimeString(timeString, &ok);
@@ -95,38 +122,48 @@ void CalcTimeEditor::updateNode(CalcNode *node)
     }
 }
 
+/**
+ * Update this dialog's properties to match those of the provided node.
+ *
+ * @param node The node to be reflected by the dialog
+ */
 void CalcTimeEditor::setNode(CalcNode *node)
 {
     reset();
-    int type = node->type();
+    CalcNode::NodeType type = node->type();
     QString value = node->value();
-    if (type == CALC_TIME_CONSTANT) {
-        group->setButton(1);
+    if (type == CalcNode::TimeConstant) {
+        group->button(1)->setChecked(true);
         timeWidget->setTime(value.toInt());
     }
-    else if (type == CALC_TIME_COLUMN) {
-        group->setButton(0);
+    else if (type == CalcNode::TimeColumn) {
+        group->button(0)->setChecked(true);
         int count = columnList->count();
         for (int i = 0; i < count; i++) {
-            if (columnList->text(i) == value) {
-                columnList->setCurrentItem(i);
+            if (columnList->itemText(i) == value) {
+                columnList->setCurrentIndex(i);
                 break;
             }
         }
     }
 }
 
+/**
+ * Determine if the currently entered values represent a valid node or not.
+ *
+ * @return True if the selected properties are valid, false otherwise
+ */
 bool CalcTimeEditor::isValid()
 {
-    if (group->id(group->selected()) == 0) {
-        return TRUE;
+    if (group->checkedId() == 0) {
+        return true;
     }
     QString time = timeWidget->getTime();
     QString error = db->isValidValue(TIME, time);
-    if (error != "") {
+    if (!error.isEmpty()) {
         QString message = tr("Constant") + ": " + error;
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
-        return FALSE;
+        QMessageBox::warning(this, qApp->applicationName(), message);
+        return false;
     }
-    return TRUE;
+    return true;
 }

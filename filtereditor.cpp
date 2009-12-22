@@ -1,7 +1,7 @@
 /*
  * filtereditor.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,27 +9,39 @@
  * (at your option) any later version.
  */
 
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qlistbox.h>
-#include <qmessagebox.h>
+/** @file filtereditor.cpp
+ * Source file for FilterEditor
+ */
+
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QMessageBox>
+#include <QPushButton>
 #include "database.h"
 #include "condition.h"
 #include "conditioneditor.h"
+#include "factory.h"
 #include "filter.h"
 #include "filtereditor.h"
 
-FilterEditor::FilterEditor(QWidget *parent, const char *name)
-    : PBDialog(tr("Filter Editor"), parent, name), db(0), filter(0)
+/**
+ * Constructor.
+ *
+ * @param parent This dialog's parent widget
+ */
+FilterEditor::FilterEditor(QWidget *parent)
+    : PBDialog(tr("Filter Editor"), parent), db(0), filter(0)
 {
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QLabel(tr("Filter Name") + " ", hbox);
-    nameBox = new QLineEdit(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(this);
+    vbox->addLayout(hbox);
+    hbox->addWidget(new QLabel(tr("Filter Name") + " ", this));
+    nameBox = new QLineEdit(this);
+    hbox->addWidget(nameBox);
 
-    listBox = new QListBox(this);
-    vbox->addWidget(listBox);
+    listWidget = Factory::listWidget(this);
+    vbox->addWidget(listWidget);
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addCondition()));
@@ -42,6 +54,9 @@ FilterEditor::FilterEditor(QWidget *parent, const char *name)
     nameBox->setFocus();
 }
 
+/**
+ * Destructor.
+ */
 FilterEditor::~FilterEditor()
 {
     if (filter) {
@@ -49,7 +64,14 @@ FilterEditor::~FilterEditor()
     }
 }
 
-int FilterEditor::edit(Database *subject, QString filterName)
+/**
+ * Launch this dialog to edit a filter.
+ *
+ * @param subject The database being edited
+ * @param filterName The name of the filter to edit
+ * @return 1 if the dialog's changes are to be committed, 0 otherwise
+ */
+int FilterEditor::edit(Database *subject, const QString &filterName)
 {
     db = subject;
     originalName = filterName;
@@ -73,11 +95,19 @@ int FilterEditor::edit(Database *subject, QString filterName)
     return result;
 }
 
+/**
+ * Get the last specified name for this filter.
+ *
+ * @return The filter's name
+ */
 QString FilterEditor::getName()
 {
     return nameBox->text();
 }
 
+/**
+ * Add a new condition to the filter.  Triggered by the "Add" button.
+ */
 void FilterEditor::addCondition()
 {
     Condition *condition = new Condition(db);
@@ -91,9 +121,13 @@ void FilterEditor::addCondition()
     }
 }
 
+/**
+ * Edit one of the filter's existing conditions.  Triggered by the "Edit"
+ * button.
+ */
 void FilterEditor::editCondition()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected == -1) {
         return;
     }
@@ -101,13 +135,17 @@ void FilterEditor::editCondition()
     if (conditionEditor->edit(condition)) {
         conditionEditor->applyChanges(condition);
         updateList();
-        listBox->setCurrentItem(selected);
+        listWidget->setCurrentRow(selected);
     }
 }
 
+/**
+ * Delete the currently selected condition.  Triggered by the "Delete"
+ * button.
+ */
 void FilterEditor::deleteCondition()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected == -1) {
         return;
     }
@@ -115,44 +153,64 @@ void FilterEditor::deleteCondition()
     updateList();
 }
 
+/**
+ * Move the currently selected condition up by one in the sequence.
+ * Triggered by the "Up" button.
+ */
 void FilterEditor::moveUp()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected == -1) {
         return;
     }
     if (filter->moveConditionUp(selected)) {
         updateList();
-        listBox->setCurrentItem(listBox->item(selected - 1));
+        listWidget->setCurrentRow(selected - 1);
     }
 }
 
+/**
+ * Move the currently selected condition down by one in the sequence.
+ * Triggered by the "Down" button.
+ */
 void FilterEditor::moveDown()
 {
-    int selected = listBox->currentItem();
+    int selected = listWidget->currentRow();
     if (selected == -1) {
         return;
     }
     if (filter->moveConditionDown(selected)) {
         updateList();
-        listBox->setCurrentItem(selected + 1);
+        listWidget->setCurrentRow(selected + 1);
     }
 }
 
+/**
+ * Update the displayed list of conditions.
+ */
 void FilterEditor::updateList()
 {
-    listBox->clear();
+    listWidget->clear();
     int count = filter->getConditionCount();
     for (int i = 0; i < count; i++) {
-        listBox->insertItem(filter->getCondition(i)->getDescription());
+        listWidget->addItem(filter->getCondition(i)->getDescription());
     }
 }
 
+/**
+ * Determine if the currently specified filter name is valid or not.
+ * Prevents duplicates and names beginning with an underscore.
+ *
+ * @return True if the name is valid, false otherwise
+ */
 bool FilterEditor::hasValidName()
 {
     return validateName(nameBox->text(), originalName, db->listFilters());
 }
 
+/**
+ * Apply any changes made in this dialog.
+ */
 void FilterEditor::applyChanges()
 {
     db->deleteFilter(originalName);

@@ -9,19 +9,29 @@
  * (at your option) any later version.
  */
 
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qobject.h>
-#include <qregexp.h>
-#include <qtextstream.h>
+/** @file csvutils.cpp
+ * Source file for CSVUtils
+ */
+
+#include <QFile>
+#include <QFileInfo>
+#include <QObject>
+#include <QRegExp>
+#include <QTextStream>
 #include "csvutils.h"
 #include "database.h"
 
+/**
+ * Constructor.
+ */
 CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), calcCount(0)
 {
 
 }
 
+/**
+ * Destructor.
+ */
 CSVUtils::~CSVUtils()
 {
     for (int i = 0; i < calcCount; i++) {
@@ -29,22 +39,32 @@ CSVUtils::~CSVUtils()
     }
 }
 
+/**
+ * Parse records from the specified CSV file, using the named text encoding,
+ * into the given database.
+ *
+ * @param filename The file to be parsed
+ * @param encoding "Latin-1" for that encoding, anything else for UTF-8
+ * @param db The database to load the data into
+ * @return An error message (or "" for none), followed by the text of the
+ *         record imported that triggered that error
+ */
 QStringList CSVUtils::parseFile(const QString &filename,
                                 const QString &encoding, Database *db)
 {
     initialize(db, filename);
     QFile f(filename);
     QStringList returnVal;
-    if (!f.open(IO_ReadOnly)) {
+    if (!f.open(QFile::ReadOnly)) {
         returnVal.append(QObject::tr("Unable to open file"));
         return returnVal;
     }
     QTextStream input(&f);
     if (encoding == "Latin-1") {
-        input.setEncoding(QTextStream::Latin1);
+        input.setCodec("latin1");
     }
     else {
-        input.setEncoding(QTextStream::UnicodeUTF8);
+        input.setCodec("UTF-8");
     }
     rowNum = 1;
     message = "";
@@ -57,21 +77,21 @@ QStringList CSVUtils::parseFile(const QString &filename,
     QString field = "";
     // store IDs of added rows; if there's an error, delete them
     addedIds.clear();
-    bool crLast = FALSE;
+    bool crLast = false;
     while (!input.atEnd()) {
         input >> x; // read one char
 
         if (x == '\r') {
             // treat as '\n', and watch for a following real '\n'
-            crLast = TRUE;
+            crLast = true;
             x = '\n';
         }
         else if (crLast && x == '\n') {
-            crLast = FALSE;
+            crLast = false;
             continue;
         }
         else {
-            crLast = FALSE;
+            crLast = false;
         }
         rowString += x;
         switch (state)
@@ -167,16 +187,16 @@ QStringList CSVUtils::parseFile(const QString &filename,
                 field += x;
             }
         }
-        if (message != "") {
+        if (!message.isEmpty()) {
             break;
         }
     }
-    if (message == "" && row.count() > 0) {
+    if (message.isEmpty() && row.count() > 0) {
         // last line doesn't end with '\n'
         row.append(field);
         addRow(db);
     }
-    if (message != "") {
+    if (!message.isEmpty()) {
         // an error was encountered; delete any rows that were added
         int count = addedIds.count();
         for (int i = count - 1; i > -1; i--) {
@@ -189,6 +209,13 @@ QStringList CSVUtils::parseFile(const QString &filename,
     return returnVal;
 }
 
+/**
+ * Convert the provided row into a text line suitable for inclusion in a
+ * CSV file.
+ *
+ * @param row A row of database fields in text form
+ * @return A CSV record
+ */
 QString CSVUtils::encodeRow(QStringList row)
 {
     QString result;
@@ -202,6 +229,14 @@ QString CSVUtils::encodeRow(QStringList row)
     return result + "\n";
 }
 
+/**
+ * Encode the given string into text usable as a CSV field.  This is
+ * typically the same as the input value unless it contains newlines,
+ * the quoting character, or the field delimiting character.
+ *
+ * @param content The text to be converted
+ * @return A CSV field string
+ */
 QString CSVUtils::encodeCell(QString content)
 {
     if (content.contains('"') == 0 && content.contains(',') == 0
@@ -213,6 +248,12 @@ QString CSVUtils::encodeCell(QString content)
     return result + "\"";
 }
 
+/**
+ * Prepare to import content into the specified database from the named file.
+ *
+ * @param db The database to import data into
+ * @param filename Path to the file to be imported from
+ */
 void CSVUtils::initialize(Database *db, const QString &filename)
 {
     colNames = db->listColumns();
@@ -241,9 +282,15 @@ void CSVUtils::initialize(Database *db, const QString &filename)
     }
     calcCount = calcs.count();
     QFileInfo info(filename);
-    db->setImportBasePath(info.dirPath(TRUE) + "/");
+    db->setImportBasePath(info.absolutePath() + "/");
 }
 
+/**
+ * Add the last parsed row of CSV data to the specified database.
+ *
+ * @param db The database to import data into
+ * @return True if successful, false if an error occurred
+ */
 bool CSVUtils::addRow(Database *db)
 {
     int countDiff = colCount - row.count();
@@ -261,22 +308,20 @@ bool CSVUtils::addRow(Database *db)
         for (i = 0; i < colCount; i++) {
             if (types[i] == CALC) {
                 double value = calcs[calcIndex]->value(row, colNames);
-                QStringList::Iterator iter = row.at(i);
-                iter = row.remove(iter);
                 int decimals = calcDecimals[calcIndex];
-                row.insert(iter, db->formatDouble(value, decimals));
+                row[i] = db->formatDouble(value, decimals);
                 calcIndex++;
             }
         }
     }
-    message = db->addRow(row, &rowId, FALSE, TRUE);
-    if (message != "") {
+    message = db->addRow(row, &rowId, false, true);
+    if (!message.isEmpty()) {
         message = QObject::tr("Error in row %1").arg(rowNum) + "\n" + message;
-        return FALSE;
+        return false;
     }
     addedIds.append(rowId);
     row.clear();
     rowString = "";
     rowNum++;
-    return TRUE;
+    return true;
 }

@@ -1,7 +1,7 @@
 /*
  * rowviewer.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,28 +9,37 @@
  * (at your option) any later version.
  */
 
+/** @file rowviewer.h
+ * Header file for RowViewer
+ */
+
 #ifndef ROWVIEWER_H
 #define ROWVIEWER_H
 
-#include <qstringlist.h>
-#include <qvaluelist.h>
+#include <QStringList>
 #include "datatypes.h"
 #include "pbdialog.h"
 
 class Database;
 class QComboBox;
 class QKeyEvent;
-class QPushButton;
-class QTextView;
 class QToolButton;
+class QTextEdit;
 class View;
 class ViewDisplay;
 
+/**
+ * A dialog which displays a read-only version of a particular row's data.
+ * Mimics in HTML the layout of the row editor, with column names on the left
+ * and the row's values for them on the right.  It has buttons at the bottom
+ * for navigating to adjacent rows (in the current filter and sorting) and
+ * launching the row editor for the displayed row.
+ */
 class RowViewer: public PBDialog
 {
     Q_OBJECT
 public:
-    RowViewer(Database *dbase, ViewDisplay *parent = 0, const char *name = 0);
+    RowViewer(Database *dbase, ViewDisplay *parent = 0);
     ~RowViewer();
 
     void viewRow(View *currentView, int rowIndex);
@@ -42,30 +51,24 @@ private slots:
     void nextRow();
     void previousRow();
     void editRow();
-    void copyText();
     void viewChanged(int index);
 
 private:
     void updateContent();
-    QString prepareString(QString content);
+    QString prepareString(const QString &content);
 
 private:
-    Database *db;
-    View *view;
-    ViewDisplay *display;
-    QComboBox *viewBox;
-    int index;
-    int rowCount;
-#if defined(Q_OS_MACX)
-    QToolButton *nextButton;
-    QToolButton *prevButton;
-#else
-    QPushButton *nextButton;
-    QPushButton *prevButton;
-#endif
-    QTextView *tv;
-    View *currentView;
-    QStringList usedImageIds;
+    Database *db; /**< The database being viewed */
+    View *view; /**< The currently-selected database view */
+    ViewDisplay *display; /**< The view display grid (used to launch the row editor) */
+    QComboBox *viewBox; /**< Database view selection list */
+    int index; /**< The current index among rows in the selected filter and sorting */
+    int rowCount; /**< The total number of rows in the current filter */
+    QToolButton *nextButton; /**< Button for viewing the next row */
+    QToolButton *prevButton; /**< Button for viewing the previous row */
+    QTextEdit *tv; /**< The HTML display widget used to show the row data */
+    View *currentView; /**< The currently-selected database view */
+    QStringList usedImageIds; /**< Keys of loaded images, used for later cleanup */
 };
 
 #endif

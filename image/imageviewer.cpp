@@ -1,7 +1,7 @@
 /*
  * imageviewer.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,50 +9,63 @@
  * (at your option) any later version.
  */
 
-#include <qapplication.h>
-#include <qhbox.h>
-#include <qscrollview.h>
+/** @file imageviewer.cpp
+ * Source file for ImageViewer
+ */
+
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QDialogButtonBox>
+#include <QKeyEvent>
+#include <QLayout>
+#include <QScrollArea>
 #include "imageviewer.h"
 #include "imagewidget.h"
 #include "../view.h"
 
-ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent, const char *name)
-    : PBDialog(tr("Image Viewer"), parent, name), fullScreen(0), currentView(0), rowIndex(0), colIndex(0)
+/**
+ * Constructor.
+ *
+ * @param allowFullScreen True if a click is to allow full-screen display
+ * @param parent This dialog's parent widget
+ */
+ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent)
+    : PBDialog(tr("Image Viewer"), parent), currentView(0), rowIndex(0), colIndex(0)
 {
-    QScrollView *scroll = new QScrollView(this, 0,
-                                          WResizeNoErase|WNorthWestGravity);
+    QScrollArea *scroll = new QScrollArea(this);
     vbox->addWidget(scroll);
-    display = new ImageWidget(scroll->viewport());
+    display = new ImageWidget(scroll);
     QPixmap pm;
     display->setPixmap(pm);
-    scroll->addChild(display);
+    scroll->setWidget(display);
     if (allowFullScreen) {
         connect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
     }
 
-    finishLayout(TRUE, FALSE, TRUE, 0, 0);
+    okCancelRow = finishLayout(true, false);
 }
 
-ImageViewer::~ImageViewer()
-{
-
-}
-
+/**
+ * Set the image to be displayed.
+ *
+ * @param image The image to show
+ */
 void ImageViewer::setImage(const QImage &image)
 {
     qApp->processEvents();
-    pm.setOptimization(QPixmap::NormalOptim);
-    pm.convertFromImage(image);
+    pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
-#if !defined(Q_WS_QWS)
-    int margin = 5;
-#if defined(Q_WS_WIN)
-    margin += 16;
-#endif
-    resize(pm.width() + margin, pm.height() + okCancelRow->height() + margin);
-#endif
+    resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
 }
 
+/**
+ * Set the currently selected database view.  Used to determine the sequence
+ * of images to show when using slideshows or the arrow keys.
+ *
+ * @param view The database view currently in use
+ * @param row The index of the table row to start at
+ * @param column The index of the table column to start at
+ */
 void ImageViewer::setView(View *view, int row, int column)
 {
     currentView = view;
@@ -60,20 +73,32 @@ void ImageViewer::setView(View *view, int row, int column)
     colIndex = column;
 }
 
+/**
+ * Use a full-screen display to show the current image.
+ */
 void ImageViewer::showFullScreen()
 {
-    fullScreen = new ImageWidget(0, 0, WDestructiveClose);
+    ImageWidget *fullScreen = new ImageWidget(0);
+    fullScreen->setAttribute(Qt::WA_DeleteOnClose);
     fullScreen->setView(currentView, rowIndex, colIndex);
-    fullScreen->setBackgroundColor(Qt::black);
-    fullScreen->setPixmap(pm, FALSE);
+    fullScreen->setAutoFillBackground(true);
+    QPalette fsPalette(fullScreen->palette());
+    fsPalette.setColor(QPalette::Window, Qt::black);
+    fullScreen->setPalette(fsPalette);
+    fullScreen->setPixmap(pm, false);
     fullScreen->resize(qApp->desktop()->size());
     hide();
     connect(fullScreen, SIGNAL(clicked()), this, SLOT(accept()));
-    fullScreen->setFocus();
+    fullScreen->setFocus(Qt::OtherFocusReason);
     fullScreen->showFullScreen();
     connect(fullScreen, SIGNAL(clicked()), fullScreen, SLOT(close()));
 }
 
+/**
+ * Check each key press to see if it represented a navigation command.
+ *
+ * @param e The event which was fired
+ */
 void ImageViewer::keyReleaseEvent(QKeyEvent *e)
 {
     int key = e->key();
@@ -81,7 +106,8 @@ void ImageViewer::keyReleaseEvent(QKeyEvent *e)
         e->ignore();
         return;
     }
-    if (key == Key_Left || key == Key_Up || key == Key_Right || key == Key_Down) {
+    if (key == Qt::Key_Left || key == Qt::Key_Up || key == Qt::Key_Right
+          || key == Qt::Key_Down) {
         processArrow(key);
     }
     else {
@@ -89,23 +115,29 @@ void ImageViewer::keyReleaseEvent(QKeyEvent *e)
     }
 }
 
+/**
+ * Handle arrow key presses by moving to the next or previous image in the
+ * column being viewed, as appropriate.
+ *
+ * @param key The arrow key which was pressed
+ */
 void ImageViewer::processArrow(int key)
 {
     if (!currentView) {
         return;
     }
     int rowCount = currentView->getRowCount();
-    bool changed = FALSE;
-    if (key == Key_Left || key == Key_Up) {
+    bool changed = false;
+    if (key == Qt::Key_Left || key == Qt::Key_Up) {
         if (rowIndex != 0) {
             rowIndex--;
-            changed = TRUE;
+            changed = true;
         }
     }
-    else if (key == Key_Right || key == Key_Down) {
+    else if (key == Qt::Key_Right || key == Qt::Key_Down) {
         if (rowIndex != rowCount - 1) {
             rowIndex++;
-            changed = TRUE;
+            changed = true;
         }
     }
     if (changed) {

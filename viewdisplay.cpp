@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,100 +9,122 @@
  * (at your option) any later version.
  */
 
+/** @file viewdisplay.cpp
+ * Source file for ViewDisplay
+ */
+
 #include <math.h>
 
-#include <qhbox.h>
-#include <qhbuttongroup.h>
-#include <qheader.h>
-#include <qlabel.h>
-#include <qlistview.h>
-#include <qmessagebox.h>
-#include <qregexp.h>
-#include <qspinbox.h>
-#include <qstringlist.h>
-#include <qtoolbutton.h>
-#include <qvbox.h>
-#include <qwidgetstack.h>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QHeaderView>
+#include <QIcon>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QMessageBox>
+#include <QSpinBox>
+#include <QStackedWidget>
+#include <QStringList>
+#include <QToolButton>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include "database.h"
 #include "datatypes.h"
+#include "factory.h"
 #include "noteeditor.h"
 #include "portabase.h"
 #include "roweditor.h"
 #include "rowviewer.h"
-#include "shadedlistitem.h"
 #include "view.h"
 #include "viewdisplay.h"
 #include "image/imageviewer.h"
 #include "image/slideshowdialog.h"
 
-#if defined(Q_WS_QWS)
-#include <qpe/resource.h>
-#else
-#include "desktop/resource.h"
-#endif
-
-ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent, const char *name,
-    WFlags f) : QVBox(parent, name, f), portabase(pbase), db(0), view(0),
-    booleanToggle(FALSE), paged(TRUE)
+/**
+ * Constructor.
+ *
+ * @param pbase The application's main window
+ * @param parent This widget's parent widget
+ */
+ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
+    portabase(pbase), db(0), view(0), booleanToggle(false), paged(true)
 {
     timer.start();
-    stack = new QWidgetStack(this);
-    setStretchFactor(stack, 1);
+    QVBoxLayout *vbox = Factory::vBoxLayout(this, true);
+    stack = new QStackedWidget(this);
+    vbox->addWidget(stack, 1);
     noResults = new QLabel("<center>" + tr("No results") + "</center>", stack);
-    table = new QListView(stack);
-    table->setAllColumnsShowFocus(TRUE);
-    table->setSorting(-1);
-    connect(table, SIGNAL(selectionChanged()), this, SLOT(rowSelected()));
-    connect(table, SIGNAL(pressed(QListViewItem*, const QPoint&, int)),
-            this, SLOT(cellPressed(QListViewItem*, const QPoint&, int)));
-    connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
-            this, SLOT(cellReleased(QListViewItem*, const QPoint&, int)));
-    connect(table, SIGNAL(doubleClicked(QListViewItem*)),
-            this, SLOT(viewRow()));
-    connect(table, SIGNAL(returnPressed(QListViewItem*)),
+    stack->addWidget(noResults);
+    table = Factory::treeWidget(stack, QStringList());
+    stack->addWidget(table);
+    connect(table, SIGNAL(itemSelectionChanged()), this, SLOT(rowSelected()));
+    connect(table, SIGNAL(itemPressed(QTreeWidgetItem*, int)),
+            this, SLOT(cellPressed(QTreeWidgetItem*, int)));
+    connect(table, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
+            this, SLOT(cellReleased(QTreeWidgetItem*, int)));
+    connect(table, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
             this, SLOT(viewRow()));
 
-    QHeader *header = table->header();
-    header->setClickEnabled(TRUE);
-    header->setMovingEnabled(FALSE);
-    connect(header, SIGNAL(pressed(int)), this, SLOT(headerPressed(int)));
-    connect(header, SIGNAL(released(int)), this, SLOT(headerReleased(int)));
-    connect(header, SIGNAL(sizeChange(int, int, int)),
+    QHeaderView *header = table->header();
+    header->setClickable(true);
+    header->setResizeMode(QHeaderView::Interactive);
+    connect(header, SIGNAL(sectionPressed(int)), this, SLOT(headerPressed(int)));
+    connect(header, SIGNAL(sectionClicked(int)), this, SLOT(headerReleased(int)));
+    connect(header, SIGNAL(sectionResized(int, int, int)),
             this, SLOT(columnResized(int, int, int)));
-    stack->raiseWidget(noResults);
+    stack->setCurrentWidget(noResults);
 
-    buttonRow = new QHBox(this);
+    buttonRow = new QWidget(this);
+    QHBoxLayout *hbox = Factory::hBoxLayout(buttonRow, true);
     rowsPerPage = new QSpinBox(buttonRow);
     rowsPerPage->setRange(1, 9999);
     rowsPerPage->setValue(13);
     connect(rowsPerPage, SIGNAL(valueChanged(int)), this,
             SLOT(updateRowsPerPage(int)));
+    hbox->addWidget(rowsPerPage);
+    vbox->addWidget(buttonRow);
 
-    prevButton = new QToolButton(LeftArrow, buttonRow);
+    prevButton = new QToolButton(buttonRow);
+    prevButton->setArrowType(Qt::LeftArrow);
+    prevButton->setSizePolicy(QSizePolicy::MinimumExpanding,
+                              QSizePolicy::Fixed);
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousPages()));
-    buttonGroup = new QHButtonGroup(buttonRow);
-    buttonGroup->hide();
-    buttonGroup->setExclusive(TRUE);
+    hbox->addWidget(prevButton, 1);
+    
+    buttonGroup = new QButtonGroup(buttonRow);
+    buttonGroup->setExclusive(true);
     for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
         pageButtons[i] = new QToolButton(buttonRow);
-        pageButtons[i]->setToggleButton(TRUE);
-        pageButtons[i]->setUsesTextLabel(TRUE);
-        buttonGroup->insert(pageButtons[i], i);
+        pageButtons[i]->setCheckable(true);
+        pageButtons[i]->setToolButtonStyle(Qt::ToolButtonTextOnly);
+        pageButtons[i]->setSizePolicy(QSizePolicy::MinimumExpanding,
+                                      QSizePolicy::Fixed);
+        buttonGroup->addButton(pageButtons[i], i);
+        hbox->addWidget(pageButtons[i], 1);
     }
-    connect(buttonGroup, SIGNAL(clicked(int)), this, SLOT(changePage(int)));
-    nextButton = new QToolButton(RightArrow, buttonRow);
+    connect(buttonGroup, SIGNAL(buttonClicked(int)),
+            this, SLOT(changePage(int)));
+    
+    nextButton = new QToolButton(buttonRow);
+    nextButton->setArrowType(Qt::RightArrow);
+    nextButton->setSizePolicy(QSizePolicy::MinimumExpanding,
+                              QSizePolicy::Fixed);
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextPages()));
+    hbox->addWidget(nextButton, 1);
 
     updateButtonSizes();
     currentPage = 1;
     firstPageButton = 1;
 }
 
-ViewDisplay::~ViewDisplay()
-{
-
-}
-
+/**
+ * Set whether or not the data records should be split between multiple pages.
+ * If set to false, all records will be shown in a scrollable list and the
+ * page navigation widget row will be hidden.
+ *
+ * @param flag True if using paged data navigation, false otherwise
+ */
 void ViewDisplay::usePages(bool flag)
 {
     if (paged == flag) {
@@ -123,6 +145,9 @@ void ViewDisplay::usePages(bool flag)
     }
 }
 
+/**
+ * Make sure all the widgets in the page navigation row have the same height.
+ */
 void ViewDisplay::updateButtonSizes()
 {
     int buttonHeight = rowsPerPage->sizeHint().height();
@@ -133,16 +158,39 @@ void ViewDisplay::updateButtonSizes()
     nextButton->setFixedHeight(buttonHeight);
 }
 
+/**
+ * Set whether or not actions taken in the data view have made
+ * not-yet-committed changes to the database (for example, a change in the
+ * width of a column made by moving the edge of its header).  Just passes the
+ * provided value along to the main window (a PortaBase instance).
+ *
+ * @param y True if uncommitted changes have been made, false otherwise.
+ */
 void ViewDisplay::setEdited(bool y)
 {
     portabase->setEdited(y);
 }
 
+/**
+ * Set whether or not clicking on a boolean field entry should toggle its
+ * value.  Useful for files such as shopping lists and todo lists, but adds
+ * a risk of accidentally changing data when you meant to just select a
+ * record.
+ *
+ * @param flag True if boolean values can be toggled by clicking on them
+ */
 void ViewDisplay::allowBooleanToggle(bool flag)
 {
     booleanToggle = flag;
 }
 
+/**
+ * Update the maximum number of records which can be shown on a single page
+ * of data.  Called when the value in the spin box at the lower left corner
+ * of the widget is changed.
+ *
+ * @param rpp The new maximum number of records per page
+ */
 void ViewDisplay::updateRowsPerPage(int rpp)
 {
     if (rpp < 1) {
@@ -152,9 +200,15 @@ void ViewDisplay::updateRowsPerPage(int rpp)
     firstPageButton = 1;
     updateTable();
     updateButtons();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
+/**
+ * Move to the data page whose number is displayed on the page navigation
+ * button with the specified ID.  Called when that button is clicked.
+ *
+ * @param id The ID of the page navigation button which was pressed
+ */
 void ViewDisplay::changePage(int id)
 {
     int newPage = firstPageButton + id;
@@ -165,6 +219,11 @@ void ViewDisplay::changePage(int id)
     updateTable();
 }
 
+/**
+ * Update the page navigation buttons to display the next set of pages,
+ * and display the data on the first page in that set.  Called when the
+ * right arrow navigation button is pressed
+ */
 void ViewDisplay::nextPages()
 {
     firstPageButton += PAGE_BUTTON_COUNT;
@@ -173,10 +232,15 @@ void ViewDisplay::nextPages()
     updateButtons();
 }
 
+/**
+ * Update the page navigation buttons to display the previous set of pages,
+ * and display the data on the first page in that set.  Called when the
+ * left arrow navigation button is pressed
+ */
 void ViewDisplay::previousPages()
 {
     firstPageButton -= PAGE_BUTTON_COUNT;
-    firstPageButton = QMAX(firstPageButton, 1);
+    firstPageButton = qMax(firstPageButton, 1);
     if (currentPage >= firstPageButton + PAGE_BUTTON_COUNT) {
         currentPage = firstPageButton;
     }
@@ -184,6 +248,11 @@ void ViewDisplay::previousPages()
     updateButtons();
 }
 
+/**
+ * Update the data in the display table to match the current display settings:
+ * page, records per page, filter, sorting, use of a paged display, etc.
+ * Initially no row will be selected.
+ */
 void ViewDisplay::updateTable()
 {
     int rowCount = view->getRowCount();
@@ -192,7 +261,7 @@ void ViewDisplay::updateTable()
     int rpp = rowsPerPage->value();
     if (paged) {
         index = (currentPage - 1) * rpp;
-        rows = QMIN(rpp, rowCount - index);
+        rows = qMin(rpp, rowCount - index);
     }
     if (rows <= 0 && rowCount > 0) {
         // past end of rows due to deletion or filtering, move to last page
@@ -202,22 +271,22 @@ void ViewDisplay::updateTable()
         }
         currentPage = pageCount;
         index = (currentPage - 1) * rpp;
-        rows = QMIN(rpp, rowCount - index);
+        rows = qMin(rpp, rowCount - index);
         if (firstPageButton > currentPage) {
             firstPageButton -= PAGE_BUTTON_COUNT;
-            firstPageButton = QMAX(firstPageButton, 1);
+            firstPageButton = qMax(firstPageButton, 1);
         }
     }
     table->clear();
+    Factory::updateRowColors(table);
     int *types = view->getColTypes();
-    QListViewItem *item = 0;
-    QRegExp linefeed("\n");
+    QTreeWidgetItem *item = 0;
     for (int i = 0; i < rows; i++) {
         if (i == 0) {
-            item = new ShadedListItem(0, table);
+            item = new QTreeWidgetItem(table);
         }
         else {
-            item = new ShadedListItem(i, table, item);
+            item = new QTreeWidgetItem(table, item);
         }
         QStringList data = view->getRow(index);
         int count = data.count();
@@ -225,18 +294,18 @@ void ViewDisplay::updateTable()
             int type = types[j];
             if (type == BOOLEAN) {
                 int checked = data[j].toInt();
-                item->setPixmap(j, PortaBase::getCheckBoxPixmap(checked));
+                item->setIcon(j, Factory::checkBoxIcon(checked));
             }
             else if (type == IMAGE) {
-                if (data[j] == "") {
+                if (data[j].isEmpty()) {
                     item->setText(j, "");
                 }
                 else {
-                    item->setPixmap(j, Resource::loadPixmap("portabase/image"));
+                    item->setIcon(j, QIcon(":/icons/image.png"));
                 }
             }
             else if (type == NOTE || type == STRING) {
-                item->setText(j, data[j].replace(linefeed, " "));
+                item->setText(j, data[j].replace("\n", " "));
             }
             else {
                 item->setText(j, data[j]);
@@ -245,14 +314,20 @@ void ViewDisplay::updateTable()
         index++;
     }
     if (rows > 0) {
-        stack->raiseWidget(table);
+        table->expandAll();
+        stack->setCurrentWidget(table);
     }
     else {
-        stack->raiseWidget(noResults);
+        stack->setCurrentWidget(noResults);
     }
-    portabase->setRowSelected(FALSE);
+    portabase->setRowSelected(table->currentItem() != 0);
 }
 
+/**
+ * Update the page navigation buttons to reflect the current data and
+ * navigation status; show the correct page numbers, disable buttons for
+ * pages that don't exist, etc.
+ */
 void ViewDisplay::updateButtons()
 {
     if (!paged) {
@@ -263,14 +338,19 @@ void ViewDisplay::updateButtons()
     prevButton->setEnabled(firstPageButton > 1);
     nextButton->setEnabled(totalPages >= firstPageButton + PAGE_BUTTON_COUNT);
     int page = firstPageButton;
-    for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
-        pageButtons[i]->setOn(page == currentPage);
+    for (int i = 0; i < PAGE_BUTTON_COUNT; i++) {
+        pageButtons[i]->setChecked(page == currentPage);
         pageButtons[i]->setEnabled(totalPages >= page);
-        pageButtons[i]->setTextLabel(QString::number(page), FALSE);
+        pageButtons[i]->setText(QString::number(page));
         page++;
     }
 }
 
+/**
+ * Set the database from which data is to be shown.
+ *
+ * @param dbase The database now in use.
+ */
 void ViewDisplay::setDatabase(Database *dbase)
 {
     closeView();
@@ -278,31 +358,35 @@ void ViewDisplay::setDatabase(Database *dbase)
     currentPage = 1;
     firstPageButton = 1;
     setView(db->currentView());
-    setEdited(FALSE);
+    setEdited(false);
 }
 
-void ViewDisplay::setView(QString name, bool applyDefaults)
+/**
+ * Set the view to be used for displaying data.
+ *
+ * @param name The name of the view to use
+ * @param applyDefaults True if the view's default filter and sorting are to
+ *                      be used, false to retain the current settings
+ */
+void ViewDisplay::setView(const QString &name, bool applyDefaults)
 {
     closeView();
     table->clear();
-    int numCols = table->columns();
-    int i;
-    for (i = 0; i < numCols; i++) {
-        table->removeColumn(0);
-    }
     view = db->getView(name, applyDefaults);
     QStringList colNames = view->getColNames();
     int *types = view->getColTypes();
     int count = colNames.count();
+    QTreeWidgetItem *headerItem = new QTreeWidgetItem();
+    int i;
     for (i = 0; i < count; i++) {
+        headerItem->setText(i, colNames[i]);
         if (types[i] == NOTE) {
-            table->addColumn(PortaBase::getNotePixmap(), colNames[i],
-                             view->getColWidth(i));
+            headerItem->setIcon(i, QIcon(":/icons/note.png"));
         }
-        else {
-            table->addColumn(colNames[i], view->getColWidth(i));
-        }
-        table->setColumnWidthMode(i, QListView::Manual);
+    }
+    table->setHeaderItem(headerItem);
+    for (i = 0; i < count; i++) {
+        table->setColumnWidth(i, view->getColWidth(i));
     }
     rowsPerPage->setValue(view->getRowsPerPage());
     view->prepareData();
@@ -310,14 +394,24 @@ void ViewDisplay::setView(QString name, bool applyDefaults)
     updateButtons();
 }
 
-void ViewDisplay::setSorting(QString name)
+/**
+ * Set the sorting to use and update the data display accordingly.
+ *
+ * @param name The name of the sorting to use
+ */
+void ViewDisplay::setSorting(const QString &name)
 {
     view->sort(name);
     view->prepareData();
     updateTable();
 }
 
-void ViewDisplay::setFilter(QString name)
+/**
+ * Set the filter to use and update the data display accordingly.
+ *
+ * @param name The name of the filter to use
+ */
+void ViewDisplay::setFilter(const QString &name)
 {
     db->getFilter(name);
     view->prepareData();
@@ -325,6 +419,10 @@ void ViewDisplay::setFilter(QString name)
     updateButtons();
 }
 
+/**
+ * Save any settings made to the current view, then remove this object's
+ * reference to it.
+ */
 void ViewDisplay::closeView()
 {
     if (view) {
@@ -333,12 +431,20 @@ void ViewDisplay::closeView()
     }
 }
 
+/**
+ * Store in the database any changes made to column widths or the maximum
+ * number of records per page.
+ */
 void ViewDisplay::saveViewSettings()
 {
     view->saveColWidths();
     view->setRowsPerPage(rowsPerPage->value());
 }
 
+/**
+ * Launch the RowEditor dialog to add a new record to the database, and
+ * update the display if a record was actually added.
+ */
 void ViewDisplay::addRow()
 {
     RowEditor rowEditor(this);
@@ -346,10 +452,19 @@ void ViewDisplay::addRow()
         view->prepareData();
         updateTable();
         updateButtons();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Launch the RowEditor dialog to edit a record, and update the display if
+ * the changes were accepted.
+ *
+ * @param id The ID of the record to edit; if -1, the record selected in the
+ *           display table is used
+ * @param copy True if the specified record is to be copied rather than edited
+ * @return True if any changes were made, false otherwise
+ */
 bool ViewDisplay::editRow(int id, bool copy)
 {
     int rowId = id;
@@ -362,13 +477,17 @@ bool ViewDisplay::editRow(int id, bool copy)
             view->prepareData();
             updateTable();
             updateButtons();
-            setEdited(TRUE);
-            return TRUE;
+            setEdited(true);
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
+/**
+ * View in the RowViewer dialog the record currently selected in the display
+ * table (if any).
+ */
 void ViewDisplay::viewRow()
 {
     int rowIndex = selectedRowIndex();
@@ -378,6 +497,9 @@ void ViewDisplay::viewRow()
     }
 }
 
+/**
+ * Delete the record currently selected in the display table (if any).
+ */
 void ViewDisplay::deleteRow()
 {
     int rowId = selectedRowId();
@@ -386,47 +508,61 @@ void ViewDisplay::deleteRow()
         view->prepareData();
         updateTable();
         updateButtons();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Delete all records matching the current filter.
+ */
 void ViewDisplay::deleteAllRows()
 {
     view->deleteAllRows();
     view->prepareData();
     updateTable();
     updateButtons();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
-void ViewDisplay::exportToCSV(QString filename)
+/**
+ * Export the records which match the currently applied filter to the
+ * specified file.  All fields are exported (not just the ones in the current
+ * view), in the order in which they appear in the database format definition.
+ * The records are listed in the current sorting order.
+ *
+ * @param filename The CSV file to create or overwrite
+ */
+void ViewDisplay::exportToCSV(const QString &filename)
 {
     view->exportToCSV(filename);
 }
 
-void ViewDisplay::exportToXML(QString filename)
+/**
+ * Export the full PortaBase file content to an XML file.  The records are
+ * listed in the current sorting order, and the ones which do not match the
+ * current filter are marked with an 'h="y"' attribute (an abbreviation for
+ * 'hidden="yes"').
+ *
+ * @param filename The XML file to create or overwrite
+ */
+void ViewDisplay::exportToXML(const QString &filename)
 {
     view->exportToXML(filename);
 }
 
+/**
+ * Get the position index in the underlying Metakit data view of the record
+ * currently selected in the display table (if any).
+ *
+ * @return The selected record's position index within the view, -1 if none
+ */
 int ViewDisplay::selectedRowIndex()
 {
-    QListViewItem *selected = table->selectedItem();
+    QTreeWidgetItem *selected = table->currentItem();
     if (!selected) {
         return -1;
     }
-    int index = 0;
-    QListViewItem *item = table->firstChild();
-    if (item != selected) {
-        QListViewItem *next = item->nextSibling();
-        while (next) {
-            index++;
-            if (next == selected) {
-                break;
-            }
-            next = next->nextSibling();
-        }
-    }
+    int index = table->indexOfTopLevelItem(selected);
     if (!paged) {
         return index;
     }
@@ -435,6 +571,11 @@ int ViewDisplay::selectedRowIndex()
     return startIndex + index;
 }
 
+/**
+ * Get the ID of the record currently selected in the display table (if any).
+ *
+ * @return The selected record's ID, -1 if no selection has been made
+ */
 int ViewDisplay::selectedRowId()
 {
     int index = selectedRowIndex();
@@ -444,12 +585,20 @@ int ViewDisplay::selectedRowId()
     return view->getId(index);
 }
 
+/**
+ * Lets the main window know that a record has been selected.  Called
+ * automatically when a record is selected.
+ */
 void ViewDisplay::rowSelected()
 {
-    portabase->setRowSelected(TRUE);
+    portabase->setRowSelected(true);
 }
 
-void ViewDisplay::cellPressed(QListViewItem *item, const QPoint&, int column)
+/**
+ * Handler for mouse presses on displayed fields.  Used to determine how
+ * long the mouse button was held down before releasing.
+ */
+void ViewDisplay::cellPressed(QTreeWidgetItem *item, int column)
 {
     if (item == 0) {
         // no row selected
@@ -459,7 +608,16 @@ void ViewDisplay::cellPressed(QListViewItem *item, const QPoint&, int column)
     timer.restart();
 }
 
-void ViewDisplay::cellReleased(QListViewItem *item, const QPoint&, int column)
+/**
+ * Mouse click (pressed and released) handler for displayed fields.  Used to
+ * display note content dialogs, toggle boolean values, display images, and
+ * launch the RowEditor dialog for the selected row (depending on exactly
+ * where and for how long the mouse was clicked).
+ *
+ * @param item The row of the table in which the click occurred
+ * @param column The position index of the column in which the click occurred
+ */
+void ViewDisplay::cellReleased(QTreeWidgetItem *item, int column)
 {
     if (item == 0) {
         // no row selected
@@ -471,24 +629,24 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint&, int column)
     int *types = view->getColTypes();
     int type = types[column];
     int rowId = selectedRowId();
-    QString colName = table->header()->label(column);
+    QString colName = table->headerItem()->text(column);
     if (type == BOOLEAN && booleanToggle) {
         db->toggleBoolean(rowId, colName);
         view->prepareData();
         updateTable();
-        setEdited(TRUE);
+        setEdited(true);
     }
     else if (timer.elapsed() > 500) {
         if (type == NOTE) {
-            NoteEditor viewer(colName, TRUE, this);
+            NoteEditor viewer(colName, true, this);
             viewer.setContent(view->getNote(rowId, column));
             viewer.exec();
         }
         else if (type == IMAGE) {
             QString format = view->getImageFormat(rowId, column);
-            if (format != "") {
+            if (!format.isEmpty()) {
                 QImage image = view->getImage(rowId, column);
-                ImageViewer viewer(TRUE, this);
+                ImageViewer viewer(true, this);
                 viewer.setView(view, selectedRowIndex(), column);
                 viewer.setImage(image);
                 viewer.exec();
@@ -500,12 +658,25 @@ void ViewDisplay::cellReleased(QListViewItem *item, const QPoint&, int column)
     }
 }
 
+/**
+ * Handler for mouse press events on the row of column headers.  Used to
+ * determine how long the mouse button was held down before releasing.
+ *
+ * @param column The position index of the column whose header was pressed on
+ */
 void ViewDisplay::headerPressed(int column)
 {
     pressedIndex = column;
     timer.restart();
 }
 
+/**
+ * Mouse click (pressed and released) handler for the row of column headers.
+ * Used to change the current sort column with a short click, or display a
+ * column statistics dialog with a long click.
+ *
+ * @param column The position index of the column in which the click occurred
+ */
 void ViewDisplay::headerReleased(int column)
 {
     if (column != pressedIndex) {
@@ -519,37 +690,70 @@ void ViewDisplay::headerReleased(int column)
     }
 }
 
+/**
+ * Handler for column resize events sent by the row of column headers.
+ * Propogates the new width setting to the view and marks the database as
+ * having been modified.
+ *
+ * @param column The position index of the column whose width was altered
+ * @param oldWidth The previous width in pixels of the column in question
+ * @param newWidth The new width in pixels of the column in question
+ */
 void ViewDisplay::columnResized(int column, int, int newWidth)
 {
-    view->setColWidth(column, newWidth);
-    setEdited(TRUE);
+    // The last column always resizes to fill available space; ignore it
+    if (column != table->columnCount() - 1) {
+        view->setColWidth(column, newWidth);
+        setEdited(true);
+    }
 }
 
+/**
+ * Update the sorting in use to reflect a short click on a column header.
+ * Sorts only on the clicked column, first in ascending order and then in
+ * descending order if clicked again.  Updates the display table and marks
+ * the database as having been modified.
+ *
+ * @param column The position index of the column being sorted on
+ */
 void ViewDisplay::sort(int column)
 {
     view->sort(column);
     view->prepareData();
     updateTable();
     portabase->updateSortMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
+/**
+ * Show a dialog containing summary statistics for a particular column of
+ * data.  Only values in records matching the current filter are factored
+ * into the statistics.
+ *
+ * @param column The position index of the column to show data for
+ */
 void ViewDisplay::showStatistics(int column)
 {
     QStringList stats = view->getStatistics(column);
     QString content("<qt><center><b>");
-    content += table->header()->label(column) + "</b></center>";
+    content += table->headerItem()->text(column) + "</b></center>";
     int count = stats.count();
     for (int i = 0; i < count; i++) {
         content += stats[i] + "<br/>";
     }
     content += "</qt>";
-    QMessageBox mb(QQDialog::tr("PortaBase"), content, QMessageBox::NoIcon,
+    QMessageBox mb(qApp->applicationName(), content, QMessageBox::NoIcon,
                    QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
     mb.exec();
 }
 
+/**
+ * Launch a dialog which will allow the user to pick a column of images to
+ * view in a slideshow.  If there are now image columns in the current view
+ * or records matching the current filter, a message dialog to that effect is
+ * displayed instead.
+ */
 void ViewDisplay::slideshow()
 {
     QStringList colNames = view->getColNames();
@@ -562,12 +766,12 @@ void ViewDisplay::slideshow()
         }
     }
     if (imageCols.count() == 0) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        QMessageBox::warning(this, qApp->applicationName(),
                              tr("No image columns in this view"));
         return;
     }
     if (view->getRowCount() == 0) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        QMessageBox::warning(this, qApp->applicationName(),
                              tr("No rows in this filter"));
         return;
     }
@@ -575,6 +779,30 @@ void ViewDisplay::slideshow()
     dialog.exec();
 }
 
+/**
+ * Handler for keyboard key press events.  Ensures that pressing the
+ * enter/return key while a row is selected will show that row in the
+ * RowViewer dialog.
+ *
+ * @param e The keyboard event which occurred
+ */
+void ViewDisplay::keyPressEvent(QKeyEvent *e)
+{
+    int key = e->key();
+    if (key == Qt::Key_Enter || key == Qt::Key_Return) {
+        viewRow();
+    }
+    else {
+        e->ignore();
+    }
+}
+
+/**
+ * Handler for keyboard key release events.  Ensures that releasing the space
+ * bar while a row is selected will show that row in the RowViewer dialog.
+ *
+ * @param e The keyboard event which occurred
+ */
 void ViewDisplay::keyReleaseEvent(QKeyEvent *e)
 {
     int key = e->key();

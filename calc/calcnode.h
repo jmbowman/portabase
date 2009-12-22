@@ -1,7 +1,7 @@
 /*
  * calcnode.h
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,76 +9,88 @@
  * (at your option) any later version.
  */
 
+/** @file calcnode.h
+ * Header file for CalcNode
+ */
+
 #ifndef CALCNODE_H
 #define CALCNODE_H
 
-#define CALC_CONSTANT 0
-#define CALC_COLUMN 1
-#define CALC_DATE_CONSTANT 2
-#define CALC_DATE_COLUMN 3
-#define CALC_TIME_CONSTANT 4
-#define CALC_TIME_COLUMN 5
-
 #define CALC_FIRST_OP 20
-#define CALC_ADD 20
-#define CALC_SUBTRACT 21
-#define CALC_MULTIPLY 22
-#define CALC_DIVIDE 23
-#define CALC_DAYS 24
-#define CALC_MAX 25
-#define CALC_MIN 26
-#define CALC_AVERAGE 27
-#define CALC_ABS 28
-#define CALC_SQRT 29
-#define CALC_LOG 30
-#define CALC_LN 31
-#define CALC_SECONDS 32
-#define CALC_MINUTES 33
-#define CALC_HOURS 34
 #define CALC_LAST_OP 34
 
-#include <qobject.h>
-#include <qstringlist.h>
+#include <QObject>
+#include <QStringList>
 
 class CalcNode;
 class Database;
 
-typedef QValueList<CalcNode*> CalcNodeList;
+typedef QList<CalcNode*> CalcNodeList;
 
+/**
+ * Class representing one node in the definition of a calculation.  Can be
+ * a column reference, a constant value, or an operation; if it's an operation,
+ * it usually has child nodes (but will fail gracefully to a default value if
+ * none have been defined).
+ */
 class CalcNode : public QObject
 {
     Q_OBJECT
 public:
-    CalcNode(int type, const QString &value);
+    /** Enumeration of possible node types */
+    enum NodeType {
+        Constant = 0,
+        Column = 1,
+        DateConstant = 2,
+        DateColumn = 3,
+        TimeConstant = 4,
+        TimeColumn = 5,
+        Add = 20,
+        Subtract = 21,
+        Multiply = 22,
+        Divide = 23,
+        Days = 24,
+        Max = 25,
+        Min = 26,
+        Average = 27,
+        Abs = 28,
+        Sqrt = 29,
+        Log = 30,
+        Ln = 31,
+        Seconds = 32,
+        Minutes = 33,
+        Hours = 34
+    };
+    CalcNode(NodeType type, const QString &value);
     ~CalcNode();
 
-    int type();
+    NodeType type();
     QString value();
-    void setType(int newType);
+    void setType(NodeType newType);
     void setValue(const QString &newValue);
     bool allowsAdd();
     bool allowsEdit();
     double value(const QStringList &row, const QStringList &colNames);
     int days(const QStringList &row, const QStringList &colNames);
     QString description(Database *db);
-    QString equation(Database *db, bool useParens=FALSE);
+    QString equation(Database *db, bool useParens=false);
     static QStringList listOperations();
     CalcNodeList getChildren();
     void addChild(CalcNode *child);
     void removeChild(CalcNode *child);
-    void moveChild(CalcNode *child, CalcNode *after);
+    void swapChildren(int i, int j);
     CalcNode *clone();
     int maxChildren();
     bool deleteColumn(const QString &name);
     void renameColumn(const QString &oldName, const QString &newName);
 
 private:
-    static QString description(Database *db, int type, const QString &value);
+    static QString description(Database *db, NodeType type, const QString &value);
 
 private:
-    int nodeType;
-    QString nodeValue;
-    CalcNodeList children;
+    NodeType nodeType; /**< The type of node that the object represents */
+    QString nodeValue; /**< The value of this node (column name, constant value, etc.) */
+    CalcNodeList children; /**< This node's child nodes, if any */
 };
 
 #endif

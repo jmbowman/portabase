@@ -1,7 +1,7 @@
 /*
  * dynamicedit.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,57 +9,63 @@
  * (at your option) any later version.
  */
 
-#include <qapplication.h>
+/** @file dynamicedit.cpp
+ * Source file for DynamicEdit
+ */
+
+#include <QApplication>
+#include <QFontMetrics>
 #include "dynamicedit.h"
 
-DynamicEdit::DynamicEdit(QWidget *parent, const char *name)
-  : QMultiLineEdit(parent, name), oldHeight(1)
+/**
+ * Constructor.
+ *
+ * @param parent This widget's parent widget, if any
+ */
+DynamicEdit::DynamicEdit(QWidget *parent)
+  : QTextEdit(parent)
 {
-    clearTableFlags(Tbl_autoVScrollBar|Tbl_autoHScrollBar);
+    setTabChangesFocus(true);
+    setFixedHeight(sizeHint().height());
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     connect(this, SIGNAL(textChanged()), this, SLOT(adjustHeight()));
-    setFixedVisibleLines(1);
+    setAcceptRichText(false);
+    setLineWrapMode(QTextEdit::NoWrap);
+    setWordWrapMode(QTextOption::NoWrap);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
-bool DynamicEdit::adjustHeight()
-{
-    int newHeight = numLines();
-    if (newHeight != oldHeight) {
-        setFixedVisibleLines(newHeight);
-        oldHeight = newHeight;
-        return true;
-    }
-    return false;
-}
-
-void DynamicEdit::keyPressEvent(QKeyEvent *e)
-{
-    // tab moves between fields instead of adding a tab to the text
-    int key = e->key();
-    if (key == Qt::Key_Tab || key == Qt::Key_Backtab) {
-        QTableView::event(e);
-    }
-    else {
-        QMultiLineEdit::keyPressEvent(e);
-    }
-}
-
-bool DynamicEdit::focusNextPrevChild(bool next)
-{
-    // bypass dummy implementation in QMultiLineEdit
-    return QWidget::focusNextPrevChild(next);
-}
-
-// QMultiLineEdit implementation return value is too wide
+/**
+ * Determine the preferred size of this widget based on its current text
+ * content.
+ *
+ * @return The current preferred size
+ */
 QSize DynamicEdit::sizeHint() const
 {
-    constPolish();
-    QFontMetrics fm(font());
-    int h = fm.lineSpacing() * 5 + fm.height() + frameWidth() * 2;
-    int w = fm.width('x') * 5;
-
-    int maxh = maximumSize().height();
-    if (maxh < QWIDGETSIZE_MAX) {
-	h = maxh;
+    QString content = toPlainText();
+    if (content.isEmpty()) {
+        QSize size = qApp->fontMetrics().size(0, "Ag");
+        size.setWidth(100);
+        size.setHeight(size.height());
+        return size;
     }
-    return QSize(w, h).expandedTo(QApplication::globalStrut());
+    qreal rheight = document()->size().rheight();
+    int height = qRound(rheight);
+    // Want to round up, not down
+    if (rheight > height) {
+        height++;
+    }
+    return QSize(100, height);
+}
+
+/**
+ * Recalculate the height required to contain all the lines of text entered
+ * so far.  Called whenever the content of the text field changes.
+ */
+void DynamicEdit::adjustHeight()
+{
+    setFixedHeight(sizeHint().height());
+    updateGeometry();
 }

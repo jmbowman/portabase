@@ -1,7 +1,7 @@
 /*
  * calceditor.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,42 +9,56 @@
  * (at your option) any later version.
  */
 
-#include <qgrid.h>
-#include <qhbox.h>
-#include <qheader.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qlistview.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
+/** @file calceditor.cpp
+ * Source file for CalcEditor
+ */
+
+#include <QHeaderView>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QTreeWidget>
 #include "calcdateeditor.h"
 #include "calceditor.h"
 #include "calcnode.h"
 #include "calcnodeeditor.h"
 #include "calctimeeditor.h"
+#include "../factory.h"
 
-CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent, const char *name)
-    : PBDialog(tr("Calculation Editor"), parent, name), db(dbase)
+/**
+ * Constructor.
+ *
+ * @param dbase The database being edited
+ * @param calcName The initial name of the calculated column
+ * @param colNames The list of database column names
+ * @param colTypes The list of database column type IDs
+ * @param parent This dialog's parent widget
+ */
+CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent)
+    : PBDialog(tr("Calculation Editor"), parent), db(dbase)
 {
-    QGrid *grid = new QGrid(2, this);
-    vbox->addWidget(grid);
-    new QLabel(tr("Column Name") + ": ", grid);
-    new QLabel(calcName, grid);
-    new QLabel(tr("Equation") + ":", grid);
-    equation = new QLineEdit(grid);
-    equation->setReadOnly(TRUE);
-    equation->setFrame(FALSE);
-    new QLabel(tr("Decimal Places") + ":", grid);
-    decimalsBox = new QSpinBox(0, 9, 1, grid);
+    QGridLayout *grid = new QGridLayout(this);
+    vbox->addLayout(grid);
+    grid->addWidget(new QLabel(tr("Column Name") + ": ", this), 0, 0);
+    grid->addWidget(new QLabel(calcName, this), 0, 1);
+    grid->addWidget(new QLabel(tr("Equation") + ":", this), 1, 0);
+    equation = new QLineEdit(this);
+    equation->setReadOnly(true);
+    equation->setFrame(false);
+    grid->addWidget(equation, 1, 1);
+    grid->addWidget(new QLabel(tr("Decimal Places") + ":", this), 2, 0);
+    decimalsBox = new QSpinBox(this);
+    decimalsBox->setRange(0, 9);
     decimalsBox->setValue(2);
-    tree = new QListView(this);
-    vbox->addWidget(tree);
-    tree->setSorting(-1);
-    tree->addColumn("", 100);
-    tree->setColumnWidthMode(0, QListView::Manual);
+    grid->addWidget(decimalsBox, 2, 1);
+    tree = Factory::treeWidget(this, QStringList());
+    tree->setRootIsDecorated(true);
     tree->header()->hide();
-    connect(tree, SIGNAL(currentChanged(QListViewItem*)),
-            this, SLOT(updateButtons(QListViewItem*)));
+    vbox->addWidget(tree);
+    connect(tree, SIGNAL(itemSelectionChanged()),
+            this, SLOT(updateButtons()));
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addNode()));
@@ -52,68 +66,83 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteNode()));
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
-    updateButtons(0);
+    updateButtons();
 
-    nodeEditor = new CalcNodeEditor(colNames, colTypes, TRUE, this);
-    valueEditor = new CalcNodeEditor(colNames, colTypes, FALSE, this);
+    nodeEditor = new CalcNodeEditor(colNames, colTypes, true, this);
+    valueEditor = new CalcNodeEditor(colNames, colTypes, false, this);
     dateEditor = new CalcDateEditor(colNames, colTypes, this);
     timeEditor = new CalcTimeEditor(db, colNames, colTypes, this);
 
-    finishLayout(TRUE, TRUE, TRUE, parent->width(), 400);
-    tree->setColumnWidth(0, width() - 2);
+    finishLayout(parent->width(), 400);
 }
 
-CalcEditor::~CalcEditor()
-{
-
-}
-
+/**
+ * Populate the dialog with the specified information.
+ *
+ * @param root The root node of the calculation to display
+ * @param decimals The number of decimal places to show for calculated values
+ */
 void CalcEditor::load(CalcNode *root, int decimals)
 {
     addNode(0, root);
     if (root != 0) {
-        QListViewItem *item = tree->firstChild();
-        tree->setSelected(item, TRUE);
-        updateButtons(item);
+        QTreeWidgetItem *item = tree->topLevelItem(0);
+        tree->setCurrentItem(item);
+        updateButtons();
     }
     updateEquation();
     decimalsBox->setValue(decimals);
 }
 
+/**
+ * Get the root node of the displayed calculation.
+ *
+ * @return The calculation's root node
+ */
 CalcNode *CalcEditor::getRootNode()
 {
-    QListViewItem *root = tree->firstChild();
+    QTreeWidgetItem *root = tree->topLevelItem(0);
     if (root == 0) {
         return 0;
     }
     return nodeMap[root];
 }
 
+/**
+ * Get the number of decimal places to display for calculation results.
+ *
+ * @return The currently specified number of decimal places to show.
+ */
 int CalcEditor::getDecimals()
 {
     return decimalsBox->value();
 }
 
-void CalcEditor::addNode(QListViewItem *parent, CalcNode *node)
+/**
+ * Add a new node to the equation as a child of the specified entry in
+ * the calculation definition tree.
+ *
+ * @param parent The displayed representation of the new node's parent
+ * @param node The node to be added to the calculation definition tree
+ */
+void CalcEditor::addNode(QTreeWidgetItem *parent, CalcNode *node)
 {
-    QListViewItem *item = 0;
+    QTreeWidgetItem *item = 0;
     QString text = node->description(db);
     if (parent == 0) {
-        item = new QListViewItem(tree, text);
+        item = new QTreeWidgetItem(tree);
     }
     else {
-        QListViewItem *sibling = parent->firstChild();
-        if (sibling == 0) {
-            item = new QListViewItem(parent, text);
+        if (parent->childCount() == 0) {
+            item = new QTreeWidgetItem(parent);
         }
         else {
-            while (sibling->nextSibling() != 0) {
-                sibling = sibling->nextSibling();
-            }
-            item = new QListViewItem(parent, sibling, text);
+            QTreeWidgetItem *sibling = parent->child(parent->childCount() - 1);
+            item = new QTreeWidgetItem(parent, sibling);
         }
-        tree->setOpen(parent, TRUE);
+        parent->setExpanded(true);
     }
+    item->setText(0, text);
     nodeMap.insert(item, node);
     CalcNodeList children = node->getChildren();
     int count = children.count();
@@ -122,33 +151,42 @@ void CalcEditor::addNode(QListViewItem *parent, CalcNode *node)
     }
 }
 
-void CalcEditor::updateButtons(QListViewItem *item)
+/**
+ * Update the status of the edit buttons based on the currently selected node
+ * (or lack thereof).
+ */
+void CalcEditor::updateButtons()
 {
+    QTreeWidgetItem *item = tree->currentItem();
     if (item == 0) {
         // empty tree
-        addButton->setEnabled(TRUE);
-        editButton->setEnabled(FALSE);
-        deleteButton->setEnabled(FALSE);
-        upButton->setEnabled(FALSE);
-        downButton->setEnabled(FALSE);
+        addButton->setEnabled(true);
+        editButton->setEnabled(false);
+        deleteButton->setEnabled(false);
+        upButton->setEnabled(false);
+        downButton->setEnabled(false);
         return;
     }
     CalcNode *node = nodeMap[item];
     addButton->setEnabled(node->allowsAdd());
     editButton->setEnabled(node->allowsEdit());
-    deleteButton->setEnabled(TRUE);
-    QListViewItem *parent = item->parent();
+    deleteButton->setEnabled(true);
+    QTreeWidgetItem *parent = item->parent();
     if (parent == 0) {
         // root node, no siblings
-        upButton->setEnabled(FALSE);
-        downButton->setEnabled(FALSE);
+        upButton->setEnabled(false);
+        downButton->setEnabled(false);
     }
     else {
-        upButton->setEnabled(parent->firstChild() != item);
-        downButton->setEnabled(item->nextSibling() != 0);
+        upButton->setEnabled(parent->child(0) != item);
+        int index = parent->indexOfChild(item);
+        downButton->setEnabled(parent->childCount() > index + 1);
     }
 }
 
+/**
+ * Update the displayed text representation of the calculation.
+ */
 void CalcEditor::updateEquation()
 {
      CalcNode *root = getRootNode();
@@ -156,13 +194,17 @@ void CalcEditor::updateEquation()
      equation->setText(eq);
 }
 
+/**
+ * Add a new node to the calculation (as a child of the selected node, if
+ * any).  Called when the "Add" button is clicked.
+ */
 void CalcEditor::addNode()
 {
-    QListViewItem *parent = tree->selectedItem();
+    QTreeWidgetItem *parent = tree->currentItem();
     if (parent != 0) {
         CalcNode *parentNode = nodeMap[parent];
         int type = parentNode->type();
-        if (type == CALC_DAYS) {
+        if (type == CalcNode::Days) {
             dateEditor->reset();
             if (!dateEditor->exec()) {
                 return;
@@ -170,14 +212,14 @@ void CalcEditor::addNode()
             CalcNode *node = dateEditor->createNode();
             addNode(parent, node);
             parentNode->addChild(node);
-            updateButtons(parent);
+            updateButtons();
             updateEquation();
             return;
         }
-        else if (type == CALC_SECONDS || type == CALC_MINUTES
-                 || type == CALC_HOURS) {
+        else if (type == CalcNode::Seconds || type == CalcNode::Minutes
+                 || type == CalcNode::Hours) {
             timeEditor->reset();
-            bool finished = FALSE;
+            bool finished = false;
             while (!finished) {
                 if (!timeEditor->exec()) {
                     return;
@@ -189,17 +231,14 @@ void CalcEditor::addNode()
             CalcNode *node = timeEditor->createNode();
             addNode(parent, node);
             parentNode->addChild(node);
-            updateButtons(parent);
+            updateButtons();
             updateEquation();
             return;
         }
     }
     nodeEditor->reset();
-    bool finished = FALSE;
+    bool finished = false;
     while (!finished) {
-#if defined(Q_WS_QWS)
-        nodeEditor->showMaximized();
-#endif
         if (!nodeEditor->exec()) {
             return;
         }
@@ -209,30 +248,34 @@ void CalcEditor::addNode()
     }
     CalcNode *node = nodeEditor->createNode();
     addNode(parent, node);
-    QListViewItem *selection = parent;
+    QTreeWidgetItem *selection = parent;
     if (parent == 0) {
-        selection = tree->firstChild();
-        tree->setSelected(selection, TRUE);
+        selection = tree->topLevelItem(0);
+        tree->setCurrentItem(selection);
     }
     else {
         CalcNode *parentNode = nodeMap[parent];
         parentNode->addChild(node);
     }
-    updateButtons(selection);
+    updateButtons();
     updateEquation();
 }
 
+/**
+ * Edit the currently selected calculation node.  Called when the "Edit"
+ * button is clicked.
+ */
 void CalcEditor::editNode()
 {
-    QListViewItem *item = tree->selectedItem();
+    QTreeWidgetItem *item = tree->currentItem();
     if (item == 0) {
         return;
     }
     CalcNode *node = nodeMap[item];
     int type = node->type();
-    if (type == CALC_COLUMN || type == CALC_CONSTANT) {
+    if (type == CalcNode::Column || type == CalcNode::Constant) {
         valueEditor->setNode(node);
-        bool finished = FALSE;
+        bool finished = false;
         while (!finished) {
             if (!valueEditor->exec()) {
                 return;
@@ -243,9 +286,9 @@ void CalcEditor::editNode()
         }
         valueEditor->updateNode(node);
     }
-    else if (type == CALC_TIME_COLUMN || type == CALC_TIME_CONSTANT) {
+    else if (type == CalcNode::TimeColumn || type == CalcNode::TimeConstant) {
         timeEditor->setNode(node);
-        bool finished = FALSE;
+        bool finished = false;
         while (!finished) {
             if (!timeEditor->exec()) {
                 return;
@@ -267,17 +310,21 @@ void CalcEditor::editNode()
     updateEquation();
 }
 
+/**
+ * Delete the selected calculation node.  Called when the "Delete" button is
+ * clicked.
+ */
 void CalcEditor::deleteNode()
 {
-    QListViewItem *item = tree->selectedItem();
+    QTreeWidgetItem *item = tree->currentItem();
     if (item == 0) {
         return;
     }
     CalcNode *node = nodeMap[item];
-    QListViewItem *parent = item->parent();
+    QTreeWidgetItem *parent = item->parent();
     if (parent != 0) {
         CalcNode *parentNode = nodeMap[parent];
-        tree->setSelected(parent, TRUE);
+        tree->setCurrentItem(parent);
         parentNode->removeChild(node);
     }
     else {
@@ -285,68 +332,79 @@ void CalcEditor::deleteNode()
     }
     removeFromMap(item);
     delete item;
-    updateButtons(parent);
+    updateButtons();
     updateEquation();
 }
 
-void CalcEditor::removeFromMap(QListViewItem *item)
+/**
+ * Remove an entry from the display tree item to calculation node mapping.
+ * All of the item's descendents are removed as well.
+ *
+ * @param item The display tree item to be removed from the mapping
+ */
+void CalcEditor::removeFromMap(QTreeWidgetItem *item)
 {
     nodeMap.remove(item);
-    QListViewItem *child = item->firstChild();
-    while (child != 0) {
-        removeFromMap(child);
-        child = child->nextSibling();
+    int childCount = item->childCount();
+    for (int i = 0; i < childCount; i++) {
+        removeFromMap(item->child(i));
     }
 }
 
+/**
+ * Move the position of the selected calculation node up by one among its
+ * siblings.
+ */
 void CalcEditor::moveUp()
 {
-    QListViewItem *item = tree->selectedItem();
+    QTreeWidgetItem *item = tree->currentItem();
     if (item == 0) {
         return;
     }
-    QListViewItem *parent = item->parent();
+    QTreeWidgetItem *parent = item->parent();
     if (parent == 0) {
         return;
     }
-    QListViewItem *sibling = parent->firstChild();
-    QListViewItem *before = 0;
-    while (sibling != item && sibling != 0) {
-        before = sibling;
-        sibling = sibling->nextSibling();
+    int index = parent->indexOfChild(item);
+    if (index > 0) {
+        QTreeWidgetItem *before = parent->child(index - 1);
+        swap(before);
     }
-    if (before != 0) {
-        swap(before, item);
-    }
-    updateButtons(item);
+    updateButtons();
     updateEquation();
 }
 
+/**
+ * Move the position of the selected calculation node down by one among its
+ * siblings.
+ */
 void CalcEditor::moveDown()
 {
-    QListViewItem *item = tree->selectedItem();
+    QTreeWidgetItem *item = tree->currentItem();
     if (item == 0) {
         return;
     }
-    QListViewItem *after = item->nextSibling();
-    if (after != 0) {
-        swap(item, after);
+    QTreeWidgetItem *parent = item->parent();
+    int index = parent->indexOfChild(item);
+    if (index + 1 < parent->childCount()) {
+        swap(item);
     }
-    updateButtons(item);
+    updateButtons();
     updateEquation();
 }
 
-void CalcEditor::swap(QListViewItem *top, QListViewItem *bottom)
+/**
+ * Swap the positions of two adjacent calculation nodes in the display tree
+ * (and in the calculation definition that it represents).
+ *
+ * @param top The higher of the two nodes to be swapped
+ */
+void CalcEditor::swap(QTreeWidgetItem *top)
 {
     CalcNode *parentNode = nodeMap[top->parent()];
-    CalcNode *topNode = nodeMap[top];
-    CalcNode *bottomNode = nodeMap[bottom];
-    top->moveItem(bottom);
-    parentNode->moveChild(topNode, bottomNode);
-}
-
-void CalcEditor::resizeEvent(QResizeEvent *event)
-{
-    QDialog::resizeEvent(event);
-    tree->setColumnWidth(0, width() - 2);
+    QTreeWidgetItem *parent = top->parent();
+    int index = parent->indexOfChild(top);
+    QTreeWidgetItem *removed = parent->takeChild(index);
+    parent->insertChild(index + 1, removed);
+    parentNode->swapChildren(index, index + 1);
 }

@@ -1,7 +1,7 @@
 /*
  * notebutton.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,32 +9,52 @@
  * (at your option) any later version.
  */
 
-#include <qfontmetrics.h>
-#include <qregexp.h>
+/** @file notebutton.cpp
+ * Source file for NoteButton
+ */
+
+#include <QFontMetrics>
+#include <QRegExp>
 #include "notebutton.h"
 #include "noteeditor.h"
 #include "portabase.h"
 
-NoteButton::NoteButton(QString colName, QWidget *parent, const char *name)
-    : QPushButton(PortaBase::getNotePixmap(), "", parent, name), name(colName)
+/**
+ * Constructor.
+ *
+ * @param colName The name of the column this note belongs to
+ * @param parent This button's parent widget
+ */
+NoteButton::NoteButton(const QString &colName, QWidget *parent)
+    : QToolButton(parent), name(colName)
 {
+    setIcon(QIcon(":/icons/note.png"));
+    setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
+                              QSizePolicy::Fixed, QSizePolicy::ToolButton));
     connect(this, SIGNAL(clicked()), this, SLOT(launchEditor()));
 }
 
-NoteButton::~NoteButton()
-{
-
-}
-
+/**
+ * Get the note's current content.
+ *
+ * @return The note text
+ */
 QString NoteButton::content()
 {
     return noteContent;
 }
 
-void NoteButton::setContent(QString text)
+/**
+ * Set the note's content.
+ *
+ * @param text The note's new text
+ */
+void NoteButton::setContent(const QString &text)
 {
     noteContent = text;
-    QString buttonText = text.replace(QRegExp("\n"), " ");
+    QString buttonText(text);
+    buttonText.replace(QRegExp("\n"), " ");
     QFontMetrics metrics = fontMetrics();
     int available = width() - 60 - metrics.width("...");
     int length = buttonText.length();
@@ -48,17 +68,27 @@ void NoteButton::setContent(QString text)
     setText(buttonText);
 }
 
+/**
+ * Launch the note content editor dialog.  Launched when the button is
+ * clicked.
+ */
 void NoteButton::launchEditor()
 {
-    NoteEditor editor(name, FALSE, this);
+    NoteEditor editor(name, false, this);
     editor.setContent(noteContent);
     if (editor.exec()) {
         setContent(editor.content());
     }
 }
 
+/**
+ * Set the button's text to the appropriate subset of the note content
+ * before it is shown.
+ *
+ * @param event A widget show event for the button
+ */
 void NoteButton::showEvent(QShowEvent *event)
 {
-    QPushButton::showEvent(event);
+    QToolButton::showEvent(event);
     setContent(noteContent);
 }

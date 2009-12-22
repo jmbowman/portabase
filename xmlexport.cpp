@@ -1,7 +1,7 @@
 /*
  * xmlexport.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,13 +9,25 @@
  * (at your option) any later version.
  */
 
-#include <qfile.h>
-#include <qtextstream.h>
+/** @file xmlexport.cpp
+ * Source file for XMLExport
+ */
+
+#include <QFile>
+#include <QTextStream>
 #include "database.h"
 #include "datatypes.h"
 #include "xmlexport.h"
 
-XMLExport::XMLExport(Database *source, QString filename, QStringList currentCols) : db(source), indentUnit(" ")
+/**
+ * Constructor.
+ *
+ * @param source The database to export from
+ * @param filename The XML file to export to
+ * @param currentCols Ordered list of column names in the current view
+ */
+XMLExport::XMLExport(Database *source, const QString &filename,
+  const QStringList &currentCols) : db(source), indentUnit(" ")
 {
     cols = currentCols;
     fieldElements.append("s");
@@ -29,15 +41,18 @@ XMLExport::XMLExport(Database *source, QString filename, QStringList currentCols
     fieldElements.append("q");
     fieldElements.append("p");
     file = new QFile(filename);
-    file->open(IO_WriteOnly);
+    file->open(QFile::WriteOnly);
     output = new QTextStream(file);
-    output->setEncoding(QTextStream::UnicodeUTF8);
+    output->setCodec("UTF-8");
     *output << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     *output << "<portabase>\n";
     indent = indentUnit;
     utils.setExportPaths(filename);
 }
 
+/**
+ * Destructor.
+ */
 XMLExport::~XMLExport()
 {
     *output << "</portabase>\n";
@@ -46,6 +61,11 @@ XMLExport::~XMLExport()
     delete file;
 }
 
+/**
+ * Add a &lt;global&gt; element representing the "_global" Metakit view.
+ *
+ * @param global The Metakit view to export
+ */
 void XMLExport::addGlobalView(c4_View &global)
 {
     *output << (indent + "<global>\n");
@@ -65,7 +85,13 @@ void XMLExport::addGlobalView(c4_View &global)
     *output << (indent + "</global>\n");
 }
 
-void XMLExport::addView(QString name, c4_View view)
+/**
+ * Add an element representing the provided Metakit view.
+ *
+ * @param name The name to use for the generated element
+ * @param view The Metakit view to export
+ */
+void XMLExport::addView(const QString &name, c4_View view)
 {
     *output << (indent + "<" + name + ">\n");
     indent += indentUnit;
@@ -99,9 +125,21 @@ void XMLExport::addView(QString name, c4_View view)
     *output << (indent + "</" + name + ">\n");
 }
 
+/**
+ * Add an element representing the actual user data table.
+ *
+ * @param fullView The Metakit view to export
+ * @param filteredView The Metakit view resulting from applying the current
+ *                     filter
+ * @param colIds Ordered array of field ID numbers (array deleted here)
+ * @param colTypes Ordered array of field type IDs (array deleted here)
+ * @param idStrings Ordered list of Metakit data field identifiers
+ * @param colNames Ordered list of field names in the database
+ */
 void XMLExport::addDataView(c4_View &fullView, c4_View &filteredView,
-                            int *colIds, int *colTypes, QStringList idStrings,
-                            QStringList colNames)
+                            int *colIds, int *colTypes,
+                            const QStringList &idStrings,
+                            const QStringList &colNames)
 {
     *output << (indent + "<data>\n");
     indent += indentUnit;
@@ -164,6 +202,14 @@ void XMLExport::addDataView(c4_View &fullView, c4_View &filteredView,
     delete[] typeChars;
 }
 
+/**
+ * Get the name to use for the export element corresponding to the given
+ * Metakit property.  Generally, this only involves stripping the leading
+ * underscore from the property name.
+ *
+ * @param prop The Metakit property being exported
+ * @return The name to use for the corresponding exported element
+ */
 QString XMLExport::getPropName(const c4_Property prop)
 {
     QString name = QString::fromUtf8(prop.Name());
@@ -171,15 +217,25 @@ QString XMLExport::getPropName(const c4_Property prop)
     return name.right(name.length() - 1);
 }
 
-QString XMLExport::getValue(c4_View &view, QString name, char type, int row)
+/**
+ * Get a value from a Metakit view cell for export.  Escapes special XML
+ * characters in the value where appropriate.
+ *
+ * @param view The view being exported
+ * @param name The name of the Metakit property being exported from
+ * @param type The Metakit property type character for this property
+ * @param row The position index in the view of the row being exported
+ * @return The specified data value, ready for insertion into an XML file
+ */
+QString XMLExport::getValue(c4_View &view, const QString &name, char type, int row)
 {
     if (type == 'I') {
-        c4_IntProp prop(name.utf8());
+        c4_IntProp prop(name.toUtf8());
         int value = prop (view[row]);
         return QString::number(value);
     }
     else {
-        c4_StringProp prop(name.utf8());
+        c4_StringProp prop(name.toUtf8());
         QString value = QString::fromUtf8(prop (view[row]));
         int length = value.length();
         QString result = "";

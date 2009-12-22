@@ -1,7 +1,7 @@
 /*
  * sorteditor.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,52 +9,49 @@
  * (at your option) any later version.
  */
 
+/** @file sorteditor.h
+ * Header file for SortEditor
+ */
+
 #ifndef SORTEDITOR_H
 #define SORTEDITOR_H
 
-#include <qstringlist.h>
+#include <QStringList>
 #include "pbdialog.h"
 
 class Database;
 class QLineEdit;
-class QListView;
-class QListViewItem;
-class QPoint;
+class QTreeWidget;
+class QTreeWidgetItem;
 
+/**
+ * Dialog for editing a sorting.
+ */
 class SortEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    SortEditor(QWidget *parent = 0, const char *name = 0);
-    ~SortEditor();
+    SortEditor(QWidget *parent = 0);
 
-    int edit(Database *subject, QString sortingName);
+    int edit(Database *subject, const QString &sortingName);
     void applyChanges();
     QString getName();
 
-protected:
-    void resizeEvent(QResizeEvent *event);
-
 private:
-    void updateTable();
-    void selectRow(QString name);
-    int isSorted(QString name);
-    bool hasValidName();
+    void updateTable(const QStringList &colNames);
 
 private slots:
-    void tableClicked(QListViewItem *item, const QPoint &point, int column);
+    void tableClicked(QTreeWidgetItem *item, int column);
     void moveUp();
     void moveDown();
 
 private:
-    QLineEdit *nameBox;
-    QListView *table;
-    Database *db;
-    QString originalName;
-    QStringList colNames;
-    QStringList sortCols;
-    QStringList descCols;
-    bool resized;
+    QLineEdit *nameBox; /**< Entry field for the sorting's name */
+    QTreeWidget *table; /**< Display of the list of database columns */
+    Database *db; /**< The database being edited */
+    QString originalName; /**< The initial name of the filter being edited */
+    QStringList sortCols; /**< Names of columns which are being sorted on */
+    QStringList descCols; /**< Names of columns which are being sorted in descending order */
 };
 
 #endif

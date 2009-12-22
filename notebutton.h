@@ -1,7 +1,7 @@
 /*
  * notebutton.h
  *
- * (c) 2002 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,20 +9,27 @@
  * (at your option) any later version.
  */
 
+/** @file notebutton.h
+ * Header file for NoteButton
+ */
+
 #ifndef NOTEBUTTON_H
 #define NOTEBUTTON_H
 
-#include <qpushbutton.h>
+#include <QToolButton>
 
-class NoteButton: public QPushButton
+/**
+ * Button which represents a note field.  Displays the beginning of the note
+ * text, and launches an editor for the full value when clicked.
+ */
+class NoteButton: public QToolButton
 {
     Q_OBJECT
 public:
-    NoteButton(QString colName, QWidget *parent = 0, const char *name = 0);
-    ~NoteButton();
+    NoteButton(const QString &colName, QWidget *parent = 0);
 
     QString content();
-    void setContent(QString text);
+    void setContent(const QString &text);
 
 protected:
     void showEvent(QShowEvent *event);
@@ -31,8 +38,8 @@ private slots:
     void launchEditor();
 
 private:
-    QString name;
-    QString noteContent;
+    QString name; /**< The name of the column the note belongs to */
+    QString noteContent; /**< The current note text */
 };
 
 #endif

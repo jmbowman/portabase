@@ -1,7 +1,7 @@
 /*
  * columneditor.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,13 +9,19 @@
  * (at your option) any later version.
  */
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qstringlist.h>
-#include <qwidgetstack.h>
+/** @file columneditor.cpp
+ * Source file for ColumnEditor
+ */
+
+#include <QCheckBox>
+#include <QComboBox>
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QStringList>
+#include <QStackedWidget>
 #include "calc/calceditor.h"
 #include "calc/calcnode.h"
 #include "columneditor.h"
@@ -24,110 +30,125 @@
 #include "enumeditor.h"
 #include "notebutton.h"
 #include "numberwidget.h"
-#include "pbdialog.h"
 
-#if !defined(Q_WS_QWS)
-#include <qhbox.h>
-#include <qpushbutton.h>
-#endif
-
-ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent, const char *name)
-  : QQDialog("", parent, name, TRUE), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
+/**
+ * Constructor.
+ *
+ * @param dbase The database in use
+ * @param parent The parent DBEditor dialog
+ */
+ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
+  : QQDialog("", parent), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
 {
-#if defined(Q_WS_QWS)
-    QGridLayout *grid = new QGridLayout(this, 3, 2);
-#else
-    QGridLayout *grid = new QGridLayout(this, 4, 2);
-#endif
+    QGridLayout *grid = new QGridLayout(this);
 
     grid->addWidget(new QLabel(tr("Name"), this), 0, 0);
     nameBox = new QLineEdit(this);
     grid->addWidget(nameBox, 0, 1);
 
     grid->addWidget(new QLabel(tr("Type"), this), 1, 0);
-    typeBox = new QComboBox(FALSE, this);
+    typeBox = new QComboBox(this); // TODO: make sure not editable
     grid->addWidget(typeBox, 1, 1);
-    typeBox->insertItem(tr("String"));
-    typeBox->insertItem(tr("Integer"));
-    typeBox->insertItem(tr("Decimal"));
-    typeBox->insertItem(tr("Boolean"));
-    typeBox->insertItem(tr("Note"));
-    typeBox->insertItem(tr("Date"));
-    typeBox->insertItem(tr("Time"));
-    typeBox->insertItem(tr("Calculation"));
-    typeBox->insertItem(tr("Sequence"));
-    typeBox->insertItem(tr("Image"));
-    typeBox->insertStringList(db->listEnums());
-    typeBox->insertItem("(" + tr("New Enum") + ")");
+    typeBox->addItem(tr("String"));
+    typeBox->addItem(tr("Integer"));
+    typeBox->addItem(tr("Decimal"));
+    typeBox->addItem(tr("Boolean"));
+    typeBox->addItem(tr("Note"));
+    typeBox->addItem(tr("Date"));
+    typeBox->addItem(tr("Time"));
+    typeBox->addItem(tr("Calculation"));
+    typeBox->addItem(tr("Sequence"));
+    typeBox->addItem(tr("Image"));
+    typeBox->addItems(db->listEnums());
+    typeBox->addItem("(" + tr("New Enum") + ")");
     connect(typeBox, SIGNAL(activated(int)),
             this, SLOT(updateDefaultWidget(int)));
     lastType = 0;
 
     defaultLabel = new QLabel(tr("Default"), this);
     grid->addWidget(defaultLabel, 2, 0);
-    defaultStack = new QWidgetStack(this);
+    defaultStack = new QStackedWidget(this);
     defaultStack->setMaximumHeight(typeBox->height());
     grid->addWidget(defaultStack, 2, 1);
     defaultCheck = new QCheckBox(defaultStack);
+    defaultStack->addWidget(defaultCheck);
     defaultLine = new QLineEdit(defaultStack);
+    defaultStack->addWidget(defaultLine);
     defaultNote = new NoteButton(tr("Default Note"), defaultStack);
+    defaultStack->addWidget(defaultNote);
     defaultInteger = new NumberWidget(INTEGER, defaultStack);
+    defaultStack->addWidget(defaultInteger);
     defaultFloat = new NumberWidget(FLOAT, defaultStack);
-    defaultDate = new QComboBox(FALSE, defaultStack);
-    defaultDate->insertItem(tr("Today"));
-    defaultDate->insertItem(tr("None"));
-    defaultTime = new QComboBox(FALSE, defaultStack);
-    defaultTime->insertItem(tr("Now"));
-    defaultTime->insertItem(tr("None"));
-    defaultEnum = new QComboBox(FALSE, defaultStack);
+    defaultStack->addWidget(defaultFloat);
+    defaultDate = new QComboBox(defaultStack); // TODO: confirm not editable
+    defaultDate->addItem(tr("Today"));
+    defaultDate->addItem(tr("None"));
+    defaultStack->addWidget(defaultDate);
+    defaultTime = new QComboBox(defaultStack); // TODO: confirm not editable
+    defaultTime->addItem(tr("Now"));
+    defaultTime->addItem(tr("None"));
+    defaultStack->addWidget(defaultTime);
+    defaultEnum = new QComboBox(defaultStack); // TODO: confirm not editable
+    defaultStack->addWidget(defaultEnum);
     calcButton = new QPushButton(tr("Edit calculation"), defaultStack);
+    defaultStack->addWidget(calcButton);
     connect(calcButton, SIGNAL(clicked()), this, SLOT(editCalculation()));
     defaultSequence = new NumberWidget(INTEGER, defaultStack);
+    defaultStack->addWidget(defaultSequence);
     defaultBlank = new QWidget(defaultStack);
-    defaultStack->raiseWidget(defaultLine);
+    defaultStack->addWidget(defaultBlank);
+    defaultStack->setCurrentWidget(defaultLine);
 
-    int minWidth = -1;
-#if !defined(Q_WS_QWS)
-    QHBox *hbox = new QHBox(this);
-    new QWidget(hbox);
-    QPushButton *okButton = new QPushButton(PBDialog::tr("OK"), hbox);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    new QWidget(hbox);
-    QPushButton *cancelButton = new QPushButton(PBDialog::tr("Cancel"), hbox);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-    new QWidget(hbox);
-    grid->addMultiCellWidget(hbox, 3, 3, 0, 1);
-    grid->setResizeMode(QLayout::FreeResize);
-    minWidth = parent->width() / 2;
-#endif
-    finishConstruction(FALSE, minWidth);
+    QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok
+                                                | QDialogButtonBox::Cancel;
+    QDialogButtonBox *box = new QDialogButtonBox(buttons, Qt::Horizontal, this);
+    grid->addWidget(box, 3, 3, 1, 2);
+    connect(box, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(box, SIGNAL(rejected()), this, SLOT(reject()));
+    setLayout(grid);
+    finishConstruction();
 }
 
-ColumnEditor::~ColumnEditor()
-{
-
-}
-
+/**
+ * Get the name of the column being edited.
+ *
+ * @return The column name, as displayed and/or entered in this dialog
+ */
 QString ColumnEditor::name()
 {
     return nameBox->text();
 }
 
-void ColumnEditor::setName(QString newName)
+/**
+ * Set the name of the column being edited.
+ *
+ * @param newName The column name
+ */
+void ColumnEditor::setName(const QString &newName)
 {
     nameBox->setText(newName);
 }
 
+/**
+ * Get the type of column being edited.
+ *
+ * @return A column type ID
+ */
 int ColumnEditor::type()
 {
-    int colType = typeBox->currentItem();
+    int colType = typeBox->currentIndex();
     if (colType > LAST_TYPE) {
-        QString enumName = typeBox->text(colType);
+        QString enumName = typeBox->itemText(colType);
         colType = db->getEnumId(enumName);
     }
     return colType;
 }
 
+/**
+ * Set the type of the column being edited.
+ *
+ * @param newType A column type ID
+ */
 void ColumnEditor::setType(int newType)
 {
     if (newType == lastType) {
@@ -138,17 +159,22 @@ void ColumnEditor::setType(int newType)
         QString enumName = db->getEnumName(newType);
         int count = typeBox->count() - 1;
         for (int i = TIME + 1; i < count; i++) {
-            if (typeBox->text(i) == enumName) {
+            if (typeBox->itemText(i) == enumName) {
                 index = i;
                 break;
             }
         }
     }
-    typeBox->setCurrentItem(index);
+    typeBox->setCurrentIndex(index);
     updateDefaultWidget(index);
     lastType = index;
 }
 
+/**
+ * Get the default value of the column being edited.
+ *
+ * @return The default value, as stored in the database
+ */
 QString ColumnEditor::defaultValue()
 {
     int colType = type();
@@ -165,7 +191,7 @@ QString ColumnEditor::defaultValue()
         return defaultNote->content();
     }
     else if (colType == DATE) {
-        int selection = defaultDate->currentItem();
+        int selection = defaultDate->currentIndex();
         if (selection == TODAY) {
             return QString::number(0);
         }
@@ -174,7 +200,7 @@ QString ColumnEditor::defaultValue()
         }
     }
     else if (colType == TIME) {
-        int selection = defaultTime->currentItem();
+        int selection = defaultTime->currentIndex();
         if (selection == NOW) {
             return QString::number(0);
         }
@@ -202,23 +228,28 @@ QString ColumnEditor::defaultValue()
     }
 }
 
-void ColumnEditor::setDefaultValue(QString newDefault)
+/**
+ * Set the default value of the column being edited.
+ *
+ * @param newDefault The default value, as stored in the database
+ */
+void ColumnEditor::setDefaultValue(const QString &newDefault)
 {
     defaultLine->setText("");
-    defaultCheck->setChecked(FALSE);
+    defaultCheck->setChecked(false);
     defaultNote->setContent("");
-    defaultDate->setCurrentItem(0);
-    defaultTime->setCurrentItem(0);
+    defaultDate->setCurrentIndex(0);
+    defaultTime->setCurrentIndex(0);
     defaultInteger->setValue("0");
     defaultFloat->setValue("0");
     defaultSequence->setValue("0");
     int colType = type();
     if (colType == BOOLEAN) {
         if (newDefault.toInt()) {
-            defaultCheck->setChecked(TRUE);
+            defaultCheck->setChecked(true);
         }
         else {
-            defaultCheck->setChecked(FALSE);
+            defaultCheck->setChecked(false);
         }
     }
     else if (colType == NOTE) {
@@ -226,24 +257,24 @@ void ColumnEditor::setDefaultValue(QString newDefault)
     }
     else if (colType == DATE) {
         if (newDefault == "0") {
-            defaultDate->setCurrentItem(0);
+            defaultDate->setCurrentIndex(0);
         }
         else {
-            defaultDate->setCurrentItem(1);
+            defaultDate->setCurrentIndex(1);
         }
     }
     else if (colType == TIME) {
         if (newDefault == "0") {
-            defaultTime->setCurrentItem(0);
+            defaultTime->setCurrentIndex(0);
         }
         else {
-            defaultTime->setCurrentItem(1);
+            defaultTime->setCurrentIndex(1);
         }
     }
     else if (colType >= FIRST_ENUM) {
         QStringList options = db->listEnumOptions(colType);
-        int selection = options.findIndex(newDefault);
-        defaultEnum->setCurrentItem(selection);
+        int selection = options.indexOf(newDefault);
+        defaultEnum->setCurrentIndex(selection);
     }
     else if (colType == INTEGER) {
         defaultInteger->setValue(newDefault);
@@ -259,6 +290,13 @@ void ColumnEditor::setDefaultValue(QString newDefault)
     }
 }
 
+/**
+ * Get the calculation defined for this column.  Used for calculated columns.
+ *
+ * @param decimals A pointer to an int which will be used to store the number
+ *                 of decimal places to display for calculation results.
+ * @return The root node of the calculation definition tree
+ */
 CalcNode *ColumnEditor::calculation(int *decimals)
 {
     if (decimals != 0) {
@@ -267,24 +305,48 @@ CalcNode *ColumnEditor::calculation(int *decimals)
     return calcRoot;
 }
 
+/**
+ * Set the calculation to be used for this column.  Used for calculated
+ * columns.
+ *
+ * @param root The root node of the calculation definition tree
+ * @param decimals The number of decimal places to display for results
+ */
 void ColumnEditor::setCalculation(CalcNode *root, int decimals)
 {
     calcRoot = root;
     calcDecimals = decimals;
 }
 
+/**
+ * Set whether or not the column type can be changed.  This is typically
+ * true for new columns and false when editing existing columns.
+ *
+ * @param flag True if the column type is editable, false otherwise
+ */
 void ColumnEditor::setTypeEditable(bool flag)
 {
     typeBox->setEnabled(flag);
     defaultSequence->setEnabled(flag);
 }
 
+/**
+ * Override of QDialog::exec() which ensures that the column name field
+ * has focus upon launch.
+ */
 int ColumnEditor::exec()
 {
     nameBox->setFocus();
     return QDialog::exec();
 }
 
+/**
+ * Display the correct default value widget for the specified column type.
+ * Called automatically whenever a new column type is selected from the list
+ * of options.
+ *
+ * @param newType The ID of the newly selected column type
+ */
 void ColumnEditor::updateDefaultWidget(int newType)
 {
     defaultLabel->setText(tr("Default"));
@@ -293,59 +355,63 @@ void ColumnEditor::updateDefaultWidget(int newType)
         EnumEditor editor(this);
         if (editor.edit(db, "")) {
             editor.applyChanges();
-            typeBox->insertItem(editor.getName(), newType);
-            typeBox->setCurrentItem(newType);
+            typeBox->insertItem(newType, editor.getName());
+            typeBox->setCurrentIndex(newType);
         }
         else {
-            typeBox->setCurrentItem(lastType);
+            typeBox->setCurrentIndex(lastType);
             return;
         }
     }
     if (newType > LAST_TYPE) {
-        QString enumName = typeBox->text(newType);
+        QString enumName = typeBox->itemText(newType);
         int enumId = db->getEnumId(enumName);
         QStringList options = db->listEnumOptions(enumId);
         defaultEnum->clear();
-        defaultEnum->insertStringList(options);
-        defaultEnum->setCurrentItem(0);
-        defaultStack->raiseWidget(defaultEnum);
+        defaultEnum->addItems(options);
+        defaultEnum->setCurrentIndex(0);
+        defaultStack->setCurrentWidget(defaultEnum);
     }
     else if (newType == BOOLEAN) {
-        defaultStack->raiseWidget(defaultCheck);
+        defaultStack->setCurrentWidget(defaultCheck);
     }
     else if (newType == NOTE) {
-        defaultStack->raiseWidget(defaultNote);
+        defaultStack->setCurrentWidget(defaultNote);
     }
     else if (newType == DATE) {
-        defaultStack->raiseWidget(defaultDate);
+        defaultStack->setCurrentWidget(defaultDate);
     }
     else if (newType == TIME) {
-        defaultStack->raiseWidget(defaultTime);
+        defaultStack->setCurrentWidget(defaultTime);
     }
     else if (newType == INTEGER) {
-        defaultStack->raiseWidget(defaultInteger);
+        defaultStack->setCurrentWidget(defaultInteger);
     }
     else if (newType == FLOAT) {
-        defaultStack->raiseWidget(defaultFloat);
+        defaultStack->setCurrentWidget(defaultFloat);
     }
     else if (newType == CALC) {
         defaultLabel->setText("");
-        defaultStack->raiseWidget(calcButton);
+        defaultStack->setCurrentWidget(calcButton);
     }
     else if (newType == SEQUENCE) {
         defaultLabel->setText(tr("Next value"));
-        defaultStack->raiseWidget(defaultSequence);
+        defaultStack->setCurrentWidget(defaultSequence);
     }
     else if (newType == IMAGE) {
         defaultLabel->setText("");
-        defaultStack->raiseWidget(defaultBlank);
+        defaultStack->setCurrentWidget(defaultBlank);
     }
     else {
-        defaultStack->raiseWidget(defaultLine);
+        defaultStack->setCurrentWidget(defaultLine);
     }
-    lastType = typeBox->currentItem();
+    lastType = typeBox->currentIndex();
 }
 
+/**
+ * Edit the calculation defined for this column (if it is of the appropriate
+ * type).  Called automatically when the "Edit calculation" button is clicked.
+ */
 void ColumnEditor::editCalculation()
 {
     int *types = dbEditor->columnTypes();

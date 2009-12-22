@@ -1,7 +1,7 @@
 /*
  * roweditor.h
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,11 +9,15 @@
  * (at your option) any later version.
  */
 
+/** @file roweditor.h
+ * Header file for RowEditor
+ */
+
 #ifndef ROWEDITOR_H
 #define ROWEDITOR_H
 
-#include <qstringlist.h>
-#include <qvaluelist.h>
+#include <QStringList>
+#include <QList>
 #include "datatypes.h"
 #include "pbdialog.h"
 
@@ -29,45 +33,47 @@ class NoteButton;
 class NumberWidget;
 class TimeWidget;
 
-typedef QValueList<QCheckBox*> CheckBoxList;
-typedef QValueList<NoteButton*> NoteButtonList;
-typedef QValueList<DateWidget*> DateWidgetList;
-typedef QValueList<TimeWidget*> TimeWidgetList;
-typedef QValueList<NumberWidget*> NumberWidgetList;
-typedef QValueList<QComboBox*> ComboBoxList;
-typedef QValueList<DynamicEdit*> DynamicEditList;
-typedef QValueList<CalcWidget*> CalcWidgetList;
-typedef QValueList<QLabel*> LabelList;
-typedef QValueList<ImageSelector*> ImageSelectorList;
+typedef QList<QCheckBox*> CheckBoxList;
+typedef QList<NoteButton*> NoteButtonList;
+typedef QList<DateWidget*> DateWidgetList;
+typedef QList<TimeWidget*> TimeWidgetList;
+typedef QList<NumberWidget*> NumberWidgetList;
+typedef QList<QComboBox*> ComboBoxList;
+typedef QList<DynamicEdit*> DynamicEditList;
+typedef QList<CalcWidget*> CalcWidgetList;
+typedef QList<QLabel*> LabelList;
+typedef QList<ImageSelector*> ImageSelectorList;
 
+/**
+ * Dialog for editing the values in one row of the database.
+ */
 class RowEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    RowEditor(QWidget *parent = 0, const char *name = 0);
-    ~RowEditor();
+    RowEditor(QWidget *parent = 0);
 
-    bool edit(Database *subject, int rowId=-1, bool copy=FALSE);
+    bool edit(Database *subject, int rowId=-1, bool copy=false);
     bool isValid();
-    QStringList getRow(bool doCalcs=TRUE);
+    QStringList getRow(bool doCalcs=true);
 
 private:
     void addContent(int rowId);
 
 private:
-    Database *db;
-    QStringList colNames;
-    IntList colTypes;
-    CheckBoxList checkBoxes;
-    NoteButtonList noteButtons;
-    DateWidgetList dateWidgets;
-    TimeWidgetList timeWidgets;
-    NumberWidgetList numberWidgets;
-    ComboBoxList comboBoxes;
-    DynamicEditList dynamicEdits;
-    CalcWidgetList calcWidgets;
-    LabelList sequenceLabels;
-    ImageSelectorList imageSelectors;
+    Database *db; /**< The database being edited */
+    QStringList colNames; /**< Ordered list of all the database's column names */
+    IntList colTypes; /**< Ordered list of all the database's column types */
+    CheckBoxList checkBoxes; /**< List of this dialog's boolean edit widgets */
+    NoteButtonList noteButtons; /**< List of this dialog's note edit widgets */
+    DateWidgetList dateWidgets; /**< List of this dialog's date edit widgets */
+    TimeWidgetList timeWidgets; /**< List of this dialog's time edit widgets */
+    NumberWidgetList numberWidgets; /**< List of this dialog's number edit widgets */
+    ComboBoxList comboBoxes; /**< List of this dialog's enum edit widgets */
+    DynamicEditList dynamicEdits; /**< List of this dialog's string edit widgets */
+    CalcWidgetList calcWidgets; /**< List of this dialog's calculation display widgets */
+    LabelList sequenceLabels; /**< List of this dialog's sequence number display widgets */
+    ImageSelectorList imageSelectors; /**< List of this dialog's image selection widgets */
 };
 
 #endif

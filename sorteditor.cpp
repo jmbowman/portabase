@@ -1,7 +1,7 @@
 /*
  * sorteditor.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,43 +9,44 @@
  * (at your option) any later version.
  */
 
-#include <qhbox.h>
-#include <qheader.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qlistview.h>
-#include <qmessagebox.h>
+/** @file sorteditor.cpp
+ * Source file for SortEditor
+ */
+
+#include <QIcon>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include "database.h"
+#include "factory.h"
 #include "portabase.h"
-#include "shadedlistitem.h"
 #include "sorteditor.h"
 
-SortEditor::SortEditor(QWidget *parent, const char *name)
-    : PBDialog(tr("Sorting Editor"), parent, name), db(0), resized(FALSE)
+/**
+ * Constructor.
+ *
+ * @param parent This dialog's parent widget
+ */
+SortEditor::SortEditor(QWidget *parent)
+    : PBDialog(tr("Sorting Editor"), parent), db(0)
 {
-    QHBox *hbox = new QHBox(this);
-    vbox->addWidget(hbox);
-    new QLabel(tr("Sorting Name") + " ", hbox);
-    nameBox = new QLineEdit(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(this);
+    vbox->addLayout(hbox);
+    hbox->addWidget(new QLabel(tr("Sorting Name") + " ", this));
+    nameBox = new QLineEdit(this);
+    hbox->addWidget(nameBox);
 
-    table = new QListView(this);
+    QStringList headers;
+    headers << tr("Sort") << tr("Column Name") << tr("Direction");
+    table = Factory::treeWidget(this, headers);
     vbox->addWidget(table);
-    table->setAllColumnsShowFocus(TRUE);
-    table->setSorting(-1);
-    table->header()->setMovingEnabled(FALSE);
-    table->addColumn(tr("Sort"));
-    table->setColumnWidthMode(0, QListView::Manual);
-    table->setColumnAlignment(0, Qt::AlignHCenter);
-    int colWidth = -1;
-#if !defined(Q_WS_WIN)
-    colWidth = (width() - table->columnWidth(0) - 5) / 2;
-#endif
-    table->addColumn(tr("Column Name"), colWidth);
-    table->addColumn(tr("Direction"), colWidth);
-    connect(table, SIGNAL(clicked(QListViewItem*, const QPoint&, int)),
-            this, SLOT(tableClicked(QListViewItem*, const QPoint&, int)));
+    connect(table, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
+            this, SLOT(tableClicked(QTreeWidgetItem*, int)));
 
-    addEditButtons(TRUE);
+    addEditButtons(true);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
     connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
 
@@ -53,29 +54,30 @@ SortEditor::SortEditor(QWidget *parent, const char *name)
     nameBox->setFocus();
 }
 
-SortEditor::~SortEditor()
-{
-
-}
-
-int SortEditor::edit(Database *subject, QString sortingName)
+/**
+ * Launch this dialog to edit the specified sorting.
+ *
+ * @param subject The database being edited
+ * @param sortingName The current name of the sorting to edit
+ */
+int SortEditor::edit(Database *subject, const QString &sortingName)
 {
     db = subject;
     originalName = sortingName;
     nameBox->setText(sortingName);
-    colNames = db->listColumns();
+    QStringList colNames = db->listColumns();
     db->getSortingInfo(sortingName, &sortCols, &descCols);
     // move currently sorted columns to the top of the list, in correct order
     int count = sortCols.count();
     for (int i = count - 1; i > -1; i--) {
         QString name = sortCols[i];
-        colNames.remove(name);
+        colNames.removeAll(name);
         colNames.prepend(name);
     }
-    updateTable();
+    updateTable(colNames);
     int result = exec();
     while (result) {
-        if (hasValidName()) {
+        if (validateName(nameBox->text(), originalName, db->listSortings())) {
             break;
         }
         else {
@@ -85,99 +87,103 @@ int SortEditor::edit(Database *subject, QString sortingName)
     return result;
 }
 
+/**
+ * Get the name for the sorting as currently shown in the dialog.
+ *
+ * @return The (possibly changed) sorting name
+ */
 QString SortEditor::getName()
 {
     return nameBox->text();
 }
 
+/**
+ * Move the selected row higher in the table, which has the effect of sorting
+ * on the field it represents before those of any other rows it moves above.
+ * Called when the "Up" button is clicked.
+ */
 void SortEditor::moveUp()
 {
-    QListViewItem *item = table->selectedItem();
+    QTreeWidgetItem *item = table->currentItem();
     if (item == 0) {
         return;
     }
-    QListViewItem *above = item->itemAbove();
-    if (above) {
-        QString name = item->text(1);
-        QString aboveName = above->text(1);
-        colNames.remove(name);
-        colNames.insert(colNames.find(aboveName), name);
-        updateTable();
-        selectRow(name);
+    int index = table->indexOfTopLevelItem(item);
+    if (index > 0) {
+        item = table->takeTopLevelItem(index);
+        table->insertTopLevelItem(index - 1, item);
+        table->setCurrentItem(item);
     }
 }
 
+/**
+ * Move the selected row lower in the table, which has the effect of sorting
+ * on the field it represents after those of any other rows it moves below.
+ * Called when the "Down" button is clicked.
+ */
 void SortEditor::moveDown()
 {
-    QListViewItem *item = table->selectedItem();
+    QTreeWidgetItem *item = table->currentItem();
     if (item == 0) {
         return;
     }
-    QListViewItem *below = item->itemBelow();
-    if (below) {
-        QString name = item->text(1);
-        colNames.remove(name);
-        below = below->itemBelow();
-        if (below) {
-            QString belowName = below->text(1);
-            colNames.insert(colNames.find(belowName), name);
-        }
-        else {
-            colNames.append(name);
-        }
-        updateTable();
-        selectRow(name);
+    int index = table->indexOfTopLevelItem(item);
+    if (index < table->topLevelItemCount() - 1) {
+        item = table->takeTopLevelItem(index);
+        table->insertTopLevelItem(index + 1, item);
+        table->setCurrentItem(item);
     }
 }
 
-void SortEditor::selectRow(QString name)
-{
-    QListViewItem *item = table->firstChild();
-    if (item) {
-        if (item->text(1) == name) {
-            table->setSelected(item, TRUE);
-        }
-        else {
-            QListViewItem *next = item->nextSibling();
-	    while (next) {
-                if (next->text(1) == name) {
-                    table->setSelected(next, TRUE);
-                    break;
-                }
-                next = next->nextSibling();
-            }
-        }
-    }
-}
-
-void SortEditor::updateTable()
+/**
+ * Update the displayed table to match the current information in sortCols
+ * and descCols.
+ *
+ * @param colNames The field names in the order in which they are appear in
+ *                 the table
+ */
+void SortEditor::updateTable(const QStringList &colNames)
 {
     table->clear();
     int count = colNames.count();
-    QListViewItem *item = 0;
+    QTreeWidgetItem *item = 0;
     for (int i = 0; i < count; i++) {
+        if (i == 0) {
+            item = new QTreeWidgetItem(table);
+        }
+        else {
+            item = new QTreeWidgetItem(table, item);
+        }
+        item->setTextAlignment(0, Qt::AlignHCenter);
         QString name = colNames[i];
-        bool sorted = isSorted(name);
         QString direction = "";
-        if (sorted) {
-            if (descCols.findIndex(name) == -1) {
+        if (sortCols.contains(name)) {
+            if (descCols.contains(name)) {
                 direction = tr("Ascending");
             }
             else {
                 direction = tr("Descending");
             }
-        }
-        if (i == 0) {
-            item = new ShadedListItem(0, table, "", name, direction);
+            item->setIcon(0, QIcon(":/icons/checked.png"));
         }
         else {
-            item = new ShadedListItem(i, table, item, "", name, direction);
+            item->setIcon(0, QIcon(":/icons/unchecked.png"));
         }
-        item->setPixmap(0, PortaBase::getCheckBoxPixmap(sorted));
+        item->setText(1, name);
+        item->setText(2, direction);
     }
 }
 
-void SortEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
+/**
+ * Handler for clicks on the information table.  A click in the first column
+ * toggles whether or not the field represented by that row will be sorted
+ * on.  A click in the third column toggles the sorting order for the
+ * appropriate field (if it's being sorted on).
+ *
+ * @param item The row of the table in which the click occurred
+ * @param column The index of the column in which the click occurred
+ */
+void SortEditor::tableClicked(QTreeWidgetItem *item, int column)
 {
     if (item == 0) {
         // no row selected
@@ -185,70 +191,51 @@ void SortEditor::tableClicked(QListViewItem *item, const QPoint&, int column)
     }
     if (column == 0) {
         QString name = item->text(1);
-        int sorted = isSorted(name);
-        if (sorted) {
-            sortCols.remove(name);
-            descCols.remove(name);
+        if (sortCols.contains(name)) {
+            item->setIcon(0, QIcon(":/icons/unchecked.png"));
+            sortCols.removeAll(name);
+            descCols.removeAll(name);
             item->setText(2, "");
         }
         else {
+            item->setIcon(0, QIcon(":/icons/checked.png"));
             sortCols.append(name);
             item->setText(2, tr("Ascending"));
         }
-        item->setPixmap(0, PortaBase::getCheckBoxPixmap(!sorted));
     }
     else if (column == 2) {
         QString name = item->text(1);
-        int sorted = isSorted(name);
-        if (sorted) {
-            if (descCols.findIndex(name) == -1) {
+        if (sortCols.contains(name)) {
+            if (!descCols.contains(name)) {
                 descCols.append(name);
                 item->setText(2, tr("Descending"));
             }
             else {
-                descCols.remove(name);
+                descCols.removeAll(name);
                 item->setText(2, tr("Ascending"));
             }
         }
     }
 }
 
-bool SortEditor::hasValidName()
-{
-    return validateName(nameBox->text(), originalName, db->listSortings());
-}
-
-int SortEditor::isSorted(QString name)
-{
-    return (sortCols.findIndex(name) != -1);
-}
-
+/**
+ * Apply to the database any changes made the last time this dialog was shown.
+ */
 void SortEditor::applyChanges()
 {
     QString sortingName = nameBox->text();
     QStringList orderedSort;
     QStringList orderedDesc;
-    int count = colNames.count();
+    int count = table->topLevelItemCount();
     for (int i = 0; i < count; i++) {
-        QString name = colNames[i];
-        if (isSorted(name)) {
+        QString name = table->topLevelItem(i)->text(1);
+        if (sortCols.contains(name)) {
             orderedSort.append(name);
-            if (descCols.findIndex(name) != -1) {
+            if (descCols.contains(name)) {
                 orderedDesc.append(name);
             }
         }
     }
     db->deleteSorting(originalName);
     db->addSorting(sortingName, orderedSort, orderedDesc);
-}
-
-void SortEditor::resizeEvent(QResizeEvent *event)
-{
-    QDialog::resizeEvent(event);
-    if (!resized) {
-        int colWidth = width() - table->columnWidth(0) - 20;
-        table->setColumnWidth(1, colWidth / 2);
-        table->setColumnWidth(2, colWidth / 2);
-        resized = TRUE;
-    }
 }

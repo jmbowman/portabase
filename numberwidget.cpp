@@ -1,7 +1,7 @@
 /*
  * numberwidget.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,45 +9,53 @@
  * (at your option) any later version.
  */
 
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qtoolbutton.h>
+/** @file numberwidget.cpp
+ * Source file for NumberWidget
+ */
+
+#include <QIcon>
+#include <QLayout>
+#include <QLineEdit>
+#include <QToolButton>
 #include "calculator.h"
 #include "datatypes.h"
+#include "factory.h"
 #include "numberwidget.h"
 
-#if defined(Q_WS_QWS)
-#include <qpe/resource.h>
-#else
-#include "desktop/resource.h"
-#endif
-
-NumberWidget::NumberWidget(int type, QWidget *parent, const char *name, WFlags f)
-  : QHBox(parent, name, f), dataType(type)
+/**
+ * Constructor.
+ *
+ * @param type The type of value to edit (FLOAT or INT)
+ * @param parent This widget's parent widget
+ */
+NumberWidget::NumberWidget(int type, QWidget *parent)
+  : QWidget(parent), dataType(type)
 {
+    QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     entryField = new QLineEdit(this);
-#if defined(Q_OS_MACX)
+    layout->addWidget(entryField, 1);
     QToolButton *button = new QToolButton(this);
-#else
-    QPushButton *button = new QPushButton(this);
-#endif
-    button->setPixmap(Resource::loadPixmap("portabase/calculator"));
+    layout->addWidget(button);
+    button->setIcon(QIcon(":/icons/calculator.png"));
+    button->setToolTip(tr("Show calculator"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchCalculator()));
-    int height = button->height();
-    setMaximumHeight(height);
-    button->setMaximumWidth(height);
 }
 
-NumberWidget::~NumberWidget()
-{
-
-}
-
+/**
+ * Get the currently selected value.
+ *
+ * @return The text representation of the currently selected value
+ */
 QString NumberWidget::getValue()
 {
     return entryField->text();
 }
 
+/**
+ * Set this widget's new value.
+ *
+ * @param value The new value to be displayed in the widget
+ */
 void NumberWidget::setValue(const QString &value)
 {
     if (dataType == INTEGER) {
@@ -59,6 +67,10 @@ void NumberWidget::setValue(const QString &value)
     }
 }
 
+/**
+ * Launch the calculator dialog.  Called automatically when the right-hand
+ * button is clicked.
+ */
 void NumberWidget::launchCalculator()
 {
     Calculator calc(this);

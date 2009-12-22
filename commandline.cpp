@@ -1,7 +1,7 @@
 /*
  * commandline.cpp
  *
- * (c) 2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,42 +9,43 @@
  * (at your option) any later version.
  */
 
-#include <qfile.h>
-#include <qobject.h>
-#include <qstringlist.h>
+/** @file commandline.cpp
+ * Source file for CommandLine
+ */
+
+#include <QApplication>
+#include <QFile>
+#include <QObject>
+#include <QStringList>
 #include "commandline.h"
 #include "database.h"
 #include "importutils.h"
 #include "view.h"
+#include "encryption/crypto.h"
 
+/**
+ * Constructor.
+ */
 CommandLine::CommandLine()
 {
 
 }
 
-CommandLine::~CommandLine()
+/**
+ * Parse the command line arguments and perform the requested action.
+ */
+int CommandLine::process()
 {
-
-}
-
-int CommandLine::process(int argc, char **argv)
-{
-    if (argv[1] == QCString("fromxml")) {
-        return fromOtherFormat(argc, argv);
+    QStringList args = qApp->arguments();
+    QStringList importCommands;
+    importCommands << "fromxml" << "fromcsv" << "frommobiledb";
+    if (importCommands.contains(args[1])) {
+        return fromOtherFormat(args);
     }
-    else if (argv[1] == QCString("fromcsv")) {
-        return fromOtherFormat(argc, argv);
+    else if (args[1] == "toxml" || args[1] == "tocsv") {
+        return toOtherFormat(args);
     }
-    else if (argv[1] == QCString("frommobiledb")) {
-        return fromOtherFormat(argc, argv);
-    }
-    else if (argv[1] == QCString("toxml")) {
-        return toOtherFormat(argc, argv);
-    }
-    else if (argv[1] == QCString("tocsv")) {
-        return toOtherFormat(argc, argv);
-    }
-    else if (argv[1] == QCString("-h") || argv[1] == QCString("--help")) {
+    else if (args[1] == "-h" || args[1] == "--help") {
         printUsage();
         return 0;
     }
@@ -54,14 +55,18 @@ int CommandLine::process(int argc, char **argv)
     }
 }
 
-int CommandLine::fromOtherFormat(int argc, char **argv)
+/**
+ * Process a command line instruction to import data from another file format.
+ *
+ * @param args The command line arguments
+ * @return The value to return from program execution
+ */
+int CommandLine::fromOtherFormat(const QStringList &args)
 {
-    QStringList args;
-    for (int i = 0; i < argc; i++) {
-        args.append(argv[i]);
-    }
+    int argc = args.count();
     int numArgs = 4;
-    int passIndex = args.findIndex("-p");
+    // Check for a password
+    int passIndex = args.indexOf("-p");
     if (passIndex != -1) {
         if (argc < passIndex + 4) {
             printUsage();
@@ -69,7 +74,8 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         }
         numArgs += 2;
     }
-    int encIndex = args.findIndex("-e");
+    // Check for an encoding specification
+    int encIndex = args.indexOf("-e");
     if (encIndex != -1) {
         if (argc < encIndex + 4) {
             printUsage();
@@ -81,17 +87,17 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         printUsage();
         return 1;
     }
-    QString sourceFile(argv[numArgs - 2]);
-    QString pbFile(argv[numArgs - 1]);
-    bool fromcsv = (argv[1] == QCString("fromcsv"));
+    QString sourceFile(args[numArgs - 2]);
+    QString pbFile(args[numArgs - 1]);
+    bool fromcsv = (args[1] == "fromcsv");
     if (fromcsv && !QFile::exists(pbFile)) {
         printf("Named PortaBase file doesn't exist\n");
         return 1;
     }
-    int openResult;
-    int encrypt = (passIndex != -1 && !fromcsv) ? 1 : 0;
+    Database::OpenResult openResult;
+    bool encrypt = passIndex != -1 && !fromcsv;
     Database *db = new Database(pbFile, &openResult, encrypt);
-    if (openResult == OPEN_NEWER_VERSION) {
+    if (openResult == Database::NewerVersion) {
         if (fromcsv) {
             printf("Unable to open PortaBase file\n");
         }
@@ -100,16 +106,16 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
         }
         return 1;
     }
-    else if (openResult == OPEN_ENCRYPTED || (passIndex != -1 && !fromcsv)) {
-        QString error = db->setPassword(args[passIndex + 1], !fromcsv);
-        if (error != "") {
-            printf(error.local8Bit());
+    else if (openResult == Database::Encrypted || (passIndex != -1 && !fromcsv)) {
+        QString error = db->encryption()->setPassword(args[passIndex + 1], !fromcsv);
+        if (!error.isEmpty()) {
+            printf(error.toLocal8Bit());
             printf("\n");
             return 1;
         }
         error = db->load();
-        if (error != "") {
-            printf(error.local8Bit());
+        if (!error.isEmpty()) {
+            printf(error.toLocal8Bit());
             printf("\n");
             return 1;
         }
@@ -120,7 +126,7 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
     QString error = "";
     QString data = "";
     ImportUtils utils;
-    if (argv[1] == QCString("fromxml")) {
+    if (args[1] == "fromxml") {
         error = utils.importXML(sourceFile, db);
     }
     else if (fromcsv) {
@@ -140,12 +146,12 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
     else {
         error = utils.importMobileDB(sourceFile, db);
     }
-    if (error != "") {
-        printf(error.local8Bit());
+    if (!error.isEmpty()) {
+        printf(error.toLocal8Bit());
         printf("\n");
-        if (data != "") {
-            printf((QObject::tr("Problematic row") + ":\n").local8Bit());
-            printf(data.local8Bit());
+        if (!data.isEmpty()) {
+            printf((QObject::tr("Problematic row") + ":\n").toLocal8Bit());
+            printf(data.toLocal8Bit());
             printf("\n");
         }
         if (!fromcsv) {
@@ -159,14 +165,18 @@ int CommandLine::fromOtherFormat(int argc, char **argv)
     return 0;
 }
 
-int CommandLine::toOtherFormat(int argc, char **argv)
+/**
+ * Process a command line instruction to export data to another file format.
+ *
+ * @param args The command line arguments
+ * @return The value to return from program execution
+ */
+int CommandLine::toOtherFormat(const QStringList &args)
 {
-    QStringList args;
-    for (int i = 0; i < argc; i++) {
-        args.append(argv[i]);
-    }
+    int argc = args.count();
     int numArgs = 4;
-    int passIndex = args.findIndex("-p");
+    // Check for a password
+    int passIndex = args.indexOf("-p");
     if (passIndex != -1) {
         if (argc < passIndex + 4) {
             printUsage();
@@ -174,7 +184,8 @@ int CommandLine::toOtherFormat(int argc, char **argv)
         }
         numArgs += 2;
     }
-    int viewIndex = args.findIndex("-v");
+    // Check for a view
+    int viewIndex = args.indexOf("-v");
     if (viewIndex != -1) {
         if (argc < viewIndex + 4) {
             printUsage();
@@ -182,16 +193,18 @@ int CommandLine::toOtherFormat(int argc, char **argv)
         }
         numArgs += 2;
     }
-    int sortIndex = args.findIndex("-s");
-    if (args.findIndex("-s") != -1) {
+    // Check for a sorting
+    int sortIndex = args.indexOf("-s");
+    if (sortIndex != -1) {
         if (argc < sortIndex + 4) {
             printUsage();
             return 1;
         }
         numArgs += 2;
     }
-    int filterIndex = args.findIndex("-f");
-    if (args.findIndex("-f") != -1) {
+    // Check for a filter
+    int filterIndex = args.indexOf("-f");
+    if (filterIndex != -1) {
         numArgs += 2;
         if (argc < filterIndex + 4) {
             printUsage();
@@ -204,26 +217,26 @@ int CommandLine::toOtherFormat(int argc, char **argv)
     }
     QString pbFile(args[numArgs - 2]);
     QString outputFile(args[numArgs - 1]);
-    int openResult;
+    Database::OpenResult openResult;
     Database *db = new Database(pbFile, &openResult);
-    if (openResult == OPEN_NEWER_VERSION) {
-        printf("Error opening file: %s\n", argv[numArgs - 2]);
+    if (openResult == Database::NewerVersion) {
+        printf("Error opening file: %s\n", args[numArgs - 2].toLocal8Bit().data());
         return 1;
     }
-    else if (openResult == OPEN_ENCRYPTED) {
+    else if (openResult == Database::Encrypted) {
         if (passIndex == -1) {
             printf("Encrypted file, must provide password\n");
             return 1;
         }
-        QString error = db->setPassword(args[passIndex + 1], FALSE);
-        if (error != "") {
-            printf(error.local8Bit());
+        QString error = db->encryption()->setPassword(args[passIndex + 1], false);
+        if (!error.isEmpty()) {
+            printf(error.toLocal8Bit());
             printf("\n");
             return 1;
         }
         error = db->load();
-        if (error != "") {
-            printf(error.local8Bit());
+        if (!error.isEmpty()) {
+            printf(error.toLocal8Bit());
             printf("\n");
             return 1;
         }
@@ -236,28 +249,28 @@ int CommandLine::toOtherFormat(int argc, char **argv)
     QString filterName = db->currentFilter();
     if (viewIndex != -1) {
         viewName = args[viewIndex + 1];
-        if (db->listViews().findIndex(viewName) == -1) {
-            printf("Unknown view: %s\n", argv[viewIndex + 1]);
+        if (!db->listViews().contains(viewName)) {
+            printf("Unknown view: %s\n", viewName.toLocal8Bit().data());
             return 1;
         }
     }
     if (sortIndex != -1) {
         sortName = args[sortIndex + 1];
-        if (db->listSortings().findIndex(sortName) == -1) {
-            printf("Unknown sorting: %s\n", argv[sortIndex + 1]);
+        if (!db->listSortings().contains(sortName)) {
+            printf("Unknown sorting: %s\n", sortName.toLocal8Bit().data());
             return 1;
         }
     }
     if (filterIndex != -1) {
         filterName = args[filterIndex + 1];
-        if (db->listFilters().findIndex(filterName) == -1) {
-            printf("Unknown filter: %s\n", argv[filterIndex + 1]);
+        if (!db->listFilters().contains(filterName)) {
+            printf("Unknown filter: %s\n", filterName.toLocal8Bit().data());
             return 1;
         }
     }
     db->setGlobalInfo(viewName, sortName, filterName);
     View *view = db->getView(viewName);
-    if (argv[1] == QCString("toxml")) {
+    if (args[1] == "toxml") {
         view->exportToXML(outputFile);
     }
     else {
@@ -269,6 +282,9 @@ int CommandLine::toOtherFormat(int argc, char **argv)
     return 0;
 }
 
+/**
+ * Print usage instructions to the console.
+ */
 void CommandLine::printUsage()
 {
     printf("Usage: portabase [-h | --help | -f file]\n");

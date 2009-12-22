@@ -1,7 +1,7 @@
 /*
  * slideshowdialog.cpp
  *
- * (c) 2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,55 +9,65 @@
  * (at your option) any later version.
  */
 
-#include <qapplication.h>
-#include <qcombobox.h>
-#include <qgrid.h>
-#include <qlabel.h>
-#include <qspinbox.h>
+/** @file slideshowdialog.cpp
+ * Source file for SlideshowDialog
+ */
+
+#include <QApplication>
+#include <QComboBox>
+#include <QDesktopWidget>
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QLayout>
+#include <QSettings>
+#include <QSpinBox>
 #include "../view.h"
 #include "imagewidget.h"
 #include "slideshowdialog.h"
 
-#if defined(Q_WS_QWS)
-#include <qpe/config.h>
-#else
-#include "../desktop/config.h"
-#endif
-
-SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent, const char *name)
-  : PBDialog(tr("Slideshow"), parent, name), fullScreen(0)
+/**
+ * Constructor.
+ *
+ * @param columns Names of all image columns in the current view
+ * @param view The current view of the database
+ * @param parent This dialog's parent widget
+ */
+SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent)
+  : PBDialog(tr("Slideshow"), parent), fullScreen(0)
 {
     currentView = view;
-    QGrid *grid = new QGrid(2, this);
-    vbox->addWidget(grid);
-    new QLabel(tr("Column"), grid);
-    columnList = new QComboBox(FALSE, grid);
-    columnList->insertStringList(columns);
+    QGridLayout *grid = new QGridLayout(this);
+    vbox->addLayout(grid);
+    grid->addWidget(new QLabel(tr("Column"), this), 0, 0);
+    columnList = new QComboBox(this);
+    columnList->addItems(columns);
+    grid->addWidget(columnList, 0, 1);
 
-    new QLabel(tr("Delay between images"), grid);
-    delayBox = new QSpinBox(grid);
-    delayBox->setMinValue(1);
+    grid->addWidget(new QLabel(tr("Delay between images"), this), 1, 0);
+    delayBox = new QSpinBox(this);
+    delayBox->setMinimum(1);
     delayBox->setSuffix(" " + tr("seconds"));
-    Config conf("portabase");
-    conf.setGroup("General");
-    delayBox->setValue(conf.readNumEntry("SlideshowDelay", 5));
+    grid->addWidget(delayBox, 1, 1);
+    QSettings settings;
+    QVariant delay = settings.value("General/SlideshowDelay", 5);
+    delayBox->setValue(delay.toInt());
 
-    finishLayout(TRUE, TRUE, FALSE);
+    finishLayout();
 }
 
-SlideshowDialog::~SlideshowDialog()
-{
-
-}
-
+/**
+ * Start the slideshow.
+ */
 void SlideshowDialog::accept()
 {
     if (!fullScreen) {
         QStringList columns = currentView->getColNames();
-        int colIndex = columns.findIndex(columnList->currentText());
-        fullScreen = new ImageWidget(0, 0, WDestructiveClose);
+        int colIndex = columns.indexOf(columnList->currentText());
+        fullScreen = new ImageWidget(0);
         fullScreen->setView(currentView, 0, colIndex);
-        fullScreen->setBackgroundColor(Qt::black);
+        QPalette fsPalette(fullScreen->palette());
+        fsPalette.setColor(QPalette::Window, Qt::black);
+        fullScreen->setPalette(fsPalette);
         fullScreen->slideshow(delayBox->value());
         fullScreen->resize(qApp->desktop()->size());
         hide();
@@ -65,9 +75,9 @@ void SlideshowDialog::accept()
         fullScreen->setFocus();
         fullScreen->showFullScreen();
         connect(fullScreen, SIGNAL(clicked()), fullScreen, SLOT(close()));
-        Config conf("portabase");
-        conf.setGroup("General");
-        conf.writeEntry("SlideshowDelay", delayBox->value());
+        int delay = delayBox->value();
+        QSettings settings;
+        settings.setValue("General/SlideshowDelay", delay);
     }
     else {
         QDialog::accept();

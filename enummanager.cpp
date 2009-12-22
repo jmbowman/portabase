@@ -1,7 +1,7 @@
 /*
  * enummanager.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,20 +9,34 @@
  * (at your option) any later version.
  */
 
-#include <qlistbox.h>
-#include <qmessagebox.h>
-#include <qstringlist.h>
+/** @file enummanager.cpp
+ * Source file for EnumManager
+ */
+
+#include <QApplication>
+#include <QLayout>
+#include <QListWidget>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QStringList>
 #include "database.h"
 #include "enumeditor.h"
 #include "enummanager.h"
+#include "factory.h"
 
-EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name)
-  : PBDialog(tr("Enum Manager"), parent, name), contentChanged(FALSE), orderChanged(FALSE)
+/**
+ * Constructor.
+ *
+ * @param dbase The database to be edited
+ * @param parent This dialog's parent widget
+ */
+EnumManager::EnumManager(Database *dbase, QWidget *parent)
+  : PBDialog(tr("Enum Manager"), parent), contentChanged(false), orderChanged(false)
 {
     db = dbase;
-    listBox = new QListBox(this);
-    vbox->addWidget(listBox);
-    listBox->insertStringList(db->listEnums());
+    listWidget = Factory::listWidget(this);
+    vbox->addWidget(listWidget);
+    listWidget->addItems(db->listEnums());
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addEnum()));
@@ -34,43 +48,47 @@ EnumManager::EnumManager(Database *dbase, QWidget *parent, const char *name)
     finishLayout();
 }
 
-EnumManager::~EnumManager()
-{
-
-}
-
+/**
+ * Create a new enumeration.  Triggered by the "Add" button.
+ */
 void EnumManager::addEnum()
 {
     EnumEditor enumEditor(this);
     if (enumEditor.edit(db, "")) {
         enumEditor.applyChanges();
-        listBox->insertItem(enumEditor.getName());
-        contentChanged = TRUE;
+        listWidget->addItem(enumEditor.getName());
+        contentChanged = true;
     }
 }
 
+/**
+ * Edit the selected enumeration.  Triggered by the "Edit" button.
+ */
 void EnumManager::editEnum()
 {
-    int selected = listBox->currentItem();
-    if (selected == -1) {
+    QListWidgetItem *item = listWidget->currentItem();
+    if (!item) {
         return;
     }
-    QString enumName = listBox->text(selected);
+    QString enumName = item->text();
     EnumEditor enumEditor(this);
     if (enumEditor.edit(db, enumName)) {
         enumEditor.applyChanges();
-        listBox->changeItem(enumEditor.getName(), selected);
-        contentChanged = TRUE;
+        item->setText(enumEditor.getName());
+        contentChanged = true;
     }
 }
 
+/**
+ * Delete the selected enumeration.  Triggered by the "Delete" button.
+ */
 void EnumManager::deleteEnum()
 {
-    int selected = listBox->currentItem();
-    if (selected == -1) {
+    QListWidgetItem *item = listWidget->currentItem();
+    if (!item) {
         return;
     }
-    QString enumName = listBox->text(selected);
+    QString enumName = item->text();
     QStringList deleteCols = db->columnsUsingEnum(enumName);
     int count = deleteCols.count();
     if (count > 0) {
@@ -79,58 +97,70 @@ void EnumManager::deleteEnum()
             msg += "\n     " + deleteCols[i];
         }
         msg += "\n" + tr("Continue?");
-        int choice = QMessageBox::warning(this, QQDialog::tr("PortaBase"), msg,
+        int choice = QMessageBox::warning(this, qApp->applicationName(), msg,
                                           QObject::tr("Yes"), QObject::tr("No"));
         if (choice != 0) {
             return;
         }
     }
     db->deleteEnum(enumName);
-    listBox->removeItem(selected);
-    contentChanged = TRUE;
+    delete item;
+    contentChanged = true;
 }
 
+/**
+ * Move the selected enumeration up by one in the list.  Triggered by the
+ * "Up" button.
+ */
 void EnumManager::moveUp()
 {
-    int selected = listBox->currentItem();
-    if (selected < 1) {
-        return;
+    int row = listWidget->currentRow();
+    if (row > 0) {
+        QListWidgetItem *item = listWidget->takeItem(row);
+        listWidget->insertItem(row - 1, item);
+        listWidget->setCurrentRow(row - 1);
+        orderChanged = true;
     }
-    QString enumName = listBox->text(selected);
-    listBox->removeItem(selected);
-    listBox->insertItem(enumName, selected - 1);
-    listBox->setCurrentItem(selected - 1);
-    orderChanged = TRUE;
 }
 
+/**
+ * Move the selected enumeration down by one in the list.  Triggered by the
+ * "Down" button.
+ */
 void EnumManager::moveDown()
 {
-    int selected = listBox->currentItem();
-    int count = listBox->count();
-    if (selected == -1 || selected == count - 1) {
-        return;
+    int row = listWidget->currentRow();
+    int count = listWidget->count();
+    if (row < count - 1) {
+        QListWidgetItem *item = listWidget->takeItem(row);
+        listWidget->insertItem(row + 1, item);
+        listWidget->setCurrentRow(row + 1);
+        orderChanged = true;
     }
-    QString enumName = listBox->text(selected);
-    listBox->removeItem(selected);
-    listBox->insertItem(enumName, selected + 1);
-    listBox->setCurrentItem(selected + 1);
-    orderChanged = TRUE;
 }
 
+/**
+ * Apply the changes made in this dialog to the database.
+ */
 void EnumManager::applyChanges()
 {
     if (!orderChanged && !contentChanged) {
         return;
     }
     QStringList names;
-    int count = listBox->count();
+    int count = listWidget->count();
     for (int i = 0; i < count; i++) {
-        names.append(listBox->text(i));
+        names.append(listWidget->item(i)->text());
     }
     db->setEnumSequence(names);
-    contentChanged = TRUE;
+    contentChanged = true;
 }
 
+/**
+ * Determine if any changes were made in this dialog.
+ *
+ * @return True if changes were made, false otherwise
+ */
 bool EnumManager::changesMade()
 {
     return contentChanged;

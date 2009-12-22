@@ -1,3 +1,20 @@
+2009-12-21  JMB  Qt 4 port
+
+    Since a non-Windows pocket computer capable of running Qt 4 applications
+    finally came out (namely the Nokia Internet Tablets, once the Qt 4 port
+    was completed in 2008-2009), I finally decided to drop Qt 2 support for
+    PortaBase.  This allowed me to clean up all the quirky code imposed by the
+    old Qt API and the Qtopia environment, converting it into a fairly clean
+    modern C++ application...and I documented all the code with Doxygen while
+    I was at it.
+    
+    This is a snapshot of the code as it stands at the point where it's
+    becoming useful for other people to look at it again.  I've been developing
+    it on the Mac, where so far everything seems to work except for encrypted
+    file support.  Before the 2.0 release I'll fix that and make sure that
+    it also works on Linux, Windows, Maemo, and possibly Symbian S60 and
+    Windows Mobile.
+
 2004-05-06  JMB  Mac OS X support
 
     Lots of little code tweaks to make PortaBase work properly and look

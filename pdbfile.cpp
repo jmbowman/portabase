@@ -1,7 +1,7 @@
 /*
  * pdbfile.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,51 +9,78 @@
  * (at your option) any later version.
  */
 
-#include <qfile.h>
-#include <qmessagebox.h>
+/** @file pdbfile.cpp
+ * Source file for PDBFile
+ */
+
+#include <QFile>
+#include <QMessageBox>
 #include <time.h>
 #include "pdbfile.h"
 
-PDBFile::PDBFile(QString _f) : fd(NULL), file_name(_f), file_attributes(0), version(0), create_date(0), modification_date(0), backup_date(0), modification_number(0), appinfo_offset(0), sortinfo_offset(0), unique_seed(0), next_record_list_id(0), number_records(0), record_list(NULL)
+/**
+ * Constructor.
+ *
+ * @param f The path of the file to be parsed
+ */
+PDBFile::PDBFile(const QString &f) : fd(0), filename(f), file_attributes(0),
+  version(0), create_date(0), modification_date(0), backup_date(0),
+  modification_number(0), appinfo_offset(0), sortinfo_offset(0),
+  unique_seed(0), next_record_list_id(0), number_records(0), record_list(0)
 {
 	memset(pdb_name, 0, sizeof(pdb_name));
 	memset(db_type, 0, sizeof(db_type));
 	memset(create_id, 0, sizeof(create_id));
 };
 
+/**
+ * Destructor.
+ */
 PDBFile::~PDBFile()
 {
 	if (record_list) {
 		delete [] record_list;
-                record_list = 0;
-        }
+        record_list = 0;
+    }
 	if (fd) {
 		fd->close();
 		delete fd;
-                fd = 0;
+        fd = 0;
 	}
 }
 
-QString PDBFile::pdbname()
-{
-	return QString::fromLatin1((char*)pdb_name);
-}
-
+/**
+ * Parse the file, loading data from the header and basic information
+ * about each record in the file.
+ *
+ * @return True if the file was successfully parsed, false otherwise
+ */
 bool PDBFile::read()
 { 
-	fd = new QFile(file_name);
-	if (!fd->open(IO_ReadOnly)) {
+	fd = new QFile(filename);
+	if (!fd->open(QIODevice::ReadOnly)) {
 		return false;
 	}
-        file_size = fd->size();
 	return readHeader() ? readRecordList() : false;
 }
 
+/**
+ * Convert the provided raw file data to an unsigned short.
+ *
+ * @param v The data from the file to be converted
+ * @return The unsigned short represented by the input data
+ */
 unsigned short PDBFile::toshort(unsigned char *v)
 {
 	return ((unsigned short)(v[0] << 8)) + v[1];
 }
 
+/**
+ * Convert the provided raw file data to an unsigned int.
+ *
+ * @param v The data from the file to be converted
+ * @return The unsigned int represented by the input data
+ */
 unsigned int PDBFile::toint(unsigned char *v) {
 	return	((unsigned int)(v[0] << 24)) + 
 		((unsigned int)(v[1] << 16)) + 
@@ -61,17 +88,30 @@ unsigned int PDBFile::toint(unsigned char *v) {
 		((unsigned int)(v[3] << 0));
 }
 
+/**
+ * Convert the provided time-representing integer from the file to a UNIX
+ * time in seconds since the epoch.  Conversion needed since Palm OS counts
+ * seconds since 1904-01-01, but UNIX counts time since 1970-01-01.
+ *
+ * @param p The Palm OS time integer to be converted
+ * @return The converted UNIX time integer
+ */
 time_t PDBFile::palm2unix_time(unsigned int p)
 {
 	//number of seconds between 01/01/1904 and 01/01/1970
 	return p - 2082844886LU; 
 }
 
+/**
+ * Parse the file's header data.
+ *
+ * @return True if successfully parsed, false otherwise
+ */
 bool PDBFile::readHeader()
 {
 	unsigned int offset = 0;
 	unsigned char header [78];
-	if (fd->readBlock((char*)header, sizeof(header)) == -1) {
+	if (fd->read((char*)header, sizeof(header)) == -1) {
 		//set error 
 		return false;
 	}
@@ -126,6 +166,12 @@ bool PDBFile::readHeader()
 			unsigned char record_attributes;
 			unsigned int unique_id;
 */
+/**
+ * Parse the metadata about each record in the file (offset within the file,
+ * attributes, unique ID, and record size).
+ *
+ * @return True if successfully parsed, false otherwise
+ */
 bool PDBFile::readRecordList()
 { 
 	if (fd == NULL) {
@@ -133,10 +179,9 @@ bool PDBFile::readRecordList()
 	}
 	record_list = new PDBFile::RecordInfo[number_records];
 	unsigned char record_buf[8];
-        int i;
+    int i;
 	for (i = 0 ; i < number_records; i++) {
-		if (fd->readBlock((char*)record_buf,
-                                  sizeof(record_buf)) == -1) {
+		if (fd->read((char*)record_buf, sizeof(record_buf)) == -1) {
 			return false;
 		}
 		record_list[i].record_data_offset = toint(record_buf);
@@ -148,6 +193,6 @@ bool PDBFile::readRecordList()
 	for (i = 0 ; i < number_records - 1; i++) {
 		record_list[i].record_size = record_list[i + 1].record_data_offset - record_list[i].record_data_offset;
 	}
-	record_list[number_records - 1].record_size = file_size - record_list[number_records - 1].record_data_offset;
+	record_list[number_records - 1].record_size = fd->size() - record_list[number_records - 1].record_data_offset;
 	return true;
 }

@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,306 +9,298 @@
  * (at your option) any later version.
  */
 
-#include <qaction.h>
-#include <qapplication.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qfont.h>
-#include <qmainwindow.h>
-#include <qmessagebox.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
-#include <qwidgetstack.h>
+/** @file portabase.cpp
+ * Source file for PortaBase (main window class)
+ */
+
+#include <QAction>
+#include <QApplication>
+#include <QCloseEvent>
+#include <QFile>
+#include <QFileInfo>
+#include <QFont>
+#include <QIconDragEvent>
+#include <QInputDialog>
+#include <QLabel>
+#include <QLayout>
+#include <QMenu>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QProcess>
+#include <QStackedWidget>
+#include <QStyle>
+#include <QToolBar>
+#include <QUrl>
 #include "condition.h"
 #include "conditioneditor.h"
 #include "database.h"
 #include "dbeditor.h"
 #include "enummanager.h"
+#include "factory.h"
 #include "filter.h"
 #include "filtereditor.h"
 #include "menuactions.h"
+#include "oldconfig.h"
 #include "passdialog.h"
 #include "portabase.h"
 #include "preferences.h"
-#include "qqdialog.h"
 #include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
+#include "qqutil/qqmenuhelper.h"
 
-#if !defined(Q_WS_QWS)
-#include <qdragobject.h>
-#include <qinputdialog.h>
-#include <qmenubar.h>
-typedef QInputDialog InputDialog;
-#include "desktop/config.h"
-#include "desktop/fileselector.h"
-#include "desktop/helpbrowser.h"
-#include "desktop/importdialog.h"
-#include "desktop/newfiledialog.h"
-#include "desktop/oldconfig.h"
-#include "desktop/qpeapplication.h"
-#include "desktop/resource.h"
-#else
-#include <qpe/config.h>
-#include <qpe/qpemenubar.h>
-#include <qpe/resource.h>
-#include "inputdialog.h"
-#if defined(SHARP)
-#include "sharp/fileselector.h"
-#include "sharp/importdialog.h"
-#include "sharp/newfiledialog.h"
-#else
-#include "fileselector.h"
-#include "importdialog.h"
-#include "newfiledialog.h"
-#endif
-#endif
-
-PortaBase::PortaBase(QWidget *parent, const char *name, WFlags f)
-  : QMainWindow(parent, name, f), db(0), doc(0), isEdited(FALSE), needsRefresh(FALSE)
+/**
+ * Constructor.
+ *
+ * @param parent This window's parent widget, if any (usually none)
+ */
+PortaBase::PortaBase(QWidget *parent)
+  : QMainWindow(parent), db(0), doc("")
 {
-#if defined(Q_WS_QWS) || defined(Q_OS_MACX)
-    setToolBarsMovable(FALSE);
-#endif
-    Config *conf = getPreferences();
-    conf->setGroup("General");
-    confirmDeletions = conf->readBoolEntry("ConfirmDeletions", TRUE);
-    booleanToggle = conf->readBoolEntry("BooleanToggle");
-    bool pagedDisplay = conf->readBoolEntry("PagedDisplay", TRUE);
-#if !defined(Q_OS_MACX)
-    QFont currentFont = qApp->font();
-    QString family = currentFont.family().lower();
-    int size = currentFont.pointSize();
-    conf->setGroup("Font");
-    family = conf->readEntry("Name", family);
-    size = conf->readNumEntry("Size", size);
-    QFont font(family, size);
-    qApp->setFont(font);
-    setFont(font);
-#endif
+    QSettings *settings = getSettings();
+    confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
+    booleanToggle = settings->value("General/BooleanToggle", false).toBool();
+    bool pagedDisplay = settings->value("General/PagedDisplay", true).toBool();
 
-    conf->setGroup("Colors");
-    QString color = conf->readEntry("EvenRows", "#FFFFFF");
-    PortaBase::evenRowColor = new QColor(color);
-    color = conf->readEntry("OddRows", "#E0E0E0");
-    PortaBase::oddRowColor = new QColor(color);
-
-    // menu and toolbar, shared between file selector and data viewer modes
-#if defined(Q_WS_QWS)
-    QToolBar *bar = new QToolBar(this);
-    addToolBar(bar, QMainWindow::Top);
-    bar->setHorizontalStretchable(TRUE);
-    menu = new QPEMenuBar(bar);
-    toolbar = new QToolBar(this);
-    addToolBar(toolbar, QMainWindow::Top, FALSE);
-#else
-    menu = menuBar();
-    toolbar = new QToolBar(this);
-    addToolBar(toolbar, QMainWindow::Top, TRUE);
-    setIcon(Resource::loadPixmap("portabase"));
-#if !defined(Q_OS_MACX)
-    statusBar();
-#endif
-#endif
-    ma = new MenuActions(this);
-
-    // menu and toolbar icon sets
-    QIconSet addIcons = Resource::loadIconSet("new");
-    QIconSet openIcons = Resource::loadIconSet("fileopen");
-    QIconSet deleteIcons = Resource::loadIconSet("trash");
-    QIconSet copyIcons = Resource::loadIconSet("copy");
-    QIconSet quitIcons = Resource::loadIconSet("quit_icon");
-    QIconSet saveIcons = Resource::loadIconSet("portabase/save");
-#if defined(Q_WS_QWS)
-    QPixmap disabledSave = Resource::loadPixmap("portabase/save_disabled");
-    saveIcons.setPixmap(disabledSave, QIconSet::Small, QIconSet::Disabled);
-#endif
-    QIconSet closeIcons = Resource::loadIconSet("close");
-    QIconSet editIcons = Resource::loadIconSet("edit");
-    QIconSet findIcons = Resource::loadIconSet("find");
-
-    // file selector actions
-    fileNewAction = ma->action("New", addIcons);
-    connect(fileNewAction, SIGNAL(activated()), this, SLOT(newFile()));
-    fileOpenAction = ma->action("Open", openIcons);
-    connect(fileOpenAction, SIGNAL(activated()), this, SLOT(openFile()));
-    fileDeleteAction = ma->action("Delete File", deleteIcons);
-    connect(fileDeleteAction, SIGNAL(activated()), this, SLOT(deleteFile()));
-    fileCopyAction = ma->action("Copy", copyIcons);
-    connect(fileCopyAction, SIGNAL(activated()), this, SLOT(copyFile()));
-    fileRenameAction = ma->action("Rename");
-    connect(fileRenameAction, SIGNAL(activated()), this, SLOT(renameFile()));
-    refreshAction = ma->action("Refresh");
-    connect(refreshAction, SIGNAL(activated()), this, SLOT(refreshFileList()));
-    importAction = ma->action("Import");
-    connect(importAction, SIGNAL(activated()), this, SLOT(import()));
-    quitAction = ma->action("Quit", quitIcons);
-    connect(quitAction, SIGNAL(activated()), this, SLOT(close()));
-
-    viewListAction = ma->action("List", TRUE);
-    connect(viewListAction, SIGNAL(activated()), this, SLOT(viewList()));
-    viewIconsAction = ma->action("Icons", TRUE);
-    connect(viewIconsAction, SIGNAL(activated()), this, SLOT(viewIcons()));
-
-    // File menu actions
-    fileSaveAction = ma->action("Save", saveIcons);
-    connect(fileSaveAction, SIGNAL(activated()), this, SLOT(save()));
-    changePassAction = ma->action("Change Password");
-    connect(changePassAction, SIGNAL(activated()),
-            this, SLOT(changePassword()));
-    dataImportAction = ma->action("Import");
-    connect(dataImportAction, SIGNAL(activated()), this, SLOT(dataImport()));
-    exportAction = ma->action("Export");
-    connect(exportAction, SIGNAL(activated()), this, SLOT(dataExport()));
-    deleteRowsAction = ma->action("Delete Rows In Filter", deleteIcons);
-    connect(deleteRowsAction, SIGNAL(activated()),
-            this, SLOT(deleteAllRows()));
-    editColsAction = ma->action("Edit Columns");
-    connect(editColsAction, SIGNAL(activated()), this, SLOT(editColumns()));
-    manageEnumsAction = ma->action("Edit Enums");
-    connect(manageEnumsAction, SIGNAL(activated()), this, SLOT(editEnums()));
-    slideshowAction = ma->action("Slideshow");
-    connect(slideshowAction, SIGNAL(activated()), this, SLOT(slideshow()));
-    propsAction = ma->action("Properties");
-    connect(propsAction, SIGNAL(activated()), this, SLOT(viewProperties()));
-    prefsAction = ma->action("Preferences");
-    connect(prefsAction, SIGNAL(activated()), this, SLOT(editPreferences()));
-    closeAction = ma->action("Close", closeIcons);
-    connect(closeAction, SIGNAL(activated()), this, SLOT(close()));
-
-    // Row menu/toolbar actions
-    rowAddAction = ma->action("Add", addIcons);
-    connect(rowAddAction, SIGNAL(activated()), this, SLOT(addRow()));
-    rowEditAction = ma->action("Edit", editIcons);
-    connect(rowEditAction, SIGNAL(activated()), this, SLOT(editRow()));
-    rowDeleteAction = ma->action("Delete", deleteIcons);
-    connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
-    rowCopyAction = ma->action("Copy", copyIcons);
-    connect(rowCopyAction, SIGNAL(activated()), this, SLOT(copyRow()));
-    rowViewAction = ma->action("Show");
-    connect(rowViewAction, SIGNAL(activated()), this, SLOT(viewRow()));
-    // this submenu doesn't get deleted when the menubar is cleared...
-    row = new QPopupMenu(this);
-    rowAddAction->addTo(row);
-    rowEditAction->addTo(row);
-    rowDeleteAction->addTo(row);
-    rowCopyAction->addTo(row);
-    rowViewAction->addTo(row);
-
-    // View menu actions
-    viewAddAction = ma->action("Add", addIcons);
-    connect(viewAddAction, SIGNAL(activated()), this, SLOT(addView()));
-    viewEditAction = ma->action("Edit", editIcons);
-    connect(viewEditAction, SIGNAL(activated()), this, SLOT(editView()));
-    viewDeleteAction = ma->action("Delete", deleteIcons);
-    connect(viewDeleteAction, SIGNAL(activated()), this, SLOT(deleteView()));
-    viewAllColsAction = ma->action("All Columns", TRUE);
-    connect(viewAllColsAction, SIGNAL(activated()),
-            this, SLOT(viewAllColumns()));
-
-    // Sort menu actions
-    sortAddAction = ma->action("Add", addIcons);
-    connect(sortAddAction, SIGNAL(activated()), this, SLOT(addSorting()));
-    sortEditAction = ma->action("Edit", editIcons);
-    connect(sortEditAction, SIGNAL(activated()), this, SLOT(editSorting()));
-    sortDeleteAction = ma->action("Delete", deleteIcons);
-    connect(sortDeleteAction, SIGNAL(activated()),
-            this, SLOT(deleteSorting()));
-
-    // Filter menu actions
-    findAction = ma->action("Quick Filter", findIcons);
-    connect(findAction, SIGNAL(activated()), this, SLOT(simpleFilter()));
-    filterAddAction = ma->action("Add", addIcons);
-    connect(filterAddAction, SIGNAL(activated()), this, SLOT(addFilter()));
-    filterEditAction = ma->action("Edit", editIcons);
-    connect(filterEditAction, SIGNAL(activated()), this, SLOT(editFilter()));
-    filterDeleteAction = ma->action("Delete", deleteIcons);
-    connect(filterDeleteAction, SIGNAL(activated()),
-            this, SLOT(deleteFilter()));
-    filterAllRowsAction = ma->action("All Rows", TRUE);
-    connect(filterAllRowsAction, SIGNAL(activated()),
-            this, SLOT(viewAllRows()));
-
-    // Help menu actions
-    helpAction = ma->action("Help Contents");
-    connect(helpAction, SIGNAL(activated()), this, SLOT(showHelp()));
-    aboutAction = ma->action("About PortaBase");
-    connect(aboutAction, SIGNAL(activated()), this, SLOT(aboutPortaBase()));
-    aboutQtAction = ma->action("About Qt");
-    connect(aboutQtAction, SIGNAL(activated()), this, SLOT(aboutQt()));
-                                
-    mainStack = new QWidgetStack(this);
+    QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
+    Factory::evenRowColor = QColor(color);
+    color = settings->value("Colors/OddRows", "#E0E0E0").toString();
+    Factory::oddRowColor = QColor(color);
+    
+    mainStack = new QStackedWidget(this);
     setCentralWidget(mainStack);
 
     viewer = new ViewDisplay(this, mainStack);
     viewer->allowBooleanToggle(booleanToggle);
     viewer->usePages(pagedDisplay);
+    mainStack->addWidget(viewer);
 
-    conf->setGroup("Files");
-    QDir defaultDir = QDir::home();
-    defaultDir.cd("Documents");
-    QString lastDir = conf->readEntry("LastDir", defaultDir.absPath());
-    if (!QDir(lastDir).exists()) {
-        lastDir = defaultDir.absPath();
-    }
-    QStringList recentFiles = getRecentFiles(*conf);
-    fileSelector = new PBFileSelector(lastDir, recentFiles,
-                                      "application/portabase", mainStack);
-    connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this,
-            SLOT(openFile(const DocLnk &)));
-    QString viewMode = conf->readEntry("View", "Icon");
-    if (viewMode == "Icon") {
-        viewIcons();
-    }
-    else {
-        viewList();
-    }
-    fileOpen();
-#if defined(Q_WS_QWS)
-    resize(200, 300);
-#else
-    conf->setGroup("Geometry");
-    int xpos = conf->readNumEntry("X", -1);
-    int ypos = conf->readNumEntry("Y", -1);
+    // menu and toolbar, shared between file selector and data viewer modes
+    toolbar = addToolBar(tr("Toolbar")); // text appears in toolbar context menu
+    statusBar();
+    ma = new MenuActions(this);
+    mh = new QQMenuHelper(this, toolbar, tr("PortaBase files"), "pob", true);
+    mh->loadSettings(settings);
+    connect(mh, SIGNAL(newFile(const QString &)),
+            this, SLOT(newFile(const QString &)));
+    connect(mh, SIGNAL(openFile(const QString &)),
+            this, SLOT(openFile(const QString &)));
+    connect(mh, SIGNAL(closeFile()), this, SLOT(close()));
+    connect(mh, SIGNAL(editPreferences()), this, SLOT(editPreferences()));
+    connect(mh, SIGNAL(quit()), this, SLOT(quit()));
+    connect(mh, SIGNAL(saveFile()), this, SLOT(save()));
+    connect(mh, SIGNAL(aboutApplication()), this, SLOT(aboutPortaBase()));
+
+    // frequently used menu and toolbar icons
+    QIcon addIcon = QIcon(":/icons/add.png");
+    QIcon editIcon = QIcon(":/icons/edit.png");
+    QIcon deleteIcon = QIcon(":/icons/delete.png");
+
+    // file selector actions
+    importAction = ma->action(MenuActions::Import);
+    connect(importAction, SIGNAL(activated()), this, SLOT(import()));
+
+    // File menu actions
+    changePassAction = ma->action(MenuActions::ChangePassword);
+    connect(changePassAction, SIGNAL(activated()),
+            this, SLOT(changePassword()));
+    dataImportAction = ma->action(MenuActions::ImportCSV);
+    connect(dataImportAction, SIGNAL(activated()), this, SLOT(dataImport()));
+    exportAction = ma->action(MenuActions::Export);
+    connect(exportAction, SIGNAL(activated()), this, SLOT(dataExport()));
+    deleteRowsAction = ma->action(MenuActions::DeleteRowsInFilter, deleteIcon);
+    connect(deleteRowsAction, SIGNAL(activated()),
+            this, SLOT(deleteAllRows()));
+    editColsAction = ma->action(MenuActions::EditColumns);
+    connect(editColsAction, SIGNAL(activated()), this, SLOT(editColumns()));
+    manageEnumsAction = ma->action(MenuActions::EditEnums);
+    connect(manageEnumsAction, SIGNAL(activated()), this, SLOT(editEnums()));
+    slideshowAction = ma->action(MenuActions::Slideshow);
+    connect(slideshowAction, SIGNAL(activated()), viewer, SLOT(slideshow()));
+    propsAction = ma->action(MenuActions::Properties);
+    connect(propsAction, SIGNAL(activated()), this, SLOT(viewProperties()));
+    fileSeparatorAction = new QAction(this);
+    fileSeparatorAction->setSeparator(true);
+    
+    // File menu
+    mh->addToFileMenu(fileSeparatorAction);
+    mh->addToFileMenu(importAction);
+    mh->addToFileMenu(changePassAction);
+    mh->addToFileMenu(dataImportAction);
+    mh->addToFileMenu(exportAction);
+    mh->addToFileMenu(deleteRowsAction);
+    mh->addToFileMenu(editColsAction);
+    mh->addToFileMenu(manageEnumsAction);
+    mh->addToFileMenu(slideshowAction);
+    mh->addToFileMenu(propsAction);
+
+    // Row menu/toolbar actions
+    rowAddAction = ma->action(MenuActions::AddRow, addIcon);
+    connect(rowAddAction, SIGNAL(activated()), viewer, SLOT(addRow()));
+    rowEditAction = ma->action(MenuActions::EditRow, editIcon);
+    connect(rowEditAction, SIGNAL(activated()), viewer, SLOT(editRow()));
+    rowDeleteAction = ma->action(MenuActions::DeleteRow, deleteIcon);
+    connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
+    rowCopyAction = ma->action(MenuActions::CopyRow, QIcon(":/icons/copy_row.png"));
+    connect(rowCopyAction, SIGNAL(activated()), this, SLOT(copyRow()));
+    rowViewAction = ma->action(MenuActions::Show);
+    connect(rowViewAction, SIGNAL(activated()), viewer, SLOT(viewRow()));
+    row = new QMenu(ma->menuText(MenuActions::Row), this);
+    row->addAction(rowAddAction);
+    row->addAction(rowEditAction);
+    row->addAction(rowDeleteAction);
+    row->addAction(rowCopyAction);
+    row->addAction(rowViewAction);
+
+    // View menu actions
+    viewAddAction = ma->action(MenuActions::AddView, addIcon);
+    connect(viewAddAction, SIGNAL(activated()), this, SLOT(addView()));
+    viewEditAction = ma->action(MenuActions::EditView, editIcon);
+    connect(viewEditAction, SIGNAL(activated()), this, SLOT(editView()));
+    viewDeleteAction = ma->action(MenuActions::DeleteView, deleteIcon);
+    connect(viewDeleteAction, SIGNAL(activated()), this, SLOT(deleteView()));
+    viewAllColsAction = ma->action(MenuActions::AllColumns, true);
+    connect(viewAllColsAction, SIGNAL(activated()),
+            this, SLOT(viewAllColumns()));
+    
+    // View menu
+    view = new QMenu(ma->menuText(MenuActions::View), this);
+    view->addAction(viewAddAction);
+    view->addAction(viewEditAction);
+    view->addAction(viewDeleteAction);
+    view->addSeparator();
+    view->addAction(viewAllColsAction);
+    connect(view, SIGNAL(triggered(QAction*)), this, SLOT(changeView(QAction*)));
+
+    // Sort menu actions
+    sortAddAction = ma->action(MenuActions::AddSorting, addIcon);
+    connect(sortAddAction, SIGNAL(activated()), this, SLOT(addSorting()));
+    sortEditAction = ma->action(MenuActions::EditSorting, editIcon);
+    connect(sortEditAction, SIGNAL(activated()), this, SLOT(editSorting()));
+    sortDeleteAction = ma->action(MenuActions::DeleteSorting, deleteIcon);
+    connect(sortDeleteAction, SIGNAL(activated()),
+            this, SLOT(deleteSorting()));
+
+    // Sort menu
+    sort = new QMenu(ma->menuText(MenuActions::Sort), this);
+    sort->addAction(sortAddAction);
+    sort->addAction(sortEditAction);
+    sort->addAction(sortDeleteAction);
+    sort->addSeparator();
+    connect(sort, SIGNAL(triggered(QAction*)), this, SLOT(changeSorting(QAction*)));
+
+    // Filter menu actions
+    findAction = ma->action(MenuActions::QuickFilter, QIcon(":/icons/find.png"));
+    connect(findAction, SIGNAL(activated()), this, SLOT(simpleFilter()));
+    filterAddAction = ma->action(MenuActions::AddFilter, addIcon);
+    connect(filterAddAction, SIGNAL(activated()), this, SLOT(addFilter()));
+    filterEditAction = ma->action(MenuActions::EditFilter, editIcon);
+    connect(filterEditAction, SIGNAL(activated()), this, SLOT(editFilter()));
+    filterDeleteAction = ma->action(MenuActions::DeleteFilter, deleteIcon);
+    connect(filterDeleteAction, SIGNAL(activated()),
+            this, SLOT(deleteFilter()));
+    filterAllRowsAction = ma->action(MenuActions::AllRows, true);
+    connect(filterAllRowsAction, SIGNAL(activated()),
+            this, SLOT(viewAllRows()));
+
+    // Filter menu
+    filter = new QMenu(ma->menuText(MenuActions::Filter), this);
+    filter->addAction(findAction);
+    filter->addAction(filterAddAction);
+    filter->addAction(filterEditAction);
+    filter->addAction(filterDeleteAction);
+    filter->addSeparator();
+    filter->addAction(filterAllRowsAction);
+    connect(filter, SIGNAL(triggered(QAction*)), this, SLOT(changeFilter(QAction*)));
+    
+    // Add menus to menubar
+    QAction *helpMenuAction = mh->helpMenu()->menuAction();
+    menuBar()->insertMenu(helpMenuAction, row);
+    menuBar()->insertMenu(helpMenuAction, view);
+    menuBar()->insertMenu(helpMenuAction, sort);
+    menuBar()->insertMenu(helpMenuAction, filter);
+    
+    // Toolbar
+    toolbar->addAction(rowAddAction);
+    toolbar->addAction(rowEditAction);
+    toolbar->addAction(rowDeleteAction);
+    toolbar->addAction(rowCopyAction);
+    toolbar->addAction(findAction);
+    createFillerActions();
+
+    setUnifiedTitleAndToolBarOnMac(true);
+    noFileLabel = new QLabel("<center>" + tr("No file selected") + "</center>", mainStack);
+    mainStack->addWidget(noFileLabel);
+    showFileSelector();
+    updateCaption();
+    restoreWindowSettings(settings);
+    setAcceptDrops(true);
+    delete settings;
+}
+
+/**
+ * Destructor.
+ */
+PortaBase::~PortaBase()
+{
+    QSettings settings;
+    mh->saveSettings(&settings);
+    saveWindowSettings(&settings);
+}
+
+/**
+ * Restore the window position, size, etc. from the provided application
+ * settings object.
+ *
+ * @param settings The application settings to load from
+ */
+void PortaBase::restoreWindowSettings(QSettings *settings)
+{
+    settings->beginGroup("Geometry");
+    int xpos = settings->value("X", -1).toInt();
+    int ypos = settings->value("Y", -1).toInt();
     if (xpos != -1 && ypos != -1) {
         move(xpos, ypos);
     }
-    if (conf->readBoolEntry("Maximized")) {
+    if (settings->value("Maximized").toBool()) {
         resize(600, 400);
         showMaximized();
     }
     else {
-        int w = conf->readNumEntry("Width", 600);
-        int h = conf->readNumEntry("Height", 400);
+        int w = settings->value("Width", 600).toInt();
+        int h = settings->value("Height", 400).toInt();
         resize(w, h);
     }
-    setAcceptDrops(TRUE);
-#endif
-    delete conf;
+    if (settings->contains("State")) {
+        restoreState(settings->value("State").toByteArray());
+    }
+    settings->endGroup();
 }
 
-const QColor *PortaBase::evenRowColor = &Qt::white;
-const QColor *PortaBase::oddRowColor = &Qt::lightGray;
-
-PortaBase::~PortaBase()
+/**
+ * Save the window position, size, etc. to the provided application
+ * settings object.
+ *
+ * @param settings The application settings to save to
+ */
+void PortaBase::saveWindowSettings(QSettings *settings)
 {
-    Config conf("portabase");
-    conf.setGroup("Files");
-    QDir lastDir(fileSelector->currentDir());
-    conf.writeEntry("LastDir", lastDir.absPath());
-    conf.writeEntry("View", viewIconsAction->isOn() ? "Icon" : "List");
-    updateRecentFiles(conf);
-#if !defined(Q_WS_QWS)
-    conf.setGroup("Geometry");
-    conf.writeEntry("Maximized", isMaximized());
-    conf.writeEntry("X", x());
-    conf.writeEntry("Y", y());
-    conf.writeEntry("Width", width());
-    conf.writeEntry("Height", height());
-#endif
+    settings->beginGroup("Geometry");
+    settings->setValue("Maximized", isMaximized());
+    settings->setValue("X", x());
+    settings->setValue("Y", y());
+    settings->setValue("Width", width());
+    settings->setValue("Height", height());
+    settings->setValue("State", saveState());
+    settings->endGroup();
 }
 
+/**
+ * Launch the "Columns Editor" dialog to define or modify the structure of
+ * the current database's main data table.
+ *
+ * @return True if changes were made and accepted, false otherwise
+ */
 bool PortaBase::editColumns()
 {
     DBEditor editor(this);
@@ -320,28 +312,24 @@ bool PortaBase::editColumns()
         if (views.count() == 0) {
             db->addView("_all", db->listColumns(), "_none", "_none");
             viewer->setDatabase(db);
-            rebuildViewMenu();
-            rebuildSortMenu();
-            rebuildFilterMenu();
-            setEdited(TRUE);
-            showDataViewer();
         }
         else {
             db->setViewColumnSequence("_all", db->listColumns());
             viewAllColumns();
-            setEdited(TRUE);
-            showDataViewer();
-            rebuildViewMenu();
-            rebuildSortMenu();
-            rebuildFilterMenu();
         }
-        return TRUE;
+        showDataViewer();
+        setEdited(true);
+        return true;
     }
     else {
-        return FALSE;
+        return false;
     }
 }
 
+/**
+ * Launch a dialog to add, edit, or delete the enumerated data types in the
+ * current database.  Called when the "Edit Enums" menu item is triggered.
+ */
 void PortaBase::editEnums()
 {
     EnumManager manager(db, this);
@@ -351,17 +339,21 @@ void PortaBase::editEnums()
     }
     if (manager.changesMade()) {
         viewer->setDatabase(db);
-        setEdited(TRUE);
+        setEdited(true);
     }
     else {
         viewer->setView(db->currentView());
     }
 }
 
+/**
+ * Launch a dialog which displays some basic statistics about the current
+ * database.  Called when the "Properties" menu item is triggered.
+ */
 void PortaBase::viewProperties()
 {
-    QString message = tr("Name") + ": " + doc->name() + "\n";
-    QFile file(doc->file());
+    QFile file(doc);
+    QString message = tr("Name") + ": " + QFileInfo(file).fileName() + "\n";
     int size = file.size();
     QString sizeString;
     if (size < 1024) {
@@ -379,16 +371,16 @@ void PortaBase::viewProperties()
     count = db->listViews().count();
     message += tr("Views") + ": " + QString::number(count) + "\n";
     QStringList sortings = db->listSortings();
-    sortings.remove("_single");
+    sortings.removeAll("_single");
     count = sortings.count();
     message += tr("Sortings") + ": " + QString::number(count) + "\n";
     QStringList filters = db->listFilters();
-    filters.remove("_simple");
+    filters.removeAll("_simple");
     count = filters.count();
     message += tr("Filters") + ": " + QString::number(count) + "\n";
     count = db->listEnums().count();
     message += tr("Enums") + ": " + QString::number(count);
-    QString title = tr("File Properties") + " - " + QQDialog::tr("PortaBase");
+    QString title = tr("File Properties") + " - " + qApp->applicationName();
     QMessageBox mb(title, message, QMessageBox::NoIcon,
                    QMessageBox::Ok, QMessageBox::NoButton,
                    QMessageBox::NoButton, this);
@@ -396,93 +388,115 @@ void PortaBase::viewProperties()
     mb.exec();
 }
 
+/**
+ * Launch a dialog which allows the user to customize many of the application
+ * settings.  Called when the "Preferences" menu item is triggered.
+ */
 void PortaBase::editPreferences()
 {
     Preferences prefs(this);
     if (prefs.exec()) {
         QFont font = prefs.applyChanges();
-#if !defined(Q_OS_MACX)
+#if !defined(Q_WS_MAC)
         setFont(font);
         viewer->updateButtonSizes();
-        file->setFont(font);
+        mh->fileMenu()->setFont(font);
+        noFileLabel->setFont(font);
+        mh->helpMenu()->setFont(font);
 #endif
-        if (doc) {
-            showDataViewer();
-            rebuildViewMenu();
-            rebuildSortMenu();
-            rebuildFilterMenu();
-        }
-#if !defined(Q_WS_QWS) && !defined(Q_OS_MACX)
-        help->setFont(font);
-        fileSelector->setFont(font);
-#endif
-        Config conf("portabase");
-        conf.setGroup("General");
-        confirmDeletions = conf.readBoolEntry("ConfirmDeletions");
-        booleanToggle = conf.readBoolEntry("BooleanToggle");
-        bool pagedDisplay = conf.readBoolEntry("PagedDisplay");
+        QSettings settings;
+        settings.beginGroup("General");
+        confirmDeletions = settings.value("ConfirmDeletions", true).toBool();
+        booleanToggle = settings.value("BooleanToggle", false).toBool();
+        bool pagedDisplay = settings.value("PagedDisplay", true).toBool();
         viewer->allowBooleanToggle(booleanToggle);
         viewer->usePages(pagedDisplay);
-        if (doc) {
-            db->setShowSeconds(conf.readBoolEntry("ShowSeconds"));
-            db->updateDateTimePrefs();
+        if (!doc.isEmpty()) {
+            showDataViewer();
+            db->updatePreferences();
             viewer->updateTable();
         }
     }
 }
 
-void PortaBase::newFile()
+/**
+ * Finish the process of creating a new PortaBase file at the specified
+ * location.  Called after the user has triggered the "New" file menu item
+ * and already selected a directory and filename.
+ *
+ * @param file The path of the file to be created
+ */
+void PortaBase::newFile(const QString &file)
 {
-    createFile(NO_SOURCE);
+    createFile(ImportDialog::NoSource, file);
 }
 
+/**
+ * Create a new PortaBase file based on the data found in a PortaBase-format
+ * XML file or a MobileDB file.  Called when the "Import" menu item is
+ * triggered while no database is open.
+ */
 void PortaBase::import()
 {
     QStringList types;
     types.append(tr("XML"));
     types.append(tr("MobileDB"));
-    bool ok = FALSE;
-    QString type = InputDialog::getItem(MenuActions::tr("Import") + QQDialog::titleSuffix,
-                                        tr("Import from:"),
-                                        types, 0, FALSE, &ok, this);
+    bool ok = false;
+    QString type = QInputDialog::getItem(this, MenuActions::tr("Import"),
+                                         tr("Import from:"),
+                                         types, 0, false, &ok);
     if (!ok) {
         return;
     }
     if (type == types[0]) {
-        createFile(XML_FILE);
+        createFile(ImportDialog::XML);
     }
     else {
-        createFile(MOBILEDB_FILE);
+        createFile(ImportDialog::MobileDB);
     }
 }
 
-void PortaBase::createFile(int source)
+/**
+ * Create a new PortaBase file from the specified data source at the given
+ * location.  First asks if the new file is to be encrypted or not.  Once the
+ * file is created, it is opened as the current database.
+ *
+ * @param source The source of data for the new file (may be "None")
+ * @param file The path of the new file to be created
+ */
+void PortaBase::createFile(ImportDialog::DataSource source,
+                           const QString &file)
 {
-    bool ok = FALSE;
-    NewFileDialog filedlg(".pob", this);
-    if (filedlg.exec()) {
-        DocLnk *file = filedlg.doc();
-        if (file != 0) {
-            doc = file;
-            ok = TRUE;
+    bool encrypted = false;
+    QString f(file);
+    if (f.isNull()) {
+        f = createNewFile();
+        if (file.isEmpty()) {
+            return;
         }
     }
-    if (!ok) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
-                             tr("Unable to create new file"));
+    QMessageBox crypt(qApp->applicationName(), tr("Encrypt the file?"),
+                      QMessageBox::NoIcon, QMessageBox::Yes,
+                      QMessageBox::No | QMessageBox::Default,
+                      QMessageBox::NoButton, this);
+    int result = crypt.exec();
+    if (result == QMessageBox::Cancel) {
         return;
     }
-    fileSelector->initFile(*doc);
-    int openResult;
-    bool encrypt = filedlg.encryption();
-    db = new Database(doc->file(), &openResult, encrypt ? 1 : 0);
-    if (encrypt) {
-        PasswordDialog passdlg(db, NEW_PASSWORD, this);
-        bool finished = FALSE;
+    else if (result == QMessageBox::Yes) {
+        encrypted = true;
+    }
+    doc = f;
+    bool ok = true;
+    Database::OpenResult openResult;
+    db = new Database(doc, &openResult, encrypted);
+    if (encrypted) {
+        PasswordDialog passdlg(db, PasswordDialog::NewPassword, this);
+        bool finished = false;
         while (!finished) {
             if (!passdlg.exec()) {
-                finished = TRUE;
-                ok = FALSE;
+                finished = true;
+                ok = false;
             }
             else {
                 finished = passdlg.validate();
@@ -491,7 +505,7 @@ void PortaBase::createFile(int source)
     }
     if (ok) {
         db->load();
-        if (source == NO_SOURCE) {
+        if (source == ImportDialog::NoSource) {
             ok = editColumns();
         }
         else {
@@ -506,62 +520,51 @@ void PortaBase::createFile(int source)
         updateCaption();
         // if not saved now, file is empty without later save...bad
         save();
-        needsRefresh = TRUE;
     }
     else {
         delete db;
         db = 0;
-        doc->removeFiles();
-        delete doc;
-        doc = 0;
+        QFile::remove(doc);
+        doc = "";
     }
 }
 
+/**
+ * Finish the work of updating the display for a database which was imported
+ * from an outside source (such as an XML or MobileDB file).
+ *
+ * @param db The database being created
+ */
 void PortaBase::finishNewFile(Database *db)
 {
-    Config conf("portabase");
-    updateRecentFiles(conf);
     viewer->setDatabase(db);
     viewer->updateTable();
     viewer->updateButtons();
     showDataViewer();
-    rebuildViewMenu();
-    rebuildSortMenu();
-    rebuildFilterMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
-void PortaBase::openFile()
+/**
+ * Open the PortaBase file which is at the specified location.
+ *
+ * @param file The path of the file to be opened
+ */
+void PortaBase::openFile(const QString &file)
 {
-    const DocLnk *selection = fileSelector->selected();
-    if (selection == 0) {
+    if (!doc.isEmpty()) {
+        // currently only support one open file at a time
         return;
     }
-    openFile(*selection);
-    delete selection;
-}
-
-void PortaBase::openFile(const QString &f)
-{
-    if (doc) {
-        return;
-    }
-    DocLnk nf(f);
-    openFile(nf);
-}
-
-void PortaBase::openFile(const DocLnk &f)
-{
-    int openResult;
-    Database *temp = new Database(f.file(), &openResult);
-    if (openResult == OPEN_NEWER_VERSION) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+    Database::OpenResult openResult;
+    Database *temp = new Database(file, &openResult);
+    if (openResult == Database::NewerVersion) {
+        QMessageBox::warning(this, qApp->applicationName(),
                              tr("This file uses a newer version of the\nPortaBase format than this version\nof PortaBase supports; please\nupgrade"));
         delete temp;
         return;
     }
-    else if (openResult == OPEN_ENCRYPTED) {
-        PasswordDialog passdlg(temp, OPEN_PASSWORD, this);
+    else if (openResult == Database::Encrypted) {
+        PasswordDialog passdlg(temp, PasswordDialog::OpenFile, this);
         if (!passdlg.exec()) {
             delete temp;
             return;
@@ -574,378 +577,150 @@ void PortaBase::openFile(const DocLnk &f)
     else {
         temp->load();
     }
-    if (doc) {
-        delete doc;
-    }
-    doc = new DocLnk(f);
+    doc = file;
     if (db) {
         delete db;
     }
     db = temp;
     viewer->setDatabase(db);
-    Config conf("portabase");
-    updateRecentFiles(conf);
     showDataViewer();
     updateCaption();
-    rebuildViewMenu();
-    rebuildSortMenu();
-    rebuildFilterMenu();
 }
 
-void PortaBase::fileOpen()
+/**
+ * Update the text in the window's title bar.
+ */
+void PortaBase::updateCaption()
 {
-    showFileSelector();
-    updateCaption();
-}
-
-void PortaBase::deleteFile()
-{
-    const DocLnk *selection = fileSelector->selected();
-    if (selection == 0) {
-        return;
-    }
-    if (QMessageBox::warning(this, QQDialog::tr("PortaBase"), tr("Delete")
-                             + " \"" + selection->name() + "\"\n"
-                             + tr("Are you sure?"),
-                             QObject::tr("Yes"), QObject::tr("No"),
-                             QString::null, 1) > 0) {
-        delete selection;
-        return;
-    }
-    QFile::remove(selection->file());
-    QFile::remove(selection->linkFile());
-    delete selection;
-    fileSelector->reread();
-}
-
-void PortaBase::copyFile()
-{
-    fileSelector->duplicate();
-}
-
-void PortaBase::renameFile()
-{
-    fileSelector->rename();
-}
-
-void PortaBase::refreshFileList()
-{
-    fileSelector->reread();
-    needsRefresh = FALSE;
-}
-
-void PortaBase::viewList()
-{
-#ifdef SHARP
-    fileSelector->setListView();
-    viewListAction->setOn(TRUE);
-    viewIconsAction->setOn(FALSE);
-    Config conf("portabase");
-    conf.setGroup("Files");
-    conf.writeEntry("View", "List");
-#endif
-}
-
-void PortaBase::viewIcons()
-{
-#ifdef SHARP
-    fileSelector->setIconView();
-    viewListAction->setOn(FALSE);
-    viewIconsAction->setOn(TRUE);
-    Config conf("portabase");
-    conf.setGroup("Files");
-    conf.writeEntry("View", "Icon");
-#endif
-}
-
-void PortaBase::openRecent(int id)
-{
-    QString path = recent->text(id);
-    if (!QFile::exists(path)) {
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"),
-                             tr("File does not exist"));
-        return;
-    }
-    openFile(path);
-}
-
-void PortaBase::updateCaption(const QString &name)
-{
-    if (!doc) {
-        setCaption(QQDialog::tr("PortaBase") + QQDialog::titleSuffix);
+    if (doc.isEmpty()) {
+        setWindowTitle(qApp->applicationName());
     }
     else {
-        QString s = name;
-        if (s.isNull()) {
-            s = doc->name();
-        }
-        setCaption(s + " - " + QQDialog::tr("PortaBase") + QQDialog::titleSuffix);
+        QString name = QFileInfo(doc).fileName();
+        setWindowTitle(name + "[*] - " + qApp->applicationName());
     }
 }
 
+/**
+ * Close the data viewer and return to the "No file selected" label.
+ */
 void PortaBase::closeViewer()
 {
     viewer->closeView();
     showFileSelector();
-    delete doc;
-    doc = 0;
+    doc = "";
     delete db;
     db = 0;
     updateCaption();
 }
 
+/**
+ * Enter "select a file" mode, where there is no currently open database.
+ */
 void PortaBase::showFileSelector()
 {
-    menu->clear();
-    toolbar->clear();
-    viewIds.clear();
-    sortIds.clear();
-    filterIds.clear();
-    fileNewAction->setEnabled(TRUE);
-    fileOpenAction->setEnabled(TRUE);
-    fileSaveAction->setEnabled(FALSE);
-    closeAction->setEnabled(FALSE);
-    quitAction->setEnabled(TRUE);
-    findAction->setEnabled(FALSE);
+    findAction->setEnabled(false);
+    rowViewAction->setEnabled(false);
+    
+    // Top-level menu visibility
+    row->menuAction()->setVisible(false);
+    view->menuAction()->setVisible(false);
+    sort->menuAction()->setVisible(false);
+    filter->menuAction()->setVisible(false);
+    
+    // File menu
+    mh->startFileSelectorMenu();
+    fileSeparatorAction->setVisible(true);
+    importAction->setVisible(true);
+    changePassAction->setVisible(false);
+    dataImportAction->setVisible(false);
+    exportAction->setVisible(false);
+    deleteRowsAction->setVisible(false);
+    editColsAction->setVisible(false);
+    manageEnumsAction->setVisible(false);
+    slideshowAction->setVisible(false);
+    propsAction->setVisible(false);
+    
+    // Toolbar
+    showAllFillerActions();
+    rowAddAction->setVisible(false);
+    rowEditAction->setVisible(false);
+    rowDeleteAction->setVisible(false);
+    rowCopyAction->setVisible(false);
+    findAction->setVisible(false);
 
-    file = new QPopupMenu(this);
-    fileNewAction->addTo(file);
-    fileNewAction->addTo(toolbar);
-    fileOpenAction->addTo(file);
-    fileOpenAction->addTo(toolbar);
-#if defined(Q_WS_QWS)
-    fileDeleteAction->addTo(file);
-    fileDeleteAction->addTo(toolbar);
-    fileRenameAction->addTo(file);
-    fileCopyAction->addTo(file);
-    refreshAction->addTo(file);
-#else
-    recent = new QPopupMenu(this);
-    Config conf("portabase");
-    QStringList recentFiles = getRecentFiles(conf);
-    int count = recentFiles.count();
-    for (int i = 0; i < count; i++) {
-        recent->insertItem(recentFiles[i]);
-    }
-    connect(recent, SIGNAL(activated(int)), this, SLOT(openRecent(int)));
-    file->insertItem(ma->menuText("Open Recent"), recent);
-#endif
-    file->insertSeparator();
-    importAction->addTo(file);
-    prefsAction->addTo(file);
-    file->insertSeparator();
-    quitAction->addTo(file);
-
-    menu->insertItem(ma->menuText("File"), file);
-
-#ifdef SHARP
-    view = new QPopupMenu(this);
-    view->setCheckable(TRUE);
-    viewListAction->addTo(view);
-    viewIconsAction->addTo(view);
-    menu->insertItem(ma->menuText("View"), view);
-#endif
-
-#if !defined(Q_WS_QWS)
-    help = new QPopupMenu(this);
-    helpAction->addTo(help);
-#if !defined(Q_OS_MACX)
-    help->insertSeparator();
-#endif
-    aboutAction->addTo(help);
-    aboutQtAction->addTo(help);
-    menu->insertItem(ma->menuText("Help"), help);
-#endif
-    if (needsRefresh) {
-        fileSelector->reread();
-        needsRefresh = FALSE;
-    }
-    mainStack->raiseWidget(fileSelector);
+    mainStack->setCurrentWidget(noFileLabel);
 }
 
+/**
+ * Enter "database open" mode.
+ */
 void PortaBase::showDataViewer()
 {
-    menu->clear();
-    toolbar->clear();
-    fileNewAction->setEnabled(FALSE);
-    fileOpenAction->setEnabled(FALSE);
-    closeAction->setEnabled(TRUE);
-    quitAction->setEnabled(FALSE);
-    findAction->setEnabled(TRUE);
-
-    // Toolbar
-    QStringList shown;
-    QStringList hidden;
-    Preferences::buttonConfiguration(shown, hidden);
-    int count = shown.count();
-    int i;
-    for (i = 0; i < count; i++) {
-        QAction *action = getButtonAction(shown[i]);
-        action->addTo(toolbar);
-    }
-
-    // View menu
-    view = new QPopupMenu(this);
-    view->setCheckable(TRUE);
-    viewAddAction->addTo(view);
-    viewEditAction->addTo(view);
-    viewDeleteAction->addTo(view);
-    view->insertSeparator();
-    viewAllColsAction->addTo(view);
-    connect(view, SIGNAL(activated(int)), this, SLOT(changeView(int)));
-
-    // Sort menu
-    sort = new QPopupMenu(this);
-    sort->setCheckable(TRUE);
-    sortAddAction->addTo(sort);
-    sortEditAction->addTo(sort);
-    sortDeleteAction->addTo(sort);
-    sort->insertSeparator();
-    connect(sort, SIGNAL(activated(int)), this, SLOT(changeSorting(int)));
-
-    // Filter menu
-    filter = new QPopupMenu(this);
-    filter->setCheckable(TRUE);
-    findAction->addTo(filter);
-    filterAddAction->addTo(filter);
-    filterEditAction->addTo(filter);
-    filterDeleteAction->addTo(filter);
-    filter->insertSeparator();
-    filterAllRowsAction->addTo(filter);
-    connect(filter, SIGNAL(activated(int)), this, SLOT(changeFilter(int)));
-
-    // Load menu preferences
-    QStringList topLevel;
-    QStringList underFile;
-    Preferences::menuConfiguration(topLevel, underFile);
+    findAction->setEnabled(true);
+    // rowViewAction status is handled by the data grid widget
+    
+    // Top-level menu visibility
+    row->menuAction()->setVisible(true);
+    view->menuAction()->setVisible(true);
+    sort->menuAction()->setVisible(true);
+    filter->menuAction()->setVisible(true);
 
     // File menu
-    file = new QPopupMenu(this);
-    count = underFile.count();
-    for (i = 0; i < count; i++) {
-        QString menuName = underFile[i];
-        file->insertItem(ma->menuText(menuName), getMenuPointer(menuName));
+    mh->startDocumentFileMenu();
+    if (db->encryption()) {
+        changePassAction->setVisible(true);
     }
-    fileSaveAction->addTo(file);
-    if (db->encrypted()) {
-        changePassAction->addTo(file);
-    }
-    dataImportAction->addTo(file);
-    exportAction->addTo(file);
-    deleteRowsAction->addTo(file);
-    editColsAction->addTo(file);
-    manageEnumsAction->addTo(file);
-    slideshowAction->addTo(file);
-    propsAction->addTo(file);
-    prefsAction->addTo(file);
-    file->insertSeparator();
-    closeAction->addTo(file);
+    dataImportAction->setVisible(true);
+    exportAction->setVisible(true);
+    deleteRowsAction->setVisible(true);
+    editColsAction->setVisible(true);
+    manageEnumsAction->setVisible(true);
+    slideshowAction->setVisible(true);
+    propsAction->setVisible(true);
+    fileSeparatorAction->setVisible(false);
+    importAction->setVisible(false);
 
-    menu->insertItem(ma->menuText("File"), file);
-    count = topLevel.count();
-    for (i = 0; i < count; i++) {
-        QString menuName = topLevel[i];
-        menu->insertItem(ma->menuText(menuName), getMenuPointer(menuName));
+    // Toolbar
+    rowAddAction->setVisible(true);
+    rowEditAction->setVisible(true);
+    rowDeleteAction->setVisible(true);
+    rowCopyAction->setVisible(true);
+    findAction->setVisible(true);
+    for (int i = 0; i < 4; i++) {
+        fillerActions[i]->setVisible(false);
     }
-#if !defined(Q_WS_QWS)
-    help = new QPopupMenu(this);
-    helpAction->addTo(help);
-#if !defined(Q_OS_MACX)
-    help->insertSeparator();
-#endif
-    aboutAction->addTo(help);
-    aboutQtAction->addTo(help);
-    menu->insertItem(ma->menuText("Help"), help);
-#endif
-    mainStack->raiseWidget(viewer);
+
+    mainStack->setCurrentWidget(viewer);
+    rebuildViewMenu();
+    rebuildSortMenu();
+    rebuildFilterMenu();
 }
 
-QPopupMenu *PortaBase::getMenuPointer(const QString &menuName)
-{
-    if (menuName == "Row") {
-        return row;
-    }
-    else if (menuName == "View") {
-        return view;
-    }
-    else if (menuName == "Sort") {
-        return sort;
-    }
-    else {
-        return filter;
-    }
-}
-
-QAction *PortaBase::getButtonAction(const QString &buttonName)
-{
-    if (buttonName == "Save") {
-        return fileSaveAction;
-    }
-    else if (buttonName == "Add") {
-        return rowAddAction;
-    }
-    else if (buttonName == "Edit") {
-        return rowEditAction;
-    }
-    else if (buttonName == "Copy") {
-        return rowCopyAction;
-    }
-    else if (buttonName == "Delete") {
-        return rowDeleteAction;
-    }
-    else {
-        return findAction;
-    }
-}
-
-QStringList PortaBase::getRecentFiles(Config &conf)
-{
-    conf.setGroup("Files");
-    QStringList recentFiles;
-    for (int i = 0; i < 5; i++) {
-        QString path = conf.readEntry(QString().sprintf("Recent%i", i), "");
-        if (!path.isEmpty()) {
-            recentFiles.append(path);
-        }
-    }
-    return recentFiles;
-}
-
-void PortaBase::updateRecentFiles(Config &conf)
-{
-    conf.setGroup("Files");
-    QStringList files = fileSelector->recent();
-    int i;
-#if !defined(Q_WS_QWS)
-    int count = files.count();
-    recent->clear();
-    for (i = 0; i < count; i++) {
-        recent->insertItem(files[i]);
-    }
-#endif
-    while (files.count() < 5) {
-        files.append("");
-    }
-    for (i = 0; i < 5; i++) {
-        conf.writeEntry(QString().sprintf("Recent%i", i), files[i]);
-    }
-}
-
-void PortaBase::setDocument(const QString &fileref)
-{
-    openFile(fileref);
-}
-
+/**
+ * Window close event handler.  Makes sure that the user is given the
+ * opportunity to save their changes if they forgot to do so.
+ *
+ * @param e The window close event
+ */
 void PortaBase::closeEvent(QCloseEvent *e)
 {
-    if (mainStack->visibleWidget() == viewer) {
-        if (isEdited) {
-            int choice = QMessageBox::warning(this, QQDialog::tr("PortaBase"),
-                                              tr("Save changes?"),
-                                              QObject::tr("Yes"),
-                                              QObject::tr("No"));
-            if (choice == 0) {
+    if (mainStack->currentWidget() == viewer) {
+        if (isWindowModified()) {
+            QMessageBox::StandardButton choice;
+            choice = QMessageBox::warning(this, qApp->applicationName(),
+                                          tr("Save changes?"),
+                                          QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+                                          QMessageBox::Cancel);
+            if (choice == QMessageBox::Yes) {
                 save();
+            }
+            else if (choice == QMessageBox::Cancel) {
+                e->ignore();
+                return;
+            }
+            else {
+                setEdited(false);
             }
         }
         e->ignore();
@@ -956,25 +731,33 @@ void PortaBase::closeEvent(QCloseEvent *e)
     }
 }
 
-void PortaBase::slideshow()
+/**
+ * Quit the application.  Called when the "Quit" action is triggered.  Makes
+ * sure that the user is given the opportunity to save their changes if they
+ * forgot to do so.
+ */
+void PortaBase::quit()
 {
-    viewer->slideshow();
+    if (!doc.isEmpty()) {
+        // close the current file; might be cancelled
+        close();
+    }
+    if (doc.isEmpty()) {
+        // if there isn't an open file, go ahead and exit
+        close();
+    }
 }
 
-void PortaBase::addRow()
-{
-    viewer->addRow();
-}
-
-void PortaBase::editRow()
-{
-    viewer->editRow();
-}
-
+/**
+ * Delete the currently selected data row, if any.  If the setting to confirm
+ * deletions is checked, a dialog will appear asking the user to confirm that
+ * they really wanted to do that.  Called when the "Delete" item in the "Row"
+ * menu is triggered.
+ */
 void PortaBase::deleteRow()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        if (QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Delete this row?"), QObject::tr("Yes"),
                                  QObject::tr("No"), QString::null, 1) > 0) {
             return;
@@ -983,20 +766,25 @@ void PortaBase::deleteRow()
     viewer->deleteRow();
 }
 
+/**
+ * Launch the row editor to create a new data row, but pre-filled with the
+ * data from the currently selected row.
+ */
 void PortaBase::copyRow()
 {
-    viewer->editRow(-1, TRUE);
+    viewer->editRow(-1, true);
 }
 
-void PortaBase::viewRow()
-{
-    viewer->viewRow();
-}
-
+/**
+ * Delete all data rows that match the current filter.  If the setting to
+ * confirm deletions is checked, a dialog will appear asking the user to
+ * confirm that they really wanted to do that.  Called when the "Delete Rows
+ * In Filter" menu item is triggered.
+ */
 void PortaBase::deleteAllRows()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        if (QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Delete all rows in the\ncurrent filter?"),
                                  QObject::tr("Yes"), QObject::tr("No"),
                                  QString::null, 1) > 0) {
@@ -1006,250 +794,321 @@ void PortaBase::deleteAllRows()
     viewer->deleteAllRows();
 }
 
+/**
+ * Commit all changes made to the database since the last time the file was
+ * saved.
+ */
 void PortaBase::save()
 {
     viewer->saveViewSettings();
     db->commit();
-    setEdited(FALSE);
+    setEdited(false);
 }
 
+/**
+ * Change the password of an encrypted PortaBase file.  Called when the
+ * "Change Password" menu item is triggered.
+ */
 void PortaBase::changePassword()
 {
-    PasswordDialog passdlg(db, CHANGE_PASSWORD, this);
+    PasswordDialog passdlg(db, PasswordDialog::ChangePassword, this);
     if (passdlg.exec()) {
         if (passdlg.validate()) {
-            setEdited(TRUE);
+            setEdited(true);
         }
     }
 }
 
+/**
+ * Import rows of data from a CSV file.  Called when the "Import" menu item
+ * is triggered while a database is open.
+ */
 void PortaBase::dataImport()
 {
-    ImportDialog dialog(CSV_FILE, db, this);
+    ImportDialog dialog(ImportDialog::CSV, db, this);
     if (dialog.exec()) {
         viewer->updateTable();
         viewer->updateButtons();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Export data from the open PortaBase file to another format.  The user will
+ * be given the option to export either the rows in the current filter to a
+ * CSV file or the entire database to an XML file.  Called when the "Export"
+ * menu item is triggered.
+ */
 void PortaBase::dataExport()
 {
     QStringList types;
     types.append(tr("CSV") + "(" + tr("rows in current filter") + ")");
     types.append(tr("XML"));
-    bool ok = FALSE;
-    QString type = InputDialog::getItem(MenuActions::tr("Export") + QQDialog::titleSuffix,
-                                        tr("Export to:"),
-                                        types, 0, FALSE, &ok, this);
+    bool ok = false;
+    QString type = QInputDialog::getItem(this, MenuActions::tr("Export"),
+                                         tr("Export to:"),
+                                         types, 0, false, &ok);
     if (!ok) {
         return;
     }
-    QString extension = ".csv";
+    QString description = tr("Text files with comma separated values");
+    QString extension = "csv";
     if (type == types[1]) {
-        extension = ".xml";
+        description = tr("XML files");
+        extension = "xml";
     }
-    NewFileDialog filedlg(extension, this);
-    if (!filedlg.exec()) {
+    QString output = createNewFile(description, extension);
+    if (output.isEmpty()) {
         return;
     }
-    DocLnk *output = filedlg.doc();
-    if (output == 0) {
-        return;
-    }
-    fileSelector->initFile(*output);
-    if (extension == ".csv") {
-        viewer->exportToCSV(output->file());
+    if (extension == "csv") {
+        viewer->exportToCSV(output);
     }
     else {
-        viewer->exportToXML(output->file());
+        viewer->exportToXML(output);
     }
-    delete output;
 }
 
+/**
+ * Launch a file dialog which allows the user to create a new file of the
+ * specified type.  Basically just delegates the work to
+ * <code>QQMenuHelper</code>, which serves as the central repository of data
+ * on recently used files and directories.
+ *
+ * @param description The description of the file type as it is to appear
+ *                    in the file dialog (null for the application default)
+ * @param extension The file extension of the file type (do not include
+ *                  the period, use null for the application default)
+ * @return The path of the file to be created (or an empty string if none)
+ */
+QString PortaBase::createNewFile(const QString &description,
+                                 const QString &extension)
+{
+  return mh->createNewFile(description, extension);
+}
+
+/**
+ * Switch to the "All Columns" database view.  Called when that view is
+ * selected from the "View" menu.
+ */
 void PortaBase::viewAllColumns()
 {
     viewer->setView("_all");
     updateViewMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
+/**
+ * Switch to the "All Rows" filter.  Called when that filter is selected
+ * from the "Filter" menu.
+ */
 void PortaBase::viewAllRows()
 {
     viewer->setFilter("_allrows");
     updateFilterMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
-void PortaBase::changeView(int id)
+/**
+ * Switch to the database view whose entry in the "View" menu has the
+ * specified ID.  Called when that menu item is triggered.
+ *
+ * @param action The menu action that was triggered to select this view
+ */
+void PortaBase::changeView(QAction *action)
 {
-    int index = viewIds.findIndex(id);
+    int index = viewActions.indexOf(action);
     if (index != -1) {
-        viewer->setView(viewNames[index], TRUE);
+        viewer->setView(viewNames[index], true);
         updateViewMenu();
         // there might be a default sorting and/or filter...
         updateSortMenu();
         updateFilterMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
-void PortaBase::changeSorting(int id)
+/**
+ * Switch to the sorting whose entry in the "Sort" menu has the
+ * specified ID.  Called when that menu item is triggered.
+ *
+ * @param action The menu action that was triggered to select this sorting
+ */
+void PortaBase::changeSorting(QAction *action)
 {
-    int index = sortIds.findIndex(id);
+    int index = sortActions.indexOf(action);
     if (index != -1) {
         viewer->setSorting(sortNames[index]);
         updateSortMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
-void PortaBase::changeFilter(int id)
+/**
+ * Switch to the filter whose entry in the "Filter" menu has the
+ * specified ID.  Called when that menu item is triggered.
+ *
+ * @param action The menu action that was triggered to select this filter
+ */
+void PortaBase::changeFilter(QAction *action)
 {
-    int index = filterIds.findIndex(id);
+    int index = filterActions.indexOf(action);
     if (index != -1) {
         viewer->setFilter(filterNames[index]);
         updateFilterMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Update the "View" menu to list the views currently defined in the open
+ * database.
+ */
 void PortaBase::rebuildViewMenu()
 {
     // remove old view names
-    int count = viewIds.count();
+    int count = viewActions.count();
     int i;
     for (i = 0; i < count; i++) {
-        view->removeItem(viewIds[i]);
+        view->removeAction(viewActions[i]);
     }
-    viewIds.clear();
+    viewActions.clear();
     // add new view names
     viewNames = db->listViews();
-    viewNames.remove("_all");
+    viewNames.removeAll("_all");
     count = viewNames.count();
     for (i = 0; i < count; i++) {
-        int id = view->insertItem(viewNames[i]);
-        viewIds.append(id);
+        QAction *action = view->addAction(viewNames[i]);
+        action->setCheckable(true);
+        viewActions.append(action);
     }
     updateViewMenu();
 }
 
+/**
+ * Update the "Sort" menu to list the sortings currently defined in the
+ * open database.
+ */
 void PortaBase::rebuildSortMenu()
 {
     // remove old sorting names
-    int count = sortIds.count();
+    int count = sortActions.count();
     int i;
     for (i = 0; i < count; i++) {
-        sort->removeItem(sortIds[i]);
+        sort->removeAction(sortActions[i]);
     }
-    sortIds.clear();
+    sortActions.clear();
     // add new sorting names
     sortNames = db->listSortings();
-    sortNames.remove("_single");
+    sortNames.removeAll("_single");
     count = sortNames.count();
     for (i = 0; i < count; i++) {
-        int id = sort->insertItem(sortNames[i]);
-        sortIds.append(id);
+        QAction *action = sort->addAction(sortNames[i]);
+        action->setCheckable(true);
+        sortActions.append(action);
     }
     updateSortMenu();
 }
 
+/**
+ * Update the "Filter" menu to list the filters currently defined in the
+ * open database.
+ */
 void PortaBase::rebuildFilterMenu()
 {
     // remove old filter names
-    int count = filterIds.count();
+    int count = filterActions.count();
     int i;
     for (i = 0; i < count; i++) {
-        filter->removeItem(filterIds[i]);
+        filter->removeAction(filterActions[i]);
     }
-    filterIds.clear();
+    filterActions.clear();
     // add new filter names
     filterNames = db->listFilters();
-    filterNames.remove("_allrows");
-    filterNames.remove("_simple");
+    filterNames.removeAll("_allrows");
+    filterNames.removeAll("_simple");
     count = filterNames.count();
     for (i = 0; i < count; i++) {
-        int id = filter->insertItem(filterNames[i]);
-        filterIds.append(id);
+        QAction *action = filter->addAction(filterNames[i]);
+        action->setCheckable(true);
+        filterActions.append(action);
     }
     updateFilterMenu();
 }
 
+/**
+ * Update the "View" menu to indicate the currently selected database view.
+ */
 void PortaBase::updateViewMenu()
 {
     QString viewName = db->currentView();
     if (viewName == "_all") {
-        viewAllColsAction->setOn(TRUE);
-        viewEditAction->setEnabled(FALSE);
-        viewDeleteAction->setEnabled(FALSE);
+        viewAllColsAction->setChecked(true);
+        viewEditAction->setEnabled(false);
+        viewDeleteAction->setEnabled(false);
     }
     else {
-        viewAllColsAction->setOn(FALSE);
-        viewEditAction->setEnabled(TRUE);
-        viewDeleteAction->setEnabled(TRUE);
+        viewAllColsAction->setChecked(false);
+        viewEditAction->setEnabled(true);
+        viewDeleteAction->setEnabled(true);
     }
     int count = viewNames.count();
     for (int i = 0; i < count; i++) {
-        if (viewName == viewNames[i]) {
-            view->setItemChecked(viewIds[i], TRUE);
-        }
-        else {
-            view->setItemChecked(viewIds[i], FALSE);
-        }
+        viewActions[i]->setChecked(viewName == viewNames[i]);
     }
 }
 
+/**
+ * Update the "Sort" menu to indicate the currently selected sorting.
+ */
 void PortaBase::updateSortMenu()
 {
     QString sortName = db->currentSorting();
-    if (sortName == "" || sortName == "_single") {
-        sortEditAction->setEnabled(FALSE);
-        sortDeleteAction->setEnabled(FALSE);
+    if (sortName.isEmpty() || sortName == "_single") {
+        sortEditAction->setEnabled(false);
+        sortDeleteAction->setEnabled(false);
     }
     else {
-        sortEditAction->setEnabled(TRUE);
-        sortDeleteAction->setEnabled(TRUE);
+        sortEditAction->setEnabled(true);
+        sortDeleteAction->setEnabled(true);
     }
     int count = sortNames.count();
     for (int i = 0; i < count; i++) {
-        if (sortName == sortNames[i]) {
-            sort->setItemChecked(sortIds[i], TRUE);
-        }
-        else {
-            sort->setItemChecked(sortIds[i], FALSE);
-        }
+        sortActions[i]->setChecked(sortName == sortNames[i]);
     }
 }
 
+/**
+ * Update the "Filter" menu to indicate the currently selected filter.
+ */
 void PortaBase::updateFilterMenu()
 {
     QString filterName = db->currentFilter();
     if (filterName == "_allrows") {
-        filterAllRowsAction->setOn(TRUE);
-        filterEditAction->setEnabled(FALSE);
-        filterDeleteAction->setEnabled(FALSE);
+        filterAllRowsAction->setChecked(true);
+        filterEditAction->setEnabled(false);
+        filterDeleteAction->setEnabled(false);
     }
     else if (filterName == "_simple") {
-        filterAllRowsAction->setOn(FALSE);
-        filterEditAction->setEnabled(FALSE);
-        filterDeleteAction->setEnabled(FALSE);
+        filterAllRowsAction->setChecked(false);
+        filterEditAction->setEnabled(false);
+        filterDeleteAction->setEnabled(false);
     }
     else {
-        filterAllRowsAction->setOn(FALSE);
-        filterEditAction->setEnabled(TRUE);
-        filterDeleteAction->setEnabled(TRUE);
+        filterAllRowsAction->setChecked(false);
+        filterEditAction->setEnabled(true);
+        filterDeleteAction->setEnabled(true);
     }
     int count = filterNames.count();
     for (int i = 0; i < count; i++) {
-        if (filterName == filterNames[i]) {
-            filter->setItemChecked(filterIds[i], TRUE);
-        }
-        else {
-            filter->setItemChecked(filterIds[i], FALSE);
-        }
+        filterActions[i]->setChecked(filterName == filterNames[i]);
     }
 }
 
+/**
+ * Launch the view editor to modify the currently selected view.  Called when
+ * the "View" menu's "Edit" item is triggered.
+ */
 void PortaBase::editView()
 {
     ViewEditor editor(this);
@@ -1260,15 +1119,19 @@ void PortaBase::editView()
         viewer->closeView();
         editor.applyChanges();
         QString newName = editor.getName();
-        viewer->setView(newName, TRUE);
+        viewer->setView(newName, true);
         // view menu is unchanged unless the view's name changed
         if (viewName != newName) {
             rebuildViewMenu();
         }
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Launch the sorting editor to modify the currently selected sorting.
+ * Called when the "Sort" menu's "Edit" item is triggered.
+ */
 void PortaBase::editSorting()
 {
     SortEditor editor(this);
@@ -1281,10 +1144,14 @@ void PortaBase::editSorting()
         if (sortingName != newName) {
             rebuildSortMenu();
         }
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Launch the filter editor to modify the currently selected filter.
+ * Called when the "Filter" menu's "Edit" item is triggered.
+ */
 void PortaBase::editFilter()
 {
     FilterEditor editor(this);
@@ -1297,22 +1164,30 @@ void PortaBase::editFilter()
         if (filterName != newName) {
             rebuildFilterMenu();
         }
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Launch the view editor dialog to add a new view to the database.  Called
+ * when the "View" menu's "Add" item is triggered.
+ */
 void PortaBase::addView()
 {
     ViewEditor editor(this);
     QStringList empty;
     if (editor.edit(db, "", empty, "_none", "_none")) {
         editor.applyChanges();
-        viewer->setView(editor.getName(), TRUE);
+        viewer->setView(editor.getName(), true);
         rebuildViewMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Launch the sorting editor dialog to add a new sorting to the database.
+ * Called when the "Sorting" menu's "Add" item is triggered.
+ */
 void PortaBase::addSorting()
 {
     SortEditor editor(this);
@@ -1320,10 +1195,14 @@ void PortaBase::addSorting()
         editor.applyChanges();
         viewer->setSorting(editor.getName());
         rebuildSortMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Launch the filter editor dialog to add a new filter to the database.
+ * Called when the "Filter" menu's "Add" item is triggered.
+ */
 void PortaBase::addFilter()
 {
     FilterEditor editor(this);
@@ -1331,14 +1210,20 @@ void PortaBase::addFilter()
         editor.applyChanges();
         viewer->setFilter(editor.getName());
         rebuildFilterMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
 }
 
+/**
+ * Delete the currently selected view from the database and return to the all
+ * columns view.  If the setting to confirm deletions is checked, a dialog
+ * will appear asking the user to confirm that they really wanted to do that.
+ * Called when the "View" menu's "Delete" item is triggered.
+ */
 void PortaBase::deleteView()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        if (QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Delete this view?"),
                                  QObject::tr("Yes"), QObject::tr("No"),
                                  QString::null, 1) > 0) {
@@ -1349,13 +1234,19 @@ void PortaBase::deleteView()
     db->deleteView(db->currentView());
     viewer->setView("_all");
     rebuildViewMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
+/**
+ * Delete the currently selected sorting from the database and return to an
+ * unsorted state.  If the setting to confirm deletions is checked, a dialog
+ * will appear asking the user to confirm that they really wanted to do that.
+ * Called when the "Sort" menu's "Delete" item is triggered.
+ */
 void PortaBase::deleteSorting()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        if (QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Delete this sorting?"),
                                  QObject::tr("Yes"), QObject::tr("No"),
                                  QString::null, 1) > 0) {
@@ -1365,13 +1256,19 @@ void PortaBase::deleteSorting()
     db->deleteSorting(db->currentSorting());
     viewer->setSorting("");
     rebuildSortMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
+/**
+ * Delete the currently selected filter from the database and return to the
+ * all rows filter.  If the setting to confirm deletions is checked, a dialog
+ * will appear asking the user to confirm that they really wanted to do that.
+ * Called when the "Filter" menu's "Delete" item is triggered.
+ */
 void PortaBase::deleteFilter()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+        if (QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Delete this filter?"),
                                  QObject::tr("Yes"), QObject::tr("No"),
                                  QString::null, 1) > 0) {
@@ -1381,9 +1278,15 @@ void PortaBase::deleteFilter()
     db->deleteFilter(db->currentFilter());
     viewer->setFilter("_allrows");
     rebuildFilterMenu();
-    setEdited(TRUE);
+    setEdited(true);
 }
 
+/**
+ * Launch a dialog which allows the user to perform a simple filter based
+ * on a single column, without needing to hassle with the filter editor
+ * dialog.  Called when the "Quick Filter" menu item or toolbar button is
+ * triggered.
+ */
 void PortaBase::simpleFilter()
 {
     ConditionEditor editor(db, this);
@@ -1397,19 +1300,32 @@ void PortaBase::simpleFilter()
         delete filter;
         viewer->setFilter("_simple");
         updateFilterMenu();
-        setEdited(TRUE);
+        setEdited(true);
     }
     else {
         delete condition;
     }
 }
 
+/**
+ * Set whether or not the open database has been modified since it was last
+ * saved.  Makes appropriate changes to the title bar and the save action's
+ * status.
+ *
+ * @param y True if the database has been modified, false otherwise
+ */
 void PortaBase::setEdited(bool y)
 {
-    isEdited = y;
-    fileSaveAction->setEnabled(y);
+    mh->setEdited(y);
 }
 
+/**
+ * Set whether or not a data row is currently selected.  Makes appropriate
+ * changes to the status of the row-related actions (edit, copy, view, and
+ * delete).
+ *
+ * @param y True if a row is currently selected, false otherwise
+ */
 void PortaBase::setRowSelected(bool y)
 {
     rowEditAction->setEnabled(y);
@@ -1418,98 +1334,262 @@ void PortaBase::setRowSelected(bool y)
     rowViewAction->setEnabled(y);
 }
 
-QPixmap PortaBase::getCheckBoxPixmap(int checked)
-{
-    if (checked) {
-        return Resource::loadPixmap("portabase/checked");
-    }
-    else {
-        return Resource::loadPixmap("portabase/unchecked");
-    }
-}
-
-QPixmap PortaBase::getNotePixmap()
-{
-    return Resource::loadPixmap("portabase/note");
-}
-
-void PortaBase::showHelp()
-{
-#if !defined(Q_WS_QWS)
-    HelpBrowser helpBrowser(this);
-    helpBrowser.exec();
-#endif
-}
-
-#if !defined(Q_WS_QWS)
+/**
+ * Drag event handler which determines if PortaBase allows a particular item
+ * to be dragged over it (in preparation for a drop, usually).  Currently
+ * accepts any URL drag events, but nothing else (text, images, etc.)  We'll
+ * figure out if it's actually a PortaBase file or not when a drop is
+ * attempted.  Note that drags aren't accepted if there is already an open
+ * file; it has to be closed first.
+ *
+ * @param event A drag event
+ */
 void PortaBase::dragEnterEvent(QDragEnterEvent *event)
 {
-    event->accept(doc ? FALSE : QUriDrag::canDecode(event));
+    if (doc.isEmpty() && event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+    }
 }
 
+/**
+ * Drop event handler which opens a dropped PortaBase file if there isn't
+ * already an open database.
+ *
+ * @param event A drop event
+ */
 void PortaBase::dropEvent(QDropEvent *event)
 {
-    if (doc) {
+    if (!doc.isEmpty()) {
         return;
     }
-    QStringList fileNames;
-    if (QUriDrag::decodeLocalFiles(event, fileNames)) {
-        QString file = fileNames[0];
+    if (event->mimeData()->hasUrls()) {
+        QUrl url = event->mimeData()->urls()[0];
+        QString file = url.toLocalFile();
         bool valid = true;
-        if (file.length() < 5) {
+        if (file.isEmpty()) {
+            valid = false;
+        }
+        else if (file.length() < 5) {
             valid = false;
         }
         else if (file.right(4) != ".pob") {
             valid = false;
         }
         if (!valid) {
-            QMessageBox::warning(this, QQDialog::tr("PortaBase"),
+            QMessageBox::warning(this, qApp->applicationName(),
                                  tr("Not a PortaBase file"));
             return;
         }
+        event->acceptProposedAction();
         openFile(file);
     }
 }
-#endif
 
-Config *PortaBase::getPreferences()
+/**
+ * Main event handler, overridden to support application icon click and drag
+ * events.  Only useful on Mac OS X, where it allows copying or linking the
+ * currently open file (with a drag) or viewing the path to the current file
+ * (with a command-click).  Cribbed almost verbatim from Qt Quarterly:
+ * http://doc.trolltech.com/qq/qq18-macfeatures.html
+ *
+ * @param event The event to be processed
+ * @return True if the event was recognized, false otherwise
+ */
+bool PortaBase::event(QEvent *event)
 {
-#if defined(Q_WS_QWS)
-    return new Config("portabase");
-#else
-    Config *conf = new Config("portabase");
-    if (!conf->exists()) {
-        // new installation or upgrade from version using old preferences...
-        // try migrating from old format
-        OldConfig old("portabase");
-        old.migrate("Colors", *conf);
-        old.migrate("Files", *conf);
-        old.migrate("Font", *conf);
-        old.migrate("General", *conf);
-        // changes aren't saved until the QSettings object is deleted
-        delete conf;
-        conf = new Config("portabase");
-        Config qpe("qpe");
-        OldConfig oldQpe("qpe");
-        oldQpe.migrate("Date", qpe);
-        oldQpe.migrate("Time", qpe);
+    if (!isActiveWindow() || doc.isEmpty()) {
+        return QMainWindow::event(event);
     }
-    return conf;
+    switch (event->type()) {
+        case QEvent::IconDrag: {
+            event->accept();
+            Qt::KeyboardModifiers modifiers = qApp->keyboardModifiers();
+            if (modifiers == Qt::NoModifier) {
+                QDrag *drag = new QDrag(this);
+                QMimeData *data = new QMimeData();
+                data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(doc));
+                drag->setMimeData(data);
+                QPixmap cursorPixmap(":/icons/document_large.png"); 
+                drag->setPixmap(cursorPixmap);
+                QPoint hotspot(cursorPixmap.width() - 5, 5);
+                drag->setHotSpot(hotspot);
+                drag->start(Qt::LinkAction | Qt::CopyAction);
+            }
+            else if (modifiers == Qt::ControlModifier) {
+                QMenu menu(this);
+                connect(&menu, SIGNAL(triggered(QAction *)), this, SLOT(openAt(QAction *)));
+
+                QFileInfo info(doc);
+                QAction *action = menu.addAction(info.fileName());
+                action->setIcon(QIcon(":/icons/document_small.png"));
+                
+                QStringList folders = info.absolutePath().split('/');
+                QStringListIterator it(folders);
+                it.toBack();
+                while (it.hasPrevious()) {
+                    QString string = it.previous();
+                    QIcon icon;
+                    if (!string.isEmpty()) {
+                        icon = style()->standardIcon(QStyle::SP_DirClosedIcon, 0, this);
+                    }
+                    else { // At the root
+                        string = "/";
+                        icon = style()->standardIcon(QStyle::SP_DriveHDIcon, 0, this);
+                    }
+                    action = menu.addAction(string);
+                    action->setIcon(icon);
+                }
+                QPoint pos(QCursor::pos().x() - 20, frameGeometry().y());
+                menu.exec(pos);
+            }
+            else {
+                event->ignore();
+            }
+            return true;
+        }
+        default: {
+            return QMainWindow::event(event);
+        }
+    }
+}
+
+/**
+ * Handler for parent directory selections from the application icon menu.
+ * Only called on Mac OS X.
+ *
+ * @param action The application icon menu action that was triggered
+ */
+void PortaBase::openAt(QAction *action)
+{
+    QString path = doc.left(doc.indexOf(action->text())) + action->text();
+    if (path == doc) {
+        return;
+    }
+    QProcess process;
+    process.start("/usr/bin/open", QStringList() << path, QIODevice::ReadOnly);
+    process.waitForFinished();
+}
+
+/**
+ * Load the main application settings, already set to read from the
+ * top-level "portabase" group.  May be empty if this is the first time
+ * running PortaBase in this environment.
+ *
+ * @return PortaBase's configurable application settings
+ */
+QSettings *PortaBase::getSettings()
+{
+    QSettings *settings = new QSettings();
+    if (settings->contains("Font/Name")) {
+        // No settings migration needed, just send it back as is
+        return settings;
+    }
+    if (settings->contains("portabase/Font/Name")) {
+        // remove old hierarchy layer which was needed for Qtopia support
+        QStringList keys = settings->allKeys();
+        int count = keys.count();
+        for (int i = 0; i < count; i++) {
+            QString key = keys[i];
+            if (key.startsWith("portabase/")) {
+                QString newKey = key.right(key.size() - 10);
+                settings->setValue(newKey, settings->value(key));
+            }
+            else if (key.startsWith("qpe/")) {
+                QString newKey = key.right(key.size() - 4);
+                settings->setValue(newKey, settings->value(key));
+            }
+        }
+        settings->remove("portabase");
+        settings->remove("qpe");
+    }
+    if (!settings->contains("Font/Name")) {
+        // new installation or upgrade from version using old preferences...
+        // try migrating from original format
+        OldConfig old("portabase");
+        if (old.exists()) {
+            old.migrate("Colors", *settings);
+            old.migrate("Files", *settings);
+            old.migrate("Font", *settings);
+            old.migrate("General", *settings);
+        }
+        OldConfig oldQpe("qpe");
+        if (oldQpe.exists()) {
+            oldQpe.migrate("Date", *settings);
+            oldQpe.migrate("Time", *settings);
+        }
+    }
+    if (settings->contains("Date/Separator")) {
+        // migrate old date and time settings to something simpler
+        QString sep = settings->value("Date/Separator", "/").toString();
+        int order = settings->value("Date/ShortOrder", 0x0111).toInt();
+        QStringList parts;
+        if (order == 0x0111) {
+            parts << "d" << "M" << "yyyy";
+        }
+        else if (order == 0x010A) {
+            parts << "M" << "d" << "yyyy";
+        }
+        else {
+            parts << "yyyy" << "MM" << "dd";
+        }
+        settings->setValue("DateTime/ShortDateFormat", parts.join(sep));
+        QString timeFormat("hh:mm");
+        if (settings->value("General/ShowSeconds", false).toBool()) {
+            timeFormat += ":ss";
+        }
+        if (settings->value("Time/AMPM", true).toBool()) {
+            timeFormat += " AP";
+        }
+        settings->setValue("DateTime/TimeFormat", timeFormat);
+        settings->remove("General/ShowSeconds");
+        settings->remove("Date");
+    }
+    // Move last old "Time" group setting, if present
+    if (settings->contains("Time/MONDAY")) {
+        settings->setValue("DateTime/MONDAY", settings->value("Time/MONDAY"));
+    }
+    settings->remove("Time");
+    // Make sure that updated settings are immediately available elsewhere
+    settings->sync();
+    return settings;
+}
+
+/**
+ * Create the filler actions needed to prevent the toolbar ever shrinking
+ * below the max number of showable actions on the Mac (since with the
+ * unified toolbar, there doesn't seem to be a way to increase the number
+ * of displayed buttons once it shrinks).
+ */
+void PortaBase::createFillerActions() {
+    for (int i = 0; i < 4; i++) {
+        fillerActions[i] = new QAction("", this);
+#if defined(Q_WS_MAC)
+        toolbar->addAction(fillerActions[i]);
+#endif
+    }
+}
+
+/**
+ * Show all of the Mac toolbar filler actions; the ones not needed will be
+ * hidden again later.
+ */
+void PortaBase::showAllFillerActions() {
+#if defined(Q_WS_MAC)
+    for (int i = 0; i < 4; i++) {
+        fillerActions[i]->setVisible(true);
+    }
 #endif
 }
 
+/**
+ * Launch a small dialog with information about PortaBase itself.  Called
+ * when the "About PortaBase" menu item is triggered.
+ */
 void PortaBase::aboutPortaBase()
 {
-    QString message = QQDialog::tr("PortaBase") + " 1.9\n";
-    message += tr("Copyright (C)") + " 2002-2004 Jeremy Bowman\n\n";
-    message += tr("Web site at http://portabase.sourceforge.net");
-    QMessageBox mb(MenuActions::tr("About PortaBase"), message,
-                   QMessageBox::NoIcon, QMessageBox::Ok, QMessageBox::NoButton,
-                   QMessageBox::NoButton, this);
-    mb.exec();
-}
-
-void PortaBase::aboutQt()
-{
-    QMessageBox::aboutQt(this, QQDialog::tr("PortaBase"));
+    QString appName = qApp->applicationName();
+    QString text = appName + " 2.0\n\n" + tr("Copyright (C)")
+                   + " 2002-2009\nJeremy Bowman\n\n"
+                   + tr("Web site at http://portabase.sourceforge.net");
+    QMessageBox::about(this, QQMenuHelper::tr("&About %1").arg(appName), text);
 }

@@ -1,7 +1,7 @@
 /*
  * timewidget.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,59 +9,71 @@
  * (at your option) any later version.
  */
 
-#include <qdatetime.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qmessagebox.h>
-#include <qpushbutton.h>
+/** @file timewidget.cpp
+ * Source file for TimeWidget
+ */
+
+#include <QDateTime>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QSettings>
+#include "factory.h"
 #include "timewidget.h"
 
-#if defined(Q_WS_QWS)
-#include <qpe/config.h>
-#else
-#include "desktop/config.h"
-#endif
-
-TimeWidget::TimeWidget(QWidget *parent, const char *name, WFlags f)
-    : QHBox(parent, name, f)
+/**
+ * Constructor.
+ *
+ * @param parent This widget's parent widget
+ */
+TimeWidget::TimeWidget(QWidget *parent)
+    : QWidget(parent)
 {
+    QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     hourEdit = new QLineEdit(this);
     hourEdit->setMaxLength(2);
     hourEdit->setMaximumWidth(25);
-    new QLabel(" : ", this);
+    layout->addWidget(hourEdit);
+    layout->addWidget(new QLabel(" : ", this));
     minuteEdit = new QLineEdit(this);
     minuteEdit->setMaxLength(2);
     minuteEdit->setMaximumWidth(25);
-    new QLabel(" : ", this);
+    layout->addWidget(minuteEdit);
+    layout->addWidget(new QLabel(" : ", this));
     secondEdit = new QLineEdit(this);
     secondEdit->setMaxLength(2);
     secondEdit->setMaximumWidth(25);
-    Config qpeConfig("qpe");
-    qpeConfig.setGroup("Time");
-    if (qpeConfig.readBoolEntry("AMPM")) {
+    layout->addWidget(secondEdit);
+    QSettings settings;
+    QString timeFormat = settings.value("DateTime/TimeFormat",
+                                        "hh:mm AP").toString();
+    if (timeFormat.contains("AP")) {
         ampmButton = new QPushButton(tr("AM"), this);
-        pm = FALSE;
+        layout->addWidget(ampmButton);
+        pm = false;
         connect(ampmButton, SIGNAL(clicked()), this, SLOT(ampmToggle()));
     }
     else {
         ampmButton = 0;
     }
     noneButton = new QPushButton(tr("None"), this);
-    noneButton->setToggleButton(TRUE);
+    noneButton->setCheckable(true);
+    layout->addWidget(noneButton);
     connect(noneButton, SIGNAL(clicked()), this, SLOT(noneToggle()));
     setMaximumHeight(noneButton->height());
-    QWidget *filler = new QWidget(this);
-    setStretchFactor(filler, 1);
+    layout->addWidget(new QWidget(this), 1);
 }
 
-TimeWidget::~TimeWidget()
-{
-
-}
-
+/**
+ * Get the currently entered time.
+ *
+ * @return The text representation of the selected time
+ */
 QString TimeWidget::getTime()
 {
-    if (noneButton->isOn()) {
+    if (noneButton->isChecked()) {
         return "-1";
     }
     QString value = hourEdit->text() + ":" + minuteEdit->text() + ":";
@@ -77,6 +89,12 @@ QString TimeWidget::getTime()
     return value;
 }
 
+/**
+ * Set the time to display.  Uses PortaBase's internal integer representation
+ * of time values (number of seconds past midnight, or -1 for blank).
+ *
+ * @param time The time to display in this widget
+ */
 void TimeWidget::setTime(int time)
 {
     int hour = 0;
@@ -93,24 +111,24 @@ void TimeWidget::setTime(int time)
         minute = (time - hour * 3600) / 60;
         second = time - hour * 3600 - minute * 60;
     }
-    bool none = FALSE;
+    bool none = false;
     if (time == -1) {
-        none = TRUE;
+        none = true;
     }
-    if (noneButton->isOn() != none) {
-        noneButton->setOn(none);
+    if (noneButton->isChecked() != none) {
+        noneButton->setChecked(none);
         noneToggle();
     }
     if (ampmButton) {
         if (hour > 11) {
-            pm = TRUE;
+            pm = true;
             ampmButton->setText(tr("PM"));
             if (hour > 12) {
                 hour -= 12;
             }
         }
         else {
-            pm = FALSE;
+            pm = false;
             ampmButton->setText(tr("AM"));
             if (hour == 0) {
                 hour = 12;
@@ -119,38 +137,51 @@ void TimeWidget::setTime(int time)
     }
     QString hourString = QString::number(hour);
     if (!ampmButton) {
-        hourString = hourString.rightJustify(2, '0');
+        hourString = hourString.rightJustified(2, '0');
     }
     hourEdit->setText(hourString);
-    minuteEdit->setText(QString::number(minute).rightJustify(2, '0'));
-    secondEdit->setText(QString::number(second).rightJustify(2, '0'));
+    minuteEdit->setText(QString::number(minute).rightJustified(2, '0'));
+    secondEdit->setText(QString::number(second).rightJustified(2, '0'));
 }
 
+/**
+ * Set the time to be displayed in this widget.
+ *
+ * @param time The time to be displayed
+ */
 void TimeWidget::setTime(QTime &time)
 {
     setTime(time.hour() * 3600 + time.minute() * 60 + time.second());
 }
 
+/**
+ * Toggle the status of this widget between null and non-null.  Called
+ * automatically when the "None" button is clicked.
+ */
 void TimeWidget::noneToggle()
 {
-    if (noneButton->isOn()) {
-        hourEdit->setEnabled(FALSE);
-        minuteEdit->setEnabled(FALSE);
-        secondEdit->setEnabled(FALSE);
+    if (noneButton->isChecked()) {
+        hourEdit->setEnabled(false);
+        minuteEdit->setEnabled(false);
+        secondEdit->setEnabled(false);
         if (ampmButton) {
-            ampmButton->setEnabled(FALSE);
+            ampmButton->setEnabled(false);
         }
     }
     else {
-        hourEdit->setEnabled(TRUE);
-        minuteEdit->setEnabled(TRUE);
-        secondEdit->setEnabled(TRUE);
+        hourEdit->setEnabled(true);
+        minuteEdit->setEnabled(true);
+        secondEdit->setEnabled(true);
         if (ampmButton) {
-            ampmButton->setEnabled(TRUE);
+            ampmButton->setEnabled(true);
         }
     }
 }
 
+/**
+ * Toggle the selected time between AM and PM.  Called automatically when
+ * the AM/PM display button is clicked.
+ */
 void TimeWidget::ampmToggle()
 {
     pm = !pm;

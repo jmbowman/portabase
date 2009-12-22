@@ -1,7 +1,7 @@
 /*
  * menuactions.cpp
  *
- * (c) 2003-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,142 +9,170 @@
  * (at your option) any later version.
  */
 
-#include <qaction.h>
+/** @file menuactions.cpp
+ * Source file for MenuActions
+ */
+
+#include <QAction>
 #include "menuactions.h"
 
-// kind of silly class used to make sure menus get translated correctly
-// without lots of manual tweaking of the translation files
-MenuActions::MenuActions(QObject *parent, const char *name)
-    : QObject(parent, name)
+/**
+ * Constructor.
+ *
+ * @param parent The parent object, if any
+ */
+MenuActions::MenuActions(QObject *parent)
+    : QObject(parent)
 {
-    textMap.insert("File", tr("File"));
-    textMap.insert("View", tr("View"));
-    textMap.insert("Row", tr("Row"));
-    textMap.insert("Sort", tr("Sort"));
-    textMap.insert("Filter", tr("Filter"));
-    textMap.insert("Help", tr("Help"));
-    textMap.insert("New", tr("New") + "...");
-    textMap.insert("Open", tr("Open") + "...");
-    textMap.insert("Open Recent", tr("Open Recent"));
-    textMap.insert("Save", tr("Save"));
-    textMap.insert("Change Password", tr("Change Password") + "...");
-    textMap.insert("Import", tr("Import") + "...");
-    textMap.insert("Export", tr("Export") + "...");
-    textMap.insert("Slideshow", tr("Slideshow") + "...");
-    textMap.insert("Properties", tr("Properties") + "...");
-    textMap.insert("Preferences", tr("Preferences") + "...");
-    textMap.insert("Quit", tr("Quit"));
-    textMap.insert("List", tr("List"));
-    textMap.insert("Icons", tr("Icons"));
-#if defined(Q_OS_MACX)
-    textMap.insert("Help Contents", tr("PortaBase Help"));
-#else
-    textMap.insert("Help Contents", tr("Help Contents"));
-#endif
-    textMap.insert("About PortaBase", tr("About PortaBase"));
-    textMap.insert("About Qt", tr("About Qt"));
-    textMap.insert("Quick Filter", tr("Quick Filter") + "...");
-    textMap.insert("Add", tr("Add") + "...");
-    textMap.insert("Edit", tr("Edit") + "...");
-    textMap.insert("Delete", tr("Delete"));
-    textMap.insert("Delete File", tr("Delete") + "...");
-    textMap.insert("Rename", tr("Rename") + "...");
-    textMap.insert("Refresh", tr("Refresh"));
-    textMap.insert("All Columns", tr("All Columns"));
-    textMap.insert("All Rows", tr("All Rows"));
-    textMap.insert("Copy", tr("Copy") + "...");
-    textMap.insert("Show", tr("Show") + "...");
-    textMap.insert("Delete Rows In Filter", tr("Delete Rows In Filter"));
-    textMap.insert("Edit Columns", tr("Edit Columns") + "...");
-    textMap.insert("Edit Enums", tr("Edit Enums") + "...");
-    textMap.insert("Close", tr("Close"));
-#if !defined(Q_WS_QWS)
-    menuTextMap.insert("File", tr("&File"));
-    menuTextMap.insert("View", tr("&View"));
-    menuTextMap.insert("Row", tr("&Row"));
-    menuTextMap.insert("Sort", tr("&Sort"));
-    menuTextMap.insert("Filter", tr("Fi&lter"));
-    menuTextMap.insert("Help", tr("&Help"));
-    menuTextMap.insert("New", tr("&New") + "...");
-    menuTextMap.insert("Open", tr("&Open") + "...");
-    menuTextMap.insert("Open Recent", tr("Open &Recent"));
-    menuTextMap.insert("Save", tr("&Save"));
-    menuTextMap.insert("Change Password", tr("C&hange Password") + "...");
-    menuTextMap.insert("Import", tr("&Import") + "...");
-    menuTextMap.insert("Export", tr("E&xport") + "...");
-    menuTextMap.insert("Slideshow", tr("S&lideshow") + "...");
-    menuTextMap.insert("Properties", tr("Proper&ties") + "...");
-    menuTextMap.insert("Preferences", tr("&Preferences") + "...");
-    menuTextMap.insert("Quit", tr("&Quit"));
-#if defined(Q_OS_MACX)
-    menuTextMap.insert("Help Contents", tr("PortaBase Help"));
-#else
-    menuTextMap.insert("Help Contents", tr("Help &Contents"));
-#endif
-    menuTextMap.insert("About PortaBase", tr("&About PortaBase"));
-    menuTextMap.insert("About Qt", tr("About &Qt"));
-    menuTextMap.insert("Quick Filter", tr("&Quick Filter") + "...");
-    menuTextMap.insert("Add", tr("&Add") + "...");
-    menuTextMap.insert("Edit", tr("&Edit") + "...");
-    menuTextMap.insert("Delete", tr("&Delete"));
-    menuTextMap.insert("All Columns", tr("All &Columns"));
-    menuTextMap.insert("All Rows", tr("All &Rows"));
-    menuTextMap.insert("Copy", tr("&Copy") + "...");
-    menuTextMap.insert("Show", tr("&Show") + "...");
-    menuTextMap.insert("Delete Rows In Filter", tr("&Delete Rows In Filter"));
-    menuTextMap.insert("Edit Columns", tr("Edit Col&umns") + "...");
-    menuTextMap.insert("Edit Enums", tr("Edit &Enums") + "...");
-    menuTextMap.insert("Close", tr("&Close"));
-
-#if defined(Q_OS_MACX)
-    accelMap.insert("Help Contents", CTRL+Key_Question);
-#else
-    accelMap.insert("Help Contents", Key_F1);
-#endif
-    accelMap.insert("New", CTRL+Key_N);
-    accelMap.insert("Open", CTRL+Key_O);
-    accelMap.insert("Save", CTRL+Key_S);
-    accelMap.insert("Close", CTRL+Key_W);
-    accelMap.insert("Quit", CTRL+Key_Q);
-    accelMap.insert("Quick Filter", CTRL+Key_F);
-    accelMap.insert("Preferences", CTRL+Key_P);
-#endif
+    QChar ellipsis(8230);
+    textMap.insert(View, tr("&View"));
+    textMap.insert(Row, tr("&Row"));
+    textMap.insert(Sort, tr("&Sort"));
+    textMap.insert(Filter, tr("Fi&lter"));
+    
+    textMap.insert(ChangePassword, tr("C&hange Password") + ellipsis);
+    toolTipMap.insert(ChangePassword, tr("Change the current file's password"));
+    
+    textMap.insert(Import, tr("&Import") + ellipsis);
+    toolTipMap.insert(Import, tr("Create a new file from data in another format"));
+    
+    textMap.insert(ImportCSV, tr("&Import") + ellipsis);
+    toolTipMap.insert(ImportCSV, tr("Import rows from a CSV file"));
+    
+    textMap.insert(Export, tr("E&xport") + ellipsis);
+    toolTipMap.insert(Export, tr("Export data to another file format"));
+    
+    textMap.insert(Slideshow, tr("S&lideshow") + ellipsis);
+    toolTipMap.insert(Slideshow, tr("Start an image slideshow"));
+    
+    textMap.insert(Properties, tr("Proper&ties"));
+    toolTipMap.insert(Properties, tr("Show information about the current file"));
+    
+    textMap.insert(Preferences, tr("&Preferences"));
+    toolTipMap.insert(Preferences, tr("View or change PortaBase settings"));
+    shortcutMap.insert(Preferences, QKeySequence(Qt::CTRL + Qt::Key_P));
+    
+    textMap.insert(QuickFilter, tr("&Quick Filter"));
+    toolTipMap.insert(QuickFilter, tr("Apply a one-condition filter"));
+    shortcutMap.insert(QuickFilter, QKeySequence(Qt::CTRL + Qt::Key_F));
+    
+    textMap.insert(AddRow, tr("&Add") + ellipsis);
+    toolTipMap.insert(AddRow, tr("Create a new row"));
+    
+    textMap.insert(AddView, tr("&Add") + ellipsis);
+    toolTipMap.insert(AddView, tr("Create a new view"));
+    
+    textMap.insert(AddSorting, tr("&Add") + ellipsis);
+    toolTipMap.insert(AddSorting, tr("Create a new sorting"));
+    
+    textMap.insert(AddFilter, tr("&Add") + ellipsis);
+    toolTipMap.insert(AddFilter, tr("Create a new filter"));
+    
+    textMap.insert(EditRow, tr("&Edit") + ellipsis);
+    toolTipMap.insert(EditRow, tr("Edit the selected row"));
+    
+    textMap.insert(EditView, tr("&Edit") + ellipsis);
+    toolTipMap.insert(EditView, tr("Edit the selected view"));
+    
+    textMap.insert(EditSorting, tr("&Edit") + ellipsis);
+    toolTipMap.insert(EditSorting, tr("Edit the selected sorting"));
+    
+    textMap.insert(EditFilter, tr("&Edit") + ellipsis);
+    toolTipMap.insert(EditFilter, tr("Edit the selected filter"));
+    
+    textMap.insert(DeleteRow, tr("&Delete"));
+    toolTipMap.insert(DeleteRow, tr("Delete the selected row"));
+    
+    textMap.insert(DeleteView, tr("&Delete"));
+    toolTipMap.insert(DeleteView, tr("Delete the selected view"));
+    
+    textMap.insert(DeleteSorting, tr("&Delete"));
+    toolTipMap.insert(DeleteSorting, tr("Delete the selected sorting"));
+    
+    textMap.insert(DeleteFilter, tr("&Delete"));
+    toolTipMap.insert(DeleteFilter, tr("Delete the selected filter"));
+    
+    textMap.insert(AllColumns, tr("All &Columns"));
+    toolTipMap.insert(AllColumns, tr("Show all of the database columns"));
+    
+    textMap.insert(AllRows, tr("All &Rows"));
+    toolTipMap.insert(AllRows, tr("Show all rows of data"));
+    
+    textMap.insert(CopyRow, tr("&Copy") + ellipsis);
+    toolTipMap.insert(CopyRow, tr("Create a copy of the selected row"));
+    
+    textMap.insert(CopyText, tr("&Copy"));
+    toolTipMap.insert(CopyText, tr("Copy the selected text"));
+    
+    textMap.insert(Show, tr("&Show"));
+    toolTipMap.insert(Show, tr("Show the selected row in more detail"));
+    shortcutMap.insert(Show, QKeySequence(Qt::CTRL + Qt::Key_R));
+    
+    textMap.insert(DeleteRowsInFilter, tr("&Delete Rows in Filter"));
+    toolTipMap.insert(DeleteRowsInFilter, tr("Delete all rows matching the current filter"));
+    
+    textMap.insert(EditColumns, tr("Edit Col&umns") + ellipsis);
+    toolTipMap.insert(EditColumns, tr("Edit the database format"));
+    
+    textMap.insert(EditEnums, tr("Edit &Enums") + ellipsis);
+    toolTipMap.insert(EditEnums, tr("Edit the enumerated data types"));
 }
 
-MenuActions::~MenuActions()
+/**
+ * Get the translation for the specified word or phrase as it should
+ * appear in a menu (possibly including an accelerator).
+ *
+ * @param item The identifier of the desired menu or action
+ */
+QString MenuActions::menuText(Item item)
 {
-
+    return textMap[item];
 }
 
-QString MenuActions::text(const QString &base)
+/**
+ * Get the action corresponding to the provided item identifier.
+ *
+ * @param item The identifier of the desired action
+ * @param toggle True if the action can be toggled (on/off)
+ */
+QAction *MenuActions::action(Item item, bool toggle)
 {
-    return textMap[base];
+    QAction *action = new QAction(menuText(item), parent());
+    action->setCheckable(toggle);
+    prepareAction(item, action);
+    return action;
 }
 
-QString MenuActions::menuText(const QString &base)
+/**
+ * Get the action corresponding to the provided item identifier.
+ *
+ * @param item The identifier of the desired action
+ * @param icon The icon to use for the action
+ */
+QAction *MenuActions::action(Item item, const QIcon &icon)
 {
-    if (menuTextMap.contains(base)) {
-        return menuTextMap[base];
+    QAction *action = new QAction(icon, menuText(item), parent());
+#if defined(Q_WS_MAC)
+    action->setIconVisibleInMenu(false);
+#endif
+    prepareAction(item, action);
+    return action;
+}
+
+/**
+ * Peform initialization steps common to all new menu and toolbar actions.
+ *
+ * @param item The identifier of the desired action
+ * @param action The action being initialized
+ */
+void MenuActions::prepareAction(Item item, QAction *action)
+{
+    if (toolTipMap.contains(item)) {
+        QString text = toolTipMap[item];
+        action->setToolTip(text);
+        action->setStatusTip(text);
     }
-    return textMap[base];
-}
-
-int MenuActions::accel(const QString &base)
-{
-    if (accelMap.contains(base)) {
-        return accelMap[base];
+    if (shortcutMap.contains(item)) {
+        action->setShortcut(shortcutMap[item]);
     }
-    return 0;
-}
-
-QAction *MenuActions::action(const QString &base, bool toggle)
-{
-    return new QAction(text(base), menuText(base), accel(base), parent(), 0,
-                       toggle);
-}
-
-QAction *MenuActions::action(const QString &base, const QIconSet &icon)
-{
-    return new QAction(text(base), icon, menuText(base), accel(base),
-                       parent());
 }

@@ -1,7 +1,7 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002-2004 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,35 +9,43 @@
  * (at your option) any later version.
  */
 
-#include <qheader.h>
-#include <qlistview.h>
-#include <qmessagebox.h>
-#include <qregexp.h>
+/** @file dbeditor.cpp
+ * Source file for DBEditor
+ */
+
+#include <QApplication>
+#include <QLayout>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QRegExp>
+#include <QTreeWidget>
 #include "calc/calcnode.h"
 #include "columneditor.h"
 #include "database.h"
 #include "datatypes.h"
 #include "dbeditor.h"
-#include "portabase.h"
-#include "shadedlistitem.h"
+#include "factory.h"
 
-DBEditor::DBEditor(QWidget *parent, const char *name)
-    : PBDialog(tr("Columns Editor"),parent, name), db(0), ceName("_cename"),
+/**
+ * Constructor.
+ *
+ * @param parent This dialog's parent widget.
+ */
+DBEditor::DBEditor(QWidget *parent)
+    : PBDialog(tr("Columns Editor"), parent), db(0), ceName("_cename"),
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
-      ceNewIndex("_cenewindex"), resized(FALSE)
+      ceNewIndex("_cenewindex"), resized(false)
 {
-    table = new QListView(this);
-    vbox->addWidget(table);
-    table->setAllColumnsShowFocus(TRUE);
-    table->setSorting(-1);
-    table->header()->setMovingEnabled(FALSE);
-    int colWidth = -1;
-#if !defined(Q_WS_WIN)
-    colWidth = width() / 3 - 2;
-#endif
-    table->addColumn(ColumnEditor::tr("Name"), colWidth);
-    table->addColumn(ColumnEditor::tr("Type"), colWidth);
-    table->addColumn(ColumnEditor::tr("Default"), colWidth);
+    QStringList headers;
+    headers << ColumnEditor::tr("Name");
+    headers << ColumnEditor::tr("Type");
+    headers << ColumnEditor::tr("Default");
+    table = Factory::treeWidget(this, headers);
+    vbox->addWidget(table, 1);
+    int colWidth = width() / 3 - 2;
+    table->setColumnWidth(0, colWidth);
+    table->setColumnWidth(1, colWidth);
+    table->setColumnWidth(2, colWidth);
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addColumn()));
@@ -49,17 +57,25 @@ DBEditor::DBEditor(QWidget *parent, const char *name)
     finishLayout();
 }
 
+/**
+ * Destructor.
+ */
 DBEditor::~DBEditor()
 {
     NameCalcMap::Iterator iter;
     for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
-        CalcNode *calcRoot = iter.data();
+        CalcNode *calcRoot = iter.value();
         if (calcRoot != 0) {
             delete calcRoot;
         }
     }
 }
 
+/**
+ * Launch this dialog in order to edit the format of the specified database.
+ *
+ * @param subject The database whose format is to be edited
+ */
 int DBEditor::edit(Database *subject)
 {
     db = subject;
@@ -80,14 +96,18 @@ int DBEditor::edit(Database *subject)
                 defaultVal = root->equation(db);
             }
         }
-        info.Add(ceName [name.utf8()] + ceType [type]
-                 + ceDefault [defaultVal.utf8()]
+        info.Add(ceName [name.toUtf8()] + ceType [type]
+                 + ceDefault [defaultVal.toUtf8()]
                  + ceOldIndex [i] + ceNewIndex [i]);
     }
     updateTable();
     return exec();
 }
 
+/**
+ * Add a new column to the database via the ColumnEditor dialog.  Called when
+ * the "Add" button is pressed.
+ */
 void DBEditor::addColumn()
 {
     QString name = "";
@@ -95,14 +115,14 @@ void DBEditor::addColumn()
     QString defaultVal = "";
     columnEditor->setName(name);
     columnEditor->setType(type);
-    columnEditor->setTypeEditable(TRUE);
+    columnEditor->setTypeEditable(true);
     columnEditor->setDefaultValue(defaultVal);
-    bool finished = FALSE;
-    bool aborted = FALSE;
+    bool finished = false;
+    bool aborted = false;
     while (!finished) {
         if (!columnEditor->exec()) {
-            finished = TRUE;
-            aborted = TRUE;
+            finished = true;
+            aborted = true;
         }
         else {
             name = columnEditor->name();
@@ -116,8 +136,8 @@ void DBEditor::addColumn()
     CalcNode *calcRoot = columnEditor->calculation(&decimals);
     if (!aborted) {
         int size = info.GetSize();
-        info.Add(ceName [name.utf8()] + ceType [type]
-                 + ceDefault[defaultVal.utf8()]
+        info.Add(ceName [name.toUtf8()] + ceType [type]
+                 + ceDefault[defaultVal.toUtf8()]
                  + ceOldIndex [-1] + ceNewIndex[size]);
         if (type == CALC) {
             calcMap.insert(name, calcRoot);
@@ -133,21 +153,25 @@ void DBEditor::addColumn()
     }
 }
 
+/**
+ * Use the ColumnEditor dialog to edit the currently selected column
+ * definition.  Called when the "Edit" button is pressed.
+ */
 void DBEditor::editColumn()
 {
-    QListViewItem *item = table->selectedItem();
-    if (item == 0) {
+    QTreeWidgetItem *item = table->currentItem();
+    if (!item) {
         return;
     }
     QString name = item->text(0);
     QString oldName = name;
-    int index = info.Find(ceName [name.utf8()]);
+    int index = info.Find(ceName [name.toUtf8()]);
     int type = ceType (info[index]);
     QString defaultVal = QString::fromUtf8(ceDefault (info[index]));
 
     columnEditor->setName(name);
     columnEditor->setType(type);
-    columnEditor->setTypeEditable(FALSE);
+    columnEditor->setTypeEditable(false);
     columnEditor->setDefaultValue(defaultVal);
     CalcNode *calcRoot = 0;
     int decimals = 2;
@@ -160,12 +184,12 @@ void DBEditor::editColumn()
         }
         columnEditor->setCalculation(calcRoot, decimals);
     }
-    bool finished = FALSE;
-    bool aborted = FALSE;
+    bool finished = false;
+    bool aborted = false;
     while (!finished) {
         if (!columnEditor->exec()) {
-            finished = TRUE;
-            aborted = TRUE;
+            finished = true;
+            aborted = true;
         }
         else {
             name = columnEditor->name();
@@ -189,8 +213,8 @@ void DBEditor::editColumn()
     }
     calcRoot = columnEditor->calculation(&decimals);
     if (!aborted) {
-        ceName (info[index]) = name.utf8();
-        ceDefault (info[index]) = defaultVal.utf8();
+        ceName (info[index]) = name.toUtf8();
+        ceDefault (info[index]) = defaultVal.toUtf8();
         if (type == CALC) {
             CalcNode *oldRoot = calcMap[oldName];
             if (oldRoot != 0) {
@@ -211,40 +235,54 @@ void DBEditor::editColumn()
     }
 }
 
-bool DBEditor::isValidName(QString colName)
+/**
+ * Determine if the provided text can be used as a valid column name.
+ *
+ * @param colName The candidate column name
+ * @return True if valid, false otherwise
+ */
+bool DBEditor::isValidName(const QString &colName)
 {
-    QStringList nameList;
-    int size = info.GetSize();
-    for (int i = 0; i < size; i++) {
-        nameList.append(QString::fromUtf8(ceName (info[i])));
-    }
-    return validateName(colName, "", nameList);
+    return validateName(colName, "", columnNames());
 }
 
-bool DBEditor::isValidDefault(int type, QString defaultVal)
+/**
+ * Determine if the provided string represents a valid default value for a
+ * column of the specified type.  Assumes that the proposed value was
+ * retrieved from the ColumnEditor dialog.
+ *
+ * @param type The type of column in question
+ * @param defaultVal The proposed default value
+ * @return True if valid, false otherwise
+ */
+bool DBEditor::isValidDefault(int type, const QString &defaultVal)
 {
     if (type == DATE || type == TIME || type >= FIRST_ENUM) {
-        return TRUE;
+        // The column editor doesn't allow free entry for these
+        return true;
     }
     QString error = db->isValidValue(type, defaultVal);
-    if (error != "") {
+    if (!error.isEmpty()) {
         QString message = ColumnEditor::tr("Default") + " " + error;
-        QMessageBox::warning(this, QQDialog::tr("PortaBase"), message);
-        return FALSE;
+        QMessageBox::warning(this, qApp->applicationName(), message);
+        return false;
     }
     else {
-        return TRUE;
+        return true;
     }
 }
 
+/**
+ * Delete the currently selected column definition.
+ */
 void DBEditor::deleteColumn()
 {
-    QListViewItem *item = table->selectedItem();
-    if (item == 0) {
+    QTreeWidgetItem *item = table->currentItem();
+    if (!item) {
         return;
     }
     QString name = item->text(0);
-    int index = info.Find(ceName [name.utf8()]);
+    int index = info.Find(ceName [name.toUtf8()]);
     int oldIndex = ceOldIndex (info[index]);
     info.RemoveAt(index);
     if (oldIndex != -1) {
@@ -266,14 +304,19 @@ void DBEditor::deleteColumn()
     updateTable();
 }
 
+/**
+ * Move the currently selected column definition up by one (unless it is
+ * already the first one).  This results in that column's position index
+ * being swapped with the one which had preceded it.
+ */
 void DBEditor::moveUp()
 {
-    QListViewItem *item = table->selectedItem();
-    if (item == 0) {
+    QTreeWidgetItem *item = table->currentItem();
+    if (!item) {
         return;
     }
     QString name = item->text(0);
-    int row1 = info.Find(ceName [name.utf8()]);
+    int row1 = info.Find(ceName [name.toUtf8()]);
     int index = ceNewIndex (info[row1]);
     if (index > 0) {
         int row2 = info.Find(ceNewIndex [index - 1]);
@@ -284,14 +327,19 @@ void DBEditor::moveUp()
     }
 }
 
+/**
+ * Move the currently selected column definition down by one (unless it is
+ * already the last one).  This results in that column's position index being
+ * swapped with the one which had followed it.
+ */
 void DBEditor::moveDown()
 {
-    QListViewItem *item = table->selectedItem();
-    if (item == 0) {
+    QTreeWidgetItem *item = table->currentItem();
+    if (!item) {
         return;
     }
     QString name = item->text(0);
-    int row1 = info.Find(ceName [name.utf8()]);
+    int row1 = info.Find(ceName [name.toUtf8()]);
     int index = ceNewIndex (info[row1]);
     int size = info.GetSize();
     if (index < size - 1) {
@@ -303,32 +351,32 @@ void DBEditor::moveDown()
     }
 }
 
-void DBEditor::selectRow(QString colName)
+/**
+ * Select the column definition with the specified name.
+ *
+ * @param colName The column name of the entry to highlight
+ */
+void DBEditor::selectRow(const QString &colName)
 {
-    QListViewItem *item = table->firstChild();
-    if (item) {
-        if (item->text(0) == colName) {
-            table->setSelected(item, TRUE);
-        }
-        else {
-            QListViewItem *next = item->nextSibling();
-	    while (next) {
-                if (next->text(0) == colName) {
-                    table->setSelected(next, TRUE);
-                    break;
-                }
-                next = next->nextSibling();
-            }
+    int count = table->topLevelItemCount();
+    for (int i = 0; i < count; i++) {
+        QTreeWidgetItem *item = table->topLevelItem(i);
+        if (item && item->text(0) == colName) {
+            table->setCurrentItem(item);
+            break;
         }
     }
 }
 
+/**
+ * Update the displayed table of column definitions.
+ */
 void DBEditor::updateTable()
 {
     table->clear();
     c4_View temp = info.SortOn(ceNewIndex);
     int size = temp.GetSize();
-    QListViewItem *last = 0;
+    QTreeWidgetItem *last = 0;
     for (int i = 0; i < size; i++) {
         QString name = QString::fromUtf8(ceName (temp[i]));
         int type = ceType (temp[i]);
@@ -338,19 +386,21 @@ void DBEditor::updateTable()
             defaultVal = defaultVal.replace(QRegExp("\n"), " ");
         }
         if (i == 0) {
-            last = new ShadedListItem(0, table, name, typeString, defaultVal);
+            last = new QTreeWidgetItem(table);
         }
         else {
-            last = new ShadedListItem(i, table, last, name, typeString,
-                                      defaultVal);
+            last = new QTreeWidgetItem(table, last);
         }
+        last->setText(0, name);
+        last->setText(1, typeString);
+        last->setText(2, defaultVal);
         if (type == BOOLEAN) {
             last->setText(2, "");
             int checked = defaultVal.toInt();
-            last->setPixmap(2, PortaBase::getCheckBoxPixmap(checked));
+            last->setIcon(2, Factory::checkBoxIcon(checked));
         }
         else if (type == NOTE) {
-            last->setPixmap(2, PortaBase::getNotePixmap());
+            last->setIcon(2, QIcon(":/icons/note.png"));
         }
         else if (type == DATE) {
             if (defaultVal == "0") {
@@ -371,6 +421,12 @@ void DBEditor::updateTable()
     }
 }
 
+/**
+ * Get the display name of the specified column type.
+ *
+ * @param type A column type ID
+ * @return A human-readable column type name
+ */
 QString DBEditor::getTypeString(int type)
 {
     if (type == STRING) {
@@ -408,6 +464,10 @@ QString DBEditor::getTypeString(int type)
     }
 }
 
+/**
+ * Apply all of the changes that have been made in this dialog to the
+ * database being edited.
+ */
 void DBEditor::applyChanges()
 {
     // handle deletions of original columns
@@ -441,7 +501,7 @@ void DBEditor::applyChanges()
         QString oldName = originalCols[i];
         QString newName = renamedCols[i];
         if (oldName != newName) {
-            if (deletedCols.findIndex(oldName) == -1) {
+            if (!deletedCols.contains(oldName)) {
                 // hasn't been deleted, go ahead and rename
                 db->renameColumn(oldName, newName);
             }
@@ -465,7 +525,7 @@ void DBEditor::applyChanges()
     NameCalcMap::Iterator iter;
     for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
         QString name = iter.key();
-        CalcNode *calcRoot = iter.data();
+        CalcNode *calcRoot = iter.value();
         db->updateCalc(name, calcRoot, decimalsMap[name]);
         if (calcRoot != 0) {
             delete calcRoot;
@@ -474,6 +534,13 @@ void DBEditor::applyChanges()
     calcMap.clear();
 }
 
+/**
+ * Override QDialog's base resizing behavior to set the display table's
+ * column widths appropriately when the dialog is first resized as part of
+ * initial setup.
+ *
+ * @param event The dialog resizing event
+ */
 void DBEditor::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
@@ -482,10 +549,15 @@ void DBEditor::resizeEvent(QResizeEvent *event)
         table->setColumnWidth(0, colWidth);
         table->setColumnWidth(1, colWidth);
         table->setColumnWidth(2, colWidth);
-        resized = TRUE;
+        resized = true;
     }
 }
 
+/**
+ * List all of the currently defined column names, ordered by position.
+ *
+ * @return The list of column names
+ */
 QStringList DBEditor::columnNames()
 {
     QStringList names;
@@ -497,6 +569,11 @@ QStringList DBEditor::columnNames()
     return names;
 }
 
+/**
+ * List the types of each currently defined column, ordered by position.
+ *
+ * @return An array of column type IDs
+ */
 int *DBEditor::columnTypes()
 {
     c4_View temp = info.SortOn(ceNewIndex);
@@ -508,36 +585,47 @@ int *DBEditor::columnTypes()
     return types;
 }
 
+/**
+ * Update any defined calculations to reflect a column renaming.
+ *
+ * @param oldName The old column name
+ * @param newName The new column name
+ */
 void DBEditor::renameColumnRefs(const QString &oldName, const QString &newName)
 {
     NameCalcMap::Iterator iter;
     for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
         QString calcName = iter.key();
-        CalcNode *calcRoot = iter.data();
+        CalcNode *calcRoot = iter.value();
         if (calcRoot != 0) {
-            int index = info.Find(ceName [calcName.utf8()]);
+            int index = info.Find(ceName [calcName.toUtf8()]);
             calcRoot->renameColumn(oldName, newName);
-            ceDefault (info[index]) = calcRoot->equation(db).utf8();
+            ceDefault (info[index]) = calcRoot->equation(db).toUtf8();
         }
     }
 }
 
+/**
+ * Update any defined calculations to reflect the deletion of a column.
+ *
+ * @param name The name of the column that was deleted
+ */
 void DBEditor::deleteColumnRefs(const QString &name)
 {
     NameCalcMap::Iterator iter;
     QStringList deletions;
     for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {
         QString calcName = iter.key();
-        CalcNode *calcRoot = iter.data();
+        CalcNode *calcRoot = iter.value();
         if (calcRoot != 0) {
-            int index = info.Find(ceName [calcName.utf8()]);
+            int index = info.Find(ceName [calcName.toUtf8()]);
             if (calcRoot->deleteColumn(name)) {
                 delete calcRoot;
                 deletions.append(calcName);
                 ceDefault (info[index]) = "";
             }
             else {
-                ceDefault (info[index]) = calcRoot->equation(db).utf8();
+                ceDefault (info[index]) = calcRoot->equation(db).toUtf8();
             }
         }
     }
