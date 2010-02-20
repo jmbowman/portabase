@@ -31,10 +31,16 @@ class QQDialog: public QDialog
     Q_OBJECT
 public:
     QQDialog(QString title, QWidget *parent=0);
+    virtual ~QQDialog();
 
 protected:
     QDialogButtonBox *addOkCancelButtons(QVBoxLayout *layout, bool cancel=true);
     void finishConstruction(int minWidth=-1, int minHeight=-1);
+
+private:
+    QString dialogClassName; /**< The class name of the subclass instance */
+    int minWidthSetting; /**< The last loaded minimum width setting */
+    int minHeightSetting; /**< The last loaded minimum height setting */
 };
 
 #endif

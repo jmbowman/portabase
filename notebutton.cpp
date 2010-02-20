@@ -82,6 +82,17 @@ void NoteButton::launchEditor()
 }
 
 /**
+ * Adjust the button's text accordingly when the button is resized.
+ *
+ * @param event A resize event for the button
+ */
+void NoteButton::resizeEvent(QResizeEvent *event)
+{
+  QToolButton::resizeEvent(event);
+  setContent(noteContent);
+}
+
+/**
  * Set the button's text to the appropriate subset of the note content
  * before it is shown.
  *

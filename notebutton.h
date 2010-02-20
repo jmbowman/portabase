@@ -32,6 +32,7 @@ public:
     void setContent(const QString &text);
 
 protected:
+    void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent *event);
 
 private slots:

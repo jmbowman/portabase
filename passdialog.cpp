@@ -66,6 +66,7 @@ PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *par
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     setLayout(grid);
+    finishConstruction();
 }
 
 /**

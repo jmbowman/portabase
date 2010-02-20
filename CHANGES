@@ -1,3 +1,11 @@
+2010-02-20  JMB  Better dialog sizing, note button resize handling
+
+    Dialogs now remember the last dimensions they were resized to, and use
+    that size again when next launched (so you don't need to resize them
+    again if you don't like the default size).  Also, the portion of a note
+    shown in the edit button of the row editor dialog is now dynamically
+    adjusted as the size of the dialog changes.
+
 2009-12-21  JMB  Qt 4 port
 
     Since a non-Windows pocket computer capable of running Qt 4 applications

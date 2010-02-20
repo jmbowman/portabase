@@ -18,6 +18,8 @@
 #include <QLabel>
 #include <QLayout>
 #include <QPushButton>
+#include <QSettings>
+#include <QSize>
 #include "qqdialog.h"
 
 /**
@@ -37,7 +39,22 @@ QQDialog::QQDialog(QString title, QWidget *parent)
     else {
         setWindowTitle(title + " - " + qApp->applicationName());
     }
-    setSizeGripEnabled(true);
+}
+
+/**
+ * Destructor.  Saves the dialog's size, if it has changed.
+ */
+QQDialog::~QQDialog()
+{
+    int w = size().width();
+    int h = size().height();
+    if (w != minWidthSetting || h != minHeightSetting) {
+        QSettings settings;
+        QString widthName = QString("DialogSizes/%1Width").arg(dialogClassName);
+        QString heightName = QString("DialogSizes/%1Height").arg(dialogClassName);
+        settings.setValue(widthName, w);
+        settings.setValue(heightName, h);
+    }
 }
 
 /**
@@ -67,16 +84,20 @@ QDialogButtonBox *QQDialog::addOkCancelButtons(QVBoxLayout *layout, bool cancel)
 
 /**
  * Method to be called at the end of subclass constructors to handle window
- * geometry.
+ * geometry.  If this dialog has been launched before, sets the new dialog
+ * to the same size as the last one.
  * @param minWidth Minimum width in pixels.  If 0 or -1, don't set a minimum.
  * @param minHeight Minimum height in pixels.  If 0 or -1, don't set a minimum.
  */
 void QQDialog::finishConstruction(int minWidth, int minHeight)
 {
-    if (minWidth != -1) {
-        setMinimumWidth(minWidth);
-    }
-    if (minHeight != -1) {
-        setMinimumHeight(minHeight);
+    QSettings settings;
+    dialogClassName = metaObject()->className();
+    QString widthName = QString("DialogSizes/%1Width").arg(dialogClassName);
+    QString heightName = QString("DialogSizes/%1Height").arg(dialogClassName);
+    minWidthSetting = settings.value(widthName, minWidth).toInt();
+    minHeightSetting = settings.value(heightName, minHeight).toInt();
+    if (minWidthSetting != -1 && minHeightSetting != -1) {
+        resize(minWidthSetting, minHeightSetting);
     }
 }

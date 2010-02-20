@@ -206,6 +206,26 @@ Mac OS X compilation
   library file in the process).  You can now run it and move it wherever
   you'd like.
 
+Code Documentation Generation
+-----------------------------
+The PortaBase source code has been documented in a manner that allows
+browsable documentation to be generated in HTML and other formats using
+Doxygen (http://www.stack.nl/~dimitri/doxygen/index.html).  To do so:
+
+- Install Doxygen on your system
+- Download the version of Qt whose documentation you want to link to (optional)
+- Run doxytag to generate the qt.tag file (on a UNIX system, this will look
+  something like "doxytag -t qt.tag $QTDIR/doc/html) (optional)
+- Make sure the TAGFILES line in PortaBase's "Doxyfile" file references the
+  Qt documentation root you wish to link to; this can be either online or local
+  (optional)
+- Run "doxygen Doxygen" in the Portabase source code main directory
+
+Paths and environment variable formatting will vary across operating systems,
+and the final step can optionally performed using the "doxywizard" GUI wizard.
+I'll assume that people interested in understanding PortaBase's source code
+can figure out these variations.
+
 Package Building
 ----------------
 To create ".ipk" files for installation on the Zaurus, create the following
