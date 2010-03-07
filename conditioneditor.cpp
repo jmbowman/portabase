@@ -63,6 +63,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
     hbox = Factory::hBoxLayout(this);
     vbox->addLayout(hbox);
     opList = new QComboBox(this);
+    opList->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     hbox->addWidget(opList);
     stringOpList.append("=");
     stringOps.append(Condition::Equals);

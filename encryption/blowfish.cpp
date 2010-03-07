@@ -322,14 +322,6 @@ Blowfish::Blowfish()
 
 }
 
-/**
- * Destructor.
- */
-Blowfish::~Blowfish()
-{
-
-}
-
 size_t Blowfish::blockSize = 8;
 
 /**
@@ -425,7 +417,7 @@ int Blowfish::blockEncryptCBC(quint32 *dst, const quint32 *src, unsigned int nbl
 		for (i = 0; i < blockwords; i++)
 			dst[i] = src[i] ^ fdback[i];
 
-		encrypt(dst, dst);
+		encrypt(&encryptParam, dst, dst);
 
 		nblocks--;
 
@@ -436,7 +428,7 @@ int Blowfish::blockEncryptCBC(quint32 *dst, const quint32 *src, unsigned int nbl
 
 			dst += blockwords;
 
-			encrypt(dst, dst);
+			encrypt(&encryptParam, dst, dst);
 
 			src += blockwords;
 
@@ -472,7 +464,7 @@ int Blowfish::blockDecryptCBC(quint32 *dst, const quint32 *src, unsigned int nbl
 			register quint32 tmp;
 			register unsigned int i;
 
-			decrypt(buf, src);
+			decrypt(&decryptParam, buf, src);
 
 			for (i = 0; i < blockwords; i++)
 			{
@@ -531,7 +523,7 @@ int Blowfish::setup(blowfishParam *bp, const quint8* key, size_t keybits)
 
 		for (i = 0; i < BLOWFISHPSIZE; i += 2, p += 2)
 		{
-			encrypt(work, work);
+			encrypt(bp, work, work);
 			#if Q_BYTE_ORDER == Q_BIG_ENDIAN
 			p[0] = work[0];
 			p[1] = work[1];
@@ -543,7 +535,7 @@ int Blowfish::setup(blowfishParam *bp, const quint8* key, size_t keybits)
 
 		for (i = 0; i < 1024; i += 2, s += 2)
 		{
-			encrypt(work, work);
+			encrypt(bp, work, work);
 			#if Q_BYTE_ORDER == Q_BIG_ENDIAN
 			s[0] = work[0];
 			s[1] = work[1];
@@ -588,15 +580,15 @@ int Blowfish::setIV(blowfishParam *bp, const quint8* iv)
  * @param src The cleartext; should be aligned on 32-bit boundary.
  * @return 0 on success.
  */
-int Blowfish::encrypt(quint32* dst, const quint32* src)
+int Blowfish::encrypt(blowfishParam *bp, quint32* dst, const quint32* src)
 {
 	#if Q_BYTE_ORDER == Q_BIG_ENDIAN
 	register quint32 xl = src[0], xr = src[1];
 	#else
 	register quint32 xl = swapu32(src[0]), xr = swapu32(src[1]);
 	#endif
-	register quint32* p = encryptParam.p;
-	register quint32* s = encryptParam.s;
+	register quint32* p = bp->p;
+	register quint32* s = bp->s;
 
 	EROUND(xl, xr); EROUND(xr, xl);
 	EROUND(xl, xr); EROUND(xr, xl);
@@ -626,15 +618,15 @@ int Blowfish::encrypt(quint32* dst, const quint32* src)
  * @param src The ciphertext; should be aligned on 32-bit boundary.
  * @return 0 on success.
  */
-int Blowfish::decrypt(quint32* dst, const quint32* src)
+int Blowfish::decrypt(blowfishParam *bp, quint32* dst, const quint32* src)
 {
 	#if Q_BYTE_ORDER == Q_BIG_ENDIAN
 	register quint32 xl = src[0], xr = src[1];
 	#else
 	register quint32 xl = swapu32(src[0]), xr = swapu32(src[1]);
 	#endif
-	register quint32* p = decryptParam.p+BLOWFISHPSIZE-1;
-	register quint32* s = decryptParam.s;
+	register quint32* p = bp->p+BLOWFISHPSIZE-1;
+	register quint32* s = bp->s;
 
 	DROUND(xl, xr); DROUND(xr, xl);
 	DROUND(xl, xr); DROUND(xr, xl);

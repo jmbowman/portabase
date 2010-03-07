@@ -61,7 +61,6 @@ class Blowfish
 {
 public:
     Blowfish();
-    ~Blowfish();
     
     int setup(const QByteArray &key);
     QByteArray encrypt(const QByteArray &data, const QByteArray &iv);
@@ -73,8 +72,8 @@ public:
 private:
     int setup(blowfishParam *bp, const quint8 *key, size_t keybits);
     int setIV(blowfishParam *bp, const quint8 *iv);
-    int encrypt(quint32 *dst, const quint32 *src);
-    int decrypt (quint32 *dst, const quint32 *src);
+    int encrypt(blowfishParam *bp, quint32 *dst, const quint32 *src);
+    int decrypt (blowfishParam *bp, quint32 *dst, const quint32 *src);
     int blockEncryptCBC(quint32 *dst, const quint32 *src, unsigned int nblocks);
     int blockDecryptCBC(quint32 *dst, const quint32 *src, unsigned int nblocks);
 

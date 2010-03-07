@@ -109,13 +109,13 @@ int CommandLine::fromOtherFormat(const QStringList &args)
     else if (openResult == Database::Encrypted || (passIndex != -1 && !fromcsv)) {
         QString error = db->encryption()->setPassword(args[passIndex + 1], !fromcsv);
         if (!error.isEmpty()) {
-            printf(error.toLocal8Bit());
+            printf("%s", error.toLocal8Bit().data());
             printf("\n");
             return 1;
         }
         error = db->load();
         if (!error.isEmpty()) {
-            printf(error.toLocal8Bit());
+            printf("%s", error.toLocal8Bit().data());
             printf("\n");
             return 1;
         }
@@ -147,11 +147,11 @@ int CommandLine::fromOtherFormat(const QStringList &args)
         error = utils.importMobileDB(sourceFile, db);
     }
     if (!error.isEmpty()) {
-        printf(error.toLocal8Bit());
+        printf("%s", error.toLocal8Bit().data());
         printf("\n");
         if (!data.isEmpty()) {
-            printf((QObject::tr("Problematic row") + ":\n").toLocal8Bit());
-            printf(data.toLocal8Bit());
+            printf("%s", (QObject::tr("Problematic row") + ":\n").toLocal8Bit().data());
+            printf("%s", data.toLocal8Bit().data());
             printf("\n");
         }
         if (!fromcsv) {
@@ -230,13 +230,13 @@ int CommandLine::toOtherFormat(const QStringList &args)
         }
         QString error = db->encryption()->setPassword(args[passIndex + 1], false);
         if (!error.isEmpty()) {
-            printf(error.toLocal8Bit());
+            printf("%s", error.toLocal8Bit().data());
             printf("\n");
             return 1;
         }
         error = db->load();
         if (!error.isEmpty()) {
-            printf(error.toLocal8Bit());
+            printf("%s", error.toLocal8Bit().data());
             printf("\n");
             return 1;
         }

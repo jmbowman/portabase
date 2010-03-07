@@ -47,7 +47,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     grid->addWidget(nameBox, 0, 1);
 
     grid->addWidget(new QLabel(tr("Type"), this), 1, 0);
-    typeBox = new QComboBox(this); // TODO: make sure not editable
+    typeBox = new QComboBox(this);
     grid->addWidget(typeBox, 1, 1);
     typeBox->addItem(tr("String"));
     typeBox->addItem(tr("Integer"));
@@ -80,15 +80,15 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     defaultStack->addWidget(defaultInteger);
     defaultFloat = new NumberWidget(FLOAT, defaultStack);
     defaultStack->addWidget(defaultFloat);
-    defaultDate = new QComboBox(defaultStack); // TODO: confirm not editable
+    defaultDate = new QComboBox(defaultStack);
     defaultDate->addItem(tr("Today"));
     defaultDate->addItem(tr("None"));
     defaultStack->addWidget(defaultDate);
-    defaultTime = new QComboBox(defaultStack); // TODO: confirm not editable
+    defaultTime = new QComboBox(defaultStack);
     defaultTime->addItem(tr("Now"));
     defaultTime->addItem(tr("None"));
     defaultStack->addWidget(defaultTime);
-    defaultEnum = new QComboBox(defaultStack); // TODO: confirm not editable
+    defaultEnum = new QComboBox(defaultStack);
     defaultStack->addWidget(defaultEnum);
     calcButton = new QPushButton(tr("Edit calculation"), defaultStack);
     defaultStack->addWidget(calcButton);

@@ -41,14 +41,6 @@ rk_isaac_state Crypto::prngState;
 bool Crypto::prngInitialized = false;
 
 /**
- * Destructor.
- */
-Crypto::~Crypto()
-{
-
-}
-
-/**
  * Attempt to open the encrypted content in a PortaBase file of the specified
  * version.
  *
@@ -270,8 +262,8 @@ int Crypto::unpaddedLength(const QByteArray &data)
  */
 void Crypto::printBytes(QString label, const QByteArray &data)
 {
-    printf((label + ":\n").toLocal8Bit().data());
-    printf(data.toHex() + "\n");
+    printf("%s:\n", label.toLocal8Bit().data());
+    printf("%s\n", data.toHex().data());
 }
 
 /**

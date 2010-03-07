@@ -1,3 +1,12 @@
+2010-03-07  JMB  File decryption, condition editor layout, GCC warnings
+
+    Fixed a bug in decrypting encrypted files that crept in when I eliminated
+    the dependency on BeeCrypt.  Updated the condition editor to adjust the
+    length of the operation selection list when its content changes (by
+    selecting a column of a different type).  Also fixed some console output
+    code (used in command-line mode) that ran afoul of some recently-added
+    GCC warnings.
+
 2010-02-20  JMB  Better dialog sizing, note button resize handling
 
     Dialogs now remember the last dimensions they were resized to, and use

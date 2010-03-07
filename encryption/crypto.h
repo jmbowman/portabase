@@ -48,7 +48,6 @@ class Crypto : public QObject
     Q_OBJECT
 public:
     Crypto(c4_Storage *outer, c4_Storage *inner);
-    ~Crypto();
 
     QString open(int version);
     void save();
