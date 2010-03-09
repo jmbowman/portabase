@@ -1,7 +1,7 @@
 /*
  * crypto.h
  *
- * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

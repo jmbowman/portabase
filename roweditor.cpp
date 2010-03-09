@@ -224,6 +224,7 @@ void RowEditor::addContent(int rowId)
             values.append(db->getDefault(colNames[i]));
         }
     }
+    initialFocus = 0;
     colTypes = db->listTypes();
     for (int i = 0; i < count; i++) {
         QString name = colNames[i];
@@ -242,6 +243,9 @@ void RowEditor::addContent(int rowId)
             layout->addWidget(widget, i, 1);
             widget->setValue(values[i]);
             numberWidgets.append(widget);
+            if (!initialFocus) {
+                initialFocus = widget;
+            }
         }
         else if (type == NOTE) {
             NoteButton *button = new NoteButton(name, grid);
@@ -297,6 +301,9 @@ void RowEditor::addContent(int rowId)
             layout->addWidget(edit, i, 1);
             edit->setPlainText(values[i]);
             dynamicEdits.append(edit);
+            if (!initialFocus) {
+                initialFocus = edit;
+            }
         }
     }
     layout->addWidget(new QWidget(grid), count, 0, 1, 2);
@@ -304,4 +311,18 @@ void RowEditor::addContent(int rowId)
     sa->setWidget(grid);
 
     finishLayout(true, true, 400, 400);
+}
+
+/**
+ * Make sure the first text input widget in the row editor (if any) gets
+ * keyboard focus when the dialog is shown.
+ *
+ * @param event A widget show event for the dialog
+ */
+void RowEditor::showEvent(QShowEvent *event)
+{
+    PBDialog::showEvent(event);
+    if (initialFocus) {
+        initialFocus->setFocus();
+    }
 }

@@ -3,7 +3,7 @@
  *
  * Adapted from BeeCrypt: http://sourceforge.net/projects/beecrypt
  *
- * (c) 2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 1999, 2000, 2002, 2005 Beeyond Software Holding BV
  *
  * This library is free software; you can redistribute it and/or
@@ -576,6 +576,7 @@ int Blowfish::setIV(blowfishParam *bp, const quint8* iv)
  * This function performs the Blowfish encryption; it encrypts one block
  * of 64 bits.
  *
+ * @param bp The Blowfish parameters struct to use
  * @param dst The ciphertext; should be aligned on 32-bit boundary.
  * @param src The cleartext; should be aligned on 32-bit boundary.
  * @return 0 on success.
@@ -614,6 +615,7 @@ int Blowfish::encrypt(blowfishParam *bp, quint32* dst, const quint32* src)
  * This function performs the Blowfish decryption; it decrypts one block
  * of 64 bits.
  * 
+ * @param bp The Blowfish parameters struct to use
  * @param dst The cleartext; should be aligned on 32-bit boundary.
  * @param src The ciphertext; should be aligned on 32-bit boundary.
  * @return 0 on success.

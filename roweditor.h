@@ -57,6 +57,9 @@ public:
     bool isValid();
     QStringList getRow(bool doCalcs=true);
 
+protected:
+    void showEvent(QShowEvent *event);
+
 private:
     void addContent(int rowId);
 
@@ -74,6 +77,7 @@ private:
     CalcWidgetList calcWidgets; /**< List of this dialog's calculation display widgets */
     LabelList sequenceLabels; /**< List of this dialog's sequence number display widgets */
     ImageSelectorList imageSelectors; /**< List of this dialog's image selection widgets */
+    QWidget *initialFocus; /**< The widget which is to receive focus when the dialog is shown */
 };
 
 #endif

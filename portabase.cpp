@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,14 +19,15 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFont>
+#include <QGroupBox>
 #include <QIconDragEvent>
 #include <QInputDialog>
-#include <QLabel>
 #include <QLayout>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QProcess>
+#include <QPushButton>
 #include <QStackedWidget>
 #include <QStyle>
 #include <QToolBar>
@@ -47,7 +48,6 @@
 #include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
-#include "qqutil/qqmenuhelper.h"
 
 /**
  * Constructor.
@@ -98,27 +98,27 @@ PortaBase::PortaBase(QWidget *parent)
 
     // file selector actions
     importAction = ma->action(MenuActions::Import);
-    connect(importAction, SIGNAL(activated()), this, SLOT(import()));
+    connect(importAction, SIGNAL(triggered()), this, SLOT(import()));
 
     // File menu actions
     changePassAction = ma->action(MenuActions::ChangePassword);
-    connect(changePassAction, SIGNAL(activated()),
+    connect(changePassAction, SIGNAL(triggered()),
             this, SLOT(changePassword()));
     dataImportAction = ma->action(MenuActions::ImportCSV);
-    connect(dataImportAction, SIGNAL(activated()), this, SLOT(dataImport()));
+    connect(dataImportAction, SIGNAL(triggered()), this, SLOT(dataImport()));
     exportAction = ma->action(MenuActions::Export);
-    connect(exportAction, SIGNAL(activated()), this, SLOT(dataExport()));
+    connect(exportAction, SIGNAL(triggered()), this, SLOT(dataExport()));
     deleteRowsAction = ma->action(MenuActions::DeleteRowsInFilter, deleteIcon);
-    connect(deleteRowsAction, SIGNAL(activated()),
+    connect(deleteRowsAction, SIGNAL(triggered()),
             this, SLOT(deleteAllRows()));
     editColsAction = ma->action(MenuActions::EditColumns);
-    connect(editColsAction, SIGNAL(activated()), this, SLOT(editColumns()));
+    connect(editColsAction, SIGNAL(triggered()), this, SLOT(editColumns()));
     manageEnumsAction = ma->action(MenuActions::EditEnums);
-    connect(manageEnumsAction, SIGNAL(activated()), this, SLOT(editEnums()));
+    connect(manageEnumsAction, SIGNAL(triggered()), this, SLOT(editEnums()));
     slideshowAction = ma->action(MenuActions::Slideshow);
-    connect(slideshowAction, SIGNAL(activated()), viewer, SLOT(slideshow()));
+    connect(slideshowAction, SIGNAL(triggered()), viewer, SLOT(slideshow()));
     propsAction = ma->action(MenuActions::Properties);
-    connect(propsAction, SIGNAL(activated()), this, SLOT(viewProperties()));
+    connect(propsAction, SIGNAL(triggered()), this, SLOT(viewProperties()));
     fileSeparatorAction = new QAction(this);
     fileSeparatorAction->setSeparator(true);
     
@@ -136,15 +136,15 @@ PortaBase::PortaBase(QWidget *parent)
 
     // Row menu/toolbar actions
     rowAddAction = ma->action(MenuActions::AddRow, addIcon);
-    connect(rowAddAction, SIGNAL(activated()), viewer, SLOT(addRow()));
+    connect(rowAddAction, SIGNAL(triggered()), viewer, SLOT(addRow()));
     rowEditAction = ma->action(MenuActions::EditRow, editIcon);
-    connect(rowEditAction, SIGNAL(activated()), viewer, SLOT(editRow()));
+    connect(rowEditAction, SIGNAL(triggered()), viewer, SLOT(editRow()));
     rowDeleteAction = ma->action(MenuActions::DeleteRow, deleteIcon);
-    connect(rowDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
+    connect(rowDeleteAction, SIGNAL(triggered()), this, SLOT(deleteRow()));
     rowCopyAction = ma->action(MenuActions::CopyRow, QIcon(":/icons/copy_row.png"));
-    connect(rowCopyAction, SIGNAL(activated()), this, SLOT(copyRow()));
+    connect(rowCopyAction, SIGNAL(triggered()), this, SLOT(copyRow()));
     rowViewAction = ma->action(MenuActions::Show);
-    connect(rowViewAction, SIGNAL(activated()), viewer, SLOT(viewRow()));
+    connect(rowViewAction, SIGNAL(triggered()), viewer, SLOT(viewRow()));
     row = new QMenu(ma->menuText(MenuActions::Row), this);
     row->addAction(rowAddAction);
     row->addAction(rowEditAction);
@@ -154,13 +154,13 @@ PortaBase::PortaBase(QWidget *parent)
 
     // View menu actions
     viewAddAction = ma->action(MenuActions::AddView, addIcon);
-    connect(viewAddAction, SIGNAL(activated()), this, SLOT(addView()));
+    connect(viewAddAction, SIGNAL(triggered()), this, SLOT(addView()));
     viewEditAction = ma->action(MenuActions::EditView, editIcon);
-    connect(viewEditAction, SIGNAL(activated()), this, SLOT(editView()));
+    connect(viewEditAction, SIGNAL(triggered()), this, SLOT(editView()));
     viewDeleteAction = ma->action(MenuActions::DeleteView, deleteIcon);
-    connect(viewDeleteAction, SIGNAL(activated()), this, SLOT(deleteView()));
+    connect(viewDeleteAction, SIGNAL(triggered()), this, SLOT(deleteView()));
     viewAllColsAction = ma->action(MenuActions::AllColumns, true);
-    connect(viewAllColsAction, SIGNAL(activated()),
+    connect(viewAllColsAction, SIGNAL(triggered()),
             this, SLOT(viewAllColumns()));
     
     // View menu
@@ -174,11 +174,11 @@ PortaBase::PortaBase(QWidget *parent)
 
     // Sort menu actions
     sortAddAction = ma->action(MenuActions::AddSorting, addIcon);
-    connect(sortAddAction, SIGNAL(activated()), this, SLOT(addSorting()));
+    connect(sortAddAction, SIGNAL(triggered()), this, SLOT(addSorting()));
     sortEditAction = ma->action(MenuActions::EditSorting, editIcon);
-    connect(sortEditAction, SIGNAL(activated()), this, SLOT(editSorting()));
+    connect(sortEditAction, SIGNAL(triggered()), this, SLOT(editSorting()));
     sortDeleteAction = ma->action(MenuActions::DeleteSorting, deleteIcon);
-    connect(sortDeleteAction, SIGNAL(activated()),
+    connect(sortDeleteAction, SIGNAL(triggered()),
             this, SLOT(deleteSorting()));
 
     // Sort menu
@@ -191,16 +191,16 @@ PortaBase::PortaBase(QWidget *parent)
 
     // Filter menu actions
     findAction = ma->action(MenuActions::QuickFilter, QIcon(":/icons/find.png"));
-    connect(findAction, SIGNAL(activated()), this, SLOT(simpleFilter()));
+    connect(findAction, SIGNAL(triggered()), this, SLOT(simpleFilter()));
     filterAddAction = ma->action(MenuActions::AddFilter, addIcon);
-    connect(filterAddAction, SIGNAL(activated()), this, SLOT(addFilter()));
+    connect(filterAddAction, SIGNAL(triggered()), this, SLOT(addFilter()));
     filterEditAction = ma->action(MenuActions::EditFilter, editIcon);
-    connect(filterEditAction, SIGNAL(activated()), this, SLOT(editFilter()));
+    connect(filterEditAction, SIGNAL(triggered()), this, SLOT(editFilter()));
     filterDeleteAction = ma->action(MenuActions::DeleteFilter, deleteIcon);
-    connect(filterDeleteAction, SIGNAL(activated()),
+    connect(filterDeleteAction, SIGNAL(triggered()),
             this, SLOT(deleteFilter()));
     filterAllRowsAction = ma->action(MenuActions::AllRows, true);
-    connect(filterAllRowsAction, SIGNAL(activated()),
+    connect(filterAllRowsAction, SIGNAL(triggered()),
             this, SLOT(viewAllRows()));
 
     // Filter menu
@@ -228,9 +228,53 @@ PortaBase::PortaBase(QWidget *parent)
     toolbar->addAction(findAction);
     createFillerActions();
 
+    // Main widget when no file is open
+    noFileWidget = new QWidget(mainStack);
+    QHBoxLayout *hlayout = Factory::hBoxLayout(noFileWidget, true);
+    hlayout->addStretch(1);
+    QVBoxLayout *vlayout = Factory::vBoxLayout(noFileWidget);
+    hlayout->addLayout(vlayout);
+    vlayout->addStretch(1);
+    QAction *action = mh->action(QQMenuHelper::New);
+    QPushButton *button = new QPushButton(action->icon(),
+                                          action->statusTip(),
+                                          noFileWidget);
+    connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
+    vlayout->addWidget(button);
+    action = mh->action(QQMenuHelper::Open);
+    button = new QPushButton(action->icon(),
+                             action->statusTip(),
+                             noFileWidget);
+    connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
+    vlayout->addWidget(button);
+    button = new QPushButton(importAction->icon(),
+                             importAction->statusTip(),
+                             noFileWidget);
+    connect(button, SIGNAL(clicked()), importAction, SIGNAL(triggered()));
+    vlayout->addWidget(button);
+    recentBox = new QGroupBox(tr("Recently opened files"), noFileWidget);
+    recentBox->setAlignment(Qt::AlignHCenter);
+    QVBoxLayout *boxLayout = Factory::vBoxLayout(recentBox, true);
+    vlayout->addWidget(recentBox);
+    for (int i = 0; i < MAX_RECENT_FILES; i++) {
+        recentButtons[i] = new QPushButton("", recentBox);
+        boxLayout->addWidget(recentButtons[i]);
+    }
+    connect(recentButtons[0], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent1), SIGNAL(triggered()));
+    connect(recentButtons[1], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent2), SIGNAL(triggered()));
+    connect(recentButtons[2], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent3), SIGNAL(triggered()));
+    connect(recentButtons[3], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent4), SIGNAL(triggered()));
+    connect(recentButtons[4], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent5), SIGNAL(triggered()));
+    vlayout->addStretch(1);
+    hlayout->addStretch(1);
+    mainStack->addWidget(noFileWidget);
+    
     setUnifiedTitleAndToolBarOnMac(true);
-    noFileLabel = new QLabel("<center>" + tr("No file selected") + "</center>", mainStack);
-    mainStack->addWidget(noFileLabel);
     showFileSelector();
     updateCaption();
     restoreWindowSettings(settings);
@@ -401,7 +445,7 @@ void PortaBase::editPreferences()
         setFont(font);
         viewer->updateButtonSizes();
         mh->fileMenu()->setFont(font);
-        noFileLabel->setFont(font);
+        noFileWidget->setFont(font);
         mh->helpMenu()->setFont(font);
 #endif
         QSettings settings;
@@ -648,8 +692,24 @@ void PortaBase::showFileSelector()
     rowDeleteAction->setVisible(false);
     rowCopyAction->setVisible(false);
     findAction->setVisible(false);
+    
+    // Update the recent file buttons
+    QStringList recentFiles;
+    recentFiles << mh->action(QQMenuHelper::Recent1)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent2)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent3)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent4)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent5)->text();
+    for (int i = 0; i < MAX_RECENT_FILES; i++) {
+        QString path = recentFiles[i];
+        QFileInfo info(path);
+        recentButtons[i]->setText(info.baseName());
+        recentButtons[i]->setToolTip(path);
+        recentButtons[i]->setVisible(!path.isEmpty());
+    }
+    recentBox->setVisible(!recentButtons[0]->text().isEmpty());
 
-    mainStack->setCurrentWidget(noFileLabel);
+    mainStack->setCurrentWidget(noFileWidget);
 }
 
 /**

@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1059,7 +1059,8 @@ c4_View Database::getData()
  *
  * @param filteredData The table to sort
  * @param column The name of the column to sort on
- * @param True to sort in ascending order, false for descending order
+ * @param ascending True to sort in ascending order, false for descending
+ *                  order
  * @return The sorted table
  */
 c4_View Database::sortData(c4_View filteredData, const QString &column,
@@ -2010,6 +2011,14 @@ void Database::setEnumOptionSequence(const QString &enumName,
     updateEnumDataIndices(enumName);
 }
 
+/**
+ * Update any calculated columns that used a column which is being deleted.
+ * Removes nodes from the calculation definitions as appropriate, and
+ * recalculates the stored result values in every row for the affected
+ * calculations.
+ *
+ * @param columnName The name of the column which is being deleted
+ */
 void Database::deleteCalcColumn(const QString &columnName)
 {
     // delete all calculation nodes referring to this column
@@ -2036,6 +2045,16 @@ void Database::deleteCalcColumn(const QString &columnName)
     }
 }
 
+/**
+ * Load the calculation definition for a calculated column based on that
+ * column's name.  This is just a convenience method wrapping
+ * Database::loadCalc(int, int*)
+ *
+ * @param colName The name of the column whose definition is desired
+ * @param decimals A pointer to the integer in which to store the number of
+ *                 decimal places that should be shown for calculation results
+ * @return The root node of the calculation definition tree
+ */
 CalcNode *Database::loadCalc(const QString &colName, int *decimals)
 {
     int index = columns.Find(cName [colName.toUtf8()]);
@@ -2046,6 +2065,15 @@ CalcNode *Database::loadCalc(const QString &colName, int *decimals)
     return loadCalc(colId, decimals);
 }
 
+/**
+ * Load the calculation definition for a calculated column based on that
+ * column's ID.
+ *
+ * @param colId The ID of the column whose definition is desired
+ * @param decimals A pointer to the integer in which to store the number of
+ *                 decimal places that should be shown for calculation results
+ * @return The root node of the calculation definition tree
+ */
 CalcNode *Database::loadCalc(int colId, int *decimals)
 {
     if (decimals != 0) {
@@ -2081,6 +2109,14 @@ CalcNode *Database::loadCalc(int colId, int *decimals)
     return root;
 }
 
+/**
+ * Delete the calculation definition for the calculated column with the
+ * specified ID.  Does not delete the column definition or the corresponding
+ * column in the data table.
+ *
+ * @param colId The ID of the column whose calculation definition is to be
+ *              deleted
+ */
 void Database::deleteCalc(int colId)
 {
     int removeIndex = calcNodes.Find(cnId [colId]);
@@ -2094,6 +2130,10 @@ void Database::deleteCalc(int colId)
     }
 }
 
+/**
+ * Recalculate the results of all calculated columns for every row and store
+ * the results.
+ */
 void Database::calculateAll()
 {
     int colCount = columns.GetSize();
@@ -2110,6 +2150,14 @@ void Database::calculateAll()
     }
 }
 
+/**
+ * Recalculate the results of the specified calculation for every row in the
+ * database and store the results.
+ *
+ * @param colId The ID of the calculated column to be recalculated
+ * @param root The root node of the calculation definition
+ * @param decimals The number of decimal places to show for calculated values
+ */
 void Database::calculateAll(int colId, CalcNode *root, int decimals)
 {
     int size = data.GetSize();
@@ -2127,11 +2175,28 @@ void Database::calculateAll(int colId, CalcNode *root, int decimals)
     }
 }
 
+/**
+ * Get the string representation of a floating point number.
+ *
+ * @param value The value to be formatted
+ * @param decimals The number of decimal places to retain
+ * @return The formatted value
+ */
 QString Database::formatDouble(double value, int decimals)
 {
     return QString("%1").arg(value, 0, 'f', decimals);
 }
 
+/**
+ * Update a calculated column with a new calculation definition.  Deletes the
+ * old definition, adds the new one, and recalculates all stored result
+ * values.
+ *
+ * @param colName The name of the calculated column being updated
+ * @param root The root node of the calculation definition tree
+ * @param decimals The number of decimal places to retain for calculated
+ *                 values
+ */
 void Database::updateCalc(const QString &colName, CalcNode *root, int decimals)
 {
     int index = columns.Find(cName [colName.toUtf8()]);
@@ -2145,6 +2210,16 @@ void Database::updateCalc(const QString &colName, CalcNode *root, int decimals)
     calculateAll(colId, root, decimals);
 }
 
+/**
+ * Add a new calculation definition tree node to the database.
+ *
+ * @param calcId The ID of the calculated column the node belongs to
+ * @param node The node to be added
+ * @param nodeId The ID of the node to be added; this is not a row ID, just
+ *               a tool for preserving the tree hierarchy
+ * @param parentId The ID of this node's parent node (this is 0 for the root
+ *                 node)
+ */
 int Database::addCalcNode(int calcId, CalcNode *node, int nodeId, int parentId)
 {
     if (node == 0) {
@@ -2166,6 +2241,14 @@ int Database::addCalcNode(int calcId, CalcNode *node, int nodeId, int parentId)
     return nextId;
 }
 
+/**
+ * Make the column ID string used to represent a column in the Metakit view
+ * definition of the main data table.
+ *
+ * @param colId The column's ID number
+ * @param type The PortaBase data type ID of the column
+ * @return A Metakit property definition string
+ */
 QString Database::makeColId(int colId, int type)
 {
     QString result("_");
@@ -2187,6 +2270,13 @@ QString Database::makeColId(int colId, int type)
     return result;
 }
 
+/**
+ * Generate the Metakit view format string for the main data table.
+ *
+ * @param old True if working with a file from PortaBase 1.2 or older, which
+ *            used a more primitive format string for this table
+ * @return The data table's format string
+ */
 QString Database::formatString(bool old)
 {
     c4_View sorted = columns.SortOn(cIndex);
@@ -2230,6 +2320,9 @@ QString Database::formatString(bool old)
     return result;
 }
 
+/**
+ * Commit any changes made to the database since the last time it was saved.
+ */
 void Database::commit()
 {
     if (crypto) {
@@ -2239,11 +2332,28 @@ void Database::commit()
     file->Commit();
 }
 
+/**
+ * Set the base path for image files referenced in a file being imported.
+ * This is generally the path of the directory containing the CSV or XML file
+ * being imported.
+ *
+ * @param path The path of the directory containing any image files to import
+ */
 void Database::setImportBasePath(const QString &path)
 {
     importBasePath = path;
 }
 
+/**
+ * Import rows of data from a CSV file.
+ *
+ * @param filename The path to the CSV file to import
+ * @param encoding The name of the text encoding used by the CSV file.
+ *                 Currently only "Latin-1" and "UTF-8" are supported.
+ * @return Empty if no error occurred.  Otherwise, an error message optionally
+ *         followed by the text of the record imported that triggered that
+ *         error
+ */
 QStringList Database::importFromCSV(const QString &filename,
                                     const QString &encoding)
 {
@@ -2251,6 +2361,17 @@ QStringList Database::importFromCSV(const QString &filename,
     return csv.parseFile(filename, encoding, this);
 }
 
+/**
+ * Export the entire content of this database to an XML file.  If the database
+ * contains any images, they will be exported as separate files in the same
+ * directory as the output file.
+ *
+ * @param filename The path of the file to export to
+ * @param fullView The Metakit view representing the main data table
+ * @param filteredView The Metakit view resulting from applying the current
+ *                     filter to the full data table
+ * @param cols Ordered list of column names in the current view
+ */
 void Database::exportToXML(const QString &filename, c4_View &fullView,
                            c4_View &filteredView, const QStringList &cols)
 {
@@ -2306,6 +2427,14 @@ void Database::exportToXML(const QString &filename, c4_View &fullView,
     c4_View::stringCompareFunc = strcmp;
 }
 
+/**
+ * Set the current view, sorting, and filter (all stored in the global
+ * properties table).  Used during command-line exports and XML import.
+ *
+ * @param view The name of the view to set as current
+ * @param sorting The name of the sorting to set as current
+ * @param filter The name of the filter to set as current
+ */
 void Database::setGlobalInfo(const QString &view, const QString &sorting,
                              const QString &filter)
 {
@@ -2314,11 +2443,26 @@ void Database::setGlobalInfo(const QString &view, const QString &sorting,
     gFilter (global[0]) = filter.toUtf8();
 }
 
+/**
+ * Determine if the provided date is set to the PortaBase "None" date.  This
+ * value is set to 1752-09-14, which used to be the earliest date supported
+ * by Qt.
+ *
+ * @param date The date to be tested
+ * @return True if the provided value is the "None" date, false otherwise
+ */
 bool Database::isNoneDate(const QDate &date)
 {
     return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
 }
 
+/**
+ * Get a text representation of the date represented by the given integer.
+ * (PortaBase stores a date YYYY-MM-DD as the integer with digits YYYYMMDD.)
+ *
+ * @param date The integer-encoded date to be formatted
+ * @return The formatted date
+ */
 QString Database::dateToString(int date)
 {
     int y = date / 10000;
@@ -2328,6 +2472,12 @@ QString Database::dateToString(int date)
     return dateToString(dateObj);
 }
 
+/**
+ * Get a text representation of the given date.
+ *
+ * @param date The date to be formatted
+ * @return The formatted date
+ */
 QString Database::dateToString(const QDate &date)
 {
     if (isNoneDate(date)) {
@@ -2336,6 +2486,15 @@ QString Database::dateToString(const QDate &date)
     return date.toString(dateFormat);
 }
 
+/**
+ * Parse a time value from the provided string.
+ *
+ * @param value The text to be parsed
+ * @param ok Pointer to a boolean value which will represent the success or
+ *           failure of the parsing attempt
+ * @return The number of seconds after midnight in the parsed time, shown as
+ *         a string
+ */
 QString Database::parseTimeString(const QString &value, bool *ok)
 {
     // check for imported blank
@@ -2393,6 +2552,13 @@ QString Database::parseTimeString(const QString &value, bool *ok)
     return QString::number(totalSeconds);
 }
 
+/**
+ * Get a human-readable time string from the given number of seconds past
+ * midnight.
+ *
+ * @param time The time to be converted (counted in seconds past midnight)
+ * @return A human-readable time string
+ */
 QString Database::timeToString(int time)
 {
     if (time == -1) {
@@ -2403,14 +2569,20 @@ QString Database::timeToString(int time)
     return timeObj.toString(timeFormat);
 }
 
+/**
+ * Make the changes necessary for files created by old versions of PortaBase
+ * to support the type of main data table format string used by more recent
+ * versions.
+ *
+ * <p>Starting in PortaBase 1.3, unique column IDs are used to identify
+ * columns in the data view rather than their names; this allows for unicode
+ * column names, since they don't appear in the format string.</p>
+ *
+ * <p>Also, the original string representation of decimal fields is now
+ * stored along with the floating point version.</p>
+ */
 void Database::updateDataColumnFormat()
 {
-    // Starting in PortaBase 1.3, unique column IDs are used to identify
-    // columns in the data view rather than their names; this allows
-    // for unicode column names, since they don't appear in the format string
-
-    // Also, the original string representation of decimal fields is now
-    // stored along with the floating point version
     data = storage->GetAs(formatString(true).toLatin1());
     int colCount = columns.GetSize();
     int rowCount = data.GetSize();
@@ -2449,10 +2621,13 @@ void Database::updateDataColumnFormat()
     updateDataFormat();
 }
 
+/**
+ * Update the text encoding used in files generated by old versions of
+ * PortaBase.  Latin-1 was used prior to version 1.3...need to convert to
+ * UTF-8 in case any characters beyond the ASCII range were stored.
+ */
 void Database::updateEncoding()
 {
-    // PortaBase used Latin-1 prior to version 1.3...need to convert to
-    // UTF-8 in case any characters beyond the ASCII range were stored
     updateEncoding(global);
     updateEncoding(columns);
     updateEncoding(views);
@@ -2464,6 +2639,12 @@ void Database::updateEncoding()
     updateEncoding(data);
 }
 
+/**
+ * Update the text encoding of all text fields in the specified Metakit view
+ * from Latin-1 to UTF-8.
+ *
+ * @param view The Metakit view to be updated
+ */
 void Database::updateEncoding(c4_View &view)
 {
     int propCount = view.NumProperties();
@@ -2479,6 +2660,11 @@ void Database::updateEncoding(c4_View &view)
     }
 }
 
+/**
+ * Fix the position indices of conditions within filters defined in old
+ * versions of PortaBase to work correctly.  Files created with PortaBase 1.4
+ * and earlier require this correction.
+ */
 void Database::fixConditionIndices()
 {
     int filterCount = filters.GetSize();
@@ -2494,6 +2680,11 @@ void Database::fixConditionIndices()
     }
 }
 
+/**
+ * Update files from old versions of PortaBase to include display settings
+ * for use on computers with full-size screens.  Files created with PortaBase
+ * 1.4.1 and earlier require this correction.
+ */
 void Database::addDesktopStats()
 {
     int count = viewColumns.GetSize();
@@ -2507,6 +2698,11 @@ void Database::addDesktopStats()
     }
 }
 
+/**
+ * Add or update the enum option indices in the main data table to support
+ * non-alphabetical sorting of enum columns.  These were added in PortaBase
+ * 1.6, but were sometimes incorrect until 1.7.
+ */
 void Database::addEnumDataIndices()
 {
     QStringList enumList = listEnums();
@@ -2517,6 +2713,12 @@ void Database::addEnumDataIndices()
     }
 }
 
+/**
+ * Add or update the enum option indices in the main data table for the named
+ * enum column.
+ *
+ * @param enumName The name of the enum whose indices are to be updated
+ */
 void Database::updateEnumDataIndices(const QString &enumName)
 {
     QStringList colNames = columnsUsingEnum(enumName);
@@ -2540,6 +2742,11 @@ void Database::updateEnumDataIndices(const QString &enumName)
     }
 }
 
+/**
+ * Update all PortaBase view definitions in old files to default to no
+ * specified sorting or filter.  The ability to specify sortings or filters
+ * to take effect when a view is switched to was introduced in PortaBase 1.6.
+ */
 void Database::addViewDefaults()
 {
     int count = views.GetSize();

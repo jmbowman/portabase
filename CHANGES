@@ -1,3 +1,13 @@
+2010-03-09  JMB  Start screen buttons, row editor focus, code comments
+
+    Added convenience buttons to the screen shown when no file is currently
+    open; these make it a little faster to create and open files, and make it
+    a little more obvious for new users what to do first.  Changed the row
+    editor so that the first text input field (if any) gets keyboard focus as
+    soon as the dialog is shown (so you can immediately start typing, and use
+    tabs to select other fields).  Also finished writing code comments for
+    use with Doxygen and updated some copyright year statements.
+
 2010-03-07  JMB  File decryption, condition editor layout, GCC warnings
 
     Fixed a bug in decrypting encrypted files that crept in when I eliminated

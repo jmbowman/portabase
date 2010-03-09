@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.h
  *
- * (c) 2005-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 #ifndef QQMENUHELPER_H
 #define QQMENUHELPER_H
 
+#include <QHash>
 #include <QIcon>
 #include <QObject>
 #include <QStringList>
@@ -25,6 +26,8 @@ class QMainWindow;
 class QMenu;
 class QSettings;
 class QToolBar;
+
+#define MAX_RECENT_FILES 5
 
 /**
  * Helps create and manage the menus for a typical document-based
@@ -62,6 +65,24 @@ class QQMenuHelper : public QObject
 {
     Q_OBJECT
 public:
+    /** Enumeration of actions created by this class */
+    enum Action {
+        New = 0,
+        Open = 1,
+        Save = 2,
+        Recent1 = 3,
+        Recent2 = 4,
+        Recent3 = 5,
+        Recent4 = 6,
+        Recent5 = 7,
+        Separator = 8,
+        Close = 9,
+        Preferences = 10,
+        Quit = 11,
+        Help = 12,
+        About = 13,
+        AboutQt = 14
+    };
     QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
                  const QString &fileDescription, const QString &fileExtension,
                  bool newFileLaunchesDialog=false);
@@ -76,7 +97,7 @@ public:
     QMenu *createMenu(QMainWindow *mainWindow);
     QMenu *fileMenu();
     QMenu *helpMenu();
-    QAction *saveAction();
+    QAction *action(Action actionId);
     QString createNewFile(const QString &fileDescription=QString::null,
                           const QString &fileExtension=QString::null);
     static QString getLastDir(QSettings *settings);
@@ -110,6 +131,7 @@ private:
     QIcon modifiedDocIcon; /**< The application document icon when there are unsaved changes */
     QString description; /**< The description of the document file type */
     QString extension; /**< The extension of the document file type */
+    QHash<Action, QAction*> actions; /**< Lookup hash for the menu actions */
     QAction *fileNewAction; /**< Action for creating a new file */
     QAction *fileOpenAction; /**< Action for opening an existing file */
     QAction *fileSaveAction; /**< Action for saving the current file */

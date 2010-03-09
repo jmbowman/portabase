@@ -219,7 +219,7 @@ Doxygen (http://www.stack.nl/~dimitri/doxygen/index.html).  To do so:
 - Make sure the TAGFILES line in PortaBase's "Doxyfile" file references the
   Qt documentation root you wish to link to; this can be either online or local
   (optional)
-- Run "doxygen Doxygen" in the Portabase source code main directory
+- Run "doxygen Doxyfile" in the Portabase source code main directory
 
 Paths and environment variable formatting will vary across operating systems,
 and the final step can optionally performed using the "doxywizard" GUI wizard.

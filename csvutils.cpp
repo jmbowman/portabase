@@ -1,7 +1,7 @@
 /*
  * csvutils.cpp
  *
- * (c) 2002-2003 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,8 +46,9 @@ CSVUtils::~CSVUtils()
  * @param filename The file to be parsed
  * @param encoding "Latin-1" for that encoding, anything else for UTF-8
  * @param db The database to load the data into
- * @return An error message (or "" for none), followed by the text of the
- *         record imported that triggered that error
+ * @return Empty if no error occurred.  Otherwise, an error message optionally
+ *         followed by the text of the record imported that triggered that
+ *         error
  */
 QStringList CSVUtils::parseFile(const QString &filename,
                                 const QString &encoding, Database *db)

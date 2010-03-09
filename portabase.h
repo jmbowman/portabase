@@ -1,7 +1,7 @@
 /*
  * portabase.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,15 @@
 #include <QStringList>
 #include "datatypes.h"
 #include "importdialog.h"
+#include "qqutil/qqmenuhelper.h"
 
 class Database;
 class MenuActions;
 class QAction;
-class QLabel;
+class QGroupBox;
 class QMenu;
 class QMenuBar;
-class QQMenuHelper;
+class QPushButton;
 class QStackedWidget;
 class ViewDisplay;
 
@@ -114,7 +115,9 @@ private:
 private:
     Database *db; /**< The currently open database, if any */
     QStackedWidget *mainStack; /**< Main widget stack (data display and "No file selected" label) */
-    QLabel *noFileLabel; /**< The "No file selected" placeholder label */
+    QWidget *noFileWidget; /**< The main widget shown when no file is open */
+    QGroupBox *recentBox; /**< The grouping box containing recentButtons */
+    QPushButton* recentButtons[MAX_RECENT_FILES]; /**< Buttons on noFileWidget representing the most recently opened files */
     QToolBar *toolbar; /**< The application toolbar */
     MenuActions *ma; /**< Menu and toolbar action definition manager */
     QQMenuHelper *mh; /**< Support code for any document-based application */

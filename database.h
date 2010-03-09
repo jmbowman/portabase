@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -201,65 +201,53 @@ private:
     c4_View data; /**< Table of user data */
     View *curView; /**< The currently selected view */
     Filter *curFilter; /**< The currently selected filter */
-    int maxId;
-    c4_IntProp Id;
-    // "_columns" view
-    c4_IntProp cIndex;
-    c4_StringProp cName;
-    c4_IntProp cType;
-    c4_StringProp cDefault;
-    c4_IntProp cId;
-    // "_views" view
-    c4_StringProp vName;
-    c4_IntProp vRpp;
-    c4_IntProp vDeskRpp;
-    c4_StringProp vSort;
-    c4_StringProp vFilter;
-    // "_viewcolumns" view
-    c4_StringProp vcView;
-    c4_IntProp vcIndex;
-    c4_StringProp vcName;
-    c4_IntProp vcWidth;
-    c4_IntProp vcDeskWidth;
-    // "_sorts" view
-    c4_StringProp sName;
-    // "_sortcolumns" view
-    c4_StringProp scSort;
-    c4_IntProp scIndex;
-    c4_StringProp scName;
-    c4_IntProp scDesc;
-    // "_filters" view
-    c4_StringProp fName;
-    // "_filterconditions" view
-    c4_StringProp fcFilter;
-    c4_IntProp fcPosition;
-    c4_StringProp fcColumn;
-    c4_IntProp fcOperator;
-    c4_StringProp fcConstant;
-    c4_IntProp fcCase;
-    // "_enums" view
-    c4_StringProp eName;
-    c4_IntProp eId;
-    c4_IntProp eIndex;
-    // "_enumoptions" view
-    c4_IntProp eoEnum;
-    c4_IntProp eoIndex;
-    c4_StringProp eoText;
-    // "_calcs" view
-    c4_IntProp calcId;
-    c4_IntProp calcDecimals;
-    // "_calcnodes" view
-    c4_IntProp cnId;
-    c4_IntProp cnNodeId;
-    c4_IntProp cnParentId;
-    c4_IntProp cnType;
-    c4_StringProp cnValue;
-    // "_global" view
-    c4_IntProp gVersion;
-    c4_StringProp gView;
-    c4_StringProp gSort;
-    c4_StringProp gFilter;
-    c4_IntProp gCrypt;
+    int maxId; /**< The largest ID of any row currently in the database */
+    c4_IntProp Id; /**< The "_id" property of the "_data" view */
+    c4_IntProp cIndex; /**< The "_cindex" property of the "_columns" view */
+    c4_StringProp cName; /**< The "_cname" property of the "_columns" view */
+    c4_IntProp cType; /**< The "_ctype" property of the "_columns" view */
+    c4_StringProp cDefault; /**< The "_cdefault" property of the "_columns" view */
+    c4_IntProp cId; /**< The "_cid" property of the "_columns" view */
+    c4_StringProp vName; /**< The "_vname" property of the "_views" view */
+    c4_IntProp vRpp; /**< The "_vrpp" property of the "_views" view */
+    c4_IntProp vDeskRpp; /**< The "_vdeskrpp" property of the "_views" view */
+    c4_StringProp vSort; /**< The "_vsort" property of the "_views" view */
+    c4_StringProp vFilter; /**< The "_vfilter" property of the "_views" view */
+    c4_StringProp vcView; /**< The "_vcview" property of the "_viewcolumns" view */
+    c4_IntProp vcIndex; /**< The "_vcindex" property of the "_viewcolumns" view */
+    c4_StringProp vcName; /**< The "_vcname" property of the "_viewcolumns" view */
+    c4_IntProp vcWidth; /**< The "_vcwidth" property of the "_viewcolumns" view */
+    c4_IntProp vcDeskWidth; /**< The "_vcdeskwidth" property of the "_viewcolumns" view */
+    c4_StringProp sName; /**< The "_sname" property of the "_sorts" view */
+    c4_StringProp scSort; /**< The "_scsort" property of the "_sortcolumns" view */
+    c4_IntProp scIndex; /**< The "_scindex" property of the "_sortcolumns" view */
+    c4_StringProp scName; /**< The "_scname" property of the "_sortcolumns" view */
+    c4_IntProp scDesc; /**< The "_scdesc" property of the "_sortcolumns" view */
+    c4_StringProp fName; /**< The "_fname" property of the "_filters" view */
+    c4_StringProp fcFilter; /**< The "_fcfilter" property of the "_filterconditions" view */
+    c4_IntProp fcPosition; /**< The "_fcposition" property of the "_filterconditions" view */
+    c4_StringProp fcColumn; /**< The "_fccolumn" property of the "_filterconditions" view */
+    c4_IntProp fcOperator; /**< The "_fcoperator" property of the "_filterconditions" view */
+    c4_StringProp fcConstant; /**< The "_fcconstant" property of the "_filterconditions" view */
+    c4_IntProp fcCase; /**< The "_fccase" property of the "_filterconditions" view */
+    c4_StringProp eName; /**< The "_ename" property of the "_enums" view */
+    c4_IntProp eId; /**< The "_eid" property of the "_enums" view */
+    c4_IntProp eIndex; /**< The "_eindex" property of the "_enums" view */
+    c4_IntProp eoEnum; /**< The "_eoenum" property of the "_enumoptions" view */
+    c4_IntProp eoIndex; /**< The "_eoindex" property of the "_enumoptions" view */
+    c4_StringProp eoText; /**< The "_eotext" property of the "_enumoptions" view */
+    c4_IntProp calcId; /**< The "_calcid" property of the "_calcs" view */
+    c4_IntProp calcDecimals; /**< The "_calcdecimals" property of the "_calcs" view */
+    c4_IntProp cnId; /**< The "_cnid" property of the "_calcnodes" view */
+    c4_IntProp cnNodeId; /**< The "_cnnodeid" property of the "_calcnodes" view */
+    c4_IntProp cnParentId; /**< The "_cnparentid" property of the "_calcnodes" view */
+    c4_IntProp cnType; /**< The "_cntype" property of the "_calcnodes" view */
+    c4_StringProp cnValue; /**< The "_cnvalue" property of the "_calcnodes" view */
+    c4_IntProp gVersion; /**< The "_gversion" property of the "_global" view */
+    c4_StringProp gView; /**< The "_gview" property of the "_global" view */
+    c4_StringProp gSort; /**< The "_gsort" property of the "_global" view */
+    c4_StringProp gFilter; /**< The "_gfilter" property of the "_global" view */
+    c4_IntProp gCrypt; /**< The "_gcrypt" property of the "_global" view */
 };
 
 #endif

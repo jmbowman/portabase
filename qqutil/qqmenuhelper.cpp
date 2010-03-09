@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.cpp
  *
- * (c) 2005-2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,8 +29,6 @@
 #include "qqhelpbrowser.h"
 #include "qqmenuhelper.h"
 
-#define MAX_RECENT_FILES 5
-
 /**
  * Constructor.
  * @param window The main application window.
@@ -39,6 +37,8 @@
  *                        to appear in file dialogs
  * @param fileExtension The file extension of the document file type (do not
  *                      include the period)
+ * @param newFileLaunchesDialog True if creating a new file launches a dialog
+ *                              to set additional parameters, false otherwise
  */
 QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
                            const QString &fileDescription,
@@ -158,6 +158,23 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     toolbar->addAction(fileNewAction);
     toolbar->addAction(fileOpenAction);
     toolbar->addAction(fileSaveAction);
+    
+    // build the actions hash
+    actions[New] = fileNewAction;
+    actions[Open] = fileOpenAction;
+    actions[Save] = fileSaveAction;
+    actions[Recent1] = recentActions[0];
+    actions[Recent2] = recentActions[1];
+    actions[Recent3] = recentActions[2];
+    actions[Recent4] = recentActions[3];
+    actions[Recent5] = recentActions[4];
+    actions[Separator] = fileSeparatorAction;
+    actions[Close] = closeAction;
+    actions[Preferences] = prefsAction;
+    actions[Quit] = quitAction;
+    actions[Help] = helpAction;
+    actions[About] = aboutAction;
+    actions[AboutQt] = aboutQtAction;
 }
 
 /**
@@ -252,9 +269,14 @@ void QQMenuHelper::updateRecentMenu()
 {
     recent->clear();
     int count = recentFiles.count();
-    for (int i = 0; i < MAX_RECENT_FILES && i < count; i++) {
-        recentActions[i]->setText(recentFiles[i]);
-        recent->addAction(recentActions[i]);
+    for (int i = 0; i < MAX_RECENT_FILES; i++) {
+        if (i < count) {
+            recentActions[i]->setText(recentFiles[i]);
+            recent->addAction(recentActions[i]);
+        }
+        else {
+            recentActions[i]->setText("");
+        }
     }
 }
 
@@ -405,13 +427,15 @@ void QQMenuHelper::addToFileMenu(QAction *action)
 }
 
 /**
- * Return the file save action.  Occasionally needed externally, for example
- * if providing the option to remove it from the toolbar.
- * @return The file save action
+ * Get the requested action object.  Occasionally needed externally, for
+ * example if creating a button with equivalent functionality.
+ *
+ * @param actionId The ID of the action to get
+ * @return The requested action
  */
-QAction *QQMenuHelper::saveAction()
+QAction *QQMenuHelper::action(Action actionId)
 {
-    return fileSaveAction;
+    return actions.value(actionId);
 }
 
 /**
@@ -532,7 +556,6 @@ void QQMenuHelper::emitOpenFile()
  * Start the process of opening a file selected from the recent files menu.
  * Emit openFile() if the file still exists, otherwise display an error
  * message.
- * @param action The action representing the selected menu item.
  */
 void QQMenuHelper::openRecent()
 {

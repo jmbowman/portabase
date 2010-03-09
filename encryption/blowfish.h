@@ -3,7 +3,7 @@
  *
  * Adapted from BeeCrypt: http://sourceforge.net/projects/beecrypt
  *
- * (c) 2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 1999, 2000, 2002 Beeyond Software Holding BV
  *
  * This library is free software; you can redistribute it and/or

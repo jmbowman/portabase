@@ -127,7 +127,7 @@ FILE_PATTERNS          = *.c \
                          *.vhd \
                          *.vhdl
 RECURSIVE              = YES
-EXCLUDE                = 
+EXCLUDE                = .git build doc packaging resources test encryption/randomkit
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = 
 EXCLUDE_SYMBOLS        = 
@@ -246,7 +246,7 @@ SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               = qt.tag=http://doc.trolltech.com/4.5
+TAGFILES               = /Developer/Documentation/Qt/html/qt.tags=http://doc.trolltech.com/4.6
 GENERATE_TAGFILE       = 
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
@@ -272,7 +272,7 @@ CALLER_GRAPH           = NO
 GRAPHICAL_HIERARCHY    = YES
 DIRECTORY_GRAPH        = YES
 DOT_IMAGE_FORMAT       = png
-DOT_PATH               = /Applications/Doxygen.app/Contents/Resources/
+DOT_PATH               = /usr/local/graphviz-2.14/bin
 DOTFILE_DIRS           = 
 DOT_GRAPH_MAX_NODES    = 50
 MAX_DOT_GRAPH_DEPTH    = 1000
