@@ -1,3 +1,14 @@
+2010-03-15  JMB  Initial Maemo support, code cleanup, release preparation work
+
+    I got PortaBase to build in the Maemo (Diablo) SDK, so I've started fixing
+    things that look bad in that environment.  In the process, I reworked a
+    lot of the layout code to be more consistent with spacing and margins.
+    I also fixed an assortment of mostly harmless bugs that were revealed by
+    the Eclipse-based ESbox IDE.  Assorted other packaging work in preparation
+    for a release: updated the Metakit patch to work with the latest release,
+    started updating the UI translation files, and made a lot of updates to the
+    build instructions (still needs some work).
+
 2010-03-09  JMB  Start screen buttons, row editor focus, code comments
 
     Added convenience buttons to the screen shown when no file is currently

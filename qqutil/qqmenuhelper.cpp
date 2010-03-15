@@ -76,7 +76,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     fileSaveAction->setToolTip(fileSaveAction->statusTip());
     fileSaveAction->setShortcut(Qt::CTRL + Qt::Key_S);
     connect(fileSaveAction, SIGNAL(triggered()), this, SIGNAL(saveFile()));
-    
+
     recent = new QMenu(tr("Open &Recent"), window);
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         // we'll set the actual paths later; just need actions that stick
@@ -84,7 +84,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
         recentActions[i] = new QAction("", window);
         connect(recentActions[i], SIGNAL(triggered()), this, SLOT(openRecent()));
     }
-    
+
     fileSeparatorAction = new QAction(this);
     fileSeparatorAction->setSeparator(true);
 
@@ -92,12 +92,12 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     closeAction->setStatusTip(tr("Close the current file"));
     closeAction->setShortcut(Qt::CTRL + Qt::Key_W);
     connect(closeAction, SIGNAL(triggered()), this, SIGNAL(closeFile()));
-    
+
     prefsAction = new QAction(tr("&Preferences"), window);
     prefsAction->setStatusTip(tr("View or change %1 settings").arg(qApp->applicationName()));
     prefsAction->setShortcut(Qt::CTRL + Qt::Key_P);
     connect(prefsAction, SIGNAL(triggered()), this, SIGNAL(editPreferences()));
-    
+
 #if defined(Q_WS_MAC)
     fileNewAction->setIconVisibleInMenu(false);
     fileOpenAction->setIconVisibleInMenu(false);
@@ -107,7 +107,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     docIcon = QIcon(":/icons/document_small.png");
     modifiedDocIcon = QIcon(darkenPixmap(QPixmap(":/icons/document_small.png")));
 #endif
-    
+
     // File menu basic setup
     file = new QMenu(tr("&File"), window);
     recent = new QMenu(tr("Open &Recent"), window);
@@ -142,7 +142,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     aboutQtAction = new QAction(tr("About &Qt"), window);
     aboutQtAction->setStatusTip(tr("About Qt"));
     connect(aboutQtAction, SIGNAL(triggered()), this, SLOT(aboutQt()));
-    
+
     // Help menu setup
     help = new QMenu(tr("&Help"), window);
     help->addAction(helpAction);
@@ -151,14 +151,17 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     help->addSeparator();
 #endif
     help->addAction(aboutAction);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+    // skip this on Maemo; the dialog is too big to read
     help->addAction(aboutQtAction);
+#endif
     window->menuBar()->addMenu(help);
-    
+
     // toolbar setup
     toolbar->addAction(fileNewAction);
     toolbar->addAction(fileOpenAction);
     toolbar->addAction(fileSaveAction);
-    
+
     // build the actions hash
     actions[New] = fileNewAction;
     actions[Open] = fileOpenAction;
@@ -307,6 +310,7 @@ void QQMenuHelper::setEdited(bool y)
 void QQMenuHelper::showHelp()
 {
     QQHelpBrowser helpBrowser(QString("qrc:/help/html/%1.html").arg(qApp->applicationName()), mainWindow);
+    helpBrowser.showMaximized();
     helpBrowser.exec();
 }
 
@@ -349,7 +353,7 @@ void QQMenuHelper::startFileSelectorMenu()
     fileOpenAction->setEnabled(true);
     fileSaveAction->setEnabled(false);
     closeAction->setEnabled(false);
-    
+
 #if defined(Q_WS_MAC)
     mainWindow->setWindowIcon(QIcon());
 #endif

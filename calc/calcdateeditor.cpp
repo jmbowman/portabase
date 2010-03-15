@@ -22,6 +22,7 @@
 #include "calcnode.h"
 #include "../datatypes.h"
 #include "../datewidget.h"
+#include "../factory.h"
 
 /**
  * Constructor.
@@ -34,8 +35,7 @@ CalcDateEditor::CalcDateEditor(const QStringList &colNames, int *colTypes, QWidg
   : PBDialog(tr("Calculation Node Editor"), parent)
 {
     group = new QButtonGroup(this);
-    QGridLayout *grid = new QGridLayout(this);
-    vbox->addLayout(grid);
+    QGridLayout *grid = Factory::gridLayout(vbox);
     QRadioButton *colButton = new QRadioButton(tr("Column"), this);
     grid->addWidget(colButton, 0, 0);
     group->addButton(colButton, 0);

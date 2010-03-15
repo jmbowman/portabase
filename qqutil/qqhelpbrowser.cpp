@@ -1,7 +1,7 @@
 /*
  * qqutil/qqhelpbrowser.cpp
  *
- * (c) 2003-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,8 @@ QQHelpBrowser::QQHelpBrowser(const QString &resource, QWidget *parent)
   : QQDialog(tr("Help"), parent)
 {
     QVBoxLayout *vbox = new QVBoxLayout(this);
+    vbox->setContentsMargins(0, 0, 0, 0);
+    vbox->setSpacing(0);
     setLayout(vbox);
 
     QTextBrowser *content = new QTextBrowser(this);
@@ -39,13 +41,13 @@ QQHelpBrowser::QQHelpBrowser(const QString &resource, QWidget *parent)
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok, Qt::Horizontal, this);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     vbox->addWidget(buttonBox);
-    
+
     QToolButton *backButton = new QToolButton(buttonBox);
     backButton->setIcon(QIcon(":/icons/back.png"));
     backButton->setToolTip(tr("Back"));
     connect(backButton, SIGNAL(clicked()), content, SLOT(backward()));
     buttonBox->addButton(backButton, QDialogButtonBox::ActionRole);
-    
+
     QToolButton *forwardButton = new QToolButton(buttonBox);
     forwardButton->setIcon(QIcon(":/icons/forward.png"));
     forwardButton->setToolTip(tr("Forward"));

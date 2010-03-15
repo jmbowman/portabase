@@ -1,0 +1,44 @@
+diff -rupN metakit-2.4.9.7/include/mk4.h metakit-2.4.9.7-patched/include/mk4.h
+--- metakit-2.4.9.7/include/mk4.h	2007-06-15 20:23:25.000000000 -0400
++++ metakit-2.4.9.7-patched/include/mk4.h	2008-05-17 17:47:50.000000000 -0400
+@@ -219,6 +219,8 @@ struct t4_i64 {
+ bool operator == (const t4_i64 a_, const t4_i64 b_);
+ bool operator < (const t4_i64 a_, const t4_i64 b_);
+ #endif 
++ 
++typedef int ((*StringCompareFunc)(const char*, const char*));
+ 
+ //---------------------------------------------------------------------------
+ 
+@@ -332,6 +334,7 @@ class c4_View {
+     friend bool operator > (const c4_View &, const c4_View &);
+     friend bool operator <= (const c4_View &, const c4_View &);
+     friend bool operator >= (const c4_View &, const c4_View &);
++    static StringCompareFunc stringCompareFunc;
+ 
+   protected:
+     void _IncSeqRef();
+diff -rupN metakit-2.4.9.7/src/format.cpp metakit-2.4.9.7-patched/src/format.cpp
+--- metakit-2.4.9.7/src/format.cpp	2007-03-09 10:58:53.000000000 -0500
++++ metakit-2.4.9.7-patched/src/format.cpp	2008-05-17 17:54:28.000000000 -0400
+@@ -867,7 +867,7 @@ int c4_FormatS::DoCompare(const c4_Bytes
+   c4_String v1((const char*)b1_.Contents(), b1_.Size());
+   c4_String v2((const char*)b2_.Contents(), b2_.Size());
+ 
+-  return v1.CompareNoCase(v2);
++  return (*c4_View::stringCompareFunc)(v1, v2);
+ }
+ 
+ void c4_FormatS::Insert(int index_, const c4_Bytes &buf_, int count_) {
+diff -rupN metakit-2.4.9.7/src/view.cpp metakit-2.4.9.7-patched/src/view.cpp
+--- metakit-2.4.9.7/src/view.cpp	2007-03-09 10:58:53.000000000 -0500
++++ metakit-2.4.9.7-patched/src/view.cpp	2009-05-23 02:50:11.000000000 -0400
+@@ -939,6 +939,8 @@ int c4_View::Compare(const c4_View &view
+ 
+   return na == nb ? 0 : i < na ?  + 1:  - 1;
+ }
++ 
++StringCompareFunc c4_View::stringCompareFunc = strcmp;
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ 

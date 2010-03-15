@@ -1,7 +1,7 @@
 /*
  * vieweditor.cpp
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
 
 #include <QComboBox>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTreeWidget>
@@ -32,20 +31,17 @@
 ViewEditor::ViewEditor(QWidget *parent)
     : PBDialog(tr("View Editor"), parent), db(0)
 {
-    QHBoxLayout *hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("View Name") + " ", this));
     nameBox = new QLineEdit(this);
     hbox->addWidget(nameBox);
 
-    hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Default Sorting") + " ", this));
     sortingBox = new QComboBox(this);
     hbox->addWidget(sortingBox, 1);
 
-    hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Default Filter") + " ", this));
     filterBox = new QComboBox(this);
     hbox->addWidget(filterBox, 1);

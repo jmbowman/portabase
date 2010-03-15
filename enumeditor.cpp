@@ -1,7 +1,7 @@
 /*
  * enumeditor.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 #include <QFileInfo>
 #include <QInputDialog>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QListWidget>
 #include <QMessageBox>
@@ -43,14 +42,12 @@ EnumEditor::EnumEditor(QWidget *parent)
   eeiIndex("_eeiindex"), eecIndex("_eecindex"), eecType("_eectype"),
   eecOldName("_eecoldname"), eecNewName("_eecnewname"), sorting(NotSorted)
 {
-    QHBoxLayout *hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Enum Name") + " ", this));
     nameBox = new QLineEdit(this);
     hbox->addWidget(nameBox);
 
-    hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    hbox = Factory::hBoxLayout(vbox);
     QPushButton *sortButton = new QPushButton(tr("Sort"), this);
     hbox->addWidget(sortButton);
     connect(sortButton, SIGNAL(clicked()), this, SLOT(sortOptions()));

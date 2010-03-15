@@ -208,7 +208,12 @@ Crypto *Database::encryption()
 void Database::updatePreferences()
 {
     QSettings settings;
-    smallScreen = settings.value("General/SmallScreen", false).toBool();
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    bool smallDefault = true;
+#else
+    bool smallDefault = false;
+#endif
+    smallScreen = settings.value("General/SmallScreen", smallDefault).toBool();
     dateFormat = settings.value("DateTime/ShortDateFormat", "yyyy-MM-dd").toString();
     timeFormat = settings.value("DateTime/TimeFormat", "hh:mm AP").toString();
 }

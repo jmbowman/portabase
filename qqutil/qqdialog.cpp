@@ -1,7 +1,7 @@
 /*
  * qqutil/qqdialog.cpp
  *
- * (c) 2003-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,6 +55,19 @@ QQDialog::~QQDialog()
         settings.setValue(widthName, w);
         settings.setValue(heightName, h);
     }
+}
+
+/**
+ *  Override QDialog's exec() method to show the dialog maximized on devices
+ *  with small screens.
+ */
+int QQDialog::exec()
+{
+
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    showMaximized();
+#endif
+    return QDialog::exec();
 }
 
 /**

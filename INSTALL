@@ -1,20 +1,21 @@
-Zaurus Development Environment
-------------------------------
-To compile PortaBase (or do any other C++ development for the Zaurus), the
-standard Qtopia development environment is used.  Details can be found at:
-
-http://www.zaurususergroup.com/modules.php?op=modload&name=phpWiki&file=index&pagename=Compiler%20Setup
+Maemo Development Environment
+-----------------------------
+To compile PortaBase for Maemo portable devices (Nokia N810, N900, etc.), you
+will need a suitable development environment.  I use ESbox
+(http://esbox.garage.maemo.org/2nd_edition/), but you should also be able to
+use the Maemo SDK directly (either on a Linux system or in a Linux virtual
+machine via VMWare, VirtualBox, etc.)  For Maemo 5 development, MADDE
+(https://wiki.maemo.org/MADDE) may work as well; at the time of this writing,
+it doesn't yet seem to support compiling Qt applications for Maemo 4.
 
 Windows Development Environment
 -------------------------------
 To compile PortaBase for use as a Windows desktop application, you will
 need the following:
-- Visual C++ 6.0 or .NET; Borland C++ almost works, but BeeCrypt needs some
-  tweaking in order to work under that compiler (if you want to try to get
-  that working, please contact me)
-- The book "C++ GUI Programming With Qt 3" by Jasmin Blanchette and Mark
-  Summerfield, which comes with a non-commercial version of Qt 3.2.1 for
-  Windows.  Alternatively, you can purchase a commercial license for Qt.
+- Windows XP, Vista, or 7
+- A recent version of Qt 4 (http://qt.nokia.com/downloads).  It's easiest to
+  get started with a version that comes with the MinGW compiler, since I
+  haven't tested the latest code with Visual Studio.
 - Inno Setup, if you wish to create the PortaBase installer; available from:
   http://www.jrsoftware.org/isinfo.php
 
@@ -23,7 +24,7 @@ Linux/UNIX Development Environment
 To compile PortaBase for use as a Linux or UNIX desktop application, you
 will need the following:
 - g++ (any relatively recent version should work)
-- A recent version of Qt 3 (including qmake and development headers)
+- A recent version of Qt 4 (including qmake and development headers)
 - Other packages as needed to satisfy the above requirements or create
   packages for your OS/distribution
   
@@ -31,109 +32,45 @@ Mac OS X Development Environment
 --------------------------------
 To compile PortaBase for use as a Mac OS X desktop application, you will
 need the following:
-- Mac OS X Jaguar (10.2) or higher
+- Mac OS X Tiger (10.4) or higher
 - The Apple developer tools (which are on one of the CDs that come with
-  Panther, and are available from http://developer.apple.com)
-- A recent version of Qt 3
+  the operating system)
+- A recent version of Qt 4 (http://qt.nokia.com/downloads)
 
 Metakit Compilation
 -------------------
-To compile PortaBase, Metakit must be compiled first.  PortaBase uses a
-version of 2.4.9.3 patched to allow case-sensitive searches, locale-sensitive
-sorting, and unicode filename support where available.  Therefore, the patch
-file metakit-2.4.9.3.patch must be applied to the Metakit 2.4.9.3 source tree
-before building.  When building for Mac OS X, however, a more recent version
-from CVS is necessary in order to avoid a build problem present in the older
-code; for the Qt/Mac developer contest, an already-patched Metakit source
-code tarball (metakit.tar.gz) has been included for convenience.
+To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
+first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
+searches and locale-sensitive sorting.  Therefore, the patch file
+metakit-2.4.9.7.patch must be applied to the Metakit 2.4.9.7 source tree before
+building.
 
-To build Metakit for the desktop test environment, run dev-x86-qpe.sh and then
-follow the Metakit installation instructions (in the Metakit README file).
-Then copy the created libmk4.a (probably in /usr/local/lib unless you
-specified somewhere else) to /opt/Qtopia/lib/ so it can be found when
-compiling PortaBase.
-
-To build Metakit for the Zaurus, use the instructions for the test environment
-(after cleaning out the results of that build, or from a different copy of the
-source directory) but with the following changes:
-
-- Run dev-arm-qpe.sh instead of dev-x86-qpe.sh.
-- Instead of running ../unix/configure, run:
-
-NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ../unix/configure --prefix=/output/dir --host=arm-linux
-
-Replace "/output/dir" with the directory you want the build results to be
-placed in (probably not /usr/local this time).  Then copy libmk4.a to
-/opt/Qtopia/sharp/lib instead of /opt/Qtopia/lib.
+To build Metakit for Maemo, follow the Metakit installation instructions (in
+the Metakit README file) inside the appropriate Scratchbox environment.  You'll
+want to pass the "--enable-threads" and "--disable-shared" parameters to the
+configure script.
 
 To compile Metakit for Windows, follow the instructions in Metakit's README
 file; be sure to build the static library version (mklib).  To compile
 Metakit for use in Linux or Mac OS X desktop PortaBase, just follow the
-README directions (the "UNIX" instructions in both cases).
+README directions (the "UNIX" instructions in both cases); you'll want to use
+the same configure script parameters mentioned above for Maemo development.
 
-BeeCrypt compilation
---------------------
-Get BeeCrypt version 3.1.0.  For the desktop versions of PortaBase, just
-follow the build instructions found in BeeCrypt's INSTALL file.  For the
-Zaurus version, run the configure script as follows:
-
-NM=arm-linux-nm LD=arm-linux-ld CC=arm-linux-gcc CXX=arm-linux-g++ RANLIB=arm-linux-ranlib AR=arm-linux-ar ./configure --prefix=/output/dir --host=arm-linux --enable-aio=no
-
-As with Metakit, replace /output/dir with the directory in which to place
-the results.  Copy libbeecrypt.a to the same place the Metakit library went.
-
-libjpeg compilation
--------------------
-For desktop Linux, this is probably already on your system; just make sure to
-install the appropriate dev package if it hasn't already been installed (for
-Debian this is libjpeg62-dev).  For Windows and Mac OS X, get version 6b from
-http://www.ijg.org and follow the build instructions from the install.doc file
-that comes with the source code (at least on Mac OS X, remember to run "make
-install-lib" at the end).  For the Zaurus version, it's easiest to just use
-the Debian arm package for libjpeg62-dev; after downloading the .deb file,
-you can extract the necessary files by running:
-
-ar x libjpeg62-dev_6b-9_arm.deb
-tar xzf data.tar.gz
-
-Move libjpeg.a to /opt/Qtopia/sharp/lib and the include files to
-/opt/Qtopia/sharp/include.
-
-Note that if you're attempting to compile using Borland C++, you'll have to
-make a few changes to the code: see http://www.bcbdev.com/articles/jpeg.htm
-for details.
-
-PortaBase for Zaurus Compilation
+PortaBase for Maemo Compilation
 --------------------------------
-After compiling Metakit, BeeCrypt, and libjpeg as described above, PortaBase
-can be compiled in the usual manner for Qtopia applications.  Use tmake on
-portabase.pro; tmake usage is described in the compiler setup HOWTO mentioned
-above.  Use "qtopia" as one of the CONFIG parameters in the file.
-"arm-linux-strip" should be run on the resulting "portabase" executable in
-order to reduce its size by removing unneeded debugging information and such.
-
-To compile a version with support for the file navigation widget on
-newer Sharp ROMs, replace the "qtopia" CONFIG parameter with "sharp".  You
-will also need the development files for Sharp's custom Zaurus libraries;
-these are available from the following (Japanese) page:
-
-http://developer.ezaurus.com/sl_j/doc/reference.htm
-
-To compile for the desktop Qtopia test environment, add "test" to the list of
-CONFIG parameters.
+After compiling Metakit as described above, PortaBase can be compiled in the
+usual manner for Maemo Qt applications.  See the ESbox (or Maemo SDK, or MADDE)
+documentation for more information.
 
 PortaBase for Windows Compilation, Packaging
 --------------------------------------------
-- Install Qt version 3.2 or newer and configure it (make sure the "bin"
+- Install a recent version of Qt 4 and configure it (make sure the "bin"
   directory is in your path and that the QTDIR and QMAKESPEC environment
   variables are set correctly).
 - Adjust the value of INCLUDEPATH in portabase.pro as needed to locate the
   library header files on your system.
-- Make sure that "desktop" is among the CONFIG parameters in portabase.pro
-  (and that "qtopia", "sharp", and "test" aren't).
 - Run "qmake -t vcapp -o portabase.dsp portabase.pro"
-- Copy beecrypt.dll, beecrypt.lib, libjpeg.lib, and mk4vc60s.lib to the
-  PortaBase source directory.
+- Copy mk4vc60s.lib to the PortaBase source directory.
 - Open the generated portabase.dsp file in Visual C++, and from
   "Build->Set Active Configuration..." select "portabase - Win32 Release".
 - Execute the build.
@@ -157,10 +94,8 @@ Linux/UNIX compilation
 ----------------------
 - Set the QMAKESPEC and QTDIR environment variables as appropriate for your
   platform
-- Make sure the Metakit and BeeCrypt static libraries (.a) are in your
-  LD_LIBRARY_PATH, and that the other library files (.so, .la, etc.) aren't.
-- Make sure that "desktop" is among the CONFIG parameters in portabase.pro
-  (and that "qtopia", "sharp", and "test" aren't).
+- Make sure the Metakit static library (libmk4.a) is in your LD_LIBRARY_PATH,
+  and that the other library files (.so, .la, etc.) aren't.
 - Run qmake on portabase.pro
 - Run make
 
@@ -188,16 +123,10 @@ portabase.pro.)
 
 Mac OS X compilation
 --------------------
-- Install Qt version 3.2 or newer and configure it, as per the directions
-  in its INSTALL file.  Newer versions are better, as this port is
-  relatively new and many bugs have been fixed recently.
-- Make sure the BeeCrypt and libjpeg static libraries (.a) are in
-  /usr/local/lib, and that the other library files (.dylib, .la, etc.)
-  aren't.  Run ranlib on both of these files, e.g.
-  "sudo ranlib /usr/local/lib/libjpeg.a".  The Metakit shared library
-  file (libmk4.dylib) should be here also.
-- Make sure that "desktop" is among the CONFIG parameters in portabase.pro
-  (and that "qtopia", "sharp", and "test" aren't).
+- Install a recent version of Qt 4 and configure it, as per the directions
+  in its INSTALL file.
+- Make sure the Metakit static library (libmk4.a) is in /usr/local/lib, and
+  that the other library files (.dylib, .la, etc.) aren't.
 - Run qmake on portabase.pro
 - Run make
 - Enter the "mac" subdirectory and run "./build_bundle.sh".  This will
@@ -226,38 +155,6 @@ and the final step can optionally performed using the "doxywizard" GUI wizard.
 I'll assume that people interested in understanding PortaBase's source code
 can figure out these variations.
 
-Package Building
-----------------
-To create ".ipk" files for installation on the Zaurus, create the following
-directory hierarchy as root in a directory of your choice:
-
-/portabase/CONTROL/control
-/portabase/CONTROL/postinst
-/portabase/opt/QtPalmtop/apps/Applications/portabase.desktop
-/portabase/opt/QtPalmtop/bin/portabase
-/portabase/opt/QtPalmtop/help/en/html/portabase.html
-/portabase/opt/QtPalmtop/help/ja/html/portabase.html
-/portabase/opt/QtPalmtop/help/zh_TW/html/portabase.html
-/portabase/opt/QtPalmtop/i18n/cs/portabase.qm
-/portabase/opt/QtPalmtop/i18n/de/portabase.qm
-/portabase/opt/QtPalmtop/i18n/fr/portabase.qm
-/portabase/opt/QtPalmtop/i18n/ja/portabase.qm
-/portabase/opt/QtPalmtop/i18n/zh_TW/portabase.qm
-/portabase/opt/QtPalmtop/pics/PortaBase.png
-/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerNext.xpm
-/portabase/opt/QtPalmtop/pics/portabase/QtaDatePickerPrev.xpm
-/portabase/opt/QtPalmtop/pics/portabase/calc.png
-/portabase/opt/QtPalmtop/pics/portabase/calendar.xpm
-/portabase/opt/QtPalmtop/pics/portabase/checked.png
-/portabase/opt/QtPalmtop/pics/portabase/image.png
-/portabase/opt/QtPalmtop/pics/portabase/note.png
-/portabase/opt/QtPalmtop/pics/portabase/save.png
-/portabase/opt/QtPalmtop/pics/portabase/save_disabled.png
-/portabase/opt/QtPalmtop/pics/portabase/unchecked.png
-/portabase/opt/QtPalmtop/pics144/portabase/save.png
-/portabase/opt/QtPalmtop/pics144/portabase/save_disabled.png
-
-(The portabase.qm files are created by running lrelease on the .pro file.)
-
-Finally, run ipkg-build on the portabase directory; this will create the
-.ipk file.
+Maemo Package Building
+----------------------
+TODO

@@ -1,7 +1,7 @@
 /*
  * factory.h
  *
- * (c) 2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,13 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
+#include <QIcon>
+#include <QLayout>
 #include <QStringList>
 
 class QAbstractItemView;
-class QGridLayout;
-class QHBoxLayout;
 class QListWidget;
 class QTreeWidget;
-class QVBoxLayout;
 class QWidget;
 
 /**
@@ -34,13 +33,19 @@ class Factory
 {
 public:
     static QGridLayout *gridLayout(QWidget *parent, bool useForParent=false);
+    static QGridLayout *gridLayout(QBoxLayout *parent);
     static QHBoxLayout *hBoxLayout(QWidget *parent, bool useForParent=false);
+    static QHBoxLayout *hBoxLayout(QBoxLayout *parent);
     static QVBoxLayout *vBoxLayout(QWidget *parent, bool useForParent=false);
+    static QVBoxLayout *vBoxLayout(QBoxLayout *parent);
     static QListWidget *listWidget(QWidget *parent);
     static QTreeWidget *treeWidget(QWidget *parent, const QStringList &headers);
     static QIcon checkBoxIcon(int checked);
     static void updateRowColors(QAbstractItemView *view);
     static void createCheckBoxIcons();
+
+private:
+    static void setupLayout(QLayout *layout);
 
 public:
     static QColor evenRowColor;

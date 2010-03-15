@@ -1,7 +1,7 @@
 /*
  * factory.cpp
  *
- * (c) 2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
 
 #include <QApplication>
 #include <QHeaderView>
-#include <QLayout>
 #include <QListWidget>
 #include <QPainter>
 #include <QPalette>
@@ -38,11 +37,25 @@ QIcon Factory::uncheckedIcon;
 QGridLayout *Factory::gridLayout(QWidget *parent, bool useForParent)
 {
     QGridLayout *grid = new QGridLayout(parent);
-    grid->setContentsMargins(0, 0, 0, 0);
-    grid->setSpacing(0);
+    setupLayout(grid);
     if (useForParent) {
         parent->setLayout(grid);
     }
+    return grid;
+}
+
+/**
+ * Create a QGridLayout and configure it with no margin or spacing (to better
+ * take advantage of available space on small screens, primarily).
+ *
+ * @param parent The new layout's parent layout
+ * @return The new layout
+ */
+QGridLayout *Factory::gridLayout(QBoxLayout *parent)
+{
+    QGridLayout *grid = new QGridLayout();
+    parent->addLayout(grid);
+    setupLayout(grid);
     return grid;
 }
 
@@ -57,11 +70,25 @@ QGridLayout *Factory::gridLayout(QWidget *parent, bool useForParent)
 QHBoxLayout *Factory::hBoxLayout(QWidget *parent, bool useForParent)
 {
     QHBoxLayout *hbox = new QHBoxLayout(parent);
-    hbox->setContentsMargins(0, 0, 0, 0);
-    hbox->setSpacing(0);
+    setupLayout(hbox);
     if (useForParent) {
         parent->setLayout(hbox);
     }
+    return hbox;
+}
+
+/**
+ * Create a QHBoxLayout and configure it with no margin or spacing (to better
+ * take advantage of available space on small screens, primarily).
+ *
+ * @param parent The new layout's parent layout
+ * @return The new layout
+ */
+QHBoxLayout *Factory::hBoxLayout(QBoxLayout *parent)
+{
+    QHBoxLayout *hbox = new QHBoxLayout();
+    parent->addLayout(hbox);
+    setupLayout(hbox);
     return hbox;
 }
 
@@ -76,12 +103,40 @@ QHBoxLayout *Factory::hBoxLayout(QWidget *parent, bool useForParent)
 QVBoxLayout *Factory::vBoxLayout(QWidget *parent, bool useForParent)
 {
     QVBoxLayout *vbox = new QVBoxLayout(parent);
-    vbox->setContentsMargins(0, 0, 0, 0);
-    vbox->setSpacing(0);
+    setupLayout(vbox);
     if (useForParent) {
         parent->setLayout(vbox);
     }
     return vbox;
+}
+
+/**
+ * Create a QVBoxLayout and configure it with no margin or spacing (to better
+ * take advantage of available space on small screens, primarily).
+ *
+ * @param parent The new layout's parent layout
+ * @return The new layout
+ */
+QVBoxLayout *Factory::vBoxLayout(QBoxLayout *parent)
+{
+    QVBoxLayout *vbox = new QVBoxLayout();
+    parent->addLayout(vbox);
+    setupLayout(vbox);
+    return vbox;
+}
+
+/**
+ * Setup code common for all new layouts.
+ *
+ * @param layout The layout being configured
+ */
+void Factory::setupLayout(QLayout *layout)
+{
+    // It's important to keep margins inside QGroupBoxes, or they look wrong
+    if (!layout->parentWidget()->inherits("QGroupBox")) {
+        layout->setContentsMargins(0, 0, 0, 0);
+    }
+    layout->setSpacing(0);
 }
 
 /**

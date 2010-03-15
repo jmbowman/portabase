@@ -1,7 +1,7 @@
 /*
  * calceditor.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
 
 #include <QHeaderView>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QSpinBox>
@@ -39,8 +38,7 @@
 CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringList &colNames, int *colTypes, QWidget *parent)
     : PBDialog(tr("Calculation Editor"), parent), db(dbase)
 {
-    QGridLayout *grid = new QGridLayout(this);
-    vbox->addLayout(grid);
+    QGridLayout *grid = Factory::gridLayout(vbox);
     grid->addWidget(new QLabel(tr("Column Name") + ": ", this), 0, 0);
     grid->addWidget(new QLabel(calcName, this), 0, 1);
     grid->addWidget(new QLabel(tr("Equation") + ":", this), 1, 0);

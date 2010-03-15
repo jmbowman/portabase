@@ -16,6 +16,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
+#include <QString>
 #include <mk4.h>
 
 class Condition;

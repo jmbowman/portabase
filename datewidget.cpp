@@ -37,7 +37,7 @@ DateWidget::DateWidget(QWidget *parent)
     days.append(tr("Fri"));
     days.append(tr("Sat"));
     days.append(tr("Sun"));
-    
+
     months.append(tr("Jan"));
     months.append(tr("Feb"));
     months.append(tr("Mar"));
@@ -50,19 +50,19 @@ DateWidget::DateWidget(QWidget *parent)
     months.append(tr("Oct"));
     months.append(tr("Nov"));
     months.append(tr("Dec"));
-    
+
     dateObj = QDate::currentDate();
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
-    
+
     QToolButton *button = new QToolButton(this);
     button->setIcon(QIcon(":/icons/calendar.png"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchSelector()));
     layout->addWidget(button);
-    
+
     display = new QLabel(toString(dateObj), this);
     display->setAlignment(Qt::AlignCenter);
     layout->addWidget(display, 1);
-    
+
     noneButton = new QPushButton(tr("None"), this);
     connect(noneButton, SIGNAL(clicked()), this, SLOT(setToNone()));
     layout->addWidget(noneButton);
@@ -167,7 +167,7 @@ void DateWidget::setToNone()
 }
 
 /**
- * Launches a QDatePicker which is preset to the currently selected date,
+ * Launches a DateDialog which is preset to the currently selected date,
  * and uses the new selection from the dialog as the new date selection if
  * appropriate.
  */

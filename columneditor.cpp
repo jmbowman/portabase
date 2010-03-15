@@ -17,7 +17,6 @@
 #include <QComboBox>
 #include <QDialogButtonBox>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QStringList>
@@ -28,6 +27,7 @@
 #include "database.h"
 #include "dbeditor.h"
 #include "enumeditor.h"
+#include "factory.h"
 #include "notebutton.h"
 #include "numberwidget.h"
 
@@ -40,7 +40,7 @@
 ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
   : QQDialog("", parent), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
 {
-    QGridLayout *grid = new QGridLayout(this);
+    QGridLayout *grid = Factory::gridLayout(this, true);
 
     grid->addWidget(new QLabel(tr("Name"), this), 0, 0);
     nameBox = new QLineEdit(this);
@@ -105,7 +105,6 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     grid->addWidget(box, 3, 3, 1, 2);
     connect(box, SIGNAL(accepted()), this, SLOT(accept()));
     connect(box, SIGNAL(rejected()), this, SLOT(reject()));
-    setLayout(grid);
     finishConstruction();
 }
 

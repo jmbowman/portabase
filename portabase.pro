@@ -1,5 +1,5 @@
 TEMPLATE        = app
-CONFIG         += qt warn_on debug thread
+CONFIG         += qt warn_on release thread
 QT             += xml
 TARGET          = PortaBase
 DESTDIR         = build
@@ -143,18 +143,29 @@ SOURCES         = calc/calcdateeditor.cpp \
 include(color_picker/qtcolorpicker.pri)
 
 # Stuff for all Linux/UNIX versions
-unix:LIBS       += -lm -lmk4 -ljpeg
+unix:LIBS       += -lm -lmk4
 
 # Stuff for Mac OS X
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 macx {
+    CONFIG             += static
     RESOURCES           = resources/mac.qrc
-    ICON                = packaging/PortaBase.icns
-    DOCUMENT_ICON.files = packaging/PortaBaseFile.icns
+    ICON                = packaging/mac/PortaBase.icns
+    DOCUMENT_ICON.files = packaging/mac/PortaBaseFile.icns
     DOCUMENT_ICON.path  = Contents/Resources
-    QMAKE_BUNDLE_DATA  += DOCUMENT_ICON
-    QMAKE_INFO_PLIST    = packaging/Info.plist
-    #CONFIG             += x86 ppc
+    EN_LPROJ.files      = packaging/mac/en.lproj/InfoPlist.strings
+    EN_LPROJ.path       = Contents/Resources/en.lproj
+    JA_LPROJ.files      = packaging/mac/ja.lproj/InfoPlist.strings
+    JA_LPROJ.path       = Contents/Resources/ja.lproj
+    QMAKE_BUNDLE_DATA  += DOCUMENT_ICON EN_LPROJ JA_LPROJ
+    QMAKE_INFO_PLIST    = packaging/mac/Info.plist
+    CONFIG             += x86 ppc
     #INCLUDEPATH        += /opt/local/include
+}
+
+# Stuff for Maemo
+maemo5|contains(QT_CONFIG, hildon): {
+    RESOURCES           = resources/maemo.qrc
 }
 
 # Stuff for Windows
@@ -165,3 +176,10 @@ win32:QMAKE_CXXFLAGS_RELEASE += /MD
 win32:INCLUDEPATH            += D:\Devel\metakit-2.4.9.3\include \
                                 D:\Devel\jpeg-6b \
                                 D:\Devel
+
+# Stuff for static builds
+static {
+    QTPLUGIN           += qtaccessiblewidgets qjpeg
+    DEFINES            += STATIC_QT
+    QMAKE_CXXFLAGS     += -fvisibility=hidden
+}

@@ -1,7 +1,7 @@
 /*
  * qqutil/qqdialog.h
  *
- * (c) 2003-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,9 @@ class QQDialog: public QDialog
 public:
     QQDialog(QString title, QWidget *parent=0);
     virtual ~QQDialog();
+
+public slots:
+    int exec();
 
 protected:
     QDialogButtonBox *addOkCancelButtons(QVBoxLayout *layout, bool cancel=true);

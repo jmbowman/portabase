@@ -18,7 +18,6 @@
 #include <QComboBox>
 #include <QDate>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QTime>
@@ -40,8 +39,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
   : PBDialog(tr("Condition Editor"), parent), dataType(STRING)
 {
     db = dbase;
-    QHBoxLayout *hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     columnList= new QComboBox(this);
     hbox->addWidget(columnList);
     columnList->addItem(tr("Any text column"));
@@ -60,8 +58,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
             this, SLOT(updateDisplay(int)));
     hbox->addStretch(1);
 
-    hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+    hbox = Factory::hBoxLayout(vbox);
     opList = new QComboBox(this);
     opList->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     hbox->addWidget(opList);

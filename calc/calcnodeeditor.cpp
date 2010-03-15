@@ -1,7 +1,7 @@
 /*
  * calcnodeeditor.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 #include <QApplication>
 #include <QButtonGroup>
 #include <QComboBox>
-#include <QLayout>
 #include <QListWidget>
 #include <QMessageBox>
 #include <QRadioButton>
@@ -38,8 +37,7 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
   : PBDialog(tr("Calculation Node Editor"), parent)
 {
     group = new QButtonGroup(this);
-    QGridLayout *grid = new QGridLayout(this);
-    vbox->addLayout(grid);
+    QGridLayout *grid = Factory::gridLayout(vbox);
     QRadioButton *colButton = new QRadioButton(tr("Column"), this);
     group->addButton(colButton, 0);
     grid->addWidget(colButton, 0, 0);
@@ -186,7 +184,7 @@ bool CalcNodeEditor::isValid()
 }
 
 /**
- * Called when a column is selected from the combo box, in order to 
+ * Called when a column is selected from the combo box, in order to
  * automatically check the appropriate radio button.
  */
 void CalcNodeEditor::columnSelected(int)

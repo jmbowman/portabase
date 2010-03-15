@@ -1,7 +1,7 @@
 /*
  * slideshowdialog.cpp
  *
- * (c) 2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
 #include <QDesktopWidget>
 #include <QDialogButtonBox>
 #include <QLabel>
-#include <QLayout>
 #include <QSettings>
 #include <QSpinBox>
+#include "../factory.h"
 #include "../view.h"
 #include "imagewidget.h"
 #include "slideshowdialog.h"
@@ -36,8 +36,7 @@ SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *paren
   : PBDialog(tr("Slideshow"), parent), fullScreen(0)
 {
     currentView = view;
-    QGridLayout *grid = new QGridLayout(this);
-    vbox->addLayout(grid);
+    QGridLayout *grid = Factory::gridLayout(vbox);
     grid->addWidget(new QLabel(tr("Column"), this), 0, 0);
     columnList = new QComboBox(this);
     columnList->addItems(columns);

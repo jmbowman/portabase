@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -129,42 +131,53 @@
     <name>CalcWidget</name>
     <message>
         <source>Update</source>
-        <translation>Aktualisieren</translation>
+        <translation type="obsolete">Aktualisieren</translation>
+    </message>
+    <message>
+        <source>Update calculated value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ColorDialog</name>
     <message>
         <source>Hu&amp;e:</source>
-        <translation>Farb&amp;ton :</translation>
+        <translation type="obsolete">Farb&amp;ton :</translation>
     </message>
     <message>
         <source>&amp;Sat:</source>
-        <translation>&amp;Sättigung :</translation>
+        <translation type="obsolete">&amp;Sättigung :</translation>
     </message>
     <message>
         <source>&amp;Val:</source>
-        <translation>&amp;Helligkeit :</translation>
+        <translation type="obsolete">&amp;Helligkeit :</translation>
     </message>
     <message>
         <source>&amp;Red:</source>
-        <translation>&amp;Rot :</translation>
+        <translation type="obsolete">&amp;Rot :</translation>
     </message>
     <message>
         <source>&amp;Green:</source>
-        <translation>&amp;Grün :</translation>
+        <translation type="obsolete">&amp;Grün :</translation>
     </message>
     <message>
         <source>Bl&amp;ue:</source>
-        <translation>Bla&amp;u :</translation>
+        <translation type="obsolete">Bla&amp;u :</translation>
     </message>
     <message>
         <source>A&amp;lpha channel:</source>
-        <translation>A&amp;lpha :</translation>
+        <translation type="obsolete">A&amp;lpha :</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Farbe auswählen</translation>
+        <translation type="obsolete">Farbe auswählen</translation>
+    </message>
+</context>
+<context>
+    <name>ColorPickerPopup</name>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -327,6 +340,17 @@
     </message>
 </context>
 <context>
+    <name>DateDialog</name>
+    <message>
+        <source>Select a date</source>
+        <translation type="unfinished">Datum auswählen</translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Heute</translation>
+    </message>
+</context>
+<context>
     <name>DateWidget</name>
     <message>
         <source>None</source>
@@ -485,15 +509,15 @@ werden gelöscht:</translation>
     <name>HelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Zurück</translation>
+        <translation type="obsolete">Zurück</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Vorwärts</translation>
+        <translation type="obsolete">Vorwärts</translation>
     </message>
 </context>
 <context>
@@ -565,19 +589,19 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>Import rows from CSV file</source>
-        <translation>Zeilen aus CSV-Datei importieren</translation>
+        <translation type="obsolete">Zeilen aus CSV-Datei importieren</translation>
     </message>
     <message>
         <source>Import from MobileDB file</source>
-        <translation>Aus MobileDB importieren</translation>
+        <translation type="obsolete">Aus MobileDB importieren</translation>
     </message>
     <message>
         <source>Import from text file</source>
-        <translation>Aus Text-Datei importieren</translation>
+        <translation type="obsolete">Aus Text-Datei importieren</translation>
     </message>
     <message>
         <source>Import from XML file</source>
-        <translation>Aus XML-Datei importieren</translation>
+        <translation type="obsolete">Aus XML-Datei importieren</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
@@ -605,54 +629,54 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>Select an image</source>
-        <translation>Wählen Sie ein Bild</translation>
+        <translation type="obsolete">Wählen Sie ein Bild</translation>
     </message>
 </context>
 <context>
     <name>MenuActions</name>
     <message>
         <source>File</source>
-        <translation>Datei</translation>
+        <translation type="obsolete">Datei</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ansicht</translation>
+        <translation type="obsolete">Ansicht</translation>
     </message>
     <message>
         <source>Row</source>
-        <translation>Zeile</translation>
+        <translation type="obsolete">Zeile</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation>Sortieren</translation>
+        <translation type="obsolete">Sortieren</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation>Filter</translation>
+        <translation type="obsolete">Filter</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="obsolete">Neu</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Öffnen</translation>
+        <translation type="obsolete">Öffnen</translation>
     </message>
     <message>
         <source>Open Recent</source>
-        <translation>Zuletzt geöffnete Dateien</translation>
+        <translation type="obsolete">Zuletzt geöffnete Dateien</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="obsolete">Speichern</translation>
     </message>
     <message>
         <source>Change Password</source>
-        <translation>Passwort ändern</translation>
+        <translation type="obsolete">Passwort ändern</translation>
     </message>
     <message>
         <source>Import</source>
@@ -664,63 +688,63 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>Slideshow</source>
-        <translation>Diashow</translation>
+        <translation type="obsolete">Diashow</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation>Eigenschaften</translation>
+        <translation type="obsolete">Eigenschaften</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>Einstellungen</translation>
+        <translation type="obsolete">Einstellungen</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Beenden</translation>
+        <translation type="obsolete">Beenden</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Liste</translation>
+        <translation type="obsolete">Liste</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation>Icons</translation>
+        <translation type="obsolete">Icons</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation>Hilfe Inhalt</translation>
+        <translation type="obsolete">Hilfe Inhalt</translation>
     </message>
     <message>
         <source>About PortaBase</source>
-        <translation>Über Portabase</translation>
+        <translation type="obsolete">Über Portabase</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation>Über Qt</translation>
+        <translation type="obsolete">Über Qt</translation>
     </message>
     <message>
         <source>Quick Filter</source>
-        <translation>Sofortfilter</translation>
+        <translation type="obsolete">Sofortfilter</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation type="obsolete">Hinzufügen</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation type="obsolete">Bearbeiten</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="obsolete">Löschen</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Umbenennen</translation>
+        <translation type="obsolete">Umbenennen</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Aktualisieren</translation>
+        <translation type="obsolete">Aktualisieren</translation>
     </message>
     <message>
         <source>All Columns</source>
@@ -728,35 +752,35 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>All Rows</source>
-        <translation>Alle Zeilen</translation>
+        <translation type="obsolete">Alle Zeilen</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation>Anzeigen</translation>
+        <translation type="obsolete">Anzeigen</translation>
     </message>
     <message>
         <source>Delete Rows In Filter</source>
-        <translation>Gefilterte Zeilen Löschen</translation>
+        <translation type="obsolete">Gefilterte Zeilen Löschen</translation>
     </message>
     <message>
         <source>Edit Columns</source>
-        <translation>Spalten bearbeiten</translation>
+        <translation type="obsolete">Spalten bearbeiten</translation>
     </message>
     <message>
         <source>Edit Enums</source>
-        <translation>Aufzählung bearbeiten</translation>
+        <translation type="obsolete">Aufzählung bearbeiten</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation type="obsolete">Schließen</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation type="obsolete">&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -776,23 +800,23 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <translation type="obsolete">&amp;Hilfe</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <translation type="obsolete">&amp;Neu</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation>Ö&amp;ffnen</translation>
+        <translation type="obsolete">Ö&amp;ffnen</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Zuletzt &amp;Geöffnet</translation>
+        <translation type="obsolete">Zuletzt &amp;Geöffnet</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation type="obsolete">&amp;Speichern</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
@@ -820,19 +844,19 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Beenden</translation>
+        <translation type="obsolete">&amp;Beenden</translation>
     </message>
     <message>
         <source>Help &amp;Contents</source>
-        <translation>Hilfe &amp;Inhalt</translation>
+        <translation type="obsolete">Hilfe &amp;Inhalt</translation>
     </message>
     <message>
         <source>&amp;About PortaBase</source>
-        <translation>Ü&amp;ber PortaBase</translation>
+        <translation type="obsolete">Ü&amp;ber PortaBase</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>Über &amp;Qt</translation>
+        <translation type="obsolete">Über &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
@@ -868,7 +892,7 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>&amp;Delete Rows In Filter</source>
-        <translation>&amp;Gefilterte Zeilen Löschen</translation>
+        <translation type="obsolete">&amp;Gefilterte Zeilen Löschen</translation>
     </message>
     <message>
         <source>Edit &amp;Enums</source>
@@ -876,54 +900,177 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;Schließen</translation>
+        <translation type="obsolete">&amp;Schließen</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
         <translation>&amp;Spalten bearbeiten</translation>
+    </message>
+    <message>
+        <source>Change the current file&apos;s password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new file from data in another format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import rows from a CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export data to another file format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start an image slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show information about the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View or change PortaBase settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply a one-condition filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show all of the database columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show all rows of data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a copy of the selected row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the selected row in more detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete Rows in Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all rows matching the current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the database format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the enumerated data types</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NewFileDialog</name>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="obsolete">Export</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation>Geben Sie einen Namen für die neue Datei an</translation>
+        <translation type="obsolete">Geben Sie einen Namen für die neue Datei an</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation>Datei existiert bereits, überschreiben?</translation>
+        <translation type="obsolete">Datei existiert bereits, überschreiben?</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation>Datei verschlüsseln?</translation>
+        <translation type="obsolete">Datei verschlüsseln?</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation>PortaBase Dateien</translation>
+        <translation type="obsolete">PortaBase Dateien</translation>
     </message>
     <message>
         <source>Text files</source>
-        <translation>Text Dateien</translation>
+        <translation type="obsolete">Text Dateien</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation>XML Dateien</translation>
+        <translation type="obsolete">XML Dateien</translation>
     </message>
     <message>
         <source>Choose a filename to save under</source>
-        <translation>Wählen Sie einen Namen zum speichern unter</translation>
+        <translation type="obsolete">Wählen Sie einen Namen zum speichern unter</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation>Textdatei mit Komma-separierten Werten</translation>
+        <translation type="obsolete">Textdatei mit Komma-separierten Werten</translation>
     </message>
     <message>
         <source>Encrypted file</source>
-        <translation>Verschlüsselte Datei</translation>
+        <translation type="obsolete">Verschlüsselte Datei</translation>
+    </message>
+</context>
+<context>
+    <name>NumberWidget</name>
+    <message>
+        <source>Show calculator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -942,11 +1089,11 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation type="obsolete">Abbrechen</translation>
     </message>
     <message>
         <source>Add</source>
@@ -973,31 +1120,31 @@ werden gelöscht:</translation>
     <name>PBFileSelector</name>
     <message>
         <source>No file selected</source>
-        <translation>Keine Datei ausgewählt</translation>
+        <translation type="obsolete">Keine Datei ausgewählt</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation>PortaBase Dateien</translation>
+        <translation type="obsolete">PortaBase Dateien</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation>Wählen Sie eine Datei aus</translation>
+        <translation type="obsolete">Wählen Sie eine Datei aus</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation>Geben Sie einen Namen für die neue Datei an</translation>
+        <translation type="obsolete">Geben Sie einen Namen für die neue Datei an</translation>
     </message>
     <message>
         <source>Unable to create new file</source>
-        <translation>Die neue Datei kann nicht angelegt werden</translation>
+        <translation type="obsolete">Die neue Datei kann nicht angelegt werden</translation>
     </message>
     <message>
         <source>Enter the new file name</source>
-        <translation>Geben Sie einen Namen für die neue Datei an</translation>
+        <translation type="obsolete">Geben Sie einen Namen für die neue Datei an</translation>
     </message>
     <message>
         <source>Unable to rename the file</source>
-        <translation>Die Datei kann nicht umbenannt werden</translation>
+        <translation type="obsolete">Die Datei kann nicht umbenannt werden</translation>
     </message>
 </context>
 <context>
@@ -1031,7 +1178,7 @@ werden gelöscht:</translation>
     <name>PortaBase</name>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="obsolete">Löschen</translation>
     </message>
     <message>
         <source>XML</source>
@@ -1047,7 +1194,7 @@ werden gelöscht:</translation>
     </message>
     <message>
         <source>Unable to create new file</source>
-        <translation>Die neue Datei kann nicht angelegt werden</translation>
+        <translation type="obsolete">Die neue Datei kann nicht angelegt werden</translation>
     </message>
     <message>
         <source>This file uses a newer version of the
@@ -1060,7 +1207,7 @@ unterstützt, bitte Version aktualisieren</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation>Sind Sie sicher?</translation>
+        <translation type="obsolete">Sind Sie sicher?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -1146,11 +1293,35 @@ Filter löschen?</translation>
     </message>
     <message>
         <source>File does not exist</source>
-        <translation>Datei existiert nicht</translation>
+        <translation type="obsolete">Datei existiert nicht</translation>
     </message>
     <message>
         <source>Not a PortaBase file</source>
         <translation>Das ist keine Portabase-Datei</translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PortaBase files</source>
+        <translation type="unfinished">PortaBase Dateien</translation>
+    </message>
+    <message>
+        <source>Recently opened files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encrypt the file?</source>
+        <translation type="unfinished">Datei verschlüsseln?</translation>
+    </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation type="unfinished">XML Dateien</translation>
     </message>
 </context>
 <context>
@@ -1261,27 +1432,83 @@ Filter löschen?</translation>
     </message>
     <message>
         <source>Top-level</source>
-        <translation>Top level</translation>
+        <translation type="obsolete">Top level</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation>Menü</translation>
+        <translation type="obsolete">Menü</translation>
     </message>
     <message>
         <source>Menus</source>
-        <translation>Menüs</translation>
+        <translation type="obsolete">Menüs</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation>Anzeigen</translation>
+        <translation type="obsolete">Anzeigen</translation>
     </message>
     <message>
         <source>Toolbar Button</source>
-        <translation>Werkzeugleiste</translation>
+        <translation type="obsolete">Werkzeugleiste</translation>
     </message>
     <message>
         <source>Buttons</source>
-        <translation>Schaltflächen</translation>
+        <translation type="obsolete">Schaltflächen</translation>
+    </message>
+    <message>
+        <source>Use small-screen settings on this device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished">T</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation type="unfinished">J</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aquamarine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lavender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thistle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1347,87 +1574,87 @@ Filter löschen?</translation>
     <name>QDatePicker</name>
     <message>
         <source>Select a date</source>
-        <translation>Datum auswählen</translation>
+        <translation type="obsolete">Datum auswählen</translation>
     </message>
     <message>
         <source>January</source>
-        <translation>Januar</translation>
+        <translation type="obsolete">Januar</translation>
     </message>
     <message>
         <source>February</source>
-        <translation>Februar</translation>
+        <translation type="obsolete">Februar</translation>
     </message>
     <message>
         <source>March</source>
-        <translation>März</translation>
+        <translation type="obsolete">März</translation>
     </message>
     <message>
         <source>April</source>
-        <translation>April</translation>
+        <translation type="obsolete">April</translation>
     </message>
     <message>
         <source>May</source>
-        <translation>Mai</translation>
+        <translation type="obsolete">Mai</translation>
     </message>
     <message>
         <source>June</source>
-        <translation>Juni</translation>
+        <translation type="obsolete">Juni</translation>
     </message>
     <message>
         <source>July</source>
-        <translation>Juli</translation>
+        <translation type="obsolete">Juli</translation>
     </message>
     <message>
         <source>August</source>
-        <translation>August</translation>
+        <translation type="obsolete">August</translation>
     </message>
     <message>
         <source>September</source>
-        <translation>September</translation>
+        <translation type="obsolete">September</translation>
     </message>
     <message>
         <source>October</source>
-        <translation>Oktober</translation>
+        <translation type="obsolete">Oktober</translation>
     </message>
     <message>
         <source>November</source>
-        <translation>November</translation>
+        <translation type="obsolete">November</translation>
     </message>
     <message>
         <source>December</source>
-        <translation>Dezember</translation>
+        <translation type="obsolete">Dezember</translation>
     </message>
     <message>
         <source>Su</source>
-        <translation>So</translation>
+        <translation type="obsolete">So</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>Mo</translation>
+        <translation type="obsolete">Mo</translation>
     </message>
     <message>
         <source>Tu</source>
-        <translation>Di</translation>
+        <translation type="obsolete">Di</translation>
     </message>
     <message>
         <source>W</source>
-        <translation>Mi</translation>
+        <translation type="obsolete">Mi</translation>
     </message>
     <message>
         <source>Th</source>
-        <translation>Do</translation>
+        <translation type="obsolete">Do</translation>
     </message>
     <message>
         <source>F</source>
-        <translation>Fr</translation>
+        <translation type="obsolete">Fr</translation>
     </message>
     <message>
         <source>Sa</source>
-        <translation>Sa</translation>
+        <translation type="obsolete">Sa</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Heute</translation>
+        <translation type="obsolete">Heute</translation>
     </message>
 </context>
 <context>
@@ -1565,23 +1792,23 @@ Filter löschen?</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>T</translation>
+        <translation type="obsolete">T</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>J</translation>
+        <translation type="obsolete">J</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>pm</translation>
+        <translation type="obsolete">pm</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>am</translation>
+        <translation type="obsolete">am</translation>
     </message>
     <message>
         <source>Problematic row</source>
@@ -1604,7 +1831,137 @@ Filter löschen?</translation>
     <name>QQDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation>Portabase</translation>
+        <translation type="obsolete">Portabase</translation>
+    </message>
+</context>
+<context>
+    <name>QQHelpBrowser</name>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished">Hilfe</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Zurück</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Vorwärts</translation>
+    </message>
+</context>
+<context>
+    <name>QQMenuHelper</name>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation type="unfinished">Wählen Sie einen Namen zum speichern unter</translation>
+    </message>
+    <message>
+        <source>&amp;About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>Create a new file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation type="unfinished">Ö&amp;ffnen</translation>
+    </message>
+    <message>
+        <source>Open an existing file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished">&amp;Beenden</translation>
+    </message>
+    <message>
+        <source>Quit the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>Save the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open &amp;Recent</source>
+        <translation type="unfinished">Zuletzt &amp;Geöffnet</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Schließen</translation>
+    </message>
+    <message>
+        <source>Close the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation type="unfinished">&amp;Einstellungen</translation>
+    </message>
+    <message>
+        <source>View or change %1 settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Datei</translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation type="unfinished">Hilfe Inhalt</translation>
+    </message>
+    <message>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Über &amp;Qt</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">Über Qt</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Hilfe</translation>
+    </message>
+    <message>
+        <source>Save changes?</source>
+        <translation type="unfinished">Änderungen speichern?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nein</translation>
+    </message>
+    <message>
+        <source>File already exists; overwrite it?</source>
+        <translation type="unfinished">Datei existiert bereits, überschreiben?</translation>
+    </message>
+    <message>
+        <source>Choose a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File does not exist</source>
+        <translation type="unfinished">Datei existiert nicht</translation>
+    </message>
+    <message>
+        <source>The selected item is a directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1639,6 +1996,81 @@ Filter löschen?</translation>
     </message>
 </context>
 <context>
+    <name>QtColorPicker</name>
+    <message>
+        <source>Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RowEditor</name>
     <message>
         <source>Row Editor</source>
@@ -1650,6 +2082,22 @@ Filter löschen?</translation>
     <message>
         <source>Row Viewer</source>
         <translation>Zeilen Ansicht</translation>
+    </message>
+    <message>
+        <source>Previous row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit this row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next row</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

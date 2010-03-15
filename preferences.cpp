@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 #include <QFont>
 #include <QGroupBox>
 #include <QLabel>
-#include <QLayout>
 #include <QPushButton>
 #include <QSettings>
 #include <QSpinBox>
@@ -41,93 +40,100 @@ Preferences::Preferences(QWidget *parent)
 {
     QTabWidget *tabs = new QTabWidget(this);
     vbox->addWidget(tabs);
-    addOptionsTab(tabs);
+    QSettings settings;
+    addGeneralTab(tabs, &settings);
+    addDateTimeTab(tabs, &settings);
     addAppearanceTab(tabs);
-    finishLayout(true, true, 400);
+    finishLayout(true, true, 400, 200);
 }
 
 /**
  * Add the general options tab to the dialog.
  *
  * @param tabs The main tabbed widget stack
+ * @param settings PortaBase's application settings
  */
-void Preferences::addOptionsTab(QTabWidget *tabs)
+void Preferences::addGeneralTab(QTabWidget *tabs, QSettings *settings)
 {
-    QWidget *optionsTab = new QWidget(tabs);
-    QVBoxLayout *layout = new QVBoxLayout(optionsTab);
-    optionsTab->setLayout(layout);
-    QGroupBox *generalGroup = new QGroupBox(tr("General"), optionsTab);
-    layout->addWidget(generalGroup);
-    QVBoxLayout *groupLayout = new QVBoxLayout(generalGroup);
-    QSettings settings;
-    settings.beginGroup("General");
-    
-    QHBoxLayout *hbox = new QHBoxLayout(generalGroup);
-    confirmDeletions = new QCheckBox(tr("Confirm deletions"), generalGroup);
-    confirmDeletions->setChecked(settings.value("ConfirmDeletions",
+    QWidget *generalTab = new QWidget(tabs);
+    QVBoxLayout *layout = Factory::vBoxLayout(generalTab, true);
+    settings->beginGroup("General");
+
+    QHBoxLayout *hbox = Factory::hBoxLayout(layout);
+    confirmDeletions = new QCheckBox(tr("Confirm deletions"), generalTab);
+    confirmDeletions->setChecked(settings->value("ConfirmDeletions",
                                                 true).toBool());
     hbox->addWidget(confirmDeletions);
     hbox->addStretch(1);
-    groupLayout->addLayout(hbox);
-    
-    hbox = new QHBoxLayout(generalGroup);
+
+    hbox = Factory::hBoxLayout(layout);
     booleanToggle = new QCheckBox(tr("Allow checkbox edit in data viewer"),
-                                  generalGroup);
-    booleanToggle->setChecked(settings.value("BooleanToggle",
+                                  generalTab);
+    booleanToggle->setChecked(settings->value("BooleanToggle",
                                              false).toBool());
     hbox->addWidget(booleanToggle);
     hbox->addStretch(1);
-    groupLayout->addLayout(hbox);
-    
-    hbox = new QHBoxLayout(generalGroup);
-    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalGroup);
-    pagedDisplay->setChecked(settings.value("PagedDisplay", true).toBool());
+
+    hbox = Factory::hBoxLayout(layout);
+    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
+    pagedDisplay->setChecked(settings->value("PagedDisplay", true).toBool());
     hbox->addWidget(pagedDisplay);
     hbox->addStretch(1);
-    groupLayout->addLayout(hbox);
-    
-    hbox = new QHBoxLayout(generalGroup);
-    noteWrap = new QCheckBox(tr("Wrap Notes"), generalGroup);
-    noteWrap->setChecked(settings.value("NoteWrap", true).toBool());
+
+    hbox = Factory::hBoxLayout(layout);
+    noteWrap = new QCheckBox(tr("Wrap Notes"), generalTab);
+    noteWrap->setChecked(settings->value("NoteWrap", true).toBool());
     hbox->addWidget(noteWrap);
-    wrapType = new QComboBox(generalGroup);
+    wrapType = new QComboBox(generalTab);
     wrapType->addItem(tr("at whitespace"));
     wrapType->addItem(tr("anywhere"));
-    if (settings.value("WrapAnywhere", false).toBool()) {
+    if (settings->value("WrapAnywhere", false).toBool()) {
         wrapType->setCurrentIndex(1);
     }
     wrapType->setEnabled(noteWrap->isChecked());
     connect(noteWrap, SIGNAL(toggled(bool)),
             wrapType, SLOT(setEnabled(bool)));
     hbox->addWidget(wrapType);
-    groupLayout->addLayout(hbox);
-    
-    hbox = new QHBoxLayout(generalGroup);
-    hbox->addWidget(new QLabel(tr("Default rows per page"), generalGroup));
-    rowsPerPage = new QSpinBox(generalGroup);
+
+    hbox = Factory::hBoxLayout(layout);
+    hbox->addWidget(new QLabel(tr("Default rows per page"), generalTab));
+    rowsPerPage = new QSpinBox(generalTab);
     rowsPerPage->setRange(1, 9999);
-    rowsPerPage->setValue(settings.value("RowsPerPage", 25).toInt());
+    rowsPerPage->setValue(settings->value("RowsPerPage", 25).toInt());
     hbox->addWidget(rowsPerPage);
-    groupLayout->addLayout(hbox);
-    generalGroup->setLayout(groupLayout);
-    
-    hbox = new QHBoxLayout(generalGroup);
+
+    hbox = Factory::hBoxLayout(layout);
     smallScreen = new QCheckBox(tr("Use small-screen settings on this device"),
-                                generalGroup);
-    smallScreen->setChecked(settings.value("SmallScreen", false).toBool());
+                                generalTab);
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    bool smallDefault = true;
+#else
+    bool smallDefault = false;
+#endif
+    smallScreen->setChecked(settings->value("SmallScreen", smallDefault).toBool());
     hbox->addWidget(smallScreen);
     hbox->addStretch(1);
-    groupLayout->addLayout(hbox);
 
-    settings.endGroup();
-    QGroupBox *dateGroup = new QGroupBox(tr("Date and Time"), optionsTab);
-    layout->addWidget(dateGroup);
-    settings.beginGroup("DateTime");
-    
-    QGridLayout *grid = new QGridLayout(dateGroup);
-    grid->addWidget(new QLabel(tr("Date format"), dateGroup), 0, 0);
-    QString df = settings.value("ShortDateFormat", "yyyy-MM-dd").toString();
-    dateFormatCombo = new QComboBox(dateGroup);
+    layout->addStretch(1);
+    tabs->addTab(generalTab, tr("General"));
+    settings->endGroup();
+}
+
+/**
+ * Add the date and time options tab to the dialog.
+ *
+ * @param tabs The main tabbed widget stack
+ * @param settings PortaBase's application settings
+ */
+void Preferences::addDateTimeTab(QTabWidget *tabs, QSettings *settings)
+{
+    QWidget *dateTimeTab = new QWidget(tabs);
+    QGridLayout *grid = Factory::gridLayout(dateTimeTab, true);
+    settings->beginGroup("DateTime");
+
+    grid->addWidget(new QLabel(tr("Date format"), dateTimeTab), 0, 0);
+    QString df = settings->value("ShortDateFormat", "yyyy-MM-dd").toString();
+    dateFormatCombo = new QComboBox(dateTimeTab);
     int currentdf = 0;
     dateFormats << "M/d/yyyy" << "d.M.yyyy" << "yyyy-MM-dd" << "d/M/yyyy";
     for (int i = 0; i < 4; i++) {
@@ -142,30 +148,31 @@ void Preferences::addOptionsTab(QTabWidget *tabs)
     dateFormatCombo->setCurrentIndex(currentdf);
     grid->addWidget(dateFormatCombo, 0, 1);
 
-    QString timeFormat = settings.value("TimeFormat", "hh:mm AP").toString();
-    grid->addWidget(new QLabel(tr("Time format"), dateGroup), 1, 0);
-    ampmCombo = new QComboBox(dateGroup);
+    QString timeFormat = settings->value("TimeFormat", "hh:mm AP").toString();
+    grid->addWidget(new QLabel(tr("Time format"), dateTimeTab), 1, 0);
+    ampmCombo = new QComboBox(dateTimeTab);
     ampmCombo->addItem(tr("24 hour"));
     ampmCombo->addItem(tr("12 hour"));
     int show12hr = timeFormat.contains("AP") ? 1 : 0;
     ampmCombo->setCurrentIndex(show12hr);
     grid->addWidget(ampmCombo, 1, 1);
 
-    grid->addWidget(new QLabel(tr("Weeks start on"), dateGroup), 2, 0);
-    weekStartCombo = new QComboBox(dateGroup);
+    grid->addWidget(new QLabel(tr("Weeks start on"), dateTimeTab), 2, 0);
+    weekStartCombo = new QComboBox(dateTimeTab);
     weekStartCombo->addItem(tr("Sunday"));
     weekStartCombo->addItem(tr("Monday"));
-    int startMonday =  settings.value("MONDAY", false).toBool() ? 1 : 0;
+    int startMonday =  settings->value("MONDAY", false).toBool() ? 1 : 0;
     weekStartCombo->setCurrentIndex(startMonday);
     grid->addWidget(weekStartCombo, 2, 1);
-    
-    showSeconds = new QCheckBox(tr("Show seconds for times"), dateGroup);
+
+    showSeconds = new QCheckBox(tr("Show seconds for times"), dateTimeTab);
     showSeconds->setChecked(timeFormat.contains("ss"));
     grid->addWidget(showSeconds, 3, 0, 1, 2);
-    
-    dateGroup->setLayout(grid);
-    layout->addStretch(1);
-    tabs->addTab(optionsTab, tr("Options"));
+
+    grid->addWidget(new QWidget(dateTimeTab), 4, 0, 1, 2);
+    grid->setRowStretch(4, 1);
+    tabs->addTab(dateTimeTab, tr("Date and Time"));
+    settings->endGroup();
 }
 
 /**
@@ -176,21 +183,18 @@ void Preferences::addOptionsTab(QTabWidget *tabs)
 void Preferences::addAppearanceTab(QTabWidget *tabs)
 {
     QWidget *appearanceTab = new QWidget(tabs);
-    QVBoxLayout *layout = new QVBoxLayout(appearanceTab);
-    appearanceTab->setLayout(layout);
-    QGridLayout *grid;
+    QVBoxLayout *layout = Factory::vBoxLayout(appearanceTab, true);
 #if !defined(Q_WS_MAC)
     QGroupBox *fontGroup = new QGroupBox(tr("Font"), appearanceTab);
-    layout->addWidget(fontGroup);
-    grid = new QGridLayout(fontGroup);
-    
-    grid->addWidget(new QLabel(tr("Name"), fontGroup), 0, 0);
+    QGridLayout *fontGrid = new QGridLayout(fontGroup, true);
+
+    fontGrid->addWidget(new QLabel(tr("Name"), fontGroup), 0, 0);
     fontName = new QComboBox(fontGroup);
     QStringList fonts = fontdb.families();
     fontName->addItems(fonts);
-    grid->addWidget(fontName, 0, 1);
-    
-    grid->addWidget(new QLabel(tr("Size"), fontGroup), 1, 0);
+    fontGrid->addWidget(fontName, 0, 1);
+
+    fontGrid->addWidget(new QLabel(tr("Size"), fontGroup), 1, 0);
     fontSize = new QComboBox(fontGroup);
     connect(fontName, SIGNAL(activated(int)), this, SLOT(updateSizes(int)));
     QFont currentFont = qApp->font();
@@ -215,31 +219,31 @@ void Preferences::addAppearanceTab(QTabWidget *tabs)
         fontSize->setCurrentIndex(index);
     }
     connect(fontSize, SIGNAL(activated(int)), this, SLOT(updateSample(int)));
-    grid->addWidget(fontSize, 1, 1);
-    
-    grid->addWidget(new QLabel(tr("Sample"), fontGroup), 2, 0);
+    fontGrid->addWidget(fontSize, 1, 1);
+
+    fontGrid->addWidget(new QLabel(tr("Sample"), fontGroup), 2, 0);
     sample = new QLabel(tr("Sample text"), fontGroup);
-    grid->addWidget(sample, 2, 1);
-    fontGroup->setLayout(grid);
+    fontGrid->addWidget(sample, 2, 1);
+    layout->addWidget(fontGroup);
 #endif
 
     QGroupBox *colorGroup = new QGroupBox(tr("Row Colors"), appearanceTab);
     layout->addWidget(colorGroup);
-    grid = new QGridLayout(colorGroup);
+    QHBoxLayout *hbox = new QHBoxLayout(colorGroup);
+    colorGroup->setLayout(hbox);
     evenButton = new QtColorPicker(colorGroup);
     configureColorPicker(evenButton);
     evenButton->setCurrentColor(Factory::evenRowColor);
     //evenButton->setSizePolicy(QSizePolicy::MinimumExpanding,
     //                          QSizePolicy::Fixed);
-    grid->addWidget(evenButton, 0, 0);
+    hbox->addWidget(evenButton);
     oddButton = new QtColorPicker(colorGroup);
     configureColorPicker(oddButton);
     oddButton->setCurrentColor(Factory::oddRowColor);
     //oddButton->setSizePolicy(QSizePolicy::MinimumExpanding,
     //                         QSizePolicy::Fixed);
-    grid->addWidget(oddButton, 0, 1);
-    colorGroup->setLayout(grid);
-    
+    hbox->addWidget(oddButton);
+
     layout->addStretch(1);
     tabs->addTab(appearanceTab, tr("Appearance"));
 }
@@ -336,7 +340,7 @@ QFont Preferences::applyChanges()
     settings.setValue("TimeFormat", timeFormat);
     settings.setValue("MONDAY", weekStartCombo->currentIndex());
     settings.endGroup();
-    
+
     settings.beginGroup("General");
     settings.setValue("ConfirmDeletions", confirmDeletions->isChecked());
     settings.setValue("BooleanToggle", booleanToggle->isChecked());

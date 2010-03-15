@@ -46,7 +46,7 @@ public:
      *
      * @param ch The character to be used
      */
-    void setDecimal(const QChar ch) { m_decimal = ch; };
+    void setDecimal(const QChar ch) { m_decimal = ch; }
 
 protected:
     void keyPressEvent(QKeyEvent* ev);

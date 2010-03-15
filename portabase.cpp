@@ -66,7 +66,7 @@ PortaBase::PortaBase(QWidget *parent)
     Factory::evenRowColor = QColor(color);
     color = settings->value("Colors/OddRows", "#E0E0E0").toString();
     Factory::oddRowColor = QColor(color);
-    
+
     mainStack = new QStackedWidget(this);
     setCentralWidget(mainStack);
 
@@ -121,7 +121,7 @@ PortaBase::PortaBase(QWidget *parent)
     connect(propsAction, SIGNAL(triggered()), this, SLOT(viewProperties()));
     fileSeparatorAction = new QAction(this);
     fileSeparatorAction->setSeparator(true);
-    
+
     // File menu
     mh->addToFileMenu(fileSeparatorAction);
     mh->addToFileMenu(importAction);
@@ -162,7 +162,7 @@ PortaBase::PortaBase(QWidget *parent)
     viewAllColsAction = ma->action(MenuActions::AllColumns, true);
     connect(viewAllColsAction, SIGNAL(triggered()),
             this, SLOT(viewAllColumns()));
-    
+
     // View menu
     view = new QMenu(ma->menuText(MenuActions::View), this);
     view->addAction(viewAddAction);
@@ -212,14 +212,14 @@ PortaBase::PortaBase(QWidget *parent)
     filter->addSeparator();
     filter->addAction(filterAllRowsAction);
     connect(filter, SIGNAL(triggered(QAction*)), this, SLOT(changeFilter(QAction*)));
-    
+
     // Add menus to menubar
     QAction *helpMenuAction = mh->helpMenu()->menuAction();
     menuBar()->insertMenu(helpMenuAction, row);
     menuBar()->insertMenu(helpMenuAction, view);
     menuBar()->insertMenu(helpMenuAction, sort);
     menuBar()->insertMenu(helpMenuAction, filter);
-    
+
     // Toolbar
     toolbar->addAction(rowAddAction);
     toolbar->addAction(rowEditAction);
@@ -232,8 +232,7 @@ PortaBase::PortaBase(QWidget *parent)
     noFileWidget = new QWidget(mainStack);
     QHBoxLayout *hlayout = Factory::hBoxLayout(noFileWidget, true);
     hlayout->addStretch(1);
-    QVBoxLayout *vlayout = Factory::vBoxLayout(noFileWidget);
-    hlayout->addLayout(vlayout);
+    QVBoxLayout *vlayout = Factory::vBoxLayout(hlayout);
     vlayout->addStretch(1);
     QAction *action = mh->action(QQMenuHelper::New);
     QPushButton *button = new QPushButton(action->icon(),
@@ -255,7 +254,6 @@ PortaBase::PortaBase(QWidget *parent)
     recentBox = new QGroupBox(tr("Recently opened files"), noFileWidget);
     recentBox->setAlignment(Qt::AlignHCenter);
     QVBoxLayout *boxLayout = Factory::vBoxLayout(recentBox, true);
-    vlayout->addWidget(recentBox);
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         recentButtons[i] = new QPushButton("", recentBox);
         boxLayout->addWidget(recentButtons[i]);
@@ -270,10 +268,11 @@ PortaBase::PortaBase(QWidget *parent)
             mh->action(QQMenuHelper::Recent4), SIGNAL(triggered()));
     connect(recentButtons[4], SIGNAL(clicked()),
             mh->action(QQMenuHelper::Recent5), SIGNAL(triggered()));
+    vlayout->addWidget(recentBox);
     vlayout->addStretch(1);
     hlayout->addStretch(1);
     mainStack->addWidget(noFileWidget);
-    
+
     setUnifiedTitleAndToolBarOnMac(true);
     showFileSelector();
     updateCaption();
@@ -665,13 +664,13 @@ void PortaBase::showFileSelector()
 {
     findAction->setEnabled(false);
     rowViewAction->setEnabled(false);
-    
+
     // Top-level menu visibility
     row->menuAction()->setVisible(false);
     view->menuAction()->setVisible(false);
     sort->menuAction()->setVisible(false);
     filter->menuAction()->setVisible(false);
-    
+
     // File menu
     mh->startFileSelectorMenu();
     fileSeparatorAction->setVisible(true);
@@ -684,7 +683,7 @@ void PortaBase::showFileSelector()
     manageEnumsAction->setVisible(false);
     slideshowAction->setVisible(false);
     propsAction->setVisible(false);
-    
+
     // Toolbar
     showAllFillerActions();
     rowAddAction->setVisible(false);
@@ -692,7 +691,7 @@ void PortaBase::showFileSelector()
     rowDeleteAction->setVisible(false);
     rowCopyAction->setVisible(false);
     findAction->setVisible(false);
-    
+
     // Update the recent file buttons
     QStringList recentFiles;
     recentFiles << mh->action(QQMenuHelper::Recent1)->text();
@@ -719,7 +718,7 @@ void PortaBase::showDataViewer()
 {
     findAction->setEnabled(true);
     // rowViewAction status is handled by the data grid widget
-    
+
     // Top-level menu visibility
     row->menuAction()->setVisible(true);
     view->menuAction()->setVisible(true);
@@ -1469,7 +1468,7 @@ bool PortaBase::event(QEvent *event)
                 QMimeData *data = new QMimeData();
                 data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(doc));
                 drag->setMimeData(data);
-                QPixmap cursorPixmap(":/icons/document_large.png"); 
+                QPixmap cursorPixmap(":/icons/document_large.png");
                 drag->setPixmap(cursorPixmap);
                 QPoint hotspot(cursorPixmap.width() - 5, 5);
                 drag->setHotSpot(hotspot);
@@ -1482,7 +1481,7 @@ bool PortaBase::event(QEvent *event)
                 QFileInfo info(doc);
                 QAction *action = menu.addAction(info.fileName());
                 action->setIcon(QIcon(":/icons/document_small.png"));
-                
+
                 QStringList folders = info.absolutePath().split('/');
                 QStringListIterator it(folders);
                 it.toBack();
@@ -1649,7 +1648,7 @@ void PortaBase::aboutPortaBase()
 {
     QString appName = qApp->applicationName();
     QString text = appName + " 2.0\n\n" + tr("Copyright (C)")
-                   + " 2002-2009\nJeremy Bowman\n\n"
+                   + " 2002-2010\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
-    QMessageBox::about(this, QQMenuHelper::tr("&About %1").arg(appName), text);
+    QMessageBox::about(this, tr("About %1").arg(appName), text);
 }

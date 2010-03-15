@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 #include <QClipboard>
 #include <QIcon>
 #include <QKeyEvent>
-#include <QLayout>
 #include <QToolButton>
 #include <QTextDocument>
 #include <QTextEdit>
@@ -52,9 +51,8 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
                                 QUrl("img://icons/unchecked.png"),
                                 QPixmap(":/icons/unchecked.png"));
     vbox->addWidget(tv);
-    
-    QHBoxLayout *hbox = Factory::hBoxLayout(this);
-    vbox->addLayout(hbox);
+
+    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     prevButton = new QToolButton(this);
     prevButton->setIcon(QIcon(":/icons/back.png"));
     prevButton->setToolTip(tr("Previous row"));

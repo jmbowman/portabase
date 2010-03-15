@@ -1,7 +1,7 @@
 /*
  * calcdateeditor.cpp
  *
- * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,13 @@
 #include <QButtonGroup>
 #include <QComboBox>
 #include <QDateTime>
-#include <QLayout>
 #include <QMessageBox>
 #include <QRadioButton>
 #include "calcnode.h"
 #include "calctimeeditor.h"
 #include "../database.h"
 #include "../datatypes.h"
+#include "../factory.h"
 #include "../timewidget.h"
 
 /**
@@ -38,8 +38,7 @@ CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int
   : PBDialog(tr("Calculation Node Editor"), parent), db(dbase)
 {
     group = new QButtonGroup(this);
-    QGridLayout *grid = new QGridLayout(this);
-    vbox->addLayout(grid);
+    QGridLayout *grid = Factory::gridLayout(vbox);
     QRadioButton *colButton = new QRadioButton(tr("Column"), this);
     grid->addWidget(colButton, 0, 0);
     group->addButton(colButton, 0);

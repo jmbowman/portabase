@@ -19,7 +19,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QSettings>
-#include <QStringList.h>
+#include <QStringList>
 #include "importdialog.h"
 #include "csverror.h"
 #include "database.h"

@@ -16,6 +16,7 @@
 #ifndef PDBFILE_H
 #define PDBFILE_H
 
+#include <QString>
 #include <sys/types.h>
 
 class QFile;

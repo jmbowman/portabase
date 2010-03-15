@@ -1,7 +1,7 @@
 /*
  * passdialog.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,10 +16,10 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QMessageBox>
 #include "database.h"
+#include "factory.h"
 #include "passdialog.h"
 #include "pbdialog.h"
 #include "encryption/crypto.h"
@@ -34,7 +34,7 @@
 PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *parent)
   : QQDialog("", parent), db(dbase), mode(dlgMode)
 {
-    QGridLayout *grid = new QGridLayout(this);
+    QGridLayout *grid = Factory::gridLayout(this, true);
     int currentRow = 0;
     if (mode == ChangePassword) {
         grid->addWidget(new QLabel(tr("Old password") + ":", this), 0, 0);
@@ -65,7 +65,6 @@ PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *par
     grid->addWidget(buttonBox, currentRow, 0, 2, 1);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    setLayout(grid);
     finishConstruction();
 }
 

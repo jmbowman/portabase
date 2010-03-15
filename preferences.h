@@ -1,7 +1,7 @@
 /*
  * preferences.h
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
+class QSettings;
 class QSpinBox;
 class QTabWidget;
 
@@ -47,7 +48,8 @@ private slots:
     void updateSample(int selectedSize);
 
 private:
-    void addOptionsTab(QTabWidget *tabs);
+    void addGeneralTab(QTabWidget *tabs, QSettings *settings);
+    void addDateTimeTab(QTabWidget *tabs, QSettings *settings);
     void addAppearanceTab(QTabWidget *tabs);
     void configureColorPicker(QtColorPicker *picker);
 

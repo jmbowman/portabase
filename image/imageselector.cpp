@@ -1,7 +1,7 @@
 /*
  * imageselector.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 #include <QBuffer>
 #include <QFile>
 #include <QImage>
-#include <QLayout>
 #include <QMessageBox>
 #include <QPushButton>
 #include "../database.h"

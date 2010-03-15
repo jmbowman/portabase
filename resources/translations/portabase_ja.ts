@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -128,43 +130,15 @@
 <context>
     <name>CalcWidget</name>
     <message>
-        <source>Update</source>
+        <source>Update calculated value</source>
         <translation>更新</translation>
     </message>
 </context>
 <context>
-    <name>ColorDialog</name>
+    <name>ColorPickerPopup</name>
     <message>
-        <source>Hu&amp;e:</source>
-        <translation>H(&amp;E):</translation>
-    </message>
-    <message>
-        <source>&amp;Sat:</source>
-        <translation>&amp;S:</translation>
-    </message>
-    <message>
-        <source>&amp;Val:</source>
-        <translation>&amp;V:</translation>
-    </message>
-    <message>
-        <source>&amp;Red:</source>
-        <translation>赤(&amp;R):</translation>
-    </message>
-    <message>
-        <source>&amp;Green:</source>
-        <translation>緑(&amp;G):</translation>
-    </message>
-    <message>
-        <source>Bl&amp;ue:</source>
-        <translation>青(&amp;U):</translation>
-    </message>
-    <message>
-        <source>A&amp;lpha channel:</source>
-        <translation>アルファチャネル(&amp;L):</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation>色を選択</translation>
+        <source>Custom</source>
+        <translation>その他の色</translation>
     </message>
 </context>
 <context>
@@ -327,6 +301,17 @@
     </message>
 </context>
 <context>
+    <name>DateDialog</name>
+    <message>
+        <source>Select a date</source>
+        <translation>日付を選択して下さい</translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation>今日</translation>
+    </message>
+</context>
+<context>
     <name>DateWidget</name>
     <message>
         <source>None</source>
@@ -479,21 +464,6 @@ deleted:</source>
     </message>
 </context>
 <context>
-    <name>HelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>進む</translation>
-    </message>
-</context>
-<context>
     <name>ImageEditor</name>
     <message>
         <source>Image Editor</source>
@@ -557,22 +527,6 @@ deleted:</source>
 <context>
     <name>ImportDialog</name>
     <message>
-        <source>Import rows from CSV file</source>
-        <translation>CSVファイルからレコードをインポート</translation>
-    </message>
-    <message>
-        <source>Import from MobileDB file</source>
-        <translation>MobileDBファイルからインポート</translation>
-    </message>
-    <message>
-        <source>Import from text file</source>
-        <translation>テキストファイルからインポート</translation>
-    </message>
-    <message>
-        <source>Import from XML file</source>
-        <translation>XMLファイルからインポート</translation>
-    </message>
-    <message>
         <source>Text encoding</source>
         <translation>文字コード</translation>
     </message>
@@ -600,57 +554,9 @@ deleted:</source>
         <source>Import</source>
         <translation>インポート</translation>
     </message>
-    <message>
-        <source>Select an image</source>
-        <translation>画像を選択して下さい</translation>
-    </message>
 </context>
 <context>
     <name>MenuActions</name>
-    <message>
-        <source>File</source>
-        <translation>ファイル</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>ビュー</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation>レコード</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation>ソート</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation>フィルター</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>新規</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>開く</translation>
-    </message>
-    <message>
-        <source>Open Recent</source>
-        <translation>最近使ったファイル</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>保存</translation>
-    </message>
-    <message>
-        <source>Change Password</source>
-        <translation>パスワード変更</translation>
-    </message>
     <message>
         <source>Import</source>
         <translation>インポート</translation>
@@ -660,100 +566,8 @@ deleted:</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <source>Slideshow</source>
-        <translation>スライドショー</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation>プロパティ</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation>設定</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>終了</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation>リスト</translation>
-    </message>
-    <message>
-        <source>Icons</source>
-        <translation>アイコン</translation>
-    </message>
-    <message>
-        <source>Help Contents</source>
-        <translation>ヘルプ目次</translation>
-    </message>
-    <message>
-        <source>About PortaBase</source>
-        <translation>PortaBaseについて</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Qtについて</translation>
-    </message>
-    <message>
-        <source>Quick Filter</source>
-        <translation>簡易フィルター</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>作成</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation>リネーム</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation>再読み込み</translation>
-    </message>
-    <message>
         <source>All Columns</source>
         <translation>全てのフィールド</translation>
-    </message>
-    <message>
-        <source>All Rows</source>
-        <translation>全てのレコード</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>コピー</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <source>Delete Rows In Filter</source>
-        <translation>フィルターに含まれるレコードを削除</translation>
-    </message>
-    <message>
-        <source>Edit Columns</source>
-        <translation>フォーマット編集</translation>
-    </message>
-    <message>
-        <source>Edit Enums</source>
-        <translation>列挙管理</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation>ファイル(&amp;F)</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -770,26 +584,6 @@ deleted:</source>
     <message>
         <source>Fi&amp;lter</source>
         <translation>フィルター(&amp;l)</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>新規(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation>開く(&amp;O)</translation>
-    </message>
-    <message>
-        <source>Open &amp;Recent</source>
-        <translation>最近使ったファイル(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
@@ -814,22 +608,6 @@ deleted:</source>
     <message>
         <source>&amp;Preferences</source>
         <translation>設定(&amp;P)</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>終了(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>Help &amp;Contents</source>
-        <translation>ヘルプ目次(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;About PortaBase</source>
-        <translation>PortaBaseについて(&amp;A)</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation>Qtについて(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
@@ -864,63 +642,135 @@ deleted:</source>
         <translation>表示(&amp;S)</translation>
     </message>
     <message>
-        <source>&amp;Delete Rows In Filter</source>
-        <translation>フィルターに含まれるレコードを削除(&amp;D)</translation>
-    </message>
-    <message>
         <source>Edit &amp;Enums</source>
         <translation>列挙管理(&amp;E)</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
         <translation>フォーマット編集(&amp;U)</translation>
     </message>
+    <message>
+        <source>Change the current file&apos;s password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new file from data in another format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import rows from a CSV file</source>
+        <translation>CSVファイルからレコードをインポート</translation>
+    </message>
+    <message>
+        <source>Export data to another file format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start an image slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show information about the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View or change PortaBase settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply a one-condition filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the selected filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the selected filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show all of the database columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show all rows of data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a copy of the selected row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the selected row in more detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete Rows in Filter</source>
+        <translation>フィルターに含まれるレコードを削除(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Delete all rows matching the current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the database format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the enumerated data types</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>NewFileDialog</name>
+    <name>NumberWidget</name>
     <message>
-        <source>Enter a name for the new file</source>
-        <translation>ファイルネームを入力して下さい</translation>
-    </message>
-    <message>
-        <source>Encrypted file</source>
-        <translation>暗号ファイル</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>エクスポート</translation>
-    </message>
-    <message>
-        <source>File already exists; overwrite it?</source>
-        <translation>ファイルは存在します…オーバーライトしますか?</translation>
-    </message>
-    <message>
-        <source>Encrypt the file?</source>
-        <translation>ファイルを暗号化しますか?</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation>PortaBaseファイル</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>テキストファイル</translation>
-    </message>
-    <message>
-        <source>XML files</source>
-        <translation>XMLファイル</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation>ファイルネームを選択して下さい</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>カンマ区切りテキスト</translation>
+        <source>Show calculator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -936,14 +786,6 @@ deleted:</source>
     <message>
         <source>No name entered</source>
         <translation>名前を入力して下さい</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
     </message>
     <message>
         <source>Add</source>
@@ -964,37 +806,6 @@ deleted:</source>
     <message>
         <source>Down</source>
         <translation>下げる</translation>
-    </message>
-</context>
-<context>
-    <name>PBFileSelector</name>
-    <message>
-        <source>No file selected</source>
-        <translation>ファイルは選択されていません</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation>PortaBaseファイル</translation>
-    </message>
-    <message>
-        <source>Choose a file</source>
-        <translation>ファイルを選択して下さい</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new file</source>
-        <translation>ファイルネームを入力して下さい</translation>
-    </message>
-    <message>
-        <source>Unable to create new file</source>
-        <translation>ファイルを作れませんでした</translation>
-    </message>
-    <message>
-        <source>Enter the new file name</source>
-        <translation>ファイルネームを入力して下さい</translation>
-    </message>
-    <message>
-        <source>Unable to rename the file</source>
-        <translation>リネーム出来ませんでした</translation>
     </message>
 </context>
 <context>
@@ -1027,14 +838,6 @@ deleted:</source>
 <context>
     <name>PortaBase</name>
     <message>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Unable to create new file</source>
-        <translation>ファイルを作れませんでした</translation>
-    </message>
-    <message>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
@@ -1042,10 +845,6 @@ upgrade</source>
         <translation>このファイルのフォーマットはこの
 PortaBaseバージョンより新しい…
 バージョンアップして下さい</translation>
-    </message>
-    <message>
-        <source>Are you sure?</source>
-        <translation>削除しますか?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -1142,12 +941,32 @@ current filter?</source>
         <translation>ファイルのプロパティ</translation>
     </message>
     <message>
-        <source>File does not exist</source>
-        <translation>ファイルは存在しません</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
         <translation>PortaBaseファイルではありません</translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PortaBase files</source>
+        <translation>PortaBaseファイル</translation>
+    </message>
+    <message>
+        <source>Recently opened files</source>
+        <translation>最近使ったファイル</translation>
+    </message>
+    <message>
+        <source>Encrypt the file?</source>
+        <translation>ファイルを暗号化しますか?</translation>
+    </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation>カンマ区切りテキスト</translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation>XMLファイル</translation>
     </message>
 </context>
 <context>
@@ -1257,261 +1076,535 @@ current filter?</source>
         <translation>表示</translation>
     </message>
     <message>
-        <source>Top-level</source>
-        <translation>第一レベル</translation>
+        <source>Use small-screen settings on this device</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Menu</source>
-        <translation>メニュー</translation>
-    </message>
-    <message>
-        <source>Menus</source>
-        <translation>メニューバー</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <source>Toolbar Button</source>
-        <translation>ボタン</translation>
-    </message>
-    <message>
-        <source>Buttons</source>
-        <translation>ツールバー</translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hu&amp;e:</source>
-        <translation>H(&amp;E):</translation>
-    </message>
-    <message>
-        <source>&amp;Sat:</source>
-        <translation>&amp;S:</translation>
-    </message>
-    <message>
-        <source>&amp;Val:</source>
-        <translation>&amp;V:</translation>
-    </message>
-    <message>
-        <source>&amp;Red:</source>
-        <translation>赤(&amp;R):</translation>
-    </message>
-    <message>
-        <source>&amp;Green:</source>
-        <translation>緑(&amp;G):</translation>
-    </message>
-    <message>
-        <source>Bl&amp;ue:</source>
-        <translation>青(&amp;U):</translation>
-    </message>
-    <message>
-        <source>A&amp;lpha channel:</source>
-        <translation>アルファチャネル(&amp;L):</translation>
-    </message>
-    <message>
-        <source>&amp;Basic colors</source>
-        <translation>基本色(&amp;B)</translation>
-    </message>
-    <message>
-        <source>&amp;Custom colors</source>
-        <translation>カスタム色(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation>カスタム色を作る(&amp;D) &gt;&gt;</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <source>&amp;Add to Custom Colors</source>
-        <translation>カスタム色に追加(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation>色を選択</translation>
-    </message>
-</context>
-<context>
-    <name>QDatePicker</name>
-    <message>
-        <source>Select a date</source>
-        <translation>日付を選択して下さい</translation>
-    </message>
-    <message>
-        <source>January</source>
-        <translation>１月</translation>
-    </message>
-    <message>
-        <source>February</source>
-        <translation>２月</translation>
-    </message>
-    <message>
-        <source>March</source>
-        <translation>３月</translation>
-    </message>
-    <message>
-        <source>April</source>
-        <translation>４月</translation>
-    </message>
-    <message>
-        <source>May</source>
-        <translation>５月</translation>
-    </message>
-    <message>
-        <source>June</source>
-        <translation>６月</translation>
-    </message>
-    <message>
-        <source>July</source>
-        <translation>７月</translation>
-    </message>
-    <message>
-        <source>August</source>
-        <translation>８月</translation>
-    </message>
-    <message>
-        <source>September</source>
-        <translation>９月</translation>
-    </message>
-    <message>
-        <source>October</source>
-        <translation>１０月</translation>
-    </message>
-    <message>
-        <source>November</source>
-        <translation>１１月</translation>
-    </message>
-    <message>
-        <source>December</source>
-        <translation>１２月</translation>
+        <source>D</source>
+        <translation>日</translation>
     </message>
     <message>
         <source>M</source>
         <translation>月</translation>
     </message>
     <message>
-        <source>W</source>
-        <translation>水</translation>
+        <source>Y</source>
+        <translation>年</translation>
     </message>
     <message>
-        <source>F</source>
-        <translation>金</translation>
+        <source>White</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Su</source>
-        <translation>日</translation>
+        <source>Aquamarine</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tu</source>
-        <translation>火</translation>
+        <source>Light blue</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Th</source>
-        <translation>木</translation>
+        <source>Cyan</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sa</source>
-        <translation>土</translation>
+        <source>Light gray</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Today</source>
-        <translation>今日</translation>
+        <source>Light green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lavender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thistle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QColorDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qcolordialog.cpp" line="+1253"/>
+        <source>Hu&amp;e:</source>
+        <translation>色相(&amp;E):</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Sat:</source>
+        <translation>彩度(&amp;S):</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Val:</source>
+        <translation>明度(&amp;V):</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Red:</source>
+        <translation>赤(&amp;R):</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Green:</source>
+        <translation>緑(&amp;G):</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bl&amp;ue:</source>
+        <translation>青(&amp;U):</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A&amp;lpha channel:</source>
+        <translation>アルファチャネル(&amp;L):</translation>
+    </message>
+    <message>
+        <location line="+101"/>
+        <source>Select Color</source>
+        <translation>色</translation>
+    </message>
+    <message>
+        <location line="+137"/>
+        <source>&amp;Basic colors</source>
+        <translation>基本的なカラー(&amp;B)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Custom colors</source>
+        <translation>カスタムカラー(&amp;C)</translation>
+    </message>
+    <message>
+        <source>&amp;Define Custom Colors &gt;&gt;</source>
+        <translation type="obsolete">カスタムカラーの定義(&amp;D) &gt;&gt;</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">キャンセル</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Add to Custom Colors</source>
+        <translation>カスタムカラーに追加(&amp;A)</translation>
+    </message>
+    <message>
+        <source>Select color</source>
+        <translation type="obsolete">カラーの選択</translation>
     </message>
 </context>
 <context>
     <name>QFileDialog</name>
     <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+514"/>
+        <location line="+447"/>
         <source>All Files (*)</source>
-        <translation>全てのファイル(*)</translation>
+        <translation>すべてのファイル(*)</translation>
     </message>
     <message>
+        <location line="+222"/>
+        <source>Directories</source>
+        <translation>ディレクトリ</translation>
+    </message>
+    <message>
+        <location line="-647"/>
+        <location line="+651"/>
+        <source>Directory:</source>
+        <translation>ディレクトリ:</translation>
+    </message>
+    <message>
+        <location line="-649"/>
+        <location line="+655"/>
+        <source>File &amp;name:</source>
+        <translation>ファイル名(&amp;N):</translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <location line="+50"/>
+        <location line="+1467"/>
+        <location line="+75"/>
+        <source>&amp;Open</source>
+        <translation>オープン(&amp;O)</translation>
+    </message>
+    <message>
+        <location line="-1592"/>
+        <location line="+50"/>
+        <source>&amp;Save</source>
+        <translation>保存(&amp;S)</translation>
+    </message>
+    <message>
+        <location line="-733"/>
+        <source>Open</source>
+        <translation>オープン</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">保存</translation>
+    </message>
+    <message>
+        <source>
+File not found.
+Please verify the correct file name was given</source>
+        <translation type="obsolete">
+ファイルが見つかりません。
+正しいファイル名が入力されたかどうか確認してください</translation>
+    </message>
+    <message>
+        <location line="+1515"/>
+        <source>%1 already exists.
+Do you want to replace it?</source>
+        <translation>%1 はすでに存在します。
+置き換えますか?</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>%1
+File not found.
+Please verify the correct file name was given.</source>
+        <translation>%1
+ファイルが見つかりません。
+正しいファイル名が入力されたかどうか確認してください。</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+408"/>
+        <source>My Computer</source>
+        <translation>マイ コンピュータ</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-54"/>
+        <location line="+861"/>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+ディレクトリが見つかりません。
+正しいディレクトリ名が入力されたかどうか確認してください。</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation type="obsolete">ソート</translation>
+    </message>
+    <message>
+        <location line="-2311"/>
+        <source>&amp;Rename</source>
+        <translation>名前の変更(&amp;R)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Delete</source>
+        <translation>削除(&amp;D)</translation>
+    </message>
+    <message>
+        <source>&amp;Reload</source>
+        <translation type="obsolete">リロード(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Sort by &amp;Name</source>
+        <translation type="obsolete">名前順にソート(&amp;N)</translation>
+    </message>
+    <message>
+        <source>Sort by &amp;Size</source>
+        <translation type="obsolete">サイズ順にソート(&amp;S)</translation>
+    </message>
+    <message>
+        <source>Sort by &amp;Date</source>
+        <translation type="obsolete">日付順にソート(&amp;D)</translation>
+    </message>
+    <message>
+        <source>&amp;Unsorted</source>
+        <translation type="obsolete">ソート解除(&amp;U)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show &amp;hidden files</source>
+        <translation>隠しファイルの表示(&amp;H)</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Back</source>
+        <translation>戻る</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Parent Directory</source>
+        <translation>親ディレクトリ</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Create New Folder</source>
+        <translation>新しいフォルダの作成</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>List View</source>
+        <translation>一覧表示</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Detail View</source>
+        <translation>詳細表示</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Look in:</source>
+        <translation>検索する場所:</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Files of type:</source>
+        <translation>ファイルの種類:</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/itemviews/qfileiconprovider.cpp" line="+411"/>
+        <source>Drive</source>
+        <translation>ドライブ</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>File</source>
+        <translation>ファイル</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>File Folder</source>
+        <comment>Match Windows Explorer</comment>
+        <translation>ファイルフォルダ</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Folder</source>
+        <comment>All other platforms</comment>
+        <translation>フォルダ</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Alias</source>
+        <comment>Mac OS X Finder</comment>
+        <translation>エイリアス</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Shortcut</source>
+        <comment>All other platforms</comment>
+        <translation>ショートカット</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Unknown</source>
+        <translation>不明</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog_win.cpp" line="+160"/>
         <source>All Files (*.*)</source>
-        <translation>全てのファイル(*.*)</translation>
-    </message>
-</context>
-<context>
-    <name>QInputDialog</name>
-    <message>
-        <source>OK</source>
-        <translation>はい</translation>
+        <translation>すべてのファイル(*.*)</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-31"/>
+        <source>Save As</source>
+        <translation>名前を付けて保存</translation>
+    </message>
+    <message>
+        <source>Open </source>
+        <translation type="obsolete">オープン</translation>
+    </message>
+    <message>
+        <source>Select a Directory</source>
+        <translation type="obsolete">ディレクトリを選択</translation>
+    </message>
+    <message>
+        <location line="+2122"/>
+        <source>&apos;%1&apos; is write protected.
+Do you want to delete it anyway?</source>
+        <translation>&apos;%1&apos; は書き込みが禁止されています。
+本当に削除しますか?</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Are sure you want to delete &apos;%1&apos;?</source>
+        <translation>&apos;%1&apos; を本当に削除しますか?</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Could not delete directory.</source>
+        <translation>ディレクトリを削除できませんでした。</translation>
+    </message>
+    <message>
+        <location line="-2146"/>
+        <source>Find Directory</source>
+        <translation>ディレクトリの検索</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Show </source>
+        <translation>表示</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>&amp;New Folder</source>
+        <translation>新しいフォルダ(&amp;N)</translation>
+    </message>
+    <message>
+        <location line="+659"/>
+        <location line="+38"/>
+        <source>&amp;Choose</source>
+        <translation>選択(&amp;C)</translation>
+    </message>
+    <message>
+        <location line="+1265"/>
+        <source>New Folder</source>
+        <translation>新しいフォルダ</translation>
+    </message>
+    <message>
+        <location line="+555"/>
+        <source>Recent Places</source>
+        <translation>履歴</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Forward</source>
+        <translation>進む</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qsidebar.cpp" line="+437"/>
+        <source>Remove</source>
+        <translation>削除</translation>
     </message>
 </context>
 <context>
     <name>QLineEdit</name>
     <message>
+        <location filename="../src/gui/widgets/qlineedit.cpp" line="+2680"/>
         <source>&amp;Undo</source>
         <translation>元に戻す(&amp;U)</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>&amp;Redo</source>
         <translation>やり直す(&amp;R)</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Cu&amp;t</source>
         <translation>切り取り(&amp;T)</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>&amp;Copy</source>
         <translation>コピー(&amp;C)</translation>
     </message>
     <message>
+        <location line="+4"/>
         <source>&amp;Paste</source>
-        <translation>張り付け(&amp;P)</translation>
+        <translation>貼り付け(&amp;P)</translation>
     </message>
     <message>
-        <source>Clear</source>
-        <translation>クリア</translation>
+        <location line="+5"/>
+        <source>Delete</source>
+        <translation>削除</translation>
     </message>
     <message>
+        <location line="+6"/>
         <source>Select All</source>
-        <translation>全て選択</translation>
-    </message>
-</context>
-<context>
-    <name>QMainWindow</name>
-    <message>
-        <source>Line up</source>
-        <translation>並べる</translation>
-    </message>
-    <message>
-        <source>Customize...</source>
-        <translation>カスタマイズ...</translation>
+        <translation>すべてを選択</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
+        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="-1111"/>
+        <source>Help</source>
+        <translation>ヘルプ</translation>
+    </message>
+    <message>
+        <location line="-853"/>
+        <location line="+852"/>
+        <location filename="../src/gui/dialogs/qmessagebox.h" line="-52"/>
+        <location line="+8"/>
         <source>OK</source>
-        <translation>はい</translation>
+        <translation>OK</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;h3&gt;Qt について&lt;/h3&gt;%1
+&lt;p&gt;QtはクロスプラットフォームのC++ アプリケーション開発ツールキットです。&lt;/p&gt;
+&lt;p&gt;Qt は MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, 商用のUnix派生版でソースコード互換を実現します。また、Qtopia Coreのように、内蔵デバイスでも利用可能です。&lt;/p&gt;
+&lt;p&gt;QtはTrolltechの商品です。詳細は&lt;tt&gt;http://qt.nokia.com/&lt;/tt&gt;を参照してください。&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&amp;Yes</source>
-        <translation>はい(&amp;Y)</translation>
+        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;このプログラムは Qt バージョン %1 を使用しています。&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&amp;No</source>
-        <translation>いいえ(&amp;N)</translation>
+        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;このプログラムは Qt オープンソース版バージョン %1 を使用しています。&lt;/p&gt;
+&lt;p&gt;Qt オープンソース版はオープンソースのアプリケーションの開発用です。ソースコードを公開しない商用アプリケーションを開発するには商用版のライセンスが必要です。&lt;/p&gt;&lt;p&gt;Qtのライセンスについては&lt;tt&gt;http://qt.nokia.com/company/model.html&lt;/tt&gt;を参照してください。&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for multiplatform GUI &amp;amp; application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants.&lt;br&gt;Qt is also available for embedded devices.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; for more information.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Qtについて&lt;/h3&gt;&lt;p&gt;このプログラムはQtバージョン%1を使います.&lt;/p&gt;&lt;p&gt;Qtはマルチプラットフォームグイとアプリケーション開発のためのC++ツールキット。&lt;/p&gt;&lt;p&gt;Qtのお蔭で、同じソースコードはMS&amp;nbsp;Windows、Mac&amp;nbsp;OS&amp;nbsp;X、Linux、と全ての主要な商業Unix種類で使えます。&lt;br&gt;Qtは組み込みプラットフォームにも使えます。&lt;/p&gt;&lt;p&gt;QtはTrolltechの作品。詳しい情報は&lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt;を参照して下さい。&lt;/p&gt;</translation>
+        <location line="+509"/>
+        <source>About Qt</source>
+        <translation>Qt について</translation>
+    </message>
+    <message>
+        <location line="-1605"/>
+        <source>Show Details...</source>
+        <translation>詳細を表示...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide Details...</source>
+        <translation>詳細を隠す...</translation>
+    </message>
+    <message>
+        <location line="+1570"/>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Qtについて&lt;/h3&gt;
+&lt;p&gt;このプログラムは Qt バージョン %1 を使用しています。&lt;/p&gt;
+&lt;p&gt;Qt は、クロスプラットホームのアプリケーション開発に使用される C++ のツールキットです。&lt;/p&gt;
+&lt;p&gt;Qt は、 MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, そして多数の Unix 系OS環境に対して、単一のソースからバイナリを生成します。
+また、 Linux および Windows CE を元とした組み込み環境にも対応しています。&lt;/p&gt;
+&lt;p&gt;Qt は様々なユーザの要望に応じるために、3つの異なるライセンスで提供されています。&lt;/p&gt;
+&lt;p&gt;
+Qt 商用ライセンスは、プロプライエタリまたは商用ソフトウェアに適用できます。
+この場合は、他者とのソースコードの共有を拒否し、 GNU LGP バージョン 2.1 または GNU GPL バージョン 3.0 を許容できないソフトウェアにおいて Qt を使用できます。
+&lt;/p&gt;
+&lt;p&gt;
+Qt GNU LGPL バージョン 2.1 ライセンスは、プロプライエタリまたはオープンソースソフトウェアに適用できます。
+この場合は、 GNU LGPL バージョン 2.1 に従う必要があります。
+&lt;/p&gt;
+&lt;p&gt;
+Qt GNU General Public License バージョン 3.0 ライセンスは、GNU GPL バージョン 3.0 または GPL 3.0 と互換性のあるライセンスを採用しているソフトウェアに適用されます。
+この場合は、GNU GPL バージョン 3.0 に従う必要があります。
+&lt;/p&gt;
+&lt;p&gt;
+ライセンスの詳細については、&lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt;
+を参照してください。&lt;/p&gt;
+&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;
+&lt;p&gt;Qt は Nokia の製品です。詳細については&lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; を参照してください。&lt;/p&gt;
+&lt;p&gt;
+訳注: ライセンスはここにある翻訳は参考のためのものであり、オリジナルの(英語の)ものが正式なものとなります。
+&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -1550,23 +1643,23 @@ current filter?</source>
     </message>
     <message>
         <source>D</source>
-        <translation>日</translation>
+        <translation type="obsolete">日</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>月</translation>
+        <translation type="obsolete">月</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation>年</translation>
+        <translation type="obsolete">年</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>午後</translation>
+        <translation type="obsolete">午後</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>午前</translation>
+        <translation type="obsolete">午前</translation>
     </message>
     <message>
         <source>Error in row %1</source>
@@ -1601,38 +1694,212 @@ current filter?</source>
     <name>QQDialog</name>
     <message>
         <source>PortaBase</source>
-        <translation>PortaBase</translation>
+        <translation type="obsolete">PortaBase</translation>
     </message>
 </context>
 <context>
-    <name>QTextEdit</name>
+    <name>QQHelpBrowser</name>
     <message>
-        <source>&amp;Undo</source>
-        <translation>元に戻す(&amp;U)</translation>
+        <source>Help</source>
+        <translation>ヘルプ</translation>
     </message>
     <message>
-        <source>&amp;Redo</source>
-        <translation>やり直す(&amp;R)</translation>
+        <source>Back</source>
+        <translation>戻る</translation>
     </message>
     <message>
-        <source>Cu&amp;t</source>
-        <translation>切り取り(&amp;T)</translation>
+        <source>Forward</source>
+        <translation>進む</translation>
+    </message>
+</context>
+<context>
+    <name>QQMenuHelper</name>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation type="unfinished">ファイルネームを選択して下さい</translation>
     </message>
     <message>
-        <source>&amp;Copy</source>
-        <translation>コピー(&amp;C)</translation>
+        <source>&amp;About %1</source>
+        <translation>%1について(&amp;A)</translation>
     </message>
     <message>
-        <source>&amp;Paste</source>
-        <translation>張り付け(&amp;P)</translation>
+        <source>&amp;New</source>
+        <translation>新規(&amp;N)</translation>
     </message>
     <message>
-        <source>Clear</source>
-        <translation>クリア</translation>
+        <source>Create a new file</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select All</source>
-        <translation>全て選択</translation>
+        <source>&amp;Open</source>
+        <translation>開く(&amp;O)</translation>
+    </message>
+    <message>
+        <source>Open an existing file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>終了(&amp;Q)</translation>
+    </message>
+    <message>
+        <source>Quit the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>保存(&amp;S)</translation>
+    </message>
+    <message>
+        <source>Save the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open &amp;Recent</source>
+        <translation>最近使ったファイル(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>閉じる(&amp;C)</translation>
+    </message>
+    <message>
+        <source>Close the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation type="unfinished">設定(&amp;P)</translation>
+    </message>
+    <message>
+        <source>View or change %1 settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>ファイル(&amp;F)</translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation type="unfinished">ヘルプ目次</translation>
+    </message>
+    <message>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation>Qtについて(&amp;Q)</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Qtについて</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>ヘルプ(&amp;H)</translation>
+    </message>
+    <message>
+        <source>Save changes?</source>
+        <translation type="unfinished">変更をセーブしますか?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">はい</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">いいえ</translation>
+    </message>
+    <message>
+        <source>File already exists; overwrite it?</source>
+        <translation>ファイルは存在します…オーバーライトしますか?</translation>
+    </message>
+    <message>
+        <source>Choose a file</source>
+        <translation>ファイルを選択して下さい</translation>
+    </message>
+    <message>
+        <source>File does not exist</source>
+        <translation>ファイルは存在しません</translation>
+    </message>
+    <message>
+        <source>The selected item is a directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QtColorPicker</name>
+    <message>
+        <source>Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1647,6 +1914,22 @@ current filter?</source>
     <message>
         <source>Row Viewer</source>
         <translation>レコード表示</translation>
+    </message>
+    <message>
+        <source>Previous row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit this row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next row</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
