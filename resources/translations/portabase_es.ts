@@ -5,18 +5,18 @@
     <name>CSVErrorDialog</name>
     <message>
         <source>Problematic row</source>
-        <translation>Enr. problématique</translation>
+        <translation>Fila problemática</translation>
     </message>
 </context>
 <context>
     <name>CalcDateEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Éditeur de noeud de calcul</translation>
+        <translation>Editor de nodos de cálculo</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Columna</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -27,26 +27,26 @@
     <name>CalcEditor</name>
     <message>
         <source>Calculation Editor</source>
-        <translation>Éditeur de calcul</translation>
+        <translation>Editor de cálculo</translation>
     </message>
     <message>
         <source>Column Name</source>
-        <translation>Nom de colonne</translation>
+        <translation>Nombre de columna</translation>
     </message>
     <message>
         <source>Equation</source>
-        <translation>Équation</translation>
+        <translation>Ecuación</translation>
     </message>
     <message>
         <source>Decimal Places</source>
-        <translation>Places des décimales</translation>
+        <translation>Poner decimales</translation>
     </message>
 </context>
 <context>
     <name>CalcNode</name>
     <message>
         <source>Days_Between</source>
-        <translation>Jours_Entre</translation>
+        <translation>Días_Entre</translation>
     </message>
     <message>
         <source>MAX</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>AVERAGE</source>
-        <translation>MOYENNE</translation>
+        <translation>PROMEDIO</translation>
     </message>
     <message>
         <source>ABS</source>
@@ -78,26 +78,26 @@
     </message>
     <message>
         <source>Seconds_Between</source>
-        <translation>Secondes_Entre</translation>
+        <translation>Segundos_Entre</translation>
     </message>
     <message>
         <source>Minutes_Between</source>
-        <translation>Minutes_Entre</translation>
+        <translation>Minutos_Entre</translation>
     </message>
     <message>
         <source>Hours_Between</source>
-        <translation>Heures_Entre</translation>
+        <translation>Horas_Entre</translation>
     </message>
 </context>
 <context>
     <name>CalcNodeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Éditeur de noeud de calcul</translation>
+        <translation>Editor de nodos de cálculo</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Columna</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -105,22 +105,22 @@
     </message>
     <message>
         <source>Operation</source>
-        <translation>Opération</translation>
+        <translation>Operación</translation>
     </message>
     <message>
         <source>Constant must be a decimal value</source>
-        <translation>Une constante doit-être une valeur décimale</translation>
+        <translation>Una contante tiene que ser un valor decimal</translation>
     </message>
 </context>
 <context>
     <name>CalcTimeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Éditeur de noeud de calcul</translation>
+        <translation>Editor de nodos de cálculo</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Columna</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -131,143 +131,143 @@
     <name>CalcWidget</name>
     <message>
         <source>Update calculated value</source>
-        <translation type="unfinished">Mise à jour</translation>
+        <translation type="unfinished">Actualizar</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Sélection d&apos;une couleur</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ColumnEditor</name>
     <message>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>String</source>
-        <translation>Chaîne</translation>
+        <translation>Serie</translation>
     </message>
     <message>
         <source>Integer</source>
-        <translation>Entier</translation>
+        <translation>Entero</translation>
     </message>
     <message>
         <source>Decimal</source>
-        <translation>Décimal</translation>
+        <translation>Decimal</translation>
     </message>
     <message>
         <source>Boolean</source>
-        <translation>Booléen</translation>
+        <translation>Boleano</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Note</translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Heure</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>New Enum</source>
-        <translation>Nouvel Énumération</translation>
+        <translation>Nueva enumeración</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Par défaut</translation>
+        <translation>Por defecto</translation>
     </message>
     <message>
         <source>Default Note</source>
-        <translation>Note par défaut</translation>
+        <translation>Nota por defecto</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Aujourd&apos;hui</translation>
+        <translation>Hoy</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>None</translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>Now</source>
-        <translation>Maintenant</translation>
+        <translation>Ahora</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>Calcul</translation>
+        <translation>Cálculo</translation>
     </message>
     <message>
         <source>Sequence</source>
-        <translation>Séquence</translation>
+        <translation>Secuencial</translation>
     </message>
     <message>
         <source>Edit calculation</source>
-        <translation>Éditer un calcul</translation>
+        <translation>Editar cálculo</translation>
     </message>
     <message>
         <source>Next value</source>
-        <translation>Val. suiv.</translation>
+        <translation>Sig. valor</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>image</translation>
+        <translation>Imagen</translation>
     </message>
 </context>
 <context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
-        <translation>N&apos;importe quel</translation>
+        <translation>Cualquier columna</translation>
     </message>
     <message>
         <source>%1 is checked</source>
-        <translation>%1 est coché</translation>
+        <translation>%1 está comprobado</translation>
     </message>
     <message>
         <source>%1 is not checked</source>
-        <translation>%1 n&apos;est pas coché</translation>
+        <translation>%1 no está comprobado</translation>
     </message>
     <message>
         <source>%1 contains %2</source>
-        <translation>%1 contient %2</translation>
+        <translation>%1 contiene %2</translation>
     </message>
     <message>
         <source>%1 starts with %2</source>
-        <translation>%1 démarre par %2</translation>
+        <translation>%1 comienza con %2</translation>
     </message>
 </context>
 <context>
     <name>ConditionEditor</name>
     <message>
         <source>Condition Editor</source>
-        <translation>Éditeur de condition</translation>
+        <translation>Editor de condiciones</translation>
     </message>
     <message>
         <source>Any text column</source>
-        <translation>N&apos;importe quel</translation>
+        <translation>Cualquier columna</translation>
     </message>
     <message>
         <source>contains</source>
-        <translation>contient</translation>
+        <translation>contiene</translation>
     </message>
     <message>
         <source>starts with</source>
-        <translation>Commence par</translation>
+        <translation>comienza con</translation>
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation>Respecter la casse</translation>
+        <translation>Respete la casilla</translation>
     </message>
     <message>
         <source>Constant</source>
@@ -278,292 +278,292 @@
     <name>Crypto</name>
     <message>
         <source>Incorrect password</source>
-        <translation>mot de passe incorrect</translation>
+        <translation>Contraseña incorrecta</translation>
     </message>
     <message>
         <source>Error in decrypting data</source>
-        <translation>Erreur dans le décryptage des données</translation>
+        <translation>Error desencriptando datos</translation>
     </message>
     <message>
         <source>Error in loading data</source>
-        <translation>Erreur dans le chargement des données</translation>
+        <translation>Error cargando datos</translation>
     </message>
     <message>
         <source>Password must be at least 6 characters long</source>
-        <translation>Le mot de passe doit faire au moins 6 car.</translation>
+        <translation>La contraseña tiene que tener al menos 6 carácteres</translation>
     </message>
 </context>
 <context>
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>Éditeur de colonnes</translation>
+        <translation>Editor de columnas</translation>
     </message>
 </context>
 <context>
     <name>DateDialog</name>
     <message>
         <source>Select a date</source>
-        <translation type="unfinished">Sélectionner une date</translation>
+        <translation type="unfinished">Elegir una fecha</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Aujourd&apos;hui</translation>
+        <translation type="unfinished">Hoy</translation>
     </message>
 </context>
 <context>
     <name>DateWidget</name>
     <message>
         <source>None</source>
-        <translation>None</translation>
+        <translation>Nada</translation>
     </message>
 </context>
 <context>
     <name>EnumEditor</name>
     <message>
         <source>Enum Editor</source>
-        <translation>Éditeur d&apos;énumération</translation>
+        <translation>Editor de enumeración</translation>
     </message>
     <message>
         <source>Enum Name</source>
-        <translation>Nom</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation>Trier</translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation>Importer</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>Exporter</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Must have at least one option</source>
-        <translation>Doit avoir au moins une option</translation>
+        <translation>Tiene que tener al menos una opción</translation>
     </message>
     <message>
         <source>Option text</source>
-        <translation>Option du texte</translation>
+        <translation>Opción del texto</translation>
     </message>
     <message>
         <source>Replace where used with:</source>
-        <translation>Remplacer si utilisé avec:</translation>
+        <translation>Reemplazar donde se haya usado por:</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation>Clasificar</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>Importar</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Exportar</translation>
     </message>
 </context>
 <context>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Gestionnaire d&apos;énumération</translation>
+        <translation>Gestor de enumeraciones</translation>
     </message>
     <message>
         <source>The following columns which
 use this enum will also be
 deleted:</source>
-        <translation>Les colonnes suivantes qui
-utilisent cette énumération seront
-aussi effacées:</translation>
+        <translation>Las columnas siguientes que
+usen esta enumeración
+también serán borradas:</translation>
     </message>
     <message>
         <source>Continue?</source>
-        <translation>Continuer?</translation>
+        <translation>¿Continuar?</translation>
     </message>
 </context>
 <context>
     <name>FilterEditor</name>
     <message>
         <source>Filter Editor</source>
-        <translation>Éditeur d&apos;énumération</translation>
+        <translation>Editor de filtros</translation>
     </message>
     <message>
         <source>Filter Name</source>
-        <translation>Nom du filtre</translation>
+        <translation>Nombre de filtro</translation>
     </message>
 </context>
 <context>
     <name>ImageEditor</name>
     <message>
         <source>Image Editor</source>
-        <translation>Éditeur d&apos;image</translation>
+        <translation>Editor de imágenes</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Ancho</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hauteur</translation>
+        <translation>Alto</translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation>Rotation</translation>
+        <translation>Girar</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Rafraîchir</translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>Image is too large to import</source>
-        <translation>Image trop grande pour l&apos;importation</translation>
+        <translation>La imagen es demasiado grande para ser importada</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
-        <translation>Format d&apos;image non supporté</translation>
+        <translation>Formato de imagen no soportado</translation>
     </message>
 </context>
 <context>
     <name>ImageSelector</name>
     <message>
         <source>Select an image</source>
-        <translation>Selectionner une image</translation>
+        <translation>Escoge una imagen</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Vista</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Changer</translation>
+        <translation>Cambiar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Delete the current image?</source>
-        <translation>Effacer l&apos;image courante?</translation>
+        <translation>¿Borrar la imagen actual?</translation>
     </message>
 </context>
 <context>
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>Visualisateur d&apos;image</translation>
+        <translation>Visor de imágenes</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Text encoding</source>
-        <translation>Encodage du texte</translation>
+        <translation>Codificar texto</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation>Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
+        <translation>Archivos de texto con valores separados por comas</translation>
     </message>
     <message>
         <source>MobileDB files</source>
-        <translation>Fichier MobileDB</translation>
+        <translation>Archivos MobileDB</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation>Fichier XML</translation>
+        <translation>Archivos XML</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>images</translation>
+        <translation>Imágenes</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation>choisissez un fichier</translation>
+        <translation>Selecciona un archivo</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importer</translation>
+        <translation>Importar</translation>
     </message>
 </context>
 <context>
     <name>MenuActions</name>
     <message>
         <source>Import</source>
-        <translation>Importer</translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Exporter</translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <source>All Columns</source>
-        <translation>Toutes les colonnes</translation>
+        <translation>Todas las columnas</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Vue</translation>
+        <translation>&amp;Ver</translation>
     </message>
     <message>
         <source>&amp;Row</source>
-        <translation>&amp;Enr</translation>
+        <translation>&amp;Fila</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation>&amp;Trie</translation>
+        <translation>&amp;Clasificar</translation>
     </message>
     <message>
         <source>Fi&amp;lter</source>
-        <translation>Fi&amp;ltre</translation>
+        <translation>Fi&amp;ltro</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
-        <translation>C&amp;hanger mot de passe</translation>
+        <translation>Ca&amp;mbiar contraseña</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation>&amp;Importer</translation>
+        <translation>&amp;Importar</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
-        <translation>E&amp;xporter</translation>
+        <translation>E&amp;xportar</translation>
     </message>
     <message>
         <source>S&amp;lideshow</source>
-        <translation>Di&amp;aporama</translation>
+        <translation>&amp;Muestra animada</translation>
     </message>
     <message>
         <source>Proper&amp;ties</source>
-        <translation>Proprié&amp;tés</translation>
+        <translation>Propie&amp;dades</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
-        <translation>Filtre &amp;Rapide</translation>
+        <translation>&amp;Filtro rápido</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation>&amp;Ajouter</translation>
+        <translation>A&amp;ñadir</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Editer</translation>
+        <translation>&amp;Editar</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Effacer</translation>
+        <translation>&amp;Borrar</translation>
     </message>
     <message>
         <source>All &amp;Columns</source>
-        <translation>Toutes les &amp;Colonnes</translation>
+        <translation>Todas las &amp;columnas</translation>
     </message>
     <message>
         <source>All &amp;Rows</source>
-        <translation>tous les En&amp;r.</translation>
+        <translation>Todas las &amp;filas</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>&amp;Copier</translation>
+        <translation>&amp;Copiar</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation>&amp;Montrer</translation>
+        <translation>&amp;Mostrar</translation>
     </message>
     <message>
         <source>Edit &amp;Enums</source>
-        <translation>Éditer les &amp;enumérations</translation>
+        <translation>Editar &amp;enumeración</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
-        <translation>Éditer &amp;colonnes</translation>
+        <translation>Editar col&amp;umnas</translation>
     </message>
     <message>
         <source>Change the current file&apos;s password</source>
@@ -587,6 +587,18 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>Show information about the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure and preview printing options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -678,18 +690,6 @@ aussi effacées:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure and preview printing options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print the current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished"></translation>
     </message>
@@ -705,66 +705,102 @@ aussi effacées:</translation>
     <name>PBDialog</name>
     <message>
         <source>Name must not start with &apos;_&apos;</source>
-        <translation>Le nom ne doit pas commencer par &apos;_&apos;</translation>
+        <translation>El nombre no tiene que comenzar por &apos;_&apos;</translation>
     </message>
     <message>
         <source>Duplicate name</source>
-        <translation>Le nom existe déjà</translation>
+        <translation>Nombre duplicado</translation>
     </message>
     <message>
         <source>No name entered</source>
-        <translation>Aucun nom entré</translation>
+        <translation>Ningún nombre introducido</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Ajouter</translation>
+        <translation>Añadir</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Éditer</translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Monter</translation>
+        <translation>Arriba</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Descendre</translation>
+        <translation>Abajo</translation>
     </message>
 </context>
 <context>
     <name>PasswordDialog</name>
     <message>
         <source>Old password</source>
-        <translation>Ancien mot de passe</translation>
+        <translation>Contraseña antigua</translation>
     </message>
     <message>
         <source>New password</source>
-        <translation>Nouveau mot de passe</translation>
+        <translation>Contraseña nueva</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <source>Repeat password</source>
-        <translation>Répéter le mot de passe</translation>
+        <translation>Repite la contraseña</translation>
     </message>
     <message>
         <source>Repeat new password</source>
-        <translation>Répéter le nouveau mot de passe</translation>
+        <translation>Repite la nueva contraseña</translation>
     </message>
     <message>
         <source>Repeated password doesn&apos;t match</source>
-        <translation>Réessayez, les mots de passe ne correspondent pas</translation>
+        <translation>La contaseña repetida no coincide</translation>
     </message>
 </context>
 <context>
     <name>PortaBase</name>
+    <message>
+        <source>This file uses a newer version of the
+PortaBase format than this version
+of PortaBase supports; please
+upgrade</source>
+        <translation>Este archivo usa una versión más
+reciente del formato PortaBase del
+que utiliza su versión intalada; por
+favor actualícela</translation>
+    </message>
+    <message>
+        <source>Save changes?</source>
+        <translation>¿Guardar cambios?</translation>
+    </message>
+    <message>
+        <source>Delete this row?</source>
+        <translation>¿Borrar esta fila?</translation>
+    </message>
+    <message>
+        <source>Delete all rows in the
+current filter?</source>
+        <translation>¿Borrar todas las filas
+en el filtro actual?</translation>
+    </message>
+    <message>
+        <source>Delete this view?</source>
+        <translation>¿Borrar esta vista?</translation>
+    </message>
+    <message>
+        <source>Delete this sorting?</source>
+        <translation>¿Borrar esta clasificación?</translation>
+    </message>
+    <message>
+        <source>Delete this filter?</source>
+        <translation>¿Borrar este filtro?</translation>
+    </message>
     <message>
         <source>XML</source>
         <translation>XML</translation>
@@ -775,30 +811,7 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>Import from:</source>
-        <translation>Importer à partir de:</translation>
-    </message>
-    <message>
-        <source>This file uses a newer version of the
-PortaBase format than this version
-of PortaBase supports; please
-upgrade</source>
-        <translation>Ce fichier utilise une version plus
-récente du format Portabase que celui 
-supporté; mettez à jour SVP</translation>
-    </message>
-    <message>
-        <source>Save changes?</source>
-        <translation>Sauver les changement?</translation>
-    </message>
-    <message>
-        <source>Delete this row?</source>
-        <translation>Effacer cette rangée</translation>
-    </message>
-    <message>
-        <source>Delete all rows in the
-current filter?</source>
-        <translation>Effacer toutes les rangées
-dans le filtre courant?</translation>
+        <translation>Importar desde:</translation>
     </message>
     <message>
         <source>CSV</source>
@@ -806,23 +819,11 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>rows in current filter</source>
-        <translation>Rangée dans le filtre courant</translation>
+        <translation>Filas en el filtro actual</translation>
     </message>
     <message>
         <source>Export to:</source>
-        <translation>Exporter vers:</translation>
-    </message>
-    <message>
-        <source>Delete this view?</source>
-        <translation>Effacer cette vue?</translation>
-    </message>
-    <message>
-        <source>Delete this sorting?</source>
-        <translation>Effacer ce tri?</translation>
-    </message>
-    <message>
-        <source>Delete this filter?</source>
-        <translation>Effacer ce filtre?</translation>
+        <translation>Exportar a:</translation>
     </message>
     <message>
         <source>Copyright (C)</source>
@@ -830,47 +831,47 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Site we: http://portabase.sourceforge.net</translation>
+        <translation>Sitio web en http://portabase.sourceforge.net</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Rows</source>
-        <translation>Enr.</translation>
+        <translation>Filas</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation>Colonnes</translation>
+        <translation>Columnas</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation>Vues</translation>
+        <translation>Vistas</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation>Tris</translation>
+        <translation>Clasificaciones</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation>Filtres</translation>
+        <translation>Filtros</translation>
     </message>
     <message>
         <source>Enums</source>
-        <translation>Énums</translation>
+        <translation>Enumeraciones</translation>
     </message>
     <message>
         <source>File Properties</source>
-        <translation>Propriétés du fichier</translation>
+        <translation>Propiedades del archivo</translation>
     </message>
     <message>
         <source>Not a PortaBase file</source>
-        <translation>Ce n&apos;est pas un fcihier Portabase</translation>
+        <translation>No es un archivo de PortaBase</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -878,7 +879,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">Fichiers portabase</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Recently opened files</source>
@@ -886,15 +887,15 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="unfinished">Crypter le fichier?</translation>
+        <translation type="unfinished">¿Encriptar el archivo?</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
+        <translation type="unfinished">Archivos de texto con valores separados por comas</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">Fichier XML</translation>
+        <translation type="unfinished">Archivos XML</translation>
     </message>
     <message>
         <source>Printing aborted</source>
@@ -917,103 +918,103 @@ dans le filtre courant?</translation>
     <name>Preferences</name>
     <message>
         <source>Preferences</source>
-        <translation>Préférences</translation>
+        <translation>Preferencias</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Police</translation>
+        <translation>Fuente</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Sample</source>
-        <translation>Exemple</translation>
+        <translation>Ejemplo</translation>
     </message>
     <message>
         <source>Sample text</source>
-        <translation>Texte d&apos;exemple</translation>
+        <translation>Texto de ejemplo</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Général</translation>
+        <translation>General</translation>
     </message>
     <message>
         <source>Confirm deletions</source>
-        <translation>Confirmer les effacements</translation>
+        <translation>Confirmar borrados</translation>
     </message>
     <message>
         <source>Allow checkbox edit in data viewer</source>
-        <translation>Autoriser l&apos;édition des cases à cocher dans les vue</translation>
+        <translation>Permitir edición de botón de chequeo en el visor de datos</translation>
     </message>
     <message>
         <source>Show seconds for times</source>
-        <translation>Montrer les secondes pour l&apos;heure</translation>
+        <translation>Mostrar segundos para las horas</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
-        <translation>Wrap Notes</translation>
+        <translation>Wrap notes</translation>
     </message>
     <message>
         <source>at whitespace</source>
-        <translation>at whitespace</translation>
+        <translation>al espacio en blanco</translation>
     </message>
     <message>
         <source>anywhere</source>
-        <translation>N&apos;importe où</translation>
-    </message>
-    <message>
-        <source>Row Colors</source>
-        <translation>Couleurs des rangées</translation>
+        <translation>cualquier lugar</translation>
     </message>
     <message>
         <source>Date and Time</source>
-        <translation>Date et heure</translation>
+        <translation>Fecha y hora</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation>format de la date</translation>
+        <translation>Formato de fecha</translation>
     </message>
     <message>
         <source>Time format</source>
-        <translation>format de l&apos;heure</translation>
+        <translation>Formato de hora</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation>24 heures</translation>
+        <translation>24 horas</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation>12 heures</translation>
+        <translation>12 horas</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation>Les semaines débutent le</translation>
+        <translation>La semana comienza el</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>Dimanche</translation>
+        <translation>Domingo</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Lundi</translation>
+        <translation>Lunes</translation>
+    </message>
+    <message>
+        <source>Row Colors</source>
+        <translation>Colores de la fila</translation>
     </message>
     <message>
         <source>Use pages in data viewer</source>
-        <translation>Utiliser la page dans le visualisateur de données</translation>
+        <translation>Usar páginas en el visor de datos</translation>
     </message>
     <message>
         <source>Default rows per page</source>
-        <translation>Enr. par défaut par page</translation>
+        <translation>Filas por defecto por páginas</translation>
     </message>
     <message>
         <source>Appearance</source>
-        <translation>Apparence</translation>
+        <translation>Apariencia</translation>
     </message>
     <message>
         <source>Use small-screen settings on this device</source>
@@ -1021,7 +1022,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">J</translation>
+        <translation type="unfinished">D</translation>
     </message>
     <message>
         <source>M</source>
@@ -1080,7 +1081,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation type="unfinished">Preferencias</translation>
     </message>
     <message>
         <source>Quit %1</source>
@@ -1088,92 +1089,88 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">À propos de Qt</translation>
+        <translation type="unfinished">Sobre Qt</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>must be an integer</source>
-        <translation>Doit-être un entier</translation>
+        <translation>tiene que ser entero</translation>
     </message>
     <message>
         <source>must be a decimal value</source>
-        <translation>Doit-être un décimal</translation>
+        <translation>tiene que ser un valor decimal</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
-        <translation>doit-être 0 ou 1</translation>
+        <translation>tiene que ser 0 o 1</translation>
     </message>
     <message>
         <source>invalid date</source>
-        <translation>date invalide</translation>
+        <translation>fecha no válida</translation>
     </message>
     <message>
         <source>invalid time</source>
-        <translation>heure invalide</translation>
+        <translation>hora no válida</translation>
     </message>
     <message>
         <source>no such option</source>
-        <translation>option invalide</translation>
-    </message>
-    <message>
-        <source>Excess columns</source>
-        <translation>Excès de colonnes</translation>
-    </message>
-    <message>
-        <source>Missing columns</source>
-        <translation>colonnes manquantes</translation>
+        <translation>no hay tal opción</translation>
     </message>
     <message>
         <source>Unable to open file</source>
-        <translation>impossible d&apos;ouvrir le fichier</translation>
-    </message>
-    <message>
-        <source>Error in row %1</source>
-        <translation>erreur dans la ligne %1</translation>
+        <translation>Imposible abrir el archivo</translation>
     </message>
     <message>
         <source>Not a valid MobileDB file</source>
-        <translation>Ce n&apos;est pas un fichier MobileDB valide</translation>
+        <translation>No es un archivo MobileDB válido</translation>
+    </message>
+    <message>
+        <source>Error in row %1</source>
+        <translation>Error en la fila %1</translation>
+    </message>
+    <message>
+        <source>Excess columns</source>
+        <translation>Columnas excesivas</translation>
+    </message>
+    <message>
+        <source>Missing columns</source>
+        <translation>Columnas perdidas</translation>
     </message>
     <message>
         <source>Problematic row</source>
-        <translation>ligne problématique</translation>
+        <translation>Fila problemática</translation>
     </message>
     <message>
         <source>Missing file</source>
-        <translation>Fichier manquant</translation>
+        <translation>Archivo perdido</translation>
     </message>
 </context>
 <context>
     <name>QQHelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation type="unfinished">Ayuda</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Préc.</translation>
+        <translation type="unfinished">Anterior</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Suiv.</translation>
+        <translation type="unfinished">Siguiente</translation>
     </message>
 </context>
 <context>
     <name>QQMenuHelper</name>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">Enregistrer sous</translation>
-    </message>
-    <message>
-        <source>&amp;About %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Elige un nombre de archivo para guardarlo</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nuevo</translation>
     </message>
     <message>
         <source>Create a new file</source>
@@ -1181,7 +1178,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Ouvrir</translation>
+        <translation type="unfinished">A&amp;brir</translation>
     </message>
     <message>
         <source>Open an existing file</source>
@@ -1189,7 +1186,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Quitter</translation>
+        <translation type="unfinished">&amp;Salir</translation>
     </message>
     <message>
         <source>Quit the application</source>
@@ -1197,7 +1194,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sauver</translation>
+        <translation type="unfinished">&amp;Guardar</translation>
     </message>
     <message>
         <source>Save the current file</source>
@@ -1205,58 +1202,62 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished">Ouvrir &amp;Recent</translation>
+        <translation type="unfinished">Abrir &amp;reciente</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Fermer</translation>
+        <translation type="unfinished">&amp;Cerrar</translation>
     </message>
     <message>
         <source>Close the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Pr&amp;eferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Fichier</translation>
+        <translation type="unfinished">&amp;Archivo</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished">Sommaire de l&apos;aide</translation>
+        <translation type="unfinished">Contenidos de la ayuda</translation>
     </message>
     <message>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About &amp;Qt</source>
-        <translation type="unfinished">Au sujet de &amp;Qt</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Aide</translation>
-    </message>
-    <message>
-        <source>Save changes?</source>
-        <translation type="unfinished">Sauver les changement?</translation>
-    </message>
-    <message>
-        <source>File already exists; overwrite it?</source>
-        <translation type="unfinished">Le fichier existe déjà; l&apos;écraser?</translation>
-    </message>
-    <message>
-        <source>Choose a file</source>
-        <translation type="unfinished">choisissez un fichier</translation>
-    </message>
-    <message>
-        <source>File does not exist</source>
-        <translation type="unfinished">Le fichier n&apos;existe pas</translation>
-    </message>
-    <message>
-        <source>The selected item is a directory</source>
+        <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pr&amp;eferences</source>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Sobre &amp;Qt</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished">A&amp;yuda</translation>
+    </message>
+    <message>
+        <source>Save changes?</source>
+        <translation type="unfinished">¿Guardar cambios?</translation>
+    </message>
+    <message>
+        <source>File already exists; overwrite it?</source>
+        <translation type="unfinished">El archivo ya existe: ¿lo sobreescribo?</translation>
+    </message>
+    <message>
+        <source>Choose a file</source>
+        <translation type="unfinished">Selecciona un archivo</translation>
+    </message>
+    <message>
+        <source>File does not exist</source>
+        <translation type="unfinished">El archivo no existe</translation>
+    </message>
+    <message>
+        <source>The selected item is a directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1336,21 +1337,21 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Sélection d&apos;une couleur</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RowEditor</name>
     <message>
         <source>Row Editor</source>
-        <translation>Éditeur de ligne</translation>
+        <translation>Editor de filas</translation>
     </message>
 </context>
 <context>
     <name>RowViewer</name>
     <message>
         <source>Row Viewer</source>
-        <translation>Visualisateur de ligne</translation>
+        <translation>VIsor de filas</translation>
     </message>
     <message>
         <source>Previous row</source>
@@ -1373,72 +1374,72 @@ dans le filtre courant?</translation>
     <name>SlideshowDialog</name>
     <message>
         <source>Slideshow</source>
-        <translation>Diaporama</translation>
+        <translation>Muestra animada</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Columna</translation>
     </message>
     <message>
         <source>Delay between images</source>
-        <translation>Délai entre 2 images</translation>
+        <translation>Dilación entre imágenes</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation>secondes</translation>
+        <translation>segundos</translation>
     </message>
 </context>
 <context>
     <name>SortEditor</name>
     <message>
         <source>Sorting Editor</source>
-        <translation>Éditeur de tri</translation>
+        <translation>Editor de clasificaciones</translation>
     </message>
     <message>
         <source>Sorting Name</source>
-        <translation>Trier par nom</translation>
+        <translation>Nombre de clasificación</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation>Trier</translation>
+        <translation>Clasificación</translation>
     </message>
     <message>
         <source>Column Name</source>
-        <translation>Nom de colonne</translation>
+        <translation>Nombre de la columna</translation>
     </message>
     <message>
         <source>Direction</source>
-        <translation>Sens</translation>
+        <translation>Dirección</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation>Montant</translation>
+        <translation>Ascendente</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation>Descendant</translation>
+        <translation>Descendente</translation>
     </message>
 </context>
 <context>
     <name>TimeWidget</name>
     <message>
         <source>AM</source>
-        <translation>am</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>pm</translation>
+        <translation>PM</translation>
     </message>
 </context>
 <context>
     <name>View</name>
     <message>
         <source>No data to summarize</source>
-        <translation>Pas de date</translation>
+        <translation>Ningún dato para resumir</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1446,192 +1447,192 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>Moyenne</translation>
+        <translation>Promedio</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation>Minimum</translation>
+        <translation>Mínimo</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation>Maximum</translation>
+        <translation>Máximo</translation>
     </message>
     <message>
         <source>Checked</source>
-        <translation>Vérifié</translation>
+        <translation>Comprobado</translation>
     </message>
     <message>
         <source>Unchecked</source>
-        <translation>Non vérifié</translation>
+        <translation>No comprobado</translation>
     </message>
     <message>
         <source>Earliest</source>
-        <translation>le plus tôt</translation>
+        <translation>El primero</translation>
     </message>
     <message>
         <source>Latest</source>
-        <translation>Le plus tard</translation>
+        <translation>El últmo</translation>
     </message>
     <message>
         <source>Total length</source>
-        <translation>longueur totale</translation>
+        <translation>Longitud total</translation>
     </message>
     <message>
         <source>characters</source>
-        <translation>caractères</translation>
+        <translation>caracteres</translation>
     </message>
     <message>
         <source>Average length</source>
-        <translation>longueur moyenne</translation>
+        <translation>Longitud media</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation>Longueur minimum</translation>
+        <translation>Longitud mínima</translation>
     </message>
     <message>
         <source>Maximum length</source>
-        <translation>Longueur maximum</translation>
+        <translation>Longitud máxima</translation>
     </message>
     <message>
         <source>Image available</source>
-        <translation>Images disponibles</translation>
+        <translation>Imagen disponible</translation>
     </message>
     <message>
         <source>No image</source>
-        <translation>Pas d&apos;image</translation>
+        <translation>Ninguna imagen</translation>
     </message>
 </context>
 <context>
     <name>ViewDisplay</name>
     <message>
         <source>No results</source>
-        <translation>Néant</translation>
+        <translation>Ningún resultado</translation>
     </message>
     <message>
         <source>No image columns in this view</source>
-        <translation>Pas d&apos;image dans cette vue</translation>
+        <translation>Ninguna columna en esta vista</translation>
     </message>
     <message>
         <source>No rows in this filter</source>
-        <translation>PAs d&apos;enr. avec ce filtre</translation>
+        <translation>Ninguna fila en este filtro</translation>
     </message>
 </context>
 <context>
     <name>ViewEditor</name>
     <message>
         <source>View Editor</source>
-        <translation>Éditeur de vue</translation>
+        <translation>Editor de vistas</translation>
     </message>
     <message>
         <source>View Name</source>
-        <translation>Nom de la vue</translation>
+        <translation>Nombre de la vista</translation>
     </message>
     <message>
         <source>Default Sorting</source>
-        <translation>tri par défaut</translation>
+        <translation>Clasificación por defecto</translation>
     </message>
     <message>
         <source>Default Filter</source>
-        <translation>Filtre par défaut</translation>
+        <translation>Filtro por defecto</translation>
     </message>
     <message>
         <source>Include</source>
-        <translation>inclure</translation>
+        <translation>Adjuntar</translation>
     </message>
     <message>
         <source>Column Name</source>
-        <translation>Nom de colonne</translation>
+        <translation>Nombre de la columna</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>All Rows</source>
-        <translation>Toutes les lignes</translation>
+        <translation>Todas las filas</translation>
     </message>
 </context>
 <context>
     <name>XMLImport</name>
     <message>
         <source>Error at</source>
-        <translation>Erreur à</translation>
+        <translation>Error en</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation>ligne</translation>
+        <translation>Línea</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Columna</translation>
     </message>
     <message>
         <source>only allowed as root element</source>
-        <translation>autorisé seulement comme élément racine</translation>
+        <translation>sólo permitido como elemento de root</translation>
     </message>
     <message>
         <source>Unknown element</source>
-        <translation>élement inconnu</translation>
+        <translation>Elemento desconocido</translation>
     </message>
     <message>
         <source>%1 not allowed as child of %2</source>
-        <translation>%1 n&apos;est pas autorisé comme &quot;enfant&quot; de %2</translation>
+        <translation>%1 no permitido como hijo de %2</translation>
     </message>
     <message>
         <source>Missing element</source>
-        <translation>Élement manquant</translation>
+        <translation>Elemento perdido</translation>
     </message>
     <message>
         <source>&quot;c&quot; attribute is missing or non-integer</source>
-        <translation>l&apos;attribut &quot;c&quot; est manquant ou n&apos;est pas un entier </translation>
+        <translation>El atributo &quot;c&quot; está perdido o no es entero</translation>
     </message>
     <message>
         <source>Unsupported</source>
-        <translation>Non supporté</translation>
+        <translation>No soportado</translation>
     </message>
     <message>
         <source>Invalid</source>
-        <translation>Invalide</translation>
+        <translation>No válido</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Dupliquer</translation>
+        <translation>Duplicado</translation>
     </message>
     <message>
         <source>Missing</source>
-        <translation>Manquant</translation>
+        <translation>Perdido</translation>
     </message>
     <message>
         <source>Too many child nodes for node type</source>
-        <translation>Trop de noeuds enfant pour ce type de noeud</translation>
+        <translation>Demasiados nodos hijos para el tipo de nodo</translation>
     </message>
     <message>
         <source>Incorrect _all view column sequence</source>
-        <translation>Incorrect _all view column sequence</translation>
+        <translation>Secuencia incorrecta de _todas las columnas mostradas</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
-        <translation>doit-être 0 ou 1</translation>
+        <translation>debe ser 0 o 1</translation>
     </message>
     <message>
         <source>must be an integer</source>
-        <translation>Doit-être un entier</translation>
+        <translation>debe ser un entero</translation>
     </message>
     <message>
         <source>must be a non-negative integer</source>
-        <translation>doi-être un entier positif</translation>
+        <translation>debe ser un entero no negativo</translation>
     </message>
     <message>
         <source>must be a positive integer</source>
-        <translation>doi-être un entier positif</translation>
+        <translation>debe ser un entero positivo</translation>
     </message>
     <message>
         <source>Duplicate element</source>
-        <translation>élement dupliqué</translation>
+        <translation>Elemento duplicado</translation>
     </message>
     <message>
         <source>Missing data for column ID %1</source>
-        <translation>donnée pour la colonne ID %1 manquante</translation>
+        <translation>Datos perdidos en la columna ID %1</translation>
     </message>
 </context>
 </TS>

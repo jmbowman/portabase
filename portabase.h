@@ -29,6 +29,7 @@ class QAction;
 class QGroupBox;
 class QMenu;
 class QMenuBar;
+class QPrinter;
 class QPushButton;
 class QStackedWidget;
 class ViewDisplay;
@@ -88,6 +89,9 @@ private slots:
     void aboutPortaBase();
     void quit();
     void openAt(QAction *where);
+    void printPreview();
+    void print();
+    void print(QPrinter *p);
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -131,6 +135,8 @@ private:
     QAction *slideshowAction; /**< "Slideshow" menu action */
     QAction *propsAction; /**< File "Properties" menu action */
     QAction *fileSeparatorAction; /**< Separator used in the "File" menu */
+    QAction *printPreviewAction; /**< "Print Preview" menu action */
+    QAction *printAction; /**< "Print" menu action */
     QAction *rowAddAction; /**< Row "Add" menu/toolbar action */
     QAction *rowEditAction; /**< Row "Edit" menu/toolbar action */
     QAction *rowDeleteAction; /**< Row "Delete" menu/toolbar action */
@@ -163,6 +169,7 @@ private:
     ActionList filterActions; /**< List of user-created filter selection actions */
     bool confirmDeletions; /**< True if deletion actions should trigger confirmation dialogs */
     bool booleanToggle; /**< True if clicking on a boolean field display should toggle its value */
+    QPrinter *printer; /**< The last-used printer settings (for this application instance) */
 };
 
 #endif

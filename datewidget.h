@@ -1,7 +1,7 @@
 /*
  * datewidget.h
  *
- * (c) 2002,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,8 +58,6 @@ private:
     QDate dateObj; /**< The date currently being shown */
     QLabel *display; /**< The text label showing the date */
     QPushButton *noneButton; /**< Button to set the date to "None" */
-    QStringList days; /**< List of day-of-week abbreviations */
-    QStringList months; /**< List of month names */
 };
 
 #endif

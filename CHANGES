@@ -1,3 +1,17 @@
+2010-03-24  JMB  Printing, translation updates, data column alignment
+
+    PortaBase now supports printing, including page setup and print preview
+    (this is omitted on Maemo and other platforms which don't provide any kind
+    of printing functionality).  Also reworked the code to take advantage of
+    translation work that's already been done for Qt, fully updated the
+    Japanese UI translation, and got the other UI translations ready for
+    translators to update (the phrases that have already been translated should
+    still appear correctly, but there are a number of new ones as well).
+    I made sure that the translations are being used correctly on Mac OS X
+    (including the application menu, which requires some special handling).
+    I also made a minor change regarding column alignment in the data viewer:
+    numeric fields are now right-aligned so they line up better.
+
 2010-03-15  JMB  Initial Maemo support, code cleanup, release preparation work
 
     I got PortaBase to build in the Maemo (Diablo) SDK, so I've started fixing

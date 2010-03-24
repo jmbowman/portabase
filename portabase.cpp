@@ -26,10 +26,15 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include <QPrinter>
 #include <QProcess>
 #include <QPushButton>
 #include <QStackedWidget>
+#include <QStatusBar>
 #include <QStyle>
+#include <QTextDocument>
 #include <QToolBar>
 #include <QUrl>
 #include "condition.h"
@@ -55,7 +60,7 @@
  * @param parent This window's parent widget, if any (usually none)
  */
 PortaBase::PortaBase(QWidget *parent)
-  : QMainWindow(parent), db(0), doc("")
+  : QMainWindow(parent), db(0), doc(""), printer(0)
 {
     QSettings *settings = getSettings();
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
@@ -119,6 +124,10 @@ PortaBase::PortaBase(QWidget *parent)
     connect(slideshowAction, SIGNAL(triggered()), viewer, SLOT(slideshow()));
     propsAction = ma->action(MenuActions::Properties);
     connect(propsAction, SIGNAL(triggered()), this, SLOT(viewProperties()));
+    printPreviewAction = ma->action(MenuActions::PrintPreview);
+    connect(printPreviewAction, SIGNAL(triggered()), this, SLOT(printPreview()));
+    printAction = ma->action(MenuActions::Print);
+    connect(printAction, SIGNAL(triggered()), this, SLOT(print()));
     fileSeparatorAction = new QAction(this);
     fileSeparatorAction->setSeparator(true);
 
@@ -133,6 +142,8 @@ PortaBase::PortaBase(QWidget *parent)
     mh->addToFileMenu(manageEnumsAction);
     mh->addToFileMenu(slideshowAction);
     mh->addToFileMenu(propsAction);
+    mh->addToFileMenu(printPreviewAction);
+    mh->addToFileMenu(printAction);
 
     // Row menu/toolbar actions
     rowAddAction = ma->action(MenuActions::AddRow, addIcon);
@@ -683,6 +694,8 @@ void PortaBase::showFileSelector()
     manageEnumsAction->setVisible(false);
     slideshowAction->setVisible(false);
     propsAction->setVisible(false);
+    printAction->setVisible(false);
+    printAction->setEnabled(false);
 
     // Toolbar
     showAllFillerActions();
@@ -739,6 +752,12 @@ void PortaBase::showDataViewer()
     propsAction->setVisible(true);
     fileSeparatorAction->setVisible(false);
     importAction->setVisible(false);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+    printPreviewAction->setEnabled(true);
+    printPreviewAction->setVisible(true);
+    printAction->setEnabled(true);
+    printAction->setVisible(true);
+#endif
 
     // Toolbar
     rowAddAction->setVisible(true);
@@ -816,9 +835,11 @@ void PortaBase::quit()
 void PortaBase::deleteRow()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Delete this row?"), QObject::tr("Yes"),
-                                 QObject::tr("No"), QString::null, 1) > 0) {
+        int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                          tr("Delete this row?"),
+                                          QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return;
         }
     }
@@ -843,10 +864,11 @@ void PortaBase::copyRow()
 void PortaBase::deleteAllRows()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Delete all rows in the\ncurrent filter?"),
-                                 QObject::tr("Yes"), QObject::tr("No"),
-                                 QString::null, 1) > 0) {
+        int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                tr("Delete all rows in the\ncurrent filter?"),
+                                QMessageBox::Yes|QMessageBox::No,
+                                QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return;
         }
     }
@@ -1282,10 +1304,11 @@ void PortaBase::addFilter()
 void PortaBase::deleteView()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Delete this view?"),
-                                 QObject::tr("Yes"), QObject::tr("No"),
-                                 QString::null, 1) > 0) {
+        int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                          tr("Delete this view?"),
+                                          QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return;
         }
     }
@@ -1305,10 +1328,11 @@ void PortaBase::deleteView()
 void PortaBase::deleteSorting()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Delete this sorting?"),
-                                 QObject::tr("Yes"), QObject::tr("No"),
-                                 QString::null, 1) > 0) {
+        int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                          tr("Delete this sorting?"),
+                                          QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return;
         }
     }
@@ -1327,10 +1351,11 @@ void PortaBase::deleteSorting()
 void PortaBase::deleteFilter()
 {
     if (confirmDeletions) {
-        if (QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Delete this filter?"),
-                                 QObject::tr("Yes"), QObject::tr("No"),
-                                 QString::null, 1) > 0) {
+        int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                          tr("Delete this filter?"),
+                                          QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return;
         }
     }
@@ -1638,6 +1663,65 @@ void PortaBase::showAllFillerActions() {
         fillerActions[i]->setVisible(true);
     }
 #endif
+}
+
+/**
+ * Show a print preview dialog.  In addition to showing what the printed
+ * output will look like, this dialog also lets the user set up printing
+ * options such as zoom factor, orientation, and paper size.  Configured
+ * settings are preserved until PortaBase exits.
+ */
+void PortaBase::printPreview()
+{
+    if (!printer) {
+        printer = new QPrinter(QPrinter::HighResolution);
+    }
+    QPrintPreviewDialog dialog(printer, this);
+    connect(&dialog, SIGNAL(paintRequested(QPrinter*)),
+            this, SLOT(print(QPrinter*)));
+    dialog.exec();
+}
+
+/**
+ * Print a subset of the current file's data that is appropriate for the current
+ * settings.  Respects the current view, sorting, and filter (but prints all
+ * matching rows, not just those shown on the current page).
+ */
+void PortaBase::print()
+{
+    if (!printer) {
+        printer = new QPrinter(QPrinter::HighResolution);
+    }
+    QPrintDialog dialog(printer, this);
+    if (dialog.exec() != QDialog::Accepted) {
+        statusBar()->showMessage(tr("Printing aborted"), 2000);
+        return;
+    }
+    statusBar()->showMessage(tr("Printing") + "...");
+    print(printer);
+    statusBar()->showMessage(tr("Printing completed"), 2000);
+}
+
+/**
+ * Do the work of actually printing the file, after the page layout has been
+ * set up.
+ *
+ * @param p The printer object to use
+ */
+void PortaBase::print(QPrinter *p)
+{
+    QTextDocument document;
+    document.addResource(QTextDocument::ImageResource,
+                         QUrl("icon://checked.png"),
+                         QPixmap(":/icons/checked.png"));
+    document.addResource(QTextDocument::ImageResource,
+                         QUrl("icon://unchecked.png"),
+                         QPixmap(":/icons/unchecked.png"));
+    document.addResource(QTextDocument::ImageResource,
+                         QUrl("icon://image.png"),
+                         QPixmap(":/icons/image.png"));
+    document.setHtml(viewer->toHtml());
+    document.print(p);
 }
 
 /**

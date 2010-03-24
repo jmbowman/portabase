@@ -132,54 +132,15 @@
 <context>
     <name>CalcWidget</name>
     <message>
-        <source>Update</source>
-        <translation type="obsolete">更新</translation>
-    </message>
-    <message>
         <source>Update calculated value</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ColorDialog</name>
-    <message>
-        <source>Hu&amp;e:</source>
-        <translation type="obsolete">色彩(&amp;E):</translation>
-    </message>
-    <message>
-        <source>&amp;Sat:</source>
-        <translation type="obsolete">深顏色(&amp;S):</translation>
-    </message>
-    <message>
-        <source>&amp;Val:</source>
-        <translation type="obsolete">顏色(&amp;V):</translation>
-    </message>
-    <message>
-        <source>&amp;Red:</source>
-        <translation type="obsolete">紅色(&amp;R):</translation>
-    </message>
-    <message>
-        <source>&amp;Green:</source>
-        <translation type="obsolete">綠色(&amp;G):</translation>
-    </message>
-    <message>
-        <source>Bl&amp;ue:</source>
-        <translation type="obsolete">藍色(&amp;U):</translation>
-    </message>
-    <message>
-        <source>A&amp;lpha channel:</source>
-        <translation type="obsolete">Alpha 管道(&amp;L):</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">選擇顏色</translation>
+        <translation type="unfinished">更新</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">選擇顏色</translation>
     </message>
 </context>
 <context>
@@ -358,91 +319,6 @@
         <source>None</source>
         <translation>無</translation>
     </message>
-    <message>
-        <source>Mon</source>
-        <translation>星期一</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>星期二
-</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>星期三</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>星期四</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>星期五
-</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>星期六</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>星期日</translation>
-    </message>
-    <message>
-        <source>Jan</source>
-        <translation>一月</translation>
-    </message>
-    <message>
-        <source>Feb</source>
-        <translation>二月</translation>
-    </message>
-    <message>
-        <source>Mar</source>
-        <translation>三月</translation>
-    </message>
-    <message>
-        <source>Apr</source>
-        <translation>四月</translation>
-    </message>
-    <message>
-        <source>May</source>
-        <translation>五月</translation>
-    </message>
-    <message>
-        <source>Jun</source>
-        <translation>六月</translation>
-    </message>
-    <message>
-        <source>Jul</source>
-        <translation>七月</translation>
-    </message>
-    <message>
-        <source>Aug</source>
-        <translation>八月</translation>
-    </message>
-    <message>
-        <source>Sep</source>
-        <translation>九月
-</translation>
-    </message>
-    <message>
-        <source>Oct</source>
-        <translation>十月</translation>
-    </message>
-    <message>
-        <source>Nov</source>
-        <translation>十一月
-</translation>
-    </message>
-    <message>
-        <source>Dec</source>
-        <translation>十二月</translation>
-    </message>
-    <message>
-        <source>%1 %2 %3 %4</source>
-        <comment>1=day of week, 2=month name, 3=day of month, 4=year</comment>
-        <translation>%4年%2%3日 %1</translation>
-    </message>
 </context>
 <context>
     <name>EnumEditor</name>
@@ -505,21 +381,6 @@ deleted:</source>
     <message>
         <source>Filter Name</source>
         <translation>篩選名稱</translation>
-    </message>
-</context>
-<context>
-    <name>HelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">說明</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation type="obsolete">上一頁</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation type="obsolete">下一頁</translation>
     </message>
 </context>
 <context>
@@ -616,73 +477,9 @@ deleted:</source>
         <source>Import</source>
         <translation>匯入</translation>
     </message>
-    <message>
-        <source>Import rows from CSV file</source>
-        <translation type="obsolete">從CSV檔案匯入資料列</translation>
-    </message>
-    <message>
-        <source>Import from MobileDB file</source>
-        <translation type="obsolete">從MobileDB檔案匯入</translation>
-    </message>
-    <message>
-        <source>Import from text file</source>
-        <translation type="obsolete">從文字檔案匯入</translation>
-    </message>
-    <message>
-        <source>Import from XML file</source>
-        <translation type="obsolete">從XML檔案匯入</translation>
-    </message>
-    <message>
-        <source>Select an image</source>
-        <translation type="obsolete">選一個影像</translation>
-    </message>
 </context>
 <context>
     <name>MenuActions</name>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">檔案</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">景觀</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation type="obsolete">資料列</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation type="obsolete">排序</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation type="obsolete">篩選</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">說明</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">新增</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">開啟</translation>
-    </message>
-    <message>
-        <source>Open Recent</source>
-        <translation type="obsolete">近日開啟</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">存</translation>
-    </message>
-    <message>
-        <source>Change Password</source>
-        <translation type="obsolete">變更密碼</translation>
-    </message>
     <message>
         <source>Import</source>
         <translation>匯入</translation>
@@ -692,100 +489,8 @@ deleted:</source>
         <translation>匯出</translation>
     </message>
     <message>
-        <source>Slideshow</source>
-        <translation type="obsolete">放映幻燈片</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">性質</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">偏好設定</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">結束</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">清單</translation>
-    </message>
-    <message>
-        <source>Icons</source>
-        <translation type="obsolete">顯示圖片</translation>
-    </message>
-    <message>
-        <source>Help Contents</source>
-        <translation type="obsolete">說明內容</translation>
-    </message>
-    <message>
-        <source>About PortaBase</source>
-        <translation type="obsolete">關於PortaBase</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation type="obsolete">關於Qt</translation>
-    </message>
-    <message>
-        <source>Quick Filter</source>
-        <translation type="obsolete">快速篩選器</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">新增</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">編輯</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">刪除</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">重新命名</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="obsolete">重新整理</translation>
-    </message>
-    <message>
         <source>All Columns</source>
         <translation>所有欄位</translation>
-    </message>
-    <message>
-        <source>All Rows</source>
-        <translation type="obsolete">所有資料列</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">複製</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="obsolete">顯示</translation>
-    </message>
-    <message>
-        <source>Delete Rows In Filter</source>
-        <translation type="obsolete">刪除篩選中的所有資料列</translation>
-    </message>
-    <message>
-        <source>Edit Columns</source>
-        <translation type="obsolete">編輯欄位</translation>
-    </message>
-    <message>
-        <source>Edit Enums</source>
-        <translation type="obsolete">編輯集合</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">關閉</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation type="obsolete">檔案(&amp;F)</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -802,26 +507,6 @@ deleted:</source>
     <message>
         <source>Fi&amp;lter</source>
         <translation>篩選(&amp;L)</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">說明(&amp;H)</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="obsolete">新增(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation type="obsolete">開啟(&amp;O)</translation>
-    </message>
-    <message>
-        <source>Open &amp;Recent</source>
-        <translation type="obsolete">近日開啟(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">存(&amp;S)</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
@@ -843,26 +528,6 @@ deleted:</source>
     <message>
         <source>Proper&amp;ties</source>
         <translation>性質(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Preferences</source>
-        <translation>偏好設定(&amp;P)</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">退出(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>Help &amp;Contents</source>
-        <translation type="obsolete">説明內容(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;About PortaBase</source>
-        <translation type="obsolete">關於PortaBase(&amp;A)</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation type="obsolete">關係QT(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
@@ -897,16 +562,8 @@ deleted:</source>
         <translation>展示(&amp;S)</translation>
     </message>
     <message>
-        <source>&amp;Delete Rows In Filter</source>
-        <translation type="obsolete">刪除篩選中的資料列(&amp;D)</translation>
-    </message>
-    <message>
         <source>Edit &amp;Enums</source>
         <translation>集合編輯(&amp;E)</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">關閉(&amp;C)</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
@@ -934,10 +591,6 @@ deleted:</source>
     </message>
     <message>
         <source>Show information about the current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View or change PortaBase settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1028,48 +681,21 @@ deleted:</source>
         <source>Edit the enumerated data types</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>NewFileDialog</name>
     <message>
-        <source>Export</source>
-        <translation type="obsolete">匯出</translation>
+        <source>Configure and preview printing options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter a name for the new file</source>
-        <translation type="obsolete">輸入檔案名稱</translation>
+        <source>&amp;Print</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File already exists; overwrite it?</source>
-        <translation type="obsolete">檔案已存在；要覆寫嗎?</translation>
+        <source>Print the current file</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Encrypt the file?</source>
-        <translation type="obsolete">檔案要加密嗎?</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation type="obsolete">PortaBase檔案</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation type="obsolete">文字檔</translation>
-    </message>
-    <message>
-        <source>XML files</source>
-        <translation type="obsolete">XML檔案</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation type="obsolete">請選一個儲存檔案名稱</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation type="obsolete">內容以逗號分隔之文字檔</translation>
-    </message>
-    <message>
-        <source>Encrypted file</source>
-        <translation type="obsolete">加密了的檔案</translation>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1094,14 +720,6 @@ deleted:</source>
         <translation>未輸入名稱</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
         <source>Add</source>
         <translation>新增</translation>
     </message>
@@ -1120,37 +738,6 @@ deleted:</source>
     <message>
         <source>Down</source>
         <translation>往下</translation>
-    </message>
-</context>
-<context>
-    <name>PBFileSelector</name>
-    <message>
-        <source>No file selected</source>
-        <translation type="obsolete">未選取任何檔案</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation type="obsolete">PortaBase檔案</translation>
-    </message>
-    <message>
-        <source>Choose a file</source>
-        <translation type="obsolete">請選取一個檔案</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new file</source>
-        <translation type="obsolete">輸入檔案名稱</translation>
-    </message>
-    <message>
-        <source>Unable to create new file</source>
-        <translation type="obsolete">無法建立新檔</translation>
-    </message>
-    <message>
-        <source>Enter the new file name</source>
-        <translation type="obsolete">輸入檔案名稱</translation>
-    </message>
-    <message>
-        <source>Unable to rename the file</source>
-        <translation type="obsolete">無法將檔案重新命名</translation>
     </message>
 </context>
 <context>
@@ -1183,10 +770,6 @@ deleted:</source>
 <context>
     <name>PortaBase</name>
     <message>
-        <source>Delete</source>
-        <translation type="obsolete">刪除</translation>
-    </message>
-    <message>
         <source>XML</source>
         <translation>XML</translation>
     </message>
@@ -1199,19 +782,11 @@ deleted:</source>
         <translation>選擇匯入格式</translation>
     </message>
     <message>
-        <source>Unable to create new file</source>
-        <translation type="obsolete">無法建立新檔</translation>
-    </message>
-    <message>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
 upgrade</source>
         <translation>此檔案使用較新版本的PortaBase格式;請升級</translation>
-    </message>
-    <message>
-        <source>Are you sure?</source>
-        <translation type="obsolete">你確定嗎?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -1295,10 +870,6 @@ current filter?</source>
         <translation>檔案性質</translation>
     </message>
     <message>
-        <source>File does not exist</source>
-        <translation type="obsolete">檔案不在</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
         <translation>不是PortaBase 檔案</translation>
     </message>
@@ -1325,6 +896,22 @@ current filter?</source>
     <message>
         <source>XML files</source>
         <translation type="unfinished">XML檔案</translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1426,36 +1013,8 @@ current filter?</source>
         <translation>每頁資料列預定值</translation>
     </message>
     <message>
-        <source>Options</source>
-        <translation>項目</translation>
-    </message>
-    <message>
         <source>Appearance</source>
         <translation>外貌</translation>
-    </message>
-    <message>
-        <source>Top-level</source>
-        <translation type="obsolete">最上層</translation>
-    </message>
-    <message>
-        <source>Menu</source>
-        <translation type="obsolete">選單</translation>
-    </message>
-    <message>
-        <source>Menus</source>
-        <translation type="obsolete">選單</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="obsolete">顯示</translation>
-    </message>
-    <message>
-        <source>Toolbar Button</source>
-        <translation type="obsolete">工具欄按鈕</translation>
-    </message>
-    <message>
-        <source>Buttons</source>
-        <translation type="obsolete">按鈕</translation>
     </message>
     <message>
         <source>Use small-screen settings on this device</source>
@@ -1515,237 +1074,22 @@ current filter?</source>
     </message>
 </context>
 <context>
-    <name>QColorDialog</name>
+    <name>QMenuBar</name>
     <message>
-        <source>Hu&amp;e:</source>
-        <translation type="obsolete">色彩(&amp;E):</translation>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Sat:</source>
-        <translation type="obsolete">深顏色(&amp;S):</translation>
+        <source>Preferences</source>
+        <translation type="unfinished">偏好設定</translation>
     </message>
     <message>
-        <source>&amp;Val:</source>
-        <translation type="obsolete">顏色(&amp;V):</translation>
+        <source>Quit %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Red:</source>
-        <translation type="obsolete">紅色(&amp;R):</translation>
-    </message>
-    <message>
-        <source>&amp;Green:</source>
-        <translation type="obsolete">綠色(&amp;G):</translation>
-    </message>
-    <message>
-        <source>Bl&amp;ue:</source>
-        <translation type="obsolete">藍色(&amp;U):</translation>
-    </message>
-    <message>
-        <source>A&amp;lpha channel:</source>
-        <translation type="obsolete">Alpha 管道(&amp;L):</translation>
-    </message>
-    <message>
-        <source>&amp;Basic colors</source>
-        <translation type="obsolete">基本顏色(&amp;B)</translation>
-    </message>
-    <message>
-        <source>&amp;Custom colors</source>
-        <translation type="obsolete">顧客顏色(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">設定自訂顏色(&amp;D)</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>&amp;Add to Custom Colors</source>
-        <translation type="obsolete">加入材自訂色板(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">選擇顏色</translation>
-    </message>
-</context>
-<context>
-    <name>QDatePicker</name>
-    <message>
-        <source>Select a date</source>
-        <translation type="obsolete">選擇日期</translation>
-    </message>
-    <message>
-        <source>January</source>
-        <translation type="obsolete">一月</translation>
-    </message>
-    <message>
-        <source>February</source>
-        <translation type="obsolete">二月</translation>
-    </message>
-    <message>
-        <source>March</source>
-        <translation type="obsolete">三月</translation>
-    </message>
-    <message>
-        <source>April</source>
-        <translation type="obsolete">四月</translation>
-    </message>
-    <message>
-        <source>May</source>
-        <translation type="obsolete">五月</translation>
-    </message>
-    <message>
-        <source>June</source>
-        <translation type="obsolete">六月</translation>
-    </message>
-    <message>
-        <source>July</source>
-        <translation type="obsolete">七月</translation>
-    </message>
-    <message>
-        <source>August</source>
-        <translation type="obsolete">八月</translation>
-    </message>
-    <message>
-        <source>September</source>
-        <translation type="obsolete">九月</translation>
-    </message>
-    <message>
-        <source>October</source>
-        <translation type="obsolete">十月</translation>
-    </message>
-    <message>
-        <source>November</source>
-        <translation type="obsolete">十一月</translation>
-    </message>
-    <message>
-        <source>December</source>
-        <translation type="obsolete">十二月</translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <translation type="obsolete">星期日</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">星期一</translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <translation type="obsolete">星期二</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <translation type="obsolete">星期三</translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <translation type="obsolete">星期四</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">星期五</translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <translation type="obsolete">星期六</translation>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation type="obsolete">今日</translation>
-    </message>
-</context>
-<context>
-    <name>QFileDialog</name>
-    <message>
-        <source>All Files (*)</source>
-        <translation type="obsolete">全部檔案</translation>
-    </message>
-    <message>
-        <source>All Files (*.*)</source>
-        <translation type="obsolete">全部檔案</translation>
-    </message>
-</context>
-<context>
-    <name>QInputDialog</name>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-</context>
-<context>
-    <name>QLineEdit</name>
-    <message>
-        <source>&amp;Undo</source>
-        <translation type="obsolete">復原(&amp;U)</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">重做(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t</source>
-        <translation type="obsolete">剪下文字(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">複製(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">貼上文字(&amp;P)</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="obsolete">清除</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">全選</translation>
-    </message>
-</context>
-<context>
-    <name>QMainWindow</name>
-    <message>
-        <source>Line up</source>
-        <translation type="obsolete">排列</translation>
-    </message>
-    <message>
-        <source>Customize...</source>
-        <translation type="obsolete">自訂...</translation>
-    </message>
-</context>
-<context>
-    <name>QMessageBox</name>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">是(&amp;Y)</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">否(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for multiplatform GUI &amp;amp; application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants.&lt;br&gt;Qt is also available for embedded devices.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;有關QT&lt;/h3&gt;&lt;p&gt;這程式使用QT %1 版本.&lt;/P&gt;&lt;P&gt;QT 是C++  開發多重式平台GUI  的工具包 &amp;amp;&lt;/p&gt;&lt;p&gt;QT 提供唯一可攜帶性橫跨MS 視窗,
-Mac, OS X, Linux 和所有較大的商業用Unix 的變體.&lt;br&gt; QT 也可在embedded 設備使用&lt;/p&gt;&lt;p&gt;QT 是Trolltech 的產品. 請洽 &lt;tt&gt;http://www.trolltech.com/qt/&lt;/tt&gt;&lt;/p&gt;</translation>
+        <source>About Qt</source>
+        <translation type="unfinished">關於Qt</translation>
     </message>
 </context>
 <context>
@@ -1795,47 +1139,12 @@ Mac, OS X, Linux 和所有較大的商業用Unix 的變體.&lt;br&gt; QT 也可�
         <translation>不正確的MobileDB檔案</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">日</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">月</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation type="obsolete">年</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">下午</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">早上</translation>
-    </message>
-    <message>
         <source>Problematic row</source>
         <translation>問題列</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>是</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>否</translation>
-    </message>
-    <message>
         <source>Missing file</source>
         <translation>檔案消失不見 </translation>
-    </message>
-</context>
-<context>
-    <name>QQDialog</name>
-    <message>
-        <source>PortaBase</source>
-        <translation type="obsolete">PortaBase</translation>
     </message>
 </context>
 <context>
@@ -1908,14 +1217,6 @@ Mac, OS X, Linux 和所有較大的商業用Unix 的變體.&lt;br&gt; QT 也可�
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Preferences</source>
-        <translation type="unfinished">偏好設定(&amp;P)</translation>
-    </message>
-    <message>
-        <source>View or change %1 settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
         <translation type="unfinished">檔案(&amp;F)</translation>
     </message>
@@ -1932,24 +1233,12 @@ Mac, OS X, Linux 和所有較大的商業用Unix 的變體.&lt;br&gt; QT 也可�
         <translation type="unfinished">關係QT(&amp;Q)</translation>
     </message>
     <message>
-        <source>About Qt</source>
-        <translation type="unfinished">關於Qt</translation>
-    </message>
-    <message>
         <source>&amp;Help</source>
         <translation type="unfinished">說明(&amp;H)</translation>
     </message>
     <message>
         <source>Save changes?</source>
         <translation type="unfinished">儲存變更嗎?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished">是</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished">否</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
@@ -1967,36 +1256,13 @@ Mac, OS X, Linux 和所有較大的商業用Unix 的變體.&lt;br&gt; QT 也可�
         <source>The selected item is a directory</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>QTextEdit</name>
     <message>
-        <source>&amp;Undo</source>
-        <translation type="obsolete">復原(&amp;U)</translation>
+        <source>Pr&amp;eferences</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">重做(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Cu&amp;t</source>
-        <translation type="obsolete">剪下文字(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">複製(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">貼上文字(&amp;P)</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="obsolete">清除</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">全選</translation>
+        <source>Change the application settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2071,7 +1337,7 @@ Mac, OS X, Linux 和所有較大的商業用Unix 的變體.&lt;br&gt; QT 也可�
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">選擇顏色</translation>
     </message>
 </context>
 <context>

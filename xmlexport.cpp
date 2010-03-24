@@ -1,7 +1,7 @@
 /*
  * xmlexport.cpp
  *
- * (c) 2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
  */
 
 #include <QFile>
+#include <QTextDocument>
 #include <QTextStream>
 #include "database.h"
 #include "datatypes.h"
@@ -237,23 +238,6 @@ QString XMLExport::getValue(c4_View &view, const QString &name, char type, int r
     else {
         c4_StringProp prop(name.toUtf8());
         QString value = QString::fromUtf8(prop (view[row]));
-        int length = value.length();
-        QString result = "";
-        for (int i = 0; i < length; i++) {
-            const QChar c = value[i];
-            if (c == '<') {
-               result += "&lt;";
-            }
-            else if (c == '>') {
-                result += "&gt;";
-            }
-            else if (c == '&') {
-                result += "&amp;";
-            }
-            else {
-                result += c;
-            }
-        }
-        return result;
+        return Qt::escape(value);
     }
 }

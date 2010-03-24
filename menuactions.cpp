@@ -1,7 +1,7 @@
 /*
  * menuactions.cpp
  *
- * (c) 2003-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
 
 #include <QAction>
 #include "menuactions.h"
+#include "qqutil/qqmenuhelper.h"
 
 /**
  * Constructor.
@@ -47,14 +48,17 @@ MenuActions::MenuActions(QObject *parent)
     
     textMap.insert(Properties, tr("Proper&ties"));
     toolTipMap.insert(Properties, tr("Show information about the current file"));
-    
-    textMap.insert(Preferences, tr("&Preferences"));
-    toolTipMap.insert(Preferences, tr("View or change PortaBase settings"));
-    shortcutMap.insert(Preferences, QKeySequence(Qt::CTRL + Qt::Key_P));
+
+    textMap.insert(PrintPreview, tr("Print Pre&view") + ellipsis);
+    toolTipMap.insert(PrintPreview, tr("Configure and preview printing options"));
+
+    textMap.insert(Print, tr("&Print") + ellipsis);
+    toolTipMap.insert(Print, tr("Print the current file"));
+    shortcutMap.insert(Print, QKeySequence(QKeySequence::Print));
     
     textMap.insert(QuickFilter, tr("&Quick Filter"));
     toolTipMap.insert(QuickFilter, tr("Apply a one-condition filter"));
-    shortcutMap.insert(QuickFilter, QKeySequence(Qt::CTRL + Qt::Key_F));
+    shortcutMap.insert(QuickFilter, QKeySequence(QKeySequence::Find));
     
     textMap.insert(AddRow, tr("&Add") + ellipsis);
     toolTipMap.insert(AddRow, tr("Create a new row"));
@@ -82,6 +86,7 @@ MenuActions::MenuActions(QObject *parent)
     
     textMap.insert(DeleteRow, tr("&Delete"));
     toolTipMap.insert(DeleteRow, tr("Delete the selected row"));
+    shortcutMap.insert(DeleteRow, QKeySequence::Delete);
     
     textMap.insert(DeleteView, tr("&Delete"));
     toolTipMap.insert(DeleteView, tr("Delete the selected view"));
@@ -126,7 +131,7 @@ MenuActions::MenuActions(QObject *parent)
  */
 QString MenuActions::menuText(Item item)
 {
-    return textMap[item];
+    return QQMenuHelper::menuText(textMap[item]);
 }
 
 /**

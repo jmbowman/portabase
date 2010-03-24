@@ -137,11 +137,11 @@ void ImageSelector::viewImage()
  */
 void ImageSelector::deleteImage()
 {
-    int ok = QMessageBox::warning(this, qApp->applicationName(),
-                                  tr("Delete the current image?"),
-                                  QObject::tr("Yes"), QObject::tr("No"),
-                                  QString::null, 1);
-    if (ok == 1) {
+    int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                      tr("Delete the current image?"),
+                                      QMessageBox::Yes|QMessageBox::No,
+                                      QMessageBox::No);
+    if (choice != QMessageBox::Yes) {
         return;
     }
     image = QImage();

@@ -29,6 +29,8 @@
 #include "qqhelpbrowser.h"
 #include "qqmenuhelper.h"
 
+QRegExp QQMenuHelper::menuRegExp("\\(&\\w\\)");
+
 /**
  * Constructor.
  * @param window The main application window.
@@ -49,35 +51,55 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
 {
     QChar ellipsis(8230);
 
+    // Some phrases need to be handled differently on Mac OS X
+    QString prefsText = menuText(tr("Pr&eferences"));
+    QString macPrefsText = QMenuBar::tr("Preferences");
+    QString quitText = menuText(tr("&Quit"));
+    QString macQuitText = QMenuBar::tr("Quit %1");
+    QString helpText = tr("Help Contents");
+    QString macHelpText = tr("%1 Help").arg(qApp->applicationName());
+    QString aboutText = menuText(tr("&About %1")).arg(qApp->applicationName());
+    QString macAboutText = QMenuBar::tr("About %1");
+    QString aboutQtText = menuText(tr("About &Qt"));
+    QString macAboutQtText = QMenuBar::tr("About Qt");
+#ifdef Q_WS_MAC
+    prefsText = macPrefsText;
+    quitText = macQuitText;
+    helpText = macHelpText;
+    aboutText = macAboutText;
+    aboutQtText = macAboutQtText;
+#endif
+
     // File menu actions
     QString fileNewText(tr("&New"));
     if (newFileLaunchesDialog) {
       fileNewText += ellipsis;
     }
-    fileNewAction = new QAction(QIcon(":/icons/new.png"), fileNewText, window);
+    fileNewAction = new QAction(QIcon(":/icons/new.png"), menuText(fileNewText), window);
     fileNewAction->setStatusTip(tr("Create a new file"));
     fileNewAction->setToolTip(fileNewAction->statusTip());
-    fileNewAction->setShortcut(Qt::CTRL + Qt::Key_N);
+    fileNewAction->setShortcut(QKeySequence::New);
     connect(fileNewAction, SIGNAL(triggered()), this, SLOT(emitNewFile()));
 
-    fileOpenAction = new QAction(QIcon(":/icons/open.png"), tr("&Open") + ellipsis, window);
+    fileOpenAction = new QAction(QIcon(":/icons/open.png"), menuText(tr("&Open")) + ellipsis, window);
     fileOpenAction->setStatusTip(tr("Open an existing file"));
     fileOpenAction->setToolTip(fileOpenAction->statusTip());
-    fileOpenAction->setShortcut(Qt::CTRL + Qt::Key_O);
+    fileOpenAction->setShortcut(QKeySequence::Open);
     connect(fileOpenAction, SIGNAL(triggered()), this, SLOT(emitOpenFile()));
 
-    quitAction = new QAction(QIcon(":/icons/quit.png"), tr("&Quit"), window);
+    quitAction = new QAction(QIcon(":/icons/quit.png"), quitText, window);
     quitAction->setStatusTip(tr("Quit the application"));
-    quitAction->setShortcut(Qt::CTRL + Qt::Key_Q);
+    quitAction->setShortcut(QKeySequence::Quit);
+    quitAction->setMenuRole(QAction::QuitRole);
     connect(quitAction, SIGNAL(triggered()), this, SIGNAL(quit()));
 
-    fileSaveAction = new QAction(QIcon(":/icons/save.png"), tr("&Save"), window);
+    fileSaveAction = new QAction(QIcon(":/icons/save.png"), menuText(tr("&Save")), window);
     fileSaveAction->setStatusTip(tr("Save the current file"));
     fileSaveAction->setToolTip(fileSaveAction->statusTip());
-    fileSaveAction->setShortcut(Qt::CTRL + Qt::Key_S);
+    fileSaveAction->setShortcut(QKeySequence::Save);
     connect(fileSaveAction, SIGNAL(triggered()), this, SIGNAL(saveFile()));
 
-    recent = new QMenu(tr("Open &Recent"), window);
+    recent = new QMenu(menuText(tr("Open &Recent")), window);
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         // we'll set the actual paths later; just need actions that stick
         // around after a file is opened
@@ -88,14 +110,15 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     fileSeparatorAction = new QAction(this);
     fileSeparatorAction->setSeparator(true);
 
-    closeAction = new QAction(QIcon(":/icons/close.png"), tr("&Close"), window);
+    closeAction = new QAction(QIcon(":/icons/close.png"), menuText(tr("&Close")), window);
     closeAction->setStatusTip(tr("Close the current file"));
-    closeAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    closeAction->setShortcut(QKeySequence::Close);
     connect(closeAction, SIGNAL(triggered()), this, SIGNAL(closeFile()));
 
-    prefsAction = new QAction(tr("&Preferences"), window);
-    prefsAction->setStatusTip(tr("View or change %1 settings").arg(qApp->applicationName()));
-    prefsAction->setShortcut(Qt::CTRL + Qt::Key_P);
+    prefsAction = new QAction(prefsText, window);
+    prefsAction->setStatusTip(tr("Change the application settings").arg(qApp->applicationName()));
+    prefsAction->setShortcut(QKeySequence::Preferences);
+    prefsAction->setMenuRole(QAction::PreferencesRole);
     connect(prefsAction, SIGNAL(triggered()), this, SIGNAL(editPreferences()));
 
 #if defined(Q_WS_MAC)
@@ -109,8 +132,8 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
 #endif
 
     // File menu basic setup
-    file = new QMenu(tr("&File"), window);
-    recent = new QMenu(tr("Open &Recent"), window);
+    file = new QMenu(menuText(tr("&File")), window);
+    recent = new QMenu(menuText(tr("Open &Recent")), window);
     file->addAction(fileNewAction);
     file->addAction(fileOpenAction);
     file->addMenu(recent);
@@ -125,26 +148,23 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     window->menuBar()->addMenu(file);
 
     // Help menu actions
-    QString helpText = tr("Help Contents");
-    QString macHelpText = tr("%1 Help").arg(qApp->applicationName());
-#if defined(Q_WS_MAC)
-    helpText = macHelpText;
-#endif
     helpAction = new QAction(helpText, window);
     helpAction->setStatusTip(helpText);
+    helpAction->setShortcut(QKeySequence::HelpContents);
     connect(helpAction, SIGNAL(triggered()), this, SLOT(showHelp()));
 
-    QString aboutText = tr("&About %1").arg(qApp->applicationName());
     aboutAction = new QAction(aboutText, window);
     aboutAction->setStatusTip(aboutText);
+    aboutAction->setMenuRole(QAction::AboutRole);
     connect(aboutAction, SIGNAL(triggered()), this, SIGNAL(aboutApplication()));
 
-    aboutQtAction = new QAction(tr("About &Qt"), window);
-    aboutQtAction->setStatusTip(tr("About Qt"));
+    aboutQtAction = new QAction(aboutQtText, window);
+    aboutQtAction->setStatusTip(aboutQtText);
+    aboutQtAction->setMenuRole(QAction::AboutQtRole);
     connect(aboutQtAction, SIGNAL(triggered()), this, SLOT(aboutQt()));
 
     // Help menu setup
-    help = new QMenu(tr("&Help"), window);
+    help = new QMenu(menuText(tr("&Help")), window);
     help->addAction(helpAction);
 #if !defined(Q_WS_MAC)
     // skip this on the mac, since both "About.." actions get moved elsewhere
@@ -178,6 +198,29 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     actions[Help] = helpAction;
     actions[About] = aboutAction;
     actions[AboutQt] = aboutQtAction;
+}
+
+/**
+ * Process an already translated string so it is suitable for inclusion in a
+ * menu.  Some languages, such as Japanese and Chinese, represent Alt-key
+ * accelerators by putting the appropriate letter in parentheses after the actual
+ * text (since none of their native characters appear literally on the
+ * keyboard). This is a problem on systems like Mac OS X, where the Alt-key
+ * accelerators aren't supported; it just adds a few extra meaningless
+ * characters after each menu item, and clashes with the look of other
+ * applications.  So this method strips out such suffixes when appropriate.
+ *
+ * @param text The already-translated text to be adjusted
+ * @return The appropriate string for inclusion in the menu on the current
+ *         platform
+ */
+QString QQMenuHelper::menuText(QString text)
+{
+#if defined(Q_WS_MAC)
+    return text.replace(menuRegExp, "");
+#else
+    return text;
+#endif
 }
 
 /**
@@ -455,7 +498,8 @@ void QQMenuHelper::saveChangesPrompt()
     if (fileSaveAction->isEnabled()) {
         int choice = QMessageBox::warning(mainWindow, qApp->applicationName(),
                                           tr("Save changes?"),
-                                          tr("Yes"), tr("No"));
+                                          QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::Yes);
         if (choice == 0) {
             emit saveFile();
         }
@@ -506,11 +550,12 @@ QString QQMenuHelper::createNewFile(const QString &fileDescription,
         filename += QString(".%1").arg(ext);
     }
     if (QFile::exists(filename)) {
-        int overwrite = QMessageBox::warning(mainWindow,
+        int choice = QMessageBox::warning(mainWindow,
                              qApp->applicationName(),
                              tr("File already exists; overwrite it?"),
-                             tr("Yes"), tr("No"), QString::null, 1);
-        if (overwrite == 1) {
+                             QMessageBox::Yes|QMessageBox::No,
+                             QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return "";
         }
     }

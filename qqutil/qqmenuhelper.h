@@ -19,6 +19,7 @@
 #include <QHash>
 #include <QIcon>
 #include <QObject>
+#include <QRegExp>
 #include <QStringList>
 
 class QAction;
@@ -101,6 +102,7 @@ public:
     QString createNewFile(const QString &fileDescription=QString::null,
                           const QString &fileExtension=QString::null);
     static QString getLastDir(QSettings *settings);
+    static QString menuText(QString text);
 
 signals:
     void newFile(const QString &);
@@ -148,6 +150,7 @@ private:
     QMenu *recent; /**< The "Open Recent" menu */
     QMenu *help; /**< The "Help" menu */
     QStringList recentFiles; /**< The most recently opened files */
+    static QRegExp menuRegExp; /**< Regular expression for menu text processing */
 };
 
 #endif

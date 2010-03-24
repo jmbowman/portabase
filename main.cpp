@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,6 +36,10 @@ int main(int argc, char **argv) {
     app.setOrganizationDomain("sourceforge.net");
     app.setApplicationName("PortaBase");
     app.setWindowIcon(QIcon(":/appicon/PortaBase.png"));
+    QTranslator qtTranslator;
+    if (qtTranslator.load(QString(":/i18n/Qt.qm"))) {
+        app.installTranslator(&qtTranslator);
+    }
     QTranslator translator;
     if (translator.load(QString(":/i18n/PortaBase.qm"))) {
         app.installTranslator(&translator);

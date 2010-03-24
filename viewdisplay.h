@@ -1,7 +1,7 @@
 /*
  * viewdisplay.h
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,6 +60,7 @@ public:
     void deleteAllRows();
     void exportToCSV(const QString &filename);
     void exportToXML(const QString &filename);
+    QString toHtml();
     void allowBooleanToggle(bool flag);
     void usePages(bool flag);
 

@@ -1,7 +1,7 @@
 /*
  * menuactions.h
  *
- * (c) 2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@ class QAction;
 
 /**
  * Text, accelerator, and shortcut definitions for menu actions.  Based
- * around the idea of mapping a simple text key to the corresponding bits
- * of data needed to build a menu action.  For example, the key "Preferences"
- * maps to tr("Preferences"), tr("&Preferences"), and CTRL+Key_P.  Grouped
+ * around the idea of mapping an enumeration key to the corresponding bits
+ * of data needed to build a menu action.  For example, the key
+ * MenuActions::Print maps to tr("&Print") and CTRL+Key_P.  Grouped
  * together here partially so the relevant text strings are always included
  * in generated translation files, regardless of which platform the code is
  * being built on (some menu actions may not be present on all platforms).
@@ -71,7 +71,9 @@ public:
         Show,
         DeleteRowsInFilter,
         EditColumns,
-        EditEnums
+        EditEnums,
+        PrintPreview,
+        Print
     };
     typedef QMap< Item, QString > PhraseMap;
     typedef QMap< Item, QKeySequence > ShortcutMap;

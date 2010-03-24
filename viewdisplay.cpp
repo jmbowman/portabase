@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #include <QSpinBox>
 #include <QStackedWidget>
 #include <QStringList>
+#include <QTextDocument>
 #include <QToolButton>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -310,6 +311,9 @@ void ViewDisplay::updateTable()
             else {
                 item->setText(j, data[j]);
             }
+            if (type == INTEGER || type == FLOAT || type == CALC || type == SEQUENCE) {
+                item->setTextAlignment(j, Qt::AlignRight);
+            }
         }
         index++;
     }
@@ -321,6 +325,73 @@ void ViewDisplay::updateTable()
         stack->setCurrentWidget(noResults);
     }
     portabase->setRowSelected(table->currentItem() != 0);
+}
+
+/**
+ * Generate an HTML string representing the content matching the current view, filter,
+ * and sorting settings.  Used for printing.
+ *
+ * @return The generated HTML string
+ */
+QString ViewDisplay::toHtml()
+{
+    QString result = "<html><head></head><body><table with=\"100%\"><thead><tr>";
+    QStringList colNames = view->getColNames();
+    int colCount = colNames.count();
+    int i, j;
+    int totalWidth = 0;
+    for (i = 0; i < colCount; i++) {
+        totalWidth += view->getColWidth(i);
+    }
+    QString cellPattern("<th align=\"left\">%1</th>");
+    for (i = 0; i < colCount; i++) {
+        result += cellPattern.arg(Qt::escape(colNames[i]));
+    }
+    result += "</tr></thead><tbody>";
+    int rowCount = view->getRowCount();
+    int *types = view->getColTypes();
+    QStringList data;
+    int type;
+    QString align;
+    QStringList rowStarts;
+    rowStarts << QString("<tr bgcolor=\"%1\">").arg(Factory::evenRowColor.name());
+    rowStarts << QString("<tr bgcolor=\"%1\">").arg(Factory::oddRowColor.name());
+    QString rowEnd("</tr>");
+    cellPattern = "<td align=\"%1\">%2</td>";
+    QStringList imgTags;
+    imgTags << "<img src=\"icon://unchecked.png\">";
+    imgTags << "<img src=\"icon://checked.png\">";
+    imgTags << "<img src=\"icon://image.png\">";
+    QString newline("\n");
+    QString br("<br>");
+    QString left("left");
+    QString right("right");
+    QString value;
+    for (i = 0; i < rowCount; i++) {
+        result += rowStarts[i % 2];
+        data = view->getRow(i);
+        for (j = 0; j < colCount; j++) {
+            type = types[j];
+            value = data[j];
+            align = left;
+            if (type == INTEGER || type == FLOAT || type == CALC || type == SEQUENCE) {
+                align = right;
+            }
+            if (type == BOOLEAN) {
+                value = imgTags[value.toInt()];
+            }
+            else if (type == IMAGE && !value.isEmpty()) {
+                value = imgTags[2];
+            }
+            else if (type == NOTE || type == STRING) {
+                value = Qt::escape(value).replace(newline, br);
+            }
+            result += cellPattern.arg(align).arg(value);
+        }
+        result += rowEnd;
+    }
+    result += "</tbody></table></body>";
+    return result;
 }
 
 /**

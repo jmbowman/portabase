@@ -1,7 +1,7 @@
 /*
  * datewidget.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,27 +30,6 @@
 DateWidget::DateWidget(QWidget *parent)
     : QWidget(parent)
 {
-    days.append(tr("Mon"));
-    days.append(tr("Tue"));
-    days.append(tr("Wed"));
-    days.append(tr("Thu"));
-    days.append(tr("Fri"));
-    days.append(tr("Sat"));
-    days.append(tr("Sun"));
-
-    months.append(tr("Jan"));
-    months.append(tr("Feb"));
-    months.append(tr("Mar"));
-    months.append(tr("Apr"));
-    months.append(tr("May"));
-    months.append(tr("Jun"));
-    months.append(tr("Jul"));
-    months.append(tr("Aug"));
-    months.append(tr("Sep"));
-    months.append(tr("Oct"));
-    months.append(tr("Nov"));
-    months.append(tr("Dec"));
-
     dateObj = QDate::currentDate();
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
 
@@ -134,19 +113,16 @@ void DateWidget::updateDisplay()
  */
 QString DateWidget::toString(const QDate &date)
 {
-    QString result = tr("%1 %2 %3 %4",
-                        "1=day of week, 2=month name, 3=day of month, 4=year");
-    result = result.arg(days[date.dayOfWeek() - 1]);
-    result = result.arg(months[date.month() - 1]);
-    result = result.arg(date.day());
-    return result.arg(date.year());
+    QString value("%1 (%2)");
+    value = value.arg(date.toString(Qt::DefaultLocaleLongDate));
+    return value.arg(QDate::shortDayName(date.dayOfWeek()));
 }
 
 /**
  * Determine if the provided date is the value that PortaBase uses to
- * represent a "None" date or not.  The first day of the Gregorian calendar
- * is used for this purpose, because it is a valid QDate value that very few
- * people would actually want to enter in a database.
+ * represent a "None" date or not.  The first day supported by QDate in older
+ * versions of Qt is used for this purpose, because it is a valid QDate value
+ * that very few people would actually want to enter in a database.
  *
  * @param date The date to be checked
  * @return True if the input date is 1752-09-14, false otherwise.
@@ -157,8 +133,8 @@ bool DateWidget::isNoneDate(const QDate &date)
 }
 
 /**
- * Set the selected date to the special "None" value (the first day of the
- * Gregorian calendar).  Called when the "None" button is clicked.
+ * Set the selected date to the special "None" value (the first day supported
+ * in earlier versions of QDate).  Called when the "None" button is clicked.
  */
 void DateWidget::setToNone()
 {

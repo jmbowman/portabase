@@ -9,6 +9,7 @@ RCC_DIR         = build
 VERSION         = 2.0.0
 TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_de.ts \
+                  resources/translations/portabase_es.ts \
                   resources/translations/portabase_fr.ts \
                   resources/translations/portabase_ja.ts \
                   resources/translations/portabase_zh_TW.ts
@@ -148,16 +149,40 @@ unix:LIBS       += -lm -lmk4
 # Stuff for Mac OS X
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 macx {
-    CONFIG             += static
+    #CONFIG             += static
     RESOURCES           = resources/mac.qrc
     ICON                = packaging/mac/PortaBase.icns
     DOCUMENT_ICON.files = packaging/mac/PortaBaseFile.icns
     DOCUMENT_ICON.path  = Contents/Resources
-    EN_LPROJ.files      = packaging/mac/en.lproj/InfoPlist.strings
+    CS_LPROJ.files      = packaging/mac/cs.lproj/InfoPlist.strings \
+                          packaging/mac/cs.lproj/locversion.plist
+    CS_LPROJ.path       = Contents/Resources/cs.lproj
+    DE_LPROJ.files      = packaging/mac/de.lproj/InfoPlist.strings \
+                          packaging/mac/de.lproj/locversion.plist
+    DE_LPROJ.path       = Contents/Resources/de.lproj
+    EN_LPROJ.files      = packaging/mac/en.lproj/InfoPlist.strings \
+                          packaging/mac/en.lproj/locversion.plist
     EN_LPROJ.path       = Contents/Resources/en.lproj
-    JA_LPROJ.files      = packaging/mac/ja.lproj/InfoPlist.strings
+    ES_LPROJ.files      = packaging/mac/es.lproj/InfoPlist.strings \
+                          packaging/mac/es.lproj/locversion.plist
+    ES_LPROJ.path       = Contents/Resources/es.lproj
+    FR_LPROJ.files      = packaging/mac/fr.lproj/InfoPlist.strings \
+                          packaging/mac/fr.lproj/locversion.plist
+    FR_LPROJ.path       = Contents/Resources/fr.lproj
+    JA_LPROJ.files      = packaging/mac/ja.lproj/InfoPlist.strings \
+                          packaging/mac/ja.lproj/locversion.plist
     JA_LPROJ.path       = Contents/Resources/ja.lproj
-    QMAKE_BUNDLE_DATA  += DOCUMENT_ICON EN_LPROJ JA_LPROJ
+    ZH_HANT_LPROJ.files = packaging/mac/zh-Hant.lproj/InfoPlist.strings \
+                          packaging/mac/zh-Hant.lproj/locversion.plist
+    ZH_HANT_LPROJ.path  = Contents/Resources/zh-Hant.lproj
+    QMAKE_BUNDLE_DATA  += DOCUMENT_ICON \
+                          CS_LPROJ \
+                          DE_LPROJ \
+                          EN_LPROJ \
+                          ES_LPROJ \
+                          FR_LPROJ \
+                          JA_LPROJ \
+                          ZH_HANT_LPROJ
     QMAKE_INFO_PLIST    = packaging/mac/Info.plist
     CONFIG             += x86 ppc
     #INCLUDEPATH        += /opt/local/include

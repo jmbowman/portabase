@@ -1,7 +1,7 @@
 /*
  * enummanager.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -98,8 +98,9 @@ void EnumManager::deleteEnum()
         }
         msg += "\n" + tr("Continue?");
         int choice = QMessageBox::warning(this, qApp->applicationName(), msg,
-                                          QObject::tr("Yes"), QObject::tr("No"));
-        if (choice != 0) {
+                                           QMessageBox::Yes|QMessageBox::No,
+                                           QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
             return;
         }
     }
