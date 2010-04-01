@@ -9,6 +9,7 @@ RCC_DIR         = build
 VERSION         = 2.0.0
 TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_de.ts \
+                  resources/translations/portabase_en.ts \
                   resources/translations/portabase_es.ts \
                   resources/translations/portabase_fr.ts \
                   resources/translations/portabase_ja.ts \

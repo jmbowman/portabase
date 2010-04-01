@@ -16,13 +16,16 @@
 #include <QAction>
 #include <QApplication>
 #include <QCloseEvent>
+#include <QDirModel>
 #include <QFile>
 #include <QFileInfo>
+#include <QFileSystemModel>
 #include <QFont>
 #include <QGroupBox>
 #include <QIconDragEvent>
 #include <QInputDialog>
 #include <QLayout>
+#include <QLocale>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
@@ -409,31 +412,37 @@ void PortaBase::viewProperties()
     QFile file(doc);
     QString message = tr("Name") + ": " + QFileInfo(file).fileName() + "\n";
     int size = file.size();
-    QString sizeString;
+    QString units;
     if (size < 1024) {
-        sizeString = QString::number(size) + " b";
+        units = QFileSystemModel::tr("%1 bytes");
+    }
+    else if (size < 1024 * 1024) {
+        size /= 1024;
+        units = QFileSystemModel::tr("%1 KB");
     }
     else {
-        size /= 1024;
-        sizeString = QString::number(size) + " Kb";
+        size /= 1024 * 1024;
+        units = QFileSystemModel::tr("%1 MB");
     }
-    message += tr("Size") + ": " + sizeString + "\n";
+    QLocale locale = QLocale::system();
+    QString sizeString = locale.toString(size);
+    message += QString("%1: %2\n").arg(tr("Size")).arg(units.arg(sizeString));
     int count = db->getData().GetSize();
-    message += tr("Rows") + ": " + QString::number(count) + "\n";
+    message += tr("Rows") + ": " + locale.toString(count) + "\n";
     count = db->listColumns().count();
-    message += tr("Columns") + ": " + QString::number(count) + "\n";
+    message += tr("Columns") + ": " + locale.toString(count) + "\n";
     count = db->listViews().count();
-    message += tr("Views") + ": " + QString::number(count) + "\n";
+    message += tr("Views") + ": " + locale.toString(count) + "\n";
     QStringList sortings = db->listSortings();
     sortings.removeAll("_single");
     count = sortings.count();
-    message += tr("Sortings") + ": " + QString::number(count) + "\n";
+    message += tr("Sortings") + ": " + locale.toString(count) + "\n";
     QStringList filters = db->listFilters();
     filters.removeAll("_simple");
     count = filters.count();
-    message += tr("Filters") + ": " + QString::number(count) + "\n";
+    message += tr("Filters") + ": " + locale.toString(count) + "\n";
     count = db->listEnums().count();
-    message += tr("Enums") + ": " + QString::number(count);
+    message += tr("Enums") + ": " + locale.toString(count);
     QString title = tr("File Properties") + " - " + qApp->applicationName();
     QMessageBox mb(title, message, QMessageBox::NoIcon,
                    QMessageBox::Ok, QMessageBox::NoButton,
@@ -694,6 +703,8 @@ void PortaBase::showFileSelector()
     manageEnumsAction->setVisible(false);
     slideshowAction->setVisible(false);
     propsAction->setVisible(false);
+    printPreviewAction->setVisible(false);
+    printPreviewAction->setEnabled(false);
     printAction->setVisible(false);
     printAction->setEnabled(false);
 

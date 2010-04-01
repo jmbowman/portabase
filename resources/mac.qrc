@@ -22,10 +22,17 @@
      <file alias="quit.png">icons/mac/quit.png</file>
      <file alias="refresh.png">icons/mac/refresh.png</file>
      <file alias="save.png">icons/mac/save.png</file>
+     <file alias="view.png">icons/mac/view.png</file>
+     <file alias="sort.png">icons/mac/sort.png</file>
+     <file alias="filter.png">icons/mac/filter.png</file>
  </qresource>
  <qresource>
      <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>
      <file>help/html/PortaBase.html</file>
+ </qresource>
+ <qresource lang="en">
+     <file alias="i18n/PortaBase.qm">translations/portabase_en.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_en.qm</file>
  </qresource>
  <qresource lang="cs">
      <file alias="i18n/PortaBase.qm">translations/portabase_cs.qm</file>

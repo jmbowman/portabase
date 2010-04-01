@@ -1,7 +1,7 @@
 /*
  * condition.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +13,7 @@
  * Source file for Condition
  */
 
+#include <QLocale>
 #include <mk4.h>
 #include "condition.h"
 #include "database.h"
@@ -381,6 +382,9 @@ void Condition::updateDescription()
     }
     else if (type == TIME) {
         arg2 = db->timeToString(constant.toInt());
+    }
+    else if (type == INTEGER || type == SEQUENCE) {
+        arg2 = QLocale::system().toString(constant.toInt());
     }
     else {
         arg2 = constant;

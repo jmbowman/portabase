@@ -1,3 +1,12 @@
+2010-03-31  JMB  Integer formatting, other minor fixes
+
+    Displayed integers now use separators as appropriate for the locale.
+    Imported and entered integers also accept strings with separators
+    appropriate for the locale.  Integers in data exported to CSV or XML
+    exclude these separators, since they aren't portable between locales.  Also
+    made a fix to ensure that English still gets used for the UI when
+    appropriate, and added a few icons to be used in an upcoming feature.
+
 2010-03-24  JMB  Printing, translation updates, data column alignment
 
     PortaBase now supports printing, including page setup and print preview

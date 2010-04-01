@@ -137,6 +137,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     file->addAction(fileNewAction);
     file->addAction(fileOpenAction);
     file->addMenu(recent);
+    file->addAction(fileSaveAction);
     file->addAction(fileSeparatorAction);
     file->addAction(closeAction);
     file->addAction(prefsAction);

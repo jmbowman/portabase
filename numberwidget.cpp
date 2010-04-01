@@ -1,7 +1,7 @@
 /*
  * numberwidget.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 #include <QIcon>
 #include <QLayout>
 #include <QLineEdit>
+#include <QLocale>
 #include <QToolButton>
 #include "calculator.h"
 #include "datatypes.h"
@@ -48,7 +49,13 @@ NumberWidget::NumberWidget(int type, QWidget *parent)
  */
 QString NumberWidget::getValue()
 {
-    return entryField->text();
+    QString text = entryField->text();
+    if (dataType == INTEGER) {
+        return QString::number(QLocale::system().toInt(text));
+    }
+    else {
+        return text;
+    }
 }
 
 /**
@@ -60,7 +67,7 @@ void NumberWidget::setValue(const QString &value)
 {
     if (dataType == INTEGER) {
         double result = value.toDouble();
-        entryField->setText(QString::number((int)result));
+        entryField->setText(QLocale::system().toString((int)result));
     }
     else {
         entryField->setText(value);

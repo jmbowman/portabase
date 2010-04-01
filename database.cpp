@@ -16,6 +16,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QFileInfo>
+#include <QLocale>
 #include <QObject>
 #include <QRegExp>
 #include <QSettings>
@@ -605,7 +606,7 @@ QString Database::isValidValue(int type, const QString &value)
 {
     if (type == INTEGER || type == SEQUENCE) {
         bool ok = false;
-        value.toInt(&ok);
+        QLocale::system().toInt(value, &ok);
         if (!ok) {
             return QObject::tr("must be an integer");
         }
@@ -688,14 +689,14 @@ void Database::addColumn(int index, const QString &name, int type,
     QByteArray idString = makeColId(nextId, type).toLatin1();
     if (type == INTEGER || type == BOOLEAN) {
         c4_IntProp newProp(idString);
-        int value = defaultVal.toInt();
+        int value = QLocale::system().toInt(defaultVal);
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
         }
     }
     else if (type == SEQUENCE) {
         c4_IntProp newProp(idString);
-        int value = defaultVal.toInt();
+        int value = QLocale::system().toInt(defaultVal);
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
             value++;
@@ -863,9 +864,11 @@ void Database::updateDataFormat()
  *
  * @param rowId The ID field of the row to retrieve
  * @param utils Image export utility, or 0 if not exporting the row
+ * @param intSeparators Use separators appropriate for the current locale in
+ *                      integer values; omitted for CSV export
  * @return A list of the row's data fields in position order
  */
-QStringList Database::getRow(int rowId, ImageUtils *utils)
+QStringList Database::getRow(int rowId, ImageUtils *utils, bool intSeparators)
 {
     QStringList results;
     int index = data.Find(Id [rowId]);
@@ -891,7 +894,12 @@ QStringList Database::getRow(int rowId, ImageUtils *utils)
                 || type == TIME || type == SEQUENCE) {
             c4_IntProp prop(idString);
             int value = prop (row);
-            results.append(QString::number(value));
+            if (intSeparators && (type == INTEGER || type == SEQUENCE)) {
+                results.append(QLocale::system().toString(value));
+            }
+            else {
+                results.append(QString::number(value));
+            }
         }
         else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(idString);
@@ -1409,12 +1417,12 @@ QString Database::addRow(const QStringList &values, int *rowId,
         }
         else if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(idString);
-            prop (row) = value.toInt();
+            prop (row) = QLocale::system().toInt(value);
         }
         else if (type == SEQUENCE) {
             c4_IntProp prop(idString);
             if (acceptSequenceVals) {
-                prop (row) = value.toInt();
+                prop (row) = QLocale::system().toInt(value);
             }
             else {
                 int nextValue = getDefault(name).toInt();
@@ -1514,7 +1522,7 @@ void Database::updateRow(int rowId, const QStringList &values)
         }
         else if (type == INTEGER || type == BOOLEAN || type == DATE) {
             c4_IntProp prop(idString);
-            prop (data[index]) = values[i].toInt();
+            prop (data[index]) = QLocale::system().toInt(values[i]);
         }
         else if (type == TIME) {
             bool ok;

@@ -88,7 +88,7 @@ public:
     void setViewColumnSequence(const QString &viewName,
                                const QStringList &colNames);
     void updateDataFormat();
-    QStringList getRow(int rowId, ImageUtils *utils=0);
+    QStringList getRow(int rowId, ImageUtils *utils=0, bool intSeparators=true);
 
     QString currentSorting();
     QStringList listSortings();

@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
  */
 
 #include <QFile>
+#include <QLocale>
 #include <QTextStream>
 #include "csvutils.h"
 #include "database.h"
@@ -168,7 +169,7 @@ QStringList View::getRow(int index)
         if (type == INTEGER || type == BOOLEAN || type == SEQUENCE) {
             c4_IntProp prop(ids[i].toUtf8());
             int value = prop (row);
-            results.append(QString::number(value));
+            results.append(QLocale::system().toString(value));
         }
         else if (type == FLOAT || type == CALC || type == IMAGE) {
             // want the string version here
@@ -336,7 +337,7 @@ void View::exportToCSV(const QString &filename)
     ImageUtils utils;
     utils.setExportPaths(filename);
     for (int i = 0; i < size; i++) {
-        QStringList row = db->getRow(Id (dbview[i]), &utils);
+        QStringList row = db->getRow(Id (dbview[i]), &utils, false);
         output << csv.encodeRow(row);
     }
     f.close();
@@ -382,6 +383,7 @@ QStringList View::getStatistics(int colIndex)
         return lines;
     }
     int type = dataTypes[colIndex];
+    QLocale locale = QLocale::system();
     if (type == INTEGER || type == SEQUENCE) {
         c4_IntProp prop(ids[colIndex].toUtf8());
         int value = prop (dbview[0]);
@@ -395,10 +397,10 @@ QStringList View::getStatistics(int colIndex)
             max = qMax(max, value);
         }
         float mean = total / (float)count;
-        lines.append(tr("Total") + ": " + QString::number(total));
-        lines.append(tr("Average") + ": " + QString::number(mean));
-        lines.append(tr("Minimum") + ": " + QString::number(min));
-        lines.append(tr("Maximum") + ": " + QString::number(max));
+        lines.append(tr("Total") + ": " + locale.toString(total));
+        lines.append(tr("Average") + ": " + locale.toString(mean));
+        lines.append(tr("Minimum") + ": " + locale.toString(min));
+        lines.append(tr("Maximum") + ": " + locale.toString(max));
     }
     else if (type == FLOAT || type == CALC) {
         c4_FloatProp prop(ids[colIndex].toUtf8());
@@ -422,8 +424,8 @@ QStringList View::getStatistics(int colIndex)
             }
         }
         double mean = total / count;
-        lines.append(tr("Total") + ": " + QString::number(total));
-        lines.append(tr("Average") + ": " + QString::number(mean));
+        lines.append(tr("Total") + ": " + locale.toString(total, 'f', 2));
+        lines.append(tr("Average") + ": " + locale.toString(mean, 'f', 2));
         lines.append(tr("Minimum") + ": " + minString);
         lines.append(tr("Maximum") + ": " + maxString);
     }
@@ -436,9 +438,9 @@ QStringList View::getStatistics(int colIndex)
                 checked++;
             }
         }
-        lines.append(tr("Checked") + ": " + QString::number(checked));
+        lines.append(tr("Checked") + ": " + locale.toString(checked));
         lines.append(tr("Unchecked") + ": "
-                     + QString::number(count - checked));
+                     + locale.toString(count - checked));
     }
     else if (type == DATE) {
         c4_IntProp prop(ids[colIndex].toUtf8());
@@ -481,13 +483,13 @@ QStringList View::getStatistics(int colIndex)
             max = qMax(max, length);
         }
         float mean = total / (float)count;
-        lines.append(tr("Total length") + ": " + QString::number(total) + " "
+        lines.append(tr("Total length") + ": " + locale.toString(total) + " "
                      + tr("characters"));
-        lines.append(tr("Average length") + ": " + QString::number(mean) + " "
+        lines.append(tr("Average length") + ": " + locale.toString(mean) + " "
                      + tr("characters"));
-        lines.append(tr("Minimum length") + ": " + QString::number(min) + " "
+        lines.append(tr("Minimum length") + ": " + locale.toString(min) + " "
                      + tr("characters"));
-        lines.append(tr("Maximum length") + ": " + QString::number(max) + " "
+        lines.append(tr("Maximum length") + ": " + locale.toString(max) + " "
                      + tr("characters"));
     }
     else if (type == IMAGE) {
@@ -500,8 +502,8 @@ QStringList View::getStatistics(int colIndex)
             }
         }
         lines.append(tr("Image available") + ": "
-                     + QString::number(count - missing));
-        lines.append(tr("No image") + ": " + QString::number(missing));
+                     + locale.toString(count - missing));
+        lines.append(tr("No image") + ": " + locale.toString(missing));
     }
     else if (type >= FIRST_ENUM) {
         c4_StringProp prop(ids[colIndex].toUtf8());
@@ -517,7 +519,7 @@ QStringList View::getStatistics(int colIndex)
             tallies[index] = tallies[index] + 1;
         }
         for (i = 0; i < optionCount; i++) {
-            lines.append(options[i] + ": " + QString::number(tallies[i]));
+            lines.append(options[i] + ": " + locale.toString(tallies[i]));
         }
         delete[] tallies;
     }
