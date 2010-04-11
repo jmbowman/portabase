@@ -69,6 +69,7 @@ PortaBase::PortaBase(QWidget *parent)
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
     booleanToggle = settings->value("General/BooleanToggle", false).toBool();
     bool pagedDisplay = settings->value("General/PagedDisplay", true).toBool();
+    bool singleClickShow = settings->value("General/SingleClickShow", true).toBool();
 
     QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
     Factory::evenRowColor = QColor(color);
@@ -81,6 +82,7 @@ PortaBase::PortaBase(QWidget *parent)
     viewer = new ViewDisplay(this, mainStack);
     viewer->allowBooleanToggle(booleanToggle);
     viewer->usePages(pagedDisplay);
+    viewer->showWithSingleClick(singleClickShow);
     mainStack->addWidget(viewer);
 
     // menu and toolbar, shared between file selector and data viewer modes
@@ -472,8 +474,10 @@ void PortaBase::editPreferences()
         confirmDeletions = settings.value("ConfirmDeletions", true).toBool();
         booleanToggle = settings.value("BooleanToggle", false).toBool();
         bool pagedDisplay = settings.value("PagedDisplay", true).toBool();
+        bool singleClickShow = settings.value("SingleClickShow", true).toBool();
         viewer->allowBooleanToggle(booleanToggle);
         viewer->usePages(pagedDisplay);
+        viewer->showWithSingleClick(singleClickShow);
         if (!doc.isEmpty()) {
             showDataViewer();
             db->updatePreferences();

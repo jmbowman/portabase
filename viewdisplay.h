@@ -63,6 +63,7 @@ public:
     QString toHtml();
     void allowBooleanToggle(bool flag);
     void usePages(bool flag);
+    void showWithSingleClick(bool flag);
 
 public slots:
     void addRow();
@@ -113,6 +114,7 @@ private:
     QTime timer; /**< Time elapsed between the last mouse press and release */
     bool booleanToggle; /**< True if boolean field values can be toggled by clicking on them in the display */
     bool paged; /**< False if all records in the view are always shown on one scrolling page */
+    bool singleClickShow; /**< True if a single click launches the row viewer */
 };
 
 #endif

@@ -1,3 +1,14 @@
+2010-04-10  JMB  Launch the row viewer with a single click, more buttons on it
+
+    The row viewer is now launched with a single click on a row in the data
+    grid by default (this can be disabled in the preferences dialog).  The
+    reason for this is that there are now buttons in the row viewer for all
+    the actions that can be performed on a selected row; this seems more
+    natural for a Maemo application, and will help free up some space on the
+    main toolbar for other things that don't require a row to be selected
+    first.  Also fixed a formatting bug introduced to the row editor by the
+    last commit.
+
 2010-03-31  JMB  Integer formatting, other minor fixes
 
     Displayed integers now use separators as appropriate for the locale.

@@ -18,6 +18,7 @@
 #include <QClipboard>
 #include <QIcon>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QToolButton>
 #include <QTextDocument>
 #include <QTextEdit>
@@ -58,11 +59,24 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     prevButton->setToolTip(tr("Previous row"));
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
     hbox->addWidget(prevButton);
+
     QToolButton *editButton = new QToolButton(this);
     editButton->setIcon(QIcon(":/icons/edit.png"));
     editButton->setToolTip(tr("Edit this row"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
     hbox->addWidget(editButton);
+
+    QToolButton *copyButton = new QToolButton(this);
+    copyButton->setIcon(QIcon(":/icons/copy_row.png"));
+    copyButton->setToolTip(tr("Copy this row"));
+    connect(copyButton, SIGNAL(clicked()), this, SLOT(copyRow()));
+    hbox->addWidget(copyButton);
+
+    QToolButton *deleteButton = new QToolButton(this);
+    deleteButton->setIcon(QIcon(":/icons/delete.png"));
+    deleteButton->setToolTip(tr("Delete this row"));
+    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteRow()));
+    hbox->addWidget(deleteButton);
 
     QStringList viewNames = db->listViews();
     viewNames.removeAll("_all");
@@ -72,11 +86,11 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
     hbox->addWidget(viewBox, 1);
 
-    QToolButton *copyButton = new QToolButton(this);
-    copyButton->setIcon(QIcon(":/icons/copy_text.png"));
-    copyButton->setToolTip(tr("Copy the selected text"));
-    connect(copyButton, SIGNAL(clicked()), tv, SLOT(copy()));
-    hbox->addWidget(copyButton);
+    QToolButton *copyTextButton = new QToolButton(this);
+    copyTextButton->setIcon(QIcon(":/icons/copy_text.png"));
+    copyTextButton->setToolTip(tr("Copy the selected text"));
+    connect(copyTextButton, SIGNAL(clicked()), tv, SLOT(copy()));
+    hbox->addWidget(copyTextButton);
     nextButton = new QToolButton(this);
     nextButton->setIcon(QIcon(":/icons/forward.png"));
     nextButton->setToolTip(tr("Next row"));
@@ -241,6 +255,38 @@ void RowViewer::editRow()
     if (display->editRow(rowId)) {
         accept();
     }
+}
+
+/**
+ * Launch the row editor dialog with a copy of the currently displayed record.
+ */
+void RowViewer::copyRow()
+{
+    int rowId = view->getId(index);
+    if (display->editRow(rowId, true)) {
+        accept();
+    }
+}
+
+/**
+ * Delete the currently displayed record and return to the data viwer.
+ */
+void RowViewer::deleteRow()
+{
+    QSettings settings;
+    bool confirmDeletions = settings.value("General/ConfirmDeletions",
+                                           true).toBool();
+    if (confirmDeletions) {
+        int choice = QMessageBox::warning(this, qApp->applicationName(),
+                                          PortaBase::tr("Delete this row?"),
+                                          QMessageBox::Yes|QMessageBox::No,
+                                          QMessageBox::No);
+        if (choice != QMessageBox::Yes) {
+            return;
+        }
+    }
+    display->deleteRow();
+    accept();
 }
 
 /**

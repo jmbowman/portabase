@@ -49,7 +49,8 @@
  * @param parent This widget's parent widget
  */
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
-    portabase(pbase), db(0), view(0), booleanToggle(false), paged(true)
+    portabase(pbase), db(0), view(0), booleanToggle(false), paged(true),
+    singleClickShow(true)
 {
     timer.start();
     QVBoxLayout *vbox = Factory::vBoxLayout(this, true);
@@ -183,6 +184,16 @@ void ViewDisplay::setEdited(bool y)
 void ViewDisplay::allowBooleanToggle(bool flag)
 {
     booleanToggle = flag;
+}
+
+/**
+ * Set whether or not a single click on a row will launch it in the RowViewer
+ * dialog.  Default is true for convenience on portable devices, but the old
+ * behavior can still be specified.
+ */
+void ViewDisplay::showWithSingleClick(bool flag)
+{
+    singleClickShow = flag;
 }
 
 /**
@@ -683,7 +694,9 @@ void ViewDisplay::cellPressed(QTreeWidgetItem *item, int column)
  * Mouse click (pressed and released) handler for displayed fields.  Used to
  * display note content dialogs, toggle boolean values, display images, and
  * launch the RowEditor dialog for the selected row (depending on exactly
- * where and for how long the mouse was clicked).
+ * where and for how long the mouse was clicked).  If the "SingleClickShow"
+ * preference is set to true, then a single click launches the row viewer for
+ * the clicked row.
  *
  * @param item The row of the table in which the click occurred
  * @param column The position index of the column in which the click occurred
@@ -726,6 +739,9 @@ void ViewDisplay::cellReleased(QTreeWidgetItem *item, int column)
         else {
             editRow();
         }
+    }
+    else if (singleClickShow) {
+        viewRow();
     }
 }
 

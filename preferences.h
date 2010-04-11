@@ -65,6 +65,7 @@ private:
     QCheckBox *noteWrap; /**< Option to autowrap text in the node editor */
     QComboBox *wrapType; /**< Option to force note text wrapping at line end rather than whitespace */
     QCheckBox *pagedDisplay; /**< Option to pages of data rows, rather than all in a scrolling list */
+    QCheckBox *singleClickShow; /**< Option to show the row viewer with a single click in the data grid */
     QSpinBox *rowsPerPage; /**< Number of rows to display on each page of the data view */
     QCheckBox *smallScreen; /**< Option to use settings for PDA/phone-sized screens */
     QtColorPicker *evenButton; /**< Button to select the color of even rows */

@@ -81,6 +81,12 @@ void Preferences::addGeneralTab(QTabWidget *tabs, QSettings *settings)
     hbox->addStretch(1);
 
     hbox = Factory::hBoxLayout(layout);
+    singleClickShow = new QCheckBox(tr("View rows with a single click"), generalTab);
+    singleClickShow->setChecked(settings->value("SingleClickShow", true).toBool());
+    hbox->addWidget(singleClickShow);
+    hbox->addStretch(1);
+
+    hbox = Factory::hBoxLayout(layout);
     noteWrap = new QCheckBox(tr("Wrap Notes"), generalTab);
     noteWrap->setChecked(settings->value("NoteWrap", true).toBool());
     hbox->addWidget(noteWrap);
@@ -345,6 +351,7 @@ QFont Preferences::applyChanges()
     settings.setValue("ConfirmDeletions", confirmDeletions->isChecked());
     settings.setValue("BooleanToggle", booleanToggle->isChecked());
     settings.setValue("PagedDisplay", pagedDisplay->isChecked());
+    settings.setValue("SingleClickShow", singleClickShow->isChecked());
     settings.setValue("NoteWrap", noteWrap->isChecked());
     settings.setValue("WrapAnywhere", wrapType->currentIndex() == 1);
     settings.setValue("RowsPerPage", rowsPerPage->value());

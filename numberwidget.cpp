@@ -66,7 +66,7 @@ QString NumberWidget::getValue()
 void NumberWidget::setValue(const QString &value)
 {
     if (dataType == INTEGER) {
-        double result = value.toDouble();
+        double result = QLocale::system().toDouble(value);
         entryField->setText(QLocale::system().toString((int)result));
     }
     else {
