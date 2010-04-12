@@ -56,6 +56,7 @@
 #include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
+#include "vsfmanager.h"
 
 /**
  * Constructor.
@@ -63,7 +64,7 @@
  * @param parent This window's parent widget, if any (usually none)
  */
 PortaBase::PortaBase(QWidget *parent)
-  : QMainWindow(parent), db(0), doc(""), printer(0)
+  : QMainWindow(parent), db(0), doc(""), printer(0), vsfManager(0)
 {
     QSettings *settings = getSettings();
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
@@ -229,18 +230,31 @@ PortaBase::PortaBase(QWidget *parent)
     filter->addAction(filterAllRowsAction);
     connect(filter, SIGNAL(triggered(QAction*)), this, SLOT(changeFilter(QAction*)));
 
+    // Toolbar-only actions
+    viewsAction = ma->action(MenuActions::Views, QIcon(":/icons/view.png"));
+    connect(viewsAction, SIGNAL(triggered()), this, SLOT(changeView()));
+    sortingsAction = ma->action(MenuActions::Sortings, QIcon(":/icons/sort.png"));
+    connect(sortingsAction, SIGNAL(triggered()), this, SLOT(changeSorting()));
+    filtersAction = ma->action(MenuActions::Filters, QIcon(":/icons/filter.png"));
+    connect(filtersAction, SIGNAL(triggered()), this, SLOT(changeFilter()));
+
     // Add menus to menubar
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     QAction *helpMenuAction = mh->helpMenu()->menuAction();
     menuBar()->insertMenu(helpMenuAction, row);
     menuBar()->insertMenu(helpMenuAction, view);
     menuBar()->insertMenu(helpMenuAction, sort);
     menuBar()->insertMenu(helpMenuAction, filter);
+#endif
 
     // Toolbar
     toolbar->addAction(rowAddAction);
     toolbar->addAction(rowEditAction);
     toolbar->addAction(rowDeleteAction);
     toolbar->addAction(rowCopyAction);
+    toolbar->addAction(viewsAction);
+    toolbar->addAction(sortingsAction);
+    toolbar->addAction(filtersAction);
     toolbar->addAction(findAction);
     createFillerActions();
 
@@ -295,6 +309,7 @@ PortaBase::PortaBase(QWidget *parent)
     restoreWindowSettings(settings);
     setAcceptDrops(true);
     delete settings;
+    vsfManager = new VSFManager(this);
 }
 
 /**
@@ -332,6 +347,12 @@ void PortaBase::restoreWindowSettings(QSettings *settings)
     }
     if (settings->contains("State")) {
         restoreState(settings->value("State").toByteArray());
+        // make sure the toolbar isn't and can't be hidden
+        if (toolbar->isHidden()) {
+        	toolbar->show();
+        }
+        toolbar->toggleViewAction()->setEnabled(false);
+        toolbar->toggleViewAction()->setVisible(false);
     }
     settings->endGroup();
 }
@@ -696,8 +717,9 @@ void PortaBase::showFileSelector()
     filter->menuAction()->setVisible(false);
 
     // File menu
-    mh->startFileSelectorMenu();
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     fileSeparatorAction->setVisible(true);
+#endif
     importAction->setVisible(true);
     changePassAction->setVisible(false);
     dataImportAction->setVisible(false);
@@ -711,6 +733,7 @@ void PortaBase::showFileSelector()
     printPreviewAction->setEnabled(false);
     printAction->setVisible(false);
     printAction->setEnabled(false);
+    mh->updateFileSelectorMenu();
 
     // Toolbar
     showAllFillerActions();
@@ -719,6 +742,9 @@ void PortaBase::showFileSelector()
     rowDeleteAction->setVisible(false);
     rowCopyAction->setVisible(false);
     findAction->setVisible(false);
+    viewsAction->setVisible(false);
+    sortingsAction->setVisible(false);
+    filtersAction->setVisible(false);
 
     // Update the recent file buttons
     QStringList recentFiles;
@@ -754,7 +780,6 @@ void PortaBase::showDataViewer()
     filter->menuAction()->setVisible(true);
 
     // File menu
-    mh->startDocumentFileMenu();
     if (db->encryption()) {
         changePassAction->setVisible(true);
     }
@@ -773,14 +798,20 @@ void PortaBase::showDataViewer()
     printAction->setEnabled(true);
     printAction->setVisible(true);
 #endif
+    mh->updateDocumentFileMenu();
 
     // Toolbar
     rowAddAction->setVisible(true);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     rowEditAction->setVisible(true);
     rowDeleteAction->setVisible(true);
     rowCopyAction->setVisible(true);
+#endif
+    viewsAction->setVisible(true);
+    sortingsAction->setVisible(true);
+    filtersAction->setVisible(true);
     findAction->setVisible(true);
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 7; i++) {
         fillerActions[i]->setVisible(false);
     }
 
@@ -1006,6 +1037,16 @@ void PortaBase::viewAllRows()
 }
 
 /**
+ * Launch the VSFManager dialog to manage the view selection.
+ */
+void PortaBase::changeView()
+{
+    vsfManager->setSubject(db, VSFManager::View);
+    vsfManager->setActions(viewAddAction, viewEditAction, viewDeleteAction);
+    vsfManager->exec();
+}
+
+/**
  * Switch to the database view whose entry in the "View" menu has the
  * specified ID.  Called when that menu item is triggered.
  *
@@ -1015,13 +1056,34 @@ void PortaBase::changeView(QAction *action)
 {
     int index = viewActions.indexOf(action);
     if (index != -1) {
-        viewer->setView(viewNames[index], true);
-        updateViewMenu();
-        // there might be a default sorting and/or filter...
-        updateSortMenu();
-        updateFilterMenu();
-        setEdited(true);
+        changeView(viewNames[index]);
     }
+}
+
+/**
+ * Switch to the named database view.  Used by menu selections and the
+ * VSFManager dialog.
+ *
+ * @param name The name of the view to switch to
+ */
+void PortaBase::changeView(const QString &name)
+{
+    viewer->setView(name, true);
+    updateViewMenu();
+    // there might be a default sorting and/or filter...
+    updateSortMenu();
+    updateFilterMenu();
+    setEdited(true);
+}
+
+/**
+ * Launch the VSFManager dialog to manage the sorting selection.
+ */
+void PortaBase::changeSorting()
+{
+    vsfManager->setSubject(db, VSFManager::Sorting);
+    vsfManager->setActions(sortAddAction, sortEditAction, sortDeleteAction);
+    vsfManager->exec();
 }
 
 /**
@@ -1034,10 +1096,31 @@ void PortaBase::changeSorting(QAction *action)
 {
     int index = sortActions.indexOf(action);
     if (index != -1) {
-        viewer->setSorting(sortNames[index]);
-        updateSortMenu();
-        setEdited(true);
+        changeSorting(sortNames[index]);
     }
+}
+
+/**
+ * Switch to the named sorting.  Used by menu selections and the
+ * VSFManager dialog.
+ *
+ * @param name The name of the sorting to switch to
+ */
+void PortaBase::changeSorting(const QString &name)
+{
+    viewer->setSorting(name);
+    updateSortMenu();
+    setEdited(true);
+}
+
+/**
+ * Launch the VSFManager dialog to manage the filter selection.
+ */
+void PortaBase::changeFilter()
+{
+    vsfManager->setSubject(db, VSFManager::Filter);
+    vsfManager->setActions(filterAddAction, filterEditAction, filterDeleteAction);
+    vsfManager->exec();
 }
 
 /**
@@ -1050,10 +1133,21 @@ void PortaBase::changeFilter(QAction *action)
 {
     int index = filterActions.indexOf(action);
     if (index != -1) {
-        viewer->setFilter(filterNames[index]);
-        updateFilterMenu();
-        setEdited(true);
+        changeFilter(filterNames[index]);
     }
+}
+
+/**
+ * Switch to the named filter.  Used by menu selections and the
+ * VSFManager dialog.
+ *
+ * @param name The name of the filter to switch to
+ */
+void PortaBase::changeFilter(const QString &name)
+{
+    viewer->setFilter(name);
+    updateFilterMenu();
+    setEdited(true);
 }
 
 /**
@@ -1660,7 +1754,7 @@ QSettings *PortaBase::getSettings()
  * of displayed buttons once it shrinks).
  */
 void PortaBase::createFillerActions() {
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 7; i++) {
         fillerActions[i] = new QAction("", this);
 #if defined(Q_WS_MAC)
         toolbar->addAction(fillerActions[i]);
@@ -1674,7 +1768,7 @@ void PortaBase::createFillerActions() {
  */
 void PortaBase::showAllFillerActions() {
 #if defined(Q_WS_MAC)
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 7; i++) {
         fillerActions[i]->setVisible(true);
     }
 #endif

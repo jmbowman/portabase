@@ -89,7 +89,9 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
 
     quitAction = new QAction(QIcon(":/icons/quit.png"), quitText, window);
     quitAction->setStatusTip(tr("Quit the application"));
+#if !defined(Q_WS_HILDON)
     quitAction->setShortcut(QKeySequence::Quit);
+#endif
     quitAction->setMenuRole(QAction::QuitRole);
     connect(quitAction, SIGNAL(triggered()), this, SIGNAL(quit()));
 
@@ -116,12 +118,14 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     connect(closeAction, SIGNAL(triggered()), this, SIGNAL(closeFile()));
 
     prefsAction = new QAction(prefsText, window);
-    prefsAction->setStatusTip(tr("Change the application settings").arg(qApp->applicationName()));
+    prefsAction->setStatusTip(tr("Change the application settings"));
+#if !defined(Q_WS_HILDON)
     prefsAction->setShortcut(QKeySequence::Preferences);
+#endif
     prefsAction->setMenuRole(QAction::PreferencesRole);
     connect(prefsAction, SIGNAL(triggered()), this, SIGNAL(editPreferences()));
 
-#if defined(Q_WS_MAC)
+#if defined(Q_WS_MAC) || defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     fileNewAction->setIconVisibleInMenu(false);
     fileOpenAction->setIconVisibleInMenu(false);
     quitAction->setIconVisibleInMenu(false);
@@ -146,7 +150,9 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     file->addSeparator();
 #endif
     file->addAction(quitAction);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     window->menuBar()->addMenu(file);
+#endif
 
     // Help menu actions
     helpAction = new QAction(helpText, window);
@@ -166,17 +172,16 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
 
     // Help menu setup
     help = new QMenu(menuText(tr("&Help")), window);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     help->addAction(helpAction);
 #if !defined(Q_WS_MAC)
     // skip this on the mac, since both "About.." actions get moved elsewhere
     help->addSeparator();
 #endif
     help->addAction(aboutAction);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
-    // skip this on Maemo; the dialog is too big to read
     help->addAction(aboutQtAction);
-#endif
     window->menuBar()->addMenu(help);
+#endif
 
     // toolbar setup
     toolbar->addAction(fileNewAction);
@@ -379,9 +384,11 @@ void QQMenuHelper::aboutQt()
  * <li>Quit</li>
  * </ul>
  * <p>Also shows the "New" and "Open" buttons on the toolbar (and on the Mac,
- * makes sure no document icon is shown in the titlebar).</p>
+ * makes sure no document icon is shown in the titlebar).  This method should
+ * be called after the visibility of any application-specific actions has
+ * been updated (due to a Maemo implementation detail).</p>
  */
-void QQMenuHelper::startFileSelectorMenu()
+void QQMenuHelper::updateFileSelectorMenu()
 {
     // update action visibility
     fileNewAction->setVisible(true);
@@ -397,6 +404,22 @@ void QQMenuHelper::startFileSelectorMenu()
     fileOpenAction->setEnabled(true);
     fileSaveAction->setEnabled(false);
     closeAction->setEnabled(false);
+
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    QMenuBar *mb = mainWindow->menuBar();
+    mb->clear();
+    mb->addAction(fileNewAction);
+    mb->addAction(fileOpenAction);
+    int count = extraFileActions.count();
+    for (int i = 0; i < count; i++) {
+    	if (extraFileActions[i]->isVisible()) {
+    		mb->addAction(extraFileActions[i]);
+    	}
+    }
+    mb->addAction(prefsAction);
+    mb->addAction(helpAction);
+    mb->addAction(aboutAction);
+#endif
 
 #if defined(Q_WS_MAC)
     mainWindow->setWindowIcon(QIcon());
@@ -418,9 +441,11 @@ void QQMenuHelper::startFileSelectorMenu()
  * <p>Also shows the "Save" button on the toolbar.  If creating
  * a new file which isn't automatically saved, follow this with a call
  * to setEdited(true).  On the Mac, also shows a document icon in the
- * titlebar.</p>
+ * titlebar.  This method should be called after the visibility of any
+ * application-specific actions has been updated (due to a Maemo
+ * implementation detail).</p>
  */
-void QQMenuHelper::startDocumentFileMenu()
+void QQMenuHelper::updateDocumentFileMenu()
 {
     // update action visibility
     fileSaveAction->setVisible(true);
@@ -435,6 +460,19 @@ void QQMenuHelper::startDocumentFileMenu()
     fileOpenAction->setEnabled(false);
     fileSaveAction->setEnabled(false);
     closeAction->setEnabled(true);
+
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    QMenuBar *mb = mainWindow->menuBar();
+    mb->clear();
+    int count = extraFileActions.count();
+    for (int i = 0; i < count; i++) {
+    	if (extraFileActions[i]->isVisible()) {
+    		mb->addAction(extraFileActions[i]);
+    	}
+    }
+    mb->addAction(prefsAction);
+    mb->addAction(helpAction);
+#endif
 
 #if defined(Q_WS_MAC)
     mainWindow->setWindowIcon(docIcon);
@@ -472,6 +510,7 @@ QMenu *QQMenuHelper::helpMenu()
 void QQMenuHelper::addToFileMenu(QAction *action)
 {
     file->insertAction(insertionPoint, action);
+    extraFileActions << action;
 }
 
 /**

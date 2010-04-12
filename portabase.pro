@@ -77,6 +77,7 @@ HEADERS         = calc/calcdateeditor.h \
                   view.h \
                   viewdisplay.h \
                   vieweditor.h \
+                  vsfmanager.h \
                   xmlexport.h \
                   xmlimport.h
 SOURCES         = calc/calcdateeditor.cpp \
@@ -139,6 +140,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   view.cpp \
                   viewdisplay.cpp \
                   vieweditor.cpp \
+                  vsfmanager.cpp \
                   xmlexport.cpp \
                   xmlimport.cpp
 
@@ -190,6 +192,7 @@ macx {
 }
 
 # Stuff for Maemo
+maemo5:QT              += dbus maemo5
 maemo5|contains(QT_CONFIG, hildon): {
     RESOURCES           = resources/maemo.qrc
 }

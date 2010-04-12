@@ -192,7 +192,7 @@ void Preferences::addAppearanceTab(QTabWidget *tabs)
     QVBoxLayout *layout = Factory::vBoxLayout(appearanceTab, true);
 #if !defined(Q_WS_MAC)
     QGroupBox *fontGroup = new QGroupBox(tr("Font"), appearanceTab);
-    QGridLayout *fontGrid = new QGridLayout(fontGroup, true);
+    QGridLayout *fontGrid = Factory::gridLayout(fontGroup, true);
 
     fontGrid->addWidget(new QLabel(tr("Name"), fontGroup), 0, 0);
     fontName = new QComboBox(fontGroup);

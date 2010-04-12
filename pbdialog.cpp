@@ -50,8 +50,8 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
                                          int minWidth, int minHeight)
 {
     QDialogButtonBox *okCancelRow = 0;
-    if (okButton) {
-        okCancelRow = addOkCancelButtons(vbox, cancelButton);
+    if (okButton || cancelButton) {
+        okCancelRow = addOkCancelButtons(vbox, okButton, cancelButton);
     }
     finishConstruction(minWidth, minHeight);
     return okCancelRow;

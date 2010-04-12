@@ -30,22 +30,22 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(Row, tr("&Row"));
     textMap.insert(Sort, tr("&Sort"));
     textMap.insert(Filter, tr("Fi&lter"));
-    
+
     textMap.insert(ChangePassword, tr("C&hange Password") + ellipsis);
     toolTipMap.insert(ChangePassword, tr("Change the current file's password"));
-    
+
     textMap.insert(Import, tr("&Import") + ellipsis);
     toolTipMap.insert(Import, tr("Create a new file from data in another format"));
-    
+
     textMap.insert(ImportCSV, tr("&Import") + ellipsis);
     toolTipMap.insert(ImportCSV, tr("Import rows from a CSV file"));
-    
+
     textMap.insert(Export, tr("E&xport") + ellipsis);
     toolTipMap.insert(Export, tr("Export data to another file format"));
-    
+
     textMap.insert(Slideshow, tr("S&lideshow") + ellipsis);
     toolTipMap.insert(Slideshow, tr("Start an image slideshow"));
-    
+
     textMap.insert(Properties, tr("Proper&ties"));
     toolTipMap.insert(Properties, tr("Show information about the current file"));
 
@@ -55,72 +55,81 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(Print, tr("&Print") + ellipsis);
     toolTipMap.insert(Print, tr("Print the current file"));
     shortcutMap.insert(Print, QKeySequence(QKeySequence::Print));
-    
+
     textMap.insert(QuickFilter, tr("&Quick Filter"));
     toolTipMap.insert(QuickFilter, tr("Apply a one-condition filter"));
     shortcutMap.insert(QuickFilter, QKeySequence(QKeySequence::Find));
-    
+
     textMap.insert(AddRow, tr("&Add") + ellipsis);
     toolTipMap.insert(AddRow, tr("Create a new row"));
-    
+
     textMap.insert(AddView, tr("&Add") + ellipsis);
     toolTipMap.insert(AddView, tr("Create a new view"));
-    
+
     textMap.insert(AddSorting, tr("&Add") + ellipsis);
     toolTipMap.insert(AddSorting, tr("Create a new sorting"));
-    
+
     textMap.insert(AddFilter, tr("&Add") + ellipsis);
     toolTipMap.insert(AddFilter, tr("Create a new filter"));
-    
+
     textMap.insert(EditRow, tr("&Edit") + ellipsis);
     toolTipMap.insert(EditRow, tr("Edit the selected row"));
-    
+
     textMap.insert(EditView, tr("&Edit") + ellipsis);
     toolTipMap.insert(EditView, tr("Edit the selected view"));
-    
+
     textMap.insert(EditSorting, tr("&Edit") + ellipsis);
     toolTipMap.insert(EditSorting, tr("Edit the selected sorting"));
-    
+
     textMap.insert(EditFilter, tr("&Edit") + ellipsis);
     toolTipMap.insert(EditFilter, tr("Edit the selected filter"));
-    
+
     textMap.insert(DeleteRow, tr("&Delete"));
     toolTipMap.insert(DeleteRow, tr("Delete the selected row"));
     shortcutMap.insert(DeleteRow, QKeySequence::Delete);
-    
+
     textMap.insert(DeleteView, tr("&Delete"));
     toolTipMap.insert(DeleteView, tr("Delete the selected view"));
-    
+
     textMap.insert(DeleteSorting, tr("&Delete"));
     toolTipMap.insert(DeleteSorting, tr("Delete the selected sorting"));
-    
+
     textMap.insert(DeleteFilter, tr("&Delete"));
     toolTipMap.insert(DeleteFilter, tr("Delete the selected filter"));
-    
+
     textMap.insert(AllColumns, tr("All &Columns"));
     toolTipMap.insert(AllColumns, tr("Show all of the database columns"));
-    
+
     textMap.insert(AllRows, tr("All &Rows"));
     toolTipMap.insert(AllRows, tr("Show all rows of data"));
-    
+
     textMap.insert(CopyRow, tr("&Copy") + ellipsis);
     toolTipMap.insert(CopyRow, tr("Create a copy of the selected row"));
-    
+
     textMap.insert(CopyText, tr("&Copy"));
     toolTipMap.insert(CopyText, tr("Copy the selected text"));
-    
+
     textMap.insert(Show, tr("&Show"));
     toolTipMap.insert(Show, tr("Show the selected row in more detail"));
     shortcutMap.insert(Show, QKeySequence(Qt::CTRL + Qt::Key_R));
-    
+
     textMap.insert(DeleteRowsInFilter, tr("&Delete Rows in Filter"));
     toolTipMap.insert(DeleteRowsInFilter, tr("Delete all rows matching the current filter"));
-    
+
     textMap.insert(EditColumns, tr("Edit Col&umns") + ellipsis);
     toolTipMap.insert(EditColumns, tr("Edit the database format"));
-    
+
     textMap.insert(EditEnums, tr("Edit &Enums") + ellipsis);
     toolTipMap.insert(EditEnums, tr("Edit the enumerated data types"));
+
+    textMap.insert(Views, tr("Views") + ellipsis);
+    toolTipMap.insert(Views, tr("Change the active view"));
+
+    textMap.insert(Sortings, tr("Sortings") + ellipsis);
+    toolTipMap.insert(Sortings, tr("Change the active sorting"));
+
+    textMap.insert(Filters, tr("Filters") + ellipsis);
+    toolTipMap.insert(Filters, tr("Change the active filter"));
 }
 
 /**
@@ -157,7 +166,7 @@ QAction *MenuActions::action(Item item, bool toggle)
 QAction *MenuActions::action(Item item, const QIcon &icon)
 {
     QAction *action = new QAction(icon, menuText(item), parent());
-#if defined(Q_WS_MAC)
+#if defined(Q_WS_MAC) || defined(Q_WS_HILDON)
     action->setIconVisibleInMenu(false);
 #endif
     prepareAction(item, action);

@@ -33,12 +33,7 @@
 QQDialog::QQDialog(QString title, QWidget *parent)
     : QDialog(parent)
 {
-    if (title.isEmpty()) {
-        setWindowTitle(qApp->applicationName());
-    }
-    else {
-        setWindowTitle(title + " - " + qApp->applicationName());
-    }
+    setWindowTitle(title);
 }
 
 /**
@@ -54,6 +49,21 @@ QQDialog::~QQDialog()
         QString heightName = QString("DialogSizes/%1Height").arg(dialogClassName);
         settings.setValue(widthName, w);
         settings.setValue(heightName, h);
+    }
+}
+
+/**
+ * Overrides QWidget::setWindowTitle() to include the application name.
+ *
+ * @param title The dialog title, not including the application name
+ */
+void QQDialog::setWindowTitle(const QString &title)
+{
+    if (title.isEmpty()) {
+        QWidget::setWindowTitle(qApp->applicationName());
+    }
+    else {
+        QWidget::setWindowTitle(title + " - " + qApp->applicationName());
     }
 }
 
@@ -77,14 +87,18 @@ int QQDialog::exec()
  * @param layout The dialog's layout manager.
  * @param cancel False if the "Cancel" button is to be omitted.
  */
-QDialogButtonBox *QQDialog::addOkCancelButtons(QVBoxLayout *layout, bool cancel)
+QDialogButtonBox *QQDialog::addOkCancelButtons(QVBoxLayout *layout, bool ok,
+                                               bool cancel)
 {
     QDialogButtonBox::StandardButtons buttons;
-    if (cancel) {
+    if (ok && cancel) {
         buttons = QDialogButtonBox::Ok | QDialogButtonBox::Cancel;
     }
-    else {
+    else if (ok) {
         buttons = QDialogButtonBox::Ok;
+    }
+    else {
+        buttons = QDialogButtonBox::Cancel;
     }
     QDialogButtonBox *buttonBox = new QDialogButtonBox(buttons, Qt::Horizontal, this);
     layout->addWidget(buttonBox);

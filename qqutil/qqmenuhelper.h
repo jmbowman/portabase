@@ -91,8 +91,8 @@ public:
     void loadSettings(QSettings *settings);
     void saveSettings(QSettings *settings);
     void updateRecentMenu();
-    void startFileSelectorMenu();
-    void startDocumentFileMenu();
+    void updateFileSelectorMenu();
+    void updateDocumentFileMenu();
     void addToFileMenu(QAction *action);
     void saveChangesPrompt();
     QMenu *createMenu(QMainWindow *mainWindow);
@@ -138,6 +138,7 @@ private:
     QAction *fileOpenAction; /**< Action for opening an existing file */
     QAction *fileSaveAction; /**< Action for saving the current file */
     QAction* recentActions[5]; /**< Actions for opening recently used files */
+    QList<QAction *> extraFileActions; /**< Additional actions added to the File menu by the application */
     QAction *fileSeparatorAction; /**< Separator that appears before "Close" in the "File" menu */
     QAction *closeAction; /**< Action for closing an open document */
     QAction *prefsAction; /**< Action for launching the application preferences dialog */

@@ -33,11 +33,14 @@ public:
     QQDialog(QString title, QWidget *parent=0);
     virtual ~QQDialog();
 
+    void setWindowTitle(const QString &title);
+
 public slots:
     int exec();
 
 protected:
-    QDialogButtonBox *addOkCancelButtons(QVBoxLayout *layout, bool cancel=true);
+    QDialogButtonBox *addOkCancelButtons(QVBoxLayout *layout, bool ok=true,
+                                         bool cancel=true);
     void finishConstruction(int minWidth=-1, int minHeight=-1);
 
 private:

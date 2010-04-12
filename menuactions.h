@@ -73,7 +73,10 @@ public:
         EditColumns,
         EditEnums,
         PrintPreview,
-        Print
+        Print,
+        Views,
+        Sortings,
+        Filters
     };
     typedef QMap< Item, QString > PhraseMap;
     typedef QMap< Item, QKeySequence > ShortcutMap;

@@ -1,3 +1,13 @@
+2010-04-12  JMB  Dialogs for view, sorting, and filter management; Maemo menu
+
+    There are now dialogs for selecting, creating, editing, and deleting views,
+    sortings, and filters.  These are launched via toolbar buttons, and are the
+    only way to access this functionality on Maemo (the menus used until now
+    have been left intact on the desktop versions for the time being).  This
+    should be a little more intuitive to use, especially for Maemo users.
+    This also made it possible to reduce the number of menu items to 10, which
+    is good for Maemo 5.
+
 2010-04-10  JMB  Launch the row viewer with a single click, more buttons on it
 
     The row viewer is now launched with a single click on a row in the data

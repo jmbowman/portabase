@@ -33,6 +33,7 @@ class QPrinter;
 class QPushButton;
 class QStackedWidget;
 class ViewDisplay;
+class VSFManager;
 
 typedef QList<QAction*> ActionList;
 
@@ -53,6 +54,9 @@ public:
     void updateFilterMenu();
     QString createNewFile(const QString &fileDescription=QString::null,
                           const QString &fileExtension=QString::null);
+    void changeView(const QString &name);
+    void changeSorting(const QString &name);
+    void changeFilter(const QString &name);
 
 public slots:
     void openFile(const QString &file);
@@ -92,6 +96,9 @@ private slots:
     void printPreview();
     void print();
     void print(QPrinter *p);
+    void changeView();
+    void changeSorting();
+    void changeFilter();
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -154,7 +161,10 @@ private:
     QAction *filterEditAction; /**< Filter "Edit" menu action */
     QAction *filterDeleteAction; /**< Filter "Delete" menu action */
     QAction *filterAllRowsAction; /**< Filter "All Rows" menu action */
-    QAction* fillerActions[4]; /**< Toolbar filler actions; Mac toolbar quirk */
+    QAction *viewsAction; /**< Toolbar "Views" action */
+    QAction *sortingsAction; /**< Toolbar "Sortings" action */
+    QAction *filtersAction; /**< Toolbar "Filters" action */
+    QAction* fillerActions[7]; /**< Toolbar filler actions; Mac toolbar quirk */
     QMenu *row; /**< "Row" Menu */
     QMenu *view; /**< "View" Menu */
     QMenu *sort; /**< "Sort" Menu */
@@ -170,6 +180,7 @@ private:
     bool confirmDeletions; /**< True if deletion actions should trigger confirmation dialogs */
     bool booleanToggle; /**< True if clicking on a boolean field display should toggle its value */
     QPrinter *printer; /**< The last-used printer settings (for this application instance) */
+    VSFManager *vsfManager; /**< Dialog for managing the view, sorting, and filter selections */
 };
 
 #endif
