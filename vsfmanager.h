@@ -21,8 +21,8 @@
 
 class Database;
 class PortaBase;
+class QAbstractButton;
 class QLabel;
-class QToolButton;
 
 /**
  * Dialog for managing the current View, Sorting, or Filter selection (hence
@@ -65,8 +65,8 @@ private:
     QAction *deleteAction; /**< The action to delete the current item */
     QVBoxLayout *layout; /**< The layout containing the button list */
     QLabel *currentLabel; /**< The "Current..." text label */
-    QToolButton *editButton; /**< The edit item button */
-    QToolButton *deleteButton; /**< The delete item button */
+    QAbstractButton *editButton; /**< The edit item button */
+    QAbstractButton *deleteButton; /**< The delete item button */
     QPushButton *addButton; /**< The add item button */
     QList<QPushButton*> buttonList; /**< The buttons for selecting existing items */
     QRegExp nameFilter; /**< Regular expression for filtering out special cases */

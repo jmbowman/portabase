@@ -20,6 +20,7 @@
 #include <QLayout>
 #include <QStringList>
 
+class QAbstractButton;
 class QAbstractItemView;
 class QListWidget;
 class QTreeWidget;
@@ -40,6 +41,7 @@ public:
     static QVBoxLayout *vBoxLayout(QBoxLayout *parent);
     static QListWidget *listWidget(QWidget *parent);
     static QTreeWidget *treeWidget(QWidget *parent, const QStringList &headers);
+    static QAbstractButton *button(QWidget *parent);
     static QIcon checkBoxIcon(int checked);
     static void updateRowColors(QAbstractItemView *view);
     static void createCheckBoxIcons();

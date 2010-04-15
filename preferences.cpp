@@ -76,7 +76,7 @@ void Preferences::addGeneralTab(QTabWidget *tabs, QSettings *settings)
 
     hbox = Factory::hBoxLayout(layout);
     pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
-    pagedDisplay->setChecked(settings->value("PagedDisplay", true).toBool());
+    pagedDisplay->setChecked(settings->value("PagedDisplay", false).toBool());
     hbox->addWidget(pagedDisplay);
     hbox->addStretch(1);
 

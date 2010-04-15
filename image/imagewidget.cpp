@@ -1,7 +1,7 @@
 /*
  * imagewidget.cpp (based on code from TxImage)
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 2003 by Pierpaolo Di Panfilo <pippo_dp@libero.it>
  * (c) 2003 by Cristian Di Panfilo <cridipan@virgilio.it>
  *
@@ -123,7 +123,7 @@ void ImageWidget::processArrow(int key)
     if (!currentView) {
         return;
     }
-    int rowCount = currentView->getRowCount();
+    int rowCount = currentView->totalRowCount();
     bool changed = false;
     bool lastImage = false;
     if (key == Qt::Key_Left || key == Qt::Key_Up) {
@@ -189,7 +189,7 @@ void ImageWidget::nextImage()
 
 /**
  * Don't bother to continue painting an image if this widget is being closed.
- * 
+ *
  * @param e The window close event
  */
 void ImageWidget::closeEvent(QCloseEvent *e)

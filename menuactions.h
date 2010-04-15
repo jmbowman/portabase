@@ -76,7 +76,8 @@ public:
         Print,
         Views,
         Sortings,
-        Filters
+        Filters,
+        Fullscreen
     };
     typedef QMap< Item, QString > PhraseMap;
     typedef QMap< Item, QKeySequence > ShortcutMap;

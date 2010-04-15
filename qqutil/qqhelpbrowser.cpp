@@ -17,6 +17,7 @@
 #include <QIcon>
 #include <QLabel>
 #include <QLayout>
+#include <QPushButton>
 #include <QTextBrowser>
 #include <QToolButton>
 #include "qqhelpbrowser.h"
@@ -42,13 +43,18 @@ QQHelpBrowser::QQHelpBrowser(const QString &resource, QWidget *parent)
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     vbox->addWidget(buttonBox);
 
-    QToolButton *backButton = new QToolButton(buttonBox);
+#if defined(Q_WS_MAC)
+    QAbstractButton *backButton = new QToolButton(buttonBox);
+    QAbstractButton *forwardButton = new QToolButton(buttonBox);
+#else
+    QAbstractButton *backButton = new QPushButton(buttonBox);
+    QAbstractButton *forwardButton = new QPushButton(buttonBox);
+#endif
     backButton->setIcon(QIcon(":/icons/back.png"));
     backButton->setToolTip(tr("Back"));
     connect(backButton, SIGNAL(clicked()), content, SLOT(backward()));
     buttonBox->addButton(backButton, QDialogButtonBox::ActionRole);
 
-    QToolButton *forwardButton = new QToolButton(buttonBox);
     forwardButton->setIcon(QIcon(":/icons/forward.png"));
     forwardButton->setToolTip(tr("Forward"));
     connect(forwardButton, SIGNAL(clicked()), content, SLOT(forward()));

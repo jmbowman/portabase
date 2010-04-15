@@ -13,11 +13,11 @@
  * Source file for NumberWidget
  */
 
+#include <QAbstractButton>
 #include <QIcon>
 #include <QLayout>
 #include <QLineEdit>
 #include <QLocale>
-#include <QToolButton>
 #include "calculator.h"
 #include "datatypes.h"
 #include "factory.h"
@@ -35,7 +35,7 @@ NumberWidget::NumberWidget(int type, QWidget *parent)
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     entryField = new QLineEdit(this);
     layout->addWidget(entryField, 1);
-    QToolButton *button = new QToolButton(this);
+    QAbstractButton *button = Factory::button(this);
     layout->addWidget(button);
     button->setIcon(QIcon(":/icons/calculator.png"));
     button->setToolTip(tr("Show calculator"));

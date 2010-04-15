@@ -109,8 +109,7 @@ int ImageEditor::edit(const QString &file)
     reader.setScaledSize(QSize(width, height));
     image = reader.read();
     qApp->processEvents();
-    QPixmap pm;
-    pm.fromImage(image);
+    QPixmap pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
     int margin = 5;
 #if defined(Q_WS_WIN)
@@ -130,11 +129,6 @@ void ImageEditor::updateImage()
     int width = widthBox->value();
     int height = heightBox->value();
     int angle = rotateBox->currentIndex() * 90;
-    if (angle == 90 || angle == 270) {
-        int temp = width;
-        width = height;
-        height = temp;
-    }
     QImageReader reader(path);
     reader.setScaledSize(QSize(width, height));
     image = reader.read();
@@ -144,8 +138,7 @@ void ImageEditor::updateImage()
         image = image.transformed(matrix);
     }
     qApp->processEvents();
-    QPixmap pm;
-    pm.fromImage(image);
+    QPixmap pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
 }
 

@@ -1,7 +1,7 @@
 /*
  * imageviewer.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ void ImageViewer::processArrow(int key)
     if (!currentView) {
         return;
     }
-    int rowCount = currentView->getRowCount();
+    int rowCount = currentView->totalRowCount();
     bool changed = false;
     if (key == Qt::Key_Left || key == Qt::Key_Up) {
         if (rowIndex != 0) {

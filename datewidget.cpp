@@ -13,10 +13,10 @@
  * Source file for DateWidget
  */
 
+#include <QAbstractButton>
 #include <QLabel>
 #include <QLayout>
 #include <QPushButton>
-#include <QToolButton>
 #include "database.h"
 #include "datedialog.h"
 #include "datewidget.h"
@@ -33,7 +33,7 @@ DateWidget::DateWidget(QWidget *parent)
     dateObj = QDate::currentDate();
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
 
-    QToolButton *button = new QToolButton(this);
+    QAbstractButton *button = Factory::button(this);
     button->setIcon(QIcon(":/icons/calendar.png"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchSelector()));
     layout->addWidget(button);

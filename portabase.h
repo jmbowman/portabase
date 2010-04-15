@@ -99,6 +99,7 @@ private slots:
     void changeView();
     void changeSorting();
     void changeFilter();
+    void toggleFullscreen();
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -164,6 +165,7 @@ private:
     QAction *viewsAction; /**< Toolbar "Views" action */
     QAction *sortingsAction; /**< Toolbar "Sortings" action */
     QAction *filtersAction; /**< Toolbar "Filters" action */
+    QAction *fullscreenAction; /**< Toolbar "Fullscreen" action */
     QAction* fillerActions[7]; /**< Toolbar filler actions; Mac toolbar quirk */
     QMenu *row; /**< "Row" Menu */
     QMenu *view; /**< "View" Menu */

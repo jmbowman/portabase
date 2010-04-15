@@ -14,7 +14,7 @@
  */
 
 #include <QLabel>
-#include <QToolButton>
+#include <QAbstractButton>
 #include "calcnode.h"
 #include "calcwidget.h"
 #include "../database.h"
@@ -38,7 +38,7 @@ CalcWidget::CalcWidget(Database *dbase, const QString &calcName, const QStringLi
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     display = new QLabel(this);
     layout->addWidget(display);
-    QToolButton *button = new QToolButton(this);
+    QAbstractButton *button = Factory::button(this);
     button->setIcon(QIcon(":/icons/refresh.png"));
     button->setToolTip(tr("Update calculated value"));
     layout->addWidget(button);

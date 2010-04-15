@@ -17,7 +17,6 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QScrollArea>
-#include <QToolButton>
 #include "database.h"
 #include "factory.h"
 #include "menuactions.h"
@@ -40,14 +39,14 @@ VSFManager::VSFManager(PortaBase *parent)
 
     QHBoxLayout *hbox = Factory::hBoxLayout(layout);
     currentLabel = new QLabel("", content);
-    hbox->addWidget(currentLabel);
+    hbox->addWidget(currentLabel, 1);
 
-    editButton = new QToolButton(content);
+    editButton = Factory::button(content);
     editButton->setIcon(QIcon(":/icons/edit.png"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editItem()));
     hbox->addWidget(editButton);
 
-    deleteButton = new QToolButton(content);
+    deleteButton = Factory::button(content);
     deleteButton->setIcon(QIcon(":/icons/delete.png"));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteItem()));
     hbox->addWidget(deleteButton);

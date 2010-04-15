@@ -13,13 +13,13 @@
  * Source file for RowViewer
  */
 
+#include <QAbstractButton>
 #include <QApplication>
 #include <QComboBox>
 #include <QClipboard>
 #include <QIcon>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QToolButton>
 #include <QTextDocument>
 #include <QTextEdit>
 #include <QUrl>
@@ -54,25 +54,25 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     vbox->addWidget(tv);
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
-    prevButton = new QToolButton(this);
+    prevButton = Factory::button(this);
     prevButton->setIcon(QIcon(":/icons/back.png"));
     prevButton->setToolTip(tr("Previous row"));
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
     hbox->addWidget(prevButton);
 
-    QToolButton *editButton = new QToolButton(this);
+    QAbstractButton *editButton = Factory::button(this);
     editButton->setIcon(QIcon(":/icons/edit.png"));
     editButton->setToolTip(tr("Edit this row"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
     hbox->addWidget(editButton);
 
-    QToolButton *copyButton = new QToolButton(this);
+    QAbstractButton *copyButton = Factory::button(this);
     copyButton->setIcon(QIcon(":/icons/copy_row.png"));
     copyButton->setToolTip(tr("Copy this row"));
     connect(copyButton, SIGNAL(clicked()), this, SLOT(copyRow()));
     hbox->addWidget(copyButton);
 
-    QToolButton *deleteButton = new QToolButton(this);
+    QAbstractButton *deleteButton = Factory::button(this);
     deleteButton->setIcon(QIcon(":/icons/delete.png"));
     deleteButton->setToolTip(tr("Delete this row"));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteRow()));
@@ -86,12 +86,12 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
     hbox->addWidget(viewBox, 1);
 
-    QToolButton *copyTextButton = new QToolButton(this);
+    QAbstractButton *copyTextButton = Factory::button(this);
     copyTextButton->setIcon(QIcon(":/icons/copy_text.png"));
     copyTextButton->setToolTip(tr("Copy the selected text"));
     connect(copyTextButton, SIGNAL(clicked()), tv, SLOT(copy()));
     hbox->addWidget(copyTextButton);
-    nextButton = new QToolButton(this);
+    nextButton = Factory::button(this);
     nextButton->setIcon(QIcon(":/icons/forward.png"));
     nextButton->setToolTip(tr("Next row"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
@@ -139,7 +139,7 @@ void RowViewer::viewRow(View *originalView, int rowIndex)
         }
     }
     index = rowIndex;
-    rowCount = view->getRowCount();
+    rowCount = view->totalRowCount();
     updateContent();
     exec();
 }

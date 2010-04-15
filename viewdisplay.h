@@ -16,10 +16,12 @@
 #ifndef VIEWDISPLAY_H
 #define VIEWDISPLAY_H
 
+#include <QModelIndex>
 #include <QTime>
 #include <QWidget>
 
 class Database;
+class DataModel;
 class PortaBase;
 class QButtonGroup;
 class QKeyEvent;
@@ -28,8 +30,7 @@ class QSpinBox;
 class QStackedWidget;
 class QString;
 class QToolButton;
-class QTreeWidget;
-class QTreeWidgetItem;
+class QTreeView;
 class View;
 
 #define PAGE_BUTTON_COUNT 5
@@ -49,8 +50,7 @@ public:
     ViewDisplay(PortaBase *pbase, QWidget *parent = 0);
 
     void setDatabase(Database *dbase);
-    void updateTable();
-    void updateButtons();
+    void resetTable();
     void updateButtonSizes();
     void saveViewSettings();
     void setView(const QString &name, bool applyDefaults=false);
@@ -89,16 +89,20 @@ private slots:
     void previousPages();
     void updateRowsPerPage(int rpp);
     void rowSelected();
-    void cellPressed(QTreeWidgetItem *item, int column);
-    void cellReleased(QTreeWidgetItem *item, int column);
+    void cellPressed(const QModelIndex &index);
+    void cellReleased(const QModelIndex &index);
     void headerPressed(int column);
     void headerReleased(int column);
     void columnResized(int column, int oldWidth, int newWidth);
+    void updateButtons(int currentPage, int totalPages);
+    void matchNewView(View *view);
+    void tableChanged();
 
 private:
     PortaBase *portabase; /**< The main application window */
     QStackedWidget *stack; /**< Main widget stack (data display and "no results" label) */
-    QTreeWidget *table; /**< Table of data records */
+    QTreeView *table; /**< Table of data records */
+    DataModel *model; /**< The model of the currently displayed data used by the table widget */
     QLabel *noResults; /**< "No results" placeholder label */
     QWidget *buttonRow; /**< Row of results page navigation controls */
     QSpinBox *rowsPerPage; /**< Records per results page selection widget */
@@ -106,10 +110,6 @@ private:
     QToolButton *nextButton; /**< "Next few pages" button */
     QButtonGroup *buttonGroup; /**< The group of page navigation buttons */
     QToolButton *pageButtons[PAGE_BUTTON_COUNT]; /**< Array of page navigation buttons */
-    Database *db; /**< The database in use */
-    View *view; /**< The currently selected database view */
-    int currentPage; /**< The currently displayed results page number */
-    int firstPageButton; /**< Number of the first results page for which a button is currently shown */
     int pressedIndex; /**< Index of the column in which the mouse has been pressed (while waiting for a release) */
     QTime timer; /**< Time elapsed between the last mouse press and release */
     bool booleanToggle; /**< True if boolean field values can be toggled by clicking on them in the display */

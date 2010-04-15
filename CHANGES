@@ -1,3 +1,19 @@
+2010-04-15  JMB  Large table scrolling performance, fullscreen mode, etc.
+
+    PortaBase now properly uses Qt 4's model/view architecture to enable good
+    performance even when scrolling through a data table with thousands of
+    rows.  (It should do well with hundreds of columns also, but I haven't
+    tested that yet.)  This means that pagination is no longer a requirement
+    for good performance on large files, but it's still available as an option
+    because it can be useful for eliminating the vertical scrollbar in cases
+    where horizontal space is at a premium.
+    
+    I added a fullscreen mode, activated by a button on the toolbar; this was
+    primarily for Maemo, but works on other platforms as well.  I also made a
+    lot of buttons look better on Maemo, fixed a couple of bugs in the image
+    editor, removed the "What's This?" button from dialog title bars, and
+    improved the layout of the column editor.
+
 2010-04-12  JMB  Dialogs for view, sorting, and filter management; Maemo menu
 
     There are now dialogs for selecting, creating, editing, and deleting views,

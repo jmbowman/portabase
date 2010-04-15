@@ -18,6 +18,8 @@
 #include <QListWidget>
 #include <QPainter>
 #include <QPalette>
+#include <QPushButton>
+#include <QToolButton>
 #include <QTreeWidget>
 #include "factory.h"
 
@@ -163,6 +165,7 @@ QListWidget *Factory::listWidget(QWidget *parent)
 QTreeWidget *Factory::treeWidget(QWidget *parent, const QStringList &headers)
 {
     QTreeWidget *table = new QTreeWidget(parent);
+    table->setUniformRowHeights(true);
     int colCount = headers.count();
     if (colCount > 0) {
       table->setColumnCount(headers.count());
@@ -178,6 +181,23 @@ QTreeWidget *Factory::treeWidget(QWidget *parent, const QStringList &headers)
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
     table->setSelectionMode(QAbstractItemView::SingleSelection);
     return table;
+}
+
+/**
+ * Get the best kind of button to use for the current platform.  This is
+ * typically QToolButton on the Mac and QPushButton elsewhere (since Mac
+ * push buttons generally don't use icons).
+ *
+ * @param The parent widget of the button to be created
+ * @return The new button
+ */
+QAbstractButton *Factory::button(QWidget *parent)
+{
+#if defined(Q_WS_MAC)
+    return new QToolButton(parent);
+#else
+    return new QPushButton(parent);
+#endif
 }
 
 /**

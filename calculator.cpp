@@ -1,7 +1,7 @@
 /*
  * calculator.cpp (based on kmymoneycalculator.cpp, by Thomas Baumgart)
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -14,15 +14,16 @@
  * Source file for Calculator
  */
 
+#include <QAbstractButton>
 #include <QDialogButtonBox>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLayout>
-#include <QToolButton>
 #include <QSignalMapper>
 #include <QRegExp>
 
 #include "calculator.h"
+#include "factory.h"
 
 /**
  * Constructor.
@@ -53,7 +54,7 @@ Calculator::Calculator(QWidget* parent)
 
     int i;
     for (i = 0; i < MAX_BUTTONS; i++) {
-        buttons[i] = new QToolButton(this);
+        buttons[i] = Factory::button(this);
         buttons[i]->setSizePolicy(QSizePolicy::MinimumExpanding,
                                   QSizePolicy::Fixed);
     }
@@ -99,7 +100,7 @@ Calculator::Calculator(QWidget* parent)
     grid->addWidget(buttons[PERCENT], 2, 4);
     grid->addWidget(buttons[CLEAR], 1, 3);
     grid->addWidget(buttons[CLEARALL], 1, 4);
-    
+
     int colWidth = buttons[CLEARALL]->sizeHint().width();
     for (i = 0; i < 5; i++) {
         grid->setColumnMinimumWidth(i, colWidth);

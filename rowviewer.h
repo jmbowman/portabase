@@ -23,7 +23,7 @@
 class Database;
 class QComboBox;
 class QKeyEvent;
-class QToolButton;
+class QAbstractButton;
 class QTextEdit;
 class View;
 class ViewDisplay;
@@ -66,8 +66,8 @@ private:
     QComboBox *viewBox; /**< Database view selection list */
     int index; /**< The current index among rows in the selected filter and sorting */
     int rowCount; /**< The total number of rows in the current filter */
-    QToolButton *nextButton; /**< Button for viewing the next row */
-    QToolButton *prevButton; /**< Button for viewing the previous row */
+    QAbstractButton *nextButton; /**< Button for viewing the next row */
+    QAbstractButton *prevButton; /**< Button for viewing the previous row */
     QTextEdit *tv; /**< The HTML display widget used to show the row data */
     View *currentView; /**< The currently-selected database view */
     QStringList usedImageIds; /**< Keys of loaded images, used for later cleanup */

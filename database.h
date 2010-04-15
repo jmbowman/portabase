@@ -99,7 +99,7 @@ public:
     void deleteSorting(const QString &name);
     void deleteSortingColumn(const QString &sortName, const QString &columnName);
     c4_View getData();
-    c4_View sortData(c4_View filteredData, const QString &column, bool ascending);
+    c4_View sortData(c4_View filteredData, const QString &column, Qt::SortOrder order);
     c4_View sortData(c4_View filteredData, const QString &sortingName);
 
     QString currentFilter();

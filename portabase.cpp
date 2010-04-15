@@ -69,7 +69,7 @@ PortaBase::PortaBase(QWidget *parent)
     QSettings *settings = getSettings();
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
     booleanToggle = settings->value("General/BooleanToggle", false).toBool();
-    bool pagedDisplay = settings->value("General/PagedDisplay", true).toBool();
+    bool pagedDisplay = settings->value("General/PagedDisplay", false).toBool();
     bool singleClickShow = settings->value("General/SingleClickShow", true).toBool();
 
     QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
@@ -87,7 +87,8 @@ PortaBase::PortaBase(QWidget *parent)
     mainStack->addWidget(viewer);
 
     // menu and toolbar, shared between file selector and data viewer modes
-    toolbar = addToolBar(tr("Toolbar")); // text appears in toolbar context menu
+    toolbar = addToolBar("toolbar");
+    toolbar->setObjectName("toolbar");
     statusBar();
     ma = new MenuActions(this);
     mh = new QQMenuHelper(this, toolbar, tr("PortaBase files"), "pob", true);
@@ -237,6 +238,9 @@ PortaBase::PortaBase(QWidget *parent)
     connect(sortingsAction, SIGNAL(triggered()), this, SLOT(changeSorting()));
     filtersAction = ma->action(MenuActions::Filters, QIcon(":/icons/filter.png"));
     connect(filtersAction, SIGNAL(triggered()), this, SLOT(changeFilter()));
+    fullscreenAction = ma->action(MenuActions::Fullscreen, QIcon(":/icons/fullscreen.png"));
+    fullscreenAction->setCheckable(true);
+    connect(fullscreenAction, SIGNAL(triggered()), this, SLOT(toggleFullscreen()));
 
     // Add menus to menubar
 #if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
@@ -256,6 +260,7 @@ PortaBase::PortaBase(QWidget *parent)
     toolbar->addAction(sortingsAction);
     toolbar->addAction(filtersAction);
     toolbar->addAction(findAction);
+    toolbar->addAction(fullscreenAction);
     createFillerActions();
 
     // Main widget when no file is open
@@ -349,7 +354,7 @@ void PortaBase::restoreWindowSettings(QSettings *settings)
         restoreState(settings->value("State").toByteArray());
         // make sure the toolbar isn't and can't be hidden
         if (toolbar->isHidden()) {
-        	toolbar->show();
+            toolbar->show();
         }
         toolbar->toggleViewAction()->setEnabled(false);
         toolbar->toggleViewAction()->setVisible(false);
@@ -373,6 +378,19 @@ void PortaBase::saveWindowSettings(QSettings *settings)
     settings->setValue("Height", height());
     settings->setValue("State", saveState());
     settings->endGroup();
+}
+
+/**
+ * Switch from normal mode to fullscreen or vice versa.
+ */
+void PortaBase::toggleFullscreen()
+{
+    if (isFullScreen()) {
+        showNormal();
+    }
+    else {
+        showFullScreen();
+    }
 }
 
 /**
@@ -494,7 +512,7 @@ void PortaBase::editPreferences()
         settings.beginGroup("General");
         confirmDeletions = settings.value("ConfirmDeletions", true).toBool();
         booleanToggle = settings.value("BooleanToggle", false).toBool();
-        bool pagedDisplay = settings.value("PagedDisplay", true).toBool();
+        bool pagedDisplay = settings.value("PagedDisplay", false).toBool();
         bool singleClickShow = settings.value("SingleClickShow", true).toBool();
         viewer->allowBooleanToggle(booleanToggle);
         viewer->usePages(pagedDisplay);
@@ -502,7 +520,7 @@ void PortaBase::editPreferences()
         if (!doc.isEmpty()) {
             showDataViewer();
             db->updatePreferences();
-            viewer->updateTable();
+            viewer->resetTable();
         }
     }
 }
@@ -626,8 +644,6 @@ void PortaBase::createFile(ImportDialog::DataSource source,
 void PortaBase::finishNewFile(Database *db)
 {
     viewer->setDatabase(db);
-    viewer->updateTable();
-    viewer->updateButtons();
     showDataViewer();
     setEdited(true);
 }
@@ -954,8 +970,7 @@ void PortaBase::dataImport()
 {
     ImportDialog dialog(ImportDialog::CSV, db, this);
     if (dialog.exec()) {
-        viewer->updateTable();
-        viewer->updateButtons();
+        viewer->resetTable();
         setEdited(true);
     }
 }

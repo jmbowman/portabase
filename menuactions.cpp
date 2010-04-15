@@ -130,6 +130,9 @@ MenuActions::MenuActions(QObject *parent)
 
     textMap.insert(Filters, tr("Filters") + ellipsis);
     toolTipMap.insert(Filters, tr("Change the active filter"));
+
+    textMap.insert(Fullscreen, tr("Fullscreen"));
+    toolTipMap.insert(Fullscreen, tr("View PortaBase in fullscreen mode"));
 }
 
 /**

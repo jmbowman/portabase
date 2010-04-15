@@ -19,6 +19,7 @@
 #include "csvutils.h"
 #include "database.h"
 #include "datatypes.h"
+#include "factory.h"
 #include "filter.h"
 #include "view.h"
 #include "image/imageutils.h"
@@ -40,17 +41,28 @@
 View::View(const QString &name, Database *parent, c4_View baseview,
   const QStringList &colNames, int *types, int *widths,
   const QStringList &colIds, const QStringList &stringColIds, int rpp)
-  : QObject(), viewName(name), Id("_id"), sortColumn(-1), ascending(true),
-  sortName("")
+  : QObject(), viewName(name), Id("_id"), sortColumn(-1),
+  sortOrder(Qt::AscendingOrder), sortName(""), omitRow(-1)
 {
     db = parent;
     dbview = baseview;
     columns = colNames;
+    rowCnt = dbview.GetSize();
+    colCnt = columns.count();
     dataTypes = types;
     colWidths = widths;
-    ids = colIds;
-    scIds = stringColIds;
+    int i;
+    int count = colIds.count();
+    for (i = 0; i < count; i++) {
+        ids << colIds[i].toUtf8();
+    }
+    count = stringColIds.count();
+    for (i = 0; i < count; i++) {
+        scIds << stringColIds[i].toUtf8();
+    }
     rowsPerPage = rpp;
+    pageFirstRow = 0;
+    pageRowCnt = rowCnt;
     sort(db->currentSorting());
 }
 
@@ -130,7 +142,8 @@ void View::saveColWidths()
  *
  * @return The number of records to show per page
  */
-int View::getRowsPerPage() {
+int View::getRowsPerPage()
+{
     return rowsPerPage;
 }
 
@@ -139,25 +152,183 @@ int View::getRowsPerPage() {
  *
  * @param rpp The number of records to show per page
  */
-void View::setRowsPerPage(int rpp) {
+void View::setRowsPerPage(int rpp)
+{
     rowsPerPage = rpp;
     db->setViewRowsPerPage(rpp);
 }
 
 /**
- * Get the total number of records currently in the database.
+ * Set data on the subset of the view to be returned for the currently
+ * displayed page.
  *
- * @return The number of records in the database
+ * @param firstRow The index of the first row to include on the page
+ * @param rowCount The number of rows on the current page
+ * @param omit Index of a row to pretend doesn't exist, -1 if none
  */
-int View::getRowCount()
+void View::setPagination(int firstRow, int rowCount, int omit)
 {
-    return dbview.GetSize();
+    pageFirstRow = firstRow;
+    pageRowCnt = rowCount;
+    omitRow = omit;
+}
+
+/**
+ * Get the total number of records matching the currently applied filter.
+ *
+ * @return The number of records passing the current filter
+ */
+int View::totalRowCount()
+{
+    return rowCnt;
+}
+
+/**
+ * Get the number of records on the currently-displayed page.
+ *
+ * @parent The parent item in the data tree; should always be an invalid index
+ * @return The number of records on the page
+ */
+int View::rowCount(const QModelIndex &) const
+{
+    return pageRowCnt;
+}
+
+/**
+ * Get the total number of columns included in this view.
+ *
+ * @parent The parent item in the data tree; should always be an invalid index
+ * @return The number of columns in this view
+ */
+int View::columnCount(const QModelIndex &) const
+{
+    return colCnt;
+}
+
+/**
+ * Get the data for the given role and section in the header with the
+ * specified orientation.  For horizontal headers, the section number
+ * corresponds to the column number. Similarly, for vertical headers, the
+ * section number corresponds to the row number.
+ *
+ * @param section The column or row number
+ * @param orientation The orientation of the header whose data is wanted
+ * @param role The role of the header data to get
+ * @return The desired header data
+ */
+QVariant View::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (orientation == Qt::Vertical || section >= colCnt) {
+        return QVariant();
+    }
+    else if (role == Qt::DisplayRole) {
+        return columns[section];
+    }
+    else if (role == Qt::DecorationRole && dataTypes[section] == NOTE) {
+        return QIcon(":/icons/note.png");
+    }
+    return QVariant();
+}
+
+/**
+ * Get the data stored under the given role for the item referred to by the
+ * index.  The index is with respect to the currently displayed page.
+ *
+ * @param index The location of the desired data in the view
+ * @param role The role the retrieved data will be used in
+ * @return The desired data value
+ */
+QVariant View::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid()) {
+        return QVariant();
+    }
+    int rowIndex = pageFirstRow + index.row();
+    if (omitRow != -1 && omitRow <= rowIndex) {
+        rowIndex++;
+    }
+    int colIndex = index.column();
+    if (rowIndex >= pageFirstRow + pageRowCnt || colIndex >= colCnt) {
+        return QVariant();
+    }
+    int type = dataTypes[colIndex];
+    if (role == Qt::DecorationRole) {
+        if (type == BOOLEAN) {
+            c4_RowRef row = dbview[rowIndex];
+            c4_IntProp prop(ids[colIndex]);
+            int value = prop (row);
+            return Factory::checkBoxIcon(value);
+        }
+        else if (type == IMAGE) {
+            c4_RowRef row = dbview[rowIndex];
+            c4_StringProp prop(scIds[colIndex]);
+            if (!QString::fromUtf8(prop (row)).isEmpty()) {
+                return QIcon(":/icons/image.png");
+            }
+            else {
+                return QVariant();
+            }
+        }
+        else {
+            return QVariant();
+        }
+    }
+    else if (role == Qt::TextAlignmentRole) {
+        if (type == INTEGER || type == FLOAT || type == CALC || type == SEQUENCE) {
+            return (int)Qt::AlignRight;
+        }
+        return (int)Qt::AlignLeft;
+    }
+    else if (role == Qt::DisplayRole) {
+        c4_RowRef row = dbview[rowIndex];
+        if (type == INTEGER || type == SEQUENCE) {
+            c4_IntProp prop(ids[colIndex]);
+            int value = prop (row);
+            return QLocale::system().toString(value);
+        }
+        else if (type == FLOAT || type == CALC) {
+            // want the string version here
+            c4_StringProp prop(scIds[colIndex]);
+            return QString::fromUtf8(prop (row));
+        }
+        else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
+            c4_StringProp prop(ids[colIndex]);
+            return QString::fromUtf8(prop (row)).replace("\n", " ");
+        }
+        else if (type == DATE) {
+            c4_IntProp prop(ids[colIndex]);
+            int value = prop (row);
+            return db->dateToString(value);
+        }
+        else if (type == TIME) {
+            c4_IntProp prop(ids[colIndex]);
+            int value = prop (row);
+            return db->timeToString(value);
+        }
+        else if (type == BOOLEAN || type == IMAGE) {
+            return "";
+        }
+        else {
+            return QVariant();
+        }
+    }
+    else if (role == Qt::EditRole) {
+        if (type == NOTE) {
+            c4_RowRef row = dbview[rowIndex];
+            c4_StringProp prop(ids[colIndex]);
+            return QString::fromUtf8(prop (row));
+        }
+        return QVariant();
+    }
+    else {
+        return QVariant();
+    }
 }
 
 /**
  * Get the data for the specified record.
  *
- * @param index The index of the desired record in the Metakit main data table
+ * @param index The index of the desired record in the current Metakit view
  */
 QStringList View::getRow(int index)
 {
@@ -167,45 +338,31 @@ QStringList View::getRow(int index)
     for (int i = 0; i < numCols; i++) {
         int type = dataTypes[i];
         if (type == INTEGER || type == BOOLEAN || type == SEQUENCE) {
-            c4_IntProp prop(ids[i].toUtf8());
+            c4_IntProp prop(ids[i]);
             int value = prop (row);
             results.append(QLocale::system().toString(value));
         }
         else if (type == FLOAT || type == CALC || type == IMAGE) {
             // want the string version here
-            c4_StringProp prop(scIds[i].toUtf8());
+            c4_StringProp prop(scIds[i]);
             results.append(QString::fromUtf8(prop (row)));
         }
         else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
-            c4_StringProp prop(ids[i].toUtf8());
+            c4_StringProp prop(ids[i]);
             results.append(QString::fromUtf8(prop (row)));
         }
         else if (type == DATE) {
-            c4_IntProp prop(ids[i].toUtf8());
+            c4_IntProp prop(ids[i]);
             int value = prop (row);
             results.append(db->dateToString(value));
         }
         else if (type == TIME) {
-            c4_IntProp prop(ids[i].toUtf8());
+            c4_IntProp prop(ids[i]);
             int value = prop (row);
             results.append(db->timeToString(value));
         }
     }
     return results;
-}
-
-/**
- * Get the content of the specified note field.
- *
- * @param rowId The ID of the record to fetch data from
- * @param colIndex The position index of the field to fetch data from
- * @return The content of the desired note
- */
-QString View::getNote(int rowId, int colIndex)
-{
-    int index = dbview.Find(Id [rowId]);
-    c4_StringProp prop(ids[colIndex].toUtf8());
-    return QString::fromUtf8(prop (dbview[index]));
 }
 
 /**
@@ -219,7 +376,7 @@ QString View::getNote(int rowId, int colIndex)
 QString View::getImageFormat(int rowId, int colIndex)
 {
     int index = dbview.Find(Id [rowId]);
-    c4_StringProp prop(scIds[colIndex].toUtf8());
+    c4_StringProp prop(scIds[colIndex]);
     return QString::fromUtf8(prop (dbview[index]));
 }
 
@@ -244,14 +401,14 @@ QImage View::getImage(int rowId, int colIndex)
  *
  * @param colIndex The position index of the field to sort on
  */
-void View::sort(int colIndex)
+void View::toggleSort(int colIndex)
 {
     if (colIndex != sortColumn) {
-        ascending = true;
+        sortOrder = Qt::AscendingOrder;
         sortColumn = colIndex;
     }
     else {
-        ascending = !ascending;
+        sortOrder = Qt::DescendingOrder;
     }
 }
 
@@ -276,12 +433,13 @@ void View::prepareData()
     Filter *filter = db->getFilter(db->currentFilter());
     dbview = filter->apply(dbview);
     if (sortColumn != -1) {
-        dbview = db->sortData(dbview, columns[sortColumn], ascending);
+        dbview = db->sortData(dbview, columns[sortColumn], sortOrder);
     }
     else {
         // if sortName is "", just returns the unsorted data
         dbview = db->sortData(dbview, sortName);
     }
+    rowCnt = dbview.GetSize();
 }
 
 /**
@@ -294,6 +452,18 @@ void View::prepareData()
 int View::getId(int index)
 {
     return Id (dbview[index]);
+}
+
+/**
+ * Get the position index (with filtering and sorting in effect) of the row
+ * with the specified ID.
+ *
+ * @param rowId The ID of the row to locate
+ * @return The row's position index (or -1 if it didn't pass the filter)
+ */
+int View::getIndex(int rowId)
+{
+    return dbview.Find(Id [rowId]);
 }
 
 /**
@@ -355,7 +525,7 @@ void View::exportToXML(const QString &filename)
 {
     c4_View fullView = db->getData();
     if (sortColumn != -1) {
-        fullView = db->sortData(fullView, columns[sortColumn], ascending);
+        fullView = db->sortData(fullView, columns[sortColumn], sortOrder);
     }
     else {
         // if sortName is "", just returns the unsorted data
@@ -369,7 +539,8 @@ void View::exportToXML(const QString &filename)
 /**
  * Get some summary statistics on the specified field in a human-readable
  * format.  The exact content of the summary depends on the data type of the
- * field.
+ * field.  The summary is with respect to the current filter, not the entire
+ * database (unless an all-inclusive filter is selected, of course).
  *
  * @param colIndex The position index of the field to get statistics for
  * @return A list of individual "Name: value" statistics
@@ -377,41 +548,40 @@ void View::exportToXML(const QString &filename)
 QStringList View::getStatistics(int colIndex)
 {
     QStringList lines;
-    int count = getRowCount();
-    if (count == 0) {
+    if (rowCnt == 0) {
         lines.append(tr("No data to summarize"));
         return lines;
     }
     int type = dataTypes[colIndex];
     QLocale locale = QLocale::system();
     if (type == INTEGER || type == SEQUENCE) {
-        c4_IntProp prop(ids[colIndex].toUtf8());
+        c4_IntProp prop(ids[colIndex]);
         int value = prop (dbview[0]);
         int total = value;
         int min = value;
         int max = value;
-        for (int i = 1; i < count; i++) {
+        for (int i = 1; i < rowCnt; i++) {
             int value = prop (dbview[i]);
             total += value;
             min = qMin(min, value);
             max = qMax(max, value);
         }
-        float mean = total / (float)count;
+        float mean = total / (float)rowCnt;
         lines.append(tr("Total") + ": " + locale.toString(total));
         lines.append(tr("Average") + ": " + locale.toString(mean));
         lines.append(tr("Minimum") + ": " + locale.toString(min));
         lines.append(tr("Maximum") + ": " + locale.toString(max));
     }
     else if (type == FLOAT || type == CALC) {
-        c4_FloatProp prop(ids[colIndex].toUtf8());
-        c4_StringProp stringProp(scIds[colIndex].toUtf8());
+        c4_FloatProp prop(ids[colIndex]);
+        c4_StringProp stringProp(scIds[colIndex]);
         double value = prop (dbview[0]);
         double total = value;
         double min = value;
         double max = value;
         QString minString = QString::fromUtf8(stringProp (dbview[0]));
         QString maxString = minString;
-        for (int i = 1; i < count; i++) {
+        for (int i = 1; i < rowCnt; i++) {
             double value = prop (dbview[i]);
             total += value;
             if (value < min) {
@@ -423,16 +593,16 @@ QStringList View::getStatistics(int colIndex)
                 maxString = QString::fromUtf8(stringProp (dbview[i]));
             }
         }
-        double mean = total / count;
+        double mean = total / rowCnt;
         lines.append(tr("Total") + ": " + locale.toString(total, 'f', 2));
         lines.append(tr("Average") + ": " + locale.toString(mean, 'f', 2));
         lines.append(tr("Minimum") + ": " + minString);
         lines.append(tr("Maximum") + ": " + maxString);
     }
     else if (type == BOOLEAN) {
-        c4_IntProp prop(ids[colIndex].toUtf8());
+        c4_IntProp prop(ids[colIndex]);
         int checked = 0;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < rowCnt; i++) {
             int value = prop (dbview[i]);
             if (value == 1) {
                 checked++;
@@ -440,14 +610,14 @@ QStringList View::getStatistics(int colIndex)
         }
         lines.append(tr("Checked") + ": " + locale.toString(checked));
         lines.append(tr("Unchecked") + ": "
-                     + locale.toString(count - checked));
+                     + locale.toString(rowCnt - checked));
     }
     else if (type == DATE) {
-        c4_IntProp prop(ids[colIndex].toUtf8());
+        c4_IntProp prop(ids[colIndex]);
         int value = prop (dbview[0]);
         int min = value;
         int max = value;
-        for (int i = 1; i < count; i++) {
+        for (int i = 1; i < rowCnt; i++) {
             int value = prop (dbview[i]);
             min = qMin(min, value);
             max = qMax(max, value);
@@ -456,11 +626,11 @@ QStringList View::getStatistics(int colIndex)
         lines.append(tr("Latest") + ": " + db->dateToString(max));
     }
     else if (type == TIME) {
-        c4_IntProp prop(ids[colIndex].toUtf8());
+        c4_IntProp prop(ids[colIndex]);
         int value = prop (dbview[0]);
         int min = value;
         int max = value;
-        for (int i = 1; i < count; i++) {
+        for (int i = 1; i < rowCnt; i++) {
             int value = prop (dbview[i]);
             min = qMin(min, value);
             max = qMax(max, value);
@@ -469,20 +639,20 @@ QStringList View::getStatistics(int colIndex)
         lines.append(tr("Latest") + ": " + db->timeToString(max));
     }
     else if (type == STRING || type == NOTE) {
-        c4_StringProp prop(ids[colIndex].toUtf8());
+        c4_StringProp prop(ids[colIndex]);
         QString value = QString::fromUtf8(prop (dbview[0]));
         int length = value.length();
         int total = length;
         int min = length;
         int max = length;
-        for (int i = 1; i < count; i++) {
+        for (int i = 1; i < rowCnt; i++) {
             QString svalue = QString::fromUtf8(prop (dbview[i]));
             length = svalue.length();
             total += length;
             min = qMin(min, length);
             max = qMax(max, length);
         }
-        float mean = total / (float)count;
+        float mean = total / (float)rowCnt;
         lines.append(tr("Total length") + ": " + locale.toString(total) + " "
                      + tr("characters"));
         lines.append(tr("Average length") + ": " + locale.toString(mean) + " "
@@ -493,20 +663,20 @@ QStringList View::getStatistics(int colIndex)
                      + tr("characters"));
     }
     else if (type == IMAGE) {
-        c4_StringProp stringProp(scIds[colIndex].toUtf8());
+        c4_StringProp stringProp(scIds[colIndex]);
         int missing = 0;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < rowCnt; i++) {
             QString value(stringProp (dbview[i]));
             if (value.isEmpty()) {
                 missing++;
             }
         }
         lines.append(tr("Image available") + ": "
-                     + locale.toString(count - missing));
+                     + locale.toString(rowCnt - missing));
         lines.append(tr("No image") + ": " + locale.toString(missing));
     }
     else if (type >= FIRST_ENUM) {
-        c4_StringProp prop(ids[colIndex].toUtf8());
+        c4_StringProp prop(ids[colIndex]);
         QStringList options = db->listEnumOptions(type);
         int optionCount = options.count();
         int *tallies = new int[optionCount];
@@ -514,7 +684,7 @@ QStringList View::getStatistics(int colIndex)
         for (i = 0; i < optionCount; i++) {
             tallies[i] = 0;
         }
-        for (i = 0; i < count; i++) {
+        for (i = 0; i < rowCnt; i++) {
             int index = options.indexOf(QString::fromUtf8(prop (dbview[i])));
             tallies[index] = tallies[index] + 1;
         }
@@ -535,7 +705,7 @@ QStringList View::getStatistics(int colIndex)
 void View::copyStateFrom(View *otherView)
 {
     sortColumn = otherView->sortColumn;
-    ascending = otherView->ascending;
+    sortOrder = otherView->sortOrder;
     sortName = otherView->sortName;
     prepareData();
 }

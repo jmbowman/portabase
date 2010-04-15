@@ -1077,12 +1077,12 @@ c4_View Database::getData()
  * @return The sorted table
  */
 c4_View Database::sortData(c4_View filteredData, const QString &column,
-                           bool ascending)
+                           Qt::SortOrder order)
 {
     QStringList colNames;
     colNames.append(column);
     QStringList descNames;
-    if (!ascending) {
+    if (order == Qt::DescendingOrder) {
         descNames.append(column);
     }
     deleteSorting("_single");
@@ -1091,7 +1091,7 @@ c4_View Database::sortData(c4_View filteredData, const QString &column,
     c4_View sortView = createEmptyView(colNames);
     c4_View result;
     c4_View::stringCompareFunc = compareUsingLocale;
-    if (ascending) {
+    if (order == Qt::AscendingOrder) {
         result = filteredData.SortOn(sortView);
     }
     else {

@@ -102,7 +102,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok
                                                 | QDialogButtonBox::Cancel;
     QDialogButtonBox *box = new QDialogButtonBox(buttons, Qt::Horizontal, this);
-    grid->addWidget(box, 3, 3, 1, 2);
+    grid->addWidget(box, 3, 0, 1, 2);
     connect(box, SIGNAL(accepted()), this, SLOT(accept()));
     connect(box, SIGNAL(rejected()), this, SLOT(reject()));
     finishConstruction();

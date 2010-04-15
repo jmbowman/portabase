@@ -31,7 +31,7 @@
  *               little odd otherwise.
  */
 QQDialog::QQDialog(QString title, QWidget *parent)
-    : QDialog(parent)
+    : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint)
 {
     setWindowTitle(title);
 }

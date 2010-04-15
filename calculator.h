@@ -1,7 +1,7 @@
 /*
  * calculator.h (based on kmymoneycalculator.h, by Thomas Baumgart)
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #include "qqutil/qqdialog.h"
 
 class QLabel;
-class QToolButton;
+class QAbstractButton;
 
 /**
   * This class implements a simple electronic calculator with the
@@ -75,7 +75,7 @@ private:
     double op1; /**< The numeric representation of the first operand */
     int op; /**< The operation to be performed between the first and the second operand */
     QLabel *display; /**< A pointer to the display area */
-    QToolButton *buttons[20]; /**< Pointers to the various buttons of the calculator */
+    QAbstractButton *buttons[20]; /**< Pointers to the various buttons of the calculator */
 
     /**
      * The values used for the various keys internally

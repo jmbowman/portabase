@@ -25,6 +25,7 @@
      <file alias="view.png">icons/mac/view.png</file>
      <file alias="sort.png">icons/mac/sort.png</file>
      <file alias="filter.png">icons/mac/filter.png</file>
+     <file alias="fullscreen.png">icons/mac/fullscreen.png</file>
  </qresource>
  <qresource>
      <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>

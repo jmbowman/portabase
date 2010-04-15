@@ -30,6 +30,7 @@ HEADERS         = calc/calcdateeditor.h \
                   csverror.h \
                   csvutils.h \
                   database.h \
+                  datamodel.h \
                   datatypes.h \
                   datedialog.h \
                   datewidget.h \
@@ -94,6 +95,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   csverror.cpp \
                   csvutils.cpp \
                   database.cpp \
+                  datamodel.cpp \
                   datedialog.cpp \
                   datewidget.cpp \
                   dbeditor.cpp \

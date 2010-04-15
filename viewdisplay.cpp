@@ -13,8 +13,6 @@
  * Source file for ViewDisplay
  */
 
-#include <math.h>
-
 #include <QApplication>
 #include <QButtonGroup>
 #include <QHeaderView>
@@ -31,6 +29,7 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include "database.h"
+#include "datamodel.h"
 #include "datatypes.h"
 #include "factory.h"
 #include "noteeditor.h"
@@ -49,8 +48,7 @@
  * @param parent This widget's parent widget
  */
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
-    portabase(pbase), db(0), view(0), booleanToggle(false), paged(true),
-    singleClickShow(true)
+    portabase(pbase), booleanToggle(false), paged(true), singleClickShow(true)
 {
     timer.start();
     QVBoxLayout *vbox = Factory::vBoxLayout(this, true);
@@ -58,14 +56,35 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     vbox->addWidget(stack, 1);
     noResults = new QLabel("<center>" + tr("No results") + "</center>", stack);
     stack->addWidget(noResults);
-    table = Factory::treeWidget(stack, QStringList());
+
+    table = new QTreeView(stack);
+    table->setUniformRowHeights(true);
+    table->setSortingEnabled(false);
+    table->setAllColumnsShowFocus(true);
+    table->setRootIsDecorated(false);
+    table->setAlternatingRowColors(true);
+    Factory::updateRowColors(table);
+    model = new DataModel(this);
+    connect(model, SIGNAL(viewLoaded(View *)),
+            this, SLOT(matchNewView(View *)));
+    connect(model, SIGNAL(paginationChanged(int, int)),
+            this, SLOT(updateButtons(int, int)));
+    connect(model, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+            this, SLOT(tableChanged()));
+    connect(model, SIGNAL(modelReset()),
+            this, SLOT(tableChanged()));
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->setSelectionMode(QAbstractItemView::SingleSelection);
+    table->setModel(model);
     stack->addWidget(table);
-    connect(table, SIGNAL(itemSelectionChanged()), this, SLOT(rowSelected()));
-    connect(table, SIGNAL(itemPressed(QTreeWidgetItem*, int)),
-            this, SLOT(cellPressed(QTreeWidgetItem*, int)));
-    connect(table, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
-            this, SLOT(cellReleased(QTreeWidgetItem*, int)));
-    connect(table, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
+
+    connect(table->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+            this, SLOT(rowSelected()));
+    connect(table, SIGNAL(pressed(const QModelIndex &)),
+            this, SLOT(cellPressed(const QModelIndex &)));
+    connect(table, SIGNAL(clicked(const QModelIndex &)),
+            this, SLOT(cellReleased(const QModelIndex &)));
+    connect(table, SIGNAL(doubleClicked(const QModelIndex &)),
             this, SLOT(viewRow()));
 
     QHeaderView *header = table->header();
@@ -93,7 +112,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
                               QSizePolicy::Fixed);
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousPages()));
     hbox->addWidget(prevButton, 1);
-    
+
     buttonGroup = new QButtonGroup(buttonRow);
     buttonGroup->setExclusive(true);
     for (int i=0; i < PAGE_BUTTON_COUNT; i++) {
@@ -107,7 +126,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     }
     connect(buttonGroup, SIGNAL(buttonClicked(int)),
             this, SLOT(changePage(int)));
-    
+
     nextButton = new QToolButton(buttonRow);
     nextButton->setArrowType(Qt::RightArrow);
     nextButton->setSizePolicy(QSizePolicy::MinimumExpanding,
@@ -116,8 +135,6 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     hbox->addWidget(nextButton, 1);
 
     updateButtonSizes();
-    currentPage = 1;
-    firstPageButton = 1;
 }
 
 /**
@@ -134,16 +151,12 @@ void ViewDisplay::usePages(bool flag)
     }
     paged = flag;
     if (paged) {
+        model->setPage(1);
         buttonRow->show();
     }
     else {
         buttonRow->hide();
-        currentPage = 1;
-        firstPageButton = 1;
-    }
-    if (view != 0) {
-        updateTable();
-        updateButtons();
+        model->setPage(0);
     }
 }
 
@@ -208,10 +221,7 @@ void ViewDisplay::updateRowsPerPage(int rpp)
     if (rpp < 1) {
         rowsPerPage->setValue(1);
     }
-    currentPage = 1;
-    firstPageButton = 1;
-    updateTable();
-    updateButtons();
+    model->setRowsPerPage(rowsPerPage->value());
     setEdited(true);
 }
 
@@ -223,12 +233,12 @@ void ViewDisplay::updateRowsPerPage(int rpp)
  */
 void ViewDisplay::changePage(int id)
 {
-    int newPage = firstPageButton + id;
-    if (newPage == currentPage) {
+    QAbstractButton *button = buttonGroup->button(id);
+    int newPage = button->text().toInt();
+    if (newPage == model->page()) {
         return;
     }
-    currentPage = newPage;
-    updateTable();
+    model->setPage(newPage);
 }
 
 /**
@@ -238,10 +248,8 @@ void ViewDisplay::changePage(int id)
  */
 void ViewDisplay::nextPages()
 {
-    firstPageButton += PAGE_BUTTON_COUNT;
-    currentPage = firstPageButton;
-    updateTable();
-    updateButtons();
+    int newPage = pageButtons[0]->text().toInt() + PAGE_BUTTON_COUNT;
+    model->setPage(newPage);
 }
 
 /**
@@ -251,91 +259,37 @@ void ViewDisplay::nextPages()
  */
 void ViewDisplay::previousPages()
 {
-    firstPageButton -= PAGE_BUTTON_COUNT;
-    firstPageButton = qMax(firstPageButton, 1);
-    if (currentPage >= firstPageButton + PAGE_BUTTON_COUNT) {
-        currentPage = firstPageButton;
+    int newFirstPage = pageButtons[0]->text().toInt() - PAGE_BUTTON_COUNT;
+    newFirstPage = qMax(newFirstPage, 1);
+    if (model->page() >= newFirstPage + PAGE_BUTTON_COUNT) {
+        model->setPage(newFirstPage + PAGE_BUTTON_COUNT - 1);
     }
-    updateTable();
-    updateButtons();
 }
 
 /**
- * Update the data in the display table to match the current display settings:
- * page, records per page, filter, sorting, use of a paged display, etc.
- * Initially no row will be selected.
+ * Respond to any significant changes in the display table, and see if it
+ * still contains data and a selected row.
  */
-void ViewDisplay::updateTable()
+void ViewDisplay::tableChanged()
 {
-    int rowCount = view->getRowCount();
-    int rows = rowCount;
-    int index = 0;
-    int rpp = rowsPerPage->value();
-    if (paged) {
-        index = (currentPage - 1) * rpp;
-        rows = qMin(rpp, rowCount - index);
-    }
-    if (rows <= 0 && rowCount > 0) {
-        // past end of rows due to deletion or filtering, move to last page
-        int pageCount = rowCount / rpp;
-        if (rowCount > pageCount * rpp) {
-            pageCount++;
-        }
-        currentPage = pageCount;
-        index = (currentPage - 1) * rpp;
-        rows = qMin(rpp, rowCount - index);
-        if (firstPageButton > currentPage) {
-            firstPageButton -= PAGE_BUTTON_COUNT;
-            firstPageButton = qMax(firstPageButton, 1);
-        }
-    }
-    table->clear();
-    Factory::updateRowColors(table);
-    int *types = view->getColTypes();
-    QTreeWidgetItem *item = 0;
-    for (int i = 0; i < rows; i++) {
-        if (i == 0) {
-            item = new QTreeWidgetItem(table);
-        }
-        else {
-            item = new QTreeWidgetItem(table, item);
-        }
-        QStringList data = view->getRow(index);
-        int count = data.count();
-        for (int j = 0; j < count; j++) {
-            int type = types[j];
-            if (type == BOOLEAN) {
-                int checked = data[j].toInt();
-                item->setIcon(j, Factory::checkBoxIcon(checked));
-            }
-            else if (type == IMAGE) {
-                if (data[j].isEmpty()) {
-                    item->setText(j, "");
-                }
-                else {
-                    item->setIcon(j, QIcon(":/icons/image.png"));
-                }
-            }
-            else if (type == NOTE || type == STRING) {
-                item->setText(j, data[j].replace("\n", " "));
-            }
-            else {
-                item->setText(j, data[j]);
-            }
-            if (type == INTEGER || type == FLOAT || type == CALC || type == SEQUENCE) {
-                item->setTextAlignment(j, Qt::AlignRight);
-            }
-        }
-        index++;
-    }
-    if (rows > 0) {
-        table->expandAll();
+    if (model->rowCount() > 0) {
         stack->setCurrentWidget(table);
     }
     else {
         stack->setCurrentWidget(noResults);
     }
-    portabase->setRowSelected(table->currentItem() != 0);
+    portabase->setRowSelected(table->currentIndex().isValid());
+}
+
+/**
+ * Update the display table to match the current application settings and
+ * recent data changes. Row colors, screen size category, date & time settings,
+ * newly imported data, etc.
+ */
+void ViewDisplay::resetTable()
+{
+    Factory::updateRowColors(table);
+    model->refresh();
 }
 
 /**
@@ -346,6 +300,7 @@ void ViewDisplay::updateTable()
  */
 QString ViewDisplay::toHtml()
 {
+    View *view = model->view();
     QString result = "<html><head></head><body><table with=\"100%\"><thead><tr>";
     QStringList colNames = view->getColNames();
     int colCount = colNames.count();
@@ -359,7 +314,7 @@ QString ViewDisplay::toHtml()
         result += cellPattern.arg(Qt::escape(colNames[i]));
     }
     result += "</tr></thead><tbody>";
-    int rowCount = view->getRowCount();
+    int rowCount = view->totalRowCount();
     int *types = view->getColTypes();
     QStringList data;
     int type;
@@ -409,17 +364,19 @@ QString ViewDisplay::toHtml()
  * Update the page navigation buttons to reflect the current data and
  * navigation status; show the correct page numbers, disable buttons for
  * pages that don't exist, etc.
+ *
+ * @param currentPage The new current page number
+ * @param totalPages The new total number of pages available
  */
-void ViewDisplay::updateButtons()
+void ViewDisplay::updateButtons(int currentPage, int totalPages)
 {
     if (!paged) {
         return;
     }
-    int rpp = rowsPerPage->value();
-    double totalPages = ceil((double)(view->getRowCount()) / (double)rpp);
-    prevButton->setEnabled(firstPageButton > 1);
-    nextButton->setEnabled(totalPages >= firstPageButton + PAGE_BUTTON_COUNT);
-    int page = firstPageButton;
+    int newFirstPage = (((currentPage - 1)/PAGE_BUTTON_COUNT) * PAGE_BUTTON_COUNT) + 1;
+    prevButton->setEnabled(newFirstPage > 1);
+    nextButton->setEnabled(totalPages >= newFirstPage + PAGE_BUTTON_COUNT);
+    int page = newFirstPage;
     for (int i = 0; i < PAGE_BUTTON_COUNT; i++) {
         pageButtons[i]->setChecked(page == currentPage);
         pageButtons[i]->setEnabled(totalPages >= page);
@@ -435,11 +392,7 @@ void ViewDisplay::updateButtons()
  */
 void ViewDisplay::setDatabase(Database *dbase)
 {
-    closeView();
-    db = dbase;
-    currentPage = 1;
-    firstPageButton = 1;
-    setView(db->currentView());
+    model->setDatabase(dbase);
     setEdited(false);
 }
 
@@ -452,28 +405,22 @@ void ViewDisplay::setDatabase(Database *dbase)
  */
 void ViewDisplay::setView(const QString &name, bool applyDefaults)
 {
-    closeView();
-    table->clear();
-    view = db->getView(name, applyDefaults);
-    QStringList colNames = view->getColNames();
-    int *types = view->getColTypes();
-    int count = colNames.count();
-    QTreeWidgetItem *headerItem = new QTreeWidgetItem();
-    int i;
-    for (i = 0; i < count; i++) {
-        headerItem->setText(i, colNames[i]);
-        if (types[i] == NOTE) {
-            headerItem->setIcon(i, QIcon(":/icons/note.png"));
-        }
-    }
-    table->setHeaderItem(headerItem);
-    for (i = 0; i < count; i++) {
+    model->setView(name, applyDefaults);
+}
+
+/**
+ * Update the column widths and rows per page spinbox to match a newly loaded
+ * view.
+ *
+ * @param view The new view to use
+ */
+void ViewDisplay::matchNewView(View *view)
+{
+    int count = view->columnCount();
+    for (int i = 0; i < count - 1; i++) {
         table->setColumnWidth(i, view->getColWidth(i));
     }
     rowsPerPage->setValue(view->getRowsPerPage());
-    view->prepareData();
-    updateTable();
-    updateButtons();
 }
 
 /**
@@ -483,9 +430,7 @@ void ViewDisplay::setView(const QString &name, bool applyDefaults)
  */
 void ViewDisplay::setSorting(const QString &name)
 {
-    view->sort(name);
-    view->prepareData();
-    updateTable();
+    model->setSorting(name);
 }
 
 /**
@@ -495,10 +440,7 @@ void ViewDisplay::setSorting(const QString &name)
  */
 void ViewDisplay::setFilter(const QString &name)
 {
-    db->getFilter(name);
-    view->prepareData();
-    updateTable();
-    updateButtons();
+    model->setFilter(name);
 }
 
 /**
@@ -507,10 +449,7 @@ void ViewDisplay::setFilter(const QString &name)
  */
 void ViewDisplay::closeView()
 {
-    if (view) {
-        saveViewSettings();
-        view = 0;
-    }
+    model->closeView();
 }
 
 /**
@@ -519,8 +458,7 @@ void ViewDisplay::closeView()
  */
 void ViewDisplay::saveViewSettings()
 {
-    view->saveColWidths();
-    view->setRowsPerPage(rowsPerPage->value());
+    model->saveViewSettings();
 }
 
 /**
@@ -530,10 +468,8 @@ void ViewDisplay::saveViewSettings()
 void ViewDisplay::addRow()
 {
     RowEditor rowEditor(this);
-    if (rowEditor.edit(db, -1)) {
-        view->prepareData();
-        updateTable();
-        updateButtons();
+    if (rowEditor.edit(model->database(), -1)) {
+        model->addRow();
         setEdited(true);
     }
 }
@@ -555,10 +491,13 @@ bool ViewDisplay::editRow(int id, bool copy)
     }
     if (rowId != -1) {
         RowEditor rowEditor(this);
-        if (rowEditor.edit(db, rowId, copy)) {
-            view->prepareData();
-            updateTable();
-            updateButtons();
+        if (rowEditor.edit(model->database(), rowId, copy)) {
+            if (copy) {
+                model->addRow();
+            }
+            else {
+                model->editRow(rowId);
+            }
             setEdited(true);
             return true;
         }
@@ -574,8 +513,8 @@ void ViewDisplay::viewRow()
 {
     int rowIndex = selectedRowIndex();
     if (rowIndex != -1) {
-        RowViewer rowViewer(db, this);
-        rowViewer.viewRow(view, rowIndex);
+        RowViewer rowViewer(model->database(), this);
+        rowViewer.viewRow(model->view(), rowIndex);
     }
 }
 
@@ -586,10 +525,7 @@ void ViewDisplay::deleteRow()
 {
     int rowId = selectedRowId();
     if (rowId != -1) {
-        db->deleteRow(rowId);
-        view->prepareData();
-        updateTable();
-        updateButtons();
+        model->deleteRow(rowId);
         setEdited(true);
     }
 }
@@ -599,10 +535,7 @@ void ViewDisplay::deleteRow()
  */
 void ViewDisplay::deleteAllRows()
 {
-    view->deleteAllRows();
-    view->prepareData();
-    updateTable();
-    updateButtons();
+    model->deleteAllRows();
     setEdited(true);
 }
 
@@ -616,7 +549,7 @@ void ViewDisplay::deleteAllRows()
  */
 void ViewDisplay::exportToCSV(const QString &filename)
 {
-    view->exportToCSV(filename);
+    model->view()->exportToCSV(filename);
 }
 
 /**
@@ -629,7 +562,7 @@ void ViewDisplay::exportToCSV(const QString &filename)
  */
 void ViewDisplay::exportToXML(const QString &filename)
 {
-    view->exportToXML(filename);
+    model->view()->exportToXML(filename);
 }
 
 /**
@@ -640,16 +573,16 @@ void ViewDisplay::exportToXML(const QString &filename)
  */
 int ViewDisplay::selectedRowIndex()
 {
-    QTreeWidgetItem *selected = table->currentItem();
-    if (!selected) {
+    QModelIndex selected = table->currentIndex();
+    if (!selected.isValid()) {
         return -1;
     }
-    int index = table->indexOfTopLevelItem(selected);
+    int index = selected.row();
     if (!paged) {
         return index;
     }
     int rpp = rowsPerPage->value();
-    int startIndex = (currentPage - 1) * rpp;
+    int startIndex = (qMax(model->page(), 1) - 1) * rpp;
     return startIndex + index;
 }
 
@@ -664,7 +597,7 @@ int ViewDisplay::selectedRowId()
     if (index == -1) {
         return -1;
     }
-    return view->getId(index);
+    return model->view()->getId(index);
 }
 
 /**
@@ -679,14 +612,12 @@ void ViewDisplay::rowSelected()
 /**
  * Handler for mouse presses on displayed fields.  Used to determine how
  * long the mouse button was held down before releasing.
+ *
+ * @param index The cell which was pressed
  */
-void ViewDisplay::cellPressed(QTreeWidgetItem *item, int column)
+void ViewDisplay::cellPressed(const QModelIndex &index)
 {
-    if (item == 0) {
-        // no row selected
-        return;
-    }
-    pressedIndex = column;
+    pressedIndex = index.column();
     timer.restart();
 }
 
@@ -698,35 +629,30 @@ void ViewDisplay::cellPressed(QTreeWidgetItem *item, int column)
  * preference is set to true, then a single click launches the row viewer for
  * the clicked row.
  *
- * @param item The row of the table in which the click occurred
- * @param column The position index of the column in which the click occurred
+ * @param index The cell which was clicked
  */
-void ViewDisplay::cellReleased(QTreeWidgetItem *item, int column)
+void ViewDisplay::cellReleased(const QModelIndex &index)
 {
-    if (item == 0) {
-        // no row selected
-        return;
-    }
+    int column = index.column();
     if (column != pressedIndex) {
         return;
     }
-    int *types = view->getColTypes();
+    int *types = model->view()->getColTypes();
     int type = types[column];
-    int rowId = selectedRowId();
-    QString colName = table->headerItem()->text(column);
     if (type == BOOLEAN && booleanToggle) {
-        db->toggleBoolean(rowId, colName);
-        view->prepareData();
-        updateTable();
+        model->toggleBoolean(index);
         setEdited(true);
     }
     else if (timer.elapsed() > 500) {
         if (type == NOTE) {
+            QString colName = model->headerData(column, Qt::Horizontal).toString();
             NoteEditor viewer(colName, true, this);
-            viewer.setContent(view->getNote(rowId, column));
+            viewer.setContent(model->data(index, Qt::EditRole).toString());
             viewer.exec();
         }
         else if (type == IMAGE) {
+            int rowId = selectedRowId();
+            View *view = model->view();
             QString format = view->getImageFormat(rowId, column);
             if (!format.isEmpty()) {
                 QImage image = view->getImage(rowId, column);
@@ -789,8 +715,8 @@ void ViewDisplay::headerReleased(int column)
 void ViewDisplay::columnResized(int column, int, int newWidth)
 {
     // The last column always resizes to fill available space; ignore it
-    if (column != table->columnCount() - 1) {
-        view->setColWidth(column, newWidth);
+    if (column != model->columnCount() - 1) {
+        model->view()->setColWidth(column, newWidth);
         setEdited(true);
     }
 }
@@ -805,9 +731,7 @@ void ViewDisplay::columnResized(int column, int, int newWidth)
  */
 void ViewDisplay::sort(int column)
 {
-    view->sort(column);
-    view->prepareData();
-    updateTable();
+    model->toggleSort(column);
     portabase->updateSortMenu();
     setEdited(true);
 }
@@ -821,9 +745,10 @@ void ViewDisplay::sort(int column)
  */
 void ViewDisplay::showStatistics(int column)
 {
-    QStringList stats = view->getStatistics(column);
+    QStringList stats = model->view()->getStatistics(column);
     QString content("<qt><center><b>");
-    content += table->headerItem()->text(column) + "</b></center>";
+    content += model->headerData(column, Qt::Horizontal).toString();
+    content += "</b></center>";
     int count = stats.count();
     for (int i = 0; i < count; i++) {
         content += stats[i] + "<br/>";
@@ -843,6 +768,7 @@ void ViewDisplay::showStatistics(int column)
  */
 void ViewDisplay::slideshow()
 {
+    View *view = model->view();
     QStringList colNames = view->getColNames();
     int *types = view->getColTypes();
     int count = colNames.count();
@@ -857,7 +783,7 @@ void ViewDisplay::slideshow()
                              tr("No image columns in this view"));
         return;
     }
-    if (view->getRowCount() == 0) {
+    if (view->totalRowCount() == 0) {
         QMessageBox::warning(this, qApp->applicationName(),
                              tr("No rows in this filter"));
         return;
