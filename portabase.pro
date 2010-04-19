@@ -1,7 +1,6 @@
 TEMPLATE        = app
 CONFIG         += qt warn_on release thread
 QT             += xml
-TARGET          = PortaBase
 DESTDIR         = build
 OBJECTS_DIR     = build
 MOC_DIR         = build
@@ -71,6 +70,7 @@ HEADERS         = calc/calcdateeditor.h \
                   qqutil/qqdialog.h \
                   qqutil/qqhelpbrowser.h \
                   qqutil/qqmenuhelper.h \
+                  qqutil/qqtoolbarstretch.h \
                   roweditor.h \
                   rowviewer.h \
                   sorteditor.h \
@@ -135,6 +135,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   qqutil/qqdialog.cpp \
                   qqutil/qqhelpbrowser.cpp \
                   qqutil/qqmenuhelper.cpp \
+                  qqutil/qqtoolbarstretch.cpp \
                   roweditor.cpp \
                   rowviewer.cpp \
                   sorteditor.cpp \
@@ -155,6 +156,7 @@ unix:LIBS       += -lm -lmk4
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 macx {
     #CONFIG             += static
+    TARGET              = PortaBase
     RESOURCES           = resources/mac.qrc
     ICON                = packaging/mac/PortaBase.icns
     DOCUMENT_ICON.files = packaging/mac/PortaBaseFile.icns
@@ -194,9 +196,20 @@ macx {
 }
 
 # Stuff for Maemo
-maemo5:QT              += dbus maemo5
 maemo5|contains(QT_CONFIG, hildon): {
+    isEmpty(PREFIX) {
+        PREFIX          = /usr/local
+    }
+    DATADIR             = $$PREFIX/share
+    TARGET              = portabase
     RESOURCES           = resources/maemo.qrc
+    INSTALLS           += target
+}
+contains(QT_CONFIG, hildon) {
+    target.path         = $$PREFIX/bin
+} else:maemo5 {
+    QT                 += dbus maemo5
+    target.path         = /opt/maemo
 }
 
 # Stuff for Windows

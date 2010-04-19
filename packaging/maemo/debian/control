@@ -1,0 +1,73 @@
+Source: portabase
+Section: user/office
+Priority: optional
+Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
+Build-Depends: debhelper (>= 5), libqt4-dev
+Standards-Version: 3.7.2
+
+Package: portabase
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, hildon-application-manager
+Description: An easy-to-use personal database application
+ PortaBase is a program for conveniently managing one-table database files.
+ It is available for many platforms, including Linux, Mac OS X, Windows,
+ and Maemo.
+ .
+ Features include:
+  - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
+    Calculation, Sequence, Image, and Enum column types
+  - Custom data views (subsets of the columns in any order)
+  - Filter the displayed rows using sets of conditions
+  - Sort the rows by any combination of columns, each in ascending or
+    descending order
+  - Optional page navigation buttons, with a custom number of rows per page
+  - Add, delete, rearrange, and rename columns at any time
+  - Specify default values for columns
+  - View summary statistics for columns (total, average, min, max, etc.)
+  - Import data from CSV, XML, and MobileDB files
+  - Export data to CSV and XML files
+  - Command-line format conversions (to and from XML, from MobileDB)
+  - Data file encryption
+  - Unicode support
+XB-Maemo-Display-Name: PortaBase
+XB-Homepage: http://portabase.sourceforge.net
+XB-Bugtracker: http://sourceforge.net/tracker/?group_id=64705&atid=508374
+XB-Maemo-Icon-26:
+ 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
+ gg==

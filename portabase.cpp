@@ -252,15 +252,15 @@ PortaBase::PortaBase(QWidget *parent)
 #endif
 
     // Toolbar
-    toolbar->addAction(rowAddAction);
-    toolbar->addAction(rowEditAction);
-    toolbar->addAction(rowDeleteAction);
-    toolbar->addAction(rowCopyAction);
-    toolbar->addAction(viewsAction);
-    toolbar->addAction(sortingsAction);
-    toolbar->addAction(filtersAction);
-    toolbar->addAction(findAction);
-    toolbar->addAction(fullscreenAction);
+    mh->addToToolBar(rowAddAction);
+    mh->addToToolBar(rowEditAction);
+    mh->addToToolBar(rowDeleteAction);
+    mh->addToToolBar(rowCopyAction);
+    mh->addToToolBar(viewsAction);
+    mh->addToToolBar(sortingsAction);
+    mh->addToToolBar(filtersAction);
+    mh->addToToolBar(findAction);
+    mh->addToToolBar(fullscreenAction);
     createFillerActions();
 
     // Main widget when no file is open

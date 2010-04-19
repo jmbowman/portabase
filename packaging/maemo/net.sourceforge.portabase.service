@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=net.sourceforge.portabase
+Exec=/usr/bin/portabase

@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
         app.installTranslator(&translator);
     }
     QStringList args = app.arguments();
-    if (args.count() > 1 && args[1] != "-f") {
+    if ((args.count() > 1 && args[1].startsWith("-")) || args.count() > 2) {
         CommandLine commandLine;
         return commandLine.process();
     }
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
         EventFilter ef(&pb);
         app.installEventFilter(&ef);
         pb.show();
-        if (args.count() == 3 && args[1] == "-f") {
+        if (args.count() == 2) {
             pb.openFile(args[2]);
         }
         return app.exec();

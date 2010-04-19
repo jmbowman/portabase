@@ -1,0 +1,64 @@
+#!/usr/bin/make -f
+APPNAME := portabase
+builddir:
+	mkdir -p builddir
+
+builddir/Makefile: builddir
+	cd src/metakit/builds && ../unix/configure --enable-threads --disable-shared
+	cd builddir && qmake-qt4 PREFIX=/usr ../portabase.pro
+
+build: build-stamp
+
+build-stamp: builddir/Makefile
+	dh_testdir
+	cd src/metakit/builds && $(MAKE)
+	cp src/metakit/include/mk4.h src/build/
+	cp src/metakit/include/mk4.inl src/build/
+	cp src/metakit/include/mk4str.h src/build/
+	cp src/metakit/include/mk4str.inl src/build/
+	cd builddir && LD_LIBRARY_PATH=../src/metakit/builds:$(LD_LIBRARY_PATH) $(MAKE)
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	dh_clean
+	rm src/resources/translations/*.qm
+	rm src/build/mk4*
+	cd src/metakit/builds && $(MAKE) clean
+	rm src/metakit/builds/config.*
+	rm src/metakit/builds/Makefile
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	lrelease src/src.pro
+	lrelease src/resources/translations/qt*.ts
+	cd builddir && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/$(APPNAME) install
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/mime/packages
+	cp $(CURDIR)/portabase-mime.xml $(CURDIR)/debian/tmp/usr/share/mime/packages
+
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installexamples
+	dh_installman
+	dh_link
+	dh_link
+	dh_strip --dbg-package=portabase-dbg
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

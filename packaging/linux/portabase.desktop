@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Name=PortaBase
+Comment=An easy-to-use personal database application
+Exec=/usr/bin/portabase
+Icon=portabase
+Categories=Office;Database;
+MimeType=application/x-portabase;

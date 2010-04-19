@@ -1,10 +1,9 @@
 Document: portabase
 Title: PortaBase Help File
 Author: Jeremy Bowman
-Abstract: This document describes what PortaBase is
- and how it can be used.
+Abstract: This document describes what PortaBase is, and how it can be used.
 Section: Apps/Databases
 
 Format: HTML
-Index: /usr/share/portabase/help/en/portabase.html
-Files: /usr/share/portabase/help/en/portabase.html
+Index: /usr/share/doc/portabase/html/PortaBase.html
+Files: /usr/share/doc/portabase/html/*.html

@@ -287,7 +287,7 @@ int CommandLine::toOtherFormat(const QStringList &args)
  */
 void CommandLine::printUsage()
 {
-    printf("Usage: portabase [-h | --help | -f file]\n");
+    printf("Usage: portabase [-h | --help | file]\n");
     printf("       portabase command [-p password] [options] fromfile tofile\n");
     printf("  where command is fromxml, toxml, fromcsv, tocsv, or frommobiledb\n");
     printf("  Valid options for toxml and tocsv are:\n");

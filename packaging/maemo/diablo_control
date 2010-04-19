@@ -1,0 +1,55 @@
+Source: portabase
+Section: user/office
+Priority: optional
+Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
+Build-Depends: debhelper (>= 5), libqt4-dev
+Standards-Version: 3.7.2
+
+Package: portabase
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, hildon-application-manager
+Description: An easy-to-use personal database application
+ PortaBase is a program for conveniently managing one-table database files.
+ It is available for many platforms, including Linux, Mac OS X, Windows,
+ and Maemo.
+ .
+ Features include:
+  - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
+    Calculation, Sequence, Image, and Enum column types
+  - Custom data views (subsets of the columns in any order)
+  - Filter the displayed rows using sets of conditions
+  - Sort the rows by any combination of columns, each in ascending or
+    descending order
+  - Optional page navigation buttons, with a custom number of rows per page
+  - Add, delete, rearrange, and rename columns at any time
+  - Specify default values for columns
+  - View summary statistics for columns (total, average, min, max, etc.)
+  - Import data from CSV, XML, and MobileDB files
+  - Export data to CSV and XML files
+  - Command-line format conversions (to and from XML, from MobileDB)
+  - Data file encryption
+  - Unicode support
+XB-Maemo-Display-Name: PortaBase
+XB-Homepage: http://portabase.sourceforge.net
+XB-Bugtracker: http://sourceforge.net/tracker/?group_id=64705&atid=508374
+XB-Maemo-Icon-26:
+ iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A
+ /wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9oEEAM0E+c6aMYAAAPMSURBVEjH
+ vZbPbxtFFMe/88s76/WPJjFOQtqSIqACFFpRRI8oJYgqOXJGvXDh3+HChQOIM5xoQagoQogDqD3Q
+ UAg/nDSJQxvHjuONd3dmZ3eHQ5OoaW1iRxVPGu1o3rz5zHtv3uwQ9JGFKzOwFlcBjGAwaROKb65/
+ t9RTSXoNzs/OuAA+fvWlM9cqIwWkWfqfBEYZdjoBfv1j/TNr8eGNxaXoWND87MxzjiO+WJh789Jo
+ ScL3uwO5UyoVsNvV+Orbn28rHb93Y3FprS9oYfa14uhIceWD9+cr1UoZYaQwjORdie1WB598/nWz
+ teO/eH3xzu6Bjj82V46V85XV2ipWazixVEcLldaO7wLoCzqUza02BGNDAUySYmqi99npCxKMoVop
+ DQVqNP2+Oor/SfigE5U2iE1yZCwnOKQjni6IMQph2RNjT90jwRkEZycOXd8tWQDWWmyaBO74G8gV
+ JwEQWGv7N9ghPCLk8LOy3kBy+nlQOYbi2FnAptio/4mtxl8IO1sQSQak2aFpwZODgxijIJSgttZA
+ vdXB1YtzAADf9yGlxPnzl3D58tuITIDl+l388vstrK/VkGx3URUOJqqnwHuEmD+ZCw5KHka0WBnD
+ eGkS1lpQSkEIQRRFKBQKCH2Fty7M4crr78Igxu2ffsDNLz8FJRSc8+NBXHBYAMYkGJ+aht9uIU0T
+ UMZgMwspJdqtBnI5gbwr0Gq2IKVE3A1hTAoLDAjiHEGocXZqDMWCQmf9+yP6vUf6a3eO2k6feQbd
+ QA0aOgZKCcrFPEbK3nBHmBBQSiEEP/5480dydKJ6ocfkiFJKm+0gzwUHoRTWHr2Vd/2w58KnSvkj
+ hUwpAeccO53QpZTSLMuyQ5CUsuC67mQnSF/hnMPzXGw32wgjDQDIMgub9S5GrQ3M/h2otcHERB46
+ jbDbTS6Uy2UWRdF9pVSXCyHyruue9jzvbM5xz/1dqyOMKggjDUbJsaE62MxB/169hftbLeQc95zn
+ JQEAlqbpOieE0P3Gkgzq1nLro/w9/+WLLxTfGTY/YRTjx6WVm6Eyv5kUISGEHazP4zgOlFIPKKWM
+ EIIss1niOaS2kUxzziWlzKGUChDCejxmLKxNsywzWZbqJEnU3l687Af6bhiGG1EU1ZVSD+I4Dg4N
+ hRBCSllyHKfqOM6zUsop13XHXdetOI5T5px7jDGHEMLx8MJN0jTVSZIEWutOFEXNKIq2lFKbWut/
+ tNYNpZRvjDF933VCCC6EcHK5nCeEKHDOC5zz/D6I7YPSfVCYJEnXGNON4zgwxmhjHvtDAvgXDRHA
+ N2eaZkMAAAAASUVORK5CYII=

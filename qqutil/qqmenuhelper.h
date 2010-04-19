@@ -94,6 +94,7 @@ public:
     void updateFileSelectorMenu();
     void updateDocumentFileMenu();
     void addToFileMenu(QAction *action);
+    void addToToolBar(QAction *action);
     void saveChangesPrompt();
     QMenu *createMenu(QMainWindow *mainWindow);
     QMenu *fileMenu();

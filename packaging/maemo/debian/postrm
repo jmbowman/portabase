@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+gtk-update-icon-cache -f /usr/share/icons/hicolor
+
+if [ -x /usr/bin/update-mime-database ]; then
+	update-mime-database /usr/share/mime
+fi
+if [ -x /usr/bin/update-desktop-database ]; then
+	update-desktop-database /usr/share/applications
+fi
+if [ -x /usr/bin/hildon-update-category-database ]; then
+	hildon-update-category-database /usr/share/mime
+fi

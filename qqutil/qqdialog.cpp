@@ -76,6 +76,7 @@ int QQDialog::exec()
 
 #if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     showMaximized();
+    resize(parentWidget()->width(), height());
 #endif
     return QDialog::exec();
 }

@@ -490,13 +490,14 @@ bool ViewDisplay::editRow(int id, bool copy)
         rowId = selectedRowId();
     }
     if (rowId != -1) {
+        int rowIndex = model->view()->getIndex(rowId);
         RowEditor rowEditor(this);
         if (rowEditor.edit(model->database(), rowId, copy)) {
             if (copy) {
                 model->addRow();
             }
             else {
-                model->editRow(rowId);
+                model->editRow(rowId, rowIndex);
             }
             setEdited(true);
             return true;

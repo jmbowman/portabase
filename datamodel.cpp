@@ -291,10 +291,10 @@ void DataModel::addRow()
  * Update the model to reflect a particular record being edited.
  *
  * @param rowId The ID of the edited row
+ * @param oldIndex The index within the view of the row before it was edited
  */
-void DataModel::editRow(int rowId)
+void DataModel::editRow(int rowId, int oldIndex)
 {
-    int oldIndex = currentView->getIndex(rowId);
     currentView->prepareData();
     int newIndex = currentView->getIndex(rowId);
     int pageStart = qMax(0, (currentPage - 1) * rpp);
@@ -419,9 +419,10 @@ void DataModel::toggleBoolean(const QModelIndex &index)
 {
     QString colName = headerData(index.column(), Qt::Horizontal).toString();
     int pageStart = qMax(0, (currentPage - 1) * rpp);
-    int rowId = currentView->getId(pageStart + index.row());
+    int rowIndex = pageStart + index.row();
+    int rowId = currentView->getId(rowIndex);
     db->toggleBoolean(rowId, colName);
-    editRow(rowId);
+    editRow(rowId, rowIndex);
 }
 
 /**

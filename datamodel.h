@@ -51,7 +51,7 @@ public:
     void setSorting(const QString &name);
     void setFilter(const QString &name);
     void addRow();
-    void editRow(int rowId);
+    void editRow(int rowId, int oldIndex=-1);
     void deleteRow(int rowId);
     void deleteAllRows();
     void toggleBoolean(const QModelIndex &index);

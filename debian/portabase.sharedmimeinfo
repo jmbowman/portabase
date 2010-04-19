@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-portabase">
+    <comment>PortaBase file</comment>
+    <comment xml:lang="cs">Soubory PortaBase</comment>
+    <comment xml:lang="de">PortaBase Dateien</comment>
+    <comment xml:lang="fr">Fichiers PortaBase</comment>
+    <comment xml:lang="ja">PortaBaseファイル</comment>
+    <comment xml:lang="zh_TW">PortaBase檔案</comment>
+    <magic priority="50">
+      <match type="byte" offset="2" value="0x1a">
+        <match type="string" offset="0" value="JL"/>
+        <match type="string" offset="0" value="LJ"/>
+      </match>
+    </magic>
+    <glob pattern="*.pob"/>
+  </mime-type>
+</mime-info>

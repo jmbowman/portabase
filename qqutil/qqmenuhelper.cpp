@@ -28,6 +28,7 @@
 #include <QToolBar>
 #include "qqhelpbrowser.h"
 #include "qqmenuhelper.h"
+#include "qqtoolbarstretch.h"
 
 QRegExp QQMenuHelper::menuRegExp("\\(&\\w\\)");
 
@@ -184,9 +185,9 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
 #endif
 
     // toolbar setup
-    toolbar->addAction(fileNewAction);
-    toolbar->addAction(fileOpenAction);
-    toolbar->addAction(fileSaveAction);
+    addToToolBar(fileNewAction);
+    addToToolBar(fileOpenAction);
+    addToToolBar(fileSaveAction);
 
     // build the actions hash
     actions[New] = fileNewAction;
@@ -511,6 +512,21 @@ void QQMenuHelper::addToFileMenu(QAction *action)
 {
     file->insertAction(insertionPoint, action);
     extraFileActions << action;
+}
+
+/**
+ * Add the specified action to the toolbar such that the spacing looks
+ * correct even on Maemo.
+ */
+void QQMenuHelper::addToToolBar(QAction *action)
+{
+#if defined(Q_WS_HILDON)
+    new QQToolBarStretch(mainToolBar, action);
+#endif
+    mainToolBar->addAction(action);
+#if defined(Q_WS_HILDON)
+    new QQToolBarStretch(mainToolBar, action);
+#endif
 }
 
 /**

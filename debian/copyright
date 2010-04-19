@@ -1,11 +1,24 @@
 This package was debianized by Jeremy Bowman <jmbowman@alum.mit.edu> on
-Sun, 09 Feb 2003 20:42:53 -0500.
+Fri, Apr 16 10:40:01 -0500.
 
-Upstream Author: Jeremy Bowman <jmbowman@alum.mit.edu>
+Author: Jeremy Bowman <jmbowman@alum.mit.edu>
 
-This software is copyright (c) 2002-2004 by Jeremy Bowman
+Copyright 2002-2010 by Jeremy Bowman
 
-You are free to distribute this software under the terms of
-the GNU General Public License.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License with
+the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
+if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA  02111-1307  USA
+
 On Debian systems, the complete text of the GNU General Public
 License can be found in the file `/usr/share/common-licenses/GPL'.

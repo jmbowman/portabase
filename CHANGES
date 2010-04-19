@@ -1,3 +1,18 @@
+2010-04-19  JMB  Maemo packaging, updated Debian packaging, bugfixes
+
+    First attempt at proper Maemo packaging (for both Diablo and Fremantle),
+    and updated the Debian packaging in the process.  As part of this, the
+    already-patched Metakit source code is now included in the PortaBase
+    source code; this should make things easier for anybody building PortaBase
+    from source.  Still testing the packaging work, but it should be almost
+    finished.
+
+    Fixed a bug in the new code for updating the display after editing a row
+    or toggling a boolean value.  Dialogs should now fill the appropriate width
+    in Maemo, even in fullscreen mode.  Adjusted the toolbar spacing on Maemo
+    to fit in better and be more finger-friendly.  Also, opening a PortaBase
+    file from the command line no longer requires a "-f" flag.
+
 2010-04-15  JMB  Large table scrolling performance, fullscreen mode, etc.
 
     PortaBase now properly uses Qt 4's model/view architecture to enable good
