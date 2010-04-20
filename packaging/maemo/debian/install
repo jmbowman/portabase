@@ -1,8 +1,0 @@
-src/packaging/maemo/portabase.desktop usr/share/applications/hildon
-resources/icons/linux/16x16/portabase.png usr/share/icons/hicolor/16x16/apps
-resources/icons/linux/22x22/portabase.png usr/share/icons/hicolor/22x22/apps
-resources/icons/linux/32x32/portabase.png usr/share/icons/hicolor/32x32/apps
-resources/icons/linux/48x48/portabase.png usr/share/icons/hicolor/48x48/apps
-resources/icons/linux/64x64/portabase.png usr/share/icons/hicolor/64x64/apps
-src/packaging/maemo/net.sourceforge.portabase.service usr/share/dbus-1/services
-src/packaging/maemo/portabase-mime.xml usr/share/mime/packages

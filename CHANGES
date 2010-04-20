@@ -1,3 +1,13 @@
+2010-04-20  JMB  Diablo packaging fixes, more bugfixes
+
+    Tested and fixed the Maemo packaging, such that it can now cleanly generate
+    a package for Diablo.  Patched the random number generator library to
+    seed itself from /dev/urandom instead of /dev/random so it doesn't hang
+    due to lack of entropy.  Disabled column reordering on the main data grid
+    widget (that's best done with views).  Aspect ratios are now preserved
+    again for images shown in a slideshow, and on Maemo images are shown
+    centered in a consistently maximized dialog for viewing.
+
 2010-04-19  JMB  Maemo packaging, updated Debian packaging, bugfixes
 
     First attempt at proper Maemo packaging (for both Diablo and Fremantle),

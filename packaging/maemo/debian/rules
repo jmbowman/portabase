@@ -12,11 +12,14 @@ build: build-stamp
 build-stamp: builddir/Makefile
 	dh_testdir
 	cd src/metakit/builds && $(MAKE)
-	cp src/metakit/include/mk4.h src/build/
-	cp src/metakit/include/mk4.inl src/build/
-	cp src/metakit/include/mk4str.h src/build/
-	cp src/metakit/include/mk4str.inl src/build/
-	cd builddir && LD_LIBRARY_PATH=../src/metakit/builds:$(LD_LIBRARY_PATH) $(MAKE)
+	mkdir -p builddir/src
+	cp src/metakit/include/mk4.h builddir/src/
+	cp src/metakit/include/mk4.inl builddir/src/
+	cp src/metakit/include/mk4str.h builddir/src/
+	cp src/metakit/include/mk4str.inl builddir/src/
+	lrelease src/src.pro
+	lrelease src/resources/translations/qt*.ts
+	cd builddir && $(MAKE)
 	touch $@
 
 clean:
@@ -24,22 +27,20 @@ clean:
 	dh_testroot
 	rm -f build-stamp
 	dh_clean
-	rm src/resources/translations/*.qm
-	rm src/build/mk4*
-	cd src/metakit/builds && $(MAKE) clean
-	rm src/metakit/builds/config.*
-	rm src/metakit/builds/Makefile
+	rm -f src/resources/translations/*.qm
+	rm -f src/build/mk4*
+	rm -f src/metakit/builds/*.o
+	rm -f src/metakit/builds/*.a
+	rm -rf src/metakit/builds/tests
+	rm -f src/metakit/builds/config.*
+	rm -f src/metakit/builds/Makefile
 
 install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
 	dh_installdirs
-	lrelease src/src.pro
-	lrelease src/resources/translations/qt*.ts
 	cd builddir && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/$(APPNAME) install
-	mkdir -p $(CURDIR)/debian/tmp/usr/share/mime/packages
-	cp $(CURDIR)/portabase-mime.xml $(CURDIR)/debian/tmp/usr/share/mime/packages
 
 binary-indep: build install
 
@@ -48,7 +49,7 @@ binary-arch: build install
 	dh_testroot
 	dh_installdocs
 	dh_installexamples
-	dh_installman
+	dh_installman $(CURDIR)/debian/portabase.1
 	dh_link
 	dh_link
 	dh_strip --dbg-package=portabase-dbg

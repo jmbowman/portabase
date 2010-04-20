@@ -89,6 +89,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
 
     QHeaderView *header = table->header();
     header->setClickable(true);
+    header->setMovable(false);
     header->setResizeMode(QHeaderView::Interactive);
     connect(header, SIGNAL(sectionPressed(int)), this, SLOT(headerPressed(int)));
     connect(header, SIGNAL(sectionClicked(int)), this, SLOT(headerReleased(int)));

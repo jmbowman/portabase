@@ -74,7 +74,22 @@ void ImageWidget::paintEvent(QPaintEvent *)
     }
     QPainter p(this);
     if (!pixmap.isNull()) {
-        p.drawPixmap(rect(), pixmap, pixmap.rect());
+        if (pixmap.size() == size()) {
+            p.drawPixmap(rect(), pixmap);
+            return;
+        }
+        p.fillRect(rect(), QColor(0, 0, 0));
+        double aspectRatio = (double)pixmap.width()/(double)pixmap.height();
+        if (aspectRatio * height() > width()) {
+            int h = (int)(width() / aspectRatio);
+            int y = (height() - h) / 2;
+            p.drawPixmap(0, y, width(), h, pixmap);
+        }
+        else {
+            int w = (int)(aspectRatio * height());
+            int x = (width() - w) / 2;
+            p.drawPixmap(x, 0, w, height(), pixmap);
+        }
     }
     else {
         p.fillRect(rect(), QColor(0, 0, 0));

@@ -192,18 +192,35 @@ macx {
                           ZH_HANT_LPROJ
     QMAKE_INFO_PLIST    = packaging/mac/Info.plist
     CONFIG             += x86 ppc
-    #INCLUDEPATH        += /opt/local/include
 }
 
 # Stuff for Maemo
 maemo5|contains(QT_CONFIG, hildon): {
+    LIBS               += -L../../src/metakit/builds
     isEmpty(PREFIX) {
         PREFIX          = /usr/local
     }
     DATADIR             = $$PREFIX/share
+    DEFINES            += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
     TARGET              = portabase
     RESOURCES           = resources/maemo.qrc
-    INSTALLS           += target
+    INSTALLS           += target desktop service icon16 icon22 icon32 icon48 icon64 mime
+    desktop.path        = $$DATADIR/applications/hildon
+    desktop.files       = packaging/maemo/portabase.desktop
+    service.path        = $$DATADIR/dbus-1/services
+    service.files       = packaging/maemo/net.sourceforge.portabase.service
+    icon16.path         = $$DATADIR/icons/hicolor/16x16/apps
+    icon16.files        = resources/icons/linux/16x16/portabase.png
+    icon22.path         = $$DATADIR/icons/hicolor/22x22/apps
+    icon22.files        = resources/icons/linux/22x22/portabase.png
+    icon32.path         = $$DATADIR/icons/hicolor/32x32/apps
+    icon32.files        = resources/icons/linux/32x32/portabase.png
+    icon48.path         = $$DATADIR/icons/hicolor/48x48/apps
+    icon48.files        = resources/icons/linux/48x48/portabase.png
+    icon64.path         = $$DATADIR/icons/hicolor/64x64/apps
+    icon64.files        = resources/icons/linux/64x64/portabase.png
+    mime.path           = $$DATADIR/mime/packages
+    mime.files          = packaging/maemo/portabase-mime.xml
 }
 contains(QT_CONFIG, hildon) {
     target.path         = $$PREFIX/bin

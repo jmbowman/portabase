@@ -70,7 +70,7 @@ CXX_SWITCHES_PY   = $(CXXFLAGS) -I$(srcdir)/../python/scxx -I$(pyincludedir)
 
 all: @MK_TARGETS@
 
-core: Makefile libmk4$(LIBEXT) $(DEMOS)
+core: Makefile libmk4$(LIBEXT)
 
 tcl: Makefile Mk4tcl$(LIBEXT)
 

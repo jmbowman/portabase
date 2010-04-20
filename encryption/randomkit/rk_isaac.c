@@ -18,10 +18,10 @@
  * distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
  * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -50,7 +50,7 @@ void rk_isaac_seed(unsigned long seed, rk_isaac_state *state)
 
 rk_error rk_isaac_randomseed(rk_isaac_state *state)
 {
-  if(rk_devfill(state->randrsl, sizeof(state->randrsl), 1) == RK_NOERR)
+  if(rk_devfill(state->randrsl, sizeof(state->randrsl), 0) == RK_NOERR)
   {
     isaac_init(state);
     return RK_NOERR;
@@ -213,7 +213,7 @@ double rk_isaac_gauss(rk_isaac_state *state)
       r2 = x1*x1 + x2*x2;
     }
     while (r2 >= 1.0 || r2 == 0.0);
-    
+
     f = sqrt(-2.0*log(r2)/r2); /* Box-Muller transform */
     state->has_gauss = 1;
     state->gauss = f*x1; /* Keep for next call */
@@ -226,13 +226,13 @@ void rk_isaac_fill(void *buffer, size_t size, rk_isaac_state *state)
   unsigned long r;
   unsigned char *buf = buffer;
   rk_isaac_state tempstate;
-  
+
   if (size > 0 && state == NULL)
   {
     rk_isaac_randomseed(&tempstate);
     state = &tempstate;
   }
-  
+
   for (; size >= 4; size -= 4)
   {
     r = rk_isaac_random(state);
@@ -241,7 +241,7 @@ void rk_isaac_fill(void *buffer, size_t size, rk_isaac_state *state)
     *(buf++) = (r >> 16) & 0xFF;
     *(buf++) = (r >> 24) & 0xFF;
   }
-  
+
   if (!size) return;
 
   r = rk_isaac_random(state);

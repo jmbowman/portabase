@@ -3,6 +3,7 @@
 VERSION=2.0
 DEST=build/diablo/portabase-$VERSION
 
+rm -rf build/diablo
 packaging/copy_source.sh $DEST/src
 cd $DEST
 mv src/portabase.pro src/src.pro

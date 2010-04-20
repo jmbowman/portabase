@@ -37,6 +37,7 @@ ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent)
     display = new ImageWidget(scroll);
     QPixmap pm;
     display->setPixmap(pm);
+    scroll->setAlignment(Qt::AlignCenter);
     scroll->setWidget(display);
     if (allowFullScreen) {
         connect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
@@ -55,7 +56,9 @@ void ImageViewer::setImage(const QImage &image)
     qApp->processEvents();
     pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
+#endif
 }
 
 /**

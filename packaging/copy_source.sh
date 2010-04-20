@@ -17,6 +17,7 @@ cp portabase.iss $DEST
 cp portabase.pro $DEST
 cp portabase.rc $DEST
 cp -R calc $DEST
+cp -R color_picker $DEST
 cp -R debian $DEST
 cp -R encryption $DEST
 cp -R image $DEST
