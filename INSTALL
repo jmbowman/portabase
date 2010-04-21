@@ -41,9 +41,9 @@ Metakit Compilation
 -------------------
 To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
 first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
-searches and locale-sensitive sorting.  Therefore, the patch file
-metakit-2.4.9.7.patch must be applied to the Metakit 2.4.9.7 source tree before
-building.
+searches and locale-sensitive sorting; the patched version is included in the
+"metakit" directory for convenience (and to support the Debian and Maemo
+autobuilders).
 
 To build Metakit for Maemo, follow the Metakit installation instructions (in
 the Metakit README file) inside the appropriate Scratchbox environment.  You'll
@@ -82,13 +82,10 @@ PortaBase for Windows Compilation, Packaging
 
 Debian Package Building
 -----------------------
-To create a Debian package for the desktop version of PortaBase, follow
-the normal process for building a Debian package:
-- Unpack the source tarball
-- Move the resulting "portabase" directory to "portabase-1.9" (or whatever
-  the current version number is)
-- From the root source directory, either run "dpkg-buildpackage" as root
-  or run "dpkg-buildpackage -rfakeroot" (if you have fakeroot installed)
+To create a Debian package for the desktop version of PortaBase, from the
+root PortaBase source directory run "packaging/linux/debian.sh".  If you have
+all the appropriate development packages installed, the .deb file will be
+generated in the build/debian directory.
 
 Linux/UNIX compilation
 ----------------------
@@ -99,41 +96,14 @@ Linux/UNIX compilation
 - Run qmake on portabase.pro
 - Run make
 
-Linux/UNIX installation
------------------------
-If you aren't building a Debian package, you'll need to manually copy some
-files into the correct locations:
-
-1- All the icons from the "desktop/icons" directory should go into
-/usr/share/portabase/icons, e.g.:
-
-/usr/share/portabase/icons/close.png
-/usr/share/portabase/icons/portabase/save.png
-
-...and so forth.
-
-2- The help files and UI translation files go into /usr/share/portabase, e.g.:
-
-/usr/share/portabase/help/en/portabase.html
-/usr/share/portabase/help/ja/portabase.html
-/usr/share/portabase/i18n/ja/portabase.qm
-
-...and so on.  (The portabase.qm files are created by running lrelease on
-portabase.pro.)
-
 Mac OS X compilation
 --------------------
 - Install a recent version of Qt 4 and configure it, as per the directions
   in its INSTALL file.
 - Make sure the Metakit static library (libmk4.a) is in /usr/local/lib, and
   that the other library files (.dylib, .la, etc.) aren't.
-- Run qmake on portabase.pro
-- Run make
-- Enter the "mac" subdirectory and run "./build_bundle.sh".  This will
-  create the PortaBase application bundle in that directory (copying and
-  appropriately linking the PortaBase executable and the Metakit shared
-  library file in the process).  You can now run it and move it wherever
-  you'd like.
+- From the root PortaBase source directory run "packaging/mac/build.sh"; this
+  will generate a self-contained PortaBase.app and a PortaBase.dmg installer.
 
 Code Documentation Generation
 -----------------------------
@@ -157,4 +127,8 @@ can figure out these variations.
 
 Maemo Package Building
 ----------------------
-TODO
+- Make sure that Scratchbox has access to the PortaBase source code
+- Log in to Scratchbox, and select the desired target with sb-menu
+- From the root PortaBase source directory, run "packaging/maemo/diablo.sh"
+  (if generating a package for Diablo); the .deb will be generated in the
+  "build/diablo" directory

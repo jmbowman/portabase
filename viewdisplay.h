@@ -64,6 +64,7 @@ public:
     void allowBooleanToggle(bool flag);
     void usePages(bool flag);
     void showWithSingleClick(bool flag);
+    void updateColWidths();
 
 public slots:
     void addRow();
@@ -110,6 +111,7 @@ private:
     QToolButton *nextButton; /**< "Next few pages" button */
     QButtonGroup *buttonGroup; /**< The group of page navigation buttons */
     QToolButton *pageButtons[PAGE_BUTTON_COUNT]; /**< Array of page navigation buttons */
+    bool propogateColWidths; /**< True if column width resizes are to be passed to the view */
     int pressedIndex; /**< Index of the column in which the mouse has been pressed (while waiting for a release) */
     QTime timer; /**< Time elapsed between the last mouse press and release */
     bool booleanToggle; /**< True if boolean field values can be toggled by clicking on them in the display */

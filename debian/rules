@@ -3,9 +3,6 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-# This is the debhelper compatibility version to use.
-export DH_COMPAT=4
-
 %:
 	dh $@
 
@@ -13,10 +10,26 @@ override_dh_installchangelogs:
 	dh_installchangelogs CHANGES
 
 override_dh_clean:
-    dh_clean
-	rm resources/translations/*.qm
+	dh_clean
+	rm -f resources/translations/*.qm
+	rm -f src/build/mk4*
+	rm -f src/metakit/builds/*.o
+	rm -f src/metakit/builds/*.a
+	rm -rf src/metakit/builds/tests
+	rm -f src/metakit/builds/config.*
+	rm -f src/metakit/builds/Makefile
 
-override_dh_auto_build:
+override_dh_auto_configure:
+	cd metakit/builds && ../unix/configure --enable-threads --disable-shared
 	lrelease portabase.pro
 	lrelease resources/translations/qt*.ts
+	dh_auto_configure
+
+override_dh_auto_build:
+	cd metakit/builds && $(MAKE)
+	mkdir -p build
+	cp metakit/include/mk4.h build/
+	cp metakit/include/mk4.inl build/
+	cp metakit/include/mk4str.h build/
+	cp metakit/include/mk4str.inl build/
 	dh_auto_build

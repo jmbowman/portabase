@@ -3,8 +3,8 @@
 # Script for packaging the Mac version of PortaBase for distribution
 # Assumes that we are in the PortaBase source code root directory
 
-rm build/PortaBase.app
-rm build/PortaBase.dmg
+rm -f build/PortaBase.app
+rm -f build/PortaBase.dmg
 qmake -spec macx-g++40 portabase.pro
 make clean
 make

@@ -229,8 +229,14 @@ contains(QT_CONFIG, hildon) {
     target.path         = /opt/maemo
 }
 
+# Stuff for other Linux/UNIX platforms
+unix:!macx:!maemo5:!contains(QT_CONFIG, hildon): {
+    #QMAKE_CXXFLAGS       += -O0 # for valgrind
+    LIBS                 += -Lmetakit/builds
+    RESOURCES             = resources/linux.qrc
+}
+
 # Stuff for Windows
-win32:LIBS                   += mk4vc60s.lib libjpeg.lib
 win32:DEFINES                += QT_DLL
 win32:RC_FILE                 = portabase.rc
 win32:QMAKE_CXXFLAGS_RELEASE += /MD

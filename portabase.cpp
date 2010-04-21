@@ -325,6 +325,9 @@ PortaBase::~PortaBase()
     QSettings settings;
     mh->saveSettings(&settings);
     saveWindowSettings(&settings);
+    if (printer) {
+        delete printer;
+    }
 }
 
 /**
@@ -832,6 +835,7 @@ void PortaBase::showDataViewer()
     }
 
     mainStack->setCurrentWidget(viewer);
+    viewer->updateColWidths();
     rebuildViewMenu();
     rebuildSortMenu();
     rebuildFilterMenu();

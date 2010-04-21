@@ -1,7 +1,7 @@
 /*
  * slideshowdialog.h
  *
- * (c) 2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ class SlideshowDialog: public PBDialog
     Q_OBJECT
 public:
     SlideshowDialog(QStringList columns, View *view, QWidget *parent = 0);
+    ~SlideshowDialog();
 
 protected slots:
     void accept();

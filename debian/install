@@ -1,3 +1,4 @@
+build/portabase usr/bin
 packaging/linux/portabase.desktop usr/share/applications
 resources/icons/linux/16x16/portabase.png usr/share/icons/hicolor/16x16/apps
 resources/icons/linux/22x22/portabase.png usr/share/icons/hicolor/22x22/apps

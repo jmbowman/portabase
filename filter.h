@@ -1,7 +1,7 @@
 /*
  * filter.h
  *
- * (c) 2002,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
+#include <QList>
 #include <QString>
 #include <mk4.h>
 
@@ -47,9 +48,7 @@ public:
 private:
     Database *db; /**< The database that this filter belongs to */
     QString filterName; /**< The name of this filter */
-    c4_View mapping; /**< Mapping of position indices to Condition pointers */
-    c4_IntProp mIndex; /**< Column for Condition position indices */
-    c4_IntProp mPointer; /**< Column for Condition pointers */
+    QList<Condition *> conditions; /**< List of Conditions in this filter */
 };
 
 #endif

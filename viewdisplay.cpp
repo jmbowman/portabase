@@ -48,7 +48,8 @@
  * @param parent This widget's parent widget
  */
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
-    portabase(pbase), booleanToggle(false), paged(true), singleClickShow(true)
+    portabase(pbase), propogateColWidths(false), booleanToggle(false),
+    paged(true), singleClickShow(true)
 {
     timer.start();
     QVBoxLayout *vbox = Factory::vBoxLayout(this, true);
@@ -393,6 +394,7 @@ void ViewDisplay::updateButtons(int currentPage, int totalPages)
  */
 void ViewDisplay::setDatabase(Database *dbase)
 {
+    propogateColWidths = false;
     model->setDatabase(dbase);
     setEdited(false);
 }
@@ -422,6 +424,25 @@ void ViewDisplay::matchNewView(View *view)
         table->setColumnWidth(i, view->getColWidth(i));
     }
     rowsPerPage->setValue(view->getRowsPerPage());
+}
+
+/**
+ * Manually force a refresh of the column widths.  Used the first time the
+ * data grid is shown for a file, since the column widths set earlier may not
+ * have stuck as the widget wasn't shown yet.
+ */
+void ViewDisplay::updateColWidths()
+{
+    View *view = model->view();
+    if (view) {
+        bool edited = portabase->isWindowModified();
+        matchNewView(view);
+        if (!edited) {
+            // these values were already in the file, so it isn't a change
+            setEdited(false);
+        }
+        propogateColWidths = true;
+    }
 }
 
 /**
@@ -717,7 +738,7 @@ void ViewDisplay::headerReleased(int column)
 void ViewDisplay::columnResized(int column, int, int newWidth)
 {
     // The last column always resizes to fill available space; ignore it
-    if (column != model->columnCount() - 1) {
+    if (propogateColWidths && column != model->columnCount() - 1) {
         model->view()->setColWidth(column, newWidth);
         setEdited(true);
     }

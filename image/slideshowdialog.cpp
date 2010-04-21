@@ -55,6 +55,16 @@ SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *paren
 }
 
 /**
+ * Destructor.
+ */
+SlideshowDialog::~SlideshowDialog()
+{
+    if (fullScreen) {
+        delete fullScreen;
+    }
+}
+
+/**
  * Start the slideshow.
  */
 void SlideshowDialog::accept()

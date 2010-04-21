@@ -1,7 +1,7 @@
 /*
  * filter.cpp
  *
- * (c) 2002,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,12 @@
  * @param name The name of this filter
  */
 Filter::Filter(Database *dbase, const QString &name)
-    : mIndex("_mindex"), mPointer("_mpointer")
 {
     db = dbase;
     filterName = name;
     int count = db->getConditionCount(name);
     for (int i = 0; i < count; i++) {
-        Condition *condition = db->getCondition(name, i);
-        mapping.Add(mIndex [i] + mPointer [(int)condition]);
+        conditions << db->getCondition(name, i);
     }
 }
 
@@ -40,11 +38,8 @@ Filter::Filter(Database *dbase, const QString &name)
  */
 Filter::~Filter()
 {
-    int size = mapping.GetSize();
-    for (int i = 0; i < size; i++) {
-        int pointer = mPointer (mapping[i]);
-        Condition *condition = (Condition*)pointer;
-        delete condition;
+    while (!conditions.isEmpty()) {
+        delete conditions.takeFirst();
     }
 }
 
@@ -73,7 +68,7 @@ void Filter::setName(const QString &newName)
  */
 int Filter::getConditionCount()
 {
-    return mapping.GetSize();
+    return conditions.count();
 }
 
 /**
@@ -84,9 +79,7 @@ int Filter::getConditionCount()
  */
 Condition *Filter::getCondition(int index)
 {
-    int mapIndex = mapping.Find(mIndex [index]);
-    int pointer = mPointer (mapping[mapIndex]);
-    return (Condition*)pointer;
+    return conditions[index];
 }
 
 /**
@@ -100,11 +93,20 @@ Condition *Filter::getCondition(int index)
  */
 void Filter::addCondition(Condition *condition, int index)
 {
-    int nextIndex = index;
-    if (nextIndex == -1) {
-        nextIndex = mapping.GetSize();
+    if (index == -1) {
+        conditions << condition;
     }
-    mapping.Add(mIndex [nextIndex] + mPointer [(int)condition]);
+    else {
+        if (index < conditions.count()) {
+            conditions[index] = condition;
+        }
+        else {
+            while (conditions.count() < index) {
+                conditions << 0;
+            }
+            conditions << condition;
+        }
+    }
 }
 
 /**
@@ -115,18 +117,8 @@ void Filter::addCondition(Condition *condition, int index)
  */
 void Filter::deleteCondition(int index)
 {
-    int mapIndex = mapping.Find(mIndex [index]);
-    int pointer = mPointer (mapping[mapIndex]);
-    Condition *condition = (Condition*)pointer;
+    Condition *condition = conditions.takeAt(index);
     delete condition;
-    mapping.RemoveAt(mapIndex);
-    int count = mapping.GetSize();
-    for (int i = 0; i < count; i++) {
-        int condIndex = mIndex (mapping[i]);
-        if (condIndex > index) {
-            mIndex (mapping[i]) = condIndex - 1;
-        }
-    }
 }
 
 /**
@@ -140,13 +132,10 @@ void Filter::deleteCondition(int index)
  */
 bool Filter::moveConditionUp(int index)
 {
-    if (index == 0) {
+    if (index <= 0 || index >= conditions.count()) {
         return false;
     }
-    int rowIndex = mapping.Find(mIndex [index]);
-    int aboveRowIndex = mapping.Find(mIndex [index - 1]);
-    mIndex (mapping[rowIndex]) = index - 1;
-    mIndex (mapping[aboveRowIndex]) = index;
+    conditions.swap(index, index - 1);
     return true;
 }
 
@@ -161,13 +150,10 @@ bool Filter::moveConditionUp(int index)
  */
 bool Filter::moveConditionDown(int index)
 {
-    if (index == getConditionCount() - 1) {
+    if (index < 0 || index >= conditions.count() - 1) {
         return false;
     }
-    int rowIndex = mapping.Find(mIndex [index]);
-    int belowRowIndex = mapping.Find(mIndex [index + 1]);
-    mIndex (mapping[rowIndex]) = index + 1;
-    mIndex (mapping[belowRowIndex]) = index;
+    conditions.swap(index, index + 1);
     return true;
 }
 
@@ -179,11 +165,10 @@ bool Filter::moveConditionDown(int index)
  */
 c4_View Filter::apply(c4_View dbview)
 {
-    int count = getConditionCount();
+    int count = conditions.count();
     c4_View result = dbview;
     for (int i = 0; i < count; i++) {
-        Condition *condition = getCondition(i);
-        result = condition->filter(result);
+        result = conditions[i]->filter(result);
     }
     return result;
 }
