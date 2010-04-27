@@ -34,6 +34,10 @@ QQDialog::QQDialog(QString title, QWidget *parent)
     : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint)
 {
     setWindowTitle(title);
+#if defined(Q_WS_MAEMO_5)
+    setAttribute(Qt::WA_Maemo5StackedWindow);
+    setWindowFlags(Qt::Window);
+#endif
 }
 
 /**
@@ -88,7 +92,7 @@ int QQDialog::exec()
  * @param layout The dialog's layout manager.
  * @param cancel False if the "Cancel" button is to be omitted.
  */
-QDialogButtonBox *QQDialog::addOkCancelButtons(QVBoxLayout *layout, bool ok,
+QDialogButtonBox *QQDialog::addOkCancelButtons(QBoxLayout *layout, bool ok,
                                                bool cancel)
 {
     QDialogButtonBox::StandardButtons buttons;
@@ -101,7 +105,12 @@ QDialogButtonBox *QQDialog::addOkCancelButtons(QVBoxLayout *layout, bool ok,
     else {
         buttons = QDialogButtonBox::Cancel;
     }
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(buttons, Qt::Horizontal, this);
+    Qt::Orientation orientation = Qt::Horizontal;
+    QBoxLayout::Direction dir = layout->direction();
+    if (dir == QBoxLayout::LeftToRight || dir == QBoxLayout::RightToLeft) {
+        orientation = Qt::Vertical;
+    }
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(buttons, orientation, this);
     layout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     if (cancel) {

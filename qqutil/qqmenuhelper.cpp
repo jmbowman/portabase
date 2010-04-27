@@ -360,7 +360,6 @@ void QQMenuHelper::setEdited(bool y)
 void QQMenuHelper::showHelp()
 {
     QQHelpBrowser helpBrowser(QString("qrc:/help/html/%1.html").arg(qApp->applicationName()), mainWindow);
-    helpBrowser.showMaximized();
     helpBrowser.exec();
 }
 
@@ -520,11 +519,11 @@ void QQMenuHelper::addToFileMenu(QAction *action)
  */
 void QQMenuHelper::addToToolBar(QAction *action)
 {
-#if defined(Q_WS_HILDON)
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     new QQToolBarStretch(mainToolBar, action);
 #endif
     mainToolBar->addAction(action);
-#if defined(Q_WS_HILDON)
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     new QQToolBarStretch(mainToolBar, action);
 #endif
 }

@@ -70,6 +70,8 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
             this, SLOT(matchNewView(View *)));
     connect(model, SIGNAL(paginationChanged(int, int)),
             this, SLOT(updateButtons(int, int)));
+    connect(model, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+            this, SLOT(tableChanged()));
     connect(model, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
             this, SLOT(tableChanged()));
     connect(model, SIGNAL(modelReset()),

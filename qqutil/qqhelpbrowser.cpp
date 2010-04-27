@@ -30,18 +30,20 @@
 QQHelpBrowser::QQHelpBrowser(const QString &resource, QWidget *parent)
   : QQDialog(tr("Help"), parent)
 {
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-    vbox->setContentsMargins(0, 0, 0, 0);
-    vbox->setSpacing(0);
-    setLayout(vbox);
+#if defined(Q_WS_MAEMO_5)
+    QBoxLayout *layout = new QHBoxLayout(this);
+#else
+    QBoxLayout *layout = new QVBoxLayout(this);
+#endif
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    setLayout(layout);
 
     QTextBrowser *content = new QTextBrowser(this);
-    vbox->addWidget(content);
+    layout->addWidget(content);
     content->setSource(resource);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok, Qt::Horizontal, this);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    vbox->addWidget(buttonBox);
+    QDialogButtonBox *buttonBox = addOkCancelButtons(layout, true, false);
 
 #if defined(Q_WS_MAC)
     QAbstractButton *backButton = new QToolButton(buttonBox);

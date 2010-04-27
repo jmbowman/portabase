@@ -31,7 +31,7 @@
      <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>
      <file>help/html/PortaBase.html</file>
  </qresource>
- <qresource>
+ <qresource lang="en">
      <file alias="i18n/PortaBase.qm">translations/portabase_en.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_en.qm</file>
  </qresource>

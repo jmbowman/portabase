@@ -3,9 +3,10 @@
 VERSION=2.0
 DEST=build/diablo/portabase-$VERSION
 
-mkdir -p $DEST
+rm -rf build/fremantle
+packaging/copy_source.sh $DEST/src
 cd $DEST
-git clone ../../../ src
-rm -r src/.git
 mv src/portabase.pro src/src.pro
 cp src/packaging/maemo/portabase.pro portabase.pro
+cp -R src/packaging/maemo/debian .
+dpkg-buildpackage -rfakeroot -uc -us -sa

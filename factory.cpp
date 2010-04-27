@@ -138,6 +138,14 @@ void Factory::setupLayout(QLayout *layout)
     if (!layout->parentWidget()->inherits("QGroupBox")) {
         layout->setContentsMargins(0, 0, 0, 0);
     }
+#if defined(Q_WS_MAEMO_5)
+    else {
+        // default top margin on Fremantle is insufficient
+        QMargins margins = layout->contentsMargins();
+        margins.setTop(20);
+        layout->setContentsMargins(margins);
+    }
+#endif
     layout->setSpacing(0);
 }
 
@@ -218,10 +226,14 @@ QIcon Factory::checkBoxIcon(int checked)
  */
 void Factory::updateRowColors(QAbstractItemView *view)
 {
+    // Maemo 5 uses the GTK+ theme colors, can't override from here; just
+    // screws up the background color
+#if !defined(Q_WS_MAEMO_5)
     QPalette viewPalette(view->palette());
     viewPalette.setColor(QPalette::Base, evenRowColor);
     viewPalette.setColor(QPalette::AlternateBase, oddRowColor);
     view->setPalette(viewPalette);
+#endif
 }
 
 /**

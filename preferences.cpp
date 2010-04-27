@@ -20,6 +20,7 @@
 #include <QGroupBox>
 #include <QLabel>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QSettings>
 #include <QSpinBox>
 #include <QTabWidget>
@@ -36,55 +37,80 @@
  * @param parent This dialog's parent widget
  */
 Preferences::Preferences(QWidget *parent)
-    : PBDialog(tr("Preferences"), parent)
+    : PBDialog(tr("Preferences"), parent), tabs(0), panel(0)
 {
-    QTabWidget *tabs = new QTabWidget(this);
+#if defined(Q_WS_MAEMO_5)
+    QScrollArea *sa = new QScrollArea(this);
+    panel = new QWidget();
+    Factory::vBoxLayout(panel, true);
+    sa->setWidgetResizable(true);
+    sa->setWidget(panel);
+    vbox->addWidget(sa);
+#else
+    tabs = new QTabWidget(this);
     vbox->addWidget(tabs);
+#endif
     QSettings settings;
-    addGeneralTab(tabs, &settings);
-    addDateTimeTab(tabs, &settings);
-    addAppearanceTab(tabs);
+    addGeneralTab(&settings);
+    addDateTimeTab(&settings);
+    addAppearanceTab();
     finishLayout(true, true, 400, 200);
 }
 
 /**
  * Add the general options tab to the dialog.
  *
- * @param tabs The main tabbed widget stack
  * @param settings PortaBase's application settings
  */
-void Preferences::addGeneralTab(QTabWidget *tabs, QSettings *settings)
+void Preferences::addGeneralTab(QSettings *settings)
 {
-    QWidget *generalTab = new QWidget(tabs);
-    QVBoxLayout *layout = Factory::vBoxLayout(generalTab, true);
+    QWidget *generalTab;
+    QVBoxLayout *layout;
+    if (tabs) {
+        generalTab = new QWidget(tabs);
+        layout = Factory::vBoxLayout(generalTab, true);
+    }
+    else {
+        generalTab = panel;
+        layout = static_cast<QVBoxLayout *>(panel->layout());
+    }
     settings->beginGroup("General");
 
-    QHBoxLayout *hbox = Factory::hBoxLayout(layout);
     confirmDeletions = new QCheckBox(tr("Confirm deletions"), generalTab);
     confirmDeletions->setChecked(settings->value("ConfirmDeletions",
                                                 true).toBool());
-    hbox->addWidget(confirmDeletions);
-    hbox->addStretch(1);
+    layout->addWidget(confirmDeletions);
 
-    hbox = Factory::hBoxLayout(layout);
     booleanToggle = new QCheckBox(tr("Allow checkbox edit in data viewer"),
                                   generalTab);
     booleanToggle->setChecked(settings->value("BooleanToggle",
                                              false).toBool());
-    hbox->addWidget(booleanToggle);
-    hbox->addStretch(1);
+    layout->addWidget(booleanToggle);
 
-    hbox = Factory::hBoxLayout(layout);
-    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
-    pagedDisplay->setChecked(settings->value("PagedDisplay", false).toBool());
-    hbox->addWidget(pagedDisplay);
-    hbox->addStretch(1);
-
-    hbox = Factory::hBoxLayout(layout);
     singleClickShow = new QCheckBox(tr("View rows with a single click"), generalTab);
     singleClickShow->setChecked(settings->value("SingleClickShow", true).toBool());
-    hbox->addWidget(singleClickShow);
-    hbox->addStretch(1);
+    layout->addWidget(singleClickShow);
+
+    smallScreen = new QCheckBox(tr("Use small-screen settings on this device"),
+                                generalTab);
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    bool smallDefault = true;
+#else
+    bool smallDefault = false;
+#endif
+    smallScreen->setChecked(settings->value("SmallScreen", smallDefault).toBool());
+    layout->addWidget(smallScreen);
+
+    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
+    pagedDisplay->setChecked(settings->value("PagedDisplay", false).toBool());
+    layout->addWidget(pagedDisplay);
+
+    QHBoxLayout *hbox = Factory::hBoxLayout(layout);
+    hbox->addWidget(new QLabel(tr("Default rows per page"), generalTab));
+    rowsPerPage = new QSpinBox(generalTab);
+    rowsPerPage->setRange(1, 9999);
+    rowsPerPage->setValue(settings->value("RowsPerPage", 25).toInt());
+    hbox->addWidget(rowsPerPage);
 
     hbox = Factory::hBoxLayout(layout);
     noteWrap = new QCheckBox(tr("Wrap Notes"), generalTab);
@@ -101,40 +127,31 @@ void Preferences::addGeneralTab(QTabWidget *tabs, QSettings *settings)
             wrapType, SLOT(setEnabled(bool)));
     hbox->addWidget(wrapType);
 
-    hbox = Factory::hBoxLayout(layout);
-    hbox->addWidget(new QLabel(tr("Default rows per page"), generalTab));
-    rowsPerPage = new QSpinBox(generalTab);
-    rowsPerPage->setRange(1, 9999);
-    rowsPerPage->setValue(settings->value("RowsPerPage", 25).toInt());
-    hbox->addWidget(rowsPerPage);
-
-    hbox = Factory::hBoxLayout(layout);
-    smallScreen = new QCheckBox(tr("Use small-screen settings on this device"),
-                                generalTab);
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
-    bool smallDefault = true;
-#else
-    bool smallDefault = false;
-#endif
-    smallScreen->setChecked(settings->value("SmallScreen", smallDefault).toBool());
-    hbox->addWidget(smallScreen);
-    hbox->addStretch(1);
-
-    layout->addStretch(1);
-    tabs->addTab(generalTab, tr("General"));
+    if (tabs) {
+        layout->addStretch(1);
+        tabs->addTab(generalTab, tr("General"));
+    }
     settings->endGroup();
 }
 
 /**
  * Add the date and time options tab to the dialog.
  *
- * @param tabs The main tabbed widget stack
  * @param settings PortaBase's application settings
  */
-void Preferences::addDateTimeTab(QTabWidget *tabs, QSettings *settings)
+void Preferences::addDateTimeTab(QSettings *settings)
 {
-    QWidget *dateTimeTab = new QWidget(tabs);
-    QGridLayout *grid = Factory::gridLayout(dateTimeTab, true);
+    QWidget *dateTimeTab;
+    QGridLayout *grid;
+    if (tabs) {
+        dateTimeTab = new QWidget(tabs);
+        grid = Factory::gridLayout(dateTimeTab, true);
+    }
+    else {
+        dateTimeTab = panel;
+        QVBoxLayout *layout = static_cast<QVBoxLayout *>(panel->layout());
+        grid = Factory::gridLayout(layout);
+    }
     settings->beginGroup("DateTime");
 
     grid->addWidget(new QLabel(tr("Date format"), dateTimeTab), 0, 0);
@@ -176,20 +193,28 @@ void Preferences::addDateTimeTab(QTabWidget *tabs, QSettings *settings)
     grid->addWidget(showSeconds, 3, 0, 1, 2);
 
     grid->addWidget(new QWidget(dateTimeTab), 4, 0, 1, 2);
-    grid->setRowStretch(4, 1);
-    tabs->addTab(dateTimeTab, tr("Date and Time"));
+    if (tabs) {
+        grid->setRowStretch(4, 1);
+        tabs->addTab(dateTimeTab, tr("Date and Time"));
+    }
     settings->endGroup();
 }
 
 /**
  * Add the appearance options tab to the dialog.
- *
- * @param tabs The main tabbed widget stack
  */
-void Preferences::addAppearanceTab(QTabWidget *tabs)
+void Preferences::addAppearanceTab()
 {
-    QWidget *appearanceTab = new QWidget(tabs);
-    QVBoxLayout *layout = Factory::vBoxLayout(appearanceTab, true);
+    QWidget *appearanceTab;
+    QVBoxLayout *layout;
+    if (tabs) {
+        appearanceTab = new QWidget(tabs);
+        layout = Factory::vBoxLayout(appearanceTab, true);
+    }
+    else {
+        appearanceTab = panel;
+        layout = static_cast<QVBoxLayout *>(panel->layout());
+    }
 #if !defined(Q_WS_MAC)
     QGroupBox *fontGroup = new QGroupBox(tr("Font"), appearanceTab);
     QGridLayout *fontGrid = Factory::gridLayout(fontGroup, true);
@@ -233,25 +258,24 @@ void Preferences::addAppearanceTab(QTabWidget *tabs)
     layout->addWidget(fontGroup);
 #endif
 
+#if !defined(Q_WS_MAEMO_5)
     QGroupBox *colorGroup = new QGroupBox(tr("Row Colors"), appearanceTab);
     layout->addWidget(colorGroup);
-    QHBoxLayout *hbox = new QHBoxLayout(colorGroup);
-    colorGroup->setLayout(hbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(colorGroup, true);
     evenButton = new QtColorPicker(colorGroup);
     configureColorPicker(evenButton);
     evenButton->setCurrentColor(Factory::evenRowColor);
-    //evenButton->setSizePolicy(QSizePolicy::MinimumExpanding,
-    //                          QSizePolicy::Fixed);
     hbox->addWidget(evenButton);
     oddButton = new QtColorPicker(colorGroup);
     configureColorPicker(oddButton);
     oddButton->setCurrentColor(Factory::oddRowColor);
-    //oddButton->setSizePolicy(QSizePolicy::MinimumExpanding,
-    //                         QSizePolicy::Fixed);
     hbox->addWidget(oddButton);
+#endif
 
-    layout->addStretch(1);
-    tabs->addTab(appearanceTab, tr("Appearance"));
+    if (tabs) {
+        layout->addStretch(1);
+        tabs->addTab(appearanceTab, tr("Appearance"));
+    }
 }
 
 /**
@@ -358,6 +382,7 @@ QFont Preferences::applyChanges()
     settings.setValue("SmallScreen", smallScreen->isChecked());
     settings.endGroup();
 
+#if !defined(Q_WS_MAEMO_5)
     settings.beginGroup("Colors");
     const QColor evenColor = evenButton->currentColor();
     Factory::evenRowColor = QColor(evenColor);
@@ -366,6 +391,7 @@ QFont Preferences::applyChanges()
     Factory::oddRowColor = QColor(oddColor);
     settings.setValue("OddRows", oddColor.name());
     settings.endGroup();
+#endif
 
 #if !defined(Q_WS_MAC)
     settings.beginGroup("Font");

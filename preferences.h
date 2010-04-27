@@ -48,12 +48,14 @@ private slots:
     void updateSample(int selectedSize);
 
 private:
-    void addGeneralTab(QTabWidget *tabs, QSettings *settings);
-    void addDateTimeTab(QTabWidget *tabs, QSettings *settings);
-    void addAppearanceTab(QTabWidget *tabs);
+    void addGeneralTab(QSettings *settings);
+    void addDateTimeTab(QSettings *settings);
+    void addAppearanceTab();
     void configureColorPicker(QtColorPicker *picker);
 
 private:
+    QTabWidget *tabs; /**< Tab widget used on all non-Fremantle platforms */
+    QWidget *panel; /**< Large scrollable preferences panel used on Fremantle */
     QFontDatabase fontdb; /**< System font database */
     IntList sizes; /**< List of displayed font sizes */
     QComboBox *fontName; /**< Font name selection list */

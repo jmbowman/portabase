@@ -34,6 +34,7 @@
 #include <QPrinter>
 #include <QProcess>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QStackedWidget>
 #include <QStatusBar>
 #include <QStyle>
@@ -66,6 +67,11 @@
 PortaBase::PortaBase(QWidget *parent)
   : QMainWindow(parent), db(0), doc(""), printer(0), vsfManager(0)
 {
+#if defined(Q_WS_MAEMO_5)
+    setAttribute(Qt::WA_Maemo5StackedWindow);
+#else
+    statusBar();
+#endif
     QSettings *settings = getSettings();
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
     booleanToggle = settings->value("General/BooleanToggle", false).toBool();
@@ -89,7 +95,6 @@ PortaBase::PortaBase(QWidget *parent)
     // menu and toolbar, shared between file selector and data viewer modes
     toolbar = addToolBar("toolbar");
     toolbar->setObjectName("toolbar");
-    statusBar();
     ma = new MenuActions(this);
     mh = new QQMenuHelper(this, toolbar, tr("PortaBase files"), "pob", true);
     mh->loadSettings(settings);
@@ -264,29 +269,31 @@ PortaBase::PortaBase(QWidget *parent)
     createFillerActions();
 
     // Main widget when no file is open
-    noFileWidget = new QWidget(mainStack);
-    QHBoxLayout *hlayout = Factory::hBoxLayout(noFileWidget, true);
+    noFileWidget = new QScrollArea(mainStack);
+    QWidget *buttonPanel = new QWidget();
+    noFileWidget->setWidgetResizable(true);
+    QHBoxLayout *hlayout = Factory::hBoxLayout(buttonPanel, true);
     hlayout->addStretch(1);
     QVBoxLayout *vlayout = Factory::vBoxLayout(hlayout);
     vlayout->addStretch(1);
     QAction *action = mh->action(QQMenuHelper::New);
     QPushButton *button = new QPushButton(action->icon(),
                                           action->statusTip(),
-                                          noFileWidget);
+                                          buttonPanel);
     connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
     vlayout->addWidget(button);
     action = mh->action(QQMenuHelper::Open);
     button = new QPushButton(action->icon(),
                              action->statusTip(),
-                             noFileWidget);
+                             buttonPanel);
     connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
     vlayout->addWidget(button);
     button = new QPushButton(importAction->icon(),
                              importAction->statusTip(),
-                             noFileWidget);
+                             buttonPanel);
     connect(button, SIGNAL(clicked()), importAction, SIGNAL(triggered()));
     vlayout->addWidget(button);
-    recentBox = new QGroupBox(tr("Recently opened files"), noFileWidget);
+    recentBox = new QGroupBox(tr("Recently opened files"), buttonPanel);
     recentBox->setAlignment(Qt::AlignHCenter);
     QVBoxLayout *boxLayout = Factory::vBoxLayout(recentBox, true);
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
@@ -306,6 +313,7 @@ PortaBase::PortaBase(QWidget *parent)
     vlayout->addWidget(recentBox);
     vlayout->addStretch(1);
     hlayout->addStretch(1);
+    noFileWidget->setWidget(buttonPanel);
     mainStack->addWidget(noFileWidget);
 
     setUnifiedTitleAndToolBarOnMac(true);

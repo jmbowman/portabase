@@ -32,7 +32,12 @@
 PBDialog::PBDialog(QString title, QWidget *parent)
     : QQDialog(title, parent)
 {
+#if defined(Q_WS_MAEMO_5)
+    QHBoxLayout *hbox = Factory::hBoxLayout(this, true);
+    vbox = Factory::vBoxLayout(hbox);
+#else
     vbox = Factory::vBoxLayout(this, true);
+#endif
 }
 
 /**
@@ -51,7 +56,8 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
 {
     QDialogButtonBox *okCancelRow = 0;
     if (okButton || cancelButton) {
-        okCancelRow = addOkCancelButtons(vbox, okButton, cancelButton);
+        okCancelRow = addOkCancelButtons(static_cast<QBoxLayout *>(layout()),
+                                         okButton, cancelButton);
     }
     finishConstruction(minWidth, minHeight);
     return okCancelRow;

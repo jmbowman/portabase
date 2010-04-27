@@ -31,6 +31,7 @@ class QMenu;
 class QMenuBar;
 class QPrinter;
 class QPushButton;
+class QScrollArea;
 class QStackedWidget;
 class ViewDisplay;
 class VSFManager;
@@ -127,7 +128,7 @@ private:
 private:
     Database *db; /**< The currently open database, if any */
     QStackedWidget *mainStack; /**< Main widget stack (data display and "No file selected" label) */
-    QWidget *noFileWidget; /**< The main widget shown when no file is open */
+    QScrollArea *noFileWidget; /**< The main widget shown when no file is open */
     QGroupBox *recentBox; /**< The grouping box containing recentButtons */
     QPushButton* recentButtons[MAX_RECENT_FILES]; /**< Buttons on noFileWidget representing the most recently opened files */
     QToolBar *toolbar; /**< The application toolbar */

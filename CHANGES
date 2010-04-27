@@ -1,3 +1,15 @@
+2010-04-27  JMB  Fremantle improvements, bugfixes
+
+    Use stacked windows on Maemo Fremantle for more screen real estate and a
+    more native look.  Put dialog buttons on the right side where they should
+    be for Fremantle.  No alternating row colors preference on Fremantle, since
+    Qt delegates that to the GTK+ theme.  The preferences dialog in Fremantle
+    now uses a large scrolling panel rather than multiple tabs.  Fixed another
+    model/view bug (display wasn't updating correctly when the number of rows
+    in the filter went from 0 to 1).  Put the start page buttons in a
+    scrollable view so they don't get squished in Maemo.  Don't maximize the
+    help dialog on non-Maemo platforms.
+
 2010-04-21  JMB  Updated Debian packaging, yet more bugfixes
 
     Tested and debugged the Debian packaging; now passes lintian cleanly.

@@ -19,7 +19,7 @@
 #include <qdialog.h>
 
 class QDialogButtonBox;
-class QVBoxLayout;
+class QBoxLayout;
 
 /**
  * Base class for most dialogs in an application.  By calling
@@ -39,7 +39,7 @@ public slots:
     int exec();
 
 protected:
-    QDialogButtonBox *addOkCancelButtons(QVBoxLayout *layout, bool ok=true,
+    QDialogButtonBox *addOkCancelButtons(QBoxLayout *layout, bool ok=true,
                                          bool cancel=true);
     void finishConstruction(int minWidth=-1, int minHeight=-1);
 
