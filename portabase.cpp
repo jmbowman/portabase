@@ -1617,6 +1617,7 @@ void PortaBase::dropEvent(QDropEvent *event)
  */
 bool PortaBase::event(QEvent *event)
 {
+#if defined(Q_WS_MAC)
     if (!isActiveWindow() || doc.isEmpty()) {
         return QMainWindow::event(event);
     }
@@ -1671,6 +1672,9 @@ bool PortaBase::event(QEvent *event)
             return QMainWindow::event(event);
         }
     }
+#else
+    return QMainWindow::event(event);
+#endif
 }
 
 /**

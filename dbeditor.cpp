@@ -1,7 +1,7 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,10 +14,12 @@
  */
 
 #include <QApplication>
+#include <QLabel>
 #include <QLayout>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QRegExp>
+#include <QStackedWidget>
 #include <QTreeWidget>
 #include "calc/calcnode.h"
 #include "columneditor.h"
@@ -36,16 +38,25 @@ DBEditor::DBEditor(QWidget *parent)
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
       ceNewIndex("_cenewindex"), resized(false)
 {
+    stack = new QStackedWidget(this);
+    vbox->addWidget(stack, 1);
+    QString text("<center>%1<br>%2</center>");
+    text = text.arg(tr("No columns defined"));
+    text = text.arg(tr("Press the \"Add\" button to create one"));
+    noColumns = new QLabel(text, stack);
+    stack->addWidget(noColumns);
+
     QStringList headers;
     headers << ColumnEditor::tr("Name");
     headers << ColumnEditor::tr("Type");
     headers << ColumnEditor::tr("Default");
-    table = Factory::treeWidget(this, headers);
-    vbox->addWidget(table, 1);
+    table = Factory::treeWidget(stack, headers);
+    stack->addWidget(table);
     int colWidth = width() / 3 - 2;
     table->setColumnWidth(0, colWidth);
     table->setColumnWidth(1, colWidth);
     table->setColumnWidth(2, colWidth);
+    stack->setCurrentWidget(noColumns);
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addColumn()));
@@ -397,7 +408,7 @@ void DBEditor::updateTable()
         if (type == BOOLEAN) {
             last->setText(2, "");
             int checked = defaultVal.toInt();
-            last->setIcon(2, Factory::checkBoxIcon(checked));
+            last->setCheckState(2, checked ? Qt::Checked : Qt::Unchecked);
         }
         else if (type == NOTE) {
             last->setIcon(2, QIcon(":/icons/note.png"));
@@ -418,6 +429,12 @@ void DBEditor::updateTable()
                 last->setText(2, ColumnEditor::tr("None"));
             }
         }
+    }
+    if (size == 0) {
+        stack->setCurrentWidget(noColumns);
+    }
+    else {
+        stack->setCurrentWidget(table);
     }
 }
 

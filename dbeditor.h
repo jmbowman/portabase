@@ -1,7 +1,7 @@
 /*
  * dbeditor.h
  *
- * (c) 2002-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,8 @@
 class CalcNode;
 class ColumnEditor;
 class Database;
+class QLabel;
+class QStackedWidget;
 class QTreeWidget;
 
 typedef QMap<QString,CalcNode*> NameCalcMap;
@@ -68,7 +70,9 @@ private slots:
 private:
     ColumnEditor *columnEditor; /**< The subdialog for adding or editing columns */
     Database *db; /**< The database being edited */
+    QStackedWidget *stack; /**< Main widget stack (data display and "no columns" label) */
     QTreeWidget *table; /**< The display of the column definition data */
+    QLabel *noColumns; /**< "No columns" placeholder label */
     QStringList originalCols; /**< The list of columns that existed when the dialog was launched */
     QStringList deletedCols; /**< The list of columns that have been marked for deletion */
     QStringList renamedCols; /**< The current names of all the original columns (including ones already marked for deletion) */

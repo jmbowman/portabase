@@ -42,9 +42,7 @@ public:
     static QListWidget *listWidget(QWidget *parent);
     static QTreeWidget *treeWidget(QWidget *parent, const QStringList &headers);
     static QAbstractButton *button(QWidget *parent);
-    static QIcon checkBoxIcon(int checked);
     static void updateRowColors(QAbstractItemView *view);
-    static void createCheckBoxIcons();
 
 private:
     static void setupLayout(QLayout *layout);
@@ -52,8 +50,6 @@ private:
 public:
     static QColor evenRowColor;
     static QColor oddRowColor;
-    static QIcon checkedIcon;
-    static QIcon uncheckedIcon;
 };
 
 #endif

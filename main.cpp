@@ -50,7 +50,6 @@ int main(int argc, char **argv) {
         return commandLine.process();
     }
     else {
-        Factory::createCheckBoxIcons();
         PortaBase pb;
         pb.setWindowTitle("PortaBase");
         EventFilter ef(&pb);

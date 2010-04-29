@@ -43,10 +43,12 @@ Calculator::Calculator(QWidget* parent)
     grid->setSizeConstraint(QLayout::SetFixedSize);
 
     display = new QLabel(this);
+#if !defined(Q_WS_MAEMO_5)
     display->setAutoFillBackground(true);
     QPalette displayPalette(display->palette());
     displayPalette.setColor(QPalette::Window, Qt::white);
     display->setPalette(displayPalette);
+#endif
 
     display->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     display->setAlignment(Qt::AlignRight | Qt::AlignVCenter);

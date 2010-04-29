@@ -1,7 +1,7 @@
 /*
  * enummanager.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,9 @@
 #include "pbdialog.h"
 
 class Database;
+class QLabel;
 class QListWidget;
+class QStackedWidget;
 
 /**
  * Dialog for managing a database's enumeration column types.
@@ -41,7 +43,9 @@ private slots:
     void moveDown();
 
 private:
+    QStackedWidget *stack; /**< Main widget stack (enum list and "no enums" label) */
     QListWidget *listWidget; /**< Display list of all defined enumerations */
+    QLabel *noEnums; /**< "No enums" placeholder label */
     Database *db; /**< The database being edited */
     bool contentChanged; /**< True if enumerations have been added, edited, or deleted */
     bool orderChanged; /**< True if enumerations have been reordered */

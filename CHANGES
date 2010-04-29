@@ -1,3 +1,21 @@
+2010-04-29  JMB  More Fremantle improvements, added some help text
+
+    Fixed the height of several widgets so they look correct on Fremantle.
+    Fixed the calculator dialog display background color.  Better checkbox
+    appearance in data tables.  Text in the data rows is now vertically
+    centered.  Fixed button placement in the column editor dialog.  Cleaner
+    layout for the condition editor dialog.  Removed redundant text from date
+    displays in the row editor.  Fixed the appearance of note field buttons in
+    the row editor.  Moved the standard add/edit/delete/up/down buttons to the
+    side button panel.  Use larger icons on Fremantle to accomodate the larger
+    buttons.  Fixed the input field widths in the time editing widget.  Fixed
+    the dialog stack back button chain when editing a row.
+    
+    In a change not specific to the Fremantle UI, I added some help text to the
+    database format, enum manager, and enum editor dialogs when they contain
+    no data.  This should make it a little easier to understand how to get
+    started when creating a new file.
+
 2010-04-27  JMB  Fremantle improvements, bugfixes
 
     Use stacked windows on Maemo Fremantle for more screen real estate and a

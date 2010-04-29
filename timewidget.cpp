@@ -1,7 +1,7 @@
 /*
  * timewidget.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,20 +31,25 @@
 TimeWidget::TimeWidget(QWidget *parent)
     : QWidget(parent)
 {
+#if defined(Q_WS_MAEMO_5)
+    int maxWidth = 70;
+#else
+    int maxWidth = 25;
+#endif
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     hourEdit = new QLineEdit(this);
     hourEdit->setMaxLength(2);
-    hourEdit->setMaximumWidth(25);
+    hourEdit->setMaximumWidth(maxWidth);
     layout->addWidget(hourEdit);
     layout->addWidget(new QLabel(" : ", this));
     minuteEdit = new QLineEdit(this);
     minuteEdit->setMaxLength(2);
-    minuteEdit->setMaximumWidth(25);
+    minuteEdit->setMaximumWidth(maxWidth);
     layout->addWidget(minuteEdit);
     layout->addWidget(new QLabel(" : ", this));
     secondEdit = new QLineEdit(this);
     secondEdit->setMaxLength(2);
-    secondEdit->setMaximumWidth(25);
+    secondEdit->setMaximumWidth(maxWidth);
     layout->addWidget(secondEdit);
     QSettings settings;
     QString timeFormat = settings.value("DateTime/TimeFormat",
@@ -62,7 +67,7 @@ TimeWidget::TimeWidget(QWidget *parent)
     noneButton->setCheckable(true);
     layout->addWidget(noneButton);
     connect(noneButton, SIGNAL(clicked()), this, SLOT(noneToggle()));
-    setMaximumHeight(noneButton->height());
+    setMaximumHeight(noneButton->sizeHint().height());
     layout->addWidget(new QWidget(this), 1);
 }
 

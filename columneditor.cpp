@@ -15,7 +15,6 @@
 
 #include <QCheckBox>
 #include <QComboBox>
-#include <QDialogButtonBox>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -38,10 +37,10 @@
  * @param parent The parent DBEditor dialog
  */
 ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
-  : QQDialog("", parent), db(dbase), dbEditor(parent), calcRoot(0), calcDecimals(2)
+  : PBDialog(tr("Column Definition"), parent), db(dbase), dbEditor(parent),
+  calcRoot(0), calcDecimals(2)
 {
-    QGridLayout *grid = Factory::gridLayout(this, true);
-
+    QGridLayout *grid = Factory::gridLayout(vbox);
     grid->addWidget(new QLabel(tr("Name"), this), 0, 0);
     nameBox = new QLineEdit(this);
     grid->addWidget(nameBox, 0, 1);
@@ -68,7 +67,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     defaultLabel = new QLabel(tr("Default"), this);
     grid->addWidget(defaultLabel, 2, 0);
     defaultStack = new QStackedWidget(this);
-    defaultStack->setMaximumHeight(typeBox->height());
+    defaultStack->setMaximumHeight(typeBox->sizeHint().height());
     grid->addWidget(defaultStack, 2, 1);
     defaultCheck = new QCheckBox(defaultStack);
     defaultStack->addWidget(defaultCheck);
@@ -99,13 +98,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     defaultStack->addWidget(defaultBlank);
     defaultStack->setCurrentWidget(defaultLine);
 
-    QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok
-                                                | QDialogButtonBox::Cancel;
-    QDialogButtonBox *box = new QDialogButtonBox(buttons, Qt::Horizontal, this);
-    grid->addWidget(box, 3, 0, 1, 2);
-    connect(box, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(box, SIGNAL(rejected()), this, SLOT(reject()));
-    finishConstruction();
+    finishLayout();
 }
 
 /**
@@ -336,7 +329,7 @@ void ColumnEditor::setTypeEditable(bool flag)
 int ColumnEditor::exec()
 {
     nameBox->setFocus();
-    return QDialog::exec();
+    return QQDialog::exec();
 }
 
 /**

@@ -39,7 +39,7 @@ ImageSelector::ImageSelector(Database *dbase, QWidget *parent)
     selectButton = new QPushButton(tr("Select an image"), this);
     addWidget(selectButton);
     connect(selectButton, SIGNAL(clicked()), this, SLOT(selectImage()));
-    setMaximumHeight(selectButton->height());
+    setMaximumHeight(selectButton->sizeHint().height());
 
     editButtons = new QWidget(this);
     QHBoxLayout *layout = Factory::hBoxLayout(editButtons, true);

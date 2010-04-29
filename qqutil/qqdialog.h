@@ -30,7 +30,7 @@ class QQDialog: public QDialog
 {
     Q_OBJECT
 public:
-    QQDialog(QString title, QWidget *parent=0);
+    QQDialog(QString title, QWidget *parent=0, bool small=false);
     virtual ~QQDialog();
 
     void setWindowTitle(const QString &title);
@@ -47,6 +47,7 @@ private:
     QString dialogClassName; /**< The class name of the subclass instance */
     int minWidthSetting; /**< The last loaded minimum width setting */
     int minHeightSetting; /**< The last loaded minimum height setting */
+    bool smallDialog; /**< True if the dialog is particularly small */
 };
 
 #endif

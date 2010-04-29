@@ -113,9 +113,13 @@ void DateWidget::updateDisplay()
  */
 QString DateWidget::toString(const QDate &date)
 {
-    QString value("%1 (%2)");
-    value = value.arg(date.toString(Qt::DefaultLocaleLongDate));
-    return value.arg(QDate::shortDayName(date.dayOfWeek()));
+#if defined(Q_WS_MAC)
+    QString value("%1, %2");
+    value = value.arg(QDate::longDayName(date.dayOfWeek()));
+    return value.arg(date.toString(Qt::DefaultLocaleLongDate));
+#else
+    return date.toString(Qt::DefaultLocaleLongDate);
+#endif
 }
 
 /**

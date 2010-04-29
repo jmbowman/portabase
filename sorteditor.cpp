@@ -162,10 +162,10 @@ void SortEditor::updateTable(const QStringList &colNames)
             else {
                 direction = tr("Descending");
             }
-            item->setIcon(0, QIcon(":/icons/checked.png"));
+            item->setCheckState(0, Qt::Checked);
         }
         else {
-            item->setIcon(0, QIcon(":/icons/unchecked.png"));
+            item->setCheckState(0, Qt::Unchecked);
         }
         item->setText(1, name);
         item->setText(2, direction);
@@ -190,13 +190,13 @@ void SortEditor::tableClicked(QTreeWidgetItem *item, int column)
     if (column == 0) {
         QString name = item->text(1);
         if (sortCols.contains(name)) {
-            item->setIcon(0, QIcon(":/icons/unchecked.png"));
+            item->setCheckState(0, Qt::Unchecked);
             sortCols.removeAll(name);
             descCols.removeAll(name);
             item->setText(2, "");
         }
         else {
-            item->setIcon(0, QIcon(":/icons/checked.png"));
+            item->setCheckState(0, Qt::Checked);
             sortCols.append(name);
             item->setText(2, tr("Ascending"));
         }

@@ -160,7 +160,7 @@ void RowViewer::updateContent()
     for (int i = 0; i < count; i++) {
         str += "<tr><td><font color=#0000ff>";
         str += prepareString(colNames[i]);
-        str += ":</font></td><td>";
+        str += ": </font></td><td valign=\"middle\">";
         int type = colTypes[i];
         if (type == BOOLEAN) {
             if (values[i].toInt()) {
@@ -252,7 +252,7 @@ void RowViewer::previousRow()
 void RowViewer::editRow()
 {
     int rowId = view->getId(index);
-    if (display->editRow(rowId)) {
+    if (display->editRow(rowId, false, this)) {
         accept();
     }
 }
@@ -263,7 +263,7 @@ void RowViewer::editRow()
 void RowViewer::copyRow()
 {
     int rowId = view->getId(index);
-    if (display->editRow(rowId, true)) {
+    if (display->editRow(rowId, true, this)) {
         accept();
     }
 }

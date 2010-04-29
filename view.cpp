@@ -252,14 +252,16 @@ QVariant View::data(const QModelIndex &index, int role) const
         return QVariant();
     }
     int type = dataTypes[colIndex];
-    if (role == Qt::DecorationRole) {
+    if (role == Qt::CheckStateRole) {
         if (type == BOOLEAN) {
             c4_RowRef row = dbview[rowIndex];
             c4_IntProp prop(ids[colIndex]);
             int value = prop (row);
-            return Factory::checkBoxIcon(value);
+            return (int)(value ? Qt::Checked : Qt::Unchecked);
         }
-        else if (type == IMAGE) {
+    }
+    if (role == Qt::DecorationRole) {
+        if (type == IMAGE) {
             c4_RowRef row = dbview[rowIndex];
             c4_StringProp prop(scIds[colIndex]);
             if (!QString::fromUtf8(prop (row)).isEmpty()) {
@@ -272,12 +274,6 @@ QVariant View::data(const QModelIndex &index, int role) const
         else {
             return QVariant();
         }
-    }
-    else if (role == Qt::TextAlignmentRole) {
-        if (type == INTEGER || type == FLOAT || type == CALC || type == SEQUENCE) {
-            return (int)Qt::AlignRight;
-        }
-        return (int)Qt::AlignLeft;
     }
     else if (role == Qt::DisplayRole) {
         c4_RowRef row = dbview[rowIndex];
@@ -319,6 +315,12 @@ QVariant View::data(const QModelIndex &index, int role) const
             return QString::fromUtf8(prop (row));
         }
         return QVariant();
+    }
+    else if (role == Qt::TextAlignmentRole) {
+        if (type == INTEGER || type == FLOAT || type == CALC || type == SEQUENCE) {
+            return (int)(Qt::AlignRight | Qt::AlignVCenter);
+        }
+        return (int)(Qt::AlignLeft | Qt::AlignVCenter);
     }
     else {
         return QVariant();

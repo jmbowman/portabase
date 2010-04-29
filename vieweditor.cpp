@@ -202,7 +202,7 @@ void ViewEditor::updateTable()
         }
         item->setTextAlignment(0, Qt::AlignHCenter);
         bool included = oldNames.contains(name);
-        item->setIcon(0, Factory::checkBoxIcon(included));
+        item->setCheckState(0, included ? Qt::Checked : Qt::Unchecked);
         item->setData(0, Qt::UserRole, included);
         item->setText(1, name);
     }
@@ -225,7 +225,7 @@ void ViewEditor::tableClicked(QTreeWidgetItem *item, int column)
     if (column == 0) {
         bool included = !item->data(0, Qt::UserRole).toBool();
         item->setData(0, Qt::UserRole, included);
-        item->setIcon(0, Factory::checkBoxIcon(included));
+        item->setCheckState(0, included ? Qt::Checked : Qt::Unchecked);
     }
 }
 

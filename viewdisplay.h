@@ -68,7 +68,7 @@ public:
 
 public slots:
     void addRow();
-    bool editRow(int rowId=-1, bool copy=false);
+    bool editRow(int rowId=-1, bool copy=false, QWidget *parent=0);
     void deleteRow();
     void slideshow();
     void viewRow();

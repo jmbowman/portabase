@@ -505,9 +505,10 @@ void ViewDisplay::addRow()
  * @param id The ID of the record to edit; if -1, the record selected in the
  *           display table is used
  * @param copy True if the specified record is to be copied rather than edited
+ * @param parent The parent widget of the new dialog (this widget if 0)
  * @return True if any changes were made, false otherwise
  */
-bool ViewDisplay::editRow(int id, bool copy)
+bool ViewDisplay::editRow(int id, bool copy, QWidget *parent)
 {
     int rowId = id;
     if (rowId == -1) {
@@ -515,7 +516,7 @@ bool ViewDisplay::editRow(int id, bool copy)
     }
     if (rowId != -1) {
         int rowIndex = model->view()->getIndex(rowId);
-        RowEditor rowEditor(this);
+        RowEditor rowEditor(parent ? parent : this);
         if (rowEditor.edit(model->database(), rowId, copy)) {
             if (copy) {
                 model->addRow();

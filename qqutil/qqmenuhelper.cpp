@@ -132,6 +132,8 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     quitAction->setIconVisibleInMenu(false);
     fileSaveAction->setIconVisibleInMenu(false);
     closeAction->setIconVisibleInMenu(false);
+#endif
+#if defined(Q_WS_MAC)
     docIcon = QIcon(":/icons/document_small.png");
     modifiedDocIcon = QIcon(darkenPixmap(QPixmap(":/icons/document_small.png")));
 #endif

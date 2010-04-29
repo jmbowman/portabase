@@ -1,7 +1,7 @@
 /*
  * enumeditor.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,10 @@
 #define DELETE_OPTION 2
 
 class Database;
+class QLabel;
 class QLineEdit;
 class QListWidget;
+class QStackedWidget;
 
 /**
  * Dialog for editing the name and option list of an enumerated column type.
@@ -65,7 +67,9 @@ private:
         Descending = 2
     };
     QLineEdit *nameBox; /**< Entry field for the enumeration's name */
+    QStackedWidget *stack; /**< Option data widget stack (option list and "no options" label) */
     QListWidget *listWidget; /**< Display of the enumeration options */
+    QLabel *noOptions; /**< "No options" placeholder label */
     Database *db; /**< The database being edited */
     QString originalName; /**< The name of the enumeration before editing started */
     c4_View info; /**< Data table for the current enumeration options */

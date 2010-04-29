@@ -203,7 +203,6 @@ maemo5|contains(QT_CONFIG, hildon): {
     DATADIR             = $$PREFIX/share
     DEFINES            += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
     TARGET              = portabase
-    RESOURCES           = resources/maemo.qrc
     INSTALLS           += target desktop service icon16 icon22 icon32 icon48 icon64 mime
     desktop.path        = $$DATADIR/applications/hildon
     desktop.files       = packaging/maemo/portabase.desktop
@@ -224,9 +223,11 @@ maemo5|contains(QT_CONFIG, hildon): {
 }
 contains(QT_CONFIG, hildon) {
     target.path         = $$PREFIX/bin
+    RESOURCES           = resources/diablo.qrc
 } else:maemo5 {
     QT                 += dbus maemo5
     target.path         = /opt/maemo
+    RESOURCES           = resources/fremantle.qrc
 }
 
 # Stuff for other Linux/UNIX platforms

@@ -1,7 +1,7 @@
 /*
  * pbdialog.h
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ class PBDialog: public QQDialog
 {
     Q_OBJECT
 public:
-    PBDialog(QString title, QWidget *parent = 0);
+    PBDialog(QString title, QWidget *parent = 0, bool small=false);
 
     bool validateName(const QString &newName, const QString &oldName,
                       const QStringList &otherNames);

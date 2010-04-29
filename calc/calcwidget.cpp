@@ -43,7 +43,7 @@ CalcWidget::CalcWidget(Database *dbase, const QString &calcName, const QStringLi
     button->setToolTip(tr("Update calculated value"));
     layout->addWidget(button);
     connect(button, SIGNAL(clicked()), this, SLOT(calculate()));
-    int height = button->height();
+    int height = button->sizeHint().height();
     setMaximumHeight(height);
 }
 

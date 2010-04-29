@@ -14,11 +14,13 @@
  */
 
 #include <QApplication>
+#include <QLabel>
 #include <QLayout>
 #include <QListWidget>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QStringList>
+#include <QStackedWidget>
 #include "database.h"
 #include "enumeditor.h"
 #include "enummanager.h"
@@ -33,10 +35,24 @@
 EnumManager::EnumManager(Database *dbase, QWidget *parent)
   : PBDialog(tr("Enum Manager"), parent), contentChanged(false), orderChanged(false)
 {
+    stack = new QStackedWidget(this);
+    vbox->addWidget(stack, 1);
+    QString text("<center>%1<br>%2</center>");
+    text = text.arg(tr("No enumerated column types defined"));
+    text = text.arg(tr("Press the \"Add\" button to create one"));
+    noEnums = new QLabel(text, stack);
+    stack->addWidget(noEnums);
+
     db = dbase;
-    listWidget = Factory::listWidget(this);
-    vbox->addWidget(listWidget);
+    listWidget = Factory::listWidget(stack);
+    stack->addWidget(listWidget);
     listWidget->addItems(db->listEnums());
+    if (listWidget->count() == 0) {
+        stack->setCurrentWidget(noEnums);
+    }
+    else {
+        stack->setCurrentWidget(listWidget);
+    }
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addEnum()));
@@ -57,6 +73,7 @@ void EnumManager::addEnum()
     if (enumEditor.edit(db, "")) {
         enumEditor.applyChanges();
         listWidget->addItem(enumEditor.getName());
+        stack->setCurrentWidget(listWidget);
         contentChanged = true;
     }
 }
@@ -106,6 +123,9 @@ void EnumManager::deleteEnum()
     }
     db->deleteEnum(enumName);
     delete item;
+    if (listWidget->count() == 0) {
+        stack->setCurrentWidget(noEnums);
+    }
     contentChanged = true;
 }
 

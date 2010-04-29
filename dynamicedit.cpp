@@ -1,7 +1,7 @@
 /*
  * dynamicedit.cpp
  *
- * (c) 2003,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,18 +45,22 @@ DynamicEdit::DynamicEdit(QWidget *parent)
 QSize DynamicEdit::sizeHint() const
 {
     QString content = toPlainText();
+    int height;
     if (content.isEmpty()) {
-        QSize size = qApp->fontMetrics().size(0, "Ag");
-        size.setWidth(100);
-        size.setHeight(size.height());
-        return size;
+        height = qApp->fontMetrics().size(0, "Ag").height();
     }
-    qreal rheight = document()->size().rheight();
-    int height = qRound(rheight);
-    // Want to round up, not down
-    if (rheight > height) {
-        height++;
+    else {
+        qreal rheight = document()->size().rheight();
+        height = qRound(rheight);
+        // Want to round up, not down
+        if (rheight > height) {
+            height++;
+        }
     }
+#if defined(Q_WS_MAEMO_5)
+    // on this platform, need to manually add room for the padding, etc.
+    height += 30;
+#endif
     return QSize(100, height);
 }
 

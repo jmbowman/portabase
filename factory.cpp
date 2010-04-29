@@ -25,8 +25,6 @@
 
 QColor Factory::evenRowColor(Qt::white);
 QColor Factory::oddRowColor(Qt::lightGray);
-QIcon Factory::checkedIcon;
-QIcon Factory::uncheckedIcon;
 
 /**
  * Create a QGridLayout and configure it with no margin or spacing (to better
@@ -209,16 +207,6 @@ QAbstractButton *Factory::button(QWidget *parent)
 }
 
 /**
- * Get the appropriate check box icon for the given boolean field value.
- *
- * @param checked 0 if false (unchecked), any other value for true (checked)
- */
-QIcon Factory::checkBoxIcon(int checked)
-{
-    return checked ? checkedIcon : uncheckedIcon;
-}
-
-/**
  * Update the row colors for a list or tree widget to match the ones currently
  * specified in the application preferences.
  *
@@ -234,13 +222,4 @@ void Factory::updateRowColors(QAbstractItemView *view)
     viewPalette.setColor(QPalette::AlternateBase, oddRowColor);
     view->setPalette(viewPalette);
 #endif
-}
-
-/**
- * Create check box images to use as boolean value indicators.
- */
-void Factory::createCheckBoxIcons()
-{
-    checkedIcon = QIcon(":/icons/checked.png");
-    uncheckedIcon = QIcon(":/icons/unchecked.png");
 }

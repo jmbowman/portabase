@@ -36,12 +36,11 @@
  * @param parent The dialog's parent widget, if any
  */
 ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
-  : PBDialog(tr("Condition Editor"), parent), dataType(STRING)
+  : PBDialog(tr("Condition Editor"), parent, true), dataType(STRING)
 {
     db = dbase;
-    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     columnList= new QComboBox(this);
-    hbox->addWidget(columnList);
+    vbox->addWidget(columnList);
     columnList->addItem(tr("Any text column"));
     QStringList tempNames = db->listColumns();
     int count = tempNames.count();
@@ -56,9 +55,8 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
     }
     connect(columnList, SIGNAL(activated(int)),
             this, SLOT(updateDisplay(int)));
-    hbox->addStretch(1);
 
-    hbox = Factory::hBoxLayout(vbox);
+    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     opList = new QComboBox(this);
     opList->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     hbox->addWidget(opList);
@@ -85,13 +83,11 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
     numberOps.append(Condition::GreaterEqual);
 
     updateOpList();
-    hbox->addWidget(new QLabel("  ", this));
     caseCheck = new QCheckBox(tr("Case sensitive"), this);
     hbox->addWidget(caseCheck);
-    hbox->addStretch(1);
 
     constantStack = new QStackedWidget(this);
-    constantStack->setMaximumHeight(columnList->height());
+    constantStack->setMaximumHeight(columnList->sizeHint().height());
     vbox->addWidget(constantStack);
     constantLine = new QLineEdit(constantStack);
     constantStack->addWidget(constantLine);

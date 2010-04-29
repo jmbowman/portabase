@@ -29,14 +29,19 @@
  * @param parent The dialog's parent widget, if any.  Should usually be
  *               provided, modal dialogs and taskbar representation are a
  *               little odd otherwise.
+ * @param small True if the dialog is small enough that it shouldn't be
+ *              maximized on platforms with small screens (like Maemo)
  */
-QQDialog::QQDialog(QString title, QWidget *parent)
-    : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint)
+QQDialog::QQDialog(QString title, QWidget *parent, bool small)
+    : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
+    smallDialog(small)
 {
     setWindowTitle(title);
 #if defined(Q_WS_MAEMO_5)
-    setAttribute(Qt::WA_Maemo5StackedWindow);
-    setWindowFlags(Qt::Window);
+    if (!small) {
+        setAttribute(Qt::WA_Maemo5StackedWindow);
+        setWindowFlags(Qt::Window);
+    }
 #endif
 }
 
@@ -77,10 +82,11 @@ void QQDialog::setWindowTitle(const QString &title)
  */
 int QQDialog::exec()
 {
-
 #if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
-    showMaximized();
-    resize(parentWidget()->width(), height());
+    if (!smallDialog) {
+        showMaximized();
+        resize(parentWidget()->width(), height());
+    }
 #endif
     return QDialog::exec();
 }
@@ -128,6 +134,7 @@ QDialogButtonBox *QQDialog::addOkCancelButtons(QBoxLayout *layout, bool ok,
  */
 void QQDialog::finishConstruction(int minWidth, int minHeight)
 {
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     QSettings settings;
     dialogClassName = metaObject()->className();
     QString widthName = QString("DialogSizes/%1Width").arg(dialogClassName);
@@ -137,4 +144,5 @@ void QQDialog::finishConstruction(int minWidth, int minHeight)
     if (minWidthSetting != -1 && minHeightSetting != -1) {
         resize(minWidthSetting, minHeightSetting);
     }
+#endif
 }

@@ -16,7 +16,7 @@
 #ifndef COLUMNEDITOR_H
 #define COLUMNEDITOR_H
 
-#include "qqutil/qqdialog.h"
+#include "pbdialog.h"
 
 class CalcNode;
 class DBEditor;
@@ -34,7 +34,7 @@ class QStackedWidget;
  * A dialog for setting the properties of a database column.  Used by
  * DBEditor.
  */
-class ColumnEditor: public QQDialog
+class ColumnEditor: public PBDialog
 {
     Q_OBJECT
 public:

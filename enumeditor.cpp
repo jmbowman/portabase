@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
+#include <QStackedWidget>
 #include <QTextStream>
 #include "database.h"
 #include "enumeditor.h"
@@ -58,8 +59,18 @@ EnumEditor::EnumEditor(QWidget *parent)
     hbox->addWidget(exportButton);
     connect(exportButton, SIGNAL(clicked()), this, SLOT(exportOptions()));
 
-    listWidget = Factory::listWidget(this);
-    vbox->addWidget(listWidget);
+    stack = new QStackedWidget(this);
+    vbox->addWidget(stack, 1);
+    QString text("<center>%1<br>%2<br>%3</center>");
+    text = text.arg(tr("No options defined for this enumeration type"));
+    text = text.arg(tr("Press the \"Add\" button to create one, or press"));
+    text = text.arg(tr("the \"Import\" button to load lines from a text file"));
+    noOptions = new QLabel(text, stack);
+    stack->addWidget(noOptions);
+
+    listWidget = Factory::listWidget(stack);
+    stack->addWidget(listWidget);
+    stack->setCurrentWidget(noOptions);
 
     addEditButtons();
     connect(addButton, SIGNAL(clicked()), this, SLOT(addOption()));
@@ -362,6 +373,12 @@ void EnumEditor::updateList()
 {
     listWidget->clear();
     listWidget->addItems(listCurrentOptions());
+    if (listWidget->count() == 0) {
+        stack->setCurrentWidget(noOptions);
+    }
+    else {
+        stack->setCurrentWidget(listWidget);
+    }
 }
 
 /**

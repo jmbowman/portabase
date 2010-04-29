@@ -14,6 +14,7 @@
  */
 
 #include <QApplication>
+#include <QDialogButtonBox>
 #include <QLabel>
 #include <QMessageBox>
 #include <QPushButton>
@@ -28,9 +29,12 @@
  * @param parent The dialog's parent widget, if any.  Should usually be
  *               provided, modal dialogs and taskbar representation are a
  *               little odd otherwise
+ * @param small True if the dialog is small enough that it shouldn't be
+ *              maximized on platforms with small screens (like Maemo)
  */
-PBDialog::PBDialog(QString title, QWidget *parent)
-    : QQDialog(title, parent)
+PBDialog::PBDialog(QString title, QWidget *parent, bool small)
+    : QQDialog(title, parent, small), addButton(0), editButton(0),
+    deleteButton(0), upButton(0), downButton(0)
 {
 #if defined(Q_WS_MAEMO_5)
     QHBoxLayout *hbox = Factory::hBoxLayout(this, true);
@@ -55,10 +59,19 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
                                          int minWidth, int minHeight)
 {
     QDialogButtonBox *okCancelRow = 0;
-    if (okButton || cancelButton) {
-        okCancelRow = addOkCancelButtons(static_cast<QBoxLayout *>(layout()),
-                                         okButton, cancelButton);
+    okCancelRow = addOkCancelButtons(static_cast<QBoxLayout *>(layout()),
+                                     okButton, cancelButton);
+#if defined(Q_WS_MAEMO_5)
+    if (addButton) {
+        okCancelRow->addButton(addButton, QDialogButtonBox::ActionRole);
+        okCancelRow->addButton(editButton, QDialogButtonBox::ActionRole);
+        okCancelRow->addButton(deleteButton, QDialogButtonBox::ActionRole);
     }
+    if (upButton) {
+        okCancelRow->addButton(upButton, QDialogButtonBox::ActionRole);
+        okCancelRow->addButton(downButton, QDialogButtonBox::ActionRole);
+    }
+#endif
     finishConstruction(minWidth, minHeight);
     return okCancelRow;
 }
@@ -73,21 +86,25 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
  */
 void PBDialog::addEditButtons(bool movementOnly)
 {
-    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     if (!movementOnly) {
         addButton = new QPushButton(tr("Add"), this);
-        hbox->addWidget(addButton);
         editButton = new QPushButton(tr("Edit"), this);
-        hbox->addWidget(editButton);
         deleteButton = new QPushButton(tr("Delete"), this);
-        hbox->addWidget(deleteButton);
     }
     upButton = new QPushButton(tr("Up"), this);
-    hbox->addWidget(upButton);
     downButton = new QPushButton(tr("Down"), this);
+#if !defined(Q_WS_MAEMO_5)
+    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
+    if (!movementOnly) {
+        hbox->addWidget(addButton);
+        hbox->addWidget(editButton);
+        hbox->addWidget(deleteButton);
+    }
+    hbox->addWidget(upButton);
     hbox->addWidget(downButton);
     // leave a blank space before the OK and Cancel buttons
     vbox->addWidget(new QLabel(" ", this));
+#endif
 }
 
 /**

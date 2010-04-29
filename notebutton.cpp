@@ -1,7 +1,7 @@
 /*
  * notebutton.cpp
  *
- * (c) 2002-2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,12 +26,18 @@
  * @param parent This button's parent widget
  */
 NoteButton::NoteButton(const QString &colName, QWidget *parent)
+#if defined(Q_WS_MAEMO_5)
+    : QPushButton(parent), name(colName)
+#else
     : QToolButton(parent), name(colName)
+#endif
 {
     setIcon(QIcon(":/icons/note.png"));
+#if !defined(Q_WS_MAEMO_5)
     setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
                               QSizePolicy::Fixed, QSizePolicy::ToolButton));
+#endif
     connect(this, SIGNAL(clicked()), this, SLOT(launchEditor()));
 }
 
@@ -88,7 +94,7 @@ void NoteButton::launchEditor()
  */
 void NoteButton::resizeEvent(QResizeEvent *event)
 {
-  QToolButton::resizeEvent(event);
+  QAbstractButton::resizeEvent(event);
   setContent(noteContent);
 }
 
@@ -100,6 +106,6 @@ void NoteButton::resizeEvent(QResizeEvent *event)
  */
 void NoteButton::showEvent(QShowEvent *event)
 {
-    QToolButton::showEvent(event);
+    QAbstractButton::showEvent(event);
     setContent(noteContent);
 }
