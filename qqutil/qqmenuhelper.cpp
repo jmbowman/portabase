@@ -333,6 +333,7 @@ void QQMenuHelper::updateRecentMenu()
             recentActions[i]->setText("");
         }
     }
+    emit recentFilesChanged();
 }
 
 /**
@@ -673,6 +674,8 @@ void QQMenuHelper::openRecent()
     if (!QFile::exists(path)) {
         QMessageBox::warning(mainWindow, qApp->applicationName(),
                              tr("File does not exist"));
+        recentFiles.removeOne(path);
+        updateRecentMenu();
         return;
     }
     if (QFileInfo(path).isDir()) {

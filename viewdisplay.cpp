@@ -64,6 +64,12 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     table->setAllColumnsShowFocus(true);
     table->setRootIsDecorated(false);
     table->setAlternatingRowColors(true);
+#if defined(Q_WS_HILDON)
+    table->setIconSize(QSize(24, 24));
+#endif
+#if defined(Q_WS_MAEMO_5)
+    table->setIconSize(QSize(32, 32));
+#endif
     Factory::updateRowColors(table);
     model = new DataModel(this);
     connect(model, SIGNAL(viewLoaded(View *)),

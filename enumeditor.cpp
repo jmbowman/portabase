@@ -61,10 +61,10 @@ EnumEditor::EnumEditor(QWidget *parent)
 
     stack = new QStackedWidget(this);
     vbox->addWidget(stack, 1);
-    QString text("<center>%1<br>%2<br>%3</center>");
+    QString text("<center>%1<br><br>%2</center>");
     text = text.arg(tr("No options defined for this enumeration type"));
-    text = text.arg(tr("Press the \"Add\" button to create one, or press"));
-    text = text.arg(tr("the \"Import\" button to load lines from a text file"));
+    QString extraText = tr("Press the \"Add\" button to create one, or press\nthe \"Import\" button to load lines from a text file");
+    text = text.arg(extraText.replace("\n", "<br>"));
     noOptions = new QLabel(text, stack);
     stack->addWidget(noOptions);
 

@@ -36,6 +36,13 @@ ViewEditor::ViewEditor(QWidget *parent)
     nameBox = new QLineEdit(this);
     hbox->addWidget(nameBox);
 
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    hbox = Factory::hBoxLayout(vbox);
+    sortingBox = new QComboBox(this);
+    hbox->addWidget(sortingBox);
+    filterBox = new QComboBox(this);
+    hbox->addWidget(filterBox);
+#else
     hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Default Sorting") + " ", this));
     sortingBox = new QComboBox(this);
@@ -45,6 +52,7 @@ ViewEditor::ViewEditor(QWidget *parent)
     hbox->addWidget(new QLabel(tr("Default Filter") + " ", this));
     filterBox = new QComboBox(this);
     hbox->addWidget(filterBox, 1);
+#endif
 
     QStringList headers;
     headers << tr("Include") << tr("Column Name");
@@ -80,7 +88,7 @@ int ViewEditor::edit(Database *subject, const QString &viewName,
     nameBox->setText(viewName);
 
     sortingBox->clear();
-    sortingBox->addItem(tr("None"));
+    sortingBox->addItem(tr("No default sorting"));
     QStringList sortings = db->listSortings();
     sortings.removeAll("_single");
     sortingBox->addItems(sortings);
@@ -96,7 +104,7 @@ int ViewEditor::edit(Database *subject, const QString &viewName,
     }
 
     filterBox->clear();
-    filterBox->addItem(tr("None"));
+    filterBox->addItem(tr("No default filter"));
     filterBox->addItem(tr("All Rows"));
     QStringList filters = db->listFilters();
     filters.removeAll("_simple");

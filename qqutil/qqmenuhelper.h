@@ -108,6 +108,7 @@ public:
 signals:
     void newFile(const QString &);
     void openFile(const QString &);
+    void recentFilesChanged();
     void saveFile();
     void closeFile();
     void editPreferences();

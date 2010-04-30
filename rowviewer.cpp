@@ -33,6 +33,10 @@
 #include "viewdisplay.h"
 #include "image/imageutils.h"
 
+#if defined(Q_WS_MAEMO_5)
+#include <QAbstractKineticScroller>
+#endif
+
 /**
  * Constructor.
  *
@@ -51,6 +55,13 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     tv->document()->addResource(QTextDocument::ImageResource,
                                 QUrl("img://icons/unchecked.png"),
                                 QPixmap(":/icons/unchecked.png"));
+#if defined(Q_WS_MAEMO_5)
+    QVariant ksProp = tv->property("kineticScroller");
+    QAbstractKineticScroller *ks = ksProp.value<QAbstractKineticScroller *>();
+    if (ks) {
+        ks->setEnabled(true);
+    }
+#endif
     vbox->addWidget(tv);
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
@@ -86,11 +97,15 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
     hbox->addWidget(viewBox, 1);
 
+#if !defined(Q_WS_MAEMO_5)
+    // kinetic scrolling takes precedence over text copy on Fremantle
     QAbstractButton *copyTextButton = Factory::button(this);
     copyTextButton->setIcon(QIcon(":/icons/copy_text.png"));
     copyTextButton->setToolTip(tr("Copy the selected text"));
     connect(copyTextButton, SIGNAL(clicked()), tv, SLOT(copy()));
     hbox->addWidget(copyTextButton);
+#endif
+
     nextButton = Factory::button(this);
     nextButton->setIcon(QIcon(":/icons/forward.png"));
     nextButton->setToolTip(tr("Next row"));
@@ -158,7 +173,13 @@ void RowViewer::updateContent()
     int count = colNames.count();
     int imageIndex = 0;
     for (int i = 0; i < count; i++) {
-        str += "<tr><td><font color=#0000ff>";
+        if (i % 2 == 0) {
+            str += "<tr>";
+        }
+        else {
+            str += "<tr bgcolor=\"lightgray\">";
+        }
+        str += "<td><font color=#0000ff>";
         str += prepareString(colNames[i]);
         str += ": </font></td><td valign=\"middle\">";
         int type = colTypes[i];

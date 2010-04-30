@@ -25,9 +25,8 @@ class QPushButton;
 
 /**
  * A widget for selecting and displaying a single date.  It consists of a
- * row of sub-widgets: a button which launches a date selection dialog,
- * a text label showing the currently selected date, and a button to reset
- * the date selection to "None" (blank).  Used by CalcDateEditor,
+ * row of sub-widgets: a text label showing the currently selected date and a
+ * button which launches a date selection dialog.  Used by CalcDateEditor,
  * ConditionEditor, and RowEditor.
  * <p>
  * Note that some of this class's methods use an integer representation for
@@ -47,7 +46,6 @@ public:
 
 private slots:
     void launchSelector();
-    void setToNone();
 
 private:
     bool isNoneDate(const QDate &date);
@@ -57,7 +55,6 @@ private:
 private:
     QDate dateObj; /**< The date currently being shown */
     QLabel *display; /**< The text label showing the date */
-    QPushButton *noneButton; /**< Button to set the date to "None" */
 };
 
 #endif

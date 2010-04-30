@@ -1,3 +1,22 @@
+2010-04-30  JMB  Proper D-Bus support, more bugfixes and Maemo improvements
+
+    Added code to correctly register with D-Bus on Maemo; this allows PortaBase
+    to be launched by clicking on a file in the file manager, ensures that only
+    one copy of PortaBase is open, and prevents PortaBase from crashing shortly
+    after being launched from the menu.
+    
+    Moved the "None" date button from the row editor to the date picker dialog,
+    allowing long dates to fit comfortably even on smaller screens.  Fixed a
+    recently-introduced bug in the toggling of column sorting directions.  Use
+    space more efficiently for dialog buttons on Diablo.  Clean up files in the
+    recently used list after they're discovered to no longer exist.  Added an
+    import toolbar button.  Hide the redundant new/open/import buttons on Maemo
+    once there's a recent files list, in order to save screen space.  Alternate
+    row shading in the row viewer, and kinetic scrolling for it in Fremantle.
+    Use screen space a little more efficiently in the Maemo version of the view
+    editor dialog.  Made image icons in the data table a little bigger for
+    Maemo.  Prepared a few files for the upcoming beta release.
+
 2010-04-29  JMB  More Fremantle improvements, added some help text
 
     Fixed the height of several widgets so they look correct on Fremantle.

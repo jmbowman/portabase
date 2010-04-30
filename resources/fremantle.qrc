@@ -8,12 +8,12 @@
      <file alias="calendar.png">icons/fremantle/calendar.png</file>
      <file alias="close.png">icons/mac/close.png</file>
      <file alias="copy_row.png">icons/fremantle/copy_row.png</file>
-     <file alias="copy_text.png">icons/fremantle/copy_text.png</file>
      <file alias="delete.png">icons/fremantle/delete.png</file>
      <file alias="edit.png">icons/fremantle/edit.png</file>
      <file alias="find.png">icons/fremantle/find.png</file>
      <file alias="forward.png">icons/fremantle/forward.png</file>
      <file alias="image.png">icons/mac/image.png</file>
+     <file alias="import.png">icons/fremantle/import.png</file>
      <file alias="new.png">icons/fremantle/new.png</file>
      <file alias="note.png">icons/mac/note.png</file>
      <file alias="open.png">icons/fremantle/open.png</file>

@@ -45,6 +45,7 @@ typedef QList<QAction*> ActionList;
 class PortaBase: public QMainWindow
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "net.sourceforge.portabase")
 public:
     PortaBase(QWidget *parent = 0);
     ~PortaBase();
@@ -59,11 +60,14 @@ public:
     void changeSorting(const QString &name);
     void changeFilter(const QString &name);
 
-public slots:
+public Q_SLOTS:
     void openFile(const QString &file);
+    Q_SCRIPTABLE void mime_open(const QString &url);
+    Q_SCRIPTABLE int top_application();
 
 private slots:
     void newFile(const QString &file);
+    void updateRecentFileButtons();
     bool editColumns();
     void editEnums();
     void viewProperties();
@@ -129,6 +133,9 @@ private:
     Database *db; /**< The currently open database, if any */
     QStackedWidget *mainStack; /**< Main widget stack (data display and "No file selected" label) */
     QScrollArea *noFileWidget; /**< The main widget shown when no file is open */
+    QPushButton *newButton; /**< The button for creating a new file */
+    QPushButton *openButton; /**< The button for picking an existing file to open */
+    QPushButton *importButton; /**< The button for importing from another format */
     QGroupBox *recentBox; /**< The grouping box containing recentButtons */
     QPushButton* recentButtons[MAX_RECENT_FILES]; /**< Buttons on noFileWidget representing the most recently opened files */
     QToolBar *toolbar; /**< The application toolbar */
@@ -167,7 +174,7 @@ private:
     QAction *sortingsAction; /**< Toolbar "Sortings" action */
     QAction *filtersAction; /**< Toolbar "Filters" action */
     QAction *fullscreenAction; /**< Toolbar "Fullscreen" action */
-    QAction* fillerActions[7]; /**< Toolbar filler actions; Mac toolbar quirk */
+    QAction* fillerActions[6]; /**< Toolbar filler actions; Mac toolbar quirk */
     QMenu *row; /**< "Row" Menu */
     QMenu *view; /**< "View" Menu */
     QMenu *sort; /**< "Sort" Menu */

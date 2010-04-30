@@ -103,6 +103,8 @@ PortaBase::PortaBase(QWidget *parent)
     connect(mh, SIGNAL(openFile(const QString &)),
             this, SLOT(openFile(const QString &)));
     connect(mh, SIGNAL(closeFile()), this, SLOT(close()));
+    connect(mh, SIGNAL(recentFilesChanged()),
+            this, SLOT(updateRecentFileButtons()));
     connect(mh, SIGNAL(editPreferences()), this, SLOT(editPreferences()));
     connect(mh, SIGNAL(quit()), this, SLOT(quit()));
     connect(mh, SIGNAL(saveFile()), this, SLOT(save()));
@@ -114,7 +116,7 @@ PortaBase::PortaBase(QWidget *parent)
     QIcon deleteIcon = QIcon(":/icons/delete.png");
 
     // file selector actions
-    importAction = ma->action(MenuActions::Import);
+    importAction = ma->action(MenuActions::Import, QIcon(":/icons/import.png"));
     connect(importAction, SIGNAL(triggered()), this, SLOT(import()));
 
     // File menu actions
@@ -257,6 +259,7 @@ PortaBase::PortaBase(QWidget *parent)
 #endif
 
     // Toolbar
+    mh->addToToolBar(importAction);
     mh->addToToolBar(rowAddAction);
     mh->addToToolBar(rowEditAction);
     mh->addToToolBar(rowDeleteAction);
@@ -277,22 +280,20 @@ PortaBase::PortaBase(QWidget *parent)
     QVBoxLayout *vlayout = Factory::vBoxLayout(hlayout);
     vlayout->addStretch(1);
     QAction *action = mh->action(QQMenuHelper::New);
-    QPushButton *button = new QPushButton(action->icon(),
-                                          action->statusTip(),
-                                          buttonPanel);
-    connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
-    vlayout->addWidget(button);
+    newButton = new QPushButton(action->icon(), action->statusTip(),
+                                 buttonPanel);
+    connect(newButton, SIGNAL(clicked()), action, SIGNAL(triggered()));
+    vlayout->addWidget(newButton);
     action = mh->action(QQMenuHelper::Open);
-    button = new QPushButton(action->icon(),
-                             action->statusTip(),
-                             buttonPanel);
-    connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
-    vlayout->addWidget(button);
-    button = new QPushButton(importAction->icon(),
-                             importAction->statusTip(),
-                             buttonPanel);
-    connect(button, SIGNAL(clicked()), importAction, SIGNAL(triggered()));
-    vlayout->addWidget(button);
+    openButton = new QPushButton(action->icon(), action->statusTip(),
+                                  buttonPanel);
+    connect(openButton, SIGNAL(clicked()), action, SIGNAL(triggered()));
+    vlayout->addWidget(openButton);
+    importButton = new QPushButton(importAction->icon(),
+                                    importAction->statusTip(),
+                                    buttonPanel);
+    connect(importButton, SIGNAL(clicked()), importAction, SIGNAL(triggered()));
+    vlayout->addWidget(importButton);
     recentBox = new QGroupBox(tr("Recently opened files"), buttonPanel);
     recentBox->setAlignment(Qt::AlignHCenter);
     QVBoxLayout *boxLayout = Factory::vBoxLayout(recentBox, true);
@@ -730,6 +731,36 @@ void PortaBase::closeViewer()
 }
 
 /**
+ * Update the recent file buttons on the file selector screen.  Called
+ * whenever QQMenuHelper updates the recent files menu (a new file is created,
+ * a file is opened, the file selector mode is re-entered, or a recent file
+ * is discovered to no longer exist).
+ */
+void PortaBase::updateRecentFileButtons()
+{
+    QStringList recentFiles;
+    recentFiles << mh->action(QQMenuHelper::Recent1)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent2)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent3)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent4)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent5)->text();
+    for (int i = 0; i < MAX_RECENT_FILES; i++) {
+        QString path = recentFiles[i];
+        QFileInfo info(path);
+        recentButtons[i]->setText(info.baseName());
+        recentButtons[i]->setToolTip(path);
+        recentButtons[i]->setVisible(!path.isEmpty());
+    }
+    bool recentFilesExist = !recentButtons[0]->text().isEmpty();
+    recentBox->setVisible(recentFilesExist);
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    newButton->setVisible(!recentFilesExist);
+    openButton->setVisible(!recentFilesExist);
+    importButton->setVisible(!recentFilesExist);
+#endif
+}
+
+/**
  * Enter "select a file" mode, where there is no currently open database.
  */
 void PortaBase::showFileSelector()
@@ -772,22 +803,6 @@ void PortaBase::showFileSelector()
     viewsAction->setVisible(false);
     sortingsAction->setVisible(false);
     filtersAction->setVisible(false);
-
-    // Update the recent file buttons
-    QStringList recentFiles;
-    recentFiles << mh->action(QQMenuHelper::Recent1)->text();
-    recentFiles << mh->action(QQMenuHelper::Recent2)->text();
-    recentFiles << mh->action(QQMenuHelper::Recent3)->text();
-    recentFiles << mh->action(QQMenuHelper::Recent4)->text();
-    recentFiles << mh->action(QQMenuHelper::Recent5)->text();
-    for (int i = 0; i < MAX_RECENT_FILES; i++) {
-        QString path = recentFiles[i];
-        QFileInfo info(path);
-        recentButtons[i]->setText(info.baseName());
-        recentButtons[i]->setToolTip(path);
-        recentButtons[i]->setVisible(!path.isEmpty());
-    }
-    recentBox->setVisible(!recentButtons[0]->text().isEmpty());
 
     mainStack->setCurrentWidget(noFileWidget);
 }
@@ -838,7 +853,7 @@ void PortaBase::showDataViewer()
     sortingsAction->setVisible(true);
     filtersAction->setVisible(true);
     findAction->setVisible(true);
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 6; i++) {
         fillerActions[i]->setVisible(false);
     }
 
@@ -1785,7 +1800,7 @@ QSettings *PortaBase::getSettings()
  * of displayed buttons once it shrinks).
  */
 void PortaBase::createFillerActions() {
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 6; i++) {
         fillerActions[i] = new QAction("", this);
 #if defined(Q_WS_MAC)
         toolbar->addAction(fillerActions[i]);
@@ -1799,7 +1814,7 @@ void PortaBase::createFillerActions() {
  */
 void PortaBase::showAllFillerActions() {
 #if defined(Q_WS_MAC)
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 6; i++) {
         fillerActions[i]->setVisible(true);
     }
 #endif
@@ -1871,8 +1886,33 @@ void PortaBase::print(QPrinter *p)
 void PortaBase::aboutPortaBase()
 {
     QString appName = qApp->applicationName();
-    QString text = appName + " 2.0\n\n" + tr("Copyright (C)")
+    QString text = appName + " 2.0b1\n\n" + tr("Copyright (C)")
                    + " 2002-2010\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::about(this, tr("About %1").arg(appName), text);
+}
+
+/**
+ * Handler for Maemo D-Bus messages to open a specified file.
+ */
+void PortaBase::mime_open(const QString &url)
+{
+    QString path = QUrl(url).toLocalFile();
+    if (!QFile::exists(path)) {
+        QString message("%1:\n%2");
+        message = message.arg(tr("No such file exists"));
+        QMessageBox::warning(this, qApp->applicationName(),
+                             message.arg(url));
+        return;
+    }
+    openFile(path);
+}
+
+/**
+ * Handler for Maemo D-Bus messages to become the currently-shown application.
+ */
+int PortaBase::top_application()
+{
+    activateWindow();
+    return 0;
 }

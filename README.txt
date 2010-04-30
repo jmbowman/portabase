@@ -1,9 +1,8 @@
-PortaBase 1.9 (March 2004)
----------------------------
-PortaBase (portable database) is a personal database application originally
-written for the Linux-based models of Sharp Zaurus PDA (and should work on
-any other Linux PDA using the Qtopia environment.)  It can now also be
-run as a Linux, Mac OS X, or Windows desktop application.
+PortaBase 2.0 beta 1 (May 2010)
+-------------------------------
+PortaBase (portable database) is a program for conveniently managing one-table
+database files. It is available for many platforms, including Linux, Mac OS X,
+Windows, and Maemo (Diablo and Fremantle).
 
 The main features PortaBase currently has are:
 - One data table per file
@@ -14,7 +13,7 @@ The main features PortaBase currently has are:
 - Filter the displayed rows using sets of conditions
 - Sort the rows by any combination of columns, each in ascending or descending
   order
-- Page navigation buttons, with a custom number of rows per page
+- Optional page navigation buttons, with a custom number of rows per page
 - Add, delete, rearrange, and rename columns at any time
 - Specify default values for columns
 - View summary statistics for columns (total, average, min, max, etc.)
@@ -24,30 +23,31 @@ The main features PortaBase currently has are:
   from MobileDB)
 - Data file encryption
 - Unicode support
-- Pick any available font to use throughout the application
-- User-specified alternating row background colors
+- Pick any available font to use throughout the application (except on
+  Mac OS X)
+- User-specified alternating row background colors (except on Fremantle)
 - Simple calculator widget for entering numeric data
-- Customizable menu and toolbar configuration
 
-See the help file (help/html/portabase.html) for more information on features
-and usage.  This help file is also the online help for the application,
-available by clicking the "?" button at the top right of any screen in
-PortaBase for the Zaurus, or Help->Help Contents in desktop PortaBase.
+See the application's help dialog for more information on features and usage.
 
-Zaurus Upgrades
----------------
-To upgrade from a previous version of PortaBase, do the following:
+Note for Zaurus Users
+---------------------
+The complete lack of new releases of Qt or Qtopia for the Zaurus has made it
+impractical to continue developing for it; every single feature would need to
+be implemented separately for two different codebases.  However, there are no
+file format changes for PortaBase 2.0; files can still be moved freely between
+the new release and PortaBase 1.9 on the Zaurus.  A future PortaBase 2.1
+release is likely to end this compatibility, however.  Maemo (as used on the
+Nokia N810 and N900) is recommended for people who want to continue using
+PortaBase on a pocketable device.  Ports to Windows Mobile, Symbian S60,
+and/or webOS may be forthcoming as well.
 
-1) uninstall libmetakit1 (if upgrading from 1.5 or earlier) and portabase
-   (your data files will be left alone)
-2) install the new portabase .ipk file
-3) delete the .ipk file (you don't have to, but it frees up space)
-
-IMPORTANT NOTE: Metakit is no longer installed as a separate library.
-PortaBase now also uses the BeeCrypt and libjpeg libraries, and installing
-each library separately makes things more complicated than most people
-would prefer.  All these libraries are now compiled into the PortaBase
-executable.
+Maemo Installation
+------------------
+PortaBase is being submitted to the extras-devel repository, you should be
+able to download and install it from there.  In time, it should make its way
+to the extras-testing and extras repositories as well, for users who are a
+little less adventurous.
 
 Windows Installation and Upgrades
 ---------------------------------
@@ -57,27 +57,26 @@ just follow the directions.
 Mac OS X Installation
 ---------------------
 Extract the application bundle from the downloaded archive and put it where
-you want it.
+you want it (usually your Applications folder).
 
 Technical Info and Acknowledgements
 -----------------------------------
-PortaBase is written in C++, using the Qt and Qtopia libraries for GUI widgets,
-data structures, and communication with the PDA environment.  It also uses:
-- the Metakit (http://www.equi4.com/metakit) embedded database library for data
-storage and manipulation
-- an enhanced version of the QtaDatePicker widget developed by John McDonald,
-available from http://prdownloads.sourceforge.net/zaurus/
+PortaBase is written in C++, using the Qt 4 library for GUI widgets, data
+structures, and communication with the operating system.  It also uses:
+
+- The Metakit (http://www.equi4.com/metakit) embedded database library for data
+  storage and manipulation
+- The Randomkit library (http://js2007.free.fr/code/index.html#RandomKit) for
+  cryptographic-strength random number generation
+- The Color Picker Qt Solution
+  (http://qt.nokia.com/products/appdev/add-on-products/catalog/4/Widgets/qtcolorpicker)
 - MobileDB import code based on code from ZReader
-(http://www.codecubed.com/zreader/index.html)
+  (http://www.killefiz.de/zaurus/showdetail.php?app=751)
 - CSV import code based on code from KSpread (http://www.koffice.org/kspread/)
-- the BeeCrypt library (http://www.virtualunlimited.com/products/beecrypt/)
-for encryption algorithms and good random number generation
-- the color picker dialog from HTML@Zaurus
-(http://www.codefactor.de/htmlAtZaurus.html), itself based on Qt's QColorDialog
+- Blowfish block cipher code based on the BeeCrypt library
+  (http://beecrypt.sourceforge.net/)
 - a modified version of the calculator widget from KMyMoney2
-(http://kmymoney2.sourceforge.net/)
-- libjpeg (http://www.ijg.org) for efficient loading and manipulation of JPEG
-image files
+  (http://kmymoney2.sourceforge.net/)
 
 License
 -------

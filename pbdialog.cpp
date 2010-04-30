@@ -61,7 +61,7 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
     QDialogButtonBox *okCancelRow = 0;
     okCancelRow = addOkCancelButtons(static_cast<QBoxLayout *>(layout()),
                                      okButton, cancelButton);
-#if defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     if (addButton) {
         okCancelRow->addButton(addButton, QDialogButtonBox::ActionRole);
         okCancelRow->addButton(editButton, QDialogButtonBox::ActionRole);
@@ -93,7 +93,7 @@ void PBDialog::addEditButtons(bool movementOnly)
     }
     upButton = new QPushButton(tr("Up"), this);
     downButton = new QPushButton(tr("Down"), this);
-#if !defined(Q_WS_MAEMO_5)
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     if (!movementOnly) {
         hbox->addWidget(addButton);

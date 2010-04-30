@@ -410,7 +410,12 @@ void View::toggleSort(int colIndex)
         sortColumn = colIndex;
     }
     else {
-        sortOrder = Qt::DescendingOrder;
+        if (sortOrder == Qt::AscendingOrder) {
+            sortOrder = Qt::DescendingOrder;
+        }
+        else {
+            sortOrder = Qt::AscendingOrder;
+        }
     }
 }
 

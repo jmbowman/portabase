@@ -5,7 +5,7 @@ DESTDIR         = build
 OBJECTS_DIR     = build
 MOC_DIR         = build
 RCC_DIR         = build
-VERSION         = 2.0.0
+VERSION         = 2.0.0b1
 TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_de.ts \
                   resources/translations/portabase_en.ts \
@@ -196,6 +196,7 @@ macx {
 
 # Stuff for Maemo
 maemo5|contains(QT_CONFIG, hildon): {
+    CONFIG             += qdbus
     LIBS               += -L../../src/metakit/builds
     isEmpty(PREFIX) {
         PREFIX          = /usr/local

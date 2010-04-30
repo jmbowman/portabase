@@ -1,7 +1,7 @@
 /*
  * datedialog.h
  *
- * (c) 2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,10 +34,12 @@ public:
     QDate selectedDate();
 
 private slots:
-    void gotoToday(); /**< Today' button handler */
+    void gotoToday(); /**< 'Today' button handler */
+    void selectNone(); /**< 'None' button handler */
 
 private:
     QCalendarWidget *calendar; /**< Calendar display widget */
+    bool noneSelected; /**< True if the 'None' button was clicked */
 };
 
 #endif

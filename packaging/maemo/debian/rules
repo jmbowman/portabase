@@ -49,8 +49,7 @@ binary-arch: build install
 	dh_testroot
 	dh_installdocs
 	dh_installexamples
-	dh_installman $(CURDIR)/debian/portabase.1
-	dh_link
+	dh_installman
 	dh_link
 	dh_strip --dbg-package=portabase-dbg
 	dh_compress

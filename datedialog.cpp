@@ -1,7 +1,7 @@
 /*
  * datedialog.cpp
  *
- * (c) 2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,12 +29,15 @@
  * @param parent This dialog's parent widget
  */
 DateDialog::DateDialog(const QDate &date, QWidget *parent)
-  : PBDialog(tr("Select a date"), parent)
+  : PBDialog(tr("Select a date"), parent), noneSelected(false)
 {
     if (!date.isValid()) {
         reject();
     }
     calendar = new QCalendarWidget(this);
+#if defined(Q_WS_MAEMO_5)
+    calendar->setStyleSheet("alternate-background-color: darkblue");
+#endif
     // date limits are for backwards compatibility
     calendar->setMinimumDate(QDate(1752, 9, 15));
     calendar->setMaximumDate(QDate(7000, 12, 31));
@@ -54,6 +57,9 @@ DateDialog::DateDialog(const QDate &date, QWidget *parent)
     QPushButton *todayButton = new QPushButton(tr("Today"));
     buttonBox->addButton(todayButton, QDialogButtonBox::ActionRole);
     connect(todayButton, SIGNAL(clicked()), this, SLOT(gotoToday()));
+    QPushButton *noneButton = new QPushButton(tr("None"));
+    buttonBox->addButton(noneButton, QDialogButtonBox::ActionRole);
+    connect(noneButton, SIGNAL(clicked()), this, SLOT(selectNone()));
 }
 
 /**
@@ -63,7 +69,12 @@ DateDialog::DateDialog(const QDate &date, QWidget *parent)
  */
 QDate DateDialog::selectedDate()
 {
-    return calendar->selectedDate();
+    if (noneSelected) {
+        return QDate(1752, 9, 14);
+    }
+    else {
+        return calendar->selectedDate();
+    }
 }
 
 /**
@@ -73,4 +84,14 @@ QDate DateDialog::selectedDate()
 void DateDialog::gotoToday()
 {
     calendar->setSelectedDate(QDate::currentDate());
+}
+
+/**
+ * Select the "None" date and close the dialog.  Called when the "None" button
+ * is clicked.
+ */
+void DateDialog::selectNone()
+{
+    noneSelected = true;
+    accept();
 }

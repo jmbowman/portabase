@@ -39,12 +39,8 @@ DateWidget::DateWidget(QWidget *parent)
     layout->addWidget(button);
 
     display = new QLabel(toString(dateObj), this);
-    display->setAlignment(Qt::AlignCenter);
+    display->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     layout->addWidget(display, 1);
-
-    noneButton = new QPushButton(tr("None"), this);
-    connect(noneButton, SIGNAL(clicked()), this, SLOT(setToNone()));
-    layout->addWidget(noneButton);
 }
 
 /**
@@ -96,11 +92,10 @@ void DateWidget::updateDisplay()
 {
     if (isNoneDate(dateObj)) {
         display->setText("               ");
-        noneButton->setEnabled(false);
     }
     else {
-        display->setText(toString(dateObj));
-        noneButton->setEnabled(true);
+        QString text(" %1");
+        display->setText(text.arg(toString(dateObj)));
     }
 }
 
@@ -134,16 +129,6 @@ QString DateWidget::toString(const QDate &date)
 bool DateWidget::isNoneDate(const QDate &date)
 {
     return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
-}
-
-/**
- * Set the selected date to the special "None" value (the first day supported
- * in earlier versions of QDate).  Called when the "None" button is clicked.
- */
-void DateWidget::setToNone()
-{
-    dateObj.setYMD(1752, 9, 14);
-    updateDisplay();
 }
 
 /**

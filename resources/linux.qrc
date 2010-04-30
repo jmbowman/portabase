@@ -14,6 +14,7 @@
      <file alias="find.png">icons/mac/find.png</file>
      <file alias="forward.png">icons/mac/forward.png</file>
      <file alias="image.png">icons/mac/image.png</file>
+     <file alias="import.png">icons/mac/import.png</file>
      <file alias="new.png">icons/mac/new.png</file>
      <file alias="note.png">icons/mac/note.png</file>
      <file alias="open.png">icons/mac/open.png</file>
