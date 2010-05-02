@@ -21,7 +21,6 @@
 #include "database.h"
 #include "factory.h"
 #include "passdialog.h"
-#include "pbdialog.h"
 #include "encryption/crypto.h"
 
 /**
@@ -32,9 +31,9 @@
  * @param parent This dialog's parent widget
  */
 PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *parent)
-  : QQDialog("", parent), db(dbase), mode(dlgMode)
+  : PBDialog(tr("Password"), parent, true), db(dbase), mode(dlgMode)
 {
-    QGridLayout *grid = Factory::gridLayout(this, true);
+    QGridLayout *grid = Factory::gridLayout(vbox);
     int currentRow = 0;
     if (mode == ChangePassword) {
         grid->addWidget(new QLabel(tr("Old password") + ":", this), 0, 0);
@@ -57,15 +56,7 @@ PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *par
         grid->addWidget(repeatPass, currentRow, 1);
         currentRow++;
     }
-
-    QDialogButtonBox::StandardButtons buttons(QDialogButtonBox::Ok |
-                                              QDialogButtonBox::Cancel);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(buttons,
-                                                       Qt::Horizontal, this);
-    grid->addWidget(buttonBox, currentRow, 0, 2, 1);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    finishConstruction();
+    finishLayout();
 }
 
 /**

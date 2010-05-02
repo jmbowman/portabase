@@ -33,7 +33,7 @@
  * @param parent This dialog's parent widget
  */
 SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent)
-  : PBDialog(tr("Slideshow"), parent), fullScreen(0)
+  : PBDialog(tr("Slideshow"), parent, true), fullScreen(0)
 {
     currentView = view;
     QGridLayout *grid = Factory::gridLayout(vbox);

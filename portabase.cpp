@@ -495,7 +495,8 @@ void PortaBase::viewProperties()
     count = filters.count();
     message += tr("Filters") + ": " + locale.toString(count) + "\n";
     count = db->listEnums().count();
-    message += tr("Enums") + ": " + locale.toString(count);
+    message += tr("Enums") + ": " + locale.toString(count) + "\n";
+    message += tr("For statistics on a particular column, press and hold that column's header for at least half of a second");
     QString title = tr("File Properties") + " - " + qApp->applicationName();
     QMessageBox mb(title, message, QMessageBox::NoIcon,
                    QMessageBox::Ok, QMessageBox::NoButton,

@@ -25,6 +25,7 @@
 #include <QStackedWidget>
 #include <QStringList>
 #include <QTextDocument>
+#include <QTimer>
 #include <QToolButton>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -48,8 +49,8 @@
  * @param parent This widget's parent widget
  */
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
-    portabase(pbase), propogateColWidths(false), booleanToggle(false),
-    paged(true), singleClickShow(true)
+    portabase(pbase), propogateColWidths(false), pressedHeader(-1),
+    booleanToggle(false), paged(true), singleClickShow(true)
 {
     timer.start();
     QVBoxLayout *vbox = Factory::vBoxLayout(this, true);
@@ -711,8 +712,8 @@ void ViewDisplay::cellReleased(const QModelIndex &index)
  */
 void ViewDisplay::headerPressed(int column)
 {
-    pressedIndex = column;
-    timer.restart();
+    pressedHeader = column;
+    QTimer::singleShot(500, this, SLOT(showStatistics()));
 }
 
 /**
@@ -724,13 +725,12 @@ void ViewDisplay::headerPressed(int column)
  */
 void ViewDisplay::headerReleased(int column)
 {
-    if (column != pressedIndex) {
+    if (column != pressedHeader) {
+        pressedHeader = -1;
         return;
     }
-    if (timer.elapsed() > 500) {
-        showStatistics(column);
-    }
     else {
+        pressedHeader = -1;
         sort(column);
     }
 }
@@ -772,11 +772,14 @@ void ViewDisplay::sort(int column)
  * Show a dialog containing summary statistics for a particular column of
  * data.  Only values in records matching the current filter are factored
  * into the statistics.
- *
- * @param column The position index of the column to show data for
  */
-void ViewDisplay::showStatistics(int column)
+void ViewDisplay::showStatistics()
 {
+    if (pressedHeader == -1) {
+        return;
+    }
+    int column = pressedHeader;
+    pressedHeader = -1;
     QStringList stats = model->view()->getStatistics(column);
     QString content("<qt><center><b>");
     content += model->headerData(column, Qt::Horizontal).toString();
@@ -786,9 +789,15 @@ void ViewDisplay::showStatistics(int column)
         content += stats[i] + "<br/>";
     }
     content += "</qt>";
-    QMessageBox mb(qApp->applicationName(), content, QMessageBox::NoIcon,
-                   QMessageBox::Ok, QMessageBox::NoButton,
-                   QMessageBox::NoButton, this);
+    QMessageBox mb(this);
+#if defined(Q_WS_MAEMO_5)
+    mb.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
+#else
+    mb.setStandardButtons(QMessageBox::Ok);
+#endif
+    mb.setText(content);
+    mb.setWindowTitle(qApp->applicationName());
+    mb.setWindowModality(Qt::ApplicationModal);
     mb.exec();
 }
 

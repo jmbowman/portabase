@@ -82,7 +82,6 @@ private:
     int selectedRowIndex();
     int selectedRowId();
     void sort(int column);
-    void showStatistics(int column);
 
 private slots:
     void changePage(int id);
@@ -94,6 +93,7 @@ private slots:
     void cellReleased(const QModelIndex &index);
     void headerPressed(int column);
     void headerReleased(int column);
+    void showStatistics();
     void columnResized(int column, int oldWidth, int newWidth);
     void updateButtons(int currentPage, int totalPages);
     void matchNewView(View *view);
@@ -113,6 +113,7 @@ private:
     QToolButton *pageButtons[PAGE_BUTTON_COUNT]; /**< Array of page navigation buttons */
     bool propogateColWidths; /**< True if column width resizes are to be passed to the view */
     int pressedIndex; /**< Index of the column in which the mouse has been pressed (while waiting for a release) */
+    int pressedHeader; /**< Index of the column header which has been pressed (while waiting for a release) */
     QTime timer; /**< Time elapsed between the last mouse press and release */
     bool booleanToggle; /**< True if boolean field values can be toggled by clicking on them in the display */
     bool paged; /**< False if all records in the view are always shown on one scrolling page */

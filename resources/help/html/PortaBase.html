@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <title>PortaBase 1.9</title>
+  <title>PortaBase 2.0b1</title>
 </head>
 <body>
 
-<div align="center"><h3>PortaBase 1.9</h3> - A portable database -</div>
+<div align="center"><h3>PortaBase 2.0b1</h3> - A portable database -</div>
 <br>
 <a href="#intro">1)Introduction</a><br>
 <a href="#file">2)File selector</a><br>
@@ -22,11 +22,12 @@
 <a href="#noteedit">13)Note editor/viewer</a><br>
 <a href="#sortedit">14)Sorting editor</a><br>
 <a href="#filteredit">15)Filter editor</a><br>
-<a href="#import">16)CSV import</a><br>
-<a href="#export">17)Data export</a><br>
-<a href="#prefs">18)Preferences dialog</a><br>
-<a href="#commandline">19)Command line usage</a><br>
-<a href="#encrypt">20)Encryption</a><br>
+<a href="#views">16)Views, sortings, and filters dialogs</a><br>
+<a href="#import">17)CSV import</a><br>
+<a href="#export">18)Data export</a><br>
+<a href="#prefs">19)Preferences dialog</a><br>
+<a href="#commandline">20)Command line usage</a><br>
+<a href="#encrypt">21)Encryption</a><br>
 <br>
 <br>
 <a name="intro"><b>1)Introduction</b></a><br>
@@ -36,36 +37,36 @@ PortaBase is a small database program for creating, browsing, and editing custom
   <li>Custom data views (subsets of the columns in any order)</li>
   <li>Filter the displayed rows using sets of conditions</li>
   <li>Sort the rows by any combination of columns, each in ascending or descending order</li>
-  <li>Page navigation buttons, with custom number of rows per page</li>
+  <li>Good performance even when browsing large tables; the display only loads data as needed</li>
+  <li>Optional page navigation buttons, with custom number of rows per page</li>
   <li>Add, delete, rearrange, and rename columns at any time</li>
   <li>Specify default values for columns</li>
   <li>View summary statistics for columns (total, average, min, max, etc.)</li>
   <li>Import data from CSV, XML, and MobileDB files</li>
   <li>Export data to CSV and XML files</li>
   <li>Command-line format conversions (to and from XML, to and from CSV, from MobileDB)</li>
+  <li>Print the data grid with view, sorting, and filter applied (not supported on Maemo)</li>
+  <li>Fullscreen mode option</li>
   <li>Unicode support</li>
-  <li>Pick any available font to use throughout the application</li>
-  <li>User-specified alternating row background colors</li>
+  <li>Pick any available font to use throughout the application (not supported on Mac OS X)</li>
+  <li>User-specified alternating row background colors (not supported on Maemo Fremantle)</li>
   <li>Simple calculator widget for entering numeric data</li>
 </ul>
 <a name="file"><b>2)File selector</b></a><br>
-Unless the program was launched by clicking on a PortaBase file, the first screen shown will be the file selector.  You may open any listed file by clicking on it (in the Zaurus version), or choose one of the following options from the "File" menu or toolbar:<br>
+Unless the program was launched by clicking on a PortaBase file, the first screen shown will be the file selector.  You may choose one of the following options from the "File" menu, toolbar, or main display buttons:<br>
 <ul>
   <li><i>New</i> - Create a new file (possibly <a href="#encrypt">encrypted</a>)</li>
-  <li><i>Open</i> - Open the selected file</li>
-  <li><i>Open Recent</i> - A sub-menu containing a list of recently opened files; click on one to open that file.
-  <li><i>Delete</i> - Delete the selected file (only on the Zaurus version)</li>
-  <li><i>Rename</i> - Change the name of the selected file (only on the Zaurus version)</li>
-  <li><i>Copy</i> - Create a copy of the selected file under a new name (only on the Zaurus version)</li>
-  <li><i>Refresh</i> - Refresh the file list to discover any recently added or deleted files (only on the Zaurus version).</li>
-  <li><i>Import</i> - Create a new file  (possibly <a href="#encrypt">encrypted</a>) from the data in an XML or MobileDB file.  You will be prompted for the type of file to import, a name for the new file to create, then the file to import.  See the PortaBase home page for more information about the XML format used.</li>
-  <li><i>Preferences</i> - Launches the <a href="#prefs">preferences dialog</a>.</li>
+  <li><i>Open</i> - Open a dialog to select a file to open</li>
+  <li><i>Open Recent/Recently opened files</i> - A list of recently opened files; click on one to open that file.
+  <li><i>Import</i> - Create a new file (possibly <a href="#encrypt">encrypted</a>) from the data in an XML or MobileDB file.  You will be prompted for the type of file to import, a name for the new file to create, then the file to import.  See the PortaBase home page for more information about the XML format used.</li>
+  <li><i>Preferences</i> - Launch the <a href="#prefs">preferences dialog</a>.</li>
+  <li><i>Fullscreen</i> - Click this toolbar button to switch PortaBase to fullscreen mode or back to normal display mode.</li>
   <li><i>Quit</i> - Close PortaBase.</li>
 </ul>
 <a name="columns"><b>3)Columns editor</b></a><br>
-Each PortaBase file contains one table of a user-defined format.  The format of this table is determined by a sequence of data columns, each of which has its own name, data type, and default value. When creating a new PortaBase file, this dialog is shown so the data columns can be defined.  The columns of an existing file can also be edited at any time using this dialog by selecting the "Edit Columns" item in the "File" menu of the <a href="#viewer">data viewer</a>.<br>
+Each PortaBase file contains one table of a user-defined format.  The format of this table is determined by a sequence of data columns, each of which has its own name, data type, and default value. When creating a new PortaBase file, this dialog is shown so the data columns can be defined.  The columns of an existing file can also be edited at any time using this dialog by selecting the "Edit Columns" menu item (in the <a href="#viewer">data viewer</a>, under the "File" menu except on Maemo where the menus are flattened).<br>
 <br>
-The current column definitions are displayed as rows in a list, in the order in which they appear in the <a href="#rowedit">row editor</a>.  These column definitions are manipulated using the buttons at the bottom of the dialog:<br>
+The current column definitions are displayed as rows in a list, in the order in which they appear in the <a href="#rowedit">row editor</a>.  These column definitions are manipulated using the buttons in the dialog:<br>
 <ul>
 <li><i>Add</i> - Create a new column definition at the end of the list.  A small dialog is shown which allows you to enter the name, data type, and default value of the new column.  (If you select "(New Enum)" from the type list in this dialog, the <a href="#enumedit">enum editor</a> will be launched to allow you to add one.)  The default value is what will be entered for this column in any already existing data rows, and it will appear in the row editor when adding new rows as well.</li>
 <li><i>Edit</i> - Edit the currently selected column definition.  Note that the data type cannot be changed.  If the default value is changed, the new default will appear in the row editor when adding new rows; existing rows are unaffected.</li>
@@ -73,20 +74,20 @@ The current column definitions are displayed as rows in a list, in the order in 
 <li><i>Up</i> - Move the currently selected column up one position in the list (and hence in the row editor as well).</li>
 <li><i>Down</i> - Move the currently selected column down one position in the list (and hence in the row editor as well).</li>
 </ul>
-None of the changes made to the table format are applied until the "OK" button is pressed; if the "X"/"Cancel" button is pressed instead, the changes are discarded and the file format is left as it was.  If the "X"/"Cancel" button is pressed while defining the columns of a new file, the file creation is aborted; otherwise, pressing either of the dialog closing buttons takes you to the <a href="#viewer">data viewer.</a><br>
+None of the changes made to the table format are applied until the "OK" ("Done" on Maemo Fremantle) button is pressed; if the dialog is exited by cancelling instead, the changes are discarded and the file format is left as it was.  If the dialog is cancelled while defining the columns of a new file, the file creation is aborted; otherwise, exiting the dialog takes you to the <a href="#viewer">data viewer.</a><br>
 <br>
 <a name="enummanage"><b>4)Enum manager</b></a><br>
-PortaBase supports enum column types, in which each value in the column is one of a set of possible string values.  The enum manager dialog lets you create, edit, delete, and change the listing order of these enums.<br>
+PortaBase supports enum (enumeration) column types, in which each value in the column is one of a set of possible string values.  The enum manager dialog lets you create, edit, delete, and change the listing order of these enums.<br>
 <br>
-Most of the dialog is occupied by a list of the currently defined enums. At the bottom is a row of buttons identical to those in the <a href="#columns">columns editor</a>:<br>
+Most of the dialog is occupied by a list of the currently defined enums. There is a row of buttons identical to those in the <a href="#columns">columns editor</a>:<br>
 <ul>
-<li><i>Add</i> - Launch the <a href="#enumedit">enum editor</a> to define a new enum.  Note that the new enum will be added when "OK" is clicked in the editor dialog, not when the "OK" button is clicked in this dialog.</li>
-<li><i>Edit</i> - Launch the enum editor to edit the currently selected enum.  As when adding, edits are applied as soon as "OK" is clicked in the editor dialog.</li>
-<li><i>Delete</i> - Delete the currently selected enum.  If there are columns of this enum type, a dialog will warn you that these would also be deleted and ask if you want to continue.  The enum (and any associated colums) will be deleted immediately, not when "OK" is clicked.</li>
+<li><i>Add</i> - Launch the <a href="#enumedit">enum editor</a> to define a new enum.  Note that the new enum will be added when "OK"/"Done" is clicked in the editor dialog, not when the "OK"/"Done" button is clicked in this dialog.</li>
+<li><i>Edit</i> - Launch the enum editor to edit the currently selected enum.  As when adding, edits are applied as soon as "OK"/"Done" is clicked in the editor dialog.</li>
+<li><i>Delete</i> - Delete the currently selected enum.  If there are columns of this enum type, a dialog will warn you that these would also be deleted and ask if you want to continue.  The enum (and any associated colums) will be deleted immediately, not when "OK"/"Done" is clicked.</li>
 <li><i>Up</i> - Move the currently selected enum up one position in the list (and hence in the column editor's type list as well).</li>
 <li><i>Down</i> - Move the currently selected enum down one position in the list (and hence in the column editor's type list as well).</li>
 </ul>
-Click "OK" to apply any changes made to the enum listing order or "X"/"Cancel" to leave the sequence unchanged (other than any added or deleted enums).<br>
+Click "OK"/"Done" to apply any changes made to the enum listing order, or cancel out of the dialog to leave the sequence unchanged (other than any added or deleted enums).<br>
 <br>
 <a name="enumedit"><b>5)Enum editor</b></a><br>
 This dialog lets you define the name and list of options for an enum column type.  It has a list of the enum's options and the same set of buttons as most of the other editor dialogs:<br>
@@ -103,12 +104,12 @@ Just below the enum name are more buttons which allow you to change the list of 
 <li><i>Import</i> - Add options from a text file; this file should have each option on a separate line.  Options in the file which are already in the enum will not be duplicated.</li>
 <li><i>Export</i> - Create a text file listing the current enum options, one on each line.</li>
 </ul>
-Click "OK" to accept any changes that were made or "X"/"Cancel" to leave the options unchanged (or cancel adding a new enum).<br>
+Click "OK"/"Done" to accept any changes that were made or cancel out of the dialog to leave the options unchanged (or cancel adding a new enum).<br>
 <br>
 <a name="calcedit"><b>6)Calculation editor</b></a><br>
 This dialog allows you to define columns which contain values calculated from the values of other columns in the same row.  It is launched by pressing the "Edit calculation" button in the column editor, which appears only for columns of type "Calculation".  At the top of the dialog are the name of the column, a read-only display of the current calculation written as a one-line expression, and a spin box that allows you to specify how many decimal places should be shown for the calculation results.<br>
 <br>
-Most of the dialog is filled by a widget which shows the current calculation as a tree, similar to many file explorer programs.  Each node in the tree represents either the value of another column, a constant value, or the result of an operation.  To edit the calculation, select a node from the tree (if any are present) and use the buttons at the bottom of the dialog:<br>
+Most of the dialog is filled by a widget which shows the current calculation as a tree, similar to many file explorer programs.  Each node in the tree represents either the value of another column, a constant value, or the result of an operation.  To edit the calculation, select a node from the tree (if any are present) and use the buttons in the dialog:<br>
 <ul>
 <li><i>Add</i> - Add a new node as a child of the currently selected node; a dialog will appear which allows you to select the type and value of the node.</li>
 <li><i>Edit</i> - Edit the selected node.</li>
@@ -137,17 +138,17 @@ An Image column stores pictures imported from JPEG or PNG image files.  After yo
 <li><i>Rotate</i> - The angle by which to rotate the image (in degrees): 0, 90, 180, or 270.</li>
 <li><i>Refresh</i> - Apply the currently displayed settings and update the image preview accordingly.</li>
 </ul>
-Note that because memory on the Zaurus is limited, very large pictures will be rejected.  JPEG images larger than 6400 x 4800 pixels cannot be imported, and ones larger than 800 x 600 will be shrunk to at most that size.  Similarly, PNG images larger than 800 x 600 cannot be imported.<br>
+Note that because memory was limited on the Zaurus PDAs for which PortaBase was originally developed, very large pictures will be rejected.  JPEG images larger than 6400 x 4800 pixels cannot be imported, and ones larger than 800 x 600 will be shrunk to at most that size.  Similarly, PNG images larger than 800 x 600 cannot be imported.  These limitations will be removed in a future version of PortaBase, since it is no longer being developed for the Zaurus.<br>
 <br>
-Click "OK" to store the image as it is shown or "X"/"Cancel" to leave the field unchanged.<br>
+Click "OK"/"Done" to store the image as it is shown, or cancel out of the dialog to leave the field unchanged.<br>
 <br>
 <a name="imageview"><b>8)Image viewer</b></a><br>
-The image viewer is a simple dialog that displays the image contained in one field of an Image column.  If launched from the <a href="#viewer">data viewer</a>, the left arrow key shows the image in the same column from the previous row in the current filter; similarly, the right arrow key shows the image from the next row.  Double-clicking on the image shows it in full-screen mode; click on the full-screen image again to close the viewer.<br>
+The image viewer is a simple dialog that displays the image contained in one field of an Image column.  If launched from the <a href="#viewer">data viewer</a>, the left arrow key shows the image in the same column from the previous row in the current filter; similarly, the right arrow key shows the image from the next row.  Double-clicking on the image shows it in fullscreen mode; click on the fullscreen image again to close the viewer.<br>
 <br>
 <a name="viewedit"><b>9)View editor</b></a><br>
 Whenever you browse a database's content in the <a href="#viewer">data viewer</a>, you are looking at one "view" of the data.  A view is a subset of the columns in the database, displayed in a particular order and with specified display widths.  Each database has a default "All Columns" view which shows all the columns in the database in the same order as they appear in the <a href="rowedit">row editor</a>.<br>
 <br>
-Views are defined using the view editor dialog.  At the top of the dialog is a text box containing the name of the view; changing this renames the view.  Next are droplists allowing you to pick a default sorting and/or filter that will be applied whenever you switch to this view; selecting "None" leaves the current sorting or filter unchanged.  (This avoids the need to select a view, then a sorting, then a filter if there are certain combinations of these you use often.)  Below those is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is included in this view.  Click this checkbox to include or exclude the column.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the order of the columns in the view.  Click "OK" to accept the currently shown settings or "X"/"Cancel" to revert to the previous values (or to cancel adding a new view).<br>
+Views are defined using the view editor dialog.  At the top of the dialog is a text box containing the name of the view; changing this renames the view.  Next are droplists allowing you to pick a default sorting and/or filter that will be applied whenever you switch to this view; selecting "No default sorting" and "No default filter" leaves the current sorting and filter unchanged.  (This avoids the need to select a view, then a sorting, then a filter if there are certain combinations of these that you use often.)  Below those is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is included in this view.  Click this checkbox to include or exclude the column.  There are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the order of the columns in the view.  Click "OK"/"Done" to accept the currently shown settings, or cancel out of the dialog to revert to the previous values (or to cancel adding a new view).<br>
 <br>
 <a name="viewer"><b>10)Data viewer</b></a><br>
 This is the main screen of the application, where you can browse the database's content and launch most of the other dialogs.  The contents of this screen are:<br>
@@ -155,38 +156,38 @@ This is the main screen of the application, where you can browse the database's 
 <li><a href="#navi">Rows display and navigation</a></li>
 <li><a href="#labels">Column labels</a></li>
 <li><a href="#filemenu">File menu</a></li>
-<li><a href="#rowmenu">Row menu</a></li>
-<li><a href="#viewmenu">View menu</a></li>
-<li><a href="#sortmenu">Sort menu</a></li>
-<li><a href="#filtermenu">Filter menu</a></li>
+<li><a href="#rowmenu">Row menu</a> (not on Maemo)</li>
+<li><a href="#viewmenu">View menu</a> (not on Maemo)</li>
+<li><a href="#sortmenu">Sort menu</a> (not on Maemo)</li>
+<li><a href="#filtermenu">Filter menu</a> (not on Maemo)</li>
 <li><a href="#toolbar">Toolbar buttons</a></li>
 </ul>
-Note that some of the menus may be shown as sub-menus under the File menu, depending on current settings in the <a href="#prefs">Preferences dialog</a>.<br>
-<br>
 <a name="navi"><i>Row display and navigation</i></a><br>
-Most of the data viewer screen is occupied by a table showing one view of a set of rows in the database.  The spin box at the bottom left of the screen specifies the maximum number of rows to display at once for the current view; you can edit this to be any positive integer (setting it low enough eliminates the scrollbar on the right of the display table, giving a little more horizontal space).  To the right of this "rows per page" box are the page navigation buttons.  Click on one of the numbered buttons to go to that page of rows; the current page is shown pressed.  Click on the arrow buttons at the ends to show the page buttons for the next or previous five pages.<br>
+Most of the data viewer screen is occupied by a table showing one view of a set of rows in the database.  You can scroll through the entire list of rows passing the current filter; performance stays good because only the data for the rows currently shown in the display is loaded.  Clicking on a row normally launches the <a href="#rowview">row viewer</a> dialog; if you disabled this in the <a href="#prefs">preferences dialog</a>, you can stil launch it by double-clicking on a row or pressing enter/return, space, or Control-R (Command-R on the Mac) while a row is selected.<br>
 <br>
 Clicking on a cell in the data display and holding down for 1/2 second or longer before releasing executes special functions.  If you do this on a cell in a Note column, the <a href="#noteedit">note viewer</a> is displayed showing the content of that note.  When done on a cell in an Image column, the image contained in that cell is shown in the <a href="#imageview">image viewer</a>.  If you do it in any other type of column, the <a href="#rowedit">row editor</a> for the row you clicked on is launched.<br>
 <br>
-Double-tapping on a row or pressing enter or space while a row is selected launches the <a href="#rowview">row viewer</a>.<br>
+If you selected in the <a href="#prefs">preferences dialog</a> to use a paginated display, there is an additional row of controls at the bottom of the screen.  The spin box at the bottom left specifies the maximum number of rows to display at once for the current view; you can edit this to be any positive integer (setting it low enough eliminates the scrollbar on the right of the display table, giving a little more horizontal space; note that Maemo Fremantle has no such scrollbar).  To the right of this "rows per page" box are the page navigation buttons.  Click on one of the numbered buttons to go to that page of rows; the button for the current page is shown pressed.  Click on the arrow buttons at the ends to show the page buttons for the next or previous five pages.<br>
 <br>
 <a name="labels"><i>Column labels</i></a><br>
-The row of column labels has several features in addition to informing you of the column names. To change the widths of the columns in the current view, click on the border between two column labels (or the right edge of the last column) and drag it to the desired location.  Clicking on a column label sorts all the rows by the content of that column in ascending order; clicking it again sorts in descending order.  If you press a column label and hold it for half a second or more before releasing, a dialog containing summary information for that column is displayed; only rows that pass the current filter are included in the summary.<br>
+The row of column labels has several features in addition to informing you of the column names. To change the widths of the columns in the current view, click on the border between two column labels (or the right edge of the last column) and drag it to the desired location.  Clicking on a column label sorts all the rows passing the current filter by the content of that column in ascending order; clicking it again sorts in descending order.  If you press a column label and hold it for 1/2 second or more before releasing, a dialog containing summary information for that column is displayed; only rows that pass the current filter are included in the summary.<br>
 <br>
 <a name="filemenu"><i>File menu</i></a><br>
-The "File" menu contains options that apply to the database file as a whole.  These are:<br>
+The "File" menu (the main menu on Maemo) contains options that apply to the database file as a whole.  These are:<br>
 <ul>
-<li><i>Save</i> - Save any changes that have been made since the file was opened or last saved.  If you exit PortaBase without saving the most recent changes, those changes will be lost (a dialog will warn you if this is about to happen).  This option is disabled if no changes have been made since the current database was opened or last saved.</li>
-<li><i>Change Password</i> - Launches a dialog which allows you to change the data file's password (only shown for encrypted files)</li>
-<li><i>Import</i> - Allows you to <a href="#import">import</a> rows from a CSV file.</li>
-<li><i>Export</i> - Allows you to <a href="#export">export</a> the current database content to a CSV or XML file.</li>
+<li><i>Save</i> - Save any changes that have been made since the file was opened or last saved.  If you exit PortaBase without saving the most recent changes, those changes will be lost (a dialog will warn you if this is about to happen).  This option is disabled if no changes have been made since the current database was opened or last saved. (Not shown in Maemo, use the toolbar button instead.)</li>
+<li><i>Change Password</i> - Launch a dialog which allows you to change the data file's password (only shown for <a href="#encrypt">encrypted files</a>)</li>
+<li><i>Import</i> - Allow you to <a href="#import">import</a> rows from a CSV file.</li>
+<li><i>Export</i> - Allow you to <a href="#export">export</a> the current database content to a CSV or XML file.</li>
 <li><i>Delete Rows In Filter</i> - Deletes all rows which are included by the filter currently in use.</li>
-<li><i>Edit Columns</i> - Launches the <a href="#columns">columns editor</a>.</li>
-<li><i>Edit Enums</i> - Launches the <a href="#enummanage">enum manager</a>.</li>
-<li><i>Slideshow</i> - Launches a dialog from which you can start a timed slideshow of images from an Image column in the current view.  Only images in rows passing the current filter are shown, and the sequence is the current sorting.</li>
-<li><i>Properties</i> - Launches a dialog which displays basic statistics about the current file (such as its size, row count, column count, etc.).</li>
-<li><i>Preferences</i> - Launches the <a href="#prefs">preferences dialog</a>.</li>
-<li><i>Close</i> - Close the current file; if there are unsaved changes, you will be asked if you want to save them.</li>
+<li><i>Edit Columns</i> - Launch the <a href="#columns">columns editor</a>.</li>
+<li><i>Edit Enums</i> - Launch the <a href="#enummanage">enum manager</a>.</li>
+<li><i>Slideshow</i> - Launch a dialog from which you can start a timed slideshow of images from an Image column in the current view.  Only images in rows passing the current filter are shown, and the sequence is the current sorting.</li>
+<li><i>Properties</i> - Launch a dialog which displays basic statistics about the current file (such as its size, row count, column count, etc.).</li>
+<li><i>Print Preview</i> - Launch the print preview dialog in order to see what the output of printing the current data selection would look like.  You can also set from here certain properties of the output, such as paper size and zoom factor.  (Not shown in Maemo, which has no printing support.)</li>
+<li><i>Print</i> - Launch the print dialog in order to print the data in the current view and filter in the current sorting order.  Note that you may wish to modify some settings with the print preview dialog first.  (Not shown in Maemo, which has no printing support.)</li>
+<li><i>Preferences</i> - Launch the <a href="#prefs">preferences dialog</a>.</li>
+<li><i>Close</i> - Close the current file; if there are unsaved changes, you will be asked if you want to save them.  (Not shown in Maemo, use the close button at the top right of the screen instead; you may need to exit fullscreen mode first.)</li>
 </ul>
 <a name="rowmenu"><i>Row menu</i></a><br>
 The "Row" menu contains actions that apply to individual rows of data.  These are:<br>
@@ -197,14 +198,18 @@ The "Row" menu contains actions that apply to individual rows of data.  These ar
 <li><i>Copy</i> - Add a new row of data, but the row editor is pre-filled with the data in the currently selected row instead of the default values.</li>
 <li><i>Show</i> - Show the currently selected row in the <a href="#rowview">row viewer</a>.</li>
 </ul>
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available through the toolbar and <a href="#rowview">row viewer</a> buttons<br>
+<br>
 <a name="viewmenu"><i>View menu</i></a><br>
 The "View" menu allows you to select and manage views.  The top section of this menu has three options:<br>
 <ul>
-<li><i>Add</i> - Add a new view to the database file.  Choosing this option launches the view editor with no name specified and none of the columns checked.</li>
+<li><i>Add</i> - Add a new view to the database file.  Choosing this option launches the <a href="#viewedit">view editor </a>with no name specified and none of the columns checked.</li>
 <li><i>Edit</i> - Edit the currently displayed view.  Choosing this option launches the view editor with the current view's name and column sequence.  The "All Columns" view cannot be edited.</li>
 <li><i>Delete</i> - Delete the currently displayed view and switch to the "All Columns" view.  The "All Columns" view cannot be deleted.</li>
 </ul>
 Below these items in the menu is a list of all the views defined for the current database, with a check next to the one currently displayed.  To switch to a different view, simply select the one you want to see from the menu.<br>
+<br>
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available in the <a href="#views">views dialog</a> launched from the toolbar.<br>
 <br>
 <a name="sortmenu"><i>Sort menu</i></a><br>
 The "Sort" menu allows you to select and manage sorting configurations.  The top section of this menu has three options:<br>
@@ -215,63 +220,80 @@ The "Sort" menu allows you to select and manage sorting configurations.  The top
 </ul>
 Below these items in the menu is a list of all the sortings defined for the current database, with a check next to the one currently in use (if any).  To change the way the rows are sorted, simply select the sorting configuration you want to use from the menu.  If you just want to sort by a single column that is displayed in the current view, it is probably faster to use the "click on a column label to sort" feature instead.<br>
 <br>
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available in the <a href="#sortings">sortings dialog</a> launched from the toolbar.<br>
+<br>
 <a name="filtermenu"><i>Filter menu</i></a><br>
 The "Filter" menu contains options that let you choose which rows of data to display.  The top section of this menu has four options:<br>
 <ul>
 <li><i>Quick Filter</i> - Lets you quickly define and use a temporary one-condition filter.  To see all rows again (or use another defined filter), choose the appropriate filter from the lower part of this menu.</li>
 <li><i>Add</i> - Define a new data filter; this launches the
 <a href="#filteredit">filter editor</a> with no name and no conditions defined.</li>
-<li><i>Edit</i> - Edit the currently selected data filter (again using the <a href="#filteredit">filter editor</a>).  The "All Rows" filter cannot be edited.</li>
+<li><i>Edit</i> - Edit the currently selected data filter (again using the filter editor).  The "All Rows" filter cannot be edited.</li>
 <li><i>Delete</i> - Delete the currently selected data filter.  The "All Rows" filter cannot be deleted.</li>
 </ul>
 Below these items in the menu is a list of all the filters defined for the current database, with a check next to the one currently in use (if any).  To select a different filter, simply select the one you want to use from the menu.<br>
+<br>
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available in the <a href="#filters">filters dialog</a> launched from the toolbar.<br>
 <br>
 <a name="toolbar"><i>Toolbar buttons</i></a><br>
 There is a toolbar of buttons that provide quick access to commonly used operations.  These are:<br>
 <ul>
 <li><i>Save</i> - Same as "Save" in the <a href="#filemenu">File menu</a>.</li>
 <li><i>Add</i> - Same as "Add" in the <a href="#rowmenu">Row menu</a>.</li>
-<li><i>Edit</i> - Same as "Edit" in the <a href="#rowmenu">Row menu</a>.</li>
-<li><i>Copy</i> - Same as "Copy" in the <a href="#rowmenu">Row menu</a>.</li>
-<li><i>Delete</i> - Same as "Delete" in the <a href="#rowmenu">Row menu</a>.</li>
+<li><i>Views</i> - Launch the <a href="#views">views dialog</a>.</li>
+<li><i>Sortings</i> - Launch the <a href="#sortings">sortings dialog</a>.</li>
+<li><i>Filters</i> - Launch the <a href="#filters">filters dialog</a>.</li>
 <li><i>Quick Filter</i> - Same as "Quick Filter" in the <a href="#filtermenu">Filter menu</a>.</li>
+<li><i>Fullscreen</i> - Click this toolbar button to switch PortaBase to fullscreen mode or back to normal display mode.</li>
 </ul>
-Note that some of the toolbar buttons may not be shown, depending on current settings in the <a href="#prefs">Preferences dialog</a>.<br>
-<br>
 <a name="rowedit"><b>11)Row editor</b></a><br>
 The row editor is shown whenever a row of data is added or edited.  It has one row for each column in the database; on the left is the name of the column, and on the right is its current value.  When adding a new row of data, the default values are shown; when editing an existing row of data, the current values are shown.  Some comments about editing certain data types:<br>
 <ul>
-<li>String fields may contain multiple lines of text; press return to add a line to the entry field.</li>
+<li>String fields may contain multiple lines of text; press enter/return to add a line to the entry field.</li>
 <li>To edit the value of a date field, click the button to the left of the current value display; this launches a calendar widget which allows you to select a new date.</li>
-<li>To the right of each integer and decimal entry field is a button which launches a simple calculator you can use as a keypad or to calculate the number to be entered; clicking "OK" puts the current value into the entry field.</li>
+<li>To the right of each integer and decimal entry field is a button which launches a simple calculator you can use as a keypad or to calculate the number to be entered; clicking "OK"/"Done" puts the current value into the entry field.</li>
 <li>The current value of each calculation column is shown.  To update the displayed value after changing the value of other columns in the row that the calculation uses, click the "Update" button to the right of the displayed value.  You don't need to do this before adding or saving the row, it is just for convenience.</li>
 <li>For Image fields which have not yet been filled, the "Select an image" button lets you choose an image file to use.  For Image fields which already have content, three buttons are shown: "View" (launch a dialog showing the current image), "Change" (replace the current image with a diferent one), and "Delete" (reset the field back to being empty).  Both the "Select an Image" and "Change" buttons launch a file selection dialog, followed by the <a href="#imageedit">image editor</a> dialog.</li>
 </ul>
-After editing the values as desired, click "OK" to accept the currently displayed values, or "X"/"Cancel" to cancel the row addition (if adding a row) or leave the current values unchanged (if editing a row).<br>
+After editing the values as desired, click "OK"/"Done" to accept the currently displayed values, or cancel out of the dialog to abort the row addition (if adding a row) or leave the current values unchanged (if editing a row).<br>
 <br>
 <a name="rowview"><b>12)Row viewer</b></a><br>
-The row viewer is a dialog designed to conveniently see all of the data for one row at a time.  Like the row editor, it has the column labels on the left and values on the right.  But the values are not editable, and they wrap so you don't have to scroll horizontally to see everything.  The complete content of note fields is shown as well, instead of just the first few words.  By default, only the columns in the current view are shown (in the view-specified order); to see a different set of columns, select the appropriate view from the droplist at the bottom of the dialog.  Pressing the left and right arrows at the bottom of the screen or the left and right directions on the direction pad allows you to navigate between rows in the current view.  Pressing the edit button at the bottom of the dialog lets you launch the row editor for the current row; if you click "OK" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer.  Finally, there is a copy button at the bottom of the dialog which copies the currently selected text (if any) to the clipboard.<br>
-<br>
+The row viewer is a dialog designed to conveniently see all of the data for one row at a time.  Like the row editor, it has the column labels on the left and values on the right.  But the values are not editable, and they wrap so you don't have to scroll horizontally to see everything.  The complete content of note fields is shown as well, instead of just the first few words.  By default, only the columns in the current view are shown (in the view-specified order); to see a different set of columns, select the appropriate view from the droplist at the bottom of the dialog.  Pressing the left and right arrows at the bottom of the screen or the left and right arrow keys allows you to navigate between rows in the current view.  There are a few other buttons buttons at the bottom of the dialog:<br>
+<ul>
+<li><i>Edit</i> - Launch the <a href="#rowedit">row editor</a> for the current row; if you click "OK"/"Done" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer.</li>
+<li><i>Copy Row</i> - Launch the row editor with a copy of the current row; if you click "OK"/"Done" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer.</li>
+<li><i>Delete</i> - Delete the shown row.</li>
+<li><i>Copy Text</i> - Copy the currently selected text (if any) to the clipboard. (Not shown in Maemo because dragging motions scroll the display rather than selecting text; copy text from the row editor instead.)</li>
+</ul>
 <a name="noteedit"><b>13)Note editor/viewer</b></a><br>
-The "Note" column type is for blocks of text which may contain multiple lines (as opposed to the "String" type, which is better suited for relatively short single lines of text).  The larger size of the content of such columns merits its own (very simple) dialog.  Both in the row editor and in the default value section of the column editor, a Note value is shown as a button containing a note icon and the beginning of the Note's content (as much as will fit).  To see and/or change the full text, press this button; a full-screen text editor dialog will appear, showing the current text of the Note.  Click "OK" to accept any changes you have made or "X"/"Cancel" to revert to the original content.<br>
+The "Note" column type is for blocks of text which may contain multiple lines (as opposed to the "String" type, which is better suited for relatively short single lines of text).  The larger size of the content of such columns merits its own (very simple) dialog.  Both in the <a href="#rowedit">row editor</a> and in the default value section of the column editor, a Note value is shown as a button containing a note icon and the beginning of the Note's content (as much as will fit).  To see and/or change the full text, press this button; a full-screen text editor dialog will appear, showing the current text of the Note.  Click "OK"/"Done" to accept any changes you have made, or cancel out of the dialog to revert to the original content.<br>
 <br>
-Note columns are treated a little specially in the data viewer also. The column label for Note columns contains a note icon indicating that it is not just a String column.  The cells in the column each show as much of the Note content as will fit.  If you press on one of these cells and hold for half a second or longer before releasing, a read-only version of the Note editor is shown.  Click either "OK" or "X"/"Cancel" to dismiss it and return to the data viewer.<br>
+Note columns are treated a little specially in the data viewer also. The column label for Note columns contains a note icon indicating that it is not just a String column.  The cells in the column each show as much of the Note content as will fit.  If you press on one of these cells and hold for 1/2 second or longer before releasing, a read-only version of the Note editor is shown.  Either click "OK"/"Done" or cancel out of the dialog to return to the data viewer.<br>
 <br>
 <a name="sortedit"><b>14)Sorting editor</b></a><br>
 Clicking on a column label in the data viewer is a convenient way to sort the database contents by a single column.  But sometimes you may want to sort by a combination of columns; sort by the content of column A, within groups of the same value of A sort by the content of column B, etc.  To do this or to sort by a column that isn't shown in the current view, you need to define a named sorting.<br>
 <br>
-Sortings are defined using the sorting editor dialog, which is very similar to the <a href="#viewedit">view editor</a> dialog.  At the top of the dialog is a text box containing the name of the sorting; changing this renames the sorting.  Below that is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is to be sorted.  Click this checkbox to add or remove the column from the set of ones to be sorted.  The third column in the table shows either "Ascending" or "Descending" for checked rows, indicating which direction to sort in; click this indicator to change it to the opposite value.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected row up or down in the table, changing the sequence in which the columns are sorted.  The rows are sorted by the topmost checked column first, rows with the same value in that column are sorted by the next highest checked column, etc.  Click "OK" to accept the currently shown settings or "X"/"Cancel" to revert to the previous values (or to cancel adding a new sorting).<br>
+Sortings are defined using the sorting editor dialog, which is very similar to the <a href="#viewedit">view editor</a> dialog.  At the top of the dialog is a text box containing the name of the sorting; changing this renames the sorting.  Below that is a table showing the names of all the columns in the database, with a checkbox next to each indicating whether or not it is to be sorted.  Click this checkbox to add or remove the column from the set of ones to be sorted.  The third column in the table shows either "Ascending" or "Descending" for checked rows, indicating which direction to sort in; click this indicator to change it to the opposite value.  The dialog has "Up" and "Down" buttons for moving the selected row up or down in the table, changing the sequence in which the columns are sorted.  The rows are sorted by the topmost checked column first, rows with the same value in that column are sorted by the next highest checked column, etc.  Click "OK"/"Done" to accept the currently shown settings or cancel out of the dialog to revert to the previous values (or to cancel adding a new sorting).<br>
 <br>
 <a name="filteredit"><b>15)Filter editor</b></a><br>
 This dialog allows you to define filters which are used to select which rows to display in the data viewer.  A filter may be as simple as "count = 1" or something more complicated like "any text column contains 'java', chapters &gt; 10, pages &lt;= 400, and instock is checked".  When you choose a filter from the "Filter" menu, the data viewer is updated to show only the rows which match the conditions you have defined.<br>
 <br>
-At the top of the dialog is a text box containing the name of the filter; changing this renames the filter.  Below that is a list of the conditions which make up the filter; a row must satisfy all of these conditions in order to pass the filter.  "Add", "Edit", "Delete", "Up", and "Down" buttons let you edit the condition list in basically the same way as the columns editor works.  But instead of the column editor dialog, a condition editor dialog is launched by the "Add" and "Edit" buttons.  This dialog lets you choose the column whose value to compare, the comparison operation to use, and the constant value to compare against.  For text comparisons, there is also a checkbox that lets you indicate whether the comparison should be case sensitive or not.  Instead of a single column, you can choose to compare the value of "Any text column"; if the value of any String or Note column in a row satisfies such a condition, the row is considered to pass the condition.  Click "OK" to accept the currently shown settings or "X"/"Cancel" to revert to the previous values (or to cancel adding a new filter).<br>
+At the top of the dialog is a text box containing the name of the filter; changing this renames the filter.  Below that is a list of the conditions which make up the filter; a row must satisfy all of these conditions in order to pass the filter.  "Add", "Edit", "Delete", "Up", and "Down" buttons let you edit the condition list in basically the same way as the <a href="#columns">columns editor</a> works.  But instead of the column editor dialog, a condition editor dialog is launched by the "Add" and "Edit" buttons.  This dialog lets you choose the column whose value to compare, the comparison operation to use, and the constant value to compare against.  For text comparisons, there is also a checkbox that lets you indicate whether the comparison should be case sensitive or not.  Instead of a single column, you can choose to compare the value of "Any text column"; if the value of any String or Note column in a row satisfies such a condition, the row is considered to pass the condition.  Click "OK"/"Done" to accept the currently shown settings, or cancel out of the dialog to revert to the previous values (or to cancel adding a new filter).<br>
 <br>
-<a name="import"><b>16)CSV import</b></a><br>
+<b>16)<a name="views">Views</a>, <a name="sortings">sortings</a>, and <a name="filters">filters</a> dialogs</b><br>
+There are three buttons on the toolbar for launching dialogs to select and manage views, sortings, and filters.  These three dialogs are very similar, differing only in the type of item being managed.  Each one has the following components:<br>
+<ul>
+<li><i>Current View/Sorting/Filter</i> - The name of the currently selected item.  If this is one of the pre-defined items such as "All Columns", "Selected Column", "All Rows", or "Quick Filter", the edit and delete buttons are disabled.</li>
+<li><i>Edit</i> - This button, to the right of the selected item name, launches the <a href="#viewedit">view editor</a>, <a href="#sortedit">sorting editor</a>, or <a href="#filteredit">filter editor</a> to modify the currently selected item.  If the edit dialog is accepted, the changes will be immediately applied and you will be returned to the <a href="#viewer">data viewer</a>.</li>
+<li><i>Delete</i> - This button, to the right of the edit button, deletes the curently selected item.  You will be returned to the data viewer with the default item of that type selected and applied (there is no default sorting, so after deleting a sorting the rows will not be sorted).</li>
+<li><i>New View/Sorting/Filter</i> - This button, below the name of the currently selected item, launches the view editor, sorting editor, or filter editor in order to create a new item of the appropriate type.  If such an item is created, it will be set as current and you will be returned to the data viewer.</li>
+<li><i>Views/Sortings/Filters list</i> - Below the "New..." button is a list of the existing items of the appropriate type.  Clicking on one of these will apply it and return you to the data viewer.  If you wish to edit or delete the item, you can then launch this dialog again to do so.</li>
+</ul>
+<a name="import"><b>17)CSV import</b></a><br>
 PortaBase can import rows of data from CSV (Comma-Separated Value) files.  This allows you to import data exported from a spreadsheet or another database program.  To do this:<br>
 <ol>
 <li>Open the PortaBase file you want to import the data into.  If you wish to import the data into a new file, create a new file and define a column structure that matches that of the data to be imported.</li>
-<li>From the "File" menu in the <a href="#viewer">data viewer</a>, select "Import".  A file selector will appear showing all the CSV files that are available; pick the one you want to import from.  The CSV file must have the same number of columns as the open database file, and the values in those columns must be appropriate for the specified column types.  You may specify the encoding of the text file in order to import non-ASCII characters correctly; the default is UTF-8 (which supports text in many languages), but you may also choose Latin-1 (which is used by most software configured for use primarily with Western European languages).</li>
+<li>From the "File" menu in the <a href="#viewer">data viewer</a>, select "Import".  A file dialog will open which allows you pick the CSV file you want to import from.  The CSV file must have the same number of columns as the open database file, and the values in those columns must be appropriate for the specified column types.  You may specify the encoding of the text file in order to import non-ASCII characters correctly; the default is UTF-8 (which supports text in many languages), but you may also choose Latin-1 (which is used by most software configured for use primarily with Western European languages).</li>
 <li>The rows in the imported file are added to the database.  Rows from other files can be added by repeating this process, or another copy of the same rows can be added by importing the same file again.</li>
 </ol>
 Notes:<br>
@@ -282,53 +304,51 @@ Notes:<br>
 <li>Calculation fields may be left as 0 or whatever; the actual values will be calculated during import.</li>
 <li>Image fields should contain either nothing (for no image loaded) or the relative or absolute path to a suitable image file.</li>
 </ol>
-<a name="export"><b>17)Data export</b></a><br>
+<a name="export"><b>18)Data export</b></a><br>
 PortaBase currently supports export to two formats: CSV and XML.  The inverse of data import, this allows you to move database content into a spreadsheet, text editor, other database program, etc. for further manipulation.  To export the current database's contents:<br>
 <ol>
 <li>Select "Export" from the "File" menu in the data viewer.</li>
 <li>Choose the format you want to export to from the droplist.  If you export to CSV, only the rows passing the current filter will be exported.  If you export to XML, the entire database structure (including column definitions, views, filters, etc.) will be exported; note that the result may be over twice the size of the actual data file, so make sure you have enough free storage space.</li>
 <li>Enter the name of the CSV or XML file you wish to create.</li>
-<li>Click "OK" to complete the export, or the "X"/"Cancel" button to cancel the operation.</li>
+<li>Click "OK"/"Done" to complete the export, or cancel out of the dialog to abort the operation.</li>
 </ol>
-<a name="prefs"><b>18)Preferences dialog</b></a><br>
-This dialog allows you to set your preferences for the PortaBase application.  Click "OK" to accept the current preferences on all tabs, or the "X"/"Cancel" button to leave them unchanged.  The tabs are:<br>
+<a name="prefs"><b>19)Preferences dialog</b></a><br>
+This dialog allows you to set your preferences for the PortaBase application.  Click "OK"/"Done" to accept the current preferences on all tabs, or cancel out of the dialog to leave them unchanged.  The tabs are:<br>
 <ul>
-<li><a href="#optionprefs">Options</a></li>
+<li><a href="#generalprefs">General</a></li>
+<li><a href="#dateprefs">Date and Time</a></li>
 <li><a href="#appearanceprefs">Appearance</a></li>
-<li><a href="#menuprefs">Menus</a></li>
-<li><a href="#buttonprefs">Buttons</a></li>
 </ul>
-<a name="optionprefs"><i>Options</i></a><br>
-The "General" section of the Options tab contains the following options:<br>
+Note that Maemo Fremantle doesn't use tabs in this dialog; all preferences are shown in a scrollable list.<br>
+<br>
+<a name="generalprefs"><i>General</i></a><br>
+The "General" tab contains the following options:<br>
 <ul>
-<li><i>Delete confirmations</i> - Check this to show a confirmation dialog whenever you attempt to delete a row, view, sorting, or filter.  This makes it less likely that you will accidentally delete something when you meant to click on something else.</li>
-<li><i>Allow checkbox edit in data viewer</i> - Check this to allow toggling of boolean values shown in the data viewer by clicking on the appropriate cell.  This makes it more convenient to use PortaBase as a todo list or such, but also makes it easier to accidentally change a data value.</li>
-<li><i>Show Seconds for times</i> - This lets you choose whether or not to display the number of seconds for time columns in the data viewer, row viewer, etc.</li>
-<li><i>Use pages in data viewer</i> - Check this to show the navigation bar at the bottom of the data viewer which allows you to specify the number of rows per page and navigate between pages.  If unchecked, the navigation bar is hidden and all rows which pass the current filter will be shown on one page; note that this may be slow for large databases.</li>
-<li><i>Wrap Notes</i> - Checking this enables automatic wrapping of text in the Note editor/viewer, avoiding the need to manually enter linebreaks.  By default it wraps only at whitespace, but you can change the droplist value to force wrapping at the end of lines whether spaces are present or not.  (This is particularly useful for languages like Japanese which tend not to use spaces.)</li>
+<li><i>Confirm deletions</i> - Check this to show a confirmation dialog whenever you attempt to delete a row, view, sorting, or filter.  This makes it less likely that you will accidentally delete something when you meant to click on something else.</li>
+<li><i>Allow checkbox edit in data viewer</i> - Check this to allow toggling of boolean values shown in the <a href="#viewer">data viewer</a> by clicking on the appropriate cell.  This makes it more convenient to use PortaBase as a todo list or such, but also makes it easier to accidentally change a data value.</li>
+<li><i>View rows with a single click</i> - By default, a single click in the data viewer opens the selected row in the <a href="#rowview">row viewer</a>.  Unchecking this option allows rows to be selected without immediately launching a dialog.</li>
+<li><i>Use small-screen settings on this device</i> - When checked, PortaBase uses default values for certain settings (such as column width, rows per page, etc.) which are more appropriate for small displays.  This can usually be guessed based on the operating system in use, but some netbooks and MIDs running PC operating systems might be better off with the small-screen settings.</li>
+<li><i>Use pages in data viewer</i> - Check this to show the navigation bar at the bottom of the data viewer which allows you to specify the number of rows per page and navigate between pages.  If unchecked, the navigation bar is hidden and all rows which pass the current filter will be shown in one scrollable list.</li>
 <li><i>Default rows per page</i> - The default value to use for the maximum number of rows displayed on one page when creating new databases.</li>
+<li><i>Wrap Notes</i> - Checking this enables automatic wrapping of text in the Note editor/viewer, avoiding the need to manually enter linebreaks.  By default it wraps only at whitespace, but you can change the droplist value to force wrapping at the end of lines whether spaces are present or not.  (This is particularly useful for languages like Japanese which tend not to use spaces.)</li>
 </ul>
-In the PC versions of PortaBase, there is also a "Date and Time" section on the Options tab.  On the Zaurus, PortaBase uses the system date and time settings; but since there is not a good cross-platform way to retrieve this information from desktop PCs, the following must be specified here:<br>
+<a name="dateprefs"><i>Date and Time</i></a><br>
+The "Date and Time" tab contains the following options:<br>
 <ul>
 <li><i>Date format</i> - The type of formatting to use for date values in the data viewer, row viewer, etc.</li>
 <li><i>Time format</i> - Whether 24 hour times or 12 hour (AM/PM) times should be shown.</li>
 <li><i>Weeks start on</i> - The first day of the week; this affects the appearance of the date entry dialog.</li>
+<li><i>Show Seconds for times</i> - This lets you choose whether or not to display the number of seconds for time columns in the data viewer, row viewer, etc.</li>
 </ul>
 <a name="appearanceprefs"><i>Appearance</i></a><br>
-In the "Font" section of the Appearance tab you can pick any font that is available for use, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may pick, for example "unifont, 16" in order to display Japanese characters, or "smallsmooth, 9" in order to fit more text on the screen.<br>
+In the "Font" section of the Appearance tab you can pick any font that is available for use, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may use this if the default font doesn't support unicode characters (rare on modern systems) or to fit more text on the screen.  (This option isn't available on Mac OS X, which doesn't seem to like applications using non-standard fonts for the UI.)<br>
 <br>
-The "Row Colors" section contains two buttons which allow you to choose the colors which will be used for the backgrounds of rows in the data viewer, columns editor, view editor, and sorting editor.  Each button shows one of the current colors; clicking on one launches a color selection dialog in which you can pick a different color to use.<br>
+The "Row Colors" section contains two buttons which allow you to choose the colors which will be used for the backgrounds of rows in the data viewer, columns editor, view editor, and sorting editor.  Each button shows one of the current colors; clicking on one launches a color selection dialog in which you can pick a different color to use.  (This option isn't available on Maemo Fremantle, where the palette is controlled by the system theme.)<br>
 <br>
-<a name="menuprefs"><i>Menus</i></a><br>
-This tab lets you control which menus are shown, and in which order; this is particularly important on some Zaurus models which may not have enough space on the screen to show all of the menus.  A list of menus is shown; the ones which are checked will be shown as top-level menus, while those which are not checked will be shown as sub-menus under the "File" menu.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected menu up or down in the list, changing the order in which the menus are shown.<br>
-<br>
-<a name="buttonprefs"><i>Buttons</i></a><br>
-This tab lets you control which toolbar buttons are shown, and in which order; as with the menus tab, this is especially useful on low-resolution Zaurus models.  A list of buttons is shown; only the ones which are checked will be shown in the toolbar.  At the bottom of the dialog are "Up" and "Down" buttons for moving the selected button up or down in the list, changing the order in which the buttons are shown.<br>
-<br>
-<a name="commandline"><b>19)Command line usage</b></a><br>
-PortaBase can be used from a Linux/Zaurus terminal or DOS prompt to import or export data without needing to go through the graphical interface.  This can be particularly useful if you want to write scripts that automatically generate, update, or otherwise manipulate PortaBase data files.  Run "portabase -h" for usage instructions; in summary, you can do the following:<br>
+<a name="commandline"><b>20)Command line usage</b></a><br>
+PortaBase can be used from a Linux/UNIX terminal or DOS prompt to import or export data without needing to go through the graphical interface.  This can be particularly useful if you want to write scripts that automatically generate, update, or otherwise manipulate PortaBase data files.  Run "portabase -h" for usage instructions; in summary, you can do the following:<br>
 <ul>
-<li><code>portabase -f </code><i>file</i> - Launch PortaBase and immediately open the named PortaBase data file.</li>
+<li><code>portabase </code><i>file</i> - Launch PortaBase and immediately open the named PortaBase data file.</li>
 <li><code>portabase fromxml </code><i>xmlfile pobfile</i> - Create a new PortaBase data file at "pobfile" from the PortaBase-format XML file located at "xmlfile".</li>
 <li><code>portabase fromcsv </code><i>csvfile pobfile</i> - Add rows to the existing PortaBase data file at "pobfile" from the CSV file located at "csvfile".</li>
 <li><code>portabase frommobiledb </code><i>mdbfile pobfile</i> - Create a new PortaBase data file at "pobfile" from the MobileDB file located at "mdbfile".</li>
@@ -339,13 +359,13 @@ To extract data from, add rows to, or create an encrypted file, type <code>-p </
 <br>
 The following options can be used between "toxml" or "tocsv" and the PortaBase file to export from:<br>
 <ul>
-<li><code>-v </code><i>view</i> - Apply the named view before exporting</li>
-<li><code>-s </code><i>sorting</i> - Apply the named sorting before exporting</li>
-<li><code>-f </code><i>filter</i> - Apply the named filter before exporting</li>
+<li><code>-v </code><i>view</i> - Apply the named view before exporting.</li>
+<li><code>-s </code><i>sorting</i> - Apply the named sorting before exporting.</li>
+<li><code>-f </code><i>filter</i> - Apply the named filter before exporting.</li>
 </ul>
 For more information about the PortaBase XML format and tools for doing useful things with it (like converting to HTML), see the PortaBase homepage (http://portabase.sourceforge.net).<br>
 <br>
-<a name="encrypt"><b>20)Encryption</b></a><br>
+<a name="encrypt"><b>21)Encryption</b></a><br>
 PortaBase data files can be encrypted in order to protect sensitive information like passwords.  Each encrypted file is accessed by providing a password specified by the file's creator.  (This password can be changed later from the <a href="#filemenu">File</a> menu's "Change Password" action.)  Because this password must be relatively easy to remember, this is the weakest point in the encryption scheme; therefore, it is important to choose a good password.  Passwords should meet the following guidelines:</p>
 <ul>
 <li>At least 6 characters long; the longer, the better (no upper limit)</li>
@@ -353,12 +373,12 @@ PortaBase data files can be encrypted in order to protect sensitive information 
 <li>Should not consist of data (or misspellings thereof) that would be likely to be in personal records (friend/relative/pet names, contact information, etc.)</li>
 <li>Easy to remember; if you choose a password that is "good" in the above senses and forget it, your data will be virtually impossible to retrieve</li>
 </ul>
-For security and implementation reasons, the entire content of encrypted files must be held in memory at once; thus encrypted files cannot scale to large sizes as well as non-encrypted files.  Files of a few hundred or a few thousand rows should still perform well, but files containing many thousands of rows of data probably won't (at least on the Zaurus; desktop computers with lots of memory can handle quite large encrypted files).<br>
+For security and implementation reasons, the entire content of encrypted files must be held in memory at once; thus encrypted files cannot scale to large sizes as well as non-encrypted files.  Files of a few hundred or a few thousand rows should still perform well, but files containing many thousands of rows of data probably won't (at least on Maemo; desktop computers with lots of memory can handle quite large encrypted files).<br>
 <br>
 For more information about encryption in PortaBase (including details on the algorithms used), see the PortaBase homepage (http://portabase.sourceforge.net).<br>
 <br>
 ----<br>
-Copyright 2002-2004 by Jeremy Bowman.<br>
+Copyright 2002-2004,2010 by Jeremy Bowman.<br>
 (jmbowman@alum.mit.edu)
 </body>
 </html>

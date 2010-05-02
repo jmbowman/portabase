@@ -1,7 +1,7 @@
 /*
  * passdialog.h
  *
- * (c) 2003-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 #ifndef PASSDIALOG_H
 #define PASSDIALOG_H
 
-#include "qqutil/qqdialog.h"
+#include "pbdialog.h"
 
 class Database;
 class QLineEdit;
@@ -26,7 +26,7 @@ class QLineEdit;
  * encrypted file, opening an encrypted file, or changing the password on an
  * open encrypted file.
  */
-class PasswordDialog: public QQDialog
+class PasswordDialog: public PBDialog
 {
     Q_OBJECT
 public:

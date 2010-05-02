@@ -1,3 +1,12 @@
+2010-05-02  JMB  Help file update, more Maemo and usability improvements
+
+    Updated the English help file to match the current state of the code.
+    Added a note to the file properties dialog about how to access the column
+    statistics dialog.  Fixed a bug in launching the column statistics dialog
+    on Fremantle.  Fixed the appearance of the password and slideshow dialogs
+    on Maemo.  Added a missing include for PBDialog that might cause compiling
+    problems on some platforms.
+
 2010-04-30  JMB  Proper D-Bus support, more bugfixes and Maemo improvements
 
     Added code to correctly register with D-Bus on Maemo; this allows PortaBase

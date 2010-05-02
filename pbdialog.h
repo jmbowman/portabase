@@ -16,6 +16,7 @@
 #ifndef PBDIALOG_H
 #define PBDIALOG_H
 
+#include <QStringList>
 #include "qqutil/qqdialog.h"
 
 class QDialogButtonBox;
