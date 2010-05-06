@@ -21,11 +21,11 @@
 #include <QPushButton>
 #include "../database.h"
 #include "../factory.h"
+#include "../importdialog.h"
 #include "imageeditor.h"
 #include "imageselector.h"
 #include "imageutils.h"
 #include "imageviewer.h"
-#include "importdialog.h"
 
 /**
  * Constructor.

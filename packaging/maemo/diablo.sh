@@ -11,4 +11,5 @@ cp src/packaging/maemo/portabase.pro portabase.pro
 cp -R src/packaging/maemo/debian .
 cp src/packaging/maemo/diablo_control debian/control
 cp src/packaging/maemo/diablo_postinst debian/postinst
-dpkg-buildpackage -rfakeroot -uc -us -sa
+dpkg-buildpackage -rfakeroot -sa -S
+#dpkg-buildpackage -rfakeroot -uc -us -sa

@@ -223,6 +223,10 @@
         <source>Image</source>
         <translation>Obrázek</translation>
     </message>
+    <message>
+        <source>Column Definition</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Condition</name>
@@ -299,6 +303,14 @@
         <source>Columns Editor</source>
         <translation>Editor sloupců</translation>
     </message>
+    <message>
+        <source>No columns defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateDialog</name>
@@ -310,12 +322,9 @@
         <source>Today</source>
         <translation type="unfinished">Dnes</translation>
     </message>
-</context>
-<context>
-    <name>DateWidget</name>
     <message>
         <source>None</source>
-        <translation>Není</translation>
+        <translation type="unfinished">Není</translation>
     </message>
 </context>
 <context>
@@ -352,6 +361,15 @@
         <source>Replace where used with:</source>
         <translation>Nahradit výskyt čím:</translation>
     </message>
+    <message>
+        <source>No options defined for this enumeration type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one, or press
+the &quot;Import&quot; button to load lines from a text file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EnumManager</name>
@@ -369,6 +387,14 @@ tohoto typu pole budou smazány:</translation>
     <message>
         <source>Continue?</source>
         <translation>Pokračovat?</translation>
+    </message>
+    <message>
+        <source>No enumerated column types defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -692,6 +718,38 @@ tohoto typu pole budou smazány:</translation>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Views</source>
+        <translation type="unfinished">Náhledy</translation>
+    </message>
+    <message>
+        <source>Change the active view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation type="unfinished">Pořadí</translation>
+    </message>
+    <message>
+        <source>Change the active sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished">Filtry</translation>
+    </message>
+    <message>
+        <source>Change the active filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View PortaBase in fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -873,10 +931,6 @@ vyhovující filtru?</translation>
         <translation>Není souborem PortaBase</translation>
     </message>
     <message>
-        <source>Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation type="unfinished">Soubory PortaBase</translation>
     </message>
@@ -910,6 +964,14 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No such file exists</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1069,6 +1131,25 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Thistle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View rows with a single click</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QFileSystemModel</name>
+    <message>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1368,6 +1449,14 @@ vyhovující filtru?</translation>
         <source>Next row</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copy this row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete this row</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SlideshowDialog</name>
@@ -1432,6 +1521,53 @@ vyhovující filtru?</translation>
     <message>
         <source>PM</source>
         <translation>Odpoledne/večer</translation>
+    </message>
+</context>
+<context>
+    <name>VSFManager</name>
+    <message>
+        <source>Views</source>
+        <translation type="unfinished">Náhledy</translation>
+    </message>
+    <message>
+        <source>Current View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation type="unfinished">Pořadí</translation>
+    </message>
+    <message>
+        <source>Current Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished">Filtry</translation>
+    </message>
+    <message>
+        <source>Current Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected Column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1543,12 +1679,16 @@ vyhovující filtru?</translation>
         <translation>Jméno sloupce</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation>Není</translation>
-    </message>
-    <message>
         <source>All Rows</source>
         <translation>Všechny záznamy</translation>
+    </message>
+    <message>
+        <source>No default sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No default filter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

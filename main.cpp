@@ -15,6 +15,8 @@
 
 #include <QApplication>
 #include <QIcon>
+#include <QProcess>
+#include <QRegExp>
 #include <QTranslator>
 #include "commandline.h"
 #include "eventfilter.h"
@@ -41,13 +43,35 @@ int main(int argc, char **argv) {
     app.setOrganizationDomain("sourceforge.net");
     app.setApplicationName("PortaBase");
     app.setWindowIcon(QIcon(":/appicon/PortaBase.png"));
+    // can't use QProcessEnvironment because Diablo doesn't have it yet
+    QStringList env = QProcess::systemEnvironment();
+    int qmIndex = env.indexOf(QRegExp("PORTABASE_QM=.*"));
+    int qtQmIndex = env.indexOf(QRegExp("PORTABASE_QT_QM=.*"));
     QTranslator qtTranslator;
-    if (qtTranslator.load(QString(":/i18n/Qt.qm"))) {
-        app.installTranslator(&qtTranslator);
+    if (qtQmIndex != -1) {
+        QString path = env[qtQmIndex];
+        path = path.right(path.length() - 16);
+        if (qtTranslator.load(path)) {
+            app.installTranslator(&qtTranslator);
+        }
+    }
+    else {
+        if (qtTranslator.load(QString(":/i18n/Qt.qm"))) {
+            app.installTranslator(&qtTranslator);
+        }
     }
     QTranslator translator;
-    if (translator.load(QString(":/i18n/PortaBase.qm"))) {
-        app.installTranslator(&translator);
+    if (qmIndex != -1) {
+        QString path = env[qmIndex];
+        path = path.right(path.length() - 13);
+        if (translator.load(path)) {
+            app.installTranslator(&translator);
+        }
+    }
+    else {
+        if (translator.load(QString(":/i18n/PortaBase.qm"))) {
+            app.installTranslator(&translator);
+        }
     }
     QStringList args = app.arguments();
     if ((args.count() > 1 && args[1].startsWith("-")) || args.count() > 2) {

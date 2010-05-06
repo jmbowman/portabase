@@ -223,6 +223,10 @@
         <source>Image</source>
         <translation>Imagen</translation>
     </message>
+    <message>
+        <source>Column Definition</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Condition</name>
@@ -299,6 +303,14 @@
         <source>Columns Editor</source>
         <translation>Editor de columnas</translation>
     </message>
+    <message>
+        <source>No columns defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateDialog</name>
@@ -310,12 +322,9 @@
         <source>Today</source>
         <translation type="unfinished">Hoy</translation>
     </message>
-</context>
-<context>
-    <name>DateWidget</name>
     <message>
         <source>None</source>
-        <translation>Nada</translation>
+        <translation type="unfinished">Nada</translation>
     </message>
 </context>
 <context>
@@ -352,6 +361,15 @@
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
+    <message>
+        <source>No options defined for this enumeration type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one, or press
+the &quot;Import&quot; button to load lines from a text file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EnumManager</name>
@@ -370,6 +388,14 @@ también serán borradas:</translation>
     <message>
         <source>Continue?</source>
         <translation>¿Continuar?</translation>
+    </message>
+    <message>
+        <source>No enumerated column types defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -693,6 +719,38 @@ también serán borradas:</translation>
         <source>Print Pre&amp;view</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Views</source>
+        <translation type="unfinished">Vistas</translation>
+    </message>
+    <message>
+        <source>Change the active view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation type="unfinished">Clasificaciones</translation>
+    </message>
+    <message>
+        <source>Change the active sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished">Filtros</translation>
+    </message>
+    <message>
+        <source>Change the active filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View PortaBase in fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -874,10 +932,6 @@ en el filtro actual?</translation>
         <translation>No es un archivo de PortaBase</translation>
     </message>
     <message>
-        <source>Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -911,6 +965,14 @@ en el filtro actual?</translation>
     </message>
     <message>
         <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No such file exists</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1070,6 +1132,25 @@ en el filtro actual?</translation>
     </message>
     <message>
         <source>Thistle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View rows with a single click</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QFileSystemModel</name>
+    <message>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1369,6 +1450,14 @@ en el filtro actual?</translation>
         <source>Next row</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copy this row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete this row</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SlideshowDialog</name>
@@ -1433,6 +1522,53 @@ en el filtro actual?</translation>
     <message>
         <source>PM</source>
         <translation>PM</translation>
+    </message>
+</context>
+<context>
+    <name>VSFManager</name>
+    <message>
+        <source>Views</source>
+        <translation type="unfinished">Vistas</translation>
+    </message>
+    <message>
+        <source>Current View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation type="unfinished">Clasificaciones</translation>
+    </message>
+    <message>
+        <source>Current Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished">Filtros</translation>
+    </message>
+    <message>
+        <source>Current Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected Column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nada</translation>
     </message>
 </context>
 <context>
@@ -1544,12 +1680,16 @@ en el filtro actual?</translation>
         <translation>Nombre de la columna</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation>Nada</translation>
-    </message>
-    <message>
         <source>All Rows</source>
         <translation>Todas las filas</translation>
+    </message>
+    <message>
+        <source>No default sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No default filter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

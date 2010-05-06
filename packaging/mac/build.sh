@@ -7,6 +7,8 @@ rm -f build/PortaBase.app
 rm -f build/PortaBase.dmg
 qmake -spec macx-g++40 portabase.pro
 make clean
+lrelease portabase.pro
+lrelease resources/translations/qt*.ts
 make
 cd build
 macdeployqt PortaBase.app

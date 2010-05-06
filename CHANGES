@@ -1,3 +1,20 @@
+2010-05-05  #################### PortaBase 2.0b1 ####################
+
+2010-05-05  JMB  Windows updates, packaging tweaks, translation tools
+
+    Updated the Windows-specific parts of portabase.pro.  Fixed a bug in
+    imageselector.cpp that broke compiling with MinGW.  Updated the application
+    icon for Windows and the Inno Setup installer script.  Created a couple of
+    batch scripts to automate compilation and creation of the installer.
+    Updated the INSTALL file with current instructions for building on Windows.
+    Made some minor packaging fixes for Debian and Maemo.
+
+    There's now a trio of environment variables that can be used to test out
+    PortaBase UI and help file translations: PORTABASE_QM, PORTABASE_QT_QM, and
+    PORTABASE_HELP.  I'll document their usage fully on the web site with the
+    notes on doing translations.  Clarified the encoding (UTF-8) of the
+    existing help files and updated the UI translation files while I was at it.
+
 2010-05-02  JMB  Help file update, more Maemo and usability improvements
 
     Updated the English help file to match the current state of the code.

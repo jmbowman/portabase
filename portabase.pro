@@ -1,5 +1,5 @@
 TEMPLATE        = app
-CONFIG         += qt warn_on release thread
+CONFIG         += qt warn_on thread
 QT             += xml
 DESTDIR         = build
 OBJECTS_DIR     = build
@@ -153,9 +153,8 @@ include(color_picker/qtcolorpicker.pri)
 unix:LIBS       += -lm -lmk4
 
 # Stuff for Mac OS X
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 macx {
-    #CONFIG             += static
+    CONFIG             += release x86 ppc
     TARGET              = PortaBase
     RESOURCES           = resources/mac.qrc
     ICON                = packaging/mac/PortaBase.icns
@@ -191,12 +190,12 @@ macx {
                           JA_LPROJ \
                           ZH_HANT_LPROJ
     QMAKE_INFO_PLIST    = packaging/mac/Info.plist
-    CONFIG             += x86 ppc
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 }
 
 # Stuff for Maemo
 maemo5|contains(QT_CONFIG, hildon): {
-    CONFIG             += qdbus
+    CONFIG             += debug qdbus
     LIBS               += -L../../src/metakit/builds
     isEmpty(PREFIX) {
         PREFIX          = /usr/local
@@ -234,17 +233,20 @@ contains(QT_CONFIG, hildon) {
 # Stuff for other Linux/UNIX platforms
 unix:!macx:!maemo5:!contains(QT_CONFIG, hildon): {
     #QMAKE_CXXFLAGS       += -O0 # for valgrind
+    CONFIG               += debug
     LIBS                 += -Lmetakit/builds
     RESOURCES             = resources/linux.qrc
 }
 
 # Stuff for Windows
-win32:DEFINES                += QT_DLL
-win32:RC_FILE                 = portabase.rc
-win32:QMAKE_CXXFLAGS_RELEASE += /MD
-win32:INCLUDEPATH            += D:\Devel\metakit-2.4.9.3\include \
-                                D:\Devel\jpeg-6b \
-                                D:\Devel
+win32 {
+    CONFIG                 += release
+    TARGET                  = PortaBase
+    RESOURCES               = resources/windows.qrc
+    LIBS                   += c:/portabase/metakit/builds/libmk4.a
+    RC_FILE                 = portabase.rc
+    INCLUDEPATH            += c:/portabase/metakit/include
+}
 
 # Stuff for static builds
 static {

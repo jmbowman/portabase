@@ -7,7 +7,7 @@ Standards-Version: 3.7.2
 
 Package: portabase
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, hildon-application-manager
+Depends: ${shlibs:Depends}, hildon-application-manager
 Description: An easy-to-use personal database application
  PortaBase is a program for conveniently managing one-table database files.
  It is available for many platforms, including Linux, Mac OS X, Windows,
@@ -71,3 +71,9 @@ XB-Maemo-Icon-26:
  IAXKcs6zjLFMrzYzxmSaR5xSyjcDcM6ZFEClK7bWdqy1URrbbWttK/0u0VqbXsO61djnc40kKaWM
  McbTJSilPetzQkgvL3qbqF5l64WQcc7p1BPGWmtc90C867///w+iNyjsMjIXAQAAAABJRU5ErkJg
  gg==
+
+Package: portabase-dbg
+Section: devel
+Architecture: any
+Depends: portabase (= ${Source-Version})
+Description: Debug symbols for PortaBase

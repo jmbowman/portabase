@@ -24,6 +24,8 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QProcess>
+#include <QRegExp>
 #include <QSettings>
 #include <QToolBar>
 #include "qqhelpbrowser.h"
@@ -358,11 +360,24 @@ void QQMenuHelper::setEdited(bool y)
 
 /**
  * Show the application's main help file.  This should be a resource named
- * help/[applicationName].html (i.e. "help/MyApp.html").
+ * help/[applicationName].html (i.e. "help/MyApp.html").  To override it with
+ * a custom file URL (to test a translation, for example), set that URL as
+ * the value of the APPLICATIONNAME_HELP environment variable.
  */
 void QQMenuHelper::showHelp()
 {
-    QQHelpBrowser helpBrowser(QString("qrc:/help/html/%1.html").arg(qApp->applicationName()), mainWindow);
+    QStringList env = QProcess::systemEnvironment();
+    QString var = QString("%1_HELP").arg(qApp->applicationName().toUpper());
+    QString path;
+    int index = env.indexOf(QRegExp(QString("%1=.*").arg(var)));
+    if (index != -1) {
+        path = env[index];
+        path = path.right(path.length() - var.length() - 1);
+    }
+    else {
+        path = QString("qrc:/help/html/%1.html").arg(qApp->applicationName());
+    }
+    QQHelpBrowser helpBrowser(path, mainWindow);
     helpBrowser.exec();
 }
 

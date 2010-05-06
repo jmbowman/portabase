@@ -53,3 +53,9 @@ XB-Maemo-Icon-26:
  hRBCSllyHKfqOM6zUsop13XHXdetOI5T5px7jDGHEMLx8MJN0jTVSZIEWutOFEXNKIq2lFKbWut/
  tNYNpZRvjDF933VCCC6EcHK5nCeEKHDOC5zz/D6I7YPSfVCYJEnXGNON4zgwxmhjHvtDAvgXDRHA
  N2eaZkMAAAAASUVORK5CYII=
+
+Package: portabase-dbg
+Section: devel
+Architecture: any
+Depends: portabase (= ${Source-Version})
+Description: Debug symbols for PortaBase

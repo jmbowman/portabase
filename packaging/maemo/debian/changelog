@@ -1,3 +1,9 @@
+portabase (2.0~beta1-2) unstable; urgency=low
+
+  * Declare the debug package in the control file
+
+ -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 05 May 2010 13:49:03 +0100
+
 portabase (2.0~beta1-1) unstable; urgency=low
 
   * Initial Maemo Release.

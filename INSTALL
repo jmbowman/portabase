@@ -15,7 +15,13 @@ need the following:
 - Windows XP, Vista, or 7
 - A recent version of Qt 4 (http://qt.nokia.com/downloads).  It's easiest to
   get started with a version that comes with the MinGW compiler, since I
-  haven't tested the latest code with Visual Studio.
+  haven't tested the latest code with Visual Studio.  Add both the "bin"
+  directory and the "mingw\bin" directory that come with it to your "Path"
+  environment variable.
+- MSYS 1.0.11 (http://sourceforge.net/projects/mingw/files/MSYS%20Base%20System/msys-1.0.11/MSYS-1.0.11.exe/download).
+  This emulates a basic UNIX system on Windows, and is the easiest way to
+  compile Metakit with MinGW.  Newer versions are available, but lack a
+  convenient installer; this one should work fine.
 - Inno Setup, if you wish to create the PortaBase installer; available from:
   http://www.jrsoftware.org/isinfo.php
 
@@ -50,11 +56,19 @@ the Metakit README file) inside the appropriate Scratchbox environment.  You'll
 want to pass the "--enable-threads" and "--disable-shared" parameters to the
 configure script.
 
-To compile Metakit for Windows, follow the instructions in Metakit's README
-file; be sure to build the static library version (mklib).  To compile
-Metakit for use in Linux or Mac OS X desktop PortaBase, just follow the
-README directions (the "UNIX" instructions in both cases); you'll want to use
-the same configure script parameters mentioned above for Maemo development.
+To compile Metakit for use in Linux or Mac OS X desktop PortaBase, just follow
+the README directions (the "UNIX" instructions in both cases); you'll want to
+use the same configure script parameters mentioned above for Maemo development.
+
+To compile Metakit for Windows, first install Qt in order to get the MinGW
+compiler.  Then install MSYS as mentioned above; in the postinstallation
+script, you'll be asked for the path of the MinGW installation that came with
+Qt.  Start MSYS from the installed shortcut, and change to the metakit/builds
+directory that is included with the PortaBase source code.  Note that you use
+"cd" to change directories, use "/" as the directory separator, and the C:
+drive is located at "/c".  From the metakit/builds directory, run
+"../unix/configure --enable-threads --disable-shared".  Once that finishes, run
+"make".  You should now have a libmk4.a static library file in that directory.
 
 PortaBase for Maemo Compilation
 --------------------------------
@@ -64,21 +78,16 @@ documentation for more information.
 
 PortaBase for Windows Compilation, Packaging
 --------------------------------------------
-- Install a recent version of Qt 4 and configure it (make sure the "bin"
-  directory is in your path and that the QTDIR and QMAKESPEC environment
-  variables are set correctly).
-- Adjust the value of INCLUDEPATH in portabase.pro as needed to locate the
-  library header files on your system.
-- Run "qmake -t vcapp -o portabase.dsp portabase.pro"
-- Copy mk4vc60s.lib to the PortaBase source directory.
-- Open the generated portabase.dsp file in Visual C++, and from
-  "Build->Set Active Configuration..." select "portabase - Win32 Release".
-- Execute the build.
-- Copy qt-mtnc321.dll from Qt's "lib" directory to the Release subdirectory
-  created by Visual C++.
-- Copy msvcrt.dll to the PortaBase source directory.
-- Run "lrelease portabase.pro" to generate the UI translation files.
-- Open portabase.iss with Inno Setup and choose "Compile"
+- Compile Metakit as described above.
+- Open a command prompt, and change to the root directory of the downloaded
+  PortaBase source code.  If this isn't at "C:\portabase", you'll have to
+  change the paths for "LIBS" and "INCLUDEPATH" in portabase.pro.
+- From that directory run "packaging\windows\build.bat"; this will generate a
+  working PortaBase.exe file in the "build" directory.
+- If you want to create an installer for PortaBase, first install Inno Setup.
+  Then run "packaging\windows\installer.bat"; you may need to edit it first
+  in order to adjust the paths to Qt and/or Inno Setup.  This will generate an
+  executable installer in the "build/windows" directory.
 
 Debian Package Building
 -----------------------
