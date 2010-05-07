@@ -49,13 +49,7 @@ NumberWidget::NumberWidget(int type, QWidget *parent)
  */
 QString NumberWidget::getValue()
 {
-    QString text = entryField->text();
-    if (dataType == INTEGER) {
-        return QString::number(QLocale::system().toInt(text));
-    }
-    else {
-        return text;
-    }
+    return entryField->text();
 }
 
 /**

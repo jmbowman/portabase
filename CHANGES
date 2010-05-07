@@ -1,3 +1,9 @@
+2010-05-07  JMB  XML & MobileDB import fixed, integer field validation fixed
+
+    Fixed a couple of bugs that were preventing XML and MobileDB import from
+    working.  Also fixed a bug where entering a decimal value into an integer
+    field would accept it as the value "0".
+
 2010-05-05  #################### PortaBase 2.0b1 ####################
 
 2010-05-05  JMB  Windows updates, packaging tweaks, translation tools

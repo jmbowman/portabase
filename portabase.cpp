@@ -590,7 +590,7 @@ void PortaBase::createFile(ImportDialog::DataSource source,
     QString f(file);
     if (f.isNull()) {
         f = createNewFile();
-        if (file.isEmpty()) {
+        if (f.isEmpty()) {
             return;
         }
     }
