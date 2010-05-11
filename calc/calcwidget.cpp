@@ -19,6 +19,7 @@
 #include "calcwidget.h"
 #include "../database.h"
 #include "../factory.h"
+#include "../formatting.h"
 #include "../roweditor.h"
 
 /**
@@ -81,6 +82,6 @@ void CalcWidget::calculate()
     CalcNode *root = db->loadCalc(colName, &decimals);
     QStringList row = rowEditor->getRow(false);
     double value = root->value(row, columns);
-    setValue(db->formatDouble(value, decimals));
+    setValue(Formatting::formatDouble(value, decimals));
     delete root;
 }

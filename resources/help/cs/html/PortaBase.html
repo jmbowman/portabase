@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>PortaBase 1.9</title>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<div align="center"><h3>PortaBase 1.9</h3> 
+- Přenosná databáze -</div>
+<br>
+<a href="#intro">1) Úvodem</a><br>
+<a href="#file">2) Menu &quot;Soubor&quot;</a><br>
+<a href="#columns">3) Editor sloupců</a><br>
+<a href="#enummanage">4) Správce seznamů</a><br>
+<a href="#enumedit">5) Editor seznamů</a><br>
+<a href="#calcedit">6) Editor výpočtů</a><br>
+<a href="#imageedit">7) Editor obrázků</a><br>
+<a href="#imageview">8) Prohlížeč obrázků</a><br>
+<a href="#viewedit">9) Editor náhledů</a><br>
+<a href="#viewer">10) Prohlížeč dat</a><br>
+<a href="#rowedit">11) Editor záznamů</a><br>
+<a href="#rowview">12) Prohlížeč záznamů</a><br>
+<a href="#noteedit">13) Editor/prohlížeč poznámek</a><br>
+<a href="#sortedit">14) Editor pořadí</a><br>
+<a href="#filteredit">15) Editor filtrů</a><br>
+<a href="#import">16) Import dat</a><br>
+<a href="#export">17) Export dat</a><br>
+<a href="#prefs">18) Dialog &quot;Nastavení&quot;</a><br>
+<a href="#commandline">19) Terminál/příkazový řádek</a><br>
+<a href="#encrypt">20) Šifrování</a><br>
+<br>
+<br>
+<a name="intro"><b>1) Úvodem</b></a><br>
+PortaBase je malá databázová aplikace pro vytváření, prohlížení a editaci uživatelských datových tabulek. Typické využití nachází při vedení inventářů médií, přehledů referencí, seznamů úkolů, nákupních seznamů, atd. Mezi významné vlastnosti patří:<br>
+<ul>
+ <li>Podpora následujících typů datových sloupců: Řetězec, integer, decimální, booleánský, poznámka (víceřádkový text), datum, čas, výpočet, sekvence, obrázek a uživatelem definovatelný seznam.</li>
+ <li>Vytváření uživatelských náhledů (vybraných sloupců v libovolném pořadí) a práce s nimi.</li>
+ <li>Filtrování zobrazených záznamů dle definované sady podmínek.</li>
+ <li>Vytváření vlastního pořadí záznamů (řazení dle libovolného sloupce či kombinace sloupců s možností stanovit směr řazení pro každý sloupec).</li>
+ <li>Navigace tlačítky při prohlížení záznamů či zobrazení stránek v prohlížeči dat (s volbou počtu záznamů zobrazovaných na jedné stránce).</li>
+ <li>Možnost kdykoli přidávat, mazat či přejmenovávat sloupce, editovat je a měnit jejich pozici.</li>
+ <li>Možnost nastavení výchozích hodnot pro jednotlivé sloupce.</li>
+ <li>Zobrazování sumárních statistik sloupců (celkem, průměr, minimum, maximum, atd.).</li>
+ <li>Import dat ze souborů CSV, XML a MobileDB.</li>
+ <li>Export dat do souborů CSV a XML.</li>
+ <li>Podpora konverzí mezi formáty dat použitím terminálu/příkazového řádku (do a ze souborů XML, do a ze souborů CSV a ze souborů MobileDB).</li>
+ <li>Podpora Unicode.</li>
+ <li>Možnost výběru jakéhokoli dostupného písma pro použití v celé aplikaci (pro rozhraní aplikace i zobrazení dat).</li>
+ <li>Uživatelsky definovatelné barvy pozadí pro odlišení sudých a lichých záznamů.</li>
+ <li>Jednoduchá pomůcka - kalkulátor pro zadávání číselných dat.</li>
+</ul>
+<a name="file"><b>2) Menu &quot;Soubor&quot;</b></a><br>
+Není-li aplikace PortaBase spuštěna poklepem na asociovaný soubor, nabídne Vám po spuštění nejprve výběr souboru. Klepnutím můžete otevřít libovolný soubor ze zobrazeného přehledu (ve verzi pro Zaurus) nebo si vybrat některou z následujících voleb menu &quot;Soubor&quot; (případně použít ekvivalentní tlačítko):<br>
+<ul>
+ <li><i>Nový</i> - Vytvoří nový soubor (volitelně i <a href="#encrypt">šifrovaný</a>).</li>
+ <li><i>Otevřít</i> - Otevře vybraný soubor.</li>
+ <li><i>Naposledy otevřené</i> - Ze submenu obsahujícího přehled naposledy otevřených souborů klepnutím otevřete vybraný soubor.
+ <li><i>Smazat</i> - Smaže vybraný soubor (pouze ve verzi pro Zaurus).</li>
+ <li><i>Přejmenovat</i> - Změní jméno vybraného souboru (pouze ve verzi pro Zaurus).</li>
+ <li><i>Kopírovat</i> - Vytvoří kopii vybraného souboru s novým jménem (pouze ve verzi pro Zaurus).</li>
+ <li><i>Načíst znovu </i> - Zaktualizuje přehled souborů o nově přidané či smazané soubory (pouze ve verzi pro Zaurus).</li>
+ <li><i>Importovat...</i> - Vytvoří nový soubor (volitelně i <a href="#encrypt">šifrovaný</a>) z dat souboru ve formátu XML či MobileDB. Přitom budete vyzváni k zadání typu importovaného souboru, jména nově vytvářeného souboru a k výběru souboru, který chcete importovat. Na domovské stránce PortaBase naleznete více informací o použitém formátu XML.</li>
+ <li><i>Nastavení</i> - Otevře <a href="#prefs">dialog &quot;Nastavení&quot;</a>.</li>
+ <li><i>Ukončit</i> - Zavře aplikaci PortaBase.</li>
+</ul>
+<a name="columns"><b>3) Editor sloupců</b></a><br>
+Každý soubor aplikace PortaBase obsahuje jednu tabulku s formátem definovaným uživatelem. Formát tabulky je určen posloupností datových sloupců, z nichž každý má své vlastní jméno, datový typ a výchozí hodnotu. Při vytváření nového souboru aplikace PortaBase je vždy zobrazen dialog Editoru sloupců umožňující uživateli  definovat datové sloupce. Sloupce již existujícího souboru lze kdykoli změnit výběrem volby &quot;Editor sloupců&quot; z menu &quot;Soubor&quot; v <a href="#viewer">Prohlížeči dat</a> (základním rozhraní aplikace).<br>
+<br>
+Stávající definice sloupců jsou zde zobrazeny ve stejném pořadí jako v <a href="#rowedit">Editoru záznamů</a>. S definicemi sloupců lze nakládat pomocí tlačítek v dolní části Editoru sloupců:<br>
+<ul>
+<li><i>Přidat</i> - Vytvoří novou definici sloupce a přidá ji na konec přehledu. Pomocí zobrazeného dialogu uživatel zadá jméno, datový typ a výchozí hodnotu nového sloupce. (Vyberete-li jako typ příslušného sloupce v tomto dialogu &quot;(Nový seznam)&quot;, spustí se <a href="#enumedit">Editor seznamů</a>, který Vám umožní nový seznam vytvořit.) Výchozí hodnota je údaj, který bude použit v daném sloupci u již existujících záznamů a současně bude použit v Editoru záznamů u nově přidávaných záznamů jako přednastavený údaj.</li>
+<li><i>Editovat</i> - Umožní editaci vybrané definice sloupce. Jednou zvolený datový typ sloupce však již nelze změnit. Je-li změněna výchozí hodnota, nově nastavená výchozí hodnota se objeví v Editoru záznamů u nově přidávaných záznamů; již existující záznamy přitom nebudou změnou ovlivněny.</li>
+<li><i>Smazat</i> - Smaže vybranou definici sloupce. Veškeré údaje uchovávané v takovém sloupci budou přitom ztraceny.</li>
+<li><i>Posunout nahoru</i> - Posune vybraný sloupec v přehledu Editoru sloupců o jednu pozici výše (a současně také v Editoru záznamů).</li>
+<li><i>Posunout dolů</i> - Posune vybraný sloupec v přehledu Editoru sloupců o jednu pozici níž (a současně také v Editoru záznamů).</li>
+</ul>
+Žádná ze změn ve formátu tabulky není provedena dříve, než změny potvrdí uživatel volbou &quot;OK&quot;; je-li použita volba &quot;Zrušit&quot; či křížek pro uzavření dialogu, veškeré změny jsou zrušeny a původní formát souboru je ponechán beze změny. Volba &quot;Zrušit&quot; či křížek pro uzavření dialogu při definování sloupců nového souboru vytváření souboru zruší. Jinými slovy - uzavřením dialogu se přeneseme zpět do <a href="#viewer">Prohlížeče dat.</a><br>
+<br>
+<a name="enummanage"><b>4) Správce seznamů</b></a><br>
+PortaBase podporuje používání uživatelského seznamu jako jednoho z typů datového sloupce,  který pracuje pouze s hodnotami z definovaného seznamu. Dialog Správce seznamů Vám umožní přidávat, editovat a mazat uživatelské seznamy a měnit jejich pořadí.<br>
+<br>
+Podstatná část dialogu je vyhrazena přehledu již existujících uživatelských seznamů. V dolní části dialogu je řada tlačítek identických jako u <a href="#columns">Editoru sloupců</a>:<br>
+<ul>
+<li><i>Přidat</i> - Spustí <a href="#enumedit">Editor seznamů</a>, který umožní vytvořit nový uživatelský seznam. Nový seznam je přidán do přehledu už po potvrzení &quot;OK&quot; v dialogu Editoru seznamů, nikoli až ve Správci seznamů.</li>
+<li><i>Editovat</i> - Spustí Editor seznamů s otevřeným vybraným uživatelským seznamem. Stejně jako při přidávání nového seznamu jsou i změny při editaci stávajícího seznamu provedeny už po potvrzení &quot;OK&quot; v dialogu Editoru seznamů.</li>
+<li><i>Smazat</i> - Smaže vybraný uživatelský seznam. Je-li tento seznam použit v některých datových sloupcích daného souboru, aplikace PortaBase upozorní uživatele na skutečnost, že smazáním vybraného uživatelského seznamu budou smazány také tyto sloupce. Vybraný uživatelský seznam (stejně tak i asociované sloupce) bude smazán ihned, nikoli až po potvrzení &quot;OK&quot;.</li>
+<li><i>Posunout nahoru </i> - Posune vybraný seznam v přehledu Správce seznamů o jednu pozici výše (a současně také v Editoru seznamů).</li>
+<li><i>Posunout dolů</i> - Posune vybraný seznam v přehledu Správce seznamů o jednu pozici níž (a současně také v Editoru seznamů).</li>
+</ul>
+Volbou &quot;OK&quot; potvrdíte změny řazení v přehledu seznamů, volbou &quot;Zrušit&quot; či křížku pro uzavření dialogu ponecháte původní řazení (netýká se přidaných ani smazaných seznamů).<br>
+<br>
+<a name="enumedit"><b>5) Editor seznamů</b></a><br>
+Tento dialog umožňuje vytvořit pod vybraným jménem vlastní seznam a zadat položky, které bude obsahovat. Vytvořený seznam pak bude k dispozici jako volba při výběru typu sloupce. Dialog Editoru seznamů zobrazuje položky seznamu a tlačítka společná i pro ostatní dialogy editorů:<br>
+<ul>
+<li><i>Přidat</i> - Přidá novou položku seznamu; nově otevřený dialog umožňuje zadat text položky.</li>
+<li><i>Editovat</i> - Umožní editaci již existující položky seznamu. Provedenou změnou budou dotčeny všechny výskyty dané položky ve stávajících záznamech.</li>
+<li><i>Smazat</i> - Smaže vybranou položku. Přitom budete dotázáni, čím chcete nahradit výskyty mazané položky.</li>
+<li><i>Posunout nahoru</i> - Posune vybranou položku v přehledu položek seznamu o jednu pozici výše (a stejně tak i v odpovídající rozbalovací nabídce).</li>
+<li><i>Posunout dolů</i> - Posune vybranou položku v přehledu položek seznamu o jednu pozici níž (a stejně tak i v odpovídající rozbalovací nabídce).</li>
+</ul>
+Bezprostředně pod jménem seznamu nalezneme tlačítka umožňující nakládání s položkami seznamu:<br>
+<ul>
+<li><i>Seřadit</i> - Seřadí položky dle abecedy. Dalším klepnutím na toto tlačítko změníte směr řazení.</li>
+<li><i>Importovat</i> - Přidá do vybraného seznamu nové položky z textového souboru; tento soubor musí obsahovat položky oddělené odřádkováním. Položky textového souboru, které jsou již v seznamu obsaženy, nebudou duplikovány.</li>
+<li><i>Exportovat</i> - Vytvoří textový soubor obsahující položky vybraného seznamu (každou na novém řádku).</li>
+</ul>
+Klepnutím na &quot;OK&quot; přijmete provedené změny, klepnutím na &quot;Zrušit&quot; či křížek pro uzavření dialogu ponecháte položky beze změny (nebo zrušíte vytvoření nového seznamu).<br>
+<br>
+<a name="calcedit"><b>6) Editor výpočtů</b></a><br>
+Tento dialog umožňuje nadefinovat sloupce obsahující hodnoty vypočtené z hodnot jiných sloupců stejného záznamu. Editor výpočtů lze vyvolat pouze u sloupců typu výpočet v Editoru sloupců po stisku tlačítek &quot;Editovat&quot; a následně &quot;Editovat výpočet&quot;. V horní části dialogu nalezneme jméno sloupce, needitovatelné jednořádkové zobrazení stávajícího výpočtu a volbu počtu desetinných míst udávajících přesnost výpočtu.<br>
+<br>
+Největší část dialogu zabírá zobrazení stromové struktury stávajího výpočtu v podobě známé např. ze souborových správců. Každá větev představuje buď hodnotu některého sloupce, konstantu nebo výsledek početní operace. Chcete-li výpočet editovat, vyberte příslušnou větev (je-li dostupná) a použijte tlačítka z dolní části dialogu:<br>
+<ul>
+<li><i>Přidat</i> - Přidá novou větev jako podřízenou větve vybrané; objeví se dialog umožňující výběr typu operace a hodnoty.</li>
+<li><i>Editovat</i> - Umožní editaci vybrané větve.</li>
+<li><i>Smazat</i> - Smaže vybranou větev.</li>
+<li><i>Posunout nahoru</i> - Posune vybranou větev o jednu pozici výše mezi větvemi stejné úrovně.</li>
+<li><i>Posunout dolů</i> - Posune vybranou větev o jednu pozici níž mezi větvemi stejné úrovně.</li>
+</ul>
+Doporučujeme začít výběrem početní operace (např. &quot;+&quot;) a následným přidáváním jejích argumentů (kterými mohou být i operace s jejich vlastními argumenty). V závislosti na tom, jaká větev je vybrána, se mění podoba tlačítek - tlačítka nepovolených funkcí jsou zašedlá; typickými nepovolenými akcemi jsou:<br>
+<ul>
+<li>Přidání podřízené větve operaci s již dosaženým maximálním počtem argumentů</li>
+<li>Změna typu početní operace; změnu lze provést jen smazáním a nahrazením stávající operace</li>
+<li>Posun větve nahoru či dolů, nelze-li již větev daným směrem dále posunovat</li>
+</ul>
+Důležité připomínky:<br>
+<ul>
+<li>Pro výpočty lze použít jen sloupce typu integer, decimální a sekvence. Navíc je možné použít sloupce typu datum jako podřízené pro operaci &quot;Počet_dnů_mezi&quot; a sloupce typu čas jako podřízené pro operace &quot;Počet_sekund_mezi&quot;, &quot;Počet_minut_mezi&quot; a &quot;Počet_hodin_mezi&quot;.</li>
+<li>Sloupce typu výpočet nelze použít pro jiné výpočty z důvodu předcházení nejrůznějším komplikacím. Stejného výsledku lze dosáhnout opakovaným použitím stejné definice jako součásti jiného výpočtu.</li>
+<li>Operace s nedostatkem (či bez) argumentů obvykle vracejí nulu.</li>
+<li>Byl-li sloupec v Editoru sloupců přejmenován či smazán, jsou výpočty, které jej používají, podle toho automaticky zaktualizovány.</li>
+</ul>
+<a name="imageedit"><b>7) Editor obrázků</b></a><br>
+Do sloupce typu obrázek lze importovat obrázky ze souborů ve formátu JPEG či PNG. Po výběru souboru, který má být importován do daného pole databáze, je zobrazen dialog Editoru obrázků. Zde lze s kopií obrázku ukládanou do databáze provést některé změny. Z horní části dialogu může být změněna:<br>
+<ul>
+<li><i>Šířka</i> - Maximální povolená šířka obrázku (v pixelech).</li>
+<li><i>Výška</i> - Maximální povolená výška obrázku (v pixelech).</li>
+<li><i>Otočení</i> - Úhel, pod kterým má být obrázek natočen (ve stupních): 0, 90, 180 nebo 270.</li>
+<li><i>Načíst znovu</i> - Použije vybrané nastavení a podle něj zaktualizuje náhled obrázku.</li>
+</ul>
+Protože přístroje Zaurus disponují jen omezeným množstvím paměti, není možné pracovat s příliš velkými obrázky. Nelze importovat obrázky JPEG s rozměry nad 6400 x 4800 pixelů, obrázky s rozměry nad 800 x 600 budou zmenšeny (maximálně na 800 x 600 pixelů). Podobně není možné importovat obrázky PNG s rozměry nad 800 x 600.<br>
+<br>
+Klepnutím na &quot;OK&quot; uložíte obrázek tak, jak je právě zobrazen, klepnutím na &quot;Zrušit&quot; či křížek pro uzavření dialogu ponecháte dané pole beze změny.<br>
+<br>
+<a name="imageview"><b>8) Prohlížeč obrázků</b></a><br>
+Prohlížeč obrázků je jednoduchý dialog zobrazující obrázek vždy z jednoho pole sloupce typu obrázek. Je-li vyvolán z <a href="#viewer">Prohlížeče dat</a>, použitím tlačítka se šipkou směřující vlevo zobrazíte obrázek ze stejného sloupce předešlého záznamu (použitého filtru); podobně použitím tlačítka se šipkou směřující vpravo zobrazíte obrázek dalšího záznamu. Poklepem na obrázek jej zobrazíte v celoobrazovkovém módu; dalším klepnutím na obrázek v celoobrazovkovém módu prohlížeč uzavřete.<br>
+<br>
+<a name="viewedit"><b>9) Editor náhledů</b></a><br>
+Kdykoli prohlížíte obsah databáze v <a href="#viewer">Prohlížeči dat</a>, používáte k jejich zobrazení určitý &quot;náhled&quot;. Náhled je podmnožinou sloupců z databáze, které jsou zobrazeny v konkrétním pořadí a šířkách. Každá databáze má jako výchozí náhled &quot;Všechny sloupce&quot; kdy jsou zobrazeny všechny sloupce databáze ve stejném pořadí, které používá <a href="rowedit">Editor záznamů</a>.<br>
+<br>
+Náhledy jsou definovány pomocí dialogu Editor náhledů. V horní části dialogu nalezneme pole se jménem náhledu - změnou tohoto údaje lze přejmenovat vybraný náhled. Následují rozbalovací nabídky umožňují výběr pořadí a/nebo filtru, které budou použity pokaždé, přepnete-li na daný náhled; výběrem volby &quot;Není&quot; ponecháte stávající pořadí či filtr beze změny (čímž se vyhnete opakovaným výběrům náhledu, pořadí a filtru při častém používání určité kombinace těchto kritérií). Níže je tabulka zobrazující jména všech sloupců databáze s zaškrtávacím polem u každého z nich, které označuje, zda sloupec bude v daném náhledu zahrnut či nikoli. Klepnutím na zaškrtávací pole lze příslušný sloupec zařadit či vyřadit. V dolní části dialogu nalezneme tlačítka &quot;Posunout nahoru&quot; a &quot;Posunout dolů&quot;, která slouží k posunu vybraného sloupce v tabulce, čímž dojde ke změně v řazení sloupců při použití daného náhledu. Klepnutím na &quot;OK&quot; potvrdíte právě zobrazené nastavení, klepnutím na &quot;Zrušit&quot; či křížek pro uzavření dialogu se vrátíte k předešlým hodnotám (nebo zrušíte vytvoření nového náhledu).<br>
+<br>
+<a name="viewer"><b>10) Prohlížeč dat</b></a><br>
+Toto je hlavní rozhraní aplikace, odkud můžete procházet obsah databáze a otevírat většinu ostatních dialogů. Rozhraní Prohlížeče dat tvoří:<br>
+<ul>
+<li><a href="#navi">Zobrazení záznamů a navigace</a></li>
+<li><a href="#labels">Popisky sloupců</a></li>
+<li><a href="#filemenu">Menu &quot;Soubor&quot;</a></li>
+<li><a href="#rowmenu">Menu &quot;Záznam&quot;</a></li>
+<li><a href="#viewmenu">Menu &quot;Náhled&quot;</a></li>
+<li><a href="#sortmenu">Menu &quot;Pořadí&quot;</a></li>
+<li><a href="#filtermenu">Menu &quot;Filtr&quot;</a></li>
+<li><a href="#toolbar">Tlačítka lišty</a></li>
+</ul>
+Některá menu mohou být zobrazena jako submenu začleněná v menu &quot;Soubor&quot; v závislosti na aktuálním uživatelském nastavení, které je možno změnit přes <a href="#prefs">dialog Nastavení</a>.<br>
+<br>
+<a name="navi"><i>Zobrazení záznamů a navigace</i></a><br>
+Největší část rozhraní Prohlížeče dat zabírá tabulka s náhledem na záznamy dané databáze. Ovládací prvek v levé dolní části rozhraní udává maximální počet záznamů stávajícího náhledu zobrazených najednou; počet záznamů lze změnit na libovolné celé kladné číslo (dostatečně nízká hodnota umožní skrýt posuvník zobrazovaný vpravo od tabulky se záznamy, čímž získáme větší horizontální zobrazovací prostor). Vpravo od ovládacího prvku pro zadání počtu záznamů na stránce jsou tlačítka sloužící k navigaci na stránkách. Klepnutím na číslované tlačítko přejdete na odpovídající stránku se záznamy; tlačítko stávající stránky je přitom zobrazeno jako stisknuté. Klepnutím na tlačítko se šipkou zobrazíte tlačítka předešlé nebo následující pětice stránek.<br>
+<br>
+Klepnutí na buňku záznamu z Prohlížeče dat a podržení stisknutého tlačítka myši alespoň 1/2 sekundy vyvolá zvláštní funkce. Provedete-li tuto akci na buňce ve sloupci typu poznámka, otevře se <a href="#noteedit">Prohlížeč poznámek</a> zobrazující konkrétní poznámku. Provedete-li akci na buňce ve sloupci typu obrázek, zobrazíte v <a href="#imageview">Prohlížeči obrázků</a> obrázek obsažený v dané buňce. Provedete-li akci na buňce ve sloupci jiného typu, otevřete <a href="#rowedit">Editor záznamů</a> s možností editace daného záznamu.<br>
+<br>
+Poklepem na záznam nebo stiskem klávesy Enter či mezerníku na vybraném záznamu spustíte <a href="#rowview">Prohlížeč záznamů</a>.<br>
+<br>
+<a name="labels"><i>Záhlaví s popisky sloupců</i></a><br>
+Záhlaví s popisky sloupců neslouží jen ke zjištění jmén sloupců. Změnu šířky sloupce v daném náhledu docílíte klepnutím na rozhraní záhlaví dvou sloupců (nebo na pravý okraj záhlaví s popiskem posledního sloupce) a přetažením okraje sloupce na požadovanou pozici. Klepnutím na záhlaví s popiskem seřadíte všechny záznamy daného sloupce dle obsahu vzestupně; dalším klepnutím sestupně. Podržíte-li stisknuté záhlaví sloupce alespoň 1/2 sekundy, vyvoláte dialog se sumárními údaji pro vybraný sloupec; do sumáře budou zahrnuty jen záznamy vyhovující aktuálnímu filtru.<br>
+<br>
+<a name="filemenu"><i>Menu &quot;Soubor&quot;</i></a><br>
+Menu &quot;Soubor&quot; obsahuje volby, které jsou použity na databázový soubor jako celek. Jsou to:<br>
+<ul>
+<li><i>Uložit</i> - Uloží jakékoli změny provedené v souboru od jeho otevření nebo posledního uložení. Ukončíte-li aplikaci PortaBase bez uložení posledních změn, tyto změny budou ztraceny (předtím se zobrazí dialog s upozorněním). Tato volba není aktivní pokud v databázi od jejího poslední otevření či uložení nebyly žádné změny prováděny.</li>
+<li><i>Změnit heslo</i> - Otevře dialog umožňující změnit heslo pro přístup k datům daného souboru (volba je zobrazena jen u šifrovaných souborů).</li>
+<li><i>Importovat...</i> - Umožní provést <a href="#import">import</a> záznamů ze souboru CSV.</li>
+<li><i>Exportovat...</i> - Umožní provést <a href="#export">export</a> stávajícího databázového obsahu do souboru CSV nebo XML.</li>
+<li><i>Smazat záznamy vyhovující aktuálnímu filtru</i> - Smaže všechny záznamy, které vyhovují právě používanému filtru.</li>
+<li><i>Editor sloupců</i> - Otevře <a href="#columns">Editor sloupců</a>.</li>
+<li><i>Editor seznamů</i> - Otevře <a href="#enummanage">Správce seznamů</a>.</li>
+<li><i>Automatické přepínání obrázků</i> - Otevře dialog, ze kterého lze spustit časovanou prezentaci z obrázků zahrnutých ve sloupci typu obrázek ve stávajícím náhledu. Zobrazeny budou jen obrázky záznamů vyhovujících aktuálnímu filtru ve stávajícím pořadí.</li>
+<li><i>Vlastnosti</i> - Otevře dialog zobrazující základní statistiku aktuálního souboru (např. jeho velikost, počet záznamů, počet sloupců, atd.).</li>
+<li><i>Nastavení</i> - Otevře <a href="#prefs">dialog Nastavení</a>.</li>
+<li><i>Zavřít</i> - Zavře stávající soubor; obsahuje-li neuložené změny, budete dotázáni, chcete-li je uložit.</li>
+</ul>
+<a name="rowmenu"><i>Menu &quot;Záznam&quot;</i></a><br>
+Menu &quot;Záznam&quot; obsahuje akce, které se vztahují k jednotlivým datovým záznamům. Jde o:<br>
+<ul>
+<li><i>Přidat</i> - Přidá nový záznam (otevře <a href="#rowedit">Editor záznamů</a>).</li>
+<li><i>Editovat</i> - Umožní editovat vybraný stávající záznam (opět přes Editor záznamů).</li>
+<li><i>Smazat</i> - Smaže vybraný záznam.</li>
+<li><i>Kopírovat...</i> - Přidá nový záznam, který bude obsahovat (v Editoru záznamů) předvyplněné údaje vybraného záznamu namísto výchozích hodnot.</li>
+<li><i>Zobrazit</i> - Zobrazí právě vybraný záznam v <a href="#rowview">Prohlížeči záznamů</a>.</li>
+</ul>
+<a name="viewmenu"><i>Menu &quot;Náhled&quot;</i></a><br>
+Menu &quot;Náhled&quot; umožňuje výběr a správu náhledů. Horní sekce tohoto menu má tři volby:<br>
+<ul>
+<li><i>Přidat</i> - Přidá do databázového souboru nový náhled. Výběr této volby otevře prázdný Editor náhledů (beze jména a bez vybraného jakéhokoli sloupce).</li>
+<li><i>Editovat</i> - Umožní editaci právě zobrazeného náhledu. Výběr této volby otevře Editor náhledů se zobrazením jména aktuálního náhledu a jeho uspořádáním sloupců. Náhled &quot;Všechny sloupce&quot; nelze editovat.</li>
+<li><i>Smazat</i> - Smaže vybraný náhled a přepne Prohlížeč dat do náhledu &quot;Všechny sloupce&quot;. Náhled &quot;Všechny sloupce&quot; nelze smazat.</li>
+</ul>
+Pod těmito položkami obsahuje menu přehled všech náhledů vytvořených pro stávající databázi, u právě zobrazeného náhledu je zatržítko. Chcete-li přepnout na jiný náhled, jednoduše vyberte požadovaný náhled z menu.<br>
+<br>
+<a name="sortmenu"><i>Menu &quot;Pořadí&quot;</i></a><br>
+Menu &quot;Pořadí&quot; umožňuje výběr a správu konfigurací řazení položek. Horní sekce tohoto menu obsahuje tři volby:<br>
+<ul>
+<li><i>Přidat</i> - Umožní přidat do souboru databáze nové pořadí záznamů. Výběr této volby spustí <a href="#sortedit">Editor pořadí</a> s novým pořadím beze jména a bez označených datových sloupců.</li>
+<li><i>Editovat</i> - Umožní editaci právě použitého pořadí (dostupné jen při použití již pojmenovaného pořadí). Výběr této volby spustí Editor pořadí s otevřením aktuálního pořadí a jeho nastavení.</li>
+<li><i>Smazat</i> - Umožní smazat právě použité pořadí (dostupné jen při použití již pojmenovaného pořadí).</li>
+</ul>
+Pod těmito položkami menu nalezneme přehled všech pořadí definovaných pro danou databázi, zatržítko vlevo od jména pořadí ukazuje, je-li některé z nich právě použito. Chcete-li změnit způsob řazení záznamů, jednoduše vyberte požadované pořadí z menu. Chcete-li seřadit záznamy podle jediného datového sloupce zobrazeného v aktuálním náhledu, bude zřejmě rychlejším způsobem klepnutí na záhlaví s popiskem sloupce, podle kterého chcete záznamy seřadit.<br>
+<br>
+<a name="filtermenu"><i>Menu &quot;Filtr&quot;</i></a><br>
+Menu &quot;Filtr&quot; obsahuje volby umožňující vybrat, které záznamy mají být zobrazeny. Horní sekce tohoto menu zahrnuje čtyři volby:<br>
+<ul>
+<li><i>Vyhledat</i> - Slouží k rychlé definici dočasného filtru obsahujícímu jen jedinou podmínku. Chcete-li pak znovu zobrazit všechny záznamy (nebo použít jiný nadefinovaný filtr), vyberte požadovaný filtr z dolní části tohoto menu.</li>
+<li><i>Přidat</i> - Umožní nadefinovat nový filtr; bude přitom spuštěn
+<a href="#filteredit">Editor filtrů</a> beze jména a bez definovaných podmínek.</li>
+<li><i>Editovat</i> - Umožní editaci právě vybraného filtru (opět pomocí <a href="#filteredit">Editoru filtrů</a>). Filtr &quot;Všechny záznamy&quot; nelze editovat.</li>
+<li><i>Smazat</i> - Umožní smazat právě vybraný filtr. Filtr &quot;Všechny záznamy&quot; nelze smazat.</li>
+</ul>
+Pod těmito položkami menu nalezneme přehled všech filtrů definovaných pro danou databázi, zatržítko vlevo od jména filtru ukazuje, je-li některý z nich právě použit. Chcete-li použít jiný filtr, jednoduše jej vyberte z menu.<br>
+<br>
+<a name="toolbar"><i>Tlačítka lišty</i></a><br>
+K nejčastěji používaným operacím lze přistupovat přes tlačítka umístěná na liště. Jde o:<br>
+<ul>
+<li><i>Uložit</i> - Odpovídá volbě &quot;Uložit&quot; z menu &quot;<a href="#filemenu">Soubor</a>&quot;.</li>
+<li><i>Přidat</i> - Odpovídá volbě &quot;Přidat&quot; z menu &quot;<a href="#rowmenu">Záznam</a>&quot;.</li>
+<li><i>Editovat</i> - Odpovídá volbě &quot;Editovat&quot; z menu &quot;<a href="#rowmenu">Záznam</a>&quot;.</li>
+<li><i>Kopírovat...</i> - Odpovídá volbě &quot;Kopírovat...&quot; z menu &quot;<a href="#rowmenu">Záznam</a>&quot;.</li>
+<li><i>Smazat</i> - Odpovídá volbě &quot;Smazat&quot; z menu &quot;<a href="#rowmenu">Záznam</a>&quot;.</li>
+<li><i>Vyhledat</i> - Odpovídá volbě &quot;Vyhledat&quot; z menu &quot;<a href="#filtermenu">Filtr</a>&quot;.</li>
+</ul>
+Ne všechna tlačítka musí být vždy zobrazena, záleží na uživatelském nastavení, které je možné změnit přes dialog <a href="#prefs">Nastavení</a>.<br>
+<br>
+<a name="rowedit"><b>11) Editor záznamů</b></a><br>
+Chceme-li přidávat nové záznamy nebo editovat záznamy stávající, použijeme Editor záznamů. Ten otevře vždy jediný záznam se všemi sloupci dané databáze; vlevo nalezneme jméno sloupce, vpravo je zobrazena stávající hodnota. Vytváříme-li nový záznam, jsou zobrazeny přednastavené výchozí hodnoty; při editaci již existujících záznamů jsou zobrazeny uložené hodnoty. Při editaci určitých datových typů berte na vědomí:<br>
+<ul>
+<li>Pole sloupce typu řetězec mohou obsahovat více řádků textu; stiskem klávesy Enter přidáte do vstupního pole nový řádek.</li>
+<li>Chcete-li změnit hodnotu v poli sloupce typu datum, klepněte na tlačítko nacházející se vlevo od zobrazené hodnoty; tím vyvoláte pomůcku - kalendář - umožňující zadat nové datum.</li>
+<li>Vpravo od polí obsahujících integer či decimální hodnotu najdeme tlačítko spouštící jednoduchý kalkulátor, pomocí něhož lze zadávat číselné hodnoty jako z klávesnice nebo provádět výpočty se zadanými čísly; klepnutí na &quot;OK&quot; předá aktuální hodnotu vstupnímu poli.</li>
+<li>U každého pole sloupce typu výpočet je zobrazena aktuální hodnota. Chcete-li zaktualizovat zobrazenou hodnotu po změně některého ze vstupních údajů použitých pro výpočet, klepněte na &quot;Aktualizovat&quot; nacházející se vpravo od zobrazené hodnoty. Toto nemusíte provádět před přidáním či uložením záznamu, jde pouze o komfortní funkci.</li>
+<li>Pole ve sloupci typu obrázek, která dosud obrázek neobsahují, nabízejí tlačítko &quot;Výběr obrázku&quot;, které umožní vybrat požadovaný obrázek. Pole ve sloupci typu obrázek, která již nějaký obrázek obsahují, nabízejí tři tlačítka: &quot;Náhled&quot; (otevře Prohlížeč obrázků se zobrazením aktuálního obrázku), &quot;Změnit&quot; (nahradí aktuální obrázek jiným) a &quot;Smazat&quot; (vyprázdní dané pole). Obě volby &quot;Výběr obrázku&quot; i &quot;Změnit&quot; spustí dialog pro výběr souboru s následným otevřením <a href="#imageedit">Editoru obrázků</a>.</li>
+</ul>
+Po ukončení editace klepněte na tlačítko &quot;OK&quot;, čímž uložíte právě zobrazené hodnoty nebo zvolte &quot;Zrušit&quot; či křížek pro uzavření dialogu, pokud chcete zrušit přidání záznamu (který jste přidávali) nebo chcete-li ponechat původní hodnoty beze změny (editovali-li jste již existující záznam).<br>
+<br>
+<a name="rowview"><b>12) Prohlížeč záznamů</b></a><br>
+Prohlížeč záznamů je dialog navržený k pohodlnému prohlížení všech údajů vztahujících se k jednomu záznamu současně. Podobně jako u Editoru záznamů i u Prohlížeče záznamů nalezneme v levé části jména sloupců a v pravé je jejich hodnoty, které však nelze editovat. Hodnoty jsou automaticky zalamovány, takže k zobrazení celého obsahu odpadá potřeba horizontálního posouvání. Je rovněž zobrazen úplný obsah pole poznámka, nejen několik počátečních slov. Jako výchozí jsou zobrazovány jen sloupce zahrnuté v použitém náhledu (v pořadí určeném při vytváření náhledu); Chcete-li vybrat jinou sadu sloupců zvolte požadovaný náhled z rozbalovacího seznamu v dolní části dialogu. Pomocí tlačítek se šipkami v dolní části dialogu či odpovídajícími klávesami se lze pohybovat mezi záznamy v rámci stávajícího náhledu. Klepnutím na editační tlačítko v dolní části dialogu spustíte Editor záznamů s otevřeným stávajícím záznamem; klepnutím na tlačítko &quot;OK&quot; v Editoru záznamů se přenesete do Prohlížeče dat, jinak budete vráceni zpět do Prohlížeče záznamů. A konečně, tlačítko pro kopírování ve spodní části dialogu slouží ke zkopírování právě označeného textu (byl-li nějaký vybrán) do systémové schránky.<br>
+<br>
+<a name="noteedit"><b>13) Editor/prohlížeč poznámek</b></a><br>
+Sloupec typu poznámka je určen zejména pro víceřádkové bloky textu (na rozdíl od sloupce typu řetězec, který je vhodnější pro relativně krátký jednořádkový text). Rozsáhlejší obsah takovéhoto sloupce si zasluhuje vlastní (velmi jednoduchý) dialog. V Editoru záznamů, stejně jako při definování výchozí hodnoty v Editoru sloupců, je hodnota poznámky zobrazena jako tlačítko s ikonou uvozující začátek textu poznámky (kolik jej lze na tlačítku zobrazit). Chcete-li obsah poznámky zobrazit celý nebo chcete-li jej změnit, stiskněte toto tlačítko; objeví se dialog textového editoru zobrazující aktuální obsah poznámky. Klepnutím na tlačítko &quot;OK&quot; potvrdíte provedené změny, volbou &quot;Zrušit&quot; či křížkem pro uzavření dialogu se vrátíte k původnímu obsahu.<br>
+<br>
+Sloupce typu poznámka se chovají trochu odlišně také v Prohlížeči dat. Jméno sloupce typu poznámka je vždy uvozeno ikonou poznámky upozorňující, že nejde o sloupec obsahující běžný řetězec. U každé buňky sloupce typu poznámka je vidět z obsahu poznámky tolik textu, kolik je z prostorových důvodů možné zobrazit. Stisknete-li v Prohlížeči dat takovouto buňku alespoň půl sekundy, po uvolnění se zobrazí celý text poznámky (bez možnosti editace). Klepnutím na tlačítko &quot;OK&quot; či křížek pro uzavření dialogu se vrátíte zpět do Prohlížeče dat.<br>
+<br>
+<a name="sortedit"><b>14) Editor pořadí</b></a><br>
+Klepnutím na záhlaví s popiskem sloupce lze jednoduše seřadit záznamy obsažené v databázi podle hodnot tohoto sloupce. Jindy se může hodit řazení záznamů podle kombinace sloupců; třídit podle obsahu sloupce A a u skupiny záznamů, které se v hodnotě sloupce A shodují, použít řazení dle obsahu sloupce B, atd. Chcete-li použít řazení podle více sloupců nebo seřadit záznamy podle sloupce, který není v daném náhledu zobrazován, bude nutné vytvořit vlastní pojmenované pořadí.<br>
+<br>
+Pořadí lze definovat pomocí Editoru pořadí, což je dialog podobný <a href="#viewedit">Editoru náhledů</a>. V horní části dialogu najdeme textové pole pro zadání jména pořadí; jeho změnou dosáhneme přejmenování pořadí. Níže nalezneme tabulku zobrazující jména všech sloupců obsažených v databázi se zaškrtávacími poli ukazujícími, zda je daný sloupec nějak řazen či nikoli. Klepnutím na toto zaškrtávací pole přidáte daný sloupec mezi řazené či jej naopak odeberete. V tabulce najdeme u řazených sloupců indikaci směru řazení (vzestupném či sestupném); klepnutím na indikátor lze změnit směr řazení. V dolní části dialogu jsou tlačítka &quot;Posunout nahoru&quot; a &quot;Posunout dolů&quot;, která slouží ke změně posloupnosti řazení (první řazení v tabulce bude použito nejříve, poslední nakonec). Klepnutím na tlačítko &quot;OK&quot; právě zobrazené nastavení použijete, zvolíte-li &quot;Zrušit&quot; či křížek pro uzavření dialogu, vrátíte se ke dřívějším hodnotám (nebo zrušíte nově vytvářené pořadí).<br>
+<br>
+<a name="filteredit"><b>15) Editor filtrů</b></a><br>
+Tento dialog umožňuje vytvářet filtry pro výběr záznamů, které budou zobrazeny v Prohlížeči dat. Filtr může být definován jednoduše, např. &quot;Počet = 1&quot; nebo i složitěji, např. &quot;Jakýkoli sloupec obsahuje 'java', kapitoly &gt; 10, stránky &lt;= 400 a současně je skladem&quot;. Vyberete-li z menu &quot;Filtr&quot; některý filtr, Prohlížeč dat zobrazí jen záznamy, které vyhovující podmínkám použitého filtru.<br>
+<br>
+V horní části dialogu se nalézá textové pole se jménem filtru; změnou tohoto údaje lze vybraný filtr přejmenovat. Pod polem se jménem filtru se nachází přehled podmínek tvořících filtr; aby záznam filtru vyhověl, musí splňovat každou z těchto podmínek. Tlačítka &quot;Přidat&quot;, &quot;Editovat&quot;, &quot;Smazat&quot;, &quot;Posunout nahoru&quot;  a &quot;Posunout dolů&quot; umožňují provádět úpravy v přehledu podmínek podobně jako u Editoru sloupců. Dialog Editoru podmínek lze vyvolat tlačítky &quot;Přidat&quot; a &quot;Editovat&quot;. Tento dialog umožňuje výběr sloupce, jehož hodnoty mají být porovnány, operace, kterou chcete pro porovnávání použít a konstanty, se kterou chcete porovnávat. Při porovnávání textu je rovněž možné zaškrtnutím volby &quot;Rozlišovat VELKÁ/malá písmena&quot; rozlišovat mezi velkými a malými písmeny. Krom porovnání s hodnotami v jediném sloupci lze výběrem možnosti &quot;Jakýkoli sloupec&quot; porovnávat s hodnotami ve všech sloupcích, které obsahují textové řetězce; pokud hodnota v některém sloupci s textovými řetězci nebo sloupci typu Poznámka vyhovuje podmínce, je záznam považován za vyhovující. Klepnutím na &quot;OK&quot; potvrdíte právě zobrazené nastavení, stiskem &quot;Zrušit&quot; či křížkem pro uzavření dialogu se vrátíte k dřívějšímu nastavení (nebo zrušíte přidání nového filtru).<br>
+<br>
+<a name="import"><b>16) Import dat</b></a><br>
+Do aplikace PortaBase lze importovat datové záznamy ze souborů CSV (obsahující hodnoty oddělené čárkami). To umožňuje import dat vyexportovaných z tabulkového editoru nebo jiné databázové aplikace. Chcete-li provést import:<br>
+<ol>
+<li>Otevřete soubor PortaBase do kterého chcete data importovat. Chcete-li importovat data do nového souboru, vytvořte nový soubor a nadefinujte strukturu sloupců odpovídající struktuře dat, která mají být importována.</li>
+<li>V <a href="#viewer">Prohlížeči dat</a> vyberte z menu &quot;Soubor&quot; volbu &quot;Importovat...&quot;. Objeví se dialog pro výběr souboru, který zobrazí všechny dostupné soubory CSV. Vyberte soubor, z něhož chcete importovat. Soubor CSV musí obsahovat stejný počet sloupců jako otevřený databázový soubor a hodnoty ve sloupcích musí odpovídat příslušným typům sloupců. Pro zajištění korektního importu znaků neobsažených v ASCII z textového souboru je potřeba definovat kódování. Jako výchozí je použito UTF-8 (podporující texty psané ve většině jazyků), lze však nastavit i Latin-1 (používáte-li textové výstupy např. pouze v angličtině).</li>
+<li>Záznamy z importovaného souboru jsou přidány do databáze. Záznamy z jiných souborů lze přidat opakováním tohoto postupu, další kopii stejných záznamů lze přidat opakováním importu stejného souboru.</li>
+</ol>
+Poznámky:<br>
+<ol>
+<li>Pole booleánského typu mohou obsahovat jen hodnoty 0 nebo 1</li>
+<li>Datová pole mohou obsahovat datum ve formátu RRRRMMDD, RRRR/MM/DD, RRRR-MM-DD nebo RRRR.MM.DD</li>
+<li>Časová pole mohou obsahovat čas ve formátu HH:MM:SS, HH:MM:SS ráno/dop., HH:MM, HH:MM ráno/dop. nebo počet sekund od půlnoci. Prázdné pole či hodnota -1 jsou interpretovány jako chybějící údaj.</li>
+<li>Pole výpočtů mohou obsahovat 0 či jiný údaj; aktuální hodnoty budou vypočteny během importu.</li>
+<li>Pole obrázků by neměla obsahovat nic (nemá-li být načten žádný obrázek) nebo relativní či absolutní cestu k vybranému obrázkovému souboru.</li>
+</ol>
+<a name="export"><b>17) Export dat</b></a><br>
+PortaBase podporuje export do dvou formátů: CSV a XML. Na rozdíl od importu dat exportní funkce umožňuje přenést obsah databáze do tabulkového či textového editoru nebo jiné databázové aplikace k dalšímu zpracování. Chcete-li provést export databázového obsahu:<br>
+<ol>
+<li>Vyberte v Prohlížeči dat z menu &quot;Soubor&quot; volbu &quot;Exportovat...&quot;.</li>
+<li>Zvolte z rozbalovacího menu formát do kterého chcete exportovat. Provádíte-li export do CSV, budou vyexportovány pouze záznamy vyhovující právě použitému filtru. Provádíte-li export do XML, bude vyexportována úplná databázová struktura (včetně definic sloupců, náhledů, filtrů atd.). Zkontrolujte však, máte-li dostatek místa pro uložení výsledku exportu, který může přesáhnout dvojnásobek velikosti původního datového souboru.</li>
+<li>Zadejte jméno souboru CSV nebo XML, který chcete vytvořit.</li>
+<li>Klepnutím na &quot;OK&quot; dokončíte export, klepnutím na &quot;Zrušit&quot; či křížek pro uzavření dialogu operaci zrušíte.</li>
+</ol>
+<a name="prefs"><b>18) Dialog &quot;Nastavení&quot;</b></a><br>
+Tento dialog Vám umožní zvolit si nastavení aplikace PortaBase. Klepnutím na &quot;OK&quot; předvolby na všech kartách dialogu potvrdíte, klepnutím na &quot;Zrušit&quot; či křížek pro uzavření dialogu ponecháte stávající předvolby nezměněné. Tento dialog obsahuje následující karty:<br>
+<ul>
+<li><a href="#optionprefs">Podmínky</a></li>
+<li><a href="#appearanceprefs">Vzhled</a></li>
+<li><a href="#menuprefs">Menu</a></li>
+<li><a href="#buttonprefs">Tlačítka</a></li>
+</ul>
+<a name="optionprefs"><i>Podmínky</i></a><br>
+Sekce Všeobecné na kartě Podmínky obsahuje následujícící volby:<br>
+<ul>
+<li><i>Vyžadovat potvrzení mazání</i> - Označte tuto volbu, chcete-li zobrazovat výzvu k potvrzení mazání každého záznamu, náhledu, pořadí či filtru. Snížíte tak riziko nežádoucího smazání něčeho, co byste smazat nechtěli, např. při nechtěném překlepu.</li>
+<li><i>Povolit editaci přepínačů v prohlížeči dat</i> - Označením této volby povolíte v Prohlížeči dat přepínání mezi booleánskými hodnotami klepnutím na příslušnou buňku. Usnadní se tak použití PortaBase např. jako seznamu úkolů, ale současně se zvýší nebezpečí náhodné nežádoucí změny hodnoty.</li>
+<li><i>Zobrazovat sekundy</i> - Označte tuto volbu, chcete-li zobrazovat sekundy ve sloupcích typu čas v Prohlížeči dat, Prohlížeči záznamů atd.</li>
+<li><i>Používat stránky v prohlížeči dat</i> - Označte tuto volbu, chcete-li v dolní části Prohlížeče dat zobrazovat navigační lištu, která Vám umožní měnit počet záznamů zobrazených na jedné stránce a navigaci mezi stránkami. Není-li tato volba označena, je navigační lišta skryta a všechny záznamy odpovídající vybranému filtru jsou zobrazeny na jediné stránce; toto nastavení může u velkých databází zpomalovat práci.</li>
+<li><i>Zalamovat poznámky </i> - Označením této volby povolíte automatické zalamování textu v Editoru/Prohlížeči poznámek bez nutnosti ručního vkládání zalomení. Ve výchozím nastavení je text zalamován pouze v mezerách, lze však nastavit vynucené zalamování kdekoli v textu (což může být vhodné u jazyků, které obvykle nepoužívají mezery mezi slovy, např. u japonštiny.)</li>
+<li><i>Výchozí počet záznamů na stránce </i> - Výchozí hodnota  maximálního počtu záznamů, které jsou zobrazeny na jedné stránce nově vytvářených databází.</li>
+</ul>
+PortaBase ve verzi pro PC obsahuje na kartě Podmínky ještě sekci Datum a čas. PortaBase pro Zaurus používá systémový datum a čas; k získání této informace ze stolních počítačů však dosud neexistuje vhodné meziplatformní řešení, proto je potřeba nastavit tyto volby:<br>
+<ul>
+<li><i>Formát datumu</i> - Formátování použité pro datum např. v Prohlížeči dat, Prohlížeči záznamů atd.</li>
+<li><i>Formát času</i> - Volba mezi 24 hodinovým či 12 hodinovým (Ráno/dopoledne či Odpoledne/večer) zobrazením času.</li>
+<li><i>Týden začíná</i> - Nastavení prvního dne v týdnu; tato volba ovlivní vzhled dialogu pro zadávání datumu.</li>
+</ul>
+<a name="appearanceprefs"><i>Vzhled</i></a><br>
+V sekci Písmo na kartě Vzhled můžete vybrat jakýkoli dostupný druh písma v jakékoli dostupné velikosti. Toto písmo bude použito pro všechny texty v aplikaci PortaBase (po ukončení a novém spuštění aplikace), dokud si nevyberete jiné písmo. K zobrazení japonských znaků můžete zvolit například &quot;unifont, 16&quot;, chcete-li zobrazit více textu na displeji najednou, můžete zkusit &quot;smallsmooth, 9&quot;.<br>
+<br>
+Sekce Barvy záznamů obsahuje dvě tlačítka pro výběr barev, které budou použity jako barvy pozadí záznamů v Prohlížeči dat, Editoru sloupců, Editoru náhledů a Editoru pořadí. Každé tlačítko zobrazuje jednu z aktuálně použitých barev. Klepnutí na tlačítko otevře dialog pro výběr barvy, kde si můžete vybrat vlastní barvu.<br>
+<br>
+<a name="menuprefs"><i>Menu</i></a><br>
+Tato karta Vám umožňuje vybrat menu, která budou zobrazena v nejvyšší úrovni a jejich pořadí. To může být zvláště důležité u některých přístrojů Zaurus, kde není na displeji dostatek místa k zobrazení všech menu. Zaškrtnutím označte menu, která chcete zobrazit v nejvyšší úrovni, neoznačená menu se objeví jako submenu v menu &quot;Soubor&quot;. Tlačítky &quot;Posunout nahoru&quot; a &quot;Posunout dolů&quot; v dolní části karty lze měnit pořadí, v němž budou menu zobrazena.<br>
+<br>
+<a name="buttonprefs"><i>Tlačítka</i></a><br>
+Tato karta Vám umožňuje zvolit tlačítka, která budou zobrazena na liště a jejich pořadí; podobně jako výběr zobrazených menu je i výběr zobrazených tlačítek důležitý především u modelů Zarusu s nízkým rozlišením. Zaškrtnutím označte tlačítka, která chcete zobrazit. Tlačítky &quot;Posunout nahoru&quot; a &quot;Posunout dolů&quot; v dolní části karty lze měnit pořadí, v němž budou tlačítka na liště zobrazena.<br>
+<br>
+<a name="commandline"><b>19) Terminál/příkazový řádek </b></a><br>
+Aplikace PortaBase podporuje přímo z terminálu Linuxu/přístroje Zaurus či příkazového řádku DOSu import a export dat bez nutnosti použití grafického rozhraní aplikace. Tato vlastnost je důležitá pro tvorbu skriptů pro automatické generování, aktualizace nebo jiné úpravy datových souborů PortaBase. Nápovědu k použití příkazového řádku či terminálu vyvoláte příkazem &quot;portabase -h&quot;; ve zkratce přinášíme stručný přehled příkazů:<br>
+<ul>
+<li><code>portabase -f </code><i>soubor</i> - Spustí aplikaci PortaBase a současně jí otevře specifikovaný soubor PortaBase.</li>
+<li><code>portabase fromxml </code><i>soubor_xml soubor_pob</i> - Vytvoří nový soubor PortaBase v &quot;soubor_pob&quot; ze souboru ve formátu PortaBase XML nacházejícího se v &quot;soubor_xml&quot;.</li>
+<li><code>portabase fromcsv </code><i>soubor_csv soubor_pob</i> - Přidá záznamy ke stávajícímu souboru PortaBase v &quot;soubor_pob&quot; ze souboru CSV nacházejícího se v &quot;soubor_csv&quot;.</li>
+<li><code>portabase frommobiledb </code><i>soubor_mdb soubor_pob</i> - Vytvoří nový soubor PortaBase v &quot;soubor_pob&quot; ze souboru MobileDB nacházejícího se v &quot;soubor_mdb&quot;.</li>
+<li><code>portabase toxml </code><i>soubor_pob soubor_xml</i> - Vytvoří nový soubor XML v &quot;soubor_xml&quot; ze souboru PortaBase nacházejícího se v &quot;soubor_pob&quot;.</li>
+<li><code>portabase tocsv </code><i>soubor_pob soubor_csv</i> - Vytvoří nový soubor CSV v &quot;soubor_csv&quot; ze záznamů souboru PortaBase nacházejícího se v &quot;soubor_pob&quot;.</li>
+</ul>
+Chcete-li získat data ze šifrovaného souboru, přidat záznamy do šifrovaného souboru nebo vytvořit nový šifrovaný soubor, je nezbytné bezprostředně za konverzním příkazem (tzn. před dalšími volbami uvedenými níže) uvést <code>-p </code><i>heslo</i>.<br>
+<br>
+Mezi příkazem &quot;toxml&quot; či &quot;tocsv&quot; a specifikací souboru PortaBase, ze kterého má být export proveden, lze ještě použít následující volby:<br>
+<ul>
+<li><code>-v </code><i>náhled</i> - Před exportem použije specifikovaný náhled.</li>
+<li><code>-s </code><i>pořadí</i> - Před exportem použije specifikované pořadí.</li>
+<li><code>-f </code><i>filtr</i> - Před exportem použije specifikovaný filtr.</li>
+</ul>
+Další informace o formátu XML používaném aplikací PortaBase a nástrojích pro jeho zpracování (např. konverze do HTML) naleznete na domovské stránce PortaBase (http://portabase.sourceforge.net).<br>
+<br>
+<a name="encrypt"><b>20) Šifrování</b></a><br>
+Soubory PortaBase lze šifrovat, čímž zabráníme nepovolaným osobám přistupovat k citlivým datům, například k uloženým heslům. Přistupujete-li k datům šifrovaného souboru PortaBase, budete nejprve vyzváni k zadání přístupového hesla, kterým soubor zabezpečil jeho autor. (Toto heslo lze kdykoli později změnit použitím volby &quot;Změnit heslo&quot; z menu &quot;<a href="#filemenu">Soubor</a>&quot;.) Protože heslo musí být relativně snadno zapamatovatelné, je jeho výběr nejslabším místem šifrovacího schématu; proto je důležité věnovat výběru dobrého hesla náležitou pozornost. Výběr hesla by měl vycházet z následujících doporučení:
+<p></p>
+<ul>
+<li>Používejte hesla o délce nejméně 6 znaků; čím delší heslo, tím je bezpečnější (horní limit délky hesla není omezen)</li>
+<li>Používejte kombinaci velkých a malých písmen, čísel a interpunkčních znamének</li>
+<li>Nepoužívejte jako hesla Vaše osobní údaje ani jejich části, stejně jako tyto údaje s úmyslnými pravopisnými chybami (nepoužívejte jména přátel, rodinných příslušníků, zvířecích mazlíčků, kontaktní informace, atd.)</li>
+<li>Používejte snadno zapamatovatelná hesla; zvolíte-li si &quot;dobré&quot; heslo (tedy vyhovující výše uvedeným zásadám), avšak zapomenete-li jej, pravděpodobně se Vám již nikdy nepodaří získat ze zašifrovaného souboru Vaše data</li>
+</ul>
+Z bezpečnostních a technických důvodů je nutné celý obsah šifrovaného souboru načíst do paměti naráz; proto šifrované soubory nemohou dosahovat takových velikostí jako soubory nešifrované. Šifrované soubory s několika málo sty či tisíci záznamy jsou zpracovávány normálně, avšak u souborů rozsáhlejších (s mnoha tisíci záznamy) tomu tak být nemusí (zejména na přístrojích Zaurus; při použití na stolních počítačích jste omezeni množstvím volné paměti).<br>
+<br>
+Další informace o šifrování v aplikaci PortaBase (včetně podrobností o použitém algoritmu) naleznete na domovské stránce PortaBase (http://portabase.sourceforge.net).<br>
+<br>
+----<br>
+Autorská práva 2002-2004 Jeremy Bowman.<br>
+(jmbowman@alum.mit.edu)
+<br>
+<br>
+Český překlad Jaromír Mára.<br>
+(jmara@seznam.cz) 
+</body>
+</html>

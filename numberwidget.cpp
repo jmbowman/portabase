@@ -21,6 +21,7 @@
 #include "calculator.h"
 #include "datatypes.h"
 #include "factory.h"
+#include "formatting.h"
 #include "numberwidget.h"
 
 /**
@@ -45,11 +46,17 @@ NumberWidget::NumberWidget(int type, QWidget *parent)
 /**
  * Get the currently selected value.
  *
- * @return The text representation of the currently selected value
+ * @return The C-locale text representation of the currently selected value
  */
 QString NumberWidget::getValue()
 {
-    return entryField->text();
+    if (dataType == INTEGER) {
+        int value = QLocale::system().toInt(entryField->text());
+        return QString::number(value);
+    }
+    else {
+        return Formatting::fromLocalDouble(entryField->text());
+    }
 }
 
 /**
@@ -60,11 +67,11 @@ QString NumberWidget::getValue()
 void NumberWidget::setValue(const QString &value)
 {
     if (dataType == INTEGER) {
-        double result = QLocale::system().toDouble(value);
+        double result = Formatting::parseDouble(value);
         entryField->setText(QLocale::system().toString((int)result));
     }
     else {
-        entryField->setText(value);
+        entryField->setText(Formatting::toLocalDouble(value));
     }
 }
 

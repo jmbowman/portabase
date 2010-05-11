@@ -23,6 +23,7 @@
 #include "calcnodeeditor.h"
 #include "../datatypes.h"
 #include "../factory.h"
+#include "../formatting.h"
 #include "../numberwidget.h"
 
 /**
@@ -175,7 +176,7 @@ bool CalcNodeEditor::isValid()
         return true;
     }
     bool ok = false;
-    number->getValue().toDouble(&ok);
+    Formatting::parseDouble(number->getValue(), &ok);
     if (!ok) {
         QMessageBox::warning(this, qApp->applicationName(),
                              tr("Constant must be a decimal value"));

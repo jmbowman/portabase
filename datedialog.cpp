@@ -51,6 +51,8 @@ DateDialog::DateDialog(const QDate &date, QWidget *parent)
     if (settings.value("DateTime/MONDAY", false).toBool()) {
         calendar->setFirstDayOfWeek(Qt::Monday);
     }
+    connect(calendar, SIGNAL(activated(QDate)), this, SLOT(accept()));
+    connect(calendar, SIGNAL(clicked(QDate)), this, SLOT(accept()));
     vbox->addWidget(calendar);
 
     QDialogButtonBox *buttonBox = finishLayout();
@@ -84,6 +86,7 @@ QDate DateDialog::selectedDate()
 void DateDialog::gotoToday()
 {
     calendar->setSelectedDate(QDate::currentDate());
+    accept();
 }
 
 /**

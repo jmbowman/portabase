@@ -26,6 +26,7 @@
 #include "database.h"
 #include "datatypes.h"
 #include "factory.h"
+#include "formatting.h"
 #include "menuactions.h"
 #include "portabase.h"
 #include "rowviewer.h"
@@ -190,6 +191,12 @@ void RowViewer::updateContent()
             else {
                 str += "<img src=\"img://icons/unchecked.png\">";
             }
+        }
+        else if (type == INTEGER || type == SEQUENCE) {
+            str += Formatting::toLocalInt(values[i]);
+        }
+        else if (type == FLOAT || type == CALC) {
+            str += Formatting::toLocalDouble(values[i]);
         }
         else if (type == IMAGE) {
             QString format = values[i];

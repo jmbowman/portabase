@@ -53,57 +53,57 @@
 <context>
     <name>CalcNode</name>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="299"/>
+        <location filename="../../calc/calcnode.cpp" line="300"/>
         <source>Days_Between</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="301"/>
+        <location filename="../../calc/calcnode.cpp" line="302"/>
         <source>MAX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="303"/>
+        <location filename="../../calc/calcnode.cpp" line="304"/>
         <source>MIN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="305"/>
+        <location filename="../../calc/calcnode.cpp" line="306"/>
         <source>AVERAGE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="307"/>
+        <location filename="../../calc/calcnode.cpp" line="308"/>
         <source>ABS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="309"/>
+        <location filename="../../calc/calcnode.cpp" line="310"/>
         <source>SQRT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="311"/>
+        <location filename="../../calc/calcnode.cpp" line="312"/>
         <source>LOG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="313"/>
+        <location filename="../../calc/calcnode.cpp" line="314"/>
         <source>LN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="315"/>
+        <location filename="../../calc/calcnode.cpp" line="316"/>
         <source>Seconds_Between</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="317"/>
+        <location filename="../../calc/calcnode.cpp" line="318"/>
         <source>Minutes_Between</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnode.cpp" line="319"/>
+        <location filename="../../calc/calcnode.cpp" line="320"/>
         <source>Hours_Between</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,27 +111,27 @@
 <context>
     <name>CalcNodeEditor</name>
     <message>
-        <location filename="../../calc/calcnodeeditor.cpp" line="37"/>
+        <location filename="../../calc/calcnodeeditor.cpp" line="38"/>
         <source>Calculation Node Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnodeeditor.cpp" line="41"/>
+        <location filename="../../calc/calcnodeeditor.cpp" line="42"/>
         <source>Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnodeeditor.cpp" line="57"/>
+        <location filename="../../calc/calcnodeeditor.cpp" line="58"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnodeeditor.cpp" line="64"/>
+        <location filename="../../calc/calcnodeeditor.cpp" line="65"/>
         <source>Operation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../calc/calcnodeeditor.cpp" line="181"/>
+        <location filename="../../calc/calcnodeeditor.cpp" line="182"/>
         <source>Constant must be a decimal value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -158,7 +158,7 @@
 <context>
     <name>CalcWidget</name>
     <message>
-        <location filename="../../calc/calcwidget.cpp" line="43"/>
+        <location filename="../../calc/calcwidget.cpp" line="44"/>
         <source>Update calculated value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -302,27 +302,27 @@
 <context>
     <name>Condition</name>
     <message>
-        <location filename="../../condition.cpp" line="362"/>
+        <location filename="../../condition.cpp" line="363"/>
         <source>Any text column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../condition.cpp" line="370"/>
+        <location filename="../../condition.cpp" line="371"/>
         <source>%1 is checked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../condition.cpp" line="373"/>
+        <location filename="../../condition.cpp" line="374"/>
         <source>%1 is not checked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../condition.cpp" line="407"/>
+        <location filename="../../condition.cpp" line="411"/>
         <source>%1 contains %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../condition.cpp" line="410"/>
+        <location filename="../../condition.cpp" line="414"/>
         <source>%1 starts with %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,12 +410,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../datedialog.cpp" line="57"/>
+        <location filename="../../datedialog.cpp" line="59"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../datedialog.cpp" line="60"/>
+        <location filename="../../datedialog.cpp" line="62"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -962,7 +962,7 @@ deleted:</source>
 <context>
     <name>NumberWidget</name>
     <message>
-        <location filename="../../numberwidget.cpp" line="41"/>
+        <location filename="../../numberwidget.cpp" line="42"/>
         <source>Show calculator</source>
         <translation type="unfinished"></translation>
     </message>
@@ -990,7 +990,7 @@ deleted:</source>
     <message>
         <location filename="../../enumeditor.cpp" line="405"/>
         <location filename="../../pbdialog.cpp" line="134"/>
-        <location filename="../../xmlimport.cpp" line="819"/>
+        <location filename="../../xmlimport.cpp" line="822"/>
         <source>Name must not start with &apos;_&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1012,7 +1012,7 @@ deleted:</source>
     </message>
     <message>
         <location filename="../../pbdialog.cpp" line="125"/>
-        <location filename="../../xmlimport.cpp" line="815"/>
+        <location filename="../../xmlimport.cpp" line="818"/>
         <source>No name entered</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1465,22 +1465,22 @@ current filter?</source>
 <context>
     <name>QMenuBar</name>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="58"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="59"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="60"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="61"/>
         <source>Quit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="64"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="65"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="66"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="67"/>
         <source>About Qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1493,61 +1493,61 @@ current filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../csvutils.cpp" line="60"/>
+        <location filename="../../csvutils.cpp" line="61"/>
         <location filename="../../enumeditor.cpp" line="218"/>
         <location filename="../../importutils.cpp" line="224"/>
         <source>Unable to open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../csvutils.cpp" line="320"/>
+        <location filename="../../csvutils.cpp" line="321"/>
         <location filename="../../importutils.cpp" line="122"/>
         <source>Error in row %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="611"/>
+        <location filename="../../database.cpp" line="612"/>
         <source>must be an integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="618"/>
+        <location filename="../../database.cpp" line="619"/>
         <source>must be a decimal value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="625"/>
+        <location filename="../../database.cpp" line="626"/>
         <source>must be 0 or 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="630"/>
-        <location filename="../../database.cpp" line="636"/>
+        <location filename="../../database.cpp" line="631"/>
+        <location filename="../../database.cpp" line="637"/>
         <source>invalid date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="643"/>
+        <location filename="../../database.cpp" line="644"/>
         <source>invalid time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="649"/>
+        <location filename="../../database.cpp" line="650"/>
         <source>no such option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="1377"/>
+        <location filename="../../database.cpp" line="1378"/>
         <source>Excess columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="1384"/>
+        <location filename="../../database.cpp" line="1385"/>
         <source>Missing columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="1467"/>
+        <location filename="../../database.cpp" line="1468"/>
         <source>Missing file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1579,128 +1579,128 @@ current filter?</source>
     <name>QQMenuHelper</name>
     <message>
         <location filename="../../enumeditor.cpp" line="203"/>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="614"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="617"/>
         <source>Choose a filename to save under</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="57"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="58"/>
         <source>Pr&amp;eferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="59"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="60"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="61"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="62"/>
         <source>Help Contents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="62"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="63"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="63"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="64"/>
         <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="65"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="66"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="76"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="77"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="81"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="82"/>
         <source>Create a new file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="86"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="87"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="87"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="88"/>
         <source>Open an existing file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="93"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="94"/>
         <source>Quit the application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="100"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="101"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="101"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="102"/>
         <source>Save the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="106"/>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="144"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="107"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="145"/>
         <source>Open &amp;Recent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="117"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="118"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="118"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="119"/>
         <source>Close the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="123"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="124"/>
         <source>Change the application settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="143"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="144"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="178"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="179"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="570"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="573"/>
         <source>Save changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="625"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="628"/>
         <source>File already exists; overwrite it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="658"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="661"/>
         <source>Choose a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="688"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="691"/>
         <source>File does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="695"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="698"/>
         <source>The selected item is a directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2166,139 +2166,139 @@ current filter?</source>
 <context>
     <name>XMLImport</name>
     <message>
-        <location filename="../../xmlimport.cpp" line="128"/>
+        <location filename="../../xmlimport.cpp" line="131"/>
         <source>Error at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="129"/>
+        <location filename="../../xmlimport.cpp" line="132"/>
         <source>Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="131"/>
+        <location filename="../../xmlimport.cpp" line="134"/>
         <source>Column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="183"/>
+        <location filename="../../xmlimport.cpp" line="186"/>
         <source>only allowed as root element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="188"/>
+        <location filename="../../xmlimport.cpp" line="191"/>
         <source>Unknown element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="193"/>
+        <location filename="../../xmlimport.cpp" line="196"/>
         <source>%1 not allowed as child of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="201"/>
-        <location filename="../../xmlimport.cpp" line="1345"/>
+        <location filename="../../xmlimport.cpp" line="204"/>
+        <location filename="../../xmlimport.cpp" line="1348"/>
         <source>Missing element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="212"/>
+        <location filename="../../xmlimport.cpp" line="215"/>
         <source>&quot;c&quot; attribute is missing or non-integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="413"/>
+        <location filename="../../xmlimport.cpp" line="416"/>
         <source>Unsupported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="439"/>
-        <location filename="../../xmlimport.cpp" line="474"/>
-        <location filename="../../xmlimport.cpp" line="503"/>
-        <location filename="../../xmlimport.cpp" line="566"/>
-        <location filename="../../xmlimport.cpp" line="570"/>
-        <location filename="../../xmlimport.cpp" line="622"/>
-        <location filename="../../xmlimport.cpp" line="626"/>
-        <location filename="../../xmlimport.cpp" line="685"/>
-        <location filename="../../xmlimport.cpp" line="691"/>
-        <location filename="../../xmlimport.cpp" line="697"/>
-        <location filename="../../xmlimport.cpp" line="731"/>
-        <location filename="../../xmlimport.cpp" line="737"/>
-        <location filename="../../xmlimport.cpp" line="762"/>
-        <location filename="../../xmlimport.cpp" line="768"/>
-        <location filename="../../xmlimport.cpp" line="772"/>
-        <location filename="../../xmlimport.cpp" line="837"/>
-        <location filename="../../xmlimport.cpp" line="844"/>
-        <location filename="../../xmlimport.cpp" line="851"/>
-        <location filename="../../xmlimport.cpp" line="1022"/>
-        <location filename="../../xmlimport.cpp" line="1047"/>
-        <location filename="../../xmlimport.cpp" line="1054"/>
-        <location filename="../../xmlimport.cpp" line="1060"/>
-        <location filename="../../xmlimport.cpp" line="1065"/>
-        <location filename="../../xmlimport.cpp" line="1069"/>
-        <location filename="../../xmlimport.cpp" line="1074"/>
+        <location filename="../../xmlimport.cpp" line="442"/>
+        <location filename="../../xmlimport.cpp" line="477"/>
+        <location filename="../../xmlimport.cpp" line="506"/>
+        <location filename="../../xmlimport.cpp" line="569"/>
+        <location filename="../../xmlimport.cpp" line="573"/>
+        <location filename="../../xmlimport.cpp" line="625"/>
+        <location filename="../../xmlimport.cpp" line="629"/>
+        <location filename="../../xmlimport.cpp" line="688"/>
+        <location filename="../../xmlimport.cpp" line="694"/>
+        <location filename="../../xmlimport.cpp" line="700"/>
+        <location filename="../../xmlimport.cpp" line="734"/>
+        <location filename="../../xmlimport.cpp" line="740"/>
+        <location filename="../../xmlimport.cpp" line="765"/>
+        <location filename="../../xmlimport.cpp" line="771"/>
+        <location filename="../../xmlimport.cpp" line="775"/>
+        <location filename="../../xmlimport.cpp" line="840"/>
+        <location filename="../../xmlimport.cpp" line="847"/>
+        <location filename="../../xmlimport.cpp" line="854"/>
+        <location filename="../../xmlimport.cpp" line="1025"/>
+        <location filename="../../xmlimport.cpp" line="1050"/>
+        <location filename="../../xmlimport.cpp" line="1057"/>
+        <location filename="../../xmlimport.cpp" line="1063"/>
+        <location filename="../../xmlimport.cpp" line="1068"/>
+        <location filename="../../xmlimport.cpp" line="1072"/>
         <location filename="../../xmlimport.cpp" line="1077"/>
-        <location filename="../../xmlimport.cpp" line="1111"/>
-        <location filename="../../xmlimport.cpp" line="1150"/>
-        <location filename="../../xmlimport.cpp" line="1164"/>
+        <location filename="../../xmlimport.cpp" line="1080"/>
+        <location filename="../../xmlimport.cpp" line="1114"/>
+        <location filename="../../xmlimport.cpp" line="1153"/>
+        <location filename="../../xmlimport.cpp" line="1167"/>
         <source>Invalid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="443"/>
-        <location filename="../../xmlimport.cpp" line="538"/>
-        <location filename="../../xmlimport.cpp" line="597"/>
-        <location filename="../../xmlimport.cpp" line="656"/>
-        <location filename="../../xmlimport.cpp" line="1205"/>
-        <location filename="../../xmlimport.cpp" line="1228"/>
+        <location filename="../../xmlimport.cpp" line="446"/>
+        <location filename="../../xmlimport.cpp" line="541"/>
+        <location filename="../../xmlimport.cpp" line="600"/>
+        <location filename="../../xmlimport.cpp" line="659"/>
+        <location filename="../../xmlimport.cpp" line="1208"/>
+        <location filename="../../xmlimport.cpp" line="1231"/>
         <source>Duplicate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="871"/>
-        <location filename="../../xmlimport.cpp" line="899"/>
-        <location filename="../../xmlimport.cpp" line="923"/>
-        <location filename="../../xmlimport.cpp" line="1258"/>
+        <location filename="../../xmlimport.cpp" line="874"/>
+        <location filename="../../xmlimport.cpp" line="902"/>
+        <location filename="../../xmlimport.cpp" line="926"/>
+        <location filename="../../xmlimport.cpp" line="1261"/>
         <source>Missing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1084"/>
+        <location filename="../../xmlimport.cpp" line="1087"/>
         <source>Too many child nodes for node type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1271"/>
+        <location filename="../../xmlimport.cpp" line="1274"/>
         <source>Incorrect _all view column sequence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1302"/>
+        <location filename="../../xmlimport.cpp" line="1305"/>
         <source>must be 0 or 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1309"/>
+        <location filename="../../xmlimport.cpp" line="1312"/>
         <source>must be an integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1316"/>
+        <location filename="../../xmlimport.cpp" line="1319"/>
         <source>must be a non-negative integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1323"/>
+        <location filename="../../xmlimport.cpp" line="1326"/>
         <source>must be a positive integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1328"/>
+        <location filename="../../xmlimport.cpp" line="1331"/>
         <source>Duplicate element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../xmlimport.cpp" line="1379"/>
+        <location filename="../../xmlimport.cpp" line="1382"/>
         <source>Missing data for column ID %1</source>
         <translation type="unfinished"></translation>
     </message>

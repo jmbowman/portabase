@@ -13,10 +13,12 @@
  * Source file for XMLImport
  */
 
+#include <QLocale>
 #include "calc/calcnode.h"
 #include "condition.h"
 #include "database.h"
 #include "filter.h"
+#include "formatting.h"
 #include "pbdialog.h"
 #include "xmlimport.h"
 
@@ -125,11 +127,12 @@ QString XMLImport::errorString()
 QString XMLImport::formattedError()
 {
     if (!error.isEmpty()) {
+        QLocale locale = QLocale::system();
         QString fullError = tr("Error at") + ": ";
         fullError += tr("Line") + " ";
-        fullError += QString::number(xmlLocator->lineNumber()) + ", ";
+        fullError += locale.toString(xmlLocator->lineNumber()) + ", ";
         fullError += tr("Column") + " ";
-        fullError += QString::number(xmlLocator->columnNumber()) + "\n";
+        fullError += locale.toString(xmlLocator->columnNumber()) + "\n";
         fullError += error;
         return fullError;
     }
@@ -1049,7 +1052,7 @@ QString XMLImport::isValidCalcNode(CalcNode *node)
     QString value = node->value();
     if (type == CalcNode::Constant) {
         bool ok;
-        value.toDouble(&ok);
+        Formatting::parseDouble(value, &ok);
         if (!ok) {
             return tr("Invalid") + " cnvalue: " + value;
         }

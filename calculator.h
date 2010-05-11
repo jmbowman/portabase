@@ -40,14 +40,6 @@ public:
     const QString result() const;
     void setInitialValue(const QString& value);
 
-    /**
-     * Set the character to be used as the separator between the integer and
-     * fractional part of an operand.
-     *
-     * @param ch The character to be used
-     */
-    void setDecimal(const QChar ch) { m_decimal = ch; }
-
 protected:
     void keyPressEvent(QKeyEvent* ev);
 
@@ -64,14 +56,6 @@ protected slots:
 private:
     QString operand; /**< The current (second) operand */
     QString m_result; /**< The last result */
-
-    /**
-     * The representation of the character to be used to separate the
-     * integer and fractional part of numbers. The internal representation
-     * is always a period.
-     */
-    QChar m_decimal;
-
     double op1; /**< The numeric representation of the first operand */
     int op; /**< The operation to be performed between the first and the second operand */
     QLabel *display; /**< A pointer to the display area */

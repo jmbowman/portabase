@@ -47,6 +47,7 @@ HEADERS         = calc/calcdateeditor.h \
                   factory.h \
                   filter.h \
                   filtereditor.h \
+                  formatting.h \
                   image/imageeditor.h \
                   image/imageselector.h \
                   image/imageutils.h \
@@ -111,6 +112,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   factory.cpp \
                   filter.cpp \
                   filtereditor.cpp \
+                  formatting.cpp \
                   image/imageeditor.cpp \
                   image/imageselector.cpp \
                   image/imageutils.cpp \

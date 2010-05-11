@@ -132,7 +132,6 @@ public:
 
     CalcNode *loadCalc(const QString &colName, int *decimals=0);
     void updateCalc(const QString &colName, CalcNode *root, int decimals);
-    QString formatDouble(double value, int decimals=2);
     void calculateAll();
 
     QString addRow(const QStringList &values, int *rowId=0,

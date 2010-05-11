@@ -21,6 +21,7 @@
 #include "datatypes.h"
 #include "factory.h"
 #include "filter.h"
+#include "formatting.h"
 #include "view.h"
 #include "image/imageutils.h"
 
@@ -285,7 +286,7 @@ QVariant View::data(const QModelIndex &index, int role) const
         else if (type == FLOAT || type == CALC) {
             // want the string version here
             c4_StringProp prop(scIds[colIndex]);
-            return QString::fromUtf8(prop (row));
+            return Formatting::toLocalDouble(QString::fromUtf8(prop (row)));
         }
         else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(ids[colIndex]);
@@ -603,8 +604,8 @@ QStringList View::getStatistics(int colIndex)
         double mean = total / rowCnt;
         lines.append(tr("Total") + ": " + locale.toString(total, 'f', 2));
         lines.append(tr("Average") + ": " + locale.toString(mean, 'f', 2));
-        lines.append(tr("Minimum") + ": " + minString);
-        lines.append(tr("Maximum") + ": " + maxString);
+        lines.append(tr("Minimum") + ": " + Formatting::toLocalDouble(minString));
+        lines.append(tr("Maximum") + ": " + Formatting::toLocalDouble(maxString));
     }
     else if (type == BOOLEAN) {
         c4_IntProp prop(ids[colIndex]);

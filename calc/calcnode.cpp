@@ -1,7 +1,7 @@
 /*
  * calcnode.cpp
  *
- * (c) 2003-2004,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 #include <QDateTime>
 #include "calcnode.h"
 #include "../database.h"
+#include "../formatting.h"
 
 /**
  * Constructor.
@@ -127,11 +128,11 @@ bool CalcNode::allowsEdit()
 double CalcNode::value(const QStringList &row, const QStringList &colNames)
 {
     if (nodeType == Constant || nodeType == TimeConstant) {
-        return nodeValue.toDouble();
+        return Formatting::parseDouble(nodeValue);
     }
     if (nodeType == Column || nodeType == TimeColumn) {
         int index = colNames.indexOf(nodeValue);
-        return row[index].toDouble();
+        return Formatting::parseDouble(row[index]);
     }
     int count = children.count();
     if (count == 0) {

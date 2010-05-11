@@ -20,6 +20,7 @@
 #include <QTextStream>
 #include "csvutils.h"
 #include "database.h"
+#include "formatting.h"
 
 /**
  * Constructor.
@@ -310,7 +311,7 @@ bool CSVUtils::addRow(Database *db)
             if (types[i] == CALC) {
                 double value = calcs[calcIndex]->value(row, colNames);
                 int decimals = calcDecimals[calcIndex];
-                row[i] = db->formatDouble(value, decimals);
+                row[i] = Formatting::formatDouble(value, decimals);
                 calcIndex++;
             }
         }

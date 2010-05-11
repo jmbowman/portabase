@@ -27,6 +27,7 @@
 #include "csvutils.h"
 #include "database.h"
 #include "filter.h"
+#include "formatting.h"
 #include "metakitfuncs.h"
 #include "view.h"
 #include "xmlexport.h"
@@ -613,7 +614,7 @@ QString Database::isValidValue(int type, const QString &value)
     }
     else if (type == FLOAT) {
         bool ok = false;
-        value.toDouble(&ok);
+        Formatting::parseDouble(value, &ok);
         if (!ok) {
             return QObject::tr("must be a decimal value");
         }
@@ -733,7 +734,7 @@ void Database::addColumn(int index, const QString &name, int type,
         // separate column to store number strings as they are entered
         QByteArray stringColId = makeColId(nextId, STRING).toLatin1();
         c4_StringProp stringProp(stringColId);
-        double value = defaultVal.toDouble();
+        double value = Formatting::parseDouble(defaultVal);
         for (int i = 0; i < size; i++) {
             newProp (data[i]) = value;
             stringProp (data[i]) = defaultVal.toUtf8();
@@ -1438,7 +1439,7 @@ QString Database::addRow(const QStringList &values, int *rowId,
         }
         else if (type == FLOAT || type == CALC) {
             c4_FloatProp prop(idString);
-            prop (row) = value.toDouble();
+            prop (row) = Formatting::parseDouble(value);
             // also need to save the string representation
             QByteArray stringColId = makeColId(cId (temp[i]), STRING).toLatin1();
             c4_StringProp stringProp(stringColId);
@@ -1532,7 +1533,7 @@ void Database::updateRow(int rowId, const QStringList &values)
         }
         else if (type == FLOAT || type == CALC) {
             c4_FloatProp prop(idString);
-            prop (data[index]) = values[i].toDouble();
+            prop (data[index]) = Formatting::parseDouble(values[i]);
             // also need to save the string representation
             QByteArray stringColId = makeColId(cId (temp[i]), STRING).toLatin1();
             c4_StringProp stringProp(stringColId);
@@ -2184,20 +2185,8 @@ void Database::calculateAll(int colId, CalcNode *root, int decimals)
             value = root->value(row, colNames);
         }
         floatProp (data[i]) = value;
-        stringProp (data[i]) = formatDouble(value, decimals).toUtf8();
+        stringProp (data[i]) = Formatting::formatDouble(value, decimals).toUtf8();
     }
-}
-
-/**
- * Get the string representation of a floating point number.
- *
- * @param value The value to be formatted
- * @param decimals The number of decimal places to retain
- * @return The formatted value
- */
-QString Database::formatDouble(double value, int decimals)
-{
-    return QString("%1").arg(value, 0, 'f', decimals);
 }
 
 /**
@@ -2620,7 +2609,7 @@ void Database::updateDataColumnFormat()
             for (int i = 0; i < rowCount; i++) {
                 double value = oldProp (data[i]);
                 newProp (data[i]) = value;
-                stringProp (data[i]) = QString::number(value).toUtf8();
+                stringProp (data[i]) = Formatting::formatDouble(value).toUtf8();
             }
         }
         else if (type == STRING || type == NOTE) {

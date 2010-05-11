@@ -233,7 +233,7 @@ void ColumnEditor::setDefaultValue(const QString &newDefault)
     defaultDate->setCurrentIndex(0);
     defaultTime->setCurrentIndex(0);
     defaultInteger->setValue("0");
-    defaultFloat->setValue("0");
+    defaultFloat->setValue("0.0");
     defaultSequence->setValue("0");
     int colType = type();
     if (colType == BOOLEAN) {

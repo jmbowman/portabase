@@ -1,3 +1,20 @@
+2010-05-10  JMB  Number formatting improvements, usability tweaks, Czech update
+
+    Overhauled the formatting and parsing of decimal values so that they should
+    look correct in most locales, without actually changing what's stored in
+    the file (internally, US English number formatting is always used).  This
+    had some side benefits, like being able to enter percentages and have them
+    used correctly in calculations.  CSV import/export still assumes US English
+    formatting, I'll try to fix that as part of a larger CSV import overhaul in
+    version 2.1.
+    
+    Changed the date dialog so that clicking "Today" or clicking (or selecting
+    with the "Enter" or "Return" keys) a day will immediately select the date
+    and close the dialog.  Changed the default decimal default value in the
+    column editor from "0" to "0.0" so as to make it easier to distinguish from
+    integer fields.  Updated the Czech UI translation and added a Czech help
+    file translation (both from 1.9; the 2.0 versions are being worked on).
+
 2010-05-07  JMB  XML & MobileDB import fixed, integer field validation fixed
 
     Fixed a couple of bugs that were preventing XML and MobileDB import from

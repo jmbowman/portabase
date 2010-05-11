@@ -19,11 +19,13 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLayout>
+#include <QLocale>
 #include <QSignalMapper>
 #include <QRegExp>
 
 #include "calculator.h"
 #include "factory.h"
+#include "formatting.h"
 
 /**
  * Constructor.
@@ -33,7 +35,6 @@ Calculator::Calculator(QWidget* parent)
   : QQDialog("", parent)
 {
     setSizeGripEnabled(false);
-    m_decimal = '.';
     m_result = "";
 
     QGridLayout* grid = new QGridLayout(this);
@@ -73,7 +74,7 @@ Calculator::Calculator(QWidget* parent)
     buttons[PLUS]->setText("+");
     buttons[MINUS]->setText("-");
     buttons[STAR]->setText("X");
-    buttons[DECIMAL]->setText(m_decimal);
+    buttons[DECIMAL]->setText(QLocale::system().decimalPoint());
     buttons[EQUAL]->setText("=");
     buttons[SLASH]->setText("/");
     buttons[CLEAR]->setText("C");
@@ -154,9 +155,21 @@ Calculator::Calculator(QWidget* parent)
  */
 void Calculator::digitClicked(int button)
 {
-    operand += QChar(button + 0x30);
-    if (operand.length() > 16) {
-        operand = operand.left(16);
+    if (operand.length() >= 20) {
+        return;
+    }
+    QChar newDigit(button + 0x30);
+    QLocale locale = QLocale::system();
+    QChar decimalPoint = locale.decimalPoint();
+    if (operand.length() > 0 && !operand.contains(decimalPoint)) {
+        // may need to change separator placement
+        qlonglong value = locale.toLongLong(operand);
+        operand = QString::number(value) + newDigit;
+        value = operand.toLongLong();
+        operand = locale.toString(value);
+    }
+    else {
+        operand += newDigit;
     }
     changeDisplay(operand);
 }
@@ -170,8 +183,9 @@ void Calculator::decimalClicked()
     if (operand.length() == 0) {
         operand = "0";
     }
-    if (operand.contains('.') == 0) {
-        operand += '.';
+    QChar decimalPoint = QLocale::system().decimalPoint();
+    if (operand.contains(decimalPoint) == 0) {
+        operand += decimalPoint;
     }
     if (operand.length() > 16) {
         operand = operand.left(16);
@@ -188,11 +202,12 @@ void Calculator::plusminusClicked()
         operand = m_result;
     }
     if (operand.length() > 0) {
-        if (operand[0] == '-') {
+        QChar negativeSign = QLocale::system().negativeSign();
+        if (operand[0] == negativeSign) {
             operand = operand.mid(1);
         }
         else {
-            operand = "-" + operand;
+            operand = QString(negativeSign) + operand;
         }
         changeDisplay(operand);
     }
@@ -207,12 +222,12 @@ void Calculator::calculationClicked(int button)
 {
     if (operand.length() == 0 && op != 0 && button == EQUAL) {
         op = 0;
-        m_result.setNum(op1);
+        m_result = QLocale::system().toString(op1);
         changeDisplay(m_result);
     }
     else if (operand.length() > 0 && op != 0) {
         // perform operation
-        double op2 = operand.toDouble();
+        double op2 = QLocale::system().toDouble(operand);
         bool error = false;
         switch(op) {
             case PLUS:
@@ -240,12 +255,12 @@ void Calculator::calculationClicked(int button)
         }
         else {
             op1 = op2;
-            m_result.setNum(op1);
+            m_result = QLocale::system().toString(op1);
             changeDisplay(m_result);
         }
     }
     else if(operand.length() > 0 && op == 0) {
-        op1 = operand.toDouble();
+        op1 = QLocale::system().toDouble(operand);
     }
 
     if (button != EQUAL) {
@@ -289,20 +304,20 @@ void Calculator::clearAllClicked()
 void Calculator::percentClicked()
 {
     if (op != 0) {
-        double op2 = operand.toDouble() / 100;
+        double op2 = QLocale::system().toDouble(operand) / 100;
         if (op == PLUS || op == MINUS) {
             op2 = op1 * op2;
         }
-        operand.setNum(op2);
+        operand = QLocale::system().toString(op2);
         calculationClicked(EQUAL);
     }
 }
 
 /**
- * Extract the result of the last calculation. The fractional part is
- * separated from the integral part by the character setup using setDecimal().
+ * Extract the result of the last calculation.
  *
- * @return The result of the last operation
+ * @return The C-locale string representation of the result of the last
+ *         operation
  */
 const QString Calculator::result() const
 {
@@ -310,8 +325,7 @@ const QString Calculator::result() const
     if (operand.isEmpty()) {
         txt = m_result;
     }
-    txt.replace(QRegExp("\\."), m_decimal);
-    return txt;
+    return Formatting::fromLocalDouble(txt);
 }
 
 /**
@@ -321,9 +335,7 @@ const QString Calculator::result() const
  */
 void Calculator::changeDisplay(const QString& str)
 {
-    QString txt = str;
-    txt.replace(QRegExp("\\."), m_decimal);
-    display->setText("<b>" + txt + "</b>");
+    display->setText("<b>" + str + "</b>");
 }
 
 void Calculator::keyPressEvent(QKeyEvent* ev)
@@ -393,9 +405,8 @@ void Calculator::setInitialValue(const QString& value)
 {
     // setup operand
     operand = value;
-    operand.replace(QRegExp(QString("\\") + m_decimal), ".");
-    op1 = value.toDouble();
-    m_result.setNum(op1);
+    op1 = Formatting::parseDouble(value);
+    m_result = QLocale::system().toString(op1);
     changeDisplay(m_result);
     operand = "";
 }

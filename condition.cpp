@@ -18,6 +18,7 @@
 #include "condition.h"
 #include "database.h"
 #include "datatypes.h"
+#include "formatting.h"
 
 /**
  * Constructor.
@@ -146,7 +147,7 @@ c4_View Condition::filter(c4_View dbview)
     if (type == INTEGER || type == BOOLEAN || type == DATE || type == TIME
             || type == SEQUENCE) {
         QString colId = db->getColId(colName);
-        int value = constant.toInt();
+        int value = QLocale::c().toInt(constant);
         return filterInt(dbview, colId, value);
     }
     else if (type >= FIRST_ENUM) {
@@ -227,7 +228,7 @@ c4_View Condition::filterInt(c4_View dbview, const QString &colId, int value)
  */
 c4_View Condition::filterFloat(c4_View dbview)
 {
-    double value = constant.toDouble();
+    double value = Formatting::parseDouble(constant);
     c4_FloatProp prop(db->getColId(colName).toLatin1().data());
     c4_View result = dbview.Clone();
     int size = dbview.GetSize();
@@ -385,6 +386,9 @@ void Condition::updateDescription()
     }
     else if (type == INTEGER || type == SEQUENCE) {
         arg2 = QLocale::system().toString(constant.toInt());
+    }
+    else if (type == FLOAT) {
+        arg2 = Formatting::toLocalDouble(constant);
     }
     else {
         arg2 = constant;

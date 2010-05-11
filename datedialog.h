@@ -34,8 +34,8 @@ public:
     QDate selectedDate();
 
 private slots:
-    void gotoToday(); /**< 'Today' button handler */
-    void selectNone(); /**< 'None' button handler */
+    void gotoToday();
+    void selectNone();
 
 private:
     QCalendarWidget *calendar; /**< Calendar display widget */

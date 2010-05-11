@@ -12,7 +12,7 @@
     <name>CalcDateEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Editor dílčích početních operací</translation>
+        <translation>Editor dílčích výpočtů</translation>
     </message>
     <message>
         <source>Column</source>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Seconds_Between</source>
-        <translation>Počet_vteřin_mezi</translation>
+        <translation>Počet_sekund_mezi</translation>
     </message>
     <message>
         <source>Minutes_Between</source>
@@ -93,7 +93,7 @@
     <name>CalcNodeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Editor dílčích početních operací</translation>
+        <translation>Editor dílčích výpočtů</translation>
     </message>
     <message>
         <source>Column</source>
@@ -116,7 +116,7 @@
     <name>CalcTimeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>Editor dílčích početních operací</translation>
+        <translation>Editor dílčích výpočtů</translation>
     </message>
     <message>
         <source>Column</source>
@@ -130,15 +130,19 @@
 <context>
     <name>CalcWidget</name>
     <message>
+        <source>Update</source>
+        <translation type="obsolete">Aktualizovat</translation>
+    </message>
+    <message>
         <source>Update calculated value</source>
-        <translation type="unfinished">Aktualizovat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Výběr barvy</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -161,7 +165,7 @@
     </message>
     <message>
         <source>Decimal</source>
-        <translation>Číslo v desítkové soustavě</translation>
+        <translation>Decimální</translation>
     </message>
     <message>
         <source>Boolean</source>
@@ -181,7 +185,7 @@
     </message>
     <message>
         <source>New Enum</source>
-        <translation>Nový typ pole</translation>
+        <translation>Nový seznam</translation>
     </message>
     <message>
         <source>Default</source>
@@ -197,11 +201,11 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Není</translation>
+        <translation>Neuvedeno</translation>
     </message>
     <message>
         <source>Now</source>
-        <translation>Nyní</translation>
+        <translation>Aktuální</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -324,18 +328,25 @@
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Není</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DateWidget</name>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Neuvádět</translation>
     </message>
 </context>
 <context>
     <name>EnumEditor</name>
     <message>
         <source>Enum Editor</source>
-        <translation>Editor typů polí</translation>
+        <translation>Editor seznamů</translation>
     </message>
     <message>
         <source>Enum Name</source>
-        <translation>Jméno typu pole</translation>
+        <translation>Jméno seznamu</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -351,11 +362,11 @@
     </message>
     <message>
         <source>Must have at least one option</source>
-        <translation>Musí být zadána alespoň 1 volba</translation>
+        <translation>Musí být zadána alespoň 1 položka seznamu</translation>
     </message>
     <message>
         <source>Option text</source>
-        <translation>Text volby</translation>
+        <translation>Položka seznamu</translation>
     </message>
     <message>
         <source>Replace where used with:</source>
@@ -375,14 +386,14 @@ the &quot;Import&quot; button to load lines from a text file</source>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Manažer typů polí</translation>
+        <translation>Správce seznamů</translation>
     </message>
     <message>
         <source>The following columns which
 use this enum will also be
 deleted:</source>
-        <translation>Následující sloupce s výskytem
-tohoto typu pole budou smazány:</translation>
+        <translation>Následující sloupec či sloupce používající
+vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>Continue?</source>
@@ -416,15 +427,15 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Šířka</translation>
+        <translation>Šířka (body)</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Výška</translation>
+        <translation>Výška (body)</translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation>Otočit</translation>
+        <translation>Otočení (st.)</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -436,7 +447,7 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
-        <translation>Editor obrázků</translation>
+        <translation>Nepodporovaný formát obrázku</translation>
     </message>
 </context>
 <context>
@@ -476,6 +487,26 @@ tohoto typu pole budou smazány:</translation>
         <translation>Kódování textu</translation>
     </message>
     <message>
+        <source>Import rows from CSV file</source>
+        <translation type="obsolete">Importovat záznamy ze souboru CSV</translation>
+    </message>
+    <message>
+        <source>Import from MobileDB file</source>
+        <translation type="obsolete">Importovat ze souboru MobileDB</translation>
+    </message>
+    <message>
+        <source>Import from text file</source>
+        <translation type="obsolete">Importovat z textového souboru</translation>
+    </message>
+    <message>
+        <source>Import from XML file</source>
+        <translation type="obsolete">Importovat ze souboru XML</translation>
+    </message>
+    <message>
+        <source>Select an image</source>
+        <translation type="obsolete">Vybrat obrázek</translation>
+    </message>
+    <message>
         <source>Text files with comma separated values</source>
         <translation>Soubory hodnot oddělených čárkami</translation>
     </message>
@@ -511,8 +542,160 @@ tohoto typu pole budou smazány:</translation>
         <translation>Exportovat</translation>
     </message>
     <message>
+        <source>About PortaBase</source>
+        <translation type="obsolete">O aplikaci PortaBase</translation>
+    </message>
+    <message>
+        <source>Row</source>
+        <translation type="obsolete">Záznam</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="obsolete">Náhled</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation type="obsolete">Pořadí</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="obsolete">Filtr</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Uložit</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="obsolete">Přidat</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="obsolete">Editovat</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="obsolete">Kopírovat</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="obsolete">Smazat</translation>
+    </message>
+    <message>
+        <source>Quick Filter</source>
+        <translation type="obsolete">Vyhledat</translation>
+    </message>
+    <message>
         <source>All Columns</source>
         <translation>Všechny sloupce</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="obsolete">Soubor</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="obsolete">Nápověda</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="obsolete">Nový</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Otevřít</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation type="obsolete">&amp;Přejmenovat(qqq)</translation>
+    </message>
+    <message>
+        <source>File &amp;name</source>
+        <translation type="obsolete">&amp;Jméno souboru(QQQ)</translation>
+    </message>
+    <message>
+        <source>File &amp;type</source>
+        <translation type="obsolete">&amp;Typ souboru(QQQ)</translation>
+    </message>
+    <message>
+        <source>Look &amp;in</source>
+        <translation type="obsolete">Umí&amp;stění(QQQ)</translation>
+    </message>
+    <message>
+        <source>Open Recent</source>
+        <translation type="obsolete">Naposledy otevřené</translation>
+    </message>
+    <message>
+        <source>Change Password</source>
+        <translation type="obsolete">Změnit heslo</translation>
+    </message>
+    <message>
+        <source>Slideshow</source>
+        <translation type="obsolete">Automatické přepínání obrázků</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation type="obsolete">Vlastnosti</translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="obsolete">Nastavení</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="obsolete">Ukončit</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="obsolete">Seznam</translation>
+    </message>
+    <message>
+        <source>Icons</source>
+        <translation type="obsolete">Ikony</translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation type="obsolete">Obsah nápovědy</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="obsolete">O Qt</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="obsolete">Přejmenovat</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="obsolete">Načíst znovu</translation>
+    </message>
+    <message>
+        <source>All Rows</source>
+        <translation type="obsolete">Všechny záznamy</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="obsolete">Zobrazit</translation>
+    </message>
+    <message>
+        <source>Delete Rows In Filter</source>
+        <translation type="obsolete">Smazat záznamy vyhovující aktuálnímu filtru</translation>
+    </message>
+    <message>
+        <source>Edit Columns</source>
+        <translation type="obsolete">Editor sloupců</translation>
+    </message>
+    <message>
+        <source>Edit Enums</source>
+        <translation type="obsolete">Editor seznamů</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">Zavřít</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="obsolete">&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -529,6 +712,26 @@ tohoto typu pole budou smazány:</translation>
     <message>
         <source>Fi&amp;lter</source>
         <translation>&amp;Filtr</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="obsolete">Nápověd&amp;a</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="obsolete">&amp;Nový</translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation type="obsolete">&amp;Otevřít</translation>
+    </message>
+    <message>
+        <source>Open &amp;Recent</source>
+        <translation type="obsolete">Naposledy ot&amp;evřené</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="obsolete">&amp;Uložit</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
@@ -549,6 +752,26 @@ tohoto typu pole budou smazány:</translation>
     <message>
         <source>Proper&amp;ties</source>
         <translation>&amp;Vlastnosti</translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation type="obsolete">Nas&amp;tavení</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="obsolete">&amp;Ukončit</translation>
+    </message>
+    <message>
+        <source>Help &amp;Contents</source>
+        <translation type="obsolete">&amp;Obsah nápovědy</translation>
+    </message>
+    <message>
+        <source>&amp;About PortaBase</source>
+        <translation type="obsolete">O aplikaci &amp;PortaBase</translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="obsolete">O &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
@@ -583,12 +806,20 @@ tohoto typu pole budou smazány:</translation>
         <translation>&amp;Zobrazit</translation>
     </message>
     <message>
+        <source>&amp;Delete Rows In Filter</source>
+        <translation type="obsolete">Smazat záznamy vyhovují&amp;cí aktuálnímu filtru</translation>
+    </message>
+    <message>
         <source>Edit Col&amp;umns</source>
         <translation>Editor &amp;sloupců</translation>
     </message>
     <message>
         <source>Edit &amp;Enums</source>
-        <translation>Editor typů &amp;polí</translation>
+        <translation>&amp;Editor seznamů</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="obsolete">&amp;Zavřít</translation>
     </message>
     <message>
         <source>Change the current file&apos;s password</source>
@@ -612,6 +843,22 @@ tohoto typu pole budou smazány:</translation>
     </message>
     <message>
         <source>Show information about the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Pre&amp;view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure and preview printing options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -703,22 +950,6 @@ tohoto typu pole budou smazány:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure and preview printing options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print the current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Views</source>
         <translation type="unfinished">Náhledy</translation>
     </message>
@@ -749,6 +980,49 @@ tohoto typu pole budou smazány:</translation>
     <message>
         <source>View PortaBase in fullscreen mode</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewFileDialog</name>
+    <message>
+        <source>Export</source>
+        <translation type="obsolete">Exportovat</translation>
+    </message>
+    <message>
+        <source>Enter a name for the new file</source>
+        <translation type="obsolete">Vyberte jméno nového souboru</translation>
+    </message>
+    <message>
+        <source>File already exists; overwrite it?</source>
+        <translation type="obsolete">Soubor již existuje; chcete jej přepsat?</translation>
+    </message>
+    <message>
+        <source>Encrypt the file?</source>
+        <translation type="obsolete">Zašifrovat tento soubor?</translation>
+    </message>
+    <message>
+        <source>Encrypted file</source>
+        <translation type="obsolete">Zašifrovaný soubor</translation>
+    </message>
+    <message>
+        <source>PortaBase files</source>
+        <translation type="obsolete">Soubory PortaBase</translation>
+    </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation type="obsolete">Soubory hodnot oddělených čárkami</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation type="obsolete">Textové soubory</translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation type="obsolete">XML soubory</translation>
+    </message>
+    <message>
+        <source>Choose a filename to save under</source>
+        <translation type="obsolete">Vyberte jméno souboru</translation>
     </message>
 </context>
 <context>
@@ -794,6 +1068,37 @@ tohoto typu pole budou smazány:</translation>
     </message>
 </context>
 <context>
+    <name>PBFileSelector</name>
+    <message>
+        <source>Enter a name for the new file</source>
+        <translation type="obsolete">Vyberte jméno nového souboru</translation>
+    </message>
+    <message>
+        <source>Unable to create new file</source>
+        <translation type="obsolete">Nelze vytvořit nový soubor</translation>
+    </message>
+    <message>
+        <source>Enter the new file name</source>
+        <translation type="obsolete">Zadejte jméno nového souboru</translation>
+    </message>
+    <message>
+        <source>Unable to rename the file</source>
+        <translation type="obsolete">Nelze přejmenovat soubor</translation>
+    </message>
+    <message>
+        <source>No file selected</source>
+        <translation type="obsolete">Není vybrán žádný soubor</translation>
+    </message>
+    <message>
+        <source>PortaBase files</source>
+        <translation type="obsolete">Soubory PortaBase</translation>
+    </message>
+    <message>
+        <source>Choose a file</source>
+        <translation type="obsolete">Vyberte soubor</translation>
+    </message>
+</context>
+<context>
     <name>PasswordDialog</name>
     <message>
         <source>Old password</source>
@@ -823,6 +1128,10 @@ tohoto typu pole budou smazány:</translation>
 <context>
     <name>PortaBase</name>
     <message>
+        <source>Delete</source>
+        <translation type="obsolete">Smazat</translation>
+    </message>
+    <message>
         <source>XML</source>
         <translation>XML</translation>
     </message>
@@ -835,14 +1144,22 @@ tohoto typu pole budou smazány:</translation>
         <translation>Importovat z:</translation>
     </message>
     <message>
+        <source>Unable to create new file</source>
+        <translation type="obsolete">Nelze vytvořit nový soubor</translation>
+    </message>
+    <message>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
 upgrade</source>
         <translation>Tento soubor používá novější verzi
 formátu PortaBase než Vaše verze
-PortaBase podporuje; prosíme,
-proveďte upgrade</translation>
+PortaBase podporuje; prosím,
+proveďte aktualizaci</translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
+        <translation type="obsolete">Jste si jist/-a?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -872,11 +1189,11 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Delete this view?</source>
-        <translation>Smazat toto zobrazení?</translation>
+        <translation>Smazat tento náhled?</translation>
     </message>
     <message>
         <source>Delete this sorting?</source>
-        <translation>Smazat toto seřazení?</translation>
+        <translation>Smazat toto pořadí?</translation>
     </message>
     <message>
         <source>Delete this filter?</source>
@@ -920,11 +1237,15 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Enums</source>
-        <translation>Typy polí (definované uživatelem)</translation>
+        <translation>Seznamy</translation>
     </message>
     <message>
         <source>File Properties</source>
         <translation>Vlastnosti souboru</translation>
+    </message>
+    <message>
+        <source>File does not exist</source>
+        <translation type="obsolete">Soubor neexistuje</translation>
     </message>
     <message>
         <source>Not a PortaBase file</source>
@@ -936,6 +1257,10 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Recently opened files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -964,10 +1289,6 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1015,7 +1336,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Show seconds for times</source>
-        <translation>Zobrazovat vteřiny</translation>
+        <translation>Zobrazovat sekundy</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
@@ -1031,7 +1352,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Row Colors</source>
-        <translation>Barvy řádků</translation>
+        <translation>Barvy záznamů</translation>
     </message>
     <message>
         <source>Date and Time</source>
@@ -1047,11 +1368,11 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation>24-hodinový</translation>
+        <translation>24 hodinový</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation>12-hodinový</translation>
+        <translation>12 hodinový</translation>
     </message>
     <message>
         <source>Weeks start on</source>
@@ -1074,8 +1395,40 @@ vyhovující filtru?</translation>
         <translation>Výchozí počet záznamů na stránce</translation>
     </message>
     <message>
+        <source>Options</source>
+        <translation type="obsolete">Podmínky</translation>
+    </message>
+    <message>
         <source>Appearance</source>
         <translation>Vzhled</translation>
+    </message>
+    <message>
+        <source>Top-level</source>
+        <translation type="obsolete">V nejvyšší úrovni</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="obsolete">Položky menu</translation>
+    </message>
+    <message>
+        <source>Menus</source>
+        <translation type="obsolete">Menu</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="obsolete">Zobrazit</translation>
+    </message>
+    <message>
+        <source>Toolbar Button</source>
+        <translation type="obsolete">Tlačítko</translation>
+    </message>
+    <message>
+        <source>Buttons</source>
+        <translation type="obsolete">Tlačítka</translation>
+    </message>
+    <message>
+        <source>View rows with a single click</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use small-screen settings on this device</source>
@@ -1133,38 +1486,19 @@ vyhovující filtru?</translation>
         <source>Thistle</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>View rows with a single click</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QFileSystemModel</name>
-    <message>
-        <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QMenuBar</name>
-    <message>
-        <source>About %1</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Preferences</source>
         <translation type="unfinished">Nastavení</translation>
     </message>
     <message>
         <source>Quit %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1235,7 +1569,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Zpět</translation>
+        <translation type="unfinished"> Zpět </translation>
     </message>
     <message>
         <source>Forward</source>
@@ -1249,8 +1583,28 @@ vyhovující filtru?</translation>
         <translation type="unfinished">Vyberte jméno souboru</translation>
     </message>
     <message>
+        <source>Pr&amp;eferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished">&amp;Ukončit</translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation type="unfinished">Obsah nápovědy</translation>
+    </message>
+    <message>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">O &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -1267,10 +1621,6 @@ vyhovující filtru?</translation>
     <message>
         <source>Open an existing file</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Ukončit</translation>
     </message>
     <message>
         <source>Quit the application</source>
@@ -1297,20 +1647,12 @@ vyhovující filtru?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;File</source>
-        <translation type="unfinished">&amp;Soubor</translation>
-    </message>
-    <message>
-        <source>Help Contents</source>
-        <translation type="unfinished">Obsah nápovědy</translation>
-    </message>
-    <message>
-        <source>%1 Help</source>
+        <source>Change the application settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About &amp;Qt</source>
-        <translation type="unfinished">O &amp;Qt</translation>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -1334,14 +1676,6 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>The selected item is a directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pr&amp;eferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change the application settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1417,7 +1751,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Výběr barvy</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1442,19 +1776,19 @@ vyhovující filtru?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next row</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy this row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete this row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next row</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1474,7 +1808,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>seconds</source>
-        <translation>(vteř.)</translation>
+        <translation>(sek.)</translation>
     </message>
 </context>
 <context>
@@ -1512,7 +1846,7 @@ vyhovující filtru?</translation>
     <name>TimeWidget</name>
     <message>
         <source>AM</source>
-        <translation>Ráno/dopoledne</translation>
+        <translation type="unfinished">Ráno/dop.</translation>
     </message>
     <message>
         <source>None</source>
@@ -1520,7 +1854,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>Odpoledne/večer</translation>
+        <translation>Odp./večer</translation>
     </message>
 </context>
 <context>
@@ -1630,11 +1964,11 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Image available</source>
-        <translation>Obrázek je k dispozici</translation>
+        <translation>Obrázek přítomen</translation>
     </message>
     <message>
         <source>No image</source>
-        <translation>Obrázek není k dispozici</translation>
+        <translation>Obrázek nepřítomen</translation>
     </message>
 </context>
 <context>
@@ -1677,6 +2011,10 @@ vyhovující filtru?</translation>
     <message>
         <source>Column Name</source>
         <translation>Jméno sloupce</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Není</translation>
     </message>
     <message>
         <source>All Rows</source>
@@ -1743,11 +2081,11 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Too many child nodes for node type</source>
-        <translation>Příliš mnoho vnořených operací pro daný typ operace</translation>
+        <translation>Příliš mnoho vnořených pro daný typ</translation>
     </message>
     <message>
         <source>Incorrect _all view column sequence</source>
-        <translation>Nesprávné pořadí sloupců</translation>
+        <translation>Nesprávná sekvence sloupců</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
@@ -1771,7 +2109,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>Missing data for column ID %1</source>
-        <translation>Chybějící data ve sloupci ID %1</translation>
+        <translation>Chybějící data sloupce ID %1</translation>
     </message>
 </context>
 </TS>
