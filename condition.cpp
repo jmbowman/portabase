@@ -379,10 +379,10 @@ void Condition::updateDescription()
         arg2 = "\"" + constant + "\"";
     }
     else if (type == DATE) {
-        arg2 = db->dateToString(constant.toInt());
+        arg2 = Formatting::dateToString(constant.toInt());
     }
     else if (type == TIME) {
-        arg2 = db->timeToString(constant.toInt());
+        arg2 = Formatting::timeToString(constant.toInt());
     }
     else if (type == INTEGER || type == SEQUENCE) {
         arg2 = QLocale::system().toString(constant.toInt());

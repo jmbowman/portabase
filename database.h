@@ -142,11 +142,6 @@ public:
     QByteArray getBinaryField(int rowId, const QString &colName);
     void setBinaryField(int rowId, const QString &colName, QByteArray bytes);
     void commit();
-    bool isNoneDate(const QDate &date);
-    QString dateToString(int date);
-    QString dateToString(const QDate &date);
-    QString timeToString(int time);
-    QString parseTimeString(const QString &value, bool *ok);
     void setImportBasePath(const QString &path);
     QStringList importFromCSV(const QString &filename,
                               const QString &encoding);
@@ -177,8 +172,6 @@ private:
 
 private:
     bool smallScreen; /**< True if currently using column widths and rows per page for small-screen devices */
-    QString dateFormat; /**< The short format to use for displaying date values */
-    QString timeFormat; /**< The format to use for displaying time values */
     c4_Storage *file; /**< The data file */
     c4_Storage *storage; /**< The data file if unencrypted, wrapped data otherwise */
     Crypto *crypto; /**< Information about the file's encryption, 0 if not encrypted */

@@ -1,3 +1,17 @@
+2010-05-11  JMB  Assorted bugfixes, formatting code cleanup, better Mac dmg
+
+    Fixed a bug in opening PortaBase files from the command line.  That bug
+    also broke opening files with a double-click on Windows and Linux, so that
+    should work again.
+
+    The recently used files list now ensures that the last opened file is at
+    the top of the list, not just in it.  Also made sure that files opened from
+    the command line or drag & drop get included in the list.
+    
+    Made the height of string input fields more consistent.  Moved more data
+    field formatting and parsing code to the new Formatting class.  Made some
+    minor enhancements to the Mac installer disk image build script.
+
 2010-05-10  JMB  Number formatting improvements, usability tweaks, Czech update
 
     Overhauled the formatting and parsing of decimal values so that they should

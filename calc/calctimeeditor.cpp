@@ -24,6 +24,7 @@
 #include "../database.h"
 #include "../datatypes.h"
 #include "../factory.h"
+#include "../formatting.h"
 #include "../timewidget.h"
 
 /**
@@ -115,7 +116,7 @@ void CalcTimeEditor::updateNode(CalcNode *node)
         node->setType(CalcNode::TimeConstant);
         QString timeString = timeWidget->getTime();
         bool ok;
-        QString time = db->parseTimeString(timeString, &ok);
+        QString time = Formatting::parseTimeString(timeString, &ok);
         // isValid() has already been checked, so ignore "ok"
         node->setValue(time);
     }

@@ -634,16 +634,6 @@ QString QQMenuHelper::createNewFile(const QString &fileDescription,
     }
     QFileInfo info(filename);
     settings.setValue("Files/LastDir", info.absolutePath());
-    // Add it to the recent files list if it's a native document file
-    if (fileExtension == extension) {
-        QString absPath = info.absoluteFilePath();
-        if (!recentFiles.contains(absPath)) {
-            recentFiles.prepend(info.absoluteFilePath());
-            if (recentFiles.count() > MAX_RECENT_FILES) {
-                recentFiles.removeLast();
-            }
-        }
-    }
     return filename;
 }
 
@@ -664,14 +654,30 @@ void QQMenuHelper::emitOpenFile()
     }
     QFileInfo info(filename);
     settings.setValue("Files/LastDir", info.absolutePath());
+    emit openFile(filename);
+}
+
+/**
+ * Update the recent files list to reflect the fact that the file at the
+ * specified path was just opened (or created).
+ *
+ * @param file The path of the file that was opened or created
+ */
+void QQMenuHelper::opened(const QString &file)
+{
+    QFileInfo info(file);
     QString absPath = info.absoluteFilePath();
-    if (!recentFiles.contains(absPath)) {
+    int index = recentFiles.indexOf(absPath);
+    if (index == -1) {
         recentFiles.prepend(absPath);
         if (recentFiles.count() > MAX_RECENT_FILES) {
             recentFiles.removeLast();
         }
     }
-    emit openFile(filename);
+    else if (index != 0) {
+        recentFiles.removeAt(index);
+        recentFiles.prepend(absPath);
+    }
 }
 
 /**

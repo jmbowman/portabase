@@ -56,8 +56,8 @@ just follow the directions.
 
 Mac OS X Installation
 ---------------------
-Extract the application bundle from the downloaded archive and put it where
-you want it (usually your Applications folder).
+Double-click on the downloaded disk image to open it, and drag the application
+from the disk image to where you want it (usually your Applications folder).
 
 Technical Info and Acknowledgements
 -----------------------------------

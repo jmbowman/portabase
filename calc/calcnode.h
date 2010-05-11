@@ -72,8 +72,8 @@ public:
     bool allowsEdit();
     double value(const QStringList &row, const QStringList &colNames);
     int days(const QStringList &row, const QStringList &colNames);
-    QString description(Database *db);
-    QString equation(Database *db, bool useParens=false);
+    QString description();
+    QString equation(bool useParens=false);
     static QStringList listOperations();
     CalcNodeList getChildren();
     void addChild(CalcNode *child);
@@ -85,7 +85,7 @@ public:
     void renameColumn(const QString &oldName, const QString &newName);
 
 private:
-    static QString description(Database *db, NodeType type, const QString &value);
+    static QString description(NodeType type, const QString &value);
 
 private:
     NodeType nodeType; /**< The type of node that the object represents */

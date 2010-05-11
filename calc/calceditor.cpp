@@ -126,7 +126,7 @@ int CalcEditor::getDecimals()
 void CalcEditor::addNode(QTreeWidgetItem *parent, CalcNode *node)
 {
     QTreeWidgetItem *item = 0;
-    QString text = node->description(db);
+    QString text = node->description();
     if (parent == 0) {
         item = new QTreeWidgetItem(tree);
     }
@@ -188,7 +188,7 @@ void CalcEditor::updateButtons()
 void CalcEditor::updateEquation()
 {
      CalcNode *root = getRootNode();
-     QString eq = (root == 0) ? QString("") : root->equation(db);
+     QString eq = (root == 0) ? QString("") : root->equation();
      equation->setText(eq);
 }
 
@@ -304,7 +304,7 @@ void CalcEditor::editNode()
         }
         dateEditor->updateNode(node);
     }
-    item->setText(0, node->description(db));
+    item->setText(0, node->description());
     updateEquation();
 }
 

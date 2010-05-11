@@ -49,6 +49,7 @@
 #include "factory.h"
 #include "filter.h"
 #include "filtereditor.h"
+#include "formatting.h"
 #include "menuactions.h"
 #include "oldconfig.h"
 #include "passdialog.h"
@@ -73,6 +74,7 @@ PortaBase::PortaBase(QWidget *parent)
     statusBar();
 #endif
     QSettings *settings = getSettings();
+    Formatting::updatePreferences(settings);
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
     booleanToggle = settings->value("General/BooleanToggle", false).toBool();
     bool pagedDisplay = settings->value("General/PagedDisplay", false).toBool();
@@ -527,12 +529,14 @@ void PortaBase::editPreferences()
         booleanToggle = settings.value("BooleanToggle", false).toBool();
         bool pagedDisplay = settings.value("PagedDisplay", false).toBool();
         bool singleClickShow = settings.value("SingleClickShow", true).toBool();
+        settings.endGroup();
         viewer->allowBooleanToggle(booleanToggle);
         viewer->usePages(pagedDisplay);
         viewer->showWithSingleClick(singleClickShow);
         if (!doc.isEmpty()) {
             showDataViewer();
             db->updatePreferences();
+            Formatting::updatePreferences(&settings);
             viewer->resetTable();
         }
     }
@@ -639,6 +643,7 @@ void PortaBase::createFile(ImportDialog::DataSource source,
         updateCaption();
         // if not saved now, file is empty without later save...bad
         save();
+        mh->opened(file);
     }
     else {
         delete db;
@@ -702,6 +707,7 @@ void PortaBase::openFile(const QString &file)
     viewer->setDatabase(db);
     showDataViewer();
     updateCaption();
+    mh->opened(file);
 }
 
 /**

@@ -21,6 +21,7 @@
 #include "datedialog.h"
 #include "datewidget.h"
 #include "factory.h"
+#include "formatting.h"
 
 /**
  * Constructor.
@@ -90,7 +91,7 @@ void DateWidget::setDate(const QDate &date)
  */
 void DateWidget::updateDisplay()
 {
-    if (isNoneDate(dateObj)) {
+    if (Formatting::isNoneDate(dateObj)) {
         display->setText("               ");
     }
     else {
@@ -118,20 +119,6 @@ QString DateWidget::toString(const QDate &date)
 }
 
 /**
- * Determine if the provided date is the value that PortaBase uses to
- * represent a "None" date or not.  The first day supported by QDate in older
- * versions of Qt is used for this purpose, because it is a valid QDate value
- * that very few people would actually want to enter in a database.
- *
- * @param date The date to be checked
- * @return True if the input date is 1752-09-14, false otherwise.
- */
-bool DateWidget::isNoneDate(const QDate &date)
-{
-    return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
-}
-
-/**
  * Launches a DateDialog which is preset to the currently selected date,
  * and uses the new selection from the dialog as the new date selection if
  * appropriate.
@@ -139,7 +126,7 @@ bool DateWidget::isNoneDate(const QDate &date)
 void DateWidget::launchSelector()
 {
     QDate tempDate(dateObj.year(), dateObj.month(), dateObj.day());
-    if (isNoneDate(tempDate)) {
+    if (Formatting::isNoneDate(tempDate)) {
         QDate today = QDate::currentDate();
         tempDate.setYMD(today.year(), today.month(), today.day());
     }

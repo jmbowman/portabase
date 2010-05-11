@@ -260,23 +260,21 @@ int CalcNode::days(const QStringList &row, const QStringList &colNames)
  * The text description of this node, as it will appear in the definition
  * tree display.
  *
- * @param db The database that this calculation belongs to
  * @return This node's description
  */
-QString CalcNode::description(Database *db)
+QString CalcNode::description()
 {
-    return CalcNode::description(db, nodeType, nodeValue);
+    return CalcNode::description(nodeType, nodeValue);
 }
 
 /**
  * Get the text description of a node with the specified properties.
  *
- * @param db The database that the calculation belongs to
  * @param type The type of calculation node
  * @param value The calculation's value
  * @return An appopriate text description
  */
-QString CalcNode::description(Database *db, NodeType type, const QString &value)
+QString CalcNode::description(NodeType type, const QString &value)
 {
     switch (type) {
         case Constant:
@@ -285,9 +283,9 @@ QString CalcNode::description(Database *db, NodeType type, const QString &value)
         case TimeColumn:
             return value;
         case DateConstant:
-            return db->dateToString(value.toInt());
+            return Formatting::dateToString(value.toInt());
         case TimeConstant:
-            return db->timeToString(value.toInt());
+            return Formatting::timeToString(value.toInt());
         case Add:
             return "+";
         case Subtract:
@@ -327,12 +325,11 @@ QString CalcNode::description(Database *db, NodeType type, const QString &value)
  * Get a text representation of this node (and it's descendents) suitable for
  * display as a human-readable equation.
  *
- * @param db The database that this calculation belongs to
  * @param useParens True if the result will be used in a context where
  *                  parentheses may be needed for clarity
  * @return A text equation representing this node and its descendents
  */
-QString CalcNode::equation(Database *db, bool useParens)
+QString CalcNode::equation(bool useParens)
 {
     QString result;
     QString opString;
@@ -346,7 +343,7 @@ QString CalcNode::equation(Database *db, bool useParens)
         case DateConstant:
         case TimeColumn:
         case TimeConstant:
-            return description(db);
+            return description();
         case Days:
         case Seconds:
         case Minutes:
@@ -360,15 +357,15 @@ QString CalcNode::equation(Database *db, bool useParens)
         case Sqrt:
         case Log:
         case Ln:
-            result = description(db) + "(";
+            result = description() + "(";
             if (count == 0) {
                 result += "?";
             }
             else {
-                result += children[0]->equation(db, false);
+                result += children[0]->equation(false);
             }
             for (i = 1; i < count; i++) {
-                result += "," + children[i]->equation(db, false);
+                result += "," + children[i]->equation(false);
             }
             if (count == 1 && needsSecondParam) {
                 result += ",?";
@@ -383,18 +380,18 @@ QString CalcNode::equation(Database *db, bool useParens)
                 result = "?";
             }
             else {
-                result = children[0]->equation(db, true);
+                result = children[0]->equation(true);
             }
-            opString = " " + description(db) + " ";
+            opString = " " + description() + " ";
             result += opString;
             if (count < 2) {
                 result += "?";
             }
             else {
-                result += children[1]->equation(db, true);
+                result += children[1]->equation(true);
             }
             for (i = 2; i < count; i++) {
-                result += opString + children[i]->equation(db, true);
+                result += opString + children[i]->equation(true);
             }
             if (useParens) {
                 result = "(" + result + ")";
@@ -415,7 +412,7 @@ QStringList CalcNode::listOperations()
     QStringList ops;
     QString blank = "";
     for (int i = CALC_FIRST_OP; i <= CALC_LAST_OP; i++) {
-        ops.append(CalcNode::description(0, (NodeType)i, blank));
+        ops.append(CalcNode::description((NodeType)i, blank));
     }
     return ops;
 }

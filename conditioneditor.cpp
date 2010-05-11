@@ -26,6 +26,7 @@
 #include "database.h"
 #include "datewidget.h"
 #include "factory.h"
+#include "formatting.h"
 #include "numberwidget.h"
 #include "timewidget.h"
 
@@ -399,8 +400,8 @@ void ConditionEditor::applyChanges(Condition *condition)
     else if (type == TIME) {
         condition->setOperator(numberOps[opList->currentIndex()]);
         bool ok;
-        condition->setConstant(db->parseTimeString(constantTime->getTime(),
-                                                   &ok));
+        condition->setConstant(Formatting::parseTimeString(constantTime->getTime(),
+                                                           &ok));
         condition->setCaseSensitive(false);
     }
     else if (type >= FIRST_ENUM) {

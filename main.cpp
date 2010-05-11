@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 #endif
         pb.show();
         if (args.count() == 2) {
-            pb.openFile(args[2]);
+            pb.openFile(args[1]);
         }
         return app.exec();
     }

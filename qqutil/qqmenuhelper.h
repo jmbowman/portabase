@@ -102,6 +102,7 @@ public:
     QAction *action(Action actionId);
     QString createNewFile(const QString &fileDescription=QString::null,
                           const QString &fileExtension=QString::null);
+    void opened(const QString &file);
     static QString getLastDir(QSettings *settings);
     static QString menuText(QString text);
 

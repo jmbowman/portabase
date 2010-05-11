@@ -617,7 +617,7 @@ void DBEditor::renameColumnRefs(const QString &oldName, const QString &newName)
         if (calcRoot != 0) {
             int index = info.Find(ceName [calcName.toUtf8()]);
             calcRoot->renameColumn(oldName, newName);
-            ceDefault (info[index]) = calcRoot->equation(db).toUtf8();
+            ceDefault (info[index]) = calcRoot->equation().toUtf8();
         }
     }
 }
@@ -642,7 +642,7 @@ void DBEditor::deleteColumnRefs(const QString &name)
                 ceDefault (info[index]) = "";
             }
             else {
-                ceDefault (info[index]) = calcRoot->equation(db).toUtf8();
+                ceDefault (info[index]) = calcRoot->equation().toUtf8();
             }
         }
     }

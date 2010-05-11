@@ -1,7 +1,7 @@
 /*
  * dynamicedit.h
  *
- * (c) 2003,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,9 @@ public:
 
 private slots:
     void adjustHeight();
+
+private:
+    QTextDocument *sampleDoc; /**< Sample text doc for height measurement */
 };
 
 #endif

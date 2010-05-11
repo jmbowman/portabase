@@ -14,6 +14,7 @@
  */
 
 #include <QSettings>
+#include <QTime>
 #include "formatting.h"
 
 QLocale Formatting::cLocale = QLocale::c();
@@ -26,6 +27,8 @@ QRegExp Formatting::localRegExp(QString("([^%1%2%3]*)(%1[0-9]*)?(%2[0-9]+)?(\\s*
                                 .arg((Formatting::localDecimalPoint == '.') ? QString("\\.") : QString(Formatting::localDecimalPoint))
                                 .arg(Formatting::localExponential)
                                 .arg(Formatting::localPercent));
+QString Formatting::dateFormat;
+QString Formatting::timeFormat;
 
 /**
  * Reload the application settings for formatting options.  Called when the
@@ -34,7 +37,8 @@ QRegExp Formatting::localRegExp(QString("([^%1%2%3]*)(%1[0-9]*)?(%2[0-9]+)?(\\s*
  */
 void Formatting::updatePreferences(QSettings *settings)
 {
-
+    dateFormat = settings->value("DateTime/ShortDateFormat", "yyyy-MM-dd").toString();
+    timeFormat = settings->value("DateTime/TimeFormat", "hh:mm AP").toString();
 }
 
 /**
@@ -173,4 +177,130 @@ QString Formatting::toLocalInt(const QString &value)
         return "";
     }
     return systemLocale.toString(integer);
+}
+
+/**
+ * Determine if the provided date is set to the PortaBase "None" date.  This
+ * value is set to 1752-09-14, which used to be the earliest date supported
+ * by Qt.
+ *
+ * @param date The date to be tested
+ * @return True if the provided value is the "None" date, false otherwise
+ */
+bool Formatting::isNoneDate(const QDate &date)
+{
+    return (date.year() == 1752 && date.month() == 9 && date.day() == 14);
+}
+
+/**
+ * Get a text representation of the date represented by the given integer.
+ * (PortaBase stores a date YYYY-MM-DD as the integer with digits YYYYMMDD.)
+ *
+ * @param date The integer-encoded date to be formatted
+ * @return The formatted date
+ */
+QString Formatting::dateToString(int date)
+{
+    int y = date / 10000;
+    int m = (date - y * 10000) / 100;
+    int d = date - y * 10000 - m * 100;
+    QDate dateObj(y, m, d);
+    return dateToString(dateObj);
+}
+
+/**
+ * Get a text representation of the given date.
+ *
+ * @param date The date to be formatted
+ * @return The formatted date
+ */
+QString Formatting::dateToString(const QDate &date)
+{
+    if (isNoneDate(date)) {
+        return "";
+    }
+    return date.toString(dateFormat);
+}
+
+/**
+ * Get a human-readable time string from the given number of seconds past
+ * midnight.
+ *
+ * @param time The time to be converted (counted in seconds past midnight)
+ * @return A human-readable time string
+ */
+QString Formatting::timeToString(int time)
+{
+    if (time == -1) {
+        return "";
+    }
+    QTime midnight;
+    QTime timeObj = midnight.addSecs(time);
+    return timeObj.toString(timeFormat);
+}
+
+/**
+ * Parse a time value from the provided string.
+ *
+ * @param value The text to be parsed
+ * @param ok Pointer to a boolean value which will represent the success or
+ *           failure of the parsing attempt
+ * @return The number of seconds after midnight in the parsed time, shown as
+ *         a string
+ */
+QString Formatting::parseTimeString(const QString &value, bool *ok)
+{
+    // check for imported blank
+    if (value.isEmpty()) {
+        *ok = true;
+        return "-1";
+    }
+    int length = value.length();
+    int firstColon = value.indexOf(':');
+    if (firstColon == -1) {
+        // assume it's a number of seconds, as used internally
+        int totalSeconds = value.toInt(ok);
+        if (!(*ok) || totalSeconds < -1 || totalSeconds > 86399) {
+            *ok = false;
+        }
+        return value;
+    }
+    // from here on is used only when importing
+    if (firstColon < 1 || length < firstColon + 3) {
+        *ok = false;
+        return value;
+    }
+    int hours = value.left(firstColon).toInt(ok);
+    if (!(*ok)) {
+        return value;
+    }
+    int minutes = value.mid(firstColon + 1, 2).toInt(ok);
+    if (!(*ok)) {
+        return value;
+    }
+    int seconds = 0;
+    int secondColon = value.indexOf(':', firstColon + 1);
+    if (secondColon != -1 && length > secondColon + 2) {
+        seconds = value.mid(secondColon + 1, 2).toInt(ok);
+        if (!(*ok)) {
+            return value;
+        }
+    }
+    if (value.indexOf("pm", 0, Qt::CaseInsensitive) != -1) {
+        if (hours < 12) {
+            hours += 12;
+        }
+    }
+    else if (value.indexOf("am", 0, Qt::CaseInsensitive) != -1 && hours == 12) {
+        hours = 0;
+    }
+    QTime time;
+    if (!time.setHMS(hours, minutes, seconds)) {
+        *ok = false;
+        return value;
+    }
+    QTime midnight;
+    int totalSeconds = midnight.secsTo(time);
+    *ok = true;
+    return QString::number(totalSeconds);
 }

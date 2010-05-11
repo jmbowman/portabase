@@ -295,12 +295,12 @@ QVariant View::data(const QModelIndex &index, int role) const
         else if (type == DATE) {
             c4_IntProp prop(ids[colIndex]);
             int value = prop (row);
-            return db->dateToString(value);
+            return Formatting::dateToString(value);
         }
         else if (type == TIME) {
             c4_IntProp prop(ids[colIndex]);
             int value = prop (row);
-            return db->timeToString(value);
+            return Formatting::timeToString(value);
         }
         else if (type == BOOLEAN || type == IMAGE) {
             return "";
@@ -357,12 +357,12 @@ QStringList View::getRow(int index)
         else if (type == DATE) {
             c4_IntProp prop(ids[i]);
             int value = prop (row);
-            results.append(db->dateToString(value));
+            results.append(Formatting::dateToString(value));
         }
         else if (type == TIME) {
             c4_IntProp prop(ids[i]);
             int value = prop (row);
-            results.append(db->timeToString(value));
+            results.append(Formatting::timeToString(value));
         }
     }
     return results;
@@ -630,8 +630,8 @@ QStringList View::getStatistics(int colIndex)
             min = qMin(min, value);
             max = qMax(max, value);
         }
-        lines.append(tr("Earliest") + ": " + db->dateToString(min));
-        lines.append(tr("Latest") + ": " + db->dateToString(max));
+        lines.append(tr("Earliest") + ": " + Formatting::dateToString(min));
+        lines.append(tr("Latest") + ": " + Formatting::dateToString(max));
     }
     else if (type == TIME) {
         c4_IntProp prop(ids[colIndex]);
@@ -643,8 +643,8 @@ QStringList View::getStatistics(int colIndex)
             min = qMin(min, value);
             max = qMax(max, value);
         }
-        lines.append(tr("Earliest") + ": " + db->timeToString(min));
-        lines.append(tr("Latest") + ": " + db->timeToString(max));
+        lines.append(tr("Earliest") + ": " + Formatting::timeToString(min));
+        lines.append(tr("Latest") + ": " + Formatting::timeToString(max));
     }
     else if (type == STRING || type == NOTE) {
         c4_StringProp prop(ids[colIndex]);

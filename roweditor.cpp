@@ -1,7 +1,7 @@
 /*
  * roweditor.cpp
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include "datewidget.h"
 #include "dynamicedit.h"
 #include "factory.h"
+#include "formatting.h"
 #include "notebutton.h"
 #include "numberwidget.h"
 #include "roweditor.h"
@@ -169,7 +170,7 @@ QStringList RowEditor::getRow(bool doCalcs)
         else if (type == TIME) {
             QString timeString = timeWidgets[timeWidgetIndex]->getTime();
             bool ok;
-            values.append(db->parseTimeString(timeString, &ok));
+            values.append(Formatting::parseTimeString(timeString, &ok));
             timeWidgetIndex++;
         }
         else if (type == CALC) {

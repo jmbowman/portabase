@@ -18,6 +18,7 @@
 #include <QTextStream>
 #include "database.h"
 #include "datatypes.h"
+#include "formatting.h"
 #include "xmlexport.h"
 
 /**
@@ -178,11 +179,11 @@ void XMLExport::addDataView(c4_View &fullView, c4_View &filteredView,
             *output << (indent + "<" + element + " c=\"");
             *output << QString::number(colIds[j]);
             if (element == "d") {
-                QString stringRep = db->dateToString(value.toInt());
+                QString stringRep = Formatting::dateToString(value.toInt());
                 *output << ("\" s=\"" + stringRep);
             }
             else if (element == "t") {
-                QString stringRep = db->timeToString(value.toInt());
+                QString stringRep = Formatting::timeToString(value.toInt());
                 *output << ("\" s=\"" + stringRep);
             }
             else if (element == "p") {

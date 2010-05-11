@@ -16,6 +16,7 @@
 #ifndef FORMATTING_H
 #define FORMATTING_H
 
+#include <QDate>
 #include <QLocale>
 #include <QRegExp>
 
@@ -36,14 +37,22 @@ public:
     static QString formatDouble(double value, int decimals=-1);
     static QString toLocalInt(const QString &value);
 
+    static bool isNoneDate(const QDate &date);
+    static QString dateToString(int date);
+    static QString dateToString(const QDate &date);
+    static QString timeToString(int time);
+    static QString parseTimeString(const QString &value, bool *ok);
+
 private:
-    static QLocale cLocale;
-    static QLocale systemLocale;
-    static QChar localDecimalPoint;
-    static QChar localExponential;
-    static QChar localPercent;
-    static QRegExp cRegExp;
-    static QRegExp localRegExp;
+    static QLocale cLocale; /**< The "C" locale used internally */
+    static QLocale systemLocale; /**< The user's selected locale */
+    static QChar localDecimalPoint; /**< Decimal point character in the user's locale */
+    static QChar localExponential; /**< Exponential character in the user's locale */
+    static QChar localPercent; /**< Percentage character in the user's locale */
+    static QRegExp cRegExp; /**< Decimal number pattern in the "C" locale */
+    static QRegExp localRegExp; /**< Decimal number pattern in the user's locale */
+    static QString dateFormat; /**< The short format to use for displaying date values */
+    static QString timeFormat; /**< The format to use for displaying time values */
 };
 
 #endif // FORMATTING_H

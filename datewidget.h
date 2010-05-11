@@ -48,7 +48,6 @@ private slots:
     void launchSelector();
 
 private:
-    bool isNoneDate(const QDate &date);
     void updateDisplay();
     QString toString(const QDate &date);
 

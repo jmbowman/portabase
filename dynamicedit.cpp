@@ -23,8 +23,9 @@
  * @param parent This widget's parent widget, if any
  */
 DynamicEdit::DynamicEdit(QWidget *parent)
-  : QTextEdit(parent)
+  : QTextEdit(parent), sampleDoc(0)
 {
+    sampleDoc = new QTextDocument("Ag", this);
     setTabChangesFocus(true);
     setFixedHeight(sizeHint().height());
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -45,17 +46,16 @@ DynamicEdit::DynamicEdit(QWidget *parent)
 QSize DynamicEdit::sizeHint() const
 {
     QString content = toPlainText();
+    QTextDocument *doc = document();
     int height;
     if (content.isEmpty()) {
-        height = qApp->fontMetrics().size(0, "Ag").height();
+        doc = sampleDoc;
     }
-    else {
-        qreal rheight = document()->size().rheight();
-        height = qRound(rheight);
-        // Want to round up, not down
-        if (rheight > height) {
-            height++;
-        }
+    qreal rheight = doc->size().rheight();
+    height = qRound(rheight);
+    // Want to round up, not down
+    if (rheight > height) {
+        height++;
     }
 #if defined(Q_WS_MAEMO_5)
     // on this platform, need to manually add room for the padding, etc.
