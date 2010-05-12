@@ -1,3 +1,12 @@
+2010-05-12  JMB  Tweaked calculator & date dialogs, package descriptions
+
+    Moved the calculator dialog's "OK" button to the right place on Fremantle.
+    Don't maximize the calendar dialog on Diablo; it seems to force several
+    slow resizings, and still doesn't come out quite right.  Updated the
+    bulleted lists in the Diablo and Maemo package descriptions to use current
+    Debian conventions, which should improve the text formatting on the Maemo
+    package web page.
+
 2010-05-11  JMB  Assorted bugfixes, formatting code cleanup, better Mac dmg
 
     Fixed a bug in opening PortaBase files from the command line.  That bug

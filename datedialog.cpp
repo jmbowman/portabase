@@ -29,7 +29,11 @@
  * @param parent This dialog's parent widget
  */
 DateDialog::DateDialog(const QDate &date, QWidget *parent)
+#if defined(Q_WS_HILDON)
+  : PBDialog(tr("Select a date"), parent, true), noneSelected(false)
+#else
   : PBDialog(tr("Select a date"), parent), noneSelected(false)
+#endif
 {
     if (!date.isValid()) {
         reject();

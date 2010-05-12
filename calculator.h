@@ -17,7 +17,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "qqutil/qqdialog.h"
+#include "pbdialog.h"
 
 class QLabel;
 class QAbstractButton;
@@ -32,7 +32,7 @@ class QAbstractButton;
   * without the user having to re-type the data. See setInitialValues()
   * for details.
   */
-class Calculator : public QQDialog  {
+class Calculator : public PBDialog  {
     Q_OBJECT
 public:
     Calculator(QWidget* parent = 0);

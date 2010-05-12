@@ -14,21 +14,18 @@ Description: An easy-to-use personal database application
  and Maemo.
  .
  Features include:
-  - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
-    Calculation, Sequence, Image, and Enum column types
-  - Custom data views (subsets of the columns in any order)
-  - Filter the displayed rows using sets of conditions
-  - Sort the rows by any combination of columns, each in ascending or
-    descending order
-  - Optional page navigation buttons, with a custom number of rows per page
-  - Add, delete, rearrange, and rename columns at any time
-  - Specify default values for columns
-  - View summary statistics for columns (total, average, min, max, etc.)
-  - Import data from CSV, XML, and MobileDB files
-  - Export data to CSV and XML files
-  - Command-line format conversions (to and from XML, from MobileDB)
-  - Data file encryption
-  - Unicode support
+  * String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
+    Calculation, Sequence, Image, and Enum column types;
+  * custom data views (subsets of the columns in any order);
+  * filter the displayed rows using sets of conditions;
+  * sort the rows by any combination of columns, each in ascending or
+    descending order;
+  * add, delete, rearrange, and rename columns at any time;
+  * view summary statistics for columns (total, average, min, max, etc.);
+  * import data from CSV, XML, and MobileDB files;
+  * export data to CSV and XML files;
+  * command-line format conversions (to and from XML, from MobileDB);
+  * optional data file encryption.
 XB-Maemo-Display-Name: PortaBase
 XB-Homepage: http://portabase.sourceforge.net
 XB-Bugtracker: http://sourceforge.net/tracker/?group_id=64705&atid=508374

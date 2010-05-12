@@ -32,13 +32,13 @@
  * @param parent The dialog's parent widget, if any.
  */
 Calculator::Calculator(QWidget* parent)
-  : QQDialog("", parent)
+  : PBDialog("", parent, true)
 {
     setSizeGripEnabled(false);
     m_result = "";
 
-    QGridLayout* grid = new QGridLayout(this);
-    setLayout(grid);
+    QGridLayout* grid = new QGridLayout();
+    vbox->addLayout(grid);
     grid->setMargin(1);
     grid->setSpacing(2);
     grid->setSizeConstraint(QLayout::SetFixedSize);
@@ -139,13 +139,7 @@ Calculator::Calculator(QWidget* parent)
     connect(buttons[CLEAR], SIGNAL(clicked()), SLOT(clearClicked()));
     connect(buttons[CLEARALL], SIGNAL(clicked()), SLOT(clearAllClicked()));
 
-    QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok
-                                                | QDialogButtonBox::Cancel;
-    QDialogButtonBox *box = new QDialogButtonBox(buttons, Qt::Horizontal, this);
-    grid->addWidget(box, 5, 0, 1, 5);
-    connect(box, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(box, SIGNAL(rejected()), this, SLOT(reject()));
-    finishConstruction();
+    finishLayout();
 }
 
 /**
