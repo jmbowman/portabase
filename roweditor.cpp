@@ -50,9 +50,10 @@ RowEditor::RowEditor(QWidget *parent)
  * @param subject The database being modified
  * @param rowId The ID of the row to edit
  * @param copy True if the row should be copied rather than edited
- * @return True if any changes made in the dialog were committed
+ * @return The ID of the added or edited row, -1 if no changes made in the
+ *         dialog were committed
  */
-bool RowEditor::edit(Database *subject, int rowId, bool copy)
+int RowEditor::edit(Database *subject, int rowId, bool copy)
 {
     db = subject;
     addContent(rowId);
@@ -82,10 +83,10 @@ bool RowEditor::edit(Database *subject, int rowId, bool copy)
             ImageSelector *widget = imageSelectors[i];
             widget->saveImage(id);
         }
-        return true;
+        return id;
     }
     else {
-        return false;
+        return -1;
     }
 }
 

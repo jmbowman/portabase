@@ -50,7 +50,7 @@ public:
     void setPage(int p);
     void setSorting(const QString &name);
     void setFilter(const QString &name);
-    void addRow();
+    void addRow(int rowId);
     void editRow(int rowId, int oldIndex=-1);
     void deleteRow(int rowId);
     void deleteAllRows();

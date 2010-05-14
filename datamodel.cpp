@@ -247,15 +247,16 @@ void DataModel::refresh()
  * Update the model to reflect the addition of a new record to the database.
  * If the new row doesn't pass the current filter, there's no need to update
  * the display.
+ *
+ * @param rowId The ID of the row that was added
  */
-void DataModel::addRow()
+void DataModel::addRow(int rowId)
 {
     int oldCount = currentView->totalRowCount();
     currentView->prepareData();
     int newCount = currentView->totalRowCount();
     if (newCount > oldCount) {
-        // row IDs are sequential without gaps from oldest to newest
-        int index = currentView->getIndex(oldCount);
+        int index = currentView->getIndex(rowId);
         int pageStart = qMax(0, (currentPage - 1) * rpp);
         int pageEnd = newCount - 1; // if not paged
         if (currentPage > 0 && pageStart + rpp > newCount) {

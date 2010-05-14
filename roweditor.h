@@ -1,7 +1,7 @@
 /*
  * roweditor.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ class RowEditor: public PBDialog
 public:
     RowEditor(QWidget *parent = 0);
 
-    bool edit(Database *subject, int rowId=-1, bool copy=false);
+    int edit(Database *subject, int rowId=-1, bool copy=false);
     bool isValid();
     QStringList getRow(bool doCalcs=true);
 

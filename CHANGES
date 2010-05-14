@@ -1,3 +1,10 @@
+2010-05-13  JMB  Fixed corner case bug in adding a new row
+
+    Squashed another bug introduced by the model/view conversion: if you added
+    a new row (or copied an existing one) while a filter was applied, and the
+    new row passed the filter, the screen refreshed in such a way that you
+    might not see the full set of rows passing the filter.
+
 2010-05-12  JMB  Tweaked calculator & date dialogs, package descriptions
 
     Moved the calculator dialog's "OK" button to the right place on Fremantle.

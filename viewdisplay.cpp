@@ -499,8 +499,9 @@ void ViewDisplay::saveViewSettings()
 void ViewDisplay::addRow()
 {
     RowEditor rowEditor(this);
-    if (rowEditor.edit(model->database(), -1)) {
-        model->addRow();
+    int id = rowEditor.edit(model->database(), -1);
+    if (id != -1) {
+        model->addRow(id);
         setEdited(true);
     }
 }
@@ -524,9 +525,10 @@ bool ViewDisplay::editRow(int id, bool copy, QWidget *parent)
     if (rowId != -1) {
         int rowIndex = model->view()->getIndex(rowId);
         RowEditor rowEditor(parent ? parent : this);
-        if (rowEditor.edit(model->database(), rowId, copy)) {
+        rowId = rowEditor.edit(model->database(), rowId, copy);
+        if (rowId != -1) {
             if (copy) {
-                model->addRow();
+                model->addRow(rowId);
             }
             else {
                 model->editRow(rowId, rowIndex);
