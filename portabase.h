@@ -131,6 +131,7 @@ private:
 
 private:
     Database *db; /**< The currently open database, if any */
+    bool readOnly; /**< True if the open file is read-only, false otherwise */
     QStackedWidget *mainStack; /**< Main widget stack (data display and "No file selected" label) */
     QScrollArea *noFileWidget; /**< The main widget shown when no file is open */
     QPushButton *newButton; /**< The button for creating a new file */

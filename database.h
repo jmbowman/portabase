@@ -44,7 +44,8 @@ public:
     enum OpenResult {
         NewerVersion = 0,
         Success = 1,
-        Encrypted = 2
+        Encrypted = 2,
+        Failure = 3
     };
 
     Database(const QString &path, OpenResult *result, bool encrypt=false);

@@ -43,7 +43,7 @@
  * @param encrypt True if an encrypted file is to be created, false otherwise
  */
 Database::Database(const QString &path, OpenResult *result, bool encrypt)
-  : crypto(0), version(0), newFile(false), curView(0), curFilter(0),
+  : file(0), crypto(0), version(0), newFile(false), curView(0), curFilter(0),
     Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"),
     cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"),
     vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"),
@@ -62,10 +62,16 @@ Database::Database(const QString &path, OpenResult *result, bool encrypt)
 {
     updatePreferences();
 
+    QFileInfo info(path);
+    if (info.exists() && !info.isReadable()) {
+        *result = Failure;
+        return;
+    }
+    bool canWrite = info.isWritable();
 #if defined(Q_WS_WIN)
-    file = new c4_Storage(path.toUtf8(), true);
+    file = new c4_Storage(path.toUtf8(), canWrite);
 #else
-    file = new c4_Storage(QFile::encodeName(path), true);
+    file = new c4_Storage(QFile::encodeName(path), canWrite);
 #endif
     global = file->GetAs("_global[_gversion:I,_gview:S,_gsort:S,_gfilter:S,_gcrypt:I]");
     if (global.GetSize() == 0) {
@@ -120,7 +126,9 @@ Database::~Database()
         delete crypto;
         delete storage;
     }
-    delete file;
+    if (file) {
+        delete file;
+    }
     if (curView) {
         delete curView;
     }

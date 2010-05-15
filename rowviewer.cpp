@@ -114,7 +114,7 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     hbox->addWidget(nextButton);
 
     finishLayout(true, false);
-    editButton->setFocus();
+    tv->setFocus();
 }
 
 /**
@@ -221,6 +221,7 @@ void RowViewer::updateContent()
     }
     str += "</table></qt>";
     tv->setHtml(str);
+    tv->setFocus();
 }
 
 /**
@@ -283,6 +284,9 @@ void RowViewer::editRow()
     if (display->editRow(rowId, false, this)) {
         accept();
     }
+    else {
+        tv->setFocus();
+    }
 }
 
 /**
@@ -293,6 +297,9 @@ void RowViewer::copyRow()
     int rowId = view->getId(index);
     if (display->editRow(rowId, true, this)) {
         accept();
+    }
+    else {
+        tv->setFocus();
     }
 }
 
@@ -355,6 +362,9 @@ void RowViewer::keyReleaseEvent(QKeyEvent *e)
         if (index != rowCount - 1) {
             nextRow();
         }
+    }
+    else if (key == Qt::Key_Space) {
+        editRow();
     }
     else {
         e->ignore();

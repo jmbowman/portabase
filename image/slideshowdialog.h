@@ -34,7 +34,6 @@ class SlideshowDialog: public PBDialog
     Q_OBJECT
 public:
     SlideshowDialog(QStringList columns, View *view, QWidget *parent = 0);
-    ~SlideshowDialog();
 
 protected slots:
     void accept();

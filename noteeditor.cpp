@@ -13,6 +13,7 @@
  * Source file for NoteEditor
  */
 
+#include <QFontMetrics>
 #include <QLayout>
 #include <QSettings>
 #include <QTextEdit>
@@ -42,6 +43,9 @@ NoteEditor::NoteEditor(const QString &colName, bool readOnly, QWidget *parent)
             textBox->setWordWrapMode(QTextOption::WrapAnywhere);
         }
     }
+    // use scalable tab widths that match earlier PortaBase versions
+    QFontMetrics metrics(textBox->currentFont());
+    textBox->setTabStopWidth(metrics.width('x') * 8);
     finishLayout(true, !readOnly, 600, 400);
     textBox->setFocus();
 }

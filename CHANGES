@@ -1,3 +1,22 @@
+2010-05-15  JMB  Assorted bugfixes
+
+    Read-only files can now be opened correctly, with a dialog warning the user
+    that they will not be able to save any changes made.  Also added better
+    recognition of and error messages for assorted file handling problems
+    (trying to open a file that doesn't exist or the user doesn't have read
+    access to, trying to overwrite a file that the user doesn't have write
+    permission for, etc.)
+
+    Fixed a bug that prevented slideshows from working (introduced by an
+    earlier fix for a memory leak).  Exclude "None" dates and times from column
+    statistic min/max calculations when there are any other values present.
+    Pressing the left or right arrows in the row editor was sometimes causing
+    both the intended change in the displayed row and an additional change in
+    focus of the buttons at the bottom of the dialog; fixed to have just the
+    desired effect.  Set tab stop widths in the note editor to be the same as
+    in earlier versions of PortaBase (the width of 8 'x' characters in the
+    current font).
+
 2010-05-13  JMB  Fixed corner case bug in adding a new row
 
     Squashed another bug introduced by the model/view conversion: if you added

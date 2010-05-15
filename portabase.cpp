@@ -66,7 +66,8 @@
  * @param parent This window's parent widget, if any (usually none)
  */
 PortaBase::PortaBase(QWidget *parent)
-  : QMainWindow(parent), db(0), doc(""), printer(0), vsfManager(0)
+  : QMainWindow(parent), db(0), readOnly(false), doc(""), printer(0),
+    vsfManager(0)
 {
 #if defined(Q_WS_MAEMO_5)
     setAttribute(Qt::WA_Maemo5StackedWindow);
@@ -500,9 +501,7 @@ void PortaBase::viewProperties()
     message += tr("Enums") + ": " + locale.toString(count) + "\n";
     message += tr("For statistics on a particular column, press and hold that column's header for at least half of a second");
     QString title = tr("File Properties") + " - " + qApp->applicationName();
-    QMessageBox mb(title, message, QMessageBox::NoIcon,
-                   QMessageBox::Ok, QMessageBox::NoButton,
-                   QMessageBox::NoButton, this);
+    QMessageBox mb(QMessageBox::NoIcon, title, message, QMessageBox::Ok, this);
     mb.setMinimumWidth(200);
     mb.exec();
 }
@@ -598,10 +597,10 @@ void PortaBase::createFile(ImportDialog::DataSource source,
             return;
         }
     }
-    QMessageBox crypt(qApp->applicationName(), tr("Encrypt the file?"),
-                      QMessageBox::NoIcon, QMessageBox::Yes,
-                      QMessageBox::No | QMessageBox::Default,
-                      QMessageBox::NoButton, this);
+    QMessageBox crypt(QMessageBox::NoIcon, qApp->applicationName(),
+                      tr("Encrypt the file?"),
+                      QMessageBox::Yes | QMessageBox::No, this);
+    crypt.setDefaultButton(QMessageBox::No);
     int result = crypt.exec();
     if (result == QMessageBox::Cancel) {
         return;
@@ -609,10 +608,15 @@ void PortaBase::createFile(ImportDialog::DataSource source,
     else if (result == QMessageBox::Yes) {
         encrypted = true;
     }
+    if (QFile::exists(file) && !QFile::remove(file)) {
+        QMessageBox::warning(this, qApp->applicationName(),
+                             tr("Unable to overwrite existing file"));
+    }
     doc = f;
     bool ok = true;
     Database::OpenResult openResult;
     db = new Database(doc, &openResult, encrypted);
+    readOnly = false;
     if (encrypted) {
         PasswordDialog passdlg(db, PasswordDialog::NewPassword, this);
         bool finished = false;
@@ -677,6 +681,11 @@ void PortaBase::openFile(const QString &file)
         // currently only support one open file at a time
         return;
     }
+    if (!QFile::exists(file)) {
+        QString message("%1:\n%2");
+        message = message.arg(tr("No such file exists")).arg(file);
+        QMessageBox::warning(this, qApp->applicationName(), message);
+    }
     Database::OpenResult openResult;
     Database *temp = new Database(file, &openResult);
     if (openResult == Database::NewerVersion) {
@@ -684,6 +693,10 @@ void PortaBase::openFile(const QString &file)
                              tr("This file uses a newer version of the\nPortaBase format than this version\nof PortaBase supports; please\nupgrade"));
         delete temp;
         return;
+    }
+    else if (openResult == Database::Failure) {
+        QMessageBox::warning(this, qApp->applicationName(),
+                             tr("Unable to read from this file"));
     }
     else if (openResult == Database::Encrypted) {
         PasswordDialog passdlg(temp, PasswordDialog::OpenFile, this);
@@ -697,6 +710,8 @@ void PortaBase::openFile(const QString &file)
         }
     }
     else {
+        QFileInfo info(file);
+        readOnly = !info.isWritable();
         temp->load();
     }
     doc = file;
@@ -708,6 +723,10 @@ void PortaBase::openFile(const QString &file)
     showDataViewer();
     updateCaption();
     mh->opened(file);
+    if (readOnly) {
+        QMessageBox::information(this, qApp->applicationName(),
+                                 tr("This file is read-only.\nYou will not be able to save any changes you make."));
+    }
 }
 
 /**
@@ -977,6 +996,9 @@ void PortaBase::deleteAllRows()
  */
 void PortaBase::save()
 {
+    if (readOnly) {
+        return;
+    }
     viewer->saveViewSettings();
     db->commit();
     setEdited(false);
@@ -1558,7 +1580,9 @@ void PortaBase::simpleFilter()
  */
 void PortaBase::setEdited(bool y)
 {
-    mh->setEdited(y);
+    if (!readOnly) {
+        mh->setEdited(y);
+    }
 }
 
 /**

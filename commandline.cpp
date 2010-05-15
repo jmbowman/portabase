@@ -15,6 +15,7 @@
 
 #include <QApplication>
 #include <QFile>
+#include <QFileInfo>
 #include <QObject>
 #include <QStringList>
 #include "commandline.h"
@@ -90,14 +91,21 @@ int CommandLine::fromOtherFormat(const QStringList &args)
     QString sourceFile(args[numArgs - 2]);
     QString pbFile(args[numArgs - 1]);
     bool fromcsv = (args[1] == "fromcsv");
-    if (fromcsv && !QFile::exists(pbFile)) {
-        printf("Named PortaBase file doesn't exist\n");
-        return 1;
+    if (fromcsv) {
+        if (!QFile::exists(pbFile)) {
+            printf("Named PortaBase file doesn't exist\n");
+            return 1;
+        }
+        QFileInfo info(pbFile);
+        if (!info.isWritable()) {
+            printf("Named PortaBase file can't be written to");
+            return 1;
+        }
     }
     Database::OpenResult openResult;
     bool encrypt = passIndex != -1 && !fromcsv;
     Database *db = new Database(pbFile, &openResult, encrypt);
-    if (openResult == Database::NewerVersion) {
+    if (openResult == Database::NewerVersion || openResult == Database::Failure) {
         if (fromcsv) {
             printf("Unable to open PortaBase file\n");
         }
@@ -219,7 +227,7 @@ int CommandLine::toOtherFormat(const QStringList &args)
     QString outputFile(args[numArgs - 1]);
     Database::OpenResult openResult;
     Database *db = new Database(pbFile, &openResult);
-    if (openResult == Database::NewerVersion) {
+    if (openResult == Database::NewerVersion || openResult == Database::Failure) {
         printf("Error opening file: %s\n", args[numArgs - 2].toLocal8Bit().data());
         return 1;
     }

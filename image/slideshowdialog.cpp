@@ -55,16 +55,6 @@ SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *paren
 }
 
 /**
- * Destructor.
- */
-SlideshowDialog::~SlideshowDialog()
-{
-    if (fullScreen) {
-        delete fullScreen;
-    }
-}
-
-/**
  * Start the slideshow.
  */
 void SlideshowDialog::accept()
@@ -73,6 +63,7 @@ void SlideshowDialog::accept()
         QStringList columns = currentView->getColNames();
         int colIndex = columns.indexOf(columnList->currentText());
         fullScreen = new ImageWidget(0);
+        fullScreen->setAttribute(Qt::WA_DeleteOnClose);
         fullScreen->setView(currentView, 0, colIndex);
         QPalette fsPalette(fullScreen->palette());
         fsPalette.setColor(QPalette::Window, Qt::black);

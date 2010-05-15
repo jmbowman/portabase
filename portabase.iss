@@ -23,16 +23,15 @@ OutputBaseFilename=PortaBase_2.0b1
 OutputDir=build\windows
 VersionInfoVersion=2.0.0.0
 ShowLanguageDialog=yes
-MinVersion=0,5.1
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
 Source: "build\PortaBase.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "CHANGES"; DestDir: "{app}"; Flags: ignoreversion
-Source: "COPYING"; DestDir: "{app}"; Flags: ignoreversion
-Source: "README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
+Source: "build\windows\CHANGES.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "build\windows\COPYING.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "build\windows\README.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "build\windows\mingwm10.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\windows\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\windows\QtCore4.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -65,6 +64,4 @@ Name: "{userdesktop}\PortaBase"; Filename: "{app}\portabase.exe"; Tasks: desktop
 
 [Run]
 Filename: "{app}\PortaBase.exe"; Description: "{cm:LaunchProgram,PortaBase}"; Flags: nowait postinstall skipifsilent
-
-
 

@@ -627,8 +627,10 @@ QStringList View::getStatistics(int colIndex)
         int max = value;
         for (int i = 1; i < rowCnt; i++) {
             int value = prop (dbview[i]);
-            min = qMin(min, value);
-            max = qMax(max, value);
+            if (value != 17520914) {
+                min = (min == 17520914) ? value : qMin(min, value);
+                max = qMax(max, value);
+            }
         }
         lines.append(tr("Earliest") + ": " + Formatting::dateToString(min));
         lines.append(tr("Latest") + ": " + Formatting::dateToString(max));
@@ -640,8 +642,10 @@ QStringList View::getStatistics(int colIndex)
         int max = value;
         for (int i = 1; i < rowCnt; i++) {
             int value = prop (dbview[i]);
-            min = qMin(min, value);
-            max = qMax(max, value);
+            if (value != -1) {
+                min = (min == -1) ? value : qMin(min, value);
+                max = qMax(max, value);
+            }
         }
         lines.append(tr("Earliest") + ": " + Formatting::timeToString(min));
         lines.append(tr("Latest") + ": " + Formatting::timeToString(max));
