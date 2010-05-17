@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=2.0~beta1
+VERSION=2.0~beta2
 DEST=build/debian/portabase-$VERSION
 
 rm -rf build/debian

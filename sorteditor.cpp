@@ -157,10 +157,10 @@ void SortEditor::updateTable(const QStringList &colNames)
         QString direction = "";
         if (sortCols.contains(name)) {
             if (descCols.contains(name)) {
-                direction = tr("Ascending");
+                direction = tr("Descending");
             }
             else {
-                direction = tr("Descending");
+                direction = tr("Ascending");
             }
             item->setCheckState(0, Qt::Checked);
         }

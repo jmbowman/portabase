@@ -1917,7 +1917,7 @@ void PortaBase::print(QPrinter *p)
 void PortaBase::aboutPortaBase()
 {
     QString appName = qApp->applicationName();
-    QString text = appName + " 2.0b1\n\n" + tr("Copyright (C)")
+    QString text = appName + " 2.0b2\n\n" + tr("Copyright (C)")
                    + " 2002-2010\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::about(this, tr("About %1").arg(appName), text);

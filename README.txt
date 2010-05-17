@@ -1,4 +1,4 @@
-PortaBase 2.0 beta 1 (May 2010)
+PortaBase 2.0 beta 2 (May 2010)
 -------------------------------
 PortaBase (portable database) is a program for conveniently managing one-table
 database files. It is available for many platforms, including Linux, Mac OS X,
@@ -44,7 +44,7 @@ and/or webOS may be forthcoming as well.
 
 Maemo Installation
 ------------------
-PortaBase is being submitted to the extras-devel repository, you should be
+PortaBase is available from the extras-devel repository, you should be
 able to download and install it from there.  In time, it should make its way
 to the extras-testing and extras repositories as well, for users who are a
 little less adventurous.
@@ -75,7 +75,7 @@ structures, and communication with the operating system.  It also uses:
 - CSV import code based on code from KSpread (http://www.koffice.org/kspread/)
 - Blowfish block cipher code based on the BeeCrypt library
   (http://beecrypt.sourceforge.net/)
-- a modified version of the calculator widget from KMyMoney2
+- A modified version of the calculator widget from KMyMoney2
   (http://kmymoney2.sourceforge.net/)
 
 License

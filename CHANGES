@@ -1,3 +1,11 @@
+2010-05-17  #################### PortaBase 2.0b2 ####################
+
+2010-05-17  JMB  Sorting editor bugfix, updated version number
+
+    Fixed a bug in the sorting editor where ascending/descending labels were
+    initially reversed.  Also updated the version number in all appropriate
+    places for the next beta release.
+
 2010-05-15  JMB  Assorted bugfixes
 
     Read-only files can now be opened correctly, with a dialog warning the user

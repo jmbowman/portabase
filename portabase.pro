@@ -5,7 +5,7 @@ DESTDIR         = build
 OBJECTS_DIR     = build
 MOC_DIR         = build
 RCC_DIR         = build
-VERSION         = 2.0.0b1
+VERSION         = 2.0.0b2
 TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_de.ts \
                   resources/translations/portabase_en.ts \
