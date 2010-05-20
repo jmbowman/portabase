@@ -710,10 +710,10 @@ void PortaBase::openFile(const QString &file)
         }
     }
     else {
-        QFileInfo info(file);
-        readOnly = !info.isWritable();
         temp->load();
     }
+    QFileInfo info(file);
+    readOnly = !info.isWritable();
     doc = file;
     if (db) {
         delete db;
@@ -1862,6 +1862,10 @@ void PortaBase::printPreview()
     if (!printer) {
         printer = new QPrinter(QPrinter::HighResolution);
     }
+    else {
+        printer->setPrintRange(QPrinter::AllPages);
+        printer->setFromTo(0, 0);
+    }
     QPrintPreviewDialog dialog(printer, this);
     connect(&dialog, SIGNAL(paintRequested(QPrinter*)),
             this, SLOT(print(QPrinter*)));
@@ -1877,6 +1881,10 @@ void PortaBase::print()
 {
     if (!printer) {
         printer = new QPrinter(QPrinter::HighResolution);
+    }
+    else {
+        printer->setPrintRange(QPrinter::AllPages);
+        printer->setFromTo(0, 0);
     }
     QPrintDialog dialog(printer, this);
     if (dialog.exec() != QDialog::Accepted) {

@@ -973,6 +973,20 @@ current filter?</source>
         <source>No such file exists</source>
         <translation>ファイルは存在しません</translation>
     </message>
+    <message>
+        <source>Unable to overwrite existing file</source>
+        <translation>既存のファイルを上書きすることができません</translation>
+    </message>
+    <message>
+        <source>Unable to read from this file</source>
+        <translation>このファイルを読めません</translation>
+    </message>
+    <message>
+        <source>This file is read-only.
+You will not be able to save any changes you make.</source>
+        <translation>このファイルは書き込み禁止です
+変更は保存出来ません</translation>
+    </message>
 </context>
 <context>
     <name>Preferences</name>

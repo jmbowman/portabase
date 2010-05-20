@@ -974,6 +974,19 @@ Filter löschen?</translation>
         <source>No such file exists</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to overwrite existing file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to read from this file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file is read-only.
+You will not be able to save any changes you make.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Preferences</name>
@@ -1135,21 +1148,6 @@ Filter löschen?</translation>
     </message>
     <message>
         <source>View rows with a single click</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QFileSystemModel</name>
-    <message>
-        <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

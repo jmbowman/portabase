@@ -1,3 +1,10 @@
+2010-05-19  JMB  Read-only encrypted files, print pages filter, translations
+
+    Fixed a bug where read-only encrypted files were erroneously showing as
+    saveable.  Fixed the print preview dialog so it no longer restricts you to
+    the last set of pages chosen for printing.  Updated all the translation
+    files with a few new phrases.
+
 2010-05-17  #################### PortaBase 2.0b2 ####################
 
 2010-05-17  JMB  Sorting editor bugfix, updated version number
