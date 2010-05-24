@@ -1,3 +1,9 @@
+2010-05-24  JMB  Chinese & Czech updates, Debian/Maemo description updates
+
+    Added the updated Chinese and Czech UI translations, and the Chinese help
+    file translation.  Made another attempt to fix the package description on
+    the Maemo package web page.
+
 2010-05-19  JMB  Read-only encrypted files, print pages filter, translations
 
     Fixed a bug where read-only encrypted files were erroneously showing as

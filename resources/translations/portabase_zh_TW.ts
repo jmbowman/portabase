@@ -12,7 +12,7 @@
     <name>CalcDateEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>計算節點編輯器 </translation>
+        <translation>計算節點編輯器</translation>
     </message>
     <message>
         <source>Column</source>
@@ -62,8 +62,7 @@
     </message>
     <message>
         <source>ABS</source>
-        <translation>絕對值
-</translation>
+        <translation>絕對值</translation>
     </message>
     <message>
         <source>SQRT</source>
@@ -79,8 +78,7 @@
     </message>
     <message>
         <source>Seconds_Between</source>
-        <translation>幾秒間
-</translation>
+        <translation>幾秒間</translation>
     </message>
     <message>
         <source>Minutes_Between</source>
@@ -118,7 +116,7 @@
     <name>CalcTimeEditor</name>
     <message>
         <source>Calculation Node Editor</source>
-        <translation>計算節點編輯器 </translation>
+        <translation>計算節點編輯器</translation>
     </message>
     <message>
         <source>Column</source>
@@ -133,14 +131,14 @@
     <name>CalcWidget</name>
     <message>
         <source>Update calculated value</source>
-        <translation type="unfinished">更新</translation>
+        <translation>更新</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">選擇顏色</translation>
+        <translation>選擇顏色</translation>
     </message>
 </context>
 <context>
@@ -227,7 +225,7 @@
     </message>
     <message>
         <source>Column Definition</source>
-        <translation type="unfinished"></translation>
+        <translation>欄位定義</translation>
     </message>
 </context>
 <context>
@@ -307,26 +305,26 @@
     </message>
     <message>
         <source>No columns defined</source>
-        <translation type="unfinished"></translation>
+        <translation>欄位未定</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
-        <translation type="unfinished"></translation>
+        <translation>按增加鈕 來建立新欄</translation>
     </message>
 </context>
 <context>
     <name>DateDialog</name>
     <message>
         <source>Select a date</source>
-        <translation type="unfinished">選擇日期</translation>
+        <translation>選擇日期</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">今日</translation>
+        <translation>今日</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
@@ -365,12 +363,12 @@
     </message>
     <message>
         <source>No options defined for this enumeration type</source>
-        <translation type="unfinished"></translation>
+        <translation>此集合類型沒有已定選擇項目</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one, or press
 the &quot;Import&quot; button to load lines from a text file</source>
-        <translation type="unfinished"></translation>
+        <translation>按”新增”鈕建立新列或者按”輸入” 鈕 則可以由一個CSV格式的檔案匯入所有資料列</translation>
     </message>
 </context>
 <context>
@@ -391,11 +389,11 @@ deleted:</source>
     </message>
     <message>
         <source>No enumerated column types defined</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有已定集合類型 </translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
-        <translation type="unfinished"></translation>
+        <translation>按”新增”鈕 來建立新集合欄位</translation>
     </message>
 </context>
 <context>
@@ -417,9 +415,7 @@ deleted:</source>
     </message>
     <message>
         <source>Width</source>
-        <translation>寬度
-
-　</translation>
+        <translation>寬度</translation>
     </message>
     <message>
         <source>Height</source>
@@ -469,8 +465,7 @@ deleted:</source>
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>影像景觀器
-</translation>
+        <translation>影像景觀器</translation>
     </message>
 </context>
 <context>
@@ -536,8 +531,7 @@ deleted:</source>
     </message>
     <message>
         <source>C&amp;hange Password</source>
-        <translation>變更密碼(&amp;H)
-</translation>
+        <translation>變更密碼(&amp;H)</translation>
     </message>
     <message>
         <source>&amp;Import</source>
@@ -597,170 +591,170 @@ deleted:</source>
     </message>
     <message>
         <source>Change the current file&apos;s password</source>
-        <translation type="unfinished"></translation>
+        <translation>改變現行檔案的密碼</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation type="unfinished"></translation>
+        <translation>用不同格式的資料來建新檔</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>從一CSV檔案匯入</translation>
     </message>
     <message>
         <source>Export data to another file format</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出資料到不同格式的檔案</translation>
     </message>
     <message>
         <source>Start an image slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動影像放映幻燈片</translation>
     </message>
     <message>
         <source>Show information about the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>陳列說明現有檔案</translation>
     </message>
     <message>
         <source>Apply a one-condition filter</source>
-        <translation type="unfinished"></translation>
+        <translation>應用”唯一條件”過濾器</translation>
     </message>
     <message>
         <source>Create a new row</source>
-        <translation type="unfinished"></translation>
+        <translation>建立新列</translation>
     </message>
     <message>
         <source>Create a new view</source>
-        <translation type="unfinished"></translation>
+        <translation>建立新景觀</translation>
     </message>
     <message>
         <source>Create a new sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>建立新排列式</translation>
     </message>
     <message>
         <source>Create a new filter</source>
-        <translation type="unfinished"></translation>
+        <translation>建立新篩選</translation>
     </message>
     <message>
         <source>Edit the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯已選列 </translation>
     </message>
     <message>
         <source>Edit the selected view</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯已選景觀</translation>
     </message>
     <message>
         <source>Edit the selected sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯已選取排列式</translation>
     </message>
     <message>
         <source>Edit the selected filter</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯已選取篩選</translation>
     </message>
     <message>
         <source>Delete the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除已選取列</translation>
     </message>
     <message>
         <source>Delete the selected view</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除已選取景觀</translation>
     </message>
     <message>
         <source>Delete the selected sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除已選取排列</translation>
     </message>
     <message>
         <source>Delete the selected filter</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除已選取篩選</translation>
     </message>
     <message>
         <source>Show all of the database columns</source>
-        <translation type="unfinished"></translation>
+        <translation> 展示所有資料欄</translation>
     </message>
     <message>
         <source>Show all rows of data</source>
-        <translation type="unfinished"></translation>
+        <translation>展示所有資料列</translation>
     </message>
     <message>
         <source>Create a copy of the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>複製已選定列</translation>
     </message>
     <message>
         <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>複製已選定文字句</translation>
     </message>
     <message>
         <source>Show the selected row in more detail</source>
-        <translation type="unfinished"></translation>
+        <translation>展示已選定列更多細節</translation>
     </message>
     <message>
         <source>&amp;Delete Rows in Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除被篩選資料列</translation>
     </message>
     <message>
         <source>Delete all rows matching the current filter</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除所有資料列與篩選資料相稱</translation>
     </message>
     <message>
         <source>Edit the database format</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯資料庫格式</translation>
     </message>
     <message>
         <source>Edit the enumerated data types</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯集合資料型式</translation>
     </message>
     <message>
         <source>Configure and preview printing options</source>
-        <translation type="unfinished"></translation>
+        <translation>設置並預展列印選項</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
+        <translation>列印</translation>
     </message>
     <message>
         <source>Print the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>列印現有檔案</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>列印預展 </translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished">景觀</translation>
+        <translation>景觀</translation>
     </message>
     <message>
         <source>Change the active view</source>
-        <translation type="unfinished"></translation>
+        <translation>改變現行景觀</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished">排序方式</translation>
+        <translation>排序方式</translation>
     </message>
     <message>
         <source>Change the active sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>改變現行排序方式</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished">篩選</translation>
+        <translation>篩選</translation>
     </message>
     <message>
         <source>Change the active filter</source>
-        <translation type="unfinished"></translation>
+        <translation>改變現行篩選器</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>全銀幕</translation>
     </message>
     <message>
         <source>View PortaBase in fullscreen mode</source>
-        <translation type="unfinished"></translation>
+        <translation>用全銀幕觀看PortaBase</translation>
     </message>
 </context>
 <context>
     <name>NumberWidget</name>
     <message>
         <source>Show calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>展示計算機</translation>
     </message>
 </context>
 <context>
@@ -933,60 +927,60 @@ current filter?</source>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">PortaBase檔案</translation>
+        <translation>PortaBase檔案</translation>
     </message>
     <message>
         <source>Recently opened files</source>
-        <translation type="unfinished"></translation>
+        <translation>最近打開檔案</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="unfinished">檔案要加密嗎?</translation>
+        <translation>檔案要加密嗎?</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">內容以逗號分隔之文字檔</translation>
+        <translation>內容以逗號分隔之文字檔</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">XML檔案</translation>
+        <translation>XML檔案</translation>
     </message>
     <message>
         <source>Printing aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>印刷流產</translation>
     </message>
     <message>
         <source>Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>印刷</translation>
     </message>
     <message>
         <source>Printing completed</source>
-        <translation type="unfinished"></translation>
+        <translation>印刷完成</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>約 1％</translation>
     </message>
     <message>
         <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation type="unfinished"></translation>
+        <translation>對於一個特定列的統計數字，按住該列的標題至少一半的第二個</translation>
     </message>
     <message>
         <source>No such file exists</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有這樣的文件存在</translation>
     </message>
     <message>
         <source>Unable to overwrite existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>無法覆蓋現有的文件</translation>
     </message>
     <message>
         <source>Unable to read from this file</source>
-        <translation type="unfinished"></translation>
+        <translation>無法讀取此文件</translation>
     </message>
     <message>
         <source>This file is read-only.
 You will not be able to save any changes you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>此文件是只讀的。您將無法保存任何更改。</translation>
     </message>
 </context>
 <context>
@@ -1093,82 +1087,82 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Use small-screen settings on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>使用小屏幕設置此設備上</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">日</translation>
+        <translation>日</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>月</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished">年</translation>
+        <translation>年</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>白色</translation>
     </message>
     <message>
         <source>Aquamarine</source>
-        <translation type="unfinished"></translation>
+        <translation>碧綠色</translation>
     </message>
     <message>
         <source>Light blue</source>
-        <translation type="unfinished"></translation>
+        <translation>淡藍色</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>青色</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>淺灰色</translation>
     </message>
     <message>
         <source>Light green</source>
-        <translation type="unfinished"></translation>
+        <translation>淺綠色</translation>
     </message>
     <message>
         <source>Lavender</source>
-        <translation type="unfinished"></translation>
+        <translation>薰衣草色</translation>
     </message>
     <message>
         <source>Silver</source>
-        <translation type="unfinished"></translation>
+        <translation>銀色</translation>
     </message>
     <message>
         <source>Tan</source>
-        <translation type="unfinished"></translation>
+        <translation>黃褐色</translation>
     </message>
     <message>
         <source>Thistle</source>
-        <translation type="unfinished"></translation>
+        <translation>薊色</translation>
     </message>
     <message>
         <source>View rows with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>查看行只需一次點擊</translation>
     </message>
 </context>
 <context>
     <name>QMenuBar</name>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>關於%1</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">偏好設定</translation>
+        <translation>偏好設定</translation>
     </message>
     <message>
         <source>Quit %1</source>
-        <translation type="unfinished"></translation>
+        <translation>退出%1</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">關於Qt</translation>
+        <translation>關於Qt</translation>
     </message>
 </context>
 <context>
@@ -1223,200 +1217,200 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Missing file</source>
-        <translation>檔案消失不見 </translation>
+        <translation>檔案消失不見</translation>
     </message>
 </context>
 <context>
     <name>QQHelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation type="unfinished">說明</translation>
+        <translation>說明</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">上一頁</translation>
+        <translation>上一頁</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">下一頁</translation>
+        <translation>下一頁</translation>
     </message>
 </context>
 <context>
     <name>QQMenuHelper</name>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">請選一個儲存檔案名稱</translation>
+        <translation>請選一個儲存檔案名稱</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>有關說明</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">新增(&amp;N)</translation>
+        <translation>新增(&amp;N)</translation>
     </message>
     <message>
         <source>Create a new file</source>
-        <translation type="unfinished"></translation>
+        <translation>建立新檔案</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">開啟(&amp;O)</translation>
+        <translation>開啟(&amp;O)</translation>
     </message>
     <message>
         <source>Open an existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟已存檔案</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished">退出(&amp;Q)</translation>
+        <translation>退出(&amp;Q)</translation>
     </message>
     <message>
         <source>Quit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>退出程式</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">存(&amp;S)</translation>
+        <translation>存(&amp;S)</translation>
     </message>
     <message>
         <source>Save the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>存現行檔案</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished">近日開啟(&amp;R)</translation>
+        <translation>近日開啟(&amp;R)</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">關閉(&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <source>Close the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉現行檔案</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">檔案(&amp;F)</translation>
+        <translation>檔案(&amp;F)</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished">說明內容</translation>
+        <translation>說明內容</translation>
     </message>
     <message>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1說明</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">關係QT(&amp;Q)</translation>
+        <translation>關係QT(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">說明(&amp;H)</translation>
+        <translation>說明(&amp;H)</translation>
     </message>
     <message>
         <source>Save changes?</source>
-        <translation type="unfinished">儲存變更嗎?</translation>
+        <translation>儲存變更嗎?</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="unfinished">檔案已存在；要覆寫嗎?</translation>
+        <translation>檔案已存在；要覆寫嗎?</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="unfinished">請選取一個檔案</translation>
+        <translation>請選取一個檔案</translation>
     </message>
     <message>
         <source>File does not exist</source>
-        <translation type="unfinished">檔案不在</translation>
+        <translation>檔案不在</translation>
     </message>
     <message>
         <source>The selected item is a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>所選項是一個目錄</translation>
     </message>
     <message>
         <source>Pr&amp;eferences</source>
-        <translation type="unfinished"></translation>
+        <translation>個人喜好</translation>
     </message>
     <message>
         <source>Change the application settings</source>
-        <translation type="unfinished"></translation>
+        <translation>改變程式設置</translation>
     </message>
 </context>
 <context>
     <name>QtColorPicker</name>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>黑色</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>白色</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>紅色</translation>
     </message>
     <message>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>暗紅色</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>綠色</translation>
     </message>
     <message>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>暗綠色</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>藍色</translation>
     </message>
     <message>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>深藍</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>墨色</translation>
     </message>
     <message>
         <source>Dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>深墨色</translation>
     </message>
     <message>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>紅紫色</translation>
     </message>
     <message>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>暗紅紫色</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>黃色</translation>
     </message>
     <message>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>暗黃色</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>灰色</translation>
     </message>
     <message>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>深灰色</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>淡灰色</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">選擇顏色</translation>
+        <translation>選擇顏色</translation>
     </message>
 </context>
 <context>
@@ -1434,27 +1428,27 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Previous row</source>
-        <translation type="unfinished"></translation>
+        <translation>前列</translation>
     </message>
     <message>
         <source>Edit this row</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯此列</translation>
     </message>
     <message>
         <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>複製選出的文字</translation>
     </message>
     <message>
         <source>Next row</source>
-        <translation type="unfinished"></translation>
+        <translation>下一 行</translation>
     </message>
     <message>
         <source>Copy this row</source>
-        <translation type="unfinished"></translation>
+        <translation>複製這一行</translation>
     </message>
     <message>
         <source>Delete this row</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除此行</translation>
     </message>
 </context>
 <context>
@@ -1473,8 +1467,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>seconds</source>
-        <translation>幾秒間
-</translation>
+        <translation>幾秒間</translation>
     </message>
 </context>
 <context>
@@ -1527,47 +1520,47 @@ You will not be able to save any changes you make.</source>
     <name>VSFManager</name>
     <message>
         <source>Views</source>
-        <translation type="unfinished">景觀</translation>
+        <translation>景觀</translation>
     </message>
     <message>
         <source>Current View</source>
-        <translation type="unfinished"></translation>
+        <translation>現行景觀</translation>
     </message>
     <message>
         <source>New View</source>
-        <translation type="unfinished"></translation>
+        <translation>新景觀</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished">排序方式</translation>
+        <translation>排序方式</translation>
     </message>
     <message>
         <source>Current Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>現行排序方式</translation>
     </message>
     <message>
         <source>New Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>新排序方式</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished">篩選</translation>
+        <translation>篩選</translation>
     </message>
     <message>
         <source>Current Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>現行篩選</translation>
     </message>
     <message>
         <source>New Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>新篩選</translation>
     </message>
     <message>
         <source>Selected Column</source>
-        <translation type="unfinished"></translation>
+        <translation>選出欄位</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
@@ -1684,11 +1677,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>No default sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有默認排序</translation>
     </message>
     <message>
         <source>No default filter</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有默認的過濾器</translation>
     </message>
 </context>
 <context>
@@ -1707,11 +1700,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>only allowed as root element</source>
-        <translation> 只可為根元素</translation>
+        <translation>只可為根元素</translation>
     </message>
     <message>
         <source>Unknown element</source>
-        <translation>未知元素 </translation>
+        <translation>未知元素</translation>
     </message>
     <message>
         <source>%1 not allowed as child of %2</source>

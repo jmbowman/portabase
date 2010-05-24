@@ -59,6 +59,15 @@ Mac OS X Installation
 Double-click on the downloaded disk image to open it, and drag the application
 from the disk image to where you want it (usually your Applications folder).
 
+Debian Installation
+-------------------
+Install the .deb package as root using dpkg -i <filename>.
+
+Installation on Other Linux/UNIX Systems
+----------------------------------------
+Download the source code tarball and follow the instructions in the contained
+INSTALL file.
+
 Technical Info and Acknowledgements
 -----------------------------------
 PortaBase is written in C++, using the Qt 4 library for GUI widgets, data

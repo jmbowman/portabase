@@ -14,9 +14,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: An easy-to-use personal database application
  PortaBase is a program for conveniently managing one-table database files.
  It is available for many platforms, including Linux, Mac OS X, Windows,
- and Maemo.
+ and Maemo.  Features include:
  .
- Features include:
   * String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
     Calculation, Sequence, Image, and Enum column types;
   * custom data views (subsets of the columns in any order);

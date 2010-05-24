@@ -135,14 +135,14 @@
     </message>
     <message>
         <source>Update calculated value</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat výpočet</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastní</translation>
     </message>
 </context>
 <context>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Neuvedeno</translation>
+        <translation>Neuvádět</translation>
     </message>
     <message>
         <source>Now</source>
@@ -229,7 +229,7 @@
     </message>
     <message>
         <source>Column Definition</source>
-        <translation type="unfinished"></translation>
+        <translation>Definice sloupce</translation>
     </message>
 </context>
 <context>
@@ -240,11 +240,11 @@
     </message>
     <message>
         <source>%1 is checked</source>
-        <translation>%1 je vybrán</translation>
+        <translation>&quot;%1&quot; je označeno</translation>
     </message>
     <message>
         <source>%1 is not checked</source>
-        <translation>%1 není vybrán</translation>
+        <translation>&quot;%1&quot; je odznačeno</translation>
     </message>
     <message>
         <source>%1 contains %2</source>
@@ -298,7 +298,7 @@
     </message>
     <message>
         <source>Password must be at least 6 characters long</source>
-        <translation>Heslo musí obsahovat minimálně 6 znaků</translation>
+        <translation>Minimální délka hesla je 6 znaků</translation>
     </message>
 </context>
 <context>
@@ -309,26 +309,26 @@
     </message>
     <message>
         <source>No columns defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádné sloupce nejsou definovány</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítkem &quot;Přidat&quot; vytvořte nový sloupec</translation>
     </message>
 </context>
 <context>
     <name>DateDialog</name>
     <message>
         <source>Select a date</source>
-        <translation type="unfinished">Vyberte datum</translation>
+        <translation>Vyberte datum</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Dnes</translation>
+        <translation>Dnes</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuvádět</translation>
     </message>
 </context>
 <context>
@@ -374,12 +374,13 @@
     </message>
     <message>
         <source>No options defined for this enumeration type</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádné položky seznamu nejsou definovány</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one, or press
 the &quot;Import&quot; button to load lines from a text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítkem &quot;Přidat&quot; vytvořte novou položku seznamu nebo 
+volbou &quot;Importovat&quot; načtěte řádky z textového souboru</translation>
     </message>
 </context>
 <context>
@@ -401,11 +402,11 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>No enumerated column types defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádné seznamy nejsou definovány</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítkem &quot;Přidat&quot; vytvořte nový seznam</translation>
     </message>
 </context>
 <context>
@@ -516,7 +517,7 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation>XML soubory</translation>
+        <translation>Soubory XML</translation>
     </message>
     <message>
         <source>Images</source>
@@ -607,19 +608,19 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="obsolete">&amp;Přejmenovat(qqq)</translation>
+        <translation type="obsolete">&amp;Přejmenovat</translation>
     </message>
     <message>
         <source>File &amp;name</source>
-        <translation type="obsolete">&amp;Jméno souboru(QQQ)</translation>
+        <translation type="obsolete">&amp;Jméno souboru</translation>
     </message>
     <message>
         <source>File &amp;type</source>
-        <translation type="obsolete">&amp;Typ souboru(QQQ)</translation>
+        <translation type="obsolete">&amp;Typ souboru</translation>
     </message>
     <message>
         <source>Look &amp;in</source>
-        <translation type="obsolete">Umí&amp;stění(QQQ)</translation>
+        <translation type="obsolete">Umí&amp;stění</translation>
     </message>
     <message>
         <source>Open Recent</source>
@@ -679,7 +680,7 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>Delete Rows In Filter</source>
-        <translation type="obsolete">Smazat záznamy vyhovující aktuálnímu filtru</translation>
+        <translation type="obsolete">Smazat záznamy vyhovující filtru</translation>
     </message>
     <message>
         <source>Edit Columns</source>
@@ -807,7 +808,7 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>&amp;Delete Rows In Filter</source>
-        <translation type="obsolete">Smazat záznamy vyhovují&amp;cí aktuálnímu filtru</translation>
+        <translation type="obsolete">Smazat záznamy vyhovují&amp;cí filtru</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
@@ -823,163 +824,163 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>Change the current file&apos;s password</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit heslo stávajícího souboru</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nový soubor z dat v jiném formátu</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importovat záznamy ze souboru CSV</translation>
     </message>
     <message>
         <source>Export data to another file format</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovat data do jiného formátu</translation>
     </message>
     <message>
         <source>Start an image slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit automatické přepínání obrázků</translation>
     </message>
     <message>
         <source>Show information about the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit informaci o stávajícím souboru</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiskový náhle&amp;d</translation>
     </message>
     <message>
         <source>Configure and preview printing options</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení tisku a volby tiskového náhledu</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tisk</translation>
     </message>
     <message>
         <source>Print the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisknout stávající soubor</translation>
     </message>
     <message>
         <source>Apply a one-condition filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyhledat (použít filtr s jedinou podmínkou)</translation>
     </message>
     <message>
         <source>Create a new row</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nový záznam</translation>
     </message>
     <message>
         <source>Create a new view</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nový náhled</translation>
     </message>
     <message>
         <source>Create a new sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nové pořadí</translation>
     </message>
     <message>
         <source>Create a new filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nový filtr</translation>
     </message>
     <message>
         <source>Edit the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat vybraný záznam</translation>
     </message>
     <message>
         <source>Edit the selected view</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat vybraný náhled</translation>
     </message>
     <message>
         <source>Edit the selected sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat vybrané pořadí</translation>
     </message>
     <message>
         <source>Edit the selected filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat vybraný filtr</translation>
     </message>
     <message>
         <source>Delete the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybraný záznam</translation>
     </message>
     <message>
         <source>Delete the selected view</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybraný náhled</translation>
     </message>
     <message>
         <source>Delete the selected sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybrané pořadí</translation>
     </message>
     <message>
         <source>Delete the selected filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vybraný filtr</translation>
     </message>
     <message>
         <source>Show all of the database columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit všechny sloupce databáze</translation>
     </message>
     <message>
         <source>Show all rows of data</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit všechny záznamy</translation>
     </message>
     <message>
         <source>Create a copy of the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit kopii vybraného záznamu</translation>
     </message>
     <message>
         <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat vybraný text</translation>
     </message>
     <message>
         <source>Show the selected row in more detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit vybraný záznam podrobněji</translation>
     </message>
     <message>
         <source>&amp;Delete Rows in Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat záznamy vyhovující &amp;filtru</translation>
     </message>
     <message>
         <source>Delete all rows matching the current filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat všechny záznamy vyhovující stávajícímu filtru</translation>
     </message>
     <message>
         <source>Edit the database format</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat formát databáze</translation>
     </message>
     <message>
         <source>Edit the enumerated data types</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat seznamy</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished">Náhledy</translation>
+        <translation>Náhledy</translation>
     </message>
     <message>
         <source>Change the active view</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit aktivní náhled</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished">Pořadí</translation>
+        <translation>Pořadí</translation>
     </message>
     <message>
         <source>Change the active sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit aktivní pořadí</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished">Filtry</translation>
+        <translation>Filtry</translation>
     </message>
     <message>
         <source>Change the active filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit aktivní filtr</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá obrazovka</translation>
     </message>
     <message>
         <source>View PortaBase in fullscreen mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepínač aplikace PortaBase na celou obrazovku</translation>
     </message>
 </context>
 <context>
@@ -990,7 +991,7 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="obsolete">Vyberte jméno nového souboru</translation>
+        <translation type="obsolete">Zadejte jméno nového souboru</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
@@ -1018,18 +1019,18 @@ vybraný seznam budou též smazány:</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="obsolete">XML soubory</translation>
+        <translation type="obsolete">Soubory XML</translation>
     </message>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="obsolete">Vyberte jméno souboru</translation>
+        <translation type="obsolete">Vyberte jméno ukládaného souboru</translation>
     </message>
 </context>
 <context>
     <name>NumberWidget</name>
     <message>
         <source>Show calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit kalkulačku</translation>
     </message>
 </context>
 <context>
@@ -1071,7 +1072,7 @@ vybraný seznam budou též smazány:</translation>
     <name>PBFileSelector</name>
     <message>
         <source>Enter a name for the new file</source>
-        <translation type="obsolete">Vyberte jméno nového souboru</translation>
+        <translation type="obsolete">Zadejte jméno nového souboru</translation>
     </message>
     <message>
         <source>Unable to create new file</source>
@@ -1177,7 +1178,7 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>CSV</source>
-        <translation>CSV  </translation>
+        <translation>CSV </translation>
     </message>
     <message>
         <source>rows in current filter</source>
@@ -1253,60 +1254,61 @@ vyhovující filtru?</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">Soubory PortaBase</translation>
+        <translation>Soubory PortaBase</translation>
     </message>
     <message>
         <source>Recently opened files</source>
-        <translation type="unfinished"></translation>
+        <translation>Naposledy otevřené soubory</translation>
     </message>
     <message>
         <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistiky jednotlivého sloupce vyvoláte dlouhým (alespoň půlsekundovým) stiskem na záhlaví daného sloupce</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="unfinished">Zašifrovat tento soubor?</translation>
+        <translation>Zašifrovat tento soubor?</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Soubory hodnot oddělených čárkami</translation>
+        <translation>Soubory hodnot oddělených čárkami</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">XML soubory</translation>
+        <translation>Soubory XML</translation>
     </message>
     <message>
         <source>Printing aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk zrušen</translation>
     </message>
     <message>
         <source>Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Probíhá tisk</translation>
     </message>
     <message>
         <source>Printing completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisk dokončen</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>O aplikaci %1</translation>
     </message>
     <message>
         <source>No such file exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor neexistuje</translation>
     </message>
     <message>
         <source>Unable to overwrite existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze přepsat existující soubor</translation>
     </message>
     <message>
         <source>Unable to read from this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento soubor nelze přečíst</translation>
     </message>
     <message>
         <source>This file is read-only.
 You will not be able to save any changes you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento soubor je určen jen ke čtení.
+Pokud v něm provedete změny, nebude možné je uložit.</translation>
     </message>
 </context>
 <context>
@@ -1345,7 +1347,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Allow checkbox edit in data viewer</source>
-        <translation>Povolit editaci přepínačů v prohlížeči dat</translation>
+        <translation>Povolit v prohlížeči dat změny označení/odznačení</translation>
     </message>
     <message>
         <source>Show seconds for times</source>
@@ -1381,11 +1383,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>24 hour</source>
-        <translation>24 hodinový</translation>
+        <translation>24hodinový</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation>12 hodinový</translation>
+        <translation>12hodinový</translation>
     </message>
     <message>
         <source>Weeks start on</source>
@@ -1441,82 +1443,82 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>View rows with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazovat záznamy jedním klepnutím</translation>
     </message>
     <message>
         <source>Use small-screen settings on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Přizpůsobit k práci na zařízení s malým displejem</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished">R</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Bílá</translation>
     </message>
     <message>
         <source>Aquamarine</source>
-        <translation type="unfinished"></translation>
+        <translation>Kobaltově modrá</translation>
     </message>
     <message>
         <source>Light blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Světle modrá</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyrkysová</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Světle šedá</translation>
     </message>
     <message>
         <source>Light green</source>
-        <translation type="unfinished"></translation>
+        <translation>Světle zelená</translation>
     </message>
     <message>
         <source>Lavender</source>
-        <translation type="unfinished"></translation>
+        <translation>Levandulová</translation>
     </message>
     <message>
         <source>Silver</source>
-        <translation type="unfinished"></translation>
+        <translation>Stříbrná</translation>
     </message>
     <message>
         <source>Tan</source>
-        <translation type="unfinished"></translation>
+        <translation>Světle hnědá</translation>
     </message>
     <message>
         <source>Thistle</source>
-        <translation type="unfinished"></translation>
+        <translation>Bodláková</translation>
     </message>
 </context>
 <context>
     <name>QMenuBar</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Quit %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukončit aplikaci %1</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>O aplikaci %1</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">O Qt</translation>
+        <translation>O Qt</translation>
     </message>
 </context>
 <context>
@@ -1578,193 +1580,193 @@ You will not be able to save any changes you make.</source>
     <name>QQHelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Nápověda</translation>
+        <translation>Nápověda</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"> Zpět </translation>
+        <translation> Zpět </translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Vpřed</translation>
+        <translation>Vpřed</translation>
     </message>
 </context>
 <context>
     <name>QQMenuHelper</name>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">Vyberte jméno souboru</translation>
+        <translation>Vyberte jméno ukládaného souboru</translation>
     </message>
     <message>
         <source>Pr&amp;eferences</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nastavení</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Ukončit</translation>
+        <translation>U&amp;končit</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished">Obsah nápovědy</translation>
+        <translation>Obsah nápovědy</translation>
     </message>
     <message>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Nápověda aplikace %1</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>O &amp;aplikaci %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">O &amp;Qt</translation>
+        <translation>O &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nový</translation>
+        <translation>No&amp;vý</translation>
     </message>
     <message>
         <source>Create a new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nový soubor</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Otevřít</translation>
+        <translation>&amp;Otevřít</translation>
     </message>
     <message>
         <source>Open an existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít existující soubor</translation>
     </message>
     <message>
         <source>Quit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukončit aplikaci</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Uložit</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <source>Save the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit stávající soubor</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished">Naposledy ot&amp;evřené</translation>
+        <translation>Naposledy ot&amp;evřené</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Zavřít</translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <source>Close the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít stávající soubor</translation>
     </message>
     <message>
         <source>Change the application settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit nastavení aplikace</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Soubor</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">Nápověd&amp;a</translation>
+        <translation>Nápověd&amp;a</translation>
     </message>
     <message>
         <source>Save changes?</source>
-        <translation type="unfinished">Uložit změny?</translation>
+        <translation>Uložit změny?</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="unfinished">Soubor již existuje; chcete jej přepsat?</translation>
+        <translation>Soubor již existuje; chcete jej přepsat?</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="unfinished">Vyberte soubor</translation>
+        <translation>Vyberte soubor</translation>
     </message>
     <message>
         <source>File does not exist</source>
-        <translation type="unfinished">Soubor neexistuje</translation>
+        <translation>Soubor neexistuje</translation>
     </message>
     <message>
         <source>The selected item is a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybraný objekt je složka</translation>
     </message>
 </context>
 <context>
     <name>QtColorPicker</name>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Černá</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Bílá</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Červená</translation>
     </message>
     <message>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě červená</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelená</translation>
     </message>
     <message>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě zelená</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Modrá</translation>
     </message>
     <message>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě modrá</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyrkysová</translation>
     </message>
     <message>
         <source>Dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě tyrkysová</translation>
     </message>
     <message>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Fialová</translation>
     </message>
     <message>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě fialová</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Žlutá</translation>
     </message>
     <message>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě žlutá</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Šedá</translation>
     </message>
     <message>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě šedá</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Světle šedá</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastní</translation>
     </message>
 </context>
 <context>
@@ -1782,27 +1784,27 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Previous row</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí záznam</translation>
     </message>
     <message>
         <source>Edit this row</source>
-        <translation type="unfinished"></translation>
+        <translation>Editovat tento záznam</translation>
     </message>
     <message>
         <source>Copy this row</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat tento záznam</translation>
     </message>
     <message>
         <source>Delete this row</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat tento záznam</translation>
     </message>
     <message>
         <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat vybraný text</translation>
     </message>
     <message>
         <source>Next row</source>
-        <translation type="unfinished"></translation>
+        <translation>Další záznam</translation>
     </message>
 </context>
 <context>
@@ -1817,7 +1819,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Delay between images</source>
-        <translation>Prodleva v přepínání </translation>
+        <translation>Interval přepínání </translation>
     </message>
     <message>
         <source>seconds</source>
@@ -1859,7 +1861,7 @@ You will not be able to save any changes you make.</source>
     <name>TimeWidget</name>
     <message>
         <source>AM</source>
-        <translation type="unfinished">Ráno/dop.</translation>
+        <translation>Ráno/dop.</translation>
     </message>
     <message>
         <source>None</source>
@@ -1874,47 +1876,47 @@ You will not be able to save any changes you make.</source>
     <name>VSFManager</name>
     <message>
         <source>Views</source>
-        <translation type="unfinished">Náhledy</translation>
+        <translation>Náhledy</translation>
     </message>
     <message>
         <source>Current View</source>
-        <translation type="unfinished"></translation>
+        <translation>Stávající náhled</translation>
     </message>
     <message>
         <source>New View</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový náhled</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished">Pořadí</translation>
+        <translation>Pořadí</translation>
     </message>
     <message>
         <source>Current Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Stávající pořadí</translation>
     </message>
     <message>
         <source>New Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Nové pořadí</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished">Filtry</translation>
+        <translation>Filtry</translation>
     </message>
     <message>
         <source>Current Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Stávající filtr</translation>
     </message>
     <message>
         <source>New Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový filtr</translation>
     </message>
     <message>
         <source>Selected Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybraný sloupec</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádný</translation>
     </message>
 </context>
 <context>
@@ -1941,19 +1943,19 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Checked</source>
-        <translation>Vybraný</translation>
+        <translation>Označený</translation>
     </message>
     <message>
         <source>Unchecked</source>
-        <translation>Nevybraný</translation>
+        <translation>Odznačený</translation>
     </message>
     <message>
         <source>Earliest</source>
-        <translation>Předešlý</translation>
+        <translation>Nejstarší</translation>
     </message>
     <message>
         <source>Latest</source>
-        <translation>Následující</translation>
+        <translation>Nejmladší</translation>
     </message>
     <message>
         <source>Total length</source>
@@ -1977,11 +1979,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Image available</source>
-        <translation>Obrázek přítomen</translation>
+        <translation>S obrázkem</translation>
     </message>
     <message>
         <source>No image</source>
-        <translation>Obrázek nepřítomen</translation>
+        <translation>Bez obrázku</translation>
     </message>
 </context>
 <context>
@@ -1992,7 +1994,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>No image columns in this view</source>
-        <translation>Tento náhled neobsahuje žádné obrázky</translation>
+        <translation>Tento náhled neobsahuje žádné sloupce s obrázky</translation>
     </message>
     <message>
         <source>No rows in this filter</source>
@@ -2035,11 +2037,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>No default sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez výchozího pořadí</translation>
     </message>
     <message>
         <source>No default filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez výchozího filtru</translation>
     </message>
 </context>
 <context>
