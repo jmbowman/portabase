@@ -40,7 +40,8 @@ Database *DataModel::database()
 }
 
 /**
- * Set the database from which data is to be shown.
+ * Set the database from which data is to be shown.  Called when a file is
+ * created, opened, or significantly altered.
  *
  * @param dbase The database now in use.
  */

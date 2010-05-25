@@ -22,6 +22,7 @@ class Database;
 class QLabel;
 class QListWidget;
 class QStackedWidget;
+class ViewDisplay;
 
 /**
  * Dialog for managing a database's enumeration column types.
@@ -30,7 +31,7 @@ class EnumManager: public PBDialog
 {
     Q_OBJECT
 public:
-    EnumManager(Database *dbase, QWidget *parent = 0);
+    EnumManager(Database *dbase, QWidget *parent, ViewDisplay *viewDisplay);
 
     void applyChanges();
     bool changesMade();
@@ -43,6 +44,7 @@ private slots:
     void moveDown();
 
 private:
+    ViewDisplay *viewer; /**< The main data display widget */
     QStackedWidget *stack; /**< Main widget stack (enum list and "no enums" label) */
     QListWidget *listWidget; /**< Display list of all defined enumerations */
     QLabel *noEnums; /**< "No enums" placeholder label */

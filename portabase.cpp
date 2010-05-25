@@ -445,17 +445,12 @@ bool PortaBase::editColumns()
  */
 void PortaBase::editEnums()
 {
-    EnumManager manager(db, this);
-    viewer->closeView();
+    EnumManager manager(db, this, viewer);
     if (manager.exec()) {
         manager.applyChanges();
     }
     if (manager.changesMade()) {
-        viewer->setDatabase(db);
         setEdited(true);
-    }
-    else {
-        viewer->setView(db->currentView());
     }
 }
 

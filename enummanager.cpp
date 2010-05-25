@@ -25,15 +25,18 @@
 #include "enumeditor.h"
 #include "enummanager.h"
 #include "factory.h"
+#include "viewdisplay.h"
 
 /**
  * Constructor.
  *
  * @param dbase The database to be edited
  * @param parent This dialog's parent widget
+ * @param viewDisplay The main data display widget
  */
-EnumManager::EnumManager(Database *dbase, QWidget *parent)
-  : PBDialog(tr("Enum Manager"), parent), contentChanged(false), orderChanged(false)
+EnumManager::EnumManager(Database *dbase, QWidget *parent, ViewDisplay *viewDisplay)
+  : PBDialog(tr("Enum Manager"), parent), viewer(viewDisplay),
+  contentChanged(false), orderChanged(false)
 {
     stack = new QStackedWidget(this);
     vbox->addWidget(stack, 1);
@@ -90,7 +93,9 @@ void EnumManager::editEnum()
     QString enumName = item->text();
     EnumEditor enumEditor(this);
     if (enumEditor.edit(db, enumName)) {
+        viewer->closeView();
         enumEditor.applyChanges();
+        viewer->setDatabase(db);
         item->setText(enumEditor.getName());
         contentChanged = true;
     }
@@ -121,7 +126,9 @@ void EnumManager::deleteEnum()
             return;
         }
     }
+    viewer->closeView();
     db->deleteEnum(enumName);
+    viewer->setDatabase(db);
     delete item;
     if (listWidget->count() == 0) {
         stack->setCurrentWidget(noEnums);

@@ -1,3 +1,9 @@
+2010-05-25  JMB  Fixed file creation bug, stale filter bug
+
+    Fixed a rather serious bug introduced by the support for read-only files,
+    which prevented any new files from being created.  Also fixed a bug where
+    the current filter might contain stale data after major format changes.
+
 2010-05-24  JMB  Chinese & Czech updates, Debian/Maemo description updates
 
     Added the updated Chinese and Czech UI translations, and the Chinese help

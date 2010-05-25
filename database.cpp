@@ -63,11 +63,14 @@ Database::Database(const QString &path, OpenResult *result, bool encrypt)
     updatePreferences();
 
     QFileInfo info(path);
-    if (info.exists() && !info.isReadable()) {
-        *result = Failure;
-        return;
+    bool canWrite = true;
+    if (info.exists()) {
+        if (!info.isReadable()) {
+            *result = Failure;
+            return;
+        }
+        canWrite = info.isWritable();
     }
-    bool canWrite = info.isWritable();
 #if defined(Q_WS_WIN)
     file = new c4_Storage(path.toUtf8(), canWrite);
 #else
@@ -813,6 +816,11 @@ void Database::deleteColumn(const QString &name)
     deleteCalc(cId (columns[index]));
     // remove the column from the definition
     columns.RemoveAt(index);
+    // clear the current filter cache, it may need to be reloaded
+    if (curFilter) {
+        delete curFilter;
+        curFilter = 0;
+    }
 }
 
 /**
@@ -853,6 +861,11 @@ void Database::renameColumn(const QString &oldName, const QString &newName)
     // rename the column in the format definition
     int index = columns.Find(cName [utf8OldName]);
     cName (columns[index]) = utf8NewName;
+    // clear the current filter cache, it may need to be reloaded
+    if (curFilter) {
+        delete curFilter;
+        curFilter = 0;
+    }
 }
 
 /**
@@ -1205,7 +1218,8 @@ QStringList Database::listFilters()
 
 /**
  * Get the definition of the named filter.  Also sets the retrieved filter to
- * be the one currently in use.
+ * be the one currently in use.  The loaded filter is cached internally and
+ * deleted when appropriate, so it shouldn't be cached elsewhere.
  *
  * @param name The name of the filter to get
  * @return The filter's definition
@@ -2008,6 +2022,11 @@ void Database::replaceEnumOption(int enumId, const QString &oldOption,
             nextIndex = filterConditions.Find(fcColumn [cName (cols[i])]
                                               + fcConstant [utf8OldOption]);
         }
+    }
+    // clear the current filter cache, it may need to be reloaded
+    if (curFilter) {
+        delete curFilter;
+        curFilter = 0;
     }
 }
 
