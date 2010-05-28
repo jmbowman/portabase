@@ -584,7 +584,7 @@ aussi effacées:</translation>
         <translation>&amp;Montrer</translation>
     </message>
     <message>
-        <source>Edit &amp;Enums</source>
+        <source>Edit E&amp;nums</source>
         <translation>Éditer les &amp;enumérations</translation>
     </message>
     <message>

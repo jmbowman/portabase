@@ -119,7 +119,7 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(EditColumns, tr("Edit Col&umns") + ellipsis);
     toolTipMap.insert(EditColumns, tr("Edit the database format"));
 
-    textMap.insert(EditEnums, tr("Edit &Enums") + ellipsis);
+    textMap.insert(EditEnums, tr("Edit E&nums") + ellipsis);
     toolTipMap.insert(EditEnums, tr("Edit the enumerated data types"));
 
     textMap.insert(Views, tr("Views") + ellipsis);

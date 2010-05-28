@@ -22,7 +22,7 @@
 	<key>CFBundleExecutable</key>
 	<string>PortaBase</string>
 	<key>CFBundleGetInfoString</key>
-	<string>2.0b2, (c) Jeremy Bowman, 2002-2010</string>
+	<string>2.0rc1, (c) Jeremy Bowman, 2002-2010</string>
 	<key>CFBundleIconFile</key>
 	<string>@ICON@</string>
 	<key>CFBundleIdentifier</key>
@@ -32,11 +32,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0b2</string>
+	<string>2.0rc1</string>
 	<key>CFBundleSignature</key>
 	<string>PBas</string>
 	<key>CFBundleVersion</key>
-	<string>2.0.0b2</string>
+	<string>2.0.0d1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.4.0</string>
 </dict>

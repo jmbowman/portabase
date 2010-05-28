@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=2.0~beta2
+VERSION=2.0~rc1
 DEST=build/diablo/portabase-$VERSION
 
 rm -rf build/diablo

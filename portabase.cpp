@@ -1633,7 +1633,7 @@ void PortaBase::dropEvent(QDropEvent *event)
         else if (file.length() < 5) {
             valid = false;
         }
-        else if (file.right(4) != ".pob") {
+        else if (file.right(4).toLower() != ".pob") {
             valid = false;
         }
         if (!valid) {
@@ -1920,7 +1920,7 @@ void PortaBase::print(QPrinter *p)
 void PortaBase::aboutPortaBase()
 {
     QString appName = qApp->applicationName();
-    QString text = appName + " 2.0b2\n\n" + tr("Copyright (C)")
+    QString text = appName + " 2.0rc1\n\n" + tr("Copyright (C)")
                    + " 2002-2010\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::about(this, tr("About %1").arg(appName), text);

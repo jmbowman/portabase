@@ -104,7 +104,6 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     fileSaveAction->setShortcut(QKeySequence::Save);
     connect(fileSaveAction, SIGNAL(triggered()), this, SIGNAL(saveFile()));
 
-    recent = new QMenu(menuText(tr("Open &Recent")), window);
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         // we'll set the actual paths later; just need actions that stick
         // around after a file is opened

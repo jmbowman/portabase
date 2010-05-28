@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>PortaBase 2.0b2</title>
+  <title>PortaBase 2.0rc1</title>
 </head>
 <body>
 
-<div align="center"><h3>PortaBase 2.0b2</h3> - A portable database -</div>
+<div align="center"><h3>PortaBase 2.0rc1</h3> - A portable database -</div>
 <br>
 <a href="#intro">1)Introduction</a><br>
 <a href="#file">2)File selector</a><br>
@@ -178,8 +178,8 @@ The "File" menu (the main menu on Maemo) contains options that apply to the data
 <ul>
 <li><i>Save</i> - Save any changes that have been made since the file was opened or last saved.  If you exit PortaBase without saving the most recent changes, those changes will be lost (a dialog will warn you if this is about to happen).  This option is disabled if no changes have been made since the current database was opened or last saved. (Not shown in Maemo, use the toolbar button instead.)</li>
 <li><i>Change Password</i> - Launch a dialog which allows you to change the data file's password (only shown for <a href="#encrypt">encrypted files</a>)</li>
-<li><i>Import</i> - Allow you to <a href="#import">import</a> rows from a CSV file.</li>
-<li><i>Export</i> - Allow you to <a href="#export">export</a> the current database content to a CSV or XML file.</li>
+<li><i>Import</i> - <a href="#import">Import</a> rows from a CSV file.</li>
+<li><i>Export</i> - <a href="#export">Export</a> the current database content to a CSV or XML file.</li>
 <li><i>Delete Rows In Filter</i> - Deletes all rows which are included by the filter currently in use.</li>
 <li><i>Edit Columns</i> - Launch the <a href="#columns">columns editor</a>.</li>
 <li><i>Edit Enums</i> - Launch the <a href="#enummanage">enum manager</a>.</li>
@@ -240,7 +240,10 @@ In order to conserve screen space, Maemo does not include this menu; equivalent 
 There is a toolbar of buttons that provide quick access to commonly used operations.  These are:<br>
 <ul>
 <li><i>Save</i> - Same as "Save" in the <a href="#filemenu">File menu</a>.</li>
-<li><i>Add</i> - Same as "Add" in the <a href="#rowmenu">Row menu</a>.</li>
+<li><i>Add</i> - Same as "Add" in the <a href="#rowmenu">Row menu</a>. (Not on Maemo)</li>
+<li><i>Edit</i> - Same as "Edit" in the <a href="#rowmenu">Row menu</a>. (Not on Maemo)</li>
+<li><i>Copy</i> - Same as "Copy" in the <a href="#rowmenu">Row menu</a>. (Not on Maemo)</li>
+<li><i>Delete</i> - Same as "Delete" in the <a href="#rowmenu">Row menu</a>.</li>
 <li><i>Views</i> - Launch the <a href="#views">views dialog</a>.</li>
 <li><i>Sortings</i> - Launch the <a href="#sortings">sortings dialog</a>.</li>
 <li><i>Filters</i> - Launch the <a href="#filters">filters dialog</a>.</li>

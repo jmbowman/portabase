@@ -582,8 +582,8 @@ deleted:</source>
         <translation>展示(&amp;S)</translation>
     </message>
     <message>
-        <source>Edit &amp;Enums</source>
-        <translation>集合編輯(&amp;E)</translation>
+        <source>Edit E&amp;nums</source>
+        <translation>集合編輯(&amp;N)</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>

@@ -39,7 +39,7 @@
  <qresource lang="cs">
      <file alias="i18n/PortaBase.qm">translations/portabase_cs.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_cs.qm</file>
-     <file>help/html/PortaBase.html</file>
+     <file alias="help/html/PortaBase.html">help/cs/html/PortaBase.html</file>
  </qresource>
  <qresource lang="de">
      <file alias="i18n/PortaBase.qm">translations/portabase_de.qm</file>

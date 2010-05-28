@@ -130,10 +130,6 @@
 <context>
     <name>CalcWidget</name>
     <message>
-        <source>Update</source>
-        <translation type="obsolete">Aktualizovat</translation>
-    </message>
-    <message>
         <source>Update calculated value</source>
         <translation>Aktualizovat výpočet</translation>
     </message>
@@ -332,13 +328,6 @@
     </message>
 </context>
 <context>
-    <name>DateWidget</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Neuvádět</translation>
-    </message>
-</context>
-<context>
     <name>EnumEditor</name>
     <message>
         <source>Enum Editor</source>
@@ -488,26 +477,6 @@ vybraný seznam budou též smazány:</translation>
         <translation>Kódování textu</translation>
     </message>
     <message>
-        <source>Import rows from CSV file</source>
-        <translation type="obsolete">Importovat záznamy ze souboru CSV</translation>
-    </message>
-    <message>
-        <source>Import from MobileDB file</source>
-        <translation type="obsolete">Importovat ze souboru MobileDB</translation>
-    </message>
-    <message>
-        <source>Import from text file</source>
-        <translation type="obsolete">Importovat z textového souboru</translation>
-    </message>
-    <message>
-        <source>Import from XML file</source>
-        <translation type="obsolete">Importovat ze souboru XML</translation>
-    </message>
-    <message>
-        <source>Select an image</source>
-        <translation type="obsolete">Vybrat obrázek</translation>
-    </message>
-    <message>
         <source>Text files with comma separated values</source>
         <translation>Soubory hodnot oddělených čárkami</translation>
     </message>
@@ -543,160 +512,8 @@ vybraný seznam budou též smazány:</translation>
         <translation>Exportovat</translation>
     </message>
     <message>
-        <source>About PortaBase</source>
-        <translation type="obsolete">O aplikaci PortaBase</translation>
-    </message>
-    <message>
-        <source>Row</source>
-        <translation type="obsolete">Záznam</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Náhled</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation type="obsolete">Pořadí</translation>
-    </message>
-    <message>
-        <source>Filter</source>
-        <translation type="obsolete">Filtr</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Uložit</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">Přidat</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editovat</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Kopírovat</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Smazat</translation>
-    </message>
-    <message>
-        <source>Quick Filter</source>
-        <translation type="obsolete">Vyhledat</translation>
-    </message>
-    <message>
         <source>All Columns</source>
         <translation>Všechny sloupce</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Soubor</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Nápověda</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Nový</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Otevřít</translation>
-    </message>
-    <message>
-        <source>&amp;Rename</source>
-        <translation type="obsolete">&amp;Přejmenovat</translation>
-    </message>
-    <message>
-        <source>File &amp;name</source>
-        <translation type="obsolete">&amp;Jméno souboru</translation>
-    </message>
-    <message>
-        <source>File &amp;type</source>
-        <translation type="obsolete">&amp;Typ souboru</translation>
-    </message>
-    <message>
-        <source>Look &amp;in</source>
-        <translation type="obsolete">Umí&amp;stění</translation>
-    </message>
-    <message>
-        <source>Open Recent</source>
-        <translation type="obsolete">Naposledy otevřené</translation>
-    </message>
-    <message>
-        <source>Change Password</source>
-        <translation type="obsolete">Změnit heslo</translation>
-    </message>
-    <message>
-        <source>Slideshow</source>
-        <translation type="obsolete">Automatické přepínání obrázků</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">Vlastnosti</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">Nastavení</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">Ukončit</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Seznam</translation>
-    </message>
-    <message>
-        <source>Icons</source>
-        <translation type="obsolete">Ikony</translation>
-    </message>
-    <message>
-        <source>Help Contents</source>
-        <translation type="obsolete">Obsah nápovědy</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation type="obsolete">O Qt</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Přejmenovat</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="obsolete">Načíst znovu</translation>
-    </message>
-    <message>
-        <source>All Rows</source>
-        <translation type="obsolete">Všechny záznamy</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="obsolete">Zobrazit</translation>
-    </message>
-    <message>
-        <source>Delete Rows In Filter</source>
-        <translation type="obsolete">Smazat záznamy vyhovující filtru</translation>
-    </message>
-    <message>
-        <source>Edit Columns</source>
-        <translation type="obsolete">Editor sloupců</translation>
-    </message>
-    <message>
-        <source>Edit Enums</source>
-        <translation type="obsolete">Editor seznamů</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Zavřít</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -713,26 +530,6 @@ vybraný seznam budou též smazány:</translation>
     <message>
         <source>Fi&amp;lter</source>
         <translation>&amp;Filtr</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">Nápověd&amp;a</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Nový</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation type="obsolete">&amp;Otevřít</translation>
-    </message>
-    <message>
-        <source>Open &amp;Recent</source>
-        <translation type="obsolete">Naposledy ot&amp;evřené</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Uložit</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
@@ -753,26 +550,6 @@ vybraný seznam budou též smazány:</translation>
     <message>
         <source>Proper&amp;ties</source>
         <translation>&amp;Vlastnosti</translation>
-    </message>
-    <message>
-        <source>&amp;Preferences</source>
-        <translation type="obsolete">Nas&amp;tavení</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">&amp;Ukončit</translation>
-    </message>
-    <message>
-        <source>Help &amp;Contents</source>
-        <translation type="obsolete">&amp;Obsah nápovědy</translation>
-    </message>
-    <message>
-        <source>&amp;About PortaBase</source>
-        <translation type="obsolete">O aplikaci &amp;PortaBase</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation type="obsolete">O &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
@@ -807,20 +584,12 @@ vybraný seznam budou též smazány:</translation>
         <translation>&amp;Zobrazit</translation>
     </message>
     <message>
-        <source>&amp;Delete Rows In Filter</source>
-        <translation type="obsolete">Smazat záznamy vyhovují&amp;cí filtru</translation>
-    </message>
-    <message>
         <source>Edit Col&amp;umns</source>
         <translation>Editor &amp;sloupců</translation>
     </message>
     <message>
-        <source>Edit &amp;Enums</source>
+        <source>Edit E&amp;nums</source>
         <translation>&amp;Editor seznamů</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="obsolete">&amp;Zavřít</translation>
     </message>
     <message>
         <source>Change the current file&apos;s password</source>
@@ -984,49 +753,6 @@ vybraný seznam budou též smazány:</translation>
     </message>
 </context>
 <context>
-    <name>NewFileDialog</name>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Exportovat</translation>
-    </message>
-    <message>
-        <source>Enter a name for the new file</source>
-        <translation type="obsolete">Zadejte jméno nového souboru</translation>
-    </message>
-    <message>
-        <source>File already exists; overwrite it?</source>
-        <translation type="obsolete">Soubor již existuje; chcete jej přepsat?</translation>
-    </message>
-    <message>
-        <source>Encrypt the file?</source>
-        <translation type="obsolete">Zašifrovat tento soubor?</translation>
-    </message>
-    <message>
-        <source>Encrypted file</source>
-        <translation type="obsolete">Zašifrovaný soubor</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation type="obsolete">Soubory PortaBase</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation type="obsolete">Soubory hodnot oddělených čárkami</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation type="obsolete">Textové soubory</translation>
-    </message>
-    <message>
-        <source>XML files</source>
-        <translation type="obsolete">Soubory XML</translation>
-    </message>
-    <message>
-        <source>Choose a filename to save under</source>
-        <translation type="obsolete">Vyberte jméno ukládaného souboru</translation>
-    </message>
-</context>
-<context>
     <name>NumberWidget</name>
     <message>
         <source>Show calculator</source>
@@ -1069,37 +795,6 @@ vybraný seznam budou též smazány:</translation>
     </message>
 </context>
 <context>
-    <name>PBFileSelector</name>
-    <message>
-        <source>Enter a name for the new file</source>
-        <translation type="obsolete">Zadejte jméno nového souboru</translation>
-    </message>
-    <message>
-        <source>Unable to create new file</source>
-        <translation type="obsolete">Nelze vytvořit nový soubor</translation>
-    </message>
-    <message>
-        <source>Enter the new file name</source>
-        <translation type="obsolete">Zadejte jméno nového souboru</translation>
-    </message>
-    <message>
-        <source>Unable to rename the file</source>
-        <translation type="obsolete">Nelze přejmenovat soubor</translation>
-    </message>
-    <message>
-        <source>No file selected</source>
-        <translation type="obsolete">Není vybrán žádný soubor</translation>
-    </message>
-    <message>
-        <source>PortaBase files</source>
-        <translation type="obsolete">Soubory PortaBase</translation>
-    </message>
-    <message>
-        <source>Choose a file</source>
-        <translation type="obsolete">Vyberte soubor</translation>
-    </message>
-</context>
-<context>
     <name>PasswordDialog</name>
     <message>
         <source>Old password</source>
@@ -1129,10 +824,6 @@ vybraný seznam budou též smazány:</translation>
 <context>
     <name>PortaBase</name>
     <message>
-        <source>Delete</source>
-        <translation type="obsolete">Smazat</translation>
-    </message>
-    <message>
         <source>XML</source>
         <translation>XML</translation>
     </message>
@@ -1145,10 +836,6 @@ vybraný seznam budou též smazány:</translation>
         <translation>Importovat z:</translation>
     </message>
     <message>
-        <source>Unable to create new file</source>
-        <translation type="obsolete">Nelze vytvořit nový soubor</translation>
-    </message>
-    <message>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
@@ -1157,10 +844,6 @@ upgrade</source>
 formátu PortaBase než Vaše verze
 PortaBase podporuje; prosím,
 proveďte aktualizaci</translation>
-    </message>
-    <message>
-        <source>Are you sure?</source>
-        <translation type="obsolete">Jste si jist/-a?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -1243,10 +926,6 @@ vyhovující filtru?</translation>
     <message>
         <source>File Properties</source>
         <translation>Vlastnosti souboru</translation>
-    </message>
-    <message>
-        <source>File does not exist</source>
-        <translation type="obsolete">Soubor neexistuje</translation>
     </message>
     <message>
         <source>Not a PortaBase file</source>
@@ -1410,36 +1089,8 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
         <translation>Výchozí počet záznamů na stránce</translation>
     </message>
     <message>
-        <source>Options</source>
-        <translation type="obsolete">Podmínky</translation>
-    </message>
-    <message>
         <source>Appearance</source>
         <translation>Vzhled</translation>
-    </message>
-    <message>
-        <source>Top-level</source>
-        <translation type="obsolete">V nejvyšší úrovni</translation>
-    </message>
-    <message>
-        <source>Menu</source>
-        <translation type="obsolete">Položky menu</translation>
-    </message>
-    <message>
-        <source>Menus</source>
-        <translation type="obsolete">Menu</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="obsolete">Zobrazit</translation>
-    </message>
-    <message>
-        <source>Toolbar Button</source>
-        <translation type="obsolete">Tlačítko</translation>
-    </message>
-    <message>
-        <source>Buttons</source>
-        <translation type="obsolete">Tlačítka</translation>
     </message>
     <message>
         <source>View rows with a single click</source>
@@ -2026,10 +1677,6 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
     <message>
         <source>Column Name</source>
         <translation>Jméno sloupce</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Není</translation>
     </message>
     <message>
         <source>All Rows</source>

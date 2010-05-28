@@ -584,7 +584,7 @@ también serán borradas:</translation>
         <translation>&amp;Mostrar</translation>
     </message>
     <message>
-        <source>Edit &amp;Enums</source>
+        <source>Edit E&amp;nums</source>
         <translation>Editar &amp;enumeración</translation>
     </message>
     <message>

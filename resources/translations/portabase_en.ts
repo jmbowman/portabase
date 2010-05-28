@@ -896,7 +896,7 @@ deleted:</source>
     </message>
     <message>
         <location filename="../../menuactions.cpp" line="122"/>
-        <source>Edit &amp;Enums</source>
+        <source>Edit E&amp;nums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

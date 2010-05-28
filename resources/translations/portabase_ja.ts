@@ -401,11 +401,11 @@ deleted:</source>
     <name>FilterEditor</name>
     <message>
         <source>Filter Editor</source>
-        <translation>フィルタ編集</translation>
+        <translation>フィルター編集</translation>
     </message>
     <message>
         <source>Filter Name</source>
-        <translation>フィルタの名前</translation>
+        <translation>フィルターの名前</translation>
     </message>
 </context>
 <context>
@@ -552,7 +552,7 @@ deleted:</source>
     </message>
     <message>
         <source>&amp;Quick Filter</source>
-        <translation>簡易フィルタ(&amp;Q)</translation>
+        <translation>簡易フィルター(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -583,8 +583,8 @@ deleted:</source>
         <translation>表示(&amp;S)</translation>
     </message>
     <message>
-        <source>Edit &amp;Enums</source>
-        <translation>列挙管理(&amp;E)</translation>
+        <source>Edit E&amp;nums</source>
+        <translation>列挙管理(&amp;N)</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
@@ -616,7 +616,7 @@ deleted:</source>
     </message>
     <message>
         <source>Apply a one-condition filter</source>
-        <translation>一つの条件を持つフィルタを適用します</translation>
+        <translation>一つの条件を持つフィルターを適用します</translation>
     </message>
     <message>
         <source>Create a new row</source>
@@ -632,7 +632,7 @@ deleted:</source>
     </message>
     <message>
         <source>Create a new filter</source>
-        <translation>新しいフィルタを作成します</translation>
+        <translation>新しいフィルターを作成します</translation>
     </message>
     <message>
         <source>Edit the selected row</source>
@@ -648,7 +648,7 @@ deleted:</source>
     </message>
     <message>
         <source>Edit the selected filter</source>
-        <translation>選択したフィルタを編集します</translation>
+        <translation>選択したフィルターを編集します</translation>
     </message>
     <message>
         <source>Delete the selected row</source>
@@ -664,7 +664,7 @@ deleted:</source>
     </message>
     <message>
         <source>Delete the selected filter</source>
-        <translation>選択したフィルタを削除します</translation>
+        <translation>選択したフィルターを削除します</translation>
     </message>
     <message>
         <source>Show all of the database columns</source>
@@ -688,11 +688,11 @@ deleted:</source>
     </message>
     <message>
         <source>&amp;Delete Rows in Filter</source>
-        <translation>フィルタに含まれるレコードを削除(&amp;D)</translation>
+        <translation>フィルターに含まれるレコードを削除(&amp;D)</translation>
     </message>
     <message>
         <source>Delete all rows matching the current filter</source>
-        <translation>使っているフィルタに含まれる全てのレコードを削除します</translation>
+        <translation>使っているフィルターに含まれる全てのレコードを削除します</translation>
     </message>
     <message>
         <source>Edit the database format</source>
@@ -736,11 +736,11 @@ deleted:</source>
     </message>
     <message>
         <source>Filters</source>
-        <translation>フィルタ管理</translation>
+        <translation>フィルター管理</translation>
     </message>
     <message>
         <source>Change the active filter</source>
-        <translation>フィルタを交換、または編集します</translation>
+        <translation>フィルターを交換、または編集します</translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -842,7 +842,7 @@ PortaBaseバージョンより新しい…
     <message>
         <source>Delete all rows in the
 current filter?</source>
-        <translation>フィルタに含まれるレコード
+        <translation>フィルターに含まれるレコード
 を全て削除しますか?</translation>
     </message>
     <message>
@@ -855,7 +855,7 @@ current filter?</source>
     </message>
     <message>
         <source>Delete this filter?</source>
-        <translation>このフィルタを削除しますか?</translation>
+        <translation>このフィルターを削除しますか?</translation>
     </message>
     <message>
         <source>XML</source>
@@ -875,7 +875,7 @@ current filter?</source>
     </message>
     <message>
         <source>rows in current filter</source>
-        <translation>フィルタに含まれるレコード</translation>
+        <translation>フィルターに含まれるレコード</translation>
     </message>
     <message>
         <source>Export to:</source>
@@ -915,7 +915,7 @@ current filter?</source>
     </message>
     <message>
         <source>Filters</source>
-        <translation>フィルタ数</translation>
+        <translation>フィルター数</translation>
     </message>
     <message>
         <source>Enums</source>
@@ -1549,15 +1549,15 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Filters</source>
-        <translation>フィルタ管理</translation>
+        <translation>フィルター管理</translation>
     </message>
     <message>
         <source>Current Filter</source>
-        <translation>使っているフィルタ</translation>
+        <translation>使っているフィルター</translation>
     </message>
     <message>
         <source>New Filter</source>
-        <translation>フィルタ作成</translation>
+        <translation>フィルター作成</translation>
     </message>
     <message>
         <source>Selected Column</source>
@@ -1647,7 +1647,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>No rows in this filter</source>
-        <translation>このフィルタにレコードはありません</translation>
+        <translation>このフィルターにレコードはありません</translation>
     </message>
 </context>
 <context>
@@ -1666,7 +1666,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Default Filter</source>
-        <translation>デフォルトフィルタ</translation>
+        <translation>デフォルトフィルター</translation>
     </message>
     <message>
         <source>Include</source>
@@ -1686,7 +1686,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>No default filter</source>
-        <translation>デフォルトフィルタなし</translation>
+        <translation>デフォルトフィルターなし</translation>
     </message>
 </context>
 <context>

@@ -3,13 +3,13 @@
 
 [Setup]
 AppName=PortaBase
-AppVerName=PortaBase 2.0b2
+AppVerName=PortaBase 2.0rc1
 AppPublisher=Jeremy Bowman
 AppPublisherURL=http://portabase.sourceforge.net
 AppSupportURL=http://portabase.sourceforge.net
 AppUpdatesURL=http://portabase.sourceforge.net
 AppReadmeFile=README.txt
-AppVersion=2.0b2
+AppVersion=2.0rc1
 AppCopyright=Copyright (C) 2002-2010 Jeremy Bowman
 DefaultDirName={pf}\PortaBase
 DefaultGroupName=PortaBase
@@ -19,9 +19,9 @@ ChangesAssociations=yes
 LicenseFile=COPYING
 PrivilegesRequired=admin
 SolidCompression=yes
-OutputBaseFilename=PortaBase_2.0b2
+OutputBaseFilename=PortaBase_2.0rc1
 OutputDir=build\windows
-VersionInfoVersion=2.0.0.1
+VersionInfoVersion=2.0.0.2
 ShowLanguageDialog=yes
 
 [Tasks]
@@ -64,4 +64,5 @@ Name: "{userdesktop}\PortaBase"; Filename: "{app}\portabase.exe"; Tasks: desktop
 
 [Run]
 Filename: "{app}\PortaBase.exe"; Description: "{cm:LaunchProgram,PortaBase}"; Flags: nowait postinstall skipifsilent
+
 
