@@ -1,3 +1,19 @@
+2010-05-29  JMB  Recent files update fix
+
+    Fixed a bug where an invalid entry was added to the recently opened files
+    list when importing a MobileDB or XML file.
+
+2010-05-27  #################### PortaBase 2.0rc1 ####################
+
+2010-05-27  JMB  Japanese update, accelerator clash fix, dropped file fix
+
+    Updated the Japanese translation of the help file (fixing a few minor
+    issues with the UI translation and the English help file in the process).
+    Both "Preferences" and "Edit Enums" in the File menu were using the "E"
+    accelerator, switched the latter to use "N".  Also accounted for the
+    possibility of dropping files which don't have the extension all in lower
+    case.  Updated version numbers for the next release.
+
 2010-05-25  JMB  Fixed file creation bug, stale filter bug
 
     Fixed a rather serious bug introduced by the support for read-only files,

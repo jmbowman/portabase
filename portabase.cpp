@@ -603,7 +603,7 @@ void PortaBase::createFile(ImportDialog::DataSource source,
     else if (result == QMessageBox::Yes) {
         encrypted = true;
     }
-    if (QFile::exists(file) && !QFile::remove(file)) {
+    if (QFile::exists(f) && !QFile::remove(f)) {
         QMessageBox::warning(this, qApp->applicationName(),
                              tr("Unable to overwrite existing file"));
     }
@@ -642,7 +642,7 @@ void PortaBase::createFile(ImportDialog::DataSource source,
         updateCaption();
         // if not saved now, file is empty without later save...bad
         save();
-        mh->opened(file);
+        mh->opened(doc);
     }
     else {
         delete db;
