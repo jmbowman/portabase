@@ -1,3 +1,9 @@
+portabase (2.0-2) unstable; urgency=low
+
+  * Better management of link in /usr/bin
+
+ -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 03 Jun 2010 09:35:50 -0500
+
 portabase (2.0-1) unstable; urgency=low
 
   * New upstream version

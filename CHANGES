@@ -1,3 +1,9 @@
+2010-06-03  JMB  Packaging fix for Fremantle
+
+    Fixed a problem with the packaging for Fremantle that was causing
+    installation to fail near completion (the link to the binary wasn't always
+    managed properly).
+
 2010-06-02  #################### PortaBase 2.0 ####################
 
 2010-06-02  JMB  Fremantle condition editor fix, updated version number

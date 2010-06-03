@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 gtk-update-icon-cache -f /usr/share/icons/hicolor
+rm -f /usr/bin/portabase
 
 if [ -x /usr/bin/update-mime-database ]; then
 	update-mime-database /usr/share/mime
