@@ -1,3 +1,11 @@
+2010-06-02  #################### PortaBase 2.0 ####################
+
+2010-06-02  JMB  Fremantle condition editor fix, updated version number
+
+    Fixed a bug on Fremantle where launching the date picker dialog from the
+    condition editor would confuse the back/close button logic in the app
+    thereafter.  Updated version numbers for the next release.
+
 2010-05-29  JMB  Recent files update fix
 
     Fixed a bug where an invalid entry was added to the recently opened files

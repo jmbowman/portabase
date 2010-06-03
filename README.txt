@@ -1,5 +1,5 @@
-PortaBase 2.0 release candidate 1 (May 2010)
---------------------------------------------
+PortaBase 2.0 (June 2010)
+-------------------------
 PortaBase (portable database) is a program for conveniently managing one-table
 database files. It is available for many platforms, including Linux, Mac OS X,
 Windows, and Maemo (Diablo and Fremantle).

@@ -3,7 +3,7 @@
 # Script for packaging the Mac version of PortaBase for distribution
 # Assumes that we are in the PortaBase source code root directory
 
-VERSION=2.0rc1
+VERSION=2.0
 DIRNAME=PortaBase_$VERSION
 
 rm -rf build/*.app

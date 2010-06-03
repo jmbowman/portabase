@@ -1,3 +1,9 @@
+portabase (2.0-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 02 Jun 2010 16:23:17 -0500
+
 portabase (2.0~rc1-1) unstable; urgency=low
 
   * New upstream version

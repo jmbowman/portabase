@@ -37,9 +37,11 @@
  * @param parent The dialog's parent widget, if any
  */
 ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
-  : PBDialog(tr("Condition Editor"), parent, true), dataType(STRING)
+  : PBDialog(tr("Condition Editor"), parent), db(dbase), dataType(STRING)
 {
-    db = dbase;
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    vbox->addStretch(1);
+#endif
     columnList= new QComboBox(this);
     vbox->addWidget(columnList);
     columnList->addItem(tr("Any text column"));
@@ -106,6 +108,9 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
     constantStack->addWidget(constantCombo);
     constantStack->setCurrentWidget(constantLine);
 
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    vbox->addStretch(1);
+#endif
     finishLayout();
 }
 
