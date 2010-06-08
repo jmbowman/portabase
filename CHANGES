@@ -1,3 +1,10 @@
+2010-06-08  JMB  XML import bugfix, default decimal string fix
+
+    Fixed a bug where XML files would fail to import if the current filter
+    was specified as anything other than the "all rows" filter.  Fixed the
+    initial default value for decimal columns to use the appropriate decimal
+    point character for the locale in use.
+
 2010-06-03  JMB  Packaging fix for Fremantle
 
     Fixed a problem with the packaging for Fremantle that was causing

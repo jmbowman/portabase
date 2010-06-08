@@ -978,10 +978,6 @@ bool XMLImport::validateSortColumns()
  */
 bool XMLImport::validateFilterConditions()
 {
-    // validation of global table data must happen after everything is defined
-    if (!validateGlobal()) {
-        return false;
-    }
     if (!validateIndexMap("fcposition", "fcposition")) {
         return false;
     }
@@ -993,6 +989,10 @@ bool XMLImport::validateFilterConditions()
             db->addFilter(filter, false);
         }
         delete filter;
+    }
+    // validation of global table data must happen after everything is defined
+    if (!validateGlobal()) {
+        return false;
     }
     return true;
 }
