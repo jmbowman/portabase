@@ -26,6 +26,7 @@ class QCheckBox;
 class QComboBox;
 class QFont;
 class QLabel;
+class QQMenuHelper;
 class QSettings;
 class QSpinBox;
 class QTabWidget;
@@ -39,7 +40,7 @@ class Preferences: public PBDialog
 {
     Q_OBJECT
 public:
-    Preferences(QWidget *parent = 0);
+    Preferences(QQMenuHelper *menuHelper, QWidget *parent = 0);
 
     QFont applyChanges();
 
@@ -54,6 +55,7 @@ private:
     void configureColorPicker(QtColorPicker *picker);
 
 private:
+    QQMenuHelper *mh; /**< Support code for any document-based application */
     QTabWidget *tabs; /**< Tab widget used on all non-Fremantle platforms */
     QWidget *panel; /**< Large scrollable preferences panel used on Fremantle */
     QFontDatabase fontdb; /**< System font database */

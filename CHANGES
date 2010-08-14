@@ -1,3 +1,13 @@
+2010-08-14  JMB  Condition editor enum enhancement, clear recent files button
+
+    If you switch from one column to another one of the same enum type in the
+    condition editor, the selected value is no longer reset to the first one
+    in the list (this was really bothering me in a transactions database where
+    the "To" and "From" columns use the same enum).
+    
+    Added a button in the "Appearance" tab of the preferences dialog to clear
+    the list of recently opened files.
+
 2010-08-13  JMB  Calculator backspace/clear fix, better Fremantle integer input
 
     Fixed a bug where clicking backspace or the clear button in the calculator

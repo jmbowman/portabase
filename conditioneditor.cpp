@@ -275,19 +275,21 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantFloat->setValue("0");
     }
     else if (type >= FIRST_ENUM) {
-        constantCombo->clear();
-        constantCombo->addItems(db->listEnumOptions(type));
-        constantStack->setCurrentWidget(constantCombo);
-        constantLine->setText("");
-        constantCheck->setChecked(false);
-        QDate today = QDate::currentDate();
-        constantDate->setDate(today);
-        QTime now = QTime::currentTime();
-        constantTime->setTime(now);
-        caseCheck->hide();
-        caseCheck->setChecked(false);
-        constantInteger->setValue("0");
-        constantFloat->setValue("0");
+        if (type != dataType) {
+            constantCombo->clear();
+            constantCombo->addItems(db->listEnumOptions(type));
+            constantStack->setCurrentWidget(constantCombo);
+            constantLine->setText("");
+            constantCheck->setChecked(false);
+            QDate today = QDate::currentDate();
+            constantDate->setDate(today);
+            QTime now = QTime::currentTime();
+            constantTime->setTime(now);
+            caseCheck->hide();
+            caseCheck->setChecked(false);
+            constantInteger->setValue("0");
+            constantFloat->setValue("0");
+        }
     }
     else {
         constantStack->setCurrentWidget(constantLine);

@@ -117,6 +117,7 @@ signals:
     void aboutApplication();
 
 public slots:
+    void clearRecentMenu();
     void setEdited(bool y);
 
 private slots:

@@ -507,7 +507,7 @@ void PortaBase::viewProperties()
  */
 void PortaBase::editPreferences()
 {
-    Preferences prefs(this);
+    Preferences prefs(mh, this);
     if (prefs.exec()) {
         QFont font = prefs.applyChanges();
 #if !defined(Q_WS_MAC)

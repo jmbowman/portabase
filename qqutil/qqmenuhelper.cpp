@@ -338,6 +338,19 @@ void QQMenuHelper::updateRecentMenu()
 }
 
 /**
+ * Clear the menu of most recently opened files so that it is empty again.
+ */
+void QQMenuHelper::clearRecentMenu()
+{
+    recent->clear();
+    recentFiles.clear();
+    for (int i = 0; i < MAX_RECENT_FILES; i++) {
+        recentActions[i]->setText("");
+    }
+    emit recentFilesChanged();
+}
+
+/**
  * Indicate whether the current document has been edited or not since it was
  * last saved, so that menu items (particularly the "Save" action) and the
  * main window decorations can be updated accordingly.

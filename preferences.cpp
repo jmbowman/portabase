@@ -30,14 +30,15 @@
 #include "pbdialog.h"
 #include "portabase.h"
 #include "preferences.h"
+#include "qqutil/qqmenuhelper.h"
 
 /**
  * Constructor.
  *
  * @param parent This dialog's parent widget
  */
-Preferences::Preferences(QWidget *parent)
-    : PBDialog(tr("Preferences"), parent), tabs(0), panel(0)
+Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)
+    : PBDialog(tr("Preferences"), parent), mh(menuHelper), tabs(0), panel(0)
 {
 #if defined(Q_WS_MAEMO_5)
     QScrollArea *sa = new QScrollArea(this);
@@ -271,6 +272,11 @@ void Preferences::addAppearanceTab()
     oddButton->setCurrentColor(Factory::oddRowColor);
     hbox->addWidget(oddButton);
 #endif
+
+    QPushButton *button = new QPushButton(tr("Clear the recent files list"),
+                                          appearanceTab);
+    connect(button, SIGNAL(clicked()), mh, SLOT(clearRecentMenu()));
+    layout->addWidget(button);
 
     if (tabs) {
         layout->addStretch(1);
