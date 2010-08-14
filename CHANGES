@@ -1,3 +1,11 @@
+2010-08-13  JMB  Calculator backspace/clear fix, better Fremantle integer input
+
+    Fixed a bug where clicking backspace or the clear button in the calculator
+    dialog could result in incorrect display of grouping separators.  Enabled
+    function lock on integer entry widgets in Fremantle, so input is easier
+    using the hardware keyboard (although this precludes group separators, and
+    wouldn't work for decimal values either).
+
 2010-06-08  JMB  XML import bugfix, default decimal string fix
 
     Fixed a bug where XML files would fail to import if the current filter

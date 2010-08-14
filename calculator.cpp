@@ -272,7 +272,19 @@ void Calculator::calculationClicked(int button)
 void Calculator::clearClicked()
 {
     if (operand.length() > 0) {
-        operand = operand.left(operand.length() - 1);
+        QLocale locale = QLocale::system();
+        QChar decimalPoint = locale.decimalPoint();
+        if (!operand.contains(decimalPoint)) {
+            // may need to change separator placement
+            qlonglong value = locale.toLongLong(operand);
+            operand = QString::number(value);
+            operand = operand.left(operand.length() - 1);
+            value = operand.toLongLong();
+            operand = locale.toString(value);
+        }
+        else {
+            operand = operand.left(operand.length() - 1);
+        }
     }
     if (operand.length() == 0) {
         changeDisplay("0");
