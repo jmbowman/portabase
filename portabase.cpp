@@ -15,31 +15,23 @@
 
 #include <QAction>
 #include <QApplication>
-#include <QCloseEvent>
-#include <QDirModel>
 #include <QFile>
 #include <QFileInfo>
 #include <QFileSystemModel>
 #include <QFont>
 #include <QGroupBox>
-#include <QIconDragEvent>
 #include <QInputDialog>
 #include <QLayout>
 #include <QLocale>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
-#include <QPrintDialog>
-#include <QPrintPreviewDialog>
 #include <QPrinter>
-#include <QProcess>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QStackedWidget>
-#include <QStatusBar>
 #include <QStyle>
 #include <QTextDocument>
-#include <QToolBar>
 #include <QUrl>
 #include "condition.h"
 #include "conditioneditor.h"
@@ -66,14 +58,9 @@
  * @param parent This window's parent widget, if any (usually none)
  */
 PortaBase::PortaBase(QWidget *parent)
-  : QMainWindow(parent), db(0), readOnly(false), doc(""), printer(0),
-    vsfManager(0)
+  : QQMainWindow(tr("PortaBase files"), "pob", parent), db(0),
+    readOnly(false), printer(0), vsfManager(0)
 {
-#if defined(Q_WS_MAEMO_5)
-    setAttribute(Qt::WA_Maemo5StackedWindow);
-#else
-    statusBar();
-#endif
     QSettings *settings = getSettings();
     Formatting::updatePreferences(settings);
     confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
@@ -96,10 +83,8 @@ PortaBase::PortaBase(QWidget *parent)
     mainStack->addWidget(viewer);
 
     // menu and toolbar, shared between file selector and data viewer modes
-    toolbar = addToolBar("toolbar");
-    toolbar->setObjectName("toolbar");
     ma = new MenuActions(this);
-    mh = new QQMenuHelper(this, toolbar, tr("PortaBase files"), "pob", true);
+    QQMenuHelper *mh = menuHelper();
     mh->loadSettings(settings);
     connect(mh, SIGNAL(newFile(const QString &)),
             this, SLOT(newFile(const QString &)));
@@ -330,85 +315,6 @@ PortaBase::PortaBase(QWidget *parent)
 }
 
 /**
- * Destructor.
- */
-PortaBase::~PortaBase()
-{
-    QSettings settings;
-    mh->saveSettings(&settings);
-    saveWindowSettings(&settings);
-    if (printer) {
-        delete printer;
-    }
-}
-
-/**
- * Restore the window position, size, etc. from the provided application
- * settings object.
- *
- * @param settings The application settings to load from
- */
-void PortaBase::restoreWindowSettings(QSettings *settings)
-{
-    settings->beginGroup("Geometry");
-    int xpos = settings->value("X", -1).toInt();
-    int ypos = settings->value("Y", -1).toInt();
-    if (xpos != -1 && ypos != -1) {
-        move(xpos, ypos);
-    }
-    if (settings->value("Maximized").toBool()) {
-        resize(600, 400);
-        showMaximized();
-    }
-    else {
-        int w = settings->value("Width", 600).toInt();
-        int h = settings->value("Height", 400).toInt();
-        resize(w, h);
-    }
-    if (settings->contains("State")) {
-        restoreState(settings->value("State").toByteArray());
-        // make sure the toolbar isn't and can't be hidden
-        if (toolbar->isHidden()) {
-            toolbar->show();
-        }
-        toolbar->toggleViewAction()->setEnabled(false);
-        toolbar->toggleViewAction()->setVisible(false);
-    }
-    settings->endGroup();
-}
-
-/**
- * Save the window position, size, etc. to the provided application
- * settings object.
- *
- * @param settings The application settings to save to
- */
-void PortaBase::saveWindowSettings(QSettings *settings)
-{
-    settings->beginGroup("Geometry");
-    settings->setValue("Maximized", isMaximized());
-    settings->setValue("X", x());
-    settings->setValue("Y", y());
-    settings->setValue("Width", width());
-    settings->setValue("Height", height());
-    settings->setValue("State", saveState());
-    settings->endGroup();
-}
-
-/**
- * Switch from normal mode to fullscreen or vice versa.
- */
-void PortaBase::toggleFullscreen()
-{
-    if (isFullScreen()) {
-        showNormal();
-    }
-    else {
-        showFullScreen();
-    }
-}
-
-/**
  * Launch the "Columns Editor" dialog to define or modify the structure of
  * the current database's main data table.
  *
@@ -460,7 +366,7 @@ void PortaBase::editEnums()
  */
 void PortaBase::viewProperties()
 {
-    QFile file(doc);
+    QFile file(documentPath());
     QString message = tr("Name") + ": " + QFileInfo(file).fileName() + "\n";
     int size = file.size();
     QString units;
@@ -507,7 +413,7 @@ void PortaBase::viewProperties()
  */
 void PortaBase::editPreferences()
 {
-    Preferences prefs(mh, this);
+    Preferences prefs(menuHelper(), this);
     if (prefs.exec()) {
         QFont font = prefs.applyChanges();
 #if !defined(Q_WS_MAC)
@@ -527,7 +433,7 @@ void PortaBase::editPreferences()
         viewer->allowBooleanToggle(booleanToggle);
         viewer->usePages(pagedDisplay);
         viewer->showWithSingleClick(singleClickShow);
-        if (!doc.isEmpty()) {
+        if (!documentPath().isEmpty()) {
             showDataViewer();
             db->updatePreferences();
             Formatting::updatePreferences(&settings);
@@ -607,10 +513,10 @@ void PortaBase::createFile(ImportDialog::DataSource source,
         QMessageBox::warning(this, qApp->applicationName(),
                              tr("Unable to overwrite existing file"));
     }
-    doc = f;
+    setDocumentPath(f);
     bool ok = true;
     Database::OpenResult openResult;
-    db = new Database(doc, &openResult, encrypted);
+    db = new Database(f, &openResult, encrypted);
     readOnly = false;
     if (encrypted) {
         PasswordDialog passdlg(db, PasswordDialog::NewPassword, this);
@@ -642,13 +548,13 @@ void PortaBase::createFile(ImportDialog::DataSource source,
         updateCaption();
         // if not saved now, file is empty without later save...bad
         save();
-        mh->opened(doc);
+        menuHelper()->opened(f);
     }
     else {
         delete db;
         db = 0;
-        QFile::remove(doc);
-        doc = "";
+        QFile::remove(f);
+        setDocumentPath("");
     }
 }
 
@@ -672,7 +578,7 @@ void PortaBase::finishNewFile(Database *db)
  */
 void PortaBase::openFile(const QString &file)
 {
-    if (!doc.isEmpty()) {
+    if (!documentPath().isEmpty()) {
         // currently only support one open file at a time
         return;
     }
@@ -709,7 +615,7 @@ void PortaBase::openFile(const QString &file)
     }
     QFileInfo info(file);
     readOnly = !info.isWritable();
-    doc = file;
+    setDocumentPath(file);
     if (db) {
         delete db;
     }
@@ -717,24 +623,10 @@ void PortaBase::openFile(const QString &file)
     viewer->setDatabase(db);
     showDataViewer();
     updateCaption();
-    mh->opened(file);
+    menuHelper()->opened(file);
     if (readOnly) {
         QMessageBox::information(this, qApp->applicationName(),
                                  tr("This file is read-only.\nYou will not be able to save any changes you make."));
-    }
-}
-
-/**
- * Update the text in the window's title bar.
- */
-void PortaBase::updateCaption()
-{
-    if (doc.isEmpty()) {
-        setWindowTitle(qApp->applicationName());
-    }
-    else {
-        QString name = QFileInfo(doc).fileName();
-        setWindowTitle(name + "[*] - " + qApp->applicationName());
     }
 }
 
@@ -745,7 +637,7 @@ void PortaBase::closeViewer()
 {
     viewer->closeView();
     showFileSelector();
-    doc = "";
+    setDocumentPath("");
     delete db;
     db = 0;
     updateCaption();
@@ -760,6 +652,7 @@ void PortaBase::closeViewer()
 void PortaBase::updateRecentFileButtons()
 {
     QStringList recentFiles;
+    QQMenuHelper *mh = menuHelper();
     recentFiles << mh->action(QQMenuHelper::Recent1)->text();
     recentFiles << mh->action(QQMenuHelper::Recent2)->text();
     recentFiles << mh->action(QQMenuHelper::Recent3)->text();
@@ -812,7 +705,7 @@ void PortaBase::showFileSelector()
     printPreviewAction->setEnabled(false);
     printAction->setVisible(false);
     printAction->setEnabled(false);
-    mh->updateFileSelectorMenu();
+    menuHelper()->updateFileSelectorMenu();
 
     // Toolbar
     showAllFillerActions();
@@ -861,7 +754,7 @@ void PortaBase::showDataViewer()
     printAction->setEnabled(true);
     printAction->setVisible(true);
 #endif
-    mh->updateDocumentFileMenu();
+    menuHelper()->updateDocumentFileMenu();
 
     // Toolbar
     rowAddAction->setVisible(true);
@@ -883,57 +776,6 @@ void PortaBase::showDataViewer()
     rebuildViewMenu();
     rebuildSortMenu();
     rebuildFilterMenu();
-}
-
-/**
- * Window close event handler.  Makes sure that the user is given the
- * opportunity to save their changes if they forgot to do so.
- *
- * @param e The window close event
- */
-void PortaBase::closeEvent(QCloseEvent *e)
-{
-    if (mainStack->currentWidget() == viewer) {
-        if (isWindowModified()) {
-            QMessageBox::StandardButton choice;
-            choice = QMessageBox::warning(this, qApp->applicationName(),
-                                          tr("Save changes?"),
-                                          QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
-                                          QMessageBox::Cancel);
-            if (choice == QMessageBox::Yes) {
-                save();
-            }
-            else if (choice == QMessageBox::Cancel) {
-                e->ignore();
-                return;
-            }
-            else {
-                setEdited(false);
-            }
-        }
-        e->ignore();
-        closeViewer();
-    }
-    else {
-        e->accept();
-    }
-}
-
-/**
- * Quit the application.  Called when the "Quit" action is triggered.  Makes
- * sure that the user is given the opportunity to save their changes if they
- * forgot to do so.
- */
-void PortaBase::quit()
-{
-    if (!doc.isEmpty()) {
-        // close the current file; might be cancelled
-        close();
-    }
-    if (doc.isEmpty()) {
-        // if there isn't an open file, go ahead and exit
-        close();
-    }
 }
 
 /**
@@ -1077,7 +919,7 @@ void PortaBase::dataExport()
 QString PortaBase::createNewFile(const QString &description,
                                  const QString &extension)
 {
-  return mh->createNewFile(description, extension);
+  return menuHelper()->createNewFile(description, extension);
 }
 
 /**
@@ -1576,7 +1418,7 @@ void PortaBase::simpleFilter()
 void PortaBase::setEdited(bool y)
 {
     if (!readOnly) {
-        mh->setEdited(y);
+        menuHelper()->setEdited(y);
     }
 }
 
@@ -1593,146 +1435,6 @@ void PortaBase::setRowSelected(bool y)
     rowDeleteAction->setEnabled(y);
     rowCopyAction->setEnabled(y);
     rowViewAction->setEnabled(y);
-}
-
-/**
- * Drag event handler which determines if PortaBase allows a particular item
- * to be dragged over it (in preparation for a drop, usually).  Currently
- * accepts any URL drag events, but nothing else (text, images, etc.)  We'll
- * figure out if it's actually a PortaBase file or not when a drop is
- * attempted.  Note that drags aren't accepted if there is already an open
- * file; it has to be closed first.
- *
- * @param event A drag event
- */
-void PortaBase::dragEnterEvent(QDragEnterEvent *event)
-{
-    if (doc.isEmpty() && event->mimeData()->hasUrls()) {
-        event->acceptProposedAction();
-    }
-}
-
-/**
- * Drop event handler which opens a dropped PortaBase file if there isn't
- * already an open database.
- *
- * @param event A drop event
- */
-void PortaBase::dropEvent(QDropEvent *event)
-{
-    if (!doc.isEmpty()) {
-        return;
-    }
-    if (event->mimeData()->hasUrls()) {
-        QUrl url = event->mimeData()->urls()[0];
-        QString file = url.toLocalFile();
-        bool valid = true;
-        if (file.isEmpty()) {
-            valid = false;
-        }
-        else if (file.length() < 5) {
-            valid = false;
-        }
-        else if (file.right(4).toLower() != ".pob") {
-            valid = false;
-        }
-        if (!valid) {
-            QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Not a PortaBase file"));
-            return;
-        }
-        event->acceptProposedAction();
-        openFile(file);
-    }
-}
-
-/**
- * Main event handler, overridden to support application icon click and drag
- * events.  Only useful on Mac OS X, where it allows copying or linking the
- * currently open file (with a drag) or viewing the path to the current file
- * (with a command-click).  Cribbed almost verbatim from Qt Quarterly:
- * http://doc.trolltech.com/qq/qq18-macfeatures.html
- *
- * @param event The event to be processed
- * @return True if the event was recognized, false otherwise
- */
-bool PortaBase::event(QEvent *event)
-{
-#if defined(Q_WS_MAC)
-    if (!isActiveWindow() || doc.isEmpty()) {
-        return QMainWindow::event(event);
-    }
-    switch (event->type()) {
-        case QEvent::IconDrag: {
-            event->accept();
-            Qt::KeyboardModifiers modifiers = qApp->keyboardModifiers();
-            if (modifiers == Qt::NoModifier) {
-                QDrag *drag = new QDrag(this);
-                QMimeData *data = new QMimeData();
-                data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(doc));
-                drag->setMimeData(data);
-                QPixmap cursorPixmap(":/icons/document_large.png");
-                drag->setPixmap(cursorPixmap);
-                QPoint hotspot(cursorPixmap.width() - 5, 5);
-                drag->setHotSpot(hotspot);
-                drag->start(Qt::LinkAction | Qt::CopyAction);
-            }
-            else if (modifiers == Qt::ControlModifier) {
-                QMenu menu(this);
-                connect(&menu, SIGNAL(triggered(QAction *)), this, SLOT(openAt(QAction *)));
-
-                QFileInfo info(doc);
-                QAction *action = menu.addAction(info.fileName());
-                action->setIcon(QIcon(":/icons/document_small.png"));
-
-                QStringList folders = info.absolutePath().split('/');
-                QStringListIterator it(folders);
-                it.toBack();
-                while (it.hasPrevious()) {
-                    QString string = it.previous();
-                    QIcon icon;
-                    if (!string.isEmpty()) {
-                        icon = style()->standardIcon(QStyle::SP_DirClosedIcon, 0, this);
-                    }
-                    else { // At the root
-                        string = "/";
-                        icon = style()->standardIcon(QStyle::SP_DriveHDIcon, 0, this);
-                    }
-                    action = menu.addAction(string);
-                    action->setIcon(icon);
-                }
-                QPoint pos(QCursor::pos().x() - 20, frameGeometry().y());
-                menu.exec(pos);
-            }
-            else {
-                event->ignore();
-            }
-            return true;
-        }
-        default: {
-            return QMainWindow::event(event);
-        }
-    }
-#else
-    return QMainWindow::event(event);
-#endif
-}
-
-/**
- * Handler for parent directory selections from the application icon menu.
- * Only called on Mac OS X.
- *
- * @param action The application icon menu action that was triggered
- */
-void PortaBase::openAt(QAction *action)
-{
-    QString path = doc.left(doc.indexOf(action->text())) + action->text();
-    if (path == doc) {
-        return;
-    }
-    QProcess process;
-    process.start("/usr/bin/open", QStringList() << path, QIODevice::ReadOnly);
-    process.waitForFinished();
 }
 
 /**
@@ -1829,7 +1531,7 @@ void PortaBase::createFillerActions() {
     for (int i = 0; i < 6; i++) {
         fillerActions[i] = new QAction("", this);
 #if defined(Q_WS_MAC)
-        toolbar->addAction(fillerActions[i]);
+        menuHelper()->addToToolBar(fillerActions[i]);
 #endif
     }
 }
@@ -1844,51 +1546,6 @@ void PortaBase::showAllFillerActions() {
         fillerActions[i]->setVisible(true);
     }
 #endif
-}
-
-/**
- * Show a print preview dialog.  In addition to showing what the printed
- * output will look like, this dialog also lets the user set up printing
- * options such as zoom factor, orientation, and paper size.  Configured
- * settings are preserved until PortaBase exits.
- */
-void PortaBase::printPreview()
-{
-    if (!printer) {
-        printer = new QPrinter(QPrinter::HighResolution);
-    }
-    else {
-        printer->setPrintRange(QPrinter::AllPages);
-        printer->setFromTo(0, 0);
-    }
-    QPrintPreviewDialog dialog(printer, this);
-    connect(&dialog, SIGNAL(paintRequested(QPrinter*)),
-            this, SLOT(print(QPrinter*)));
-    dialog.exec();
-}
-
-/**
- * Print a subset of the current file's data that is appropriate for the current
- * settings.  Respects the current view, sorting, and filter (but prints all
- * matching rows, not just those shown on the current page).
- */
-void PortaBase::print()
-{
-    if (!printer) {
-        printer = new QPrinter(QPrinter::HighResolution);
-    }
-    else {
-        printer->setPrintRange(QPrinter::AllPages);
-        printer->setFromTo(0, 0);
-    }
-    QPrintDialog dialog(printer, this);
-    if (dialog.exec() != QDialog::Accepted) {
-        statusBar()->showMessage(tr("Printing aborted"), 2000);
-        return;
-    }
-    statusBar()->showMessage(tr("Printing") + "...");
-    print(printer);
-    statusBar()->showMessage(tr("Printing completed"), 2000);
 }
 
 /**

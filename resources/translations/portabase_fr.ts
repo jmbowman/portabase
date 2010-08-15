@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -131,14 +131,14 @@
     <name>CalcWidget</name>
     <message>
         <source>Update calculated value</source>
-        <translation type="unfinished">Mise à jour</translation>
+        <translation>Mettre à jour la valeur calculée</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Sélection d&apos;une couleur</translation>
+        <translation>Personnalisé</translation>
     </message>
 </context>
 <context>
@@ -181,7 +181,7 @@
     </message>
     <message>
         <source>New Enum</source>
-        <translation>Nouvel Énumération</translation>
+        <translation>Nouvelle énumération</translation>
     </message>
     <message>
         <source>Default</source>
@@ -217,15 +217,15 @@
     </message>
     <message>
         <source>Next value</source>
-        <translation>Val. suiv.</translation>
+        <translation>Valeur suivante</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>image</translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Column Definition</source>
-        <translation type="unfinished"></translation>
+        <translation>Définition de colonne</translation>
     </message>
 </context>
 <context>
@@ -282,7 +282,7 @@
     <name>Crypto</name>
     <message>
         <source>Incorrect password</source>
-        <translation>mot de passe incorrect</translation>
+        <translation>Mot de passe incorrect</translation>
     </message>
     <message>
         <source>Error in decrypting data</source>
@@ -294,7 +294,7 @@
     </message>
     <message>
         <source>Password must be at least 6 characters long</source>
-        <translation>Le mot de passe doit faire au moins 6 car.</translation>
+        <translation>Le mot de passe doit faire au moins 6 caractères</translation>
     </message>
 </context>
 <context>
@@ -305,26 +305,26 @@
     </message>
     <message>
         <source>No columns defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune colonne définie</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
-        <translation type="unfinished"></translation>
+        <translation>Appuyer sur le bouton &quot;Ajouter&quot; pour en créer une</translation>
     </message>
 </context>
 <context>
     <name>DateDialog</name>
     <message>
         <source>Select a date</source>
-        <translation type="unfinished">Sélectionner une date</translation>
+        <translation>Sélectionner une date</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Aujourd&apos;hui</translation>
+        <translation>Aujourd&apos;hui</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">None</translation>
+        <translation>Aucune</translation>
     </message>
 </context>
 <context>
@@ -355,7 +355,7 @@
     </message>
     <message>
         <source>Option text</source>
-        <translation>Option du texte</translation>
+        <translation>Texte de l&apos;option</translation>
     </message>
     <message>
         <source>Replace where used with:</source>
@@ -363,12 +363,13 @@
     </message>
     <message>
         <source>No options defined for this enumeration type</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune option définie pour ce type d&apos;énumération</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one, or press
 the &quot;Import&quot; button to load lines from a text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Appuyez sur le bouton &quot;Ajouter&quot; pour en créer une ou
+sur le bouton &quot;Importer&quot; pour en charger depuis un fichier texte</translation>
     </message>
 </context>
 <context>
@@ -383,7 +384,7 @@ use this enum will also be
 deleted:</source>
         <translation>Les colonnes suivantes qui
 utilisent cette énumération seront
-aussi effacées:</translation>
+aussi supprimées :</translation>
     </message>
     <message>
         <source>Continue?</source>
@@ -391,18 +392,18 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>No enumerated column types defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun type énuméré défini</translation>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
-        <translation type="unfinished"></translation>
+        <translation>Appuyez sur le bouton &quot;Ajouter&quot; pour en créer un</translation>
     </message>
 </context>
 <context>
     <name>FilterEditor</name>
     <message>
         <source>Filter Editor</source>
-        <translation>Éditeur d&apos;énumération</translation>
+        <translation>Éditeur de filtre</translation>
     </message>
     <message>
         <source>Filter Name</source>
@@ -456,11 +457,11 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Delete the current image?</source>
-        <translation>Effacer l&apos;image courante?</translation>
+        <translation>Supprimer l&apos;image courante?</translation>
     </message>
 </context>
 <context>
@@ -490,11 +491,11 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation>images</translation>
+        <translation>Images</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation>choisissez un fichier</translation>
+        <translation>Choisissez un fichier</translation>
     </message>
     <message>
         <source>Import</source>
@@ -521,15 +522,15 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>&amp;Row</source>
-        <translation>&amp;Enr</translation>
+        <translation>&amp;Rangée</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation>&amp;Trie</translation>
+        <translation>&amp;Trier</translation>
     </message>
     <message>
         <source>Fi&amp;lter</source>
-        <translation>Fi&amp;ltre</translation>
+        <translation>Fi&amp;ltrer</translation>
     </message>
     <message>
         <source>C&amp;hange Password</source>
@@ -565,7 +566,7 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Effacer</translation>
+        <translation>S&amp;upprimer</translation>
     </message>
     <message>
         <source>All &amp;Columns</source>
@@ -573,7 +574,7 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>All &amp;Rows</source>
-        <translation>tous les En&amp;r.</translation>
+        <translation>Toutes les &amp;rangées</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -581,7 +582,7 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation>&amp;Montrer</translation>
+        <translation>&amp;Détailler</translation>
     </message>
     <message>
         <source>Edit E&amp;nums</source>
@@ -589,174 +590,174 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>Edit Col&amp;umns</source>
-        <translation>Éditer &amp;colonnes</translation>
+        <translation>Éditer les &amp;colonnes</translation>
     </message>
     <message>
         <source>Change the current file&apos;s password</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier le mot de passe du fichier courant</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau fichier à partir de données dans un autre format</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer des rangées à partir d&apos;un fichier CSV</translation>
     </message>
     <message>
         <source>Export data to another file format</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les données dans un autre format de fichier</translation>
     </message>
     <message>
         <source>Start an image slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer un diaporama</translation>
     </message>
     <message>
         <source>Show information about the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les informations au sujet du fichier courant</translation>
     </message>
     <message>
         <source>Apply a one-condition filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer un filtre mono condition</translation>
     </message>
     <message>
         <source>Create a new row</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une nouvelle rangée</translation>
     </message>
     <message>
         <source>Create a new view</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une nouvelle vue</translation>
     </message>
     <message>
         <source>Create a new sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau tri</translation>
     </message>
     <message>
         <source>Create a new filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau filtre</translation>
     </message>
     <message>
         <source>Edit the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la rangée sélectionnée</translation>
     </message>
     <message>
         <source>Edit the selected view</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer la vue sélectionnée</translation>
     </message>
     <message>
         <source>Edit the selected sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le tri sélectionné</translation>
     </message>
     <message>
         <source>Edit the selected filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le filtre sélectionné</translation>
     </message>
     <message>
         <source>Delete the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la rangée sélectionnée</translation>
     </message>
     <message>
         <source>Delete the selected view</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la vue sélectionnée</translation>
     </message>
     <message>
         <source>Delete the selected sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le tri sélectionné</translation>
     </message>
     <message>
         <source>Delete the selected filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le filtre sélectionné</translation>
     </message>
     <message>
         <source>Show all of the database columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher toutes les colonnes de la base</translation>
     </message>
     <message>
         <source>Show all rows of data</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher toutes les rangées</translation>
     </message>
     <message>
         <source>Create a copy of the selected row</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une copie de la rangée sélectionnée</translation>
     </message>
     <message>
         <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le texte sélectionné</translation>
     </message>
     <message>
         <source>Show the selected row in more detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher plus de détail sur la rangée sélectionnée</translation>
     </message>
     <message>
         <source>&amp;Delete Rows in Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;upprimer les rangées du filtre</translation>
     </message>
     <message>
         <source>Delete all rows matching the current filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer toutes les rangées correspondant au filtre courant</translation>
     </message>
     <message>
         <source>Edit the database format</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le format de la base</translation>
     </message>
     <message>
         <source>Edit the enumerated data types</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer les types de données énumérés</translation>
     </message>
     <message>
         <source>Configure and preview printing options</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurer et visualiser les options d&apos;impression</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Imprimer</translation>
     </message>
     <message>
         <source>Print the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimer le fichier courant</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Aperçu a&amp;vant impression</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished">Vues</translation>
+        <translation>Vues</translation>
     </message>
     <message>
         <source>Change the active view</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer la vue active</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished">Tris</translation>
+        <translation>Tris</translation>
     </message>
     <message>
         <source>Change the active sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le tri actif</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished">Filtres</translation>
+        <translation>Filtres</translation>
     </message>
     <message>
         <source>Change the active filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le filtre actif</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Plein écran</translation>
     </message>
     <message>
         <source>View PortaBase in fullscreen mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher PortaBase en plein écran</translation>
     </message>
 </context>
 <context>
     <name>NumberWidget</name>
     <message>
         <source>Show calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la calculatrice</translation>
     </message>
 </context>
 <context>
@@ -771,7 +772,7 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>No name entered</source>
-        <translation>Aucun nom entré</translation>
+        <translation>Aucun nom saisi</translation>
     </message>
     <message>
         <source>Add</source>
@@ -783,7 +784,7 @@ aussi effacées:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Up</source>
@@ -846,16 +847,16 @@ supporté; mettez à jour SVP</translation>
     </message>
     <message>
         <source>Save changes?</source>
-        <translation>Sauver les changement?</translation>
+        <translation>Sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Delete this row?</source>
-        <translation>Effacer cette rangée</translation>
+        <translation>Supprimer cette rangée?</translation>
     </message>
     <message>
         <source>Delete all rows in the
 current filter?</source>
-        <translation>Effacer toutes les rangées
+        <translation>Supprimer toutes les rangées
 dans le filtre courant?</translation>
     </message>
     <message>
@@ -864,7 +865,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>rows in current filter</source>
-        <translation>Rangée dans le filtre courant</translation>
+        <translation>Rangées dans le filtre courant</translation>
     </message>
     <message>
         <source>Export to:</source>
@@ -872,15 +873,15 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Delete this view?</source>
-        <translation>Effacer cette vue?</translation>
+        <translation>Supprimer cette vue ?</translation>
     </message>
     <message>
         <source>Delete this sorting?</source>
-        <translation>Effacer ce tri?</translation>
+        <translation>Supprimer ce tri ?</translation>
     </message>
     <message>
         <source>Delete this filter?</source>
-        <translation>Effacer ce filtre?</translation>
+        <translation>Supprimer ce filtre ?</translation>
     </message>
     <message>
         <source>Copyright (C)</source>
@@ -888,7 +889,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Site we: http://portabase.sourceforge.net</translation>
+        <translation>Site web: http://portabase.sourceforge.net</translation>
     </message>
     <message>
         <source>Name</source>
@@ -900,7 +901,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Rows</source>
-        <translation>Enr.</translation>
+        <translation>Rangées</translation>
     </message>
     <message>
         <source>Columns</source>
@@ -920,7 +921,7 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Enums</source>
-        <translation>Énums</translation>
+        <translation>Énumérations</translation>
     </message>
     <message>
         <source>File Properties</source>
@@ -928,64 +929,65 @@ dans le filtre courant?</translation>
     </message>
     <message>
         <source>Not a PortaBase file</source>
-        <translation>Ce n&apos;est pas un fcihier Portabase</translation>
+        <translation>Ce n&apos;est pas un fichier PortaBase</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">Fichiers portabase</translation>
+        <translation>Fichiers PortaBase</translation>
     </message>
     <message>
         <source>Recently opened files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers récemment ouverts</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="unfinished">Crypter le fichier?</translation>
+        <translation>Crypter le fichier?</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
+        <translation>Fichiers texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">Fichier XML</translation>
+        <translation>Fichiers XML</translation>
     </message>
     <message>
         <source>Printing aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Impression annulée</translation>
     </message>
     <message>
         <source>Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Impression</translation>
     </message>
     <message>
         <source>Printing completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Impression terminée</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos de %1</translation>
     </message>
     <message>
         <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour obtenir des stats sur une colonne, appuyer sur l&apos;entête de cette colonne pendant au moins une demi seconde</translation>
     </message>
     <message>
         <source>No such file exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Un tel fichier n&apos;existe pas</translation>
     </message>
     <message>
         <source>Unable to overwrite existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;écraser le fichier existant</translation>
     </message>
     <message>
         <source>Unable to read from this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de lire ce fichier</translation>
     </message>
     <message>
         <source>This file is read-only.
 You will not be able to save any changes you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce fichier est en lecture seule
+Vous ne pourrez pas sauvegarder vos modifications.</translation>
     </message>
 </context>
 <context>
@@ -1020,31 +1022,31 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Confirm deletions</source>
-        <translation>Confirmer les effacements</translation>
+        <translation>Confirmer les suppressions</translation>
     </message>
     <message>
         <source>Allow checkbox edit in data viewer</source>
-        <translation>Autoriser l&apos;édition des cases à cocher dans les vue</translation>
+        <translation>Autoriser l&apos;édition des cases à cocher dans les vues</translation>
     </message>
     <message>
         <source>Show seconds for times</source>
-        <translation>Montrer les secondes pour l&apos;heure</translation>
+        <translation>Afficher les secondes pour l&apos;heure</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
-        <translation>Wrap Notes</translation>
+        <translation>Retour à la ligne auto pour le texte des notes</translation>
     </message>
     <message>
         <source>at whitespace</source>
-        <translation>at whitespace</translation>
+        <translation>à l&apos;espace</translation>
     </message>
     <message>
         <source>anywhere</source>
-        <translation>N&apos;importe où</translation>
+        <translation>n&apos;importe où</translation>
     </message>
     <message>
         <source>Row Colors</source>
-        <translation>Couleurs des rangées</translation>
+        <translation>Couleur des rangées</translation>
     </message>
     <message>
         <source>Date and Time</source>
@@ -1052,11 +1054,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Date format</source>
-        <translation>format de la date</translation>
+        <translation>Format de la date</translation>
     </message>
     <message>
         <source>Time format</source>
-        <translation>format de l&apos;heure</translation>
+        <translation>Format de l&apos;heure</translation>
     </message>
     <message>
         <source>24 hour</source>
@@ -1080,11 +1082,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Use pages in data viewer</source>
-        <translation>Utiliser la page dans le visualisateur de données</translation>
+        <translation>Utiliser les pages dans le visualiseur de données</translation>
     </message>
     <message>
         <source>Default rows per page</source>
-        <translation>Enr. par défaut par page</translation>
+        <translation>Nombre de rangées par défaut par page</translation>
     </message>
     <message>
         <source>Appearance</source>
@@ -1092,82 +1094,82 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Use small-screen settings on this device</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la configuration pour les petits écrans sur ce matériel</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">J</translation>
+        <translation>J</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanc</translation>
     </message>
     <message>
         <source>Aquamarine</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu marine</translation>
     </message>
     <message>
         <source>Light blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu clair</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Turquoise</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris clair</translation>
     </message>
     <message>
         <source>Light green</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert clair</translation>
     </message>
     <message>
         <source>Lavender</source>
-        <translation type="unfinished"></translation>
+        <translation>Lavande</translation>
     </message>
     <message>
         <source>Silver</source>
-        <translation type="unfinished"></translation>
+        <translation>Argent</translation>
     </message>
     <message>
         <source>Tan</source>
-        <translation type="unfinished"></translation>
+        <translation>Brun</translation>
     </message>
     <message>
         <source>Thistle</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauve</translation>
     </message>
     <message>
         <source>View rows with a single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualiser les rangées avec un simple clic</translation>
     </message>
 </context>
 <context>
     <name>QMenuBar</name>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos de %1</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Préférences</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Quit %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter %1</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">À propos de Qt</translation>
+        <translation>À propos de Qt</translation>
     </message>
 </context>
 <context>
@@ -1178,7 +1180,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>must be a decimal value</source>
-        <translation>Doit-être un décimal</translation>
+        <translation>doit-être un décimal</translation>
     </message>
     <message>
         <source>must be 0 or 1</source>
@@ -1198,7 +1200,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Excess columns</source>
-        <translation>Excès de colonnes</translation>
+        <translation>Trop de colonnes</translation>
     </message>
     <message>
         <source>Missing columns</source>
@@ -1210,15 +1212,15 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Error in row %1</source>
-        <translation>erreur dans la ligne %1</translation>
+        <translation>erreur dans la rangée %1</translation>
     </message>
     <message>
         <source>Not a valid MobileDB file</source>
-        <translation>Ce n&apos;est pas un fichier MobileDB valide</translation>
+        <translation>Fichier MobileDB non valide</translation>
     </message>
     <message>
         <source>Problematic row</source>
-        <translation>ligne problématique</translation>
+        <translation>Rangée problématique</translation>
     </message>
     <message>
         <source>Missing file</source>
@@ -1229,231 +1231,231 @@ You will not be able to save any changes you make.</source>
     <name>QQHelpBrowser</name>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Aide</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Préc.</translation>
+        <translation>Précédent</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Suiv.</translation>
+        <translation>Suivant</translation>
     </message>
 </context>
 <context>
     <name>QQMenuHelper</name>
     <message>
         <source>Choose a filename to save under</source>
-        <translation type="unfinished">Enregistrer sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;A propos de %1</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Create a new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau fichier</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Ouvrir</translation>
+        <translation>&amp;Ouvrir</translation>
     </message>
     <message>
         <source>Open an existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir un fichier existant</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Quitter</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>Quit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter l&apos;application</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sauver</translation>
+        <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
         <source>Save the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder le fichier courant</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished">Ouvrir &amp;Recent</translation>
+        <translation>Ouvrir &amp;récent</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Close the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer le fichier courant</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Fichier</translation>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished">Sommaire de l&apos;aide</translation>
+        <translation>Sommaire de l&apos;aide</translation>
     </message>
     <message>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Aide</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">Au sujet de &amp;Qt</translation>
+        <translation>A propos de &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Aide</translation>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
         <source>Save changes?</source>
-        <translation type="unfinished">Sauver les changement?</translation>
+        <translation>Sauvegarder les modifications ?</translation>
     </message>
     <message>
         <source>File already exists; overwrite it?</source>
-        <translation type="unfinished">Le fichier existe déjà; l&apos;écraser?</translation>
+        <translation>Le fichier existe déjà; voulez-vous l&apos;écraser?</translation>
     </message>
     <message>
         <source>Choose a file</source>
-        <translation type="unfinished">choisissez un fichier</translation>
+        <translation>Choisissez un fichier</translation>
     </message>
     <message>
         <source>File does not exist</source>
-        <translation type="unfinished">Le fichier n&apos;existe pas</translation>
+        <translation>Le fichier n&apos;existe pas</translation>
     </message>
     <message>
         <source>The selected item is a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;élément sélectionné est un dossier</translation>
     </message>
     <message>
         <source>Pr&amp;eferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Pr&amp;eférences</translation>
     </message>
     <message>
         <source>Change the application settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier la configuration de l&apos;application</translation>
     </message>
 </context>
 <context>
     <name>QtColorPicker</name>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Noir</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanc</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge foncé</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert foncé</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu foncé</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Turquoise</translation>
     </message>
     <message>
         <source>Dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Turquoise foncé</translation>
     </message>
     <message>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Violet</translation>
     </message>
     <message>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Violet foncé</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaune foncé</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris</translation>
     </message>
     <message>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris foncé</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris clair</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished">Sélection d&apos;une couleur</translation>
+        <translation>Personnalisé</translation>
     </message>
 </context>
 <context>
     <name>RowEditor</name>
     <message>
         <source>Row Editor</source>
-        <translation>Éditeur de ligne</translation>
+        <translation>Éditeur de rangée</translation>
     </message>
 </context>
 <context>
     <name>RowViewer</name>
     <message>
         <source>Row Viewer</source>
-        <translation>Visualisateur de ligne</translation>
+        <translation>Visualiseur de rangée</translation>
     </message>
     <message>
         <source>Previous row</source>
-        <translation type="unfinished"></translation>
+        <translation>Rangée précédente</translation>
     </message>
     <message>
         <source>Edit this row</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer cette rangée</translation>
     </message>
     <message>
         <source>Copy the selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le texte sélectionné</translation>
     </message>
     <message>
         <source>Next row</source>
-        <translation type="unfinished"></translation>
+        <translation>Rangée suivante</translation>
     </message>
     <message>
         <source>Copy this row</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier cette rangée</translation>
     </message>
     <message>
         <source>Delete this row</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer cette rangée</translation>
     </message>
 </context>
 <context>
@@ -1464,7 +1466,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Colonne</translation>
     </message>
     <message>
         <source>Delay between images</source>
@@ -1483,7 +1485,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Sorting Name</source>
-        <translation>Trier par nom</translation>
+        <translation>Nom du tri</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -1499,18 +1501,18 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Ascending</source>
-        <translation>Montant</translation>
+        <translation>Croissant</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation>Descendant</translation>
+        <translation>Décroissant</translation>
     </message>
 </context>
 <context>
     <name>TimeWidget</name>
     <message>
         <source>AM</source>
-        <translation>am</translation>
+        <translation>Matin</translation>
     </message>
     <message>
         <source>None</source>
@@ -1518,61 +1520,61 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>PM</source>
-        <translation>pm</translation>
+        <translation>Après-midi</translation>
     </message>
 </context>
 <context>
     <name>VSFManager</name>
     <message>
         <source>Views</source>
-        <translation type="unfinished">Vues</translation>
+        <translation>Vues</translation>
     </message>
     <message>
         <source>Current View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue courante</translation>
     </message>
     <message>
         <source>New View</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle vue</translation>
     </message>
     <message>
         <source>Sortings</source>
-        <translation type="unfinished">Tris</translation>
+        <translation>Tris</translation>
     </message>
     <message>
         <source>Current Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Tri courant</translation>
     </message>
     <message>
         <source>New Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau tri</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished">Filtres</translation>
+        <translation>Filtres</translation>
     </message>
     <message>
         <source>Current Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre courant</translation>
     </message>
     <message>
         <source>New Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau filtre</translation>
     </message>
     <message>
         <source>Selected Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Colonne sélectionnée</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun(e)</translation>
     </message>
 </context>
 <context>
     <name>View</name>
     <message>
         <source>No data to summarize</source>
-        <translation>Pas de date</translation>
+        <translation>Aucune donnée à synthétiser</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1600,7 +1602,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Earliest</source>
-        <translation>le plus tôt</translation>
+        <translation>Le plus tôt</translation>
     </message>
     <message>
         <source>Latest</source>
@@ -1608,7 +1610,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Total length</source>
-        <translation>longueur totale</translation>
+        <translation>Longueur totale</translation>
     </message>
     <message>
         <source>characters</source>
@@ -1616,7 +1618,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Average length</source>
-        <translation>longueur moyenne</translation>
+        <translation>Longueur moyenne</translation>
     </message>
     <message>
         <source>Minimum length</source>
@@ -1632,22 +1634,22 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>No image</source>
-        <translation>Pas d&apos;image</translation>
+        <translation>Aucune image</translation>
     </message>
 </context>
 <context>
     <name>ViewDisplay</name>
     <message>
         <source>No results</source>
-        <translation>Néant</translation>
+        <translation>Aucun résultat</translation>
     </message>
     <message>
         <source>No image columns in this view</source>
-        <translation>Pas d&apos;image dans cette vue</translation>
+        <translation>Aucune image dans cette vue</translation>
     </message>
     <message>
         <source>No rows in this filter</source>
-        <translation>PAs d&apos;enr. avec ce filtre</translation>
+        <translation>Aucun enr. avec ce filtre</translation>
     </message>
 </context>
 <context>
@@ -1662,7 +1664,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Default Sorting</source>
-        <translation>tri par défaut</translation>
+        <translation>Tri par défaut</translation>
     </message>
     <message>
         <source>Default Filter</source>
@@ -1670,7 +1672,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Include</source>
-        <translation>inclure</translation>
+        <translation>Inclure</translation>
     </message>
     <message>
         <source>Column Name</source>
@@ -1678,15 +1680,15 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>All Rows</source>
-        <translation>Toutes les lignes</translation>
+        <translation>Toutes les rangées</translation>
     </message>
     <message>
         <source>No default sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun tri par défaut</translation>
     </message>
     <message>
         <source>No default filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun filtre par défaut</translation>
     </message>
 </context>
 <context>
@@ -1697,11 +1699,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Line</source>
-        <translation>ligne</translation>
+        <translation>Ligne</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation>colonne</translation>
+        <translation>Colonne</translation>
     </message>
     <message>
         <source>only allowed as root element</source>
@@ -1709,7 +1711,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Unknown element</source>
-        <translation>élement inconnu</translation>
+        <translation>Element inconnu</translation>
     </message>
     <message>
         <source>%1 not allowed as child of %2</source>
@@ -1721,7 +1723,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>&quot;c&quot; attribute is missing or non-integer</source>
-        <translation>l&apos;attribut &quot;c&quot; est manquant ou n&apos;est pas un entier </translation>
+        <translation>L&apos;attribut &quot;c&quot; est manquant ou n&apos;est pas un entier </translation>
     </message>
     <message>
         <source>Unsupported</source>
@@ -1753,7 +1755,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>must be an integer</source>
-        <translation>Doit-être un entier</translation>
+        <translation>doit-être un entier</translation>
     </message>
     <message>
         <source>must be a non-negative integer</source>
@@ -1765,11 +1767,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Duplicate element</source>
-        <translation>élement dupliqué</translation>
+        <translation>Element dupliqué</translation>
     </message>
     <message>
         <source>Missing data for column ID %1</source>
-        <translation>donnée pour la colonne ID %1 manquante</translation>
+        <translation>Donnée pour la colonne ID %1 manquante</translation>
     </message>
 </context>
 </TS>

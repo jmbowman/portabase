@@ -21,6 +21,7 @@
 #include <QStringList>
 #include "datatypes.h"
 #include "importdialog.h"
+#include "qqutil/qqmainwindow.h"
 #include "qqutil/qqmenuhelper.h"
 
 class Database;
@@ -28,7 +29,6 @@ class MenuActions;
 class QAction;
 class QGroupBox;
 class QMenu;
-class QMenuBar;
 class QPrinter;
 class QPushButton;
 class QScrollArea;
@@ -42,13 +42,12 @@ typedef QList<QAction*> ActionList;
  * The main window of the PortaBase application.  Most interaction with the
  * menus and toolbars is managed here.
  */
-class PortaBase: public QMainWindow
+class PortaBase: public QQMainWindow
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "net.sourceforge.portabase")
 public:
     PortaBase(QWidget *parent = 0);
-    ~PortaBase();
 
     void setEdited(bool y);
     void setRowSelected(bool y);
@@ -96,28 +95,14 @@ private slots:
     void deleteFilter();
     void simpleFilter();
     void aboutPortaBase();
-    void quit();
-    void openAt(QAction *where);
-    void printPreview();
-    void print();
     void print(QPrinter *p);
     void changeView();
     void changeSorting();
     void changeFilter();
-    void toggleFullscreen();
-
-protected:
-    void closeEvent(QCloseEvent *e);
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
-    bool event (QEvent *event);
 
 private:
-    void restoreWindowSettings(QSettings *settings);
-    void saveWindowSettings(QSettings *settings);
     void createFile(ImportDialog::DataSource source, const QString &file=QString::null);
     void finishNewFile(Database *db);
-    void updateCaption();
     void rebuildViewMenu();
     void updateViewMenu();
     void rebuildSortMenu();
@@ -139,9 +124,7 @@ private:
     QPushButton *importButton; /**< The button for importing from another format */
     QGroupBox *recentBox; /**< The grouping box containing recentButtons */
     QPushButton* recentButtons[MAX_RECENT_FILES]; /**< Buttons on noFileWidget representing the most recently opened files */
-    QToolBar *toolbar; /**< The application toolbar */
     MenuActions *ma; /**< Menu and toolbar action definition manager */
-    QQMenuHelper *mh; /**< Support code for any document-based application */
     QAction *importAction; /**< "Import" menu action (for creating a new file) */
     QAction *changePassAction; /**< "Change Password" menu action */
     QAction *dataImportAction; /**< "Import" menu action (in an existing file) */

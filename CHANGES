@@ -1,3 +1,10 @@
+2010-08-15  JMB  French translation update, main window code cleanup
+
+    Added a recently received update to the French UI translation.  Moved a lot
+    of code for the main window to a separate base class, which has already
+    been tested and refined in another project of mine; fixes a minor issue
+    with the save changes prompt dialog.
+
 2010-08-14  JMB  Condition editor enum enhancement, clear recent files button
 
     If you switch from one column to another one of the same enum type in the

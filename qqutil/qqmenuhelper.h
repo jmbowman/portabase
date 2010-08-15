@@ -40,7 +40,6 @@ class QToolBar;
  * <li>icons/quit.png</li>
  * <li>icons/close.png</li>
  * <li>icons/save.png</li>
- * <li>icons/document.png</li>
  * </ul>
  * <p>The following "File" menu is provided when in the initial
  * "file selector" mode:</p>
@@ -95,7 +94,7 @@ public:
     void updateDocumentFileMenu();
     void addToFileMenu(QAction *action);
     void addToToolBar(QAction *action);
-    void saveChangesPrompt();
+    int saveChangesPrompt();
     QMenu *createMenu(QMainWindow *mainWindow);
     QMenu *fileMenu();
     QMenu *helpMenu();

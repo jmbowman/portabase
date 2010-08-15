@@ -70,6 +70,7 @@ HEADERS         = calc/calcdateeditor.h \
                   preferences.h \
                   qqutil/qqdialog.h \
                   qqutil/qqhelpbrowser.h \
+                  qqutil/qqmainwindow.h \
                   qqutil/qqmenuhelper.h \
                   qqutil/qqtoolbarstretch.h \
                   roweditor.h \
@@ -136,6 +137,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   preferences.cpp \
                   qqutil/qqdialog.cpp \
                   qqutil/qqhelpbrowser.cpp \
+                  qqutil/qqmainwindow.cpp \
                   qqutil/qqmenuhelper.cpp \
                   qqutil/qqtoolbarstretch.cpp \
                   roweditor.cpp \

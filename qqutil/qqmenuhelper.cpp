@@ -442,9 +442,9 @@ void QQMenuHelper::updateFileSelectorMenu()
     mb->addAction(fileOpenAction);
     int count = extraFileActions.count();
     for (int i = 0; i < count; i++) {
-    	if (extraFileActions[i]->isVisible()) {
-    		mb->addAction(extraFileActions[i]);
-    	}
+        if (extraFileActions[i]->isVisible()) {
+            mb->addAction(extraFileActions[i]);
+        }
     }
     mb->addAction(prefsAction);
     mb->addAction(helpAction);
@@ -496,9 +496,9 @@ void QQMenuHelper::updateDocumentFileMenu()
     mb->clear();
     int count = extraFileActions.count();
     for (int i = 0; i < count; i++) {
-    	if (extraFileActions[i]->isVisible()) {
-    		mb->addAction(extraFileActions[i]);
-    	}
+        if (extraFileActions[i]->isVisible()) {
+            mb->addAction(extraFileActions[i]);
+        }
     }
     mb->addAction(prefsAction);
     mb->addAction(helpAction);
@@ -577,18 +577,25 @@ QAction *QQMenuHelper::action(Action actionId)
  * if both the closeFile() and quit() signals are connected to the window's
  * close() slot, then both of these actions and a pressing of the window's
  * "X" button can all be handled in that method.
+ *
+ * @return The code returned from the message box (Yes, No, or Cancel)
  */
-void QQMenuHelper::saveChangesPrompt()
+int QQMenuHelper::saveChangesPrompt()
 {
+    int choice = QMessageBox::Yes;
     if (fileSaveAction->isEnabled()) {
-        int choice = QMessageBox::warning(mainWindow, qApp->applicationName(),
-                                          tr("Save changes?"),
-                                          QMessageBox::Yes|QMessageBox::No,
-                                          QMessageBox::Yes);
-        if (choice == 0) {
+        choice = QMessageBox::warning(mainWindow, qApp->applicationName(),
+                                      tr("Save changes?"),
+                                      QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+                                      QMessageBox::Cancel);
+        if (choice == QMessageBox::Yes) {
             emit saveFile();
         }
+        else if (choice == QMessageBox::No) {
+            setEdited(false);
+        }
     }
+    return choice;
 }
 
 /**
