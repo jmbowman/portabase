@@ -65,6 +65,8 @@ public:
     void usePages(bool flag);
     void showWithSingleClick(bool flag);
     void updateColWidths();
+    int rowCount();
+    int columnCount();
 
 public slots:
     void addRow();

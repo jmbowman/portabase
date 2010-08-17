@@ -1,3 +1,9 @@
+2010-08-16  JMB  Note button sizing fix, more info in file properties dialog
+
+    Fixed the width of note field edit buttons representing long text on
+    Fremantle.  Added the number of rows in the current filter and the number
+    of columns in the current view to the file properties dialog.
+
 2010-08-15  JMB  French translation update, main window code cleanup
 
     Added a recently received update to the French UI translation.  Moved a lot

@@ -62,7 +62,11 @@ void NoteButton::setContent(const QString &text)
     QString buttonText(text);
     buttonText.replace(QRegExp("\n"), " ");
     QFontMetrics metrics = fontMetrics();
+#if defined(Q_WS_MAEMO_5)
+    int available = width() - 90 - metrics.width("...");
+#else
     int available = width() - 60 - metrics.width("...");
+#endif
     int length = buttonText.length();
     for (int i = 0; i < length; i++) {
         if (metrics.width(buttonText, i + 1) > available) {
@@ -95,7 +99,9 @@ void NoteButton::launchEditor()
 void NoteButton::resizeEvent(QResizeEvent *event)
 {
   QAbstractButton::resizeEvent(event);
-  setContent(noteContent);
+  if (isVisible()) {
+      setContent(noteContent);
+  }
 }
 
 /**

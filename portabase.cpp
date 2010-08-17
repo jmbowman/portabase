@@ -385,9 +385,13 @@ void PortaBase::viewProperties()
     QString sizeString = locale.toString(size);
     message += QString("%1: %2\n").arg(tr("Size")).arg(units.arg(sizeString));
     int count = db->getData().GetSize();
-    message += tr("Rows") + ": " + locale.toString(count) + "\n";
+    QString rowsInFilter = locale.toString(viewer->rowCount());
+    QString colsInView = locale.toString(viewer->columnCount());
+    message += tr("Rows") + ": " + locale.toString(count) + " (";
+    message += tr("%1 in current filter").arg(rowsInFilter) + ")\n";
     count = db->listColumns().count();
-    message += tr("Columns") + ": " + locale.toString(count) + "\n";
+    message += tr("Columns") + ": " + locale.toString(count) + " (";
+    message += tr("%1 in current view").arg(colsInView) + ")\n";
     count = db->listViews().count();
     message += tr("Views") + ": " + locale.toString(count) + "\n";
     QStringList sortings = db->listSortings();

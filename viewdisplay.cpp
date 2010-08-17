@@ -304,6 +304,26 @@ void ViewDisplay::resetTable()
 }
 
 /**
+ * Get the number of rows passing the current filter.
+ *
+ * @return The row count
+ */
+int ViewDisplay::rowCount()
+{
+    return model->view()->totalRowCount();
+}
+
+/**
+ * Get the number of columns in the current view.
+ *
+ * @return The column count
+ */
+int ViewDisplay::columnCount()
+{
+    return model->columnCount();
+}
+
+/**
  * Generate an HTML string representing the content matching the current view, filter,
  * and sorting settings.  Used for printing.
  *
