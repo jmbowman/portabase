@@ -102,6 +102,7 @@ Linux/UNIX compilation
   platform
 - Make sure the Metakit static library (libmk4.a) is in your LD_LIBRARY_PATH,
   and that the other library files (.so, .la, etc.) aren't.
+- Run "lrelease resources/translations/*.ts" to prepare the translation files.
 - Run qmake on portabase.pro
 - Run make
 

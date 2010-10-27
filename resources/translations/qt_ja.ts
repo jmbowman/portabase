@@ -499,37 +499,31 @@ Please verify the correct directory name was given.</source>
         <translation>戻る</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Parent Directory</source>
         <translation>親ディレクトリ</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Create New Folder</source>
         <translation>新しいフォルダの作成</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>List View</source>
         <translation>一覧表示</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Detail View</source>
         <translation>詳細表示</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Look in:</source>
         <translation>検索する場所:</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Files of type:</source>
         <translation>ファイルの種類:</translation>
@@ -1239,77 +1233,62 @@ Qt GNU General Public License バージョン 3.0 ライセンスは、GNU GPL �
         <translation>書式設定</translation>
     </message>
     <message>
-        <location/>
         <source>Paper</source>
         <translation>用紙</translation>
     </message>
     <message>
-        <location/>
         <source>Page size:</source>
         <translation>ページサイズ:</translation>
     </message>
     <message>
-        <location/>
         <source>Width:</source>
         <translation>幅:</translation>
     </message>
     <message>
-        <location/>
         <source>Height:</source>
         <translation>高さ:</translation>
     </message>
     <message>
-        <location/>
         <source>Paper source:</source>
         <translation>給紙装置:</translation>
     </message>
     <message>
-        <location/>
         <source>Orientation</source>
         <translation>印刷方向</translation>
     </message>
     <message>
-        <location/>
         <source>Portrait</source>
         <translation>縦 (ポートレート)</translation>
     </message>
     <message>
-        <location/>
         <source>Landscape</source>
         <translation>横 (ランドスケープ)</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse landscape</source>
         <translation>横 反転 (リバースランドスケープ)</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse portrait</source>
         <translation>縦 反転 (リバースポートレート)</translation>
     </message>
     <message>
-        <location/>
         <source>Margins</source>
         <translation>余白</translation>
     </message>
     <message>
-        <location/>
         <source>top margin</source>
         <translation>上端余白</translation>
     </message>
     <message>
-        <location/>
         <source>left margin</source>
         <translation>左端余白</translation>
     </message>
     <message>
-        <location/>
         <source>right margin</source>
         <translation>右端余白</translation>
     </message>
     <message>
-        <location/>
         <source>bottom margin</source>
         <translation>下端余白</translation>
     </message>
@@ -1960,12 +1939,10 @@ Please choose a different file name.</source>
         <translation>書式</translation>
     </message>
     <message>
-        <location/>
         <source>Page</source>
         <translation>ページ</translation>
     </message>
     <message>
-        <location/>
         <source>Advanced</source>
         <translation>高度な設定</translation>
     </message>
@@ -1978,92 +1955,74 @@ Please choose a different file name.</source>
         <translation>書式</translation>
     </message>
     <message>
-        <location/>
         <source>Copies</source>
         <translation>印刷部数</translation>
     </message>
     <message>
-        <location/>
         <source>Print range</source>
         <translation>印刷範囲</translation>
     </message>
     <message>
-        <location/>
         <source>Print all</source>
         <translation>すべて印刷</translation>
     </message>
     <message>
-        <location/>
         <source>Pages from</source>
         <translation>先頭のページ</translation>
     </message>
     <message>
-        <location/>
         <source>to</source>
         <translation>末尾のページ</translation>
     </message>
     <message>
-        <location/>
         <source>Selection</source>
         <translation>選択した部分を印刷</translation>
     </message>
     <message>
-        <location/>
         <source>Output Settings</source>
         <translation>出力設定</translation>
     </message>
     <message>
-        <location/>
         <source>Copies:</source>
         <translation>印刷部数:</translation>
     </message>
     <message>
-        <location/>
         <source>Collate</source>
         <translation>丁合い</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse</source>
         <translation>逆順</translation>
     </message>
     <message>
-        <location/>
         <source>Options</source>
         <translation>オプション</translation>
     </message>
     <message>
-        <location/>
         <source>Color Mode</source>
         <translation>色</translation>
     </message>
     <message>
-        <location/>
         <source>Color</source>
         <translation>カラー</translation>
     </message>
     <message>
-        <location/>
         <source>Grayscale</source>
         <translation>グレースケール</translation>
     </message>
     <message>
-        <location/>
         <source>Duplex Printing</source>
         <translation>両面印刷</translation>
     </message>
     <message>
-        <location/>
         <source>None</source>
         <translation>なし</translation>
     </message>
     <message>
-        <location/>
         <source>Long side</source>
         <translation>長辺綴じ</translation>
     </message>
     <message>
-        <location/>
         <source>Short side</source>
         <translation>短辺綴じ</translation>
     </message>
@@ -2076,42 +2035,34 @@ Please choose a different file name.</source>
         <translation>書式</translation>
     </message>
     <message>
-        <location/>
         <source>Printer</source>
         <translation>プリンタ</translation>
     </message>
     <message>
-        <location/>
         <source>&amp;Name:</source>
         <translation>名前(&amp;N):</translation>
     </message>
     <message>
-        <location/>
         <source>P&amp;roperties</source>
         <translation>プロパティ(&amp;r)</translation>
     </message>
     <message>
-        <location/>
         <source>Location:</source>
         <translation>設置場所:</translation>
     </message>
     <message>
-        <location/>
         <source>Preview</source>
         <translation>プレビュー</translation>
     </message>
     <message>
-        <location/>
         <source>Type:</source>
         <translation>タイプ:</translation>
     </message>
     <message>
-        <location/>
         <source>Output &amp;file:</source>
         <translation>出力ファイル名(&amp;f):</translation>
     </message>
     <message>
-        <location/>
         <source>...</source>
         <translation>...</translation>
     </message>

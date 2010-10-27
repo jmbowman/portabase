@@ -440,25 +440,21 @@ Verifique que el nombre del fichero es correcto.</translation>
         <translation>Anterior (histórico)</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Parent Directory</source>
         <translation>Directorio superior</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>List View</source>
         <translation>Vista de lista</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Detail View</source>
         <translation>Vista detallada</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Files of type:</source>
         <translation>Ficheros de tipo:</translation>
@@ -585,7 +581,6 @@ Do you want to delete it anyway?</source>
         <translation>Ver en:</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Create New Folder</source>
         <translation>Crear una nueva carpeta</translation>
@@ -1215,77 +1210,62 @@ All other platforms</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Page size:</source>
         <translation type="unfinished">Tamaño de página:</translation>
     </message>
     <message>
-        <location/>
         <source>Width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Paper source:</source>
         <translation type="unfinished">Fuente del papel:</translation>
     </message>
     <message>
-        <location/>
         <source>Orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Portrait</source>
         <translation type="unfinished">Vertical</translation>
     </message>
     <message>
-        <location/>
         <source>Landscape</source>
         <translation type="unfinished">Apaisado</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse landscape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Reverse portrait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>top margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>left margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>right margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>bottom margin</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1951,12 +1931,10 @@ Elija un nombre de fichero diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1969,92 +1947,74 @@ Elija un nombre de fichero diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Copies</source>
         <translation type="unfinished">Copias</translation>
     </message>
     <message>
-        <location/>
         <source>Print range</source>
         <translation type="unfinished">Imprimir el intervalo</translation>
     </message>
     <message>
-        <location/>
         <source>Print all</source>
         <translation type="unfinished">Imprimir todo</translation>
     </message>
     <message>
-        <location/>
         <source>Pages from</source>
         <translation type="unfinished">Páginas</translation>
     </message>
     <message>
-        <location/>
         <source>to</source>
         <translation type="unfinished">a</translation>
     </message>
     <message>
-        <location/>
         <source>Selection</source>
         <translation type="unfinished">Selección</translation>
     </message>
     <message>
-        <location/>
         <source>Output Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Copies:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Collate</source>
         <translation type="unfinished">Recopilar</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Options</source>
         <translation type="unfinished">Opciones</translation>
     </message>
     <message>
-        <location/>
         <source>Color Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Grayscale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Duplex Printing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Long side</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Short side</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2067,42 +2027,34 @@ Elija un nombre de fichero diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Printer</source>
         <translation type="unfinished">Impresora</translation>
     </message>
     <message>
-        <location/>
         <source>&amp;Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>P&amp;roperties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Location:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>Output &amp;file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>

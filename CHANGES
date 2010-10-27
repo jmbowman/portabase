@@ -1,3 +1,10 @@
+2010-10-27  JMB  Build instructions update, translation files cleanup
+
+    Mentioned the need to prepare the translation files in the compilation
+    instructions.  Removed some extraneous empty "location" elements in the
+    Qt translation files that were causing Pootle (a translation server I'm in
+    the process of setting up) to choke.
+
 2010-08-16  JMB  Note button sizing fix, more info in file properties dialog
 
     Fixed the width of note field edit buttons representing long text on

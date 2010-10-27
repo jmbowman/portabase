@@ -495,25 +495,21 @@ Please verify the correct file name was given.</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Parent Directory</source>
         <translation>父目錄</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>List View</source>
         <translation>列表檢視</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Detail View</source>
         <translation>詳細檢視</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Files of type:</source>
         <translation>檔案型態：</translation>
@@ -640,7 +636,6 @@ Do you want to delete it anyway?</source>
         <translation>尋找於：</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Create New Folder</source>
         <translation>建立新資料夾</translation>
@@ -1272,77 +1267,62 @@ Do you want to delete it anyway?</source>
         <translation>表單</translation>
     </message>
     <message>
-        <location/>
         <source>Paper</source>
         <translation>紙張</translation>
     </message>
     <message>
-        <location/>
         <source>Page size:</source>
         <translation>紙張大小：</translation>
     </message>
     <message>
-        <location/>
         <source>Width:</source>
         <translation>寬度：</translation>
     </message>
     <message>
-        <location/>
         <source>Height:</source>
         <translation>高度：</translation>
     </message>
     <message>
-        <location/>
         <source>Paper source:</source>
         <translation>紙張來源：</translation>
     </message>
     <message>
-        <location/>
         <source>Orientation</source>
         <translation>方向</translation>
     </message>
     <message>
-        <location/>
         <source>Portrait</source>
         <translation>縱向</translation>
     </message>
     <message>
-        <location/>
         <source>Landscape</source>
         <translation>橫向</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse landscape</source>
         <translation>反序橫向</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse portrait</source>
         <translation>反序縱向</translation>
     </message>
     <message>
-        <location/>
         <source>Margins</source>
         <translation>邊緣</translation>
     </message>
     <message>
-        <location/>
         <source>top margin</source>
         <translation>上緣</translation>
     </message>
     <message>
-        <location/>
         <source>left margin</source>
         <translation>左緣</translation>
     </message>
     <message>
-        <location/>
         <source>right margin</source>
         <translation>右緣</translation>
     </message>
     <message>
-        <location/>
         <source>bottom margin</source>
         <translation>下緣</translation>
     </message>
@@ -2008,12 +1988,10 @@ Please choose a different file name.</source>
         <translation>表單</translation>
     </message>
     <message>
-        <location/>
         <source>Page</source>
         <translation>頁面</translation>
     </message>
     <message>
-        <location/>
         <source>Advanced</source>
         <translation>進階</translation>
     </message>
@@ -2026,92 +2004,74 @@ Please choose a different file name.</source>
         <translation>表單</translation>
     </message>
     <message>
-        <location/>
         <source>Copies</source>
         <translation>份數</translation>
     </message>
     <message>
-        <location/>
         <source>Print range</source>
         <translation>列印範圍</translation>
     </message>
     <message>
-        <location/>
         <source>Print all</source>
         <translation>全部列印</translation>
     </message>
     <message>
-        <location/>
         <source>Pages from</source>
         <translation>指定頁面：從</translation>
     </message>
     <message>
-        <location/>
         <source>to</source>
         <translation>到</translation>
     </message>
     <message>
-        <location/>
         <source>Selection</source>
         <translation>選擇區</translation>
     </message>
     <message>
-        <location/>
         <source>Output Settings</source>
         <translation>輸出設定</translation>
     </message>
     <message>
-        <location/>
         <source>Copies:</source>
         <translation>份數：</translation>
     </message>
     <message>
-        <location/>
         <source>Collate</source>
         <translation>校對</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse</source>
         <translation>反向</translation>
     </message>
     <message>
-        <location/>
         <source>Options</source>
         <translation>選項</translation>
     </message>
     <message>
-        <location/>
         <source>Color Mode</source>
         <translation>顏色模式</translation>
     </message>
     <message>
-        <location/>
         <source>Color</source>
         <translation>顏色</translation>
     </message>
     <message>
-        <location/>
         <source>Grayscale</source>
         <translation>灰階</translation>
     </message>
     <message>
-        <location/>
         <source>Duplex Printing</source>
         <translation>雙工列印</translation>
     </message>
     <message>
-        <location/>
         <source>None</source>
         <translation>無</translation>
     </message>
     <message>
-        <location/>
         <source>Long side</source>
         <translation>長邊</translation>
     </message>
     <message>
-        <location/>
         <source>Short side</source>
         <translation>短邊</translation>
     </message>
@@ -2124,42 +2084,34 @@ Please choose a different file name.</source>
         <translation>表單</translation>
     </message>
     <message>
-        <location/>
         <source>Printer</source>
         <translation>印表機</translation>
     </message>
     <message>
-        <location/>
         <source>&amp;Name:</source>
         <translation>名稱(&amp;N)：</translation>
     </message>
     <message>
-        <location/>
         <source>P&amp;roperties</source>
         <translation>屬性(&amp;R)</translation>
     </message>
     <message>
-        <location/>
         <source>Location:</source>
         <translation>位置：</translation>
     </message>
     <message>
-        <location/>
         <source>Preview</source>
         <translation>預覽</translation>
     </message>
     <message>
-        <location/>
         <source>Type:</source>
         <translation>型態：</translation>
     </message>
     <message>
-        <location/>
         <source>Output &amp;file:</source>
         <translation>輸出檔案(&amp;F)：</translation>
     </message>
     <message>
-        <location/>
         <source>...</source>
         <translation>...</translation>
     </message>

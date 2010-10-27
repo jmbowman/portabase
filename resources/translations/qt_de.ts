@@ -431,13 +431,11 @@
         <translation>Zurück</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>List View</source>
         <translation>Liste</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Detail View</source>
         <translation>Details</translation>
@@ -545,7 +543,6 @@ Stellen Sie sicher, dass der Dateiname richtig ist.</translation>
         <translation>Übergeordnetes Verzeichnis</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Files of type:</source>
         <translation>Dateien des Typs:</translation>
@@ -651,7 +648,6 @@ Möchten Sie die Datei trotzdem löschen?</translation>
         <translation>Suchen in:</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Create New Folder</source>
         <translation>Neuen Ordner erstellen</translation>
@@ -1224,77 +1220,62 @@ Möchten Sie die Datei trotzdem löschen?</translation>
         <translation>Formular</translation>
     </message>
     <message>
-        <location/>
         <source>Paper</source>
         <translation>Papier</translation>
     </message>
     <message>
-        <location/>
         <source>Page size:</source>
         <translation>Seitengröße:</translation>
     </message>
     <message>
-        <location/>
         <source>Width:</source>
         <translation>Breite:</translation>
     </message>
     <message>
-        <location/>
         <source>Height:</source>
         <translation>Höhe:</translation>
     </message>
     <message>
-        <location/>
         <source>Paper source:</source>
         <translation>Papierquelle:</translation>
     </message>
     <message>
-        <location/>
         <source>Orientation</source>
         <translation>Ausrichtung</translation>
     </message>
     <message>
-        <location/>
         <source>Portrait</source>
         <translation>Hochformat</translation>
     </message>
     <message>
-        <location/>
         <source>Landscape</source>
         <translation>Querformat</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse landscape</source>
         <translation>Umgekehrtes Querformat</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse portrait</source>
         <translation>Umgekehrtes Hochformat</translation>
     </message>
     <message>
-        <location/>
         <source>Margins</source>
         <translation>Ränder</translation>
     </message>
     <message>
-        <location/>
         <source>top margin</source>
         <translation>Oberer Rand</translation>
     </message>
     <message>
-        <location/>
         <source>left margin</source>
         <translation>Linker Rand</translation>
     </message>
     <message>
-        <location/>
         <source>right margin</source>
         <translation>Rechter Rand</translation>
     </message>
     <message>
-        <location/>
         <source>bottom margin</source>
         <translation>Unterer Rand</translation>
     </message>
@@ -1845,12 +1826,10 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <translation>Formular</translation>
     </message>
     <message>
-        <location/>
         <source>Page</source>
         <translation>Seite</translation>
     </message>
     <message>
-        <location/>
         <source>Advanced</source>
         <translation>Erweitert</translation>
     </message>
@@ -1863,92 +1842,74 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <translation>Formular</translation>
     </message>
     <message>
-        <location/>
         <source>Copies</source>
         <translation>Anzahl Exemplare</translation>
     </message>
     <message>
-        <location/>
         <source>Print range</source>
         <translation>Bereich drucken</translation>
     </message>
     <message>
-        <location/>
         <source>Print all</source>
         <translation>Alles drucken</translation>
     </message>
     <message>
-        <location/>
         <source>Pages from</source>
         <translation>Seiten von</translation>
     </message>
     <message>
-        <location/>
         <source>to</source>
         <translation>bis</translation>
     </message>
     <message>
-        <location/>
         <source>Selection</source>
         <translation>Auswahl</translation>
     </message>
     <message>
-        <location/>
         <source>Output Settings</source>
         <translation>Ausgabeeinstellungen</translation>
     </message>
     <message>
-        <location/>
         <source>Copies:</source>
         <translation>Anzahl Exemplare:</translation>
     </message>
     <message>
-        <location/>
         <source>Collate</source>
         <translation>Sortieren</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse</source>
         <translation>Umgekehrt</translation>
     </message>
     <message>
-        <location/>
         <source>Options</source>
         <translation>Optionen</translation>
     </message>
     <message>
-        <location/>
         <source>Color Mode</source>
         <translation>Farbmodus</translation>
     </message>
     <message>
-        <location/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
-        <location/>
         <source>Grayscale</source>
         <translation>Graustufen</translation>
     </message>
     <message>
-        <location/>
         <source>Duplex Printing</source>
         <translation>Duplexdruck</translation>
     </message>
     <message>
-        <location/>
         <source>None</source>
         <translation>Kein</translation>
     </message>
     <message>
-        <location/>
         <source>Long side</source>
         <translation>Lange Seite</translation>
     </message>
     <message>
-        <location/>
         <source>Short side</source>
         <translation>Kurze Seite</translation>
     </message>
@@ -1961,42 +1922,34 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <translation>Formular</translation>
     </message>
     <message>
-        <location/>
         <source>Printer</source>
         <translation>Drucker</translation>
     </message>
     <message>
-        <location/>
         <source>&amp;Name:</source>
         <translation>&amp;Name:</translation>
     </message>
     <message>
-        <location/>
         <source>P&amp;roperties</source>
         <translation>&amp;Eigenschaften</translation>
     </message>
     <message>
-        <location/>
         <source>Location:</source>
         <translation>Standort:</translation>
     </message>
     <message>
-        <location/>
         <source>Preview</source>
         <translation>Vorschau</translation>
     </message>
     <message>
-        <location/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
     <message>
-        <location/>
         <source>Output &amp;file:</source>
         <translation>Ausgabe&amp;datei:</translation>
     </message>
     <message>
-        <location/>
         <source>...</source>
         <translation>...</translation>
     </message>

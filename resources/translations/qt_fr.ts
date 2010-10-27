@@ -399,13 +399,11 @@
         <translation>Précédent (historique)</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>List View</source>
         <translation>Affichage liste</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Detail View</source>
         <translation>Affichage détaillé</translation>
@@ -487,7 +485,6 @@ Veuillez vérifier que le nom du fichier est correct.</translation>
         <translation>Dossier parent</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Files of type:</source>
         <translation>Fichiers de type :</translation>
@@ -609,7 +606,6 @@ Voulez-vous quand même le supprimer ?</translation>
         <translation>Voir dans:</translation>
     </message>
     <message>
-        <location/>
         <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
         <source>Create New Folder</source>
         <translation>Créer un nouveau dossier</translation>
@@ -1241,77 +1237,62 @@ Voulez-vous quand même le supprimer ?</translation>
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location/>
         <source>Paper</source>
         <translation>Papier</translation>
     </message>
     <message>
-        <location/>
         <source>Page size:</source>
         <translation>Dimensions :</translation>
     </message>
     <message>
-        <location/>
         <source>Width:</source>
         <translation>Largeur :</translation>
     </message>
     <message>
-        <location/>
         <source>Height:</source>
         <translation>Hauteur :</translation>
     </message>
     <message>
-        <location/>
         <source>Paper source:</source>
         <translation>Source du papier :</translation>
     </message>
     <message>
-        <location/>
         <source>Orientation</source>
         <translation></translation>
     </message>
     <message>
-        <location/>
         <source>Portrait</source>
         <translation>Portrait</translation>
     </message>
     <message>
-        <location/>
         <source>Landscape</source>
         <translation>Paysage</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse landscape</source>
         <translation>Paysage inversé</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse portrait</source>
         <translation>Portrait inversé</translation>
     </message>
     <message>
-        <location/>
         <source>Margins</source>
         <translation>Marges</translation>
     </message>
     <message>
-        <location/>
         <source>top margin</source>
         <translation>marge haute</translation>
     </message>
     <message>
-        <location/>
         <source>left margin</source>
         <translation>marge gauche</translation>
     </message>
     <message>
-        <location/>
         <source>right margin</source>
         <translation>marge droite</translation>
     </message>
     <message>
-        <location/>
         <source>bottom margin</source>
         <translation>marge basse</translation>
     </message>
@@ -1977,12 +1958,10 @@ Veuillez choisir un nom de fichier différent.</translation>
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location/>
         <source>Page</source>
         <translation></translation>
     </message>
     <message>
-        <location/>
         <source>Advanced</source>
         <translation>Avancé</translation>
     </message>
@@ -1995,92 +1974,74 @@ Veuillez choisir un nom de fichier différent.</translation>
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location/>
         <source>Copies</source>
         <translation>Copies</translation>
     </message>
     <message>
-        <location/>
         <source>Print range</source>
         <translation>Imprimer la sélection</translation>
     </message>
     <message>
-        <location/>
         <source>Print all</source>
         <translation>Imprimer tout</translation>
     </message>
     <message>
-        <location/>
         <source>Pages from</source>
         <translation>Pages</translation>
     </message>
     <message>
-        <location/>
         <source>to</source>
         <translation>à</translation>
     </message>
     <message>
-        <location/>
         <source>Selection</source>
         <translation>Sélection</translation>
     </message>
     <message>
-        <location/>
         <source>Output Settings</source>
         <translation>Paramètres de sortie</translation>
     </message>
     <message>
-        <location/>
         <source>Copies:</source>
         <translation></translation>
     </message>
     <message>
-        <location/>
         <source>Collate</source>
         <translation>Assembler</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse</source>
         <translation>Inverse</translation>
     </message>
     <message>
-        <location/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location/>
         <source>Color Mode</source>
         <translation>Mode de couleur</translation>
     </message>
     <message>
-        <location/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location/>
         <source>Grayscale</source>
         <translation>Dégradé de gris</translation>
     </message>
     <message>
-        <location/>
         <source>Duplex Printing</source>
         <translation>Impression en duplex</translation>
     </message>
     <message>
-        <location/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location/>
         <source>Long side</source>
         <translation>Côté long</translation>
     </message>
     <message>
-        <location/>
         <source>Short side</source>
         <translation>Côté court</translation>
     </message>
@@ -2093,42 +2054,34 @@ Veuillez choisir un nom de fichier différent.</translation>
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location/>
         <source>Printer</source>
         <translation>Imprimante</translation>
     </message>
     <message>
-        <location/>
         <source>&amp;Name:</source>
         <translation>&amp;Nom :</translation>
     </message>
     <message>
-        <location/>
         <source>P&amp;roperties</source>
         <translation>P&amp;ropriétés</translation>
     </message>
     <message>
-        <location/>
         <source>Location:</source>
         <translation>Emplacement :</translation>
     </message>
     <message>
-        <location/>
         <source>Preview</source>
         <translation>Prévisualisation</translation>
     </message>
     <message>
-        <location/>
         <source>Type:</source>
         <translation></translation>
     </message>
     <message>
-        <location/>
         <source>Output &amp;file:</source>
         <translation>&amp;Fichier de sortie:</translation>
     </message>
     <message>
-        <location/>
         <source>...</source>
         <translation></translation>
     </message>
