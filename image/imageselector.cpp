@@ -102,19 +102,23 @@ void ImageSelector::setFormat(const QString &newFormat)
  */
 void ImageSelector::selectImage()
 {
-    ImportDialog dialog(ImportDialog::Image, db, this);
-    if (dialog.exec()) {
-        QString file = dialog.getPath();
-        ImageEditor editor(this);
-        if (!editor.edit(file)) {
-            return;
-        }
-        format = editor.getFormat();
-        image = editor.getImage();
-        path = editor.isModified() ? QString("") : file;
-        changed = true;
-        setCurrentWidget(editButtons);
+    ImportDialog dialog(ImportDialog::Image, this);
+    if (!dialog.exec()) {
+        return;
     }
+    if (!dialog.import(db)) {
+        return;
+    }
+    QString file = dialog.getPath();
+    ImageEditor editor(this);
+    if (!editor.edit(file)) {
+        return;
+    }
+    format = editor.getFormat();
+    image = editor.getImage();
+    path = editor.isModified() ? QString("") : file;
+    changed = true;
+    setCurrentWidget(editButtons);
 }
 
 /**

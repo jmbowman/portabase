@@ -30,32 +30,28 @@
  * Constructor.
  *
  * @param sourceType The type of file to open and import from
- * @param subject The database to import into
  * @param parent The widget to use as the parent of any dialogs launched
  */
-ImportDialog::ImportDialog(DataSource sourceType, Database *subject, QWidget *parent)
-  : QObject(), db(subject), parentWidget(parent), source(sourceType)
+ImportDialog::ImportDialog(DataSource sourceType, QWidget *parent)
+  : QObject(), parentWidget(parent), source(sourceType)
 {
 
 }
 
 /**
- * Launch the open file dialog and import data from the selected file, if
- * any.
+ * Launch the open file dialog (and a second dialog to select the text
+ * encoding, if necessary).
  *
- * @return 1 if data was imported, 0 otherwise
+ * @return True if a file was was selected, false otherwise
  */
 bool ImportDialog::exec()
 {
     QString filter;
-    if (source == CSV) {
-        filter = tr("Text files with comma separated values") + " (*.csv)";
+    if (source == CSV || source == OptionList) {
+        filter = QString::null;
     }
     else if (source == MobileDB) {
         filter = tr("MobileDB files") + " (*.pdb)";
-    }
-    else if (source == OptionList) {
-        filter = QString::null;
     }
     else if (source == XML) {
         filter = tr("XML files") + " (*.xml)";
@@ -75,8 +71,6 @@ bool ImportDialog::exec()
         settings.setValue("Files/LastDir", info.absolutePath());
         path = info.absoluteFilePath();
     }
-
-    QString encoding = "";
     if (source == CSV || source == OptionList) {
         QStringList encodings;
         encodings.append("UTF-8");
@@ -89,11 +83,22 @@ bool ImportDialog::exec()
             return false;
         }
     }
+    return true;
+}
 
+/**
+ * Import data from the selected file.  Should only be called if exec()
+ * returned true.
+ *
+ * @param db The database to import into
+ * @return True if data was imported, false otherwise
+ */
+bool ImportDialog::import(Database *db)
+{
     QString error = "";
     QString data = "";
     if (source == CSV) {
-        QStringList result = db->importFromCSV(file, encoding);
+        QStringList result = db->importFromCSV(path, encoding);
         int count = result.count();
         if (count > 0) {
             error = result[0];
@@ -104,15 +109,15 @@ bool ImportDialog::exec()
     }
     else if (source == OptionList) {
         ImportUtils utils;
-        error = utils.importTextLines(file, encoding, &options);
+        error = utils.importTextLines(path, encoding, &options);
     }
     else if (source == MobileDB) {
         ImportUtils utils;
-        error = utils.importMobileDB(file, db);
+        error = utils.importMobileDB(path, db);
     }
     else if (source == XML) {
         ImportUtils utils;
-        error = utils.importXML(file, db);
+        error = utils.importXML(path, db);
     }
     if (!error.isEmpty()) {
         if (data.isEmpty()) {

@@ -39,16 +39,17 @@ public:
         OptionList = 4,
         Image = 5
     };
-    ImportDialog(DataSource sourceType, Database *subject, QWidget *parent = 0);
+    ImportDialog(DataSource sourceType, QWidget *parent = 0);
 
     bool exec();
+    bool import(Database *db);
     QStringList getOptions();
     QString getPath();
 
 private:
-    Database *db; /**< The database that is in use */
     QWidget *parentWidget; /**< This dialog's parent widget */
     DataSource source; /**< The type of file being imported from */
+    QString encoding; /**< The text encoding to use for a CSV or enum options file */
     QStringList options; /**< List of imported enumeration options, if any */
     QString path; /**< The absolute path of the file that was imported */
 };

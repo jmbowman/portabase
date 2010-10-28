@@ -1,3 +1,9 @@
+2010-10-28  JMB  More intuitive import dialog sequence
+
+    The sequence of dialogs when importing a MobileDB or XML file now makes
+    more sense; the user is prompted first for the file to import, then for
+    the name of the new file to create.
+
 2010-10-27  JMB  Build instructions update, translation files cleanup
 
     Mentioned the need to prepare the translation files in the compilation

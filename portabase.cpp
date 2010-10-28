@@ -494,6 +494,12 @@ void PortaBase::import()
 void PortaBase::createFile(ImportDialog::DataSource source,
                            const QString &file)
 {
+    ImportDialog dialog(source, this);
+    if (source != ImportDialog::NoSource) {
+        if (!dialog.exec()) {
+            return;
+        }
+    }
     bool encrypted = false;
     QString f(file);
     if (f.isNull()) {
@@ -541,8 +547,7 @@ void PortaBase::createFile(ImportDialog::DataSource source,
             ok = editColumns();
         }
         else {
-            ImportDialog dialog(source, db, this);
-            ok = dialog.exec();
+            ok = dialog.import(db);
             if (ok) {
                 finishNewFile(db);
             }
@@ -865,10 +870,12 @@ void PortaBase::changePassword()
  */
 void PortaBase::dataImport()
 {
-    ImportDialog dialog(ImportDialog::CSV, db, this);
+    ImportDialog dialog(ImportDialog::CSV, this);
     if (dialog.exec()) {
-        viewer->resetTable();
-        setEdited(true);
+        if (dialog.import(db)) {
+            viewer->resetTable();
+            setEdited(true);
+        }
     }
 }
 

@@ -167,8 +167,11 @@ void EnumEditor::sortOptions()
  */
 void EnumEditor::importOptions()
 {
-    ImportDialog dialog(ImportDialog::OptionList, db, this);
+    ImportDialog dialog(ImportDialog::OptionList, this);
     if (!dialog.exec()) {
+        return;
+    }
+    if (!dialog.import(db)) {
         return;
     }
     QStringList lines = dialog.getOptions();
