@@ -68,7 +68,8 @@ QString NumberWidget::getValue()
 /**
  * Set this widget's new value.
  *
- * @param value The new value to be displayed in the widget
+ * @param value The new value to be displayed in the widget (formatted for
+ *              the C locale)
  */
 void NumberWidget::setValue(const QString &value)
 {

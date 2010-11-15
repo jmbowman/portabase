@@ -884,11 +884,9 @@ void Database::updateDataFormat()
  *
  * @param rowId The ID field of the row to retrieve
  * @param utils Image export utility, or 0 if not exporting the row
- * @param intSeparators Use separators appropriate for the current locale in
- *                      integer values; omitted for CSV export
  * @return A list of the row's data fields in position order
  */
-QStringList Database::getRow(int rowId, ImageUtils *utils, bool intSeparators)
+QStringList Database::getRow(int rowId, ImageUtils *utils)
 {
     QStringList results;
     int index = data.Find(Id [rowId]);
@@ -914,12 +912,7 @@ QStringList Database::getRow(int rowId, ImageUtils *utils, bool intSeparators)
                 || type == TIME || type == SEQUENCE) {
             c4_IntProp prop(idString);
             int value = prop (row);
-            if (intSeparators && (type == INTEGER || type == SEQUENCE)) {
-                results.append(QLocale::system().toString(value));
-            }
-            else {
-                results.append(QString::number(value));
-            }
+            results.append(QString::number(value));
         }
         else if (type == STRING || type == NOTE || type >= FIRST_ENUM) {
             c4_StringProp prop(idString);

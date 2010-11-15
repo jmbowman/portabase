@@ -345,7 +345,13 @@ QStringList View::getRow(int index)
             int value = prop (row);
             results.append(QLocale::system().toString(value));
         }
-        else if (type == FLOAT || type == CALC || type == IMAGE) {
+        else if (type == FLOAT || type == CALC) {
+            // want the string version here
+            c4_StringProp prop(scIds[i]);
+            QString standardForm = QString::fromUtf8(prop (row));
+            results.append(Formatting::toLocalDouble(standardForm));
+        }
+        else if (type == IMAGE) {
             // want the string version here
             c4_StringProp prop(scIds[i]);
             results.append(QString::fromUtf8(prop (row)));
@@ -515,7 +521,7 @@ void View::exportToCSV(const QString &filename)
     ImageUtils utils;
     utils.setExportPaths(filename);
     for (int i = 0; i < size; i++) {
-        QStringList row = db->getRow(Id (dbview[i]), &utils, false);
+        QStringList row = db->getRow(Id (dbview[i]), &utils);
         output << csv.encodeRow(row);
     }
     f.close();

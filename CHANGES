@@ -1,3 +1,8 @@
+2010-11-14  JMB  Fixed bugs in number formatting
+
+    Fixed a couple of outstanding bugs that impacted locales which use the
+    the period as an integer grouping separator.
+
 2010-10-28  JMB  More intuitive import dialog sequence
 
     The sequence of dialogs when importing a MobileDB or XML file now makes
