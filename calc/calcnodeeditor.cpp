@@ -47,8 +47,8 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
     int count = colNames.count();
     int i;
     for (i = 0; i < count; i++) {
-        int type = colTypes[i];
-        if (type == INTEGER || type == FLOAT || type == SEQUENCE) {
+        int t = colTypes[i];
+        if (t == INTEGER || t == FLOAT || t == SEQUENCE || t == BOOLEAN) {
             columnList->addItem(colNames[i]);
         }
     }

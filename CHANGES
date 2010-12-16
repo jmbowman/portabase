@@ -1,3 +1,8 @@
+2010-12-16  JMB  Allow boolean columns in calculations
+
+    Boolean columns can now be used in calculations; they take the value of
+    either 1 (true) or 0 (false).
+
 2010-11-14  JMB  Fixed bugs in number formatting
 
     Fixed a couple of outstanding bugs that impacted locales which use the
