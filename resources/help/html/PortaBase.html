@@ -126,7 +126,7 @@ Usually you want to start by adding an operation node, such as "+", and then add
 </ul>
 Some points worth noting:<br>
 <ul>
-<li>Only columns of type Integer, Decimal, and Sequence can be used in calculations.  Additionally, Date columns can be used as children of a "Days_Between" operation, and Time columns can be used as children of "Seconds_Between", "Minutes_Between", and "Hours_Between" operations.</li>
+<li>Only columns of type Integer, Decimal, Sequence, and Boolean can be used in calculations.  Additionally, Date columns can be used as children of a "Days_Between" operation, and Time columns can be used as children of "Seconds_Between", "Minutes_Between", and "Hours_Between" operations.</li>
 <li>Calculation columns cannot be used in other calculations, since this would introduce a variety of complications.  You can get the same effect by repeating the definition of a calculation as part of another one.</li>
 <li>Operations which haven't been given enough (or any) arguments usually return zero.</li>
 <li>If a column is renamed or deleted using the columns editor, any calculations using it are automatically updated accordingly.</li>
