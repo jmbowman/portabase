@@ -37,7 +37,7 @@ public:
 
     void setGroup(const QString &gname);
     QString readEntry(const QString &key, const QString &deflt = QString::null);
-    bool exists();
+    bool exists() const;
     void migrate(const QString &group, QSettings &settings);
 
 private:

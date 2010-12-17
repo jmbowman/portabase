@@ -39,7 +39,7 @@
  * @param parent This dialog's parent widget
  */
 RowEditor::RowEditor(QWidget *parent)
-  : PBDialog(tr("Row Editor"), parent), db(0)
+  : PBDialog(tr("Row Editor"), parent), db(0), initialFocus(0)
 {
 
 }

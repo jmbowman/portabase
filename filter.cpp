@@ -48,7 +48,7 @@ Filter::~Filter()
  *
  * @return The filter's name
  */
-QString Filter::getName()
+QString Filter::getName() const
 {
     return filterName;
 }

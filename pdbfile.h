@@ -41,9 +41,9 @@ protected:
     };
     bool readHeader();
     bool readRecordList();
-    unsigned short toshort(unsigned char *v);		
-    unsigned int toint(unsigned char *v);		
-    time_t palm2unix_time(unsigned int p);
+    unsigned short toshort(unsigned char *v) const;
+    unsigned int toint(unsigned char *v) const;
+    time_t palm2unix_time(unsigned int p) const;
 
 protected:
     QFile *fd; /**< The file being parsed */

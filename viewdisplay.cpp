@@ -336,10 +336,6 @@ QString ViewDisplay::toHtml()
     QStringList colNames = view->getColNames();
     int colCount = colNames.count();
     int i, j;
-    int totalWidth = 0;
-    for (i = 0; i < colCount; i++) {
-        totalWidth += view->getColWidth(i);
-    }
     QString cellPattern("<th align=\"left\">%1</th>");
     for (i = 0; i < colCount; i++) {
         result += cellPattern.arg(Qt::escape(colNames[i]));

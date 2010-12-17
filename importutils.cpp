@@ -121,6 +121,8 @@ QString ImportUtils::importMobileDB(const QString &filename, Database *db)
         if (!message.isEmpty()) {
             message = QObject::tr("Error in row %1").arg(i + 1)
                       + "\n" + message;
+            delete[] types;
+            delete[] widths;
             return message;
         }
     }

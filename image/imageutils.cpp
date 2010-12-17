@@ -95,7 +95,7 @@ QImage ImageUtils::load(const QString &path, bool *resized)
  *
  * @return The image's format
  */
-QString ImageUtils::getFormat()
+QString ImageUtils::getFormat() const
 {
     return format;
 }
@@ -105,7 +105,7 @@ QString ImageUtils::getFormat()
  *
  * @return The error message, which may be empty
  */
-QString ImageUtils::getErrorMessage()
+QString ImageUtils::getErrorMessage() const
 {
     return error;
 }

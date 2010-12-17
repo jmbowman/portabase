@@ -27,16 +27,16 @@ class MobileDBFile : public PDBFile
 public:
     MobileDBFile(const QString &f);
     bool read();
-    int row_count();
-    int col_count();
+    int row_count() const;
+    int col_count() const;
     const char* db_info(); 
-    QStringList field_types();
-    const int* field_lengths();
+    QStringList field_types() const;
+    const int* field_lengths() const;
     QStringList row(int i);
-    QStringList field_labels();
+    QStringList field_labels() const;
 
 protected:
-    bool verify_recordhdr(const unsigned char *raw_record);
+    bool verify_recordhdr(const unsigned char *raw_record) const;
     virtual bool readMobileDBHeader();
     int record_category(int i);
 

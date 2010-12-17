@@ -70,7 +70,7 @@ bool PDBFile::read()
  * @param v The data from the file to be converted
  * @return The unsigned short represented by the input data
  */
-unsigned short PDBFile::toshort(unsigned char *v)
+unsigned short PDBFile::toshort(unsigned char *v) const
 {
 	return ((unsigned short)(v[0] << 8)) + v[1];
 }
@@ -81,7 +81,7 @@ unsigned short PDBFile::toshort(unsigned char *v)
  * @param v The data from the file to be converted
  * @return The unsigned int represented by the input data
  */
-unsigned int PDBFile::toint(unsigned char *v) {
+unsigned int PDBFile::toint(unsigned char *v) const {
 	return	((unsigned int)(v[0] << 24)) + 
 		((unsigned int)(v[1] << 16)) + 
 		((unsigned int)(v[2] << 8)) + 
@@ -96,7 +96,7 @@ unsigned int PDBFile::toint(unsigned char *v) {
  * @param p The Palm OS time integer to be converted
  * @return The converted UNIX time integer
  */
-time_t PDBFile::palm2unix_time(unsigned int p)
+time_t PDBFile::palm2unix_time(unsigned int p) const
 {
 	//number of seconds between 01/01/1904 and 01/01/1970
 	return p - 2082844886LU; 

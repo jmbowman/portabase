@@ -108,7 +108,7 @@ void OldConfig::read()
  *
  * @return True if the file exists, false otherwise
  */
-bool OldConfig::exists()
+bool OldConfig::exists() const
 {
     return fileExists;
 }

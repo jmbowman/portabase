@@ -33,8 +33,8 @@ public:
     static QImage load(Database *db, int rowId, const QString &colName,
                        const QString &format);
     QImage load(const QString &path, bool *resized);
-    QString getFormat();
-    QString getErrorMessage();
+    QString getFormat() const;
+    QString getErrorMessage() const;
     static QByteArray getImageData(QImage image, const QString &format,
                               const QString &path, bool changed);
     void setExportPaths(const QString &filePath);

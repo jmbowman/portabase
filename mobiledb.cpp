@@ -71,13 +71,15 @@ bool MobileDBFile::readMobileDBHeader() {
 	if (record_id < 0) {
 		return false;
 	}
-    unsigned int recordSize = record_list[record_id].record_size;
+	unsigned int recordSize = record_list[record_id].record_size;
 	fd->seek(record_list[record_id].record_data_offset);
 	unsigned char *raw_record = new unsigned char [recordSize];
 	if (fd->read((char*)raw_record, recordSize) == -1) {
+		delete[] raw_record;
 		return false;
 	}
 	if (!verify_recordhdr(raw_record)) {
+		delete[] raw_record;
 		return false;
 	}
 	unsigned char *p = raw_record + 7;
@@ -86,7 +88,7 @@ bool MobileDBFile::readMobileDBHeader() {
 	while (p < end && *p != 0xff ) { 
 		colcount++;
 		p++;
-        QString label = QString::fromLatin1((char*)p);
+		QString label = QString::fromLatin1((char*)p);
 		fieldlabels.append(label);
 		p += label.length() + 1;
 	};
@@ -97,21 +99,23 @@ bool MobileDBFile::readMobileDBHeader() {
 	if (record_id < 0) {
 		return false;
 	}
-    recordSize = record_list[record_id].record_size;
+	recordSize = record_list[record_id].record_size;
 	fd->seek(record_list[record_id].record_data_offset);
 	raw_record = new unsigned char [recordSize];
 	if (fd->read((char*)raw_record, recordSize) == -1) {
+		delete[] raw_record;
 		return false;
 	}
 	if (!verify_recordhdr(raw_record)) {
+		delete[] raw_record;
 		return false;
 	}
 	p = raw_record + 7;
 	end = raw_record + recordSize;
 	for (i = 0; i < colcount && p < end && *p != 0xff; i++) {
 		p++;
-        QString type = QString::fromLatin1((char*)p);
-        fieldtypes.append(type);
+		QString type = QString::fromLatin1((char*)p);
+		fieldtypes.append(type);
 		p += type.length() + 1;
 	};
 	delete [] raw_record;
@@ -121,13 +125,15 @@ bool MobileDBFile::readMobileDBHeader() {
 	if (record_id < 0) {
 		return false;
 	}
-    recordSize = record_list[record_id].record_size;
+	recordSize = record_list[record_id].record_size;
 	fd->seek(record_list[record_id].record_data_offset);
 	raw_record = new unsigned char [recordSize];
 	if (fd->read((char*)raw_record, recordSize) == -1) {
+		delete[] raw_record;
 		return false;
 	}
 	if (!verify_recordhdr(raw_record)) {
+		delete[] raw_record;
 		return false;
 	}
 	p = raw_record + 7;
@@ -135,7 +141,7 @@ bool MobileDBFile::readMobileDBHeader() {
 	for (i = 0; i < colcount && p < end && *p != 0xff; i++) {   
 		int index  = *p;
 		p++;
-        QString length = QString::fromLatin1((char*)p);
+		QString length = QString::fromLatin1((char*)p);
 		fieldlengths[index] = length.toInt();
 		p += length.length() + 1;
 	};
@@ -148,7 +154,7 @@ bool MobileDBFile::readMobileDBHeader() {
  *
  * @return The number of database rows
  */
-int MobileDBFile::row_count()
+int MobileDBFile::row_count() const
 {
 	return rowcount;
 }
@@ -174,7 +180,7 @@ int MobileDBFile::record_category(int cat_num)
  *
  * @return True if the data is valid, false otherwise.
  */
-bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) { 
+bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) const {
 	if (raw_record[0] != 0xff || raw_record[1] != 0xff ||
 		raw_record[2] != 0xff || raw_record[3] != 0x01 
 		|| raw_record[4] != 0xff || raw_record[5] != 0x00
@@ -189,7 +195,7 @@ bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) {
  *
  * @return The number of database columns.
  */
-int MobileDBFile::col_count()
+int MobileDBFile::col_count() const
 {
 	return colcount;
 }
@@ -220,20 +226,22 @@ QStringList MobileDBFile::row(int i)
 		}
 	}
 	fd->seek(record_list[i].record_data_offset);
-    unsigned int recordSize = record_list[i].record_size;
+	unsigned int recordSize = record_list[i].record_size;
 	unsigned char *raw_record = new unsigned char [recordSize];
 	if (fd->read((char*)raw_record, recordSize) == -1) {
+		delete[] raw_record;
 		return rowdata;
 	}
 	//unpack row data;
 	if (!verify_recordhdr(raw_record)) {
+		delete[] raw_record;
 		return rowdata;
 	}
 	unsigned char *p = raw_record + 7;
 	unsigned char *end = raw_record + recordSize;
 	for(int x = 0; x < colcount && p < end && *p != 0xff; x++) { 
 		p++;
-        QString cell = QString::fromLatin1((char*)p);
+		QString cell = QString::fromLatin1((char*)p);
 		rowdata.append(cell);
 		p += cell.length() + 1;
 	};
@@ -247,7 +255,7 @@ QStringList MobileDBFile::row(int i)
  *
  * @return List of the database's column types
  */
-QStringList MobileDBFile::field_types()
+QStringList MobileDBFile::field_types() const
 {
 	return fieldtypes;
 }
@@ -257,8 +265,8 @@ QStringList MobileDBFile::field_types()
  *
  * @return List of column display widths
  */
-const int *MobileDBFile::field_lengths() {
-    return fieldlengths;
+const int *MobileDBFile::field_lengths() const {
+	return fieldlengths;
 }
 
 /**
@@ -266,7 +274,7 @@ const int *MobileDBFile::field_lengths() {
  *
  * @return List of column names
  */
-QStringList MobileDBFile::field_labels()
+QStringList MobileDBFile::field_labels() const
 {
 	return fieldlabels;
 }

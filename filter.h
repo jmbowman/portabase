@@ -35,7 +35,7 @@ class Filter
 public:
     Filter(Database *dbase, const QString &name);
     ~Filter();
-    QString getName();
+    QString getName() const;
     void setName(const QString &newName);
     int getConditionCount();
     Condition *getCondition(int index);

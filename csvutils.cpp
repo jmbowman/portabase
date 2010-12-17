@@ -25,7 +25,8 @@
 /**
  * Constructor.
  */
-CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), calcCount(0)
+CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), colCount(0),
+    endStringCount(0), rowNum(1), calcCount(0)
 {
 
 }

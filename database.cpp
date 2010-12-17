@@ -44,7 +44,7 @@
  */
 Database::Database(const QString &path, OpenResult *result, bool encrypt)
   : file(0), crypto(0), version(0), newFile(false), curView(0), curFilter(0),
-    Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"),
+    maxId(0), Id("_id"), cIndex("_cindex"), cName("_cname"), cType("_ctype"),
     cDefault("_cdefault"), cId("_cid"), vName("_vname"), vRpp("_vrpp"),
     vDeskRpp("_vdeskrpp"), vSort("_vsort"), vFilter("_vfilter"),
     vcView("_vcview"), vcIndex("_vcindex"), vcName("_vcname"),
