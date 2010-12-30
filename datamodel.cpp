@@ -315,6 +315,10 @@ void DataModel::editRow(int rowId, int oldIndex)
     }
     // remove it from its old location
     processRowRemoval(oldIndex, newIndex);
+    if (newIndex == -1) {
+        // row no longer passes filter, nothing left to do
+        return;
+    }
     if (newIndex < pageStart) {
         // row got moved to an earlier page, add the previous row to this page
         beginInsertRows(QModelIndex(), 0, 0);

@@ -1,3 +1,11 @@
+2010-12-30  JMB  Decimal formatting, view model, and condition editor bugfixes
+
+    Fixed a bug that prevented negative decimals between 0 and -1 from being
+    entered, another that could sometimes trigger a crash when a row was
+    edited so that it no longer passed the current filter, and a third that
+    prevented the condition editor from being correctly initialized when
+    starting with a condition based on an enum column.
+
 2010-12-16  JMB  Allow boolean columns in calculations
 
     Boolean columns can now be used in calculations; they take the value of

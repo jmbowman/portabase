@@ -275,7 +275,7 @@ void ConditionEditor::updateDisplay(int columnIndex)
         constantFloat->setValue("0");
     }
     else if (type >= FIRST_ENUM) {
-        if (type != dataType) {
+        if (type != dataType || constantStack->currentWidget() != constantCombo) {
             constantCombo->clear();
             constantCombo->addItems(db->listEnumOptions(type));
             constantStack->setCurrentWidget(constantCombo);

@@ -64,7 +64,12 @@ QString Formatting::fromLocalDouble(const QString &value)
         if (!ok) {
             return "";
         }
-        result = cLocale.toString(integer);
+        if (integer == 0 && integerPart[0] == '-') {
+            result = "-0";
+        }
+        else {
+            result = cLocale.toString(integer);
+        }
     }
     QString decimalPart = localRegExp.cap(2);
     if (!decimalPart.isEmpty()) {
@@ -103,7 +108,12 @@ QString Formatting::toLocalDouble(const QString &value)
         if (!ok) {
             return "";
         }
-        result = systemLocale.toString(integer);
+        if (integer == 0 && integerPart[0] == '-') {
+            result = "-0";
+        }
+        else {
+            result = systemLocale.toString(integer);
+        }
     }
     QString decimalPart = cRegExp.cap(2);
     if (!decimalPart.isEmpty()) {
