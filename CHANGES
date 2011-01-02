@@ -1,3 +1,9 @@
+2011-01-01  JMB  Doxygen updates, Windows build fixes
+
+    Made some improvements to the Doxygen documentation generation process and
+    content.  Fixed some bugs that crept up in the Windows build since the
+    2.0 release.
+
 2010-12-30  JMB  Decimal formatting, view model, and condition editor bugfixes
 
     Fixed a bug that prevented negative decimals between 0 and -1 from being

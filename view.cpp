@@ -9,7 +9,7 @@
  * (at your option) any later version.
  */
 
-/** @file view.cpp
+/** @file
  * Source file for View
  */
 
@@ -187,7 +187,7 @@ int View::totalRowCount()
 /**
  * Get the number of records on the currently-displayed page.
  *
- * @parent The parent item in the data tree; should always be an invalid index
+ * @param parent The parent item in the data tree; should always be an invalid index
  * @return The number of records on the page
  */
 int View::rowCount(const QModelIndex &) const
@@ -198,7 +198,7 @@ int View::rowCount(const QModelIndex &) const
 /**
  * Get the total number of columns included in this view.
  *
- * @parent The parent item in the data tree; should always be an invalid index
+ * @param parent The parent item in the data tree; should always be an invalid index
  * @return The number of columns in this view
  */
 int View::columnCount(const QModelIndex &) const

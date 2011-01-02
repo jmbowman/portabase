@@ -95,7 +95,9 @@ int QQDialog::exec()
  * Convenience method for adding "OK" and "Cancel" buttons to the bottom of
  * a dialog which uses a QVBoxLayout.  The buttons are automatically linked
  * to the dialog's accept() and reject() slots.
+ *
  * @param layout The dialog's layout manager.
+ * @param ok False if the "OK" button is to be omitted
  * @param cancel False if the "Cancel" button is to be omitted.
  */
 QDialogButtonBox *QQDialog::addOkCancelButtons(QBoxLayout *layout, bool ok,

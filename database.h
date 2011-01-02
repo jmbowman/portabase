@@ -33,9 +33,9 @@ class QDate;
 class View;
 
 /**
- * The central point of virtually all operations on a PortaBase data file.
+ * The central point of virtually all operations on a %PortaBase data file.
  * As much as possible, detailed knowledge of the internal structure of a
- * PortaBase file is restricted to this class.
+ * %PortaBase file is restricted to this class.
  */
 class Database
 {

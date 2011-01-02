@@ -21,7 +21,7 @@
 #include <QStringList>
 
 /**
- * Parser for application settings from early versions of PortaBase for
+ * Parser for application settings from early versions of %PortaBase for
  * desktop operating systems, which used Qt 2 and hence didn't have access
  * to the QSettings class.  Now only used to find these older settings if
  * ones in the new format aren't present, and migrate them over when the

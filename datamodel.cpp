@@ -120,7 +120,7 @@ void DataModel::saveViewSettings()
  * Make the model aware of a change in the number of rows to display on each
  * page.
  *
- * @param rpp The new number of rows per page
+ * @param rowsPerPage The new number of rows per page
  */
 void DataModel::setRowsPerPage(int rowsPerPage)
 {
@@ -144,7 +144,7 @@ int DataModel::page()
 /**
  * Set the page of data to be shown.
  *
- * @param page The new page number
+ * @param p The new page number
  */
 void DataModel::setPage(int p)
 {
@@ -434,7 +434,7 @@ void DataModel::toggleBoolean(const QModelIndex &index)
 /**
  * Get the number of rows in the currently displayed data set.
  *
- * @parent The parent item in the data tree; should always be an invalid index
+ * @param parent The parent item in the data tree; should always be an invalid index
  * @return The number of rows in the subset
  */
 int DataModel::rowCount(const QModelIndex &parent) const
@@ -448,7 +448,7 @@ int DataModel::rowCount(const QModelIndex &parent) const
 /**
  * Get the number of columns in the currently displayed data set.
  *
- * @parent The parent item in the data tree; should always be an invalid index
+ * @param parent The parent item in the data tree; should always be an invalid index
  * @return The number of columns in the subset
  */
 int DataModel::columnCount(const QModelIndex &parent) const

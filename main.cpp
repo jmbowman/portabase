@@ -29,6 +29,15 @@
 #endif
 
 /**
+ * @mainpage PortaBase Source Code Reference
+ *
+ * This is the reference documentation for the source code of %PortaBase and
+ * the software libraries it uses.  For more information on what %PortaBase
+ * is and how to use it, see the %PortaBase home page at
+ * http://portabase.sourceforge.net/.
+ */
+
+/**
  * The application main method, which receives the command line parameters
  * and starts the application accordingly.
  *

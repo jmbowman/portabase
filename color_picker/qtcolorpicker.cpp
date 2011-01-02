@@ -118,8 +118,8 @@
     QtColorPicker also provides a the static function getColor(),
     which pops up the grid of standard colors at any given point.
 
-    \img colorpicker1.png
-    \img colorpicker2.png
+    \image html colorpicker1.png
+    \image html colorpicker2.png
 
     \sa QColorDialog
 */

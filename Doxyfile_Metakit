@@ -4,9 +4,9 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = PortaBase
+PROJECT_NAME           = Metakit
 PROJECT_NUMBER         = 
-OUTPUT_DIRECTORY       = doc
+OUTPUT_DIRECTORY       = doc/html/metakit
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -51,7 +51,7 @@ TYPEDEF_HIDES_STRUCT   = NO
 # Build related configuration options
 #---------------------------------------------------------------------------
 EXTRACT_ALL            = YES
-EXTRACT_PRIVATE        = YES
+EXTRACT_PRIVATE        = NO
 EXTRACT_STATIC         = YES
 EXTRACT_LOCAL_CLASSES  = YES
 EXTRACT_LOCAL_METHODS  = NO
@@ -93,7 +93,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = .
+INPUT                  = metakit
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
@@ -127,14 +127,14 @@ FILE_PATTERNS          = *.c \
                          *.vhd \
                          *.vhdl
 RECURSIVE              = YES
-EXCLUDE                = .git build doc metakit packaging resources test encryption/randomkit
+EXCLUDE                = 
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = 
-EXCLUDE_SYMBOLS        = ColorPickerButton ColorPickerItem ColorPickerPopup const_iterator iterator
+EXCLUDE_SYMBOLS        = 
 EXAMPLE_PATH           = 
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
-IMAGE_PATH             = packaging/docs
+IMAGE_PATH             = 
 INPUT_FILTER           = 
 FILTER_PATTERNS        = 
 FILTER_SOURCE_FILES    = NO
@@ -246,8 +246,8 @@ SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
-TAGFILES               = /Developer/Documentation/Qt/html/qt.tags=http://doc.trolltech.com/4.7 doc/html/metakit/html/metakit.tag=metakit/html
-GENERATE_TAGFILE       = 
+TAGFILES               = 
+GENERATE_TAGFILE       = doc/html/metakit/html/metakit.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 PERL_PATH              = /usr/bin/perl

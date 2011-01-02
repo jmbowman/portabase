@@ -42,7 +42,7 @@
 #define BLOWFISHPSIZE	(BLOWFISHROUNDS+2)
 
 /**
- * Holds all the parameters necessary for the Blowfish cipher.
+ * Holds all the parameters necessary for the %Blowfish cipher.
  */
 struct blowfishParam
 {
@@ -52,9 +52,9 @@ struct blowfishParam
 };
 
 /**
- * Implementation of the Blowfish block cipher using CBC mode.  Derived
+ * Implementation of the %Blowfish block cipher using CBC mode.  Derived
  * from the implementation in BeeCrypt, refactored to include only the
- * parts needed by PortaBase and to take advantage of C++ code organization
+ * parts needed by %PortaBase and to take advantage of C++ code organization
  * features.
  */
 class Blowfish

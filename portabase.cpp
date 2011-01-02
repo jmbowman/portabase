@@ -423,9 +423,9 @@ void PortaBase::editPreferences()
 #if !defined(Q_WS_MAC)
         setFont(font);
         viewer->updateButtonSizes();
-        mh->fileMenu()->setFont(font);
+        menuHelper()->fileMenu()->setFont(font);
         noFileWidget->setFont(font);
-        mh->helpMenu()->setFont(font);
+        menuHelper()->helpMenu()->setFont(font);
 #endif
         QSettings settings;
         settings.beginGroup("General");

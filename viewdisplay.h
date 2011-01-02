@@ -36,7 +36,7 @@ class View;
 #define PAGE_BUTTON_COUNT 5
 
 /**
- * The main data display widget in PortaBase.  Shows a table which displays
+ * The main data display widget in %PortaBase.  Shows a table which displays
  * records matching the current filter as rows, and fields in the current
  * view as columns.  By default records are split between pages containing
  * a maximum number of rows each (with navigation controls at the bottom of

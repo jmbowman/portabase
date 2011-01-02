@@ -123,17 +123,21 @@ Doxygen (http://www.stack.nl/~dimitri/doxygen/index.html).  To do so:
 
 - Install Doxygen on your system
 - Download the version of Qt whose documentation you want to link to (optional)
-- Run doxytag to generate the qt.tag file (on a UNIX system, this will look
-  something like "doxytag -t qt.tag $QTDIR/doc/html) (optional)
-- Make sure the TAGFILES line in PortaBase's "Doxyfile" file references the
-  Qt documentation root you wish to link to; this can be either online or local
-  (optional)
-- Run "doxygen Doxyfile" in the Portabase source code main directory
+- Make sure the TAGFILES line in PortaBase's "Doxyfile" file uses the correct
+  path for the qt.tags file in the Qt documentation you downloaded and
+  references the Qt documentation root you wish to link to; this can be either
+  online or local (optional)
+- Install Graphviz (http://www.graphviz.org/) and either make sure that the
+  "dot" executable is in your path or set the "DOT_PATH" setting accordingly
+  in Doxyfile and Doxyfile_Metakit.  Alternatively, you can set "HAVE_DOT" to
+  "NO" in both of these files to disable diagram generation instead.
+- From the Portabase source code main directory, run the appropriate doxygen
+  script for your platform from the packaging directory (for example,
+  packaging/mac/doxygen.sh).
 
-Paths and environment variable formatting will vary across operating systems,
-and the final step can optionally performed using the "doxywizard" GUI wizard.
-I'll assume that people interested in understanding PortaBase's source code
-can figure out these variations.
+There are a lot of optional features in Doxygen, so you may want to read
+through its documentation and change some of the settings in Doxyfile and
+Doxyfile_Metakit before generating the documentation.
 
 Maemo Package Building
 ----------------------

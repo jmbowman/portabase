@@ -21,7 +21,7 @@
 class PortaBase;
 
 /**
- * Filter for application events which require special handling.  Currently
+ * %Filter for application events which require special handling.  Currently
  * only used to handle file open requests from the Mac OS X Finder.
  * Implemented as a separate class to make sure it never gets events of its
  * own that it needs to distinguish from the incoming application events.

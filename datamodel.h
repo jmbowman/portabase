@@ -24,7 +24,7 @@ class View;
 
 /**
  * Data model for the currently-displayed subset of the main data table in
- * a PortaBase file.  Used to optimize access to that table from Qt views,
+ * a %PortaBase file.  Used to optimize access to that table from Qt views,
  * like the main data grid widget.
  */
 class DataModel: public QAbstractTableModel

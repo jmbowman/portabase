@@ -33,11 +33,14 @@ public:
     virtual bool read();
 
 protected:
+    /**
+     * Information about one record in a .pdb file.
+     */
     struct RecordInfo { 
-        unsigned int record_data_offset;
-        unsigned char record_attributes;
-        unsigned int unique_id;
-        unsigned int record_size;
+        unsigned int record_data_offset; /**< The location in the file at which the record starts */
+        unsigned char record_attributes; /**< A bitmap of record attributes */
+        unsigned int unique_id; /**< The unique ID of the record */
+        unsigned int record_size; /**< The length of the record in bytes */
     };
     bool readHeader();
     bool readRecordList();

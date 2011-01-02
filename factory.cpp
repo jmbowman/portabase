@@ -194,7 +194,7 @@ QTreeWidget *Factory::treeWidget(QWidget *parent, const QStringList &headers)
  * typically QToolButton on the Mac and QPushButton elsewhere (since Mac
  * push buttons generally don't use icons).
  *
- * @param The parent widget of the button to be created
+ * @param parent The parent widget of the button to be created
  * @return The new button
  */
 QAbstractButton *Factory::button(QWidget *parent)

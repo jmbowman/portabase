@@ -19,7 +19,7 @@
 #include <QStringList>
 
 /**
- * This class manages usage of PortaBase as a command line tool.  This is
+ * This class manages usage of %PortaBase as a command line tool.  This is
  * typically used for import/export of file contents, often as part of a
  * script.
  */

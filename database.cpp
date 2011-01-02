@@ -1085,8 +1085,7 @@ c4_View Database::getData()
  *
  * @param filteredData The table to sort
  * @param column The name of the column to sort on
- * @param ascending True to sort in ascending order, false for descending
- *                  order
+ * @param order The order in which to sort the column
  * @return The sorted table
  */
 c4_View Database::sortData(c4_View filteredData, const QString &column,

@@ -33,11 +33,11 @@ typedef QMap<QString,QMap<int,QString> > IndexMap;
 typedef QMap<QString,Filter*> FilterMap;
 
 /**
- * Handler for parsing PortaBase XML data files.  XML is used as an
- * import/export format for PortaBase, allowing the content of a database
+ * Handler for parsing %PortaBase XML data files.  XML is used as an
+ * import/export format for %PortaBase, allowing the content of a database
  * to be represented in a plain text format for manual or automated
  * manipulation.  This class assumes that data is being loaded into an
- * essentially empty PortaBase file; to add data to an existing file, use
+ * essentially empty %PortaBase file; to add data to an existing file, use
  * CSV instead.
  */
 class XMLImport : public QObject, public QXmlDefaultHandler

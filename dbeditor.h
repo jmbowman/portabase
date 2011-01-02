@@ -32,7 +32,7 @@ typedef QMap<QString,CalcNode*> NameCalcMap;
 typedef QMap<QString,int> NameDecimalsMap;
 
 /**
- * "Columns Editor" dialog for editing the format of a PortaBase database.
+ * "Columns Editor" dialog for editing the format of a %PortaBase database.
  * Shows all of the currently defined columns, and shows buttons for adding,
  * editing, deleting, and reordering the database columns.
  */

@@ -24,7 +24,7 @@
 #include <QSettings>
 #include <QSpinBox>
 #include <QTabWidget>
-#include <QtColorPicker>
+#include "color_picker/qtcolorpicker.h"
 #include "factory.h"
 #include "menuactions.h"
 #include "pbdialog.h"
@@ -35,6 +35,7 @@
 /**
  * Constructor.
  *
+ * @param menuHelper Menu management helper object
  * @param parent This dialog's parent widget
  */
 Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)

@@ -160,6 +160,7 @@ void VSFManager::setActions(QAction *add, QAction *edit, QAction *del)
  * filters.
  *
  * @param items Names of the new items to be represented by the buttons
+ * @param current The name of the currently selected item
  */
 void VSFManager::updateButtonList(const QStringList &items, const QString &current)
 {

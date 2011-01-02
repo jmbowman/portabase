@@ -25,7 +25,7 @@ class QTextStream;
 class Database;
 
 /**
- * Utility class for exporting the full content of a PortaBase file to an XML
+ * Utility class for exporting the full content of a %PortaBase file to an XML
  * file.  Begins writing to the file during the constructor, and finishes in
  * the destructor.
  */

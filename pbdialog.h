@@ -24,7 +24,7 @@ class QPushButton;
 class QVBoxLayout;
 
 /**
- * Base class for many PortaBase dialogs.  Handles standard validation for
+ * Base class for many %PortaBase dialogs.  Handles standard validation for
  * names of views, sortings, filters and such.  Also supports easy addition
  * of a row of buttons for list management.
  */

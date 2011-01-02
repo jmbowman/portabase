@@ -23,16 +23,16 @@ class QQMenuHelper;
 class QSettings;
 
 /**
- * <p>The base class for the main window of a document-based application
+ * The base class for the main window of a document-based application
  * with a single file format.  Provides support for features typically
  * expected of such applications across different platforms.  Assumes the
- * existence of the following icon resources on Mac OS X:</p>
- * <ul>
- * <li>icons/document_small.png (should be 16x16)</li>
- * <li>icons/document_large.png (should be 32x32)</li>
- * </ul>
- * <p>These are different sizes of the icon used to represent the
- * application's documents in Finder.</p>
+ * existence of the following icon resources on Mac OS X:
+ *
+ * @li icons/document_small.png (should be 16x16)
+ * @li icons/document_large.png (should be 32x32)
+ *
+ * These are different sizes of the icon used to represent the
+ * application's documents in Finder.
  */
 class QQMainWindow: public QMainWindow
 {

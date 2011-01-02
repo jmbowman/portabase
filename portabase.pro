@@ -22,6 +22,7 @@ HEADERS         = calc/calcdateeditor.h \
                   calc/calctimeeditor.h \
                   calc/calcwidget.h \
                   calculator.h \
+                  color_picker/qtcolorpicker.h \
                   columneditor.h \
                   commandline.h \
                   condition.h \
@@ -90,6 +91,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   calc/calctimeeditor.cpp \
                   calc/calcwidget.cpp \
                   calculator.cpp \
+                  color_picker/qtcolorpicker.cpp \
                   columneditor.cpp \
                   commandline.cpp \
                   condition.cpp \
@@ -150,8 +152,6 @@ SOURCES         = calc/calcdateeditor.cpp \
                   vsfmanager.cpp \
                   xmlexport.cpp \
                   xmlimport.cpp
-
-include(color_picker/qtcolorpicker.pri)
 
 # Stuff for all Linux/UNIX versions
 unix:LIBS       += -lm -lmk4

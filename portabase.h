@@ -39,7 +39,7 @@ class VSFManager;
 typedef QList<QAction*> ActionList;
 
 /**
- * The main window of the PortaBase application.  Most interaction with the
+ * The main window of the %PortaBase application.  Most interaction with the
  * menus and toolbars is managed here.
  */
 class PortaBase: public QQMainWindow
