@@ -30,7 +30,7 @@
  * @param parent This dialog's parent widget
  */
 SortEditor::SortEditor(QWidget *parent)
-    : PBDialog(tr("Sorting Editor"), parent), db(0)
+    : PBDialog(tr("Sorting Editor"), parent), db(0), updating(false)
 {
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Sorting Name") + " ", this));
@@ -43,6 +43,8 @@ SortEditor::SortEditor(QWidget *parent)
     vbox->addWidget(table);
     connect(table, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
             this, SLOT(tableClicked(QTreeWidgetItem*, int)));
+    connect(table->model(), SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+            this, SLOT(dataChanged(QModelIndex, QModelIndex)));
 
     addEditButtons(true);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
@@ -60,6 +62,7 @@ SortEditor::SortEditor(QWidget *parent)
  */
 int SortEditor::edit(Database *subject, const QString &sortingName)
 {
+    updating = true;
     db = subject;
     originalName = sortingName;
     nameBox->setText(sortingName);
@@ -73,6 +76,7 @@ int SortEditor::edit(Database *subject, const QString &sortingName)
         colNames.prepend(name);
     }
     updateTable(colNames);
+    updating = false;
     int result = exec();
     while (result) {
         if (validateName(nameBox->text(), originalName, db->listSortings())) {
@@ -108,9 +112,11 @@ void SortEditor::moveUp()
     }
     int index = table->indexOfTopLevelItem(item);
     if (index > 0) {
+        updating = true;
         item = table->takeTopLevelItem(index);
         table->insertTopLevelItem(index - 1, item);
         table->setCurrentItem(item);
+        updating = false;
     }
 }
 
@@ -127,9 +133,11 @@ void SortEditor::moveDown()
     }
     int index = table->indexOfTopLevelItem(item);
     if (index < table->topLevelItemCount() - 1) {
+        updating = true;
         item = table->takeTopLevelItem(index);
         table->insertTopLevelItem(index + 1, item);
         table->setCurrentItem(item);
+        updating = false;
     }
 }
 
@@ -173,10 +181,10 @@ void SortEditor::updateTable(const QStringList &colNames)
 }
 
 /**
- * Handler for clicks on the information table.  A click in the first column
- * toggles whether or not the field represented by that row will be sorted
- * on.  A click in the third column toggles the sorting order for the
- * appropriate field (if it's being sorted on).
+ * Handler for clicks on the information table.  A click in the third column
+ * toggles the sorting order for the appropriate field (if it's being sorted
+ * on).  Clicks in the first column trigger a data change in the model and
+ * are handled by dataChanged() instead.
  *
  * @param item The row of the table in which the click occurred
  * @param column The index of the column in which the click occurred
@@ -187,21 +195,7 @@ void SortEditor::tableClicked(QTreeWidgetItem *item, int column)
         // no row selected
         return;
     }
-    if (column == 0) {
-        QString name = item->text(1);
-        if (sortCols.contains(name)) {
-            item->setCheckState(0, Qt::Unchecked);
-            sortCols.removeAll(name);
-            descCols.removeAll(name);
-            item->setText(2, "");
-        }
-        else {
-            item->setCheckState(0, Qt::Checked);
-            sortCols.append(name);
-            item->setText(2, tr("Ascending"));
-        }
-    }
-    else if (column == 2) {
+    if (column == 2) {
         QString name = item->text(1);
         if (sortCols.contains(name)) {
             if (!descCols.contains(name)) {
@@ -213,6 +207,34 @@ void SortEditor::tableClicked(QTreeWidgetItem *item, int column)
                 item->setText(2, tr("Ascending"));
             }
         }
+    }
+}
+
+/**
+ * Handler for information table model data changes.  Used to detect when the
+ * user clicks a field selection checkbox (because the kinetic scrolling
+ * on Maemo Fremantle sometimes prevents the itemClicked() signal from
+ * being emitted when the checkbox is toggled).
+ *
+ * @param topLeft The top left position of the changed data region
+ * @param bottomRight The bottom right position of the changed data region
+ */
+void SortEditor::dataChanged(const QModelIndex &topLeft, const QModelIndex &)
+{
+    if (updating || topLeft.column() != 0) {
+        return;
+    }
+    QTreeWidgetItem *item = table->topLevelItem(topLeft.row());
+    Qt::CheckState state = item->checkState(0);
+    QString name = item->text(1);
+    if (state == Qt::Unchecked && sortCols.contains(name)) {
+        sortCols.removeAll(name);
+        descCols.removeAll(name);
+        item->setText(2, "");
+    }
+    else if (state == Qt::Checked && !sortCols.contains(name)) {
+        sortCols.append(name);
+        item->setText(2, tr("Ascending"));
     }
 }
 

@@ -28,9 +28,12 @@
  *
  * @param f Path to the MobileDB file to be parsed
  */
-MobileDBFile::MobileDBFile(const QString &f) : PDBFile(f), colcount(0), rowcount(0)
+MobileDBFile::MobileDBFile(const QString &f) : PDBFile(f), colcount(0),
+    rowcount(0)
 {
-
+    for (int i = 0; i < 20; i++) {
+        fieldlengths[i] = 0;
+    }
 }
 
 /**

@@ -409,6 +409,8 @@ void DBEditor::updateTable()
             last->setText(2, "");
             int checked = defaultVal.toInt();
             last->setCheckState(2, checked ? Qt::Checked : Qt::Unchecked);
+            // remove the ability to toggle the checkbox
+            last->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         }
         else if (type == NOTE) {
             last->setIcon(2, QIcon(":/icons/note.png"));

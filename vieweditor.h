@@ -44,7 +44,6 @@ private:
     void updateTable();
 
 private slots:
-    void tableClicked(QTreeWidgetItem *item, int column);
     void moveUp();
     void moveDown();
 

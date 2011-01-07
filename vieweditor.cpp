@@ -58,8 +58,6 @@ ViewEditor::ViewEditor(QWidget *parent)
     headers << tr("Include") << tr("Column Name");
     table = Factory::treeWidget(this, headers);
     vbox->addWidget(table);
-    connect(table, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
-            this, SLOT(tableClicked(QTreeWidgetItem*, int)));
 
     addEditButtons(true);
     connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
@@ -217,27 +215,6 @@ void ViewEditor::updateTable()
 }
 
 /**
- * Handler for clicks on the information table.  A click in the first column
- * toggles whether or not the field represented by that row will be included
- * in the view.
- *
- * @param item The row of the table in which the click occurred
- * @param column The index of the column in which the click occurred
- */
-void ViewEditor::tableClicked(QTreeWidgetItem *item, int column)
-{
-    if (item == 0) {
-        // no row selected
-        return;
-    }
-    if (column == 0) {
-        bool included = !item->data(0, Qt::UserRole).toBool();
-        item->setData(0, Qt::UserRole, included);
-        item->setCheckState(0, included ? Qt::Checked : Qt::Unchecked);
-    }
-}
-
-/**
  * Apply to the database any changes made the last time this dialog was shown.
  */
 void ViewEditor::applyChanges()
@@ -275,7 +252,7 @@ void ViewEditor::applyChanges()
     for (int i = 0; i < count; i++) {
         QTreeWidgetItem *item = table->topLevelItem(i);
         QString name = item->text(1);
-        if (item->data(0, Qt::UserRole).toBool()) {
+        if (item->checkState(0) == Qt::Checked) {
             sequence.append(name);
             if (!oldNames.contains(name)) {
                 // newly added column

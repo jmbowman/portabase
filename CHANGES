@@ -1,3 +1,9 @@
+2011-01-07  JMB  Fremantle checkbox bugfixes, cppcheck warning fixes
+
+    Fixed some erratic checkbox functionality (especially in lists on
+    Fremantle) in the columns editor, sorting editor, and view editor.  Also
+    fixed a few spots in the code which triggered warnings in cppcheck.
+
 2011-01-01  JMB  Doxygen updates, Windows build fixes
 
     Made some improvements to the Doxygen documentation generation process and

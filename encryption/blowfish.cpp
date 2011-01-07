@@ -26,8 +26,8 @@
  * Blowfish block cipher source file.
  */
 
+#include <stdlib.h>
 #include "blowfish.h"
-#include "stdlib.h"
 
 # ifdef __arch__swab32
 #  define swapu32(n) __arch__swab32(n)

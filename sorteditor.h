@@ -16,6 +16,7 @@
 #ifndef SORTEDITOR_H
 #define SORTEDITOR_H
 
+#include <QModelIndex>
 #include <QStringList>
 #include "pbdialog.h"
 
@@ -42,6 +43,7 @@ private:
 
 private slots:
     void tableClicked(QTreeWidgetItem *item, int column);
+    void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
     void moveUp();
     void moveDown();
 
@@ -52,6 +54,7 @@ private:
     QString originalName; /**< The initial name of the filter being edited */
     QStringList sortCols; /**< Names of columns which are being sorted on */
     QStringList descCols; /**< Names of columns which are being sorted in descending order */
+    bool updating; /** Indicator that model changes should be temporarily ignored */
 };
 
 #endif

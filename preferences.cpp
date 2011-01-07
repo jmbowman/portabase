@@ -39,7 +39,8 @@
  * @param parent This dialog's parent widget
  */
 Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)
-    : PBDialog(tr("Preferences"), parent), mh(menuHelper), tabs(0), panel(0)
+    : PBDialog(tr("Preferences"), parent), mh(menuHelper), tabs(0), panel(0),
+      fontName(0), fontSize(0), sample(0)
 {
 #if defined(Q_WS_MAEMO_5)
     QScrollArea *sa = new QScrollArea(this);
