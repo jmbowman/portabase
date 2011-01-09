@@ -22,13 +22,20 @@
 #include "imagewidget.h"
 #include "../view.h"
 
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#include <QtDBus>
+#include <mce/mode-names.h>
+#include <mce/dbus-names.h>
+#endif
+
 /**
  * Constructor.
  *
  * @param parent This widget's parent widget (0 if it is to be full-screen)
  */
 ImageWidget::ImageWidget(QWidget *parent)
-           : QWidget(parent), currentView(0), rowIndex(0), colIndex(0), timer(0), slideshowDelay(0)
+  : QWidget(parent), currentView(0), rowIndex(0), colIndex(0),
+    timer(0), ssTimer(0), slideshowDelay(0)
 {
     closing = false;
     setAttribute(Qt::WA_NoSystemBackground);
@@ -192,6 +199,11 @@ void ImageWidget::slideshow(int delay)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(nextImage()));
     timer->start(delay * 1000);
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    ssTimer = new QTimer(this);
+    connect(ssTimer, SIGNAL(timeout()), this, SLOT(keepScreenOn()));
+    ssTimer->start(30 * 1000);
+#endif
 }
 
 /**
@@ -203,6 +215,20 @@ void ImageWidget::nextImage()
 }
 
 /**
+ * Send a D-Bus signal on Maemo to prevent the backlight from turning off.
+ */
+void ImageWidget::keepScreenOn()
+{
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    QDBusConnection::systemBus().call(
+        QDBusMessage::createMethodCall(MCE_SERVICE,
+                                       MCE_REQUEST_PATH,
+                                       MCE_REQUEST_IF,
+                                       MCE_PREVENT_BLANK_REQ));
+#endif
+}
+
+/**
  * Don't bother to continue painting an image if this widget is being closed.
  *
  * @param e The window close event
@@ -210,5 +236,11 @@ void ImageWidget::nextImage()
 void ImageWidget::closeEvent(QCloseEvent *e)
 {
     closing = true;
+    if (timer) {
+        delete timer;
+    }
+    if (ssTimer) {
+        delete ssTimer;
+    }
     e->accept();
 }

@@ -35,7 +35,7 @@ NumberWidget::NumberWidget(int type, QWidget *parent)
 {
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     entryField = new QLineEdit(this);
-#if defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_MAEMO_5) && QT_VERSION < 0x040700
     if (type == INTEGER) {
         // this serves to enable function lock, making number entry easier
         entryField->setInputMethodHints(Qt::ImhDigitsOnly);
@@ -75,7 +75,7 @@ void NumberWidget::setValue(const QString &value)
 {
     if (dataType == INTEGER) {
         double result = Formatting::parseDouble(value);
-#if defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_MAEMO_5) && QT_VERSION < 0x040700
         // with function lock on, commas and periods can't be entered
         entryField->setText(QString::number((int)result));
 #else

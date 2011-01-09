@@ -1,3 +1,12 @@
+2011-01-09  JMB  Removed row double-clicking, better Maemo backlight handling
+
+    Removed the behavior to show the row viewer when double-clicking on a row
+    in the data table; it was interacting badly with the single-click behavior
+    and was only one of many ways of launching the row viewer.  The backlight
+    on Maemo devices now won't dim or turn off during a slideshow.  Also made
+    sure that an earlier fix for improving integer input on Fremantle PR1.2
+    won't break on PR1.3.
+
 2011-01-07  JMB  Fremantle checkbox bugfixes, cppcheck warning fixes
 
     Fixed some erratic checkbox functionality (especially in lists on

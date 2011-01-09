@@ -55,6 +55,7 @@ protected:
 
 private slots:
     void nextImage();
+    void keepScreenOn();
 
 private:
     void processArrow(int key);
@@ -66,6 +67,7 @@ private:
     int rowIndex; /**< The table row index of the current image */
     int colIndex; /**< The table column index of the current image */
     QTimer *timer; /**< Timer used in slideshows */
+    QTimer *ssTimer; /**< Timer used on Maemo to keep screen on during slideshows */
     int slideshowDelay; /**< The delay in seconds between images in a slideshow */
 };
 

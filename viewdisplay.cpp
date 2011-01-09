@@ -94,8 +94,6 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
             this, SLOT(cellPressed(const QModelIndex &)));
     connect(table, SIGNAL(clicked(const QModelIndex &)),
             this, SLOT(cellReleased(const QModelIndex &)));
-    connect(table, SIGNAL(doubleClicked(const QModelIndex &)),
-            this, SLOT(viewRow()));
 
     QHeaderView *header = table->header();
     header->setClickable(true);
