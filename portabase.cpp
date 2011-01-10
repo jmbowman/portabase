@@ -63,10 +63,8 @@ PortaBase::PortaBase(QWidget *parent)
 {
     QSettings *settings = getSettings();
     Formatting::updatePreferences(settings);
-    confirmDeletions = settings->value("General/ConfirmDeletions", true).toBool();
-    booleanToggle = settings->value("General/BooleanToggle", false).toBool();
-    bool pagedDisplay = settings->value("General/PagedDisplay", false).toBool();
-    bool singleClickShow = settings->value("General/SingleClickShow", true).toBool();
+    confirmDeletions = settings->value("General/ConfirmDeletions",
+                                       true).toBool();
 
     QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
     Factory::evenRowColor = QColor(color);
@@ -77,9 +75,7 @@ PortaBase::PortaBase(QWidget *parent)
     setCentralWidget(mainStack);
 
     viewer = new ViewDisplay(this, mainStack);
-    viewer->allowBooleanToggle(booleanToggle);
-    viewer->usePages(pagedDisplay);
-    viewer->showWithSingleClick(singleClickShow);
+    viewer->updatePreferences(settings);
     mainStack->addWidget(viewer);
 
     // menu and toolbar, shared between file selector and data viewer modes
@@ -428,19 +424,16 @@ void PortaBase::editPreferences()
         menuHelper()->helpMenu()->setFont(font);
 #endif
         QSettings settings;
+#if defined (Q_WS_MAEMO_5)
+#endif
         settings.beginGroup("General");
         confirmDeletions = settings.value("ConfirmDeletions", true).toBool();
-        booleanToggle = settings.value("BooleanToggle", false).toBool();
-        bool pagedDisplay = settings.value("PagedDisplay", false).toBool();
-        bool singleClickShow = settings.value("SingleClickShow", true).toBool();
         settings.endGroup();
-        viewer->allowBooleanToggle(booleanToggle);
-        viewer->usePages(pagedDisplay);
-        viewer->showWithSingleClick(singleClickShow);
+        viewer->updatePreferences(&settings);
+        Formatting::updatePreferences(&settings);
         if (!documentPath().isEmpty()) {
             showDataViewer();
             db->updatePreferences();
-            Formatting::updatePreferences(&settings);
             viewer->resetTable();
         }
     }

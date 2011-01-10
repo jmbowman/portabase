@@ -40,7 +40,7 @@
  */
 Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)
     : PBDialog(tr("Preferences"), parent), mh(menuHelper), tabs(0), panel(0),
-      fontName(0), fontSize(0), sample(0)
+      variableHeightRows(0), fontName(0), fontSize(0), sample(0)
 {
 #if defined(Q_WS_MAEMO_5)
     QScrollArea *sa = new QScrollArea(this);
@@ -56,7 +56,7 @@ Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)
     QSettings settings;
     addGeneralTab(&settings);
     addDateTimeTab(&settings);
-    addAppearanceTab();
+    addAppearanceTab(&settings);
     finishLayout(true, true, 400, 200);
 }
 
@@ -206,7 +206,7 @@ void Preferences::addDateTimeTab(QSettings *settings)
 /**
  * Add the appearance options tab to the dialog.
  */
-void Preferences::addAppearanceTab()
+void Preferences::addAppearanceTab(QSettings *settings)
 {
     QWidget *appearanceTab;
     QVBoxLayout *layout;
@@ -258,6 +258,15 @@ void Preferences::addAppearanceTab()
     fontGrid->addWidget(new QLabel(tr("Sample"), fontGroup), 2, 0);
     sample = new QLabel(tr("Sample text"), fontGroup);
     fontGrid->addWidget(sample, 2, 1);
+
+#if defined(Q_WS_MAEMO_5)
+    variableHeightRows = new QCheckBox(tr("Adjust row height to match font"),
+                                       fontGroup);
+    variableHeightRows->setChecked(settings->value("Font/VariableHeightRows",
+                                                   false).toBool());
+    fontGrid->addWidget(variableHeightRows, 3, 0, 1, 2);
+#endif
+
     layout->addWidget(fontGroup);
 #endif
 
@@ -269,6 +278,7 @@ void Preferences::addAppearanceTab()
     configureColorPicker(evenButton);
     evenButton->setCurrentColor(Factory::evenRowColor);
     hbox->addWidget(evenButton);
+    hbox->addSpacing(10);
     oddButton = new QtColorPicker(colorGroup);
     configureColorPicker(oddButton);
     oddButton->setCurrentColor(Factory::oddRowColor);
@@ -390,7 +400,10 @@ QFont Preferences::applyChanges()
     settings.setValue("SmallScreen", smallScreen->isChecked());
     settings.endGroup();
 
-#if !defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_MAEMO_5)
+    settings.setValue("Font/VariableHeightRows",
+                      variableHeightRows->isChecked());
+#else
     settings.beginGroup("Colors");
     const QColor evenColor = evenButton->currentColor();
     Factory::evenRowColor = QColor(evenColor);

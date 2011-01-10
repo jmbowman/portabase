@@ -172,7 +172,6 @@ private:
     QStringList filterNames; /**< List of all user-named filters in the database */
     ActionList filterActions; /**< List of user-created filter selection actions */
     bool confirmDeletions; /**< True if deletion actions should trigger confirmation dialogs */
-    bool booleanToggle; /**< True if clicking on a boolean field display should toggle its value */
     QPrinter *printer; /**< The last-used printer settings (for this application instance) */
     VSFManager *vsfManager; /**< Dialog for managing the view, sorting, and filter selections */
 };

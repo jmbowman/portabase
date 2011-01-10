@@ -34,6 +34,7 @@
 #include "datatypes.h"
 #include "factory.h"
 #include "noteeditor.h"
+#include "pbmaemo5style.h"
 #include "portabase.h"
 #include "roweditor.h"
 #include "rowviewer.h"
@@ -70,6 +71,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
 #endif
 #if defined(Q_WS_MAEMO_5)
     table->setIconSize(QSize(32, 32));
+    table->setStyle(new PBMaemo5Style());
 #endif
     Factory::updateRowColors(table);
     model = new DataModel(this);
@@ -193,29 +195,6 @@ void ViewDisplay::updateButtonSizes()
 void ViewDisplay::setEdited(bool y)
 {
     portabase->setEdited(y);
-}
-
-/**
- * Set whether or not clicking on a boolean field entry should toggle its
- * value.  Useful for files such as shopping lists and todo lists, but adds
- * a risk of accidentally changing data when you meant to just select a
- * record.
- *
- * @param flag True if boolean values can be toggled by clicking on them
- */
-void ViewDisplay::allowBooleanToggle(bool flag)
-{
-    booleanToggle = flag;
-}
-
-/**
- * Set whether or not a single click on a row will launch it in the RowViewer
- * dialog.  Default is true for convenience on portable devices, but the old
- * behavior can still be specified.
- */
-void ViewDisplay::showWithSingleClick(bool flag)
-{
-    singleClickShow = flag;
 }
 
 /**
@@ -847,6 +826,24 @@ void ViewDisplay::slideshow()
     }
     SlideshowDialog dialog(imageCols, view, this);
     dialog.exec();
+}
+
+/**
+ * Update display options to match the user's current preferences.
+ *
+ * @param settings The current set of application preferences
+ */
+void ViewDisplay::updatePreferences(QSettings *settings)
+{
+    settings->beginGroup("General");
+    booleanToggle = settings->value("BooleanToggle", false).toBool();
+    singleClickShow = settings->value("SingleClickShow", true).toBool();
+    usePages(settings->value("PagedDisplay", false).toBool());
+    settings->endGroup();
+#if defined(Q_WS_MAEMO_5)
+    bool vhr = settings->value("Font/VariableHeightRows", false).toBool();
+    (static_cast<PBMaemo5Style*>(table->style()))->setVariableHeightRows(vhr);
+#endif
 }
 
 /**

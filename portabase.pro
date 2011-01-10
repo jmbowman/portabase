@@ -66,6 +66,7 @@ HEADERS         = calc/calcdateeditor.h \
                   oldconfig.h \
                   passdialog.h \
                   pbdialog.h \
+                  pbmaemo5style.h \
                   pdbfile.h \
                   portabase.h \
                   preferences.h \
@@ -134,6 +135,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   oldconfig.cpp \
                   passdialog.cpp \
                   pbdialog.cpp \
+                  pbmaemo5style.cpp \
                   pdbfile.cpp \
                   portabase.cpp \
                   preferences.cpp \

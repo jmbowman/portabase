@@ -51,13 +51,14 @@ private slots:
 private:
     void addGeneralTab(QSettings *settings);
     void addDateTimeTab(QSettings *settings);
-    void addAppearanceTab();
+    void addAppearanceTab(QSettings *settings);
     void configureColorPicker(QtColorPicker *picker);
 
 private:
     QQMenuHelper *mh; /**< Support code for any document-based application */
     QTabWidget *tabs; /**< Tab widget used on all non-Fremantle platforms */
     QWidget *panel; /**< Large scrollable preferences panel used on Fremantle */
+    QCheckBox *variableHeightRows; /**< Option to allow row heights to vary on Fremantle */
     QFontDatabase fontdb; /**< System font database */
     IntList sizes; /**< List of displayed font sizes */
     QComboBox *fontName; /**< Font name selection list */

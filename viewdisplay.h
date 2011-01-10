@@ -26,6 +26,7 @@ class PortaBase;
 class QButtonGroup;
 class QKeyEvent;
 class QLabel;
+class QSettings;
 class QSpinBox;
 class QStackedWidget;
 class QString;
@@ -61,12 +62,10 @@ public:
     void exportToCSV(const QString &filename);
     void exportToXML(const QString &filename);
     QString toHtml();
-    void allowBooleanToggle(bool flag);
-    void usePages(bool flag);
-    void showWithSingleClick(bool flag);
     void updateColWidths();
     int rowCount();
     int columnCount();
+    void updatePreferences(QSettings *settings);
 
 public slots:
     void addRow();
@@ -84,6 +83,7 @@ private:
     int selectedRowIndex();
     int selectedRowId();
     void sort(int column);
+    void usePages(bool flag);
 
 private slots:
     void changePage(int id);

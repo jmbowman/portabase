@@ -39,6 +39,12 @@ ImageWidget::ImageWidget(QWidget *parent)
 {
     closing = false;
     setAttribute(Qt::WA_NoSystemBackground);
+#if defined(Q_WS_MAEMO_5)
+    if (!parent) {
+        // Allow fullscreen images to auto-rotate
+        setAttribute(Qt::WA_Maemo5AutoOrientation, true);
+    }
+#endif
 }
 
 /**

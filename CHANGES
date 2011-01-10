@@ -1,3 +1,11 @@
+2011-01-10  JMB  Fremantle image rotation, adjustable row height
+
+    Allow fullscreen images on Fremantle (including slideshows) to
+    auto-rotate with the device orientation.  Also added a preference to allow
+    the data table row height to adjust to the font size on Fremantle
+    (allowing more rows on the screen but making them harder to accurately tap
+    with fingers).
+
 2011-01-09  JMB  Removed row double-clicking, better Maemo backlight handling
 
     Removed the behavior to show the row viewer when double-clicking on a row
