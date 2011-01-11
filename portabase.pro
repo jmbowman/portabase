@@ -24,6 +24,7 @@ HEADERS         = calc/calcdateeditor.h \
                   calculator.h \
                   color_picker/qtcolorpicker.h \
                   columneditor.h \
+                  columninfo.h \
                   commandline.h \
                   condition.h \
                   conditioneditor.h \
@@ -94,6 +95,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   calculator.cpp \
                   color_picker/qtcolorpicker.cpp \
                   columneditor.cpp \
+                  columninfo.cpp \
                   commandline.cpp \
                   condition.cpp \
                   conditioneditor.cpp \

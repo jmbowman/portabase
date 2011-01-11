@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,8 @@
  */
 Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)
     : PBDialog(tr("Preferences"), parent), mh(menuHelper), tabs(0), panel(0),
-      variableHeightRows(0), fontName(0), fontSize(0), sample(0)
+      variableHeightRows(0), fontName(0), fontSize(0), sample(0),
+      autoRotate(0)
 {
 #if defined(Q_WS_MAEMO_5)
     QScrollArea *sa = new QScrollArea(this);
@@ -107,6 +108,13 @@ void Preferences::addGeneralTab(QSettings *settings)
     pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
     pagedDisplay->setChecked(settings->value("PagedDisplay", false).toBool());
     layout->addWidget(pagedDisplay);
+
+#if defined(Q_WS_MAEMO_5)
+    autoRotate = new QCheckBox(tr("Auto-rotate to match device orientation"),
+                               generalTab);
+    autoRotate->setChecked(settings->value("AutoRotate", false).toBool());
+    layout->addWidget(autoRotate);
+#endif
 
     QHBoxLayout *hbox = Factory::hBoxLayout(layout);
     hbox->addWidget(new QLabel(tr("Default rows per page"), generalTab));
@@ -401,15 +409,14 @@ QFont Preferences::applyChanges()
     settings.endGroup();
 
 #if defined(Q_WS_MAEMO_5)
+    settings.setValue("General/AutoRotate", autoRotate->isChecked());
     settings.setValue("Font/VariableHeightRows",
                       variableHeightRows->isChecked());
 #else
     settings.beginGroup("Colors");
     const QColor evenColor = evenButton->currentColor();
-    Factory::evenRowColor = QColor(evenColor);
     settings.setValue("EvenRows", evenColor.name());
     const QColor oddColor = oddButton->currentColor();
-    Factory::oddRowColor = QColor(oddColor);
     settings.setValue("OddRows", oddColor.name());
     settings.endGroup();
 #endif

@@ -1,3 +1,12 @@
+2011-01-11  JMB  Better column widths and statistics, Fremantle auto-rotate
+
+    Appended a 0-width empty column to the data table to soak up any extra
+    space (useful for right-aligned last columns, and fixes a bug where a
+    newly opened file could inherit the width of the previous file's last
+    column).  Improved the appearance of the column statistics dialog and gave
+    it a widget to control the column's width in pixels.  Added a preferences
+    option to enable auto-rotation of the entire application on Fremantle.
+
 2011-01-10  JMB  Fremantle image rotation, adjustable row height
 
     Allow fullscreen images on Fremantle (including slideshows) to

@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,21 +62,12 @@ PortaBase::PortaBase(QWidget *parent)
     readOnly(false), printer(0), vsfManager(0)
 {
     QSettings *settings = getSettings();
-    Formatting::updatePreferences(settings);
-    confirmDeletions = settings->value("General/ConfirmDeletions",
-                                       true).toBool();
-
-    QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
-    Factory::evenRowColor = QColor(color);
-    color = settings->value("Colors/OddRows", "#E0E0E0").toString();
-    Factory::oddRowColor = QColor(color);
-
     mainStack = new QStackedWidget(this);
     setCentralWidget(mainStack);
 
     viewer = new ViewDisplay(this, mainStack);
-    viewer->updatePreferences(settings);
     mainStack->addWidget(viewer);
+    updatePreferences(settings);
 
     // menu and toolbar, shared between file selector and data viewer modes
     ma = new MenuActions(this);
@@ -424,19 +415,41 @@ void PortaBase::editPreferences()
         menuHelper()->helpMenu()->setFont(font);
 #endif
         QSettings settings;
-#if defined (Q_WS_MAEMO_5)
-#endif
-        settings.beginGroup("General");
-        confirmDeletions = settings.value("ConfirmDeletions", true).toBool();
-        settings.endGroup();
-        viewer->updatePreferences(&settings);
-        Formatting::updatePreferences(&settings);
+        updatePreferences(&settings);
         if (!documentPath().isEmpty()) {
             showDataViewer();
             db->updatePreferences();
             viewer->resetTable();
         }
     }
+}
+
+/**
+ * Update the window and other objects to match the user's current
+ * application preferences.
+ *
+ * @param settings The current set of application preferences
+ */
+void PortaBase::updatePreferences(QSettings *settings)
+{
+    QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
+    Factory::evenRowColor = QColor(color);
+    color = settings->value("Colors/OddRows", "#E0E0E0").toString();
+    Factory::oddRowColor = QColor(color);
+
+    settings->beginGroup("General");
+    confirmDeletions = settings->value("ConfirmDeletions", true).toBool();
+#if defined (Q_WS_MAEMO_5)
+    if (settings->value("AutoRotate", false).toBool()) {
+        setAttribute(Qt::WA_Maemo5AutoOrientation, true);
+    }
+    else {
+        setAttribute(Qt::WA_Maemo5LandscapeOrientation, true);
+    }
+#endif
+    settings->endGroup();
+    viewer->updatePreferences(settings);
+    Formatting::updatePreferences(settings);
 }
 
 /**

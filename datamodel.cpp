@@ -1,7 +1,7 @@
 /*
  * datamodel.cpp
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -446,17 +446,18 @@ int DataModel::rowCount(const QModelIndex &parent) const
 }
 
 /**
- * Get the number of columns in the currently displayed data set.
+ * Get the number of columns in the currently displayed data set, plus an
+ * extra empty column to fill any spare width.
  *
  * @param parent The parent item in the data tree; should always be an invalid index
- * @return The number of columns in the subset
+ * @return The number of columns in the subset plus one
  */
 int DataModel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid() || !currentView) {
         return 0;
     }
-    return currentView->columnCount(parent);
+    return currentView->columnCount(parent) + 1;
 }
 
 /**

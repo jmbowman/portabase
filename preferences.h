@@ -1,7 +1,7 @@
 /*
  * preferences.h
  *
- * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,6 +71,7 @@ private:
     QComboBox *wrapType; /**< Option to force note text wrapping at line end rather than whitespace */
     QCheckBox *pagedDisplay; /**< Option to pages of data rows, rather than all in a scrolling list */
     QCheckBox *singleClickShow; /**< Option to show the row viewer with a single click in the data grid */
+    QCheckBox *autoRotate; /**< Option to auto-rotate with Fremantle device orientation */
     QSpinBox *rowsPerPage; /**< Number of rows to display on each page of the data view */
     QCheckBox *smallScreen; /**< Option to use settings for PDA/phone-sized screens */
     QtColorPicker *evenButton; /**< Button to select the color of even rows */

@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 #include <QToolButton>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include "columninfo.h"
 #include "database.h"
 #include "datamodel.h"
 #include "datatypes.h"
@@ -291,13 +292,13 @@ int ViewDisplay::rowCount()
 }
 
 /**
- * Get the number of columns in the current view.
+ * Get the number of data columns in the current view.
  *
  * @return The column count
  */
 int ViewDisplay::columnCount()
 {
-    return model->columnCount();
+    return model->columnCount() - 1;
 }
 
 /**
@@ -422,9 +423,10 @@ void ViewDisplay::setView(const QString &name, bool applyDefaults)
 void ViewDisplay::matchNewView(View *view)
 {
     int count = view->columnCount();
-    for (int i = 0; i < count - 1; i++) {
+    for (int i = 0; i < count; i++) {
         table->setColumnWidth(i, view->getColWidth(i));
     }
+    table->setColumnWidth(count, 0);
     rowsPerPage->setValue(view->getRowsPerPage());
 }
 
@@ -775,25 +777,12 @@ void ViewDisplay::showStatistics()
     }
     int column = pressedHeader;
     pressedHeader = -1;
-    QStringList stats = model->view()->getStatistics(column);
-    QString content("<qt><center><b>");
-    content += model->headerData(column, Qt::Horizontal).toString();
-    content += "</b></center>";
-    int count = stats.count();
-    for (int i = 0; i < count; i++) {
-        content += stats[i] + "<br/>";
+    QString colName = model->headerData(column, Qt::Horizontal).toString();
+    ColumnInfoDialog info(this);
+    if (info.launch(model->view(), colName)) {
+        matchNewView(model->view());
+        setEdited(true);
     }
-    content += "</qt>";
-    QMessageBox mb(this);
-#if defined(Q_WS_MAEMO_5)
-    mb.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
-#else
-    mb.setStandardButtons(QMessageBox::Ok);
-#endif
-    mb.setText(content);
-    mb.setWindowTitle(qApp->applicationName());
-    mb.setWindowModality(Qt::ApplicationModal);
-    mb.exec();
 }
 
 /**
