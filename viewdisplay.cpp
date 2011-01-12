@@ -66,7 +66,6 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     table->setSortingEnabled(false);
     table->setAllColumnsShowFocus(true);
     table->setRootIsDecorated(false);
-    table->setAlternatingRowColors(true);
 #if defined(Q_WS_HILDON)
     table->setIconSize(QSize(24, 24));
 #endif
@@ -277,7 +276,6 @@ void ViewDisplay::tableChanged()
  */
 void ViewDisplay::resetTable()
 {
-    Factory::updateRowColors(table);
     model->refresh();
 }
 
@@ -416,7 +414,7 @@ void ViewDisplay::setView(const QString &name, bool applyDefaults)
 
 /**
  * Update the column widths and rows per page spinbox to match a newly loaded
- * view.
+ * or edited view.
  *
  * @param view The new view to use
  */
@@ -772,12 +770,11 @@ void ViewDisplay::sort(int column)
  */
 void ViewDisplay::showStatistics()
 {
-    if (pressedHeader == -1) {
-        return;
+    QString colName = QString::null;
+    if (pressedHeader != -1) {
+        colName = model->headerData(pressedHeader, Qt::Horizontal).toString();
+        pressedHeader = -1;
     }
-    int column = pressedHeader;
-    pressedHeader = -1;
-    QString colName = model->headerData(column, Qt::Horizontal).toString();
     ColumnInfoDialog info(this);
     if (info.launch(model->view(), colName)) {
         matchNewView(model->view());
@@ -829,6 +826,7 @@ void ViewDisplay::updatePreferences(QSettings *settings)
     singleClickShow = settings->value("SingleClickShow", true).toBool();
     usePages(settings->value("PagedDisplay", false).toBool());
     settings->endGroup();
+    Factory::updateRowColors(table);
 #if defined(Q_WS_MAEMO_5)
     bool vhr = settings->value("Font/VariableHeightRows", false).toBool();
     (static_cast<PBMaemo5Style*>(table->style()))->setVariableHeightRows(vhr);

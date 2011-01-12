@@ -1,7 +1,7 @@
 /*
  * factory.cpp
  *
- * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,12 +19,36 @@
 #include <QPainter>
 #include <QPalette>
 #include <QPushButton>
+#include <QSettings>
+#include <QTextEdit>
 #include <QToolButton>
 #include <QTreeWidget>
 #include "factory.h"
 
+#if defined(Q_WS_MAEMO_5)
+#include <QAbstractKineticScroller>
+#endif
+
 QColor Factory::evenRowColor(Qt::white);
 QColor Factory::oddRowColor(Qt::lightGray);
+bool Factory::useAlternatingRowColors(true);
+
+/**
+ * Reload the application settings for row color options.  Called when the
+ * application is first started, and again whenever changes are made in the
+ * Preferences dialog.
+ */
+void Factory::updatePreferences(QSettings *settings)
+{
+    settings->beginGroup("Colors");
+    useAlternatingRowColors = settings->value("UseAlternating",
+                                              true).toBool();
+    QString color = settings->value("EvenRows", "#FFFFFF").toString();
+    evenRowColor = QColor(color);
+    color = settings->value("OddRows", "#E0E0E0").toString();
+    oddRowColor = QColor(color);
+    settings->endGroup();
+}
 
 /**
  * Create a QGridLayout and configure it with no margin or spacing (to better
@@ -156,7 +180,6 @@ void Factory::setupLayout(QLayout *layout)
 QListWidget *Factory::listWidget(QWidget *parent)
 {
     QListWidget *list = new QListWidget(parent);
-    list->setAlternatingRowColors(true);
     updateRowColors(list);
     return list;
 }
@@ -182,7 +205,6 @@ QTreeWidget *Factory::treeWidget(QWidget *parent, const QStringList &headers)
     table->setSortingEnabled(false);
     table->setAllColumnsShowFocus(true);
     table->setRootIsDecorated(false);
-    table->setAlternatingRowColors(true);
     updateRowColors(table);
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
     table->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -207,6 +229,27 @@ QAbstractButton *Factory::button(QWidget *parent)
 }
 
 /**
+ * Create and configure a read-only QTextEdit (for showing simple HTML
+ * content).  On Maemo Fremantle, kinetic scrolling will be enabled.
+ *
+ * @param parent The parent widget of the widget to be created
+ * @return The new text display widget
+ */
+QTextEdit *Factory::textDisplay(QWidget *parent)
+{
+    QTextEdit *display = new QTextEdit(parent);
+    display->setReadOnly(true);
+#if defined(Q_WS_MAEMO_5)
+    QVariant ksProp = display->property("kineticScroller");
+    QAbstractKineticScroller *ks = ksProp.value<QAbstractKineticScroller *>();
+    if (ks) {
+        ks->setEnabled(true);
+    }
+#endif
+    return display;
+}
+
+/**
  * Update the row colors for a list or tree widget to match the ones currently
  * specified in the application preferences.
  *
@@ -216,6 +259,7 @@ void Factory::updateRowColors(QAbstractItemView *view)
 {
     // Maemo 5 uses the GTK+ theme colors, can't override from here; just
     // screws up the background color
+    view->setAlternatingRowColors(useAlternatingRowColors);
 #if !defined(Q_WS_MAEMO_5)
     QPalette viewPalette(view->palette());
     viewPalette.setColor(QPalette::Base, evenRowColor);

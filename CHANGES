@@ -1,3 +1,11 @@
+2011-01-12  JMB  Better properties dialog, translation updates, theme bugfix
+
+    Improved the file properties dialog, including a button to launch the
+    column statistics dialog.  Made some updates to the UI translation files.
+    Added an option to disable alternating row shading on Fremantle so that
+    themes with poor choices of a second color don't look bad (the default
+    theme uses the same color for all rows).
+
 2011-01-11  JMB  Better column widths and statistics, Fremantle auto-rotate
 
     Appended a 0-width empty column to the data table to soak up any extra

@@ -229,6 +229,21 @@
     </message>
 </context>
 <context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation type="unfinished">欄</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">寬度</translation>
+    </message>
+</context>
+<context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
@@ -473,10 +488,6 @@ deleted:</source>
     <message>
         <source>Text encoding</source>
         <translation>文字編碼方式</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>內容以逗號分隔之文字檔</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -841,10 +852,6 @@ upgrade</source>
         <translation>此檔案使用較新版本的PortaBase格式;請升級</translation>
     </message>
     <message>
-        <source>Save changes?</source>
-        <translation>儲存變更嗎?</translation>
-    </message>
-    <message>
         <source>Delete this row?</source>
         <translation>刪除此列嗎?</translation>
     </message>
@@ -886,44 +893,8 @@ current filter?</source>
         <translation>網址 http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>名稱</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>大小</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation>資料列</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation>欄</translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation>景觀</translation>
-    </message>
-    <message>
-        <source>Sortings</source>
-        <translation>排序方式</translation>
-    </message>
-    <message>
-        <source>Filters</source>
-        <translation>篩選</translation>
-    </message>
-    <message>
-        <source>Enums</source>
-        <translation>集合名稱</translation>
-    </message>
-    <message>
-        <source>File Properties</source>
-        <translation>檔案性質</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
-        <translation>不是PortaBase 檔案</translation>
+        <translation type="obsolete">不是PortaBase 檔案</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -946,24 +917,12 @@ current filter?</source>
         <translation>XML檔案</translation>
     </message>
     <message>
-        <source>Printing aborted</source>
-        <translation>印刷流產</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation>印刷</translation>
-    </message>
-    <message>
-        <source>Printing completed</source>
-        <translation>印刷完成</translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>約 1％</translation>
     </message>
     <message>
         <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation>對於一個特定列的統計數字，按住該列的標題至少一半的第二個</translation>
+        <translation type="obsolete">對於一個特定列的統計數字，按住該列的標題至少一半的第二個</translation>
     </message>
     <message>
         <source>No such file exists</source>
@@ -1145,6 +1104,77 @@ You will not be able to save any changes you make.</source>
         <source>View rows with a single click</source>
         <translation>查看行只需一次點擊</translation>
     </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear the recent files list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <source>File Properties</source>
+        <translation>檔案性質</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>名稱</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <source>%1 in current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>資料列</translation>
+    </message>
+    <message>
+        <source>%1 in current view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>欄</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>景觀</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>排序方式</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>篩選</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>集合名稱</translation>
+    </message>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMenuBar</name>
@@ -1233,6 +1263,25 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Forward</source>
         <translation>下一頁</translation>
+    </message>
+</context>
+<context>
+    <name>QQMainWindow</name>
+    <message>
+        <source>Not a %1 file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation>印刷流產</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation>印刷</translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation>印刷完成</translation>
     </message>
 </context>
 <context>
@@ -1607,7 +1656,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>characters</source>
-        <translation>字元</translation>
+        <translation type="obsolete">字元</translation>
     </message>
     <message>
         <source>Average length</source>
@@ -1628,6 +1677,12 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>No image</source>
         <translation>沒有影像</translation>
+    </message>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

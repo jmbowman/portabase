@@ -229,6 +229,21 @@
     </message>
 </context>
 <context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Largeur</translation>
+    </message>
+</context>
+<context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
@@ -476,10 +491,6 @@ aussi supprimées :</translation>
     <message>
         <source>Text encoding</source>
         <translation>Encodage du texte</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>Fichier texte avec des &quot;valeurs séparées par des virgules&quot;</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -846,10 +857,6 @@ récente du format Portabase que celui
 supporté; mettez à jour SVP</translation>
     </message>
     <message>
-        <source>Save changes?</source>
-        <translation>Sauvegarder les changements?</translation>
-    </message>
-    <message>
         <source>Delete this row?</source>
         <translation>Supprimer cette rangée?</translation>
     </message>
@@ -892,44 +899,8 @@ dans le filtre courant?</translation>
         <translation>Site web: http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>Nom</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Taille</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation>Rangées</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation>Colonnes</translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation>Vues</translation>
-    </message>
-    <message>
-        <source>Sortings</source>
-        <translation>Tris</translation>
-    </message>
-    <message>
-        <source>Filters</source>
-        <translation>Filtres</translation>
-    </message>
-    <message>
-        <source>Enums</source>
-        <translation>Énumérations</translation>
-    </message>
-    <message>
-        <source>File Properties</source>
-        <translation>Propriétés du fichier</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
-        <translation>Ce n&apos;est pas un fichier PortaBase</translation>
+        <translation type="obsolete">Ce n&apos;est pas un fichier PortaBase</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -952,24 +923,12 @@ dans le filtre courant?</translation>
         <translation>Fichiers XML</translation>
     </message>
     <message>
-        <source>Printing aborted</source>
-        <translation>Impression annulée</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation>Impression</translation>
-    </message>
-    <message>
-        <source>Printing completed</source>
-        <translation>Impression terminée</translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>A propos de %1</translation>
     </message>
     <message>
         <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation>Pour obtenir des stats sur une colonne, appuyer sur l&apos;entête de cette colonne pendant au moins une demi seconde</translation>
+        <translation type="obsolete">Pour obtenir des stats sur une colonne, appuyer sur l&apos;entête de cette colonne pendant au moins une demi seconde</translation>
     </message>
     <message>
         <source>No such file exists</source>
@@ -1152,6 +1111,77 @@ Vous ne pourrez pas sauvegarder vos modifications.</translation>
         <source>View rows with a single click</source>
         <translation>Visualiser les rangées avec un simple clic</translation>
     </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear the recent files list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <source>File Properties</source>
+        <translation>Propriétés du fichier</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nom</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Taille</translation>
+    </message>
+    <message>
+        <source>%1 in current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>Rangées</translation>
+    </message>
+    <message>
+        <source>%1 in current view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>Colonnes</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>Vues</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>Tris</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>Filtres</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>Énumérations</translation>
+    </message>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMenuBar</name>
@@ -1240,6 +1270,25 @@ Vous ne pourrez pas sauvegarder vos modifications.</translation>
     <message>
         <source>Forward</source>
         <translation>Suivant</translation>
+    </message>
+</context>
+<context>
+    <name>QQMainWindow</name>
+    <message>
+        <source>Not a %1 file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation>Impression annulée</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation>Impression</translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation>Impression terminée</translation>
     </message>
 </context>
 <context>
@@ -1614,7 +1663,7 @@ Vous ne pourrez pas sauvegarder vos modifications.</translation>
     </message>
     <message>
         <source>characters</source>
-        <translation>caractères</translation>
+        <translation type="obsolete">caractères</translation>
     </message>
     <message>
         <source>Average length</source>
@@ -1635,6 +1684,13 @@ Vous ne pourrez pas sauvegarder vos modifications.</translation>
     <message>
         <source>No image</source>
         <translation>Aucune image</translation>
+    </message>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

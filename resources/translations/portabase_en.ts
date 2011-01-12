@@ -4,7 +4,7 @@
 <context>
     <name>CSVErrorDialog</name>
     <message>
-        <location filename="../../csverror.cpp" line="32"/>
+        <location filename="../../csverror.cpp" line="33"/>
         <source>Problematic row</source>
         <translation type="unfinished"></translation>
     </message>
@@ -192,61 +192,61 @@
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="51"/>
-        <location filename="../../dbeditor.cpp" line="450"/>
+        <location filename="../../dbeditor.cpp" line="452"/>
         <source>String</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="52"/>
-        <location filename="../../dbeditor.cpp" line="453"/>
+        <location filename="../../dbeditor.cpp" line="455"/>
         <source>Integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="53"/>
-        <location filename="../../dbeditor.cpp" line="456"/>
+        <location filename="../../dbeditor.cpp" line="458"/>
         <source>Decimal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="54"/>
-        <location filename="../../dbeditor.cpp" line="459"/>
+        <location filename="../../dbeditor.cpp" line="461"/>
         <source>Boolean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="55"/>
-        <location filename="../../dbeditor.cpp" line="462"/>
+        <location filename="../../dbeditor.cpp" line="464"/>
         <source>Note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="56"/>
-        <location filename="../../dbeditor.cpp" line="465"/>
+        <location filename="../../dbeditor.cpp" line="467"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="57"/>
-        <location filename="../../dbeditor.cpp" line="468"/>
+        <location filename="../../dbeditor.cpp" line="470"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="58"/>
-        <location filename="../../dbeditor.cpp" line="471"/>
+        <location filename="../../dbeditor.cpp" line="473"/>
         <source>Calculation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="59"/>
-        <location filename="../../dbeditor.cpp" line="474"/>
+        <location filename="../../dbeditor.cpp" line="476"/>
         <source>Sequence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="60"/>
-        <location filename="../../dbeditor.cpp" line="477"/>
+        <location filename="../../dbeditor.cpp" line="479"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -257,7 +257,7 @@
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="67"/>
-        <location filename="../../columneditor.cpp" line="344"/>
+        <location filename="../../columneditor.cpp" line="345"/>
         <location filename="../../dbeditor.cpp" line="52"/>
         <location filename="../../dbeditor.cpp" line="277"/>
         <source>Default</source>
@@ -270,21 +270,21 @@
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="83"/>
-        <location filename="../../dbeditor.cpp" line="418"/>
+        <location filename="../../dbeditor.cpp" line="420"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="84"/>
         <location filename="../../columneditor.cpp" line="88"/>
-        <location filename="../../dbeditor.cpp" line="421"/>
-        <location filename="../../dbeditor.cpp" line="429"/>
+        <location filename="../../dbeditor.cpp" line="423"/>
+        <location filename="../../dbeditor.cpp" line="431"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../columneditor.cpp" line="87"/>
-        <location filename="../../dbeditor.cpp" line="426"/>
+        <location filename="../../dbeditor.cpp" line="428"/>
         <source>Now</source>
         <translation type="unfinished"></translation>
     </message>
@@ -294,8 +294,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../columneditor.cpp" line="390"/>
+        <location filename="../../columneditor.cpp" line="391"/>
         <source>Next value</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <location filename="../../columninfo.cpp" line="30"/>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../columninfo.cpp" line="34"/>
+        <source>Column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../columninfo.cpp" line="45"/>
+        <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -335,27 +353,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../conditioneditor.cpp" line="45"/>
+        <location filename="../../conditioneditor.cpp" line="47"/>
         <source>Any text column</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../conditioneditor.cpp" line="66"/>
+        <location filename="../../conditioneditor.cpp" line="68"/>
         <source>contains</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../conditioneditor.cpp" line="68"/>
+        <location filename="../../conditioneditor.cpp" line="70"/>
         <source>starts with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../conditioneditor.cpp" line="87"/>
+        <location filename="../../conditioneditor.cpp" line="89"/>
         <source>Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../conditioneditor.cpp" line="351"/>
+        <location filename="../../conditioneditor.cpp" line="358"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
@@ -461,18 +479,18 @@ the &quot;Import&quot; button to load lines from a text file</source>
     </message>
     <message>
         <location filename="../../enumeditor.cpp" line="116"/>
-        <location filename="../../enumeditor.cpp" line="300"/>
+        <location filename="../../enumeditor.cpp" line="303"/>
         <source>Must have at least one option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enumeditor.cpp" line="232"/>
-        <location filename="../../enumeditor.cpp" line="264"/>
+        <location filename="../../enumeditor.cpp" line="235"/>
+        <location filename="../../enumeditor.cpp" line="267"/>
         <source>Option text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enumeditor.cpp" line="310"/>
+        <location filename="../../enumeditor.cpp" line="313"/>
         <source>Replace where used with:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -480,29 +498,29 @@ the &quot;Import&quot; button to load lines from a text file</source>
 <context>
     <name>EnumManager</name>
     <message>
-        <location filename="../../enummanager.cpp" line="36"/>
+        <location filename="../../enummanager.cpp" line="38"/>
         <source>Enum Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enummanager.cpp" line="41"/>
+        <location filename="../../enummanager.cpp" line="44"/>
         <source>No enumerated column types defined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enummanager.cpp" line="42"/>
+        <location filename="../../enummanager.cpp" line="45"/>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enummanager.cpp" line="112"/>
+        <location filename="../../enummanager.cpp" line="117"/>
         <source>The following columns which
 use this enum will also be
 deleted:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enummanager.cpp" line="116"/>
+        <location filename="../../enummanager.cpp" line="121"/>
         <source>Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -582,7 +600,7 @@ deleted:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../image/imageselector.cpp" line="141"/>
+        <location filename="../../image/imageselector.cpp" line="145"/>
         <source>Delete the current image?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -598,37 +616,32 @@ deleted:</source>
 <context>
     <name>ImportDialog</name>
     <message>
-        <location filename="../../importdialog.cpp" line="52"/>
-        <source>Text files with comma separated values</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../importdialog.cpp" line="55"/>
+        <location filename="../../importdialog.cpp" line="54"/>
         <source>MobileDB files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../importdialog.cpp" line="61"/>
+        <location filename="../../importdialog.cpp" line="57"/>
         <source>XML files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../importdialog.cpp" line="64"/>
+        <location filename="../../importdialog.cpp" line="60"/>
         <source>Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../importdialog.cpp" line="69"/>
+        <location filename="../../importdialog.cpp" line="65"/>
         <source>Choose a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../importdialog.cpp" line="85"/>
+        <location filename="../../importdialog.cpp" line="79"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../importdialog.cpp" line="86"/>
+        <location filename="../../importdialog.cpp" line="80"/>
         <source>Text encoding</source>
         <translation type="unfinished"></translation>
     </message>
@@ -945,17 +958,17 @@ deleted:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="567"/>
+        <location filename="../../portabase.cpp" line="432"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1046"/>
+        <location filename="../../portabase.cpp" line="854"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="95"/>
+        <location filename="../../rowviewer.cpp" line="83"/>
         <source>All Columns</source>
         <translation type="unfinished"></translation>
     </message>
@@ -971,32 +984,32 @@ deleted:</source>
 <context>
     <name>PBDialog</name>
     <message>
-        <location filename="../../enumeditor.cpp" line="231"/>
+        <location filename="../../enumeditor.cpp" line="234"/>
         <location filename="../../pbdialog.cpp" line="90"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enumeditor.cpp" line="263"/>
+        <location filename="../../enumeditor.cpp" line="266"/>
         <location filename="../../pbdialog.cpp" line="91"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enumeditor.cpp" line="309"/>
+        <location filename="../../enumeditor.cpp" line="312"/>
         <location filename="../../pbdialog.cpp" line="92"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enumeditor.cpp" line="405"/>
+        <location filename="../../enumeditor.cpp" line="408"/>
         <location filename="../../pbdialog.cpp" line="134"/>
         <location filename="../../xmlimport.cpp" line="822"/>
         <source>Name must not start with &apos;_&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../enumeditor.cpp" line="413"/>
+        <location filename="../../enumeditor.cpp" line="416"/>
         <location filename="../../pbdialog.cpp" line="139"/>
         <source>Duplicate name</source>
         <translation type="unfinished"></translation>
@@ -1056,93 +1069,43 @@ deleted:</source>
 <context>
     <name>PortaBase</name>
     <message>
-        <location filename="../../portabase.cpp" line="102"/>
+        <location filename="../../portabase.cpp" line="59"/>
         <source>PortaBase files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="300"/>
+        <location filename="../../portabase.cpp" line="270"/>
         <source>Recently opened files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="469"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="485"/>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="487"/>
-        <source>Rows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="489"/>
-        <source>Columns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="491"/>
-        <source>Views</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="495"/>
-        <source>Sortings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="499"/>
-        <source>Filters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="501"/>
-        <source>Enums</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="502"/>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="503"/>
-        <source>File Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="564"/>
-        <location filename="../../portabase.cpp" line="1044"/>
+        <location filename="../../portabase.cpp" line="429"/>
+        <location filename="../../portabase.cpp" line="852"/>
         <source>XML</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="565"/>
+        <location filename="../../portabase.cpp" line="430"/>
         <source>MobileDB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="568"/>
+        <location filename="../../portabase.cpp" line="433"/>
         <source>Import from:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="601"/>
+        <location filename="../../portabase.cpp" line="472"/>
         <source>Encrypt the file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="613"/>
+        <location filename="../../portabase.cpp" line="484"/>
         <source>Unable to overwrite existing file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="693"/>
+        <location filename="../../portabase.cpp" line="563"/>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
@@ -1150,111 +1113,86 @@ upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="699"/>
+        <location filename="../../portabase.cpp" line="569"/>
         <source>Unable to read from this file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="728"/>
+        <location filename="../../portabase.cpp" line="598"/>
         <source>This file is read-only.
 You will not be able to save any changes you make.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="905"/>
-        <source>Save changes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="954"/>
-        <location filename="../../rowviewer.cpp" line="316"/>
+        <location filename="../../portabase.cpp" line="760"/>
+        <location filename="../../rowviewer.cpp" line="298"/>
         <source>Delete this row?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="983"/>
+        <location filename="../../portabase.cpp" line="789"/>
         <source>Delete all rows in the
 current filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1043"/>
+        <location filename="../../portabase.cpp" line="851"/>
         <source>CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1043"/>
+        <location filename="../../portabase.cpp" line="851"/>
         <source>rows in current filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1047"/>
+        <location filename="../../portabase.cpp" line="855"/>
         <source>Export to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1052"/>
+        <location filename="../../portabase.cpp" line="860"/>
         <source>Text files with comma separated values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1055"/>
+        <location filename="../../portabase.cpp" line="863"/>
         <source>XML files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1488"/>
+        <location filename="../../portabase.cpp" line="1296"/>
         <source>Delete this view?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1512"/>
+        <location filename="../../portabase.cpp" line="1320"/>
         <source>Delete this sorting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1535"/>
+        <location filename="../../portabase.cpp" line="1343"/>
         <source>Delete this filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1646"/>
-        <source>Not a PortaBase file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="1891"/>
-        <source>Printing aborted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="1894"/>
-        <source>Printing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="1896"/>
-        <source>Printing completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../portabase.cpp" line="1928"/>
+        <location filename="../../portabase.cpp" line="1551"/>
         <source>Copyright (C)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1930"/>
+        <location filename="../../portabase.cpp" line="1553"/>
         <source>Web site at http://portabase.sourceforge.net</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="1931"/>
+        <location filename="../../portabase.cpp" line="1554"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../portabase.cpp" line="686"/>
-        <location filename="../../portabase.cpp" line="1942"/>
+        <location filename="../../portabase.cpp" line="556"/>
+        <location filename="../../portabase.cpp" line="1565"/>
         <source>No such file exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1262,203 +1200,291 @@ current filter?</source>
 <context>
     <name>Preferences</name>
     <message>
-        <location filename="../../preferences.cpp" line="40"/>
+        <location filename="../../preferences.cpp" line="42"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="79"/>
+        <location filename="../../preferences.cpp" line="83"/>
         <source>Confirm deletions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="84"/>
+        <location filename="../../preferences.cpp" line="88"/>
         <source>Allow checkbox edit in data viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="104"/>
+        <location filename="../../preferences.cpp" line="108"/>
         <source>Use pages in data viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="116"/>
+        <location filename="../../preferences.cpp" line="127"/>
         <source>Wrap Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="120"/>
+        <location filename="../../preferences.cpp" line="131"/>
         <source>at whitespace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="121"/>
+        <location filename="../../preferences.cpp" line="132"/>
         <source>anywhere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="109"/>
+        <location filename="../../preferences.cpp" line="120"/>
         <source>Default rows per page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="90"/>
+        <location filename="../../preferences.cpp" line="94"/>
         <source>View rows with a single click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="94"/>
+        <location filename="../../preferences.cpp" line="98"/>
         <source>Use small-screen settings on this device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="132"/>
+        <location filename="../../preferences.cpp" line="113"/>
+        <source>Auto-rotate to match device orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../preferences.cpp" line="143"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="157"/>
+        <location filename="../../preferences.cpp" line="168"/>
         <source>Date format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="164"/>
+        <location filename="../../preferences.cpp" line="175"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="165"/>
+        <location filename="../../preferences.cpp" line="176"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="165"/>
+        <location filename="../../preferences.cpp" line="176"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="175"/>
+        <location filename="../../preferences.cpp" line="186"/>
         <source>Time format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="177"/>
+        <location filename="../../preferences.cpp" line="188"/>
         <source>24 hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="178"/>
+        <location filename="../../preferences.cpp" line="189"/>
         <source>12 hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="183"/>
+        <location filename="../../preferences.cpp" line="194"/>
         <source>Weeks start on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="185"/>
+        <location filename="../../preferences.cpp" line="196"/>
         <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="186"/>
+        <location filename="../../preferences.cpp" line="197"/>
         <source>Monday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="191"/>
+        <location filename="../../preferences.cpp" line="202"/>
         <source>Show seconds for times</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="198"/>
+        <location filename="../../preferences.cpp" line="209"/>
         <source>Date and Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="219"/>
+        <location filename="../../preferences.cpp" line="230"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="222"/>
+        <location filename="../../preferences.cpp" line="234"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="228"/>
+        <location filename="../../preferences.cpp" line="240"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="255"/>
+        <location filename="../../preferences.cpp" line="267"/>
         <source>Sample</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="256"/>
+        <location filename="../../preferences.cpp" line="268"/>
         <source>Sample text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="262"/>
+        <location filename="../../preferences.cpp" line="273"/>
+        <source>Adjust row height to match font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../preferences.cpp" line="280"/>
+        <source>Use alternating row colors if theme has them</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../preferences.cpp" line="286"/>
         <source>Row Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="277"/>
+        <location filename="../../preferences.cpp" line="300"/>
+        <source>Clear the recent files list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../preferences.cpp" line="307"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="289"/>
+        <location filename="../../preferences.cpp" line="319"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="290"/>
+        <location filename="../../preferences.cpp" line="320"/>
         <source>Aquamarine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="291"/>
+        <location filename="../../preferences.cpp" line="321"/>
         <source>Light blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="292"/>
+        <location filename="../../preferences.cpp" line="322"/>
         <source>Cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="293"/>
+        <location filename="../../preferences.cpp" line="323"/>
         <source>Light gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="294"/>
+        <location filename="../../preferences.cpp" line="324"/>
         <source>Light green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="295"/>
+        <location filename="../../preferences.cpp" line="325"/>
         <source>Lavender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="296"/>
+        <location filename="../../preferences.cpp" line="326"/>
         <source>Silver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="297"/>
+        <location filename="../../preferences.cpp" line="327"/>
         <source>Tan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../preferences.cpp" line="298"/>
+        <location filename="../../preferences.cpp" line="328"/>
         <source>Thistle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="34"/>
+        <source>File Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="45"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="62"/>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="65"/>
+        <source>Modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="69"/>
+        <source>%1 in current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="70"/>
+        <source>Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="75"/>
+        <source>%1 in current view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="76"/>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="80"/>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="85"/>
+        <source>Sortings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="90"/>
+        <source>Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="93"/>
+        <source>Enums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../propertiesdialog.cpp" line="100"/>
+        <source>Column Statistics</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1493,61 +1519,61 @@ current filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../csvutils.cpp" line="61"/>
-        <location filename="../../enumeditor.cpp" line="218"/>
-        <location filename="../../importutils.cpp" line="224"/>
+        <location filename="../../csvutils.cpp" line="62"/>
+        <location filename="../../enumeditor.cpp" line="221"/>
+        <location filename="../../importutils.cpp" line="226"/>
         <source>Unable to open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../csvutils.cpp" line="321"/>
+        <location filename="../../csvutils.cpp" line="322"/>
         <location filename="../../importutils.cpp" line="122"/>
         <source>Error in row %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="618"/>
+        <location filename="../../database.cpp" line="621"/>
         <source>must be an integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="625"/>
+        <location filename="../../database.cpp" line="628"/>
         <source>must be a decimal value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="632"/>
+        <location filename="../../database.cpp" line="635"/>
         <source>must be 0 or 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="637"/>
-        <location filename="../../database.cpp" line="643"/>
+        <location filename="../../database.cpp" line="640"/>
+        <location filename="../../database.cpp" line="646"/>
         <source>invalid date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="650"/>
+        <location filename="../../database.cpp" line="653"/>
         <source>invalid time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="656"/>
+        <location filename="../../database.cpp" line="659"/>
         <source>no such option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="1384"/>
+        <location filename="../../database.cpp" line="1390"/>
         <source>Excess columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="1391"/>
+        <location filename="../../database.cpp" line="1397"/>
         <source>Missing columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../database.cpp" line="1474"/>
+        <location filename="../../database.cpp" line="1480"/>
         <source>Missing file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1576,10 +1602,33 @@ current filter?</source>
     </message>
 </context>
 <context>
+    <name>QQMainWindow</name>
+    <message>
+        <location filename="../../qqutil/qqmainwindow.cpp" line="228"/>
+        <source>Not a %1 file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qqutil/qqmainwindow.cpp" line="360"/>
+        <source>Printing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qqutil/qqmainwindow.cpp" line="363"/>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qqutil/qqmainwindow.cpp" line="365"/>
+        <source>Printing completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QQMenuHelper</name>
     <message>
-        <location filename="../../enumeditor.cpp" line="203"/>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="617"/>
+        <location filename="../../enumeditor.cpp" line="206"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="636"/>
         <source>Choose a filename to save under</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1649,58 +1698,57 @@ current filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="107"/>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="145"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="144"/>
         <source>Open &amp;Recent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="118"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="117"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="119"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="118"/>
         <source>Close the current file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="124"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="123"/>
         <source>Change the application settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="144"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="143"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="179"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="178"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="573"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="588"/>
         <source>Save changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="628"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="647"/>
         <source>File already exists; overwrite it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="651"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="670"/>
         <source>Choose a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="697"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="716"/>
         <source>File does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qqutil/qqmenuhelper.cpp" line="704"/>
+        <location filename="../../qqutil/qqmenuhelper.cpp" line="723"/>
         <source>The selected item is a directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1827,37 +1875,37 @@ current filter?</source>
 <context>
     <name>RowViewer</name>
     <message>
-        <location filename="../../rowviewer.cpp" line="48"/>
+        <location filename="../../rowviewer.cpp" line="44"/>
         <source>Row Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="71"/>
+        <location filename="../../rowviewer.cpp" line="59"/>
         <source>Previous row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="77"/>
+        <location filename="../../rowviewer.cpp" line="65"/>
         <source>Edit this row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="83"/>
+        <location filename="../../rowviewer.cpp" line="71"/>
         <source>Copy this row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="89"/>
+        <location filename="../../rowviewer.cpp" line="77"/>
         <source>Delete this row</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="105"/>
+        <location filename="../../rowviewer.cpp" line="93"/>
         <source>Copy the selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../rowviewer.cpp" line="112"/>
+        <location filename="../../rowviewer.cpp" line="100"/>
         <source>Next row</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1913,15 +1961,15 @@ current filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../sorteditor.cpp" line="163"/>
-        <location filename="../../sorteditor.cpp" line="201"/>
-        <location filename="../../sorteditor.cpp" line="213"/>
+        <location filename="../../sorteditor.cpp" line="171"/>
+        <location filename="../../sorteditor.cpp" line="207"/>
+        <location filename="../../sorteditor.cpp" line="237"/>
         <source>Ascending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../sorteditor.cpp" line="160"/>
-        <location filename="../../sorteditor.cpp" line="209"/>
+        <location filename="../../sorteditor.cpp" line="168"/>
+        <location filename="../../sorteditor.cpp" line="203"/>
         <source>Descending</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2008,91 +2056,94 @@ current filter?</source>
 <context>
     <name>View</name>
     <message>
-        <location filename="../../view.cpp" line="560"/>
+        <location filename="../../view.cpp" line="568"/>
         <source>No data to summarize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="578"/>
-        <location filename="../../view.cpp" line="605"/>
+        <location filename="../../view.cpp" line="587"/>
+        <location filename="../../view.cpp" line="614"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="579"/>
-        <location filename="../../view.cpp" line="606"/>
+        <location filename="../../view.cpp" line="588"/>
+        <location filename="../../view.cpp" line="616"/>
         <source>Average</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="580"/>
-        <location filename="../../view.cpp" line="607"/>
+        <location filename="../../view.cpp" line="589"/>
+        <location filename="../../view.cpp" line="618"/>
         <source>Minimum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="581"/>
-        <location filename="../../view.cpp" line="608"/>
+        <location filename="../../view.cpp" line="590"/>
+        <location filename="../../view.cpp" line="620"/>
         <source>Maximum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="619"/>
+        <location filename="../../view.cpp" line="632"/>
         <source>Checked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="620"/>
+        <location filename="../../view.cpp" line="634"/>
         <source>Unchecked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="635"/>
-        <location filename="../../view.cpp" line="650"/>
+        <location filename="../../view.cpp" line="649"/>
+        <location filename="../../view.cpp" line="666"/>
         <source>Earliest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="636"/>
         <location filename="../../view.cpp" line="651"/>
+        <location filename="../../view.cpp" line="668"/>
         <source>Latest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="668"/>
+        <location filename="../../view.cpp" line="686"/>
         <source>Total length</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../view.cpp" line="669"/>
-        <location filename="../../view.cpp" line="671"/>
-        <location filename="../../view.cpp" line="673"/>
-        <location filename="../../view.cpp" line="675"/>
-        <source>characters</source>
-        <translation type="unfinished"></translation>
+    <message numerus="yes">
+        <location filename="../../view.cpp" line="687"/>
+        <location filename="../../view.cpp" line="689"/>
+        <location filename="../../view.cpp" line="691"/>
+        <location filename="../../view.cpp" line="693"/>
+        <source>%Ln character(s)</source>
+        <translation>
+            <numerusform>%Ln character</numerusform>
+            <numerusform>%Ln characters</numerusform>
+        </translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="670"/>
+        <location filename="../../view.cpp" line="688"/>
         <source>Average length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="672"/>
+        <location filename="../../view.cpp" line="690"/>
         <source>Minimum length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="674"/>
+        <location filename="../../view.cpp" line="692"/>
         <source>Maximum length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="686"/>
+        <location filename="../../view.cpp" line="704"/>
         <source>Image available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../view.cpp" line="688"/>
+        <location filename="../../view.cpp" line="706"/>
         <source>No image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2100,17 +2151,17 @@ current filter?</source>
 <context>
     <name>ViewDisplay</name>
     <message>
-        <location filename="../../viewdisplay.cpp" line="59"/>
+        <location filename="../../viewdisplay.cpp" line="61"/>
         <source>No results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../viewdisplay.cpp" line="826"/>
+        <location filename="../../viewdisplay.cpp" line="805"/>
         <source>No image columns in this view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../viewdisplay.cpp" line="831"/>
+        <location filename="../../viewdisplay.cpp" line="810"/>
         <source>No rows in this filter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2148,17 +2199,17 @@ current filter?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../vieweditor.cpp" line="91"/>
+        <location filename="../../vieweditor.cpp" line="89"/>
         <source>No default sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../vieweditor.cpp" line="107"/>
+        <location filename="../../vieweditor.cpp" line="105"/>
         <source>No default filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../vieweditor.cpp" line="108"/>
+        <location filename="../../vieweditor.cpp" line="106"/>
         <source>All Rows</source>
         <translation type="unfinished"></translation>
     </message>

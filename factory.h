@@ -1,7 +1,7 @@
 /*
  * factory.h
  *
- * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,8 @@
 class QAbstractButton;
 class QAbstractItemView;
 class QListWidget;
+class QSettings;
+class QTextEdit;
 class QTreeWidget;
 class QWidget;
 
@@ -42,6 +44,8 @@ public:
     static QListWidget *listWidget(QWidget *parent);
     static QTreeWidget *treeWidget(QWidget *parent, const QStringList &headers);
     static QAbstractButton *button(QWidget *parent);
+    static QTextEdit *textDisplay(QWidget *parent);
+    static void updatePreferences(QSettings *settings);
     static void updateRowColors(QAbstractItemView *view);
 
 private:
@@ -50,6 +54,9 @@ private:
 public:
     static QColor evenRowColor;
     static QColor oddRowColor;
+
+private:
+    static bool useAlternatingRowColors;
 };
 
 #endif

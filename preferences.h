@@ -74,6 +74,7 @@ private:
     QCheckBox *autoRotate; /**< Option to auto-rotate with Fremantle device orientation */
     QSpinBox *rowsPerPage; /**< Number of rows to display on each page of the data view */
     QCheckBox *smallScreen; /**< Option to use settings for PDA/phone-sized screens */
+    QCheckBox *useAlternating; /**< Option to turn off alternating row colors on Fremantle*/
     QtColorPicker *evenButton; /**< Button to select the color of even rows */
     QtColorPicker *oddButton; /**< Button to select the color of odd rows */
     QStringList dateFormats; /**< List of standard date formatting styles */

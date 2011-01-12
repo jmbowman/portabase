@@ -229,6 +229,21 @@
     </message>
 </context>
 <context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation type="unfinished">Columna</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Ancho</translation>
+    </message>
+</context>
+<context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
@@ -475,10 +490,6 @@ también serán borradas:</translation>
     <message>
         <source>Text encoding</source>
         <translation>Codificar texto</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>Archivos de texto con valores separados por comas</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -834,10 +845,6 @@ que utiliza su versión intalada; por
 favor actualícela</translation>
     </message>
     <message>
-        <source>Save changes?</source>
-        <translation>¿Guardar cambios?</translation>
-    </message>
-    <message>
         <source>Delete this row?</source>
         <translation>¿Borrar esta fila?</translation>
     </message>
@@ -892,44 +899,8 @@ en el filtro actual?</translation>
         <translation>Sitio web en http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>Nombre</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Tamaño</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation>Filas</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation>Columnas</translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation>Vistas</translation>
-    </message>
-    <message>
-        <source>Sortings</source>
-        <translation>Clasificaciones</translation>
-    </message>
-    <message>
-        <source>Filters</source>
-        <translation>Filtros</translation>
-    </message>
-    <message>
-        <source>Enums</source>
-        <translation>Enumeraciones</translation>
-    </message>
-    <message>
-        <source>File Properties</source>
-        <translation>Propiedades del archivo</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
-        <translation>No es un archivo de PortaBase</translation>
+        <translation type="obsolete">No es un archivo de PortaBase</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -952,23 +923,7 @@ en el filtro actual?</translation>
         <translation type="unfinished">Archivos XML</translation>
     </message>
     <message>
-        <source>Printing aborted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printing completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1151,6 +1106,77 @@ You will not be able to save any changes you make.</source>
         <source>View rows with a single click</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear the recent files list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <source>File Properties</source>
+        <translation>Propiedades del archivo</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nombre</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamaño</translation>
+    </message>
+    <message>
+        <source>%1 in current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>Filas</translation>
+    </message>
+    <message>
+        <source>%1 in current view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>Columnas</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>Vistas</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>Clasificaciones</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>Filtros</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>Enumeraciones</translation>
+    </message>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMenuBar</name>
@@ -1239,6 +1265,25 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Forward</source>
         <translation type="unfinished">Siguiente</translation>
+    </message>
+</context>
+<context>
+    <name>QQMainWindow</name>
+    <message>
+        <source>Not a %1 file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1613,7 +1658,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>characters</source>
-        <translation>caracteres</translation>
+        <translation type="obsolete">caracteres</translation>
     </message>
     <message>
         <source>Average length</source>
@@ -1634,6 +1679,12 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>No image</source>
         <translation>Ninguna imagen</translation>
+    </message>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

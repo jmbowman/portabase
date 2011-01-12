@@ -229,6 +229,21 @@
     </message>
 </context>
 <context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <source>Column Statistics</source>
+        <translation>フィールドサマリー情報</translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation>フィールド</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>幅</translation>
+    </message>
+</context>
+<context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
@@ -474,10 +489,6 @@ deleted:</source>
     <message>
         <source>Text encoding</source>
         <translation>文字コード</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>カンマ区切りテキスト</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -832,10 +843,6 @@ PortaBaseバージョンより新しい…
 バージョンアップして下さい</translation>
     </message>
     <message>
-        <source>Save changes?</source>
-        <translation>変更をセーブしますか?</translation>
-    </message>
-    <message>
         <source>Delete this row?</source>
         <translation>このレコードを削除しますか?</translation>
     </message>
@@ -890,46 +897,6 @@ current filter?</source>
         <translation>http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>名前</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>サイズ</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation>レコード数</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation>フィールド数</translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation>ビュー数</translation>
-    </message>
-    <message>
-        <source>Sortings</source>
-        <translation>ソーティング数</translation>
-    </message>
-    <message>
-        <source>Filters</source>
-        <translation>フィルター数</translation>
-    </message>
-    <message>
-        <source>Enums</source>
-        <translation>列挙数</translation>
-    </message>
-    <message>
-        <source>File Properties</source>
-        <translation>ファイルのプロパティ</translation>
-    </message>
-    <message>
-        <source>Not a PortaBase file</source>
-        <translation>PortaBaseファイルではありません</translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation>PortaBaseファイル</translation>
     </message>
@@ -950,24 +917,8 @@ current filter?</source>
         <translation>XMLファイル</translation>
     </message>
     <message>
-        <source>Printing aborted</source>
-        <translation>印刷は中止されました</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation>印刷中</translation>
-    </message>
-    <message>
-        <source>Printing completed</source>
-        <translation>印刷終了</translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>%1について</translation>
-    </message>
-    <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation>フィールドの統計をみるには、そのフィールドのラベルを１／２秒以上押して下さい</translation>
     </message>
     <message>
         <source>No such file exists</source>
@@ -1150,6 +1101,77 @@ You will not be able to save any changes you make.</source>
         <source>View rows with a single click</source>
         <translation>レコードを一回押すだけで表示します</translation>
     </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation>デバイスの向きに合わせて回転させます</translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation>レコードの高さをフォントに合わせます</translation>
+    </message>
+    <message>
+        <source>Clear the recent files list</source>
+        <translation>最近使ったファイルの一覧をクリアします</translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation>行の背景に使われる色をテーマから二つ使います</translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <source>File Properties</source>
+        <translation>ファイルのプロパティ</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>ファイル名</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>サイズ</translation>
+    </message>
+    <message>
+        <source>%1 in current filter</source>
+        <translation>使っているフィルターは%1</translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>レコード数</translation>
+    </message>
+    <message>
+        <source>%1 in current view</source>
+        <translation>使っているビューは%1</translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>フィールド数</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>ビュー数</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>ソーティング数</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>フィルター数</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>列挙数</translation>
+    </message>
+    <message>
+        <source>Column Statistics</source>
+        <translation>フィールドサマリー情報</translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation>変更日</translation>
+    </message>
 </context>
 <context>
     <name>QMenuBar</name>
@@ -1238,6 +1260,25 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Forward</source>
         <translation>進む</translation>
+    </message>
+</context>
+<context>
+    <name>QQMainWindow</name>
+    <message>
+        <source>Not a %1 file</source>
+        <translation>%1ファイルではありません</translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation>印刷は中止されました</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation>印刷中</translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation>印刷終了</translation>
     </message>
 </context>
 <context>
@@ -1611,10 +1652,6 @@ You will not be able to save any changes you make.</source>
         <translation>合計文字数</translation>
     </message>
     <message>
-        <source>characters</source>
-        <translation>文字</translation>
-    </message>
-    <message>
         <source>Average length</source>
         <translation>平均文字数</translation>
     </message>
@@ -1633,6 +1670,12 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>No image</source>
         <translation>画像なし</translation>
+    </message>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation>
+            <numerusform>%Ln文字</numerusform>
+        </translation>
     </message>
 </context>
 <context>

@@ -564,7 +564,8 @@ QStringList View::getStatistics(int colIndex)
 {
     QStringList lines;
     if (rowCnt == 0) {
-        lines.append(tr("<tr><td>No data to summarize</td></tr>"));
+        lines.append(QString("<tr><td>%1</td></tr>")
+                     .arg(tr("No data to summarize")));
         return lines;
     }
     int type = dataTypes[colIndex];

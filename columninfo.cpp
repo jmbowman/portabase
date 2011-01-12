@@ -21,10 +21,6 @@
 #include "factory.h"
 #include "view.h"
 
-#if defined(Q_WS_MAEMO_5)
-#include <QAbstractKineticScroller>
-#endif
-
 /**
  * Constructor.
  *
@@ -42,15 +38,7 @@ ColumnInfoDialog::ColumnInfoDialog(QWidget *parent)
     hbox->addWidget(columns, 1);
     vbox->addWidget(topRow);
 
-    display = new QTextEdit(this);
-    display->setReadOnly(true);
-#if defined(Q_WS_MAEMO_5)
-    QVariant ksProp = display->property("kineticScroller");
-    QAbstractKineticScroller *ks = ksProp.value<QAbstractKineticScroller *>();
-    if (ks) {
-        ks->setEnabled(true);
-    }
-#endif
+    display = Factory::textDisplay(this);
     vbox->addWidget(display);
 
     hbox = Factory::hBoxLayout(vbox);

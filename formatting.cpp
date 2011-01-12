@@ -1,7 +1,7 @@
 /*
  * formatting.cpp
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -247,6 +247,19 @@ QString Formatting::timeToString(int time)
     QTime midnight;
     QTime timeObj = midnight.addSecs(time);
     return timeObj.toString(timeFormat);
+}
+
+/**
+ * Get a human-readable time string from the given date-time object.
+ *
+ * @param dateTime The date and time to be formatted
+ * @return A human-readable date + time string
+ */
+QString Formatting::dateTimeToString(const QDateTime &dateTime)
+{
+    QString date = dateToString(dateTime.date());
+    QString time = dateTime.time().toString(timeFormat);
+    return QString("%1 %2").arg(date).arg(time);
 }
 
 /**

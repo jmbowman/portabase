@@ -229,6 +229,21 @@
     </message>
 </context>
 <context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Šířka (body)</translation>
+    </message>
+</context>
+<context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
@@ -475,10 +490,6 @@ vybraný seznam budou též smazány:</translation>
     <message>
         <source>Text encoding</source>
         <translation>Kódování textu</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>Soubory hodnot oddělených čárkami</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -846,10 +857,6 @@ PortaBase podporuje; prosím,
 proveďte aktualizaci</translation>
     </message>
     <message>
-        <source>Save changes?</source>
-        <translation>Uložit změny?</translation>
-    </message>
-    <message>
         <source>Delete this row?</source>
         <translation>Smazat tento záznam?</translation>
     </message>
@@ -892,44 +899,8 @@ vyhovující filtru?</translation>
         <translation>Domovská stránka: http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>Jméno</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Velikost</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation>Záznamy</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation>Sloupce</translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation>Náhledy</translation>
-    </message>
-    <message>
-        <source>Sortings</source>
-        <translation>Pořadí</translation>
-    </message>
-    <message>
-        <source>Filters</source>
-        <translation>Filtry</translation>
-    </message>
-    <message>
-        <source>Enums</source>
-        <translation>Seznamy</translation>
-    </message>
-    <message>
-        <source>File Properties</source>
-        <translation>Vlastnosti souboru</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
-        <translation>Není souborem PortaBase</translation>
+        <translation type="obsolete">Není souborem PortaBase</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -938,10 +909,6 @@ vyhovující filtru?</translation>
     <message>
         <source>Recently opened files</source>
         <translation>Naposledy otevřené soubory</translation>
-    </message>
-    <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation>Statistiky jednotlivého sloupce vyvoláte dlouhým (alespoň půlsekundovým) stiskem na záhlaví daného sloupce</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
@@ -954,18 +921,6 @@ vyhovující filtru?</translation>
     <message>
         <source>XML files</source>
         <translation>Soubory XML</translation>
-    </message>
-    <message>
-        <source>Printing aborted</source>
-        <translation>Tisk zrušen</translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation>Probíhá tisk</translation>
-    </message>
-    <message>
-        <source>Printing completed</source>
-        <translation>Tisk dokončen</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -1152,6 +1107,77 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
         <source>Thistle</source>
         <translation>Bodláková</translation>
     </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear the recent files list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <source>File Properties</source>
+        <translation>Vlastnosti souboru</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Jméno</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Velikost</translation>
+    </message>
+    <message>
+        <source>%1 in current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>Záznamy</translation>
+    </message>
+    <message>
+        <source>%1 in current view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>Sloupce</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>Náhledy</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>Pořadí</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>Filtry</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>Seznamy</translation>
+    </message>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMenuBar</name>
@@ -1240,6 +1266,25 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
     <message>
         <source>Forward</source>
         <translation>Vpřed</translation>
+    </message>
+</context>
+<context>
+    <name>QQMainWindow</name>
+    <message>
+        <source>Not a %1 file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation>Tisk zrušen</translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation>Probíhá tisk</translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation>Tisk dokončen</translation>
     </message>
 </context>
 <context>
@@ -1614,7 +1659,7 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
     </message>
     <message>
         <source>characters</source>
-        <translation>znaků</translation>
+        <translation type="obsolete">znaků</translation>
     </message>
     <message>
         <source>Average length</source>
@@ -1635,6 +1680,12 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
     <message>
         <source>No image</source>
         <translation>Bez obrázku</translation>
+    </message>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

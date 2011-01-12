@@ -1,7 +1,7 @@
 /*
  * csverror.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 #include <QLayout>
 #include <QTextEdit>
 #include "csverror.h"
+#include "factory.h"
 
 /**
  * Constructor.
@@ -31,10 +32,9 @@ CSVErrorDialog::CSVErrorDialog(const QString &message, const QString &data, QWid
     vbox->addWidget(new QLabel(message, this));
     vbox->addWidget(new QLabel(tr("Problematic row") + ":", this));
 
-    QTextEdit *dataBox = new QTextEdit(this);
+    QTextEdit *dataBox = Factory::textDisplay(this);
     dataBox->setLineWrapMode(QTextEdit::NoWrap);
     dataBox->insertPlainText(data);
-    dataBox->setReadOnly(true);
     vbox->addWidget(dataBox);
 
     finishLayout(true, false);

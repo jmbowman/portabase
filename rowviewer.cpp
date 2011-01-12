@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002-2004,2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,10 +34,6 @@
 #include "viewdisplay.h"
 #include "image/imageutils.h"
 
-#if defined(Q_WS_MAEMO_5)
-#include <QAbstractKineticScroller>
-#endif
-
 /**
  * Constructor.
  *
@@ -47,8 +43,7 @@
 RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
   : PBDialog(tr("Row Viewer"), parent), db(dbase), display(parent), currentView(0)
 {
-    tv = new QTextEdit(this);
-    tv->setReadOnly(true);
+    tv = Factory::textDisplay(this);
     // Make the boolean value images available in case we need them
     tv->document()->addResource(QTextDocument::ImageResource,
                                 QUrl("img://icons/checked.png"),
@@ -56,13 +51,6 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     tv->document()->addResource(QTextDocument::ImageResource,
                                 QUrl("img://icons/unchecked.png"),
                                 QPixmap(":/icons/unchecked.png"));
-#if defined(Q_WS_MAEMO_5)
-    QVariant ksProp = tv->property("kineticScroller");
-    QAbstractKineticScroller *ks = ksProp.value<QAbstractKineticScroller *>();
-    if (ks) {
-        ks->setEnabled(true);
-    }
-#endif
     vbox->addWidget(tv);
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);

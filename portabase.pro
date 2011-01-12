@@ -71,6 +71,7 @@ HEADERS         = calc/calcdateeditor.h \
                   pdbfile.h \
                   portabase.h \
                   preferences.h \
+                  propertiesdialog.h \
                   qqutil/qqdialog.h \
                   qqutil/qqhelpbrowser.h \
                   qqutil/qqmainwindow.h \
@@ -141,6 +142,7 @@ SOURCES         = calc/calcdateeditor.cpp \
                   pdbfile.cpp \
                   portabase.cpp \
                   preferences.cpp \
+                  propertiesdialog.cpp \
                   qqutil/qqdialog.cpp \
                   qqutil/qqhelpbrowser.cpp \
                   qqutil/qqmainwindow.cpp \

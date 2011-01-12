@@ -17,12 +17,10 @@
 #include <QApplication>
 #include <QFile>
 #include <QFileInfo>
-#include <QFileSystemModel>
 #include <QFont>
 #include <QGroupBox>
 #include <QInputDialog>
 #include <QLayout>
-#include <QLocale>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
@@ -30,7 +28,6 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QStackedWidget>
-#include <QStyle>
 #include <QTextDocument>
 #include <QUrl>
 #include "condition.h"
@@ -47,6 +44,7 @@
 #include "passdialog.h"
 #include "portabase.h"
 #include "preferences.h"
+#include "propertiesdialog.h"
 #include "sorteditor.h"
 #include "viewdisplay.h"
 #include "vieweditor.h"
@@ -349,53 +347,13 @@ void PortaBase::editEnums()
 
 /**
  * Launch a dialog which displays some basic statistics about the current
- * database.  Called when the "Properties" menu item is triggered.
+ * database, and a button for launching the column statistics dialog.  Called
+ * when the "Properties" menu item is triggered.
  */
 void PortaBase::viewProperties()
 {
-    QFile file(documentPath());
-    QString message = tr("Name") + ": " + QFileInfo(file).fileName() + "\n";
-    int size = file.size();
-    QString units;
-    if (size < 1024) {
-        units = QFileSystemModel::tr("%1 bytes");
-    }
-    else if (size < 1024 * 1024) {
-        size /= 1024;
-        units = QFileSystemModel::tr("%1 KB");
-    }
-    else {
-        size /= 1024 * 1024;
-        units = QFileSystemModel::tr("%1 MB");
-    }
-    QLocale locale = QLocale::system();
-    QString sizeString = locale.toString(size);
-    message += QString("%1: %2\n").arg(tr("Size")).arg(units.arg(sizeString));
-    int count = db->getData().GetSize();
-    QString rowsInFilter = locale.toString(viewer->rowCount());
-    QString colsInView = locale.toString(viewer->columnCount());
-    message += tr("Rows") + ": " + locale.toString(count) + " (";
-    message += tr("%1 in current filter").arg(rowsInFilter) + ")\n";
-    count = db->listColumns().count();
-    message += tr("Columns") + ": " + locale.toString(count) + " (";
-    message += tr("%1 in current view").arg(colsInView) + ")\n";
-    count = db->listViews().count();
-    message += tr("Views") + ": " + locale.toString(count) + "\n";
-    QStringList sortings = db->listSortings();
-    sortings.removeAll("_single");
-    count = sortings.count();
-    message += tr("Sortings") + ": " + locale.toString(count) + "\n";
-    QStringList filters = db->listFilters();
-    filters.removeAll("_simple");
-    count = filters.count();
-    message += tr("Filters") + ": " + locale.toString(count) + "\n";
-    count = db->listEnums().count();
-    message += tr("Enums") + ": " + locale.toString(count) + "\n";
-    message += tr("For statistics on a particular column, press and hold that column's header for at least half of a second");
-    QString title = tr("File Properties") + " - " + qApp->applicationName();
-    QMessageBox mb(QMessageBox::NoIcon, title, message, QMessageBox::Ok, this);
-    mb.setMinimumWidth(200);
-    mb.exec();
+    PropertiesDialog dialog(documentPath(), db, viewer, this);
+    dialog.exec();
 }
 
 /**
@@ -432,11 +390,6 @@ void PortaBase::editPreferences()
  */
 void PortaBase::updatePreferences(QSettings *settings)
 {
-    QString color = settings->value("Colors/EvenRows", "#FFFFFF").toString();
-    Factory::evenRowColor = QColor(color);
-    color = settings->value("Colors/OddRows", "#E0E0E0").toString();
-    Factory::oddRowColor = QColor(color);
-
     settings->beginGroup("General");
     confirmDeletions = settings->value("ConfirmDeletions", true).toBool();
 #if defined (Q_WS_MAEMO_5)
@@ -448,8 +401,9 @@ void PortaBase::updatePreferences(QSettings *settings)
     }
 #endif
     settings->endGroup();
-    viewer->updatePreferences(settings);
+    Factory::updatePreferences(settings);
     Formatting::updatePreferences(settings);
+    viewer->updatePreferences(settings);
 }
 
 /**

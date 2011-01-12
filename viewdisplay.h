@@ -73,6 +73,7 @@ public slots:
     void deleteRow();
     void slideshow();
     void viewRow();
+    void showStatistics();
 
 protected:
     void keyPressEvent(QKeyEvent *e);
@@ -95,7 +96,6 @@ private slots:
     void cellReleased(const QModelIndex &index);
     void headerPressed(int column);
     void headerReleased(int column);
-    void showStatistics();
     void columnResized(int column, int oldWidth, int newWidth);
     void updateButtons(int currentPage, int totalPages);
     void matchNewView(View *view);

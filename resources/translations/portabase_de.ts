@@ -229,6 +229,21 @@
     </message>
 </context>
 <context>
+    <name>ColumnInfoDialog</name>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Column</source>
+        <translation type="unfinished">Spalte</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished">Breite</translation>
+    </message>
+</context>
+<context>
     <name>Condition</name>
     <message>
         <source>Any text column</source>
@@ -475,10 +490,6 @@ werden gelöscht:</translation>
     <message>
         <source>Text encoding</source>
         <translation>Text-Codierung</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>Text-Datei mit durch Komma getrennten Werten (CSV)</translation>
     </message>
     <message>
         <source>MobileDB files</source>
@@ -845,10 +856,6 @@ des Portabase Formats als diese Version
 unterstützt, bitte Version aktualisieren</translation>
     </message>
     <message>
-        <source>Save changes?</source>
-        <translation>Änderungen speichern?</translation>
-    </message>
-    <message>
         <source>Delete this row?</source>
         <translation>Zeile Löschen?</translation>
     </message>
@@ -891,48 +898,12 @@ Filter löschen?</translation>
         <translation>Homepage: http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>Name</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Größe</translation>
-    </message>
-    <message>
-        <source>Rows</source>
-        <translation>Zeilen</translation>
-    </message>
-    <message>
-        <source>Columns</source>
-        <translation>Spalten</translation>
-    </message>
-    <message>
-        <source>Views</source>
-        <translation>Sichten</translation>
-    </message>
-    <message>
-        <source>Sortings</source>
-        <translation>Sortierungen</translation>
-    </message>
-    <message>
-        <source>Filters</source>
-        <translation>Filter</translation>
-    </message>
-    <message>
-        <source>Enums</source>
-        <translation>Aufzählungen</translation>
-    </message>
-    <message>
-        <source>File Properties</source>
-        <translation>Eigenschaften Datei</translation>
-    </message>
-    <message>
         <source>Not a PortaBase file</source>
-        <translation>Das ist keine Portabase-Datei</translation>
+        <translation type="obsolete">Das ist keine Portabase-Datei</translation>
     </message>
     <message>
         <source>PortaBase files</source>
-        <translation type="unfinished">PortaBase Dateien</translation>
+        <translation>PortaBase Dateien</translation>
     </message>
     <message>
         <source>Recently opened files</source>
@@ -940,34 +911,18 @@ Filter löschen?</translation>
     </message>
     <message>
         <source>Encrypt the file?</source>
-        <translation type="unfinished">Datei verschlüsseln?</translation>
+        <translation>Datei verschlüsseln?</translation>
     </message>
     <message>
         <source>Text files with comma separated values</source>
-        <translation type="unfinished">Text-Datei mit durch Komma getrennten Werten (CSV)</translation>
+        <translation>Text-Datei mit durch Komma getrennten Werten (CSV)</translation>
     </message>
     <message>
         <source>XML files</source>
-        <translation type="unfinished">XML Dateien</translation>
-    </message>
-    <message>
-        <source>Printing aborted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Printing completed</source>
-        <translation type="unfinished"></translation>
+        <translation>XML Dateien</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1150,6 +1105,77 @@ You will not be able to save any changes you make.</source>
         <source>View rows with a single click</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear the recent files list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PropertiesDialog</name>
+    <message>
+        <source>File Properties</source>
+        <translation>Eigenschaften Datei</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Größe</translation>
+    </message>
+    <message>
+        <source>%1 in current filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows</source>
+        <translation>Zeilen</translation>
+    </message>
+    <message>
+        <source>%1 in current view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation>Spalten</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>Sichten</translation>
+    </message>
+    <message>
+        <source>Sortings</source>
+        <translation>Sortierungen</translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation>Filter</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation>Aufzählungen</translation>
+    </message>
+    <message>
+        <source>Column Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modified</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMenuBar</name>
@@ -1238,6 +1264,25 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Forward</source>
         <translation type="unfinished">Vorwärts</translation>
+    </message>
+</context>
+<context>
+    <name>QQMainWindow</name>
+    <message>
+        <source>Not a %1 file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing completed</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1612,7 +1657,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>characters</source>
-        <translation>Zeichen</translation>
+        <translation type="obsolete">Zeichen</translation>
     </message>
     <message>
         <source>Average length</source>
@@ -1633,6 +1678,12 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>No image</source>
         <translation>Kein Bild</translation>
+    </message>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

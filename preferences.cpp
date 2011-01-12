@@ -41,7 +41,7 @@
 Preferences::Preferences(QQMenuHelper *menuHelper, QWidget *parent)
     : PBDialog(tr("Preferences"), parent), mh(menuHelper), tabs(0), panel(0),
       variableHeightRows(0), fontName(0), fontSize(0), sample(0),
-      autoRotate(0)
+      autoRotate(0), useAlternating(0)
 {
 #if defined(Q_WS_MAEMO_5)
     QScrollArea *sa = new QScrollArea(this);
@@ -228,6 +228,7 @@ void Preferences::addAppearanceTab(QSettings *settings)
     }
 #if !defined(Q_WS_MAC)
     QGroupBox *fontGroup = new QGroupBox(tr("Font"), appearanceTab);
+    layout->addWidget(fontGroup);
     QGridLayout *fontGrid = Factory::gridLayout(fontGroup, true);
 
     fontGrid->addWidget(new QLabel(tr("Name"), fontGroup), 0, 0);
@@ -266,6 +267,7 @@ void Preferences::addAppearanceTab(QSettings *settings)
     fontGrid->addWidget(new QLabel(tr("Sample"), fontGroup), 2, 0);
     sample = new QLabel(tr("Sample text"), fontGroup);
     fontGrid->addWidget(sample, 2, 1);
+#endif
 
 #if defined(Q_WS_MAEMO_5)
     variableHeightRows = new QCheckBox(tr("Adjust row height to match font"),
@@ -273,12 +275,14 @@ void Preferences::addAppearanceTab(QSettings *settings)
     variableHeightRows->setChecked(settings->value("Font/VariableHeightRows",
                                                    false).toBool());
     fontGrid->addWidget(variableHeightRows, 3, 0, 1, 2);
-#endif
 
-    layout->addWidget(fontGroup);
-#endif
-
-#if !defined(Q_WS_MAEMO_5)
+    useAlternating = new QCheckBox(
+                         tr("Use alternating row colors if theme has them"),
+                         appearanceTab);
+    useAlternating->setChecked(settings->value("Colors/UseAlternating",
+                                                     true).toBool());
+    layout->addWidget(useAlternating);
+#else
     QGroupBox *colorGroup = new QGroupBox(tr("Row Colors"), appearanceTab);
     layout->addWidget(colorGroup);
     QHBoxLayout *hbox = Factory::hBoxLayout(colorGroup, true);
@@ -412,6 +416,7 @@ QFont Preferences::applyChanges()
     settings.setValue("General/AutoRotate", autoRotate->isChecked());
     settings.setValue("Font/VariableHeightRows",
                       variableHeightRows->isChecked());
+    settings.setValue("Colors/UseAlternating", useAlternating->isChecked());
 #else
     settings.beginGroup("Colors");
     const QColor evenColor = evenButton->currentColor();
