@@ -1,3 +1,8 @@
+2011-01-13  JMB  HTML export
+
+    Added the option to export to an HTML file (the results look much like the
+    printing output).
+
 2011-01-12  JMB  Better properties dialog, translation updates, theme bugfix
 
     Improved the file properties dialog, including a button to launch the

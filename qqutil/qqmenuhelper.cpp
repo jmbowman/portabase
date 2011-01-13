@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.cpp
  *
- * (c) 2005-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -641,6 +641,8 @@ QString QQMenuHelper::createNewFile(const QString &fileDescription,
     if (!filename.endsWith(ext, Qt::CaseInsensitive)) {
         filename += QString(".%1").arg(ext);
     }
+#if !defined(Q_WS_MAC)
+    // The native Mac file dialog confirms overwrites internally
     if (QFile::exists(filename)) {
         int choice = QMessageBox::warning(mainWindow,
                              qApp->applicationName(),
@@ -651,6 +653,7 @@ QString QQMenuHelper::createNewFile(const QString &fileDescription,
             return "";
         }
     }
+#endif
     QFileInfo info(filename);
     settings.setValue("Files/LastDir", info.absolutePath());
     return filename;

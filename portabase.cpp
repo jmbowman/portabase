@@ -842,13 +842,14 @@ void PortaBase::dataImport()
 /**
  * Export data from the open PortaBase file to another format.  The user will
  * be given the option to export either the rows in the current filter to a
- * CSV file or the entire database to an XML file.  Called when the "Export"
- * menu item is triggered.
+ * CSV or HTML file, or the entire database to an XML file.  Called when the
+ * "Export" menu item is triggered.
  */
 void PortaBase::dataExport()
 {
     QStringList types;
     types.append(tr("CSV") + "(" + tr("rows in current filter") + ")");
+    types.append(tr("HTML"));
     types.append(tr("XML"));
     bool ok = false;
     QString type = QInputDialog::getItem(this, MenuActions::tr("Export"),
@@ -860,6 +861,10 @@ void PortaBase::dataExport()
     QString description = tr("Text files with comma separated values");
     QString extension = "csv";
     if (type == types[1]) {
+        description = tr("HTML files");
+        extension = "html";
+    }
+    else if (type == types[2]) {
         description = tr("XML files");
         extension = "xml";
     }
@@ -869,6 +874,9 @@ void PortaBase::dataExport()
     }
     if (extension == "csv") {
         viewer->exportToCSV(output);
+    }
+    else if (extension == "html") {
+        viewer->exportToHTML(output);
     }
     else {
         viewer->exportToXML(output);
@@ -1537,7 +1545,7 @@ void PortaBase::print(QPrinter *p)
     document.addResource(QTextDocument::ImageResource,
                          QUrl("icon://image.png"),
                          QPixmap(":/icons/image.png"));
-    document.setHtml(viewer->toHtml());
+    document.setHtml(viewer->toPrintHTML());
     document.print(p);
 }
 

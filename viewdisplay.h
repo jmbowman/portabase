@@ -60,8 +60,9 @@ public:
     void closeView();
     void deleteAllRows();
     void exportToCSV(const QString &filename);
+    void exportToHTML(const QString &filename);
     void exportToXML(const QString &filename);
-    QString toHtml();
+    QString toPrintHTML();
     void updateColWidths();
     int rowCount();
     int columnCount();

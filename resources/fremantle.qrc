@@ -28,6 +28,7 @@
  <qresource>
      <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>
      <file>help/html/PortaBase.html</file>
+     <file>templates/export.html</file>
  </qresource>
  <qresource lang="en">
      <file alias="i18n/PortaBase.qm">translations/portabase_en.qm</file>
