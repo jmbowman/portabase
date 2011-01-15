@@ -1,7 +1,7 @@
 /*
  * commandline.cpp
  *
- * (c) 2003,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,11 +39,13 @@ int CommandLine::process()
 {
     QStringList args = qApp->arguments();
     QStringList importCommands;
+    QStringList exportCommands;
     importCommands << "fromxml" << "fromcsv" << "frommobiledb";
+    exportCommands << "toxml" << "tocsv" << "tohtml";
     if (importCommands.contains(args[1])) {
         return fromOtherFormat(args);
     }
-    else if (args[1] == "toxml" || args[1] == "tocsv") {
+    else if (exportCommands.contains(args[1])) {
         return toOtherFormat(args);
     }
     else if (args[1] == "-h" || args[1] == "--help") {
@@ -281,6 +283,9 @@ int CommandLine::toOtherFormat(const QStringList &args)
     if (args[1] == "toxml") {
         view->exportToXML(outputFile);
     }
+    else if (args[1] == "tohtml") {
+        view->exportToHTML(outputFile);
+    }
     else {
         view->prepareData();
         view->exportToCSV(outputFile);
@@ -297,8 +302,8 @@ void CommandLine::printUsage()
 {
     printf("Usage: portabase [-h | --help | file]\n");
     printf("       portabase command [-p password] [options] fromfile tofile\n");
-    printf("  where command is fromxml, toxml, fromcsv, tocsv, or frommobiledb\n");
-    printf("  Valid options for toxml and tocsv are:\n");
+    printf("  where command is fromxml, toxml, fromcsv, tocsv, tohtml, or frommobiledb\n");
+    printf("  Valid options for toxml, tocsv, and tohtml are:\n");
     printf("    -v viewname (apply this view before exporting)\n");
     printf("    -s sortname (apply this sorting before exporting)\n");
     printf("    -f filtername (apply this filter before exporting)\n");

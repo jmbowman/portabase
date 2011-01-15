@@ -1,3 +1,9 @@
+2011-01-15  JMB  Allow HTML export from the command line, fixed XML import bug
+
+    Allow export to HTML to be done from the command line just like exporting
+    to CSV or XML.  Also updated XML import to allow for the possibility of
+    booleans columns being referenced in calculated fields.
+
 2011-01-13  JMB  HTML export
 
     Added the option to export to an HTML file (the results look much like the

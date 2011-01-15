@@ -15,7 +15,6 @@
 
 #include <QApplication>
 #include <QButtonGroup>
-#include <QFileInfo>
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -26,7 +25,6 @@
 #include <QStackedWidget>
 #include <QStringList>
 #include <QTextDocument>
-#include <QTextStream>
 #include <QTimer>
 #include <QToolButton>
 #include <QTreeWidget>
@@ -594,84 +592,7 @@ void ViewDisplay::exportToCSV(const QString &filename)
  */
 void ViewDisplay::exportToHTML(const QString &filename)
 {
-    // Open the output template
-    QFile templateFile(":/templates/export.html");
-    if (!templateFile.open(QFile::ReadOnly)) {
-        QMessageBox::information(this, qApp->applicationName(),
-                                 tr("Unable to open output template"));
-        return;
-    }
-    QTextStream stream(&templateFile);
-    QString result = stream.readAll();
-    templateFile.close();
-
-    // populate the title and row colors
-    result = result.arg(QFileInfo(filename).completeBaseName());
-    result = result.arg(Factory::evenRowColor.name());
-    result = result.arg(Factory::oddRowColor.name());
-
-    // populate the column headers
-    View *view = model->view();
-    QStringList lines;
-    QStringList colNames = view->getColNames();
-    int colCount = colNames.count();
-    int i, j;
-    QString headerPattern("<th>%1</th>\n");
-    for (i = 0; i < colCount; i++) {
-        lines.append(headerPattern.arg(Qt::escape(colNames[i])));
-    }
-    QFile f(filename);
-    if (!f.open(QFile::WriteOnly)) {
-        return;
-    }
-    QTextStream output(&f);
-    output.setCodec("UTF-8");
-    output << result.arg(lines.join(""));
-
-    // populate the data
-    int rowCount = view->totalRowCount();
-    int *types = view->getColTypes();
-    QStringList data;
-    int type;
-    QStringList rowStarts;
-    rowStarts << "<tr class=\"even\">\n" << "<tr class=\"odd\">\n";
-    QString rowEnd("</tr>\n");
-    QString leftPattern = "<td>%1</td>\n";
-    QString rightPattern = "<td class=\"r\">%1</td>\n";
-    QStringList divs;
-    divs << "<td><div class=\"n\">&#9744;</div></td>\n";
-    divs << "<td><div class=\"y\">&#9745;</div></td>\n";
-    divs << "<td><div class=\"i\">&#9997;</div></td>\n";
-    QString newline("\n");
-    QString br("<br>");
-    QString value;
-    for (i = 0; i < rowCount; i++) {
-        output << rowStarts[i % 2];
-        data = view->getRow(i);
-        for (j = 0; j < colCount; j++) {
-            type = types[j];
-            if (type == INTEGER || type == FLOAT || type == CALC
-                || type == SEQUENCE) {
-                output << rightPattern.arg(data[j]);
-            }
-            else if (type == BOOLEAN) {
-                output << divs[data[j].toInt()];
-            }
-            else if (type == IMAGE && !data[j].isEmpty()) {
-                output << divs[2];
-            }
-            else if (type == NOTE || type == STRING) {
-                value = Qt::escape(data[j]).replace(newline, br);
-                output << leftPattern.arg(value);
-            }
-            else {
-                output << leftPattern.arg(data[j]);
-            }
-        }
-        output << rowEnd;
-    }
-    output << "</tbody>\n</table>\n</body>\n</html>\n";
-    f.close();
+    model->view()->exportToHTML(filename);
 }
 
 /**

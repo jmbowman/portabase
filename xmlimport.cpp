@@ -1068,7 +1068,7 @@ QString XMLImport::isValidCalcNode(CalcNode *node)
             return tr("Invalid") + " cnvalue: " + value;
         }
         int colType = db->getType(value);
-        if (colType != INTEGER && colType != FLOAT) {
+        if (colType != INTEGER && colType != FLOAT && colType != BOOLEAN) {
             return tr("Invalid") + " cnvalue: " + value;
         }
     }

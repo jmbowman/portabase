@@ -14,7 +14,9 @@
  */
 
 #include <QFile>
+#include <QFileInfo>
 #include <QLocale>
+#include <QTextDocument>
 #include <QTextStream>
 #include "csvutils.h"
 #include "database.h"
@@ -524,6 +526,91 @@ void View::exportToCSV(const QString &filename)
         QStringList row = db->getRow(Id (dbview[i]), &utils);
         output << csv.encodeRow(row);
     }
+    f.close();
+}
+
+/**
+ * Export the information in the current view and filter to an HTML file at
+ * the specified path.  The records are listed in the current sorting order.
+ * Unlike the HTML generated for printing, this method's output is intended
+ * to be a standalone page viewable in normal web browsers, with easily
+ * overridden display properties.
+ *
+ * @param filename The HTML file to create or overwrite
+ */
+void View::exportToHTML(const QString &filename)
+{
+    // Open the output template
+    QFile templateFile(":/templates/export.html");
+    if (!templateFile.open(QFile::ReadOnly)) {
+        return;
+    }
+    QTextStream stream(&templateFile);
+    QString result = stream.readAll();
+    templateFile.close();
+
+    // populate the title and row colors
+    result = result.arg(QFileInfo(filename).completeBaseName());
+    result = result.arg(Factory::evenRowColor.name());
+    result = result.arg(Factory::oddRowColor.name());
+
+    // populate the column headers
+    QStringList lines;
+    int colCount = columns.count();
+    int i, j;
+    QString headerPattern("<th>%1</th>\n");
+    for (i = 0; i < colCount; i++) {
+        lines.append(headerPattern.arg(Qt::escape(columns[i])));
+    }
+    QFile f(filename);
+    if (!f.open(QFile::WriteOnly)) {
+        return;
+    }
+    QTextStream output(&f);
+    output.setCodec("UTF-8");
+    output << result.arg(lines.join(""));
+
+    // populate the data
+    QStringList data;
+    int type;
+    QStringList rowStarts;
+    rowStarts << "<tr class=\"even\">\n" << "<tr class=\"odd\">\n";
+    QString rowEnd("</tr>\n");
+    QString leftPattern = "<td>%1</td>\n";
+    QString rightPattern = "<td class=\"r\">%1</td>\n";
+    QStringList divs;
+    divs << "<td><div class=\"n\">&#9744;</div></td>\n";
+    divs << "<td><div class=\"y\">&#9745;</div></td>\n";
+    divs << "<td><div class=\"i\">&#9997;</div></td>\n";
+    QString newline("\n");
+    QString br("<br>");
+    QString value;
+    for (i = 0; i < rowCnt; i++) {
+        output << rowStarts[i % 2];
+        data = getRow(i);
+        for (j = 0; j < colCount; j++) {
+            type = dataTypes[j];
+            if (type == INTEGER || type == FLOAT || type == CALC
+                || type == SEQUENCE) {
+                output << rightPattern.arg(data[j]);
+            }
+            else if (type == BOOLEAN) {
+                output << divs[data[j].toInt()];
+            }
+            else if (type == IMAGE && !data[j].isEmpty()) {
+                output << divs[2];
+            }
+            else if (type == NOTE || type == STRING) {
+                value = Qt::escape(data[j]).replace(newline, br);
+                output << leftPattern.arg(value);
+            }
+            else {
+                output << leftPattern.arg(data[j]);
+            }
+        }
+        output << rowEnd;
+    }
+    output << "</tbody>\n</table>\n</body>\n</html>\n";
     f.close();
 }
 
