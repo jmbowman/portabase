@@ -488,19 +488,18 @@ int View::getIndex(int rowId)
  */
 void View::deleteAllRows()
 {
-    // delete by descending ID so the IDs don't change with each deletion
-    c4_View sorted = dbview.SortOn(Id);
     int count = dbview.GetSize();
     int *ids = new int[count];
     int i;
     for (i = 0; i < count; i++) {
-        ids[i] = Id (sorted[count - i - 1]);
+        ids[i] = Id (dbview[count - i - 1]);
     }
     // do deletions after obtaining all IDs so we don't need to worry about
     // the view changing
     for (i = 0; i < count; i++) {
-        db->deleteRow(ids[i]);
+        db->deleteRow(ids[i], false);
     }
+    db->compressRowIds();
     delete[] ids;
 }
 

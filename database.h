@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -138,7 +138,8 @@ public:
     QString addRow(const QStringList &values, int *rowId=0,
                    bool acceptSequenceVals=false, bool fromcsv=false);
     void updateRow(int rowId, const QStringList &values);
-    void deleteRow(int id);
+    void deleteRow(int id, bool compressRowIds=true);
+    void compressRowIds();
     void toggleBoolean(int rowId, const QString &colName);
     QByteArray getBinaryField(int rowId, const QString &colName);
     void setBinaryField(int rowId, const QString &colName, QByteArray bytes);

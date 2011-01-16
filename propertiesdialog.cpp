@@ -68,13 +68,15 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
     QString rowsInFilter = locale.toString(vd->rowCount());
     QString inCurrent = tr("%1 in current filter").arg(rowsInFilter);
     content.append(row.arg(tr("Rows")).arg(QString("%1 (%2)")
-                                           .arg(count).arg(inCurrent)));
+                                           .arg(locale.toString(count))
+                                           .arg(inCurrent)));
 
     count = db->listColumns().count();
     QString colsInView = locale.toString(vd->columnCount());
     inCurrent = tr("%1 in current view").arg(colsInView);
     content.append(row.arg(tr("Columns")).arg(QString("%1 (%2)")
-                                              .arg(count).arg(inCurrent)));
+                                              .arg(locale.toString(count))
+                                              .arg(inCurrent)));
 
     count = db->listViews().count();
     content.append(row.arg(tr("Views")).arg(locale.toString(count)));

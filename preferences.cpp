@@ -283,6 +283,7 @@ void Preferences::addAppearanceTab(QSettings *settings)
                                                      true).toBool());
     layout->addWidget(useAlternating);
 #else
+    Q_UNUSED(settings);
     QGroupBox *colorGroup = new QGroupBox(tr("Row Colors"), appearanceTab);
     layout->addWidget(colorGroup);
     QHBoxLayout *hbox = Factory::hBoxLayout(colorGroup, true);

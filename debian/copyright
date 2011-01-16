@@ -1,24 +1,94 @@
-This package was debianized by Jeremy Bowman <jmbowman@alum.mit.edu> on
-Fri, Apr 16 10:40:01 -0500.
+Format: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Upstream-Name: PortaBase
+Upstream-Contact: Jeremy Bowman <jmbowman@alum.mit.edu>
+Source: http://portabase.git.sourceforge.net/
 
-Author: Jeremy Bowman <jmbowman@alum.mit.edu>
+Copyright: 2002-2011 Jeremy Bowman <jmbowman@alum.mit.edu>
+License: GPL-2+
 
-Copyright 2002-2010 by Jeremy Bowman
+Files: calculator.*
+Copyright: 2002-2004, 2008-2010 Jeremy Bowman <jmbowman@alum.mit.edu>
+           2000-2002 Michael Edwardes <mte@users.sourceforge.net>
+License: GPL-2+
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+Files: color_picker/*
+Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies)
+License: LGPL-2.1 or GPL-3
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Files: encryption/blowfish.*
+Copyright: 2008-2010 Jeremy Bowman <jmbowman@alum.mit.edu>
+           1999, 2000, 2002, 2005 Beeyond Software Holding BV
+License: LGPL-2.1+
 
-You should have received a copy of the GNU General Public License with
-the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
-if not, write to the Free Software Foundation, Inc., 51 Franklin St,
-Fifth Floor, Boston, MA 02110-1301, USA.
+Files: encryption/randomkit/*
+Copyright: 2003-2006 Jean-Sebastien Roy <js@jeannot.org>
+License: Expat
 
-On Debian systems, the complete text of the GNU General Public
-License can be found in the file `/usr/share/common-licenses/GPL'.
+Files: image/imagewidget.*
+Copyright: 2003-2004, 2008-2010 Jeremy Bowman <jmbowman@alum.mit.edu>
+           2003 Pierpaolo Di Panfilo <pippo_dp@libero.it>
+           2003 Cristian Di Panfilo <cridipan@virgilio.it>
+License: GPL-2+
+
+Files: metakit/*
+Copyright: 1996-2007 Jean-Claude Wippler <jcw@equi4.com>
+License: Expat
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License with
+ the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
+ if not, write to the Free Software Foundation, Inc., 51 Franklin St,
+ Fifth Floor, Boston, MA 02110-1301, USA.
+ .
+ On Debian systems, the complete text of the GNU General Public
+ License can be found in the file `/usr/share/common-licenses/GPL'.
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+License: LGPL-2.1
+ This library is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Library General Public License as published by
+ the Free Software Foundation; version 2.1 dated February, 1999.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Library General Public License for more details.
+ .
+ On Debian systems, the complete text of the GNU Library General Public License
+ can be found in the file `/usr/share/common-licenses/LGPL-2.1'.
+
+License: GPL-3
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 3 dated June, 2007.
+ .
+ On Debian systems, the complete text of version 3 of the GNU General
+ Public License can be found in the file `/usr/share/common-licenses/GPL-3'.

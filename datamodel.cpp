@@ -409,11 +409,11 @@ void DataModel::deleteAllRows()
         // nothing to delete
         return;
     }
-    beginRemoveRows(QModelIndex(), 0, totalRows - 1);
+    beginResetModel();
     currentView->deleteAllRows();
     currentView->prepareData();
     processPaginationChange(true);
-    endRemoveRows();
+    endResetModel();
 }
 
 /**

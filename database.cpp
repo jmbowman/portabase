@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1568,11 +1568,16 @@ void Database::updateRow(int rowId, const QStringList &values)
  * Delete the specified row from the main data table.
  *
  * @param id The ID of the row to delete
+ * @param compressRowIds True if higher row IDs should be adjusted down now,
+ *                    false if compressRowIds() will be called afterwards
  */
-void Database::deleteRow(int id)
+void Database::deleteRow(int id, bool compressRowIds)
 {
     int index = data.Find(Id [id]);
     data.RemoveAt(index);
+    if (!compressRowIds) {
+        return;
+    }
     int size = data.GetSize();
     for (int i = 0; i < size; i++) {
         c4_RowRef row = data[i];
@@ -1582,6 +1587,25 @@ void Database::deleteRow(int id)
         }
     }
     maxId--;
+}
+
+/**
+ * Compress the set of row IDs in use so there aren't any gaps.  Should only
+ * be needed after a bulk delete operation in which this compacting was
+ * explicitly deferred.
+ */
+void Database::compressRowIds()
+{
+    c4_View sorted = data.SortOn(Id);
+    int size = sorted.GetSize();
+    for (int i = 0; i < size; i++) {
+        c4_RowRef row = sorted[i];
+        int rowId = Id (row);
+        if (rowId > i) {
+            Id (row) = i;
+        }
+    }
+    maxId = size - 1;
 }
 
 /**
