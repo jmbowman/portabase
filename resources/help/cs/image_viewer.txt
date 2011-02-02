@@ -1,0 +1,6 @@
+.. _image_viewer:
+
+Prohlížeč obrázků
+=================
+
+Prohlížeč obrázků je jednoduchý dialog zobrazující obrázek vždy z jednoho pole sloupce typu obrázek. Je-li vyvolán z :ref:`Prohlížeče dat <data_viewer>`\ , použitím tlačítka se šipkou směřující vlevo zobrazíte obrázek ze stejného sloupce předešlého záznamu (použitého filtru); podobně použitím tlačítka se šipkou směřující vpravo zobrazíte obrázek dalšího záznamu. Poklepem na obrázek jej zobrazíte v celoobrazovkovém módu; dalším klepnutím na obrázek v celoobrazovkovém módu prohlížeč uzavřete.

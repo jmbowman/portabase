@@ -1,0 +1,25 @@
+.. _enum_manager:
+
+Enum manager
+============
+
+PortaBase supports enum (enumeration) column types, in which each value in the column is one of a set of possible string values.  The enum manager dialog lets you create, edit, delete, and change the listing order of these enums.
+
+Most of the dialog is occupied by a list of the currently defined enums. There is a row of buttons identical to those in the :ref:`columns editor <columns_editor>`:
+
+**Add**
+  Launch the :ref:`enum editor <enum_editor>` to define a new enum.  Note that the new enum will be added when "OK"/"Done" is clicked in the editor dialog, not when the "OK"/"Done" button is clicked in this dialog.
+  
+**Edit**
+  Launch the enum editor to edit the currently selected enum.  As when adding, edits are applied as soon as "OK"/"Done" is clicked in the editor dialog.
+  
+**Delete**
+  Delete the currently selected enum.  If there are columns of this enum type, a dialog will warn you that these would also be deleted and ask if you want to continue.  The enum (and any associated colums) will be deleted immediately, not when "OK"/"Done" is clicked.
+  
+**Up**
+  Move the currently selected enum up one position in the list (and hence in the column editor's type list as well).
+  
+**Down**
+  Move the currently selected enum down one position in the list (and hence in the column editor's type list as well).
+
+Click "OK"/"Done" to apply any changes made to the enum listing order, or cancel out of the dialog to leave the sequence unchanged (other than any added or deleted enums).

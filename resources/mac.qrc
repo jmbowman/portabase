@@ -35,35 +35,28 @@
  <qresource lang="en">
      <file alias="i18n/PortaBase.qm">translations/portabase_en.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_en.qm</file>
-     <file>help/html/PortaBase.html</file>
  </qresource>
  <qresource lang="cs">
      <file alias="i18n/PortaBase.qm">translations/portabase_cs.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_cs.qm</file>
-     <file alias="help/html/PortaBase.html">help/cs/html/PortaBase.html</file>
  </qresource>
  <qresource lang="de">
      <file alias="i18n/PortaBase.qm">translations/portabase_de.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_de.qm</file>
-     <file>help/html/PortaBase.html</file>
  </qresource>
  <qresource lang="es">
      <file alias="i18n/PortaBase.qm">translations/portabase_es.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_es.qm</file>
-     <file>help/html/PortaBase.html</file>
  </qresource>
  <qresource lang="fr">
      <file alias="i18n/PortaBase.qm">translations/portabase_fr.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_fr.qm</file>
-     <file>help/html/PortaBase.html</file>
  </qresource>
  <qresource lang="ja">
-     <file alias="help/html/PortaBase.html">help/ja/html/PortaBase.html</file>
      <file alias="i18n/PortaBase.qm">translations/portabase_ja.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_ja.qm</file>
  </qresource>
  <qresource lang="zh-Hant">
-     <file alias="help/html/PortaBase.html">help/tw/html/PortaBase.html</file>
      <file alias="i18n/PortaBase.qm">translations/portabase_zh_TW.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_zh_TW.qm</file>
  </qresource>

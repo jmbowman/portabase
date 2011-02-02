@@ -73,7 +73,6 @@ HEADERS         = calc/calcdateeditor.h \
                   preferences.h \
                   propertiesdialog.h \
                   qqutil/qqdialog.h \
-                  qqutil/qqhelpbrowser.h \
                   qqutil/qqmainwindow.h \
                   qqutil/qqmenuhelper.h \
                   qqutil/qqtoolbarstretch.h \
@@ -144,7 +143,6 @@ SOURCES         = calc/calcdateeditor.cpp \
                   preferences.cpp \
                   propertiesdialog.cpp \
                   qqutil/qqdialog.cpp \
-                  qqutil/qqhelpbrowser.cpp \
                   qqutil/qqmainwindow.cpp \
                   qqutil/qqmenuhelper.cpp \
                   qqutil/qqtoolbarstretch.cpp \

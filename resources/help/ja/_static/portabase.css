@@ -1,0 +1,15 @@
+@import url(agogo.css);
+div.header {
+  padding-left: 5px;
+}
+div.body {
+  padding-left: 5px;
+  padding-right: 0px;
+}
+div.footer {
+  padding-left: 5px;
+}
+div.body h1 {
+  line-height: normal;
+  text-align: left;
+}

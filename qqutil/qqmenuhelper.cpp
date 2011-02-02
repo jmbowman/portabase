@@ -20,6 +20,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QFont>
+#include <QLocale>
 #include <QMainWindow>
 #include <QMenu>
 #include <QMenuBar>
@@ -28,7 +29,7 @@
 #include <QRegExp>
 #include <QSettings>
 #include <QToolBar>
-#include "qqhelpbrowser.h"
+#include <QUrl>
 #include "qqmenuhelper.h"
 #include "qqtoolbarstretch.h"
 
@@ -371,26 +372,66 @@ void QQMenuHelper::setEdited(bool y)
 }
 
 /**
- * Show the application's main help file.  This should be a resource named
- * help/[applicationName].html (i.e. "help/MyApp.html").  To override it with
- * a custom file URL (to test a translation, for example), set that URL as
- * the value of the APPLICATIONNAME_HELP environment variable.
+ * Show the application's main help file.  This should be an "index.html"
+ * file in one of the following locations:
+ * <ul>
+ * <li>Linux/UNIX: /usr/share/[app_name]/help/[locale]/index.html</li>
+ * <li>Mac OS X: [app_bundle]/Contents/Resources/[locale].lproj/index.html</li>
+ * <li>Windows: [app_directory]/help/[locale]/index.html</li>
+ * </ul>
+ * The "en" locale is used by default if no help files in a more suitable
+ * locale are available.  To override the directory path with a custom value
+ * (to test a translation, for example), set that path as the value of the
+ * APPLICATIONNAME_HELP environment variable.
  */
 void QQMenuHelper::showHelp()
 {
     QStringList env = QProcess::systemEnvironment();
     QString var = QString("%1_HELP").arg(qApp->applicationName().toUpper());
-    QString path;
+    QString helpDir;
     int index = env.indexOf(QRegExp(QString("%1=.*").arg(var)));
     if (index != -1) {
-        path = env[index];
-        path = path.right(path.length() - var.length() - 1);
+        QString helpDir = env[index];
+        helpDir = helpDir.right(helpDir.length() - var.length() - 1);
     }
     else {
-        path = QString("qrc:/help/html/%1.html").arg(qApp->applicationName());
+        QString lang = QLocale::system().name();
+        QStringList langs;
+        langs.append(lang);
+        int i  = lang.indexOf('.');
+        if (i > 0) {
+            lang = lang.left(i);
+        }
+        i = lang.indexOf('_');
+        if (i > 0) {
+            langs.append(lang.left(i));
+        }
+        // if no translation is available, show the English help
+        langs.append("en");
+        QString suffix = "/";
+#if defined(Q_WS_WIN)
+        QString path = qApp->applicationDirPath() + "/help/";
+#elif defined(Q_WS_MAC)
+        QString path = qApp->applicationDirPath() + "/../Resources/";
+        suffix = ".lproj/";
+#else
+        QString path = QString("/usr/share/%1/help/")
+                       .arg(qApp->applicationName().toLower());
+#endif
+        int count = langs.count();
+        for (int i = 0; i < count; i++) {
+            QDir dir(path + langs[i] + suffix);
+            if (dir.exists()) {
+                helpDir = path + langs[i] + suffix;
+                break;
+            }
+        }
     }
-    QQHelpBrowser helpBrowser(path, mainWindow);
-    helpBrowser.exec();
+    if (!helpDir.isEmpty()) {
+        QDir dir(helpDir);
+        QString path = dir.absoluteFilePath("index.html");
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    }
 }
 
 /**

@@ -1,0 +1,8 @@
+.. _filter_editor:
+
+Filter editor
+=============
+
+This dialog allows you to define filters which are used to select which rows to display in the data viewer.  A filter may be as simple as "count = 1" or something more complicated like "any text column contains 'java', chapters > 10, pages <= 400, and instock is checked".  When you choose a filter from the "Filter" menu, the data viewer is updated to show only the rows which match the conditions you have defined.
+
+At the top of the dialog is a text box containing the name of the filter; changing this renames the filter.  Below that is a list of the conditions which make up the filter; a row must satisfy all of these conditions in order to pass the filter.  "Add", "Edit", "Delete", "Up", and "Down" buttons let you edit the condition list in basically the same way as the :ref:`columns editor <columns_editor>` works.  But instead of the column editor dialog, a condition editor dialog is launched by the "Add" and "Edit" buttons.  This dialog lets you choose the column whose value to compare, the comparison operation to use, and the constant value to compare against.  For text comparisons, there is also a checkbox that lets you indicate whether the comparison should be case sensitive or not.  Instead of a single column, you can choose to compare the value of "Any text column"; if the value of any String or Note column in a row satisfies such a condition, the row is considered to pass the condition.  Click "OK"/"Done" to accept the currently shown settings, or cancel out of the dialog to revert to the previous values (or to cancel adding a new filter).

@@ -1,0 +1,18 @@
+.. _encryption:
+
+Šifrování
+=========
+
+Soubory PortaBase lze šifrovat, čímž zabráníme nepovolaným osobám přistupovat k citlivým datům, například k uloženým heslům. Přistupujete-li k datům šifrovaného souboru PortaBase, budete nejprve vyzváni k zadání přístupového hesla, kterým soubor zabezpečil jeho autor. (Toto heslo lze kdykoli později změnit použitím volby "Změnit heslo" z menu ":ref:`Soubor <file_menu>`".) Protože heslo musí být relativně snadno zapamatovatelné, je jeho výběr nejslabším místem šifrovacího schématu; proto je důležité věnovat výběru dobrého hesla náležitou pozornost. Výběr hesla by měl vycházet z následujících doporučení:
+
+* Používejte hesla o délce nejméně 6 znaků; čím delší heslo, tím je bezpečnější (horní limit délky hesla není omezen)
+
+* Používejte kombinaci velkých a malých písmen, čísel a interpunkčních znamének
+
+* Nepoužívejte jako hesla Vaše osobní údaje ani jejich části, stejně jako tyto údaje s úmyslnými pravopisnými chybami (nepoužívejte jména přátel, rodinných příslušníků, zvířecích mazlíčků, kontaktní informace, atd.)
+
+* Používejte snadno zapamatovatelná hesla; zvolíte-li si "dobré" heslo (tedy vyhovující výše uvedeným zásadám), avšak zapomenete-li jej, pravděpodobně se Vám již nikdy nepodaří získat ze zašifrovaného souboru Vaše data
+
+Z bezpečnostních a technických důvodů je nutné celý obsah šifrovaného souboru načíst do paměti naráz; proto šifrované soubory nemohou dosahovat takových velikostí jako soubory nešifrované. Šifrované soubory s několika málo sty či tisíci záznamy jsou zpracovávány normálně, avšak u souborů rozsáhlejších (s mnoha tisíci záznamy) tomu tak být nemusí (zejména na přístrojích Zaurus; při použití na stolních počítačích jste omezeni množstvím volné paměti).
+
+Další informace o šifrování v aplikaci PortaBase (včetně podrobností o použitém algoritmu) naleznete na domovské stránce PortaBase (http://portabase.sourceforge.net).

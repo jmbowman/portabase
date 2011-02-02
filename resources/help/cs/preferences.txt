@@ -1,0 +1,65 @@
+.. _preferences:
+
+Dialog "Nastavení"
+==================
+
+Tento dialog Vám umožní zvolit si nastavení aplikace PortaBase. Klepnutím na "OK" předvolby na všech kartách dialogu potvrdíte, klepnutím na "Zrušit" či křížek pro uzavření dialogu ponecháte stávající předvolby nezměněné. Tento dialog obsahuje následující karty:
+
+.. contents::
+   :local:
+   :backlinks: none
+
+.. _general_prefs:
+
+Podmínky
+--------
+
+Sekce Všeobecné na kartě Podmínky obsahuje následujícící volby:
+
+**Vyžadovat potvrzení mazání**
+  Označte tuto volbu, chcete-li zobrazovat výzvu k potvrzení mazání každého záznamu, náhledu, pořadí či filtru. Snížíte tak riziko nežádoucího smazání něčeho, co byste smazat nechtěli, např. při nechtěném překlepu.
+
+**Povolit editaci přepínačů v prohlížeči dat**
+  Označením této volby povolíte v Prohlížeči dat přepínání mezi booleánskými hodnotami klepnutím na příslušnou buňku. Usnadní se tak použití PortaBase např. jako seznamu úkolů, ale současně se zvýší nebezpečí náhodné nežádoucí změny hodnoty.
+
+**Zobrazovat sekundy**
+  Označte tuto volbu, chcete-li zobrazovat sekundy ve sloupcích typu čas v Prohlížeči dat, Prohlížeči záznamů atd.
+
+**Používat stránky v prohlížeči dat**
+  Označte tuto volbu, chcete-li v dolní části Prohlížeče dat zobrazovat navigační lištu, která Vám umožní měnit počet záznamů zobrazených na jedné stránce a navigaci mezi stránkami. Není-li tato volba označena, je navigační lišta skryta a všechny záznamy odpovídající vybranému filtru jsou zobrazeny na jediné stránce; toto nastavení může u velkých databází zpomalovat práci.
+
+**Zalamovat poznámky**
+  Označením této volby povolíte automatické zalamování textu v Editoru/Prohlížeči poznámek bez nutnosti ručního vkládání zalomení. Ve výchozím nastavení je text zalamován pouze v mezerách, lze však nastavit vynucené zalamování kdekoli v textu (což může být vhodné u jazyků, které obvykle nepoužívají mezery mezi slovy, např. u japonštiny.)
+
+**Výchozí počet záznamů na stránce**
+  Výchozí hodnota  maximálního počtu záznamů, které jsou zobrazeny na jedné stránce nově vytvářených databází.
+
+PortaBase ve verzi pro PC obsahuje na kartě Podmínky ještě sekci Datum a čas. PortaBase pro Zaurus používá systémový datum a čas; k získání této informace ze stolních počítačů však dosud neexistuje vhodné meziplatformní řešení, proto je potřeba nastavit tyto volby:
+
+**Formát datumu**
+  Formátování použité pro datum např. v Prohlížeči dat, Prohlížeči záznamů atd.
+
+**Formát času**
+  Volba mezi 24 hodinovým či 12 hodinovým (Ráno/dopoledne či Odpoledne/večer) zobrazením času.
+
+**Týden začíná**
+  Nastavení prvního dne v týdnu; tato volba ovlivní vzhled dialogu pro zadávání datumu.
+
+.. _appearance_prefs:
+
+Vzhled
+------
+
+V sekci Písmo na kartě Vzhled můžete vybrat jakýkoli dostupný druh písma v jakékoli dostupné velikosti. Toto písmo bude použito pro všechny texty v aplikaci PortaBase (po ukončení a novém spuštění aplikace), dokud si nevyberete jiné písmo. K zobrazení japonských znaků můžete zvolit například "unifont, 16", chcete-li zobrazit více textu na displeji najednou, můžete zkusit "smallsmooth, 9".
+
+Sekce Barvy záznamů obsahuje dvě tlačítka pro výběr barev, které budou použity jako barvy pozadí záznamů v Prohlížeči dat, Editoru sloupců, Editoru náhledů a Editoru pořadí. Každé tlačítko zobrazuje jednu z aktuálně použitých barev. Klepnutí na tlačítko otevře dialog pro výběr barvy, kde si můžete vybrat vlastní barvu.
+
+Menu
+----
+
+Tato karta Vám umožňuje vybrat menu, která budou zobrazena v nejvyšší úrovni a jejich pořadí. To může být zvláště důležité u některých přístrojů Zaurus, kde není na displeji dostatek místa k zobrazení všech menu. Zaškrtnutím označte menu, která chcete zobrazit v nejvyšší úrovni, neoznačená menu se objeví jako submenu v menu "Soubor". Tlačítky "Posunout nahoru" a "Posunout dolů" v dolní části karty lze měnit pořadí, v němž budou menu zobrazena.
+
+Tlačítka
+--------
+
+Tato karta Vám umožňuje zvolit tlačítka, která budou zobrazena na liště a jejich pořadí; podobně jako výběr zobrazených menu je i výběr zobrazených tlačítek důležitý především u modelů Zarusu s nízkým rozlišením. Zaškrtnutím označte tlačítka, která chcete zobrazit. Tlačítky "Posunout nahoru" a "Posunout dolů" v dolní části karty lze měnit pořadí, v němž budou tlačítka na liště zobrazena.

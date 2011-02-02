@@ -1,0 +1,37 @@
+.. _command_line:
+
+Command line usage
+------------------
+
+PortaBase can be used from a Linux/UNIX terminal or DOS prompt to import or export data without needing to go through the graphical interface.  This can be particularly useful if you want to write scripts that automatically generate, update, or otherwise manipulate PortaBase data files.  Run ``portabase -h`` for usage instructions; in summary, you can do the following:
+
+:samp:`portabase {file}`
+  Launch PortaBase and immediately open the named PortaBase data file.
+
+:samp:`portabase fromxml {xmlfile pobfile}`
+  Create a new PortaBase data file at *pobfile* from the PortaBase-format XML file located at *xmlfile*.
+
+:samp:`portabase fromcsv {csvfile pobfile}`
+  Add rows to the existing PortaBase data file at *pobfile* from the CSV file located at *csvfile*.
+
+:samp:`portabase frommobiledb {mdbfile pobfile}`
+  Create a new PortaBase data file at *pobfile* from the MobileDB file located at *mdbfile*.
+
+:samp:`portabase toxml {pobfile xmlfile}`
+  Create a new XML file at *xmlfile* from the PortaBase data file located at *pobfile*.
+
+:samp:`portabase tocsv {pobfile csvfile}`
+  Create a new CSV file at *csvfile* from rows in the PortaBase data file located at *pobfile*.
+
+:samp:`portabase tohtml {pobfile htmlfile}`
+  Create a new HTML file at *htmlfile* from rows in the PortaBase data file located at *pobfile*.
+
+To extract data from, add rows to, or create an encrypted file, type :samp:`-p {password}` immediately after the conversion command (before the other options described below).
+
+The following options can be used between ``toxml``, ``tocsv``, or ``tohtml`` and the PortaBase file to export from:
+
+-v view     Apply the named view before exporting.
+-s sorting  Apply the named sorting before exporting.
+-f filter   Apply the named filter before exporting.
+
+For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.sourceforge.net).

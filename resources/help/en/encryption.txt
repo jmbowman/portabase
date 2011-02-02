@@ -1,0 +1,18 @@
+.. _encryption:
+
+Encryption
+==========
+
+PortaBase data files can be encrypted in order to protect sensitive information like passwords.  Each encrypted file is accessed by providing a password specified by the file's creator.  (This password can be changed later from the :ref:`File menu <file_menu>`'s "Change Password" action.)  Because this password must be relatively easy to remember, this is the weakest point in the encryption scheme; therefore, it is important to choose a good password.  Passwords should meet the following guidelines:
+
+* At least 6 characters long; the longer, the better (no upper limit)
+
+* Contain a combination of upper and lower case letters, numbers, and punctuation symbols
+
+* Should not consist of data (or misspellings thereof) that would be likely to be in personal records (friend/relative/pet names, contact information, etc.)
+
+* Easy to remember; if you choose a password that is "good" in the above senses and forget it, your data will be virtually impossible to retrieve
+
+For security and implementation reasons, the entire content of encrypted files must be held in memory at once; thus encrypted files cannot scale to large sizes as well as non-encrypted files.  Files of a few hundred or a few thousand rows should still perform well, but files containing many thousands of rows of data probably won't (at least on Maemo; desktop computers with lots of memory can handle quite large encrypted files).
+
+For more information about encryption in PortaBase (including details on the algorithms used), see the PortaBase homepage (http://portabase.sourceforge.net).

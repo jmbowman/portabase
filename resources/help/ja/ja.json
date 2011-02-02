@@ -1,0 +1,18 @@
+{
+    "embeddedFonts" :
+    [[
+        "VL-Gothic-Regular.ttf",
+        "VL-PGothic-Regular.ttf"
+    ]],
+    "fontsAlias" : {
+        "stdFont": "VL-PGothic-Regular",
+        "stdBold": "VL-PGothic-Regular",
+        "stdItalic": "VL-PGothic-Regular",
+        "stdMono": "VL-Gothic-Regular"
+    },
+    "styles" : [
+        ["base" , {
+            "wordWrap": "CJK"
+        }]
+     ]
+ }

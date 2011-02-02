@@ -1,0 +1,41 @@
+.. _calculation_editor:
+
+Calculation editor
+==================
+
+This dialog allows you to define columns which contain values calculated from the values of other columns in the same row.  It is launched by pressing the "Edit calculation" button in the column editor, which appears only for columns of type "Calculation".  At the top of the dialog are the name of the column, a read-only display of the current calculation written as a one-line expression, and a spin box that allows you to specify how many decimal places should be shown for the calculation results.
+
+Most of the dialog is filled by a widget which shows the current calculation as a tree, similar to many file explorer programs.  Each node in the tree represents either the value of another column, a constant value, or the result of an operation.  To edit the calculation, select a node from the tree (if any are present) and use the buttons in the dialog:
+
+**Add**
+  Add a new node as a child of the currently selected node; a dialog will appear which allows you to select the type and value of the node.
+
+**Edit**
+  Edit the selected node.
+
+**Delete**
+  Delete the currently selected node.
+
+**Up**
+  Move the currently selected node up among its siblings.
+
+**Down**
+  Move the currently selected node down among its siblings.
+
+Usually you want to start by adding an operation node, such as "+", and then add its arguments (which may themselves be operations with arguments of their own).  The buttons automatically update when a node is selected in order to indicate which actions are possible; typical actions not allowed are:
+
+* Adding a child node to an operation which already has as many arguments as it can use
+
+* Editing an operation node; it must be deleted and replaced instead
+
+* Moving a node up or down when it cannot move further in that direction
+
+Some points worth noting:
+
+* Only columns of type Integer, Decimal, Sequence, and Boolean can be used in calculations.  Additionally, Date columns can be used as children of a "Days_Between" operation, and Time columns can be used as children of "Seconds_Between", "Minutes_Between", and "Hours_Between" operations.
+
+* Calculation columns cannot be used in other calculations, since this would introduce a variety of complications.  You can get the same effect by repeating the definition of a calculation as part of another one.
+
+* Operations which haven't been given enough (or any) arguments usually return zero.
+
+* If a column is renamed or deleted using the columns editor, any calculations using it are automatically updated accordingly.

@@ -1,0 +1,22 @@
+.. _image_editor:
+
+Image editor
+============
+
+An Image column stores pictures imported from JPEG or PNG image files.  After you select an image file to import into a field in the database, this dialog is shown so you can make minor changes to the copy of the image that will be saved in the database.  The top row contains the following controls:
+
+**Width**
+  The maximum allowed width of the image (in pixels).
+
+**Height**
+  The maximum allowed height of the image (in pixels).
+
+**Rotate**
+  The angle by which to rotate the image (in degrees): 0, 90, 180, or 270.
+
+**Refresh**
+  Apply the currently displayed settings and update the image preview accordingly.
+
+Click "OK"/"Done" to store the image as it is shown, or cancel out of the dialog to leave the field unchanged.
+
+.. note:: Because memory was limited on the Zaurus PDAs for which PortaBase was originally developed, very large pictures will be rejected.  JPEG images larger than 6400 x 4800 pixels cannot be imported, and ones larger than 800 x 600 will be shrunk to at most that size.  Similarly, PNG images larger than 800 x 600 cannot be imported.  These limitations will be removed in a future version of PortaBase, since it is no longer being developed for the Zaurus.

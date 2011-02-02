@@ -1,0 +1,25 @@
+.. _columns_editor:
+
+Columns editor
+==============
+
+Each PortaBase file contains one table of a user-defined format.  The format of this table is determined by a sequence of data columns, each of which has its own name, data type, and default value. When creating a new PortaBase file, this dialog is shown so the data columns can be defined.  The columns of an existing file can also be edited at any time using this dialog by selecting the "Edit Columns" menu item (in the :ref:`data viewer <data_viewer>`, under the "File" menu except on Maemo where the menus are flattened).
+
+The current column definitions are displayed as rows in a list, in the order in which they appear in the :ref:`row editor <row_editor>`.  These column definitions are manipulated using the buttons in the dialog:
+
+**Add**
+  Create a new column definition at the end of the list.  A small dialog is shown which allows you to enter the name, data type, and default value of the new column.  (If you select "(New Enum)" from the type list in this dialog, the :ref:`enum editor <enum_editor>` will be launched to allow you to add one.)  The default value is what will be entered for this column in any already existing data rows, and it will appear in the row editor when adding new rows as well.
+
+**Edit**
+  Edit the currently selected column definition.  Note that the data type cannot be changed.  If the default value is changed, the new default will appear in the row editor when adding new rows; existing rows are unaffected.
+
+**Delete**
+  Delete the currently selected column definition.  All data stored in that column will be lost.
+
+**Up**
+  Move the currently selected column up one position in the list (and hence in the row editor as well).
+
+**Down**
+  Move the currently selected column down one position in the list (and hence in the row editor as well).
+
+None of the changes made to the table format are applied until the "OK" ("Done" on Maemo Fremantle) button is pressed; if the dialog is exited by cancelling instead, the changes are discarded and the file format is left as it was.  If the dialog is cancelled while defining the columns of a new file, the file creation is aborted; otherwise, exiting the dialog takes you to the :ref:`data viewer <data_viewer>`.

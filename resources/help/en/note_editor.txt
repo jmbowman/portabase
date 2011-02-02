@@ -1,0 +1,8 @@
+.. _note_editor:
+
+Note editor
+===========
+
+The "Note" column type is for blocks of text which may contain multiple lines (as opposed to the "String" type, which is better suited for relatively short single lines of text).  The larger size of the content of such columns merits its own (very simple) dialog.  Both in the :ref:`row editor <row_editor>` and in the default value section of the column editor, a Note value is shown as a button containing a note icon and the beginning of the Note's content (as much as will fit).  To see and/or change the full text, press this button; a full-screen text editor dialog will appear, showing the current text of the Note.  Click "OK"/"Done" to accept any changes you have made, or cancel out of the dialog to revert to the original content.
+
+Note columns are treated a little specially in the :ref:`data viewer <data_viewer>` also. The column label for Note columns contains a note icon indicating that it is not just a String column.  The cells in the column each show as much of the Note content as will fit.  If you press on one of these cells and hold for 1/2 second or longer before releasing, a read-only version of the Note editor is shown.  Either click "OK"/"Done" or cancel out of the dialog to return to the data viewer.

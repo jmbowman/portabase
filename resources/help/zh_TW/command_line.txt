@@ -1,0 +1,34 @@
+.. _command_line:
+
+命令列用法
+------------------
+
+PortaBase可以不需藉由圖形介面直接從Linux/Zaurus終端機或DOS模式下來匯入或匯出資料。在你撰寫命令稿以便自動產生、更新、或處理PortaBase資料檔時，這一點特別有用。執行\ ``portabase -h``\ 可得到用法說明; 總之，你可以達成下列功能：
+
+:samp:`portabase {file}`
+  啟動 PortaBase並立即打開名為資料檔。
+
+:samp:`portabase fromxml {xmlfile pobfile}`
+  由名為\ *xmlfile*\ 符合PortaBase XML格式的檔案，匯入資料成一個名為\ *pobfile*\ 的新PortaBase資料檔。
+
+:samp:`portabase fromcsv {csvfile pobfile}`
+  由名為\ *csvfile*\ 的CSV檔匯入資料，新增至名為\ *pobfile*\ 的PortaBase資料檔。
+
+:samp:`portabase frommobiledb {mdbfile pobfile}`
+  由名為\ *mdbfile*\ 的MobileDB檔案，匯入資料成一個名為\ *pobfile*\ 的新PortaBase資料檔。
+
+:samp:`portabase toxml {pobfile xmlfile}`
+  由名為\ *pobfile*\ 的PortaBase資料檔，將資料匯出成一個名為\ *xmlfile*\ 的新XML檔。
+
+:samp:`portabase tocsv {pobfile csvfile}`
+  由名為\ *pobfile*\ 的PortaBase資料檔，將資料匯出成一個名為\ *csvfile*\ 的新CSV檔。
+
+要產生加密檔或從中取出資料或新增資料列時，緊接在轉換的命令後輸入\ :samp:`-p {密碼}`\ (在下面所述的選項之前)。
+
+下列選項可用於欲匯出的PortaBase檔案與目的檔\ ``toxml``\ 或\ ``tocsv``\ 之間：
+
+-v <景觀名稱>      匯出前先套用指定的景觀
+-s <排序方式名稱>  匯出前先套用指定的排序方式
+-f <篩選名稱>      匯出前先套用指定的篩選
+
+有關PortaBase的XML格式與相關的工具(比如轉換至HTML)的詳細資訊，請見PortaBase首頁(http://portabase.sourceforge.net)。

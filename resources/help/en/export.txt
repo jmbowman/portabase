@@ -1,0 +1,14 @@
+.. _export:
+
+Data export
+===========
+
+PortaBase currently supports export to three formats: CSV, HTML, and XML.  The inverse of data import, this allows you to move database content into a spreadsheet, text editor, other database program, etc. for further manipulation.  To export the current database's contents:
+
+1. Select "Export" from the "File" menu in the data viewer.
+
+2. Choose the format you want to export to from the droplist.  If you export to CSV or HTML, only the rows passing the current filter will be exported.  Additionally, when exporting to HTML only the columns included in the current view will be exported.  If you export to XML, the entire database structure (including column definitions, views, filters, etc.) will be exported; note that the result may be over twice the size of the actual data file, so make sure you have enough free storage space.
+
+3. Enter the name of the CSV, HTML, or XML file you wish to create.
+
+4. Click "OK"/"Done" to complete the export, or cancel out of the dialog to abort the operation.

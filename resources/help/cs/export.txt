@@ -1,0 +1,14 @@
+.. _export:
+
+Export dat
+==========
+
+PortaBase podporuje export do dvou formátů: CSV a XML. Na rozdíl od importu dat exportní funkce umožňuje přenést obsah databáze do tabulkového či textového editoru nebo jiné databázové aplikace k dalšímu zpracování. Chcete-li provést export databázového obsahu:
+
+1. Vyberte v Prohlížeči dat z menu "Soubor" volbu "Exportovat...".
+
+2. Zvolte z rozbalovacího menu formát do kterého chcete exportovat. Provádíte-li export do CSV, budou vyexportovány pouze záznamy vyhovující právě použitému filtru. Provádíte-li export do XML, bude vyexportována úplná databázová struktura (včetně definic sloupců, náhledů, filtrů atd.). Zkontrolujte však, máte-li dostatek místa pro uložení výsledku exportu, který může přesáhnout dvojnásobek velikosti původního datového souboru.
+
+3. Zadejte jméno souboru CSV nebo XML, který chcete vytvořit.
+
+4. Klepnutím na "OK" dokončíte export, klepnutím na "Zrušit" či křížek pro uzavření dialogu operaci zrušíte.

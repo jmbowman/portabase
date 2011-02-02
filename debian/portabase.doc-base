@@ -5,5 +5,5 @@ Abstract: This document describes what PortaBase is, and how it can be used.
 Section: Data Management
 
 Format: HTML
-Index: /usr/share/doc/portabase/html/PortaBase.html
-Files: /usr/share/doc/portabase/html/*.html
+Index: /usr/share/doc/portabase/help/en/index.html
+Files: /usr/share/doc/portabase/help/en/*

@@ -1,0 +1,8 @@
+.. _filter_editor:
+
+Editor filtrů
+=============
+
+Tento dialog umožňuje vytvářet filtry pro výběr záznamů, které budou zobrazeny v Prohlížeči dat. Filtr může být definován jednoduše, např. "Počet = 1" nebo i složitěji, např. "Jakýkoli sloupec obsahuje 'java', kapitoly > 10, stránky <= 400 a současně je skladem". Vyberete-li z menu "Filtr" některý filtr, Prohlížeč dat zobrazí jen záznamy, které vyhovující podmínkám použitého filtru.
+
+V horní části dialogu se nalézá textové pole se jménem filtru; změnou tohoto údaje lze vybraný filtr přejmenovat. Pod polem se jménem filtru se nachází přehled podmínek tvořících filtr; aby záznam filtru vyhověl, musí splňovat každou z těchto podmínek. Tlačítka "Přidat", "Editovat", "Smazat", "Posunout nahoru"  a "Posunout dolů" umožňují provádět úpravy v přehledu podmínek podobně jako u Editoru sloupců. Dialog Editoru podmínek lze vyvolat tlačítky "Přidat" a "Editovat". Tento dialog umožňuje výběr sloupce, jehož hodnoty mají být porovnány, operace, kterou chcete pro porovnávání použít a konstanty, se kterou chcete porovnávat. Při porovnávání textu je rovněž možné zaškrtnutím volby "Rozlišovat VELKÁ/malá písmena" rozlišovat mezi velkými a malými písmeny. Krom porovnání s hodnotami v jediném sloupci lze výběrem možnosti "Jakýkoli sloupec" porovnávat s hodnotami ve všech sloupcích, které obsahují textové řetězce; pokud hodnota v některém sloupci s textovými řetězci nebo sloupci typu Poznámka vyhovuje podmínce, je záznam považován za vyhovující. Klepnutím na "OK" potvrdíte právě zobrazené nastavení, stiskem "Zrušit" či křížkem pro uzavření dialogu se vrátíte k dřívějšímu nastavení (nebo zrušíte přidání nového filtru).

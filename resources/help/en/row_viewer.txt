@@ -1,0 +1,18 @@
+.. _row_viewer:
+
+Row viewer
+==========
+
+The row viewer is a dialog designed to conveniently see all of the data for one row at a time.  Like the row editor, it has the column labels on the left and values on the right.  But the values are not editable, and they wrap so you don't have to scroll horizontally to see everything.  The complete content of note fields is shown as well, instead of just the first few words.  By default, only the columns in the current view are shown (in the view-specified order); to see a different set of columns, select the appropriate view from the droplist at the bottom of the dialog.  Pressing the left and right arrows at the bottom of the screen or the left and right arrow keys allows you to navigate between rows in the current view.  There are a few other buttons buttons at the bottom of the dialog:
+
+**Edit**
+  Launch the :ref:`row editor <row_editor>` for the current row; if you click "OK"/"Done" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer.
+
+**Copy Row**
+  Launch the row editor with a copy of the current row; if you click "OK"/"Done" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer.
+
+**Delete**
+  Delete the shown row.
+
+**Copy Text**
+  Copy the currently selected text (if any) to the clipboard. (Not shown in Maemo because dragging motions scroll the display rather than selecting text; copy text from the row editor instead.)

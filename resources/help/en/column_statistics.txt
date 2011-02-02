@@ -1,0 +1,6 @@
+.. _column_statistics:
+
+Column statistics dialog
+========================
+
+The column statistics dialog, launched from the file properties dialog or by long-pressing a column header, shows summary statistics about the data in a column.  Only data in rows that pass the current filter is included in the calculations.  If it was launched from the file properties dialog, a droplist at the top of the dialog allows you to select which column to view statistics for; only columns in the current view are listed.  At the bottom of the dialog is a widget which allows you to edit the display width (in pixels) of that column in the current view.  If you close the dialog by clicking "OK"/"Done", any changes you made to the column widths will be applied.

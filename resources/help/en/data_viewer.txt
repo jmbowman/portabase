@@ -1,0 +1,198 @@
+.. _data_viewer:
+
+Data viewer
+===========
+
+This is the main screen of the application, where you can browse the database's content and launch most of the other dialogs.  The contents of this screen are:
+
+.. contents::
+   :local:
+   :backlinks: none
+
+.. _navigation:
+
+Row display and navigation
+--------------------------
+
+Most of the data viewer screen is occupied by a table showing one view of a set of rows in the database.  You can scroll through the entire list of rows passing the current filter; performance stays good because only the data for the rows currently shown in the display is loaded.  Clicking on a row normally launches the :ref:`row viewer <row_viewer>` dialog; if you disabled this in the :ref:`preferences dialog <preferences>`, you can stil launch it by pressing enter/return, space, or Control-R (Command-R on the Mac) while a row is selected.
+
+Clicking on a cell in the data display and holding down for 1/2 second or longer before releasing executes special functions.  If you do this on a cell in a Note column, the :ref:`note viewer <note_editor>` is displayed showing the content of that note.  When done on a cell in an Image column, the image contained in that cell is shown in the :ref:`image viewer <image_viewer>`.  If you do it in any other type of column, the :ref:`row editor <row_editor>` for the row you clicked on is launched.
+
+If you selected in the :ref:`preferences dialog <preferences>` to use a paginated display, there is an additional row of controls at the bottom of the screen.  The spin box at the bottom left specifies the maximum number of rows to display at once for the current view; you can edit this to be any positive integer (setting it low enough eliminates the scrollbar on the right of the display table, giving a little more horizontal space; note that Maemo Fremantle has no such scrollbar).  To the right of this "rows per page" box are the page navigation buttons.  Click on one of the numbered buttons to go to that page of rows; the button for the current page is shown pressed.  Click on the arrow buttons at the ends to show the page buttons for the next or previous five pages.
+
+.. _column_labels:
+
+Column labels
+-------------
+
+The row of column labels has several features in addition to informing you of the column names. To change the widths of the columns in the current view, click on the border between two column labels (or the right edge of the last column) and drag it to the desired location.  Clicking on a column label sorts all the rows passing the current filter by the content of that column in ascending order; clicking it again sorts in descending order.  If you press a column label and hold it for 1/2 second or more before releasing, the :ref:`column statistics dialog <column_statistics>` is shown.
+
+.. _file_menu:
+
+File menu
+---------
+
+The "File" menu (the main menu on Maemo) contains options that apply to the database file as a whole.  These are:
+
+**Save**
+  Save any changes that have been made since the file was opened or last saved.  If you exit PortaBase without saving the most recent changes, those changes will be lost (a dialog will warn you if this is about to happen).  This option is disabled if no changes have been made since the current database was opened or last saved. (Not shown in Maemo, use the toolbar button instead.)
+
+**Change Password**
+  Launch a dialog which allows you to change the data file's password (only shown for :ref:`encrypted files <encryption>`).
+
+**Import**
+  :ref:`Import <import>` rows from a CSV file.
+
+**Export**
+  :ref:`Export <export>` the current database content to a CSV, HTML, or XML file.
+
+**Delete Rows In Filter**
+  Deletes all rows which are included by the filter currently in use.
+
+**Edit Columns**
+  Launch the :ref:`columns editor <columns_editor>`.
+
+**Edit Enums**
+  Launch the :ref:`enum manager <enum_manager>`.
+
+**Slideshow**
+  Launch a dialog from which you can start a timed slideshow of images from an Image column in the current view.  Only images in rows passing the current filter are shown, and the sequence is the current sorting.
+
+**Properties**
+  Launch a dialog which displays basic statistics about the current file (such as its size, row count, column count, etc.).  The :ref:`column statistics dialog <column_statistics>` can also be launched from this dialog.
+
+**Print Preview**
+  Launch the print preview dialog in order to see what the output of printing the current data selection would look like.  You can also set from here certain properties of the output, such as paper size and zoom factor.  (Not shown in Maemo, which has no printing support.)
+
+**Print**
+  Launch the print dialog in order to print the data in the current view and filter in the current sorting order.  Note that you may wish to modify some settings with the print preview dialog first.  (Not shown in Maemo, which has no printing support.)
+
+**Preferences**
+  Launch the :ref:`preferences dialog <preferences>`.
+
+**Close**
+  Close the current file; if there are unsaved changes, you will be asked if you want to save them.  (Not shown in Maemo, use the close button at the top right of the screen instead; you may need to exit fullscreen mode first.)
+
+.. _row_menu:
+
+Row menu (not on Maemo)
+-----------------------
+
+The "Row" menu contains actions that apply to individual rows of data.  These are:
+
+**Add**
+  Add a new row of data (by launching the :ref:`row editor <row_editor>`).
+
+**Edit**
+  Edit the currently selected row of data (again using the row editor).
+
+**Delete**
+  Delete the currently selected row of data.
+
+**Copy**
+  Add a new row of data, but the row editor is pre-filled with the data in the currently selected row instead of the default values.
+
+**Show**
+  Show the currently selected row in the :ref:`row viewer <row_viewer>`.
+
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available through the toolbar and :ref:`row viewer <row_viewer>` buttons.
+
+.. _view_menu:
+
+View menu (not on Maemo)
+------------------------
+
+The "View" menu allows you to select and manage views.  The top section of this menu has three options:
+
+**Add**
+  Add a new view to the database file.  Choosing this option launches the :ref:`view editor <view_editor>` with no name specified and none of the columns checked.
+
+**Edit**
+  Edit the currently displayed view.  Choosing this option launches the view editor with the current view's name and column sequence.  The "All Columns" view cannot be edited.
+
+**Delete**
+  Delete the currently displayed view and switch to the "All Columns" view.  The "All Columns" view cannot be deleted.
+
+Below these items in the menu is a list of all the views defined for the current database, with a check next to the one currently displayed.  To switch to a different view, simply select the one you want to see from the menu.
+
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available in the :ref:`views dialog <vsf_dialogs>` launched from the toolbar.
+
+.. _sort_menu:
+
+Sort menu (not on Maemo)
+------------------------
+
+The "Sort" menu allows you to select and manage sorting configurations.  The top section of this menu has three options:
+
+**Add**
+  Add a new sorting to the database file.  Choosing this option launches the :ref:`sorting editor <sorting_editor>` with no name specified and none of the columns checked.
+
+**Edit**
+  Edit the currently used sorting (only available if a named sorting is in use).  Choosing this option launches the sorting editor with the current sorting's name and settings.
+
+**Delete**
+  Delete the currently used sorting (only available if a named sorting is in use).
+
+Below these items in the menu is a list of all the sortings defined for the current database, with a check next to the one currently in use (if any).  To change the way the rows are sorted, simply select the sorting configuration you want to use from the menu.  If you just want to sort by a single column that is displayed in the current view, it is probably faster to use the "click on a column label to sort" feature instead.
+
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available in the :ref:`sortings dialog <vsf_dialogs>` launched from the toolbar.
+
+.. _filter_menu:
+
+Filter menu (not on Maemo)
+--------------------------
+
+The "Filter" menu contains options that let you choose which rows of data to display.  The top section of this menu has four options:
+
+**Quick Filter**
+  Lets you quickly define and use a temporary one-condition filter.  To see all rows again (or use another defined filter), choose the appropriate filter from the lower part of this menu.
+
+**Add**
+  Define a new data filter; this launches the :ref:`filter editor <filter_editor>` with no name and no conditions defined.
+
+**Edit**
+  Edit the currently selected data filter (again using the filter editor).  The "All Rows" filter cannot be edited.
+
+**Delete**
+  Delete the currently selected data filter.  The "All Rows" filter cannot be deleted.
+
+Below these items in the menu is a list of all the filters defined for the current database, with a check next to the one currently in use (if any).  To select a different filter, simply select the one you want to use from the menu.
+
+In order to conserve screen space, Maemo does not include this menu; equivalent functionality is available in the :ref:`filters dialog <vsf_dialogs>` launched from the toolbar.
+
+.. _toolbar:
+
+Toolbar buttons
+---------------
+
+There is a toolbar of buttons that provide quick access to commonly used operations.  These are:
+
+**Save**
+  Same as "Save" in the :ref:`File menu <file_menu>`.
+
+**Add**
+  Same as "Add" in the :ref:`Row menu <row_menu>`.
+
+**Edit**
+  Same as "Edit" in the :ref:`Row menu <row_menu>`. (Not on Maemo)
+
+**Copy**
+  Same as "Copy" in the :ref:`Row menu <row_menu>`. (Not on Maemo)
+
+**Delete**
+  Same as "Delete" in the :ref:`Row menu <row_menu>`. (Not on Maemo)
+
+**Views**
+  Launch the :ref:`views dialog <vsf_dialogs>`.
+
+**Sortings**
+  Launch the :ref:`sortings dialog <vsf_dialogs>`.
+
+**Filters**
+  Launch the :ref:`filters dialog <vsf_dialogs>`.
+
+**Quick Filter**
+  Same as "Quick Filter" in the :ref:`Filter menu <filter_menu>`.
+
+**Fullscreen**
+  Click this toolbar button to switch PortaBase to fullscreen mode or back to normal display mode.

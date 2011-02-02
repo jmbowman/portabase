@@ -1,0 +1,18 @@
+.. _row_editor:
+
+Row editor
+==========
+
+The row editor is shown whenever a row of data is added or edited.  It has one row for each column in the database; on the left is the name of the column, and on the right is its current value.  When adding a new row of data, the default values are shown; when editing an existing row of data, the current values are shown.  Some comments about editing certain data types:
+
+* String fields may contain multiple lines of text; press enter/return to add a line to the entry field.
+
+* To edit the value of a date field, click the button to the left of the current value display; this launches a calendar widget which allows you to select a new date.
+
+* To the right of each integer and decimal entry field is a button which launches a simple calculator you can use as a keypad or to calculate the number to be entered; clicking "OK"/"Done" puts the current value into the entry field.
+
+* The current value of each calculation column is shown.  To update the displayed value after changing the value of other columns in the row that the calculation uses, click the "Update" button to the right of the displayed value.  You don't need to do this before adding or saving the row, it is just for convenience.
+
+* For Image fields which have not yet been filled, the "Select an image" button lets you choose an image file to use.  For Image fields which already have content, three buttons are shown: "View" (launch a dialog showing the current image), "Change" (replace the current image with a diferent one), and "Delete" (reset the field back to being empty).  Both the "Select an Image" and "Change" buttons launch a file selection dialog, followed by the :ref:`image editor <image_editor>` dialog.
+
+After editing the values as desired, click "OK"/"Done" to accept the currently displayed values, or cancel out of the dialog to abort the row addition (if adding a row) or leave the current values unchanged (if editing a row).

@@ -1,0 +1,27 @@
+.. _file_selector:
+
+File selector
+=============
+
+Unless the program was launched by clicking on a PortaBase file, the first screen shown will be the file selector.  You may choose one of the following options from the "File" menu, toolbar, or main display buttons:
+
+**New**
+  Create a new file (possibly :ref:`encrypted <encryption>`)
+
+**Open**
+  Open a dialog to select a file to open
+
+**Open Recent/Recently opened files**
+  A list of recently opened files; click on one to open that file.
+
+**Import**
+  Create a new file (possibly :ref:`encrypted <encryption>`) from the data in an XML or MobileDB file.  You will be prompted for the type of file to import, the file to import, then a name for the new file to create.  See the PortaBase home page for more information about the XML format used.
+
+**Preferences**
+  Launch the :ref:`preferences dialog <preferences>`.
+
+**Fullscreen**
+  Click this toolbar button to switch PortaBase to fullscreen mode or back to normal display mode.
+
+**Quit**
+  Close PortaBase.

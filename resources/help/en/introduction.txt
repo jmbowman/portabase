@@ -1,0 +1,44 @@
+.. _introduction:
+
+Introduction
+============
+
+PortaBase is a small database program for creating, browsing, and editing custom tables of data.  Typical uses are media inventories, reference charts, TODO lists, shopping lists, etc.  Notable features include:
+
+* String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time, Calculation, Sequence, Image, and Enum column types
+
+* Custom data views (subsets of the columns in any order)
+
+* Filter the displayed rows using sets of conditions
+
+* Sort the rows by any combination of columns, each in ascending or descending order
+
+* Good performance even when browsing large tables; the display only loads data as needed
+
+* Optional page navigation buttons, with custom number of rows per page
+
+* Add, delete, rearrange, and rename columns at any time
+
+* Specify default values for columns
+
+* View summary statistics for columns (total, average, min, max, etc.)
+
+* Import data from CSV, XML, and MobileDB files
+
+* Export data to CSV, HTML, and XML files
+
+* Command-line format conversions (to and from XML, to and from CSV, from MobileDB, to HTML)
+
+* Print the data grid with view, sorting, and filter applied (not supported on Maemo)
+
+* Fullscreen mode option
+
+* Optional data file encryption
+
+* Unicode support
+
+* Pick any available font to use throughout the application (not supported on Mac OS X)
+
+* User-specified alternating row background colors (Maemo Fremantle uses colors from the system theme instead)
+
+* Simple calculator widget for entering numeric data

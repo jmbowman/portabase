@@ -1,0 +1,6 @@
+.. _image_viewer:
+
+Image viewer
+============
+
+The image viewer is a simple dialog that displays the image contained in one field of an Image column.  If launched from the :ref:`data viewer <data_viewer>`, the left arrow key shows the image in the same column from the previous row in the current filter; similarly, the right arrow key shows the image from the next row.  Double-clicking on the image shows it in fullscreen mode; click on the fullscreen image again to close the viewer.  When viewing a fullscreen image (including slideshows) on Maemo Fremantle, the image will auto-rotate to match the current orientation of the device.

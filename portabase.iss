@@ -3,14 +3,14 @@
 
 [Setup]
 AppName=PortaBase
-AppVerName=PortaBase 2.0
+AppVerName=PortaBase 2.1
 AppPublisher=Jeremy Bowman
 AppPublisherURL=http://portabase.sourceforge.net
 AppSupportURL=http://portabase.sourceforge.net
 AppUpdatesURL=http://portabase.sourceforge.net
 AppReadmeFile=README.txt
-AppVersion=2.0
-AppCopyright=Copyright (C) 2002-2010 Jeremy Bowman
+AppVersion=2.1
+AppCopyright=Copyright (C) 2002-2011 Jeremy Bowman
 DefaultDirName={pf}\PortaBase
 DefaultGroupName=PortaBase
 AllowNoIcons=yes
@@ -19,7 +19,7 @@ ChangesAssociations=yes
 LicenseFile=COPYING
 PrivilegesRequired=admin
 SolidCompression=yes
-OutputBaseFilename=PortaBase_2.0
+OutputBaseFilename=PortaBase_2.1
 OutputDir=build\windows
 VersionInfoVersion=2.0.0.3
 ShowLanguageDialog=yes
@@ -39,6 +39,11 @@ Source: "build\windows\QtGui4.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\windows\QtXml4.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\windows\accessible\qtaccessiblewidgets4.dll"; DestDir: "{app}\accessible"; Flags: ignoreversion
 Source: "build\windows\imageformats\qjpeg4.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "resources\help\_static\*"; DestDir: "{app}\help\_static"; Flags: ignoreversion
+Source: "resources\help\cs\_build\html\*"; DestDir: "{app}\help\cs"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\en\_build\html\*"; DestDir: "{app}\help\en"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\ja\_build\html\*"; DestDir: "{app}\help\ja"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\zh_TW\_build\html\*"; DestDir: "{app}\help\zh_TW"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Languages]

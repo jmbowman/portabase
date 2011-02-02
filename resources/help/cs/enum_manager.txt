@@ -1,0 +1,25 @@
+.. _enum_manager:
+
+Správce seznamů
+===============
+
+PortaBase podporuje používání uživatelského seznamu jako jednoho z typů datového sloupce,  který pracuje pouze s hodnotami z definovaného seznamu. Dialog Správce seznamů Vám umožní přidávat, editovat a mazat uživatelské seznamy a měnit jejich pořadí.
+
+Podstatná část dialogu je vyhrazena přehledu již existujících uživatelských seznamů. V dolní části dialogu je řada tlačítek identických jako u :ref:`Editoru sloupců <columns_editor>`\ :
+
+**Přidat**
+  Spustí :ref:`Editor seznamů <enum_editor>`\ , který umožní vytvořit nový uživatelský seznam. Nový seznam je přidán do přehledu už po potvrzení "OK" v dialogu Editoru seznamů, nikoli až ve Správci seznamů.
+  
+**Editovat**
+  Spustí Editor seznamů s otevřeným vybraným uživatelským seznamem. Stejně jako při přidávání nového seznamu jsou i změny při editaci stávajícího seznamu provedeny už po potvrzení "OK" v dialogu Editoru seznamů.
+  
+**Smazat**
+  Smaže vybraný uživatelský seznam. Je-li tento seznam použit v některých datových sloupcích daného souboru, aplikace PortaBase upozorní uživatele na skutečnost, že smazáním vybraného uživatelského seznamu budou smazány také tyto sloupce. Vybraný uživatelský seznam (stejně tak i asociované sloupce) bude smazán ihned, nikoli až po potvrzení "OK".
+  
+**Posunout nahoru**
+  Posune vybraný seznam v přehledu Správce seznamů o jednu pozici výše (a současně také v Editoru seznamů).
+  
+**Posunout dolů**
+  Posune vybraný seznam v přehledu Správce seznamů o jednu pozici níž (a současně také v Editoru seznamů).
+
+Volbou "OK" potvrdíte změny řazení v přehledu seznamů, volbou "Zrušit" či křížku pro uzavření dialogu ponecháte původní řazení (netýká se přidaných ani smazaných seznamů).

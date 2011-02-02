@@ -1,0 +1,34 @@
+.. _enum_editor:
+
+Enum editor
+===========
+
+This dialog lets you define the name and list of options for an enum column type.  It has a list of the enum's options and the same set of buttons as most of the other editor dialogs:
+
+**Add**
+  Add a new option; a dialog will appear for you to enter the option text into.
+
+**Edit**
+  Change the text of an existing enum option.  All existing uses of this option will be updated to the new text.
+
+**Delete**
+  Delete the currently selected option.  A dialog will ask you to pick the value to use wherever this option was being used.
+
+**Up**
+  Move the currently selected option up one position in the list (and hence in the selection droplist as well).
+
+**Down**
+  Move the currently selected option down one position in the list (and hence in the selection droplist as well).
+
+Just below the enum name are more buttons which allow you to change the list of options:
+
+**Sort**
+  Sort the options in alphabetical order.  Click the button again to reverse the sorting order.
+
+**Import**
+  Add options from a text file; this file should have each option on a separate line.  Options in the file which are already in the enum will not be duplicated.
+
+**Export**
+  Create a text file listing the current enum options, one on each line.
+
+Click "OK"/"Done" to accept any changes that were made or cancel out of the dialog to leave the options unchanged (or cancel adding a new enum).

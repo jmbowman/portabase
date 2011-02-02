@@ -54,11 +54,15 @@ PortaBase's features include:
 .PP
 \- Import data from CSV, XML, and MobileDB files
 .PP
-\- Export data to CSV and XML files
+\- Export data to CSV, HTML, and XML files
 .PP
-\- Command\-line format conversions (to and from XML, from MobileDB)
+\- Command\-line format conversions (to and from XML, from MobileDB, to HTML)
 .PP
-\- Data file encryption
+\- Print the data grid with view, sorting, and filter applied
+.PP
+\- Fullscreen mode option
+.PP
+\- Optional data file encryption
 .PP
 \- Unicode support
 .PP
@@ -81,6 +85,9 @@ Create a new XML file from the input PortaBase file.
 .TP
 \fBtocsv\fP
 Create a new CSV file from the input PortaBase file.
+.TP
+\fBtohtml\fP
+Create a new HTML file from the input PortaBase file.
 .PP
 If an encrypted PortaBase file is to be read or created, the following
 option can be used immediately after the command:
@@ -88,7 +95,7 @@ option can be used immediately after the command:
 \fB\-p\fP \fI<password>\fP
 Open or create the encrypted PortaBase file using the given password
 .PP
-The toxml and tocsv commands accept the following options:
+The toxml, tocsv, and tohtml commands accept the following options:
 .TP
 \fB\-v\fP \fI<view>\fP
 Apply the named view before exporting.

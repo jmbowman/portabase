@@ -1,5 +1,11 @@
 #!/bin/sh
 
+KEEP_HELP="no"
+if [ "$1" = "--keep-help" ]; then
+    KEEP_HELP="yes"
+    shift
+fi
+
 DEST=$1
 
 rm -rf $DEST
@@ -9,6 +15,7 @@ cp *.cpp $DEST
 cp CHANGES $DEST
 cp COPYING $DEST
 cp Doxyfile $DEST
+cp Doxyfile_Metakit $DEST
 cp INSTALL $DEST
 cp README.txt $DEST
 cp metakit-2.4.9.7.patch $DEST
@@ -25,3 +32,10 @@ cp -R metakit $DEST
 cp -R qqutil $DEST
 cp -R packaging $DEST
 cp -R resources $DEST
+if [ "$KEEP_HELP" = "no" ]; then
+    rm -rf $DEST/resources/help/_static
+    rm -rf $DEST/resources/help/cs/_build
+    rm -rf $DEST/resources/help/en/_build
+    rm -rf $DEST/resources/help/ja/_build
+    rm -rf $DEST/resources/help/zh_TW/_build
+fi

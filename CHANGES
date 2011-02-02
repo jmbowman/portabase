@@ -1,3 +1,10 @@
+2011-02-02  JMB  Improved help pages, updated man page
+
+    Changed the help content from a monolithic HTML page in a modal dialog
+    to an easily-navigated set of smaller pages with search functionality,
+    launched in the system's default browser.  Updated the man page to include
+    HTML export capability.
+
 2011-01-16  JMB  Faster "delete rows in filter", organized copyright info
 
     Improved the speed of deleting all rows in the current filter.  Updated

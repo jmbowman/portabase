@@ -1,0 +1,8 @@
+.. _view_editor:
+
+Editor náhledů
+==============
+
+Kdykoli prohlížíte obsah databáze v :ref:`Prohlížeči dat <data_viewer>`\ , používáte k jejich zobrazení určitý "náhled". Náhled je podmnožinou sloupců z databáze, které jsou zobrazeny v konkrétním pořadí a šířkách. Každá databáze má jako výchozí náhled "Všechny sloupce" kdy jsou zobrazeny všechny sloupce databáze ve stejném pořadí, které používá :ref:`Editor záznamů <row_editor>`\ .
+
+Náhledy jsou definovány pomocí dialogu Editor náhledů. V horní části dialogu nalezneme pole se jménem náhledu - změnou tohoto údaje lze přejmenovat vybraný náhled. Následují rozbalovací nabídky umožňují výběr pořadí a/nebo filtru, které budou použity pokaždé, přepnete-li na daný náhled; výběrem volby "Není" ponecháte stávající pořadí či filtr beze změny (čímž se vyhnete opakovaným výběrům náhledu, pořadí a filtru při častém používání určité kombinace těchto kritérií). Níže je tabulka zobrazující jména všech sloupců databáze s zaškrtávacím polem u každého z nich, které označuje, zda sloupec bude v daném náhledu zahrnut či nikoli. Klepnutím na zaškrtávací pole lze příslušný sloupec zařadit či vyřadit. V dolní části dialogu nalezneme tlačítka "Posunout nahoru"; a "Posunout dolů", která slouží k posunu vybraného sloupce v tabulce, čímž dojde ke změně v řazení sloupců při použití daného náhledu. Klepnutím na "OK" potvrdíte právě zobrazené nastavení, klepnutím na "Zrušit" či křížek pro uzavření dialogu se vrátíte k předešlým hodnotám (nebo zrušíte vytvoření nového náhledu).

@@ -1,0 +1,75 @@
+.. _preferences:
+
+Preferences dialog
+==================
+
+This dialog allows you to set your preferences for the PortaBase application.  Click "OK"/"Done" to accept the current preferences on all tabs, or cancel out of the dialog to leave them unchanged.  The tabs are:
+
+.. contents::
+   :local:
+   :backlinks: none
+
+.. note:: Maemo Fremantle doesn't use tabs in this dialog; all preferences are shown in a scrollable list.
+
+.. _general_prefs:
+
+General
+-------
+
+The "General" tab contains the following options:
+
+**Confirm deletions**
+  Check this to show a confirmation dialog whenever you attempt to delete a row, view, sorting, or filter.  This makes it less likely that you will accidentally delete something when you meant to click on something else.
+
+**Allow checkbox edit in data viewer**
+  Check this to allow toggling of boolean values shown in the :ref:`data viewer <data_viewer>` by clicking on the appropriate cell.  This makes it more convenient to use PortaBase as a todo list or such, but also makes it easier to accidentally change a data value.
+
+**View rows with a single click**
+  By default, a single click in the data viewer opens the selected row in the :ref:`row viewer <row_viewer>`.  Unchecking this option allows rows to be selected without immediately launching a dialog.
+
+**Use small-screen settings on this device**
+  When checked, PortaBase uses default values for certain settings (such as column width, rows per page, etc.) which are more appropriate for small displays.  This can usually be guessed based on the operating system in use, but some netbooks and MIDs running PC operating systems might be better off with the small-screen settings.
+
+**Auto-rotate to match device orientation** (Maemo Fremantle only)
+  When checked, the application will automatically switch between landscape and portrait display, depending on the current orientation of the device.
+
+**Use pages in data viewer**
+  Check this to show the navigation bar at the bottom of the data viewer which allows you to specify the number of rows per page and navigate between pages.  If unchecked, the navigation bar is hidden and all rows which pass the current filter will be shown in one scrollable list.
+
+**Default rows per page**
+  The default value to use for the maximum number of rows displayed on one page when creating new databases.
+
+**Wrap Notes**
+  Checking this enables automatic wrapping of text in the Note editor/viewer, avoiding the need to manually enter linebreaks.  By default it wraps only at whitespace, but you can change the droplist value to force wrapping at the end of lines whether spaces are present or not.  (This is particularly useful for languages like Japanese which tend not to use spaces.)
+
+.. _date_time_prefs:
+
+Date and Time
+-------------
+
+The "Date and Time" tab contains the following options:
+
+**Date format**
+  The type of formatting to use for date values in the data viewer, row viewer, etc.
+
+**Time format**
+  Whether 24 hour times or 12 hour (AM/PM) times should be shown.
+
+**Weeks start on**
+  The first day of the week; this affects the appearance of the date entry dialog.
+
+**Show Seconds for times**
+  This lets you choose whether or not to display the number of seconds for time columns in the data viewer, row viewer, etc.
+
+.. _appearance_prefs:
+
+Appearance
+----------
+
+In the "Font" section of the Appearance tab you can pick any font that is available for use, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may use this if the default font doesn't support unicode characters (rare on modern systems) or to fit more text on the screen.  (This option isn't available on Mac OS X, which doesn't seem to like applications using non-standard fonts for the UI.)
+
+The "Row Colors" section contains two buttons which allow you to choose the colors which will be used for the backgrounds of rows in the data viewer, columns editor, view editor, and sorting editor.  Each button shows one of the current colors; clicking on one launches a color selection dialog in which you can pick a different color to use.
+
+.. note:: This option isn't available on Maemo Fremantle, where the palette is controlled by the system theme.  Instead, there is an option to either use the alternating row color from the theme or make all rows the same color; some themes don't have an appropriate color set for this.
+
+The "Clear the recent files list" button clears the history of recently created and opened files, so that none will be listed on the :ref:`file selection screen <file_selector>`.  Files opened later will be added to the list as normal.

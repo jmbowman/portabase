@@ -1,0 +1,21 @@
+.. _vsf_dialogs:
+
+Views, sortings, and filters dialogs
+====================================
+
+There are three buttons on the toolbar for launching dialogs to select and manage views, sortings, and filters.  These three dialogs are very similar, differing only in the type of item being managed.  Each one has the following components:
+
+**Current View/Sorting/Filter**
+  The name of the currently selected item.  If this is one of the pre-defined items such as "All Columns", "Selected Column", "All Rows", or "Quick Filter", the edit and delete buttons are disabled.
+
+**Edit**
+  This button, to the right of the selected item name, launches the :ref:`view editor <view_editor>`, :ref:`sorting editor <sorting_editor>`, or :ref:`filter editor <filter_editor>` to modify the currently selected item.  If the edit dialog is accepted, the changes will be immediately applied and you will be returned to the :ref:`data viewer <data_viewer>`.
+
+**Delete**
+  This button, to the right of the edit button, deletes the curently selected item.  You will be returned to the data viewer with the default item of that type selected and applied (there is no default sorting, so after deleting a sorting the rows will not be sorted).
+
+**New View/Sorting/Filter**
+  This button, below the name of the currently selected item, launches the view editor, sorting editor, or filter editor in order to create a new item of the appropriate type.  If such an item is created, it will be set as current and you will be returned to the data viewer.
+
+**Views/Sortings/Filters list**
+  Below the "New..." button is a list of the existing items of the appropriate type.  Clicking on one of these will apply it and return you to the data viewer.  If you wish to edit or delete the item, you can then launch this dialog again to do so.
