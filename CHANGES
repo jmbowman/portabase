@@ -1,3 +1,8 @@
+2012-02-04  JMB  Fixed condition editor operators for sequence fields
+
+    Fixed a bug where the condition editor used the list of string-type
+    operators for sequence fields rather than the numeric ones.
+
 2011-02-02  JMB  Improved help pages, updated man page
 
     Changed the help content from a monolithic HTML page in a modal dialog

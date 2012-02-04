@@ -322,7 +322,7 @@ void ConditionEditor::updateOpList()
     }
     opList->setEnabled(true);
     if (dataType == INTEGER || dataType == FLOAT || dataType == DATE
-            || dataType == TIME || dataType == CALC
+            || dataType == TIME || dataType == CALC || dataType == SEQUENCE
             || dataType >= FIRST_ENUM) {
         opList->addItems(numberOpList);
     }
