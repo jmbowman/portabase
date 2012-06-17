@@ -1,3 +1,8 @@
+2012-06-17  JMB  Updated .desktop file for Linux packaging
+
+    Removed the deprecated "Encoding" key to comply with the current
+    specification.
+
 2012-02-04  JMB  Fixed condition editor operators for sequence fields
 
     Fixed a bug where the condition editor used the list of string-type
