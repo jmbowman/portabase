@@ -54,6 +54,10 @@
      <file alias="i18n/PortaBase.qm">translations/portabase_ja.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_ja.qm</file>
  </qresource>
+ <qresource lang="sk">
+     <file alias="i18n/PortaBase.qm">translations/portabase_sk.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_sk.qm</file>
+ </qresource>
  <qresource lang="zh_TW">
      <file alias="i18n/PortaBase.qm">translations/portabase_zh_TW.qm</file>
      <file alias="i18n/Qt.qm">translations/qt_zh_TW.qm</file>

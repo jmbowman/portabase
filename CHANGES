@@ -1,3 +1,7 @@
+2012-06-18  JMB  Added Slovak UI translation
+
+    Added a Slovak translation of the user interface (provided by Slavko).
+
 2012-06-17  JMB  Updated .desktop file for Linux packaging
 
     Removed the deprecated "Encoding" key to comply with the current
