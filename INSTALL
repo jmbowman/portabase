@@ -1,129 +1,23 @@
-Maemo Development Environment
------------------------------
-To compile PortaBase for Maemo portable devices (Nokia N810, N900, etc.), you
-will need a suitable development environment.  I use ESbox
-(http://esbox.garage.maemo.org/2nd_edition/), but you should also be able to
-use the Maemo SDK directly (either on a Linux system or in a Linux virtual
-machine via VMWare, VirtualBox, etc.)  For Maemo 5 development, MADDE
-(https://wiki.maemo.org/MADDE) may work as well; at the time of this writing,
-it doesn't yet seem to support compiling Qt applications for Maemo 4.
+Platform-Specific Installation Instructions
+-------------------------------------------
+For instructions on compiling PortaBase for your particular platform, see the
+appropriate file under the "doc" directory:
 
-Windows Development Environment
--------------------------------
-To compile PortaBase for use as a Windows desktop application, you will
-need the following:
-- Windows XP, Vista, or 7
-- A recent version of Qt 4 (http://qt.nokia.com/downloads).  It's easiest to
-  get started with a version that comes with the MinGW compiler, since I
-  haven't tested the latest code with Visual Studio.  Add both the "bin"
-  directory and the "mingw\bin" directory that come with it to your "Path"
-  environment variable.
-- MSYS 1.0.11 (http://sourceforge.net/projects/mingw/files/MSYS%20Base%20System/msys-1.0.11/MSYS-1.0.11.exe/download).
-  This emulates a basic UNIX system on Windows, and is the easiest way to
-  compile Metakit with MinGW.  Newer versions are available, but lack a
-  convenient installer; this one should work fine.
-- Inno Setup, if you wish to create the PortaBase installer; available from:
-  http://www.jrsoftware.org/isinfo.php
+* install_linux.txt
+* install_mac.txt
+* install_maemo.txt
+* install_windows.txt
 
-Linux/UNIX Development Environment
-----------------------------------
-To compile PortaBase for use as a Linux or UNIX desktop application, you
-will need the following:
-- g++ (any relatively recent version should work)
-- A recent version of Qt 4 (including qmake and development headers)
-- Other packages as needed to satisfy the above requirements or create
-  packages for your OS/distribution
-  
-Mac OS X Development Environment
---------------------------------
-To compile PortaBase for use as a Mac OS X desktop application, you will
-need the following:
-- Mac OS X Tiger (10.4) or higher
-- The Apple developer tools (which are on one of the CDs that come with
-  the operating system)
-- A recent version of Qt 4 (http://qt.nokia.com/downloads)
-
-Metakit Compilation
--------------------
-To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
-first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
-searches and locale-sensitive sorting; the patched version is included in the
-"metakit" directory for convenience (and to support the Debian and Maemo
-autobuilders).
-
-To build Metakit for Maemo, follow the Metakit installation instructions (in
-the Metakit README file) inside the appropriate Scratchbox environment.  You'll
-want to pass the "--enable-threads" and "--disable-shared" parameters to the
-configure script.
-
-To compile Metakit for use in Linux or Mac OS X desktop PortaBase, just follow
-the README directions (the "UNIX" instructions in both cases); you'll want to
-use the same configure script parameters mentioned above for Maemo development.
-
-To compile Metakit for Windows, first install Qt in order to get the MinGW
-compiler.  Then install MSYS as mentioned above; in the postinstallation
-script, you'll be asked for the path of the MinGW installation that came with
-Qt.  Start MSYS from the installed shortcut, and change to the metakit/builds
-directory that is included with the PortaBase source code.  Note that you use
-"cd" to change directories, use "/" as the directory separator, and the C:
-drive is located at "/c".  From the metakit/builds directory, run
-"../unix/configure --enable-threads --disable-shared".  Once that finishes, run
-"make".  You should now have a libmk4.a static library file in that directory.
-
-PortaBase for Maemo Compilation
---------------------------------
-After compiling Metakit as described above, PortaBase can be compiled in the
-usual manner for Maemo Qt applications.  See the ESbox (or Maemo SDK, or MADDE)
-documentation for more information.
-
-PortaBase for Windows Compilation, Packaging
---------------------------------------------
-- Compile Metakit as described above.
-- Open a command prompt, and change to the root directory of the downloaded
-  PortaBase source code.  If this isn't at "C:\portabase", you'll have to
-  change the paths for "LIBS" and "INCLUDEPATH" in portabase.pro.
-- From that directory run "packaging\windows\build.bat"; this will generate a
-  working PortaBase.exe file in the "build" directory.
-- If you want to create an installer for PortaBase, first install Inno Setup,
-  Python, and Sphinx (for the help pages, as described below).  Then run
-  "packaging\windows\installer.bat"; you may need to edit it first in order to
-  adjust the paths to Qt and/or Inno Setup. This will generate an executable
-  installer in the "build/windows" directory.
-
-Debian Package Building
------------------------
-To create a Debian package for the desktop version of PortaBase, from the
-root PortaBase source directory run "packaging/linux/debian.sh".  If you have
-all the appropriate development packages installed, the .deb file will be
-generated in the build/debian directory.
-
-Linux/UNIX compilation
-----------------------
-- Set the QMAKESPEC and QTDIR environment variables as appropriate for your
-  platform
-- Make sure the Metakit static library (libmk4.a) is in your LD_LIBRARY_PATH,
-  and that the other library files (.so, .la, etc.) aren't.
-- Run "lrelease resources/translations/*.ts" to prepare the translation files.
-- Run qmake on portabase.pro
-- Run make
-
-Mac OS X compilation
---------------------
-- Install a recent version of Qt 4 and configure it, as per the directions
-  in its INSTALL file.
-- Make sure the Metakit static library (libmk4.a) is in /usr/local/lib, and
-  that the other library files (.dylib, .la, etc.) aren't.
-- From the root PortaBase source directory run "packaging/mac/build.sh"; this
-  will generate a self-contained PortaBase.app and a PortaBase.dmg installer.
+The notes below are relevant to generating the PortaBase help files and source
+code documentation on all the supported platforms.
 
 Help Pages Generation
 ---------------------
 PortaBase's help pages are generated from a simple text-based markup using
 Sphinx (http://sphinx.pocoo.org/).  To create a full PortaBase installation
-package, you'll need Python 2.4 or higher and Sphinx 1.0 or higher (1.1 or the
-latest development code in order to correctly support search in the Japanese
-help files).  The scripts for building the installer on each platform assume
-that these are present and automatically generate and include the help pages.
+package, you'll need Python 2.4 or higher and Sphinx 1.1 or higher.  The
+scripts for building the installer on each platform assume that these are
+present and automatically generate and include the help pages.
 
 Code Documentation Generation
 -----------------------------
@@ -148,11 +42,3 @@ Doxygen (http://www.stack.nl/~dimitri/doxygen/index.html).  To do so:
 There are a lot of optional features in Doxygen, so you may want to read
 through its documentation and change some of the settings in Doxyfile and
 Doxyfile_Metakit before generating the documentation.
-
-Maemo Package Building
-----------------------
-- Make sure that Scratchbox has access to the PortaBase source code
-- Log in to Scratchbox, and select the desired target with sb-menu
-- From the root PortaBase source directory, run "packaging/maemo/diablo.sh"
-  (if generating a package for Diablo); the .deb will be generated in the
-  "build/diablo" directory

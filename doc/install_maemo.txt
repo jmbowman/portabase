@@ -1,0 +1,37 @@
+Maemo Development Environment
+-----------------------------
+To compile PortaBase for Maemo portable devices (Nokia N810, N900, etc.), you
+will need a suitable development environment.  I use ESbox
+(http://esbox.garage.maemo.org/2nd_edition/), but you should also be able to
+use the Maemo SDK directly (either on a Linux system or in a Linux virtual
+machine via VMWare, VirtualBox, etc.)  For Maemo 5 development, MADDE
+(https://wiki.maemo.org/MADDE) may work as well; at the time of this writing,
+it doesn't yet seem to support compiling Qt applications for Maemo 4.
+
+Metakit Compilation
+-------------------
+To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
+first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
+searches and locale-sensitive sorting; the patched version is included in the
+"metakit" directory for convenience (and to support the Debian and Maemo
+autobuilders).
+
+To build Metakit for Maemo, follow the Metakit installation instructions (in
+the Metakit README file) inside the appropriate Scratchbox environment.  You'll
+want to pass the "--enable-threads" and "--disable-shared" parameters to the
+configure script.
+
+PortaBase  Compilation
+----------------------
+After compiling Metakit as described above, PortaBase can be compiled in the
+usual manner for Maemo Qt applications.  See the ESbox (or Maemo SDK, or MADDE)
+documentation for more information.
+
+Maemo Package Building
+----------------------
+- Make sure that Scratchbox has access to the PortaBase source code
+- Log in to Scratchbox, and select the desired target with sb-menu
+- From the root PortaBase source directory, run "packaging/maemo/diablo.sh"
+  (if generating a package for Diablo); the .deb will be generated in the
+  "build/diablo" directory.  The "packaging/maemo/fremantle.sh" script will
+  similarly generate a package for Fremantle.

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="sk_SK">
 <context>
     <name>CloseButton</name>
     <message>
         <location filename="../src/gui/widgets/qtabbar.cpp" line="+2251"/>
         <source>Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavrieť záložku</translation>
     </message>
 </context>
 <context>
@@ -114,7 +114,7 @@
     <message>
         <location line="+101"/>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať farbu</translation>
     </message>
     <message>
         <location line="+137"/>
@@ -178,19 +178,19 @@
         <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
         <source>%1: key is empty</source>
         <comment>QSystemSemaphore</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1: kľúč je prázdny</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>%1: unable to make key</source>
         <comment>QSystemSemaphore</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1: nemožno vytvoriť kľúč</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>%1: ftok failed</source>
         <comment>QSystemSemaphore</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1: ftok zlyhal</translation>
     </message>
 </context>
 <context>
@@ -203,7 +203,7 @@
     <message>
         <location line="-115"/>
         <source>Done</source>
-        <translation type="unfinished">Dokončené</translation>
+        <translation>Dokončené</translation>
     </message>
 </context>
 <context>
@@ -218,12 +218,12 @@
     <message>
         <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+3"/>
         <source>Save</source>
-        <translation type="unfinished">Uložiť</translation>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Uložiť</translation>
+        <translation>&amp;Uložiť</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -233,22 +233,22 @@
     <message>
         <location line="+3"/>
         <source>Cancel</source>
-        <translation type="unfinished">Storno</translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">S&amp;torno</translation>
+        <translation>S&amp;torno</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Close</source>
-        <translation type="unfinished">Zavrieť</translation>
+        <translation>Zavrieť</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Zavrieť</translation>
+        <translation>&amp;Zavrieť</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -328,7 +328,37 @@
     <message>
         <location line="-27"/>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
+    </message>
+</context>
+<context>
+    <name>QDirModel</name>
+    <message>
+        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+453"/>
+        <source>Name</source>
+        <translation>Meno</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Size</source>
+        <translation>Veľkosť</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation>Druh</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Date Modified</source>
+        <translation>Dátum zmeny</translation>
     </message>
 </context>
 <context>
@@ -337,32 +367,32 @@
         <location filename="../src/corelib/io/qfile.cpp" line="+708"/>
         <location line="+141"/>
         <source>Destination file exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Cieový súbor existuje</translation>
     </message>
     <message>
         <location line="-108"/>
         <source>Cannot remove source file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemožno odstrániť vstupný súbor</translation>
     </message>
     <message>
         <location line="+120"/>
         <source>Cannot open %1 for input</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemožno otvoriť %1 na vstup</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Cannot open for output</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemožno otvoriť na výstup</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Failure to write block</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba zápisu do bloku</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Cannot create %1 for output</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemožno otvoriť %1 na výstup</translation>
     </message>
 </context>
 <context>
@@ -455,7 +485,7 @@ Prosím overte správnosť zadaného mena súboru.</translation>
     <message>
         <location line="+1017"/>
         <source>Recent Places</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedávne umiestnenia</translation>
     </message>
     <message>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+402"/>
@@ -672,14 +702,14 @@ Chcete ho aj tak zmazať?</translation>
         <location filename="../src/gui/text/qfontdatabase.cpp" line="+90"/>
         <location line="+1176"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normálne</translation>
     </message>
     <message>
         <location line="-1173"/>
         <location line="+12"/>
         <location line="+1149"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Tučné</translation>
     </message>
     <message>
         <location line="-1158"/>
@@ -709,53 +739,53 @@ Chcete ho aj tak zmazať?</translation>
         <location line="-1004"/>
         <location line="+1007"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Šikmé</translation>
     </message>
     <message>
         <location line="-1004"/>
         <location line="+1006"/>
         <source>Oblique</source>
-        <translation type="unfinished"></translation>
+        <translation>Naklonené</translation>
     </message>
     <message>
         <location line="+705"/>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Latin</source>
-        <translation type="unfinished"></translation>
+        <translation>Stredoeurópske</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation>Grécke</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Cyrillic</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyrilika</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Armenian</source>
-        <translation type="unfinished"></translation>
+        <translation>Arménske</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Hebrew</source>
-        <translation type="unfinished"></translation>
+        <translation>Hebrejské</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Arabic</source>
-        <translation type="unfinished"></translation>
+        <translation>Arabské</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Syriac</source>
-        <translation type="unfinished"></translation>
+        <translation>Sýrske</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -845,32 +875,32 @@ Chcete ho aj tak zmazať?</translation>
     <message>
         <location line="+3"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Zjednodušená čínština</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradičná čínština</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Japonské</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Korean</source>
-        <translation type="unfinished"></translation>
+        <translation>Kórejské</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Vietnamese</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnamské</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symboly</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1112,7 +1142,7 @@ Chcete ho aj tak zmazať?</translation>
     <message>
         <location line="+1570"/>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;O Qt&lt;/h3&gt;&lt;p&gt;Tento program používa Qt verzie %1.&lt;/p&gt;&lt;p&gt;Qt je sada nástrojov C++ na vývoj viacplatformových aplikácií.&lt;/p&gt;&lt;p&gt;Qt poskytuje prenosnosť spoločného zdrojového kódu medzi MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux a všetký,mi hlavnými komečnými variantmi Unixu. Qt je dostupné aj pre zabudované zariadenia, ako Qt pre zabudovaný Linux a Qt pre Windows CE.&lt;/p&gt;&lt;p&gt;Qt je dostupné pod tromi rôznymi licenčnými voľbami, navrhnutými na prispôsobenie sa potrebám r§znych anšich používateľov.&lt;/p&gt;Qt licencované pod našim komerčným licenčným ujednaním  je vhodné na vývoj komerčného/proprietárneho softvéru, kde nechcete s žiadnou treťou stranou zdieľať žiadnu časť zdrojového kódu, či byť inak v rozpore s podmienkami GNU LGPL verzie 2.1 alebo GNU GPL verzie 3.0.&lt;/p&gt;&lt;p&gt;Qt licencované pod GNU LGPL verzie 2.1 je vhodné na vývoj aplikácií Qt (proprietárnych alebo sotvoreným kódom) poskytovaných v súlade s podmienkami GNU LGPL verzie 2.1.&lt;/p&gt;&lt;p&gt;Qt licencované pod GNU General Public License verzie 3.0 je vhodné na vývoj aplikácií Qt, ktoré chcete použiť v kombinácii so softvérom , ktorý spadá pod podmienky GNU GPL verzie 3.0 alebo keď ste ochotný dodržať podmienky GNU GPL verzie 3.0.&lt;/p&gt;&lt;p&gt;Prosím, navštívte &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt;, kde nájdete rpehľad licencovania Qt.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation a/alebo jej spoločnosť(ti).&lt;/p&gt;&lt;p&gt;Qt je produktom Nokia. Ďalšie informácie nájdete na &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
@@ -1129,43 +1159,43 @@ Chcete ho aj tak zmazať?</translation>
     <message>
         <location filename="../src/network/access/qnetworkaccessdatabackend.cpp" line="+74"/>
         <source>Operation not supported on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Operácia nie je podporovaná na %1</translation>
     </message>
     <message>
         <location line="+53"/>
         <source>Invalid URI: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatná URI: %1</translation>
     </message>
     <message>
         <location filename="../src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+175"/>
         <source>Write error writing to %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba zápisu pri zápise do %1: %2</translation>
     </message>
     <message>
         <location line="+57"/>
         <source>Read error reading from %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba čítania pri čítaní %1: %2</translation>
     </message>
     <message>
         <location line="+31"/>
         <source>Socket error on %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba socketu na %1: %2</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Remote host closed the connection prematurely on %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialený hostiteľ predčasne ukončil spojenie an %1</translation>
     </message>
     <message>
         <location line="+53"/>
         <source>Protocol error: packet of size 0 received</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba protokolu: prijatý paket s veľkosťou 0</translation>
     </message>
     <message>
         <location filename="../src/network/kernel/qhostinfo.cpp" line="+177"/>
         <location line="+57"/>
         <source>No host name given</source>
-        <translation type="unfinished"></translation>
+        <translation>Nebolo zadané meno hostiteľa</translation>
     </message>
 </context>
 <context>
@@ -1173,12 +1203,12 @@ Chcete ho aj tak zmazať?</translation>
     <message>
         <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="+1195"/>
         <source>Name</source>
-        <translation type="unfinished">Meno</translation>
+        <translation>Meno</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
 </context>
 <context>
@@ -1186,102 +1216,102 @@ Chcete ho aj tak zmazať?</translation>
     <message>
         <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
         <source>Centimeters (cm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Centimetre (cm)</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Millimeters (mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Milimetre (mm)</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Inches (in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Palce (in)</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Points (pt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Body (pt)</translation>
     </message>
     <message>
         <location filename="../src/gui/dialogs/qpagesetupwidget.ui"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát</translation>
     </message>
     <message>
         <location/>
         <source>Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Papier</translation>
     </message>
     <message>
         <location/>
         <source>Page size:</source>
-        <translation type="unfinished">Veľkosť strany:</translation>
+        <translation>Veľkosť strany:</translation>
     </message>
     <message>
         <location/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka:</translation>
     </message>
     <message>
         <location/>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <location/>
         <source>Paper source:</source>
-        <translation type="unfinished">Zdroj papiera:</translation>
+        <translation>Zdroj papiera:</translation>
     </message>
     <message>
         <location/>
         <source>Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientácia</translation>
     </message>
     <message>
         <location/>
         <source>Portrait</source>
-        <translation type="unfinished">Na výšku</translation>
+        <translation>Na výšku</translation>
     </message>
     <message>
         <location/>
         <source>Landscape</source>
-        <translation type="unfinished">Na šírku</translation>
+        <translation>Na šírku</translation>
     </message>
     <message>
         <location/>
         <source>Reverse landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Opačne na šírku</translation>
     </message>
     <message>
         <location/>
         <source>Reverse portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Opačne na výšku</translation>
     </message>
     <message>
         <location/>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraje</translation>
     </message>
     <message>
         <location/>
         <source>top margin</source>
-        <translation type="unfinished"></translation>
+        <translation>horný okraj</translation>
     </message>
     <message>
         <location/>
         <source>left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>ľavý okraj</translation>
     </message>
     <message>
         <location/>
         <source>right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>pravý okraj</translation>
     </message>
     <message>
         <location/>
         <source>bottom margin</source>
-        <translation type="unfinished"></translation>
+        <translation>dolný okraj</translation>
     </message>
 </context>
 <context>
@@ -1619,117 +1649,117 @@ Prosím zvoľte iné meno súboru.</translation>
     <message>
         <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
         <source>A0</source>
-        <translation type="unfinished"></translation>
+        <translation>A0</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A1</source>
-        <translation type="unfinished"></translation>
+        <translation>A1</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A2</source>
-        <translation type="unfinished"></translation>
+        <translation>A2</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A3</source>
-        <translation type="unfinished"></translation>
+        <translation>A3</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A4</source>
-        <translation type="unfinished"></translation>
+        <translation>A4</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A5</source>
-        <translation type="unfinished"></translation>
+        <translation>A5</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A6</source>
-        <translation type="unfinished"></translation>
+        <translation>A6</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A7</source>
-        <translation type="unfinished"></translation>
+        <translation>A7</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A8</source>
-        <translation type="unfinished"></translation>
+        <translation>A8</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>A9</source>
-        <translation type="unfinished"></translation>
+        <translation>A9</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B0</source>
-        <translation type="unfinished"></translation>
+        <translation>B0</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B1</source>
-        <translation type="unfinished"></translation>
+        <translation>B1</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B2</source>
-        <translation type="unfinished"></translation>
+        <translation>B2</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B3</source>
-        <translation type="unfinished"></translation>
+        <translation>B3</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B4</source>
-        <translation type="unfinished"></translation>
+        <translation>B4</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B5</source>
-        <translation type="unfinished"></translation>
+        <translation>B5</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B6</source>
-        <translation type="unfinished"></translation>
+        <translation>B6</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B7</source>
-        <translation type="unfinished"></translation>
+        <translation>B7</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B8</source>
-        <translation type="unfinished"></translation>
+        <translation>B8</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B9</source>
-        <translation type="unfinished"></translation>
+        <translation>B9</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>B10</source>
-        <translation type="unfinished"></translation>
+        <translation>B10</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>C5E</source>
-        <translation type="unfinished"></translation>
+        <translation>C5E</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>DLE</source>
-        <translation type="unfinished"></translation>
+        <translation>DLE</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1769,48 +1799,48 @@ Prosím zvoľte iné meno súboru.</translation>
     <message>
         <location line="+1"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastná</translation>
     </message>
     <message>
         <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-522"/>
         <location line="+68"/>
         <source>&amp;Options &gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Možnosti &gt;&gt;</translation>
     </message>
     <message>
         <location line="-63"/>
         <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tlačiť</translation>
     </message>
     <message>
         <location line="+67"/>
         <source>&amp;Options &lt;&lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Možnosti &lt;&lt;</translation>
     </message>
     <message>
         <location line="+253"/>
         <source>Print to File (PDF)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačiť do súboru (PDF)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Print to File (Postscript)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačiť do súboru (PostScript)</translation>
     </message>
     <message>
         <location line="+45"/>
         <source>Local file</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokálny súbor</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Write %1 file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapísať %1 súbor</translation>
     </message>
     <message>
         <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hodnota „Od” nemôže byť väčšia ako hodnota „Do”.</translation>
     </message>
 </context>
 <context>
@@ -1819,107 +1849,107 @@ Prosím zvoľte iné meno súboru.</translation>
         <location filename="../src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
         <location line="+12"/>
         <source>Page Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavenie strany</translation>
     </message>
     <message>
         <location filename="../src/gui/dialogs/qprintpreviewdialog.cpp" line="+252"/>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location line="+79"/>
         <source>Print Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukážka pred tlačením</translation>
     </message>
     <message>
         <location line="+29"/>
         <source>Next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšia strana</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Predošlá strana</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>First page</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvá strana</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Last page</source>
-        <translation type="unfinished"></translation>
+        <translation>Posledná strana</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Fit width</source>
-        <translation type="unfinished"></translation>
+        <translation>Prispôsobiť šírke</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Fit page</source>
-        <translation type="unfinished"></translation>
+        <translation>Prispôsobiť strane</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšiť</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Portrait</source>
-        <translation type="unfinished">Na výšku</translation>
+        <translation>Na výšku</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Landscape</source>
-        <translation type="unfinished">Na šírku</translation>
+        <translation>Na šírku</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Show single page</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť jednu stranu</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Show facing pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť plynulé strany</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Show overview of all pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť prehľad všetkých strán</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačiť</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Page setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavenie strany</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Close</source>
-        <translation type="unfinished">Zavrieť</translation>
+        <translation>Zavrieť</translation>
     </message>
     <message>
         <location line="+151"/>
         <source>Export to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovať do PDF</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Export to PostScript</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovať do PostScript</translation>
     </message>
 </context>
 <context>
@@ -1942,17 +1972,17 @@ Prosím zvoľte iné meno súboru.</translation>
     <message>
         <location filename="../src/gui/dialogs/qprintpropertieswidget.ui"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát</translation>
     </message>
     <message>
         <location/>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Strana</translation>
     </message>
     <message>
         <location/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokročilé</translation>
     </message>
 </context>
 <context>
@@ -1960,97 +1990,97 @@ Prosím zvoľte iné meno súboru.</translation>
     <message>
         <location filename="../src/gui/dialogs/qprintsettingsoutput.ui"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát</translation>
     </message>
     <message>
         <location/>
         <source>Copies</source>
-        <translation type="unfinished">Kópie</translation>
+        <translation>Kópie</translation>
     </message>
     <message>
         <location/>
         <source>Print range</source>
-        <translation type="unfinished">Rozsah tlače</translation>
+        <translation>Rozsah tlače</translation>
     </message>
     <message>
         <location/>
         <source>Print all</source>
-        <translation type="unfinished">Tlačiť všetko</translation>
+        <translation>Tlačiť všetko</translation>
     </message>
     <message>
         <location/>
         <source>Pages from</source>
-        <translation type="unfinished">Strany od</translation>
+        <translation>Strany od</translation>
     </message>
     <message>
         <location/>
         <source>to</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <location/>
         <source>Selection</source>
-        <translation type="unfinished">Výber</translation>
+        <translation>Výber</translation>
     </message>
     <message>
         <location/>
         <source>Output Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavenia výstupu</translation>
     </message>
     <message>
         <location/>
         <source>Copies:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kópie:</translation>
     </message>
     <message>
         <location/>
         <source>Collate</source>
-        <translation type="unfinished">Triediť</translation>
+        <translation>Triediť</translation>
     </message>
     <message>
         <location/>
         <source>Reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>Opačne</translation>
     </message>
     <message>
         <location/>
         <source>Options</source>
-        <translation type="unfinished">Možnosti</translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <location/>
         <source>Color Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Farebný režim</translation>
     </message>
     <message>
         <location/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba</translation>
     </message>
     <message>
         <location/>
         <source>Grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation>Stupne sivej</translation>
     </message>
     <message>
         <location/>
         <source>Duplex Printing</source>
-        <translation type="unfinished"></translation>
+        <translation>Obojstranná tlač</translation>
     </message>
     <message>
         <location/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadne</translation>
     </message>
     <message>
         <location/>
         <source>Long side</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhá strana</translation>
     </message>
     <message>
         <location/>
         <source>Short side</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátka strana</translation>
     </message>
 </context>
 <context>
@@ -2058,47 +2088,47 @@ Prosím zvoľte iné meno súboru.</translation>
     <message>
         <location filename="../src/gui/dialogs/qprintwidget.ui"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát</translation>
     </message>
     <message>
         <location/>
         <source>Printer</source>
-        <translation type="unfinished">Tlačiareň</translation>
+        <translation>Tlačiareň</translation>
     </message>
     <message>
         <location/>
         <source>&amp;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Me&amp;no:</translation>
     </message>
     <message>
         <location/>
         <source>P&amp;roperties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastno&amp;sti</translation>
     </message>
     <message>
         <location/>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Umiestnenie:</translation>
     </message>
     <message>
         <location/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukážka</translation>
     </message>
     <message>
         <location/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <location/>
         <source>Output &amp;file:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Výstupný súbor:</translation>
     </message>
     <message>
         <location/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>…</translation>
     </message>
 </context>
 <context>
@@ -2229,7 +2259,7 @@ Prosím zvoľte iné meno súboru.</translation>
 <context>
     <name>QSlider</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
+        <location line="+151"/>
         <source>Page left</source>
         <translation>Strana naľavo</translation>
     </message>
@@ -2257,7 +2287,7 @@ Prosím zvoľte iné meno súboru.</translation>
 <context>
     <name>QSpinBox</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
+        <location line="-574"/>
         <source>More</source>
         <translation>Viac</translation>
     </message>

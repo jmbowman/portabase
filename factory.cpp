@@ -16,12 +16,15 @@
 #include <QApplication>
 #include <QHeaderView>
 #include <QListWidget>
+#include <QLocale>
 #include <QPainter>
 #include <QPalette>
+#include <QProcess>
 #include <QPushButton>
 #include <QSettings>
 #include <QTextEdit>
 #include <QToolButton>
+#include <QTranslator>
 #include <QTreeWidget>
 #include "factory.h"
 
@@ -247,6 +250,48 @@ QTextEdit *Factory::textDisplay(QWidget *parent)
     }
 #endif
     return display;
+}
+
+/**
+ * Load a UI translation file from a resource based on the appropriate system
+ * UI language settings.  Assumes that such files are in the standard ":/i18n"
+ * folder, and that an underscore is used to separate the base filename from
+ * the language.  Allows for overriding this selection by setting an
+ * appropriate environment variable to the .qm file to use instead (useful for
+ * translators to test their work).
+ *
+ * @param translator The translator object to be loaded and installed
+ * @param filename The base filename of the translation file, before appending
+ *                 the language
+ * @param envVariable The name of the override environment variable
+ */
+void Factory::translation(QTranslator *translator, const QString &filename,
+                          const QString &envVariable)
+{
+    // can't count on QProcessEnvironment because Diablo doesn't have it yet
+    QStringList env = QProcess::systemEnvironment();
+    int index = env.indexOf(QRegExp(envVariable + "=.*"));
+    if (index != -1) {
+        QString path = env[index];
+        path = path.right(path.length() - envVariable.length() - 1);
+        if (translator->load(path)) {
+            qApp->installTranslator(translator);
+        }
+    }
+    else {
+#if QT_VERSION >= 0x040800
+        // Use the correct list of UI languages from the system locale
+        bool loaded = translator->load(QLocale::system(), filename, "_",
+                                       ":/i18n");
+#else
+        // Hope that Qt isn't returning a formatting locale different from the
+        // UI language one
+        bool loaded = translator->load(QString(":/i18n/") + filename + ".qm"));
+#endif
+        if (loaded) {
+            qApp->installTranslator(translator);
+        }
+    }
 }
 
 /**

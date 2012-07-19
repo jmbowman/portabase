@@ -1,0 +1,37 @@
+Linux/UNIX Development Environment
+----------------------------------
+To compile PortaBase for use as a Linux or UNIX desktop application, you
+will need the following:
+- g++ (any relatively recent version should work)
+- A recent version of Qt 4 (including qmake and development headers)
+- Other packages as needed to satisfy the above requirements or create
+  packages for your OS/distribution
+
+Metakit Compilation
+-------------------
+To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
+first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
+searches and locale-sensitive sorting; the patched version is included in the
+"metakit" directory for convenience (and to support the Debian and Maemo
+autobuilders).
+
+To compile Metakit for use in Linux desktop PortaBase, just follow the README
+directions (the "UNIX" instructions); you'll want to pass the
+"--enable-threads" and "--disable-shared" parameters to the configure script.
+
+Debian Package Building
+-----------------------
+To create a Debian package for the desktop version of PortaBase, from the
+root PortaBase source directory run "packaging/linux/debian.sh".  If you have
+all the appropriate development packages installed, the .deb file will be
+generated in the build/debian directory.
+
+PortaBase compilation
+---------------------
+- Set the QMAKESPEC and QTDIR environment variables as appropriate for your
+  platform
+- Make sure the Metakit static library (libmk4.a) is in your LD_LIBRARY_PATH,
+  and that the other library files (.so, .la, etc.) aren't.
+- Run "lrelease resources/translations/*.ts" to prepare the translation files.
+- Run qmake on portabase.pro
+- Run make

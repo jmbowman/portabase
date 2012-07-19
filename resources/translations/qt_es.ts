@@ -2,6 +2,44 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="es">
 <context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <location filename="../src/gui/kernel/qapplication.cpp" line="+2316"/>
+        <source>Services</source>
+        <translation>Servicios</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide %1</source>
+        <translation>Ocultar %1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide Others</source>
+        <translation>Ocultar otros</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show All</source>
+        <translation>Mostrar todo</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Preferences...</source>
+        <translation>Preferencias…</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Quit %1</source>
+        <translation>Salir de %1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>About %1</source>
+        <translation>Acerca de %1</translation>
+    </message>
+</context>
+<context>
     <name>CloseButton</name>
     <message>
         <location filename="../src/gui/widgets/qtabbar.cpp" line="+2251"/>
@@ -329,6 +367,42 @@
         <location line="-27"/>
         <source>&amp;OK</source>
         <translation type="unfinished">&amp;Aceptar</translation>
+    </message>
+</context>
+<context>
+    <name>QDirModel</name>
+    <message>
+        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+453"/>
+        <source>Name</source>
+        <translation>Nombre</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Size</source>
+        <translation>Tamaño</translation>
+    </message>
+    <message>
+        <source>Kind</source>
+        <comment>Match OS X Finder
+</comment>
+        <translation type="obsolete">Clase</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Date Modified</source>
+        <translation>Última modificación</translation>
+    </message>
+    <message>
+        <location line="-8"/>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation type="unfinished">Clase</translation>
     </message>
 </context>
 <context>

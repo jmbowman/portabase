@@ -13,7 +13,7 @@ rm -f build/*.dmg
 rm -rf build/$DIRNAME
 
 # compile and make the application bundle
-qmake -spec macx-g++40 portabase.pro
+qmake -spec macx-llvm portabase.pro
 make clean
 lrelease portabase.pro
 lrelease resources/translations/qt*.ts

@@ -163,7 +163,7 @@ unix:LIBS       += -lm -lmk4
 
 # Stuff for Mac OS X
 macx {
-    CONFIG             += release x86 ppc
+    CONFIG             += release x86_64
     TARGET              = PortaBase
     RESOURCES           = resources/mac.qrc
     ICON                = packaging/mac/PortaBase.icns
@@ -203,7 +203,6 @@ macx {
                           SK_LPROJ \
                           ZH_HANT_LPROJ
     QMAKE_INFO_PLIST    = packaging/mac/Info.plist
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 }
 
 # Stuff for Maemo

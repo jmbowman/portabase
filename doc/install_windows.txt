@@ -1,0 +1,48 @@
+Windows Development Environment
+-------------------------------
+To compile PortaBase for use as a Windows desktop application, you will
+need the following:
+- Windows XP, Vista, or 7
+- A recent version of Qt 4 (http://qt.nokia.com/downloads).  It's easiest to
+  get started with a version that comes with the MinGW compiler, since I
+  haven't tested the latest code with Visual Studio.  Add both the "bin"
+  directory and the "mingw\bin" directory that come with it to your "Path"
+  environment variable.
+- MSYS 1.0.11 (http://sourceforge.net/projects/mingw/files/MSYS%20Base%20System/msys-1.0.11/MSYS-1.0.11.exe/download).
+  This emulates a basic UNIX system on Windows, and is the easiest way to
+  compile Metakit with MinGW.  Newer versions are available, but lack a
+  convenient installer; this one should work fine.
+- Inno Setup, if you wish to create the PortaBase installer; available from:
+  http://www.jrsoftware.org/isinfo.php
+
+Metakit Compilation
+-------------------
+To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
+first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
+searches and locale-sensitive sorting; the patched version is included in the
+"metakit" directory for convenience (and to support the Debian and Maemo
+autobuilders).
+
+To compile Metakit for Windows, first install Qt in order to get the MinGW
+compiler.  Then install MSYS as mentioned above; in the postinstallation
+script, you'll be asked for the path of the MinGW installation that came with
+Qt.  Start MSYS from the installed shortcut, and change to the metakit/builds
+directory that is included with the PortaBase source code.  Note that you use
+"cd" to change directories, use "/" as the directory separator, and the C:
+drive is located at "/c".  From the metakit/builds directory, run
+"../unix/configure --enable-threads --disable-shared".  Once that finishes, run
+"make".  You should now have a libmk4.a static library file in that directory.
+
+PortaBase Compilation and Packaging
+-----------------------------------
+- Compile Metakit as described above.
+- Open a command prompt, and change to the root directory of the downloaded
+  PortaBase source code.  If this isn't at "C:\portabase", you'll have to
+  change the paths for "LIBS" and "INCLUDEPATH" in portabase.pro.
+- From that directory run "packaging\windows\build.bat"; this will generate a
+  working PortaBase.exe file in the "build" directory.
+- If you want to create an installer for PortaBase, first install Inno Setup,
+  Python, and Sphinx (for the help pages, as described in PortaBase's INSTALL
+  file).  Then run "packaging\windows\installer.bat"; you may need to edit it
+  first in order to adjust the paths to Qt and/or Inno Setup. This will
+  generate an executable installer in the "build/windows" directory.

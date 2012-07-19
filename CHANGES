@@ -1,3 +1,16 @@
+2012-07-18  JMB  Mac build updates, better language detection, install docs
+
+    Updated the Mac build scripts to reflect Apple's current recommendations
+    and the realities of compiling on Lion with Xcode 4.  Also updated the
+    code for selecting the UI language to display based on changes in Qt 4.8
+    which do a better job at providing the correct language settings from the
+    system.  Updated the translation files to include phrases recently added
+    to the Qt framework.
+
+    Also broke out the platform-specific sections of the INSTALL file into
+    their own files, which should make it easier to understand the build
+    instructions.
+
 2012-06-18  JMB  Added Slovak UI translation
 
     Added a Slovak translation of the user interface (provided by Slavko).

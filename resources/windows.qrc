@@ -32,37 +32,23 @@
      <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>
      <file>templates/export.html</file>
  </qresource>
- <qresource lang="en">
-     <file alias="i18n/PortaBase.qm">translations/portabase_en.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_en.qm</file>
- </qresource>
- <qresource lang="cs">
-     <file alias="i18n/PortaBase.qm">translations/portabase_cs.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_cs.qm</file>
- </qresource>
- <qresource lang="de">
-     <file alias="i18n/PortaBase.qm">translations/portabase_de.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_de.qm</file>
- </qresource>
- <qresource lang="es">
-     <file alias="i18n/PortaBase.qm">translations/portabase_es.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_es.qm</file>
- </qresource>
- <qresource lang="fr">
-     <file alias="i18n/PortaBase.qm">translations/portabase_fr.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_fr.qm</file>
- </qresource>
- <qresource lang="ja">
-     <file alias="i18n/PortaBase.qm">translations/portabase_ja.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_ja.qm</file>
- </qresource>
- <qresource lang="sk">
-     <file alias="i18n/PortaBase.qm">translations/portabase_sk.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_sk.qm</file>
- </qresource>
- <qresource lang="zh_TW">
-     <file alias="i18n/PortaBase.qm">translations/portabase_zh_TW.qm</file>
-     <file alias="i18n/Qt.qm">translations/qt_zh_TW.qm</file>
+ <qresource prefix="/i18n">
+     <file alias="PortaBase_en.qm">translations/portabase_en.qm</file>
+     <file alias="Qt_en.qm">translations/qt_en.qm</file>
+     <file alias="PortaBase_cs.qm">translations/portabase_cs.qm</file>
+     <file alias="Qt_cs.qm">translations/qt_cs.qm</file>
+     <file alias="PortaBase_de.qm">translations/portabase_de.qm</file>
+     <file alias="Qt_de.qm">translations/qt_de.qm</file>
+     <file alias="PortaBase_es.qm">translations/portabase_es.qm</file>
+     <file alias="Qt_es.qm">translations/qt_es.qm</file>
+     <file alias="PortaBase_fr.qm">translations/portabase_fr.qm</file>
+     <file alias="Qt_fr.qm">translations/qt_fr.qm</file>
+     <file alias="PortaBase_ja.qm">translations/portabase_ja.qm</file>
+     <file alias="Qt_ja.qm">translations/qt_ja.qm</file>
+     <file alias="PortaBase_sk.qm">translations/portabase_sk.qm</file>
+     <file alias="Qt_sk.qm">translations/qt_sk.qm</file>
+     <file alias="PortaBase_zh_TW.qm">translations/portabase_zh_TW.qm</file>
+     <file alias="Qt_zh_TW.qm">translations/qt_zh_TW.qm</file>
  </qresource>
  </RCC>
  

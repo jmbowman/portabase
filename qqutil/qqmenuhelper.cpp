@@ -395,16 +395,30 @@ void QQMenuHelper::showHelp()
         helpDir = helpDir.right(helpDir.length() - var.length() - 1);
     }
     else {
-        QString lang = QLocale::system().name();
-        QStringList langs;
-        langs.append(lang);
-        int i  = lang.indexOf('.');
-        if (i > 0) {
-            lang = lang.left(i);
-        }
-        i = lang.indexOf('_');
-        if (i > 0) {
-            langs.append(lang.left(i));
+#if QT_VERSION >= 0x040800
+        // Use the correct list of UI languages from the system locale
+        QStringList langs = QLocale::system().uiLanguages();
+#else
+        // Hope that Qt isn't returning a formatting locale different from the
+        // UI language one
+        QStringList langs = QStringList(QLocale::system().name());
+#endif
+        QStringList dirNames;
+        int count = langs.count();
+        int i;
+        int j;
+        QString lang;
+        for (i = 0; i < count; i++) {
+            lang = langs[0];
+            langs.append(lang);
+            j  = lang.indexOf('.');
+            if (j > 0) {
+                lang = lang.left(j);
+            }
+            j = lang.indexOf('_');
+            if (j > 0) {
+                dirNames.append(lang.left(j));
+            }
         }
         // if no translation is available, show the English help
         langs.append("en");
@@ -418,8 +432,8 @@ void QQMenuHelper::showHelp()
         QString path = QString("/usr/share/%1/help/")
                        .arg(qApp->applicationName().toLower());
 #endif
-        int count = langs.count();
-        for (int i = 0; i < count; i++) {
+        count = langs.count();
+        for (i = 0; i < count; i++) {
             QDir dir(path + langs[i] + suffix);
             if (dir.exists()) {
                 helpDir = path + langs[i] + suffix;

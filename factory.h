@@ -25,6 +25,7 @@ class QAbstractItemView;
 class QListWidget;
 class QSettings;
 class QTextEdit;
+class QTranslator;
 class QTreeWidget;
 class QWidget;
 
@@ -45,6 +46,8 @@ public:
     static QTreeWidget *treeWidget(QWidget *parent, const QStringList &headers);
     static QAbstractButton *button(QWidget *parent);
     static QTextEdit *textDisplay(QWidget *parent);
+    static void translation(QTranslator *translator, const QString &filename,
+                            const QString &envVariable);
     static void updatePreferences(QSettings *settings);
     static void updateRowColors(QAbstractItemView *view);
 
