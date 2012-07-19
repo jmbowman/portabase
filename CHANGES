@@ -1,3 +1,11 @@
+2012-07-19  JMB  Fixed column sorting and title bar bugs, fixed help on Maemo
+
+    Fixed a recently-introduced bug where clicking on a column header to sort
+    by that column would also show the column statistics dialog.  Also fixed
+    a bug where the title bar wasn't always reflecting correctly if there were
+    unsaved changes or not.  Fixed the Maemo packaging to correctly locate the
+    new help files.
+
 2012-07-18  JMB  Mac build updates, better language detection, install docs
 
     Updated the Mac build scripts to reflect Apple's current recommendations

@@ -785,13 +785,19 @@ void ViewDisplay::sort(int column)
  * Show a dialog containing summary statistics for a particular column of
  * data.  Only values in records matching the current filter are factored
  * into the statistics.
+ *
+ * @param allColumns True if the dialog should allow selection of any column
+ *                   in the current view, false for just the one clicked
  */
-void ViewDisplay::showStatistics()
+void ViewDisplay::showStatistics(bool allColumns)
 {
     QString colName = QString::null;
     if (pressedHeader != -1) {
         colName = model->headerData(pressedHeader, Qt::Horizontal).toString();
         pressedHeader = -1;
+    }
+    else if (!allColumns) {
+        return;
     }
     ColumnInfoDialog info(this);
     if (info.launch(model->view(), colName)) {

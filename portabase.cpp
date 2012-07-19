@@ -535,6 +535,7 @@ void PortaBase::createFile(ImportDialog::DataSource source,
  */
 void PortaBase::finishNewFile(Database *db)
 {
+    updateCaption(); // put [*] in title before setEdited() is called
     viewer->setDatabase(db);
     showDataViewer();
     setEdited(true);
@@ -589,9 +590,9 @@ void PortaBase::openFile(const QString &file)
         delete db;
     }
     db = temp;
+    updateCaption();
     viewer->setDatabase(db);
     showDataViewer();
-    updateCaption();
     menuHelper()->opened(file);
     if (readOnly) {
         QMessageBox::information(this, qApp->applicationName(),

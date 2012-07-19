@@ -74,7 +74,7 @@ public slots:
     void deleteRow();
     void slideshow();
     void viewRow();
-    void showStatistics();
+    void showStatistics(bool allColumns=false);
 
 protected:
     void keyPressEvent(QKeyEvent *e);

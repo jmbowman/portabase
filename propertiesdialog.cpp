@@ -112,5 +112,5 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
  */
 void PropertiesDialog::showColumnStatistics()
 {
-    vd->showStatistics();
+    vd->showStatistics(true);
 }

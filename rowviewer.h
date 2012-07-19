@@ -61,7 +61,7 @@ private:
 
 private:
     Database *db; /**< The database being viewed */
-    View *view; /**< The currently-selected database view */
+    View *view; /**< The database view selected in the main display */
     ViewDisplay *display; /**< The view display grid (used to launch the row editor) */
     QComboBox *viewBox; /**< Database view selection list */
     int index; /**< The current index among rows in the selected filter and sorting */
@@ -69,7 +69,7 @@ private:
     QAbstractButton *nextButton; /**< Button for viewing the next row */
     QAbstractButton *prevButton; /**< Button for viewing the previous row */
     QTextEdit *tv; /**< The HTML display widget used to show the row data */
-    View *currentView; /**< The currently-selected database view */
+    View *currentView; /**< The database view currently selected in this dialog */
     QStringList usedImageIds; /**< Keys of loaded images, used for later cleanup */
 };
 
