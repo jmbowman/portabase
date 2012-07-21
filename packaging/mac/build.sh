@@ -4,7 +4,13 @@
 # Assumes that we are in the PortaBase source code root directory
 # Takes the parameter to make -j as an argument, for utilizing multiple cores
 
-VERSION=2.0
+# By default, builds a 64-bit Intel binary.  If you want to build a universal
+# binary that runs on PowerPC and 32-bit Intel Macs, pass the string
+# "universal" as the second parameter.  You'll need to have a suitably old or
+# hacked version of Xcode, and appropriately compiled versions of Qt and
+# Metakit.
+
+VERSION=`cat packaging/version_number`
 DIRNAME=PortaBase_$VERSION
 
 # remove old build files
@@ -13,7 +19,11 @@ rm -f build/*.dmg
 rm -rf build/$DIRNAME
 
 # compile and make the application bundle
-qmake -spec macx-llvm portabase.pro
+if [ "$2" == "universal" ]; then
+    qmake -spec macx-g++40 portabase.pro
+else
+    qmake -spec macx-llvm portabase.pro
+fi
 make clean
 lrelease portabase.pro
 lrelease resources/translations/qt*.ts

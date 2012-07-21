@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1557,8 +1557,9 @@ void PortaBase::print(QPrinter *p)
 void PortaBase::aboutPortaBase()
 {
     QString appName = qApp->applicationName();
-    QString text = appName + " 2.0\n\n" + tr("Copyright (C)")
-                   + " 2002-2010\nJeremy Bowman\n\n"
+    QString version = qApp->applicationVersion();
+    QString text = appName + " " + version + "\n\n" + tr("Copyright (C)")
+                   + " " + COPYRIGHT_YEARS + "\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
     QMessageBox::about(this, tr("About %1").arg(appName), text);
 }

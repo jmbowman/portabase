@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=2.0
+VERSION=`cat packaging/version_number`
 DEST=build/diablo/portabase-$VERSION
 
 rm -rf build/diablo
@@ -10,6 +10,11 @@ mv src/portabase.pro src/src.pro
 cp src/packaging/maemo/portabase.pro portabase.pro
 cp -R src/packaging/maemo/debian .
 cp src/packaging/maemo/diablo_control debian/control
+cp src/packaging/maemo/diablo_dirs debian/dirs
+cp src/packaging/maemo/diablo_install debian/install
 cp src/packaging/maemo/diablo_postinst debian/postinst
-dpkg-buildpackage -rfakeroot -sa -S
-#dpkg-buildpackage -rfakeroot -uc -us -sa
+if [ "$1" == "source" ]; then
+    dpkg-buildpackage -rfakeroot -sa -S
+else
+    dpkg-buildpackage -rfakeroot -uc -us -sa
+fi

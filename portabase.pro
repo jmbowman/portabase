@@ -1,11 +1,11 @@
 TEMPLATE        = app
 CONFIG         += qt warn_on thread
+#DEFINES        += TRACE_ENABLED # enables TRACE macro for crash debugging
 QT             += xml
 DESTDIR         = build
 OBJECTS_DIR     = build
 MOC_DIR         = build
 RCC_DIR         = build
-VERSION         = 2.0.0
 TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_de.ts \
                   resources/translations/portabase_en.ts \
@@ -159,11 +159,16 @@ SOURCES         = calc/calcdateeditor.cpp \
                   xmlimport.cpp
 
 # Stuff for all Linux/UNIX versions
-unix:LIBS       += -lm -lmk4
+unix {
+    LIBS               += -lm -lmk4
+    VERSION             = $$system(cat packaging/version_number)
+    COPYRIGHT_YEARS     = $$system(cat packaging/copyright_years)
+}
 
 # Stuff for Mac OS X
 macx {
-    CONFIG             += release x86_64
+    macx-g++40:CONFIG  += release x86 ppc
+    !macx-g++40:CONFIG += release x86_64
     TARGET              = PortaBase
     RESOURCES           = resources/mac.qrc
     ICON                = packaging/mac/PortaBase.icns
@@ -206,7 +211,7 @@ macx {
 }
 
 # Stuff for Maemo
-maemo5|contains(QT_CONFIG, hildon): {
+maemo5|contains(QT_CONFIG, hildon) {
     CONFIG             += debug qdbus
     LIBS               += -L../../src/metakit/builds
     isEmpty(PREFIX) {
@@ -233,17 +238,18 @@ maemo5|contains(QT_CONFIG, hildon): {
     mime.path           = $$DATADIR/mime/packages
     mime.files          = packaging/maemo/portabase-mime.xml
 }
-contains(QT_CONFIG, hildon) {
+contains(QT_CONFIG, hildon):!maemo5 {
     target.path         = $$PREFIX/bin
     RESOURCES           = resources/diablo.qrc
-} else:maemo5 {
+}
+maemo5 {
     QT                 += dbus maemo5
     target.path         = /opt/maemo
     RESOURCES           = resources/fremantle.qrc
 }
 
 # Stuff for other Linux/UNIX platforms
-unix:!macx:!maemo5:!contains(QT_CONFIG, hildon): {
+unix:!macx:!maemo5:!contains(QT_CONFIG, hildon) {
     #QMAKE_CXXFLAGS       += -O0 # for valgrind
     CONFIG               += debug
     LIBS                 += -Lmetakit/builds
@@ -258,6 +264,8 @@ win32 {
     LIBS                   += c:/portabase/metakit/builds/libmk4.a
     RC_FILE                 = portabase.rc
     INCLUDEPATH            += c:/portabase/metakit/include
+    VERSION                 = $$system(type packaging\version_number)
+    COPYRIGHT_YEARS         = $$system(type packaging\copyright_years)
 }
 
 # Stuff for static builds
@@ -266,3 +274,9 @@ static {
     DEFINES            += STATIC_QT
     QMAKE_CXXFLAGS     += -fvisibility=hidden
 }
+
+# Provide the version number and copyright year range
+VERSION_STRING         = '\\"$${VERSION}\\"'
+COPYRIGHT_YEARS_STRING = '\\"$${COPYRIGHT_YEARS}\\"'
+DEFINES               += VERSION_NUMBER=\"$${VERSION_STRING}\"
+DEFINES               += COPYRIGHT_YEARS=\"$${COPYRIGHT_YEARS_STRING}\"

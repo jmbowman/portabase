@@ -1,7 +1,7 @@
 /*
  * qqutil/qqdialog.cpp
  *
- * (c) 2003-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -146,5 +146,8 @@ void QQDialog::finishConstruction(int minWidth, int minHeight)
     if (minWidthSetting != -1 && minHeightSetting != -1) {
         resize(minWidthSetting, minHeightSetting);
     }
+#else
+    Q_UNUSED(minWidth);
+    Q_UNUSED(minHeight);
 #endif
 }

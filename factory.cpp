@@ -1,7 +1,7 @@
 /*
  * factory.cpp
  *
- * (c) 2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -286,7 +286,7 @@ void Factory::translation(QTranslator *translator, const QString &filename,
 #else
         // Hope that Qt isn't returning a formatting locale different from the
         // UI language one
-        bool loaded = translator->load(QString(":/i18n/") + filename + ".qm"));
+        bool loaded = translator->load(QString(":/i18n/") + filename + ".qm");
 #endif
         if (loaded) {
             qApp->installTranslator(translator);

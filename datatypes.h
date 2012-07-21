@@ -1,7 +1,7 @@
 /*
  * datatypes.h
  *
- * (c) 2002,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008,2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,5 +37,11 @@
 #define NOW 0
 
 typedef QList<int> IntList;
+
+#ifdef TRACE_ENABLED
+#define TRACE qDebug("%s@%d", __FILE__, __LINE__)
+#else
+#define TRACE
+#endif
 
 #endif

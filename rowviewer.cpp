@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002-2004,2010-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -158,7 +158,7 @@ void RowViewer::updateContent()
     QStringList values = currentView->getRow(index);
     QStringList colNames = currentView->getColNames();
     int *colTypes = currentView->getColTypes();
-    QString str = "<qt><table cellspacing=0>";
+    QString str = "<table cellspacing=0>";
     int count = colNames.count();
     int imageIndex = 0;
     for (int i = 0; i < count; i++) {
@@ -201,8 +201,9 @@ void RowViewer::updateContent()
         }
         str += "</td></tr>";
     }
-    str += "</table></qt>";
-    tv->setHtml(str);
+    str += "</table>";
+    tv->clear();
+    tv->append(str);
     tv->setFocus();
 }
 

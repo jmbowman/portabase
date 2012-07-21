@@ -1,3 +1,18 @@
+2012-07-21  JMB  Fixed N900 bugs, made packaging improvements
+
+    Fixed a bug where the column statistics dialog didn't have the correct
+    parent widget set when launched via the file properties dialog (mostly a
+    problem on Maemo Fremantle, where this affects the dialog transition
+    animation).  Also changed the way content gets added to HTML display
+    widgets (such as the row viewer, the file properties dialog, and the
+    column statistics dialog) in an attempt to work around a Qt bug which
+    seems to cause intermittent crashes only on the N900.
+    
+    Moved the help files in the Fremantle package to the /opt partition so
+    they don't consume limited space in the root partition.  Made assorted
+    improvements to the build scripts so they don't require as much manual
+    fiddling with each release (read version number from one file, etc.)
+
 2012-07-19  JMB  Fixed column sorting and title bar bugs, fixed help on Maemo
 
     Fixed a recently-introduced bug where clicking on a column header to sort

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=2.0
+VERSION=`cat packaging/version_number`
 DEST=build/debian/portabase-$VERSION
 
 rm -rf build/debian

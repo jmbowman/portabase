@@ -1,7 +1,7 @@
 /*
  * propertiesdialog.cpp
  *
- * (c) 2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2011-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
     vbox->addWidget(display);
 
     QStringList content;
-    content.append("<qt><table cellspacing=\"0\">");
+    content.append("<table cellspacing=\"0\">");
     QString row("<tr><td align=\"right\"><font color=\"#0000ff\">%1: </font></td><td>%2</td></tr>");
 
     QFile file(filePath);
@@ -94,8 +94,9 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
     count = db->listEnums().count();
     content.append(row.arg(tr("Enums")).arg(locale.toString(count)));
 
-    content.append("</table></qt>");
-    display->setHtml(content.join(""));
+    content.append("</table>");
+    display->clear();
+    display->append(content.join(""));
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addStretch(1);
@@ -112,5 +113,5 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
  */
 void PropertiesDialog::showColumnStatistics()
 {
-    vd->showStatistics(true);
+    vd->showStatistics(true, this);
 }

@@ -1,7 +1,7 @@
 /*
  * datewidget.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,9 +29,8 @@
  * @param parent This widget's parent widget
  */
 DateWidget::DateWidget(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent), dateObj(QDate::currentDate())
 {
-    dateObj = QDate::currentDate();
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
 
     QAbstractButton *button = Factory::button(this);

@@ -1,7 +1,7 @@
 /*
  * viewdisplay.h
  *
- * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -74,7 +74,7 @@ public slots:
     void deleteRow();
     void slideshow();
     void viewRow();
-    void showStatistics(bool allColumns=false);
+    void showStatistics(bool allColumns=false, QWidget *parent=0);
 
 protected:
     void keyPressEvent(QKeyEvent *e);

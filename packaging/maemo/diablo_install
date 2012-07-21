@@ -1,0 +1,17 @@
+src/resources/help/_static/* usr/share/portabase/help/_static
+src/resources/help/cs/_build/html/*.html usr/share/portabase/help/cs
+src/resources/help/cs/_build/html/*.inv usr/share/portabase/help/cs
+src/resources/help/cs/_build/html/*.js usr/share/portabase/help/cs
+src/resources/help/cs/_build/html/_sources/* usr/share/portabase/help/cs/_sources
+src/resources/help/en/_build/html/*.html usr/share/portabase/help/en
+src/resources/help/en/_build/html/*.inv usr/share/portabase/help/en
+src/resources/help/en/_build/html/*.js usr/share/portabase/help/en
+src/resources/help/en/_build/html/_sources/* usr/share/portabase/help/en/_sources
+src/resources/help/ja/_build/html/*.html usr/share/portabase/help/ja
+src/resources/help/ja/_build/html/*.inv usr/share/portabase/help/ja
+src/resources/help/ja/_build/html/*.js usr/share/portabase/help/ja
+src/resources/help/ja/_build/html/_sources/* usr/share/portabase/help/ja/_sources
+src/resources/help/zh_TW/_build/html/*.html usr/share/portabase/help/zh_TW
+src/resources/help/zh_TW/_build/html/*.inv usr/share/portabase/help/zh_TW
+src/resources/help/zh_TW/_build/html/*.js usr/share/portabase/help/zh_TW
+src/resources/help/zh_TW/_build/html/_sources/* usr/share/portabase/help/zh_TW/_sources

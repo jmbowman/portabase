@@ -26,6 +26,7 @@ cp portabase.rc $DEST
 cp -R calc $DEST
 cp -R color_picker $DEST
 cp -R debian $DEST
+cp -R doc $DEST
 cp -R encryption $DEST
 cp -R image $DEST
 cp -R metakit $DEST

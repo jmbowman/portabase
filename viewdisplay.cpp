@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -788,8 +788,10 @@ void ViewDisplay::sort(int column)
  *
  * @param allColumns True if the dialog should allow selection of any column
  *                   in the current view, false for just the one clicked
+ * @param parent The parent widget of the dialog (0 if the ViewDisplay
+ *               widget itself is the parent)
  */
-void ViewDisplay::showStatistics(bool allColumns)
+void ViewDisplay::showStatistics(bool allColumns, QWidget *parent)
 {
     QString colName = QString::null;
     if (pressedHeader != -1) {
@@ -799,7 +801,7 @@ void ViewDisplay::showStatistics(bool allColumns)
     else if (!allColumns) {
         return;
     }
-    ColumnInfoDialog info(this);
+    ColumnInfoDialog info(parent ? parent : this);
     if (info.launch(model->view(), colName)) {
         matchNewView(model->view());
         setEdited(true);

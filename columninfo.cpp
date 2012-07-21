@@ -1,7 +1,7 @@
 /*
  * columninfo.cpp
  *
- * (c) 2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2011-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -104,17 +104,18 @@ bool ColumnInfoDialog::launch(View *currentView, const QString &colName)
 void ColumnInfoDialog::columnSelected(int index)
 {
     if (index == -1) {
-        display->setHtml("<qt></qt>");
+        display->clear();
         colWidth->setValue(0);
         return;
     }
     QStringList content;
     QString name = columns->itemText(index);
-    content.append(QString("<qt><center><b>%1</b></center>").arg(name));
+    content.append(QString("<center><b>%1</b></center>").arg(name));
     content.append("<table cellspacing=0>");
     content.append(view->getStatistics(index));
-    content.append("</table></qt>");
-    display->setHtml(content.join(""));
+    content.append("</table>");
+    display->clear();
+    display->append(content.join(""));
     QVariant width = columns->itemData(index);
     if (width.isValid()) {
         colWidth->setValue(width.toInt());
