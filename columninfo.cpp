@@ -16,6 +16,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QSpinBox>
+#include <QTextCursor>
 #include <QTextEdit>
 #include "columninfo.h"
 #include "factory.h"
@@ -114,8 +115,11 @@ void ColumnInfoDialog::columnSelected(int index)
     content.append("<table cellspacing=0>");
     content.append(view->getStatistics(index));
     content.append("</table>");
-    display->clear();
+    display->undo();
     display->append(content.join(""));
+    QTextCursor cursor = display->textCursor();
+    cursor.setPosition(0);
+    display->setTextCursor(cursor);
     QVariant width = columns->itemData(index);
     if (width.isValid()) {
         colWidth->setValue(width.toInt());

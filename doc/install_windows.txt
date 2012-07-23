@@ -3,11 +3,14 @@ Windows Development Environment
 To compile PortaBase for use as a Windows desktop application, you will
 need the following:
 - Windows XP, Vista, or 7
-- A recent version of Qt 4 (http://qt.nokia.com/downloads).  It's easiest to
-  get started with a version that comes with the MinGW compiler, since I
-  haven't tested the latest code with Visual Studio.  Add both the "bin"
-  directory and the "mingw\bin" directory that come with it to your "Path"
-  environment variable.
+- The latest Qt SDK (from http://qt.nokia.com/downloads).  You'll need this
+  even if it doesn't have the very latest version of the Qt framework, because
+  it's the easiest way to install an appropriate version of the MinGW
+  compiler.  Add both the "bin" directory and the "mingw\bin" directory that
+  come with it to your "Path" environment variable.  If you want to use a
+  version of the Qt framework newer than the one bundled with the SDK,
+  download and install the appropriate version and put its "bin" directory in
+  your path instead of the one from the SDK.
 - MSYS 1.0.11 (http://sourceforge.net/projects/mingw/files/MSYS%20Base%20System/msys-1.0.11/MSYS-1.0.11.exe/download).
   This emulates a basic UNIX system on Windows, and is the easiest way to
   compile Metakit with MinGW.  Newer versions are available, but lack a
@@ -23,8 +26,8 @@ searches and locale-sensitive sorting; the patched version is included in the
 "metakit" directory for convenience (and to support the Debian and Maemo
 autobuilders).
 
-To compile Metakit for Windows, first install Qt in order to get the MinGW
-compiler.  Then install MSYS as mentioned above; in the postinstallation
+To compile Metakit for Windows, first install the Qt SDK in order to get the
+MinGW compiler.  Then install MSYS as mentioned above; in the postinstallation
 script, you'll be asked for the path of the MinGW installation that came with
 Qt.  Start MSYS from the installed shortcut, and change to the metakit/builds
 directory that is included with the PortaBase source code.  Note that you use
@@ -32,6 +35,17 @@ directory that is included with the PortaBase source code.  Note that you use
 drive is located at "/c".  From the metakit/builds directory, run
 "../unix/configure --enable-threads --disable-shared".  Once that finishes, run
 "make".  You should now have a libmk4.a static library file in that directory.
+
+Installing Python and Sphinx
+----------------------------
+If you want to generate the help files and/or a PortaBase installer, you'll
+need to install these.  Download the latest Python 2 installer from
+http://www.python.org/download/ and run it.  Then download the appropriate
+installer for setuptools from http://pypi.python.org/pypi/setuptools/ and run
+that also.  Open a new DOS prompt and run "C:\Python27\Scripts\easy_install
+pip" (change the path as necessary) to install a more capable python package
+manager.  Finally, running "C:\Python27\Scripts\pip install Sphinx" will
+install Sphinx and all the other Python libraries that it depends on.
 
 PortaBase Compilation and Packaging
 -----------------------------------

@@ -1,3 +1,9 @@
+2012-07-23  JMB  More HTML display fixes, build script updates
+
+    Fixed the new code for HTML display widgets to correctly display the top
+    of the content first (if there's enough to cause scrolling).  Made more
+    improvements to the build scripts, mostly for Windows.
+
 2012-07-21  JMB  Fixed N900 bugs, made packaging improvements
 
     Fixed a bug where the column statistics dialog didn't have the correct

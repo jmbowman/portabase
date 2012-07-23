@@ -20,6 +20,7 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QTextCursor>
 #include <QTextDocument>
 #include <QTextEdit>
 #include <QUrl>
@@ -161,6 +162,8 @@ void RowViewer::updateContent()
     QString str = "<table cellspacing=0>";
     int count = colNames.count();
     int imageIndex = 0;
+    // remove any previous content; clear() breaks resource loading somehow
+    tv->undo();
     for (int i = 0; i < count; i++) {
         if (i % 2 == 0) {
             str += "<tr>";
@@ -202,8 +205,10 @@ void RowViewer::updateContent()
         str += "</td></tr>";
     }
     str += "</table>";
-    tv->clear();
     tv->append(str);
+    QTextCursor cursor = tv->textCursor();
+    cursor.setPosition(0);
+    tv->setTextCursor(cursor);
     tv->setFocus();
 }
 

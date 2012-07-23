@@ -264,8 +264,8 @@ win32 {
     LIBS                   += c:/portabase/metakit/builds/libmk4.a
     RC_FILE                 = portabase.rc
     INCLUDEPATH            += c:/portabase/metakit/include
-    VERSION                 = $$system(type packaging\version_number)
-    COPYRIGHT_YEARS         = $$system(type packaging\copyright_years)
+    VERSION                 = $$system(type packaging\\version_number)
+    COPYRIGHT_YEARS         = $$system(type packaging\\copyright_years)
 }
 
 # Stuff for static builds

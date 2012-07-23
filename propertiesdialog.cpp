@@ -17,6 +17,7 @@
 #include <QHBoxLayout>
 #include <QLocale>
 #include <QPushButton>
+#include <QTextCursor>
 #include <QTextEdit>
 #include "database.h"
 #include "factory.h"
@@ -95,8 +96,10 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
     content.append(row.arg(tr("Enums")).arg(locale.toString(count)));
 
     content.append("</table>");
-    display->clear();
     display->append(content.join(""));
+    QTextCursor cursor = display->textCursor();
+    cursor.setPosition(0);
+    display->setTextCursor(cursor);
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addStretch(1);

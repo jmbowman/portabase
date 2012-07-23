@@ -17,6 +17,7 @@ DIRNAME=PortaBase_$VERSION
 rm -rf build/*.app
 rm -f build/*.dmg
 rm -rf build/$DIRNAME
+rm -rf resources/help/_static # in case created for Maemo
 
 # compile and make the application bundle
 if [ "$2" == "universal" ]; then

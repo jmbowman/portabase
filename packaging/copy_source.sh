@@ -30,6 +30,10 @@ cp -R doc $DEST
 cp -R encryption $DEST
 cp -R image $DEST
 cp -R metakit $DEST
+rm -f $DEST/metakit/builds/*.a
+rm -f $DEST/metakit/builds/*.o
+rm -f $DEST/metakit/builds/config.*
+rm -f $DEST/metakit/builds/Makefile
 cp -R qqutil $DEST
 cp -R packaging $DEST
 cp -R resources $DEST

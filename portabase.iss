@@ -10,7 +10,7 @@ AppSupportURL=http://portabase.sourceforge.net
 AppUpdatesURL=http://portabase.sourceforge.net
 AppReadmeFile=README.txt
 AppVersion=2.1
-AppCopyright=Copyright (C) 2002-2011 Jeremy Bowman
+AppCopyright=Copyright (C) 2002-2012 Jeremy Bowman
 DefaultDirName={pf}\PortaBase
 DefaultGroupName=PortaBase
 AllowNoIcons=yes
@@ -21,7 +21,7 @@ PrivilegesRequired=admin
 SolidCompression=yes
 OutputBaseFilename=PortaBase_2.1
 OutputDir=build\windows
-VersionInfoVersion=2.0.0.3
+VersionInfoVersion=2.1.0.0
 ShowLanguageDialog=yes
 
 [Tasks]
@@ -53,6 +53,7 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
+Name: "sk"; MessagesFile: "compiler:Languages\Slovak.isl"
 Name: "zh_TW"; MessagesFile: "packaging\windows\ChineseTrad-2-5.1.11.isl"
 
 [Registry]
