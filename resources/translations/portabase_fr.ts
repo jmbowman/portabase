@@ -899,10 +899,6 @@ dans le filtre courant?</translation>
         <translation>Site web: http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Not a PortaBase file</source>
-        <translation type="obsolete">Ce n&apos;est pas un fichier PortaBase</translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation>Fichiers PortaBase</translation>
     </message>
@@ -927,10 +923,6 @@ dans le filtre courant?</translation>
         <translation>A propos de %1</translation>
     </message>
     <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation type="obsolete">Pour obtenir des stats sur une colonne, appuyer sur l&apos;entête de cette colonne pendant au moins une demi seconde</translation>
-    </message>
-    <message>
         <source>No such file exists</source>
         <translation>Un tel fichier n&apos;existe pas</translation>
     </message>
@@ -947,6 +939,14 @@ dans le filtre courant?</translation>
 You will not be able to save any changes you make.</source>
         <translation>Ce fichier est en lecture seule
 Vous ne pourrez pas sauvegarder vos modifications.</translation>
+    </message>
+    <message>
+        <source>HTML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1258,25 +1258,10 @@ Vous ne pourrez pas sauvegarder vos modifications.</translation>
     </message>
 </context>
 <context>
-    <name>QQHelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation>Aide</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>Précédent</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Suivant</translation>
-    </message>
-</context>
-<context>
     <name>QQMainWindow</name>
     <message>
         <source>Not a %1 file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ce n&apos;est pas un fichier %1</translation>
     </message>
     <message>
         <source>Printing aborted</source>

@@ -55,13 +55,6 @@
     </message>
 </context>
 <context>
-    <name>QAccessibleButton</name>
-    <message>
-        <source>Press</source>
-        <translation>Drücken</translation>
-    </message>
-</context>
-<context>
     <name>QApplication</name>
     <message>
         <source>QT_LAYOUT_DIRECTION</source>
@@ -164,49 +157,6 @@
     <message>
         <source>Close</source>
         <translation>Schließen</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>%1: key is empty</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Ungültige Schlüsselangabe (leer)</translation>
-    </message>
-    <message>
-        <source>%1: unable to make key</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Es kann kein Schlüssel erzeugt werden</translation>
-    </message>
-    <message>
-        <source>%1: ftok failed</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: ftok-Aufruf ist fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>%1: already exists</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: existiert bereits</translation>
-    </message>
-    <message>
-        <source>%1: does not exist</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Nicht existent</translation>
-    </message>
-    <message>
-        <source>%1: out of resources</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Keine Ressourcen mehr verfügbar</translation>
-    </message>
-    <message>
-        <source>%1: permission denied</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Zugriff verweigert</translation>
-    </message>
-    <message>
-        <source>%1: unknown error %2</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Unbekannter Fehler %2</translation>
     </message>
 </context>
 <context>
@@ -966,33 +916,6 @@ Möchten Sie die Datei trotzdem löschen?</translation>
     <message>
         <source>Hide Details...</source>
         <translation>Details ausblenden...</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Invalid hostname</source>
-        <translation>Ungültiger Rechnername</translation>
-    </message>
-    <message>
-        <source>Operation not supported on %1</source>
-        <translation>Diese Operation wird von %1 nicht unterstützt</translation>
-    </message>
-    <message>
-        <source>Invalid URI: %1</source>
-        <translation>Ungültiger URI: %1</translation>
-    </message>
-    <message>
-        <source>Socket error on %1: %2</source>
-        <translation>Socket-Fehler bei %1: %2</translation>
-    </message>
-    <message>
-        <source>Remote host closed the connection prematurely on %1</source>
-        <translation>Der entfernte Rechner hat die Verbindung zu %1 vorzeitig beendet</translation>
-    </message>
-    <message>
-        <source>No host name given</source>
-        <translation>Es wurde kein Hostname angegeben</translation>
     </message>
 </context>
 <context>

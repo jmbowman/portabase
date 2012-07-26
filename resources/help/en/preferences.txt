@@ -66,7 +66,7 @@ The "Date and Time" tab contains the following options:
 Appearance
 ----------
 
-In the "Font" section of the Appearance tab you can pick any font that is available for use, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may use this if the default font doesn't support unicode characters (rare on modern systems) or to fit more text on the screen.  (This option isn't available on Mac OS X, which doesn't seem to like applications using non-standard fonts for the UI.)
+In the "Font" section of the Appearance tab you can pick any font that is available for use, in any size it is available in.  That font will then be used for all text in PortaBase (even after exiting the application and restarting it) until you pick a different one.  You may use this if the default font doesn't support unicode characters (rare on modern systems) or to fit more text on the screen.  (This option isn't available on Mac OS X, which doesn't seem to like applications using non-standard fonts for the UI.)  On Maemo Fremantle, the rows will remain at a finger-friendly height regardless of font size unless the "Adjust row height to match font" option is checked.
 
 The "Row Colors" section contains two buttons which allow you to choose the colors which will be used for the backgrounds of rows in the data viewer, columns editor, view editor, and sorting editor.  Each button shows one of the current colors; clicking on one launches a color selection dialog in which you can pick a different color to use.
 

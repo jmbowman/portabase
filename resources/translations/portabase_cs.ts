@@ -899,10 +899,6 @@ vyhovující filtru?</translation>
         <translation>Domovská stránka: http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Not a PortaBase file</source>
-        <translation type="obsolete">Není souborem PortaBase</translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation>Soubory PortaBase</translation>
     </message>
@@ -943,6 +939,14 @@ vyhovující filtru?</translation>
 You will not be able to save any changes you make.</source>
         <translation>Tento soubor je určen jen ke čtení.
 Pokud v něm provedete změny, nebude možné je uložit.</translation>
+    </message>
+    <message>
+        <source>HTML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1254,25 +1258,10 @@ Pokud v něm provedete změny, nebude možné je uložit.</translation>
     </message>
 </context>
 <context>
-    <name>QQHelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation>Nápověda</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation> Zpět </translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Vpřed</translation>
-    </message>
-</context>
-<context>
     <name>QQMainWindow</name>
     <message>
         <source>Not a %1 file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Není souborem %1</translation>
     </message>
     <message>
         <source>Printing aborted</source>

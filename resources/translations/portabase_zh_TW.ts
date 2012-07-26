@@ -893,10 +893,6 @@ current filter?</source>
         <translation>網址 http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Not a PortaBase file</source>
-        <translation type="obsolete">不是PortaBase 檔案</translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation>PortaBase檔案</translation>
     </message>
@@ -921,10 +917,6 @@ current filter?</source>
         <translation>約 1％</translation>
     </message>
     <message>
-        <source>For statistics on a particular column, press and hold that column&apos;s header for at least half of a second</source>
-        <translation type="obsolete">對於一個特定列的統計數字，按住該列的標題至少一半的第二個</translation>
-    </message>
-    <message>
         <source>No such file exists</source>
         <translation>沒有這樣的文件存在</translation>
     </message>
@@ -940,6 +932,14 @@ current filter?</source>
         <source>This file is read-only.
 You will not be able to save any changes you make.</source>
         <translation>此文件是只讀的。您將無法保存任何更改。</translation>
+    </message>
+    <message>
+        <source>HTML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1251,25 +1251,10 @@ You will not be able to save any changes you make.</source>
     </message>
 </context>
 <context>
-    <name>QQHelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation>說明</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>上一頁</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>下一頁</translation>
-    </message>
-</context>
-<context>
     <name>QQMainWindow</name>
     <message>
         <source>Not a %1 file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">不是%1 檔案</translation>
     </message>
     <message>
         <source>Printing aborted</source>

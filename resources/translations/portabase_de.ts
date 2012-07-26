@@ -898,10 +898,6 @@ Filter löschen?</translation>
         <translation>Homepage: http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>Not a PortaBase file</source>
-        <translation type="obsolete">Das ist keine Portabase-Datei</translation>
-    </message>
-    <message>
         <source>PortaBase files</source>
         <translation>PortaBase Dateien</translation>
     </message>
@@ -940,6 +936,14 @@ Filter löschen?</translation>
     <message>
         <source>This file is read-only.
 You will not be able to save any changes you make.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1252,25 +1256,10 @@ You will not be able to save any changes you make.</source>
     </message>
 </context>
 <context>
-    <name>QQHelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation type="unfinished">Zurück</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation type="unfinished">Vorwärts</translation>
-    </message>
-</context>
-<context>
     <name>QQMainWindow</name>
     <message>
         <source>Not a %1 file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Das ist keine %1-Datei</translation>
     </message>
     <message>
         <source>Printing aborted</source>

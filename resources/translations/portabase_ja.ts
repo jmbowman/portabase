@@ -938,6 +938,14 @@ You will not be able to save any changes you make.</source>
         <translation>このファイルは書き込み禁止です
 変更は保存出来ません</translation>
     </message>
+    <message>
+        <source>HTML</source>
+        <translation>HTML</translation>
+    </message>
+    <message>
+        <source>HTML files</source>
+        <translation>HTMLファイル</translation>
+    </message>
 </context>
 <context>
     <name>Preferences</name>
@@ -1245,21 +1253,6 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Missing file</source>
         <translation>ファイルは存在しません</translation>
-    </message>
-</context>
-<context>
-    <name>QQHelpBrowser</name>
-    <message>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>進む</translation>
     </message>
 </context>
 <context>

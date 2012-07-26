@@ -55,13 +55,6 @@
     </message>
 </context>
 <context>
-    <name>QAccessibleButton</name>
-    <message>
-        <source>Press</source>
-        <translation>Stisknout</translation>
-    </message>
-</context>
-<context>
     <name>QApplication</name>
     <message>
         <source>Activates the program&apos;s main window</source>
@@ -168,56 +161,6 @@
     <message>
         <source>False</source>
         <translation>Nepravda</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>%1: key is empty</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Klíč je prázdný</translation>
-    </message>
-    <message>
-        <source>%1: unable to make key</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Nelze vytvořit klíč</translation>
-    </message>
-    <message>
-        <source>%1: ftok failed</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Vyvolání ftok se nezdařilo</translation>
-    </message>
-    <message>
-        <source>%1: key is empty</source>
-        <translation type="obsolete">%1: Klíč je prázdný</translation>
-    </message>
-    <message>
-        <source>%1: unable to make key</source>
-        <translation type="obsolete">%1: Nelze vytvořit klíč</translation>
-    </message>
-    <message>
-        <source>%1: ftok failed</source>
-        <translation type="obsolete">%1: Vyvolání ftok se nezdařilo</translation>
-    </message>
-    <message>
-        <source>%1: already exists</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Již existuje</translation>
-    </message>
-    <message>
-        <source>%1: does not exist</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Neexistuje</translation>
-    </message>
-    <message>
-        <source>%1: out of resources</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Nedostatek prostředků</translation>
-    </message>
-    <message>
-        <source>%1: unknown error %2</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: Neznámá chyba %2</translation>
     </message>
 </context>
 <context>
@@ -965,49 +908,6 @@ Ověřte, prosím, že bylo zadáno správné jméno souboru.</translation>
     <message>
         <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
         <translation type="obsolete">&lt;p&gt;Tento program používá Qt-verze %1.&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Invalid hostname</source>
-        <translation>Neplatné jméno hostitele</translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="obsolete">Domů</translation>
-    </message>
-    <message>
-        <source>Protocol error: packet of size 0 received</source>
-        <translation type="obsolete">Chyba protokolu: Byl přijat paket o nulové velikosti</translation>
-    </message>
-    <message>
-        <source>Invalid URI: %1</source>
-        <translation>Neplatná adresa: %1</translation>
-    </message>
-    <message>
-        <source>Socket error on %1: %2</source>
-        <translation>Chyba socketu na %1: %2</translation>
-    </message>
-    <message>
-        <source>No host name given</source>
-        <translation>Nebylo zadáno jméno hostitele</translation>
-    </message>
-    <message>
-        <source>Read error reading from %1: %2</source>
-        <translation type="obsolete">Při čtení ze souboru %1 nastala chyba: %2</translation>
-    </message>
-    <message>
-        <source>Remote host closed the connection prematurely on %1</source>
-        <translation>Vzdálený počítač předčasně ukončil spojení s %1</translation>
-    </message>
-    <message>
-        <source>Operation not supported on %1</source>
-        <translation>Tato operace není %1 podporována</translation>
-    </message>
-    <message>
-        <source>Write error writing to %1: %2</source>
-        <translation type="obsolete">Při zápisu do souboru %1: %2 nastala chyba</translation>
     </message>
 </context>
 <context>

@@ -1,0 +1,15 @@
+[main]
+host = https://www.transifex.com
+
+[portabase.portabase]
+file_filter = resources/translations/portabase_<lang>.ts
+source_file = resources/translations/portabase_en.ts
+source_lang = en
+type = QT
+
+[portabase.qt]
+file_filter = resources/translations/qt_<lang>.ts
+source_file = resources/translations/qt_en.ts
+source_lang = en
+type = QT
+

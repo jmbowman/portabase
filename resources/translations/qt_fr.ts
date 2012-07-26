@@ -176,54 +176,6 @@
     </message>
 </context>
 <context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>%1: permission denied</source>
-        <comment>QSystemSemaphore</comment>
-        <translation type="obsolete">%1: permission refusée</translation>
-    </message>
-    <message>
-        <source>%1: already exists</source>
-        <comment>QSystemSemaphore</comment>
-        <translation type="obsolete">%1: existe déjà</translation>
-    </message>
-    <message>
-        <source>%1: doesn&apos;t exists</source>
-        <comment>QSystemSemaphore</comment>
-        <translation type="obsolete">%1: n&apos;existe pas</translation>
-    </message>
-    <message>
-        <source>%1: does not exist</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1 : n&apos;existe pas</translation>
-    </message>
-    <message>
-        <source>%1: out of resources</source>
-        <comment>QSystemSemaphore</comment>
-        <translation type="obsolete">%1: plus de ressources disponibles</translation>
-    </message>
-    <message>
-        <source>%1: unknown error %2</source>
-        <comment>QSystemSemaphore</comment>
-        <translation type="obsolete">%1: erreur inconnue %2</translation>
-    </message>
-    <message>
-        <source>%1: key is empty</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: clé vide</translation>
-    </message>
-    <message>
-        <source>%1: unable to make key</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: impossible de créer la clé</translation>
-    </message>
-    <message>
-        <source>%1: ftok failed</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: ftok a échoué</translation>
-    </message>
-</context>
-<context>
     <name>QDialog</name>
     <message>
         <source>What&apos;s This?</source>
@@ -1028,45 +980,6 @@ Voulez-vous quand même le supprimer ?</translation>
     <message>
         <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Qt est une bibliothèque logicielle C++ pour le développement d’applications multiplateformes.&lt;/p&gt;&lt;p&gt;Qt fournit une portabilité source unique pour MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux et les principales variantes commerciales d’Unix. Qt est également disponible pour appareils intégrés comme Qt pour Embedded Linux et Qt pour Windows CE.&lt;/p&gt;&lt;p&gt;Il existe trois options de licence différentes conçues pour s’adapter aux besoins d’utilisateurs variés.&lt;/p&gt;&lt;p&gt;Qt concédée sous notre contrat de licence commerciale est destinée au développement de logiciels propriétaires/commerciaux dont vous ne souhaitez pas partager le code source avec des tiers ou qui ne peuvent se conformer aux termes de la LGPL GNU version 2.1 ou GPL GNU version 3.0.&lt;/p&gt;&lt;p&gt;Qt concédée sous la LGPL GNU version 2.1 est destinée au développement d’applications Qt (propriétaires ou libres) à condition que vous vous conformiez aux conditions générales de la LGPL GNU version 2.1.&lt;/p&gt;&lt;p&gt;Qt concédée sous la licence publique générale GNU version 3.0 est destinée au développement d’applications Qt lorsque vous souhaitez utiliser ces applications avec d’autres logiciels soumis aux termes de la GPL GNU version 3.0 ou lorsque vous acceptez les termes de la GPL GNU version 3.0.&lt;/p&gt;&lt;p&gt;Veuillez consulter&lt;a href=&quot;http : //qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; pour un aperçu des concessions de licences Qt.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation et/ou ses filiales.&lt;/p&gt;&lt;p&gt;Qt est un produit Nokia. Voir &lt;a href=&quot;http : //qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; pour de plus amples informations.&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Home</source>
-        <translation>Début</translation>
-    </message>
-    <message>
-        <source>Operation not supported on %1</source>
-        <translation>Opération non supportée sur %1</translation>
-    </message>
-    <message>
-        <source>Invalid URI: %1</source>
-        <translation>URI invalide : %1</translation>
-    </message>
-    <message>
-        <source>Write error writing to %1: %2</source>
-        <translation>Erreur d&apos;écriture sur %1 : %2</translation>
-    </message>
-    <message>
-        <source>Read error reading from %1: %2</source>
-        <translation>Erreur de lecture sur %1 : %2</translation>
-    </message>
-    <message>
-        <source>Socket error on %1: %2</source>
-        <translation>Erreur de socket sur %1 : %2</translation>
-    </message>
-    <message>
-        <source>Remote host closed the connection prematurely on %1</source>
-        <translation>L&apos;hôte distant a fermé sa connexion de façon prématurée sur %1</translation>
-    </message>
-    <message>
-        <source>Protocol error: packet of size 0 received</source>
-        <translation>Erreur de protocole: paquet de taille 0 reçu</translation>
-    </message>
-    <message>
-        <source>No host name given</source>
-        <translation>Nom d&apos;hôte manquant</translation>
     </message>
 </context>
 <context>

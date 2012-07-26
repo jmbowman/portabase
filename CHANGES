@@ -1,3 +1,9 @@
+2012-07-26  JMB  Updated UI translation files, Transifex setup
+
+    Got the translation files ready for the translators to update for the next
+    release.  Mapped the files to the PortaBase translation project on
+    Transifex.
+
 2012-07-23  JMB  More HTML display fixes, build script updates
 
     Fixed the new code for HTML display widgets to correctly display the top
