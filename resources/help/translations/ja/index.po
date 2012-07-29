@@ -1,0 +1,24 @@
+# Messages from index.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 03:04+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 3cf6a454c62e4f86913054fa551e75ba
+#: ../../index.txt:2
+msgid "PortaBase - A Portable Database"
+msgstr "PortaBase - A Portable Database"

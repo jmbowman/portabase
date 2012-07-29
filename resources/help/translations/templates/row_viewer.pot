@@ -1,0 +1,68 @@
+# Messages from row_viewer.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase 2.1\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../row_viewer.txt:4
+# d83cb19482c545a287e5517ac659ca08
+msgid "Row viewer"
+msgstr ""
+
+#: ../../row_viewer.txt:6
+# 1815b6155ccc4b05a68f5dc431512d4b
+msgid "The row viewer is a dialog designed to conveniently see all of the data for one row at a time.  Like the row editor, it has the column labels on the left and values on the right.  But the values are not editable, and they wrap so you don't have to scroll horizontally to see everything.  The complete content of note fields is shown as well, instead of just the first few words.  By default, only the columns in the current view are shown (in the view-specified order); to see a different set of columns, select the appropriate view from the droplist at the bottom of the dialog.  Pressing the left and right arrows at the bottom of the screen or the left and right arrow keys allows you to navigate between rows in the current view.  There are a few other buttons buttons at the bottom of the dialog:"
+msgstr ""
+
+#: ../../row_viewer.txt:9
+# 10b8ef961b7c458eb4bcf2bef5c5eb1e
+msgid "**Edit**"
+msgstr ""
+
+#: ../../row_viewer.txt:9
+# 79ef41afe553419db3e2262aac43f412
+msgid "Launch the :ref:`row editor <row_editor>` for the current row; if you click \"OK\"/\"Done\" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer."
+msgstr ""
+
+#: ../../row_viewer.txt:12
+# 083d945fc0df40af99ac32fb526f7089
+msgid "**Copy Row**"
+msgstr ""
+
+#: ../../row_viewer.txt:12
+# 87b3e4e43fa642d2926db885afd3a5ac
+msgid "Launch the row editor with a copy of the current row; if you click \"OK\"/\"Done\" in the row editor you will be taken back to the data viewer, otherwise you will be returned to the row viewer."
+msgstr ""
+
+#: ../../row_viewer.txt:15
+# 238c6607f66d441e9a34655246176717
+msgid "**Delete**"
+msgstr ""
+
+#: ../../row_viewer.txt:15
+# de62b194bf7a4c4895e77ca03ee5c442
+msgid "Delete the shown row."
+msgstr ""
+
+#: ../../row_viewer.txt:17
+# 4d4b11cc6c1740b18f041019eda4e0a4
+msgid "**Copy Text**"
+msgstr ""
+
+#: ../../row_viewer.txt:18
+# 08dbd32d27a142eca56bc0f65ef89581
+msgid "Copy the currently selected text (if any) to the clipboard. (Not shown in Maemo because dragging motions scroll the display rather than selecting text; copy text from the row editor instead.)"
+msgstr ""
+

@@ -1,0 +1,122 @@
+# Messages from columns_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 04:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 70275c548f364860943f77248e3d62e9
+#: ../../columns_editor.txt:4
+msgid "Columns editor"
+msgstr "フォーマット編集画面"
+
+# 71dc7335c0314dadade4cd2f9b457f5c
+#: ../../columns_editor.txt:6
+msgid ""
+"Each PortaBase file contains one table of a user-defined format.  The format"
+" of this table is determined by a sequence of data columns, each of which "
+"has its own name, data type, and default value. When creating a new "
+"PortaBase file, this dialog is shown so the data columns can be defined.  "
+"The columns of an existing file can also be edited at any time using this "
+"dialog by selecting the \"Edit Columns\" menu item (in the :ref:`data viewer"
+" <data_viewer>`, under the \"File\" menu except on Maemo where the menus are"
+" flattened)."
+msgstr "PortaBaseファイルはそれぞれ、ユーザーが定義したフォーマットのテーブルを1つ含んでいます。このテーブルのフォーマットは一連のデータフィールドから決定されており、フィールドはそれぞれ名前、データタイプ、デフォルト値を持っています。PortaBaseファイルの新規作成時にはこのダイアログが表示され、データフィールドを定義することができます。既存のファイルのフィールドもいつでも、\\ :ref:`データ表示画面 <data_viewer>`\\ の\"ファイル\"メニューの\"フォーマット編集\"を選択し、このダイアログを使って編集できます。（メニューの構成が簡単なMaemoでは、このオプションは\"ファイル\"メニューの下ではなく、直接メニューに入っている。）"
+
+# 03a7c33339fd423f9d6863497e9e6d05
+#: ../../columns_editor.txt:8
+msgid ""
+"The current column definitions are displayed as rows in a list, in the order"
+" in which they appear in the :ref:`row editor <row_editor>`.  These column "
+"definitions are manipulated using the buttons in the dialog:"
+msgstr "現在のフィールド定義が１フィールドにつき１行の形で、\\ :ref:`レコード編集画面 <row_editor>`\\ で表示されるのと同じ順番で一覧表示されます。これらのフィールド定義は、ダイアログのボタンを使って操作することができます:"
+
+# 69bd093ac9a84b409b42e545f929684c
+#: ../../columns_editor.txt:11
+msgid "**Add**"
+msgstr "**作成**"
+
+# 75049522062a4269bdd9501c7227226a
+#: ../../columns_editor.txt:11
+msgid ""
+"Create a new column definition at the end of the list.  A small dialog is "
+"shown which allows you to enter the name, data type, and default value of "
+"the new column.  (If you select \"(New Enum)\" from the type list in this "
+"dialog, the :ref:`enum editor <enum_editor>` will be launched to allow you "
+"to add one.)  The default value is what will be entered for this column in "
+"any already existing data rows, and it will appear in the row editor when "
+"adding new rows as well."
+msgstr "リストの最後に新しいフィールド定義を作成します。名前、データタイプ、そしてデフォルト値を入力するための小さなダイアログが表示されます。（もしこのダイアログのタイプリストから\"(新しい列挙)\"を選択した場合、これを追加するための\\ :ref:`列挙編集画面 <enum_editor>`\\ が起動されます。）デフォルト値は、既存のデータレコードのこのフィールドに入力され、新しいレコードを追加する時にもレコード編集画面に表示されます。"
+
+# 9754b7418b504863835965439af12933
+#: ../../columns_editor.txt:14
+msgid "**Edit**"
+msgstr "**編集**"
+
+# 9e548c2357a04fef84dfefe2485ed14a
+#: ../../columns_editor.txt:14
+msgid ""
+"Edit the currently selected column definition.  Note that the data type "
+"cannot be changed.  If the default value is changed, the new default will "
+"appear in the row editor when adding new rows; existing rows are unaffected."
+msgstr "選択されているフィールド定義を編集します。データタイプは変更できないことに注意してください。デフォルト値が変更されると、この新しいデフォルト値が新規レコード作成時のレコード編集画面で表示されます; 既存のレコードには影響しません。"
+
+# 9aa088a18fe943658edb1a63fbf4ffb7
+#: ../../columns_editor.txt:17
+msgid "**Delete**"
+msgstr "**削除**"
+
+# 787c8356a95745aa88b36bdbcb3844d5
+#: ../../columns_editor.txt:17
+msgid ""
+"Delete the currently selected column definition.  All data stored in that "
+"column will be lost."
+msgstr "選択されているフィールド定義を削除します。このフィールドに入力されているデータはすべて失われます。"
+
+# f053506909d54147b0a1666a7a1e3540
+#: ../../columns_editor.txt:20
+msgid "**Up**"
+msgstr "**上げる**"
+
+# 451674dd12bf44cd85208f66578851ce
+#: ../../columns_editor.txt:20
+msgid ""
+"Move the currently selected column up one position in the list (and hence in"
+" the row editor as well)."
+msgstr "選択されているフィールドのリスト上での位置を一つ上げます（それに伴って、レコード編集画面上でも一つ上の位置に表示されます）。"
+
+# 7bc960e2ce5140b7b88a2a22023c5a31
+#: ../../columns_editor.txt:23
+msgid "**Down**"
+msgstr "**下げる**"
+
+# adcaa601e93443c3bf23dcbe205436d4
+#: ../../columns_editor.txt:23
+msgid ""
+"Move the currently selected column down one position in the list (and hence "
+"in the row editor as well)."
+msgstr "選択されているフィールドのリスト上での位置を一つ下げます（それに伴って、レコード編集画面上でも一つ下の位置に表示されます）。"
+
+# 897e3e701ec7431d8c78dacb327fe880
+#: ../../columns_editor.txt:25
+msgid ""
+"None of the changes made to the table format are applied until the \"OK\" "
+"(\"Done\" on Maemo Fremantle) button is pressed; if the dialog is exited by "
+"cancelling instead, the changes are discarded and the file format is left as"
+" it was.  If the dialog is cancelled while defining the columns of a new "
+"file, the file creation is aborted; otherwise, exiting the dialog takes you "
+"to the :ref:`data viewer <data_viewer>`."
+msgstr "テーブルフォーマットに行った変更は、\"OK\"ボタンが押されるまでは適用されません: 代りにキャンセルするのを選ぶと、変更は破棄され、元々のファイルのフォーマットが残されます。新規ファイルのフィールド定義注にキャンセルする場合、ファイル作成はアボートされます; それ以外の時は、どちらかのダイアログクローズボタンを押すと\\ :ref:`データ表示画面 <data_viewer>`\\ に移ります。"

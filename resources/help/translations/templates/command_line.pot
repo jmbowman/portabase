@@ -1,0 +1,128 @@
+# Messages from command_line.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase 2.1\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../command_line.txt:4
+# 4b3e9ac074e14ad885c2478af29b2869
+msgid "Command line usage"
+msgstr ""
+
+#: ../../command_line.txt:6
+# bd407972ea8842bbaf265b72ac6ae49b
+msgid "PortaBase can be used from a Linux/UNIX terminal or DOS prompt to import or export data without needing to go through the graphical interface.  This can be particularly useful if you want to write scripts that automatically generate, update, or otherwise manipulate PortaBase data files.  Run ``portabase -h`` for usage instructions; in summary, you can do the following:"
+msgstr ""
+
+#: ../../command_line.txt:9
+# 87dc7c3302e948718939c8edfe4a3913
+msgid ":samp:`portabase {file}`"
+msgstr ""
+
+#: ../../command_line.txt:9
+# 32e45eb1f1f9488bb5796dba07f14d95
+msgid "Launch PortaBase and immediately open the named PortaBase data file."
+msgstr ""
+
+#: ../../command_line.txt:12
+# 3c8ce4744141449880f31a4332f60aff
+msgid ":samp:`portabase fromxml {xmlfile pobfile}`"
+msgstr ""
+
+#: ../../command_line.txt:12
+# 3afdaa6b522a44fead0ff4f85e1cb822
+msgid "Create a new PortaBase data file at *pobfile* from the PortaBase-format XML file located at *xmlfile*."
+msgstr ""
+
+#: ../../command_line.txt:15
+# f431dc09a08348b58f666445481fd27e
+msgid ":samp:`portabase fromcsv {csvfile pobfile}`"
+msgstr ""
+
+#: ../../command_line.txt:15
+# 6e8730127ae94060890c6081d69381f3
+msgid "Add rows to the existing PortaBase data file at *pobfile* from the CSV file located at *csvfile*."
+msgstr ""
+
+#: ../../command_line.txt:18
+# e2f949af22ef482987caaadf5cf64486
+msgid ":samp:`portabase frommobiledb {mdbfile pobfile}`"
+msgstr ""
+
+#: ../../command_line.txt:18
+# c2b341cbc37e415580fe4db5bc3a9406
+msgid "Create a new PortaBase data file at *pobfile* from the MobileDB file located at *mdbfile*."
+msgstr ""
+
+#: ../../command_line.txt:21
+# d04aa8ce8e2e472ca47ff1cf311c5b05
+msgid ":samp:`portabase toxml {pobfile xmlfile}`"
+msgstr ""
+
+#: ../../command_line.txt:21
+# 7e135d2319e541e18fdad426f7d8e9c7
+msgid "Create a new XML file at *xmlfile* from the PortaBase data file located at *pobfile*."
+msgstr ""
+
+#: ../../command_line.txt:24
+# 524f36d5e5fc4e5b90e171ee8a14f68f
+msgid ":samp:`portabase tocsv {pobfile csvfile}`"
+msgstr ""
+
+#: ../../command_line.txt:24
+# db0b3b57b89447a0a045de462de0f0d1
+msgid "Create a new CSV file at *csvfile* from rows in the PortaBase data file located at *pobfile*."
+msgstr ""
+
+#: ../../command_line.txt:27
+# 76f42311fc1240caab72e60b82e0a78d
+msgid ":samp:`portabase tohtml {pobfile htmlfile}`"
+msgstr ""
+
+#: ../../command_line.txt:27
+# 95e5804cc5af4e6aa29ebef9cab4a7c9
+msgid "Create a new HTML file at *htmlfile* from rows in the PortaBase data file located at *pobfile*."
+msgstr ""
+
+#: ../../command_line.txt:29
+# 34cdb28b136449d7a023e4b2d0e44e4f
+msgid "To extract data from, add rows to, or create an encrypted file, type :samp:`-p {password}` immediately after the conversion command (before the other options described below)."
+msgstr ""
+
+#: ../../command_line.txt:31
+# 47c15e9af058494faa111608d903b5cb
+msgid "The following options can be used between ``toxml``, ``tocsv``, or ``tohtml`` and the PortaBase file to export from:"
+msgstr ""
+
+#: ../../command_line.txt:33
+# 5d6b233cd46041e2b0c670906b13fbaa
+msgid "Apply the named view before exporting."
+msgstr ""
+
+#: ../../command_line.txt:34
+# 71af851a67fc4a4c8dcb6cf5074ad9db
+msgid "Apply the named sorting before exporting."
+msgstr ""
+
+#: ../../command_line.txt:35
+# d297a2eb20b948408c7f13361d760710
+msgid "Apply the named filter before exporting."
+msgstr ""
+
+#: ../../command_line.txt:37
+# 0af6523a1160474ba4a62dd8d3ffb4f4
+msgid "For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.sourceforge.net)."
+msgstr ""
+

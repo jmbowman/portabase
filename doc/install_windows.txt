@@ -39,13 +39,16 @@ drive is located at "/c".  From the metakit/builds directory, run
 Installing Python and Sphinx
 ----------------------------
 If you want to generate the help files and/or a PortaBase installer, you'll
-need to install these.  Download the latest Python 2 installer from
-http://www.python.org/download/ and run it.  Then download the appropriate
-installer for setuptools from http://pypi.python.org/pypi/setuptools/ and run
-that also.  Open a new DOS prompt and run "C:\Python27\Scripts\easy_install
-pip" (change the path as necessary) to install a more capable python package
-manager.  Finally, running "C:\Python27\Scripts\pip install Sphinx" will
-install Sphinx and all the other Python libraries that it depends on.
+need to install these if you don't already have them.  Download the latest
+Python 2 installer from http://www.python.org/download/ and run it.  Then
+download the appropriate installer for setuptools from
+http://pypi.python.org/pypi/setuptools/ and run that also.  Open a new DOS
+prompt and run "C:\Python27\Scripts\easy_install pip" (change the path as
+necessary) to install a more capable python package manager.  Running
+"C:\Python27\Scripts\pip install Sphinx" will install Sphinx and all the other
+Python libraries that it depends on.  To be able to automatically download the
+latest help page translations from Transifex, also run
+"C:\Python27\Scripts\pip install transifex-client".
 
 PortaBase Compilation and Packaging
 -----------------------------------

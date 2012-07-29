@@ -38,9 +38,5 @@ cp -R qqutil $DEST
 cp -R packaging $DEST
 cp -R resources $DEST
 if [ "$KEEP_HELP" = "no" ]; then
-    rm -rf $DEST/resources/help/_static
-    rm -rf $DEST/resources/help/cs/_build
-    rm -rf $DEST/resources/help/en/_build
-    rm -rf $DEST/resources/help/ja/_build
-    rm -rf $DEST/resources/help/zh_TW/_build
+    rm -rf $DEST/resources/help/_build
 fi

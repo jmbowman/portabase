@@ -19,6 +19,15 @@ To compile Metakit for use in Linux desktop PortaBase, just follow the README
 directions (the "UNIX" instructions); you'll want to pass the
 "--enable-threads" and "--disable-shared" parameters to the configure script.
 
+Help Pages Generation
+---------------------
+Make sure you have Python 2.4 or higher installed, as well as the "pip"
+installer for Python packages.  Install Sphinx by running "pip install Sphinx"
+as root or using sudo.  To be able to automatically download the latest help
+page translations from Transifex, also run "pip install transifex-client".
+Use the script at packaging/generate_help.sh to generate the help files; see
+the top of the script for usage information.
+
 Debian Package Building
 -----------------------
 To create a Debian package for the desktop version of PortaBase, from the

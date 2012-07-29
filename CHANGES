@@ -1,3 +1,9 @@
+2012-07-29  JMB  Proper internationalization of help pages
+
+    Reworked how the help files are generated so that the translations for
+    them can be managed online with Transifex just like the UI translations.
+    Updated the build scripts accordingly.
+
 2012-07-26  JMB  Updated UI translation files, Transifex setup
 
     Got the translation files ready for the translators to update for the next

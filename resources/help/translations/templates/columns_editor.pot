@@ -1,0 +1,88 @@
+# Messages from columns_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase 2.1\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../columns_editor.txt:4
+# 70275c548f364860943f77248e3d62e9
+msgid "Columns editor"
+msgstr ""
+
+#: ../../columns_editor.txt:6
+# 71dc7335c0314dadade4cd2f9b457f5c
+msgid "Each PortaBase file contains one table of a user-defined format.  The format of this table is determined by a sequence of data columns, each of which has its own name, data type, and default value. When creating a new PortaBase file, this dialog is shown so the data columns can be defined.  The columns of an existing file can also be edited at any time using this dialog by selecting the \"Edit Columns\" menu item (in the :ref:`data viewer <data_viewer>`, under the \"File\" menu except on Maemo where the menus are flattened)."
+msgstr ""
+
+#: ../../columns_editor.txt:8
+# 03a7c33339fd423f9d6863497e9e6d05
+msgid "The current column definitions are displayed as rows in a list, in the order in which they appear in the :ref:`row editor <row_editor>`.  These column definitions are manipulated using the buttons in the dialog:"
+msgstr ""
+
+#: ../../columns_editor.txt:11
+# 69bd093ac9a84b409b42e545f929684c
+msgid "**Add**"
+msgstr ""
+
+#: ../../columns_editor.txt:11
+# 75049522062a4269bdd9501c7227226a
+msgid "Create a new column definition at the end of the list.  A small dialog is shown which allows you to enter the name, data type, and default value of the new column.  (If you select \"(New Enum)\" from the type list in this dialog, the :ref:`enum editor <enum_editor>` will be launched to allow you to add one.)  The default value is what will be entered for this column in any already existing data rows, and it will appear in the row editor when adding new rows as well."
+msgstr ""
+
+#: ../../columns_editor.txt:14
+# 9754b7418b504863835965439af12933
+msgid "**Edit**"
+msgstr ""
+
+#: ../../columns_editor.txt:14
+# 9e548c2357a04fef84dfefe2485ed14a
+msgid "Edit the currently selected column definition.  Note that the data type cannot be changed.  If the default value is changed, the new default will appear in the row editor when adding new rows; existing rows are unaffected."
+msgstr ""
+
+#: ../../columns_editor.txt:17
+# 9aa088a18fe943658edb1a63fbf4ffb7
+msgid "**Delete**"
+msgstr ""
+
+#: ../../columns_editor.txt:17
+# 787c8356a95745aa88b36bdbcb3844d5
+msgid "Delete the currently selected column definition.  All data stored in that column will be lost."
+msgstr ""
+
+#: ../../columns_editor.txt:20
+# f053506909d54147b0a1666a7a1e3540
+msgid "**Up**"
+msgstr ""
+
+#: ../../columns_editor.txt:20
+# 451674dd12bf44cd85208f66578851ce
+msgid "Move the currently selected column up one position in the list (and hence in the row editor as well)."
+msgstr ""
+
+#: ../../columns_editor.txt:23
+# 7bc960e2ce5140b7b88a2a22023c5a31
+msgid "**Down**"
+msgstr ""
+
+#: ../../columns_editor.txt:23
+# adcaa601e93443c3bf23dcbe205436d4
+msgid "Move the currently selected column down one position in the list (and hence in the row editor as well)."
+msgstr ""
+
+#: ../../columns_editor.txt:25
+# 897e3e701ec7431d8c78dacb327fe880
+msgid "None of the changes made to the table format are applied until the \"OK\" (\"Done\" on Maemo Fremantle) button is pressed; if the dialog is exited by cancelling instead, the changes are discarded and the file format is left as it was.  If the dialog is cancelled while defining the columns of a new file, the file creation is aborted; otherwise, exiting the dialog takes you to the :ref:`data viewer <data_viewer>`."
+msgstr ""
+

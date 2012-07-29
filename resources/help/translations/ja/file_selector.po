@@ -1,0 +1,108 @@
+# Messages from file_selector.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 04:19+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 2cad1e6da55d482fb2210239f12d3ec6
+#: ../../file_selector.txt:4
+msgid "File selector"
+msgstr "ファイル選択画面"
+
+# 2eb84e3492814c55933c4c9b1ceb1925
+#: ../../file_selector.txt:6
+msgid ""
+"Unless the program was launched by clicking on a PortaBase file, the first "
+"screen shown will be the file selector.  You may choose one of the following"
+" options from the \"File\" menu, toolbar, or main display buttons:"
+msgstr "PortaBaseファイルをクリックしてプログラムを起動した時を以外は、最初にファイル選択画面が表示されます。ここで\"ファイル\"メニュー、ツールバー、や画面のボタンから以下のオプションのいずれかを選択します:"
+
+# 6461c61772d84482993f05df60545a41
+#: ../../file_selector.txt:9
+msgid "**New**"
+msgstr "**新規**"
+
+# 0c7fd18a4b8241fd977ebed9fd298f34
+#: ../../file_selector.txt:9
+msgid "Create a new file (possibly :ref:`encrypted <encryption>`)"
+msgstr "新しいファイル（\\ :ref:`暗号化 <encryption>`\\ されたものも可）を作成します。"
+
+# 8663a69a3164464f8e6d0f5edd4bc264
+#: ../../file_selector.txt:12
+msgid "**Open**"
+msgstr "**開く**"
+
+# 3ad2af8246ee43b2bba1d29976dee802
+#: ../../file_selector.txt:12
+msgid "Open a dialog to select a file to open"
+msgstr "ファイル選択ダイアログで選ぶファイルを開きます。"
+
+# d093e4359fc343c8ab6d1a80a27e5b47
+#: ../../file_selector.txt:15
+msgid "**Open Recent/Recently opened files**"
+msgstr "**最近使ったファイル**"
+
+# 81e36a97b0994c26bb58bbc5f91260e1
+#: ../../file_selector.txt:15
+msgid "A list of recently opened files; click on one to open that file."
+msgstr "サブメニューで最近使用したファイルが一覧表示され、そのうちの一つをクリックすることで開けます。"
+
+# 7f1a5165f32646beab64753a2e652622
+#: ../../file_selector.txt:18
+msgid "**Import**"
+msgstr "**インポート**"
+
+# 1f50da8b4ea944b0b495883529661f76
+#: ../../file_selector.txt:18
+msgid ""
+"Create a new file (possibly :ref:`encrypted <encryption>`) from the data in "
+"an XML or MobileDB file.  You will be prompted for the type of file to "
+"import, the file to import, then a name for the new file to create.  See the"
+" PortaBase home page for more information about the XML format used."
+msgstr "XMLまたはMobileDBファイルから新しいファイル（\\ :ref:`暗号化 <encryption>`\\ されたものも可）を作成します。まずインポートするファイルのタイプ、次いでインポートするファイル名、最後に作成するファイル名を入力するプロンプトが表示されます。使用されるXMLフォーマットについてはPortaBaseのホームページを参照して下さい。"
+
+# 2bb2d86f846a474a8cc21c2a3b521c5b
+#: ../../file_selector.txt:21
+msgid "**Preferences**"
+msgstr "**設定**"
+
+# e2faad6134a4449c83298da80083bbef
+#: ../../file_selector.txt:21
+msgid "Launch the :ref:`preferences dialog <preferences>`."
+msgstr ":ref:`設定画面 <preferences>`\\ を起動します。"
+
+# b6aa01a321d74e25a763a4930b263cc0
+#: ../../file_selector.txt:24
+msgid "**Fullscreen**"
+msgstr "**フルスクリーン**"
+
+# 715c18ea94694aa6826c967c23780010
+#: ../../file_selector.txt:24
+msgid ""
+"Click this toolbar button to switch PortaBase to fullscreen mode or back to "
+"normal display mode."
+msgstr "PortaBaseを通常表示からフルスクリーン表示に変えます、あるいはその逆。"
+
+# 1c0e46468c0a4990963912a3504456c2
+#: ../../file_selector.txt:26
+msgid "**Quit**"
+msgstr "**終了**"
+
+# 3fef01df82dc4da49658bd627463397e
+#: ../../file_selector.txt:27
+msgid "Close PortaBase."
+msgstr "PortaBaseを閉じます。"

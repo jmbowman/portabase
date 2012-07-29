@@ -4,25 +4,28 @@
 # fremantle.sh; it isn't worth setting up Sphinx in each Scratchbox environment
 
 platform=$(uname)
-cd resources/help
-rm -rf _static
-for dir in `ls`
+rm -rf resources/help/_build/_static
+packaging/generate_help.sh en
+if [ "$platform" == "Darwin" ]; then
+    sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
+else
+    sed -i 's:_static:../_static:g' resources/help/_build/html/*.html
+fi
+mv resources/help/_build/html/_static resources/help/_build
+mv resources/help/_build/html resources/help/_build/en
+for dir in `ls resources/help/translations`
 do
+    if [ "$dir" == "templates" ]; then
+        continue
+    fi
     if [ -d "$dir" ]; then
-        cd $dir
-        make clean
-        make html
+        packaging/generate_help.sh "$dir"
         if [ "$platform" == "Darwin" ]; then
-            sed -i '' 's:_static:../_static:g' _build/html/*.html
+            sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
         else
-            sed -i 's:_static:../_static:g' _build/html/*.html
+            sed -i 's:_static:../_static:g' resources/help/_build/html/*.html
         fi
-        if [ $dir = "en" ]; then
-            mv _build/html/_static ..
-        else
-            rm -r _build/html/_static
-        fi
-        cd ..
+        rm -r resources/help/_build/html/_static
+        mv resources/help/_build/html "resources/help/_build/$dir"
     fi
 done
-cd ../..

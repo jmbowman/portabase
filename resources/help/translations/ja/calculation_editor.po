@@ -1,0 +1,161 @@
+# Messages from calculation_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 05:05+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 40b424d8183a49ef9d1782f44ac846e8
+#: ../../calculation_editor.txt:4
+msgid "Calculation editor"
+msgstr "計算値編集画面"
+
+# a6b2be0f07a84cc89925e4be520b975a
+#: ../../calculation_editor.txt:6
+msgid ""
+"This dialog allows you to define columns which contain values calculated "
+"from the values of other columns in the same row.  It is launched by "
+"pressing the \"Edit calculation\" button in the column editor, which appears"
+" only for columns of type \"Calculation\".  At the top of the dialog are the"
+" name of the column, a read-only display of the current calculation written "
+"as a one-line expression, and a spin box that allows you to specify how many"
+" decimal places should be shown for the calculation results."
+msgstr "このダイアログで、同じレコードの他のフィールドの値からの算出値を持つフィールドを定義できます。フィールドエディタ画面で\"計算編集\"ボタンを押すと起動するダイアログで、フィールドタイプが\"計算値\"の時にのみ表示されます。このダイアログの最上部にはフィールド名、読み取り専用の１行の数式で表した現在の数式の表示部、計算結果を何桁まで表示するかを選択するスピンボックスがあります。"
+
+# 4f5af6c77ed540b1a56ff00c62751680
+#: ../../calculation_editor.txt:8
+msgid ""
+"Most of the dialog is filled by a widget which shows the current calculation"
+" as a tree, similar to many file explorer programs.  Each node in the tree "
+"represents either the value of another column, a constant value, or the "
+"result of an operation.  To edit the calculation, select a node from the "
+"tree (if any are present) and use the buttons in the dialog:"
+msgstr "ダイアログの大部分は多くのファイルエクスプローラにも似た、ツリー状に現在の計算式を表示するウィジェットで占められています。ツリー上のノードはそれぞれ、他のフィールドの値、定数,または演算子のいずれかを表示しています。計算式を編集するには、（もし既にあれば）ツリーからノードを選択し、ダイアログのボタンを使用します:"
+
+# 5931ce55d45b4f4cbe892e8242089f93
+#: ../../calculation_editor.txt:11
+msgid "**Add**"
+msgstr "**作成**"
+
+# 9ed33e39d0244e75b5671996435a2895
+#: ../../calculation_editor.txt:11
+msgid ""
+"Add a new node as a child of the currently selected node; a dialog will "
+"appear which allows you to select the type and value of the node."
+msgstr "新しいノードを、現在選択しているノードの子として追加します: ノードの値のタイプを選択するためのダイアログが表示されます。"
+
+# dd6d91ebe7ae470189743ba74d60c829
+#: ../../calculation_editor.txt:14
+msgid "**Edit**"
+msgstr "**編集**"
+
+# 0602f1c6fe794888951cbdcca372d919
+#: ../../calculation_editor.txt:14
+msgid "Edit the selected node."
+msgstr "選択されているノードを編集します。"
+
+# f1a545d3cbc14bb982dfb128a5b4fbce
+#: ../../calculation_editor.txt:17
+msgid "**Delete**"
+msgstr "**削除**"
+
+# 4798dbfc7c74458887dece22363185dc
+#: ../../calculation_editor.txt:17
+msgid "Delete the currently selected node."
+msgstr "選択されているノードを削除します。"
+
+# 63a2b652762647af8d75869f598e4851
+#: ../../calculation_editor.txt:20
+msgid "**Up**"
+msgstr "**上げる**"
+
+# 511b40992bc84acaa6743662bf340342
+#: ../../calculation_editor.txt:20
+msgid "Move the currently selected node up among its siblings."
+msgstr "選択されているノードをその兄弟の間で上に移動します。"
+
+# 835bed28447f4d5bb5baad0ce9bd0c6e
+#: ../../calculation_editor.txt:23
+msgid "**Down**"
+msgstr "**下げる**"
+
+# 6fd02ecf29d84e549ef0f8658c48d18e
+#: ../../calculation_editor.txt:23
+msgid "Move the currently selected node down among its siblings."
+msgstr "選択されているノードをその兄弟の間で下に移動します。"
+
+# 1eaec6b3f6b0465d91fa5d179338f661
+#: ../../calculation_editor.txt:25
+msgid ""
+"Usually you want to start by adding an operation node, such as \"+\", and "
+"then add its arguments (which may themselves be operations with arguments of"
+" their own).  The buttons automatically update when a node is selected in "
+"order to indicate which actions are possible; typical actions not allowed "
+"are:"
+msgstr "通常は、例えば\"+\"などの演算子ノードの追加から始め、その引き数（それ自身も引き数を持った演算子ノードでも構いません）を追加します。ボタンは、現在選択されているノードに対してそのアクションが実行できる時には、自動的に更新されます; 許可されないアクションは、例えば次のようなものです:"
+
+# 095e6533d8d844cc97452bf523e9902c
+#: ../../calculation_editor.txt:27
+msgid ""
+"Adding a child node to an operation which already has as many arguments as "
+"it can use"
+msgstr "演算子ノードが既に扱える最大の個数の引き数を持っている時の、子ノードの追加。"
+
+# 639c481b219748508194e74343a115c5
+#: ../../calculation_editor.txt:29
+msgid "Editing an operation node; it must be deleted and replaced instead"
+msgstr "演算子ノードの編集; 編集した値は削除され、代替値で置き換えられます。"
+
+# 3925a8a965b34204b997add6e8f8af88
+#: ../../calculation_editor.txt:31
+msgid "Moving a node up or down when it cannot move further in that direction"
+msgstr "その方向にそれ以上動かせない時のノードの\"上げる\"と\"下げる\"。"
+
+# bd869ee5d20642b4b6b7301c3e1606d5
+#: ../../calculation_editor.txt:33
+msgid "Some points worth noting:"
+msgstr "以下は蛇足ですが:"
+
+# e252a40f01e24691ae0f1679a81fa050
+#: ../../calculation_editor.txt:35
+msgid ""
+"Only columns of type Integer, Decimal, Sequence, and Boolean can be used in "
+"calculations.  Additionally, Date columns can be used as children of a "
+"\"Days_Between\" operation, and Time columns can be used as children of "
+"\"Seconds_Between\", \"Minutes_Between\", and \"Hours_Between\" operations."
+msgstr "計算には、整数値、数値、番号、真偽フィールドを使うことができます。加えて、日付フィールドを\"Days_Between\"操作の時に、時刻フィールドを\"Seconds_Between\"、\"Minutes_Between\"、それから\"Hours_Between\"フィールドで使うことができます。"
+
+# cfc636662b1b4ebf82eb2a77a99c407c
+#: ../../calculation_editor.txt:37
+msgid ""
+"Calculation columns cannot be used in other calculations, since this would "
+"introduce a variety of complications.  You can get the same effect by "
+"repeating the definition of a calculation as part of another one."
+msgstr "計算値フィールドは、さまざまな複合問題を引き起こしかねないので、他の計算値フィールドでは使えません。同じ効果は、計算値の定義を他の計算値の一部として繰り返すことで得られます。"
+
+# 54e6c32b8e044874af417b6eaaefb9e8
+#: ../../calculation_editor.txt:39
+msgid ""
+"Operations which haven't been given enough (or any) arguments usually return"
+" zero."
+msgstr "操作に必要なだけの引き数が（あるいは引き数が全く）渡されなかった場合は、通常、０が返されます。"
+
+# bd26c908e88f400abd83523205f2e548
+#: ../../calculation_editor.txt:41
+msgid ""
+"If a column is renamed or deleted using the columns editor, any calculations"
+" using it are automatically updated accordingly."
+msgstr "フィールドエディタでフィールド名が変更された時やフィールドが削除された時は、いずれの計算値も変更内容にしたがって自動的に更新されます。"

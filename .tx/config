@@ -13,3 +13,141 @@ source_file = resources/translations/qt_en.ts
 source_lang = en
 type = QT
 
+[portabase.index]
+file_filter = resources/help/translations/<lang>/index.po
+source_file = resources/help/translations/templates/index.pot
+source_lang = en
+type = PO
+
+[portabase.introduction]
+file_filter = resources/help/translations/<lang>/introduction.po
+source_file = resources/help/translations/templates/introduction.pot
+source_lang = en
+type = PO
+
+[portabase.file_selector]
+file_filter = resources/help/translations/<lang>/file_selector.po
+source_file = resources/help/translations/templates/file_selector.pot
+source_lang = en
+type = PO
+
+[portabase.columns_editor]
+file_filter = resources/help/translations/<lang>/columns_editor.po
+source_file = resources/help/translations/templates/columns_editor.pot
+source_lang = en
+type = PO
+
+[portabase.enum_manager]
+file_filter = resources/help/translations/<lang>/enum_manager.po
+source_file = resources/help/translations/templates/enum_manager.pot
+source_lang = en
+type = PO
+
+[portabase.enum_editor]
+file_filter = resources/help/translations/<lang>/enum_editor.po
+source_file = resources/help/translations/templates/enum_editor.pot
+source_lang = en
+type = PO
+
+[portabase.calculation_editor]
+file_filter = resources/help/translations/<lang>/calculation_editor.po
+source_file = resources/help/translations/templates/calculation_editor.pot
+source_lang = en
+type = PO
+
+[portabase.image_editor]
+file_filter = resources/help/translations/<lang>/image_editor.po
+source_file = resources/help/translations/templates/image_editor.pot
+source_lang = en
+type = PO
+
+[portabase.image_viewer]
+file_filter = resources/help/translations/<lang>/image_viewer.po
+source_file = resources/help/translations/templates/image_viewer.pot
+source_lang = en
+type = PO
+
+[portabase.view_editor]
+file_filter = resources/help/translations/<lang>/view_editor.po
+source_file = resources/help/translations/templates/view_editor.pot
+source_lang = en
+type = PO
+
+[portabase.data_viewer]
+file_filter = resources/help/translations/<lang>/data_viewer.po
+source_file = resources/help/translations/templates/data_viewer.pot
+source_lang = en
+type = PO
+
+[portabase.column_statistics]
+file_filter = resources/help/translations/<lang>/column_statistics.po
+source_file = resources/help/translations/templates/column_statistics.pot
+source_lang = en
+type = PO
+
+[portabase.row_editor]
+file_filter = resources/help/translations/<lang>/row_editor.po
+source_file = resources/help/translations/templates/row_editor.pot
+source_lang = en
+type = PO
+
+[portabase.row_viewer]
+file_filter = resources/help/translations/<lang>/row_viewer.po
+source_file = resources/help/translations/templates/row_viewer.pot
+source_lang = en
+type = PO
+
+[portabase.note_editor]
+file_filter = resources/help/translations/<lang>/note_editor.po
+source_file = resources/help/translations/templates/note_editor.pot
+source_lang = en
+type = PO
+
+[portabase.sorting_editor]
+file_filter = resources/help/translations/<lang>/sorting_editor.po
+source_file = resources/help/translations/templates/sorting_editor.pot
+source_lang = en
+type = PO
+
+[portabase.filter_editor]
+file_filter = resources/help/translations/<lang>/filter_editor.po
+source_file = resources/help/translations/templates/filter_editor.pot
+source_lang = en
+type = PO
+
+[portabase.vsf_dialogs]
+file_filter = resources/help/translations/<lang>/vsf_dialogs.po
+source_file = resources/help/translations/templates/vsf_dialogs.pot
+source_lang = en
+type = PO
+
+[portabase.import]
+file_filter = resources/help/translations/<lang>/import.po
+source_file = resources/help/translations/templates/import.pot
+source_lang = en
+type = PO
+
+[portabase.export]
+file_filter = resources/help/translations/<lang>/export.po
+source_file = resources/help/translations/templates/export.pot
+source_lang = en
+type = PO
+
+[portabase.preferences]
+file_filter = resources/help/translations/<lang>/preferences.po
+source_file = resources/help/translations/templates/preferences.pot
+source_lang = en
+type = PO
+
+[portabase.command_line]
+file_filter = resources/help/translations/<lang>/command_line.po
+source_file = resources/help/translations/templates/command_line.pot
+source_lang = en
+type = PO
+
+[portabase.encryption]
+file_filter = resources/help/translations/<lang>/encryption.po
+source_file = resources/help/translations/templates/encryption.pot
+source_lang = en
+type = PO
+

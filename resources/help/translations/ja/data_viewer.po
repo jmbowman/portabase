@@ -1,0 +1,612 @@
+# Messages from data_viewer.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 05:29+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 70a3ccda4462487996bbf67f4917f062
+#: ../../data_viewer.txt:4
+msgid "Data viewer"
+msgstr "データ表示画面"
+
+# 56597878e3cc40e9956690763307070e
+#: ../../data_viewer.txt:6
+msgid ""
+"This is the main screen of the application, where you can browse the "
+"database's content and launch most of the other dialogs.  The contents of "
+"this screen are:"
+msgstr "これはこのアプリケーションのメインの画面で、ここでデータベースの内容をブラウズし、他のダイアログの大半を起動することができます。この画面上には以下があります:"
+
+# 05032c6d260a4aaf963a4f69c9de84a9
+#: ../../data_viewer.txt:15
+msgid "Row display and navigation"
+msgstr "レコード表示・操作部"
+
+# 657b21086e3849ddbb80bf533864bb9f
+#: ../../data_viewer.txt:17
+msgid ""
+"Most of the data viewer screen is occupied by a table showing one view of a "
+"set of rows in the database.  You can scroll through the entire list of rows"
+" passing the current filter; performance stays good because only the data "
+"for the rows currently shown in the display is loaded.  Clicking on a row "
+"normally launches the :ref:`row viewer <row_viewer>` dialog; if you disabled"
+" this in the :ref:`preferences dialog <preferences>`, you can stil launch it"
+" by pressing enter/return, space, or Control-R (Command-R on the Mac) while "
+"a row is selected."
+msgstr "データ表示画面画面の大部分は一つのビューを使って、データベース内のレコードの一部を表示している表で占められています。使っているフィルターにパスする全部のレコードをスクロール出来る; 要求時ページングのおかげで大きいファイルでも遅くなることはない。通常、レコード上でクリックすると\\ :ref:`レコード表示画面 <row_viewer>`\\ が起動されます。\\ :ref:`設定画面 <preferences>`\\ でこのオプションを外した場合でも、レコードが選択された状態でスペース、Enter/Return、あるいはCtrl-Rを押すとその画面は起動されます。"
+
+# c510a40ba03a46bbabbb897fd288332d
+#: ../../data_viewer.txt:19
+msgid ""
+"Clicking on a cell in the data display and holding down for 1/2 second or "
+"longer before releasing executes special functions.  If you do this on a "
+"cell in a Note column, the :ref:`note viewer <note_editor>` is displayed "
+"showing the content of that note.  When done on a cell in an Image column, "
+"the image contained in that cell is shown in the :ref:`image viewer "
+"<image_viewer>`.  If you do it in any other type of column, the :ref:`row "
+"editor <row_editor>` for the row you clicked on is launched."
+msgstr "データ表示部のセルをクリックし、そのまま0.5秒かそれ以上してから離すと、特別な機能が実行されます。ノートフィールドのセル上でこれを行った場合、\\ :ref:`記述画面(表示) <note_editor>`\\ でノートの内容が表示されます。イメージフィールドのセル上で行ったときは、そのセルに含まれている画像が\\ :ref:`画像表示画面 <image_viewer>`\\ で表示されます。他のタイプのフィールド上でこれを行った場合、クリックしたレコードを対象として\\ :ref:`レコード編集画面 <row_editor>`\\ が起動されます。"
+
+# 863b37bfb2754a539787fcb47932e6bd
+#: ../../data_viewer.txt:21
+msgid ""
+"If you selected in the :ref:`preferences dialog <preferences>` to use a "
+"paginated display, there is an additional row of controls at the bottom of "
+"the screen.  The spin box at the bottom left specifies the maximum number of"
+" rows to display at once for the current view; you can edit this to be any "
+"positive integer (setting it low enough eliminates the scrollbar on the "
+"right of the display table, giving a little more horizontal space; note that"
+" Maemo Fremantle has no such scrollbar).  To the right of this \"rows per "
+"page\" box are the page navigation buttons.  Click on one of the numbered "
+"buttons to go to that page of rows; the button for the current page is shown"
+" pressed.  Click on the arrow buttons at the ends to show the page buttons "
+"for the next or previous five pages."
+msgstr ":ref:`設定画面 <preferences>`\\ で\"データ表示にページを使う\"を選択した場合、画面の下部にそのためのコントロールがあります。画面左下のスピンボックスには現在のビューで1度に表示するレコード数を示しています; この値は好きな正数に変更することができます（表の表示部の右側にスクロールバーが表示されないような小さい値に設定すると、ちょっとだけ横方向の空間が広がります）。\"ページごとのレコード数\"ボックスの右側には、ページナビゲーション用のボタンがあります。この数字が振られたボタンのいずれかをクリックすることで、そのレコードページに移動できます; 現在のページは押された状態で表示されています。前の5ページ、または次の5ページのボタンを表示させるには、端にある矢印ボタンをクリックします。"
+
+# f641e2dcfbda45dfbe4c7177906cf4b3
+#: ../../data_viewer.txt:26
+msgid "Column labels"
+msgstr "フィールドラベル"
+
+# 160569cc6421479ba87c86409d186a01
+#: ../../data_viewer.txt:28
+msgid ""
+"The row of column labels has several features in addition to informing you "
+"of the column names. To change the widths of the columns in the current "
+"view, click on the border between two column labels (or the right edge of "
+"the last column) and drag it to the desired location.  Clicking on a column "
+"label sorts all the rows passing the current filter by the content of that "
+"column in ascending order; clicking it again sorts in descending order.  If "
+"you press a column label and hold it for 1/2 second or more before "
+"releasing, the :ref:`column statistics dialog <column_statistics>` is shown."
+msgstr "フィールドラベル行にはフィールド名関連の情報を提供するいくつかの追加機能があります。現在のビューでフィールド表示幅を変更するには、二つのフィールドラベル間の境界（あるいは、最後のカラムであれば右端）をクリックし、望みの位置までドラッグします。フィールドラベルをクリックするとそのフィールドの内容の昇順でソートされます; 再度そこをクリックすると降順でソートされます。フィールドをクリックし0.5秒かそれ以上そのままにしてから放すと、\\ :ref:`フィールドマリー情報画面 <column_statistics>`\\ が表示されます。"
+
+# c763f794d0964d22904395d8317dc068
+#: ../../data_viewer.txt:33
+msgid "File menu"
+msgstr "ファイルメニュー"
+
+# 6c33c8f2ce9b425390d97698ee6bb600
+#: ../../data_viewer.txt:35
+msgid ""
+"The \"File\" menu (the main menu on Maemo) contains options that apply to "
+"the database file as a whole.  These are:"
+msgstr "\"ファイル\"メニュー（Maemo版では唯一のメニュー）にはデータベース全体に適用されるオプションが含まれています。以下があります:"
+
+# 44cf95f764d04b20af3cf191ed9cac6d
+# eba2a6812fb043f49bf43a35358f7822
+#: ../../data_viewer.txt:38 ../../data_viewer.txt:171
+msgid "**Save**"
+msgstr "**保存**"
+
+# 9865a85b577b4ed5b1b4d831f759bbe3
+#: ../../data_viewer.txt:38
+msgid ""
+"Save any changes that have been made since the file was opened or last "
+"saved.  If you exit PortaBase without saving the most recent changes, those "
+"changes will be lost (a dialog will warn you if this is about to happen).  "
+"This option is disabled if no changes have been made since the current "
+"database was opened or last saved. (Not shown in Maemo, use the toolbar "
+"button instead.)"
+msgstr "ファイルが開かれてから、あるいは最後に保存されてから行われた全ての変更を保存します。最後に行った変更を保存せずにPortaBaseを終了すると、それらの変更は失われてしまいます（このようなことが起ころうとすると、ダイアログが現れて警告が表示されます）。このオプションは現在のデータベースが開かれてから、あるいは最後に保存されてからまったく変更が行われていない時には選択できないようになっています。（Maemo版では表示されません; ツールバーの保存ボタンを使います）"
+
+# 204b52f5096048a38a3d55de779e8de4
+#: ../../data_viewer.txt:41
+msgid "**Change Password**"
+msgstr "**パスワード変更**"
+
+# 0947f236c87a418eb6cda9b1f878663e
+#: ../../data_viewer.txt:41
+msgid ""
+"Launch a dialog which allows you to change the data file's password (only "
+"shown for :ref:`encrypted files <encryption>`)."
+msgstr "データファイルのパスワードを変更するためのダイアログを起動します（\\ :ref:`暗号化された <encryption>`\\ ファイルでのみ表示されます）。"
+
+# 472d2258ceaa4906a5fddfe7098bb00e
+#: ../../data_viewer.txt:44
+msgid "**Import**"
+msgstr "**インポート**"
+
+# 595e154e4af842d9b9c3d1da8b1346ed
+#: ../../data_viewer.txt:44
+msgid ":ref:`Import <import>` rows from a CSV file."
+msgstr "CSVファイルからレコードの\\ :ref:`インポート <import>`\\ を行うことができます。"
+
+# 13776cc36b7d463a9cc2fe1246ad9a45
+#: ../../data_viewer.txt:47
+msgid "**Export**"
+msgstr "**エクスポート**"
+
+# de0408d8a52c4f23a0b166aba5d9d10d
+#: ../../data_viewer.txt:47
+msgid ""
+":ref:`Export <export>` the current database content to a CSV, HTML, or XML "
+"file."
+msgstr "現在のデータベースの内容をCSV、HTML、またはXMLファイルに\\ :ref:`エクスポート <export>`\\ することができます。"
+
+# 5b1e91fd838f4a89bb2de11da3c77478
+#: ../../data_viewer.txt:50
+msgid "**Delete Rows In Filter**"
+msgstr "**フィルターに含まれるレコードを削除**"
+
+# f78a1a16aa5545b1827a2896a8fc6b88
+#: ../../data_viewer.txt:50
+msgid "Deletes all rows which are included by the filter currently in use."
+msgstr "現在使用しているフィルターに含まれるレコードを全て削除します。"
+
+# 8560fd9882dc4dad99c594148544f23b
+#: ../../data_viewer.txt:53
+msgid "**Edit Columns**"
+msgstr "**フォーマット編集**"
+
+# b4d830af4a794db183e36c91eab5f03f
+#: ../../data_viewer.txt:53
+msgid "Launch the :ref:`columns editor <columns_editor>`."
+msgstr ":ref:`フォーマット編集画面 <columns_editor>`\\ を起動します。"
+
+# 9085eeb5e3474dd5ae256cd3254fa2e2
+#: ../../data_viewer.txt:56
+msgid "**Edit Enums**"
+msgstr "**列挙管理**"
+
+# 052599ac8ae84013adee820ae132bd41
+#: ../../data_viewer.txt:56
+msgid "Launch the :ref:`enum manager <enum_manager>`."
+msgstr ":ref:`列挙管理画面 <enum_manager>`\\ を起動します。"
+
+# 68f15dfeb005411a940a6bd269fb9626
+#: ../../data_viewer.txt:59
+msgid "**Slideshow**"
+msgstr "**スライドショー**"
+
+# 979b86c9bc8d4e0b8a3130fbfc7973fd
+#: ../../data_viewer.txt:59
+msgid ""
+"Launch a dialog from which you can start a timed slideshow of images from an"
+" Image column in the current view.  Only images in rows passing the current "
+"filter are shown, and the sequence is the current sorting."
+msgstr "現在のビューに含まれている画像フィールドの画像を時間駆動でスライドショーするための画面を起動します。現在のフィルターに含まれているレコードの画像だけが使用され、順番は現在のソーティングになります。"
+
+# ac9eec4b465943629c484b751b428f91
+#: ../../data_viewer.txt:62
+msgid "**Properties**"
+msgstr "**プロパティ**"
+
+# b3eab18460ab457a8dce05e631b9e37d
+#: ../../data_viewer.txt:62
+msgid ""
+"Launch a dialog which displays basic statistics about the current file (such"
+" as its size, row count, column count, etc.).  The :ref:`column statistics "
+"dialog <column_statistics>` can also be launched from this dialog."
+msgstr "現在のファイルについての基本的な統計情報（サイズ、レコード数、フィールド数など）を表示する画面を起動します。その画面から\\ :ref:`フィールドマリー情報画面 <column_statistics>`\\ を起動する事も出来ます。"
+
+# 06a142b09b2a48a5be415b7af1c2c473
+#: ../../data_viewer.txt:65
+msgid "**Print Preview**"
+msgstr "**印刷プレビュー**"
+
+# f3c679f871a74b1b87e05567a81968bd
+#: ../../data_viewer.txt:65
+msgid ""
+"Launch the print preview dialog in order to see what the output of printing "
+"the current data selection would look like.  You can also set from here "
+"certain properties of the output, such as paper size and zoom factor.  (Not "
+"shown in Maemo, which has no printing support.)"
+msgstr "使っているビューなどで印刷したらどうなりますかを示す画面を表示します。用紙サイズとズーム率などの設定もこの画面で選択できます。（印刷機能のないMaemoでは表示されません）"
+
+# ff2fff1ddded46f2822f4a79605f2bbf
+#: ../../data_viewer.txt:68
+msgid "**Print**"
+msgstr "**印刷**"
+
+# 3870aa4084714adea3e7152721970699
+#: ../../data_viewer.txt:68
+msgid ""
+"Launch the print dialog in order to print the data in the current view and "
+"filter in the current sorting order.  Note that you may wish to modify some "
+"settings with the print preview dialog first.  (Not shown in Maemo, which "
+"has no printing support.)"
+msgstr "使っているビュー、フィルター、とソーティングを適用したデータを印刷します。先に印刷プレビューの画面で設定を確認した方がいいかもしれません。（印刷機能のないMaemoでは表示されません）"
+
+# 4cb1ae3a7c8d4245bebad327bb2803bb
+#: ../../data_viewer.txt:71
+msgid "**Preferences**"
+msgstr "**設定**"
+
+# a46e0d72c05a4b5897ed6c3f4cfe0e6b
+#: ../../data_viewer.txt:71
+msgid "Launch the :ref:`preferences dialog <preferences>`."
+msgstr ":ref:`設定画面 <preferences>`\\ を起動します。"
+
+# e45e7e72ea0d41dc9828b159918d8a60
+#: ../../data_viewer.txt:74
+msgid "**Close**"
+msgstr "**閉じる**"
+
+# c50e52b560bd4d37bf333de7287e1f47
+#: ../../data_viewer.txt:74
+msgid ""
+"Close the current file; if there are unsaved changes, you will be asked if "
+"you want to save them.  (Not shown in Maemo, use the close button at the top"
+" right of the screen instead; you may need to exit fullscreen mode first.)"
+msgstr "現在のファイルを閉じます; 保存されていない変更がある場合は、これを保存するかと聞かれます。（Maemo版では表示されません、上右のボタンを使います; フルスクリーン表示の場合、まず通常表示に戻ります）"
+
+# 91903c5fd5de4f76a7ac000abf3dd6ac
+#: ../../data_viewer.txt:79
+msgid "Row menu (not on Maemo)"
+msgstr "レコードメニュー（Maemo版意外）"
+
+# 97381a011f8d4472833fa48becd0fc0d
+#: ../../data_viewer.txt:81
+msgid ""
+"The \"Row\" menu contains actions that apply to individual rows of data.  "
+"These are:"
+msgstr "\"レコード\"メニューにはここのレコードに適用されるアクションが含まれています。以下があります:"
+
+# c69773f318de4547bda717b306c82e34
+# 2421057f43ab4438af82ef90d31e0aaf
+# e8ce519230004d30b5c80760a3eda436
+# afc4695b78554f2b961b8b87cc644131
+# 5edf717808104d74b0462addf7b03b0f
+#: ../../data_viewer.txt:84 ../../data_viewer.txt:108
+#: ../../data_viewer.txt:128 ../../data_viewer.txt:151
+#: ../../data_viewer.txt:174
+msgid "**Add**"
+msgstr "**作成**"
+
+# 4933998fdfec42ce91921c9ee0cd1eec
+#: ../../data_viewer.txt:84
+msgid ""
+"Add a new row of data (by launching the :ref:`row editor <row_editor>`)."
+msgstr "新しいレコードを作成します（\\ :ref:`レコード編集画面 <row_editor>`\\ が起動されます）。"
+
+# 321b94e4e8d64849a2798c460f1f3f01
+# 02028f4ef63c476ba4c189332550270f
+# c8de09ec903a41fb877d9b7839d2aa26
+# ae602947aced4520b292e367ac499ff2
+# 6d50bbbd902f4c1d899f405d453160fd
+#: ../../data_viewer.txt:87 ../../data_viewer.txt:111
+#: ../../data_viewer.txt:131 ../../data_viewer.txt:154
+#: ../../data_viewer.txt:177
+msgid "**Edit**"
+msgstr "**編集**"
+
+# a519c746d8e44f1ea9f99e16fd5d8987
+#: ../../data_viewer.txt:87
+msgid "Edit the currently selected row of data (again using the row editor)."
+msgstr "選択されているデータレコードを編集します（これもレコード編集画面を使用します）。"
+
+# 9defc3aedd354399b5a52c7fd1fa7efa
+# c58343bc7af34972a6b4c1aeda310a4e
+# 88692b36e3294952aeecb7f0cf133dee
+# b99edbea6e974c8fb9255b97b63147f0
+# 38148832a5234b72b9e502448e79d934
+#: ../../data_viewer.txt:90 ../../data_viewer.txt:114
+#: ../../data_viewer.txt:134 ../../data_viewer.txt:157
+#: ../../data_viewer.txt:183
+msgid "**Delete**"
+msgstr "**削除**"
+
+# 94afc3c7526d4ce7aef9999e70ecf8ad
+#: ../../data_viewer.txt:90
+msgid "Delete the currently selected row of data."
+msgstr "選択されているデータレコードを削除します。"
+
+# d1f6245922c64d9ab2b4c98c2e6a7fc8
+# 77ca25369e3844a7b44d7692949a40b8
+#: ../../data_viewer.txt:93 ../../data_viewer.txt:180
+msgid "**Copy**"
+msgstr "**コピー**"
+
+# 9bc2a6bd0e2044bd81cbdb7c5f5b7c7e
+#: ../../data_viewer.txt:93
+msgid ""
+"Add a new row of data, but the row editor is pre-filled with the data in the"
+" currently selected row instead of the default values."
+msgstr "新しいデータレコードを作成しますが、レコード編集画面はあらかじめ、デフォルト値の代わりに現在選択されているレコードのデータが入力されています。"
+
+# acd4e54eacc840649ea28db65d625bae
+#: ../../data_viewer.txt:96
+msgid "**Show**"
+msgstr "**表示**"
+
+# 6f44108d54544de5988a8443507d00cb
+#: ../../data_viewer.txt:96
+msgid "Show the currently selected row in the :ref:`row viewer <row_viewer>`."
+msgstr "現在選択されているレコードを\\ :ref:`レコード表示画面 <row_viewer>`\\ で表示します。"
+
+# 176e05c93a5a4891a576ef0a9cad7705
+#: ../../data_viewer.txt:98
+msgid ""
+"In order to conserve screen space, Maemo does not include this menu; "
+"equivalent functionality is available through the toolbar and :ref:`row "
+"viewer <row_viewer>` buttons."
+msgstr "小さい画面をうまく使うために、Maemo版はこのメニューを表示しません。同等な機能はツールバーと\\ :ref:`レコード表示画面 <row_viewer>`\\ のボタンを通じて使えます。"
+
+# 23ac094a1e7740488cefbfdd8193b425
+#: ../../data_viewer.txt:103
+msgid "View menu (not on Maemo)"
+msgstr "ビューメニュー（Maemo版意外）"
+
+# 2ed57091aade45688b729bac384cb56e
+#: ../../data_viewer.txt:105
+msgid ""
+"The \"View\" menu allows you to select and manage views.  The top section of"
+" this menu has three options:"
+msgstr "\"ビュー\"メニューではビューの選択と管理ができます。このメニューの先頭部には3つのオプションがあります:"
+
+# e4baa186edca405a837030e5d158e2fe
+#: ../../data_viewer.txt:108
+msgid ""
+"Add a new view to the database file.  Choosing this option launches the "
+":ref:`view editor <view_editor>` with no name specified and none of the "
+"columns checked."
+msgstr "データベースファイルに新しいビューを追加します。このオプションを選択すると、名前は未指定、全てのフィールドが未チェックの状態で、\\ :ref:`ビュー編集画面 <view_editor>`\\ が起動されます。"
+
+# af4b1a275c8e48f9aa53951f7015dcd8
+#: ../../data_viewer.txt:111
+msgid ""
+"Edit the currently displayed view.  Choosing this option launches the view "
+"editor with the current view's name and column sequence.  The \"All "
+"Columns\" view cannot be edited."
+msgstr "現在表示されているビューを編集します。このオプションを選択すると、現在のビューの名前とフィールド状態でビュー編集画面が起動されます。"
+
+# a51c3e9e691d4b499cc8fb79c1b21a07
+#: ../../data_viewer.txt:114
+msgid ""
+"Delete the currently displayed view and switch to the \"All Columns\" view."
+"  The \"All Columns\" view cannot be deleted."
+msgstr "現在表示されている削除を削除し、\"全てのフィールド\"ビューに切り替えます。\"全てのフィールド\"ビューを削除することはできません。"
+
+# b11499cb0bef4e3eafd7fc2d03d275e1
+#: ../../data_viewer.txt:116
+msgid ""
+"Below these items in the menu is a list of all the views defined for the "
+"current database, with a check next to the one currently displayed.  To "
+"switch to a different view, simply select the one you want to see from the "
+"menu."
+msgstr "メニュー内のこれらの項目より下は現在のデータベースに定義されている全てのビューのリストで、現在表示されているものの隣にチェックがついています。別のビューに切り替えるには、表示したいものをこのメニューから選択します。"
+
+# 676766b5320c4aae84ae9b4810d38219
+#: ../../data_viewer.txt:118
+msgid ""
+"In order to conserve screen space, Maemo does not include this menu; "
+"equivalent functionality is available in the :ref:`views dialog "
+"<vsf_dialogs>` launched from the toolbar."
+msgstr "小さい画面をうまく使うために、Maemo版はこのメニューを表示しません。同等な機能はツールバーから起動させる\\ :ref:`ビュー管理画面 <vsf_dialogs>`\\ を通じて使えます。"
+
+# 33631316cbb24401bca4b4cf502b3b5d
+#: ../../data_viewer.txt:123
+msgid "Sort menu (not on Maemo)"
+msgstr "ソートメニュー（Maemo版意外）"
+
+# a732b36fcb934e519db6690409ab356a
+#: ../../data_viewer.txt:125
+msgid ""
+"The \"Sort\" menu allows you to select and manage sorting configurations.  "
+"The top section of this menu has three options:"
+msgstr "\"ソート\"メニューでは、ソーティング（表示順）の設定の選択と管理ができます。このメニューの先頭部には3つのオプションがあります:"
+
+# 548490fec5db4c73a41be00600588701
+#: ../../data_viewer.txt:128
+msgid ""
+"Add a new sorting to the database file.  Choosing this option launches the "
+":ref:`sorting editor <sorting_editor>` with no name specified and none of "
+"the columns checked."
+msgstr "データベースファイルに新しいソーティングを作成します。このオプションを選択すると、名前が未指定で、全てのフィールドがチェックされていない状態で\\ :ref:`ソーティング編集画面 <sorting_editor>`\\ が起動されます。"
+
+# 25baca4a5e524548a28324f65adc78af
+#: ../../data_viewer.txt:131
+msgid ""
+"Edit the currently used sorting (only available if a named sorting is in "
+"use).  Choosing this option launches the sorting editor with the current "
+"sorting's name and settings."
+msgstr "現在使用されているソーティングを編集します（命名済みのソーティングがすでに使用されている時のみ選択できます）。このオプションを選択すると、現在のソーティングの名前とフィールド状態でソーティング編集画面が起動されます。"
+
+# a25734bde4864af3a78b5ce1281a1aa2
+#: ../../data_viewer.txt:134
+msgid ""
+"Delete the currently used sorting (only available if a named sorting is in "
+"use)."
+msgstr "現在使用されているソーティングを削除します（命名済みのソーティングがすでに使用されている時のみ選択できます）。"
+
+# f428956093e447cab9fc4d4a3b682655
+#: ../../data_viewer.txt:136
+msgid ""
+"Below these items in the menu is a list of all the sortings defined for the "
+"current database, with a check next to the one currently in use (if any).  "
+"To change the way the rows are sorted, simply select the sorting "
+"configuration you want to use from the menu.  If you just want to sort by a "
+"single column that is displayed in the current view, it is probably faster "
+"to use the \"click on a column label to sort\" feature instead."
+msgstr "メニュー内のこれらの項目より下は現在のデータベースに定義されている全てのソーティングのリストで、（ソーティングを使用しているときは）現在使用されているものの隣にチェックがついています。レコードのソート方法を変更するには、使用したいソーティング設定をこのメニューから選択します。もし現在のビューで表示されているフィールドの1つでソートしたいだけであれば、代りに\"フィールドラベルのクリックでのソート\"機能を使う方が早いでしょう。"
+
+# 934ef1ee3996456d98708da81d51f85a
+#: ../../data_viewer.txt:138
+msgid ""
+"In order to conserve screen space, Maemo does not include this menu; "
+"equivalent functionality is available in the :ref:`sortings dialog "
+"<vsf_dialogs>` launched from the toolbar."
+msgstr "小さい画面をうまく使うために、Maemo版はこのメニューを表示しません。同等な機能はツールバーから起動させる\\ :ref:`ソーティング管理画面 <vsf_dialogs>`\\ を通じて使えます。"
+
+# b754369ddea74e69bd41b5b2a84436a8
+#: ../../data_viewer.txt:143
+msgid "Filter menu (not on Maemo)"
+msgstr "フィルターメニュー（Maemo版意外）"
+
+# 2a55803e935e4c7d9ad5bac3013a85bf
+#: ../../data_viewer.txt:145
+msgid ""
+"The \"Filter\" menu contains options that let you choose which rows of data "
+"to display.  The top section of this menu has four options:"
+msgstr "\"フィルター\"メニューには、表示対象にするデータレコードを選択するためのオプションがあります。このメニューの先頭部には4つのオプションがあります:"
+
+# ea411ec5ee7b4fd8a138455702c8b590
+# 0077b92b876245e4ab4ff2e8e3f43102
+#: ../../data_viewer.txt:148 ../../data_viewer.txt:195
+msgid "**Quick Filter**"
+msgstr "**簡易フィルター**"
+
+# 297275487f534d33a3ba2a22c28cb4b9
+#: ../../data_viewer.txt:148
+msgid ""
+"Lets you quickly define and use a temporary one-condition filter.  To see "
+"all rows again (or use another defined filter), choose the appropriate "
+"filter from the lower part of this menu."
+msgstr "一時的な一つの条件だけでのfilterを、簡単に指定できます。全てのレコードを表示しなおす（または別のフィルタを定義して使用する）には、メニューの下部から適当なフィルターを選択してください。"
+
+# e293ad1fb2a4415cb9992d81bb653139
+#: ../../data_viewer.txt:151
+msgid ""
+"Define a new data filter; this launches the :ref:`filter editor "
+"<filter_editor>` with no name and no conditions defined."
+msgstr "新しいデータフィルターを定義します; これは、名前が未指定で、何も条件が定義されていない状態で\\ :ref:`フィルター編集画面 <filter_editor>`\\ を起動します。"
+
+# eb9676002093488c8808808e85f2db49
+#: ../../data_viewer.txt:154
+msgid ""
+"Edit the currently selected data filter (again using the filter editor).  "
+"The \"All Rows\" filter cannot be edited."
+msgstr "使用しているデータフィルターを編集します（これもフィルター編集画面を使用します）。\"全てのレコード\"フィルターは編集できません。"
+
+# faaee01046ea4778a9b53953c76be04b
+#: ../../data_viewer.txt:157
+msgid ""
+"Delete the currently selected data filter.  The \"All Rows\" filter cannot "
+"be deleted."
+msgstr "使用しているデータフィルターを削除します。\"全てのレコード\"フィルターは削除できません。"
+
+# ef38ca0c5fd84b08bb57e8f6174d3d46
+#: ../../data_viewer.txt:159
+msgid ""
+"Below these items in the menu is a list of all the filters defined for the "
+"current database, with a check next to the one currently in use (if any).  "
+"To select a different filter, simply select the one you want to use from the"
+" menu."
+msgstr "メニュー内のこれらの項目より下は現在のデータベースに定義されている全てのフィルターのリストで、（フィルターを使用していれば）現在表示されているものの隣にチェックがついています。別のフィルターに切り替えるには、表示したいものをこのメニューから選択します。"
+
+# d753b068f9114a69aa06538ff6812946
+#: ../../data_viewer.txt:161
+msgid ""
+"In order to conserve screen space, Maemo does not include this menu; "
+"equivalent functionality is available in the :ref:`filters dialog "
+"<vsf_dialogs>` launched from the toolbar."
+msgstr "小さい画面をうまく使うために、Maemo版はこのメニューを表示しません。同等な機能はツールバーから起動させる\\ :ref:`フィルター管理画面 <vsf_dialogs>`\\ を通じて使えます。"
+
+# 3491f7828f984e8c9ef5fea5b8d7fcb7
+#: ../../data_viewer.txt:166
+msgid "Toolbar buttons"
+msgstr "ツールバーボタン"
+
+# 5efc4d60c7f54bb0ab64a77db76b1272
+#: ../../data_viewer.txt:168
+msgid ""
+"There is a toolbar of buttons that provide quick access to commonly used "
+"operations.  These are:"
+msgstr "共通的に使われる操作に素早くアクセスするためのボタンを配したツールバーがあります。以下がそうです:"
+
+# 03d348d61091430ba6908c864d74fa50
+#: ../../data_viewer.txt:171
+msgid "Same as \"Save\" in the :ref:`File menu <file_menu>`."
+msgstr ":ref:`ファイルメニュー <file_menu>`\\ の\"保存\"と同じです。"
+
+# f8e6788d94174d62861f57b5ecec9779
+#: ../../data_viewer.txt:174
+msgid "Same as \"Add\" in the :ref:`Row menu <row_menu>`."
+msgstr ":ref:`レコードメニュー <row_menu>`\\ の\"作成\"と同じです。"
+
+# 7041d8b253a34b82b377bc630819be5f
+#: ../../data_viewer.txt:177
+msgid "Same as \"Edit\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
+msgstr ":ref:`レコードメニュー <row_menu>`\\ の\"編集\"と同じです。（Maemo版以外）"
+
+# fde21dbd40534f0e959097ca2a0b4071
+#: ../../data_viewer.txt:180
+msgid "Same as \"Copy\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
+msgstr ":ref:`レコードメニュー <row_menu>`\\ の\"コピー\"と同じです。（Maemo版以外）"
+
+# c7d0f8f98a2e481fb8ff7b37dca8eb13
+#: ../../data_viewer.txt:183
+msgid "Same as \"Delete\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
+msgstr ":ref:`レコードメニュー <row_menu>`\\ の\"削除\"と同じです。（Maemo版以外）"
+
+# bd3789fc23f14ff7993cb6ce55689505
+#: ../../data_viewer.txt:186
+msgid "**Views**"
+msgstr "**ビュー管理**"
+
+# 277e22bf1b85433dbb9694bb82cea0da
+#: ../../data_viewer.txt:186
+msgid "Launch the :ref:`views dialog <vsf_dialogs>`."
+msgstr ":ref:`ビュー管理が面 <vsf_dialogs>`\\ を起動します。"
+
+# b364e3368cf34ce5909844cf3fea8b4c
+#: ../../data_viewer.txt:189
+msgid "**Sortings**"
+msgstr "**ソーティング管理**"
+
+# 24aa0d45f90d4092b42b2cb0a7f5de0f
+#: ../../data_viewer.txt:189
+msgid "Launch the :ref:`sortings dialog <vsf_dialogs>`."
+msgstr ":ref:`ソーティング管理画面 <vsf_dialogs>`\\ を起動します。"
+
+# 008a8db368b5412d90b8628a7f334354
+#: ../../data_viewer.txt:192
+msgid "**Filters**"
+msgstr "**フィルター管理**"
+
+# 3561f92c1c0f42f4afeeb8ac45987427
+#: ../../data_viewer.txt:192
+msgid "Launch the :ref:`filters dialog <vsf_dialogs>`."
+msgstr ":ref:`フィルター管理画面 <vsf_dialogs>`\\ を起動します。"
+
+# c00fb2db1433417ab15102d4096ad728
+#: ../../data_viewer.txt:195
+msgid "Same as \"Quick Filter\" in the :ref:`Filter menu <filter_menu>`."
+msgstr ":ref:`フィルターメニュー <filter_menu>`\\ の\"簡易フィルター\"と同じです。"
+
+# 642ab2f1c52e454f99f2e1d3708a9e12
+#: ../../data_viewer.txt:197
+msgid "**Fullscreen**"
+msgstr "**フルスクリーン**"
+
+# 41f2e38f8a304cd3bd71de4589c16657
+#: ../../data_viewer.txt:198
+msgid ""
+"Click this toolbar button to switch PortaBase to fullscreen mode or back to "
+"normal display mode."
+msgstr "PortaBaseを通常表示からフルスクリーン表示に変えます、あるいはその逆。"

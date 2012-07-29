@@ -1,0 +1,52 @@
+# Messages from note_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 22:58+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 5da0d4765da34656a662a8b41095b9ad
+#: ../../note_editor.txt:4
+msgid "Note editor"
+msgstr "多行文字項編輯器/檢視器"
+
+# 3520949e318443baa78cbd5cf5fceb55
+#: ../../note_editor.txt:6
+msgid ""
+"The \"Note\" column type is for blocks of text which may contain multiple "
+"lines (as opposed to the \"String\" type, which is better suited for "
+"relatively short single lines of text).  The larger size of the content of "
+"such columns merits its own (very simple) dialog.  Both in the :ref:`row "
+"editor <row_editor>` and in the default value section of the column editor, "
+"a Note value is shown as a button containing a note icon and the beginning "
+"of the Note's content (as much as will fit).  To see and/or change the full "
+"text, press this button; a full-screen text editor dialog will appear, "
+"showing the current text of the Note.  Click \"OK\"/\"Done\" to accept any "
+"changes you have made, or cancel out of the dialog to revert to the original"
+" content."
+msgstr "\"多行文字項\"欄位型別用於可能包含好幾行的文字區塊(對\"字串\"型別而言，則是適用於較短的單行文字)。此種欄位由於內容較多因而有自己獨特(非常簡單)的對話盒。在列編輯器與欄位編輯器的預設值區塊中，多行文字項是以一個包含筆記本的按鈕與開頭的部分內容來顯示 (依空間多寡而定)。要檢視及/或修改完整的內文，在按鈕上按一下即可; 螢幕上會出現一個全螢幕的文字編輯器對話盒，裡頭是多行文字項的所有文字。按下\"確定\"鈕儲存所有變更或是\"X\"/\"取消\"維持原本內容不變。"
+
+# aa91512a347441b7964357bbcd754c9f
+#: ../../note_editor.txt:8
+msgid ""
+"Note columns are treated a little specially in the :ref:`data viewer "
+"<data_viewer>` also. The column label for Note columns contains a note icon "
+"indicating that it is not just a String column.  The cells in the column "
+"each show as much of the Note content as will fit.  If you press on one of "
+"these cells and hold for 1/2 second or longer before releasing, a read-only "
+"version of the Note editor is shown.  Either click \"OK\"/\"Done\" or cancel"
+" out of the dialog to return to the data viewer."
+msgstr "在資料檢視器中，多行文字項欄位的處理方式也有一點特別。多行文字項欄位的標籤會有一個多行文字項的小圖示來表示它不是字串欄位。此欄位的資料格只會顯示放得下的內容。如果你在其中一個資料格上按住不放超過半秒，則會出現多行文字項編輯器的唯讀版本。按下\"確定\"或\"X\"/\"取消\"則會回到資料檢視器。"

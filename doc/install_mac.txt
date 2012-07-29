@@ -28,6 +28,16 @@ supporting Tiger, PowerPC processors, or 32-bit Intel processors requires some
 additional effort (especially if you're using Xcode 4 instead of an earlier
 version).
 
+Help Pages Generation
+---------------------
+If you don't already have the "pip" installer for Python packages installed,
+do so by running "sudo easy_install pip".  Then install Sphinx by running
+"sudo pip install Sphinx".  To be able to automatically download the latest
+help page translations from Transifex, also run
+"sudo pip install transifex-client".  Use the script at
+packaging/generate_help.sh to generate the help files; see the top of the
+script for usage information.
+
 PortaBase compilation
 ---------------------
 - Install a recent version of Qt 4 and configure it, as per the directions
@@ -38,3 +48,5 @@ PortaBase compilation
   that the other library files (.dylib, .la, etc.) aren't.
 - From the root PortaBase source directory run "packaging/mac/build.sh"; this
   will generate a self-contained PortaBase.app and a PortaBase.dmg installer.
+  You'll need the libraries for help file generation installed as described
+  above.

@@ -1,6 +1,0 @@
-.. _row_viewer:
-
-Prohlížeč záznamů
-=================
-
-Prohlížeč záznamů je dialog navržený k pohodlnému prohlížení všech údajů vztahujících se k jednomu záznamu současně. Podobně jako u Editoru záznamů i u Prohlížeče záznamů nalezneme v levé části jména sloupců a v pravé je jejich hodnoty, které však nelze editovat. Hodnoty jsou automaticky zalamovány, takže k zobrazení celého obsahu odpadá potřeba horizontálního posouvání. Je rovněž zobrazen úplný obsah pole poznámka, nejen několik počátečních slov. Jako výchozí jsou zobrazovány jen sloupce zahrnuté v použitém náhledu (v pořadí určeném při vytváření náhledu); Chcete-li vybrat jinou sadu sloupců zvolte požadovaný náhled z rozbalovacího seznamu v dolní části dialogu. Pomocí tlačítek se šipkami v dolní části dialogu či odpovídajícími klávesami se lze pohybovat mezi záznamy v rámci stávajícího náhledu. Klepnutím na editační tlačítko v dolní části dialogu spustíte Editor záznamů s otevřeným stávajícím záznamem; klepnutím na tlačítko "OK" v Editoru záznamů se přenesete do Prohlížeče dat, jinak budete vráceni zpět do Prohlížeče záznamů. A konečně, tlačítko pro kopírování ve spodní části dialogu slouží ke zkopírování právě označeného textu (byl-li nějaký vybrán) do systémové schránky.

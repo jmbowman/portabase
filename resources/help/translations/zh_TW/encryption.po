@@ -1,0 +1,82 @@
+# Messages from encryption.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 21:02+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# ce1903b4648f4b7d8bf640e2f729fa33
+#: ../../encryption.txt:4
+msgid "Encryption"
+msgstr "加密"
+
+# 6e1bc515c265473caf88d1857ec0acc3
+#: ../../encryption.txt:6
+msgid ""
+"PortaBase data files can be encrypted in order to protect sensitive "
+"information like passwords.  Each encrypted file is accessed by providing a "
+"password specified by the file's creator.  (This password can be changed "
+"later from the :ref:`File menu <file_menu>`'s \"Change Password\" action.)  "
+"Because this password must be relatively easy to remember, this is the "
+"weakest point in the encryption scheme; therefore, it is important to choose"
+" a good password.  Passwords should meet the following guidelines:"
+msgstr "PortaBase資料檔可以使用加密來保護諸如密碼之類的機密資料。存取加密檔時需提供檔案主人指定的密碼。(此密碼稍後可由\\ :ref:`檔案 <file_menu>`\\ 選單的\"更改密碼\"來變更。) 因為密碼最好是好記，這也是加密架構中最脆弱的地方; 因此，選擇一個好密碼相當重要。密碼應符合下列原則："
+
+# d629d6509af842be84eca812bd9315a7
+#: ../../encryption.txt:8
+msgid "At least 6 characters long; the longer, the better (no upper limit)"
+msgstr "至少6個字; 愈長愈好 (無上限)"
+
+# a4b32202ec614718bc0258804b4d7ef6
+#: ../../encryption.txt:10
+msgid ""
+"Contain a combination of upper and lower case letters, numbers, and "
+"punctuation symbols"
+msgstr "可包含大小寫字母，數字與標點符號"
+
+# 2921be4cc353484fb333ac2f885d4ecf
+#: ../../encryption.txt:12
+msgid ""
+"Should not consist of data (or misspellings thereof) that would be likely to"
+" be in personal records (friend/relative/pet names, contact information, "
+"etc.)"
+msgstr "不應包含會出現在個人資料(朋友/親戚/寵物的名字、聯絡資訊等等)中的資料"
+
+# 01bae48f08684fb4a25505dbceff9ddc
+#: ../../encryption.txt:14
+msgid ""
+"Easy to remember; if you choose a password that is \"good\" in the above "
+"senses and forget it, your data will be virtually impossible to retrieve"
+msgstr "好記; 如果你依照上述條件取了一個\"好\"的密碼卻將它忘了，你的資料就再也拿不出來了"
+
+# 28c39a6b5ed34875bef4f5e5bf1ca1f8
+#: ../../encryption.txt:16
+msgid ""
+"For security and implementation reasons, the entire content of encrypted "
+"files must be held in memory at once; thus encrypted files cannot scale to "
+"large sizes as well as non-encrypted files.  Files of a few hundred or a few"
+" thousand rows should still perform well, but files containing many "
+"thousands of rows of data probably won't (at least on Maemo; desktop "
+"computers with lots of memory can handle quite large encrypted files)."
+msgstr "由於安全性與實作上的緣故，加密檔案的整個內容必需存放在記憶體中; 因此加密檔案的大小可能會受到限制，無法跟無加密檔案一樣大。幾百或幾千列應當不成問題，再多一些可能就不行了(至少在Maemo上是如此; 擁有許多記憶體的桌上型電腦應當可以處理相當大的加密檔案)。"
+
+# e3957606668e40a5b52edfcff6495d6d
+#: ../../encryption.txt:18
+msgid ""
+"For more information about encryption in PortaBase (including details on the"
+" algorithms used), see the PortaBase homepage "
+"(http://portabase.sourceforge.net)."
+msgstr "有關PortaBase中加密的詳細資訊(包含使用的演算法的細節)，請見PortaBase首頁(http://portabase.sourceforge.net)。"

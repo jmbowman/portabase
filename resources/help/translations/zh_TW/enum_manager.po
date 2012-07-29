@@ -1,0 +1,113 @@
+# Messages from enum_manager.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 22:26+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# a257cd7b45194d488535312ad5aa202f
+#: ../../enum_manager.txt:4
+msgid "Enum manager"
+msgstr "集合管理員"
+
+# a477246e20df4d5e892d426a5a63b097
+#: ../../enum_manager.txt:6
+msgid ""
+"PortaBase supports enum (enumeration) column types, in which each value in "
+"the column is one of a set of possible string values.  The enum manager "
+"dialog lets you create, edit, delete, and change the listing order of these "
+"enums."
+msgstr "PortaBase支援集合的欄位型別，即欄位值是一組字串的其中一個。集合管理員對話盒使你能夠對一個集合進行新增、編輯、刪除與更改順序等動作。"
+
+# 9cfd2d1ec7754d61b014ec975438dce4
+#: ../../enum_manager.txt:8
+msgid ""
+"Most of the dialog is occupied by a list of the currently defined enums. "
+"There is a row of buttons identical to those in the :ref:`columns editor "
+"<columns_editor>`:"
+msgstr "對話盒的大部分畫面用來顯示目前集合的項目清單。畫面底部則是一列與\\ :ref:`欄位編輯器 <columns_editor>`\\ 中完全相同的按鈕："
+
+# 615d8bcd5e4947ca8112bcdbe4c9cfc6
+#: ../../enum_manager.txt:11
+msgid "**Add**"
+msgstr "**新增**"
+
+# dc644f9afd5e432ba94a222b07c893b6
+#: ../../enum_manager.txt:11
+msgid ""
+"Launch the :ref:`enum editor <enum_editor>` to define a new enum.  Note that"
+" the new enum will be added when \"OK\"/\"Done\" is clicked in the editor "
+"dialog, not when the \"OK\"/\"Done\" button is clicked in this dialog."
+msgstr "使用\\ :ref:`集合編輯器 <enum_editor>`\\ 來定義一個新集合。按下編輯器對話盒的\"確定\"鈕而非本對話盒的\"確定\"鈕時，才能將此一新集合儲存起來"
+
+# b24535ca505b4238baa9e3416acd559b
+#: ../../enum_manager.txt:14
+msgid "**Edit**"
+msgstr "**編輯**"
+
+# f157619a7eec4450a62c905ede858264
+#: ../../enum_manager.txt:14
+msgid ""
+"Launch the enum editor to edit the currently selected enum.  As when adding,"
+" edits are applied as soon as \"OK\"/\"Done\" is clicked in the editor "
+"dialog."
+msgstr "使用集合編輯器來編輯目前選定之集合。與新增時相同，按下編輯器對話盒的\"確定\"鈕，修改才會生效。"
+
+# c299ae09aa7f4bea82f29c09bcda2c35
+#: ../../enum_manager.txt:17
+msgid "**Delete**"
+msgstr "**刪除**"
+
+# a3cebfbb2e704b079c17a715f0a9255a
+#: ../../enum_manager.txt:17
+msgid ""
+"Delete the currently selected enum.  If there are columns of this enum type,"
+" a dialog will warn you that these would also be deleted and ask if you want"
+" to continue.  The enum (and any associated colums) will be deleted "
+"immediately, not when \"OK\"/\"Done\" is clicked."
+msgstr "刪除目前選定之集合。如果有任何欄位使用此一集合型別，則會出現一個警告對話盒表示這些欄位將被刪除，並詢問你是否繼續此一動作。若回答是，此集合(與任何相關的欄位)將會立刻被刪除，而非等到你按下\"確定\"鈕。"
+
+# 4b2bdb774e2443969c7ca2b54e22bda2
+#: ../../enum_manager.txt:20
+msgid "**Up**"
+msgstr "**往上**"
+
+# 2ad624ac3bd94ac4b2d804bd5c8dacec
+#: ../../enum_manager.txt:20
+msgid ""
+"Move the currently selected enum up one position in the list (and hence in "
+"the column editor's type list as well)."
+msgstr "將目前選定之集合往上移動一個位置(同時在欄位編輯器中的順序也會隨之改變)。"
+
+# 0bd22fc89bd94fb2afaaaded14cc4008
+#: ../../enum_manager.txt:23
+msgid "**Down**"
+msgstr "**往下**"
+
+# e9aee729e09f47448d5c07adc316076d
+#: ../../enum_manager.txt:23
+msgid ""
+"Move the currently selected enum down one position in the list (and hence in"
+" the column editor's type list as well)."
+msgstr "將目前選定之集合往下移動一個位置(同時在欄位編輯器中的順序也會隨之改變)。"
+
+# 1c44c9d094c0420abe10727d681e2d83
+#: ../../enum_manager.txt:25
+msgid ""
+"Click \"OK\"/\"Done\" to apply any changes made to the enum listing order, "
+"or cancel out of the dialog to leave the sequence unchanged (other than any "
+"added or deleted enums)."
+msgstr "按下 \"確定\" 來確認變更集合項目的順序或按下 \"X\"/\"取消\"則維持原本順序不變 (但新增或刪除的集合項目不在此限)。"

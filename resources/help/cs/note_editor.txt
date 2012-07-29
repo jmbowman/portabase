@@ -1,8 +1,0 @@
-.. _note_editor:
-
-Editor/prohlížeč poznámek
-=========================
-
-Sloupec typu poznámka je určen zejména pro víceřádkové bloky textu (na rozdíl od sloupce typu řetězec, který je vhodnější pro relativně krátký jednořádkový text). Rozsáhlejší obsah takovéhoto sloupce si zasluhuje vlastní (velmi jednoduchý) dialog. V Editoru záznamů, stejně jako při definování výchozí hodnoty v Editoru sloupců, je hodnota poznámky zobrazena jako tlačítko s ikonou uvozující začátek textu poznámky (kolik jej lze na tlačítku zobrazit). Chcete-li obsah poznámky zobrazit celý nebo chcete-li jej změnit, stiskněte toto tlačítko; objeví se dialog textového editoru zobrazující aktuální obsah poznámky. Klepnutím na tlačítko "OK" potvrdíte provedené změny, volbou "Zrušit" či křížkem pro uzavření dialogu se vrátíte k původnímu obsahu.
-
-Sloupce typu poznámka se chovají trochu odlišně také v Prohlížeči dat. Jméno sloupce typu poznámka je vždy uvozeno ikonou poznámky upozorňující, že nejde o sloupec obsahující běžný řetězec. U každé buňky sloupce typu poznámka je vidět z obsahu poznámky tolik textu, kolik je z prostorových důvodů možné zobrazit. Stisknete-li v Prohlížeči dat takovouto buňku alespoň půl sekundy, po uvolnění se zobrazí celý text poznámky (bez možnosti editace). Klepnutím na tlačítko "OK" či křížek pro uzavření dialogu se vrátíte zpět do Prohlížeče dat.

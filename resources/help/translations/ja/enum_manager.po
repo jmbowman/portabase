@@ -1,0 +1,113 @@
+# Messages from enum_manager.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 04:34+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# a257cd7b45194d488535312ad5aa202f
+#: ../../enum_manager.txt:4
+msgid "Enum manager"
+msgstr "列挙管理画面"
+
+# a477246e20df4d5e892d426a5a63b097
+#: ../../enum_manager.txt:6
+msgid ""
+"PortaBase supports enum (enumeration) column types, in which each value in "
+"the column is one of a set of possible string values.  The enum manager "
+"dialog lets you create, edit, delete, and change the listing order of these "
+"enums."
+msgstr "PortaBaseは列挙型のフィールドタイプをサポートしています。このフィールドの値は選択可能な文字列値のセットの内の一つになります。列挙管理ダイアログを使って、列挙型の作成、編集、削除、表示順の変更ができます。"
+
+# 9cfd2d1ec7754d61b014ec975438dce4
+#: ../../enum_manager.txt:8
+msgid ""
+"Most of the dialog is occupied by a list of the currently defined enums. "
+"There is a row of buttons identical to those in the :ref:`columns editor "
+"<columns_editor>`:"
+msgstr "ダイアログの大部分は、現在定義されている列挙型の一覧で占められています。画面には、\\ :ref:`フォーマット編集画面 <columns_editor>`\\ と同様のボタンが一行に並んでいます:"
+
+# 615d8bcd5e4947ca8112bcdbe4c9cfc6
+#: ../../enum_manager.txt:11
+msgid "**Add**"
+msgstr "**作成**"
+
+# dc644f9afd5e432ba94a222b07c893b6
+#: ../../enum_manager.txt:11
+msgid ""
+"Launch the :ref:`enum editor <enum_editor>` to define a new enum.  Note that"
+" the new enum will be added when \"OK\"/\"Done\" is clicked in the editor "
+"dialog, not when the \"OK\"/\"Done\" button is clicked in this dialog."
+msgstr ":ref:`列挙編集画面 <enum_editor>`\\ を起動し、列挙型を定義します。新しい列挙型は編集ダイアログで\"OK\"がクリックされた時点で登録されます。ダイアログの\"OK\"ボタンがクリックされなかった場合は登録されませんのでご注意ください。"
+
+# b24535ca505b4238baa9e3416acd559b
+#: ../../enum_manager.txt:14
+msgid "**Edit**"
+msgstr "**編集**"
+
+# f157619a7eec4450a62c905ede858264
+#: ../../enum_manager.txt:14
+msgid ""
+"Launch the enum editor to edit the currently selected enum.  As when adding,"
+" edits are applied as soon as \"OK\"/\"Done\" is clicked in the editor "
+"dialog."
+msgstr "列挙編集画面を起動し、選択されている列挙型を編集します。作成の時と同様、編集ダイアログで\"OK\"がクリックされた時に編集結果が適用されます。"
+
+# c299ae09aa7f4bea82f29c09bcda2c35
+#: ../../enum_manager.txt:17
+msgid "**Delete**"
+msgstr "**削除**"
+
+# a3cebfbb2e704b079c17a715f0a9255a
+#: ../../enum_manager.txt:17
+msgid ""
+"Delete the currently selected enum.  If there are columns of this enum type,"
+" a dialog will warn you that these would also be deleted and ask if you want"
+" to continue.  The enum (and any associated colums) will be deleted "
+"immediately, not when \"OK\"/\"Done\" is clicked."
+msgstr "選択されている列挙型を削除します。この列挙型を使用しているフィールドがある場合、これらも削除される旨の警告が表示され、続けてよいかと訊ねられます。この列挙型（と関連するフィールド）は\"OK\"がクリックされた時ではなく、即座に削除されます。"
+
+# 4b2bdb774e2443969c7ca2b54e22bda2
+#: ../../enum_manager.txt:20
+msgid "**Up**"
+msgstr "**上げる**"
+
+# 2ad624ac3bd94ac4b2d804bd5c8dacec
+#: ../../enum_manager.txt:20
+msgid ""
+"Move the currently selected enum up one position in the list (and hence in "
+"the column editor's type list as well)."
+msgstr "選択されている列挙型のリスト上での位置を一つ上げます（それに伴って、フィールド編集画面のタイプリストでの順番もひとつ前に来ます）"
+
+# 0bd22fc89bd94fb2afaaaded14cc4008
+#: ../../enum_manager.txt:23
+msgid "**Down**"
+msgstr "**下げる**"
+
+# e9aee729e09f47448d5c07adc316076d
+#: ../../enum_manager.txt:23
+msgid ""
+"Move the currently selected enum down one position in the list (and hence in"
+" the column editor's type list as well)."
+msgstr "選択されている列挙型のリスト上での位置を一つ下げます（それに伴って、フィールド編集画面のタイプリストでの順番もひとつ後に来ます）。"
+
+# 1c44c9d094c0420abe10727d681e2d83
+#: ../../enum_manager.txt:25
+msgid ""
+"Click \"OK\"/\"Done\" to apply any changes made to the enum listing order, "
+"or cancel out of the dialog to leave the sequence unchanged (other than any "
+"added or deleted enums)."
+msgstr "列挙型の表示順序に行った変更を適用するには\"OK\"をクリック、表示順を（列挙型の追加および削除の分を除いては）変更せずに終わるにはキャンセルします。"

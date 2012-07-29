@@ -1,0 +1,90 @@
+# Messages from row_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 23:26+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# f13f30f4e191479f878edc04dc5ee272
+#: ../../row_editor.txt:4
+msgid "Row editor"
+msgstr "列編輯器"
+
+# 19ed3d0539b548b486ee3f84516c36f2
+#: ../../row_editor.txt:6
+msgid ""
+"The row editor is shown whenever a row of data is added or edited.  It has "
+"one row for each column in the database; on the left is the name of the "
+"column, and on the right is its current value.  When adding a new row of "
+"data, the default values are shown; when editing an existing row of data, "
+"the current values are shown.  Some comments about editing certain data "
+"types:"
+msgstr "新增或編輯一資料列時就會啟用列編輯器。它會以一列一列的方式顯示資料庫中的每個欄位；左邊是欄位的名稱，右邊則是目前的值。新增一資料列時，右邊顯示的是欄位預設值。編輯各資料型別之注意事項如下："
+
+# bfe0f10c0d5a42b08c3f82b22282a719
+#: ../../row_editor.txt:8
+msgid ""
+"String fields may contain multiple lines of text; press enter/return to add "
+"a line to the entry field."
+msgstr "字串欄位可以包含多行文字；按下Enter鍵可以新增一行。"
+
+# 3c54952d96ef4f9ca3b04d3ada61043b
+#: ../../row_editor.txt:10
+msgid ""
+"To edit the value of a date field, click the button to the left of the "
+"current value display; this launches a calendar widget which allows you to "
+"select a new date."
+msgstr "要編輯日期欄位的值時，按一下目前顯示值左邊的按鈕；則你可以使用一個小月曆來選擇新的日期。"
+
+# 8deadfcd4272464ca61a11b031c2f097
+#: ../../row_editor.txt:12
+msgid ""
+"To the right of each integer and decimal entry field is a button which "
+"launches a simple calculator you can use as a keypad or to calculate the "
+"number to be entered; clicking \"OK\"/\"Done\" puts the current value into "
+"the entry field."
+msgstr "按下數字欄位右邊的按鈕會叫出一個小計算機，可用於計算與輸入數字；按下\"確定\"鈕則數字會被放入欄位中。"
+
+# 195fec04bc184cb580836920a24a4459
+#: ../../row_editor.txt:14
+msgid ""
+"The current value of each calculation column is shown.  To update the "
+"displayed value after changing the value of other columns in the row that "
+"the calculation uses, click the \"Update\" button to the right of the "
+"displayed value.  You don't need to do this before adding or saving the row,"
+" it is just for convenience."
+msgstr "在完成改變欄位的值後, 按下右邊的”更新”按鈕, 新的值就被貯存了. 你不必再存一次"
+
+# 148a46f53af447ff91330c9c4b44c2a0
+#: ../../row_editor.txt:16
+msgid ""
+"For Image fields which have not yet been filled, the \"Select an image\" "
+"button lets you choose an image file to use.  For Image fields which already"
+" have content, three buttons are shown: \"View\" (launch a dialog showing "
+"the current image), \"Change\" (replace the current image with a diferent "
+"one), and \"Delete\" (reset the field back to being empty).  Both the "
+"\"Select an Image\" and \"Change\" buttons launch a file selection dialog, "
+"followed by the :ref:`image editor <image_editor>` dialog."
+msgstr "在影像欄位裡, 如果尚未加入影像, ”選一個影像”按鈕可幫你選一個檔案. 如果已經有存檔, 就可看到三個按鈕出現: ”檢視”, ”改變”和”刪除”. ”選一個影像”和 ”改變”按鈕, 兩者都會起動選檔案的對話盒, 然後跟隨\\ :ref:`影像編輯器 <image_editor>`\\ 對話盒"
+
+# 5ca0c602b2ef432c9eae6590d087b8ec
+#: ../../row_editor.txt:18
+msgid ""
+"After editing the values as desired, click \"OK\"/\"Done\" to accept the "
+"currently displayed values, or cancel out of the dialog to abort the row "
+"addition (if adding a row) or leave the current values unchanged (if editing"
+" a row)."
+msgstr "在編輯完畢後，按下\"確定\"鈕表示接受目前顯示的值，或按下\"X\"/\"取消\"鈕來取消新增一列(如果是新增一列)或是保持原值不變(如果是編輯資料列)。"

@@ -1,0 +1,37 @@
+# Messages from image_viewer.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <jmbowman@alum.mit.edu>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 05:11+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/portabase/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 4f40a9486183449b96d1e0934495affe
+#: ../../image_viewer.txt:4
+msgid "Image viewer"
+msgstr "画像表示画面"
+
+# e724dfa201d0438eaa73720b337653f0
+#: ../../image_viewer.txt:6
+msgid ""
+"The image viewer is a simple dialog that displays the image contained in one"
+" field of an Image column.  If launched from the :ref:`data viewer "
+"<data_viewer>`, the left arrow key shows the image in the same column from "
+"the previous row in the current filter; similarly, the right arrow key shows"
+" the image from the next row.  Double-clicking on the image shows it in "
+"fullscreen mode; click on the fullscreen image again to close the viewer.  "
+"When viewing a fullscreen image (including slideshows) on Maemo Fremantle, "
+"the image will auto-rotate to match the current orientation of the device."
+msgstr "画像表示画面は画像フィールドの一つに含まれている画像を表示するためのシンプルな画面です。\\ :ref:`データ表示画面 <data_viewer>`\\ から起動され、左矢印キーで現在のフィルター中の前のレコードの同じフィールドの画像が、同様に右矢印で次のレコードの画像が表示されます。画像をダブルクリックするとフルスクリーンモードで表示されます; ビューアを閉じるにはフルスクリーン画像を再度クリックします。Maemo 5版でフルスクリーン画像を表示する場合、画像はデバイスの向きに合わせて自動的に回転します。"

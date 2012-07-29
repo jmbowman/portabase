@@ -1,0 +1,58 @@
+# Messages from encryption.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase 2.1\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../encryption.txt:4
+# ce1903b4648f4b7d8bf640e2f729fa33
+msgid "Encryption"
+msgstr ""
+
+#: ../../encryption.txt:6
+# 6e1bc515c265473caf88d1857ec0acc3
+msgid "PortaBase data files can be encrypted in order to protect sensitive information like passwords.  Each encrypted file is accessed by providing a password specified by the file's creator.  (This password can be changed later from the :ref:`File menu <file_menu>`'s \"Change Password\" action.)  Because this password must be relatively easy to remember, this is the weakest point in the encryption scheme; therefore, it is important to choose a good password.  Passwords should meet the following guidelines:"
+msgstr ""
+
+#: ../../encryption.txt:8
+# d629d6509af842be84eca812bd9315a7
+msgid "At least 6 characters long; the longer, the better (no upper limit)"
+msgstr ""
+
+#: ../../encryption.txt:10
+# a4b32202ec614718bc0258804b4d7ef6
+msgid "Contain a combination of upper and lower case letters, numbers, and punctuation symbols"
+msgstr ""
+
+#: ../../encryption.txt:12
+# 2921be4cc353484fb333ac2f885d4ecf
+msgid "Should not consist of data (or misspellings thereof) that would be likely to be in personal records (friend/relative/pet names, contact information, etc.)"
+msgstr ""
+
+#: ../../encryption.txt:14
+# 01bae48f08684fb4a25505dbceff9ddc
+msgid "Easy to remember; if you choose a password that is \"good\" in the above senses and forget it, your data will be virtually impossible to retrieve"
+msgstr ""
+
+#: ../../encryption.txt:16
+# 28c39a6b5ed34875bef4f5e5bf1ca1f8
+msgid "For security and implementation reasons, the entire content of encrypted files must be held in memory at once; thus encrypted files cannot scale to large sizes as well as non-encrypted files.  Files of a few hundred or a few thousand rows should still perform well, but files containing many thousands of rows of data probably won't (at least on Maemo; desktop computers with lots of memory can handle quite large encrypted files)."
+msgstr ""
+
+#: ../../encryption.txt:18
+# e3957606668e40a5b52edfcff6495d6d
+msgid "For more information about encryption in PortaBase (including details on the algorithms used), see the PortaBase homepage (http://portabase.sourceforge.net)."
+msgstr ""
+

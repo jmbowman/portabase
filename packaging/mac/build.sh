@@ -17,7 +17,7 @@ DIRNAME=PortaBase_$VERSION
 rm -rf build/*.app
 rm -f build/*.dmg
 rm -rf build/$DIRNAME
-rm -rf resources/help/_static # in case created for Maemo
+rm -rf resources/help/_build/_static # in case created for Maemo
 
 # compile and make the application bundle
 if [ "$2" == "universal" ]; then
@@ -41,26 +41,28 @@ cd build
 macdeployqt PortaBase.app
 
 # update and copy the help files
-cd ../resources/help
-for dir in `ls`
+cd ..
+packaging/generate_help.sh en
+sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
+mv resources/help/_build/html/_static build/PortaBase.app/Contents/Resources/
+cp -R resources/help/_build/html/* build/PortaBase.app/Contents/Resources/en.lproj/
+for dir in `ls resources/help/translations`
 do
-    if [ -d "$dir" ]; then
-        cd $dir
-        make clean
-        make html
-        sed -i '' 's:_static:../_static:g' _build/html/*.html
+    if [ "$dir" == "templates" ]; then
+        continue
+    fi
+    if [ -d "resources/help/translations/$dir" ]; then
+        packaging/generate_help.sh "$dir"
+        rm -r resources/help/_build/html/_static
+        sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
         target="$dir"
         if [ $dir = "zh_TW" ]; then
             target="zh-Hant"
-            mv _build/html/_static ../../../build/PortaBase.app/Contents/Resources/
-        else
-            rm -r _build/html/_static
         fi
-        cp -R _build/html/* "../../../build/PortaBase.app/Contents/Resources/$target.lproj/"
-        cd ..
+        cp -R resources/help/_build/html/* "build/PortaBase.app/Contents/Resources/$target.lproj/"
     fi
 done
-cd ../../build
+cd build
 
 # make the disk image for distribution
 mkdir $DIRNAME
