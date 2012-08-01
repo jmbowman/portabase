@@ -4,17 +4,19 @@ Priority: optional
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
 Build-Depends: debhelper (>= 7.4.12), libqt4-dev (>= 4.5.0)
 Standards-Version: 3.8.4
-Vcs-Git: git://portabase.git.sourceforge.net/gitroot/portabase/portabase
-Vcs-Browser: http://portabase.git.sourceforge.net/
-Homepage: http://portabase.sourceforge.net
+Vcs-Git: git://git.code.sf.net/p/portabase/code-0
+Vcs-Browser: https://sourceforge.net/p/portabase/code-0/
+Homepage: http://www.portabase.org
 
 Package: portabase
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: An easy-to-use personal database application
  PortaBase is a program for conveniently managing one-table database files.
- It is available for many platforms, including Linux, Mac OS X, Windows,
- and Maemo.  Features include:
+ It can be used as a shopping list, password manager, media inventory,
+ financial tracker, TODO list, address book, photo album, and more. It is
+ available for many platforms, including Linux, Mac OS X, Windows, and Maemo.
+ Features include:
  .
   * String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
     Calculation, Sequence, Image, and Enum column types;
@@ -25,6 +27,7 @@ Description: An easy-to-use personal database application
   * add, delete, rearrange, and rename columns at any time;
   * view summary statistics for columns (total, average, min, max, etc.);
   * import data from CSV, XML, and MobileDB files;
-  * export data to CSV and XML files;
-  * command-line format conversions (to and from XML, from MobileDB);
+  * export data to CSV, HTML, and XML files;
+  * command-line format conversions (to and from XML, from MobileDB,
+    to HTML);
   * optional data file encryption.

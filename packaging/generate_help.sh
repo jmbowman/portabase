@@ -10,12 +10,16 @@
 # packaging/resources/help/_build/index.html
 
 cd resources/help
-make clean
+if [ "$1" = "--no-clean" ]; then
+    shift 1
+else
+    make clean
+fi
 HELP_LANG="$1"
 if [ -z "$HELP_LANG" ]; then
     HELP_LANG="en"
 fi
-if [ "$2" == "update" ]; then
+if [ "$2" = "update" ]; then
     tx pull --mode developer -f -l $HELP_LANG
 fi
 if [ -d "translations/$HELP_LANG" ]; then

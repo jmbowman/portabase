@@ -9,7 +9,7 @@ resources/icons/linux/128x128/portabase.png usr/share/icons/hicolor/128x128/apps
 resources/icons/linux/portabase.svgz usr/share/icons/hicolor/scalable/apps
 resources/icons/portabase.xpm usr/share/pixmaps
 resources/help/_build/_static/* usr/share/portabase/help/_static
-resources/help/_build/cs/html/*.html usr/share/portabase/help/cs
+resources/help/_build/cs/*.html usr/share/portabase/help/cs
 resources/help/_build/cs/*.inv usr/share/portabase/help/cs
 resources/help/_build/cs/*.js usr/share/portabase/help/cs
 resources/help/_build/cs/_sources/* usr/share/portabase/help/cs/_sources

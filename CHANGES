@@ -1,3 +1,13 @@
+2012-07-31  JMB  Added Sphinx translation files, more packaging fixes
+
+    Added the localization files for Sphinx itself so they can be translated
+    for PortaBase along with everything else.  Included a few search-related
+    phrases currently missing in the upstream files due to a bug.
+    
+    Fixed more packaging bugs (Debian source format version, detecting the
+    correct language for help files, building the help files on Windows, etc.)
+    Added some more information to the build instructions (INSTALL, etc.)
+
 2012-07-29  JMB  Proper internationalization of help pages
 
     Reworked how the help files are generated so that the translations for

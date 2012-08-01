@@ -409,8 +409,8 @@ void QQMenuHelper::showHelp()
         int j;
         QString lang;
         for (i = 0; i < count; i++) {
-            lang = langs[0];
-            langs.append(lang);
+            lang = langs[0].replace(QLatin1Char('-'), QLatin1Char('_'));
+            dirNames.append(lang);
             j  = lang.indexOf('.');
             if (j > 0) {
                 lang = lang.left(j);
@@ -421,7 +421,7 @@ void QQMenuHelper::showHelp()
             }
         }
         // if no translation is available, show the English help
-        langs.append("en");
+        dirNames.append("en");
         QString suffix = "/";
 #if defined(Q_WS_WIN)
         QString path = qApp->applicationDirPath() + "/help/";
@@ -432,11 +432,11 @@ void QQMenuHelper::showHelp()
         QString path = QString("/usr/share/%1/help/")
                        .arg(qApp->applicationName().toLower());
 #endif
-        count = langs.count();
+        count = dirNames.count();
         for (i = 0; i < count; i++) {
-            QDir dir(path + langs[i] + suffix);
+            QDir dir(path + dirNames[i] + suffix);
             if (dir.exists()) {
-                helpDir = path + langs[i] + suffix;
+                helpDir = path + dirNames[i] + suffix;
                 break;
             }
         }

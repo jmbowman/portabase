@@ -1,7 +1,7 @@
 REM Make sure these paths are appropriate for your system:
 
 SET mingw_dir=C:\Qt\2010.05\mingw
-SET qt_dir=C:\Qt\4.7.1
+SET qt_dir=C:\Qt\4.8.2
 path = %PATH%;C:\Python27;C:\Python27\Scripts
 
 IF NOT EXIST build\windows MKDIR build\windows
@@ -21,6 +21,6 @@ COPY %qt_dir%\plugins\accessible\qtaccessiblewidgets4.dll build\windows\accessib
 IF NOT EXIST build\windows\imageformats MKDIR build\windows\imageformats
 COPY %qt_dir%\plugins\imageformats\qjpeg4.dll build\windows\imageformats
 
-CMD /C packaging\windows\generate_help.bat
+CALL packaging\windows\generate_all_help.bat
 
 "C:\Program Files\Inno Setup 5\ISCC" portabase.iss

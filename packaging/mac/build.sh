@@ -43,23 +43,29 @@ macdeployqt PortaBase.app
 # update and copy the help files
 cd ..
 packaging/generate_help.sh en
-sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
-mv resources/help/_build/html/_static build/PortaBase.app/Contents/Resources/
-cp -R resources/help/_build/html/* build/PortaBase.app/Contents/Resources/en.lproj/
+cd resources/help/_build
+sed -i '' 's:_static:../_static:g' html/*.html
+mv html/_static ../../../build/PortaBase.app/Contents/Resources/
+cp -R html/* ../../../build/PortaBase.app/Contents/Resources/en.lproj/
+cd ../../..
 for dir in `ls resources/help/translations`
 do
     if [ "$dir" == "templates" ]; then
         continue
     fi
     if [ -d "resources/help/translations/$dir" ]; then
-        packaging/generate_help.sh "$dir"
-        rm -r resources/help/_build/html/_static
-        sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
+        packaging/generate_help.sh --no-clean "$dir"
+        cd resources/help/_build
+        sed -i '' 's:_static/translations:translations:g' html/*.html
+        sed -i '' 's:_static:../_static:g' html/*.html
+        mv html/_static/translations.js html/
+        rm -r html/_static
         target="$dir"
         if [ $dir = "zh_TW" ]; then
             target="zh-Hant"
         fi
-        cp -R resources/help/_build/html/* "build/PortaBase.app/Contents/Resources/$target.lproj/"
+        cp -R html/* "../../../build/PortaBase.app/Contents/Resources/$target.lproj/"
+        cd ../../..
     fi
 done
 cd build

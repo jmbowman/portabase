@@ -50,6 +50,34 @@ Python libraries that it depends on.  To be able to automatically download the
 latest help page translations from Transifex, also run
 "C:\Python27\Scripts\pip install transifex-client".
 
+Installing gettext
+------------------
+Building the translations of the PortaBase help files into other languages
+requires the GNU gettext utilities.  The easiest way to obtain these is to
+download the following two files:
+
+http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-tools-dev_0.18.1.1-2_win32.zip
+http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime_0.18.1.1-2_win32.zip
+
+Change your PATH environment variable so that it includes the bin directory
+from the first download and the lib directory from the second one (or just
+merge the files from those two directories and put the resulting directory in
+your PATH).
+
+Generating the Help Files
+-------------------------
+The script for generating the PortaBase installer does this automatically, but
+there is also a script for doing it separately (in case, for example, you're a
+translator wanting to test the output before a release).  After installing
+Python, Sphinx, gettext, and perhaps transifex-client as described above, run
+"packaging\windows\generate_help en" to generate the English help files.
+Replace "en" with the ISO code for another locale to generate the documentation
+in that language, assuming translations are available for it.  To generate a
+copy of the help files with the latest translations for a language from
+Transifex, you could instead run the command like
+"packaging\windows\generate_help --update ja" (which would generate the
+Japanese help files).
+
 PortaBase Compilation and Packaging
 -----------------------------------
 - Compile Metakit as described above.

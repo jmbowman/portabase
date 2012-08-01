@@ -9,7 +9,7 @@ fi
 DEST=$1
 
 rm -rf $DEST
-mkdir -p $DEST
+mkdir -p $DEST/.tx
 cp *.h $DEST
 cp *.cpp $DEST
 cp CHANGES $DEST
@@ -23,6 +23,7 @@ cp portabase.ico $DEST
 cp portabase.iss $DEST
 cp portabase.pro $DEST
 cp portabase.rc $DEST
+cp .tx/config $DEST/.tx
 cp -R calc $DEST
 cp -R color_picker $DEST
 cp -R debian $DEST

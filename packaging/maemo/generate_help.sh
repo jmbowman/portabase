@@ -6,26 +6,33 @@
 platform=$(uname)
 rm -rf resources/help/_build/_static
 packaging/generate_help.sh en
-if [ "$platform" == "Darwin" ]; then
-    sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
+cd resources/help/_build
+if [ "$platform" = "Darwin" ]; then
+    sed -i '' 's:_static:../_static:g' html/*.html
 else
-    sed -i 's:_static:../_static:g' resources/help/_build/html/*.html
+    sed -i 's:_static:../_static:g' html/*.html
 fi
-mv resources/help/_build/html/_static resources/help/_build
-mv resources/help/_build/html resources/help/_build/en
+mv html/_static .
+mv html en
+cd ../../..
 for dir in `ls resources/help/translations`
 do
-    if [ "$dir" == "templates" ]; then
+    if [ "$dir" = "templates" ]; then
         continue
     fi
-    if [ -d "$dir" ]; then
-        packaging/generate_help.sh "$dir"
-        if [ "$platform" == "Darwin" ]; then
-            sed -i '' 's:_static:../_static:g' resources/help/_build/html/*.html
+    if [ -d "resources/help/translations/$dir" ]; then
+        packaging/generate_help.sh --no-clean "$dir"
+        cd resources/help/_build
+        if [ "$platform" = "Darwin" ]; then
+            sed -i '' 's:_static/translations:translations:g' html/*.html
+            sed -i '' 's:_static:../_static:g' html/*.html
         else
-            sed -i 's:_static:../_static:g' resources/help/_build/html/*.html
+            sed -i 's:_static/translations:translations:g' html/*.html
+            sed -i 's:_static:../_static:g' html/*.html
         fi
-        rm -r resources/help/_build/html/_static
-        mv resources/help/_build/html "resources/help/_build/$dir"
+        mv html/_static/translations.js html/
+        rm -r html/_static
+        mv html "$dir"
+        cd ../../..
     fi
 done

@@ -151,3 +151,9 @@ source_file = resources/help/translations/templates/encryption.pot
 source_lang = en
 type = PO
 
+[portabase.sphinx]
+file_filter = resources/help/translations/<lang>/sphinx.po
+source_file = resources/help/translations/templates/sphinx.pot
+source_lang = en
+type = PO
+
