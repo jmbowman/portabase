@@ -1,3 +1,10 @@
+2012-08-06  JMB  Support for signing Windows binaries
+
+    Updated the windows build scripts to support digitally signing the program
+    binary, installer, and uninstaller.  This should tone down the warning
+    messages shown on Vista and higher when installing future PortaBase
+    releases.
+
 2012-07-31  JMB  Added Sphinx translation files, more packaging fixes
 
     Added the localization files for Sphinx itself so they can be translated

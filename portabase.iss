@@ -23,6 +23,9 @@ OutputBaseFilename=PortaBase_2.1
 OutputDir=build\windows
 VersionInfoVersion=2.1.0.0
 ShowLanguageDialog=yes
+#if Defined SignIt
+  SignTool=kSign /d $qPortaBase 2.1 installer$q /du $qhttp://www.portabase.org$q $f
+#endif
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
@@ -39,11 +42,11 @@ Source: "build\windows\QtGui4.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\windows\QtXml4.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\windows\accessible\qtaccessiblewidgets4.dll"; DestDir: "{app}\accessible"; Flags: ignoreversion
 Source: "build\windows\imageformats\qjpeg4.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
-Source: "resources\help\_static\*"; DestDir: "{app}\help\_static"; Flags: ignoreversion
-Source: "resources\help\cs\_build\html\*"; DestDir: "{app}\help\cs"; Flags: ignoreversion recursesubdirs
-Source: "resources\help\en\_build\html\*"; DestDir: "{app}\help\en"; Flags: ignoreversion recursesubdirs
-Source: "resources\help\ja\_build\html\*"; DestDir: "{app}\help\ja"; Flags: ignoreversion recursesubdirs
-Source: "resources\help\zh_TW\_build\html\*"; DestDir: "{app}\help\zh_TW"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\_build\_static\*"; DestDir: "{app}\help\_static"; Flags: ignoreversion
+Source: "resources\help\_build\cs\*"; DestDir: "{app}\help\cs"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\_build\en\*"; DestDir: "{app}\help\en"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\_build\ja\*"; DestDir: "{app}\help\ja"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\_build\zh_TW\*"; DestDir: "{app}\help\zh_TW"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Languages]
@@ -64,7 +67,7 @@ Root: HKCR; Subkey: "PortaBaseFile\shell\open\command"; ValueType: string; Value
 
 [Icons]
 Name: "{group}\PortaBase"; Filename: "{app}\PortaBase.exe"; Comment: "A personal database application"
-Name: "{group}\{cm:ProgramOnTheWeb,PortaBase}"; Filename: "http://portabase.sourceforge.net"
+Name: "{group}\{cm:ProgramOnTheWeb,PortaBase}"; Filename: "http://www.portabase.org"
 Name: "{group}\{cm:UninstallProgram,PortaBase}"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\PortaBase"; Filename: "{app}\portabase.exe"; Tasks: desktopicon
 

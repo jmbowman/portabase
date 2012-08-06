@@ -21,6 +21,10 @@ COPY %qt_dir%\plugins\accessible\qtaccessiblewidgets4.dll build\windows\accessib
 IF NOT EXIST build\windows\imageformats MKDIR build\windows\imageformats
 COPY %qt_dir%\plugins\imageformats\qjpeg4.dll build\windows\imageformats
 
-CALL packaging\windows\generate_all_help.bat
+REM CALL packaging\windows\generate_all_help.bat
 
-"C:\Program Files\Inno Setup 5\ISCC" portabase.iss
+IF NOT "%1" EQU "" (
+    "C:\Program Files\Inno Setup 5\ISCC" /dSignIt=true "/SkSign=$qC:\Program Files\kSign\kSignCMD.exe$q /f $qC:\Users\Jeremy Bowman\Documents\jb_certificate.pfx$q /p %1 $p" portabase.iss
+) ELSE (
+    "C:\Program Files\Inno Setup 5\ISCC" portabase.iss
+)
