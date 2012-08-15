@@ -41,3 +41,4 @@ cp -R resources $DEST
 if [ "$KEEP_HELP" = "no" ]; then
     rm -rf $DEST/resources/help/_build
 fi
+find $DEST -name '*.DS_Store' -type f -delete

@@ -1,3 +1,11 @@
+2012-08-12  JMB  New application icon
+
+    Switched to a new application icon designed specifically for PortaBase by
+    Holly Guenther (http://kimchikawaii.deviantart.com).  Some of my upcoming
+    plans for PortaBase work best if it has a unique and distinctive icon
+    rather than the previous one borrowed from Wikipedia (or the one before
+    that borrowed from KDE).
+
 2012-08-06  JMB  Support for signing Windows binaries
 
     Updated the windows build scripts to support digitally signing the program
