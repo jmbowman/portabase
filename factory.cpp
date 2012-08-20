@@ -22,19 +22,20 @@
 #include <QProcess>
 #include <QPushButton>
 #include <QSettings>
-#include <QTextEdit>
 #include <QToolButton>
 #include <QTranslator>
 #include <QTreeWidget>
 #include "factory.h"
 
 #if defined(Q_WS_MAEMO_5)
-#include <QAbstractKineticScroller>
+#include <QWebSettings>
+#include <QWebView>
 #endif
 
 QColor Factory::evenRowColor(Qt::white);
 QColor Factory::oddRowColor(Qt::lightGray);
 bool Factory::useAlternatingRowColors(true);
+bool Factory::webViewConfigured(false);
 
 /**
  * Reload the application settings for row color options.  Called when the
@@ -233,21 +234,28 @@ QAbstractButton *Factory::button(QWidget *parent)
 
 /**
  * Create and configure a read-only QTextEdit (for showing simple HTML
- * content).  On Maemo Fremantle, kinetic scrolling will be enabled.
+ * content).  On Maemo Fremantle, a QWebView will be used instead to work
+ * around an intermittent crash-inducing bug in adding HTML to QTextEdit.
  *
  * @param parent The parent widget of the widget to be created
  * @return The new text display widget
  */
-QTextEdit *Factory::textDisplay(QWidget *parent)
+HtmlDisplay *Factory::htmlDisplay(QWidget *parent)
 {
-    QTextEdit *display = new QTextEdit(parent);
-    display->setReadOnly(true);
 #if defined(Q_WS_MAEMO_5)
-    QVariant ksProp = display->property("kineticScroller");
-    QAbstractKineticScroller *ks = ksProp.value<QAbstractKineticScroller *>();
-    if (ks) {
-        ks->setEnabled(true);
+    if (!webViewConfigured) {
+        QWebSettings *settings = QWebSettings::globalSettings();
+        settings->setAttribute(QWebSettings::JavascriptEnabled, false);
+        settings->setAttribute(QWebSettings::PrivateBrowsingEnabled, true);
+        settings->setAttribute(QWebSettings::SiteSpecificQuirksEnabled, false);
+        settings->setFontSize(QWebSettings::DefaultFontSize, qApp->font().pointSize());
+        settings->setMaximumPagesInCache(1);
+        webViewConfigured = true;
     }
+#endif
+    HtmlDisplay *display = new HtmlDisplay(parent);
+#if !defined(Q_WS_MAEMO_5)
+    display->setReadOnly(true);
 #endif
     return display;
 }

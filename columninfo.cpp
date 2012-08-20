@@ -16,10 +16,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QSpinBox>
-#include <QTextCursor>
-#include <QTextEdit>
 #include "columninfo.h"
-#include "factory.h"
 #include "view.h"
 
 /**
@@ -39,7 +36,7 @@ ColumnInfoDialog::ColumnInfoDialog(QWidget *parent)
     hbox->addWidget(columns, 1);
     vbox->addWidget(topRow);
 
-    display = Factory::textDisplay(this);
+    display = Factory::htmlDisplay(this);
     vbox->addWidget(display);
 
     hbox = Factory::hBoxLayout(vbox);
@@ -105,21 +102,16 @@ bool ColumnInfoDialog::launch(View *currentView, const QString &colName)
 void ColumnInfoDialog::columnSelected(int index)
 {
     if (index == -1) {
-        display->clear();
         colWidth->setValue(0);
         return;
     }
     QStringList content;
     QString name = columns->itemText(index);
-    content.append(QString("<center><b>%1</b></center>").arg(name));
+    content.append(QString("<html><body><center><b>%1</b></center>").arg(name));
     content.append("<table cellspacing=0>");
     content.append(view->getStatistics(index));
-    content.append("</table>");
-    display->undo();
-    display->append(content.join(""));
-    QTextCursor cursor = display->textCursor();
-    cursor.setPosition(0);
-    display->setTextCursor(cursor);
+    content.append("</table></body></html>");
+    display->setHtml(content.join(""));
     QVariant width = columns->itemData(index);
     if (width.isValid()) {
         colWidth->setValue(width.toInt());

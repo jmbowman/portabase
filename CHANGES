@@ -1,3 +1,9 @@
+2012-08-20  JMB  N900 crash fix
+
+    Hopefully a final fix for the N900 crash I was occasionally experiencing,
+    by completely replacing the HTML display widget used for that platform.
+    Working fine so far after a week of testing.
+
 2012-08-12  JMB  New application icon
 
     Switched to a new application icon designed specifically for PortaBase by

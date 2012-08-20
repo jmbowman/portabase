@@ -243,9 +243,13 @@ contains(QT_CONFIG, hildon):!maemo5 {
     RESOURCES           = resources/diablo.qrc
 }
 maemo5 {
-    QT                 += dbus maemo5
+    QT                 += dbus maemo5 network webkit
     target.path         = /opt/maemo
     RESOURCES           = resources/fremantle.qrc
+    HEADERS            += image/imagereply.h \
+                          pbnetworkaccessmanager.h
+    SOURCES            += image/imagereply.cpp \
+                          pbnetworkaccessmanager.cpp
 }
 
 # Stuff for other Linux/UNIX platforms

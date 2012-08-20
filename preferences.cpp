@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2004,2009-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,10 @@
 #include "portabase.h"
 #include "preferences.h"
 #include "qqutil/qqmenuhelper.h"
+
+#if defined(Q_WS_MAEMO_5)
+#include <QWebSettings>
+#endif
 
 /**
  * Constructor.
@@ -418,6 +422,9 @@ QFont Preferences::applyChanges()
     settings.setValue("Font/VariableHeightRows",
                       variableHeightRows->isChecked());
     settings.setValue("Colors/UseAlternating", useAlternating->isChecked());
+    QWebSettings *webSettings = QWebSettings::globalSettings();
+    webSettings->setFontSize(QWebSettings::DefaultFontSize,
+                             sizes[fontSize->currentIndex()]);
 #else
     settings.beginGroup("Colors");
     const QColor evenColor = evenButton->currentColor();

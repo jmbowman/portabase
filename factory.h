@@ -1,7 +1,7 @@
 /*
  * factory.h
  *
- * (c) 2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,10 +24,17 @@ class QAbstractButton;
 class QAbstractItemView;
 class QListWidget;
 class QSettings;
-class QTextEdit;
 class QTranslator;
 class QTreeWidget;
 class QWidget;
+
+#if defined(Q_WS_MAEMO_5)
+#include <QWebView>
+#define HtmlDisplay QWebView
+#else
+#include <QTextEdit>
+#define HtmlDisplay QTextEdit
+#endif
 
 /**
  * A collection of static factory methods for creating widgets and layouts
@@ -45,7 +52,7 @@ public:
     static QListWidget *listWidget(QWidget *parent);
     static QTreeWidget *treeWidget(QWidget *parent, const QStringList &headers);
     static QAbstractButton *button(QWidget *parent);
-    static QTextEdit *textDisplay(QWidget *parent);
+    static HtmlDisplay *htmlDisplay(QWidget *parent);
     static void translation(QTranslator *translator, const QString &filename,
                             const QString &envVariable);
     static void updatePreferences(QSettings *settings);
@@ -60,6 +67,7 @@ public:
 
 private:
     static bool useAlternatingRowColors;
+    static bool webViewConfigured;
 };
 
 #endif

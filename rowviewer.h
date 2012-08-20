@@ -1,7 +1,7 @@
 /*
  * rowviewer.h
  *
- * (c) 2002-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 #include <QStringList>
 #include "datatypes.h"
+#include "factory.h"
 #include "pbdialog.h"
 
 class Database;
@@ -68,9 +69,8 @@ private:
     int rowCount; /**< The total number of rows in the current filter */
     QAbstractButton *nextButton; /**< Button for viewing the next row */
     QAbstractButton *prevButton; /**< Button for viewing the previous row */
-    QTextEdit *tv; /**< The HTML display widget used to show the row data */
+    HtmlDisplay *hd; /**< The HTML display widget used to show the row data */
     View *currentView; /**< The database view currently selected in this dialog */
-    QStringList usedImageIds; /**< Keys of loaded images, used for later cleanup */
 };
 
 #endif

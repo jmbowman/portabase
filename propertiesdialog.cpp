@@ -17,8 +17,6 @@
 #include <QHBoxLayout>
 #include <QLocale>
 #include <QPushButton>
-#include <QTextCursor>
-#include <QTextEdit>
 #include "database.h"
 #include "factory.h"
 #include "formatting.h"
@@ -34,11 +32,11 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
                                    ViewDisplay *viewer, QWidget *parent)
   : PBDialog(tr("File Properties"), parent), vd(viewer)
 {
-    QTextEdit *display = Factory::textDisplay(this);
+    HtmlDisplay *display = Factory::htmlDisplay(this);
     vbox->addWidget(display);
 
     QStringList content;
-    content.append("<table cellspacing=\"0\">");
+    content.append("<html><body><table cellspacing=\"0\">");
     QString row("<tr><td align=\"right\"><font color=\"#0000ff\">%1: </font></td><td>%2</td></tr>");
 
     QFile file(filePath);
@@ -95,11 +93,8 @@ PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,
     count = db->listEnums().count();
     content.append(row.arg(tr("Enums")).arg(locale.toString(count)));
 
-    content.append("</table>");
-    display->append(content.join(""));
-    QTextCursor cursor = display->textCursor();
-    cursor.setPosition(0);
-    display->setTextCursor(cursor);
+    content.append("</table></body></html>");
+    display->setHtml(content.join(""));
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addStretch(1);

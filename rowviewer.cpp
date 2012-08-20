@@ -20,13 +20,10 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <QTextCursor>
 #include <QTextDocument>
-#include <QTextEdit>
 #include <QUrl>
 #include "database.h"
 #include "datatypes.h"
-#include "factory.h"
 #include "formatting.h"
 #include "menuactions.h"
 #include "portabase.h"
@@ -34,6 +31,10 @@
 #include "view.h"
 #include "viewdisplay.h"
 #include "image/imageutils.h"
+
+#if defined(Q_WS_MAEMO_5)
+#include "pbnetworkaccessmanager.h"
+#endif
 
 /**
  * Constructor.
@@ -44,15 +45,8 @@
 RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
   : PBDialog(tr("Row Viewer"), parent), db(dbase), display(parent), currentView(0)
 {
-    tv = Factory::textDisplay(this);
-    // Make the boolean value images available in case we need them
-    tv->document()->addResource(QTextDocument::ImageResource,
-                                QUrl("img://icons/checked.png"),
-                                QPixmap(":/icons/checked.png"));
-    tv->document()->addResource(QTextDocument::ImageResource,
-                                QUrl("img://icons/unchecked.png"),
-                                QPixmap(":/icons/unchecked.png"));
-    vbox->addWidget(tv);
+    hd = Factory::htmlDisplay(this);
+    vbox->addWidget(hd);
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     prevButton = Factory::button(this);
@@ -87,13 +81,24 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
     hbox->addWidget(viewBox, 1);
 
-#if !defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_MAEMO_5)
+    PBNetworkAccessManager *manager = new PBNetworkAccessManager(db);
+    hd->page()->setNetworkAccessManager(manager);
+#else
     // kinetic scrolling takes precedence over text copy on Fremantle
     QAbstractButton *copyTextButton = Factory::button(this);
     copyTextButton->setIcon(QIcon(":/icons/copy_text.png"));
     copyTextButton->setToolTip(tr("Copy the selected text"));
-    connect(copyTextButton, SIGNAL(clicked()), tv, SLOT(copy()));
+    connect(copyTextButton, SIGNAL(clicked()), hd, SLOT(copy()));
     hbox->addWidget(copyTextButton);
+
+    // Make the boolean value images available in case we need them
+    hd->document()->addResource(QTextDocument::ImageResource,
+                                QUrl("qrc:/icons/checked.png"),
+                                QPixmap(":/icons/checked.png"));
+    hd->document()->addResource(QTextDocument::ImageResource,
+                                QUrl("qrc:/icons/unchecked.png"),
+                                QPixmap(":/icons/unchecked.png"));
 #endif
 
     nextButton = Factory::button(this);
@@ -103,7 +108,7 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     hbox->addWidget(nextButton);
 
     finishLayout(true, false);
-    tv->setFocus();
+    hd->setFocus();
 }
 
 /**
@@ -158,12 +163,13 @@ void RowViewer::updateContent()
     nextButton->setEnabled(index != rowCount - 1);
     QStringList values = currentView->getRow(index);
     QStringList colNames = currentView->getColNames();
+#if defined(Q_WS_MAEMO_5)
+    QStringList allColNames = db->listColumns();
+#endif
     int *colTypes = currentView->getColTypes();
-    QString str = "<table cellspacing=0>";
+    QString str = "<html><body><table cellspacing=0>";
     int count = colNames.count();
     int imageIndex = 0;
-    // remove any previous content; clear() breaks resource loading somehow
-    tv->undo();
     for (int i = 0; i < count; i++) {
         if (i % 2 == 0) {
             str += "<tr>";
@@ -177,10 +183,10 @@ void RowViewer::updateContent()
         int type = colTypes[i];
         if (type == BOOLEAN) {
             if (values[i].toInt()) {
-                str += "<img src=\"img://icons/checked.png\">";
+                str += "<img src=\"qrc:/icons/checked.png\">";
             }
             else {
-                str += "<img src=\"img://icons/unchecked.png\">";
+                str += "<img src=\"qrc:/icons/unchecked.png\">";
             }
         }
         else if (type == IMAGE) {
@@ -188,14 +194,16 @@ void RowViewer::updateContent()
             if (!format.isEmpty()) {
                 int rowId = currentView->getId(index);
                 QString name = colNames[i];
+#if defined(Q_WS_MAEMO_5)
+                int colIndex = allColNames.indexOf(name);
+                QString imageId = QString("img://%1_%2_%3").arg(rowId).arg(colIndex).arg(format);
+#else
                 QImage image = ImageUtils::load(db, rowId, name, format);
                 QString imageId = QString("img://image%1").arg(imageIndex);
-                tv->document()->addResource(QTextDocument::ImageResource,
+                hd->document()->addResource(QTextDocument::ImageResource,
                                             QUrl(imageId), image);
+#endif
                 str += QString("<img src=\"%1\">").arg(imageId);
-                if (!usedImageIds.contains(imageId)) {
-                    usedImageIds.append(imageId);
-                }
                 imageIndex++;
             }
         }
@@ -204,12 +212,9 @@ void RowViewer::updateContent()
         }
         str += "</td></tr>";
     }
-    str += "</table>";
-    tv->append(str);
-    QTextCursor cursor = tv->textCursor();
-    cursor.setPosition(0);
-    tv->setTextCursor(cursor);
-    tv->setFocus();
+    str += "</table></body></html>";
+    hd->setHtml(str);
+    hd->setFocus();
 }
 
 /**
@@ -273,7 +278,7 @@ void RowViewer::editRow()
         accept();
     }
     else {
-        tv->setFocus();
+        hd->setFocus();
     }
 }
 
@@ -287,7 +292,7 @@ void RowViewer::copyRow()
         accept();
     }
     else {
-        tv->setFocus();
+        hd->setFocus();
     }
 }
 

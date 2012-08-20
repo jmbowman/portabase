@@ -1,7 +1,7 @@
 /*
  * csverror.cpp
  *
- * (c) 2003-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,10 @@
 #include <QLayout>
 #include <QTextEdit>
 #include "csverror.h"
-#include "factory.h"
+
+#if defined(Q_WS_MAEMO_5)
+#include <QAbstractKineticScroller>
+#endif
 
 /**
  * Constructor.
@@ -32,9 +35,17 @@ CSVErrorDialog::CSVErrorDialog(const QString &message, const QString &data, QWid
     vbox->addWidget(new QLabel(message, this));
     vbox->addWidget(new QLabel(tr("Problematic row") + ":", this));
 
-    QTextEdit *dataBox = Factory::textDisplay(this);
+    QTextEdit *dataBox = new QTextEdit(parent);
+    dataBox->setReadOnly(true);
+#if defined(Q_WS_MAEMO_5)
+    QVariant ksProp = dataBox->property("kineticScroller");
+    QAbstractKineticScroller *ks = ksProp.value<QAbstractKineticScroller *>();
+    if (ks) {
+        ks->setEnabled(true);
+    }
+#endif
     dataBox->setLineWrapMode(QTextEdit::NoWrap);
-    dataBox->insertPlainText(data);
+    dataBox->setPlainText(data);
     vbox->addWidget(dataBox);
 
     finishLayout(true, false);

@@ -1,7 +1,7 @@
 /*
  * columninfo.h
  *
- * (c) 2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2011-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 #ifndef COLUMN_INFO_H
 #define COLUMN_INFO_H
 
+#include "factory.h"
 #include "pbdialog.h"
 
 class QComboBox;
@@ -47,7 +48,7 @@ private:
     View *view; /**< The currently-selected database view */
     QWidget *topRow; /**< The column selection row, which is sometimes hidden */
     QComboBox *columns; /**< List of all columns in the table */
-    QTextEdit *display; /**< Display widget for column statistics */
+    HtmlDisplay *display; /**< Display widget for column statistics */
     QSpinBox *colWidth; /**< Control for the column's display width */
     bool edited; /**< True if any column widths have been changed */
 };
