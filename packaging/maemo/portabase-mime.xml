@@ -5,8 +5,11 @@
     <comment>PortaBase file</comment>
     <comment xml:lang="cs">Soubory PortaBase</comment>
     <comment xml:lang="de">PortaBase Dateien</comment>
+    <comment xml:lang="es">Archivo PortaBase</comment>
     <comment xml:lang="fr">Fichiers PortaBase</comment>
     <comment xml:lang="ja">PortaBaseファイル</comment>
+    <comment xml:lang="sk">Súbory PortaBase</comment>
+    <comment xml:lang="zh_CN">PortaBase档案</comment>
     <comment xml:lang="zh_TW">PortaBase檔案</comment>
     <osso:category name="documents"/>
     <magic priority="50">

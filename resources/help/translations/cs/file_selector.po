@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 20:21+0000\n"
+"PO-Revision-Date: 2012-08-19 15:18+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/portabase/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,7 +29,7 @@ msgid ""
 "Unless the program was launched by clicking on a PortaBase file, the first "
 "screen shown will be the file selector.  You may choose one of the following"
 " options from the \"File\" menu, toolbar, or main display buttons:"
-msgstr "Není-li aplikace PortaBase spuštěna poklepem na asociovaný soubor, nabídne Vám po spuštění nejprve výběr souboru. Klepnutím můžete otevřít libovolný soubor ze zobrazeného přehledu (ve verzi pro Zaurus) nebo si vybrat některou z následujících voleb menu \"Soubor\" (případně použít ekvivalentní tlačítko):"
+msgstr "Není-li aplikace PortaBase spuštěna poklepem na asociovaný soubor, nabídne Vám po spuštění nejprve výběr souboru.  Klepnutím můžete otevřít libovolný soubor ze zobrazeného přehledu nebo si vybrat některou z následujících voleb menu \"Soubor\" (případně použít ekvivalentní tlačítko):"
 
 # 6461c61772d84482993f05df60545a41
 #: ../../file_selector.txt:9
@@ -49,7 +49,7 @@ msgstr "**Otevřít**"
 # 3ad2af8246ee43b2bba1d29976dee802
 #: ../../file_selector.txt:12
 msgid "Open a dialog to select a file to open"
-msgstr "Otevře vybraný soubor."
+msgstr "Otevře dialog pro výběr souboru, který chcete otevřít."
 
 # d093e4359fc343c8ab6d1a80a27e5b47
 #: ../../file_selector.txt:15
@@ -73,7 +73,7 @@ msgid ""
 "an XML or MobileDB file.  You will be prompted for the type of file to "
 "import, the file to import, then a name for the new file to create.  See the"
 " PortaBase home page for more information about the XML format used."
-msgstr "Vytvoří nový soubor (volitelně i :ref:`šifrovaný <encryption>`\\ ) z dat souboru ve formátu XML či MobileDB. Přitom budete vyzváni k zadání typu importovaného souboru, jména nově vytvářeného souboru a k výběru souboru, který chcete importovat. Na domovské stránce PortaBase naleznete více informací o použitém formátu XML."
+msgstr "Vytvoří nový soubor (volitelně i :ref:`šifrovaný <encryption>`\\ ) z dat souboru ve formátu XML či MobileDB.  Přitom budete vyzváni k zadání typu importovaného souboru, jména nově vytvářeného souboru a k výběru souboru, který chcete importovat.  Na domovské stránce PortaBase naleznete více informací o použitém formátu XML."
 
 # 2bb2d86f846a474a8cc21c2a3b521c5b
 #: ../../file_selector.txt:21
@@ -88,14 +88,14 @@ msgstr "Otevře :ref:`dialog \"Nastavení\" <preferences>`\\ ."
 # b6aa01a321d74e25a763a4930b263cc0
 #: ../../file_selector.txt:24
 msgid "**Fullscreen**"
-msgstr ""
+msgstr "**Celá obrazovka**"
 
 # 715c18ea94694aa6826c967c23780010
 #: ../../file_selector.txt:24
 msgid ""
 "Click this toolbar button to switch PortaBase to fullscreen mode or back to "
 "normal display mode."
-msgstr ""
+msgstr "Klepnutím na toto tlačítko zobrazíte aplikaci PortaBase na celé obrazovce (displeji) nebo se vrátíte zpět do normálního zobrazení."
 
 # 1c0e46468c0a4990963912a3504456c2
 #: ../../file_selector.txt:26

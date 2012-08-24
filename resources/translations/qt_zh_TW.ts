@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_TW" version="2.0">
+<context>
+    <name>CloseButton</name>
+    <message>
+        <source>Close Tab</source>
+        <translation>關閉分頁</translation>
+    </message>
+</context>
 <context>
     <name>MAC_APPLICATION_MENU</name>
     <message>
@@ -33,14 +38,11 @@
     </message>
 </context>
 <context>
-    <name>CloseButton</name>
-    <message>
-        <source>Close Tab</source>
-        <translation>關閉分頁</translation>
-    </message>
-</context>
-<context>
     <name>QAbstractSpinBox</name>
+    <message>
+        <source>&amp;Select All</source>
+        <translation>全部選擇(&amp;S)</translation>
+    </message>
     <message>
         <source>&amp;Step up</source>
         <translation>單步向上(&amp;S)</translation>
@@ -49,16 +51,16 @@
         <source>Step &amp;down</source>
         <translation>單步向下(&amp;D)</translation>
     </message>
-    <message>
-        <source>&amp;Select All</source>
-        <translation>全部選擇(&amp;S)</translation>
-    </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Activate</source>
         <translation>啟動</translation>
+    </message>
+    <message>
+        <source>Activates the program&apos;s main window</source>
+        <translation>啟動程式的主視窗</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
@@ -70,12 +72,8 @@
     </message>
     <message>
         <source>QT_LAYOUT_DIRECTION</source>
-        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <comment>Translate this string to the string 'LTR' in left-to-right languages or to 'RTL' in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
         <translation>LTR</translation>
-    </message>
-    <message>
-        <source>Activates the program&apos;s main window</source>
-        <translation>啟動程式的主視窗</translation>
     </message>
 </context>
 <context>
@@ -136,32 +134,12 @@
         <translation>自訂顏色(&amp;C)</translation>
     </message>
     <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">定義自訂顏色(&amp;D)＞＞</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
         <source>&amp;Add to Custom Colors</source>
         <translation>新增到自訂顏色(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">選擇顏色</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
-    <message>
-        <source>Open</source>
-        <translation>開啟</translation>
-    </message>
     <message>
         <source>False</source>
         <translation>假</translation>
@@ -171,6 +149,10 @@
         <translation>真</translation>
     </message>
     <message>
+        <source>Open</source>
+        <translation>開啟</translation>
+    </message>
+    <message>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
@@ -178,12 +160,12 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
-        <translation>這是什麼？</translation>
-    </message>
-    <message>
         <source>Done</source>
         <translation>完成</translation>
+    </message>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>這是什麼？</translation>
     </message>
 </context>
 <context>
@@ -193,32 +175,36 @@
         <translation>確定</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation>儲存</translation>
+        <source>&amp;OK</source>
+        <translation>確定(&amp;O)</translation>
     </message>
     <message>
         <source>&amp;Save</source>
         <translation>儲存(&amp;S)</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>開啟</translation>
+        <source>Save</source>
+        <translation>儲存</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>取消</translation>
+        <source>Open</source>
+        <translation>開啟</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>關閉</translation>
+        <source>Cancel</source>
+        <translation>取消</translation>
     </message>
     <message>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>關閉</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -235,6 +221,10 @@
     <message>
         <source>Don&apos;t Save</source>
         <translation>不要儲存</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation>關閉而不儲存</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -276,14 +266,6 @@
         <source>Restore Defaults</source>
         <translation>回復預設值</translation>
     </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>關閉而不儲存</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>確定(&amp;O)</translation>
-    </message>
 </context>
 <context>
     <name>QDirModel</name>
@@ -317,8 +299,12 @@
         <translation>目標檔已存在</translation>
     </message>
     <message>
+        <source>Will not rename sequential file using block copy</source>
+        <translation>不能用整體複製來改變列序檔案的名字</translation>
+    </message>
+    <message>
         <source>Cannot remove source file</source>
-        <translation type="unfinished"></translation>
+        <translation>不能移除原始碼檔案</translation>
     </message>
     <message>
         <source>Cannot open %1 for input</source>
@@ -336,16 +322,112 @@
         <source>Cannot create %1 for output</source>
         <translation>無法建立 %1 以輸出</translation>
     </message>
+    <message>
+        <source>No file engine available or engine does not support UnMapExtension</source>
+        <translation>沒有檔案引擎可用或者引擎沒有辦法支援UnMapExtension </translation>
+    </message>
 </context>
 <context>
     <name>QFileDialog</name>
+    <message>
+        <source>Look in:</source>
+        <translation>尋找於：</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>返回</translation>
+    </message>
+    <message>
+        <source>Go back</source>
+        <translation>回去</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>往前</translation>
+    </message>
+    <message>
+        <source>Go forward</source>
+        <translation>向前</translation>
+    </message>
+    <message>
+        <source>Parent Directory</source>
+        <translation>父目錄</translation>
+    </message>
+    <message>
+        <source>Go to the parent directory</source>
+        <translation>去父代目錄</translation>
+    </message>
+    <message>
+        <source>Create New Folder</source>
+        <translation>建立新資料夾</translation>
+    </message>
+    <message>
+        <source>Create a New Folder</source>
+        <translation>創立一個新文件夾</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation>列表檢視</translation>
+    </message>
+    <message>
+        <source>Change to list view mode</source>
+        <translation>改到列出景觀模式</translation>
+    </message>
+    <message>
+        <source>Detail View</source>
+        <translation>詳細檢視</translation>
+    </message>
+    <message>
+        <source>Change to detail view mode</source>
+        <translation>改到細節景觀模式</translation>
+    </message>
+    <message>
+        <source>Files of type:</source>
+        <translation>檔案型態：</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>尋找目錄</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>開啟</translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation>另存新檔</translation>
+    </message>
     <message>
         <source>All Files (*)</source>
         <translation>所有檔案 (*)</translation>
     </message>
     <message>
-        <source>Directories</source>
-        <translation>目錄</translation>
+        <source>Show </source>
+        <translation>顯示 </translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>重新命名(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>刪除(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Show &amp;hidden files</source>
+        <translation>顯示隱藏檔(&amp;H)</translation>
+    </message>
+    <message>
+        <source>&amp;New Folder</source>
+        <translation>新增資料夾(&amp;N)</translation>
+    </message>
+    <message>
+        <source>Directory:</source>
+        <translation>目錄：</translation>
+    </message>
+    <message>
+        <source>File &amp;name:</source>
+        <translation>檔名(&amp;N)：</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -356,8 +438,20 @@
         <translation>儲存(&amp;S)</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>開啟</translation>
+        <source>Directories</source>
+        <translation>目錄</translation>
+    </message>
+    <message>
+        <source>&amp;Choose</source>
+        <translation>選擇(&amp;C)</translation>
+    </message>
+    <message>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+找不到目錄。
+請檢查目錄名稱是否正確。</translation>
     </message>
     <message>
         <source>%1 already exists.
@@ -374,63 +468,11 @@ Please verify the correct file name was given.</source>
 請檢查檔名是否正確。</translation>
     </message>
     <message>
-        <source>My Computer</source>
-        <translation>我的電腦</translation>
+        <source>New Folder</source>
+        <translation>新資料夾</translation>
     </message>
     <message>
-        <source>&amp;Rename</source>
-        <translation>重新命名(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>刪除(&amp;D)</translation>
-    </message>
-    <message>
-        <source>Show &amp;hidden files</source>
-        <translation>顯示隱藏檔(&amp;H)</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>返回</translation>
-    </message>
-    <message>
-        <source>Parent Directory</source>
-        <translation>父目錄</translation>
-    </message>
-    <message>
-        <source>List View</source>
-        <translation>列表檢視</translation>
-    </message>
-    <message>
-        <source>Detail View</source>
-        <translation>詳細檢視</translation>
-    </message>
-    <message>
-        <source>Files of type:</source>
-        <translation>檔案型態：</translation>
-    </message>
-    <message>
-        <source>Directory:</source>
-        <translation>目錄：</translation>
-    </message>
-    <message>
-        <source>
-File not found.
-Please verify the correct file name was given</source>
-        <translation type="obsolete">
-檔案找不到。
-請檢查檔名是否正確。</translation>
-    </message>
-    <message>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1
-找不到目錄。
-請檢查目錄名稱是否正確。</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
         <translation>%1 有寫入保護。
 您確定要刪除它嗎？</translation>
@@ -452,8 +494,12 @@ Do you want to delete it anyway?</source>
         <translation>所有檔案 (*.*)</translation>
     </message>
     <message>
-        <source>Save As</source>
-        <translation>另存新檔</translation>
+        <source>Remove</source>
+        <translation>移除</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>我的電腦</translation>
     </message>
     <message>
         <source>Drive</source>
@@ -464,52 +510,52 @@ Do you want to delete it anyway?</source>
         <translation>檔案</translation>
     </message>
     <message>
+        <source>File Folder</source>
+        <comment>Match Windows Explorer</comment>
+        <translation>檔案夾</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <comment>All other platforms</comment>
+        <translation>文件夾</translation>
+    </message>
+    <message>
+        <source>Alias</source>
+        <comment>Mac OS X Finder</comment>
+        <translation>別號</translation>
+    </message>
+    <message>
+        <source>Shortcut</source>
+        <comment>All other platforms</comment>
+        <translation>捷徑</translation>
+    </message>
+    <message>
         <source>Unknown</source>
         <translation>未知</translation>
-    </message>
-    <message>
-        <source>Find Directory</source>
-        <translation>尋找目錄</translation>
-    </message>
-    <message>
-        <source>Show </source>
-        <translation>顯示 </translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>往前</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>新資料夾</translation>
-    </message>
-    <message>
-        <source>&amp;New Folder</source>
-        <translation>新增資料夾(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&amp;Choose</source>
-        <translation>選擇(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>移除</translation>
-    </message>
-    <message>
-        <source>File &amp;name:</source>
-        <translation>檔名(&amp;N)：</translation>
-    </message>
-    <message>
-        <source>Look in:</source>
-        <translation>尋找於：</translation>
-    </message>
-    <message>
-        <source>Create New Folder</source>
-        <translation>建立新資料夾</translation>
     </message>
 </context>
 <context>
     <name>QFileSystemModel</name>
+    <message>
+        <source>%1 TB</source>
+        <translation>%1 TB</translation>
+    </message>
+    <message>
+        <source>%1 GB</source>
+        <translation>%1 GB</translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation>%1 KB</translation>
+    </message>
+    <message>
+        <source>%1 bytes</source>
+        <translation>%1 位元組</translation>
+    </message>
     <message>
         <source>Invalid filename</source>
         <translation>不合法的檔名</translation>
@@ -549,24 +595,8 @@ Do you want to delete it anyway?</source>
         <translation>電腦</translation>
     </message>
     <message>
-        <source>%1 TB</source>
-        <translation>%1 TB</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
-    </message>
-    <message>
-        <source>%1 bytes</source>
-        <translation>%1 位元組</translation>
+        <source>%1 byte(s)</source>
+        <translation>%1 字節</translation>
     </message>
 </context>
 <context>
@@ -735,9 +765,17 @@ Do you want to delete it anyway?</source>
         <source>Runic</source>
         <translation>盧恩</translation>
     </message>
+    <message>
+        <source>N&apos;Ko</source>
+        <translation>N&apos;Ko</translation>
+    </message>
 </context>
 <context>
     <name>QFontDialog</name>
+    <message>
+        <source>Select Font</source>
+        <translation>選擇字型</translation>
+    </message>
     <message>
         <source>&amp;Font</source>
         <translation>字型(&amp;F)</translation>
@@ -769,10 +807,6 @@ Do you want to delete it anyway?</source>
     <message>
         <source>Wr&amp;iting System</source>
         <translation>寫入系統(&amp;I)</translation>
-    </message>
-    <message>
-        <source>Select Font</source>
-        <translation>選擇字型</translation>
     </message>
 </context>
 <context>
@@ -847,76 +881,16 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>About</source>
-        <translation type="obsolete">關於</translation>
+        <source>Actions</source>
+        <translation>行動</translation>
     </message>
     <message>
-        <source>Config</source>
-        <translation type="obsolete">設定</translation>
-    </message>
-    <message>
-        <source>Preference</source>
-        <translation type="obsolete">喜好設定</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">選項</translation>
-    </message>
-    <message>
-        <source>Setting</source>
-        <translation type="obsolete">設定</translation>
-    </message>
-    <message>
-        <source>Setup</source>
-        <translation type="obsolete">設定</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">離開</translation>
-    </message>
-    <message>
-        <source>Exit</source>
-        <translation type="obsolete">離開</translation>
-    </message>
-    <message>
-        <source>About %1</source>
-        <translation type="obsolete">關於 %1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation type="obsolete">關於 Qt</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">喜好設定</translation>
-    </message>
-    <message>
-        <source>Quit %1</source>
-        <translation type="obsolete">離開 %1</translation>
+        <source>Corner Toolbar</source>
+        <translation>角落工具欄</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
-    <message>
-        <source>Help</source>
-        <translation>說明</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>確定</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>關於 Qt</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt; 這個程式使用 Qt 版本 %1&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;關於 Qt&lt;/h3&gt;%1&lt;p&gt;Qt 為一個跨平台的 C++ 開發工具。&lt;/p&gt;&lt;p&gt;Qt 提供各平台相容機制，只要寫一份程式碼，就可以在 MS&amp;nbsp;Windows、Mac&amp;nbsp;OS&amp;nbsp;X、Linux 與各主要的商業 Unix 平台上編譯。Qt 也可以用 Qtopia Core 用於嵌入式系統。&lt;/p&gt;&lt;p&gt;Qt 為 Trolltech 的產品。詳情請參考 &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;。&lt;/p&gt;</translation>
-    </message>
     <message>
         <source>Show Details...</source>
         <translation>顯示詳情...</translation>
@@ -926,20 +900,24 @@ Do you want to delete it anyway?</source>
         <translation>隱藏詳情...</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>OK</source>
+        <translation>確定</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;關於 Qt&lt;/h3&gt;%1&lt;p&gt;Qt 為一個跨平台的 C++ 開發工具。&lt;/p&gt;&lt;p&gt;Qt 提供各平台相容機制，只要寫一份程式碼，就可以在 MS&amp;nbsp;Windows、Mac&amp;nbsp;OS&amp;nbsp;X、Linux 與各主要的商業 Unix 平台上編譯。Qt 也有用於嵌入式 Linux 與 Windows CE 的版本。&lt;/p&gt;&lt;p&gt;Qt 為 Nokia 的產品。詳情請參考 &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;。&lt;/p&gt;</translation>
+        <source>Help</source>
+        <translation>說明</translation>
     </message>
     <message>
-        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;這個程式使用了 Qt 開放源碼版本 %1。&lt;/p&gt;&lt;p&gt;Qt 開放源碼版本是專門為了開發開放源碼應用程式使用的版本。若是您要開發專利私有（封閉）軟體，您需要 Qt 的商業授權。&lt;/p&gt;&lt;p&gt;Qt 的授權概要請參考 &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt;。&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation>＜h3&gt;關於Qt&lt;/h3&gt;這程式是用Qt %1.0 版本＜/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt Embedded.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;關於 Qt&lt;/h3&gt;%1&lt;p&gt;Qt 為一個跨平台的 C++ 開發工具。&lt;/p&gt;&lt;p&gt;Qt 提供各平台相容機制，只要寫一份程式碼，就可以在 MS&amp;nbsp;Windows、Mac&amp;nbsp;OS&amp;nbsp;X、Linux 與各主要的商業 Unix 平台上編譯。Qt 也可以用 Qtopia Core 用於嵌入式系統。&lt;/p&gt;&lt;p&gt;Qt 為 Trolltech 的產品。詳情請參考 &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;。&lt;/p&gt;</translation>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Qt 是一個C++ 工具包可以在跨平臺內研發程式。＜/p&gt;&lt;p&gt;Qt 提供可移植的單一代碼橫跨MS, OS ,X, Linux 和其他主要商用Unix演變產品。Qt 也可發現嵌入在Linux 和視窗CE系統裡.&lt;/p&gt;&lt;p&gt;Qt 也在三種不同執照選擇設計裡出現來配合我們不同使用者的需求。&lt;/p&gt;&lt;p&gt;Qt 給予商業用執照同意使用權來開發商用軟體但不得將任何原碼轉享給第三者或其他不能同意GNU LGPL 版本2•1 或GNU GPL 3.0 版的條款者&lt;/p&gt;&lt;p&gt;Qt 使用執照發給GNU LGPL2.1 版本是適用於研發Qt（ 有版權或公開原碼的）應用程式，假設你能承諾GNN LGPL 2.1所有的條款及條件&lt;/p&gt;&lt;p&gt;Qt 有執照使用於GNU一般公共執照3•0 版本是適用于開發Qt 應用程式而且你想用此應用程式與GNU GPL 3.0 版本的軟體結合並且同意根據GNL GPL3.0 版的條款&lt;/p&gt;&lt;p&gt;請看&lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt;全灠有關Qt 照使用權&lt;/p&gt;&lt;p&gt;Copyright (C)2012 Nokia 株式會社和/或其他附屬有關公司&lt;/p&gt;&lt;p&gt;Qt 是Nokia 產品。參看&lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;更多資料。&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>關於 Qt</translation>
     </message>
 </context>
 <context>
@@ -955,22 +933,6 @@ Do you want to delete it anyway?</source>
 </context>
 <context>
     <name>QPageSetupWidget</name>
-    <message>
-        <source>Centimeters (cm)</source>
-        <translation>公分</translation>
-    </message>
-    <message>
-        <source>Millimeters (mm)</source>
-        <translation>公厘</translation>
-    </message>
-    <message>
-        <source>Inches (in)</source>
-        <translation>英吋</translation>
-    </message>
-    <message>
-        <source>Points (pt)</source>
-        <translation>點</translation>
-    </message>
     <message>
         <source>Form</source>
         <translation>表單</translation>
@@ -1035,290 +997,28 @@ Do you want to delete it anyway?</source>
         <source>bottom margin</source>
         <translation>下緣</translation>
     </message>
+    <message>
+        <source>Centimeters (cm)</source>
+        <translation>公分</translation>
+    </message>
+    <message>
+        <source>Millimeters (mm)</source>
+        <translation>公厘</translation>
+    </message>
+    <message>
+        <source>Inches (in)</source>
+        <translation>英吋</translation>
+    </message>
+    <message>
+        <source>Points (pt)</source>
+        <translation>點</translation>
+    </message>
 </context>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <source>locally connected</source>
-        <translation>本地連接</translation>
-    </message>
-    <message>
-        <source>Aliases: %1</source>
-        <translation>別名：%1</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>未知</translation>
-    </message>
-    <message>
-        <source>Portrait</source>
-        <translation type="obsolete">縱向</translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="obsolete">橫向</translation>
-    </message>
-    <message>
-        <source>A0 (841 x 1189 mm)</source>
-        <translation>A0 (841 x 1189 mm)</translation>
-    </message>
-    <message>
-        <source>A1 (594 x 841 mm)</source>
-        <translation>A1 (594 x 841 mm)</translation>
-    </message>
-    <message>
-        <source>A2 (420 x 594 mm)</source>
-        <translation>A2 (420 x 594 mm)</translation>
-    </message>
-    <message>
-        <source>A3 (297 x 420 mm)</source>
-        <translation>A3 (297 x 420 mm)</translation>
-    </message>
-    <message>
-        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
-        <translation>A4 (210 x 297 mm, 8.26 x 11.7 英吋)</translation>
-    </message>
-    <message>
-        <source>A5 (148 x 210 mm)</source>
-        <translation>A5 (148 x 210 mm)</translation>
-    </message>
-    <message>
-        <source>A6 (105 x 148 mm)</source>
-        <translation>A6 (105 x 148 mm)</translation>
-    </message>
-    <message>
-        <source>A7 (74 x 105 mm)</source>
-        <translation>A7 (74 x 105 mm)</translation>
-    </message>
-    <message>
-        <source>A8 (52 x 74 mm)</source>
-        <translation>A8 (52 x 74 mm)</translation>
-    </message>
-    <message>
-        <source>A9 (37 x 52 mm)</source>
-        <translation>A9 (37 x 52 mm)</translation>
-    </message>
-    <message>
-        <source>B0 (1000 x 1414 mm)</source>
-        <translation>B0 (1000 x 1414 mm)</translation>
-    </message>
-    <message>
-        <source>B1 (707 x 1000 mm)</source>
-        <translation>B1 (707 x 1000 mm)</translation>
-    </message>
-    <message>
-        <source>B2 (500 x 707 mm)</source>
-        <translation>B2 (500 x 707 mm)</translation>
-    </message>
-    <message>
-        <source>B3 (353 x 500 mm)</source>
-        <translation>B3 (353 x 500 mm)</translation>
-    </message>
-    <message>
-        <source>B4 (250 x 353 mm)</source>
-        <translation>B4 (250 x 353 mm)</translation>
-    </message>
-    <message>
-        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
-        <translation>B5 (176 x 250 mm, 6.93 x 9.84 英吋)</translation>
-    </message>
-    <message>
-        <source>B6 (125 x 176 mm)</source>
-        <translation>B6 (125 x 176 mm)</translation>
-    </message>
-    <message>
-        <source>B7 (88 x 125 mm)</source>
-        <translation>B7 (88 x 125 mm)</translation>
-    </message>
-    <message>
-        <source>B8 (62 x 88 mm)</source>
-        <translation>B8 (62 x 88 mm)</translation>
-    </message>
-    <message>
-        <source>B9 (44 x 62 mm)</source>
-        <translation>B9 (44 x 62 mm)</translation>
-    </message>
-    <message>
-        <source>B10 (31 x 44 mm)</source>
-        <translation>B10 (31 x 44 mm)</translation>
-    </message>
-    <message>
-        <source>C5E (163 x 229 mm)</source>
-        <translation>C5E (163 x 229 mm)</translation>
-    </message>
-    <message>
-        <source>DLE (110 x 220 mm)</source>
-        <translation>DLE (110 x 220 mm)</translation>
-    </message>
-    <message>
-        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
-        <translation>Executive (7.5 x 10 英吋, 191 x 254 mm)</translation>
-    </message>
-    <message>
-        <source>Folio (210 x 330 mm)</source>
-        <translation>對開 (210 x 330 mm)</translation>
-    </message>
-    <message>
-        <source>Ledger (432 x 279 mm)</source>
-        <translation>Ledger (432 x 279 mm)</translation>
-    </message>
-    <message>
-        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
-        <translation>Legal (8.5 x 14 英吋, 216 x 356 mm)</translation>
-    </message>
-    <message>
-        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
-        <translation>Letter (8.5 x 11 英吋, 216 x 279 mm)</translation>
-    </message>
-    <message>
-        <source>Tabloid (279 x 432 mm)</source>
-        <translation>Tabloid (279 x 432 mm)</translation>
-    </message>
-    <message>
-        <source>US Common #10 Envelope (105 x 241 mm)</source>
-        <translation>US 常用 10 號信封 (105x241 mm)</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>確定</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>Page size:</source>
-        <translation type="obsolete">紙張大小：</translation>
-    </message>
-    <message>
-        <source>Orientation:</source>
-        <translation type="obsolete">方向：</translation>
-    </message>
-    <message>
-        <source>Paper source:</source>
-        <translation type="obsolete">紙張來源：</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>列印</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">檔案</translation>
-    </message>
-    <message>
-        <source>Printer</source>
-        <translation type="obsolete">印表機</translation>
-    </message>
-    <message>
-        <source>Print To File ...</source>
-        <translation>列印到檔案...</translation>
-    </message>
-    <message>
-        <source>Print dialog</source>
-        <translation type="obsolete">列印對話框</translation>
-    </message>
-    <message>
-        <source>Paper format</source>
-        <translation type="obsolete">紙張格式</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="obsolete">大小：</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">內容</translation>
-    </message>
-    <message>
-        <source>Printer info:</source>
-        <translation type="obsolete">印表機資訊：</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="obsolete">瀏覽</translation>
-    </message>
-    <message>
-        <source>Print to file</source>
-        <translation type="obsolete">列印到檔案</translation>
-    </message>
-    <message>
-        <source>Print range</source>
-        <translation>列印範圍</translation>
-    </message>
-    <message>
-        <source>Print all</source>
-        <translation>全部列印</translation>
-    </message>
-    <message>
-        <source>Pages from</source>
-        <translation type="obsolete">指定頁面：從</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">到</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">選擇區</translation>
-    </message>
-    <message>
-        <source>Copies</source>
-        <translation type="obsolete">份數</translation>
-    </message>
-    <message>
-        <source>Number of copies:</source>
-        <translation type="obsolete">列印份數：</translation>
-    </message>
-    <message>
-        <source>Collate</source>
-        <translation type="obsolete">校對</translation>
-    </message>
-    <message>
-        <source>Print last page first</source>
-        <translation type="obsolete">從最後一頁印起</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">其他</translation>
-    </message>
-    <message>
-        <source>Print in color if available</source>
-        <translation type="obsolete">可以的話用彩色列印</translation>
-    </message>
-    <message>
-        <source>Double side printing</source>
-        <translation type="obsolete">雙面列印</translation>
-    </message>
-    <message>
-        <source>File %1 is not writable.
-Please choose a different file name.</source>
-        <translation>檔案 %1 無法寫入。
-請選擇其它檔名。</translation>
-    </message>
-    <message>
-        <source>%1 already exists.
-Do you want to overwrite it?</source>
-        <translation>%1 已存在。
-您要覆寫它嗎？</translation>
-    </message>
-    <message>
-        <source>File exists</source>
-        <translation>檔案已存在</translation>
-    </message>
-    <message>
-        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;您要覆寫它嗎？&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <source>Print selection</source>
-        <translation>列印選擇區</translation>
-    </message>
-    <message>
-        <source>%1 is a directory.
-Please choose a different file name.</source>
-        <translation>%1 是一個目錄。
-請選擇其他檔名。</translation>
     </message>
     <message>
         <source>A0</source>
@@ -1445,6 +1145,150 @@ Please choose a different file name.</source>
         <translation>自訂</translation>
     </message>
     <message>
+        <source>File exists</source>
+        <translation>檔案已存在</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;您要覆寫它嗎？&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>A0 (841 x 1189 mm)</source>
+        <translation>A0 (841 x 1189 mm)</translation>
+    </message>
+    <message>
+        <source>A1 (594 x 841 mm)</source>
+        <translation>A1 (594 x 841 mm)</translation>
+    </message>
+    <message>
+        <source>A2 (420 x 594 mm)</source>
+        <translation>A2 (420 x 594 mm)</translation>
+    </message>
+    <message>
+        <source>A3 (297 x 420 mm)</source>
+        <translation>A3 (297 x 420 mm)</translation>
+    </message>
+    <message>
+        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
+        <translation>A4 (210 x 297 mm, 8.26 x 11.7 英吋)</translation>
+    </message>
+    <message>
+        <source>A5 (148 x 210 mm)</source>
+        <translation>A5 (148 x 210 mm)</translation>
+    </message>
+    <message>
+        <source>A6 (105 x 148 mm)</source>
+        <translation>A6 (105 x 148 mm)</translation>
+    </message>
+    <message>
+        <source>A7 (74 x 105 mm)</source>
+        <translation>A7 (74 x 105 mm)</translation>
+    </message>
+    <message>
+        <source>A8 (52 x 74 mm)</source>
+        <translation>A8 (52 x 74 mm)</translation>
+    </message>
+    <message>
+        <source>A9 (37 x 52 mm)</source>
+        <translation>A9 (37 x 52 mm)</translation>
+    </message>
+    <message>
+        <source>B0 (1000 x 1414 mm)</source>
+        <translation>B0 (1000 x 1414 mm)</translation>
+    </message>
+    <message>
+        <source>B1 (707 x 1000 mm)</source>
+        <translation>B1 (707 x 1000 mm)</translation>
+    </message>
+    <message>
+        <source>B2 (500 x 707 mm)</source>
+        <translation>B2 (500 x 707 mm)</translation>
+    </message>
+    <message>
+        <source>B3 (353 x 500 mm)</source>
+        <translation>B3 (353 x 500 mm)</translation>
+    </message>
+    <message>
+        <source>B4 (250 x 353 mm)</source>
+        <translation>B4 (250 x 353 mm)</translation>
+    </message>
+    <message>
+        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
+        <translation>B5 (176 x 250 mm, 6.93 x 9.84 英吋)</translation>
+    </message>
+    <message>
+        <source>B6 (125 x 176 mm)</source>
+        <translation>B6 (125 x 176 mm)</translation>
+    </message>
+    <message>
+        <source>B7 (88 x 125 mm)</source>
+        <translation>B7 (88 x 125 mm)</translation>
+    </message>
+    <message>
+        <source>B8 (62 x 88 mm)</source>
+        <translation>B8 (62 x 88 mm)</translation>
+    </message>
+    <message>
+        <source>B9 (44 x 62 mm)</source>
+        <translation>B9 (44 x 62 mm)</translation>
+    </message>
+    <message>
+        <source>B10 (31 x 44 mm)</source>
+        <translation>B10 (31 x 44 mm)</translation>
+    </message>
+    <message>
+        <source>C5E (163 x 229 mm)</source>
+        <translation>C5E (163 x 229 mm)</translation>
+    </message>
+    <message>
+        <source>DLE (110 x 220 mm)</source>
+        <translation>DLE (110 x 220 mm)</translation>
+    </message>
+    <message>
+        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
+        <translation>Executive (7.5 x 10 英吋, 191 x 254 mm)</translation>
+    </message>
+    <message>
+        <source>Folio (210 x 330 mm)</source>
+        <translation>對開 (210 x 330 mm)</translation>
+    </message>
+    <message>
+        <source>Ledger (432 x 279 mm)</source>
+        <translation>Ledger (432 x 279 mm)</translation>
+    </message>
+    <message>
+        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
+        <translation>Legal (8.5 x 14 英吋, 216 x 356 mm)</translation>
+    </message>
+    <message>
+        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
+        <translation>Letter (8.5 x 11 英吋, 216 x 279 mm)</translation>
+    </message>
+    <message>
+        <source>Tabloid (279 x 432 mm)</source>
+        <translation>Tabloid (279 x 432 mm)</translation>
+    </message>
+    <message>
+        <source>US Common #10 Envelope (105 x 241 mm)</source>
+        <translation>US 常用 10 號信封 (105x241 mm)</translation>
+    </message>
+    <message>
+        <source>Print all</source>
+        <translation>全部列印</translation>
+    </message>
+    <message>
+        <source>Print selection</source>
+        <translation>列印選擇區</translation>
+    </message>
+    <message>
+        <source>Print range</source>
+        <translation>列印範圍</translation>
+    </message>
+    <message>
+        <source>Print current page</source>
+        <translation>打印當前一頁</translation>
+    </message>
+    <message>
         <source>&amp;Options &gt;&gt;</source>
         <translation>操作 (&amp;O) &gt;&gt;</translation>
     </message>
@@ -1473,8 +1317,46 @@ Please choose a different file name.</source>
         <translation>寫入 %1 檔案</translation>
     </message>
     <message>
+        <source>Print To File ...</source>
+        <translation>列印到檔案...</translation>
+    </message>
+    <message>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 是一個目錄。
+請選擇其他檔名。</translation>
+    </message>
+    <message>
+        <source>File %1 is not writable.
+Please choose a different file name.</source>
+        <translation>檔案 %1 無法寫入。
+請選擇其它檔名。</translation>
+    </message>
+    <message>
+        <source>%1 already exists.
+Do you want to overwrite it?</source>
+        <translation>%1 已存在。
+您要覆寫它嗎？</translation>
+    </message>
+    <message>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
         <translation>起始數值不能大於結束數值</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>確定</translation>
+    </message>
+    <message>
+        <source>locally connected</source>
+        <translation>本地連接</translation>
+    </message>
+    <message>
+        <source>Aliases: %1</source>
+        <translation>別名：%1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
@@ -1565,21 +1447,6 @@ Please choose a different file name.</source>
     </message>
 </context>
 <context>
-    <name>QPrintPropertiesDialog</name>
-    <message>
-        <source>PPD Properties</source>
-        <translation type="obsolete">PPD 內容</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">儲存</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">確定</translation>
-    </message>
-</context>
-<context>
     <name>QPrintPropertiesWidget</name>
     <message>
         <source>Form</source>
@@ -1619,6 +1486,10 @@ Please choose a different file name.</source>
     <message>
         <source>to</source>
         <translation>到</translation>
+    </message>
+    <message>
+        <source>Current Page</source>
+        <translation>當前頁</translation>
     </message>
     <message>
         <source>Selection</source>
@@ -1856,6 +1727,26 @@ Please choose a different file name.</source>
         <source>Scroll Right</source>
         <translation>往右捲軸</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation>關閉</translation>
+    </message>
+    <message>
+        <source>Activate</source>
+        <translation>啟動</translation>
+    </message>
+    <message>
+        <source>Press</source>
+        <translation>印刷</translation>
+    </message>
+    <message>
+        <source>Close the tab</source>
+        <translation>關閉標籤</translation>
+    </message>
+    <message>
+        <source>Activate the tab</source>
+        <translation>啟動標籤</translation>
+    </message>
 </context>
 <context>
     <name>QTextControl</name>
@@ -1906,12 +1797,22 @@ Please choose a different file name.</source>
 <context>
     <name>QUndoGroup</name>
     <message>
+        <source>Undo %1</source>
+        <translation>復原 %1</translation>
+    </message>
+    <message>
         <source>Undo</source>
+        <comment>Default text for undo action</comment>
         <translation>復原</translation>
     </message>
     <message>
+        <source>Redo %1</source>
+        <translation>重作%1</translation>
+    </message>
+    <message>
         <source>Redo</source>
-        <translation>重做</translation>
+        <comment>Default text for redo action</comment>
+        <translation> 重作</translation>
     </message>
 </context>
 <context>
@@ -1924,12 +1825,22 @@ Please choose a different file name.</source>
 <context>
     <name>QUndoStack</name>
     <message>
+        <source>Undo %1</source>
+        <translation>復原%1</translation>
+    </message>
+    <message>
         <source>Undo</source>
+        <comment>Default text for undo action</comment>
         <translation>復原</translation>
     </message>
     <message>
+        <source>Redo %1</source>
+        <translation>重作%1</translation>
+    </message>
+    <message>
         <source>Redo</source>
-        <translation>重做</translation>
+        <comment>Default text for redo action</comment>
+        <translation>重作</translation>
     </message>
 </context>
 <context>

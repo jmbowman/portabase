@@ -20,10 +20,17 @@ rm -rf build/$DIRNAME
 rm -rf resources/help/_build/_static # in case created for Maemo
 
 # compile and make the application bundle
-if [ "$2" == "universal" ]; then
+if [ "$1" == "--universal" ]; then
+    shift 1
     qmake -spec macx-g++40 portabase.pro
 else
     qmake -spec macx-llvm portabase.pro
+fi
+if [ "$1" == "--sign" ]; then
+    SIGN=Yes
+    shift 1
+else
+    SIGN=No
 fi
 make clean
 lrelease portabase.pro
@@ -61,6 +68,9 @@ do
         mv html/_static/translations.js html/
         rm -r html/_static
         target="$dir"
+        if [ $dir = "zh_CN" ]; then
+            target="zh-Hans"
+        fi
         if [ $dir = "zh_TW" ]; then
             target="zh-Hant"
         fi
@@ -70,6 +80,27 @@ do
 done
 cd build
 
+# sign the binaries if the "--sign" parameter was passed in
+if [ "$SIGN" == "Yes" ]; then
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtCore.framework/Versions/4/QtCore
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtGui.framework/Versions/4/QtGui
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtNetwork.framework/Versions/4/QtNetwork
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtXml.framework/Versions/4/QtXml
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/accessible/libqtaccessiblewidgets.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/bearer/libqcorewlanbearer.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/bearer/libqgenericbearer.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/codecs/libqcncodecs.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/codecs/libqjpcodecs.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/codecs/libqkrcodecs.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/codecs/libqtwcodecs.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/graphicssystems/libqtracegraphicssystem.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqgif.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqico.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqjpeg.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqtga.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app
+fi
+
 # make the disk image for distribution
 mkdir $DIRNAME
 mv PortaBase.app $DIRNAME
@@ -77,6 +108,9 @@ cp ../README.txt $DIRNAME/ReadMe
 cp ../CHANGES $DIRNAME/Changes
 cp ../COPYING $DIRNAME/License
 hdiutil create $DIRNAME.dmg -srcfolder $DIRNAME -format UDZO -volname $DIRNAME
+if [ "$SIGN" == "Yes" ]; then
+    codesign -s "Developer ID Application: Jeremy Bowman" $DIRNAME.dmg
+fi
 
 # To verify no inappropriate library dependencies remain:
 otool -L $DIRNAME/PortaBase.app/Contents/MacOS/PortaBase

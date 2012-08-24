@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 20:56+0000\n"
+"PO-Revision-Date: 2012-08-19 15:17+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/portabase/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,7 +29,7 @@ msgid ""
 "This is the main screen of the application, where you can browse the "
 "database's content and launch most of the other dialogs.  The contents of "
 "this screen are:"
-msgstr "Toto je hlavní rozhraní aplikace, odkud můžete procházet obsah databáze a otevírat většinu ostatních dialogů. Rozhraní Prohlížeče dat tvoří:"
+msgstr "Toto je hlavní rozhraní aplikace, odkud můžete procházet obsah databáze a otevírat většinu ostatních dialogů.  Rozhraní Prohlížeče dat tvoří:"
 
 # 05032c6d260a4aaf963a4f69c9de84a9
 #: ../../data_viewer.txt:15
@@ -47,7 +47,7 @@ msgid ""
 " this in the :ref:`preferences dialog <preferences>`, you can stil launch it"
 " by pressing enter/return, space, or Control-R (Command-R on the Mac) while "
 "a row is selected."
-msgstr ""
+msgstr "Největší část rozhraní Prohlížeče dat zabírá tabulka s náhledem na záznamy dané databáze.  Můžete se posouvat po všech záznamech vyhovujících danému filtru; dobrý výkon aplikace to neovlivní, vždy se načtou jen data právě zobrazených záznamů.  Klepnutím na záznam se normálně spustí dialog :ref:`Prohlížeče záznamů <row_viewer>`; pokud jste to však v :ref:`dialogu Nastavení <preferences>` zakázali, můžete jej přesto vyvolat stiskem Enter/Return, Mezerníku či Control-R (na Macu Command-R) na vybraném záznamu."
 
 # c510a40ba03a46bbabbb897fd288332d
 #: ../../data_viewer.txt:19
@@ -59,7 +59,7 @@ msgid ""
 "the image contained in that cell is shown in the :ref:`image viewer "
 "<image_viewer>`.  If you do it in any other type of column, the :ref:`row "
 "editor <row_editor>` for the row you clicked on is launched."
-msgstr "Klepnutí na buňku záznamu z Prohlížeče dat a podržení stisknutého tlačítka myši alespoň 1/2 sekundy vyvolá zvláštní funkce. Provedete-li tuto akci na buňce ve sloupci typu poznámka, otevře se :ref:`Prohlížeč poznámek <note_editor>` zobrazující konkrétní poznámku. Provedete-li akci na buňce ve sloupci typu obrázek, zobrazíte v :ref:`Prohlížeči obrázků <image_viewer>` obrázek obsažený v dané buňce. Provedete-li akci na buňce ve sloupci jiného typu, otevřete :ref:`Editor záznamů <row_editor>` s možností editace daného záznamu."
+msgstr "Klepnutí na buňku záznamu z Prohlížeče dat a podržení stisknutého tlačítka myši alespoň 1/2 sekundy vyvolá zvláštní funkce.  Provedete-li tuto akci na buňce ve sloupci typu poznámka, otevře se :ref:`Prohlížeč poznámek <note_editor>` zobrazující konkrétní poznámku.  Provedete-li akci na buňce ve sloupci typu obrázek, zobrazíte v :ref:`Prohlížeči obrázků <image_viewer>` obrázek obsažený v dané buňce.  Provedete-li akci na buňce ve sloupci jiného typu, otevřete :ref:`Editor záznamů <row_editor>` s možností editace daného záznamu."
 
 # 863b37bfb2754a539787fcb47932e6bd
 #: ../../data_viewer.txt:21
@@ -75,12 +75,12 @@ msgid ""
 "buttons to go to that page of rows; the button for the current page is shown"
 " pressed.  Click on the arrow buttons at the ends to show the page buttons "
 "for the next or previous five pages."
-msgstr ""
+msgstr "Pokud jste si v :ref:`dialogu Nastavení <preferences>` vybrali používání stránek v Prohlížeči dat, v dolní části obrazovky naleznete další ovládací prvky.  Ovládací prvek v levé dolní části rozhraní udává maximální počet záznamů zobrazených najednou u stávajícího náhledu; počet záznamů lze změnit na libovolné celé kladné číslo (dostatečně nízká hodnota umožní skrýt vertikální posuvník zobrazovaný vpravo od tabulky se záznamy, což zvětší horizontální zobrazovací prostor; na Maemo Fremantle tento posuvník nenajdete).  Vpravo od ovládacího prvku pro zadání výchozího počtu záznamů na stránce jsou tlačítka sloužící k navigaci na stránkách.  Klepnutím na číslované tlačítko přejdete na odpovídající stránku se záznamy; tlačítko stávající stránky je přitom zobrazeno jako stisknuté.  Klepnutím na tlačítko se šipkou zobrazíte tlačítka předešlé nebo následující pětice stránek."
 
 # f641e2dcfbda45dfbe4c7177906cf4b3
 #: ../../data_viewer.txt:26
 msgid "Column labels"
-msgstr "Záhlaví s popisky sloupců"
+msgstr "Popisky sloupců"
 
 # 160569cc6421479ba87c86409d186a01
 #: ../../data_viewer.txt:28
@@ -93,7 +93,7 @@ msgid ""
 "column in ascending order; clicking it again sorts in descending order.  If "
 "you press a column label and hold it for 1/2 second or more before "
 "releasing, the :ref:`column statistics dialog <column_statistics>` is shown."
-msgstr ""
+msgstr "Záhlaví s popisky sloupců neslouží jen ke zjištění jmén sloupců. Změnu šířky sloupce v daném náhledu docílíte klepnutím na rozhraní záhlaví dvou sloupců (nebo na pravý okraj záhlaví s popiskem posledního sloupce) a přetažením okraje sloupce na požadovanou pozici. Klepnutím na záhlaví s popiskem seřadíte všechny záznamy daného sloupce vyhovující aktuálnímu filtru dle obsahu vzestupně; dalším klepnutím sestupně.  Podržíte-li stisknuté záhlaví sloupce alespoň 1/2 sekundy, vyvoláte :ref:`dialog statistiky sloupce <column_statistics>` s údaji pro vybraný sloupec a aktuální filtr."
 
 # c763f794d0964d22904395d8317dc068
 #: ../../data_viewer.txt:33
@@ -105,7 +105,7 @@ msgstr "Menu \"Soubor\""
 msgid ""
 "The \"File\" menu (the main menu on Maemo) contains options that apply to "
 "the database file as a whole.  These are:"
-msgstr ""
+msgstr "Menu \"Soubor\" (hlavní menu na přístrojích s Maemo) obsahuje volby, které se použijí na databázový soubor jako na celek.  Jde o:"
 
 # 44cf95f764d04b20af3cf191ed9cac6d
 # eba2a6812fb043f49bf43a35358f7822
@@ -122,7 +122,7 @@ msgid ""
 "This option is disabled if no changes have been made since the current "
 "database was opened or last saved. (Not shown in Maemo, use the toolbar "
 "button instead.)"
-msgstr ""
+msgstr "Uloží jakékoli změny provedené v souboru od jeho otevření nebo posledního uložení.  Ukončíte-li aplikaci PortaBase bez uložení posledních změn, tyto změny budou ztraceny (předtím se zobrazí dialog s upozorněním).  Tato volba není aktivní pokud v databázi od jejího poslední otevření či uložení nebyly prováděny žádné změny. (Chybí na Maemo, použijte tlačítko na liště.)"
 
 # 204b52f5096048a38a3d55de779e8de4
 #: ../../data_viewer.txt:41
@@ -134,7 +134,7 @@ msgstr "**Změnit heslo**"
 msgid ""
 "Launch a dialog which allows you to change the data file's password (only "
 "shown for :ref:`encrypted files <encryption>`)."
-msgstr ""
+msgstr "Spustí dialog umožňující uživateli změnit heslo datového souboru (zobrazí se jen u :ref:`šifrovaných souborů <encryption>`)."
 
 # 472d2258ceaa4906a5fddfe7098bb00e
 #: ../../data_viewer.txt:44
@@ -156,7 +156,7 @@ msgstr "**Exportovat...**"
 msgid ""
 ":ref:`Export <export>` the current database content to a CSV, HTML, or XML "
 "file."
-msgstr ""
+msgstr ":ref:`Exportuje <export>` stávající obsah databáze do souboru CSV, HTML či XML."
 
 # 5b1e91fd838f4a89bb2de11da3c77478
 #: ../../data_viewer.txt:50
@@ -199,7 +199,7 @@ msgid ""
 "Launch a dialog from which you can start a timed slideshow of images from an"
 " Image column in the current view.  Only images in rows passing the current "
 "filter are shown, and the sequence is the current sorting."
-msgstr "Otevře dialog, ze kterého lze spustit časovanou prezentaci z obrázků zahrnutých ve sloupci typu obrázek ve stávajícím náhledu. Zobrazeny budou jen obrázky záznamů vyhovujících aktuálnímu filtru ve stávajícím pořadí."
+msgstr "Otevře dialog, ze kterého lze spustit časovanou prezentaci z obrázků zahrnutých ve sloupci typu obrázek ve stávajícím náhledu.  Zobrazeny budou jen obrázky záznamů vyhovujících aktuálnímu filtru ve stávajícím pořadí."
 
 # ac9eec4b465943629c484b751b428f91
 #: ../../data_viewer.txt:62
@@ -212,12 +212,12 @@ msgid ""
 "Launch a dialog which displays basic statistics about the current file (such"
 " as its size, row count, column count, etc.).  The :ref:`column statistics "
 "dialog <column_statistics>` can also be launched from this dialog."
-msgstr ""
+msgstr "Otevře dialog zobrazující základní statistické údaje o stávajícím souboru (např. jeho velikost, počet záznamů, počet sloupců, aj.).  Z tohoto dialogu lze otevřít také :ref:`dialog statistiky sloupce <column_statistics>`."
 
 # 06a142b09b2a48a5be415b7af1c2c473
 #: ../../data_viewer.txt:65
 msgid "**Print Preview**"
-msgstr ""
+msgstr "**Tiskový náhled**"
 
 # f3c679f871a74b1b87e05567a81968bd
 #: ../../data_viewer.txt:65
@@ -226,12 +226,12 @@ msgid ""
 "the current data selection would look like.  You can also set from here "
 "certain properties of the output, such as paper size and zoom factor.  (Not "
 "shown in Maemo, which has no printing support.)"
-msgstr ""
+msgstr "Spustí dialog tiskového náhledu s možností prohlédnout si, jak by vypadal tiskový výstup vybraných dat.  Na tomto místě lze rovněž nastavit některé vlastnosti výstupu, např. velikost papíru a měřítko.  (Nedostupné na Maemo, které postrádá podporu tisku.)"
 
 # ff2fff1ddded46f2822f4a79605f2bbf
 #: ../../data_viewer.txt:68
 msgid "**Print**"
-msgstr ""
+msgstr "**Tisk**"
 
 # 3870aa4084714adea3e7152721970699
 #: ../../data_viewer.txt:68
@@ -240,7 +240,7 @@ msgid ""
 "filter in the current sorting order.  Note that you may wish to modify some "
 "settings with the print preview dialog first.  (Not shown in Maemo, which "
 "has no printing support.)"
-msgstr ""
+msgstr "Spustí tiskový dialog pro tisk dat stávajícího náhledu, filtru a pořadí.  Berte na vědomí, že případné změny v nastavení tisku je nutné provést předem přes dialog tiskového náhledu.  (Nedostupné na Maemo, které postrádá podporu tisku.)"
 
 # 4cb1ae3a7c8d4245bebad327bb2803bb
 #: ../../data_viewer.txt:71
@@ -250,7 +250,7 @@ msgstr "**Nastavení**"
 # a46e0d72c05a4b5897ed6c3f4cfe0e6b
 #: ../../data_viewer.txt:71
 msgid "Launch the :ref:`preferences dialog <preferences>`."
-msgstr "Otevře :ref:`dialog Nastavení <preferences>`."
+msgstr "Otevře :ref:`dialog \"Nastavení \"<preferences>`."
 
 # e45e7e72ea0d41dc9828b159918d8a60
 #: ../../data_viewer.txt:74
@@ -263,12 +263,12 @@ msgid ""
 "Close the current file; if there are unsaved changes, you will be asked if "
 "you want to save them.  (Not shown in Maemo, use the close button at the top"
 " right of the screen instead; you may need to exit fullscreen mode first.)"
-msgstr ""
+msgstr "Zavře stávající soubor; vyskytují-li se v souboru neuložené změny, bude uživatel dotázán, přeje-li si je uložit.  (Chybí na Maemo, použijte tlačítko v pravém horním rohu obrazovky; nejdříve je třeba opustit celoobrazovkové zobrazení.)"
 
 # 91903c5fd5de4f76a7ac000abf3dd6ac
 #: ../../data_viewer.txt:79
 msgid "Row menu (not on Maemo)"
-msgstr ""
+msgstr "Menu Záznam (chybí na Maemo)"
 
 # 97381a011f8d4472833fa48becd0fc0d
 #: ../../data_viewer.txt:81
@@ -347,7 +347,7 @@ msgstr "**Zobrazit**"
 # 6f44108d54544de5988a8443507d00cb
 #: ../../data_viewer.txt:96
 msgid "Show the currently selected row in the :ref:`row viewer <row_viewer>`."
-msgstr " Zobrazí právě vybraný záznam v :ref:`Prohlížeči záznamů <row_viewer>`."
+msgstr "Zobrazí právě vybraný záznam v :ref:`Prohlížeči záznamů <row_viewer>`."
 
 # 176e05c93a5a4891a576ef0a9cad7705
 #: ../../data_viewer.txt:98
@@ -355,19 +355,19 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available through the toolbar and :ref:`row "
 "viewer <row_viewer>` buttons."
-msgstr ""
+msgstr "Kvůli úspoře místa na obrazovce na Maemo toto menu chybí; stejnou funkcionalitu však plní tlačítka na liště a v :ref:`Prohlížeči záznamů <row_viewer>`."
 
 # 23ac094a1e7740488cefbfdd8193b425
 #: ../../data_viewer.txt:103
 msgid "View menu (not on Maemo)"
-msgstr ""
+msgstr "Menu \"Náhled\" (chybí na Maemo)"
 
 # 2ed57091aade45688b729bac384cb56e
 #: ../../data_viewer.txt:105
 msgid ""
 "The \"View\" menu allows you to select and manage views.  The top section of"
 " this menu has three options:"
-msgstr "Menu \"Náhled\" umožňuje výběr a správu náhledů. Horní sekce tohoto menu má tři volby:"
+msgstr "Menu \"Náhled\" umožňuje výběr a správu náhledů.  Horní sekce tohoto menu má tři volby:"
 
 # e4baa186edca405a837030e5d158e2fe
 #: ../../data_viewer.txt:108
@@ -375,7 +375,7 @@ msgid ""
 "Add a new view to the database file.  Choosing this option launches the "
 ":ref:`view editor <view_editor>` with no name specified and none of the "
 "columns checked."
-msgstr ""
+msgstr "Umožní přidat nový náhled do souboru databáze.  Výběr této volby otevře :ref:`Editor náhledů <view_editor>` bez jména nového náhledu a bez vybraného kteréhokoli sloupce."
 
 # af4b1a275c8e48f9aa53951f7015dcd8
 #: ../../data_viewer.txt:111
@@ -383,14 +383,14 @@ msgid ""
 "Edit the currently displayed view.  Choosing this option launches the view "
 "editor with the current view's name and column sequence.  The \"All "
 "Columns\" view cannot be edited."
-msgstr "Umožní editaci právě zobrazeného náhledu. Výběr této volby otevře Editor náhledů se zobrazením jména aktuálního náhledu a jeho uspořádáním sloupců. Náhled \"Všechny sloupce\" nelze editovat."
+msgstr "Umožní editaci právě zobrazeného náhledu.  Výběr této volby otevře Editor náhledů se zobrazením jména aktuálního náhledu a jeho uspořádáním sloupců.  Náhled \"Všechny sloupce\" nelze editovat."
 
 # a51c3e9e691d4b499cc8fb79c1b21a07
 #: ../../data_viewer.txt:114
 msgid ""
 "Delete the currently displayed view and switch to the \"All Columns\" view."
 "  The \"All Columns\" view cannot be deleted."
-msgstr "Smaže vybraný náhled a přepne Prohlížeč dat do náhledu \"Všechny sloupce\". Náhled \"Všechny sloupce\" nelze smazat."
+msgstr "Smaže vybraný náhled a přepne Prohlížeč dat do náhledu \"Všechny sloupce\".  Náhled \"Všechny sloupce\" nelze smazat."
 
 # b11499cb0bef4e3eafd7fc2d03d275e1
 #: ../../data_viewer.txt:116
@@ -399,7 +399,7 @@ msgid ""
 "current database, with a check next to the one currently displayed.  To "
 "switch to a different view, simply select the one you want to see from the "
 "menu."
-msgstr "Pod těmito položkami obsahuje menu přehled všech náhledů vytvořených pro stávající databázi, u právě zobrazeného náhledu je zatržítko. Chcete-li přepnout na jiný náhled, jednoduše vyberte požadovaný náhled z menu."
+msgstr "Pod těmito položkami obsahuje menu přehled všech náhledů vytvořených pro stávající databázi, u právě zobrazeného náhledu je zatržítko.  Chcete-li přepnout na jiný náhled, jednoduše vyberte požadovaný náhled z menu."
 
 # 676766b5320c4aae84ae9b4810d38219
 #: ../../data_viewer.txt:118
@@ -407,19 +407,19 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`views dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr ""
+msgstr "Kvůli úspoře místa na obrazovce na Maemo toto menu chybí; stejnou funkcionalitu však plní :ref:`dialog náhledů <vsf_dialogs>` spuštěný z tlačítkové lišty."
 
 # 33631316cbb24401bca4b4cf502b3b5d
 #: ../../data_viewer.txt:123
 msgid "Sort menu (not on Maemo)"
-msgstr ""
+msgstr "Menu Pořadí (chybí na Maemo)"
 
 # a732b36fcb934e519db6690409ab356a
 #: ../../data_viewer.txt:125
 msgid ""
 "The \"Sort\" menu allows you to select and manage sorting configurations.  "
 "The top section of this menu has three options:"
-msgstr "Menu \"Pořadí\" umožňuje výběr a správu konfigurací řazení položek. Horní sekce tohoto menu obsahuje tři volby:"
+msgstr "Menu \"Pořadí\" umožňuje výběr a správu konfigurací řazení položek.  Horní sekce tohoto menu obsahuje tři volby:"
 
 # 548490fec5db4c73a41be00600588701
 #: ../../data_viewer.txt:128
@@ -427,7 +427,7 @@ msgid ""
 "Add a new sorting to the database file.  Choosing this option launches the "
 ":ref:`sorting editor <sorting_editor>` with no name specified and none of "
 "the columns checked."
-msgstr "Umožní přidat do souboru databáze nové pořadí záznamů. Výběr této volby spustí :ref:`Editor pořadí <sorting_editor>` s novým pořadím beze jména a bez označených datových sloupců."
+msgstr "Umožní přidat do souboru databáze nové pořadí záznamů.  Výběr této volby spustí :ref:`Editor pořadí <sorting_editor>` s novým pořadím beze jména a bez označených datových sloupců."
 
 # 25baca4a5e524548a28324f65adc78af
 #: ../../data_viewer.txt:131
@@ -435,7 +435,7 @@ msgid ""
 "Edit the currently used sorting (only available if a named sorting is in "
 "use).  Choosing this option launches the sorting editor with the current "
 "sorting's name and settings."
-msgstr "Umožní editaci právě použitého pořadí (dostupné jen při použití již pojmenovaného pořadí). Výběr této volby spustí Editor pořadí s otevřením aktuálního pořadí a jeho nastavení."
+msgstr "Umožní editaci právě použitého pořadí (dostupné jen při použití již pojmenovaného pořadí).  Výběr této volby spustí Editor pořadí s otevřením aktuálního pořadí a jeho nastavení."
 
 # a25734bde4864af3a78b5ce1281a1aa2
 #: ../../data_viewer.txt:134
@@ -453,7 +453,7 @@ msgid ""
 "configuration you want to use from the menu.  If you just want to sort by a "
 "single column that is displayed in the current view, it is probably faster "
 "to use the \"click on a column label to sort\" feature instead."
-msgstr "Pod těmito položkami menu nalezneme přehled všech pořadí definovaných pro danou databázi, zatržítko vlevo od jména pořadí ukazuje, je-li některé z nich právě použito. Chcete-li změnit způsob řazení záznamů, jednoduše vyberte požadované pořadí z menu. Chcete-li seřadit záznamy podle jediného datového sloupce zobrazeného v aktuálním náhledu, bude zřejmě rychlejším způsobem klepnutí na záhlaví s popiskem sloupce, podle kterého chcete záznamy seřadit."
+msgstr "Pod těmito položkami menu nalezneme přehled všech pořadí definovaných pro danou databázi, zatržítko vlevo od jména pořadí ukazuje, je-li některé z nich právě použito.  Chcete-li změnit způsob řazení záznamů, jednoduše vyberte požadované pořadí z menu.  Chcete-li seřadit záznamy podle jediného datového sloupce zobrazeného v aktuálním náhledu, bude zřejmě rychlejším způsobem klepnutí na záhlaví s popiskem sloupce, podle kterého chcete záznamy seřadit."
 
 # 934ef1ee3996456d98708da81d51f85a
 #: ../../data_viewer.txt:138
@@ -461,12 +461,12 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`sortings dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr ""
+msgstr "Kvůli úspoře místa na obrazovce na Maemo toto menu chybí; stejnou funkcionalitu však plní :ref:`dialog pořadí <vsf_dialogs>` spuštěný z tlačítkové lišty."
 
 # b754369ddea74e69bd41b5b2a84436a8
 #: ../../data_viewer.txt:143
 msgid "Filter menu (not on Maemo)"
-msgstr ""
+msgstr "Menu \"Filtr\" (chybí na Maemo)"
 
 # 2a55803e935e4c7d9ad5bac3013a85bf
 #: ../../data_viewer.txt:145
@@ -487,7 +487,7 @@ msgid ""
 "Lets you quickly define and use a temporary one-condition filter.  To see "
 "all rows again (or use another defined filter), choose the appropriate "
 "filter from the lower part of this menu."
-msgstr "Slouží k rychlé definici dočasného filtru obsahujícímu jen jedinou podmínku. Chcete-li pak znovu zobrazit všechny záznamy (nebo použít jiný nadefinovaný filtr), vyberte požadovaný filtr z dolní části tohoto menu."
+msgstr "Slouží k rychlé definici dočasného filtru obsahujícímu jen jedinou podmínku.  Chcete-li pak znovu zobrazit všechny záznamy (nebo použít jiný nadefinovaný filtr), vyberte požadovaný filtr z dolní části tohoto menu."
 
 # e293ad1fb2a4415cb9992d81bb653139
 #: ../../data_viewer.txt:151
@@ -501,14 +501,14 @@ msgstr "Umožní nadefinovat nový filtr; bude přitom spuštěn :ref:`Editor fi
 msgid ""
 "Edit the currently selected data filter (again using the filter editor).  "
 "The \"All Rows\" filter cannot be edited."
-msgstr "Umožní editaci právě vybraného filtru (opět pomocí :ref:`Editoru filtrů <filter_editor>`). Filtr \"Všechny záznamy\" nelze editovat."
+msgstr "Umožní editaci právě vybraného filtru (opět pomocí :ref:`Editoru filtrů <filter_editor>`).  Filtr \"Všechny záznamy\" nelze editovat."
 
 # faaee01046ea4778a9b53953c76be04b
 #: ../../data_viewer.txt:157
 msgid ""
 "Delete the currently selected data filter.  The \"All Rows\" filter cannot "
 "be deleted."
-msgstr "Umožní smazat právě vybraný filtr. Filtr \"Všechny záznamy\" nelze smazat."
+msgstr "Umožní smazat právě vybraný filtr.  Filtr \"Všechny záznamy\" nelze smazat."
 
 # ef38ca0c5fd84b08bb57e8f6174d3d46
 #: ../../data_viewer.txt:159
@@ -517,7 +517,7 @@ msgid ""
 "current database, with a check next to the one currently in use (if any).  "
 "To select a different filter, simply select the one you want to use from the"
 " menu."
-msgstr "Pod těmito položkami menu nalezneme přehled všech filtrů definovaných pro danou databázi, zatržítko vlevo od jména filtru ukazuje, je-li některý z nich právě použit. Chcete-li použít jiný filtr, jednoduše jej vyberte z menu."
+msgstr "Pod těmito položkami menu nalezneme přehled všech filtrů definovaných pro danou databázi, zatržítko vlevo od jména filtru ukazuje, je-li některý z nich právě použit.  Chcete-li použít jiný filtr, jednoduše jej vyberte z menu."
 
 # d753b068f9114a69aa06538ff6812946
 #: ../../data_viewer.txt:161
@@ -525,7 +525,7 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`filters dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr ""
+msgstr "Kvůli úspoře místa na obrazovce na Maemo toto menu chybí; stejnou funkcionalitu však plní :ref:`dialog filtrů <vsf_dialogs>` spuštěný z tlačítkové lišty."
 
 # 3491f7828f984e8c9ef5fea5b8d7fcb7
 #: ../../data_viewer.txt:166
@@ -537,7 +537,7 @@ msgstr "Tlačítka lišty"
 msgid ""
 "There is a toolbar of buttons that provide quick access to commonly used "
 "operations.  These are:"
-msgstr "K nejčastěji používaným operacím lze přistupovat přes tlačítka umístěná na liště. Jde o:"
+msgstr "K nejčastěji používaným operacím lze přistupovat přes tlačítka umístěná na liště.  Jde o:"
 
 # 03d348d61091430ba6908c864d74fa50
 #: ../../data_viewer.txt:171
@@ -552,47 +552,47 @@ msgstr "Odpovídá volbě \"Přidat\" z menu \":ref:`Záznam <row_menu>`\"."
 # 7041d8b253a34b82b377bc630819be5f
 #: ../../data_viewer.txt:177
 msgid "Same as \"Edit\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
-msgstr ""
+msgstr "Odpovídá volbě \"Editovat\" z menu :ref:`Záznam <row_menu>`. (Chybí na Maemo)"
 
 # fde21dbd40534f0e959097ca2a0b4071
 #: ../../data_viewer.txt:180
 msgid "Same as \"Copy\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
-msgstr ""
+msgstr "Odpovídá volbě \"Kopírovat\" z menu :ref:`Záznam <row_menu>`. (Chybí na Maemo)"
 
 # c7d0f8f98a2e481fb8ff7b37dca8eb13
 #: ../../data_viewer.txt:183
 msgid "Same as \"Delete\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
-msgstr ""
+msgstr "Odpovídá volbě \"Smazat\" z menu :ref:`Záznam <row_menu>`. (Chybí na Maemo)"
 
 # bd3789fc23f14ff7993cb6ce55689505
 #: ../../data_viewer.txt:186
 msgid "**Views**"
-msgstr ""
+msgstr "**Náhledy**"
 
 # 277e22bf1b85433dbb9694bb82cea0da
 #: ../../data_viewer.txt:186
 msgid "Launch the :ref:`views dialog <vsf_dialogs>`."
-msgstr ""
+msgstr "Spustí :ref:`dialog \"Náhledy\" <vsf_dialogs>`."
 
 # b364e3368cf34ce5909844cf3fea8b4c
 #: ../../data_viewer.txt:189
 msgid "**Sortings**"
-msgstr ""
+msgstr "**Pořadí**"
 
 # 24aa0d45f90d4092b42b2cb0a7f5de0f
 #: ../../data_viewer.txt:189
 msgid "Launch the :ref:`sortings dialog <vsf_dialogs>`."
-msgstr ""
+msgstr "Spustí :ref:`dialog \"Pořadí\" <vsf_dialogs>`."
 
 # 008a8db368b5412d90b8628a7f334354
 #: ../../data_viewer.txt:192
 msgid "**Filters**"
-msgstr ""
+msgstr "**Filtry**"
 
 # 3561f92c1c0f42f4afeeb8ac45987427
 #: ../../data_viewer.txt:192
 msgid "Launch the :ref:`filters dialog <vsf_dialogs>`."
-msgstr ""
+msgstr "Spustí :ref:`dialog \"Filtry\" <vsf_dialogs>`."
 
 # c00fb2db1433417ab15102d4096ad728
 #: ../../data_viewer.txt:195
@@ -602,11 +602,11 @@ msgstr "Odpovídá volbě \"Vyhledat\" z menu \":ref:`Filtr <filter_menu>`\"."
 # 642ab2f1c52e454f99f2e1d3708a9e12
 #: ../../data_viewer.txt:197
 msgid "**Fullscreen**"
-msgstr ""
+msgstr "**Celá obrazovka**"
 
 # 41f2e38f8a304cd3bd71de4589c16657
 #: ../../data_viewer.txt:198
 msgid ""
 "Click this toolbar button to switch PortaBase to fullscreen mode or back to "
 "normal display mode."
-msgstr ""
+msgstr "Klepnutím na toto tlačítko zobrazíte aplikaci PortaBase na celé obrazovce (displeji) nebo se vrátíte zpět do normálního zobrazení."

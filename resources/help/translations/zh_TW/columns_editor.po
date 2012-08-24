@@ -4,14 +4,15 @@
 # 
 # Translators:
 #   <jmbowman@alum.mit.edu>, 2012.
+#   <shinshansu@yahoo.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 21:10+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2012-08-20 04:12+0000\n"
+"Last-Translator: LSU <shinshansu@yahoo.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/portabase/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,7 +35,7 @@ msgid ""
 "dialog by selecting the \"Edit Columns\" menu item (in the :ref:`data viewer"
 " <data_viewer>`, under the \"File\" menu except on Maemo where the menus are"
 " flattened)."
-msgstr ""
+msgstr "每一個在PortaBase 內的檔案都含有使用考設定的表格式。這些表格式是一連續的數據欄位來決定，每一個格式都有它自己的名稱，數據類型，和默認值。每當建立一個新的PortaBase 檔案，這對話器就會顯示讓你可以設定你的數據欄位表。巳經存在的數據欄位任何時間都可以用此對話器來修訂只要點擊選項裡的 \"編輯欄位\" 即可（在:ref:'數據流灠器＜data_viewer>', 在\"檔案\"項目下面）"
 
 # 03a7c33339fd423f9d6863497e9e6d05
 #: ../../columns_editor.txt:8
@@ -119,4 +120,4 @@ msgid ""
 " it was.  If the dialog is cancelled while defining the columns of a new "
 "file, the file creation is aborted; otherwise, exiting the dialog takes you "
 "to the :ref:`data viewer <data_viewer>`."
-msgstr ""
+msgstr "沒有任何格式表的修改會被應用上直到你點擊\"OK\" 按鈕（在Maemo 系統上是\"Done\"); 如果對話器登出是因為被取消，則所有改變將被丟棄且檔案格式將維持如未被修改前。如果對話被取消時你正在給新檔案設定欄位格式時，則新檔建立將被中止；否則，登出對話將帶你到數據流灠處 :ref:'數據流灠器＜data_viewer>'."

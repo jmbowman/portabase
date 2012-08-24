@@ -4,14 +4,15 @@
 # 
 # Translators:
 #   <jmbowman@alum.mit.edu>, 2012.
+#   <shinshansu@yahoo.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 23:22+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2012-08-22 01:24+0000\n"
+"Last-Translator: LSU <shinshansu@yahoo.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/portabase/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,7 +74,7 @@ msgid ""
 "viewer <data_viewer>` by clicking on the appropriate cell.  This makes it "
 "more convenient to use PortaBase as a todo list or such, but also makes it "
 "easier to accidentally change a data value."
-msgstr ""
+msgstr " 檢點這個讓你能夠切換真或假之值如示範在:ref:'數據流灠＜data_viewer>' 如果點擊在適應格子裡。這讓整體感覺更方便使用PortaBase作為待辦事項列表，但是也讓他更容易"
 
 # f03f4260c3de49cfb473c5e48f3c90f1
 #: ../../preferences.txt:28
@@ -86,7 +87,7 @@ msgid ""
 "By default, a single click in the data viewer opens the selected row in the "
 ":ref:`row viewer <row_viewer>`.  Unchecking this option allows rows to be "
 "selected without immediately launching a dialog."
-msgstr ""
+msgstr "在默認情況下，單一點擊在數據景觀器裏會把所選的列位開放到列位景觀裡：ref:'列位景觀器＜row_viewer>'. 把選項拿掉時當你選岀一列位時就不會馬上開啟對話錄器"
 
 # cd60c1f148004f5082310531399c53bf
 #: ../../preferences.txt:31
@@ -106,14 +107,14 @@ msgstr "當檢查，PortaBase使用默認值的某些設置（如列寬，行，
 # 3e9ea74d8de3408b92d4c255266da9b5
 #: ../../preferences.txt:34
 msgid "**Auto-rotate to match device orientation** (Maemo Fremantle only)"
-msgstr ""
+msgstr "自動旋轉匹配設備方向**(只適用于Maem Fremantle)"
 
 # 64c03b22aaa8445b856f6cf79d885e25
 #: ../../preferences.txt:34
 msgid ""
 "When checked, the application will automatically switch between landscape "
 "and portrait display, depending on the current orientation of the device."
-msgstr ""
+msgstr "正常檢視時，應用程式會自動轉換為景觀或肖像展示，它完全依據當前設備方向"
 
 # 9212f2e57b3e4776ad5d69ffc53a9406
 #: ../../preferences.txt:37
@@ -230,7 +231,7 @@ msgid ""
 "UI.)  On Maemo Fremantle, the rows will remain at a finger-friendly height "
 "regardless of font size unless the \"Adjust row height to match font\" "
 "option is checked."
-msgstr ""
+msgstr "在\"字體\"區的外觀顯現卡你能選取任何可以用的字體，任何尺寸。該字體將使用在PortaBase 上的任何文章(甚至應用程式登出後再登入） 直到你選不同字體後。你可以用此字體如杲默認字體不支持Unicode 字型（現代系統很少這現象）或者去適應銀光幕上多種文字。（這選項不能用在MacOS X, 該系統似乎不喜歡應用程式使用不標準字體用在UI 上）在Maemo Fremantle 系統裡，列位表將保持在一指高不管字體尺寸除非\"調整列位高度去配合字體\" 時選項被確認。"
 
 # 5402968d97534040b21bbfd56d5f5b88
 #: ../../preferences.txt:71
@@ -249,7 +250,7 @@ msgid ""
 "controlled by the system theme.  Instead, there is an option to either use "
 "the alternating row color from the theme or make all rows the same color; "
 "some themes don't have an appropriate color set for this."
-msgstr ""
+msgstr "這個選項不在Maemo Fremantle 系統裡，在那裡彩色版是控制在系統主題上。相反的，還有一個選項可以用來互相改變行列的顏色--那就是用主題或讓紙所有行列都用相同顏色；有些主題沒有設計適合白的色彩給行列使用。"
 
 # d677f1d055364d6e9ff65abf11296f44
 #: ../../preferences.txt:75
@@ -258,4 +259,4 @@ msgid ""
 "created and opened files, so that none will be listed on the :ref:`file "
 "selection screen <file_selector>`.  Files opened later will be added to the "
 "list as normal."
-msgstr ""
+msgstr "在＂清除最近檔案列表＂的按鈕將刪除最近建立旳和打開的檔案的歷史，所以設有任何的檔案會列在:ref:'檔案選取銀幕 <file_selector>'. 其後打開了的檔案會如常態加入檔案列表裡。"

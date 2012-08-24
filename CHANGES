@@ -1,3 +1,12 @@
+2012-08-24  JMB  Translation updates, Mac code signing
+
+    Incorporated the latest text updates from all the translators.  Added a
+    work-in-progress simplified Chinese translation by Fiona Zhao.  Support
+    for simplified Chinese and Slovak in the Windows installer.
+    
+    Added support for code signing in the Mac build script in order to be
+    treated as a more legitimate application by Gatekeeper in Mountain Lion.
+
 2012-08-20  JMB  N900 crash fix
 
     Hopefully a final fix for the N900 crash I was occasionally experiencing,

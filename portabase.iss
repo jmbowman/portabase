@@ -5,9 +5,9 @@
 AppName=PortaBase
 AppVerName=PortaBase 2.1
 AppPublisher=Jeremy Bowman
-AppPublisherURL=http://portabase.sourceforge.net
-AppSupportURL=http://portabase.sourceforge.net
-AppUpdatesURL=http://portabase.sourceforge.net
+AppPublisherURL=http://www.portabase.org
+AppSupportURL=http://www.portabase.org
+AppUpdatesURL=http://www.portabase.org
 AppReadmeFile=README.txt
 AppVersion=2.1
 AppCopyright=Copyright (C) 2002-2012 Jeremy Bowman
@@ -56,8 +56,8 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "sk"; MessagesFile: "compiler:Languages\Slovak.isl"
-Name: "zh_TW"; MessagesFile: "packaging\windows\ChineseTrad-2-5.1.11.isl"
+Name: "sk"; MessagesFile: "packaging\windows\Slovak-7-5.5.0.isl"
+Name: "zh_TW"; MessagesFile: "packaging\windows\ChineseSimp-12-5.5.0.isl"
 
 [Registry]
 Root: HKCR; Subkey: ".pob"; ValueType: string; ValueName: ""; ValueData: "PortaBaseFile"; Flags: uninsdeletevalue

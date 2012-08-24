@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="sk_SK">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sk" version="2.0">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -232,15 +230,15 @@
     <name>ColumnInfoDialog</name>
     <message>
         <source>Column Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Štatistiky stĺpcov</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">Stĺpec</translation>
+        <translation>Stĺpec</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished">Šírka</translation>
+        <translation>Šírka</translation>
     </message>
 </context>
 <context>
@@ -902,7 +900,7 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>HTML</source>
-        <translation type="unfinished"></translation>
+        <translation>HTML</translation>
     </message>
     <message>
         <source>Export to:</source>
@@ -914,7 +912,7 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>HTML files</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory HTML</translation>
     </message>
     <message>
         <source>XML files</source>
@@ -993,7 +991,7 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>Auto-rotate to match device orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky otočiť, aby zodpovedalo orientácii zariadenia</translation>
     </message>
     <message>
         <source>General</source>
@@ -1069,11 +1067,11 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>Adjust row height to match font</source>
-        <translation type="unfinished"></translation>
+        <translation>Prispôsobiť šírku stĺpca písmu</translation>
     </message>
     <message>
         <source>Use alternating row colors if theme has them</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť alternatívne farby riadkov, ak ich má téma</translation>
     </message>
     <message>
         <source>Row Colors</source>
@@ -1081,7 +1079,7 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>Clear the recent files list</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazať zoznam nedávno použitých  súborov</translation>
     </message>
     <message>
         <source>Appearance</source>
@@ -1144,11 +1142,11 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>Modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenené</translation>
     </message>
     <message>
         <source>%1 in current filter</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 v aktuálnom filtri</translation>
     </message>
     <message>
         <source>Rows</source>
@@ -1156,7 +1154,7 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>%1 in current view</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 v aktuálnom pohľade</translation>
     </message>
     <message>
         <source>Columns</source>
@@ -1180,7 +1178,7 @@ aktuálneho filtra?</translation>
     </message>
     <message>
         <source>Column Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Štatistiky stĺpcov</translation>
     </message>
 </context>
 <context>
@@ -1261,7 +1259,7 @@ aktuálneho filtra?</translation>
     <name>QQMainWindow</name>
     <message>
         <source>Not a %1 file</source>
-        <translation type="unfinished">Nie je súborom %1</translation>
+        <translation>Nie je súborom %1</translation>
     </message>
     <message>
         <source>Printing aborted</source>
@@ -1648,15 +1646,7 @@ aktuálneho filtra?</translation>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>characters</source>
-        <translation type="obsolete">znakov</translation>
+        <translation><numerusform>%Ln znak</numerusform><numerusform>%Ln znaky</numerusform><numerusform>%Ln znakov</numerusform></translation>
     </message>
     <message>
         <source>Average length</source>

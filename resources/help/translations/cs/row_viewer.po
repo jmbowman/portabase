@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 08:24+0000\n"
+"PO-Revision-Date: 2012-08-19 15:16+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/portabase/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,12 +37,12 @@ msgid ""
 "the left and right arrows at the bottom of the screen or the left and right "
 "arrow keys allows you to navigate between rows in the current view.  There "
 "are a few other buttons buttons at the bottom of the dialog:"
-msgstr ""
+msgstr "Prohlížeč záznamů je dialog navržený k pohodlnému prohlížení všech údajů vztahujících se k jednomu záznamu současně.  Podobně jako u Editoru záznamů i u Prohlížeče záznamů nalezneme v levé části jména sloupců a v pravé je jejich hodnoty, které však nelze editovat.  Hodnoty jsou automaticky zalamovány, takže pro zobrazení celého obsahu odpadá potřeba horizontálního posouvání.  Je rovněž zobrazen úplný obsah pole poznámka, nejen několik počátečních slov.  Jako výchozí jsou zobrazovány jen sloupce zahrnuté v použitém náhledu (v pořadí určeném při vytváření náhledu). Chcete-li vybrat jinou sadu sloupců zvolte požadovaný náhled z rozbalovacího seznamu v dolní části dialogu.  Pomocí tlačítek se šipkami v dolní části dialogu či odpovídajícími klávesami se lze pohybovat mezi záznamy v rámci stávajícího náhledu.  V dolní části dialogu jsou ještě další tlačítka:"
 
 # 10b8ef961b7c458eb4bcf2bef5c5eb1e
 #: ../../row_viewer.txt:9
 msgid "**Edit**"
-msgstr ""
+msgstr "**Editovat**"
 
 # 79ef41afe553419db3e2262aac43f412
 #: ../../row_viewer.txt:9
@@ -50,12 +50,12 @@ msgid ""
 "Launch the :ref:`row editor <row_editor>` for the current row; if you click "
 "\"OK\"/\"Done\" in the row editor you will be taken back to the data viewer,"
 " otherwise you will be returned to the row viewer."
-msgstr ""
+msgstr "Spustí :ref:`Editor záznamů <row_editor>` s otevřeným stávajícím záznamem; klepnutím v Editoru záznamů na \"OK\"/\"Done\" se vrátíte zpět do Prohlížeče dat, jinak se vrátíte do Prohlížeče záznamů."
 
 # 083d945fc0df40af99ac32fb526f7089
 #: ../../row_viewer.txt:12
 msgid "**Copy Row**"
-msgstr ""
+msgstr "**Kopírovat záznam**"
 
 # 87b3e4e43fa642d2926db885afd3a5ac
 #: ../../row_viewer.txt:12
@@ -63,22 +63,22 @@ msgid ""
 "Launch the row editor with a copy of the current row; if you click "
 "\"OK\"/\"Done\" in the row editor you will be taken back to the data viewer,"
 " otherwise you will be returned to the row viewer."
-msgstr ""
+msgstr "Spustí Editor záznamů s otevřenou kopií stávajícího záznamu; klepnutím v Editoru záznamů na \"OK\"/\"Done\" se vrátíte zpět do Prohlížeče dat, jinak se vrátíte do Prohlížeče záznamů."
 
 # 238c6607f66d441e9a34655246176717
 #: ../../row_viewer.txt:15
 msgid "**Delete**"
-msgstr ""
+msgstr "**Smazat**"
 
 # de62b194bf7a4c4895e77ca03ee5c442
 #: ../../row_viewer.txt:15
 msgid "Delete the shown row."
-msgstr ""
+msgstr "Smaže zobrazený záznam."
 
 # 4d4b11cc6c1740b18f041019eda4e0a4
 #: ../../row_viewer.txt:17
 msgid "**Copy Text**"
-msgstr ""
+msgstr "**Kopírovat text**"
 
 # 08dbd32d27a142eca56bc0f65ef89581
 #: ../../row_viewer.txt:18
@@ -86,4 +86,4 @@ msgid ""
 "Copy the currently selected text (if any) to the clipboard. (Not shown in "
 "Maemo because dragging motions scroll the display rather than selecting "
 "text; copy text from the row editor instead.)"
-msgstr ""
+msgstr "Zkopíruje právě vybraný text (je-li nějaký vybrán) do systémové schránky. (Nezobrazuje se na Maemo, kde tažením posunujete záběr displeje místo výběru textu; text lze kopírovat z Editoru záznamů.)"

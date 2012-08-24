@@ -1,0 +1,55 @@
+# Messages from filter_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 05:39+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/portabase/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+# 5aafc9c7d12442c48086f5b34aaf192f
+#: ../../filter_editor.txt:4
+msgid "Filter editor"
+msgstr ""
+
+# 8d9c0c37584a4110b28478d1dd1d804a
+#: ../../filter_editor.txt:6
+msgid ""
+"This dialog allows you to define filters which are used to select which rows"
+" to display in the data viewer.  A filter may be as simple as \"count = 1\" "
+"or something more complicated like \"any text column contains 'java', "
+"chapters > 10, pages <= 400, and instock is checked\".  When you choose a "
+"filter from the \"Filter\" menu, the data viewer is updated to show only the"
+" rows which match the conditions you have defined."
+msgstr ""
+
+# 25d379f7b6a8406fb19230488b66282d
+#: ../../filter_editor.txt:8
+msgid ""
+"At the top of the dialog is a text box containing the name of the filter; "
+"changing this renames the filter.  Below that is a list of the conditions "
+"which make up the filter; a row must satisfy all of these conditions in "
+"order to pass the filter.  \"Add\", \"Edit\", \"Delete\", \"Up\", and "
+"\"Down\" buttons let you edit the condition list in basically the same way "
+"as the :ref:`columns editor <columns_editor>` works.  But instead of the "
+"column editor dialog, a condition editor dialog is launched by the \"Add\" "
+"and \"Edit\" buttons.  This dialog lets you choose the column whose value to"
+" compare, the comparison operation to use, and the constant value to compare"
+" against.  For text comparisons, there is also a checkbox that lets you "
+"indicate whether the comparison should be case sensitive or not.  Instead of"
+" a single column, you can choose to compare the value of \"Any text "
+"column\"; if the value of any String or Note column in a row satisfies such "
+"a condition, the row is considered to pass the condition.  Click "
+"\"OK\"/\"Done\" to accept the currently shown settings, or cancel out of the"
+" dialog to revert to the previous values (or to cancel adding a new filter)."
+msgstr ""

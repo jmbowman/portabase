@@ -17,6 +17,10 @@ resources/help/_build/en/*.html usr/share/portabase/help/en
 resources/help/_build/en/*.inv usr/share/portabase/help/en
 resources/help/_build/en/*.js usr/share/portabase/help/en
 resources/help/_build/en/_sources/* usr/share/portabase/help/en/_sources
+resources/help/_build/fr/*.html usr/share/portabase/help/fr
+resources/help/_build/fr/*.inv usr/share/portabase/help/fr
+resources/help/_build/fr/*.js usr/share/portabase/help/fr
+resources/help/_build/fr/_sources/* usr/share/portabase/help/fr/_sources
 resources/help/_build/ja/*.html usr/share/portabase/help/ja
 resources/help/_build/ja/*.inv usr/share/portabase/help/ja
 resources/help/_build/ja/*.js usr/share/portabase/help/ja

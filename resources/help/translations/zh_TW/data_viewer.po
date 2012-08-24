@@ -4,14 +4,15 @@
 # 
 # Translators:
 #   <jmbowman@alum.mit.edu>, 2012.
+#   <shinshansu@yahoo.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 22:20+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: LANGUAGE <portabase-i18n@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2012-08-24 03:29+0000\n"
+"Last-Translator: LSU <shinshansu@yahoo.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/portabase/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +48,7 @@ msgid ""
 " this in the :ref:`preferences dialog <preferences>`, you can stil launch it"
 " by pressing enter/return, space, or Control-R (Command-R on the Mac) while "
 "a row is selected."
-msgstr ""
+msgstr "大部分的資料檢示銀幕都被庫表所佔領只展示資料庫一些資料而已。但是你可以利用滾動軸看到整個篩選的表列；性能表現如以前一樣快速因為只有現有顯示裡行列的資料會加載進去。點擊一行通常會啟動:ref:'列檢視器<row_viewer>' 對話；如果你讓他從:ref:'徧好對話<preference>'失去功能,你仍可按進入/返回，空白鍵，或Control-R(在Mac是Command-R) 在你選擇一個你要的一行後。"
 
 # c510a40ba03a46bbabbb897fd288332d
 #: ../../data_viewer.txt:19
@@ -75,7 +76,7 @@ msgid ""
 "buttons to go to that page of rows; the button for the current page is shown"
 " pressed.  Click on the arrow buttons at the ends to show the page buttons "
 "for the next or previous five pages."
-msgstr ""
+msgstr "如果您在偏好對話選擇用分頁顯示:ref:'偏好對話<preference>'，那麼在銀幕最底會增加一行控制列。在旋轉方塊左底邊有說明最多幾行可從展示在在當前檢視窗內；你可以編輯改寫任何一個正整數(設置尺寸小到足以看不在右側的滾動軸，給多一點平行空間；請注意Maemo 沒有滾軸). 在\"每頁行數\"格子的右邊是頁面導航按鈕。點擊在有數字的按鈕能引導休到那頁面的行列；本頁的按鈕會展現已被按下。點擊在後面有箭頭的按鈕會展示前一頁或下一頁的頁面按鈕。"
 
 # f641e2dcfbda45dfbe4c7177906cf4b3
 #: ../../data_viewer.txt:26
@@ -93,7 +94,7 @@ msgid ""
 "column in ascending order; clicking it again sorts in descending order.  If "
 "you press a column label and hold it for 1/2 second or more before "
 "releasing, the :ref:`column statistics dialog <column_statistics>` is shown."
-msgstr ""
+msgstr "在行裡的欄位標籤有許多特色除了告知你每一欄的名稱外。要改變當前檢視窗的欄位寬度，點擊兩欄位標籤中的邊界(或者最後一橍右邊側) 然後拉到你想要的地方即可。點擊欄位標籤可以將在此欄內已篩選過的行列按照上升行列排序；再點擊一次則按下降行列排序。假如你按上一欄的標籤久一點大亼約二分之一秒或更長一點才放開，就可看到欄位統計對話:ref:'欄位統計對話<column_statistics>'."
 
 # c763f794d0964d22904395d8317dc068
 #: ../../data_viewer.txt:33
@@ -105,7 +106,7 @@ msgstr "檔案選單"
 msgid ""
 "The \"File\" menu (the main menu on Maemo) contains options that apply to "
 "the database file as a whole.  These are:"
-msgstr ""
+msgstr "\"檔案\"選項單(Maemo 的主要選項單)內含有選項可整體應用到資料庫檔案。這些是："
 
 # 44cf95f764d04b20af3cf191ed9cac6d
 # eba2a6812fb043f49bf43a35358f7822
@@ -122,7 +123,7 @@ msgid ""
 "This option is disabled if no changes have been made since the current "
 "database was opened or last saved. (Not shown in Maemo, use the toolbar "
 "button instead.)"
-msgstr ""
+msgstr "保存從上回打開或上次保存後的任何被糾正過的檔案。如果你登出PortaBase忘記保存最近糾正過的內容，這些將會遺失(一個對話錄將會警告你如果此事將發生). 這個選項將會被取消，如果沒有任何改變自從上次打開此資料庫或保存後。(沒有在Maemo 系統內顯示，需要用工具欄內的按鈕。)"
 
 # 204b52f5096048a38a3d55de779e8de4
 #: ../../data_viewer.txt:41
@@ -134,7 +135,7 @@ msgstr "**更改密碼**"
 msgid ""
 "Launch a dialog which allows you to change the data file's password (only "
 "shown for :ref:`encrypted files <encryption>`)."
-msgstr ""
+msgstr "啟動對話錄來改變你的資料檔案(只有顯示在:ref:'檔案加密<encryption>')."
 
 # 472d2258ceaa4906a5fddfe7098bb00e
 #: ../../data_viewer.txt:44
@@ -156,7 +157,7 @@ msgstr "**匯出**"
 msgid ""
 ":ref:`Export <export>` the current database content to a CSV, HTML, or XML "
 "file."
-msgstr ""
+msgstr ":ref:' 輸出<export>' 用以外傳最近的資料庫內容到一個CSV,HTML, 或XML 型的檔案。"
 
 # 5b1e91fd838f4a89bb2de11da3c77478
 #: ../../data_viewer.txt:50
@@ -212,7 +213,7 @@ msgid ""
 "Launch a dialog which displays basic statistics about the current file (such"
 " as its size, row count, column count, etc.).  The :ref:`column statistics "
 "dialog <column_statistics>` can also be launched from this dialog."
-msgstr ""
+msgstr "啟動對話器來展示當前檔案的統計數字(比如它的尺寸，多少行，多少欄，等等。). 這欄位統計數字對話也可在此對話中啟動。:ref:'欄位統計對話<column_statistics>."
 
 # 06a142b09b2a48a5be415b7af1c2c473
 #: ../../data_viewer.txt:65
@@ -263,7 +264,7 @@ msgid ""
 "Close the current file; if there are unsaved changes, you will be asked if "
 "you want to save them.  (Not shown in Maemo, use the close button at the top"
 " right of the screen instead; you may need to exit fullscreen mode first.)"
-msgstr ""
+msgstr "關閉當前的檔案；如果有尚有巳編正但尚未保存者，你會被問是否要保存它們。(但不在Maemo 顯示，而必須用在銀幕最右上方的關閉按鈕；有可能要從全銀幕先退出。)"
 
 # 91903c5fd5de4f76a7ac000abf3dd6ac
 #: ../../data_viewer.txt:79
@@ -347,7 +348,7 @@ msgstr "**展示**"
 # 6f44108d54544de5988a8443507d00cb
 #: ../../data_viewer.txt:96
 msgid "Show the currently selected row in the :ref:`row viewer <row_viewer>`."
-msgstr ""
+msgstr "在列位檢視器裡顯示當前選取的行列:ref:'列位檢視器<row_viewer>'."
 
 # 176e05c93a5a4891a576ef0a9cad7705
 #: ../../data_viewer.txt:98
@@ -355,7 +356,7 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available through the toolbar and :ref:`row "
 "viewer <row_viewer>` buttons."
-msgstr ""
+msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動列位檢視器時你可以找到同等功能. :ref:'列位檢視器<row_viewer>'按鈕。"
 
 # 23ac094a1e7740488cefbfdd8193b425
 #: ../../data_viewer.txt:103
@@ -375,7 +376,7 @@ msgid ""
 "Add a new view to the database file.  Choosing this option launches the "
 ":ref:`view editor <view_editor>` with no name specified and none of the "
 "columns checked."
-msgstr ""
+msgstr "加入一個新的數據庫視圖到數據庫檔案裡。可以選用這選項來啟動檢視編輯器:ref:'檢視編輯<view_editor>' 沒有特定的名字也沒有特別指定那些欄位。"
 
 # af4b1a275c8e48f9aa53951f7015dcd8
 #: ../../data_viewer.txt:111
@@ -407,7 +408,7 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`views dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr ""
+msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動檢視對話時你可以找到同等功能. :ref:'檢視對話<vsf_dialogs>'"
 
 # 33631316cbb24401bca4b4cf502b3b5d
 #: ../../data_viewer.txt:123
@@ -461,7 +462,7 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`sortings dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr ""
+msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動排序對話時你可以找到同等功能. :ref:'排序對話<vsf_dialogs>'"
 
 # b754369ddea74e69bd41b5b2a84436a8
 #: ../../data_viewer.txt:143
@@ -525,7 +526,7 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`filters dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr ""
+msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動篩選對話時你可以找到同等功能. :ref:'篩選對話<vsf_dialogs>'"
 
 # 3491f7828f984e8c9ef5fea5b8d7fcb7
 #: ../../data_viewer.txt:166
@@ -552,17 +553,17 @@ msgstr "與\\ :ref:`資料列選單 <row_menu>`\\ 中的\"新增\"功能相同�
 # 7041d8b253a34b82b377bc630819be5f
 #: ../../data_viewer.txt:177
 msgid "Same as \"Edit\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
-msgstr ""
+msgstr "與在行列項目裡的\"編輯\"相同(但不在Maemo) :ref:'行列項目<row_menu>'."
 
 # fde21dbd40534f0e959097ca2a0b4071
 #: ../../data_viewer.txt:180
 msgid "Same as \"Copy\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
-msgstr ""
+msgstr "與在行列項目裡的\"複製\" 相同(但不在Maemo) :ref:'行列項目<row_menu>'."
 
 # c7d0f8f98a2e481fb8ff7b37dca8eb13
 #: ../../data_viewer.txt:183
 msgid "Same as \"Delete\" in the :ref:`Row menu <row_menu>`. (Not on Maemo)"
-msgstr ""
+msgstr "與在行列項目裡的\"刪除\" 相同(但不在Maemo) :ref:'行列項目<row_menu>'."
 
 # bd3789fc23f14ff7993cb6ce55689505
 #: ../../data_viewer.txt:186
@@ -572,7 +573,7 @@ msgstr "**景觀**"
 # 277e22bf1b85433dbb9694bb82cea0da
 #: ../../data_viewer.txt:186
 msgid "Launch the :ref:`views dialog <vsf_dialogs>`."
-msgstr ""
+msgstr "啟動:ref:'檢視對話器<vsf_dialogs>'."
 
 # b364e3368cf34ce5909844cf3fea8b4c
 #: ../../data_viewer.txt:189
@@ -582,7 +583,7 @@ msgstr "**排序**"
 # 24aa0d45f90d4092b42b2cb0a7f5de0f
 #: ../../data_viewer.txt:189
 msgid "Launch the :ref:`sortings dialog <vsf_dialogs>`."
-msgstr ""
+msgstr "啟動:ref:'排序對話器<vsf_dialogs>'."
 
 # 008a8db368b5412d90b8628a7f334354
 #: ../../data_viewer.txt:192
@@ -592,12 +593,12 @@ msgstr "**篩選**"
 # 3561f92c1c0f42f4afeeb8ac45987427
 #: ../../data_viewer.txt:192
 msgid "Launch the :ref:`filters dialog <vsf_dialogs>`."
-msgstr ""
+msgstr "啟動:ref:'篩選對話器<vsf_dialogs>' ."
 
 # c00fb2db1433417ab15102d4096ad728
 #: ../../data_viewer.txt:195
 msgid "Same as \"Quick Filter\" in the :ref:`Filter menu <filter_menu>`."
-msgstr ""
+msgstr "根\"快速篩選麗\" 在:ref:'篩選項目<filter_menu>'."
 
 # 642ab2f1c52e454f99f2e1d3708a9e12
 #: ../../data_viewer.txt:197

@@ -1,0 +1,39 @@
+# Messages from column_statistics.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+#   <shinshansu@yahoo.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-08-20 02:37+0000\n"
+"Last-Translator: LSU <shinshansu@yahoo.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/portabase/language/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+# 67aaee6df4df4319a347e05a82e24189
+#: ../../column_statistics.txt:4
+msgid "Column statistics dialog"
+msgstr "欄位統數對話"
+
+# 0c8d420449b04fdda29838162847b670
+#: ../../column_statistics.txt:6
+msgid ""
+"The column statistics dialog, launched from the file properties dialog or by"
+" long-pressing a column header, shows summary statistics about the data in a"
+" column.  Only data in rows that pass the current filter is included in the "
+"calculations.  If it was launched from the file properties dialog, a "
+"droplist at the top of the dialog allows you to select which column to view "
+"statistics for; only columns in the current view are listed.  At the bottom "
+"of the dialog is a widget which allows you to edit the display width (in "
+"pixels) of that column in the current view.  If you close the dialog by "
+"clicking \"OK\"/\"Done\", any changes you made to the column widths will be "
+"applied."
+msgstr "欄位統計對話，可經由檔案性能對話或者按列標題久一點發動，就可以顯示欄位統計數字的總結。只有當前過濾後的列表上的數據才能包含在計算裡。如果由檔案性能對話來發動，則有一個下拉列表在對話器上方讓你可以選擇那些橍位你想看統計；也只有當前在灠示器裡的欄位才列出來。在對話裡的下端有一個物件可允許休修改欄位顯示的寬度(用pixels)。如果你以點擊\"Ok\"/\"Done\" 來關閉對話，則任何修改都會被應用到。"

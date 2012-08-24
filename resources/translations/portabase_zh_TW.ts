@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_TW" version="2.0">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -144,6 +142,10 @@
 <context>
     <name>ColumnEditor</name>
     <message>
+        <source>Column Definition</source>
+        <translation>欄位定義</translation>
+    </message>
+    <message>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
@@ -180,6 +182,18 @@
         <translation>時間</translation>
     </message>
     <message>
+        <source>Calculation</source>
+        <translation>計算</translation>
+    </message>
+    <message>
+        <source>Sequence</source>
+        <translation>次序</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation>影像</translation>
+    </message>
+    <message>
         <source>New Enum</source>
         <translation>自訂集合</translation>
     </message>
@@ -204,14 +218,6 @@
         <translation>現在</translation>
     </message>
     <message>
-        <source>Calculation</source>
-        <translation>計算</translation>
-    </message>
-    <message>
-        <source>Sequence</source>
-        <translation>次序</translation>
-    </message>
-    <message>
         <source>Edit calculation</source>
         <translation>編輯計算</translation>
     </message>
@@ -219,28 +225,20 @@
         <source>Next value</source>
         <translation>下一個值</translation>
     </message>
-    <message>
-        <source>Image</source>
-        <translation>影像</translation>
-    </message>
-    <message>
-        <source>Column Definition</source>
-        <translation>欄位定義</translation>
-    </message>
 </context>
 <context>
     <name>ColumnInfoDialog</name>
     <message>
         <source>Column Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>列數據</translation>
     </message>
     <message>
         <source>Column</source>
-        <translation type="unfinished">欄</translation>
+        <translation>行</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished">寬度</translation>
+        <translation>寬度</translation>
     </message>
 </context>
 <context>
@@ -353,18 +351,6 @@
         <translation>集合名稱</translation>
     </message>
     <message>
-        <source>Must have at least one option</source>
-        <translation>集合至少要有一個項目</translation>
-    </message>
-    <message>
-        <source>Option text</source>
-        <translation>項目文字內容</translation>
-    </message>
-    <message>
-        <source>Replace where used with:</source>
-        <translation>將原本之處取代為</translation>
-    </message>
-    <message>
         <source>Sort</source>
         <translation>排序</translation>
     </message>
@@ -385,12 +371,32 @@
 the &quot;Import&quot; button to load lines from a text file</source>
         <translation>按”新增”鈕建立新列或者按”輸入” 鈕 則可以由一個CSV格式的檔案匯入所有資料列</translation>
     </message>
+    <message>
+        <source>Must have at least one option</source>
+        <translation>集合至少要有一個項目</translation>
+    </message>
+    <message>
+        <source>Option text</source>
+        <translation>項目文字內容</translation>
+    </message>
+    <message>
+        <source>Replace where used with:</source>
+        <translation>將原本之處取代為</translation>
+    </message>
 </context>
 <context>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
         <translation>集合管理員</translation>
+    </message>
+    <message>
+        <source>No enumerated column types defined</source>
+        <translation>沒有已定集合類型 </translation>
+    </message>
+    <message>
+        <source>Press the &quot;Add&quot; button to create one</source>
+        <translation>按”新增”鈕 來建立新集合欄位</translation>
     </message>
     <message>
         <source>The following columns which
@@ -401,14 +407,6 @@ deleted:</source>
     <message>
         <source>Continue?</source>
         <translation>繼續?</translation>
-    </message>
-    <message>
-        <source>No enumerated column types defined</source>
-        <translation>沒有已定集合類型 </translation>
-    </message>
-    <message>
-        <source>Press the &quot;Add&quot; button to create one</source>
-        <translation>按”新增”鈕 來建立新集合欄位</translation>
     </message>
 </context>
 <context>
@@ -486,10 +484,6 @@ deleted:</source>
 <context>
     <name>ImportDialog</name>
     <message>
-        <source>Text encoding</source>
-        <translation>文字編碼方式</translation>
-    </message>
-    <message>
         <source>MobileDB files</source>
         <translation>MobileDB檔案</translation>
     </message>
@@ -509,21 +503,13 @@ deleted:</source>
         <source>Import</source>
         <translation>匯入</translation>
     </message>
+    <message>
+        <source>Text encoding</source>
+        <translation>文字編碼方式</translation>
+    </message>
 </context>
 <context>
     <name>MenuActions</name>
-    <message>
-        <source>Import</source>
-        <translation>匯入</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation>匯出</translation>
-    </message>
-    <message>
-        <source>All Columns</source>
-        <translation>所有欄位</translation>
-    </message>
     <message>
         <source>&amp;View</source>
         <translation>景觀(&amp;V)</translation>
@@ -545,64 +531,12 @@ deleted:</source>
         <translation>變更密碼(&amp;H)</translation>
     </message>
     <message>
-        <source>&amp;Import</source>
-        <translation>匯入(&amp;I)</translation>
-    </message>
-    <message>
-        <source>E&amp;xport</source>
-        <translation>匯出(&amp;X)</translation>
-    </message>
-    <message>
-        <source>S&amp;lideshow</source>
-        <translation>放映幻燈片(&amp;L)</translation>
-    </message>
-    <message>
-        <source>Proper&amp;ties</source>
-        <translation>性質(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Quick Filter</source>
-        <translation>快速篩選器(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>&amp;Add</source>
-        <translation>新增(&amp;A)</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>編輯(&amp;E)</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>刪除(&amp;D)</translation>
-    </message>
-    <message>
-        <source>All &amp;Columns</source>
-        <translation>所有欄位(&amp;C)</translation>
-    </message>
-    <message>
-        <source>All &amp;Rows</source>
-        <translation>所有資料列(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation>複製(&amp;F)</translation>
-    </message>
-    <message>
-        <source>&amp;Show</source>
-        <translation>展示(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Edit E&amp;nums</source>
-        <translation>集合編輯(&amp;N)</translation>
-    </message>
-    <message>
-        <source>Edit Col&amp;umns</source>
-        <translation>編輯欄位(&amp;U)</translation>
-    </message>
-    <message>
         <source>Change the current file&apos;s password</source>
         <translation>改變現行檔案的密碼</translation>
+    </message>
+    <message>
+        <source>&amp;Import</source>
+        <translation>匯入(&amp;I)</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
@@ -613,20 +547,56 @@ deleted:</source>
         <translation>從一CSV檔案匯入</translation>
     </message>
     <message>
+        <source>E&amp;xport</source>
+        <translation>匯出(&amp;X)</translation>
+    </message>
+    <message>
         <source>Export data to another file format</source>
         <translation>匯出資料到不同格式的檔案</translation>
+    </message>
+    <message>
+        <source>S&amp;lideshow</source>
+        <translation>放映幻燈片(&amp;L)</translation>
     </message>
     <message>
         <source>Start an image slideshow</source>
         <translation>啟動影像放映幻燈片</translation>
     </message>
     <message>
+        <source>Proper&amp;ties</source>
+        <translation>性質(&amp;T)</translation>
+    </message>
+    <message>
         <source>Show information about the current file</source>
         <translation>陳列說明現有檔案</translation>
     </message>
     <message>
+        <source>Print Pre&amp;view</source>
+        <translation>列印預展 </translation>
+    </message>
+    <message>
+        <source>Configure and preview printing options</source>
+        <translation>設置並預展列印選項</translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation>列印</translation>
+    </message>
+    <message>
+        <source>Print the current file</source>
+        <translation>列印現有檔案</translation>
+    </message>
+    <message>
+        <source>&amp;Quick Filter</source>
+        <translation>快速篩選器(&amp;Q)</translation>
+    </message>
+    <message>
         <source>Apply a one-condition filter</source>
         <translation>應用”唯一條件”過濾器</translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation>新增(&amp;A)</translation>
     </message>
     <message>
         <source>Create a new row</source>
@@ -645,6 +615,10 @@ deleted:</source>
         <translation>建立新篩選</translation>
     </message>
     <message>
+        <source>&amp;Edit</source>
+        <translation>編輯(&amp;E)</translation>
+    </message>
+    <message>
         <source>Edit the selected row</source>
         <translation>編輯已選列 </translation>
     </message>
@@ -659,6 +633,10 @@ deleted:</source>
     <message>
         <source>Edit the selected filter</source>
         <translation>編輯已選取篩選</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>刪除(&amp;D)</translation>
     </message>
     <message>
         <source>Delete the selected row</source>
@@ -677,12 +655,24 @@ deleted:</source>
         <translation>刪除已選取篩選</translation>
     </message>
     <message>
+        <source>All &amp;Columns</source>
+        <translation>所有欄位(&amp;C)</translation>
+    </message>
+    <message>
         <source>Show all of the database columns</source>
         <translation> 展示所有資料欄</translation>
     </message>
     <message>
+        <source>All &amp;Rows</source>
+        <translation>所有資料列(&amp;R)</translation>
+    </message>
+    <message>
         <source>Show all rows of data</source>
         <translation>展示所有資料列</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>複製(&amp;F)</translation>
     </message>
     <message>
         <source>Create a copy of the selected row</source>
@@ -691,6 +681,10 @@ deleted:</source>
     <message>
         <source>Copy the selected text</source>
         <translation>複製已選定文字句</translation>
+    </message>
+    <message>
+        <source>&amp;Show</source>
+        <translation>展示(&amp;S)</translation>
     </message>
     <message>
         <source>Show the selected row in more detail</source>
@@ -705,28 +699,20 @@ deleted:</source>
         <translation>刪除所有資料列與篩選資料相稱</translation>
     </message>
     <message>
+        <source>Edit Col&amp;umns</source>
+        <translation>編輯欄位(&amp;U)</translation>
+    </message>
+    <message>
         <source>Edit the database format</source>
         <translation>編輯資料庫格式</translation>
     </message>
     <message>
+        <source>Edit E&amp;nums</source>
+        <translation>集合編輯(&amp;N)</translation>
+    </message>
+    <message>
         <source>Edit the enumerated data types</source>
         <translation>編輯集合資料型式</translation>
-    </message>
-    <message>
-        <source>Configure and preview printing options</source>
-        <translation>設置並預展列印選項</translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation>列印</translation>
-    </message>
-    <message>
-        <source>Print the current file</source>
-        <translation>列印現有檔案</translation>
-    </message>
-    <message>
-        <source>Print Pre&amp;view</source>
-        <translation>列印預展 </translation>
     </message>
     <message>
         <source>Views</source>
@@ -760,6 +746,18 @@ deleted:</source>
         <source>View PortaBase in fullscreen mode</source>
         <translation>用全銀幕觀看PortaBase</translation>
     </message>
+    <message>
+        <source>Import</source>
+        <translation>匯入</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>匯出</translation>
+    </message>
+    <message>
+        <source>All Columns</source>
+        <translation>所有欄位</translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -770,18 +768,6 @@ deleted:</source>
 </context>
 <context>
     <name>PBDialog</name>
-    <message>
-        <source>Name must not start with &apos;_&apos;</source>
-        <translation>名稱首字不可為&apos;_&apos;</translation>
-    </message>
-    <message>
-        <source>Duplicate name</source>
-        <translation>名稱已存在</translation>
-    </message>
-    <message>
-        <source>No name entered</source>
-        <translation>未輸入名稱</translation>
-    </message>
     <message>
         <source>Add</source>
         <translation>新增</translation>
@@ -795,12 +781,24 @@ deleted:</source>
         <translation>刪除</translation>
     </message>
     <message>
+        <source>Name must not start with &apos;_&apos;</source>
+        <translation>名稱首字不可為&apos;_&apos;</translation>
+    </message>
+    <message>
+        <source>Duplicate name</source>
+        <translation>名稱已存在</translation>
+    </message>
+    <message>
         <source>Up</source>
         <translation>往上</translation>
     </message>
     <message>
         <source>Down</source>
         <translation>往下</translation>
+    </message>
+    <message>
+        <source>No name entered</source>
+        <translation>未輸入名稱</translation>
     </message>
 </context>
 <context>
@@ -833,6 +831,14 @@ deleted:</source>
 <context>
     <name>PortaBase</name>
     <message>
+        <source>PortaBase files</source>
+        <translation>PortaBase檔案</translation>
+    </message>
+    <message>
+        <source>Recently opened files</source>
+        <translation>最近打開檔案</translation>
+    </message>
+    <message>
         <source>XML</source>
         <translation>XML</translation>
     </message>
@@ -845,11 +851,28 @@ deleted:</source>
         <translation>選擇匯入格式</translation>
     </message>
     <message>
+        <source>Encrypt the file?</source>
+        <translation>檔案要加密嗎?</translation>
+    </message>
+    <message>
+        <source>Unable to overwrite existing file</source>
+        <translation>無法覆蓋現有的文件</translation>
+    </message>
+    <message>
         <source>This file uses a newer version of the
 PortaBase format than this version
 of PortaBase supports; please
 upgrade</source>
         <translation>此檔案使用較新版本的PortaBase格式;請升級</translation>
+    </message>
+    <message>
+        <source>Unable to read from this file</source>
+        <translation>無法讀取此文件</translation>
+    </message>
+    <message>
+        <source>This file is read-only.
+You will not be able to save any changes you make.</source>
+        <translation>此文件是只讀的。您將無法保存任何更改。</translation>
     </message>
     <message>
         <source>Delete this row?</source>
@@ -869,8 +892,24 @@ current filter?</source>
         <translation>目前篩選中的所有資料列</translation>
     </message>
     <message>
+        <source>HTML</source>
+        <translation>HTML</translation>
+    </message>
+    <message>
         <source>Export to:</source>
         <translation>選擇匯出格式</translation>
+    </message>
+    <message>
+        <source>Text files with comma separated values</source>
+        <translation>內容以逗號分隔之文字檔</translation>
+    </message>
+    <message>
+        <source>HTML files</source>
+        <translation>HTML 檔案</translation>
+    </message>
+    <message>
+        <source>XML files</source>
+        <translation>XML檔案</translation>
     </message>
     <message>
         <source>Delete this view?</source>
@@ -893,26 +932,6 @@ current filter?</source>
         <translation>網址 http://portabase.sourceforge.net</translation>
     </message>
     <message>
-        <source>PortaBase files</source>
-        <translation>PortaBase檔案</translation>
-    </message>
-    <message>
-        <source>Recently opened files</source>
-        <translation>最近打開檔案</translation>
-    </message>
-    <message>
-        <source>Encrypt the file?</source>
-        <translation>檔案要加密嗎?</translation>
-    </message>
-    <message>
-        <source>Text files with comma separated values</source>
-        <translation>內容以逗號分隔之文字檔</translation>
-    </message>
-    <message>
-        <source>XML files</source>
-        <translation>XML檔案</translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>約 1％</translation>
     </message>
@@ -920,57 +939,12 @@ current filter?</source>
         <source>No such file exists</source>
         <translation>沒有這樣的文件存在</translation>
     </message>
-    <message>
-        <source>Unable to overwrite existing file</source>
-        <translation>無法覆蓋現有的文件</translation>
-    </message>
-    <message>
-        <source>Unable to read from this file</source>
-        <translation>無法讀取此文件</translation>
-    </message>
-    <message>
-        <source>This file is read-only.
-You will not be able to save any changes you make.</source>
-        <translation>此文件是只讀的。您將無法保存任何更改。</translation>
-    </message>
-    <message>
-        <source>HTML</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HTML files</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Preferences</name>
     <message>
         <source>Preferences</source>
         <translation>偏好設定</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation>字型</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>名稱</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>大小</translation>
-    </message>
-    <message>
-        <source>Sample</source>
-        <translation>範例</translation>
-    </message>
-    <message>
-        <source>Sample text</source>
-        <translation>範例文字</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>一般事項</translation>
     </message>
     <message>
         <source>Confirm deletions</source>
@@ -981,8 +955,8 @@ You will not be able to save any changes you make.</source>
         <translation>允許在資料檢視器中編輯核對盒</translation>
     </message>
     <message>
-        <source>Show seconds for times</source>
-        <translation>時間格式中包含秒</translation>
+        <source>Use pages in data viewer</source>
+        <translation>在資料觀察器裡使用頁數</translation>
     </message>
     <message>
         <source>Wrap Notes</source>
@@ -997,12 +971,40 @@ You will not be able to save any changes you make.</source>
         <translation>最後一個位置</translation>
     </message>
     <message>
-        <source>Date and Time</source>
-        <translation>日期與時間</translation>
+        <source>Default rows per page</source>
+        <translation>每頁資料列預定值</translation>
+    </message>
+    <message>
+        <source>View rows with a single click</source>
+        <translation>查看行只需一次點擊</translation>
+    </message>
+    <message>
+        <source>Use small-screen settings on this device</source>
+        <translation>使用小屏幕設置此設備上</translation>
+    </message>
+    <message>
+        <source>Auto-rotate to match device orientation</source>
+        <translation>自動旋轉配合機組原創</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>一般事項</translation>
     </message>
     <message>
         <source>Date format</source>
         <translation>日期格式</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation>日</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <translation>月</translation>
+    </message>
+    <message>
+        <source>Y</source>
+        <translation>年</translation>
     </message>
     <message>
         <source>Time format</source>
@@ -1029,36 +1031,52 @@ You will not be able to save any changes you make.</source>
         <translation>星期一</translation>
     </message>
     <message>
+        <source>Show seconds for times</source>
+        <translation>時間格式中包含秒</translation>
+    </message>
+    <message>
+        <source>Date and Time</source>
+        <translation>日期與時間</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation>字型</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>名稱</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <source>Sample</source>
+        <translation>範例</translation>
+    </message>
+    <message>
+        <source>Sample text</source>
+        <translation>範例文字</translation>
+    </message>
+    <message>
+        <source>Adjust row height to match font</source>
+        <translation>調整列的高度來配合字體</translation>
+    </message>
+    <message>
+        <source>Use alternating row colors if theme has them</source>
+        <translation>如果主題已經存列裡就用不同的列色彩</translation>
+    </message>
+    <message>
         <source>Row Colors</source>
         <translation>資料列背景色</translation>
     </message>
     <message>
-        <source>Use pages in data viewer</source>
-        <translation>在資料觀察器裡使用頁數</translation>
-    </message>
-    <message>
-        <source>Default rows per page</source>
-        <translation>每頁資料列預定值</translation>
+        <source>Clear the recent files list</source>
+        <translation>清除最近檔案表</translation>
     </message>
     <message>
         <source>Appearance</source>
         <translation>外貌</translation>
-    </message>
-    <message>
-        <source>Use small-screen settings on this device</source>
-        <translation>使用小屏幕設置此設備上</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation>日</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation>月</translation>
-    </message>
-    <message>
-        <source>Y</source>
-        <translation>年</translation>
     </message>
     <message>
         <source>White</source>
@@ -1100,26 +1118,6 @@ You will not be able to save any changes you make.</source>
         <source>Thistle</source>
         <translation>薊色</translation>
     </message>
-    <message>
-        <source>View rows with a single click</source>
-        <translation>查看行只需一次點擊</translation>
-    </message>
-    <message>
-        <source>Auto-rotate to match device orientation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Adjust row height to match font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear the recent files list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use alternating row colors if theme has them</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1136,8 +1134,12 @@ You will not be able to save any changes you make.</source>
         <translation>大小</translation>
     </message>
     <message>
+        <source>Modified</source>
+        <translation>改造過的</translation>
+    </message>
+    <message>
         <source>%1 in current filter</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 在現有澞過</translation>
     </message>
     <message>
         <source>Rows</source>
@@ -1145,7 +1147,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>%1 in current view</source>
-        <translation type="unfinished"></translation>
+        <translation>%1在現示裡</translation>
     </message>
     <message>
         <source>Columns</source>
@@ -1169,19 +1171,11 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>Column Statistics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Modified</source>
-        <translation type="unfinished"></translation>
+        <translation>行數據</translation>
     </message>
 </context>
 <context>
     <name>QMenuBar</name>
-    <message>
-        <source>About %1</source>
-        <translation>關於%1</translation>
-    </message>
     <message>
         <source>Preferences</source>
         <translation>偏好設定</translation>
@@ -1191,12 +1185,28 @@ You will not be able to save any changes you make.</source>
         <translation>退出%1</translation>
     </message>
     <message>
+        <source>About %1</source>
+        <translation>關於%1</translation>
+    </message>
+    <message>
         <source>About Qt</source>
         <translation>關於Qt</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
+    <message>
+        <source>Problematic row</source>
+        <translation>問題列</translation>
+    </message>
+    <message>
+        <source>Unable to open file</source>
+        <translation>無法開啟檔案</translation>
+    </message>
+    <message>
+        <source>Error in row %1</source>
+        <translation>第%1資料列有錯</translation>
+    </message>
     <message>
         <source>must be an integer</source>
         <translation>須為整數</translation>
@@ -1230,31 +1240,19 @@ You will not be able to save any changes you make.</source>
         <translation>欄位不足</translation>
     </message>
     <message>
-        <source>Unable to open file</source>
-        <translation>無法開啟檔案</translation>
-    </message>
-    <message>
-        <source>Error in row %1</source>
-        <translation>第%1資料列有錯</translation>
+        <source>Missing file</source>
+        <translation>檔案消失不見</translation>
     </message>
     <message>
         <source>Not a valid MobileDB file</source>
         <translation>不正確的MobileDB檔案</translation>
-    </message>
-    <message>
-        <source>Problematic row</source>
-        <translation>問題列</translation>
-    </message>
-    <message>
-        <source>Missing file</source>
-        <translation>檔案消失不見</translation>
     </message>
 </context>
 <context>
     <name>QQMainWindow</name>
     <message>
         <source>Not a %1 file</source>
-        <translation type="unfinished">不是%1 檔案</translation>
+        <translation>不是%1的檔案</translation>
     </message>
     <message>
         <source>Printing aborted</source>
@@ -1276,8 +1274,28 @@ You will not be able to save any changes you make.</source>
         <translation>請選一個儲存檔案名稱</translation>
     </message>
     <message>
+        <source>Pr&amp;eferences</source>
+        <translation>個人喜好</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>退出(&amp;Q)</translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation>說明內容</translation>
+    </message>
+    <message>
+        <source>%1 Help</source>
+        <translation>%1說明</translation>
+    </message>
+    <message>
         <source>&amp;About %1</source>
         <translation>有關說明</translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation>關係QT(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -1294,10 +1312,6 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Open an existing file</source>
         <translation>開啟已存檔案</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>退出(&amp;Q)</translation>
     </message>
     <message>
         <source>Quit the application</source>
@@ -1324,20 +1338,12 @@ You will not be able to save any changes you make.</source>
         <translation>關閉現行檔案</translation>
     </message>
     <message>
+        <source>Change the application settings</source>
+        <translation>改變程式設置</translation>
+    </message>
+    <message>
         <source>&amp;File</source>
         <translation>檔案(&amp;F)</translation>
-    </message>
-    <message>
-        <source>Help Contents</source>
-        <translation>說明內容</translation>
-    </message>
-    <message>
-        <source>%1 Help</source>
-        <translation>%1說明</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation>關係QT(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -1362,14 +1368,6 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>The selected item is a directory</source>
         <translation>所選項是一個目錄</translation>
-    </message>
-    <message>
-        <source>Pr&amp;eferences</source>
-        <translation>個人喜好</translation>
-    </message>
-    <message>
-        <source>Change the application settings</source>
-        <translation>改變程式設置</translation>
     </message>
 </context>
 <context>
@@ -1469,20 +1467,20 @@ You will not be able to save any changes you make.</source>
         <translation>編輯此列</translation>
     </message>
     <message>
-        <source>Copy the selected text</source>
-        <translation>複製選出的文字</translation>
-    </message>
-    <message>
-        <source>Next row</source>
-        <translation>下一 行</translation>
-    </message>
-    <message>
         <source>Copy this row</source>
         <translation>複製這一行</translation>
     </message>
     <message>
         <source>Delete this row</source>
         <translation>刪除此行</translation>
+    </message>
+    <message>
+        <source>Copy the selected text</source>
+        <translation>複製選出的文字</translation>
+    </message>
+    <message>
+        <source>Next row</source>
+        <translation>下一 行</translation>
     </message>
 </context>
 <context>
@@ -1639,9 +1637,9 @@ You will not be able to save any changes you make.</source>
         <source>Total length</source>
         <translation>總長</translation>
     </message>
-    <message>
-        <source>characters</source>
-        <translation type="obsolete">字元</translation>
+    <message numerus="yes">
+        <source>%Ln character(s)</source>
+        <translation><numerusform>%Ln字，</numerusform></translation>
     </message>
     <message>
         <source>Average length</source>
@@ -1662,12 +1660,6 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>No image</source>
         <translation>沒有影像</translation>
-    </message>
-    <message numerus="yes">
-        <source>%Ln character(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-        </translation>
     </message>
 </context>
 <context>
@@ -1712,16 +1704,16 @@ You will not be able to save any changes you make.</source>
         <translation>欄位名稱</translation>
     </message>
     <message>
-        <source>All Rows</source>
-        <translation>所有資料列</translation>
-    </message>
-    <message>
         <source>No default sorting</source>
         <translation>沒有默認排序</translation>
     </message>
     <message>
         <source>No default filter</source>
         <translation>沒有默認的過濾器</translation>
+    </message>
+    <message>
+        <source>All Rows</source>
+        <translation>所有資料列</translation>
     </message>
 </context>
 <context>
@@ -1740,7 +1732,7 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>only allowed as root element</source>
-        <translation>只可為根元素</translation>
+        <translation>，只可為根元素</translation>
     </message>
     <message>
         <source>Unknown element</source>

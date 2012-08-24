@@ -7,6 +7,10 @@ src/resources/help/_build/en/*.html opt/portabase/help/en
 src/resources/help/_build/en/*.inv opt/portabase/help/en
 src/resources/help/_build/en/*.js opt/portabase/help/en
 src/resources/help/_build/en/_sources/* opt/portabase/help/en/_sources
+src/resources/help/_build/fr/*.html opt/portabase/help/fr
+src/resources/help/_build/fr/*.inv opt/portabase/help/fr
+src/resources/help/_build/fr/*.js opt/portabase/help/fr
+src/resources/help/_build/fr/_sources/* opt/portabase/help/fr/_sources
 src/resources/help/_build/ja/*.html opt/portabase/help/ja
 src/resources/help/_build/ja/*.inv opt/portabase/help/ja
 src/resources/help/_build/ja/*.js opt/portabase/help/ja
