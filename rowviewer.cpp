@@ -313,7 +313,8 @@ void RowViewer::deleteRow()
             return;
         }
     }
-    display->deleteRow();
+    int rowId = view->getId(index);
+    display->deleteRow(rowId);
     accept();
 }
 

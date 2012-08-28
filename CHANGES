@@ -1,3 +1,16 @@
+2012-08-28  JMB  Row deletion bugfix, Mac icons and retina display support
+
+    Fixed a bug where deleting a row from the row viewer would delete the
+    row it was first launched for, not necessarily the one it was currently
+    showing.  Also updated a few instaces of the application icon on the Mac
+    that I missed when first swapping it.  Enabled high-resolution text
+    rendering on retina displays (higher resolution icon display has to wait
+    for support in Qt).
+
+    Added the latest update to the French translation of the help files, and
+    made some changes to ensure that the updated translations of Sphinx
+    phrases are fully utilized in the help files.
+
 2012-08-24  JMB  Translation updates, Mac code signing
 
     Incorporated the latest text updates from all the translators.  Added a

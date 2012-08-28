@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
+#   <dany@poupard.nom.fr>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:06+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-08-27 19:20+0000\n"
+"Last-Translator: danypoup <dany@poupard.nom.fr>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/portabase/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 # 723538d734ca4b2d9765c63c93b372b1
 #: ../../image_editor.txt:4
 msgid "Image editor"
-msgstr ""
+msgstr "Editeur d'images"
 
 # b07976cb0dc34646ad62169e61fee86c
 #: ../../image_editor.txt:6
@@ -29,57 +30,57 @@ msgid ""
 "After you select an image file to import into a field in the database, this "
 "dialog is shown so you can make minor changes to the copy of the image that "
 "will be saved in the database.  The top row contains the following controls:"
-msgstr ""
+msgstr "Une colonne de type Image stocke des images importées à partir de fichier au format JPEG ou PNG. Après avoir sélectionné un fichier à importer dans un champ de la base de données, cette boite de dialogue est affichée, ainsi vous pouvez apporter des modifications mineures sur la copie de l'image qui sera enregistrée dans la base de données. La ligne du haut contient les contrôles suivants :"
 
 # a5f832b3b80d49aaa228c9263385f6bf
 #: ../../image_editor.txt:9
 msgid "**Width**"
-msgstr ""
+msgstr "**Largeur**"
 
 # 67b32333a10b4f16bea603238410e15f
 #: ../../image_editor.txt:9
 msgid "The maximum allowed width of the image (in pixels)."
-msgstr ""
+msgstr "La largeur maximale autorisée pour l'image (en pixels)."
 
 # 357c6c6170e54833bc385a3304afcc84
 #: ../../image_editor.txt:12
 msgid "**Height**"
-msgstr ""
+msgstr "**Hauteur**"
 
 # 1ad8cb149206412d9e46fc224789c11d
 #: ../../image_editor.txt:12
 msgid "The maximum allowed height of the image (in pixels)."
-msgstr ""
+msgstr "La hauteur maximale autorisée pour l'image (en pixels)."
 
 # 169e4f6d80af4780aa9f638f420cad3b
 #: ../../image_editor.txt:15
 msgid "**Rotate**"
-msgstr ""
+msgstr "**Rotation**"
 
 # cacfabd5245349b0aa3988a64939bfc7
 #: ../../image_editor.txt:15
 msgid ""
 "The angle by which to rotate the image (in degrees): 0, 90, 180, or 270."
-msgstr ""
+msgstr "L'angle de rotation de l'image (en degrés) : 0, 90, 180 ou 270."
 
 # 009942046379418784898beb423f12ac
 #: ../../image_editor.txt:18
 msgid "**Refresh**"
-msgstr ""
+msgstr "**Actualiser**"
 
 # c9969f62ec464f58906241b3f429f6ef
 #: ../../image_editor.txt:18
 msgid ""
 "Apply the currently displayed settings and update the image preview "
 "accordingly."
-msgstr ""
+msgstr "Applique la configuration d'affichage actuelle et met à jour la prévisualisation de l'image en conséquence."
 
 # b94f400f3398469abc82d28724bdebee
 #: ../../image_editor.txt:20
 msgid ""
 "Click \"OK\"/\"Done\" to store the image as it is shown, or cancel out of "
 "the dialog to leave the field unchanged."
-msgstr ""
+msgstr "Cliquez sur \"OK\"/\"Fait\" pour stocker l'image telle qu'elle est affichée ou quittez la boite de dialogue en annulant pour laisser le champ non modifié."
 
 # a2edd321360d4e79a296b5fdaa25bbf6
 #: ../../image_editor.txt:22
@@ -91,4 +92,4 @@ msgid ""
 "than 800 x 600 cannot be imported.  These limitations will be removed in a "
 "future version of PortaBase, since it is no longer being developed for the "
 "Zaurus."
-msgstr ""
+msgstr "Parce que la mémoire était limitée sur les Zaurus, ordinateurs personnels pour lesquels PortaBase a été initialement développé, les images de très grande taille ne sont pas supportées. Les images JPEG supérieures à 6400 x 4800 pixels ne peuvent être importées et celles supérieures à 800 x 600 seront réduites à cette taille maxi. De même, les images PNG supérieures à 800 x 600 ne peuvent être importées. Ces limitations seront supprimées dans une version future de PortaBase puisque que le développement pour le Zaurus a été arrêté."

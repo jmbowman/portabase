@@ -70,8 +70,8 @@ public:
 
 public slots:
     void addRow();
-    bool editRow(int rowId=-1, bool copy=false, QWidget *parent=0);
-    void deleteRow();
+    bool editRow(int id=-1, bool copy=false, QWidget *parent=0);
+    void deleteRow(int id=-1);
     void slideshow();
     void viewRow();
     void showStatistics(bool allColumns=false, QWidget *parent=0);

@@ -548,11 +548,17 @@ void ViewDisplay::viewRow()
 }
 
 /**
- * Delete the record currently selected in the display table (if any).
+ * Delete a record that is currently shown in the display table.
+ *
+ * @param id The ID of the record to delete; if -1, the record selected in the
+ *           display table is used
  */
-void ViewDisplay::deleteRow()
+void ViewDisplay::deleteRow(int id)
 {
-    int rowId = selectedRowId();
+    int rowId = id;
+    if (rowId == -1) {
+        rowId = selectedRowId();
+    }
     if (rowId != -1) {
         model->deleteRow(rowId);
         setEdited(true);

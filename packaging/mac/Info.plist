@@ -39,5 +39,7 @@
 	<string>2.1.0f1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.5.0</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
 </dict>
 </plist>

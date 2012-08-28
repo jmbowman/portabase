@@ -6,7 +6,7 @@
 
 # By default, builds a 64-bit Intel binary.  If you want to build a universal
 # binary that runs on PowerPC and 32-bit Intel Macs, pass the string
-# "universal" as the second parameter.  You'll need to have a suitably old or
+# "--universal" as the first parameter.  You'll need to have a suitably old or
 # hacked version of Xcode, and appropriately compiled versions of Qt and
 # Metakit.
 
