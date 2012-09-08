@@ -1,3 +1,10 @@
+2012-09-08  #################### PortaBase 2.1 ####################
+
+2012-09-08  JMB  French translation update, updates for 2.1 release
+
+    Added the latest translations of the help files into French, and updated
+    the last few files in preparation for the 2.1 release.
+
 2012-08-28  JMB  Row deletion bugfix, Mac icons and retina display support
 
     Fixed a bug where deleting a row from the row viewer would delete the

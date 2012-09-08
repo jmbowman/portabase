@@ -3,24 +3,25 @@
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
+#   <dany@poupard.nom.fr>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:13+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-09-08 09:29+0000\n"
+"Last-Translator: danypoup <dany@poupard.nom.fr>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/portabase/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 # 70a3ccda4462487996bbf67f4917f062
 #: ../../data_viewer.txt:4
 msgid "Data viewer"
-msgstr ""
+msgstr "Editeur de données"
 
 # 56597878e3cc40e9956690763307070e
 #: ../../data_viewer.txt:6
@@ -28,12 +29,12 @@ msgid ""
 "This is the main screen of the application, where you can browse the "
 "database's content and launch most of the other dialogs.  The contents of "
 "this screen are:"
-msgstr ""
+msgstr "C'est l'écran principal de l'application où vous pouvez naviguer dans la base de données et d'où vous pouvez accéder à la plupart des boites de dialogue. Cet écran contient :"
 
 # 05032c6d260a4aaf963a4f69c9de84a9
 #: ../../data_viewer.txt:15
 msgid "Row display and navigation"
-msgstr ""
+msgstr "Navigation et affichage des lignes"
 
 # 657b21086e3849ddbb80bf533864bb9f
 #: ../../data_viewer.txt:17
@@ -46,7 +47,7 @@ msgid ""
 " this in the :ref:`preferences dialog <preferences>`, you can stil launch it"
 " by pressing enter/return, space, or Control-R (Command-R on the Mac) while "
 "a row is selected."
-msgstr ""
+msgstr "La plus grande partie de l'écran du visualiseur de données est prise par un tableau qui affiche une vue de la base de données. Vous pouvez faire défiler toutes les lignes sans tenir compte du filtre courant ; les performances restent bonnes car seules les lignes affichées sont effectivement chargées. Cliquer sur une ligne lance le :ref:`visualiseur de ligne <row_viewer>` ; si vous l'avez désactiver dans les :ref:préférences <preferences>`, vous pouvez encore le lancer en appuyant sur les touches ENTREE, ESPACE ou CTRL-droite alors qu'une ligne est sélectionnée. "
 
 # c510a40ba03a46bbabbb897fd288332d
 #: ../../data_viewer.txt:19
@@ -58,7 +59,7 @@ msgid ""
 "the image contained in that cell is shown in the :ref:`image viewer "
 "<image_viewer>`.  If you do it in any other type of column, the :ref:`row "
 "editor <row_editor>` for the row you clicked on is launched."
-msgstr ""
+msgstr "Cliquer sur une cellule et maintenir enfoncé le bouton de la souris pendant au moins une demi seconde avant de le relâcher, déclenche des fonctions spéciales. Si vous effectuez cette action sur une cellule dans une colonne de type Note alors le :ref:`visualiseur de notes <note_editor>` s'affiche avec le contenu de la note sélectionnée. Sur une cellule d'une colonne de type Image, c'est le :ref:`visualiseur d'images <image_viewer>` qui s'affiche avec l'image correspondante. Pour les autres types de colonne, c'est :ref:`l'éditeur de ligne <row_editor>` qui s'affiche."
 
 # 863b37bfb2754a539787fcb47932e6bd
 #: ../../data_viewer.txt:21
@@ -74,12 +75,12 @@ msgid ""
 "buttons to go to that page of rows; the button for the current page is shown"
 " pressed.  Click on the arrow buttons at the ends to show the page buttons "
 "for the next or previous five pages."
-msgstr ""
+msgstr "Si dans les :ref:`préférences <preferences>` vous avez choisi d'utiliser un affichage paginé alors une ligne supplémentaire de contrôles apparaît en bas de l'écran. La zone de saisie en bas à gauche indique le nombre maximum de lignes simultanées à afficher dans la vue courante ; vous pouvez modifier cette valeur par n'importe quel entier positif (en la définissant suffisamment basse, la barre de défilement sur la droite de l'affichage disparaît, donnant un peu plus d'espace ; notez que Maemo Fremantle ne dispose pas d'une telle barre de défilement). A la droite de cette boite \"lignes par page\", il y a les boutons de navigation paginée. Cliquez sur l'un des boutons numérotés  pour aller à la page correspondante ; le bouton de la page courante apparaîtra enfoncée. Cliquez sur les flèches pour afficher les boutons de déplacement vers les 5 suivantes/précédentes pages."
 
 # f641e2dcfbda45dfbe4c7177906cf4b3
 #: ../../data_viewer.txt:26
 msgid "Column labels"
-msgstr ""
+msgstr "Libellé de colonne"
 
 # 160569cc6421479ba87c86409d186a01
 #: ../../data_viewer.txt:28
@@ -92,25 +93,25 @@ msgid ""
 "column in ascending order; clicking it again sorts in descending order.  If "
 "you press a column label and hold it for 1/2 second or more before "
 "releasing, the :ref:`column statistics dialog <column_statistics>` is shown."
-msgstr ""
+msgstr "La ligne des libellés de colonne, en plus de fournir le nom des colonnes, dispose de fonctionnalités additionnelles. Pour changer la largeur des colonnes de la vue courante, cliquez sur la bordure entre deux étiquettes de colonne (ou le bord droit de la dernière colonne) et déplacez la jusqu'à la position souhaitée. Cliquer sur le libellé d'une colonne tri toutes les lignes du filtre courant dans l'ordre croissant de cette colonne ; cliquer une fois encore tri dans l'ordre décroissant. Si vous appuyer sur un libellé de colonne pendant 1/2 seconde au moins avant de relâcher la pression, la :ref:`boite de dialogue des statistiques de colonnes <column_statistics>` s'affiche."
 
 # c763f794d0964d22904395d8317dc068
 #: ../../data_viewer.txt:33
 msgid "File menu"
-msgstr ""
+msgstr "Menu fichier"
 
 # 6c33c8f2ce9b425390d97698ee6bb600
 #: ../../data_viewer.txt:35
 msgid ""
 "The \"File\" menu (the main menu on Maemo) contains options that apply to "
 "the database file as a whole.  These are:"
-msgstr ""
+msgstr "Le menu \"Fichier\" (menu principal sur Maemo) contient des options qui s'appliquent à l'ensemble de la base de données. Il y a :"
 
 # 44cf95f764d04b20af3cf191ed9cac6d
 # eba2a6812fb043f49bf43a35358f7822
 #: ../../data_viewer.txt:38 ../../data_viewer.txt:171
 msgid "**Save**"
-msgstr ""
+msgstr "**Enregistrer**"
 
 # 9865a85b577b4ed5b1b4d831f759bbe3
 #: ../../data_viewer.txt:38
@@ -121,76 +122,76 @@ msgid ""
 "This option is disabled if no changes have been made since the current "
 "database was opened or last saved. (Not shown in Maemo, use the toolbar "
 "button instead.)"
-msgstr ""
+msgstr "Enregistre tous les changements qui ont été effectué depuis que le fichier a été ouvert ou depuis la dernière sauvegarde. Si vous quittez PortaBase sans enregistrer les modifications, elles seront perdues (une boite de dialogue vous avertira). Cette option est désactivée tant qu'il n'y a aucune modification (Sur Maemo, utilisez la barre d'outils plutôt)."
 
 # 204b52f5096048a38a3d55de779e8de4
 #: ../../data_viewer.txt:41
 msgid "**Change Password**"
-msgstr ""
+msgstr "**Modifier le mot de passe**"
 
 # 0947f236c87a418eb6cda9b1f878663e
 #: ../../data_viewer.txt:41
 msgid ""
 "Launch a dialog which allows you to change the data file's password (only "
 "shown for :ref:`encrypted files <encryption>`)."
-msgstr ""
+msgstr "Ouvre une boite de dialogue qui vous permet de changer le mot de passe du fichier (visible seulement pour les :ref:`fichiers chiffrés <encryption>`)."
 
 # 472d2258ceaa4906a5fddfe7098bb00e
 #: ../../data_viewer.txt:44
 msgid "**Import**"
-msgstr ""
+msgstr "**Import**"
 
 # 595e154e4af842d9b9c3d1da8b1346ed
 #: ../../data_viewer.txt:44
 msgid ":ref:`Import <import>` rows from a CSV file."
-msgstr ""
+msgstr ":ref:`Importe <import>` les lignes à partir d'un fichier CSV."
 
 # 13776cc36b7d463a9cc2fe1246ad9a45
 #: ../../data_viewer.txt:47
 msgid "**Export**"
-msgstr ""
+msgstr "**Export**"
 
 # de0408d8a52c4f23a0b166aba5d9d10d
 #: ../../data_viewer.txt:47
 msgid ""
 ":ref:`Export <export>` the current database content to a CSV, HTML, or XML "
 "file."
-msgstr ""
+msgstr ":ref:`Exporte <export>` le contenu de la base de données courante dans un fichier CSV, HTML ou XML."
 
 # 5b1e91fd838f4a89bb2de11da3c77478
 #: ../../data_viewer.txt:50
 msgid "**Delete Rows In Filter**"
-msgstr ""
+msgstr "**Supprimer les lignes d'un filtre**"
 
 # f78a1a16aa5545b1827a2896a8fc6b88
 #: ../../data_viewer.txt:50
 msgid "Deletes all rows which are included by the filter currently in use."
-msgstr ""
+msgstr "Supprime toutes les lignes incluses dans le filtre courant."
 
 # 8560fd9882dc4dad99c594148544f23b
 #: ../../data_viewer.txt:53
 msgid "**Edit Columns**"
-msgstr ""
+msgstr "**Modifier les colonnes**"
 
 # b4d830af4a794db183e36c91eab5f03f
 #: ../../data_viewer.txt:53
 msgid "Launch the :ref:`columns editor <columns_editor>`."
-msgstr ""
+msgstr "Ouvre :ref:`l'éditeur de colonnes <columns_editor>`."
 
 # 9085eeb5e3474dd5ae256cd3254fa2e2
 #: ../../data_viewer.txt:56
 msgid "**Edit Enums**"
-msgstr ""
+msgstr "**Modifier les énumérations**"
 
 # 052599ac8ae84013adee820ae132bd41
 #: ../../data_viewer.txt:56
 msgid "Launch the :ref:`enum manager <enum_manager>`."
-msgstr ""
+msgstr "Ouvre le :ref:`gestionnaire d'énumération <enum_manager>`."
 
 # 68f15dfeb005411a940a6bd269fb9626
 #: ../../data_viewer.txt:59
 msgid "**Slideshow**"
-msgstr ""
+msgstr "**Diaporama**"
 
 # 979b86c9bc8d4e0b8a3130fbfc7973fd
 #: ../../data_viewer.txt:59
@@ -198,12 +199,12 @@ msgid ""
 "Launch a dialog from which you can start a timed slideshow of images from an"
 " Image column in the current view.  Only images in rows passing the current "
 "filter are shown, and the sequence is the current sorting."
-msgstr ""
+msgstr "Ouvre une boite de dialogue qui vous permet de démarré u diaporama temporisé à partir d'une colonne de type Image dans la vue courante. Seules les images correspondant au filtre courant sont affichées et l'ordre est celui du tri en cours."
 
 # ac9eec4b465943629c484b751b428f91
 #: ../../data_viewer.txt:62
 msgid "**Properties**"
-msgstr ""
+msgstr "**Propriétés**"
 
 # b3eab18460ab457a8dce05e631b9e37d
 #: ../../data_viewer.txt:62
@@ -211,12 +212,12 @@ msgid ""
 "Launch a dialog which displays basic statistics about the current file (such"
 " as its size, row count, column count, etc.).  The :ref:`column statistics "
 "dialog <column_statistics>` can also be launched from this dialog."
-msgstr ""
+msgstr "Ouvre une boite de dialogue qui affiche quelques statistiques sur le fichier courant (telles que la taille, le nombre de ligne, le nombre de colonne, ...) La boite de dialogue des :ref:`statistiques de colonne <column_statistics>` peut aussi être ouverte depuis cette boite de dialogue."
 
 # 06a142b09b2a48a5be415b7af1c2c473
 #: ../../data_viewer.txt:65
 msgid "**Print Preview**"
-msgstr ""
+msgstr "**Aperçu avant impression**"
 
 # f3c679f871a74b1b87e05567a81968bd
 #: ../../data_viewer.txt:65
@@ -225,12 +226,12 @@ msgid ""
 "the current data selection would look like.  You can also set from here "
 "certain properties of the output, such as paper size and zoom factor.  (Not "
 "shown in Maemo, which has no printing support.)"
-msgstr ""
+msgstr "Ouvre l'aperçu avant impression afin de voir à quoi ressemblerait l'impression des données actuellement sélectionnées. Vous pouvez définir certaines propriétés de l'impression telles que la taille du papier et le facteur de zoom (Non visible dans Maemo qui ne dispose pas du support de l'impression)."
 
 # ff2fff1ddded46f2822f4a79605f2bbf
 #: ../../data_viewer.txt:68
 msgid "**Print**"
-msgstr ""
+msgstr "**Imprimer**"
 
 # 3870aa4084714adea3e7152721970699
 #: ../../data_viewer.txt:68
@@ -239,22 +240,22 @@ msgid ""
 "filter in the current sorting order.  Note that you may wish to modify some "
 "settings with the print preview dialog first.  (Not shown in Maemo, which "
 "has no printing support.)"
-msgstr ""
+msgstr "Ouvre la boite de dialogue pour imprimer les données de la vue et du filtre courants en respectant l'ordre de tri en cours. Notez que vous pouvez préalablement modifier certaines propriétés via l'aperçu avant impression  (Non visible dans Maemo qui ne dispose pas du support de l'impression)."
 
 # 4cb1ae3a7c8d4245bebad327bb2803bb
 #: ../../data_viewer.txt:71
 msgid "**Preferences**"
-msgstr ""
+msgstr "**Préférences**"
 
 # a46e0d72c05a4b5897ed6c3f4cfe0e6b
 #: ../../data_viewer.txt:71
 msgid "Launch the :ref:`preferences dialog <preferences>`."
-msgstr ""
+msgstr "Ouvre la boite de dialogue des :ref:`préférences <preferences>`."
 
 # e45e7e72ea0d41dc9828b159918d8a60
 #: ../../data_viewer.txt:74
 msgid "**Close**"
-msgstr ""
+msgstr "**Fermer**"
 
 # c50e52b560bd4d37bf333de7287e1f47
 #: ../../data_viewer.txt:74
@@ -262,19 +263,19 @@ msgid ""
 "Close the current file; if there are unsaved changes, you will be asked if "
 "you want to save them.  (Not shown in Maemo, use the close button at the top"
 " right of the screen instead; you may need to exit fullscreen mode first.)"
-msgstr ""
+msgstr "Ferme le fichier courant ; s'il y a des modifications non enregistrées une question vous sera posée vous demandant si vous désirez les enregistrer (Non visible dans Maemo, utilisez le bouton de fermeture en haut à droite de l'écran à la place ; si nécessaire, sortir du mode plein écran au préalable)"
 
 # 91903c5fd5de4f76a7ac000abf3dd6ac
 #: ../../data_viewer.txt:79
 msgid "Row menu (not on Maemo)"
-msgstr ""
+msgstr "Menu Ligne (non présent dans Maemo)"
 
 # 97381a011f8d4472833fa48becd0fc0d
 #: ../../data_viewer.txt:81
 msgid ""
 "The \"Row\" menu contains actions that apply to individual rows of data.  "
 "These are:"
-msgstr ""
+msgstr "Le menu \"Ligne\" contient les actions qui s'appliquent à des lignes individuelles.\nIl y a :"
 
 # c69773f318de4547bda717b306c82e34
 # 2421057f43ab4438af82ef90d31e0aaf
@@ -285,13 +286,13 @@ msgstr ""
 #: ../../data_viewer.txt:128 ../../data_viewer.txt:151
 #: ../../data_viewer.txt:174
 msgid "**Add**"
-msgstr ""
+msgstr "**Ajouter**"
 
 # 4933998fdfec42ce91921c9ee0cd1eec
 #: ../../data_viewer.txt:84
 msgid ""
 "Add a new row of data (by launching the :ref:`row editor <row_editor>`)."
-msgstr ""
+msgstr "Ajoute une nouvelle ligne (en ouvrant :ref:`l'éditeur de ligne <row_editor>`)."
 
 # 321b94e4e8d64849a2798c460f1f3f01
 # 02028f4ef63c476ba4c189332550270f
@@ -302,12 +303,12 @@ msgstr ""
 #: ../../data_viewer.txt:131 ../../data_viewer.txt:154
 #: ../../data_viewer.txt:177
 msgid "**Edit**"
-msgstr ""
+msgstr "**Modifier**"
 
 # a519c746d8e44f1ea9f99e16fd5d8987
 #: ../../data_viewer.txt:87
 msgid "Edit the currently selected row of data (again using the row editor)."
-msgstr ""
+msgstr "Modifier la ligne actuellement sélectionnée (encore une fois en utilisant l'éditeur de ligne)."
 
 # 9defc3aedd354399b5a52c7fd1fa7efa
 # c58343bc7af34972a6b4c1aeda310a4e
@@ -318,35 +319,35 @@ msgstr ""
 #: ../../data_viewer.txt:134 ../../data_viewer.txt:157
 #: ../../data_viewer.txt:183
 msgid "**Delete**"
-msgstr ""
+msgstr "**Supprimer**"
 
 # 94afc3c7526d4ce7aef9999e70ecf8ad
 #: ../../data_viewer.txt:90
 msgid "Delete the currently selected row of data."
-msgstr ""
+msgstr "Supprime la ligne actuellement sélectionnée."
 
 # d1f6245922c64d9ab2b4c98c2e6a7fc8
 # 77ca25369e3844a7b44d7692949a40b8
 #: ../../data_viewer.txt:93 ../../data_viewer.txt:180
 msgid "**Copy**"
-msgstr ""
+msgstr "**Copier**"
 
 # 9bc2a6bd0e2044bd81cbdb7c5f5b7c7e
 #: ../../data_viewer.txt:93
 msgid ""
 "Add a new row of data, but the row editor is pre-filled with the data in the"
 " currently selected row instead of the default values."
-msgstr ""
+msgstr "Ajoute une nouvelle ligne mais l'éditeur de ligne est pré-rempli avec les données de la ligne actuellement sélectionnée, au lieu des valeurs par défaut."
 
 # acd4e54eacc840649ea28db65d625bae
 #: ../../data_viewer.txt:96
 msgid "**Show**"
-msgstr ""
+msgstr "**Afficher**"
 
 # 6f44108d54544de5988a8443507d00cb
 #: ../../data_viewer.txt:96
 msgid "Show the currently selected row in the :ref:`row viewer <row_viewer>`."
-msgstr ""
+msgstr "Affiche la ligne actuellement sélectionnée dans :ref:`le visualiseur de ligne <row_viewer>`."
 
 # 176e05c93a5a4891a576ef0a9cad7705
 #: ../../data_viewer.txt:98
@@ -354,7 +355,7 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available through the toolbar and :ref:`row "
 "viewer <row_viewer>` buttons."
-msgstr ""
+msgstr "Afin de préserver de l'espace sur l'écran, Maemo ne dispose pas de ce menu ; une fonctionnalité équivalente est disponible via la barre d'outils et les boutons du :ref:`visualiseur de ligne <row_viewer>` buttons."
 
 # 23ac094a1e7740488cefbfdd8193b425
 #: ../../data_viewer.txt:103

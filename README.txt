@@ -1,5 +1,5 @@
-PortaBase 2.1 (August 2012)
----------------------------
+PortaBase 2.1 (September 2012)
+------------------------------
 PortaBase (portable database) is a program for conveniently managing one-table
 database files. It can be used as a shopping list, password manager, media
 inventory, financial tracker, TODO list, address book, photo album, and more.
@@ -32,6 +32,13 @@ The main features PortaBase currently has are:
 - Simple calculator widget for entering numeric data
 
 See the application's help dialog for more information on features and usage.
+
+Kickstarter Campaign
+--------------------
+Simultaneously with the 2.1 release, a Kickstarter Campaign is being launched
+in an attempt to fund more rapid development of new PortaBase features and
+porting of the application to new mobile device platforms.  For more
+information, see the PortaBase homepage at http://portabase.org.
 
 Note for Zaurus Users
 ---------------------
@@ -100,6 +107,9 @@ Additional software is used to package PortaBase on its various platforms:
   the translatable message files used by Sphinx
 - Inno Setup (http://www.jrsoftware.org/isinfo.php) for creating the Windows
   installer
+
+The application icon was created by Holly Guenther
+(http://kimchikawaii.deviantart.com)
 
 License
 -------

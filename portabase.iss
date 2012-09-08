@@ -45,6 +45,7 @@ Source: "build\windows\imageformats\qjpeg4.dll"; DestDir: "{app}\imageformats"; 
 Source: "resources\help\_build\_static\*"; DestDir: "{app}\help\_static"; Flags: ignoreversion
 Source: "resources\help\_build\cs\*"; DestDir: "{app}\help\cs"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\en\*"; DestDir: "{app}\help\en"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\_build\fr\*"; DestDir: "{app}\help\fr"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\ja\*"; DestDir: "{app}\help\ja"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\zh_TW\*"; DestDir: "{app}\help\zh_TW"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
