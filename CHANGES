@@ -1,3 +1,10 @@
+2012-09-10  JMB  Maemo packaging fixes
+
+    Added mce-dev to the list of build dependencies used by the Maemo
+    autobuilders; needed for keeping the display on throughout a slideshow.
+    Also updated the base64-encoded application icon data in the Maemo
+    package control files.
+
 2012-09-08  #################### PortaBase 2.1 ####################
 
 2012-09-08  JMB  French translation update, updates for 2.1 release
