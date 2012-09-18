@@ -1,7 +1,7 @@
 /*
  * view.h
  *
- * (c) 2002-2004,2009-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ private:
     QList<QByteArray> ids; /**< Ordered list of Metakit data field identifiers */
     QList<QByteArray> scIds; /**< Ordered list of alternate string form field identifiers */
     int rowsPerPage; /**< The maximum number of records to show per page of data */
-    int sortColumn; /**< The index of the single column being sorted on, -1 if none */
+    QString sortColumn; /**< The name of the single column being sorted on, "" if none */
     Qt::SortOrder sortOrder; /**< Order of single-column sorting */
     QString sortName; /**< The name of the sorting currently in use, if any */
     int rowCnt; /**< The number of rows currently in the view, cached for performance */

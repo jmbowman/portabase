@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002-2004,2009-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 View::View(const QString &name, Database *parent, c4_View baseview,
   const QStringList &colNames, int *types, int *widths,
   const QStringList &colIds, const QStringList &stringColIds, int rpp)
-  : QObject(), viewName(name), Id("_id"), sortColumn(-1),
+  : QObject(), viewName(name), Id("_id"), sortColumn(""),
   sortOrder(Qt::AscendingOrder), sortName(""), omitRow(-1)
 {
     db = parent;
@@ -414,9 +414,9 @@ QImage View::getImage(int rowId, int colIndex)
  */
 void View::toggleSort(int colIndex)
 {
-    if (colIndex != sortColumn) {
+    if (columns[colIndex] != sortColumn) {
         sortOrder = Qt::AscendingOrder;
-        sortColumn = colIndex;
+        sortColumn = columns[colIndex];
     }
     else {
         if (sortOrder == Qt::AscendingOrder) {
@@ -435,7 +435,7 @@ void View::toggleSort(int colIndex)
  */
 void View::sort(const QString &sortingName)
 {
-    sortColumn = -1;
+    sortColumn = "";
     sortName = sortingName;
 }
 
@@ -448,8 +448,8 @@ void View::prepareData()
     dbview = db->getData();
     Filter *filter = db->getFilter(db->currentFilter());
     dbview = filter->apply(dbview);
-    if (sortColumn != -1) {
-        dbview = db->sortData(dbview, columns[sortColumn], sortOrder);
+    if (!sortColumn.isEmpty()) {
+        dbview = db->sortData(dbview, sortColumn, sortOrder);
     }
     else {
         // if sortName is "", just returns the unsorted data
@@ -624,8 +624,8 @@ void View::exportToHTML(const QString &filename)
 void View::exportToXML(const QString &filename)
 {
     c4_View fullView = db->getData();
-    if (sortColumn != -1) {
-        fullView = db->sortData(fullView, columns[sortColumn], sortOrder);
+    if (!sortColumn.isEmpty()) {
+        fullView = db->sortData(fullView, sortColumn, sortOrder);
     }
     else {
         // if sortName is "", just returns the unsorted data

@@ -1,3 +1,10 @@
+2012-09-18  JMB  Row viewer sorting bugfix
+
+    Fixed a bug where the row viewer sorting could become incorrect when
+    changing to a different view while a one-column sorting was in effect
+    (it was sorting on the same column index in the view, but that could
+    be a different column after the change).
+
 2012-09-10  JMB  Maemo packaging fixes
 
     Added mce-dev to the list of build dependencies used by the Maemo
