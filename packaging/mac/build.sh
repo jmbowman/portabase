@@ -23,8 +23,10 @@ rm -rf resources/help/_build/_static # in case created for Maemo
 if [ "$1" == "--universal" ]; then
     shift 1
     qmake -spec macx-g++40 portabase.pro
+    UNIVERSAL=Yes
 else
     qmake -spec macx-llvm portabase.pro
+    UNIVERSAL=No
 fi
 if [ "$1" == "--sign" ]; then
     SIGN=Yes
@@ -107,9 +109,14 @@ mv PortaBase.app $DIRNAME
 cp ../README.txt $DIRNAME/ReadMe
 cp ../CHANGES $DIRNAME/Changes
 cp ../COPYING $DIRNAME/License
-hdiutil create $DIRNAME.dmg -srcfolder $DIRNAME -format UDZO -volname $DIRNAME
+if [ "$UNIVERSAL" == "Yes" ]; then
+    DMGNAME=${DIRNAME}_universal.dmg
+else
+    DMGNAME=$DIRNAME.dmg
+fi
+hdiutil create $DMGNAME -srcfolder $DIRNAME -format UDZO -volname $DIRNAME
 if [ "$SIGN" == "Yes" ]; then
-    codesign -s "Developer ID Application: Jeremy Bowman" $DIRNAME.dmg
+    codesign -s "Developer ID Application: Jeremy Bowman" $DMGNAME
 fi
 
 # To verify no inappropriate library dependencies remain:

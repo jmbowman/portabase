@@ -1,3 +1,7 @@
+2012-09-19  JMB  Mac universal binary build update
+
+    Minor fix to automated building of 32-bit Intel/PPC universal binaries.
+
 2012-09-18  JMB  Row viewer sorting bugfix
 
     Fixed a bug where the row viewer sorting could become incorrect when
