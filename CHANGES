@@ -1,3 +1,8 @@
+2013-10-01  JMB  Fixed icon in Mac 'About PortaBase' dialog
+
+    On the Mac, the 'About PortaBase' dialog was picking up the title bar's
+    document icon; fixed to use the application icon instead.
+
 2012-09-19  JMB  Mac universal binary build update
 
     Minor fix to automated building of 32-bit Intel/PPC universal binaries.

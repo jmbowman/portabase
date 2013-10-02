@@ -1561,7 +1561,13 @@ void PortaBase::aboutPortaBase()
     QString text = appName + " " + version + "\n\n" + tr("Copyright (C)")
                    + " " + COPYRIGHT_YEARS + "\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
-    QMessageBox::about(this, tr("About %1").arg(appName), text);
+#if defined(Q_WS_MAC)
+    // Don't use doc icon in about dialog, bypass main window's icon
+    QWidget *parent = statusBar();
+#else
+    QWidget *parent = this;
+#endif
+    QMessageBox::about(parent, tr("About %1").arg(appName), text);
 }
 
 /**

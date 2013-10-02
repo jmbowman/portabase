@@ -53,7 +53,12 @@ QQMainWindow::QQMainWindow(const QString &fileDescription,
 #if defined(Q_WS_MAEMO_5)
     setAttribute(Qt::WA_Maemo5StackedWindow);
 #else
+#if defined(Q_WS_MAC)
+    // Set the icon used in the about dialog; doc icon is main window icon
+    statusBar()->setWindowIcon(qApp->windowIcon());
+#else
     statusBar();
+#endif
 #endif
     toolbar = addToolBar("toolbar");
     toolbar->setObjectName("toolbar");

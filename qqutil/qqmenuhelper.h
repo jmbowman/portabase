@@ -22,6 +22,10 @@
 #include <QRegExp>
 #include <QStringList>
 
+#if defined(Q_WS_MAC)
+#include <QStatusBar>
+#endif
+
 class QAction;
 class QMainWindow;
 class QMenu;
