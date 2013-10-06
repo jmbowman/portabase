@@ -34,4 +34,18 @@ The following options can be used between ``toxml``, ``tocsv``, or ``tohtml`` an
 -s sorting  Apply the named sorting before exporting.
 -f filter   Apply the named filter before exporting.
 
+The following options can be used with either ``fromcsv`` or ``tocsv``:
+
+--headers     There is or should be a row of column headers
+-d delimiter  The field delimiter character (typically 'tab' if not using the default ',')
+-e encoding   Parse or write the CSV file using the specified text encoding (the default is UTF-8)
+
+There's one additional option for ``fromcsv``:
+
+--add-to-enums  Automatically add new enum values encountered
+
+There's also one additional option for ``tocsv``:
+
+-l line_ending  "crlf" to use Windows-style carriage return + newline, default is UNIX/Mac-style (newline only)
+
 For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.sourceforge.net).

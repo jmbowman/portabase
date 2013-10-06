@@ -1,7 +1,7 @@
 /*
  * csvutils.cpp
  *
- * (c) 2002-2003,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2008-2010,2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,12 +21,25 @@
 #include "csvutils.h"
 #include "database.h"
 #include "formatting.h"
+#include "image/imageutils.h"
+#include "view.h"
 
 /**
  * Constructor.
+ *
+ * @param delimiter The character used to separate fields
+ * @param encoding "Latin-1" for that encoding, anything else for UTF-8
+ * @param headers True if the file does or should start with a row of column
+ *                headers
+ * @param lineEnding The character(s) used to designate the end of a record
+ *                   (only when writing)
  */
-CSVUtils::CSVUtils() : m_textquote('"'), m_delimiter(','), colCount(0),
-    endStringCount(0), rowNum(1), calcCount(0)
+CSVUtils::CSVUtils(QChar delimiter, const QString &encoding, bool headers,
+                   const QString &lineEnding, bool addNewEnumOptions)
+  : m_textquote('"'), m_add_options(addNewEnumOptions), m_delimiter(delimiter),
+    m_encoding(encoding), m_headers(headers), m_line_ending(lineEnding),
+    colCount(0), endStringCount(0), headersParsed(false), rowNum(1),
+    calcCount(0)
 {
 
 }
@@ -42,20 +55,64 @@ CSVUtils::~CSVUtils()
 }
 
 /**
- * Parse records from the specified CSV file, using the named text encoding,
- * into the given database.
+ * Apply the appropriate text encoding to the specified text stream.  Handles
+ * any common aliases that Qt itself doesn't recognize (like "Latin-1" instead
+ * of "latin1").
+ *
+ * @param stream The QTextStream whose encoding is to be set
+ */
+void CSVUtils::applyCodec(QTextStream *stream)
+{
+    if (m_encoding == "Latin-1") {
+        stream->setCodec("latin1");
+    }
+    else {
+        stream->setCodec(m_encoding.toLatin1());
+    }
+}
+
+/**
+ * Export the records which match the currently applied filter to the
+ * specified file.  All fields are exported (not just the ones in the current
+ * view), in the order in which they appear in the database format definition.
+ * The records are listed in the current sorting order.
+ *
+ * @param filename The path at which to create the file
+ * @param db The database containing the data to export to CSV
+ * @param view The database view representing the current filter and sorting
+ */
+void CSVUtils::writeFile(const QString &filename, Database *db, View *view)
+{
+    QFile f(filename);
+    f.open(QFile::WriteOnly);
+    QTextStream output(&f);
+    applyCodec(&output);
+    if (m_headers) {
+        output << encodeRow(db->listColumns());
+    }
+    int size = view->totalRowCount();
+    ImageUtils utils;
+    utils.setExportPaths(filename);
+    for (int i = 0; i < size; i++) {
+      QStringList row = db->getRow(view->getId(i), &utils);
+        output << encodeRow(row);
+    }
+    f.close();
+}
+
+/**
+ * Parse records from the specified CSV file into the given database.
  *
  * @param filename The file to be parsed
- * @param encoding "Latin-1" for that encoding, anything else for UTF-8
  * @param db The database to load the data into
  * @return Empty if no error occurred.  Otherwise, an error message optionally
  *         followed by the text of the record imported that triggered that
  *         error
  */
-QStringList CSVUtils::parseFile(const QString &filename,
-                                const QString &encoding, Database *db)
+QStringList CSVUtils::parseFile(const QString &filename, Database *db)
 {
     initialize(db, filename);
+    headersParsed = false;
     QFile f(filename);
     QStringList returnVal;
     if (!f.open(QFile::ReadOnly)) {
@@ -63,12 +120,7 @@ QStringList CSVUtils::parseFile(const QString &filename,
         return returnVal;
     }
     QTextStream input(&f);
-    if (encoding == "Latin-1") {
-        input.setCodec("latin1");
-    }
-    else {
-        input.setCodec("UTF-8");
-    }
+    applyCodec(&input);
     rowNum = 1;
     message = "";
     enum { S_START, S_QUOTED_FIELD, S_MAYBE_END_OF_QUOTED_FIELD,
@@ -100,7 +152,7 @@ QStringList CSVUtils::parseFile(const QString &filename,
         switch (state)
         {
         case S_START :
-            if (x == m_textquote) {
+            if (x == m_textquote && m_delimiter != '\t') {
                 state = S_QUOTED_FIELD;
             }
             else if (x == m_delimiter) {
@@ -168,7 +220,7 @@ QStringList CSVUtils::parseFile(const QString &filename,
             }
             break;
         case S_MAYBE_NORMAL_FIELD :
-            if (x == m_textquote) {
+            if (x == m_textquote && m_delimiter != '\t') {
                 field = "";
                 state = S_QUOTED_FIELD;
                 break;
@@ -229,7 +281,7 @@ QString CSVUtils::encodeRow(QStringList row)
             result += m_delimiter;
         }
     }
-    return result + "\n";
+    return result + m_line_ending;
 }
 
 /**
@@ -242,8 +294,12 @@ QString CSVUtils::encodeRow(QStringList row)
  */
 QString CSVUtils::encodeCell(QString content)
 {
-    if (content.contains('"') == 0 && content.contains(',') == 0
-            && content.contains('\n') == 0) {
+    if (m_delimiter == '\t') {
+        // tsv files just don't allow tabs in fields
+        return content.replace("\t", "");
+    }
+    if (content.contains('"') == 0 && content.contains(m_delimiter) == 0
+        && content.contains('\n') == 0 && content.contains('\r') == 0) {
         return content;
     }
     QString result("\"");
@@ -296,6 +352,10 @@ void CSVUtils::initialize(Database *db, const QString &filename)
  */
 bool CSVUtils::addRow(Database *db)
 {
+    if (m_headers && !headersParsed) {
+        headersParsed = true;
+        return true;
+    }
     int countDiff = colCount - row.count();
     int i;
     if (countDiff > 0 && countDiff <= endStringCount) {
@@ -303,6 +363,13 @@ bool CSVUtils::addRow(Database *db)
         for (i = 0; i < countDiff; i++) {
             row.append("");
         }
+    }
+    while (countDiff < 0) {
+        // are the extra columns empty and ignorable?
+        if (row.last() == "") {
+            row.removeLast();
+        }
+        countDiff++;
     }
     int rowId = 0;
     if (calcCount > 0) {

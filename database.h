@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 
 #define FILE_VERSION 11
 
+class CSVUtils;
 class CalcNode;
 class Condition;
 class Crypto;
@@ -76,7 +77,8 @@ public:
     QString getDefault(const QString &column);
     void setDefault(const QString &column, const QString &value);
     QString getColId(const QString &column, int type=-1);
-    QString isValidValue(int type, const QString &value);
+    QString isValidValue(int type, const QString &value,
+                         bool addNewEnumOptions=false);
     void addColumn(int index, const QString &name, int type,
                    const QString &defaultVal, int id=-1);
     void renameColumn(const QString &oldName, const QString &newName);
@@ -136,7 +138,8 @@ public:
     void calculateAll();
 
     QString addRow(const QStringList &values, int *rowId=0,
-                   bool acceptSequenceVals=false, bool fromcsv=false);
+                   bool acceptSequenceVals=false, bool fromcsv=false,
+                   bool addNewEnumOptions=false);
     void updateRow(int rowId, const QStringList &values);
     void deleteRow(int id, bool compressRowIds=true);
     void compressRowIds();
@@ -145,8 +148,7 @@ public:
     void setBinaryField(int rowId, const QString &colName, QByteArray bytes);
     void commit();
     void setImportBasePath(const QString &path);
-    QStringList importFromCSV(const QString &filename,
-                              const QString &encoding);
+    QStringList importFromCSV(const QString &filename, CSVUtils *csv);
     void exportToXML(const QString &filename, c4_View &fullView,
                      c4_View &filteredView, const QStringList &cols);
     void setGlobalInfo(const QString &view, const QString &sorting,

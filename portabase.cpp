@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 #include <QUrl>
 #include "condition.h"
 #include "conditioneditor.h"
+#include "csvutils.h"
 #include "database.h"
 #include "dbeditor.h"
 #include "enummanager.h"
@@ -874,7 +875,8 @@ void PortaBase::dataExport()
         return;
     }
     if (extension == "csv") {
-        viewer->exportToCSV(output);
+        CSVUtils csv;
+        viewer->exportToCSV(output, &csv);
     }
     else if (extension == "html") {
         viewer->exportToHTML(output);

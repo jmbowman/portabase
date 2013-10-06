@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include "columninfo.h"
+#include "csvutils.h"
 #include "database.h"
 #include "datamodel.h"
 #include "datatypes.h"
@@ -581,10 +582,11 @@ void ViewDisplay::deleteAllRows()
  * The records are listed in the current sorting order.
  *
  * @param filename The CSV file to create or overwrite
+ * @param csv The CSV settings to use for export (delimiter, line ending, etc.)
  */
-void ViewDisplay::exportToCSV(const QString &filename)
+void ViewDisplay::exportToCSV(const QString &filename, CSVUtils *csv)
 {
-    model->view()->exportToCSV(filename);
+    csv->writeFile(filename, model->database(), model->view());
 }
 
 /**

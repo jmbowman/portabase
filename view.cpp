@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -501,31 +501,6 @@ void View::deleteAllRows()
     }
     db->compressRowIds();
     delete[] ids;
-}
-
-/**
- * Export the records which match the currently applied filter to the
- * specified file.  All fields are exported (not just the ones in the current
- * view), in the order in which they appear in the database format definition.
- * The records are listed in the current sorting order.
- *
- * @param filename The CSV file to create or overwrite
- */
-void View::exportToCSV(const QString &filename)
-{
-    QFile f(filename);
-    f.open(QFile::WriteOnly);
-    QTextStream output(&f);
-    output.setCodec("UTF-8");
-    CSVUtils csv;
-    int size = dbview.GetSize();
-    ImageUtils utils;
-    utils.setExportPaths(filename);
-    for (int i = 0; i < size; i++) {
-        QStringList row = db->getRow(Id (dbview[i]), &utils);
-        output << csv.encodeRow(row);
-    }
-    f.close();
 }
 
 /**

@@ -1,7 +1,7 @@
 /*
  * view.h
  *
- * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 #include <QStringList>
 #include "datatypes.h"
 
+class CSVUtils;
 class Database;
 
 /**
@@ -57,7 +58,6 @@ public:
     QString getImageFormat(int rowId, int colIndex);
     QImage getImage(int rowId, int colIndex);
     void deleteAllRows();
-    void exportToCSV(const QString &filename);
     void exportToHTML(const QString &filename);
     void exportToXML(const QString &filename);
     void copyStateFrom(View *otherView);

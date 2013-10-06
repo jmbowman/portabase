@@ -1,7 +1,7 @@
 /*
  * viewdisplay.h
  *
- * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 #include <QTime>
 #include <QWidget>
 
+class CSVUtils;
 class Database;
 class DataModel;
 class PortaBase;
@@ -59,7 +60,7 @@ public:
     void setFilter(const QString &name);
     void closeView();
     void deleteAllRows();
-    void exportToCSV(const QString &filename);
+    void exportToCSV(const QString &filename, CSVUtils *csv);
     void exportToHTML(const QString &filename);
     void exportToXML(const QString &filename);
     QString toPrintHTML();

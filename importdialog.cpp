@@ -22,6 +22,7 @@
 #include <QStringList>
 #include "importdialog.h"
 #include "csverror.h"
+#include "csvutils.h"
 #include "database.h"
 #include "importutils.h"
 #include "qqutil/qqmenuhelper.h"
@@ -98,7 +99,8 @@ bool ImportDialog::import(Database *db)
     QString error = "";
     QString data = "";
     if (source == CSV) {
-        QStringList result = db->importFromCSV(path, encoding);
+        CSVUtils csv(',', encoding);
+        QStringList result = db->importFromCSV(path, &csv);
         int count = result.count();
         if (count > 0) {
             error = result[0];

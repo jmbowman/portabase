@@ -106,11 +106,31 @@ Apply the named sorting before exporting.
 \fB\-f\fP \fI<filter>\fP
 Apply the named filter before exporting.
 .PP
-The fromcsv command supports one option:
+Options which can be used for both fromcsv and tocsv:
+.TP
+\fB\-\-\headers\fP
+The CSV file does or should contain an initial row of column headers.
+.TP
+\fB\-d\fP \fI<delimiter>\fP
+The character to be used as a field delimiter.  Defaults to a comma,
+use the string "tab" to indicate a tab character.
 .TP
 \fB\-e\fP \fI<encoding>\fP
-Specifies the text encoding of the imported CSV file; options are UTF-8
-(the default) and Latin-1.
+Specifies the text encoding of the file; typical options are UTF\-8
+(the default), Latin\-1, UTF\-16, Shift\-JIS, etc.
+.PP
+The fromcsv command supports one additional option:
+.TP
+\fB\-\-add\-unknown\-enum\-options\fP
+Automatically add unknown enum options rather than treating them as
+invalid data.
+The fromcsv command also supports one additional option:
+.TP
+\fB\-l\fP \fI<line ending>\fP
+Indicates how each line in the CSV file is to be ended.  By default
+UNIX/Mac\-style newline characters are used, but specifying "crlf"
+indicates that a Windows\-style carriage return and newline should
+be used instead.
 .SH OPTIONS
 \fIPortaBase\fP accepts the following options:
 .TP

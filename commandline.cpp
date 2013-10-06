@@ -1,7 +1,7 @@
 /*
  * commandline.cpp
  *
- * (c) 2003,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2011,2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,9 @@
 #include <QFileInfo>
 #include <QObject>
 #include <QStringList>
+#include <QTextCodec>
 #include "commandline.h"
+#include "csvutils.h"
 #include "database.h"
 #include "importutils.h"
 #include "view.h"
@@ -27,13 +29,14 @@
 /**
  * Constructor.
  */
-CommandLine::CommandLine()
+CommandLine::CommandLine() : argc(0), numArgs(4)
 {
 
 }
 
 /**
  * Parse the command line arguments and perform the requested action.
+ * @return The program execution return value
  */
 int CommandLine::process()
 {
@@ -59,6 +62,49 @@ int CommandLine::process()
 }
 
 /**
+ * Look for the specified command-line option and return its index among the
+ * arguments.
+ *
+ * @param option The option string to look for
+ * @param takesArgument True if this option requires a parameter to be provided
+ * @return The index at which the option was found, -1 if not found, or -2 if
+ *         a required argument is missing
+ */
+int CommandLine::parseOption(const QString &option, bool takesArgument)
+{
+    int index = qApp->arguments().indexOf(option);
+    if (index == -1) {
+        return -1;
+    }
+    if (takesArgument && (argc < index + 4)) {
+        return -2;
+    }
+    numArgs += (takesArgument ? 2 : 1);
+    return index;
+}
+
+/**
+ * Verify that the provided text encoding (if any) is one that is understood
+ * by PortaBase.
+ *
+ * @param argIndex The position index of the encoding parameter
+ * @return The encoding if valid, "UTF-8" if none was specified, or a null
+ *         string if the provided encoding is not recognized
+ */
+QString CommandLine::validateEncoding(int argIndex)
+{
+    if (argIndex == -1) {
+        return QString("UTF-8");
+    }
+    QString encoding = qApp->arguments()[argIndex];
+    if (!QTextCodec::codecForName(encoding.toLatin1())) {
+        printf("Unknown text encoding: %s\n", encoding.toLocal8Bit().data());
+        return QString();
+    }
+    return encoding;
+}
+
+/**
  * Process a command line instruction to import data from another file format.
  *
  * @param args The command line arguments
@@ -66,28 +112,19 @@ int CommandLine::process()
  */
 int CommandLine::fromOtherFormat(const QStringList &args)
 {
-    int argc = args.count();
-    int numArgs = 4;
-    // Check for a password
-    int passIndex = args.indexOf("-p");
-    if (passIndex != -1) {
-        if (argc < passIndex + 4) {
-            printUsage();
-            return 1;
-        }
-        numArgs += 2;
-    }
-    // Check for an encoding specification
-    int encIndex = args.indexOf("-e");
-    if (encIndex != -1) {
-        if (argc < encIndex + 4) {
-            printUsage();
-            return 1;
-        }
-        numArgs += 2;
-    }
-    if (argc != numArgs) {
+    argc = args.count();
+    int passIndex = parseOption("-p");
+    int encIndex = parseOption("-e");
+    int delIndex = parseOption("-d");
+    int enumsIndex = parseOption("--add-unknown-enum-options");
+    int headersIndex = parseOption("--headers", false);
+    if (passIndex == -2 || encIndex == -2 || delIndex == -2
+        || enumsIndex == -2 || headersIndex == -2 || argc != numArgs) {
         printUsage();
+        return 1;
+    }
+    QString encoding = validateEncoding(encIndex);
+    if (encoding.isNull()) {
         return 1;
     }
     QString sourceFile(args[numArgs - 2]);
@@ -140,11 +177,18 @@ int CommandLine::fromOtherFormat(const QStringList &args)
         error = utils.importXML(sourceFile, db);
     }
     else if (fromcsv) {
-        QString encoding = "UTF-8";
-        if (encIndex != -1) {
-            encoding = args[encIndex + 1];
+        QChar delimiter = ',';
+        if (delIndex != -1) {
+            QString delimArg = args[delIndex + 1];
+            if (delimArg == "tab") {
+                delimiter = '\t';
+            }
+            else {
+                delimiter = delimArg[0];
+            }
         }
-        QStringList result = db->importFromCSV(sourceFile, encoding);
+        CSVUtils csv(delimiter, encoding, headersIndex != -1);
+        QStringList result = db->importFromCSV(sourceFile, &csv);
         int count = result.count();
         if (count > 0) {
             error = result[0];
@@ -183,46 +227,23 @@ int CommandLine::fromOtherFormat(const QStringList &args)
  */
 int CommandLine::toOtherFormat(const QStringList &args)
 {
-    int argc = args.count();
-    int numArgs = 4;
-    // Check for a password
-    int passIndex = args.indexOf("-p");
-    if (passIndex != -1) {
-        if (argc < passIndex + 4) {
-            printUsage();
-            return 1;
-        }
-        numArgs += 2;
-    }
-    // Check for a view
-    int viewIndex = args.indexOf("-v");
-    if (viewIndex != -1) {
-        if (argc < viewIndex + 4) {
-            printUsage();
-            return 1;
-        }
-        numArgs += 2;
-    }
-    // Check for a sorting
-    int sortIndex = args.indexOf("-s");
-    if (sortIndex != -1) {
-        if (argc < sortIndex + 4) {
-            printUsage();
-            return 1;
-        }
-        numArgs += 2;
-    }
-    // Check for a filter
-    int filterIndex = args.indexOf("-f");
-    if (filterIndex != -1) {
-        numArgs += 2;
-        if (argc < filterIndex + 4) {
-            printUsage();
-            return 1;
-        }
-    }
-    if (argc != numArgs) {
+    argc = args.count();
+    int passIndex = parseOption("-p");
+    int viewIndex = parseOption("-v");
+    int sortIndex = parseOption("-s");
+    int filterIndex = parseOption("-f");
+    int encIndex = parseOption("-e");
+    int delIndex = parseOption("-d");
+    int endIndex = parseOption("-l");
+    int headersIndex = parseOption("--headers", false);
+    if (passIndex == -2 || viewIndex == -2 || sortIndex == -2
+        || filterIndex == -2 || encIndex == -2 || delIndex == -2
+        || endIndex == -2 || headersIndex == -2 || argc != numArgs) {
         printUsage();
+        return 1;
+    }
+    QString encoding = validateEncoding(encIndex);
+    if (encoding.isNull()) {
         return 1;
     }
     QString pbFile(args[numArgs - 2]);
@@ -280,6 +301,7 @@ int CommandLine::toOtherFormat(const QStringList &args)
     }
     db->setGlobalInfo(viewName, sortName, filterName);
     View *view = db->getView(viewName);
+    QString argument;
     if (args[1] == "toxml") {
         view->exportToXML(outputFile);
     }
@@ -287,8 +309,26 @@ int CommandLine::toOtherFormat(const QStringList &args)
         view->exportToHTML(outputFile);
     }
     else {
+        QChar delimiter = ',';
+        if (delIndex != -1) {
+            argument = args[delIndex + 1];
+            if (argument == "tab") {
+                delimiter = '\t';
+            }
+            else {
+                delimiter = argument[0];
+            }
+        }
+        QString lineEnding("\n");
+        if (endIndex != -1) {
+            argument = args[endIndex + 1];
+            if (argument == "crlf") {
+                lineEnding = "\r\n";
+            }
+        }
         view->prepareData();
-        view->exportToCSV(outputFile);
+        CSVUtils csv(delimiter, encoding, headersIndex != -1, lineEnding);
+        csv.writeFile(outputFile, db, view);
     }
     // view is deleted by Database destructor
     delete db;
@@ -307,8 +347,14 @@ void CommandLine::printUsage()
     printf("    -v viewname (apply this view before exporting)\n");
     printf("    -s sortname (apply this sorting before exporting)\n");
     printf("    -f filtername (apply this filter before exporting)\n");
-    printf("  There is one option for fromcsv:\n");
-    printf("    -e encoding (UTF-8 or Latin-1; default is UTF-8)\n");
+    printf("  Options for fromcsv and tocsv:\n");
+    printf("    --headers (if there is or should be a row of column headers)\n");
+    printf("    -d delimiter (typically 'tab' if not using the default ',')\n");
+    printf("    -e encoding (UTF-8 (the default), Latin-1, Shift-JIS, etc.)\n");
+    printf("  Additional option for fromcsv:\n");
+    printf("    --add-unknown-enum-options (automatically add new enum values encountered)\n");
+    printf("  Additional option for tocsv:\n");
+    printf("    -l line_ending ('crlf' for Windows-style, default is UNIX/Mac-style)\n");
     printf("  When using fromcsv, \"tofile\" must be an existing PortaBase file.\n");
     printf("  Specify -h or --help to receive this message\n");
 }

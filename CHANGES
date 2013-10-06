@@ -1,3 +1,12 @@
+2013-10-06  JMB  More CSV import/export options from command line
+
+    Added several improvements to the import and export of CSV files from the
+    command line: more file encodings, support for tab-delimited files, the
+    option to export with Windows line endings, support for parsing and
+    writing files with an initial row of column headers, and the option to
+    automatically add new enum options encountered instead of treating them as
+    validation errors.  The UI will get support for the new options soon.
+
 2013-10-01  JMB  Fixed icon in Mac 'About PortaBase' dialog
 
     On the Mac, the 'About PortaBase' dialog was picking up the title bar's

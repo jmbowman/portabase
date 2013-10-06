@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -610,9 +610,12 @@ QString Database::getColId(const QString &column, int type)
  *
  * @param type The data type to interpret the value as
  * @param value The value being tested
+ * @param addNewEnumOptions True if an unknown enum option should be
+ *                          automatically added rather than counted as an error
  * @return An appropriate error message if invalid, an empty string otherwise
  */
-QString Database::isValidValue(int type, const QString &value)
+QString Database::isValidValue(int type, const QString &value,
+                               bool addNewEnumOptions)
 {
     if (type == INTEGER || type == SEQUENCE) {
         bool ok = false;
@@ -656,7 +659,12 @@ QString Database::isValidValue(int type, const QString &value)
     else if (type >= FIRST_ENUM) {
         QStringList options = listEnumOptions(type);
         if (!options.contains(value)) {
-            return QObject::tr("no such option");
+            if (addNewEnumOptions) {
+                addEnumOption(getEnumName(type), value);
+            }
+            else {
+                return QObject::tr("no such option");
+            }
         }
     }
     return "";
@@ -1375,11 +1383,14 @@ Condition *Database::getCondition(const QString &filterName, int index)
  *                           columns, false to generate new ones
  * @param fromcsv True if importing from CSV, so blank fields should be
  *                replaced with the appropriate default values
+ * @param addNewEnumOptions True if unknown enum options should be
+ *                          automatically added instead of treated as errors
  * @return An error message explaining why the row could not be added, or an
  *         empty string if it was added successfully
  */
 QString Database::addRow(const QStringList &values, int *rowId,
-                         bool acceptSequenceVals, bool fromcsv)
+                         bool acceptSequenceVals, bool fromcsv,
+                         bool addNewEnumOptions)
 {
     c4_Row row;
     Id (row) = maxId + 1;
@@ -1412,7 +1423,7 @@ QString Database::addRow(const QStringList &values, int *rowId,
             value = value.replace(QRegExp("-"), "");
             value = value.replace(QRegExp("\\."), "");
         }
-        QString error = isValidValue(type, value);
+        QString error = isValidValue(type, value, addNewEnumOptions);
         if (!error.isEmpty()) {
             // convert blank numbers in CSV import to the default value
             if (fromcsv && (value.isEmpty())
@@ -1751,11 +1762,10 @@ void Database::setViewColumnSequence(const QString &viewName,
                                      const QStringList &colNames)
 {
     int count = colNames.count();
-    int nextIndex = -1;
     QByteArray utf8ViewName = viewName.toUtf8();
     for (int i = 0; i < count; i++) {
-        nextIndex = viewColumns.Find(vcView [utf8ViewName]
-                                     + vcName [colNames[i].toUtf8()]);
+        int nextIndex = viewColumns.Find(vcView [utf8ViewName]
+                                         + vcName [colNames[i].toUtf8()]);
         vcIndex (viewColumns[nextIndex]) = i;
     }
 }
@@ -2391,17 +2401,14 @@ void Database::setImportBasePath(const QString &path)
  * Import rows of data from a CSV file.
  *
  * @param filename The path to the CSV file to import
- * @param encoding The name of the text encoding used by the CSV file.
- *                 Currently only "Latin-1" and "UTF-8" are supported.
+ * @param csv The settings to use for CSV import (delimiter, encoding, etc.)
  * @return Empty if no error occurred.  Otherwise, an error message optionally
  *         followed by the text of the record imported that triggered that
  *         error
  */
-QStringList Database::importFromCSV(const QString &filename,
-                                    const QString &encoding)
+QStringList Database::importFromCSV(const QString &filename, CSVUtils *csv)
 {
-    CSVUtils csv;
-    return csv.parseFile(filename, encoding, this);
+    return csv->parseFile(filename, this);
 }
 
 /**
