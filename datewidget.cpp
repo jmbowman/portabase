@@ -62,13 +62,13 @@ void DateWidget::setDate(int date)
 {
     if (date == 0) {
         QDate today = QDate::currentDate();
-        dateObj.setYMD(today.year(), today.month(), today.day());
+        dateObj.setDate(today.year(), today.month(), today.day());
     }
     else {
         int y = date / 10000;
         int m = (date - y * 10000) / 100;
         int d = date - y * 10000 - m * 100;
-        dateObj.setYMD(y, m, d);
+        dateObj.setDate(y, m, d);
     }
     updateDisplay();
 }
@@ -80,7 +80,7 @@ void DateWidget::setDate(int date)
  */
 void DateWidget::setDate(const QDate &date)
 {
-    dateObj.setYMD(date.year(), date.month(), date.day());
+    dateObj.setDate(date.year(), date.month(), date.day());
     updateDisplay();
 }
 
@@ -127,12 +127,12 @@ void DateWidget::launchSelector()
     QDate tempDate(dateObj.year(), dateObj.month(), dateObj.day());
     if (Formatting::isNoneDate(tempDate)) {
         QDate today = QDate::currentDate();
-        tempDate.setYMD(today.year(), today.month(), today.day());
+        tempDate.setDate(today.year(), today.month(), today.day());
     }
     DateDialog selector(tempDate, this);
     if (selector.exec()) {
         tempDate = selector.selectedDate();
-        dateObj.setYMD(tempDate.year(), tempDate.month(), tempDate.day());
+        dateObj.setDate(tempDate.year(), tempDate.month(), tempDate.day());
         updateDisplay();
     }
 }
