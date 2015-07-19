@@ -22,8 +22,10 @@
 
 # Intermediary build files #
 ############################
+.qmake.stash
 /build/
 _build/
+/doc/html/
 config.h
 config.status
 Makefile
