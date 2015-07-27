@@ -23,7 +23,8 @@ cp portabase.pro $DEST
 cp portabase.rc $DEST
 cp .tx/config $DEST/.tx
 cp -R debian $DEST
-cp -R doc $DEST
+mkdir $DEST/doc
+cp doc/*.txt $DEST/doc
 cp -R metakit $DEST
 rm -f $DEST/metakit/builds/*.a
 rm -f $DEST/metakit/builds/*.o
@@ -31,13 +32,15 @@ rm -f $DEST/metakit/builds/config.*
 rm -f $DEST/metakit/builds/Makefile
 cp -R packaging $DEST
 cp -R resources $DEST
-cp src/*.h $DEST
-cp src/*.cpp $DEST
-cp -R src/calc $DEST
-cp -R src/color_picker $DEST
-cp -R src/encryption $DEST
-cp -R src/image $DEST
-cp -R src/qqutil $DEST
+rm -f $DEST/resources/translations/*.qm
+mkdir $DEST/src
+cp src/*.h $DEST/src
+cp src/*.cpp $DEST/src
+cp -R src/calc $DEST/src
+cp -R src/color_picker $DEST/src
+cp -R src/encryption $DEST/src
+cp -R src/image $DEST/src
+cp -R src/qqutil $DEST/src
 if [ "$KEEP_HELP" = "no" ]; then
     rm -rf $DEST/resources/help/_build
 fi
