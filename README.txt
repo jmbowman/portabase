@@ -1,3 +1,13 @@
+PortaBase Development Status
+----------------------------
+After a long stretch of focusing on other goals, I'm attempting to start
+consistently working on PortaBase for a few hours each week.  For insight into
+what's been done recently, what's in progress, and what is planned for the
+near future, check out the new task tracker at
+https://tree.taiga.io/project/jmbowman-portabase/kanban.  If you would like to
+contribute, or have suggestions on ways to make it easier to contribute,
+please contact me.
+
 PortaBase 2.1 (September 2012)
 ------------------------------
 PortaBase (portable database) is a program for conveniently managing one-table
@@ -33,13 +43,6 @@ The main features PortaBase currently has are:
 
 See the application's help dialog for more information on features and usage.
 
-Kickstarter Campaign
---------------------
-Simultaneously with the 2.1 release, a Kickstarter Campaign is being launched
-in an attempt to fund more rapid development of new PortaBase features and
-porting of the application to new mobile device platforms.  For more
-information, see the PortaBase homepage at http://portabase.org.
-
 Note for Zaurus Users
 ---------------------
 The complete lack of new releases of Qt or Qtopia for the Zaurus has made it
@@ -55,10 +58,7 @@ see the PortaBase home page for more details.
 
 Maemo Installation
 ------------------
-PortaBase 2.0 is available from the extras repository, and 2.1 is available
-from extras-devel; you should be able to download and install it from there.
-In time, version 2.1 should make its way to the extras-testing and extras
-repositories as well, for users who are a little less adventurous.
+PortaBase 2.1 is available from the extras repository.
 
 Windows Installation and Upgrades
 ---------------------------------
@@ -69,6 +69,10 @@ Mac OS X Installation
 ---------------------
 Double-click on the downloaded disk image to open it, and drag the application
 from the disk image to where you want it (usually your Applications folder).
+The first time you launch it, you may need to do so via a Control-click or
+right click; this should be resolved with the next release (the installer
+needs to be updated to satisfy the code signing requirements of recent
+Mac OS X releases).
 
 Debian Installation
 -------------------
@@ -81,7 +85,7 @@ INSTALL file.
 
 Technical Info and Acknowledgements
 -----------------------------------
-PortaBase is written in C++, using the Qt 4 library for GUI widgets, data
+PortaBase is written in C++, using the Qt library for GUI widgets, data
 structures, and communication with the operating system.  It also uses:
 
 - The Metakit (http://www.equi4.com/metakit) embedded database library for data

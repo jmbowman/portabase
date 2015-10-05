@@ -6,10 +6,8 @@ need the following:
   64-bit support
 - Xcode (if running Xcode 4, be sure to install the command line utilities
   from Preferences -> Downloads)
-- A recent version of Qt 4 (http://qt.nokia.com/downloads); 4.8 or higher is
-  recommended.  You'll probably want to download the source package and compile
-  it yourself; the precompiled binary package uses settings which aren't very
-  compatible with Xcode 4.
+- A recent version of Qt (https://www.qt.io/download/); 4.8 or higher is
+  recommended.
 
 Metakit Compilation
 -------------------
@@ -20,7 +18,7 @@ searches and locale-sensitive sorting; the patched version is included in the
 autobuilders).
 
 To compile Metakit for Mac OS X, from the root PortaBase source directory run
-"packaging/mac/build_metakit.sh"; it'll prompt you for you password near the
+"packaging/mac/build_metakit.sh"; it'll prompt you for your password near the
 end in order to install the files under /usr/local where they will be found
 later when compiling PortaBase.  Note that this script is configured assuming
 that you're on Leopard or later, compiling only for Intel 64-bit processors;
@@ -43,10 +41,7 @@ script for usage information.
 
 PortaBase compilation
 ---------------------
-- Install a recent version of Qt 4 and configure it, as per the directions
-  in its INSTALL file.  See the script included with the PortaBase source
-  code under packaging/mac/configure_qt.sh for the settings I currently use
-  to build Qt for linking to PortaBase.
+- Install a recent version of Qt as described above.
 - Make sure the Metakit static library (libmk4.a) is in /usr/local/lib, and
   that the other library files (.dylib, .la, etc.) aren't.
 - From the root PortaBase source directory run "packaging/mac/build.sh"; this
