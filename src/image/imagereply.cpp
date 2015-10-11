@@ -1,7 +1,7 @@
 /*
  * imagereply.cpp
  *
- * (c) 2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2012,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 #include <QFile>
 #include <QNetworkAccessManager>
 #include <QTimer>
-#include "database.h"
+#include "../database.h"
 #include "imagereply.h"
 
 /**

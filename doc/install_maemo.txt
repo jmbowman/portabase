@@ -30,6 +30,9 @@ Maemo Package Building
 - Make sure that Scratchbox has access to the PortaBase source code, with the
   help files already generated on the host system by running
   packaging/maemo/generate_help.sh
+- If building for Fremantle, add "maemo5" to the CONFIG entry in portabase.pro.
+  This is needed in order to distinguish from Diablo when configuring the
+  build.
 - Log in to Scratchbox (by running /scratchbox/login from a terminal), and
   select the desired target with sb-menu
 - From the root PortaBase source directory, run "packaging/maemo/diablo.sh"
