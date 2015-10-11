@@ -1,7 +1,7 @@
 /*
  * imagewidget.h (based on code from TxImage)
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 2003 by Pierpaolo Di Panfilo <pippo_dp@libero.it>
  * (c) 2003 by Cristian Di Panfilo <cridipan@virgilio.it>
  *
@@ -35,7 +35,7 @@ class ImageWidget : public QWidget
 {
     Q_OBJECT
  public:
-    ImageWidget(QWidget *parent);
+    explicit ImageWidget(QWidget *parent);
 
     void setPixmap(QPixmap pm, bool resize=true);
     void setView(View *view, int row, int column);

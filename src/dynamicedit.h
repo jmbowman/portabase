@@ -1,7 +1,7 @@
 /*
  * dynamicedit.h
  *
- * (c) 2003,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class DynamicEdit : public QTextEdit
 {
     Q_OBJECT
 public:
-    DynamicEdit(QWidget *parent = 0);
+    explicit DynamicEdit(QWidget *parent = 0);
     
     QSize sizeHint() const;
 

@@ -1,7 +1,7 @@
 /*
  * crypto.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,9 +12,6 @@
 /** @file crypto.cpp
  * Source file for Crypto
  */
-
-#include <stdio.h>
-#include <stdlib.h>
 
 #include <QCryptographicHash>
 #include "bytestream.h"
@@ -251,19 +248,6 @@ int Crypto::unpaddedLength(const QByteArray &data)
     // skip the "1" used to mark the start of the padding
     result--;
     return result;
-}
-
-/**
- * Print the given label to the console, followed by a hexadecimal
- * representation of the given byte array.  Used for debugging purposes.
- *
- * @param label The text label to send to the console
- * @param data The binary data to be displayed
- */
-void Crypto::printBytes(QString label, const QByteArray &data)
-{
-    printf("%s:\n", label.toLocal8Bit().data());
-    printf("%s\n", data.toHex().data());
 }
 
 /**

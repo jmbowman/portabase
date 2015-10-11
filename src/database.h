@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -101,7 +101,7 @@ public:
                     const QStringList &descCols);
     void deleteSorting(const QString &name);
     void deleteSortingColumn(const QString &sortName, const QString &columnName);
-    c4_View getData();
+    c4_View getData() const;
     c4_View sortData(c4_View filteredData, const QString &column, Qt::SortOrder order);
     c4_View sortData(c4_View filteredData, const QString &sortingName);
 
@@ -159,11 +159,11 @@ private:
     c4_View createEmptyView(const QStringList &colNames);
     void replaceEnumOption(int enumId, const QString &oldOption,
                            const QString &newOption);
-    QString makeColId(int id, int type);
+    static QString makeColId(int id, int type);
     QString formatString(bool old = false);
     void updateDataColumnFormat();
     void updateEncoding();
-    void updateEncoding(c4_View &view);
+    static void updateEncoding(c4_View &view);
     void fixConditionIndices();
     void addDesktopStats();
     void addEnumDataIndices();

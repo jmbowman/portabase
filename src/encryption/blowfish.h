@@ -3,7 +3,7 @@
  *
  * Adapted from BeeCrypt: http://sourceforge.net/projects/beecrypt
  *
- * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 1999, 2000, 2002 Beeyond Software Holding BV
  *
  * This library is free software; you can redistribute it and/or
@@ -70,10 +70,10 @@ public:
     static size_t blockSize; /** The size of one block of data, in bytes. */
 
 private:
-    int setup(blowfishParam *bp, const quint8 *key, size_t keybits);
-    int setIV(blowfishParam *bp, const quint8 *iv);
-    int encrypt(blowfishParam *bp, quint32 *dst, const quint32 *src);
-    int decrypt (blowfishParam *bp, quint32 *dst, const quint32 *src);
+    static int setup(blowfishParam *bp, const quint8 *key, size_t keybits);
+    static int setIV(blowfishParam *bp, const quint8 *iv);
+    static int encrypt(blowfishParam *bp, quint32 *dst, const quint32 *src);
+    static int decrypt (blowfishParam *bp, quint32 *dst, const quint32 *src);
     int blockEncryptCBC(quint32 *dst, const quint32 *src, unsigned int nblocks);
     int blockDecryptCBC(quint32 *dst, const quint32 *src, unsigned int nblocks);
 

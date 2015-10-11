@@ -1,7 +1,7 @@
 /*
  * columninfo.h
  *
- * (c) 2011-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2011-2012,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ class ColumnInfoDialog: public PBDialog
 {
     Q_OBJECT
 public:
-    ColumnInfoDialog(QWidget *parent = 0);
+    explicit ColumnInfoDialog(QWidget *parent = 0);
 
     bool launch(View *currentView, const QString &colName=QString::null);
 

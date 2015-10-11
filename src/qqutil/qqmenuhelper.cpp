@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.cpp
  *
- * (c) 2005-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -406,12 +406,11 @@ void QQMenuHelper::showHelp()
         QStringList dirNames;
         int count = langs.count();
         int i;
-        int j;
         QString lang;
         for (i = 0; i < count; i++) {
             lang = langs[0].replace(QLatin1Char('-'), QLatin1Char('_'));
             dirNames.append(lang);
-            j  = lang.indexOf('.');
+            int j  = lang.indexOf('.');
             if (j > 0) {
                 lang = lang.left(j);
             }
@@ -422,15 +421,16 @@ void QQMenuHelper::showHelp()
         }
         // if no translation is available, show the English help
         dirNames.append("en");
-        QString suffix = "/";
 #if defined(Q_WS_WIN)
         QString path = qApp->applicationDirPath() + "/help/";
+        QString suffix = "/";
 #elif defined(Q_WS_MAC)
         QString path = qApp->applicationDirPath() + "/../Resources/";
         suffix = ".lproj/";
 #else
         QString path = QString("/usr/share/%1/help/")
                        .arg(qApp->applicationName().toLower());
+        QString suffix = "/";
 #endif
         count = dirNames.count();
         for (i = 0; i < count; i++) {

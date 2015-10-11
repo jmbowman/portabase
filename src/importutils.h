@@ -1,7 +1,7 @@
 /*
  * importutils.h
  *
- * (c) 2002,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,13 +29,13 @@ class ImportUtils
 public:
     ImportUtils();
 
-    QString importMobileDB(const QString &filename, Database *db);
-    QString importXML(const QString &filename, Database *db);
-    QString importTextLines(const QString &filename, const QString &encoding,
+    static QString importMobileDB(const QString &filename, Database *db);
+    static QString importXML(const QString &filename, Database *db);
+    static QString importTextLines(const QString &filename, const QString &encoding,
                             QStringList *options);
 
 private:
-    QStringList convertMobileDBRow(QStringList values, int *types);
+    static QStringList convertMobileDBRow(QStringList values, int *types);
 };
 
 #endif

@@ -1,7 +1,7 @@
 /*
  * vsfmanager.h
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ public:
         Filter = 2
     };
 
-    VSFManager(PortaBase *parent = 0);
+    explicit VSFManager(PortaBase *parent = 0);
 
     void setSubject(Database *database, Subject s);
     void setActions(QAction *add, QAction *edit, QAction *del);

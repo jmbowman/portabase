@@ -1,7 +1,7 @@
 /*
  * condition.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ public:
         NotEqual = 7
     };
 
-    Condition(Database *dbase);
+    explicit Condition(Database *dbase);
 
     QString getColName();
     void setColName(const QString &newName);

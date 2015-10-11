@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1082,7 +1082,7 @@ void Database::deleteSortingColumn(const QString &sortName,
  *
  * @return The main data table
  */
-c4_View Database::getData()
+c4_View Database::getData() const
 {
     return data;
 }

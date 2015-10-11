@@ -1,7 +1,7 @@
 /*
  * oldconfig.h
  *
- * (c) 2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,10 +33,9 @@ public:
     /** A group of settings, mapped from name to value */
     typedef QMap<QString, QString> ConfigGroup;
 
-    OldConfig(const QString &name);
+    explicit OldConfig(const QString &name);
 
     void setGroup(const QString &gname);
-    QString readEntry(const QString &key, const QString &deflt = QString::null);
     bool exists() const;
     void migrate(const QString &group, QSettings &settings);
 

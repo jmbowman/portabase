@@ -1,7 +1,7 @@
 /*
  * oldconfig.cpp
  *
- * (c) 2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,27 +49,6 @@ void OldConfig::setGroup(const QString &gname)
         return;
     }
     git = it;
-}
-
-/**
- * Get the value of a string-valued setting from the current group.
- *
- * @param key The name of the setting to retrieve
- * @param deflt The default value to use if the setting is absent
- * @return The requested setting value
- */
-QString OldConfig::readEntry(const QString &key, const QString &deflt)
-{
-    if (git == groups.end()) {
-        return deflt;
-    }
-    ConfigGroup::ConstIterator it = (*git).find(key);
-    if (it != ( *git ).end()) {
-        return *it;
-    }
-    else {
-        return deflt;
-    }
 }
 
 /**

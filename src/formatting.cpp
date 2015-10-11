@@ -1,7 +1,7 @@
 /*
  * formatting.cpp
  *
- * (c) 2010-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -169,24 +169,6 @@ QString Formatting::formatDouble(double value, int decimals)
     else {
         return cLocale.toString(value, 'f', decimals);
     }
-}
-
-/**
- * Interpret the provided string as an integer value formatted for the "C"
- * locale, and return the equivalent value for the current locale.  Returns
- * an empty string if the provided string isn't a valid integer.
- *
- * @param value The C-locale integer string to be converted
- * @return The equivalent string in the current locale, or "" if invalid
- */
-QString Formatting::toLocalInt(const QString &value)
-{
-    bool ok;
-    int integer = cLocale.toInt(value, &ok);
-    if (!ok) {
-        return "";
-    }
-    return systemLocale.toString(integer);
 }
 
 /**

@@ -1,7 +1,7 @@
 /*
  * datamodel.h
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ class DataModel: public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    DataModel(QObject *parent=0);
+    explicit DataModel(QObject *parent=0);
 
     int rowCount(const QModelIndex &parent=QModelIndex()) const;
     int columnCount(const QModelIndex &parent=QModelIndex()) const;

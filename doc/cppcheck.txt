@@ -1,0 +1,11 @@
+Using cppcheck
+--------------
+
+The static code analysis tool cppcheck is used during development to catch any
+code constructs that seem likely to cause bugs or cause poor performance.  To
+run the checks, first install cppcheck by following the instructions for your
+platform at http://cppcheck.sourceforge.net/.  Then, after confirming that
+cppcheck is in your PATH, run the following from the project root:
+
+packaging/cppcheck/cppcheck.sh (if on Linux/UNIX)
+packaging/cppcheck/cppcheck.bat (if on Windows)

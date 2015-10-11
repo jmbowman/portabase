@@ -1,7 +1,7 @@
 /*
  * pdbfile.cpp
  *
- * (c) 2002-2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ bool PDBFile::read()
  * @param v The data from the file to be converted
  * @return The unsigned short represented by the input data
  */
-unsigned short PDBFile::toshort(unsigned char *v) const
+unsigned short PDBFile::toshort(unsigned char *v)
 {
 	return ((unsigned short)(v[0] << 8)) + v[1];
 }
@@ -81,25 +81,12 @@ unsigned short PDBFile::toshort(unsigned char *v) const
  * @param v The data from the file to be converted
  * @return The unsigned int represented by the input data
  */
-unsigned int PDBFile::toint(unsigned char *v) const {
+unsigned int PDBFile::toint(unsigned char *v)
+{
 	return	((unsigned int)(v[0] << 24)) + 
 		((unsigned int)(v[1] << 16)) + 
 		((unsigned int)(v[2] << 8)) + 
 		((unsigned int)(v[3] << 0));
-}
-
-/**
- * Convert the provided time-representing integer from the file to a UNIX
- * time in seconds since the epoch.  Conversion needed since Palm OS counts
- * seconds since 1904-01-01, but UNIX counts time since 1970-01-01.
- *
- * @param p The Palm OS time integer to be converted
- * @return The converted UNIX time integer
- */
-time_t PDBFile::palm2unix_time(unsigned int p) const
-{
-	//number of seconds between 01/01/1904 and 01/01/1970
-	return p - 2082844886LU; 
 }
 
 /**
@@ -156,7 +143,7 @@ bool PDBFile::readHeader()
 	offset +=  sizeof(next_record_list_id);
 
 	number_records = toshort(header + offset);	
-	offset +=  sizeof(number_records);
+	//offset +=  sizeof(number_records);
 
 	return true;
 }

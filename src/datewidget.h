@@ -1,7 +1,7 @@
 /*
  * datewidget.h
  *
- * (c) 2002,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ class DateWidget: public QWidget
 {
     Q_OBJECT
 public:
-    DateWidget(QWidget *parent = 0);
+    explicit DateWidget(QWidget *parent = 0);
 
     int getDate();
     void setDate(int date);

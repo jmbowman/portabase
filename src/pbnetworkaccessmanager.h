@@ -1,7 +1,7 @@
 /*
  * pbnetworkaccessmanager.h
  *
- * (c) 2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2012,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class QNetworkReply;
 class PBNetworkAccessManager: public QNetworkAccessManager
 {
 public:
-    PBNetworkAccessManager(Database *dbase);
+    explicit PBNetworkAccessManager(Database *dbase);
 
 protected:
     QNetworkReply *createRequest(QNetworkAccessManager::Operation op,

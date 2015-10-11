@@ -1,7 +1,7 @@
 /*
  * mobiledb.cpp
  *
- * (c) 2002-2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -168,7 +168,7 @@ int MobileDBFile::row_count() const
  *
  * @param cat_num The ID of the type of data to retrieve
  */
-int MobileDBFile::record_category(int cat_num)
+int MobileDBFile::record_category(int cat_num) const
 {
 	for (int i = 0; i < number_records; i++) {
 		if ((record_list[i].record_attributes &0x7) == cat_num ) {
@@ -183,7 +183,7 @@ int MobileDBFile::record_category(int cat_num)
  *
  * @return True if the data is valid, false otherwise.
  */
-bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) const {
+bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) {
 	if (raw_record[0] != 0xff || raw_record[1] != 0xff ||
 		raw_record[2] != 0xff || raw_record[3] != 0x01 
 		|| raw_record[4] != 0xff || raw_record[5] != 0x00
@@ -191,16 +191,6 @@ bool MobileDBFile::verify_recordhdr(const unsigned char *raw_record) const {
 		return false;
 	}
 	return true;
-}
-
-/**
- * Get the number of columns in the database.
- *
- * @return The number of database columns.
- */
-int MobileDBFile::col_count() const
-{
-	return colcount;
 }
 
 /**

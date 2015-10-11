@@ -1,0 +1,13 @@
+// Suppression of bogus cppcheck errors and warnings
+
+// Event handlers
+unusedFunction:src/color_picker/qtcolorpicker.cpp
+
+// Implementation of the c4_Stream interface called by Metakit
+unusedFunction:src/encryption/bytestream.cpp
+
+// Implementation of interface called by QWebView
+unusedFunction:src/image/imagereply.cpp
+
+// Implementation of the QXmlDefaultHandler interface called by QXmlSimpleReader
+unusedFunction:src/xmlimport.cpp

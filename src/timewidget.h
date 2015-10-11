@@ -1,7 +1,7 @@
 /*
  * timewidget.h
  *
- * (c) 2002,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ class TimeWidget: public QWidget
 {
     Q_OBJECT
 public:
-    TimeWidget(QWidget *parent = 0);
+    explicit TimeWidget(QWidget *parent = 0);
 
     QString getTime();
     void setTime(int time);

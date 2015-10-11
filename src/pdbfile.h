@@ -1,7 +1,7 @@
 /*
  * pdbfile.h
  *
- * (c) 2002,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ class QFile;
 class PDBFile
 {
 public:
-    PDBFile(const QString &f);
+    explicit PDBFile(const QString &f);
     virtual ~PDBFile();
     virtual bool read();
 
@@ -44,9 +44,8 @@ protected:
     };
     bool readHeader();
     bool readRecordList();
-    unsigned short toshort(unsigned char *v) const;
-    unsigned int toint(unsigned char *v) const;
-    time_t palm2unix_time(unsigned int p) const;
+    static unsigned short toshort(unsigned char *v);
+    static unsigned int toint(unsigned char *v);
 
 protected:
     QFile *fd; /**< The file being parsed */

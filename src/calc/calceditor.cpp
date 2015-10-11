@@ -1,7 +1,7 @@
 /*
  * calceditor.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,11 +83,9 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
 void CalcEditor::load(CalcNode *root, int decimals)
 {
     addNode(0, root);
-    if (root != 0) {
-        QTreeWidgetItem *item = tree->topLevelItem(0);
-        tree->setCurrentItem(item);
-        updateButtons();
-    }
+    QTreeWidgetItem *item = tree->topLevelItem(0);
+    tree->setCurrentItem(item);
+    updateButtons();
     updateEquation();
     decimalsBox->setValue(decimals);
 }

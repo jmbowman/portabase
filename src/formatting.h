@@ -1,7 +1,7 @@
 /*
  * formatting.h
  *
- * (c) 2010-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,6 @@ public:
     static QString toLocalDouble(const QString &value);
     static double parseDouble(const QString &value, bool *ok=0);
     static QString formatDouble(double value, int decimals=-1);
-    static QString toLocalInt(const QString &value);
 
     static bool isNoneDate(const QDate &date);
     static QString dateToString(int date);

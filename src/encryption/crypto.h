@@ -1,7 +1,7 @@
 /*
  * crypto.h
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-201,20150 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,7 +59,6 @@ private:
     QByteArray encrypt(const QByteArray &data);
     QByteArray decrypt(const QByteArray &data, bool *passError);
     int unpaddedLength(const QByteArray &data);
-    void printBytes(QString label, const QByteArray &data);
     void invertIfNecessary(QByteArray dataHash, int version);
     inline quint32 swapu32(quint32 n)
     {

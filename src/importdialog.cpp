@@ -1,7 +1,7 @@
 /*
  * importdialog.cpp
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -110,16 +110,13 @@ bool ImportDialog::import(Database *db)
         }
     }
     else if (source == OptionList) {
-        ImportUtils utils;
-        error = utils.importTextLines(path, encoding, &options);
+        error = ImportUtils::importTextLines(path, encoding, &options);
     }
     else if (source == MobileDB) {
-        ImportUtils utils;
-        error = utils.importMobileDB(path, db);
+        error = ImportUtils::importMobileDB(path, db);
     }
     else if (source == XML) {
-        ImportUtils utils;
-        error = utils.importXML(path, db);
+        error = ImportUtils::importXML(path, db);
     }
     if (!error.isEmpty()) {
         if (data.isEmpty()) {

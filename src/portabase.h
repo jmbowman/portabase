@@ -1,7 +1,7 @@
 /*
  * portabase.h
  *
- * (c) 2002-2004,2008-2011 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class PortaBase: public QQMainWindow
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "net.sourceforge.portabase")
 public:
-    PortaBase(QWidget *parent = 0);
+    explicit PortaBase(QWidget *parent = 0);
 
     void setEdited(bool y);
     void setRowSelected(bool y);

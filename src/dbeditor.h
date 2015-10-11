@@ -1,7 +1,7 @@
 /*
  * dbeditor.h
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ class DBEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    DBEditor(QWidget *parent = 0);
+    explicit DBEditor(QWidget *parent = 0);
     ~DBEditor();
 
     int edit(Database *subject);

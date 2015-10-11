@@ -1,7 +1,7 @@
 /*
  * calculator.h (based on kmymoneycalculator.h, by Thomas Baumgart)
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -35,7 +35,7 @@ class QAbstractButton;
 class Calculator : public PBDialog  {
     Q_OBJECT
 public:
-    Calculator(QWidget* parent = 0);
+    explicit Calculator(QWidget* parent = 0);
 
     const QString result() const;
     void setInitialValue(const QString& value);

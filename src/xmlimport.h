@@ -1,7 +1,7 @@
 /*
  * xmlimport.h
  *
- * (c) 2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ class XMLImport : public QObject, public QXmlDefaultHandler
 {
     Q_OBJECT
 public:
-    XMLImport(Database *dbase);
+    explicit XMLImport(Database *dbase);
 
     bool startDocument();
     bool startElement(const QString &namespaceURI, const QString &localName,

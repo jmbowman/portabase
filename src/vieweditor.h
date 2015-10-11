@@ -1,7 +1,7 @@
 /*
  * vieweditor.h
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class ViewEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    ViewEditor(QWidget *parent = 0);
+    explicit ViewEditor(QWidget *parent = 0);
 
     int edit(Database *subject, const QString &viewName,
              const QStringList &currentCols, const QString &defaultSort,

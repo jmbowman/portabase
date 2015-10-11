@@ -1,7 +1,7 @@
 /*
  * xmlexport.h
  *
- * (c) 2003,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,8 +43,8 @@ public:
                      const QStringList &colNames);
 
 private:
-    QString getPropName(const c4_Property prop);
-    QString getValue(c4_View &view, const QString &name, char type, int row);
+    static QString getPropName(const c4_Property prop);
+    static QString getValue(c4_View &view, const QString &name, char type, int row);
 
 private:
     Database *db; /**< The database being exported from */

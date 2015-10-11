@@ -1,7 +1,7 @@
 /*
  * menuactions.h
  *
- * (c) 2003,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ public:
     typedef QMap< Item, QString > PhraseMap;
     typedef QMap< Item, QKeySequence > ShortcutMap;
 
-    MenuActions(QObject *parent=0);
+    explicit MenuActions(QObject *parent=0);
 
     QString menuText(Item item);
     QAction *action(Item item, bool toggle=false);

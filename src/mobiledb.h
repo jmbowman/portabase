@@ -1,7 +1,7 @@
 /*
  * mobiledb.h
  *
- * (c) 2002,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,10 +25,9 @@
 class MobileDBFile : public PDBFile
 { 
 public:
-    MobileDBFile(const QString &f);
+    explicit MobileDBFile(const QString &f);
     bool read();
     int row_count() const;
-    int col_count() const;
     const char* db_info(); 
     QStringList field_types() const;
     const int* field_lengths() const;
@@ -36,9 +35,9 @@ public:
     QStringList field_labels() const;
 
 protected:
-    bool verify_recordhdr(const unsigned char *raw_record) const;
+    static bool verify_recordhdr(const unsigned char *raw_record);
     virtual bool readMobileDBHeader();
-    int record_category(int i);
+    int record_category(int i) const;
 
 protected:
     int colcount; /**< The number of columns in the database */

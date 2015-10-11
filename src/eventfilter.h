@@ -1,7 +1,7 @@
 /*
  * eventfilter.h
  *
- * (c) 2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ class EventFilter : public QObject
 {
     Q_OBJECT
 public:
-    EventFilter(PortaBase *mainWindow);
+    explicit EventFilter(PortaBase *mainWindow);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);

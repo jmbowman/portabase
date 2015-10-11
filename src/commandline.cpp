@@ -1,7 +1,7 @@
 /*
  * commandline.cpp
  *
- * (c) 2003,2008-2011,2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2011,2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -172,9 +172,8 @@ int CommandLine::fromOtherFormat(const QStringList &args)
     }
     QString error = "";
     QString data = "";
-    ImportUtils utils;
     if (args[1] == "fromxml") {
-        error = utils.importXML(sourceFile, db);
+        error = ImportUtils::importXML(sourceFile, db);
     }
     else if (fromcsv) {
         QChar delimiter = ',';
@@ -198,7 +197,7 @@ int CommandLine::fromOtherFormat(const QStringList &args)
         }
     }
     else {
-        error = utils.importMobileDB(sourceFile, db);
+        error = ImportUtils::importMobileDB(sourceFile, db);
     }
     if (!error.isEmpty()) {
         printf("%s", error.toLocal8Bit().data());

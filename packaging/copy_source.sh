@@ -44,4 +44,4 @@ cp -R src/qqutil $DEST/src
 if [ "$KEEP_HELP" = "no" ]; then
     rm -rf $DEST/resources/help/_build
 fi
-find $DEST -name '*.DS_Store' -type f -delete
+find $DEST -name '*.DS_Store' -type f | xargs rm -f

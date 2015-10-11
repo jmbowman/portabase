@@ -1,7 +1,7 @@
 /*
  * bytestream.h
  *
- * (c) 2003,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
 class ByteStream: public c4_Stream
 {
 public:
-    ByteStream(const QByteArray &data);
+    explicit ByteStream(const QByteArray &data);
     ByteStream();
     ~ByteStream();
 

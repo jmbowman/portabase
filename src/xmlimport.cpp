@@ -1,7 +1,7 @@
 /*
  * xmlimport.cpp
  *
- * (c) 2003,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -948,13 +948,12 @@ bool XMLImport::validateSortColumns()
     IndexMap::Iterator iter;
     QStringList allCols;
     QStringList descCols;
-    int count;
     for (iter = indexMap.begin(); iter != indexMap.end(); ++iter) {
         allCols.clear();
         descCols.clear();
         QString sname = iter.key();
         QMap<int,QString> mapping = iter.value();
-        count = mapping.count();
+        int count = mapping.count();
         for (int i = 0; i < count; i++) {
             QString item = mapping[i];
             if (item.startsWith("_")) {

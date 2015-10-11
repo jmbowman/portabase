@@ -144,7 +144,7 @@ class ColorPickerButton : public QFrame
     Q_OBJECT
 
 public:
-    ColorPickerButton(QWidget *parent);
+    explicit ColorPickerButton(QWidget *parent);
 
 signals:
     void clicked();
@@ -633,7 +633,7 @@ QColor ColorPickerPopup::color(int index) const
     if (index < 0 || index > (int) items.count() - 1)
         return QColor();
 
-    ColorPickerPopup *that = (ColorPickerPopup *)this;
+    ColorPickerPopup *that = const_cast<ColorPickerPopup *>(this);
     return that->items.at(index)->color();
 }
 
@@ -668,7 +668,7 @@ void ColorPickerPopup::updateSelected()
     }
 
     if (sender() && sender()->inherits("ColorPickerItem")) {
-	ColorPickerItem *item = (ColorPickerItem *)sender();
+ 	ColorPickerItem *item = dynamic_cast<ColorPickerItem *>(sender());
 	lastSel = item->color();
 	emit selected(item->color());
     }
@@ -826,7 +826,7 @@ void ColorPickerPopup::showEvent(QShowEvent *)
 	for (int j = 0; j < grid->rowCount(); ++j) {
 	    QWidget *w = widgetAt[j][i];
 	    if (w && w->inherits("ColorPickerItem")) {
-		if (((ColorPickerItem *)w)->isSelected()) {
+		if ((dynamic_cast<ColorPickerItem *>(w))->isSelected()) {
 		    w->setFocus();
 		    foundSelected = true;
 		    break;

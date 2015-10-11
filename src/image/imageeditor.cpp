@@ -1,7 +1,7 @@
 /*
  * imageeditor.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -150,16 +150,6 @@ void ImageEditor::updateImage()
 QImage ImageEditor::getImage()
 {
     return image;
-}
-
-/**
- * Get the path to the file from which the current image was loaded.
- *
- * @return The path to the image file
- */
-QString ImageEditor::getFile()
-{
-    return path;
 }
 
 /**
