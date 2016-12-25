@@ -2,11 +2,9 @@ Mac OS X Development Environment
 --------------------------------
 To compile PortaBase for use as a Mac OS X desktop application, you will
 need the following:
-- Mac OS X Tiger (10.4) or higher; Leopard (10.5) or higher for Cocoa and/or
-  64-bit support
-- Xcode (if running Xcode 4, be sure to install the command line utilities
-  from Preferences -> Downloads)
-- A recent version of Qt (https://www.qt.io/download/); 4.8 or higher is
+- Mac OS X Snow Leopard (10.6) or higher
+- Xcode (be sure to also install the command line utilities)
+- A recent version of Qt (https://www.qt.io/download/); 5.5 or higher is
   recommended.
 
 Metakit Compilation
@@ -20,11 +18,7 @@ autobuilders).
 To compile Metakit for Mac OS X, from the root PortaBase source directory run
 "packaging/mac/build_metakit.sh"; it'll prompt you for your password near the
 end in order to install the files under /usr/local where they will be found
-later when compiling PortaBase.  Note that this script is configured assuming
-that you're on Leopard or later, compiling only for Intel 64-bit processors;
-supporting Tiger, PowerPC processors, or 32-bit Intel processors requires some
-additional effort (especially if you're using Xcode 4 instead of an earlier
-version).
+later when compiling PortaBase.
 
 Help Pages Generation
 ---------------------

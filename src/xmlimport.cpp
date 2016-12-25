@@ -1,7 +1,7 @@
 /*
  * xmlimport.cpp
  *
- * (c) 2003,2009-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009-2010,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -113,7 +113,7 @@ XMLImport::XMLImport(Database *dbase) : QObject(), QXmlDefaultHandler(),
  *
  * @return An error message, or an empty string if none
  */
-QString XMLImport::errorString()
+QString XMLImport::errorString() const
 {
     return error;
 }

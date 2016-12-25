@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.h
  *
- * (c) 2005-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #include <QRegExp>
 #include <QStringList>
 
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
 #include <QStatusBar>
 #endif
 
@@ -30,7 +30,7 @@ class QAction;
 class QMainWindow;
 class QMenu;
 class QSettings;
-class QToolBar;
+class QQToolBar;
 
 #define MAX_RECENT_FILES 5
 
@@ -87,17 +87,18 @@ public:
         About = 13,
         AboutQt = 14
     };
-    QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
-                 const QString &fileDescription, const QString &fileExtension,
+    QQMenuHelper(QMainWindow *window, const QString &fileDescription,
+                 const QString &fileExtension,
                  bool newFileLaunchesDialog=false);
 
     void loadSettings(QSettings *settings);
     void saveSettings(QSettings *settings);
     void updateRecentMenu();
-    void updateFileSelectorMenu();
-    void updateDocumentFileMenu();
+    void updateForFileSelector();
+    void updateForDocument();
     void addToFileMenu(QAction *action);
-    void addToToolBar(QAction *action);
+    void addToDocumentToolBar(QAction *action);
+    void addToFileSelectorToolBar(QAction *action);
     int saveChangesPrompt();
     QMenu *createMenu(QMainWindow *mainWindow);
     QMenu *fileMenu();
@@ -135,7 +136,8 @@ private:
 
 private:
     QMainWindow *mainWindow; /**< The main application window */
-    QToolBar *mainToolBar; /**< The main toolbar */
+    QQToolBar *documentToolBar; /**< The toolbar shown when a document is open */
+    QQToolBar *fileSelectorToolBar; /**< The toolbar for the file selector screen */
     QIcon docIcon; /**< The application document icon (used in Mac titlebar) */
     QIcon modifiedDocIcon; /**< The application document icon when there are unsaved changes */
     QString description; /**< The description of the document file type */

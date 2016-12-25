@@ -1,7 +1,7 @@
 /*
  * imageeditor.cpp
  *
- * (c) 2003-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -112,7 +112,7 @@ int ImageEditor::edit(const QString &file)
     QPixmap pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
     int margin = 5;
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
     margin += 16;
 #endif
     resize(qMax(pm.width() + margin, paramsRow->sizeHint().width() + margin),

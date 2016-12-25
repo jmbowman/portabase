@@ -35,9 +35,6 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-static char const rcsid[] =
-  "@(#) $Jeannot: rk_mt.c,v 1.6 2006/02/19 13:48:34 js Exp $";
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>

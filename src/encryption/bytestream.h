@@ -1,7 +1,7 @@
 /*
  * bytestream.h
  *
- * (c) 2003,2008,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,6 @@ public:
 private:
     QByteArray content; /**< The stored byte array */
     int location; /**< The current read or write location in the content */
-    bool writing; /**< True if the content is being written to */
 };
 
 #endif

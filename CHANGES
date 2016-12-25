@@ -1,3 +1,45 @@
+2016-12-24  JMB  Added Qt 5 support, native Mac toolbar
+
+    Added support for Qt 5 to get the latest fixes for actively supported
+    platforms and enable ports to new ones, without yet dropping Qt 4
+    support (needed for Maemo devices).
+
+    Used and extended QMacToolBar to get a native toolbar on Mac OS X,
+    complete with the usual customization options.
+
+2015-10-11  JMB  Automated Fremantle builds, fixed cppcheck findings
+
+    Added the packaging/maemo/fremantle_vm.sh script to automate Maemo
+    Fremantle builds, similar to the one already done for Diablo.
+
+    Automated execution of the "cppcheck" static code analysis utility and
+    fixed the potential issues it reported.
+
+2015-10-04  JMB  Added Maemo Diablo build script using VM
+
+    Added the packaging/maemo/diablo_vm.sh script to fully automate builds
+    of the Maemo Diablo version of PortaBase, launching and closing the
+    development virtual machine as necessary.
+
+2015-07-27  JMB  Fixed bugs in handling of new src dir
+
+    Fixed a few bugs in the updated copy_source.sh script.
+
+2015-07-19  JMB  Moved source code under src directory
+
+    From the early days when PortaBase was a much smaller program, the main
+    source code files have always been in the project root directory. This is
+    no longer appropriate now that the number of files has grown and the
+    repository is being hosted on GitHub where this structure is burying the
+    README well down the page. Created a "src" directory, moved the source
+    files into it, and updated all scripts to cope with the new
+    organizational structure.
+
+2015-07-07  JMB  Replaced usage of deprecated date-setting method
+
+    Replace usage of the deprecated QDate.setYMD() with setDate() in order to
+    prepare for Qt 5 support.
+
 2013-10-06  JMB  More CSV import/export options from command line
 
     Added several improvements to the import and export of CSV files from the

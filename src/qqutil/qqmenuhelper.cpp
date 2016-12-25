@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.cpp
  *
- * (c) 2005-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2011,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,17 +28,19 @@
 #include <QProcess>
 #include <QRegExp>
 #include <QSettings>
-#include <QToolBar>
 #include <QUrl>
 #include "qqmenuhelper.h"
-#include "qqtoolbarstretch.h"
+#include "qqtoolbar.h"
+
+#if QT_VERSION >= 0x050000
+#include <QStandardPaths>
+#endif
 
 QRegExp QQMenuHelper::menuRegExp("\\(&\\w\\)");
 
 /**
  * Constructor.
  * @param window The main application window.
- * @param toolbar The main toolbar
  * @param fileDescription The description of the document file type as it is
  *                        to appear in file dialogs
  * @param fileExtension The file extension of the document file type (do not
@@ -46,18 +48,16 @@ QRegExp QQMenuHelper::menuRegExp("\\(&\\w\\)");
  * @param newFileLaunchesDialog True if creating a new file launches a dialog
  *                              to set additional parameters, false otherwise
  */
-QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
-                           const QString &fileDescription,
+QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
                            const QString &fileExtension,
                            bool newFileLaunchesDialog)
- : QObject(window), mainWindow(window), mainToolBar(toolbar),
-   description(fileDescription), extension(fileExtension), file(0), help(0)
+ : QObject(window), mainWindow(window), description(fileDescription),
+   extension(fileExtension), file(0), help(0)
 {
     QChar ellipsis(8230);
 
     // Some phrases need to be handled differently on Mac OS X
     QString prefsText = menuText(tr("Pr&eferences"));
-    QString macPrefsText = QMenuBar::tr("Preferences");
     QString quitText = menuText(tr("&Quit"));
     QString macQuitText = QMenuBar::tr("Quit %1");
     QString helpText = tr("Help Contents");
@@ -65,14 +65,14 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     QString aboutText = menuText(tr("&About %1")).arg(qApp->applicationName());
     QString macAboutText = QMenuBar::tr("About %1");
     QString aboutQtText = menuText(tr("About &Qt"));
-    QString macAboutQtText = QMenuBar::tr("About Qt");
-#ifdef Q_WS_MAC
-    prefsText = macPrefsText;
+#ifdef Q_OS_MAC
     quitText = macQuitText;
     helpText = macHelpText;
     aboutText = macAboutText;
-    aboutQtText = macAboutQtText;
 #endif
+
+    documentToolBar = new QQToolBar(window, "documentToolbar");
+    fileSelectorToolBar = new QQToolBar(window, "fileSelectorToolbar");
 
     // File menu actions
     QString fileNewText(tr("&New"));
@@ -80,12 +80,14 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
       fileNewText += ellipsis;
     }
     fileNewAction = new QAction(QIcon(":/icons/new.png"), menuText(fileNewText), window);
+    fileNewAction->setObjectName("New File");
     fileNewAction->setStatusTip(tr("Create a new file"));
     fileNewAction->setToolTip(fileNewAction->statusTip());
     fileNewAction->setShortcut(QKeySequence::New);
     connect(fileNewAction, SIGNAL(triggered()), this, SLOT(emitNewFile()));
 
     fileOpenAction = new QAction(QIcon(":/icons/open.png"), menuText(tr("&Open")) + ellipsis, window);
+    fileOpenAction->setObjectName("Open File");
     fileOpenAction->setStatusTip(tr("Open an existing file"));
     fileOpenAction->setToolTip(fileOpenAction->statusTip());
     fileOpenAction->setShortcut(QKeySequence::Open);
@@ -100,6 +102,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     connect(quitAction, SIGNAL(triggered()), this, SIGNAL(quit()));
 
     fileSaveAction = new QAction(QIcon(":/icons/save.png"), menuText(tr("&Save")), window);
+    fileSaveAction->setObjectName("Save");
     fileSaveAction->setStatusTip(tr("Save the current file"));
     fileSaveAction->setToolTip(fileSaveAction->statusTip());
     fileSaveAction->setShortcut(QKeySequence::Save);
@@ -128,14 +131,14 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     prefsAction->setMenuRole(QAction::PreferencesRole);
     connect(prefsAction, SIGNAL(triggered()), this, SIGNAL(editPreferences()));
 
-#if defined(Q_WS_MAC) || defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#if defined(Q_OS_MAC) || defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     fileNewAction->setIconVisibleInMenu(false);
     fileOpenAction->setIconVisibleInMenu(false);
     quitAction->setIconVisibleInMenu(false);
     fileSaveAction->setIconVisibleInMenu(false);
     closeAction->setIconVisibleInMenu(false);
 #endif
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     docIcon = QIcon(":/icons/document_small.png");
     modifiedDocIcon = QIcon(darkenPixmap(QPixmap(":/icons/document_small.png")));
 #endif
@@ -151,7 +154,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     file->addAction(closeAction);
     file->addAction(prefsAction);
     insertionPoint = fileSeparatorAction;
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
     file->addSeparator();
 #endif
     file->addAction(quitAction);
@@ -179,7 +182,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
     help = new QMenu(menuText(tr("&Help")), window);
 #if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
     help->addAction(helpAction);
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
     // skip this on the mac, since both "About.." actions get moved elsewhere
     help->addSeparator();
 #endif
@@ -189,9 +192,9 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
 #endif
 
     // toolbar setup
-    addToToolBar(fileNewAction);
-    addToToolBar(fileOpenAction);
-    addToToolBar(fileSaveAction);
+    addToFileSelectorToolBar(fileNewAction);
+    addToFileSelectorToolBar(fileOpenAction);
+    addToDocumentToolBar(fileSaveAction);
 
     // build the actions hash
     actions[New] = fileNewAction;
@@ -227,8 +230,8 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, QToolBar *toolbar,
  */
 QString QQMenuHelper::menuText(QString text)
 {
-#if defined(Q_WS_MAC)
-    return text.replace(menuRegExp, "");
+#if defined(Q_OS_MAC)
+    return text.replace(menuRegExp, "").replace("&", "");
 #else
     return text;
 #endif
@@ -256,7 +259,7 @@ QString QQMenuHelper::menuText(QString text)
  */
 void QQMenuHelper::loadSettings(QSettings *settings)
 {
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
     // Load font settings
     QFont currentFont = qApp->font();
     QString family = currentFont.family().toLower();
@@ -267,6 +270,8 @@ void QQMenuHelper::loadSettings(QSettings *settings)
     qApp->setFont(font);
     mainWindow->setFont(font);
 #endif
+    documentToolBar->loadSettings(settings);
+    fileSelectorToolBar->loadSettings(settings);
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         QString key = QString("Files/Recent%1").arg(i);
         QString path = settings->value(key, "").toString();
@@ -288,6 +293,8 @@ void QQMenuHelper::loadSettings(QSettings *settings)
  */
 void QQMenuHelper::saveSettings(QSettings *settings)
 {
+    documentToolBar->saveSettings(settings);
+    fileSelectorToolBar->saveSettings(settings);
     // Save the list of recently opened files
     QStringList files(recentFiles);
     // Insert blank entries if necessary
@@ -310,7 +317,11 @@ QString QQMenuHelper::getLastDir(QSettings *settings)
 {
     QString lastDir = settings->value("Files/LastDir", "").toString();
     if (lastDir.isEmpty() || !QDir(lastDir).exists()) {
+#if QT_VERSION >= 0x050000
+        lastDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)[0];
+#else
         lastDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+#endif
         if (lastDir.isEmpty()) {
             lastDir = QDir::homePath();
         }
@@ -361,7 +372,7 @@ void QQMenuHelper::setEdited(bool y)
 {
     fileSaveAction->setEnabled(y);
     mainWindow->setWindowModified(y);
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     if (y) {
         mainWindow->setWindowIcon(modifiedDocIcon);
     }
@@ -421,12 +432,12 @@ void QQMenuHelper::showHelp()
         }
         // if no translation is available, show the English help
         dirNames.append("en");
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
         QString path = qApp->applicationDirPath() + "/help/";
         QString suffix = "/";
-#elif defined(Q_WS_MAC)
+#elif defined(Q_OS_MAC)
         QString path = qApp->applicationDirPath() + "/../Resources/";
-        suffix = ".lproj/";
+        QString suffix = ".lproj/";
 #else
         QString path = QString("/usr/share/%1/help/")
                        .arg(qApp->applicationName().toLower());
@@ -473,7 +484,7 @@ void QQMenuHelper::aboutQt()
  * be called after the visibility of any application-specific actions has
  * been updated (due to a Maemo implementation detail).</p>
  */
-void QQMenuHelper::updateFileSelectorMenu()
+void QQMenuHelper::updateForFileSelector()
 {
     // update action visibility
     fileNewAction->setVisible(true);
@@ -506,7 +517,9 @@ void QQMenuHelper::updateFileSelectorMenu()
     mb->addAction(aboutAction);
 #endif
 
-#if defined(Q_WS_MAC)
+    fileSelectorToolBar->show();
+
+#if defined(Q_OS_MAC)
     mainWindow->setWindowIcon(QIcon());
 #endif
 }
@@ -530,7 +543,7 @@ void QQMenuHelper::updateFileSelectorMenu()
  * application-specific actions has been updated (due to a Maemo
  * implementation detail).</p>
  */
-void QQMenuHelper::updateDocumentFileMenu()
+void QQMenuHelper::updateForDocument()
 {
     // update action visibility
     fileSaveAction->setVisible(true);
@@ -559,7 +572,9 @@ void QQMenuHelper::updateDocumentFileMenu()
     mb->addAction(helpAction);
 #endif
 
-#if defined(Q_WS_MAC)
+    documentToolBar->show();
+
+#if defined(Q_OS_MAC)
     mainWindow->setWindowIcon(docIcon);
 #endif
 }
@@ -599,18 +614,19 @@ void QQMenuHelper::addToFileMenu(QAction *action)
 }
 
 /**
- * Add the specified action to the toolbar such that the spacing looks
- * correct even on Maemo.
+ * Add the specified action to the document screen toolbar.
  */
-void QQMenuHelper::addToToolBar(QAction *action)
+void QQMenuHelper::addToDocumentToolBar(QAction *action)
 {
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
-    new QQToolBarStretch(mainToolBar, action);
-#endif
-    mainToolBar->addAction(action);
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
-    new QQToolBarStretch(mainToolBar, action);
-#endif
+    documentToolBar->add(action);
+}
+
+/**
+ * Add the specified action to the file selector screen toolbar.
+ */
+void QQMenuHelper::addToFileSelectorToolBar(QAction *action)
+{
+    fileSelectorToolBar->add(action);
 }
 
 /**
@@ -696,7 +712,7 @@ QString QQMenuHelper::createNewFile(const QString &fileDescription,
     if (!filename.endsWith(ext, Qt::CaseInsensitive)) {
         filename += QString(".%1").arg(ext);
     }
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
     // The native Mac file dialog confirms overwrites internally
     if (QFile::exists(filename)) {
         int choice = QMessageBox::warning(mainWindow,
