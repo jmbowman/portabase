@@ -1,7 +1,7 @@
 /*
  * factory.cpp
  *
- * (c) 2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -201,11 +201,19 @@ QTreeWidget *Factory::treeWidget(QWidget *parent, const QStringList &headers)
     table->setUniformRowHeights(true);
     int colCount = headers.count();
     if (colCount > 0) {
-      table->setColumnCount(headers.count());
-      table->setHeaderLabels(headers);
-      table->header()->setResizeMode(QHeaderView::ResizeToContents);
+        table->setColumnCount(headers.count());
+        table->setHeaderLabels(headers);
+#if QT_VERSION >= 0x050000
+        table->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
+        table->header()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
     }
+#if QT_VERSION >= 0x050000
+    table->header()->setSectionsMovable(false);
+#else
     table->header()->setMovable(false);
+#endif
     table->setSortingEnabled(false);
     table->setAllColumnsShowFocus(true);
     table->setRootIsDecorated(false);
@@ -225,7 +233,7 @@ QTreeWidget *Factory::treeWidget(QWidget *parent, const QStringList &headers)
  */
 QAbstractButton *Factory::button(QWidget *parent)
 {
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     return new QToolButton(parent);
 #else
     return new QPushButton(parent);

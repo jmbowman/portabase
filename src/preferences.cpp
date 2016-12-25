@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -230,7 +230,7 @@ void Preferences::addAppearanceTab(QSettings *settings)
         appearanceTab = panel;
         layout = static_cast<QVBoxLayout *>(panel->layout());
     }
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
     QGroupBox *fontGroup = new QGroupBox(tr("Font"), appearanceTab);
     layout->addWidget(fontGroup);
     QGridLayout *fontGrid = Factory::gridLayout(fontGroup, true);
@@ -434,7 +434,7 @@ QFont Preferences::applyChanges()
     settings.endGroup();
 #endif
 
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
     settings.beginGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentIndex()];

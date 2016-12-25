@@ -1,7 +1,7 @@
 /*
  * formatting.cpp
  *
- * (c) 2010-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010-2011,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
  */
 
 #include <QSettings>
+#include <QTextDocument>
 #include <QTime>
 #include "formatting.h"
 
@@ -308,4 +309,21 @@ QString Formatting::parseTimeString(const QString &value, bool *ok)
     int totalSeconds = midnight.secsTo(time);
     *ok = true;
     return QString::number(totalSeconds);
+}
+
+/**
+ * Get a copy of the provided string with HTML/XML special characters (such as
+ * '<', '>', '&', and '"') escaped.  Abstracts away the different APIs for doing
+ * this in Qt 4 and 5.
+ *
+ * @param value The string to be escaped
+ * @return A copy of the input string with special characters escaped
+ */
+QString Formatting::toHtmlEscaped(const QString &value)
+{
+#if QT_VERSION >= 0x050000
+  return value.toHtmlEscaped();
+#else
+  return Qt::escape(value);
+#endif
 }

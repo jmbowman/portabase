@@ -3,7 +3,7 @@
  *
  * Adapted from BeeCrypt: http://sourceforge.net/projects/beecrypt
  *
- * (c) 2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 1999, 2000, 2002, 2005 Beeyond Software Holding BV
  *
  * This library is free software; you can redistribute it and/or
@@ -407,12 +407,12 @@ QByteArray Blowfish::decrypt(const QByteArray &data, const QByteArray &iv)
  */
 int Blowfish::blockEncryptCBC(quint32 *dst, const quint32 *src, unsigned int nblocks)
 {
-	register const unsigned int blockwords = Blowfish::blockSize >> 2;
-	register quint32 *fdback = encryptParam.fdback;
+	const unsigned int blockwords = Blowfish::blockSize >> 2;
+	quint32 *fdback = encryptParam.fdback;
 
 	if (nblocks > 0)
 	{
-		register unsigned int i;
+        unsigned int i;
 
 		for (i = 0; i < blockwords; i++)
 			dst[i] = src[i] ^ fdback[i];
@@ -453,16 +453,16 @@ int Blowfish::blockEncryptCBC(quint32 *dst, const quint32 *src, unsigned int nbl
  */
 int Blowfish::blockDecryptCBC(quint32 *dst, const quint32 *src, unsigned int nblocks)
 {
-	register const unsigned int blockwords = Blowfish::blockSize >> 2;
-	register quint32 *fdback = decryptParam.fdback;
-	register quint32 *buf = (quint32*) malloc(blockwords * sizeof(quint32));
+	const unsigned int blockwords = Blowfish::blockSize >> 2;
+	quint32 *fdback = decryptParam.fdback;
+	quint32 *buf = (quint32*) malloc(blockwords * sizeof(quint32));
 
 	if (buf)
 	{
 		while (nblocks > 0)
 		{
-			register quint32 tmp;
-			register unsigned int i;
+			quint32 tmp;
+			unsigned int i;
 
 			decrypt(&decryptParam, buf, src);
 
@@ -498,9 +498,9 @@ int Blowfish::setup(blowfishParam *bp, const quint8* key, size_t keybits)
 {
 	if (((keybits & 7) == 0) && (keybits >= 32) && (keybits <= 448))
 	{
-		register quint32* p = bp->p;
-		register quint32* s = bp->s;
-		register unsigned int i, j, k;
+		quint32* p = bp->p;
+		quint32* s = bp->s;
+		unsigned int i, j, k;
 
 		quint32 tmp, work[2];
 
@@ -584,12 +584,12 @@ int Blowfish::setIV(blowfishParam *bp, const quint8* iv)
 int Blowfish::encrypt(blowfishParam *bp, quint32* dst, const quint32* src)
 {
 	#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-	register quint32 xl = src[0], xr = src[1];
+	quint32 xl = src[0], xr = src[1];
 	#else
-	register quint32 xl = swapu32(src[0]), xr = swapu32(src[1]);
+	quint32 xl = swapu32(src[0]), xr = swapu32(src[1]);
 	#endif
-	register quint32* p = bp->p;
-	register quint32* s = bp->s;
+	quint32* p = bp->p;
+	quint32* s = bp->s;
 
 	EROUND(xl, xr); EROUND(xr, xl);
 	EROUND(xl, xr); EROUND(xr, xl);
@@ -623,12 +623,12 @@ int Blowfish::encrypt(blowfishParam *bp, quint32* dst, const quint32* src)
 int Blowfish::decrypt(blowfishParam *bp, quint32* dst, const quint32* src)
 {
 	#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-	register quint32 xl = src[0], xr = src[1];
+	quint32 xl = src[0], xr = src[1];
 	#else
-	register quint32 xl = swapu32(src[0]), xr = swapu32(src[1]);
+	quint32 xl = swapu32(src[0]), xr = swapu32(src[1]);
 	#endif
-	register quint32* p = bp->p+BLOWFISHPSIZE-1;
-	register quint32* s = bp->s;
+	quint32* p = bp->p+BLOWFISHPSIZE-1;
+	quint32* s = bp->s;
 
 	DROUND(xl, xr); DROUND(xr, xl);
 	DROUND(xl, xr); DROUND(xr, xl);

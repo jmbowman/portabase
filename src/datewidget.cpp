@@ -1,7 +1,7 @@
 /*
  * datewidget.cpp
  *
- * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -108,7 +108,7 @@ void DateWidget::updateDisplay()
  */
 QString DateWidget::toString(const QDate &date)
 {
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     QString value("%1, %2");
     value = value.arg(QDate::longDayName(date.dayOfWeek()));
     return value.arg(date.toString(Qt::DefaultLocaleLongDate));

@@ -1,14 +1,18 @@
 #!/bin/sh
+#
+# (c) 2010-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 
 # Script for packaging the Mac version of PortaBase for distribution
 # Assumes that we are in the PortaBase source code root directory
 # Takes the parameter to make -j as an argument, for utilizing multiple cores
 
-# By default, builds a 64-bit Intel binary.  If you want to build a universal
-# binary that runs on PowerPC and 32-bit Intel Macs, pass the string
-# "--universal" as the first parameter.  You'll need to have a suitably old or
-# hacked version of Xcode, and appropriately compiled versions of Qt and
-# Metakit.
+# This script builds a 64-bit Intel binary; support for PowerPC and 32-bit
+# Intel Macs was dropped with the upgrade to Qt 5
 
 VERSION=`cat packaging/version_number`
 DIRNAME=PortaBase_$VERSION
@@ -20,14 +24,7 @@ rm -rf build/$DIRNAME
 rm -rf resources/help/_build/_static # in case created for Maemo
 
 # compile and make the application bundle
-if [ "$1" == "--universal" ]; then
-    shift 1
-    qmake -spec macx-g++40 portabase.pro
-    UNIVERSAL=Yes
-else
-    qmake -spec macx-llvm portabase.pro
-    UNIVERSAL=No
-fi
+qmake -spec macx-llvm portabase.pro
 if [ "$1" == "--sign" ]; then
     SIGN=Yes
     shift 1
@@ -109,11 +106,7 @@ mv PortaBase.app $DIRNAME
 cp ../README.txt $DIRNAME/ReadMe
 cp ../CHANGES $DIRNAME/Changes
 cp ../COPYING $DIRNAME/License
-if [ "$UNIVERSAL" == "Yes" ]; then
-    DMGNAME=${DIRNAME}_universal.dmg
-else
-    DMGNAME=$DIRNAME.dmg
-fi
+DMGNAME=$DIRNAME.dmg
 hdiutil create $DMGNAME -srcfolder $DIRNAME -format UDZO -volname $DIRNAME
 if [ "$SIGN" == "Yes" ]; then
     codesign -s "Developer ID Application: Jeremy Bowman" $DMGNAME

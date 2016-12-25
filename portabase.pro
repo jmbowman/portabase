@@ -2,6 +2,7 @@ TEMPLATE        = app
 CONFIG         += qt warn_on thread
 #DEFINES        += TRACE_ENABLED # enables TRACE macro for crash debugging
 QT             += xml
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 DESTDIR         = build
 OBJECTS_DIR     = build
 MOC_DIR         = build
@@ -77,6 +78,7 @@ HEADERS         = src/calc/calcdateeditor.h \
                   src/qqutil/qqdialog.h \
                   src/qqutil/qqmainwindow.h \
                   src/qqutil/qqmenuhelper.h \
+                  src/qqutil/qqtoolbar.h \
                   src/qqutil/qqtoolbarstretch.h \
                   src/roweditor.h \
                   src/rowviewer.h \
@@ -147,6 +149,7 @@ SOURCES         = src/calc/calcdateeditor.cpp \
                   src/qqutil/qqdialog.cpp \
                   src/qqutil/qqmainwindow.cpp \
                   src/qqutil/qqmenuhelper.cpp \
+                  src/qqutil/qqtoolbar.cpp \
                   src/qqutil/qqtoolbarstretch.cpp \
                   src/roweditor.cpp \
                   src/rowviewer.cpp \
@@ -168,9 +171,17 @@ unix {
 
 # Stuff for Mac OS X
 macx {
-    macx-g++40:CONFIG  += release x86 ppc
-    !macx-g++40:CONFIG += release x86_64
+    CONFIG             += c++11 release x86_64
+    QMAKE_CXXFLAGS     += -stdlib=libc++ -std=c++11
+    QMAKE_MAC_SDK       = macosx10.11
+    QT                 += macextras
+    INCLUDEPATH        += /usr/local/include
+    LIBS               += -L/usr/local/lib -framework Foundation
     TARGET              = PortaBase
+    HEADERS            += src/qqutil/qqmactoolbardelegate.h \
+                          src/qqutil/qqmactoolbarutils.h
+    OBJECTIVE_SOURCES  += src/qqutil/qqmactoolbardelegate.mm \
+                          src/qqutil/qqmactoolbarutils.mm
     RESOURCES           = resources/mac.qrc
     ICON                = packaging/mac/PortaBase.icns
     DOCUMENT_ICON.files = packaging/mac/PortaBaseFile.icns

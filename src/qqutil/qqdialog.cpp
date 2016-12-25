@@ -1,7 +1,7 @@
 /*
  * qqutil/qqdialog.cpp
  *
- * (c) 2003-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,18 +62,23 @@ QQDialog::~QQDialog()
 }
 
 /**
- * Overrides QWidget::setWindowTitle() to include the application name.
+ * Overrides QWidget::setWindowTitle() to include the application name. Qt 5
+ * does this automatically when appropriate, so this is just for Maemo now.
  *
  * @param title The dialog title, not including the application name
  */
 void QQDialog::setWindowTitle(const QString &title)
 {
+#if QT_VERSION >= 0x050000
+    QWidget::setWindowTitle(title);
+#else
     if (title.isEmpty()) {
         QWidget::setWindowTitle(qApp->applicationName());
     }
     else {
         QWidget::setWindowTitle(title + " - " + qApp->applicationName());
     }
+#endif
 }
 
 /**

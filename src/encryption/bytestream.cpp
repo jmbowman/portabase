@@ -1,7 +1,7 @@
 /*
  * bytestream.cpp
  *
- * (c) 2003,2008 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,8 +25,7 @@
  *
  * @param data The byte array to read from
  */
-ByteStream::ByteStream(const QByteArray &data) : content(data), location(0),
-    writing(false)
+ByteStream::ByteStream(const QByteArray &data) : content(data), location(0)
 {
 
 }
@@ -34,7 +33,7 @@ ByteStream::ByteStream(const QByteArray &data) : content(data), location(0),
 /**
  * Constructor for writing.
  */
-ByteStream::ByteStream() : location(0), writing(true)
+ByteStream::ByteStream() : location(0)
 {
 
 }

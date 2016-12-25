@@ -1,7 +1,7 @@
 /*
  * qqmainwindow.h
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,7 +90,6 @@ private:
 
 private:
     QString extension; /**< The extension of the document file type */
-    QToolBar *toolbar; /**< The application toolbar */
     QQMenuHelper *mh; /**< Support code for any document-based application */
     QString docPath; /**< Path of the current document file */
     QPrinter *printer; /**< The last-used printer settings (for this application instance) */

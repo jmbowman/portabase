@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,7 +71,6 @@ PortaBase::PortaBase(QWidget *parent)
     // menu and toolbar, shared between file selector and data viewer modes
     ma = new MenuActions(this);
     QQMenuHelper *mh = menuHelper();
-    mh->loadSettings(settings);
     connect(mh, SIGNAL(newFile(const QString &)),
             this, SLOT(newFile(const QString &)));
     connect(mh, SIGNAL(openFile(const QString &)),
@@ -233,17 +232,20 @@ PortaBase::PortaBase(QWidget *parent)
 #endif
 
     // Toolbar
-    mh->addToToolBar(importAction);
-    mh->addToToolBar(rowAddAction);
-    mh->addToToolBar(rowEditAction);
-    mh->addToToolBar(rowDeleteAction);
-    mh->addToToolBar(rowCopyAction);
-    mh->addToToolBar(viewsAction);
-    mh->addToToolBar(sortingsAction);
-    mh->addToToolBar(filtersAction);
-    mh->addToToolBar(findAction);
-    mh->addToToolBar(fullscreenAction);
-    createFillerActions();
+    mh->addToFileSelectorToolBar(importAction);
+    mh->addToFileSelectorToolBar(fullscreenAction);
+    mh->addToDocumentToolBar(rowAddAction);
+#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+    mh->addToDocumentToolBar(rowEditAction);
+    mh->addToDocumentToolBar(rowDeleteAction);
+    mh->addToDocumentToolBar(rowCopyAction);
+#endif
+    mh->addToDocumentToolBar(viewsAction);
+    mh->addToDocumentToolBar(sortingsAction);
+    mh->addToDocumentToolBar(filtersAction);
+    mh->addToDocumentToolBar(findAction);
+    mh->addToDocumentToolBar(fullscreenAction);
+    mh->loadSettings(settings);
 
     // Main widget when no file is open
     noFileWidget = new QScrollArea(mainStack);
@@ -366,7 +368,7 @@ void PortaBase::editPreferences()
     Preferences prefs(menuHelper(), this);
     if (prefs.exec()) {
         QFont font = prefs.applyChanges();
-#if !defined(Q_WS_MAC)
+#if !defined(Q_OS_MAC)
         setFont(font);
         viewer->updateButtonSizes();
         menuHelper()->fileMenu()->setFont(font);
@@ -676,18 +678,7 @@ void PortaBase::showFileSelector()
     printPreviewAction->setEnabled(false);
     printAction->setVisible(false);
     printAction->setEnabled(false);
-    menuHelper()->updateFileSelectorMenu();
-
-    // Toolbar
-    showAllFillerActions();
-    rowAddAction->setVisible(false);
-    rowEditAction->setVisible(false);
-    rowDeleteAction->setVisible(false);
-    rowCopyAction->setVisible(false);
-    findAction->setVisible(false);
-    viewsAction->setVisible(false);
-    sortingsAction->setVisible(false);
-    filtersAction->setVisible(false);
+    menuHelper()->updateForFileSelector();
 
     mainStack->setCurrentWidget(noFileWidget);
 }
@@ -725,22 +716,7 @@ void PortaBase::showDataViewer()
     printAction->setEnabled(true);
     printAction->setVisible(true);
 #endif
-    menuHelper()->updateDocumentFileMenu();
-
-    // Toolbar
-    rowAddAction->setVisible(true);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
-    rowEditAction->setVisible(true);
-    rowDeleteAction->setVisible(true);
-    rowCopyAction->setVisible(true);
-#endif
-    viewsAction->setVisible(true);
-    sortingsAction->setVisible(true);
-    filtersAction->setVisible(true);
-    findAction->setVisible(true);
-    for (int i = 0; i < 6; i++) {
-        fillerActions[i]->setVisible(false);
-    }
+    menuHelper()->updateForDocument();
 
     mainStack->setCurrentWidget(viewer);
     viewer->updateColWidths();
@@ -1504,33 +1480,6 @@ QSettings *PortaBase::getSettings()
 }
 
 /**
- * Create the filler actions needed to prevent the toolbar ever shrinking
- * below the max number of showable actions on the Mac (since with the
- * unified toolbar, there doesn't seem to be a way to increase the number
- * of displayed buttons once it shrinks).
- */
-void PortaBase::createFillerActions() {
-    for (int i = 0; i < 6; i++) {
-        fillerActions[i] = new QAction("", this);
-#if defined(Q_WS_MAC)
-        menuHelper()->addToToolBar(fillerActions[i]);
-#endif
-    }
-}
-
-/**
- * Show all of the Mac toolbar filler actions; the ones not needed will be
- * hidden again later.
- */
-void PortaBase::showAllFillerActions() {
-#if defined(Q_WS_MAC)
-    for (int i = 0; i < 6; i++) {
-        fillerActions[i]->setVisible(true);
-    }
-#endif
-}
-
-/**
  * Do the work of actually printing the file, after the page layout has been
  * set up.
  *
@@ -1563,7 +1512,7 @@ void PortaBase::aboutPortaBase()
     QString text = appName + " " + version + "\n\n" + tr("Copyright (C)")
                    + " " + COPYRIGHT_YEARS + "\nJeremy Bowman\n\n"
                    + tr("Web site at http://portabase.sourceforge.net");
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     // Don't use doc icon in about dialog, bypass main window's icon
     QWidget *parent = statusBar();
 #else

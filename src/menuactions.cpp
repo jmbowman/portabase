@@ -1,7 +1,7 @@
 /*
  * menuactions.cpp
  *
- * (c) 2003-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2009-2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(ChangePassword, tr("C&hange Password") + ellipsis);
     toolTipMap.insert(ChangePassword, tr("Change the current file's password"));
 
+    objectNameMap.insert(Import, "Import");
     textMap.insert(Import, tr("&Import") + ellipsis);
     toolTipMap.insert(Import, tr("Create a new file from data in another format"));
 
@@ -56,10 +57,12 @@ MenuActions::MenuActions(QObject *parent)
     toolTipMap.insert(Print, tr("Print the current file"));
     shortcutMap.insert(Print, QKeySequence(QKeySequence::Print));
 
+    objectNameMap.insert(QuickFilter, "Quick Filter");
     textMap.insert(QuickFilter, tr("&Quick Filter"));
     toolTipMap.insert(QuickFilter, tr("Apply a one-condition filter"));
     shortcutMap.insert(QuickFilter, QKeySequence(QKeySequence::Find));
 
+    objectNameMap.insert(AddRow, "AddRow");
     textMap.insert(AddRow, tr("&Add") + ellipsis);
     toolTipMap.insert(AddRow, tr("Create a new row"));
 
@@ -72,6 +75,7 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(AddFilter, tr("&Add") + ellipsis);
     toolTipMap.insert(AddFilter, tr("Create a new filter"));
 
+    objectNameMap.insert(EditRow, "Edit Row");
     textMap.insert(EditRow, tr("&Edit") + ellipsis);
     toolTipMap.insert(EditRow, tr("Edit the selected row"));
 
@@ -84,6 +88,7 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(EditFilter, tr("&Edit") + ellipsis);
     toolTipMap.insert(EditFilter, tr("Edit the selected filter"));
 
+    objectNameMap.insert(DeleteRow, "Delete Row");
     textMap.insert(DeleteRow, tr("&Delete"));
     toolTipMap.insert(DeleteRow, tr("Delete the selected row"));
     shortcutMap.insert(DeleteRow, QKeySequence::Delete);
@@ -103,6 +108,7 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(AllRows, tr("All &Rows"));
     toolTipMap.insert(AllRows, tr("Show all rows of data"));
 
+    objectNameMap.insert(CopyRow, "Copy Row");
     textMap.insert(CopyRow, tr("&Copy") + ellipsis);
     toolTipMap.insert(CopyRow, tr("Create a copy of the selected row"));
 
@@ -122,15 +128,19 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(EditEnums, tr("Edit E&nums") + ellipsis);
     toolTipMap.insert(EditEnums, tr("Edit the enumerated data types"));
 
+    objectNameMap.insert(Views, "Views");
     textMap.insert(Views, tr("Views") + ellipsis);
     toolTipMap.insert(Views, tr("Change the active view"));
 
+    objectNameMap.insert(Sortings, "Sortings");
     textMap.insert(Sortings, tr("Sortings") + ellipsis);
     toolTipMap.insert(Sortings, tr("Change the active sorting"));
 
+    objectNameMap.insert(Filters, "Filters");
     textMap.insert(Filters, tr("Filters") + ellipsis);
     toolTipMap.insert(Filters, tr("Change the active filter"));
 
+    objectNameMap.insert(Fullscreen, "Fullscreen");
     textMap.insert(Fullscreen, tr("Fullscreen"));
     toolTipMap.insert(Fullscreen, tr("View PortaBase in fullscreen mode"));
 }
@@ -169,7 +179,7 @@ QAction *MenuActions::action(Item item, bool toggle)
 QAction *MenuActions::action(Item item, const QIcon &icon)
 {
     QAction *action = new QAction(icon, menuText(item), parent());
-#if defined(Q_WS_MAC) || defined(Q_WS_HILDON)
+#if defined(Q_OS_MAC) || defined(Q_WS_HILDON)
     action->setIconVisibleInMenu(false);
 #endif
     prepareAction(item, action);
@@ -184,6 +194,9 @@ QAction *MenuActions::action(Item item, const QIcon &icon)
  */
 void MenuActions::prepareAction(Item item, QAction *action)
 {
+    if (objectNameMap.contains(item)) {
+        action->setObjectName(objectNameMap[item]);
+    }
     if (toolTipMap.contains(item)) {
         QString text = toolTipMap[item];
         action->setToolTip(text);

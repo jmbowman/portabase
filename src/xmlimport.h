@@ -1,7 +1,7 @@
 /*
  * xmlimport.h
  *
- * (c) 2003,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ public:
     bool endElement(const QString &namespaceURI, const QString &localName,
                     const QString &qName);
     bool characters (const QString &ch);
-    QString errorString();
+    QString errorString() const;
     QString formattedError();
     bool fatalError(const QXmlParseException &exception);
     void setDocumentLocator(QXmlLocator *locator);

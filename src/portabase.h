@@ -1,7 +1,7 @@
 /*
  * portabase.h
  *
- * (c) 2002-2004,2008-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -111,8 +111,6 @@ private:
     void showFileSelector();
     void showDataViewer();
     QSettings *getSettings();
-    void createFillerActions();
-    void showAllFillerActions();
     void updatePreferences(QSettings *settings);
 
 private:
@@ -159,7 +157,6 @@ private:
     QAction *sortingsAction; /**< Toolbar "Sortings" action */
     QAction *filtersAction; /**< Toolbar "Filters" action */
     QAction *fullscreenAction; /**< Toolbar "Fullscreen" action */
-    QAction* fillerActions[6]; /**< Toolbar filler actions; Mac toolbar quirk */
     QMenu *row; /**< "Row" Menu */
     QMenu *view; /**< "View" Menu */
     QMenu *sort; /**< "Sort" Menu */

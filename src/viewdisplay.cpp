@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004,2008-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 #include <QSpinBox>
 #include <QStackedWidget>
 #include <QStringList>
-#include <QTextDocument>
 #include <QTimer>
 #include <QToolButton>
 #include <QTreeWidget>
@@ -35,6 +34,7 @@
 #include "datamodel.h"
 #include "datatypes.h"
 #include "factory.h"
+#include "formatting.h"
 #include "noteeditor.h"
 #include "pbmaemo5style.h"
 #include "portabase.h"
@@ -99,9 +99,15 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
             this, SLOT(cellReleased(const QModelIndex &)));
 
     QHeaderView *header = table->header();
+#if QT_VERSION >= 0x050000
+    header->setSectionsClickable(true);
+    header->setSectionsMovable(false);
+    header->setSectionResizeMode(QHeaderView::Interactive);
+#else
     header->setClickable(true);
     header->setMovable(false);
     header->setResizeMode(QHeaderView::Interactive);
+#endif
     connect(header, SIGNAL(sectionPressed(int)), this, SLOT(headerPressed(int)));
     connect(header, SIGNAL(sectionClicked(int)), this, SLOT(headerReleased(int)));
     connect(header, SIGNAL(sectionResized(int, int, int)),
@@ -316,7 +322,7 @@ QString ViewDisplay::toPrintHTML()
     int i, j;
     QString cellPattern("<th align=\"left\">%1</th>");
     for (i = 0; i < colCount; i++) {
-        result += cellPattern.arg(Qt::escape(colNames[i]));
+        result += cellPattern.arg(Formatting::toHtmlEscaped(colNames[i]));
     }
     result += "</tr></thead><tbody>";
     int rowCount = view->totalRowCount();
@@ -355,7 +361,7 @@ QString ViewDisplay::toPrintHTML()
                 value = imgTags[2];
             }
             else if (type == NOTE || type == STRING) {
-                value = Qt::escape(value).replace(newline, br);
+                value = Formatting::toHtmlEscaped(value).replace(newline, br);
             }
             result += cellPattern.arg(align).arg(value);
         }

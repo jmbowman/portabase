@@ -1,7 +1,7 @@
 /*
  * menuactions.h
  *
- * (c) 2003,2009-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2009-2010,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -93,6 +93,7 @@ private:
     void prepareAction(Item item, QAction *action);
 
 private:
+    PhraseMap objectNameMap; /**< Mapping of items to object names (not all items have one) */
     PhraseMap textMap; /**< Mapping of items to translations (including accelerators) */
     PhraseMap toolTipMap; /**< Mapping of items to translated tooltips */
     ShortcutMap shortcutMap; /**< Mapping of items to shortcut key combinations */

@@ -1,7 +1,7 @@
 /*
  * qqmainwindow.cpp
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@
 #include <QSettings>
 #include <QStatusBar>
 #include <QStyle>
-#include <QToolBar>
 #include <QUrl>
 #include "qqmainwindow.h"
 #include "qqmenuhelper.h"
@@ -53,16 +52,14 @@ QQMainWindow::QQMainWindow(const QString &fileDescription,
 #if defined(Q_WS_MAEMO_5)
     setAttribute(Qt::WA_Maemo5StackedWindow);
 #else
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     // Set the icon used in the about dialog; doc icon is main window icon
     statusBar()->setWindowIcon(qApp->windowIcon());
 #else
     statusBar();
 #endif
 #endif
-    toolbar = addToolBar("toolbar");
-    toolbar->setObjectName("toolbar");
-    mh = new QQMenuHelper(this, toolbar, fileDescription, fileExtension);
+    mh = new QQMenuHelper(this, fileDescription, fileExtension);
 }
 
 /**
@@ -113,12 +110,6 @@ void QQMainWindow::restoreWindowSettings(QSettings *settings)
     }
     if (settings->contains("State")) {
         restoreState(settings->value("State").toByteArray());
-        // make sure the toolbar isn't and can't be hidden
-        if (toolbar->isHidden()) {
-            toolbar->show();
-        }
-        toolbar->toggleViewAction()->setEnabled(false);
-        toolbar->toggleViewAction()->setVisible(false);
     }
     settings->endGroup();
 }
@@ -177,6 +168,20 @@ void QQMainWindow::setDocumentPath(const QString &path)
  */
 void QQMainWindow::updateCaption()
 {
+#if QT_VERSION >= 0x050000
+    if (docPath.isEmpty()) {
+        setWindowTitle("");
+    }
+    else {
+#if defined(Q_OS_MAC)
+        // Use full path for correct document icon click functionality
+        QString name = docPath;
+#else
+        QString name = QFileInfo(docPath).fileName();
+#endif
+        setWindowTitle(name + "[*]");
+    }
+#else
     if (docPath.isEmpty()) {
         setWindowTitle(qApp->applicationName());
     }
@@ -184,6 +189,7 @@ void QQMainWindow::updateCaption()
         QString name = QFileInfo(docPath).fileName();
         setWindowTitle(name + "[*] - " + qApp->applicationName());
     }
+#endif
 }
 
 /**
@@ -250,7 +256,7 @@ void QQMainWindow::dropEvent(QDropEvent *event)
  */
 bool QQMainWindow::event(QEvent *event)
 {
-#if defined(Q_WS_MAC)
+#if defined(Q_OS_MAC)
     if (!isActiveWindow() || docPath.isEmpty()) {
         return QMainWindow::event(event);
     }

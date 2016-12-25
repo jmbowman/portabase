@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002-2004,2009-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QLocale>
-#include <QTextDocument>
 #include <QTextStream>
 #include "csvutils.h"
 #include "database.h"
@@ -534,7 +533,7 @@ void View::exportToHTML(const QString &filename)
     int i, j;
     QString headerPattern("<th>%1</th>\n");
     for (i = 0; i < colCount; i++) {
-        lines.append(headerPattern.arg(Qt::escape(columns[i])));
+        lines.append(headerPattern.arg(Formatting::toHtmlEscaped(columns[i])));
     }
     QFile f(filename);
     if (!f.open(QFile::WriteOnly)) {
@@ -575,7 +574,7 @@ void View::exportToHTML(const QString &filename)
                 output << divs[2];
             }
             else if (type == NOTE || type == STRING) {
-                value = Qt::escape(data[j]).replace(newline, br);
+                value = Formatting::toHtmlEscaped(data[j]).replace(newline, br);
                 output << leftPattern.arg(value);
             }
             else {

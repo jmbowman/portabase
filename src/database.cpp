@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ Database::Database(const QString &path, OpenResult *result, bool encrypt)
         }
         canWrite = info.isWritable();
     }
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_WIN)
     file = new c4_Storage(path.toUtf8(), canWrite);
 #else
     file = new c4_Storage(QFile::encodeName(path), canWrite);

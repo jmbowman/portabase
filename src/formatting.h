@@ -1,7 +1,7 @@
 /*
  * formatting.h
  *
- * (c) 2010-2011,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010-2011,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,6 +42,7 @@ public:
     static QString timeToString(int time);
     static QString dateTimeToString(const QDateTime &dateTime);
     static QString parseTimeString(const QString &value, bool *ok);
+    static QString toHtmlEscaped(const QString &value);
 
 private:
     static QLocale cLocale; /**< The "C" locale used internally */
