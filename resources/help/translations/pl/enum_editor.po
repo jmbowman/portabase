@@ -1,0 +1,140 @@
+# Messages from enum_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2013-11-20 18:52+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Polish (http://www.transifex.com/jmbowman/portabase/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# 2faf1ad53f304b97b619f2a7cba74ab3
+#: ../../enum_editor.txt:4
+msgid "Enum editor"
+msgstr ""
+
+# 85cb640696e045f3b47ec22529a842bf
+#: ../../enum_editor.txt:6
+msgid ""
+"This dialog lets you define the name and list of options for an enum column "
+"type.  It has a list of the enum's options and the same set of buttons as "
+"most of the other editor dialogs:"
+msgstr ""
+
+# 3b54bfb53b6d445d97139d74850700db
+#: ../../enum_editor.txt:9
+msgid "**Add**"
+msgstr ""
+
+# 515fd45b9836497ea84b9596f486bd7e
+#: ../../enum_editor.txt:9
+msgid ""
+"Add a new option; a dialog will appear for you to enter the option text "
+"into."
+msgstr ""
+
+# cedff25428dc4d9bb5a1605317bba4a2
+#: ../../enum_editor.txt:12
+msgid "**Edit**"
+msgstr ""
+
+# b1be5b098a7e4986aeea26fb74debaa7
+#: ../../enum_editor.txt:12
+msgid ""
+"Change the text of an existing enum option.  All existing uses of this "
+"option will be updated to the new text."
+msgstr ""
+
+# c7516bb3712b464f98c39e91032ea7ab
+#: ../../enum_editor.txt:15
+msgid "**Delete**"
+msgstr ""
+
+# 68529c319df3434b892ad06e035bd607
+#: ../../enum_editor.txt:15
+msgid ""
+"Delete the currently selected option.  A dialog will ask you to pick the "
+"value to use wherever this option was being used."
+msgstr ""
+
+# 1ab5a21f7c0044d495df992e98037ea0
+#: ../../enum_editor.txt:18
+msgid "**Up**"
+msgstr ""
+
+# 3a0bba4810bb4b8dbade5ff88812d52c
+#: ../../enum_editor.txt:18
+msgid ""
+"Move the currently selected option up one position in the list (and hence in"
+" the selection droplist as well)."
+msgstr ""
+
+# 69e5d7eaf4db4ab4baba41b18516cbd2
+#: ../../enum_editor.txt:21
+msgid "**Down**"
+msgstr ""
+
+# 0ba1ab4cd8aa41fc8917ab8fc2d89f63
+#: ../../enum_editor.txt:21
+msgid ""
+"Move the currently selected option down one position in the list (and hence "
+"in the selection droplist as well)."
+msgstr ""
+
+# e9c8eb4fd9c340c4b81b8449713845c8
+#: ../../enum_editor.txt:23
+msgid ""
+"Just below the enum name are more buttons which allow you to change the list"
+" of options:"
+msgstr ""
+
+# fd03cac4281f45cfa947603084582b09
+#: ../../enum_editor.txt:26
+msgid "**Sort**"
+msgstr ""
+
+# 14d31e1c32c344ca9017b9d949f82376
+#: ../../enum_editor.txt:26
+msgid ""
+"Sort the options in alphabetical order.  Click the button again to reverse "
+"the sorting order."
+msgstr ""
+
+# 97dd897d76874a028356f92a070b6c1e
+#: ../../enum_editor.txt:29
+msgid "**Import**"
+msgstr ""
+
+# f4837df30e3147bd974b33e0a2db54ab
+#: ../../enum_editor.txt:29
+msgid ""
+"Add options from a text file; this file should have each option on a "
+"separate line.  Options in the file which are already in the enum will not "
+"be duplicated."
+msgstr ""
+
+# 03944b7ddd7f4436b240958354d0e544
+#: ../../enum_editor.txt:32
+msgid "**Export**"
+msgstr ""
+
+# f3b35035b47c45cdb81293ed85937eb2
+#: ../../enum_editor.txt:32
+msgid "Create a text file listing the current enum options, one on each line."
+msgstr ""
+
+# 6ca366f6364a471583d3735f8c8f5fa0
+#: ../../enum_editor.txt:34
+msgid ""
+"Click \"OK\"/\"Done\" to accept any changes that were made or cancel out of "
+"the dialog to leave the options unchanged (or cancel adding a new enum)."
+msgstr ""

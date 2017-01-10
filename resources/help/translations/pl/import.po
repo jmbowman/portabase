@@ -1,0 +1,100 @@
+# Messages from import.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2013-11-20 18:52+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Polish (http://www.transifex.com/jmbowman/portabase/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# a0a58e972afa42e98089636dcac56883
+#: ../../import.txt:4
+msgid "CSV import"
+msgstr ""
+
+# 66b5cb95c34b4b8aafca80b715e4a1ee
+#: ../../import.txt:6
+msgid ""
+"PortaBase can import rows of data from CSV (Comma-Separated Value) files.  "
+"This allows you to import data exported from a spreadsheet or another "
+"database program.  To do this:"
+msgstr ""
+
+# 52e508ed674c40be8ab885e64c93faf5
+#: ../../import.txt:8
+msgid ""
+"Open the PortaBase file you want to import the data into.  If you wish to "
+"import the data into a new file, create a new file and define a column "
+"structure that matches that of the data to be imported."
+msgstr ""
+
+# 4b13298a370146279ecf9904e126f02a
+#: ../../import.txt:10
+msgid ""
+"From the \"File\" menu in the :ref:`data viewer <data_viewer>`, select "
+"\"Import\".  A file dialog will open which allows you pick the CSV file you "
+"want to import from.  The CSV file must have the same number of columns as "
+"the open database file, and the values in those columns must be appropriate "
+"for the specified column types.  You may specify the encoding of the text "
+"file in order to import non-ASCII characters correctly; the default is UTF-8"
+" (which supports text in many languages), but you may also choose Latin-1 "
+"(which is used by most software configured for use primarily with Western "
+"European languages)."
+msgstr ""
+
+# 5b0373417c3b4c3e8203bd11b97a1a83
+#: ../../import.txt:12
+msgid ""
+"The rows in the imported file are added to the database.  Rows from other "
+"files can be added by repeating this process, or another copy of the same "
+"rows can be added by importing the same file again."
+msgstr ""
+
+# 5a1f73a0a8cc4880abfba9c923e78f31
+#: ../../import.txt:14
+msgid "Notes:"
+msgstr ""
+
+# 1d0f3ba24ef84f678e32096f35d3e012
+#: ../../import.txt:16
+msgid "Boolean fields must have a value of either 0 or 1."
+msgstr ""
+
+# 131affd192604cd990a010e5d8baae67
+#: ../../import.txt:18
+msgid ""
+"Date fields may be formated as YYYYMMDD, YYYY/MM/DD, YYYY-MM-DD, or "
+"YYYY.MM.DD."
+msgstr ""
+
+# 624916e9ef9d4755805ec1b9c2718b5d
+#: ../../import.txt:20
+msgid ""
+"Time fields may be formated as HH:MM:SS, HH:MM:SS AM, HH:MM, HH:MM AM, or "
+"the number of seconds past midnight.  Blank or -1 values are interpreted as "
+"\"None\"."
+msgstr ""
+
+# 89384c45e09f43c98f4ed49fcaf49af2
+#: ../../import.txt:22
+msgid ""
+"Calculation fields may be left as 0 or whatever; the actual values will be "
+"calculated during import."
+msgstr ""
+
+# 71cb8b7ee1f943a78e87996aa8859d4d
+#: ../../import.txt:24
+msgid ""
+"Image fields should contain either nothing (for no image loaded) or the "
+"relative or absolute path to a suitable image file."
+msgstr ""

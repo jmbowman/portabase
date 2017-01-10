@@ -1,0 +1,140 @@
+# Messages from introduction.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2013-11-20 18:52+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Polish (http://www.transifex.com/jmbowman/portabase/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# 864e593259f34373adcc6d170f3aa881
+#: ../../introduction.txt:4
+msgid "Introduction"
+msgstr ""
+
+# 0046061e6d924cbc81221c5b08312f94
+#: ../../introduction.txt:6
+msgid ""
+"PortaBase is a small database program for creating, browsing, and editing "
+"custom tables of data.  Typical uses are media inventories, reference "
+"charts, TODO lists, shopping lists, etc.  Notable features include:"
+msgstr ""
+
+# 8f9f1193b22d4850b6573ee9980761b6
+#: ../../introduction.txt:8
+msgid ""
+"String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time, "
+"Calculation, Sequence, Image, and Enum column types"
+msgstr ""
+
+# 41732c117431468cb92e4621b49011e4
+#: ../../introduction.txt:10
+msgid "Custom data views (subsets of the columns in any order)"
+msgstr ""
+
+# 713920e22e284a5fa9b5fa09e58131a9
+#: ../../introduction.txt:12
+msgid "Filter the displayed rows using sets of conditions"
+msgstr ""
+
+# 9b402b247414438680443c4428ed6075
+#: ../../introduction.txt:14
+msgid ""
+"Sort the rows by any combination of columns, each in ascending or descending"
+" order"
+msgstr ""
+
+# 32e170ec57bb480689a39df26f8ac923
+#: ../../introduction.txt:16
+msgid ""
+"Good performance even when browsing large tables; the display only loads "
+"data as needed"
+msgstr ""
+
+# 54a7420316524ea5a3b213a2b01f9010
+#: ../../introduction.txt:18
+msgid "Optional page navigation buttons, with custom number of rows per page"
+msgstr ""
+
+# 593d17994b1e4632a1663803d1b5c7f5
+#: ../../introduction.txt:20
+msgid "Add, delete, rearrange, and rename columns at any time"
+msgstr ""
+
+# 07272370c9944b0cab739b88114bd731
+#: ../../introduction.txt:22
+msgid "Specify default values for columns"
+msgstr ""
+
+# a00bb7d1079042e2a4e66197960b128b
+#: ../../introduction.txt:24
+msgid "View summary statistics for columns (total, average, min, max, etc.)"
+msgstr ""
+
+# bf197da1ddaa4d9497817087cc44c166
+#: ../../introduction.txt:26
+msgid "Import data from CSV, XML, and MobileDB files"
+msgstr ""
+
+# 215b3a3e261748a290db78acb9915dfc
+#: ../../introduction.txt:28
+msgid "Export data to CSV, HTML, and XML files"
+msgstr ""
+
+# 0326c943737f4cc8935f66a008385922
+#: ../../introduction.txt:30
+msgid ""
+"Command-line format conversions (to and from XML, to and from CSV, from "
+"MobileDB, to HTML)"
+msgstr ""
+
+# a2443ec58e824e2cb95acafb810b94fd
+#: ../../introduction.txt:32
+msgid ""
+"Print the data grid with view, sorting, and filter applied (not supported on"
+" Maemo)"
+msgstr ""
+
+# cde87a7997da42c79fd5c9f9aca30fba
+#: ../../introduction.txt:34
+msgid "Fullscreen mode option"
+msgstr ""
+
+# a25b4e13cb6b4c9091314367de03072e
+#: ../../introduction.txt:36
+msgid "Optional data file encryption"
+msgstr ""
+
+# 629eabc2bb704b9dbc57fd3f34105c13
+#: ../../introduction.txt:38
+msgid "Unicode support"
+msgstr ""
+
+# e0de9c1511d54ddc805f1cafd993f5db
+#: ../../introduction.txt:40
+msgid ""
+"Pick any available font to use throughout the application (not supported on "
+"Mac OS X)"
+msgstr ""
+
+# 60332a09ecbd4c2ca68b01dbdfa41ecd
+#: ../../introduction.txt:42
+msgid ""
+"User-specified alternating row background colors (Maemo Fremantle uses "
+"colors from the system theme instead)"
+msgstr ""
+
+# d68b7b5cdb524dd6a2cdf85abcc482f2
+#: ../../introduction.txt:44
+msgid "Simple calculator widget for entering numeric data"
+msgstr ""

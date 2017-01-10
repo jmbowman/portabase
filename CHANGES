@@ -1,3 +1,8 @@
+2017-01-09  JMB  Added Italian UI translation, updated translation files
+
+    A new Italian translation has been contributed by Maurizio Codogno.
+    Also fetched the latest updates for other languages from Transifex.
+
 2016-12-24  JMB  Added Qt 5 support, native Mac toolbar
 
     Added support for Qt 5 to get the latest fixes for actively supported

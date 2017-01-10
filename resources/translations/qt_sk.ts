@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="sk_SK">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sk" version="2.0">
 <context>
     <name>CloseButton</name>
     <message>
@@ -9,7 +7,42 @@
     </message>
 </context>
 <context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <source>Services</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide Others</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Preferences...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Quit %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>QAbstractSpinBox</name>
+    <message>
+        <source>&amp;Select All</source>
+        <translation>Vy&amp;brať všetko</translation>
+    </message>
     <message>
         <source>&amp;Step up</source>
         <translation>Krok na&amp;hor</translation>
@@ -18,17 +51,16 @@
         <source>Step &amp;down</source>
         <translation>Krok na&amp;dol</translation>
     </message>
-    <message>
-        <source>&amp;Select All</source>
-        <translation>Vy&amp;brať všetko</translation>
-    </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <source>QT_LAYOUT_DIRECTION</source>
-        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
-        <translation>LTR</translation>
+        <source>Activate</source>
+        <translation>Aktivovať</translation>
+    </message>
+    <message>
+        <source>Activates the program&apos;s main window</source>
+        <translation>Aktivuje hlavné okno programu</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
@@ -39,12 +71,9 @@
         <translation>Chyba kompatibility knižnice Qt</translation>
     </message>
     <message>
-        <source>Activate</source>
-        <translation>Aktivovať</translation>
-    </message>
-    <message>
-        <source>Activates the program&apos;s main window</source>
-        <translation>Aktivuje hlavné okno programu</translation>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string 'LTR' in left-to-right languages or to 'RTL' in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <translation>LTR</translation>
     </message>
 </context>
 <context>
@@ -105,32 +134,12 @@
         <translation>&amp;Vlastné farby</translation>
     </message>
     <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">&amp;Definovať vlastné farby &gt;&gt;</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Storno</translation>
-    </message>
-    <message>
         <source>&amp;Add to Custom Colors</source>
         <translation>Prid&amp;ať k vlastným farbám</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">Vybrať farbu</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
-    <message>
-        <source>Open</source>
-        <translation>Otvoriť</translation>
-    </message>
     <message>
         <source>False</source>
         <translation>Nepravda</translation>
@@ -140,6 +149,10 @@
         <translation>Pravda</translation>
     </message>
     <message>
+        <source>Open</source>
+        <translation>Otvoriť</translation>
+    </message>
+    <message>
         <source>Close</source>
         <translation>Zavrieť</translation>
     </message>
@@ -147,12 +160,12 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
-        <translation>Čo je to?</translation>
-    </message>
-    <message>
         <source>Done</source>
         <translation>Dokončené</translation>
+    </message>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>Čo je to?</translation>
     </message>
 </context>
 <context>
@@ -162,32 +175,36 @@
         <translation>OK</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation>Uložiť</translation>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Save</source>
         <translation>&amp;Uložiť</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>Otvoriť</translation>
+        <source>Save</source>
+        <translation>Uložiť</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Storno</translation>
+        <source>Open</source>
+        <translation>Otvoriť</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
         <translation>S&amp;torno</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Zavrieť</translation>
+        <source>Cancel</source>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>&amp;Close</source>
         <translation>&amp;Zavrieť</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Zavrieť</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -204,6 +221,10 @@
     <message>
         <source>Don&apos;t Save</source>
         <translation>Neuložiť</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation>Zavrieť bez uloženia</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -245,14 +266,6 @@
         <source>Restore Defaults</source>
         <translation>Obnoviť štandardné</translation>
     </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Zavrieť bez uloženia</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
-    </message>
 </context>
 <context>
     <name>QDirModel</name>
@@ -286,6 +299,10 @@
         <translation>Cieový súbor existuje</translation>
     </message>
     <message>
+        <source>Will not rename sequential file using block copy</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Cannot remove source file</source>
         <translation>Nemožno odstrániť vstupný súbor</translation>
     </message>
@@ -305,40 +322,88 @@
         <source>Cannot create %1 for output</source>
         <translation>Nemožno otvoriť %1 na výstup</translation>
     </message>
+    <message>
+        <source>No file engine available or engine does not support UnMapExtension</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>QFileDialog</name>
     <message>
-        <source>All Files (*)</source>
-        <translation>Všetky súbory (*)</translation>
+        <source>Look in:</source>
+        <translation>Hľadať v:</translation>
     </message>
     <message>
         <source>Back</source>
         <translation>Späť</translation>
     </message>
     <message>
+        <source>Go back</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Dopredu</translation>
+    </message>
+    <message>
+        <source>Go forward</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Parent Directory</source>
+        <translation>Rodičovský priečinok</translation>
+    </message>
+    <message>
+        <source>Go to the parent directory</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Create New Folder</source>
         <translation>Vytvoriť nový priečinok</translation>
+    </message>
+    <message>
+        <source>Create a New Folder</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>List View</source>
         <translation>Zoznam</translation>
     </message>
     <message>
+        <source>Change to list view mode</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Detail View</source>
         <translation>Detaily</translation>
+    </message>
+    <message>
+        <source>Change to detail view mode</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Files of type:</source>
+        <translation>Súbory typu:</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>Nájsť priečinok</translation>
     </message>
     <message>
         <source>Open</source>
         <translation>Otvoriť</translation>
     </message>
     <message>
-        <source>&amp;Open</source>
-        <translation>&amp;Otvoriť</translation>
+        <source>Save As</source>
+        <translation>Uložiť ako</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Uložiť</translation>
+        <source>All Files (*)</source>
+        <translation>Všetky súbory (*)</translation>
+    </message>
+    <message>
+        <source>Show </source>
+        <translation>Zobraziť</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
@@ -353,8 +418,40 @@
         <translation>Zobraziť &amp;skryté súbory</translation>
     </message>
     <message>
+        <source>&amp;New Folder</source>
+        <translation>&amp;Nový priečinok</translation>
+    </message>
+    <message>
+        <source>Directory:</source>
+        <translation>Priečinok:</translation>
+    </message>
+    <message>
+        <source>File &amp;name:</source>
+        <translation>Me&amp;no súboru:</translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>&amp;Otvoriť</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Uložiť</translation>
+    </message>
+    <message>
         <source>Directories</source>
         <translation>Priečinky</translation>
+    </message>
+    <message>
+        <source>&amp;Choose</source>
+        <translation>&amp;Zvoliť</translation>
+    </message>
+    <message>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1 
+Priečinok nenájdený. 
+Prosím overte správnosť zadaného mena priečinku.</translation>
     </message>
     <message>
         <source>%1 already exists.
@@ -371,47 +468,11 @@ Súbor nenájdený.
 Prosím overte správnosť zadaného mena súboru.</translation>
     </message>
     <message>
-        <source>Recent Places</source>
-        <translation>Nedávne umiestnenia</translation>
+        <source>New Folder</source>
+        <translation>Nový priečinok</translation>
     </message>
     <message>
-        <source>My Computer</source>
-        <translation>Môj počítač</translation>
-    </message>
-    <message>
-        <source>Parent Directory</source>
-        <translation>Rodičovský priečinok</translation>
-    </message>
-    <message>
-        <source>Look in:</source>
-        <translation>Hľadať v:</translation>
-    </message>
-    <message>
-        <source>Files of type:</source>
-        <translation>Súbory typu:</translation>
-    </message>
-    <message>
-        <source>Directory:</source>
-        <translation>Priečinok:</translation>
-    </message>
-    <message>
-        <source>
-File not found.
-Please verify the correct file name was given</source>
-        <translation type="obsolete">
-Súbor nenájdený.
-Prosím overte správnosť zadaného mena súboru</translation>
-    </message>
-    <message>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1 
-Priečinok nenájdený. 
-Prosím overte správnosť zadaného mena priečinku.</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
         <translation>&apos;%1&apos; je chránený proti zápisu.
 Chcete ho aj tak zmazať?</translation>
@@ -425,12 +486,20 @@ Chcete ho aj tak zmazať?</translation>
         <translation>Priečinok sa nedá zmazať.</translation>
     </message>
     <message>
+        <source>Recent Places</source>
+        <translation>Nedávne umiestnenia</translation>
+    </message>
+    <message>
         <source>All Files (*.*)</source>
         <translation>Všetky súbory (*.*)</translation>
     </message>
     <message>
-        <source>Save As</source>
-        <translation>Uložiť ako</translation>
+        <source>Remove</source>
+        <translation>Odstrániť</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>Môj počítač</translation>
     </message>
     <message>
         <source>Drive</source>
@@ -441,40 +510,28 @@ Chcete ho aj tak zmazať?</translation>
         <translation>Súbor</translation>
     </message>
     <message>
+        <source>File Folder</source>
+        <comment>Match Windows Explorer</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Folder</source>
+        <comment>All other platforms</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Alias</source>
+        <comment>Mac OS X Finder</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Shortcut</source>
+        <comment>All other platforms</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Unknown</source>
         <translation>Neznáme</translation>
-    </message>
-    <message>
-        <source>Find Directory</source>
-        <translation>Nájsť priečinok</translation>
-    </message>
-    <message>
-        <source>Show </source>
-        <translation>Zobraziť</translation>
-    </message>
-    <message>
-        <source>&amp;New Folder</source>
-        <translation>&amp;Nový priečinok</translation>
-    </message>
-    <message>
-        <source>&amp;Choose</source>
-        <translation>&amp;Zvoliť</translation>
-    </message>
-    <message>
-        <source>File &amp;name:</source>
-        <translation>Me&amp;no súboru:</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Nový priečinok</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Dopredu</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Odstrániť</translation>
     </message>
 </context>
 <context>
@@ -537,6 +594,10 @@ Chcete ho aj tak zmazať?</translation>
         <source>Computer</source>
         <translation>Počítač</translation>
     </message>
+    <message>
+        <source>%1 byte(s)</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>QFontDatabase</name>
@@ -550,19 +611,19 @@ Chcete ho aj tak zmazať?</translation>
     </message>
     <message>
         <source>Demi Bold</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Demi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Italic</source>
@@ -606,71 +667,71 @@ Chcete ho aj tak zmazať?</translation>
     </message>
     <message>
         <source>Thaana</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Devanagari</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bengali</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Gurmukhi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Gujarati</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Oriya</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Telugu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Kannada</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Malayalam</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sinhala</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Thai</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Lao</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tibetan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Myanmar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Georgian</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khmer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Simplified Chinese</source>
@@ -698,15 +759,23 @@ Chcete ho aj tak zmazať?</translation>
     </message>
     <message>
         <source>Ogham</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Runic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>N&apos;Ko</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QFontDialog</name>
+    <message>
+        <source>Select Font</source>
+        <translation>Vybrať písmo</translation>
+    </message>
     <message>
         <source>&amp;Font</source>
         <translation>&amp;Písmo</translation>
@@ -734,10 +803,6 @@ Chcete ho aj tak zmazať?</translation>
     <message>
         <source>Sample</source>
         <translation>Náhľad</translation>
-    </message>
-    <message>
-        <source>Select Font</source>
-        <translation>Vybrať písmo</translation>
     </message>
     <message>
         <source>Wr&amp;iting System</source>
@@ -790,12 +855,12 @@ Chcete ho aj tak zmazať?</translation>
         <translation>V&amp;ložiť</translation>
     </message>
     <message>
-        <source>Select All</source>
-        <translation>Vybrať všetko</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Odstrániť</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Vybrať všetko</translation>
     </message>
 </context>
 <context>
@@ -816,76 +881,16 @@ Chcete ho aj tak zmazať?</translation>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Informácie o</translation>
+        <source>Actions</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Config</source>
-        <translation type="obsolete">Konfigurácia</translation>
-    </message>
-    <message>
-        <source>Preference</source>
-        <translation type="obsolete">Preferencia</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Možnosti</translation>
-    </message>
-    <message>
-        <source>Setting</source>
-        <translation type="obsolete">Nastavenia</translation>
-    </message>
-    <message>
-        <source>Setup</source>
-        <translation type="obsolete">Nastavenie</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">Opustiť</translation>
-    </message>
-    <message>
-        <source>Exit</source>
-        <translation type="obsolete">Ukončiť</translation>
-    </message>
-    <message>
-        <source>About %1</source>
-        <translation type="obsolete">Informácie o %1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation type="obsolete">Informácie o Qt</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">Preferencie</translation>
-    </message>
-    <message>
-        <source>Quit %1</source>
-        <translation type="obsolete">Opustiť %1</translation>
+        <source>Corner Toolbar</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Informácie o Qt</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Pomocník</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Tento program používa Qt verziu %1.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;Informácie o Qt&lt;h3&gt;%1&lt;p&gt;Qt je C++ nástroj pre vývoj viac-platformových aplikácií.&lt;/p&gt;&lt;p&gt;Qt poskytuje jedno zdrojový prenos medzi MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux a všetkými významnými komerčnými variantmi Unix. Qt je tiež dostupná pre vložené zariadenia ako Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt je produkt spoločnosti Trolltech. Pozrite &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; pre viac informácií.&lt;/p&gt;</translation>
-    </message>
     <message>
         <source>Show Details...</source>
         <translation>Zobraziť detaily...</translation>
@@ -895,12 +900,24 @@ Chcete ho aj tak zmazať?</translation>
         <translation>Skryť detaily...</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;O Qt&lt;/h3&gt;&lt;p&gt;Tento program používa Qt verzie %1.&lt;/p&gt;&lt;p&gt;Qt je sada nástrojov C++ na vývoj viacplatformových aplikácií.&lt;/p&gt;&lt;p&gt;Qt poskytuje prenosnosť spoločného zdrojového kódu medzi MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux a všetký,mi hlavnými komečnými variantmi Unixu. Qt je dostupné aj pre zabudované zariadenia, ako Qt pre zabudovaný Linux a Qt pre Windows CE.&lt;/p&gt;&lt;p&gt;Qt je dostupné pod tromi rôznymi licenčnými voľbami, navrhnutými na prispôsobenie sa potrebám r§znych anšich používateľov.&lt;/p&gt;Qt licencované pod našim komerčným licenčným ujednaním  je vhodné na vývoj komerčného/proprietárneho softvéru, kde nechcete s žiadnou treťou stranou zdieľať žiadnu časť zdrojového kódu, či byť inak v rozpore s podmienkami GNU LGPL verzie 2.1 alebo GNU GPL verzie 3.0.&lt;/p&gt;&lt;p&gt;Qt licencované pod GNU LGPL verzie 2.1 je vhodné na vývoj aplikácií Qt (proprietárnych alebo sotvoreným kódom) poskytovaných v súlade s podmienkami GNU LGPL verzie 2.1.&lt;/p&gt;&lt;p&gt;Qt licencované pod GNU General Public License verzie 3.0 je vhodné na vývoj aplikácií Qt, ktoré chcete použiť v kombinácii so softvérom , ktorý spadá pod podmienky GNU GPL verzie 3.0 alebo keď ste ochotný dodržať podmienky GNU GPL verzie 3.0.&lt;/p&gt;&lt;p&gt;Prosím, navštívte &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt;, kde nájdete rpehľad licencovania Qt.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation a/alebo jej spoločnosť(ti).&lt;/p&gt;&lt;p&gt;Qt je produktom Nokia. Ďalšie informácie nájdete na &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;.&lt;/p&gt;</translation>
+        <source>OK</source>
+        <translation>OK</translation>
     </message>
     <message>
-        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Tento program používa Qt Open Source Edition verziu %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition je určená pre vývoj Open Source aplikácií. Pre vývoj vlastnených (closed source) aplikácií potrebujete komerčnú Qt licenciu.&lt;/p&gt;&lt;p&gt;Prosím pozrite &lt;a href=&quot;http://qt.nokia.com/company/model.html&quot;&gt;qt.nokia.com/company/model.html&lt;/a&gt; pre prehľad Qt licencovania.&lt;/p&gt;</translation>
+        <source>Help</source>
+        <translation>Pomocník</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Informácie o Qt</translation>
     </message>
 </context>
 <context>
@@ -916,22 +933,6 @@ Chcete ho aj tak zmazať?</translation>
 </context>
 <context>
     <name>QPageSetupWidget</name>
-    <message>
-        <source>Centimeters (cm)</source>
-        <translation>Centimetre (cm)</translation>
-    </message>
-    <message>
-        <source>Millimeters (mm)</source>
-        <translation>Milimetre (mm)</translation>
-    </message>
-    <message>
-        <source>Inches (in)</source>
-        <translation>Palce (in)</translation>
-    </message>
-    <message>
-        <source>Points (pt)</source>
-        <translation>Body (pt)</translation>
-    </message>
     <message>
         <source>Form</source>
         <translation>Formát</translation>
@@ -996,290 +997,28 @@ Chcete ho aj tak zmazať?</translation>
         <source>bottom margin</source>
         <translation>dolný okraj</translation>
     </message>
+    <message>
+        <source>Centimeters (cm)</source>
+        <translation>Centimetre (cm)</translation>
+    </message>
+    <message>
+        <source>Millimeters (mm)</source>
+        <translation>Milimetre (mm)</translation>
+    </message>
+    <message>
+        <source>Inches (in)</source>
+        <translation>Palce (in)</translation>
+    </message>
+    <message>
+        <source>Points (pt)</source>
+        <translation>Body (pt)</translation>
+    </message>
 </context>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <source>locally connected</source>
-        <translation>lokálne pripojená</translation>
-    </message>
-    <message>
-        <source>Aliases: %1</source>
-        <translation>Aliasy: %1</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>neznáme</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Storno</translation>
-    </message>
-    <message>
-        <source>Print in color if available</source>
-        <translation type="obsolete">Tlačiť farebne ak je to dostupné</translation>
-    </message>
-    <message>
-        <source>Print all</source>
-        <translation>Tlačiť všetko</translation>
-    </message>
-    <message>
-        <source>Print range</source>
-        <translation>Rozsah tlače</translation>
-    </message>
-    <message>
-        <source>Print last page first</source>
-        <translation type="obsolete">Tlačiť najprv poslednú stranu</translation>
-    </message>
-    <message>
-        <source>Number of copies:</source>
-        <translation type="obsolete">Počet kópií:</translation>
-    </message>
-    <message>
-        <source>Paper format</source>
-        <translation type="obsolete">Formát papiera</translation>
-    </message>
-    <message>
-        <source>Portrait</source>
-        <translation type="obsolete">Na výšku</translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="obsolete">Na šírku</translation>
-    </message>
-    <message>
-        <source>A0 (841 x 1189 mm)</source>
-        <translation>A0 (841 x 1189 mm)</translation>
-    </message>
-    <message>
-        <source>A1 (594 x 841 mm)</source>
-        <translation>A1 (594 x 841 mm)</translation>
-    </message>
-    <message>
-        <source>A2 (420 x 594 mm)</source>
-        <translation>A2 (420 x 594 mm)</translation>
-    </message>
-    <message>
-        <source>A3 (297 x 420 mm)</source>
-        <translation>A3 (297 x 420 mm)</translation>
-    </message>
-    <message>
-        <source>A5 (148 x 210 mm)</source>
-        <translation>A5 (148 x 210 mm)</translation>
-    </message>
-    <message>
-        <source>A6 (105 x 148 mm)</source>
-        <translation>A6 (105 x 148 mm)</translation>
-    </message>
-    <message>
-        <source>A7 (74 x 105 mm)</source>
-        <translation>A7 (74 x 105 mm)</translation>
-    </message>
-    <message>
-        <source>A8 (52 x 74 mm)</source>
-        <translation>A8 (52 x 74 mm)</translation>
-    </message>
-    <message>
-        <source>A9 (37 x 52 mm)</source>
-        <translation>A9 (37 x 52 mm)</translation>
-    </message>
-    <message>
-        <source>B0 (1000 x 1414 mm)</source>
-        <translation>B0 (1000 x 1414 mm)</translation>
-    </message>
-    <message>
-        <source>B1 (707 x 1000 mm)</source>
-        <translation>B1 (707 x 1000 mm)</translation>
-    </message>
-    <message>
-        <source>B2 (500 x 707 mm)</source>
-        <translation>B2 (500 x 707 mm)</translation>
-    </message>
-    <message>
-        <source>B3 (353 x 500 mm)</source>
-        <translation>B3 (353 x 500 mm)</translation>
-    </message>
-    <message>
-        <source>B4 (250 x 353 mm)</source>
-        <translation>B4 (250 x 353 mm)</translation>
-    </message>
-    <message>
-        <source>B6 (125 x 176 mm)</source>
-        <translation>B6 (125 x 176 mm)</translation>
-    </message>
-    <message>
-        <source>B7 (88 x 125 mm)</source>
-        <translation>B7 (88 x 125 mm)</translation>
-    </message>
-    <message>
-        <source>B8 (62 x 88 mm)</source>
-        <translation>B8 (62 x 88 mm)</translation>
-    </message>
-    <message>
-        <source>B9 (44 x 62 mm)</source>
-        <translation>B9 (44 x 62 mm)</translation>
-    </message>
-    <message>
-        <source>B10 (31 x 44 mm)</source>
-        <translation>B10 (31 x 44 mm)</translation>
-    </message>
-    <message>
-        <source>C5E (163 x 229 mm)</source>
-        <translation>C5E (163 x 229 mm)</translation>
-    </message>
-    <message>
-        <source>DLE (110 x 220 mm)</source>
-        <translation>DLE (110 x 220 mm)</translation>
-    </message>
-    <message>
-        <source>Folio (210 x 330 mm)</source>
-        <translation>Folio (210 x 330 mm)</translation>
-    </message>
-    <message>
-        <source>Ledger (432 x 279 mm)</source>
-        <translation>Ledger (432 x 279 mm)</translation>
-    </message>
-    <message>
-        <source>Tabloid (279 x 432 mm)</source>
-        <translation>Tabloid (279 x 432 mm)</translation>
-    </message>
-    <message>
-        <source>US Common #10 Envelope (105 x 241 mm)</source>
-        <translation>Obálka US Common #10 (105 x 241 mm)</translation>
-    </message>
-    <message>
-        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
-        <translation>A4 (210 x 297 mm, 8.26 x 11.7 palcov)</translation>
-    </message>
-    <message>
-        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
-        <translation>B5 (176 x 250 mm, 6.93 x 9.84 palcov)</translation>
-    </message>
-    <message>
-        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
-        <translation>Executive (7.5 x 10 palcov, 191 x 254 mm)</translation>
-    </message>
-    <message>
-        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
-        <translation>Legal (8.5 x 14 palcov, 216 x 356 mm)</translation>
-    </message>
-    <message>
-        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
-        <translation>Letter (8.5 x 11 palcov, 216 x 279 mm)</translation>
-    </message>
-    <message>
-        <source>Print selection</source>
-        <translation>Výber tlače</translation>
-    </message>
-    <message>
-        <source>Page size:</source>
-        <translation type="obsolete">Veľkosť strany:</translation>
-    </message>
-    <message>
-        <source>Orientation:</source>
-        <translation type="obsolete">Orientácia:</translation>
-    </message>
-    <message>
-        <source>Paper source:</source>
-        <translation type="obsolete">Zdroj papiera:</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Tlač</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Súbor</translation>
-    </message>
-    <message>
-        <source>Printer</source>
-        <translation type="obsolete">Tlačiareň</translation>
-    </message>
-    <message>
-        <source>Print To File ...</source>
-        <translation>Tlačiť do súboru ...</translation>
-    </message>
-    <message>
-        <source>Print dialog</source>
-        <translation type="obsolete">Dialóg tlače</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="obsolete">Veľkosť:</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">Vlastnosti</translation>
-    </message>
-    <message>
-        <source>Printer info:</source>
-        <translation type="obsolete">Informácie o tlačiarni:</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="obsolete">Prechádzať</translation>
-    </message>
-    <message>
-        <source>Print to file</source>
-        <translation type="obsolete">Tlačiť do súboru</translation>
-    </message>
-    <message>
-        <source>Pages from</source>
-        <translation type="obsolete">Strany od</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">do</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">Výber</translation>
-    </message>
-    <message>
-        <source>Copies</source>
-        <translation type="obsolete">Kópie</translation>
-    </message>
-    <message>
-        <source>Collate</source>
-        <translation type="obsolete">Triediť</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Iné</translation>
-    </message>
-    <message>
-        <source>Double side printing</source>
-        <translation type="obsolete">Obojstranná tlač</translation>
-    </message>
-    <message>
-        <source>File %1 is not writable.
-Please choose a different file name.</source>
-        <translation>Do súboru %1 sa nedá zapisovať. 
-Prosím vyberte si iné meno súboru.</translation>
-    </message>
-    <message>
-        <source>%1 already exists.
-Do you want to overwrite it?</source>
-        <translation>%1 už existuje. 
-Chcete ho prepísať?</translation>
-    </message>
-    <message>
-        <source>File exists</source>
-        <translation>Súbor existuje</translation>
-    </message>
-    <message>
-        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Chcete ho prepísať?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <source>%1 is a directory.
-Please choose a different file name.</source>
-        <translation>%1 je priečinok. 
-Prosím zvoľte iné meno súboru.</translation>
     </message>
     <message>
         <source>A0</source>
@@ -1375,35 +1114,179 @@ Prosím zvoľte iné meno súboru.</translation>
     </message>
     <message>
         <source>Executive</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Folio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Legal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Letter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tabloid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>US Common #10 Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Custom</source>
         <translation>Vlastná</translation>
+    </message>
+    <message>
+        <source>File exists</source>
+        <translation>Súbor existuje</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Chcete ho prepísať?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>A0 (841 x 1189 mm)</source>
+        <translation>A0 (841 x 1189 mm)</translation>
+    </message>
+    <message>
+        <source>A1 (594 x 841 mm)</source>
+        <translation>A1 (594 x 841 mm)</translation>
+    </message>
+    <message>
+        <source>A2 (420 x 594 mm)</source>
+        <translation>A2 (420 x 594 mm)</translation>
+    </message>
+    <message>
+        <source>A3 (297 x 420 mm)</source>
+        <translation>A3 (297 x 420 mm)</translation>
+    </message>
+    <message>
+        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
+        <translation>A4 (210 x 297 mm, 8.26 x 11.7 palcov)</translation>
+    </message>
+    <message>
+        <source>A5 (148 x 210 mm)</source>
+        <translation>A5 (148 x 210 mm)</translation>
+    </message>
+    <message>
+        <source>A6 (105 x 148 mm)</source>
+        <translation>A6 (105 x 148 mm)</translation>
+    </message>
+    <message>
+        <source>A7 (74 x 105 mm)</source>
+        <translation>A7 (74 x 105 mm)</translation>
+    </message>
+    <message>
+        <source>A8 (52 x 74 mm)</source>
+        <translation>A8 (52 x 74 mm)</translation>
+    </message>
+    <message>
+        <source>A9 (37 x 52 mm)</source>
+        <translation>A9 (37 x 52 mm)</translation>
+    </message>
+    <message>
+        <source>B0 (1000 x 1414 mm)</source>
+        <translation>B0 (1000 x 1414 mm)</translation>
+    </message>
+    <message>
+        <source>B1 (707 x 1000 mm)</source>
+        <translation>B1 (707 x 1000 mm)</translation>
+    </message>
+    <message>
+        <source>B2 (500 x 707 mm)</source>
+        <translation>B2 (500 x 707 mm)</translation>
+    </message>
+    <message>
+        <source>B3 (353 x 500 mm)</source>
+        <translation>B3 (353 x 500 mm)</translation>
+    </message>
+    <message>
+        <source>B4 (250 x 353 mm)</source>
+        <translation>B4 (250 x 353 mm)</translation>
+    </message>
+    <message>
+        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
+        <translation>B5 (176 x 250 mm, 6.93 x 9.84 palcov)</translation>
+    </message>
+    <message>
+        <source>B6 (125 x 176 mm)</source>
+        <translation>B6 (125 x 176 mm)</translation>
+    </message>
+    <message>
+        <source>B7 (88 x 125 mm)</source>
+        <translation>B7 (88 x 125 mm)</translation>
+    </message>
+    <message>
+        <source>B8 (62 x 88 mm)</source>
+        <translation>B8 (62 x 88 mm)</translation>
+    </message>
+    <message>
+        <source>B9 (44 x 62 mm)</source>
+        <translation>B9 (44 x 62 mm)</translation>
+    </message>
+    <message>
+        <source>B10 (31 x 44 mm)</source>
+        <translation>B10 (31 x 44 mm)</translation>
+    </message>
+    <message>
+        <source>C5E (163 x 229 mm)</source>
+        <translation>C5E (163 x 229 mm)</translation>
+    </message>
+    <message>
+        <source>DLE (110 x 220 mm)</source>
+        <translation>DLE (110 x 220 mm)</translation>
+    </message>
+    <message>
+        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
+        <translation>Executive (7.5 x 10 palcov, 191 x 254 mm)</translation>
+    </message>
+    <message>
+        <source>Folio (210 x 330 mm)</source>
+        <translation>Folio (210 x 330 mm)</translation>
+    </message>
+    <message>
+        <source>Ledger (432 x 279 mm)</source>
+        <translation>Ledger (432 x 279 mm)</translation>
+    </message>
+    <message>
+        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
+        <translation>Legal (8.5 x 14 palcov, 216 x 356 mm)</translation>
+    </message>
+    <message>
+        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
+        <translation>Letter (8.5 x 11 palcov, 216 x 279 mm)</translation>
+    </message>
+    <message>
+        <source>Tabloid (279 x 432 mm)</source>
+        <translation>Tabloid (279 x 432 mm)</translation>
+    </message>
+    <message>
+        <source>US Common #10 Envelope (105 x 241 mm)</source>
+        <translation>Obálka US Common #10 (105 x 241 mm)</translation>
+    </message>
+    <message>
+        <source>Print all</source>
+        <translation>Tlačiť všetko</translation>
+    </message>
+    <message>
+        <source>Print selection</source>
+        <translation>Výber tlače</translation>
+    </message>
+    <message>
+        <source>Print range</source>
+        <translation>Rozsah tlače</translation>
+    </message>
+    <message>
+        <source>Print current page</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>&amp;Options &gt;&gt;</source>
@@ -1434,8 +1317,46 @@ Prosím zvoľte iné meno súboru.</translation>
         <translation>Zapísať %1 súbor</translation>
     </message>
     <message>
+        <source>Print To File ...</source>
+        <translation>Tlačiť do súboru ...</translation>
+    </message>
+    <message>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 je priečinok. 
+Prosím zvoľte iné meno súboru.</translation>
+    </message>
+    <message>
+        <source>File %1 is not writable.
+Please choose a different file name.</source>
+        <translation>Do súboru %1 sa nedá zapisovať. 
+Prosím vyberte si iné meno súboru.</translation>
+    </message>
+    <message>
+        <source>%1 already exists.
+Do you want to overwrite it?</source>
+        <translation>%1 už existuje. 
+Chcete ho prepísať?</translation>
+    </message>
+    <message>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
         <translation>Hodnota „Od” nemôže byť väčšia ako hodnota „Do”.</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>locally connected</source>
+        <translation>lokálne pripojená</translation>
+    </message>
+    <message>
+        <source>Aliases: %1</source>
+        <translation>Aliasy: %1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>neznáme</translation>
     </message>
 </context>
 <context>
@@ -1526,21 +1447,6 @@ Prosím zvoľte iné meno súboru.</translation>
     </message>
 </context>
 <context>
-    <name>QPrintPropertiesDialog</name>
-    <message>
-        <source>PPD Properties</source>
-        <translation type="obsolete">PPD vlastnosti</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Uložiť</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-</context>
-<context>
     <name>QPrintPropertiesWidget</name>
     <message>
         <source>Form</source>
@@ -1580,6 +1486,10 @@ Prosím zvoľte iné meno súboru.</translation>
     <message>
         <source>to</source>
         <translation>do</translation>
+    </message>
+    <message>
+        <source>Current Page</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Selection</source>
@@ -1817,6 +1727,26 @@ Prosím zvoľte iné meno súboru.</translation>
         <source>Scroll Right</source>
         <translation>Posunúť vpravo</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Activate</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Press</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close the tab</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Activate the tab</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>QTextControl</name>
@@ -1867,12 +1797,22 @@ Prosím zvoľte iné meno súboru.</translation>
 <context>
     <name>QUndoGroup</name>
     <message>
+        <source>Undo %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Undo</source>
-        <translation>Vrátiť späť</translation>
+        <comment>Default text for undo action</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Redo %1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Opakovať vrátené</translation>
+        <comment>Default text for redo action</comment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1885,12 +1825,22 @@ Prosím zvoľte iné meno súboru.</translation>
 <context>
     <name>QUndoStack</name>
     <message>
+        <source>Undo %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Undo</source>
-        <translation>Vrátiť späť</translation>
+        <comment>Default text for undo action</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Redo %1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Opakovať vrátené</translation>
+        <comment>Default text for redo action</comment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

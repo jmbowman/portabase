@@ -1,0 +1,36 @@
+# Messages from image_viewer.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 05:09+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# 4f40a9486183449b96d1e0934495affe
+#: ../../image_viewer.txt:4
+msgid "Image viewer"
+msgstr ""
+
+# e724dfa201d0438eaa73720b337653f0
+#: ../../image_viewer.txt:6
+msgid ""
+"The image viewer is a simple dialog that displays the image contained in one"
+" field of an Image column.  If launched from the :ref:`data viewer "
+"<data_viewer>`, the left arrow key shows the image in the same column from "
+"the previous row in the current filter; similarly, the right arrow key shows"
+" the image from the next row.  Double-clicking on the image shows it in "
+"fullscreen mode; click on the fullscreen image again to close the viewer.  "
+"When viewing a fullscreen image (including slideshows) on Maemo Fremantle, "
+"the image will auto-rotate to match the current orientation of the device."
+msgstr ""

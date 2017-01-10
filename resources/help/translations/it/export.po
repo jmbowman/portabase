@@ -1,0 +1,61 @@
+# Messages from export.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-07-28 05:54+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# 4edadb88f5f44a25b467791034eb362a
+#: ../../export.txt:4
+msgid "Data export"
+msgstr ""
+
+# 464d914dd82f4a9986911911233d9817
+#: ../../export.txt:6
+msgid ""
+"PortaBase currently supports export to three formats: CSV, HTML, and XML.  "
+"The inverse of data import, this allows you to move database content into a "
+"spreadsheet, text editor, other database program, etc. for further "
+"manipulation.  To export the current database's contents:"
+msgstr ""
+
+# 471c5c0a21514279bf09836975e65264
+#: ../../export.txt:8
+msgid "Select \"Export\" from the \"File\" menu in the data viewer."
+msgstr ""
+
+# d395bc7fffda499faa746f96d1dd991c
+#: ../../export.txt:10
+msgid ""
+"Choose the format you want to export to from the droplist.  If you export to"
+" CSV or HTML, only the rows passing the current filter will be exported.  "
+"Additionally, when exporting to HTML only the columns included in the "
+"current view will be exported.  If you export to XML, the entire database "
+"structure (including column definitions, views, filters, etc.) will be "
+"exported; note that the result may be over twice the size of the actual data"
+" file, so make sure you have enough free storage space."
+msgstr ""
+
+# e08ae0c7b6104329af7be11493f5476d
+#: ../../export.txt:12
+msgid "Enter the name of the CSV, HTML, or XML file you wish to create."
+msgstr ""
+
+# c0c167874647439f8b2d2be45f579cfd
+#: ../../export.txt:14
+msgid ""
+"Click \"OK\"/\"Done\" to complete the export, or cancel out of the dialog to"
+" abort the operation."
+msgstr ""

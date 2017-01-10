@@ -41,6 +41,8 @@
      <file alias="Qt_es.qm">translations/qt_es.qm</file>
      <file alias="PortaBase_fr.qm">translations/portabase_fr.qm</file>
      <file alias="Qt_fr.qm">translations/qt_fr.qm</file>
+     <file alias="PortaBase_it.qm">translations/portabase_it.qm</file>
+     <file alias="Qt_it.qm">translations/qt_it.qm</file>
      <file alias="PortaBase_ja.qm">translations/portabase_ja.qm</file>
      <file alias="Qt_ja.qm">translations/qt_ja.qm</file>
      <file alias="PortaBase_sk.qm">translations/portabase_sk.qm</file>

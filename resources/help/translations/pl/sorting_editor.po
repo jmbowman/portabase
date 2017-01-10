@@ -1,0 +1,54 @@
+# Messages from sorting_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2013-11-20 18:52+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Polish (http://www.transifex.com/jmbowman/portabase/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# 75575e615edb414fbca3d2af94924af9
+#: ../../sorting_editor.txt:4
+msgid "Sorting editor"
+msgstr ""
+
+# 9eeeec5aa4964cd1835378b37307dc5c
+#: ../../sorting_editor.txt:6
+msgid ""
+"Clicking on a column label in the data viewer is a convenient way to sort "
+"the database contents by a single column.  But sometimes you may want to "
+"sort by a combination of columns; sort by the content of column A, within "
+"groups of the same value of A sort by the content of column B, etc.  To do "
+"this or to sort by a column that isn't shown in the current view, you need "
+"to define a named sorting."
+msgstr ""
+
+# 9b9f07d708524bebb23f258fa8873103
+#: ../../sorting_editor.txt:8
+msgid ""
+"Sortings are defined using the sorting editor dialog, which is very similar "
+"to the :ref:`view editor <view_editor>` dialog.  At the top of the dialog is"
+" a text box containing the name of the sorting; changing this renames the "
+"sorting.  Below that is a table showing the names of all the columns in the "
+"database, with a checkbox next to each indicating whether or not it is to be"
+" sorted.  Click this checkbox to add or remove the column from the set of "
+"ones to be sorted.  The third column in the table shows either \"Ascending\""
+" or \"Descending\" for checked rows, indicating which direction to sort in; "
+"click this indicator to change it to the opposite value.  The dialog has "
+"\"Up\" and \"Down\" buttons for moving the selected row up or down in the "
+"table, changing the sequence in which the columns are sorted.  The rows are "
+"sorted by the topmost checked column first, rows with the same value in that"
+" column are sorted by the next highest checked column, etc.  Click "
+"\"OK\"/\"Done\" to accept the currently shown settings or cancel out of the "
+"dialog to revert to the previous values (or to cancel adding a new sorting)."
+msgstr ""

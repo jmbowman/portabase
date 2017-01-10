@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.0">
+<context>
+    <name>CloseButton</name>
+    <message>
+        <source>Close Tab</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
 <context>
     <name>MAC_APPLICATION_MENU</name>
     <message>
@@ -33,14 +38,11 @@
     </message>
 </context>
 <context>
-    <name>CloseButton</name>
-    <message>
-        <source>Close Tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QAbstractSpinBox</name>
+    <message>
+        <source>&amp;Select All</source>
+        <translation>&amp;Seleccionar todo</translation>
+    </message>
     <message>
         <source>&amp;Step up</source>
         <translation>&amp;Aumentar</translation>
@@ -49,16 +51,16 @@
         <source>Step &amp;down</source>
         <translation>Re&amp;ducir</translation>
     </message>
-    <message>
-        <source>&amp;Select All</source>
-        <translation>&amp;Seleccionar todo</translation>
-    </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Activate</source>
         <translation>Activar</translation>
+    </message>
+    <message>
+        <source>Activates the program&apos;s main window</source>
+        <translation>Activa la ventana principal del programa</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
@@ -70,12 +72,8 @@
     </message>
     <message>
         <source>QT_LAYOUT_DIRECTION</source>
-        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <comment>Translate this string to the string 'LTR' in left-to-right languages or to 'RTL' in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
         <translation>LTR</translation>
-    </message>
-    <message>
-        <source>Activates the program&apos;s main window</source>
-        <translation>Activa la ventana principal del programa</translation>
     </message>
 </context>
 <context>
@@ -125,7 +123,7 @@
     </message>
     <message>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>&amp;Basic colors</source>
@@ -136,32 +134,12 @@
         <translation>&amp;Colores personalizados</translation>
     </message>
     <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">&amp;Definir colores personalizados &gt;&gt;</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">Aceptar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
         <source>&amp;Add to Custom Colors</source>
         <translation>&amp;Añadir a los colores personalizados</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">Seleccionar color</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
-    <message>
-        <source>Open</source>
-        <translation>Abrir</translation>
-    </message>
     <message>
         <source>False</source>
         <translation>Falso</translation>
@@ -171,6 +149,10 @@
         <translation>Verdadero</translation>
     </message>
     <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
@@ -178,12 +160,12 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
-        <translation>¿Qué es esto?</translation>
+        <source>Done</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Done</source>
-        <translation type="unfinished">Terminar</translation>
+        <source>What&apos;s This?</source>
+        <translation>¿Qué es esto?</translation>
     </message>
 </context>
 <context>
@@ -193,32 +175,36 @@
         <translation>Aceptar</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="unfinished">Guardar</translation>
+        <source>&amp;OK</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Guardar</translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
-    </message>
-    <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Cancelar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="unfinished">Cerrar</translation>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Cerrar</translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Apply</source>
@@ -235,6 +221,10 @@
     <message>
         <source>Don&apos;t Save</source>
         <translation>No guardar</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation>Cerrar sin guardar</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -276,14 +266,6 @@
         <source>Restore Defaults</source>
         <translation>Restaurar los valores predeterminados</translation>
     </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Cerrar sin guardar</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="unfinished">&amp;Aceptar</translation>
-    </message>
 </context>
 <context>
     <name>QDirModel</name>
@@ -297,9 +279,8 @@
     </message>
     <message>
         <source>Kind</source>
-        <comment>Match OS X Finder
-</comment>
-        <translation type="obsolete">Clase</translation>
+        <comment>Match OS X Finder</comment>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Type</source>
@@ -310,48 +291,143 @@
         <source>Date Modified</source>
         <translation>Última modificación</translation>
     </message>
-    <message>
-        <source>Kind</source>
-        <comment>Match OS X Finder</comment>
-        <translation type="unfinished">Clase</translation>
-    </message>
 </context>
 <context>
     <name>QFile</name>
     <message>
         <source>Destination file exists</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Will not rename sequential file using block copy</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cannot remove source file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cannot open %1 for input</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cannot open for output</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Failure to write block</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cannot create %1 for output</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>No file engine available or engine does not support UnMapExtension</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QFileDialog</name>
     <message>
+        <source>Look in:</source>
+        <translation>Ver en:</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Anterior (histórico)</translation>
+    </message>
+    <message>
+        <source>Go back</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Siguiente (histórico)</translation>
+    </message>
+    <message>
+        <source>Go forward</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Parent Directory</source>
+        <translation>Directorio superior</translation>
+    </message>
+    <message>
+        <source>Go to the parent directory</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Create New Folder</source>
+        <translation>Crear una nueva carpeta</translation>
+    </message>
+    <message>
+        <source>Create a New Folder</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation>Vista de lista</translation>
+    </message>
+    <message>
+        <source>Change to list view mode</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Detail View</source>
+        <translation>Vista detallada</translation>
+    </message>
+    <message>
+        <source>Change to detail view mode</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Files of type:</source>
+        <translation>Ficheros de tipo:</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>Buscar en el directorio</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation>Guardar como</translation>
+    </message>
+    <message>
         <source>All Files (*)</source>
         <translation>Todos los ficheros (*)</translation>
     </message>
     <message>
-        <source>Directories</source>
-        <translation>Directorios</translation>
+        <source>Show </source>
+        <translation>Mostrar </translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>Cambia&amp;r de nombre</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>&amp;Borrar</translation>
+    </message>
+    <message>
+        <source>Show &amp;hidden files</source>
+        <translation>Mostrar los fic&amp;heros ocultos</translation>
+    </message>
+    <message>
+        <source>&amp;New Folder</source>
+        <translation>&amp;Nueva carpeta</translation>
+    </message>
+    <message>
+        <source>Directory:</source>
+        <translation>Directorio:</translation>
+    </message>
+    <message>
+        <source>File &amp;name:</source>
+        <translation>&amp;Nombre de fichero:</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -362,8 +438,20 @@
         <translation>&amp;Guardar</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>Abrir</translation>
+        <source>Directories</source>
+        <translation>Directorios</translation>
+    </message>
+    <message>
+        <source>&amp;Choose</source>
+        <translation>&amp;Seleccionar</translation>
+    </message>
+    <message>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+Directorio no encontrado.
+Verique que el nombre del directorio es correcto.</translation>
     </message>
     <message>
         <source>%1 already exists.
@@ -380,63 +468,11 @@ Fichero no encontrado.
 Verifique que el nombre del fichero es correcto.</translation>
     </message>
     <message>
-        <source>My Computer</source>
-        <translation>Mi equipo</translation>
+        <source>New Folder</source>
+        <translation>Nueva carpeta</translation>
     </message>
     <message>
-        <source>&amp;Rename</source>
-        <translation>Cambia&amp;r de nombre</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>&amp;Borrar</translation>
-    </message>
-    <message>
-        <source>Show &amp;hidden files</source>
-        <translation>Mostrar los fic&amp;heros ocultos</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>Anterior (histórico)</translation>
-    </message>
-    <message>
-        <source>Parent Directory</source>
-        <translation>Directorio superior</translation>
-    </message>
-    <message>
-        <source>List View</source>
-        <translation>Vista de lista</translation>
-    </message>
-    <message>
-        <source>Detail View</source>
-        <translation>Vista detallada</translation>
-    </message>
-    <message>
-        <source>Files of type:</source>
-        <translation>Ficheros de tipo:</translation>
-    </message>
-    <message>
-        <source>Directory:</source>
-        <translation>Directorio:</translation>
-    </message>
-    <message>
-        <source>
-File not found.
-Please verify the correct file name was given</source>
-        <translation type="obsolete">
-Fichero no encontrado. 
-Compruebe que el nombre del fichero es correcto</translation>
-    </message>
-    <message>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1
-Directorio no encontrado.
-Verique que el nombre del directorio es correcto.</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
         <translation>«%1» está protegido contra escritura. 
 ¿Desea borrarlo de todas formas?</translation>
@@ -451,15 +487,19 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>Recent Places</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>All Files (*.*)</source>
         <translation>Todos los ficheros (*.*)</translation>
     </message>
     <message>
-        <source>Save As</source>
-        <translation>Guardar como</translation>
+        <source>Remove</source>
+        <translation>Eliminar</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>Mi equipo</translation>
     </message>
     <message>
         <source>Drive</source>
@@ -470,48 +510,28 @@ Do you want to delete it anyway?</source>
         <translation>Fichero</translation>
     </message>
     <message>
+        <source>File Folder</source>
+        <comment>Match Windows Explorer</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Folder</source>
+        <comment>All other platforms</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Alias</source>
+        <comment>Mac OS X Finder</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Shortcut</source>
+        <comment>All other platforms</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Unknown</source>
         <translation>Desconocido</translation>
-    </message>
-    <message>
-        <source>Find Directory</source>
-        <translation>Buscar en el directorio</translation>
-    </message>
-    <message>
-        <source>Show </source>
-        <translation>Mostrar </translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Siguiente (histórico)</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Nueva carpeta</translation>
-    </message>
-    <message>
-        <source>&amp;New Folder</source>
-        <translation>&amp;Nueva carpeta</translation>
-    </message>
-    <message>
-        <source>&amp;Choose</source>
-        <translation>&amp;Seleccionar</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Eliminar</translation>
-    </message>
-    <message>
-        <source>File &amp;name:</source>
-        <translation>&amp;Nombre de fichero:</translation>
-    </message>
-    <message>
-        <source>Look in:</source>
-        <translation>Ver en:</translation>
-    </message>
-    <message>
-        <source>Create New Folder</source>
-        <translation>Crear una nueva carpeta</translation>
     </message>
 </context>
 <context>
@@ -559,9 +579,8 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>Type</source>
-        <comment>
-All other platforms</comment>
-        <translation type="obsolete">Tipo</translation>
+        <comment>All other platforms</comment>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Date Modified</source>
@@ -576,180 +595,187 @@ All other platforms</comment>
         <translation>Equipo</translation>
     </message>
     <message>
-        <source>Type</source>
-        <comment>All other platforms</comment>
-        <translation type="unfinished">Tipo</translation>
+        <source>%1 byte(s)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QFontDatabase</name>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Demi Bold</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Demi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Oblique</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Latin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cyrillic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Armenian</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Hebrew</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Arabic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Syriac</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Thaana</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Devanagari</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bengali</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Gurmukhi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Gujarati</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Oriya</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Telugu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Kannada</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Malayalam</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sinhala</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Thai</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Lao</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tibetan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Myanmar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Georgian</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khmer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Korean</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Vietnamese</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ogham</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Runic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>N&apos;Ko</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QFontDialog</name>
+    <message>
+        <source>Select Font</source>
+        <translation>Seleccionar un tipo de letra</translation>
+    </message>
     <message>
         <source>&amp;Font</source>
         <translation>&amp;Tipo de letra</translation>
@@ -781,10 +807,6 @@ All other platforms</comment>
     <message>
         <source>Wr&amp;iting System</source>
         <translation>Sistema de escr&amp;itura</translation>
-    </message>
-    <message>
-        <source>Select Font</source>
-        <translation>Seleccionar un tipo de letra</translation>
     </message>
 </context>
 <context>
@@ -859,76 +881,16 @@ All other platforms</comment>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Acerca de</translation>
+        <source>Actions</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Config</source>
-        <translation type="obsolete">Configuración</translation>
-    </message>
-    <message>
-        <source>Preference</source>
-        <translation type="obsolete">Preferencia</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opciones</translation>
-    </message>
-    <message>
-        <source>Setting</source>
-        <translation type="obsolete">Parámetro</translation>
-    </message>
-    <message>
-        <source>Setup</source>
-        <translation type="obsolete">Configuración</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">Salir</translation>
-    </message>
-    <message>
-        <source>Exit</source>
-        <translation type="obsolete">Salir</translation>
-    </message>
-    <message>
-        <source>About %1</source>
-        <translation type="obsolete">Acerca de %1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation type="obsolete">Acerca de Qt</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">Preferencias</translation>
-    </message>
-    <message>
-        <source>Quit %1</source>
-        <translation type="obsolete">Salir de %1</translation>
+        <source>Corner Toolbar</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
-    <message>
-        <source>Help</source>
-        <translation>Ayuda</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>Aceptar</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Acerca de Qt</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Este programa utiliza la versión %1 de Qt.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;Acerca de Qt&lt;/h3&gt;%1&lt;p&gt;Qt es un toolkit en C++ para desarrollo de aplicaciones multiplataforma.&lt;/p&gt;&lt;p&gt;Qt proporciona portabilidad del código entre MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux y todas las variantes comerciales de Unix importantes. Qt también está disponible para sistemas empotrados bajo el nombre Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt es un producto de Trolltech. Visite &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; para obtener más información.&lt;/p&gt;</translation>
-    </message>
     <message>
         <source>Show Details...</source>
         <translation>Mostrar los detalles...</translation>
@@ -938,157 +900,257 @@ All other platforms</comment>
         <translation>Ocultar los detalles...</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>OK</source>
+        <translation>Aceptar</translation>
     </message>
     <message>
-        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Este programa utiliza Qt Open Source Edition versión %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition está dirigida al desarrollo de aplicaciones libres. Para desarrollar aplicaciones privativas (de código cerrado) necesita una licencia comercial de Qt.&lt;/p&gt;&lt;p&gt;Visite &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; para obtener una visión global de las licencias de Qt.&lt;/p&gt;</translation>
+        <source>Help</source>
+        <translation>Ayuda</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Acerca de Qt</translation>
     </message>
 </context>
 <context>
     <name>QPPDOptionsModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QPageSetupWidget</name>
     <message>
-        <source>Centimeters (cm)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Millimeters (mm)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inches (in)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points (pt)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page size:</source>
-        <translation type="unfinished">Tamaño de página:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paper source:</source>
-        <translation type="unfinished">Fuente del papel:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Portrait</source>
-        <translation type="unfinished">Vertical</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished">Apaisado</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reverse landscape</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reverse portrait</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>top margin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>left margin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>right margin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>bottom margin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Centimeters (cm)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Millimeters (mm)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Inches (in)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Points (pt)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <source>locally connected</source>
-        <translation>conectado localmente</translation>
+        <source>Print</source>
+        <translation>Imprimir</translation>
     </message>
     <message>
-        <source>Aliases: %1</source>
-        <translation>Alias: %1</translation>
+        <source>A0</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>unknown</source>
-        <translation>desconocido</translation>
+        <source>A1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Print in color if available</source>
-        <translation type="obsolete">Imprimir en color si es posible</translation>
+        <source>A2</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Print all</source>
-        <translation>Imprimir todo</translation>
+        <source>A3</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Print selection</source>
-        <translation>Imprimir la selección</translation>
+        <source>A4</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Print range</source>
-        <translation>Imprimir el intervalo</translation>
+        <source>A5</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Print last page first</source>
-        <translation type="obsolete">Imprimir primero la última página</translation>
+        <source>A6</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Number of copies:</source>
-        <translation type="obsolete">Número de copias:</translation>
+        <source>A7</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Paper format</source>
-        <translation type="obsolete">Formato del papel</translation>
+        <source>A8</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Portrait</source>
-        <translation type="obsolete">Vertical</translation>
+        <source>A9</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Landscape</source>
-        <translation type="obsolete">Apaisado</translation>
+        <source>B0</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B4</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B5</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B6</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B7</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B8</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B9</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B10</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>C5E</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>DLE</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Executive</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Folio</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Ledger</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>US Common #10 Envelope</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>File exists</source>
+        <translation>El fichero existe</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;¿Desea sobrescribirlo?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>A0 (841 x 1189 mm)</source>
@@ -1211,92 +1273,58 @@ All other platforms</comment>
         <translation>Sobre US Common #10 (105 x 241 mm)</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>Aceptar</translation>
+        <source>Print all</source>
+        <translation>Imprimir todo</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
+        <source>Print selection</source>
+        <translation>Imprimir la selección</translation>
     </message>
     <message>
-        <source>Page size:</source>
-        <translation type="obsolete">Tamaño de página:</translation>
+        <source>Print range</source>
+        <translation>Imprimir el intervalo</translation>
     </message>
     <message>
-        <source>Orientation:</source>
-        <translation type="obsolete">Orientación:</translation>
+        <source>Print current page</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Paper source:</source>
-        <translation type="obsolete">Fuente del papel:</translation>
+        <source>&amp;Options &gt;&gt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Print</source>
-        <translation>Imprimir</translation>
+        <source>&amp;Print</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>File</source>
-        <translation type="obsolete">Fichero</translation>
+        <source>&amp;Options &lt;&lt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Printer</source>
-        <translation type="obsolete">Impresora</translation>
+        <source>Print to File (PDF)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Print to File (Postscript)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Local file</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Write %1 file</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print To File ...</source>
         <translation>Imprimir a fichero...</translation>
     </message>
     <message>
-        <source>Print dialog</source>
-        <translation type="obsolete">Ventana de impresión</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="obsolete">Tamaño:</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">Propiedades</translation>
-    </message>
-    <message>
-        <source>Printer info:</source>
-        <translation type="obsolete">Información de la impresora:</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="obsolete">Explorar</translation>
-    </message>
-    <message>
-        <source>Print to file</source>
-        <translation type="obsolete">Imprimir a fichero</translation>
-    </message>
-    <message>
-        <source>Pages from</source>
-        <translation type="obsolete">Páginas</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">a</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">Selección</translation>
-    </message>
-    <message>
-        <source>Copies</source>
-        <translation type="obsolete">Copias</translation>
-    </message>
-    <message>
-        <source>Collate</source>
-        <translation type="obsolete">Recopilar</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Otro</translation>
-    </message>
-    <message>
-        <source>Double side printing</source>
-        <translation type="obsolete">Impresión a doble cara</translation>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 es un directorio. 
+Elija un nombre de fichero diferente.</translation>
     </message>
     <message>
         <source>File %1 is not writable.
@@ -1311,409 +1339,248 @@ Do you want to overwrite it?</source>
 ¿Desea sobrescribirlo?</translation>
     </message>
     <message>
-        <source>File exists</source>
-        <translation>El fichero existe</translation>
-    </message>
-    <message>
-        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;¿Desea sobrescribirlo?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <source>%1 is a directory.
-Please choose a different file name.</source>
-        <translation>%1 es un directorio. 
-Elija un nombre de fichero diferente.</translation>
-    </message>
-    <message>
-        <source>A0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B10</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C5E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DLE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Executive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ledger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Letter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tabloid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>US Common #10 Envelope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Options &gt;&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Options &lt;&lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print to File (PDF)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print to File (Postscript)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Local file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write %1 file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>Aceptar</translation>
+    </message>
+    <message>
+        <source>locally connected</source>
+        <translation>conectado localmente</translation>
+    </message>
+    <message>
+        <source>Aliases: %1</source>
+        <translation>Alias: %1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>desconocido</translation>
     </message>
 </context>
 <context>
     <name>QPrintPreviewDialog</name>
     <message>
         <source>Page Setup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print Preview</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Next page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Previous page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Fit width</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Fit page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Portrait</source>
-        <translation type="unfinished">Vertical</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished">Apaisado</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show single page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show facing pages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show overview of all pages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page setup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Cerrar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Export to PDF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Export to PostScript</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QPrintPropertiesDialog</name>
-    <message>
-        <source>PPD Properties</source>
-        <translation type="obsolete">Propiedades PPD</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Guardar</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">Aceptar</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QPrintPropertiesWidget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QPrintSettingsOutput</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Copies</source>
-        <translation type="unfinished">Copias</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print range</source>
-        <translation type="unfinished">Imprimir el intervalo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print all</source>
-        <translation type="unfinished">Imprimir todo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Pages from</source>
-        <translation type="unfinished">Páginas</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>to</source>
-        <translation type="unfinished">a</translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Current Page</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Selection</source>
-        <translation type="unfinished">Selección</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Output Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Copies:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Collate</source>
-        <translation type="unfinished">Recopilar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Duplex Printing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Long side</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Short side</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QPrintWidget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Printer</source>
-        <translation type="unfinished">Impresora</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>&amp;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>P&amp;roperties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Output &amp;file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1860,6 +1727,26 @@ Elija un nombre de fichero diferente.</translation>
         <source>Scroll Right</source>
         <translation>Desplazar hacia la derecha</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Activate</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Press</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close the tab</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Activate the tab</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>QTextControl</name>
@@ -1910,12 +1797,22 @@ Elija un nombre de fichero diferente.</translation>
 <context>
     <name>QUndoGroup</name>
     <message>
+        <source>Undo %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Undo</source>
-        <translation>Deshacer</translation>
+        <comment>Default text for undo action</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Redo %1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Rehacer</translation>
+        <comment>Default text for redo action</comment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1928,12 +1825,22 @@ Elija un nombre de fichero diferente.</translation>
 <context>
     <name>QUndoStack</name>
     <message>
+        <source>Undo %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Undo</source>
-        <translation>Deshacer</translation>
+        <comment>Default text for undo action</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Redo %1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Rehacer</translation>
+        <comment>Default text for redo action</comment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
