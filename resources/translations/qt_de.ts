@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.0">
 <context>
     <name>CloseButton</name>
     <message>
@@ -42,6 +40,10 @@
 <context>
     <name>QAbstractSpinBox</name>
     <message>
+        <source>&amp;Select All</source>
+        <translation>&amp;Alles auswählen</translation>
+    </message>
+    <message>
         <source>&amp;Step up</source>
         <translation>&amp;Inkrementieren</translation>
     </message>
@@ -49,17 +51,16 @@
         <source>Step &amp;down</source>
         <translation>&amp;Dekrementieren</translation>
     </message>
-    <message>
-        <source>&amp;Select All</source>
-        <translation>&amp;Alles auswählen</translation>
-    </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <source>QT_LAYOUT_DIRECTION</source>
-        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
-        <translation>LTR</translation>
+        <source>Activate</source>
+        <translation>Aktivieren</translation>
+    </message>
+    <message>
+        <source>Activates the program&apos;s main window</source>
+        <translation>Aktiviert das Hauptfenster der Anwendung</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
@@ -70,12 +71,9 @@
         <translation>Die Qt-Bibliothek ist inkompatibel</translation>
     </message>
     <message>
-        <source>Activate</source>
-        <translation>Aktivieren</translation>
-    </message>
-    <message>
-        <source>Activates the program&apos;s main window</source>
-        <translation>Aktiviert das Hauptfenster der Anwendung</translation>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string 'LTR' in left-to-right languages or to 'RTL' in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <translation>LTR</translation>
     </message>
 </context>
 <context>
@@ -143,16 +141,16 @@
 <context>
     <name>QComboBox</name>
     <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
         <source>False</source>
         <translation>Falsch</translation>
     </message>
     <message>
         <source>True</source>
         <translation>Wahr</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Close</source>
@@ -162,12 +160,12 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
-        <translation>Direkthilfe</translation>
-    </message>
-    <message>
         <source>Done</source>
         <translation>Fertig</translation>
+    </message>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>Direkthilfe</translation>
     </message>
 </context>
 <context>
@@ -177,32 +175,36 @@
         <translation>OK</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Save</source>
         <translation>S&amp;peichern</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
+        <source>Save</source>
+        <translation>Speichern</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <source>Open</source>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Schließen</translation>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>&amp;Close</source>
         <translation>Schl&amp;ießen</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -219,6 +221,10 @@
     <message>
         <source>Don&apos;t Save</source>
         <translation>Nicht speichern</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation>Schließen ohne Speichern</translation>
     </message>
     <message>
         <source>Discard</source>
@@ -259,14 +265,6 @@
     <message>
         <source>Restore Defaults</source>
         <translation>Voreinstellungen</translation>
-    </message>
-    <message>
-        <source>Close without Saving</source>
-        <translation>Schließen ohne Speichern</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
     </message>
 </context>
 <context>
@@ -332,24 +330,64 @@
 <context>
     <name>QFileDialog</name>
     <message>
-        <source>All Files (*)</source>
-        <translation>Alle Dateien (*)</translation>
+        <source>Look in:</source>
+        <translation>Suchen in:</translation>
     </message>
     <message>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
+        <source>Go back</source>
+        <translation>Zurück</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Vorwärts</translation>
+    </message>
+    <message>
+        <source>Go forward</source>
+        <translation>Vor</translation>
+    </message>
+    <message>
+        <source>Parent Directory</source>
+        <translation>Übergeordnetes Verzeichnis</translation>
+    </message>
+    <message>
+        <source>Go to the parent directory</source>
+        <translation>Gehe zum übergeordneten Verzeichnis</translation>
+    </message>
+    <message>
+        <source>Create New Folder</source>
+        <translation>Neuen Ordner erstellen</translation>
+    </message>
+    <message>
+        <source>Create a New Folder</source>
+        <translation>Neuen Ordner erstellen</translation>
+    </message>
+    <message>
         <source>List View</source>
         <translation>Liste</translation>
+    </message>
+    <message>
+        <source>Change to list view mode</source>
+        <translation>Wechsle zu Listenansicht</translation>
     </message>
     <message>
         <source>Detail View</source>
         <translation>Details</translation>
     </message>
     <message>
-        <source>File</source>
-        <translation>Datei</translation>
+        <source>Change to detail view mode</source>
+        <translation>Wechsle zu Detailansicht</translation>
+    </message>
+    <message>
+        <source>Files of type:</source>
+        <translation>Dateien des Typs:</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>Verzeichnis suchen</translation>
     </message>
     <message>
         <source>Open</source>
@@ -360,16 +398,12 @@
         <translation>Speichern unter</translation>
     </message>
     <message>
-        <source>&amp;Open</source>
-        <translation>&amp;Öffnen</translation>
+        <source>All Files (*)</source>
+        <translation>Alle Dateien (*)</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation>S&amp;peichern</translation>
-    </message>
-    <message>
-        <source>Recent Places</source>
-        <translation>Zuletzt besucht</translation>
+        <source>Show </source>
+        <translation>Anzeigen </translation>
     </message>
     <message>
         <source>&amp;Rename</source>
@@ -384,24 +418,40 @@
         <translation>&amp;Versteckte Dateien anzeigen</translation>
     </message>
     <message>
-        <source>New Folder</source>
-        <translation>Neues Verzeichnis</translation>
+        <source>&amp;New Folder</source>
+        <translation>&amp;Neues Verzeichnis</translation>
     </message>
     <message>
-        <source>Find Directory</source>
-        <translation>Verzeichnis suchen</translation>
+        <source>Directory:</source>
+        <translation>Verzeichnis:</translation>
+    </message>
+    <message>
+        <source>File &amp;name:</source>
+        <translation>Datei&amp;name:</translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>&amp;Öffnen</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>S&amp;peichern</translation>
     </message>
     <message>
         <source>Directories</source>
         <translation>Verzeichnisse</translation>
     </message>
     <message>
-        <source>All Files (*.*)</source>
-        <translation>Alle Dateien (*.*)</translation>
+        <source>&amp;Choose</source>
+        <translation>&amp;Auswählen</translation>
     </message>
     <message>
-        <source>Directory:</source>
-        <translation>Verzeichnis:</translation>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+Das Verzeichnis konnte nicht gefunden werden.
+Stellen Sie sicher, dass der Verzeichnisname richtig ist.</translation>
     </message>
     <message>
         <source>%1 already exists.
@@ -418,27 +468,11 @@ Die Datei konnte nicht gefunden werden.
 Stellen Sie sicher, dass der Dateiname richtig ist.</translation>
     </message>
     <message>
-        <source>My Computer</source>
-        <translation>Mein Computer</translation>
+        <source>New Folder</source>
+        <translation>Neues Verzeichnis</translation>
     </message>
     <message>
-        <source>Parent Directory</source>
-        <translation>Übergeordnetes Verzeichnis</translation>
-    </message>
-    <message>
-        <source>Files of type:</source>
-        <translation>Dateien des Typs:</translation>
-    </message>
-    <message>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1
-Das Verzeichnis konnte nicht gefunden werden.
-Stellen Sie sicher, dass der Verzeichnisname richtig ist.</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
         <translation>&apos;%1&apos; ist schreibgeschützt.
 Möchten Sie die Datei trotzdem löschen?</translation>
@@ -452,8 +486,28 @@ Möchten Sie die Datei trotzdem löschen?</translation>
         <translation>Konnte Verzeichnis nicht löschen.</translation>
     </message>
     <message>
+        <source>Recent Places</source>
+        <translation>Zuletzt besucht</translation>
+    </message>
+    <message>
+        <source>All Files (*.*)</source>
+        <translation>Alle Dateien (*.*)</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>Mein Computer</translation>
+    </message>
+    <message>
         <source>Drive</source>
         <translation>Laufwerk</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>File Folder</source>
@@ -478,62 +532,6 @@ Möchten Sie die Datei trotzdem löschen?</translation>
     <message>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
-    </message>
-    <message>
-        <source>Show </source>
-        <translation>Anzeigen </translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Vorwärts</translation>
-    </message>
-    <message>
-        <source>&amp;New Folder</source>
-        <translation>&amp;Neues Verzeichnis</translation>
-    </message>
-    <message>
-        <source>&amp;Choose</source>
-        <translation>&amp;Auswählen</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>File &amp;name:</source>
-        <translation>Datei&amp;name:</translation>
-    </message>
-    <message>
-        <source>Look in:</source>
-        <translation>Suchen in:</translation>
-    </message>
-    <message>
-        <source>Create New Folder</source>
-        <translation>Neuen Ordner erstellen</translation>
-    </message>
-    <message>
-        <source>Go back</source>
-        <translation>Zurück</translation>
-    </message>
-    <message>
-        <source>Go forward</source>
-        <translation>Vor</translation>
-    </message>
-    <message>
-        <source>Go to the parent directory</source>
-        <translation>Gehe zum übergeordneten Verzeichnis</translation>
-    </message>
-    <message>
-        <source>Create a New Folder</source>
-        <translation>Neuen Ordner erstellen</translation>
-    </message>
-    <message>
-        <source>Change to list view mode</source>
-        <translation>Wechsle zu Listenansicht</translation>
-    </message>
-    <message>
-        <source>Change to detail view mode</source>
-        <translation>Wechsle zu Detailansicht</translation>
     </message>
 </context>
 <context>
@@ -775,6 +773,10 @@ Möchten Sie die Datei trotzdem löschen?</translation>
 <context>
     <name>QFontDialog</name>
     <message>
+        <source>Select Font</source>
+        <translation>Schriftart auswählen</translation>
+    </message>
+    <message>
         <source>&amp;Font</source>
         <translation>&amp;Schriftart</translation>
     </message>
@@ -801,10 +803,6 @@ Möchten Sie die Datei trotzdem löschen?</translation>
     <message>
         <source>Sample</source>
         <translation>Beispiel</translation>
-    </message>
-    <message>
-        <source>Select Font</source>
-        <translation>Schriftart auswählen</translation>
     </message>
     <message>
         <source>Wr&amp;iting System</source>
@@ -837,10 +835,6 @@ Möchten Sie die Datei trotzdem löschen?</translation>
 <context>
     <name>QLineEdit</name>
     <message>
-        <source>Select All</source>
-        <translation>Alles auswählen</translation>
-    </message>
-    <message>
         <source>&amp;Undo</source>
         <translation>&amp;Rückgängig</translation>
     </message>
@@ -864,6 +858,10 @@ Möchten Sie die Datei trotzdem löschen?</translation>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
+    <message>
+        <source>Select All</source>
+        <translation>Alles auswählen</translation>
+    </message>
 </context>
 <context>
     <name>QMenu</name>
@@ -886,29 +884,13 @@ Möchten Sie die Datei trotzdem löschen?</translation>
         <source>Actions</source>
         <translation>Optionen</translation>
     </message>
+    <message>
+        <source>Corner Toolbar</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>QMessageBox</name>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Über Qt&lt;/h3&gt;&lt;p&gt;Dieses Programm verwendet Qt Version %1.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Über Qt</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Hilfe</translation>
-    </message>
     <message>
         <source>Show Details...</source>
         <translation>Details einblenden...</translation>
@@ -916,6 +898,26 @@ Möchten Sie die Datei trotzdem löschen?</translation>
     <message>
         <source>Hide Details...</source>
         <translation>Details ausblenden...</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Hilfe</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Über Qt&lt;/h3&gt;&lt;p&gt;Dieses Programm verwendet Qt Version %1.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Über Qt</translation>
     </message>
 </context>
 <context>
@@ -931,22 +933,6 @@ Möchten Sie die Datei trotzdem löschen?</translation>
 </context>
 <context>
     <name>QPageSetupWidget</name>
-    <message>
-        <source>Centimeters (cm)</source>
-        <translation>Zentimeter (cm)</translation>
-    </message>
-    <message>
-        <source>Millimeters (mm)</source>
-        <translation>Millimeter (mm)</translation>
-    </message>
-    <message>
-        <source>Inches (in)</source>
-        <translation>Zoll (in)</translation>
-    </message>
-    <message>
-        <source>Points (pt)</source>
-        <translation>Punkte (pt)</translation>
-    </message>
     <message>
         <source>Form</source>
         <translation>Formular</translation>
@@ -1011,198 +997,28 @@ Möchten Sie die Datei trotzdem löschen?</translation>
         <source>bottom margin</source>
         <translation>Unterer Rand</translation>
     </message>
+    <message>
+        <source>Centimeters (cm)</source>
+        <translation>Zentimeter (cm)</translation>
+    </message>
+    <message>
+        <source>Millimeters (mm)</source>
+        <translation>Millimeter (mm)</translation>
+    </message>
+    <message>
+        <source>Inches (in)</source>
+        <translation>Zoll (in)</translation>
+    </message>
+    <message>
+        <source>Points (pt)</source>
+        <translation>Punkte (pt)</translation>
+    </message>
 </context>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <source>locally connected</source>
-        <translation>direkt verbunden</translation>
-    </message>
-    <message>
-        <source>Aliases: %1</source>
-        <translation>Alias: %1</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Print all</source>
-        <translation>Alles drucken</translation>
-    </message>
-    <message>
-        <source>Print range</source>
-        <translation>Bereich drucken</translation>
-    </message>
-    <message>
-        <source>A0 (841 x 1189 mm)</source>
-        <translation>A0 (841 x 1189 mm)</translation>
-    </message>
-    <message>
-        <source>A1 (594 x 841 mm)</source>
-        <translation>A1 (594 x 841 mm)</translation>
-    </message>
-    <message>
-        <source>A2 (420 x 594 mm)</source>
-        <translation>A2 (420 x 594 mm)</translation>
-    </message>
-    <message>
-        <source>A3 (297 x 420 mm)</source>
-        <translation>A3 (297 x 420 mm)</translation>
-    </message>
-    <message>
-        <source>A5 (148 x 210 mm)</source>
-        <translation>A5 (148 x 210 mm)</translation>
-    </message>
-    <message>
-        <source>A6 (105 x 148 mm)</source>
-        <translation>A6 (105 x 148 mm)</translation>
-    </message>
-    <message>
-        <source>A7 (74 x 105 mm)</source>
-        <translation>A7 (74 x 105 mm)</translation>
-    </message>
-    <message>
-        <source>A8 (52 x 74 mm)</source>
-        <translation>A8 (52 x 74 mm)</translation>
-    </message>
-    <message>
-        <source>A9 (37 x 52 mm)</source>
-        <translation>A9 (37 x 52 mm)</translation>
-    </message>
-    <message>
-        <source>B0 (1000 x 1414 mm)</source>
-        <translation>B0 (1000 x 1414 mm)</translation>
-    </message>
-    <message>
-        <source>B1 (707 x 1000 mm)</source>
-        <translation>B1 (707 x 1000 mm)</translation>
-    </message>
-    <message>
-        <source>B2 (500 x 707 mm)</source>
-        <translation>B2 (500 x 707 mm)</translation>
-    </message>
-    <message>
-        <source>B3 (353 x 500 mm)</source>
-        <translation>B3 (353 x 500 mm)</translation>
-    </message>
-    <message>
-        <source>B4 (250 x 353 mm)</source>
-        <translation>B4 (250 x 353 mm)</translation>
-    </message>
-    <message>
-        <source>B6 (125 x 176 mm)</source>
-        <translation>B6 (125 x 176 mm)</translation>
-    </message>
-    <message>
-        <source>B7 (88 x 125 mm)</source>
-        <translation>B7 (88 x 125 mm)</translation>
-    </message>
-    <message>
-        <source>B8 (62 x 88 mm)</source>
-        <translation>B8 (62 x 88 mm)</translation>
-    </message>
-    <message>
-        <source>B9 (44 x 62 mm)</source>
-        <translation>B9 (44 x 62 mm)</translation>
-    </message>
-    <message>
-        <source>B10 (31 x 44 mm)</source>
-        <translation>B10 (31 x 44 mm)</translation>
-    </message>
-    <message>
-        <source>C5E (163 x 229 mm)</source>
-        <translation>C5E (163 x 229 mm)</translation>
-    </message>
-    <message>
-        <source>DLE (110 x 220 mm)</source>
-        <translation>DLE (110 x 220 mm)</translation>
-    </message>
-    <message>
-        <source>Folio (210 x 330 mm)</source>
-        <translation>Folio (210 x 330 mm)</translation>
-    </message>
-    <message>
-        <source>Ledger (432 x 279 mm)</source>
-        <translation>Ledger (432 x 279 mm)</translation>
-    </message>
-    <message>
-        <source>Tabloid (279 x 432 mm)</source>
-        <translation>Tabloid (279 x 432 mm)</translation>
-    </message>
-    <message>
-        <source>US Common #10 Envelope (105 x 241 mm)</source>
-        <translation>US Common #10 Envelope (105 x 241 mm)</translation>
-    </message>
-    <message>
-        <source>Print current page</source>
-        <translation>Diese Seite drucken</translation>
-    </message>
-    <message>
-        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
-        <translation>A4 (210 x 297 mm)</translation>
-    </message>
-    <message>
-        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
-        <translation>B5 (176 x 250 mm)</translation>
-    </message>
-    <message>
-        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
-        <translation>Executive (7,5 x 10 Zoll, 191 x 254 mm)</translation>
-    </message>
-    <message>
-        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
-        <translation>Legal (8,5 x 14 Zoll, 216 x 356 mm)</translation>
-    </message>
-    <message>
-        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
-        <translation>Letter (8,5 x 11 Zoll, 216 x 279 mm)</translation>
-    </message>
-    <message>
-        <source>Print selection</source>
-        <translation>Auswahl drucken</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Drucken</translation>
-    </message>
-    <message>
-        <source>Print To File ...</source>
-        <translation>In Datei drucken ...</translation>
-    </message>
-    <message>
-        <source>File %1 is not writable.
-Please choose a different file name.</source>
-        <translation>Die Datei %1 ist schreibgeschützt.
-Bitte wählen Sie einen anderen Dateinamen.</translation>
-    </message>
-    <message>
-        <source>%1 already exists.
-Do you want to overwrite it?</source>
-        <translation>Die Datei %1 existiert bereits.
-Soll sie überschrieben werden?</translation>
-    </message>
-    <message>
-        <source>File exists</source>
-        <translation>Die Datei existiert bereits</translation>
-    </message>
-    <message>
-        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Soll sie überschrieben werden?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <source>%1 is a directory.
-Please choose a different file name.</source>
-        <translation>%1 ist ein Verzeichnis.
-Bitte wählen Sie einen anderen Dateinamen.</translation>
-    </message>
-    <message>
-        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translation>Die Angabe für die erste Seite darf nicht größer sein als die für die letzte Seite.</translation>
     </message>
     <message>
         <source>A0</source>
@@ -1329,8 +1145,156 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <translation>Benutzerdefiniert</translation>
     </message>
     <message>
+        <source>File exists</source>
+        <translation>Die Datei existiert bereits</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Soll sie überschrieben werden?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>A0 (841 x 1189 mm)</source>
+        <translation>A0 (841 x 1189 mm)</translation>
+    </message>
+    <message>
+        <source>A1 (594 x 841 mm)</source>
+        <translation>A1 (594 x 841 mm)</translation>
+    </message>
+    <message>
+        <source>A2 (420 x 594 mm)</source>
+        <translation>A2 (420 x 594 mm)</translation>
+    </message>
+    <message>
+        <source>A3 (297 x 420 mm)</source>
+        <translation>A3 (297 x 420 mm)</translation>
+    </message>
+    <message>
+        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
+        <translation>A4 (210 x 297 mm)</translation>
+    </message>
+    <message>
+        <source>A5 (148 x 210 mm)</source>
+        <translation>A5 (148 x 210 mm)</translation>
+    </message>
+    <message>
+        <source>A6 (105 x 148 mm)</source>
+        <translation>A6 (105 x 148 mm)</translation>
+    </message>
+    <message>
+        <source>A7 (74 x 105 mm)</source>
+        <translation>A7 (74 x 105 mm)</translation>
+    </message>
+    <message>
+        <source>A8 (52 x 74 mm)</source>
+        <translation>A8 (52 x 74 mm)</translation>
+    </message>
+    <message>
+        <source>A9 (37 x 52 mm)</source>
+        <translation>A9 (37 x 52 mm)</translation>
+    </message>
+    <message>
+        <source>B0 (1000 x 1414 mm)</source>
+        <translation>B0 (1000 x 1414 mm)</translation>
+    </message>
+    <message>
+        <source>B1 (707 x 1000 mm)</source>
+        <translation>B1 (707 x 1000 mm)</translation>
+    </message>
+    <message>
+        <source>B2 (500 x 707 mm)</source>
+        <translation>B2 (500 x 707 mm)</translation>
+    </message>
+    <message>
+        <source>B3 (353 x 500 mm)</source>
+        <translation>B3 (353 x 500 mm)</translation>
+    </message>
+    <message>
+        <source>B4 (250 x 353 mm)</source>
+        <translation>B4 (250 x 353 mm)</translation>
+    </message>
+    <message>
+        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
+        <translation>B5 (176 x 250 mm)</translation>
+    </message>
+    <message>
+        <source>B6 (125 x 176 mm)</source>
+        <translation>B6 (125 x 176 mm)</translation>
+    </message>
+    <message>
+        <source>B7 (88 x 125 mm)</source>
+        <translation>B7 (88 x 125 mm)</translation>
+    </message>
+    <message>
+        <source>B8 (62 x 88 mm)</source>
+        <translation>B8 (62 x 88 mm)</translation>
+    </message>
+    <message>
+        <source>B9 (44 x 62 mm)</source>
+        <translation>B9 (44 x 62 mm)</translation>
+    </message>
+    <message>
+        <source>B10 (31 x 44 mm)</source>
+        <translation>B10 (31 x 44 mm)</translation>
+    </message>
+    <message>
+        <source>C5E (163 x 229 mm)</source>
+        <translation>C5E (163 x 229 mm)</translation>
+    </message>
+    <message>
+        <source>DLE (110 x 220 mm)</source>
+        <translation>DLE (110 x 220 mm)</translation>
+    </message>
+    <message>
+        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
+        <translation>Executive (7,5 x 10 Zoll, 191 x 254 mm)</translation>
+    </message>
+    <message>
+        <source>Folio (210 x 330 mm)</source>
+        <translation>Folio (210 x 330 mm)</translation>
+    </message>
+    <message>
+        <source>Ledger (432 x 279 mm)</source>
+        <translation>Ledger (432 x 279 mm)</translation>
+    </message>
+    <message>
+        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
+        <translation>Legal (8,5 x 14 Zoll, 216 x 356 mm)</translation>
+    </message>
+    <message>
+        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
+        <translation>Letter (8,5 x 11 Zoll, 216 x 279 mm)</translation>
+    </message>
+    <message>
+        <source>Tabloid (279 x 432 mm)</source>
+        <translation>Tabloid (279 x 432 mm)</translation>
+    </message>
+    <message>
+        <source>US Common #10 Envelope (105 x 241 mm)</source>
+        <translation>US Common #10 Envelope (105 x 241 mm)</translation>
+    </message>
+    <message>
+        <source>Print all</source>
+        <translation>Alles drucken</translation>
+    </message>
+    <message>
+        <source>Print selection</source>
+        <translation>Auswahl drucken</translation>
+    </message>
+    <message>
+        <source>Print range</source>
+        <translation>Bereich drucken</translation>
+    </message>
+    <message>
+        <source>Print current page</source>
+        <translation>Diese Seite drucken</translation>
+    </message>
+    <message>
         <source>&amp;Options &gt;&gt;</source>
         <translation>&amp;Einstellungen &gt;&gt;</translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation>&amp;Drucken</translation>
     </message>
     <message>
         <source>&amp;Options &lt;&lt;</source>
@@ -1353,12 +1317,54 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <translation>Schreiben der Datei %1</translation>
     </message>
     <message>
-        <source>&amp;Print</source>
-        <translation>&amp;Drucken</translation>
+        <source>Print To File ...</source>
+        <translation>In Datei drucken ...</translation>
+    </message>
+    <message>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 ist ein Verzeichnis.
+Bitte wählen Sie einen anderen Dateinamen.</translation>
+    </message>
+    <message>
+        <source>File %1 is not writable.
+Please choose a different file name.</source>
+        <translation>Die Datei %1 ist schreibgeschützt.
+Bitte wählen Sie einen anderen Dateinamen.</translation>
+    </message>
+    <message>
+        <source>%1 already exists.
+Do you want to overwrite it?</source>
+        <translation>Die Datei %1 existiert bereits.
+Soll sie überschrieben werden?</translation>
+    </message>
+    <message>
+        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
+        <translation>Die Angabe für die erste Seite darf nicht größer sein als die für die letzte Seite.</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>locally connected</source>
+        <translation>direkt verbunden</translation>
+    </message>
+    <message>
+        <source>Aliases: %1</source>
+        <translation>Alias: %1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
     </message>
 </context>
 <context>
     <name>QPrintPreviewDialog</name>
+    <message>
+        <source>Page Setup</source>
+        <translation>Seite einrichten</translation>
+    </message>
     <message>
         <source>%1%</source>
         <translation>%1%</translation>
@@ -1439,10 +1445,6 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <source>Export to PostScript</source>
         <translation>PostScript exportieren</translation>
     </message>
-    <message>
-        <source>Page Setup</source>
-        <translation>Seite einrichten</translation>
-    </message>
 </context>
 <context>
     <name>QPrintPropertiesWidget</name>
@@ -1484,6 +1486,10 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
     <message>
         <source>to</source>
         <translation>bis</translation>
+    </message>
+    <message>
+        <source>Current Page</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Selection</source>
@@ -1536,10 +1542,6 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
     <message>
         <source>Short side</source>
         <translation>Kurze Seite</translation>
-    </message>
-    <message>
-        <source>Current Page</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -1725,6 +1727,26 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <source>Scroll Right</source>
         <translation>Nach rechts scrollen</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Activate</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Press</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close the tab</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Activate the tab</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>QTextControl</name>
@@ -1775,12 +1797,22 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
 <context>
     <name>QUndoGroup</name>
     <message>
+        <source>Undo %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Undo</source>
-        <translation>Rückgängig</translation>
+        <comment>Default text for undo action</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Redo %1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Wiederherstellen</translation>
+        <comment>Default text for redo action</comment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1793,12 +1825,22 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
 <context>
     <name>QUndoStack</name>
     <message>
+        <source>Undo %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Undo</source>
-        <translation>Rückgängig</translation>
+        <comment>Default text for undo action</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Redo %1</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Wiederherstellen</translation>
+        <comment>Default text for redo action</comment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1909,6 +1951,14 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
         <translation>falscher Wert für die Standalone-Deklaration</translation>
     </message>
     <message>
+        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
+        <translation>fehlende Kodierung-Deklaration oder Standalone-Deklaration beim Parsen der XML-Deklaration</translation>
+    </message>
+    <message>
+        <source>standalone declaration expected while reading the XML declaration</source>
+        <translation>fehlende Standalone-Deklaration beim Parsen der XML Deklaration</translation>
+    </message>
+    <message>
         <source>error occurred while parsing document type definition</source>
         <translation>Fehler beim Parsen der Dokumenttypdefinition</translation>
     </message>
@@ -1947,14 +1997,6 @@ Bitte wählen Sie einen anderen Dateinamen.</translation>
     <message>
         <source>error in the text declaration of an external entity</source>
         <translation>Fehler in der Text-Deklaration einer externen Entity</translation>
-    </message>
-    <message>
-        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
-        <translation>fehlende Kodierung-Deklaration oder Standalone-Deklaration beim Parsen der XML-Deklaration</translation>
-    </message>
-    <message>
-        <source>standalone declaration expected while reading the XML declaration</source>
-        <translation>fehlende Standalone-Deklaration beim Parsen der XML Deklaration</translation>
     </message>
 </context>
 </TS>

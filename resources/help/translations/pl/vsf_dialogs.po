@@ -1,0 +1,102 @@
+# Messages from vsf_dialogs.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2013-11-20 18:52+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"Language-Team: Polish (http://www.transifex.com/jmbowman/portabase/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# ccaddbbf363a4735b4101b24b9cf65a4
+#: ../../vsf_dialogs.txt:4
+msgid "Views, sortings, and filters dialogs"
+msgstr ""
+
+# 649ed656251b484581b7f99a43e67100
+#: ../../vsf_dialogs.txt:6
+msgid ""
+"There are three buttons on the toolbar for launching dialogs to select and "
+"manage views, sortings, and filters.  These three dialogs are very similar, "
+"differing only in the type of item being managed.  Each one has the "
+"following components:"
+msgstr ""
+
+# b2177df15f354b5cb11dd5603efc1f1a
+#: ../../vsf_dialogs.txt:9
+msgid "**Current View/Sorting/Filter**"
+msgstr ""
+
+# 17fd10fb046d48bb96de1a69550e2809
+#: ../../vsf_dialogs.txt:9
+msgid ""
+"The name of the currently selected item.  If this is one of the pre-defined "
+"items such as \"All Columns\", \"Selected Column\", \"All Rows\", or \"Quick"
+" Filter\", the edit and delete buttons are disabled."
+msgstr ""
+
+# 0c04214346fc4438ab1933bfbdc6e004
+#: ../../vsf_dialogs.txt:12
+msgid "**Edit**"
+msgstr ""
+
+# d22ba93151894a4e8b8c55327d8369e8
+#: ../../vsf_dialogs.txt:12
+msgid ""
+"This button, to the right of the selected item name, launches the :ref:`view"
+" editor <view_editor>`, :ref:`sorting editor <sorting_editor>`, or "
+":ref:`filter editor <filter_editor>` to modify the currently selected item."
+"  If the edit dialog is accepted, the changes will be immediately applied "
+"and you will be returned to the :ref:`data viewer <data_viewer>`."
+msgstr ""
+
+# bddfa00b33be42f2a6f543269b172328
+#: ../../vsf_dialogs.txt:15
+msgid "**Delete**"
+msgstr ""
+
+# cfbbca2ac5cb465c92ef37d08c82c211
+#: ../../vsf_dialogs.txt:15
+msgid ""
+"This button, to the right of the edit button, deletes the curently selected "
+"item.  You will be returned to the data viewer with the default item of that"
+" type selected and applied (there is no default sorting, so after deleting a"
+" sorting the rows will not be sorted)."
+msgstr ""
+
+# 76727b33e7c0488c9f1530f8686273a6
+#: ../../vsf_dialogs.txt:18
+msgid "**New View/Sorting/Filter**"
+msgstr ""
+
+# 5f54c9d2c25443a8bbbc28d3aa31b1b4
+#: ../../vsf_dialogs.txt:18
+msgid ""
+"This button, below the name of the currently selected item, launches the "
+"view editor, sorting editor, or filter editor in order to create a new item "
+"of the appropriate type.  If such an item is created, it will be set as "
+"current and you will be returned to the data viewer."
+msgstr ""
+
+# 3bc49ccd2e404855a52598acfce45822
+#: ../../vsf_dialogs.txt:20
+msgid "**Views/Sortings/Filters list**"
+msgstr ""
+
+# e7b34e702546484b86201b7a2bb7f04c
+#: ../../vsf_dialogs.txt:21
+msgid ""
+"Below the \"New...\" button is a list of the existing items of the "
+"appropriate type.  Clicking on one of these will apply it and return you to "
+"the data viewer.  If you wish to edit or delete the item, you can then "
+"launch this dialog again to do so."
+msgstr ""

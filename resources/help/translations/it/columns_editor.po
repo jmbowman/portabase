@@ -1,0 +1,122 @@
+# Messages from columns_editor.txt
+# Copyright (C) 2002-2012, Jeremy Bowman
+# This file is distributed under the same license as the PortaBase package.
+# 
+# Translators:
+# maurizio codogno <dotmaudot@gmail.com>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"POT-Creation-Date: 2012-07-27 20:40-0500\n"
+"PO-Revision-Date: 2012-12-07 11:07+0000\n"
+"Last-Translator: maurizio codogno <dotmaudot@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# 70275c548f364860943f77248e3d62e9
+#: ../../columns_editor.txt:4
+msgid "Columns editor"
+msgstr "Editor di colonne"
+
+# 71dc7335c0314dadade4cd2f9b457f5c
+#: ../../columns_editor.txt:6
+msgid ""
+"Each PortaBase file contains one table of a user-defined format.  The format"
+" of this table is determined by a sequence of data columns, each of which "
+"has its own name, data type, and default value. When creating a new "
+"PortaBase file, this dialog is shown so the data columns can be defined.  "
+"The columns of an existing file can also be edited at any time using this "
+"dialog by selecting the \"Edit Columns\" menu item (in the :ref:`data viewer"
+" <data_viewer>`, under the \"File\" menu except on Maemo where the menus are"
+" flattened)."
+msgstr "Ogni file PortaBase contiene una singola tabella di formato definito dall'utente. Il formato di questa tabella è determinato da una successione di colonne di dati, ciascuna delle quali ha il suo nome, tipo di dati e valore di default. Quando si crea un nuovo file PortaBase, questa finestra di dialogo viene mostrata in modo tale che si possano definire le colonne di dati. Le colonne di un file esistente possono essere editate in ogni momento da questa finestra di dialogo, selezionando la voce di menu \"Edita colonne\" (nel :ref: `visualizzatore dati <data_viewer>`presente nel menu \"File\", tranne che su Maemo dove i menu sono su un unico livello)."
+
+# 03a7c33339fd423f9d6863497e9e6d05
+#: ../../columns_editor.txt:8
+msgid ""
+"The current column definitions are displayed as rows in a list, in the order"
+" in which they appear in the :ref:`row editor <row_editor>`.  These column "
+"definitions are manipulated using the buttons in the dialog:"
+msgstr "Le definizioni della colonna attuale sono visualizzate come righe in una lista, nell'ordine in cui appaiono nell' :ref: `editor di riga <row_editor>`. Tali definizioni di colonna sono manipolabili usando i pulsanti della finestra di dialogo:"
+
+# 69bd093ac9a84b409b42e545f929684c
+#: ../../columns_editor.txt:11
+msgid "**Add**"
+msgstr "**Aggiungi**"
+
+# 75049522062a4269bdd9501c7227226a
+#: ../../columns_editor.txt:11
+msgid ""
+"Create a new column definition at the end of the list.  A small dialog is "
+"shown which allows you to enter the name, data type, and default value of "
+"the new column.  (If you select \"(New Enum)\" from the type list in this "
+"dialog, the :ref:`enum editor <enum_editor>` will be launched to allow you "
+"to add one.)  The default value is what will be entered for this column in "
+"any already existing data rows, and it will appear in the row editor when "
+"adding new rows as well."
+msgstr "Crea una nuova definizione di colonna in fondo alla lista. Appare una piccola finestra di dialogo che permette di inserire il nome, il tipo di dati e il valore di default per la nuova colonna. (Se selezioni \"(Nuova Enum)\" dalla lista di tipi in questa finestra di dialogo, l' :ref: `editor di enumerazioni <enum_editor>` viene lanciato, permettendoti di aggiungere un'enumerazione). Il valore di default è quello che viene inserito nella colonna in tutte le righe di dati già esistenti, e apparirà anche nell'editor di riga quando verranno aggiunte altre righe."
+
+# 9754b7418b504863835965439af12933
+#: ../../columns_editor.txt:14
+msgid "**Edit**"
+msgstr "**Modifica**"
+
+# 9e548c2357a04fef84dfefe2485ed14a
+#: ../../columns_editor.txt:14
+msgid ""
+"Edit the currently selected column definition.  Note that the data type "
+"cannot be changed.  If the default value is changed, the new default will "
+"appear in the row editor when adding new rows; existing rows are unaffected."
+msgstr "Modifica la definizione di colonna attualmente selezionata. Nota che il tipo di dati non può essere modificato. Se il valore di default viene cambiato, quello nuovo apparirà nell'editor di riga quando si aggiungono nuove righe: quelle esistenti non vengono modificate."
+
+# 9aa088a18fe943658edb1a63fbf4ffb7
+#: ../../columns_editor.txt:17
+msgid "**Delete**"
+msgstr "**Elimina**"
+
+# 787c8356a95745aa88b36bdbcb3844d5
+#: ../../columns_editor.txt:17
+msgid ""
+"Delete the currently selected column definition.  All data stored in that "
+"column will be lost."
+msgstr "Elimina la definizione di colonna attualmente selezionata. Tutti i dati contenuti in tale colonna verranno persi."
+
+# f053506909d54147b0a1666a7a1e3540
+#: ../../columns_editor.txt:20
+msgid "**Up**"
+msgstr "**Su**"
+
+# 451674dd12bf44cd85208f66578851ce
+#: ../../columns_editor.txt:20
+msgid ""
+"Move the currently selected column up one position in the list (and hence in"
+" the row editor as well)."
+msgstr "Sposta una posizione più in alto nella lista (e quindi nell'editor di riga) la colonna attualmente selezionata."
+
+# 7bc960e2ce5140b7b88a2a22023c5a31
+#: ../../columns_editor.txt:23
+msgid "**Down**"
+msgstr "**Giù**"
+
+# adcaa601e93443c3bf23dcbe205436d4
+#: ../../columns_editor.txt:23
+msgid ""
+"Move the currently selected column down one position in the list (and hence "
+"in the row editor as well)."
+msgstr "Sposta una posizione più in basso nella lista (e quindi nell'editor di riga) la colonna attualmente selezionata."
+
+# 897e3e701ec7431d8c78dacb327fe880
+#: ../../columns_editor.txt:25
+msgid ""
+"None of the changes made to the table format are applied until the \"OK\" "
+"(\"Done\" on Maemo Fremantle) button is pressed; if the dialog is exited by "
+"cancelling instead, the changes are discarded and the file format is left as"
+" it was.  If the dialog is cancelled while defining the columns of a new "
+"file, the file creation is aborted; otherwise, exiting the dialog takes you "
+"to the :ref:`data viewer <data_viewer>`."
+msgstr "Nessuna delle modifiche fatte al formato della tabella verrà applicata fino a quando non viene cliccato il pulsante \"OK\" (\"Done\" sul Maemo Fremantle); se si esce dalla finestra di dialogo con un \"Cancella\", le modifiche sono scartate e il formato del file lasciato come era in origine. Se la finestra di dialogo viene cancellata mentre si stanno definendo le colonne di un nuovo file, la creazione del file è abortita; altrimenti, uscire dalla finestra di dialogo porta al :ref: `visualizzatore di dati <data_viewer>`."

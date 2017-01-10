@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="ja">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ja" version="2.0">
 <context>
     <name>CloseButton</name>
     <message>
         <source>Close Tab</source>
-        <translatorcomment>ToolTip</translatorcomment>
         <translation>タブを閉じる</translation>
     </message>
 </context>
@@ -43,16 +40,16 @@
 <context>
     <name>QAbstractSpinBox</name>
     <message>
+        <source>&amp;Select All</source>
+        <translation>すべてを選択(&amp;S)</translation>
+    </message>
+    <message>
         <source>&amp;Step up</source>
         <translation>上(&amp;S)</translation>
     </message>
     <message>
         <source>Step &amp;down</source>
         <translation>下(&amp;D)</translation>
-    </message>
-    <message>
-        <source>&amp;Select All</source>
-        <translation>すべてを選択(&amp;S)</translation>
     </message>
 </context>
 <context>
@@ -75,7 +72,7 @@
     </message>
     <message>
         <source>QT_LAYOUT_DIRECTION</source>
-        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <comment>Translate this string to the string 'LTR' in left-to-right languages or to 'RTL' in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
         <translation>LTR</translation>
     </message>
 </context>
@@ -137,32 +134,12 @@
         <translation>カスタムカラー(&amp;C)</translation>
     </message>
     <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">カスタムカラーの定義(&amp;D) &gt;&gt;</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">キャンセル</translation>
-    </message>
-    <message>
         <source>&amp;Add to Custom Colors</source>
         <translation>カスタムカラーに追加(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">カラーの選択</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
-    <message>
-        <source>Open</source>
-        <translation>開く</translation>
-    </message>
     <message>
         <source>False</source>
         <translation>偽</translation>
@@ -172,6 +149,10 @@
         <translation>真</translation>
     </message>
     <message>
+        <source>Open</source>
+        <translation>開く</translation>
+    </message>
+    <message>
         <source>Close</source>
         <translation>閉じる</translation>
     </message>
@@ -179,12 +160,12 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
-        <translation>ヒント?</translation>
-    </message>
-    <message>
         <source>Done</source>
         <translation>終了</translation>
+    </message>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>ヒント?</translation>
     </message>
 </context>
 <context>
@@ -194,36 +175,16 @@
         <translation>OK</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation>適用</translation>
-    </message>
-    <message>
-        <source>Ignore</source>
-        <translation>無視</translation>
-    </message>
-    <message>
-        <source>Retry</source>
-        <translation>再試行</translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation>中止</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>保存</translation>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
     </message>
     <message>
         <source>Open</source>
@@ -234,16 +195,28 @@
         <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>閉じる</translation>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <source>&amp;Close</source>
         <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>適用</translation>
+    </message>
+    <message>
         <source>Reset</source>
         <translation>リセット</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -278,12 +251,20 @@
         <translation>すべて保存</translation>
     </message>
     <message>
-        <source>Restore Defaults</source>
-        <translation>デフォルトに戻す</translation>
+        <source>Abort</source>
+        <translation>中止</translation>
     </message>
     <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <source>Retry</source>
+        <translation>再試行</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation>無視</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation>デフォルトに戻す</translation>
     </message>
 </context>
 <context>
@@ -297,10 +278,6 @@
         <translation>サイズ</translation>
     </message>
     <message>
-        <source>Date Modified</source>
-        <translation>更新日</translation>
-    </message>
-    <message>
         <source>Kind</source>
         <comment>Match OS X Finder</comment>
         <translation>種類</translation>
@@ -309,6 +286,10 @@
         <source>Type</source>
         <comment>All other platforms</comment>
         <translation>タイプ</translation>
+    </message>
+    <message>
+        <source>Date Modified</source>
+        <translation>更新日</translation>
     </message>
 </context>
 <context>
@@ -349,12 +330,96 @@
 <context>
     <name>QFileDialog</name>
     <message>
+        <source>Look in:</source>
+        <translation>検索する場所:</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>戻る</translation>
+    </message>
+    <message>
+        <source>Go back</source>
+        <translation>戻る</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>進む</translation>
+    </message>
+    <message>
+        <source>Go forward</source>
+        <translation>進む</translation>
+    </message>
+    <message>
+        <source>Parent Directory</source>
+        <translation>親ディレクトリ</translation>
+    </message>
+    <message>
+        <source>Go to the parent directory</source>
+        <translation>親ディレクトリへ移動</translation>
+    </message>
+    <message>
+        <source>Create New Folder</source>
+        <translation>新しいフォルダの作成</translation>
+    </message>
+    <message>
+        <source>Create a New Folder</source>
+        <translation>新しいフォルダの作成</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation>一覧表示</translation>
+    </message>
+    <message>
+        <source>Change to list view mode</source>
+        <translation>リスト表示モードへ変更</translation>
+    </message>
+    <message>
+        <source>Detail View</source>
+        <translation>詳細表示</translation>
+    </message>
+    <message>
+        <source>Change to detail view mode</source>
+        <translation>詳細表示モードへ変更</translation>
+    </message>
+    <message>
+        <source>Files of type:</source>
+        <translation>ファイルの種類:</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>ディレクトリの検索</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>開く</translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation>名前を付けて保存</translation>
+    </message>
+    <message>
         <source>All Files (*)</source>
         <translation>すべてのファイル(*)</translation>
     </message>
     <message>
-        <source>Directories</source>
-        <translation>ディレクトリ</translation>
+        <source>Show </source>
+        <translation>表示</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>名前の変更(&amp;R)</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>削除(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Show &amp;hidden files</source>
+        <translation>隠しファイルの表示(&amp;H)</translation>
+    </message>
+    <message>
+        <source>&amp;New Folder</source>
+        <translation>新しいフォルダ(&amp;N)</translation>
     </message>
     <message>
         <source>Directory:</source>
@@ -373,8 +438,20 @@
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation>開く</translation>
+        <source>Directories</source>
+        <translation>ディレクトリ</translation>
+    </message>
+    <message>
+        <source>&amp;Choose</source>
+        <translation>選択(&amp;C)</translation>
+    </message>
+    <message>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+ディレクトリが見つかりません。
+正しいディレクトリ名が入力されたかどうか確認してください。</translation>
     </message>
     <message>
         <source>%1 already exists.
@@ -391,56 +468,38 @@ Please verify the correct file name was given.</source>
 正しいファイル名が入力されたかどうか確認してください。</translation>
     </message>
     <message>
+        <source>New Folder</source>
+        <translation>新しいフォルダ</translation>
+    </message>
+    <message>
+        <source>'%1' is write protected.
+Do you want to delete it anyway?</source>
+        <translation>&apos;%1&apos; は書き込みが禁止されています。
+本当に削除しますか?</translation>
+    </message>
+    <message>
+        <source>Are sure you want to delete &apos;%1&apos;?</source>
+        <translation>&apos;%1&apos; を本当に削除しますか?</translation>
+    </message>
+    <message>
+        <source>Could not delete directory.</source>
+        <translation>ディレクトリを削除できませんでした。</translation>
+    </message>
+    <message>
+        <source>Recent Places</source>
+        <translation>履歴</translation>
+    </message>
+    <message>
+        <source>All Files (*.*)</source>
+        <translation>すべてのファイル(*.*)</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>削除</translation>
+    </message>
+    <message>
         <source>My Computer</source>
         <translation>マイコンピュータ</translation>
-    </message>
-    <message>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1
-ディレクトリが見つかりません。
-正しいディレクトリ名が入力されたかどうか確認してください。</translation>
-    </message>
-    <message>
-        <source>&amp;Rename</source>
-        <translation>名前の変更(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>削除(&amp;D)</translation>
-    </message>
-    <message>
-        <source>Show &amp;hidden files</source>
-        <translation>隠しファイルの表示(&amp;H)</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <source>Parent Directory</source>
-        <translation>親ディレクトリ</translation>
-    </message>
-    <message>
-        <source>Create New Folder</source>
-        <translation>新しいフォルダの作成</translation>
-    </message>
-    <message>
-        <source>List View</source>
-        <translation>一覧表示</translation>
-    </message>
-    <message>
-        <source>Detail View</source>
-        <translation>詳細表示</translation>
-    </message>
-    <message>
-        <source>Look in:</source>
-        <translation>検索する場所:</translation>
-    </message>
-    <message>
-        <source>Files of type:</source>
-        <translation>ファイルの種類:</translation>
     </message>
     <message>
         <source>Drive</source>
@@ -474,109 +533,9 @@ Please verify the correct directory name was given.</source>
         <source>Unknown</source>
         <translation>不明</translation>
     </message>
-    <message>
-        <source>All Files (*.*)</source>
-        <translation>すべてのファイル(*.*)</translation>
-    </message>
-    <message>
-        <source>Save As</source>
-        <translation>名前を付けて保存</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos; is write protected.
-Do you want to delete it anyway?</source>
-        <translation>&apos;%1&apos; は書き込みが禁止されています。
-本当に削除しますか?</translation>
-    </message>
-    <message>
-        <source>Are sure you want to delete &apos;%1&apos;?</source>
-        <translation>&apos;%1&apos; を本当に削除しますか?</translation>
-    </message>
-    <message>
-        <source>Could not delete directory.</source>
-        <translation>ディレクトリを削除できませんでした。</translation>
-    </message>
-    <message>
-        <source>Find Directory</source>
-        <translation>ディレクトリの検索</translation>
-    </message>
-    <message>
-        <source>Show </source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <source>&amp;New Folder</source>
-        <translation>新しいフォルダ(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&amp;Choose</source>
-        <translation>選択(&amp;C)</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>新しいフォルダ</translation>
-    </message>
-    <message>
-        <source>Recent Places</source>
-        <translation>履歴</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>進む</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <source>Go back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <source>Go forward</source>
-        <translation>進む</translation>
-    </message>
-    <message>
-        <source>Go to the parent directory</source>
-        <translation>親ディレクトリへ移動</translation>
-    </message>
-    <message>
-        <source>Create a New Folder</source>
-        <translation>新しいフォルダの作成</translation>
-    </message>
-    <message>
-        <source>Change to list view mode</source>
-        <translation>リスト表示モードへ変更</translation>
-    </message>
-    <message>
-        <source>Change to detail view mode</source>
-        <translation>詳細表示モードへ変更</translation>
-    </message>
 </context>
 <context>
     <name>QFileSystemModel</name>
-    <message>
-        <source>Name</source>
-        <translation>名前</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>サイズ</translation>
-    </message>
-    <message>
-        <source>Date Modified</source>
-        <translation>更新日</translation>
-    </message>
-    <message>
-        <source>Kind</source>
-        <comment>Match OS X Finder</comment>
-        <translation>種類</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <comment>All other platforms</comment>
-        <translation>タイプ</translation>
-    </message>
     <message>
         <source>%1 TB</source>
         <translation>%1 TB</translation>
@@ -606,6 +565,28 @@ Do you want to delete it anyway?</source>
         <translation>&lt;b&gt;ファイル名 &quot;%1&quot; は使用できません。&lt;/b&gt;&lt;p&gt;名前を短くしたり、アクセント記号などを削除して再度試してください。</translation>
     </message>
     <message>
+        <source>Name</source>
+        <translation>名前</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>サイズ</translation>
+    </message>
+    <message>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation>種類</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>タイプ</translation>
+    </message>
+    <message>
+        <source>Date Modified</source>
+        <translation>更新日</translation>
+    </message>
+    <message>
         <source>My Computer</source>
         <translation>マイ コンピュータ</translation>
     </message>
@@ -622,7 +603,6 @@ Do you want to delete it anyway?</source>
     <name>QFontDatabase</name>
     <message>
         <source>Normal</source>
-        <translatorcomment>ここはどう訳すべきか...</translatorcomment>
         <translation>明朝</translation>
     </message>
     <message>
@@ -793,6 +773,10 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QFontDialog</name>
     <message>
+        <source>Select Font</source>
+        <translation>フォントの選択</translation>
+    </message>
+    <message>
         <source>&amp;Font</source>
         <translation>フォント(&amp;F)</translation>
     </message>
@@ -823,10 +807,6 @@ Do you want to delete it anyway?</source>
     <message>
         <source>Wr&amp;iting System</source>
         <translation>言語(&amp;I)</translation>
-    </message>
-    <message>
-        <source>Select Font</source>
-        <translation>フォントの選択</translation>
     </message>
 </context>
 <context>
@@ -912,18 +892,6 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Qt について</translation>
-    </message>
-    <message>
         <source>Show Details...</source>
         <translation>詳細を表示...</translation>
     </message>
@@ -932,12 +900,24 @@ Do you want to delete it anyway?</source>
         <translation>詳細を隠す...</translation>
     </message>
     <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>ヘルプ</translation>
+    </message>
+    <message>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Qt について&lt;/h3&gt;&lt;p&gt;このプログラムは Qt バージョン %1 を使用しています。&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Qt はクロスプラットフォームアプリケーション開発用の C++ ツールキットです。&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt ライセンスについての概要は &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; をご覧ください。&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt は Nokia 社の製品です。詳しい情報は &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; をご覧ください。&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Qt について</translation>
     </message>
 </context>
 <context>
@@ -953,22 +933,6 @@ Do you want to delete it anyway?</source>
 </context>
 <context>
     <name>QPageSetupWidget</name>
-    <message>
-        <source>Centimeters (cm)</source>
-        <translation>センチメートル (cm)</translation>
-    </message>
-    <message>
-        <source>Millimeters (mm)</source>
-        <translation>ミリメートル (mm)</translation>
-    </message>
-    <message>
-        <source>Inches (in)</source>
-        <translation>インチ (in)</translation>
-    </message>
-    <message>
-        <source>Points (pt)</source>
-        <translation>ポイント (pt)</translation>
-    </message>
     <message>
         <source>Form</source>
         <translation>書式設定</translation>
@@ -1033,194 +997,28 @@ Do you want to delete it anyway?</source>
         <source>bottom margin</source>
         <translation>下端余白</translation>
     </message>
+    <message>
+        <source>Centimeters (cm)</source>
+        <translation>センチメートル (cm)</translation>
+    </message>
+    <message>
+        <source>Millimeters (mm)</source>
+        <translation>ミリメートル (mm)</translation>
+    </message>
+    <message>
+        <source>Inches (in)</source>
+        <translation>インチ (in)</translation>
+    </message>
+    <message>
+        <source>Points (pt)</source>
+        <translation>ポイント (pt)</translation>
+    </message>
 </context>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>locally connected</source>
-        <translation>ローカルに接続しています</translation>
-    </message>
-    <message>
-        <source>Aliases: %1</source>
-        <translation>エイリアス: %1</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>不明</translation>
-    </message>
-    <message>
-        <source>Print all</source>
-        <translation>すべて印刷</translation>
-    </message>
-    <message>
-        <source>Print range</source>
-        <translation>印刷範囲</translation>
-    </message>
-    <message>
-        <source>A0 (841 x 1189 mm)</source>
-        <translation>A0 (841 x 1189mm)</translation>
-    </message>
-    <message>
-        <source>A1 (594 x 841 mm)</source>
-        <translation>A1 (594 x 841mm)</translation>
-    </message>
-    <message>
-        <source>A2 (420 x 594 mm)</source>
-        <translation>A2 (420 x 594mm)</translation>
-    </message>
-    <message>
-        <source>A3 (297 x 420 mm)</source>
-        <translation>A3 (297 x 420mm)</translation>
-    </message>
-    <message>
-        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
-        <translation>A4 (210 x 297mm、8.26 x 11.7インチ)</translation>
-    </message>
-    <message>
-        <source>A5 (148 x 210 mm)</source>
-        <translation>A5 (148 x 210mm)</translation>
-    </message>
-    <message>
-        <source>A6 (105 x 148 mm)</source>
-        <translation>A6 (105 x 148mm)</translation>
-    </message>
-    <message>
-        <source>A7 (74 x 105 mm)</source>
-        <translation>A7 (74 x 105mm)</translation>
-    </message>
-    <message>
-        <source>A8 (52 x 74 mm)</source>
-        <translation>A8 (52 x 74mm)</translation>
-    </message>
-    <message>
-        <source>A9 (37 x 52 mm)</source>
-        <translation>A9 (37 x 52mm)</translation>
-    </message>
-    <message>
-        <source>B0 (1000 x 1414 mm)</source>
-        <translation>B0 (1000 x 1414mm)</translation>
-    </message>
-    <message>
-        <source>B1 (707 x 1000 mm)</source>
-        <translation>B1 (707 x 1000mm)</translation>
-    </message>
-    <message>
-        <source>B2 (500 x 707 mm)</source>
-        <translation>B2 (500 x 707mm)</translation>
-    </message>
-    <message>
-        <source>B3 (353 x 500 mm)</source>
-        <translation>B3 (353 x 500mm)</translation>
-    </message>
-    <message>
-        <source>B4 (250 x 353 mm)</source>
-        <translation>B4 (250 x 353mm)</translation>
-    </message>
-    <message>
-        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
-        <translation>B5 (176 x 250mm、6.93 x 9.84インチ)</translation>
-    </message>
-    <message>
-        <source>B6 (125 x 176 mm)</source>
-        <translation>B6 (125 x 176mm)</translation>
-    </message>
-    <message>
-        <source>B7 (88 x 125 mm)</source>
-        <translation>B7 (88 x 125mm)</translation>
-    </message>
-    <message>
-        <source>B8 (62 x 88 mm)</source>
-        <translation>B8 (62 x 88mm)</translation>
-    </message>
-    <message>
-        <source>B9 (44 x 62 mm)</source>
-        <translation>B9 (44 x 62mm)</translation>
-    </message>
-    <message>
-        <source>B10 (31 x 44 mm)</source>
-        <translation>B10 (31 x 44mm)</translation>
-    </message>
-    <message>
-        <source>C5E (163 x 229 mm)</source>
-        <translation>C5E (163 x 229mm)</translation>
-    </message>
-    <message>
-        <source>DLE (110 x 220 mm)</source>
-        <translation>DLE (110 x 220mm)</translation>
-    </message>
-    <message>
-        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
-        <translation>Executive (7.5 x 10インチ、191 x 254mm)</translation>
-    </message>
-    <message>
-        <source>Folio (210 x 330 mm)</source>
-        <translation>Folio (210 x 330mm)</translation>
-    </message>
-    <message>
-        <source>Ledger (432 x 279 mm)</source>
-        <translation>Ledger (432 x 279mm)</translation>
-    </message>
-    <message>
-        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
-        <translation>Legal (8.5 x 14インチ、216 x 356mm)</translation>
-    </message>
-    <message>
-        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
-        <translation>Letter (8.5 x 11インチ、216 x 279mm)</translation>
-    </message>
-    <message>
-        <source>Tabloid (279 x 432 mm)</source>
-        <translation>Tabloid (279 x 432mm)</translation>
-    </message>
-    <message>
-        <source>US Common #10 Envelope (105 x 241 mm)</source>
-        <translation>US Common #10 Envelope (105 x 241mm)</translation>
-    </message>
-    <message>
-        <source>Print current page</source>
-        <translation>現在のページの印刷</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>印刷</translation>
-    </message>
-    <message>
-        <source>Print To File ...</source>
-        <translation>ファイルへ出力...</translation>
-    </message>
-    <message>
-        <source>File %1 is not writable.
-Please choose a different file name.</source>
-        <translation>ファイル %1 は書き込み可能ではありません。
-別のファイル名を選んでください。</translation>
-    </message>
-    <message>
-        <source>%1 already exists.
-Do you want to overwrite it?</source>
-        <translation>%1 はすでに存在します。
-上書きしますか?</translation>
-    </message>
-    <message>
-        <source>File exists</source>
-        <translation>ファイルは既に存在しています</translation>
-    </message>
-    <message>
-        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;ファイルを上書きしてもよろしいですか?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <source>Print selection</source>
-        <translation>選択された範囲を印刷</translation>
-    </message>
-    <message>
-        <source>%1 is a directory.
-Please choose a different file name.</source>
-        <translation>%1 はディレクトリです。
-ファイル名を指定してください。</translation>
     </message>
     <message>
         <source>A0</source>
@@ -1347,6 +1145,150 @@ Please choose a different file name.</source>
         <translation>カスタム</translation>
     </message>
     <message>
+        <source>File exists</source>
+        <translation>ファイルは既に存在しています</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;ファイルを上書きしてもよろしいですか?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>A0 (841 x 1189 mm)</source>
+        <translation>A0 (841 x 1189mm)</translation>
+    </message>
+    <message>
+        <source>A1 (594 x 841 mm)</source>
+        <translation>A1 (594 x 841mm)</translation>
+    </message>
+    <message>
+        <source>A2 (420 x 594 mm)</source>
+        <translation>A2 (420 x 594mm)</translation>
+    </message>
+    <message>
+        <source>A3 (297 x 420 mm)</source>
+        <translation>A3 (297 x 420mm)</translation>
+    </message>
+    <message>
+        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
+        <translation>A4 (210 x 297mm、8.26 x 11.7インチ)</translation>
+    </message>
+    <message>
+        <source>A5 (148 x 210 mm)</source>
+        <translation>A5 (148 x 210mm)</translation>
+    </message>
+    <message>
+        <source>A6 (105 x 148 mm)</source>
+        <translation>A6 (105 x 148mm)</translation>
+    </message>
+    <message>
+        <source>A7 (74 x 105 mm)</source>
+        <translation>A7 (74 x 105mm)</translation>
+    </message>
+    <message>
+        <source>A8 (52 x 74 mm)</source>
+        <translation>A8 (52 x 74mm)</translation>
+    </message>
+    <message>
+        <source>A9 (37 x 52 mm)</source>
+        <translation>A9 (37 x 52mm)</translation>
+    </message>
+    <message>
+        <source>B0 (1000 x 1414 mm)</source>
+        <translation>B0 (1000 x 1414mm)</translation>
+    </message>
+    <message>
+        <source>B1 (707 x 1000 mm)</source>
+        <translation>B1 (707 x 1000mm)</translation>
+    </message>
+    <message>
+        <source>B2 (500 x 707 mm)</source>
+        <translation>B2 (500 x 707mm)</translation>
+    </message>
+    <message>
+        <source>B3 (353 x 500 mm)</source>
+        <translation>B3 (353 x 500mm)</translation>
+    </message>
+    <message>
+        <source>B4 (250 x 353 mm)</source>
+        <translation>B4 (250 x 353mm)</translation>
+    </message>
+    <message>
+        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
+        <translation>B5 (176 x 250mm、6.93 x 9.84インチ)</translation>
+    </message>
+    <message>
+        <source>B6 (125 x 176 mm)</source>
+        <translation>B6 (125 x 176mm)</translation>
+    </message>
+    <message>
+        <source>B7 (88 x 125 mm)</source>
+        <translation>B7 (88 x 125mm)</translation>
+    </message>
+    <message>
+        <source>B8 (62 x 88 mm)</source>
+        <translation>B8 (62 x 88mm)</translation>
+    </message>
+    <message>
+        <source>B9 (44 x 62 mm)</source>
+        <translation>B9 (44 x 62mm)</translation>
+    </message>
+    <message>
+        <source>B10 (31 x 44 mm)</source>
+        <translation>B10 (31 x 44mm)</translation>
+    </message>
+    <message>
+        <source>C5E (163 x 229 mm)</source>
+        <translation>C5E (163 x 229mm)</translation>
+    </message>
+    <message>
+        <source>DLE (110 x 220 mm)</source>
+        <translation>DLE (110 x 220mm)</translation>
+    </message>
+    <message>
+        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
+        <translation>Executive (7.5 x 10インチ、191 x 254mm)</translation>
+    </message>
+    <message>
+        <source>Folio (210 x 330 mm)</source>
+        <translation>Folio (210 x 330mm)</translation>
+    </message>
+    <message>
+        <source>Ledger (432 x 279 mm)</source>
+        <translation>Ledger (432 x 279mm)</translation>
+    </message>
+    <message>
+        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
+        <translation>Legal (8.5 x 14インチ、216 x 356mm)</translation>
+    </message>
+    <message>
+        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
+        <translation>Letter (8.5 x 11インチ、216 x 279mm)</translation>
+    </message>
+    <message>
+        <source>Tabloid (279 x 432 mm)</source>
+        <translation>Tabloid (279 x 432mm)</translation>
+    </message>
+    <message>
+        <source>US Common #10 Envelope (105 x 241 mm)</source>
+        <translation>US Common #10 Envelope (105 x 241mm)</translation>
+    </message>
+    <message>
+        <source>Print all</source>
+        <translation>すべて印刷</translation>
+    </message>
+    <message>
+        <source>Print selection</source>
+        <translation>選択された範囲を印刷</translation>
+    </message>
+    <message>
+        <source>Print range</source>
+        <translation>印刷範囲</translation>
+    </message>
+    <message>
+        <source>Print current page</source>
+        <translation>現在のページの印刷</translation>
+    </message>
+    <message>
         <source>&amp;Options &gt;&gt;</source>
         <translation>オプション(&amp;O) &gt;&gt;</translation>
     </message>
@@ -1375,9 +1317,46 @@ Please choose a different file name.</source>
         <translation>ファイル %1 に書き込みました</translation>
     </message>
     <message>
+        <source>Print To File ...</source>
+        <translation>ファイルへ出力...</translation>
+    </message>
+    <message>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 はディレクトリです。
+ファイル名を指定してください。</translation>
+    </message>
+    <message>
+        <source>File %1 is not writable.
+Please choose a different file name.</source>
+        <translation>ファイル %1 は書き込み可能ではありません。
+別のファイル名を選んでください。</translation>
+    </message>
+    <message>
+        <source>%1 already exists.
+Do you want to overwrite it?</source>
+        <translation>%1 はすでに存在します。
+上書きしますか?</translation>
+    </message>
+    <message>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translatorcomment>QPrintPropertiesWidgetにFromとToがあってそれを指している</translatorcomment>
         <translation>印刷開始ページ番号は、印刷終了ページ番号より小さくなければなりません。</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>locally connected</source>
+        <translation>ローカルに接続しています</translation>
+    </message>
+    <message>
+        <source>Aliases: %1</source>
+        <translation>エイリアス: %1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>不明</translation>
     </message>
 </context>
 <context>
@@ -1509,6 +1488,10 @@ Please choose a different file name.</source>
         <translation>末尾のページ</translation>
     </message>
     <message>
+        <source>Current Page</source>
+        <translation>現在のページ</translation>
+    </message>
+    <message>
         <source>Selection</source>
         <translation>選択した部分を印刷</translation>
     </message>
@@ -1559,10 +1542,6 @@ Please choose a different file name.</source>
     <message>
         <source>Short side</source>
         <translation>短辺綴じ</translation>
-    </message>
-    <message>
-        <source>Current Page</source>
-        <translation>現在のページ</translation>
     </message>
 </context>
 <context>
@@ -1747,6 +1726,26 @@ Please choose a different file name.</source>
     <message>
         <source>Scroll Right</source>
         <translation>右へスクロール</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>閉じる</translation>
+    </message>
+    <message>
+        <source>Activate</source>
+        <translation>アクティブに</translation>
+    </message>
+    <message>
+        <source>Press</source>
+        <translation>押す</translation>
+    </message>
+    <message>
+        <source>Close the tab</source>
+        <translation>タブを閉じる</translation>
+    </message>
+    <message>
+        <source>Activate the tab</source>
+        <translation>タブをアクティブに</translation>
     </message>
 </context>
 <context>

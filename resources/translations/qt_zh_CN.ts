@@ -300,11 +300,11 @@
     </message>
     <message>
         <source>Will not rename sequential file using block copy</source>
-        <translation type="unfinished"/>
+        <translation>使用块副本不会重命名顺序文件</translation>
     </message>
     <message>
         <source>Cannot remove source file</source>
-        <translation type="unfinished"/>
+        <translation>无法删除源文件</translation>
     </message>
     <message>
         <source>Cannot open %1 for input</source>
@@ -324,7 +324,7 @@
     </message>
     <message>
         <source>No file engine available or engine does not support UnMapExtension</source>
-        <translation type="unfinished"/>
+        <translation>没有可用的引擎文件或引擎不支持UnMapExtension</translation>
     </message>
 </context>
 <context>
@@ -339,7 +339,7 @@
     </message>
     <message>
         <source>Go back</source>
-        <translation type="unfinished"/>
+        <translation>退后</translation>
     </message>
     <message>
         <source>Forward</source>
@@ -347,7 +347,7 @@
     </message>
     <message>
         <source>Go forward</source>
-        <translation type="unfinished"/>
+        <translation>前进</translation>
     </message>
     <message>
         <source>Parent Directory</source>
@@ -355,7 +355,7 @@
     </message>
     <message>
         <source>Go to the parent directory</source>
-        <translation type="unfinished"/>
+        <translation>转到母目录</translation>
     </message>
     <message>
         <source>Create New Folder</source>
@@ -363,7 +363,7 @@
     </message>
     <message>
         <source>Create a New Folder</source>
-        <translation type="unfinished"/>
+        <translation>创建新文件夹</translation>
     </message>
     <message>
         <source>List View</source>
@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Change to list view mode</source>
-        <translation type="unfinished"/>
+        <translation>切换到列表视图模式</translation>
     </message>
     <message>
         <source>Detail View</source>
@@ -379,7 +379,7 @@
     </message>
     <message>
         <source>Change to detail view mode</source>
-        <translation type="unfinished"/>
+        <translation>切换到详细信息视图模式</translation>
     </message>
     <message>
         <source>Files of type:</source>
@@ -512,22 +512,22 @@ Do you want to delete it anyway?</source>
     <message>
         <source>File Folder</source>
         <comment>Match Windows Explorer</comment>
-        <translation type="unfinished"/>
+        <translation>文件夹</translation>
     </message>
     <message>
         <source>Folder</source>
         <comment>All other platforms</comment>
-        <translation type="unfinished"/>
+        <translation>文件夹</translation>
     </message>
     <message>
         <source>Alias</source>
         <comment>Mac OS X Finder</comment>
-        <translation type="unfinished"/>
+        <translation>别号</translation>
     </message>
     <message>
         <source>Shortcut</source>
         <comment>All other platforms</comment>
-        <translation type="unfinished"/>
+        <translation>捷径</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -596,7 +596,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>%1 byte(s)</source>
-        <translation type="unfinished"/>
+        <translation>％1的字节</translation>
     </message>
 </context>
 <context>
@@ -767,7 +767,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>N&apos;Ko</source>
-        <translation type="unfinished"/>
+        <translation>N&apos;Ko</translation>
     </message>
 </context>
 <context>
@@ -882,11 +882,11 @@ Do you want to delete it anyway?</source>
     <name>QMenuBar</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"/>
+        <translation>操作</translation>
     </message>
     <message>
         <source>Corner Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>角工具栏</translation>
     </message>
 </context>
 <context>
@@ -909,11 +909,11 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;H3&gt;关于Qt&lt;/ H3&gt;&lt;p&gt;此程序使用Qt％1版本&lt;/ P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;p&gt;Qt 是一个C++ 工具包可以在跨平台内研发程式。 ＜/p&gt;&lt;p&gt;Qt 提供可移植的单一代码横跨MS, OS ,X, Linux 和其他主要商用Unix演变产品。 Qt 也可发现嵌入在Linux 和视窗CE系统里.&lt;/p&gt;&lt;p&gt;Qt 也在三种不同执照选择设计里出现来配合我们不同使用者的需求。 &lt;/p&gt;&lt;p&gt;Qt 给予商业用执照同意使用权来开发商用软体但不得将任何原码转享给第三者或其他不能同意GNU LGPL 版本2•1 或GNU GPL 3.0 版的条款者&lt; /p&gt;&lt;p&gt;Qt 使用执照发给GNU LGPL2.1 版本是适用于研发Qt（ 有版权或公开原码的）应用程式，假设你能承诺GNN LGPL 2.1所有的条款及条件&lt;/p&gt;&lt; p&gt;Qt 有执照使用于GNU一般公共执照3•0 版本是适用于开发Qt 应用程式而且你想用此应用程式与GNU GPL 3.0 版本的软体结合并且同意根据GNL GPL3.0 版的条款&lt;/p &gt;&lt;p&gt;请看&lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt;全灠有关Qt 照使用权&lt;/p&gt; &lt;p&gt;Copyright (C)2012 Nokia 株式会社和/或其他附属有关公司&lt;/p&gt;&lt;p&gt;Qt 是Nokia 产品。参看&lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt;更多资料。 &lt;/p&gt;</translation>
     </message>
     <message>
         <source>About Qt</source>
@@ -1286,7 +1286,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>Print current page</source>
-        <translation type="unfinished"/>
+        <translation>打印当前页</translation>
     </message>
     <message>
         <source>&amp;Options &gt;&gt;</source>
@@ -1489,7 +1489,7 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Current Page</source>
-        <translation type="unfinished"/>
+        <translation>当前页</translation>
     </message>
     <message>
         <source>Selection</source>
@@ -1729,23 +1729,23 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>关闭</translation>
     </message>
     <message>
         <source>Activate</source>
-        <translation type="unfinished"/>
+        <translation>激活</translation>
     </message>
     <message>
         <source>Press</source>
-        <translation type="unfinished"/>
+        <translation>按下</translation>
     </message>
     <message>
         <source>Close the tab</source>
-        <translation type="unfinished"/>
+        <translation>关闭标签页</translation>
     </message>
     <message>
         <source>Activate the tab</source>
-        <translation type="unfinished"/>
+        <translation>激活标签</translation>
     </message>
 </context>
 <context>
@@ -1798,21 +1798,21 @@ Do you want to overwrite it?</source>
     <name>QUndoGroup</name>
     <message>
         <source>Undo %1</source>
-        <translation type="unfinished"/>
+        <translation>撤消%1</translation>
     </message>
     <message>
         <source>Undo</source>
         <comment>Default text for undo action</comment>
-        <translation type="unfinished"/>
+        <translation>撤销</translation>
     </message>
     <message>
         <source>Redo %1</source>
-        <translation type="unfinished"/>
+        <translation>重做%1</translation>
     </message>
     <message>
         <source>Redo</source>
         <comment>Default text for redo action</comment>
-        <translation type="unfinished"/>
+        <translation>重做</translation>
     </message>
 </context>
 <context>
@@ -1826,21 +1826,21 @@ Do you want to overwrite it?</source>
     <name>QUndoStack</name>
     <message>
         <source>Undo %1</source>
-        <translation type="unfinished"/>
+        <translation>撤消%1</translation>
     </message>
     <message>
         <source>Undo</source>
         <comment>Default text for undo action</comment>
-        <translation type="unfinished"/>
+        <translation>撤销</translation>
     </message>
     <message>
         <source>Redo %1</source>
-        <translation type="unfinished"/>
+        <translation>重做%1</translation>
     </message>
     <message>
         <source>Redo</source>
         <comment>Default text for redo action</comment>
-        <translation type="unfinished"/>
+        <translation>重做</translation>
     </message>
 </context>
 <context>
