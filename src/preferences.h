@@ -45,6 +45,7 @@ public:
     QFont applyChanges();
 
 private slots:
+    void resetColors();
     void updateSizes(int selected);
     void updateSample(int selectedSize);
 
