@@ -33,6 +33,8 @@
  *                headers
  * @param lineEnding The character(s) used to designate the end of a record
  *                   (only when writing)
+ * @param addNewEnumOptions True if new option values should be automatically
+ *                          added to enums when encountered during import
  */
 CSVUtils::CSVUtils(QChar delimiter, const QString &encoding, bool headers,
                    const QString &lineEnding, bool addNewEnumOptions)
@@ -384,7 +386,7 @@ bool CSVUtils::addRow(Database *db)
             }
         }
     }
-    message = db->addRow(row, &rowId, false, true);
+    message = db->addRow(row, &rowId, false, true, m_add_options);
     if (!message.isEmpty()) {
         message = QObject::tr("Error in row %1").arg(rowNum) + "\n" + message;
         return false;

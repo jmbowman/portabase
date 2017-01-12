@@ -42,7 +42,7 @@ The following options can be used with either ``fromcsv`` or ``tocsv``:
 
 There's one additional option for ``fromcsv``:
 
---add-to-enums  Automatically add new enum values encountered
+--add-unknown-enum-options  Automatically add new enum values encountered
 
 There's also one additional option for ``tocsv``:
 
