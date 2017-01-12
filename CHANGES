@@ -1,4 +1,4 @@
-2017-01-11  JMB  Better alternating row color defaults
+2017-01-11  JMB  Better alternating row color defaults, CSV enums import
 
     The background colors for alternate rows in the data viewer and
     other grids had been defaulting to white and light gray, but now
@@ -8,6 +8,10 @@
     but the color from the preferences dialog is now used.  There is also
     now a "Reset" button in the dialog to revert to the current system
     default colors.
+
+    Also, I discovered that I hadn't quite finished support for optionally
+    importing new enum values during CSV import with the initial commit back
+    in 2013; it is now finished and tested.
 
 2017-01-09  JMB  Added Italian UI translation, updated translation files
 

@@ -116,7 +116,7 @@ int CommandLine::fromOtherFormat(const QStringList &args)
     int passIndex = parseOption("-p");
     int encIndex = parseOption("-e");
     int delIndex = parseOption("-d");
-    int enumsIndex = parseOption("--add-unknown-enum-options");
+    int enumsIndex = parseOption("--add-unknown-enum-options", false);
     int headersIndex = parseOption("--headers", false);
     if (passIndex == -2 || encIndex == -2 || delIndex == -2
         || enumsIndex == -2 || headersIndex == -2 || argc != numArgs) {
@@ -186,7 +186,8 @@ int CommandLine::fromOtherFormat(const QStringList &args)
                 delimiter = delimArg[0];
             }
         }
-        CSVUtils csv(delimiter, encoding, headersIndex != -1);
+        CSVUtils csv(delimiter, encoding, headersIndex != -1, "\n",
+                     enumsIndex != -1);
         QStringList result = db->importFromCSV(sourceFile, &csv);
         int count = result.count();
         if (count > 0) {
