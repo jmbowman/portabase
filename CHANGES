@@ -1,3 +1,14 @@
+2017-01-11  JMB  Better alternating row color defaults
+
+    The background colors for alternate rows in the data viewer and
+    other grids had been defaulting to white and light gray, but now
+    use the appropriate colors from the current native theme unless other
+    values have been specified.  Similarly, the row viewer had been
+    hardcoded to use light gray as the alternate row background color,
+    but the color from the preferences dialog is now used.  There is also
+    now a "Reset" button in the dialog to revert to the current system
+    default colors.
+
 2017-01-09  JMB  Added Italian UI translation, updated translation files
 
     A new Italian translation has been contributed by Maurizio Codogno.

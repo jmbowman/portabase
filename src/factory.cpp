@@ -47,9 +47,11 @@ void Factory::updatePreferences(QSettings *settings)
     settings->beginGroup("Colors");
     useAlternatingRowColors = settings->value("UseAlternating",
                                               true).toBool();
-    QString color = settings->value("EvenRows", "#FFFFFF").toString();
+    QString defaultBase = qApp->palette("QAbstractItemView").color(QPalette::Base).name();
+    QString color = settings->value("EvenRows", defaultBase).toString();
     evenRowColor = QColor(color);
-    color = settings->value("OddRows", "#E0E0E0").toString();
+    QString defaultAlternateBase = qApp->palette("QAbstractItemView").color(QPalette::AlternateBase).name();
+    color = settings->value("OddRows", defaultAlternateBase).toString();
     oddRowColor = QColor(color);
     settings->endGroup();
 }

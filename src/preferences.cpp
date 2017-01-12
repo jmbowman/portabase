@@ -300,6 +300,10 @@ void Preferences::addAppearanceTab(QSettings *settings)
     configureColorPicker(oddButton);
     oddButton->setCurrentColor(Factory::oddRowColor);
     hbox->addWidget(oddButton);
+    hbox->addSpacing(10);
+    QPushButton *resetButton = new QPushButton(tr("Reset"), colorGroup);
+    connect(resetButton, SIGNAL(clicked()), this, SLOT(resetColors()));
+    hbox->addWidget(resetButton);
 #endif
 
     QPushButton *button = new QPushButton(tr("Clear the recent files list"),
@@ -332,6 +336,16 @@ void Preferences::configureColorPicker(QtColorPicker *picker)
     picker->insertColor(QColor("tan"), tr("Tan"));
     picker->insertColor(QColor("thistle"), tr("Thistle"));
     picker->setColorDialogEnabled(true);
+}
+
+/**
+ * Handle a click of the button which resets the selected alternating row
+ * colors back to the current system defaults.
+ */
+void Preferences::resetColors()
+{
+    evenButton->setCurrentColor(qApp->palette("QAbstractItemView").color(QPalette::Base));
+    oddButton->setCurrentColor(qApp->palette("QAbstractItemView").color(QPalette::AlternateBase));
 }
 
 /**
@@ -428,9 +442,18 @@ QFont Preferences::applyChanges()
 #else
     settings.beginGroup("Colors");
     const QColor evenColor = evenButton->currentColor();
-    settings.setValue("EvenRows", evenColor.name());
     const QColor oddColor = oddButton->currentColor();
-    settings.setValue("OddRows", oddColor.name());
+    const QColor defaultEven = qApp->palette("QAbstractItemView").color(QPalette::Base);
+    const QColor defaultOdd = qApp->palette("QAbstractItemView").color(QPalette::AlternateBase);
+    if (evenColor == defaultEven && oddColor == defaultOdd) {
+        // Don't save the system defaults, match any changes made to them later
+        settings.remove("EvenRows");
+        settings.remove("OddRows");
+    }
+    else {
+        settings.setValue("EvenRows", evenColor.name());
+        settings.setValue("OddRows", oddColor.name());
+    }
     settings.endGroup();
 #endif
 

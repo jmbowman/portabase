@@ -168,6 +168,8 @@ void RowViewer::updateContent()
 #endif
     int *colTypes = currentView->getColTypes();
     QString str = "<html><body><table cellspacing=0>";
+    QString altColor = Factory::oddRowColor.name();
+    QString altRow = QString("<tr bgcolor=\"%1\">").arg(altColor);
     int count = colNames.count();
     int imageIndex = 0;
     for (int i = 0; i < count; i++) {
@@ -175,7 +177,7 @@ void RowViewer::updateContent()
             str += "<tr>";
         }
         else {
-            str += "<tr bgcolor=\"lightgray\">";
+            str += altRow;
         }
         str += "<td><font color=#0000ff>";
         str += prepareString(colNames[i]);

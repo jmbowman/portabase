@@ -273,7 +273,6 @@ QtColorPicker::QtColorPicker(QWidget *parent,
     setFocusPolicy(Qt::StrongFocus);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
     setAutoDefault(false);
-    setAutoFillBackground(true);
     setCheckable(true);
 
     // Set text
