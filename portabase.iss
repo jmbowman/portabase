@@ -46,6 +46,7 @@ Source: "resources\help\_build\_static\*"; DestDir: "{app}\help\_static"; Flags:
 Source: "resources\help\_build\cs\*"; DestDir: "{app}\help\cs"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\en\*"; DestDir: "{app}\help\en"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\fr\*"; DestDir: "{app}\help\fr"; Flags: ignoreversion recursesubdirs
+Source: "resources\help\_build\it\*"; DestDir: "{app}\help\it"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\ja\*"; DestDir: "{app}\help\ja"; Flags: ignoreversion recursesubdirs
 Source: "resources\help\_build\zh_TW\*"; DestDir: "{app}\help\zh_TW"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
@@ -56,9 +57,11 @@ Name: "cs"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
+Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "sk"; MessagesFile: "packaging\windows\Slovak-7-5.5.0.isl"
-Name: "zh_TW"; MessagesFile: "packaging\windows\ChineseSimp-12-5.5.0.isl"
+Name: "sk"; MessagesFile: "packaging\windows\Slovak.isl"
+Name: "zh_CN"; MessagesFile: "packaging\windows\ChineseSimplified.isl"
+Name: "zh_TW"; MessagesFile: "packaging\windows\ChineseTraditional.isl"
 
 [Registry]
 Root: HKCR; Subkey: ".pob"; ValueType: string; ValueName: ""; ValueData: "PortaBaseFile"; Flags: uninsdeletevalue

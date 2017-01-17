@@ -825,7 +825,7 @@ deleted:</source>
     </message>
     <message>
         <source>Repeated password doesn&apos;t match</source>
-        <translation>輸入的密碼不合</translation>
+        <translation>輸入的密碼不匹配</translation>
     </message>
 </context>
 <context>
@@ -952,7 +952,7 @@ current filter?</source>
     </message>
     <message>
         <source>Allow checkbox edit in data viewer</source>
-        <translation>允許在資料檢視器中編輯核對盒</translation>
+        <translation>允許在資料檢視器中編輯複選框</translation>
     </message>
     <message>
         <source>Use pages in data viewer</source>
@@ -972,7 +972,7 @@ current filter?</source>
     </message>
     <message>
         <source>Default rows per page</source>
-        <translation>每頁資料列預定值</translation>
+        <translation>默認每頁行</translation>
     </message>
     <message>
         <source>View rows with a single click</source>
@@ -1040,7 +1040,7 @@ current filter?</source>
     </message>
     <message>
         <source>Font</source>
-        <translation>字型</translation>
+        <translation>字體</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1186,11 +1186,11 @@ current filter?</source>
     </message>
     <message>
         <source>About %1</source>
-        <translation>關於%1</translation>
+        <translation>約%1</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation>關於Qt</translation>
+        <translation>約Qt</translation>
     </message>
 </context>
 <context>
@@ -1256,15 +1256,15 @@ current filter?</source>
     </message>
     <message>
         <source>Printing aborted</source>
-        <translation>印刷流產</translation>
+        <translation>打印中止</translation>
     </message>
     <message>
         <source>Printing</source>
-        <translation>印刷</translation>
+        <translation>打印中</translation>
     </message>
     <message>
         <source>Printing completed</source>
-        <translation>印刷完成</translation>
+        <translation>打印完成</translation>
     </message>
 </context>
 <context>
@@ -1315,7 +1315,7 @@ current filter?</source>
     </message>
     <message>
         <source>Quit the application</source>
-        <translation>退出程式</translation>
+        <translation>退出應用程序</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -1768,7 +1768,7 @@ current filter?</source>
     </message>
     <message>
         <source>Too many child nodes for node type</source>
-        <translation>此種節點太多子層節點</translation>
+        <translation>此節點類型有太多的子節點</translation>
     </message>
     <message>
         <source>Incorrect _all view column sequence</source>
@@ -1788,7 +1788,7 @@ current filter?</source>
     </message>
     <message>
         <source>must be a positive integer</source>
-        <translation>須為整正數</translation>
+        <translation>須為正整數</translation>
     </message>
     <message>
         <source>Duplicate element</source>

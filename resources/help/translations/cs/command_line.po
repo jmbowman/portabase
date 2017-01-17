@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
-#   <jmbowman@alum.mit.edu>, 2012.
+# jmbowman <jmbowman@alum.mit.edu>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
@@ -11,12 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
 "PO-Revision-Date: 2012-08-19 15:17+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/portabase/language/cs/)\n"
+"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 # 4b3e9ac074e14ad885c2478af29b2869
 #: ../../command_line.txt:4

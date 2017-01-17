@@ -1,3 +1,9 @@
+2017-01-16  JMB  More translation file updates
+
+    My last pull of updated translations from Transiex missed some of the
+    recent updates to existing translations.  Everything that's been
+    translated there should now also be in the source code.
+
 2017-01-11  JMB  Better alternating row color defaults, CSV enums import
 
     The background colors for alternate rows in the data viewer and
