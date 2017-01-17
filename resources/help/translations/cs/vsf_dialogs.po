@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
 "PO-Revision-Date: 2012-08-19 15:16+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/portabase/language/cs/)\n"
+"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 # ccaddbbf363a4735b4101b24b9cf65a4
 #: ../../vsf_dialogs.txt:4

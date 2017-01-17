@@ -176,95 +176,95 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="vanished">&amp;Salva</translation>
+        <translation>&amp;Salva</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="vanished">Salva</translation>
+        <translation>Salva</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Apri</translation>
+        <translation>Apri</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Annulla</translation>
+        <translation>&amp;Annulla</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Chiudi</translation>
+        <translation>&amp;Chiudi</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Chiudi</translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Applica</translation>
+        <translation>Applica</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Ripristina</translation>
+        <translation>Ripristina</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="vanished">Aiuto</translation>
+        <translation>Aiuto</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="vanished">Non salvare</translation>
+        <translation>Non salvare</translation>
     </message>
     <message>
         <source>Close without Saving</source>
-        <translation type="vanished">Chiudi senza salvare</translation>
+        <translation>Chiudi senza salvare</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="vanished">Tralascia</translation>
+        <translation>Tralascia</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;SÃ¬</translation>
+        <translation>&amp;SÃ¬</translation>
     </message>
     <message>
         <source>Yes to &amp;All</source>
-        <translation type="vanished">SÃ¬ &amp;a tutti</translation>
+        <translation>SÃ¬ &amp;a tutti</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;No</translation>
+        <translation>&amp;No</translation>
     </message>
     <message>
         <source>N&amp;o to All</source>
-        <translation type="vanished">N&amp;o a tutti</translation>
+        <translation>N&amp;o a tutti</translation>
     </message>
     <message>
         <source>Save All</source>
-        <translation type="vanished">Salva tutti</translation>
+        <translation>Salva tutti</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="vanished">Interrompi</translation>
+        <translation>Interrompi</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="vanished">Riprova</translation>
+        <translation>Riprova</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="vanished">Ignora</translation>
+        <translation>Ignora</translation>
     </message>
     <message>
         <source>Restore Defaults</source>
-        <translation type="vanished">Ripristina valori predefiniti</translation>
+        <translation>Ripristina valori predefiniti</translation>
     </message>
 </context>
 <context>
@@ -531,7 +531,7 @@ Vuoi eliminarlo comunque?</translation>
     <message>
         <source>Alias</source>
         <comment>Mac OS X Finder</comment>
-        <translation type="vanished">Alias</translation>
+        <translation>Alias</translation>
     </message>
     <message>
         <source>Shortcut</source>
@@ -963,11 +963,11 @@ Vuoi eliminarlo comunque?</translation>
     <name>QPPDOptionsModel</name>
     <message>
         <source>Name</source>
-        <translation type="vanished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="vanished">Valore</translation>
+        <translation>Valore</translation>
     </message>
 </context>
 <context>
@@ -1054,7 +1054,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Centimeters (cm)</source>
-        <translation type="vanished">Centimetri (cm)</translation>
+        <translation>Centimetri (cm)</translation>
     </message>
     <message>
         <location filename="../../qtbase/src/printsupport/dialogs/qpagesetupdialog_unix.cpp" line="+277"/>
@@ -1083,127 +1083,127 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>A0</source>
-        <translation type="vanished">A0</translation>
+        <translation>A0</translation>
     </message>
     <message>
         <source>A1</source>
-        <translation type="vanished">A1</translation>
+        <translation>A1</translation>
     </message>
     <message>
         <source>A2</source>
-        <translation type="vanished">A2</translation>
+        <translation>A2</translation>
     </message>
     <message>
         <source>A3</source>
-        <translation type="vanished">A3</translation>
+        <translation>A3</translation>
     </message>
     <message>
         <source>A4</source>
-        <translation type="vanished">A4</translation>
+        <translation>A4</translation>
     </message>
     <message>
         <source>A5</source>
-        <translation type="vanished">A5</translation>
+        <translation>A5</translation>
     </message>
     <message>
         <source>A6</source>
-        <translation type="vanished">A6</translation>
+        <translation>A6</translation>
     </message>
     <message>
         <source>A7</source>
-        <translation type="vanished">A7</translation>
+        <translation>A7</translation>
     </message>
     <message>
         <source>A8</source>
-        <translation type="vanished">A8</translation>
+        <translation>A8</translation>
     </message>
     <message>
         <source>A9</source>
-        <translation type="vanished">A9</translation>
+        <translation>A9</translation>
     </message>
     <message>
         <source>B0</source>
-        <translation type="vanished">B0</translation>
+        <translation>B0</translation>
     </message>
     <message>
         <source>B1</source>
-        <translation type="vanished">B1</translation>
+        <translation>B1</translation>
     </message>
     <message>
         <source>B2</source>
-        <translation type="vanished">B2</translation>
+        <translation>B2</translation>
     </message>
     <message>
         <source>B3</source>
-        <translation type="vanished">B3</translation>
+        <translation>B3</translation>
     </message>
     <message>
         <source>B4</source>
-        <translation type="vanished">B4</translation>
+        <translation>B4</translation>
     </message>
     <message>
         <source>B5</source>
-        <translation type="vanished">B5</translation>
+        <translation>B5</translation>
     </message>
     <message>
         <source>B6</source>
-        <translation type="vanished">B6</translation>
+        <translation>B6</translation>
     </message>
     <message>
         <source>B7</source>
-        <translation type="vanished">B7</translation>
+        <translation>B7</translation>
     </message>
     <message>
         <source>B8</source>
-        <translation type="vanished">B8</translation>
+        <translation>B8</translation>
     </message>
     <message>
         <source>B9</source>
-        <translation type="vanished">B9</translation>
+        <translation>B9</translation>
     </message>
     <message>
         <source>B10</source>
-        <translation type="vanished">B10</translation>
+        <translation>B10</translation>
     </message>
     <message>
         <source>C5E</source>
-        <translation type="vanished">C5E</translation>
+        <translation>C5E</translation>
     </message>
     <message>
         <source>DLE</source>
-        <translation type="vanished">DLE</translation>
+        <translation>DLE</translation>
     </message>
     <message>
         <source>Executive</source>
-        <translation type="vanished">Esecutivo</translation>
+        <translation>Esecutivo</translation>
     </message>
     <message>
         <source>Folio</source>
-        <translation type="vanished">Foglio</translation>
+        <translation>Foglio</translation>
     </message>
     <message>
         <source>Ledger</source>
-        <translation type="vanished">Registro</translation>
+        <translation>Registro</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation type="vanished">Legale</translation>
+        <translation>Legale</translation>
     </message>
     <message>
         <source>Letter</source>
-        <translation type="vanished">Lettera</translation>
+        <translation>Lettera</translation>
     </message>
     <message>
         <source>Tabloid</source>
-        <translation type="vanished">Tabloid</translation>
+        <translation>Tabloid</translation>
     </message>
     <message>
         <source>US Common #10 Envelope</source>
-        <translation type="vanished">Busta comune #10 USA</translation>
+        <translation>Busta comune #10 USA</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="vanished">Personalizzato</translation>
+        <translation>Personalizzato</translation>
     </message>
     <message>
         <source>File exists</source>
@@ -1538,7 +1538,7 @@ Vuoi sostituirlo?</translation>
     </message>
     <message>
         <source>Export to PostScript</source>
-        <translation type="vanished">Esporta come PostScript</translation>
+        <translation>Esporta come PostScript</translation>
     </message>
 </context>
 <context>
@@ -1555,7 +1555,7 @@ Vuoi sostituirlo?</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="vanished">Avanzate</translation>
+        <translation>Avanzate</translation>
     </message>
 </context>
 <context>
