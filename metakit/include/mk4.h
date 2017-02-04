@@ -1,5 +1,5 @@
 // mk4.h --
-// $Id: mk4.h 1669 2007-06-16 00:23:25Z jcw $
+// $Id$
 // This is part of Metakit, see http://www.equi4.com/metakit.html
 
 /** @file
@@ -8,6 +8,8 @@
 
 #ifndef __MK4_H__
 #define __MK4_H__
+
+#include <stdint.h>
 
 //---------------------------------------------------------------------------
 //
@@ -43,7 +45,7 @@
 //---------------------------------------------------------------------------
 
 /// Current release = 100 * major + 10 * minor + maintenance
-#define d4_MetakitLibraryVersion 249    // 2.4.9.7 release, Jun 16, 2007
+#define d4_MetakitLibraryVersion 249    // 2.4.9.8 release, Jun 18, 2015
 #define d4_MetaKitLibraryVersion d4_MetakitLibraryVersion // compat, yuck
 
 //---------------------------------------------------------------------------
@@ -197,29 +199,10 @@ defined(__x86_64__) || defined(__s390x__) || defined(__alpha) ||  \
 #define d4_inline
 #endif 
 
-typedef unsigned char t4_byte; // create typedefs for t4_byte, etc.
+typedef uint8_t t4_byte; // create typedefs for t4_byte, etc.
+typedef int32_t t4_i32; // if longs are 64b, then int must be 32b
+typedef int64_t t4_i64;
 
-#if q4_LONG64
-typedef int t4_i32; // if longs are 64b, then int must be 32b
-#else 
-typedef long t4_i32; // if longs aren't 64b, then they are 32b
-#endif 
-
-#if q4_LONG64           // choose a way to represent 64b integers
-typedef long t4_i64;
-#elif defined (LONG_LONG)
-typedef LONG_LONG t4_i64;
-#elif HAVE_LONG_LONG
-typedef long long t4_i64;
-#else 
-struct t4_i64 {
-    long l1;
-    long l2;
-};
-bool operator == (const t4_i64 a_, const t4_i64 b_);
-bool operator < (const t4_i64 a_, const t4_i64 b_);
-#endif 
- 
 typedef int ((*StringCompareFunc)(const char*, const char*));
 
 //---------------------------------------------------------------------------

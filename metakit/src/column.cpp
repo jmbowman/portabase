@@ -1,5 +1,5 @@
 // column.cpp --
-// $Id: column.cpp 1230 2007-03-09 15:58:53Z jcw $
+// $Id$
 // This is part of Metakit, the homepage is http://www.equi4.com/metakit.html
 
 /** @file
@@ -418,13 +418,15 @@ void c4_Column::MoveGapTo(t4_i32 pos_) {
   // move the gap up, ie. some bytes down
     MoveGapUp(pos_);
   else if (_gap > pos_)
-  // move the gap down, ie. some bytes up
-  if (_gap - pos_ > _size - _gap + fSegRest(pos_)) {
-    RemoveGap(); // it's faster to get rid of the gap instead
-    _gap = pos_;
-  } else
-  // normal case, move some bytes up
-    MoveGapDown(pos_);
+  {
+    // move the gap down, ie. some bytes up
+    if (_gap - pos_ > _size - _gap + fSegRest(pos_)) {
+      RemoveGap(); // it's faster to get rid of the gap instead
+      _gap = pos_;
+    } else
+    // normal case, move some bytes up
+      MoveGapDown(pos_);
+  }
 
   d4_assert(_gap == pos_);
 
@@ -1175,7 +1177,7 @@ void c4_ColOfInts::SetAccessWidth(int bits_) {
 
   _currWidth = (1 << l2bp1) >> 1;
 
-  if (l2bp1 > 4 && (_mustFlip || Persist() != 0 && Strategy()._bytesFlipped))
+  if (l2bp1 > 4 && (_mustFlip || (Persist() != 0 && Strategy()._bytesFlipped)))
     l2bp1 += 3;
   // switch to the trailing entries for byte flipping
 

@@ -1,5 +1,5 @@
 // trseize.cpp -- Regression test program, resizing tests
-// $Id: tresize.cpp 1230 2007-03-09 15:58:53Z jcw $
+// $Id$
 // This is part of Metakit, the homepage is http://www.equi4.com/metakit.html
 
 #include "regress.h"

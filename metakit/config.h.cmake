@@ -1,56 +1,54 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
-
 /* Define to 1 if you have the `bcopy' function. */
-#undef HAVE_BCOPY
+#cmakedefine HAVE_BCOPY 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#undef HAVE_DLFCN_H
+#cmakedefine HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-#undef HAVE_INTTYPES_H
+#cmakedefine HAVE_INTTYPES_H 1
 
 /* Define to 1 if the system has the type `long long'. */
-#undef HAVE_LONG_LONG
+#cmakedefine HAVE_LONG_LONG 1
 
 /* Define to 1 if you have the `memmove' function. */
-#undef HAVE_MEMMOVE
+#cmakedefine HAVE_MEMMOVE 1
 
 /* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
+#cmakedefine HAVE_MEMORY_H
 
 /* Define to 1 if you have the `mmap' function. */
-#undef HAVE_MMAP
+#cmakedefine HAVE_MMAP 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#undef HAVE_STDINT_H
+#cmakedefine HAVE_STDINT_H 1
 
 /* Define to 1 if you have the <stdlib.h> header file. */
-#undef HAVE_STDLIB_H
+#cmakedefine HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the <strings.h> header file. */
-#undef HAVE_STRINGS_H
+#cmakedefine HAVE_STRINGS_H 1
 
 /* Define to 1 if you have the <string.h> header file. */
-#undef HAVE_STRING_H
+#cmakedefine HAVE_STRING_H 1
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-#undef HAVE_SYS_STAT_H
+#cmakedefine HAVE_SYS_STAT_H 1
 
 /* Define to 1 if you have the <sys/types.h> header file. */
-#undef HAVE_SYS_TYPES_H
+#cmakedefine HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#undef HAVE_UNISTD_H
+#cmakedefine HAVE_UNISTD_H 1
 
 /* The size of a `long', as computed by sizeof. */
-#undef SIZEOF_LONG
+#cmakedefine SIZEOF_LONG @SIZEOF_LONG@
 
 /* Define to 1 if you have the ANSI C header files. */
-#undef STDC_HEADERS
+#cmakedefine STDC_HEADERS 1
 
 /* Define to empty if `const' does not conform to ANSI C. */
-#undef const
+#cmakedefine const @ANSI_CONST@
 
 /* Define as `__inline' if that's what the C compiler calls it, or to nothing
    if it is not supported. */
-#undef inline
+#cmakedefine inline @COMPILER_INLINE@

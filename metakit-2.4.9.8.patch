@@ -1,0 +1,47 @@
+diff --git a/include/mk4.h b/include/mk4.h
+index d7d97c0..ba014af 100755
+--- a/include/mk4.h
++++ b/include/mk4.h
+@@ -203,6 +203,8 @@ typedef uint8_t t4_byte; // create typedefs for t4_byte, etc.
+ typedef int32_t t4_i32; // if longs are 64b, then int must be 32b
+ typedef int64_t t4_i64;
+ 
++typedef int ((*StringCompareFunc)(const char*, const char*));
++
+ //---------------------------------------------------------------------------
+ 
+ class c4_View {
+@@ -315,6 +317,7 @@ class c4_View {
+     friend bool operator > (const c4_View &, const c4_View &);
+     friend bool operator <= (const c4_View &, const c4_View &);
+     friend bool operator >= (const c4_View &, const c4_View &);
++    static StringCompareFunc stringCompareFunc;
+ 
+   protected:
+     void _IncSeqRef();
+diff --git a/src/format.cpp b/src/format.cpp
+index a1a0d9b..9577e59 100755
+--- a/src/format.cpp
++++ b/src/format.cpp
+@@ -869,7 +869,7 @@ int c4_FormatS::DoCompare(const c4_Bytes &b1_, const c4_Bytes &b2_) {
+   c4_String v1((const char*)b1_.Contents(), b1_.Size());
+   c4_String v2((const char*)b2_.Contents(), b2_.Size());
+ 
+-  return v1.CompareNoCase(v2);
++  return (*c4_View::stringCompareFunc)(v1, v2);
+ }
+ 
+ void c4_FormatS::Insert(int index_, const c4_Bytes &buf_, int count_) {
+diff --git a/src/view.cpp b/src/view.cpp
+index 4086d5e..70d2ae5 100755
+--- a/src/view.cpp
++++ b/src/view.cpp
+@@ -940,6 +940,8 @@ int c4_View::Compare(const c4_View &view_)const {
+   return na == nb ? 0 : i < na ?  + 1:  - 1;
+ }
+ 
++StringCompareFunc c4_View::stringCompareFunc = strcmp;
++
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ /** @class c4_Cursor

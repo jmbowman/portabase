@@ -1,3 +1,48 @@
+2015-06-18    ############################################    MK 2.4.9.8
+
+    Consolidate all the changes since the move to GitHub.
+
+2011-08-18    Move code to public repository on GitHub
+
+    The Subversion repository at svn://svn.equi4.com/metakit is now
+    obsolete. GitHub has the new official repository for Metakit.
+
+2009-02-10    Create Python install dir if not yet present
+
+    As with C++ and Tcl, the installation directory is created if
+    it did not exist (patch provided by A. Sampson).
+
+2007-06-25    Various Tcl tweaks (recovered from SVN log)
+
+    Cleanup/overhaul, adding CONST86, stubs, and Tcl_GetErrorLine
+    compatibility to allow compiling Mk4tcl for Tcl 8.6*.
+
+2007-06-24    Tcl TEA3 overhaul
+
+    Replace configure.in/Makefile.in with new versions, adapted from
+    Tcl's sampleextension.  Now generates config.h and pkgIndex.tcl
+    from corresponding *.in files.
+    
+    Comnvert all tcl/test/ entries to new ones in tcl/tests/ to use
+    the standard tcltest framework.  Just 40 tests in all so far.
+    
+    Update to tcl.m4 3.6, with a patch to fix "make test" on macosx.
+
+2007-06-24    Cleanup obsolete code
+
+    Remove Lua binding in lua/ - it was never actually completed.
+    Remove win/{catfish,kitviewer,msevc3,msvc152} - now unsupported.
+    Remove mac/, pre-macosx builds are no longer supported.
+    Removed the MKSQL logic and tcl/mksql.tcl, since it is not used.
+
+2007-06-24    Patch for cygwin
+
+    There's a submitted patch (F152) which tries to fix a problem
+    when compilng MK on cygwin with CXXFLAGS=-mno-cygwin, but it may
+    not be the best way to fix things.  Instead, this change adds the
+    $(LDFLAGS) parameter in a few places in the Makefile.  It was not
+    used before, and $(SHLIB_FLAGS) still isn't being used - weird.
+
 2007-06-18    Fix threading problems in Mk4tcl
 
     A change is needed to make the thread fix work with mk::loop,
