@@ -1,5 +1,5 @@
 // remap.cpp --
-// $Id: remap.cpp 1230 2007-03-09 15:58:53Z jcw $
+// $Id$
 // This is part of Metakit, the homepage is http://www.equi4.com/metakit.html
 
 /** @file
@@ -238,7 +238,7 @@ int c4_HashViewer::LookDict(t4_i32 hash_, c4_Cursor cursor_)const {
   /* We use ~hash_ instead of hash_, as degenerate hash functions, such
   as for ints <sigh>, can have lots of leading zeros. It's not
   really a performance risk, but better safe than sorry. */
-  if (IsUnused(i) || Hash(i) == hash_ && KeySame(Row(i), cursor_))
+  if (IsUnused(i) || (Hash(i) == hash_ && KeySame(Row(i), cursor_)))
     return i;
 
   int freeslot = IsDummy(i) ? i :  - 1;
@@ -1054,10 +1054,12 @@ bool c4_IndexedViewer::RemoveRows(int pos_, int count_) {
   while (--n >= 0) {
     int v = _mapProp(_map[n]);
     if (v >= pos_)
+    {
       if (v < pos_ + count_)
         _map.RemoveAt(n);
       else
         _mapProp(_map[n]) = v - count_;
+    }
   }
 
   return true;

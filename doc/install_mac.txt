@@ -10,7 +10,7 @@ need the following:
 Metakit Compilation
 -------------------
 To compile PortaBase, Metakit (http://www.equi4.com/metakit/) must be compiled
-first.  PortaBase uses a version of 2.4.9.7 patched to allow case-sensitive
+first.  PortaBase uses a version of 2.4.9.8 patched to allow case-sensitive
 searches and locale-sensitive sorting; the patched version is included in the
 "metakit" directory for convenience (and to support the Debian and Maemo
 autobuilders).

@@ -1,5 +1,5 @@
 // string.cpp --
-// $Id: string.cpp 1230 2007-03-09 15:58:53Z jcw $
+// $Id$
 // This is part of Metakit, see http://www.equi4.com/metakit.html
 
 /** @file
@@ -230,8 +230,8 @@ c4_String c4_String::Right(int nCount)const {
 }
 
 bool operator == (const c4_String &a, const c4_String &b) {
-  return a._value == b._value || a.GetLength() == b.GetLength() && memcmp
-    (a.Data(), b.Data(), a.GetLength()) == 0;
+  return a._value == b._value || (a.GetLength() == b.GetLength() && memcmp
+    (a.Data(), b.Data(), a.GetLength()) == 0);
 }
 
 int c4_String::Compare(const char *str)const {

@@ -1,5 +1,5 @@
 // tlimits.cpp -- Regression test program, limit tests
-// $Id: tlimits.cpp 1230 2007-03-09 15:58:53Z jcw $
+// $Id$
 // This is part of Metakit, the homepage is http://www.equi4.com/metakit.html
 
 #include "regress.h"
@@ -61,7 +61,7 @@ void TestLimits() {
 
   B(l02, Over 64 Kb of strings, 0)W(l02a);
    {
-    static char *texts[3] =  {
+    static char const*texts[3] =  {
       "Alice in Wonderland", "The wizard of Oz", "I'm singin' in the rain"
     };
 
@@ -185,7 +185,7 @@ void TestLimits() {
 
   B(l05, Delete from 32 Kb of strings, 0)W(l05a);
    {
-    static char *texts[3] =  {
+    static char const*texts[3] =  {
       "Alice in Wonderland", "The wizard of Oz", "I'm singin' in the rain"
     };
 

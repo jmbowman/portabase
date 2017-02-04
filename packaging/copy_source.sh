@@ -16,7 +16,7 @@ cp Doxyfile $DEST
 cp Doxyfile_Metakit $DEST
 cp INSTALL $DEST
 cp README.txt $DEST
-cp metakit-2.4.9.7.patch $DEST
+cp metakit-2.4.9.8.patch $DEST
 cp portabase.ico $DEST
 cp portabase.iss $DEST
 cp portabase.pro $DEST
