@@ -1,7 +1,7 @@
 /*
  * calceditor.cpp
  *
- * (c) 2003-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,11 +13,11 @@
  * Source file for CalcEditor
  */
 
+#include <QAction>
 #include <QHeaderView>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QSpinBox>
 #include <QTreeWidget>
 #include "calcdateeditor.h"
 #include "calceditor.h"
@@ -25,6 +25,7 @@
 #include "calcnodeeditor.h"
 #include "calctimeeditor.h"
 #include "../factory.h"
+#include "../qqutil/qqspinbox.h"
 
 /**
  * Constructor.
@@ -47,7 +48,7 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
     equation->setFrame(false);
     grid->addWidget(equation, 1, 1);
     grid->addWidget(new QLabel(tr("Decimal Places") + ":", this), 2, 0);
-    decimalsBox = new QSpinBox(this);
+    decimalsBox = new QQSpinBox(this);
     decimalsBox->setRange(0, 9);
     decimalsBox->setValue(2);
     grid->addWidget(decimalsBox, 2, 1);
@@ -59,11 +60,11 @@ CalcEditor::CalcEditor(Database *dbase, const QString &calcName, const QStringLi
             this, SLOT(updateButtons()));
 
     addEditButtons();
-    connect(addButton, SIGNAL(clicked()), this, SLOT(addNode()));
-    connect(editButton, SIGNAL(clicked()), this, SLOT(editNode()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteNode()));
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(addAction, SIGNAL(triggered()), this, SLOT(addNode()));
+    connect(editAction, SIGNAL(triggered()), this, SLOT(editNode()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteNode()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
     updateButtons();
 
     nodeEditor = new CalcNodeEditor(colNames, colTypes, true, this);
@@ -156,27 +157,27 @@ void CalcEditor::updateButtons()
     QTreeWidgetItem *item = tree->currentItem();
     if (item == 0) {
         // empty tree
-        addButton->setEnabled(true);
-        editButton->setEnabled(false);
-        deleteButton->setEnabled(false);
-        upButton->setEnabled(false);
-        downButton->setEnabled(false);
+        addAction->setEnabled(true);
+        editAction->setEnabled(false);
+        deleteAction->setEnabled(false);
+        upAction->setEnabled(false);
+        downAction->setEnabled(false);
         return;
     }
     CalcNode *node = nodeMap[item];
-    addButton->setEnabled(node->allowsAdd());
-    editButton->setEnabled(node->allowsEdit());
-    deleteButton->setEnabled(true);
+    addAction->setEnabled(node->allowsAdd());
+    editAction->setEnabled(node->allowsEdit());
+    deleteAction->setEnabled(true);
     QTreeWidgetItem *parent = item->parent();
     if (parent == 0) {
         // root node, no siblings
-        upButton->setEnabled(false);
-        downButton->setEnabled(false);
+        upAction->setEnabled(false);
+        downAction->setEnabled(false);
     }
     else {
-        upButton->setEnabled(parent->child(0) != item);
+        upAction->setEnabled(parent->child(0) != item);
         int index = parent->indexOfChild(item);
-        downButton->setEnabled(parent->childCount() > index + 1);
+        downAction->setEnabled(parent->childCount() > index + 1);
     }
 }
 

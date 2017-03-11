@@ -1,7 +1,7 @@
 /*
  * passdialog.h
  *
- * (c) 2003-2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2009-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,9 @@
 #define PASSDIALOG_H
 
 #include "pbdialog.h"
+#include "qqutil/qqlineedit.h"
 
 class Database;
-class QLineEdit;
 
 /**
  * Dialog for entering file encryption passwords.  Used when creating a new
@@ -44,9 +44,9 @@ public:
 private:
     Database *db; /**< The database being created, opened, or changed */
     DialogMode mode; /**< The purpose for which this dialog was launched */
-    QLineEdit *oldPass; /**< Entry field for the old password, when changing it */
-    QLineEdit *pass; /**< Entry field for the password */
-    QLineEdit *repeatPass; /**< Entry field for confirming the entered password */
+    QQLineEdit *oldPass; /**< Entry field for the old password, when changing it */
+    QQLineEdit *pass; /**< Entry field for the password */
+    QQLineEdit *repeatPass; /**< Entry field for confirming the entered password */
 };
 
 #endif

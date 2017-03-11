@@ -1,7 +1,7 @@
 /*
  * enummanager.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +13,7 @@
  * Source file for EnumManager
  */
 
+#include <QAction>
 #include <QApplication>
 #include <QLabel>
 #include <QLayout>
@@ -35,7 +36,7 @@
  * @param viewDisplay The main data display widget
  */
 EnumManager::EnumManager(Database *dbase, QWidget *parent, ViewDisplay *viewDisplay)
-  : PBDialog(tr("Enum Manager"), parent), viewer(viewDisplay),
+  : PBDialog(tr("Enums"), parent), viewer(viewDisplay),
   contentChanged(false), orderChanged(false)
 {
     stack = new QStackedWidget(this);
@@ -58,11 +59,11 @@ EnumManager::EnumManager(Database *dbase, QWidget *parent, ViewDisplay *viewDisp
     }
 
     addEditButtons();
-    connect(addButton, SIGNAL(clicked()), this, SLOT(addEnum()));
-    connect(editButton, SIGNAL(clicked()), this, SLOT(editEnum()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteEnum()));
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(addAction, SIGNAL(triggered()), this, SLOT(addEnum()));
+    connect(editAction, SIGNAL(triggered()), this, SLOT(editEnum()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteEnum()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
 
     finishLayout();
 }

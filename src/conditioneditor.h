@@ -1,7 +1,7 @@
 /*
  * conditioneditor.h
  *
- * (c) 2002-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2009,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,13 +20,13 @@
 #include "condition.h"
 #include "datatypes.h"
 #include "pbdialog.h"
+#include "qqutil/qqlineedit.h"
 
 class Database;
 class DateWidget;
 class NumberWidget;
 class QCheckBox;
 class QComboBox;
-class QLineEdit;
 class QStackedWidget;
 class TimeWidget;
 
@@ -39,7 +39,7 @@ class ConditionEditor: public PBDialog
 {
     Q_OBJECT
 public:
-    ConditionEditor(Database *dbase, QWidget *parent = 0);
+    ConditionEditor(Database *dbase, QWidget *parent = 0, bool quickFilter = false);
 
     int edit(Condition *condition);
     void applyChanges(Condition *condition);
@@ -63,7 +63,7 @@ private:
     QStringList stringOpList; /**< The list of string operator display strings */
     QStringList numberOpList; /**< The list of numeric operator display strings */
     QStackedWidget *constantStack; /**< The stack of constant value widgets */
-    QLineEdit *constantLine; /**< Entry field for text constants */
+    QQLineEdit *constantLine; /**< Entry field for text constants */
     QCheckBox *constantCheck; /**< Checkbox for boolean constants */
     DateWidget *constantDate; /**< Date constant selection widget */
     TimeWidget *constantTime; /**< Time constant selection widget */

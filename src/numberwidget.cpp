@@ -1,7 +1,7 @@
 /*
  * numberwidget.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,13 @@
 #include <QAbstractButton>
 #include <QIcon>
 #include <QLayout>
-#include <QLineEdit>
 #include <QLocale>
 #include "calculator.h"
 #include "datatypes.h"
 #include "factory.h"
 #include "formatting.h"
 #include "numberwidget.h"
+#include "qqutil/qqlineedit.h"
 
 /**
  * Constructor.
@@ -34,12 +34,19 @@ NumberWidget::NumberWidget(int type, QWidget *parent)
   : QWidget(parent), dataType(type)
 {
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
-    entryField = new QLineEdit(this);
+    entryField = new QQLineEdit(this);
+#if QT_VERSION >= 0x050000
+    entryField->setInputMethodHints(entryField->inputMethodHints()|Qt::ImhFormattedNumbersOnly);
+#endif
     layout->addWidget(entryField, 1);
     QAbstractButton *button = Factory::button(this);
     layout->addWidget(button);
-    button->setIcon(QIcon(":/icons/calculator.png"));
+    button->setIcon(Factory::icon("calculator"));
     button->setToolTip(tr("Show calculator"));
+#if defined(Q_OS_ANDROID)
+    // Skip the button when clicking "next" from the entry field
+    button->setFocusPolicy(Qt::NoFocus);
+#endif
     connect(button, SIGNAL(clicked()), this, SLOT(launchCalculator()));
 }
 
@@ -58,6 +65,18 @@ QString NumberWidget::getValue()
         return Formatting::fromLocalDouble(entryField->text());
     }
 }
+
+#if defined(Q_OS_ANDROID)
+/**
+ * Set the type of enter key to use on Android's software keyboard.
+ *
+ * @param type The type of enter key to use
+ */
+void NumberWidget::setEnterKeyType(Qt::EnterKeyType type)
+{
+    entryField->setEnterKeyType(type);
+}
+#endif
 
 /**
  * Set this widget's new value.

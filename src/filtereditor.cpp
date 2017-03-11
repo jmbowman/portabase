@@ -1,7 +1,7 @@
 /*
  * filtereditor.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,8 +13,8 @@
  * Source file for FilterEditor
  */
 
+#include <QAction>
 #include <QLabel>
-#include <QLineEdit>
 #include <QListWidget>
 #include <QMessageBox>
 #include <QPushButton>
@@ -24,6 +24,7 @@
 #include "factory.h"
 #include "filter.h"
 #include "filtereditor.h"
+#include "qqutil/qqlineedit.h"
 
 /**
  * Constructor.
@@ -35,18 +36,18 @@ FilterEditor::FilterEditor(QWidget *parent)
 {
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Filter Name") + " ", this));
-    nameBox = new QLineEdit(this);
+    nameBox = new QQLineEdit(this);
     hbox->addWidget(nameBox);
 
     listWidget = Factory::listWidget(this);
     vbox->addWidget(listWidget);
 
     addEditButtons();
-    connect(addButton, SIGNAL(clicked()), this, SLOT(addCondition()));
-    connect(editButton, SIGNAL(clicked()), this, SLOT(editCondition()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCondition()));
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(addAction, SIGNAL(triggered()), this, SLOT(addCondition()));
+    connect(editAction, SIGNAL(triggered()), this, SLOT(editCondition()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteCondition()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
 
     finishLayout();
     nameBox->setFocus();

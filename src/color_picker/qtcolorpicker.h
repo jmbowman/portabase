@@ -3,7 +3,7 @@
 ** This file is part of a Qt Solutions component.
 ** 
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** Copyright (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+** Copyright (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
 ** 
 ** Contact:  Qt Software Information (qt-info@nokia.com)
 ** 
@@ -72,6 +72,8 @@
 #endif
 
 class ColorPickerPopup;
+class QEventLoop;
+class QGridLayout;
 
 class QT_QTCOLORPICKER_EXPORT QtColorPicker : public QPushButton
 {
@@ -117,6 +119,122 @@ private:
     bool withColorDialog;
     bool dirty;
     bool firstInserted;
+};
+
+/*
+    A class  that acts very much  like a QPushButton. It's not styled,
+    so we  can  expect  the  exact  same    look,  feel and   geometry
+    everywhere.     Also,  this  button     always emits   clicked  on
+    mouseRelease, even if the mouse button was  not pressed inside the
+    widget.
+*/
+class ColorPickerButton : public QFrame
+{
+    Q_OBJECT
+
+public:
+    explicit ColorPickerButton(QWidget *parent);
+
+signals:
+    void clicked();
+
+protected:
+    void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void keyPressEvent(QKeyEvent *e);
+    void keyReleaseEvent(QKeyEvent *e);
+    void paintEvent(QPaintEvent *e);
+    void focusInEvent(QFocusEvent *e);
+    void focusOutEvent(QFocusEvent *e);
+};
+
+/*
+    This class represents each "color" or item in the color grid.
+*/
+class ColorPickerItem : public QFrame
+{
+    Q_OBJECT
+
+public:
+    ColorPickerItem(const QColor &color = Qt::white, const QString &text = QString::null,
+              QWidget *parent = 0);
+    ~ColorPickerItem();
+
+    QColor color() const;
+    QString text() const;
+
+    void setSelected(bool);
+    bool isSelected() const;
+signals:
+    void clicked();
+    void selected();
+
+public slots:
+    void setColor(const QColor &color, const QString &text = QString());
+
+protected:
+    void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void paintEvent(QPaintEvent *e);
+
+private:
+    QColor c;
+    QString t;
+    bool sel;
+};
+
+/*
+
+*/
+class ColorPickerPopup : public QFrame
+{
+    Q_OBJECT
+
+public:
+    ColorPickerPopup(int width, bool withColorDialog,
+               QWidget *parent = 0);
+    ~ColorPickerPopup();
+
+    void insertColor(const QColor &col, const QString &text, int index);
+    void exec();
+
+    void setExecFlag();
+
+    QColor lastSelected() const;
+
+    ColorPickerItem *find(const QColor &col) const;
+    QColor color(int index) const;
+
+signals:
+    void selected(const QColor &);
+    void hid();
+
+public slots:
+    void getColorFromDialog();
+
+protected slots:
+    void updateSelected();
+
+protected:
+    void keyPressEvent(QKeyEvent *e);
+    void showEvent(QShowEvent *e);
+    void hideEvent(QHideEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+
+    void regenerateGrid();
+
+private:
+    QMap<int, QMap<int, QWidget *> > widgetAt;
+    QList<ColorPickerItem *> items;
+    QGridLayout *grid;
+    ColorPickerButton *moreButton;
+    QEventLoop *eventLoop;
+
+    int lastPos;
+    int cols;
+    QColor lastSel;
 };
 
 #endif

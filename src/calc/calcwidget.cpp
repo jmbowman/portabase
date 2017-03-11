@@ -1,7 +1,7 @@
 /*
  * calcwidget.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ CalcWidget::CalcWidget(Database *dbase, const QString &calcName, const QStringLi
     display = new QLabel(this);
     layout->addWidget(display);
     QAbstractButton *button = Factory::button(this);
-    button->setIcon(QIcon(":/icons/refresh.png"));
+    button->setIcon(Factory::icon("refresh"));
     button->setToolTip(tr("Update calculated value"));
     layout->addWidget(button);
     connect(button, SIGNAL(clicked()), this, SLOT(calculate()));

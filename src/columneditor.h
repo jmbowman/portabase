@@ -1,7 +1,7 @@
 /*
  * columneditor.h
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 #define COLUMNEDITOR_H
 
 #include "pbdialog.h"
+#include "qqutil/qqlineedit.h"
 
 class CalcNode;
 class DBEditor;
@@ -26,7 +27,6 @@ class NumberWidget;
 class QCheckBox;
 class QComboBox;
 class QLabel;
-class QLineEdit;
 class QPushButton;
 class QStackedWidget;
 
@@ -60,12 +60,12 @@ private slots:
 private:
     Database *db; /**< The database in use */
     DBEditor *dbEditor; /**< The database format editor dialog */
-    QLineEdit *nameBox; /**< Column name entry field */
+    QQLineEdit *nameBox; /**< Column name entry field */
     QComboBox *typeBox; /**< Column type selection list */
     QLabel *defaultLabel; /**< Default value UI label (sometimes vanishes) */
     QStackedWidget *defaultStack; /**< Stack of default value entry widgets */
     QCheckBox *defaultCheck; /**< Default value checkbox for booleans */
-    QLineEdit *defaultLine; /**< Default value field for strings */
+    QQLineEdit *defaultLine; /**< Default value field for strings */
     NoteButton *defaultNote; /**< Default value field for notes */
     NumberWidget *defaultInteger; /**< Default value field for integers */
     NumberWidget *defaultFloat; /**< Default value field for floats */

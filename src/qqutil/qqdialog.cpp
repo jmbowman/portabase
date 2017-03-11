@@ -1,7 +1,7 @@
 /*
  * qqutil/qqdialog.cpp
  *
- * (c) 2003-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2012,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,12 +15,20 @@
 
 #include <QApplication>
 #include <QDialogButtonBox>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
 #include <QPushButton>
 #include <QSettings>
 #include <QSize>
+#include <QVBoxLayout>
 #include "qqdialog.h"
+#include "qqfactory.h"
+
+#if defined(Q_OS_ANDROID)
+#include <QScreen>
+#include "actionbar.h"
+#endif
 
 /**
  * Constructor.
@@ -30,18 +38,43 @@
  *               provided, modal dialogs and taskbar representation are a
  *               little odd otherwise.
  * @param small True if the dialog is small enough that it shouldn't be
- *              maximized on platforms with small screens (like Maemo)
+ *              maximized on platforms with small screens (like Android and
+ *              Maemo)
+ * @param backButtonAccepts True if the Android back button applies changes
+ *                          made in the dialog
  */
-QQDialog::QQDialog(QString title, QWidget *parent, bool small)
+QQDialog::QQDialog(QString title, QWidget *parent, bool small, bool backButtonAccepts)
     : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
-    smallDialog(small)
+    smallDialog(small), acceptOnBack(backButtonAccepts)
 {
+#if defined(Q_WS_MAEMO_5)
+    QHBoxLayout *hbox = QQFactory::hBoxLayout(this, true);
+    vbox = QQFactory::vBoxLayout(hbox);
+#else
+    vbox = QQFactory::vBoxLayout(this, true);
+#endif
+#if defined(Q_OS_ANDROID)
+    actionBar = 0;
+    screenGeometryChanged(qApp->primaryScreen()->availableGeometry());
+    connect(qApp->primaryScreen(), SIGNAL(availableGeometryChanged(const QRect &)),
+            this, SLOT(screenGeometryChanged(const QRect &)));
+    actionBar = new ActionBar(this);
+    vbox->addWidget(actionBar);
+    if (backButtonAccepts) {
+        connect(actionBar, &ActionBar::up, this, &QQDialog::accept);
+    }
+    else {
+        connect(actionBar, &ActionBar::up, this, &QQDialog::reject);
+    }
+#endif
     setWindowTitle(title);
 #if defined(Q_WS_MAEMO_5)
     if (!small) {
         setAttribute(Qt::WA_Maemo5StackedWindow);
         setWindowFlags(Qt::Window);
     }
+#elif defined(Q_OS_ANDROID)
+    setWindowFlags(Qt::Window);
 #endif
 }
 
@@ -63,13 +96,17 @@ QQDialog::~QQDialog()
 
 /**
  * Overrides QWidget::setWindowTitle() to include the application name. Qt 5
- * does this automatically when appropriate, so this is just for Maemo now.
+ * does this automatically when appropriate on most platforms, so this is
+ * mainly for the benefit of Maemo and Android (where it puts the title in
+ * the action bar).
  *
  * @param title The dialog title, not including the application name
  */
 void QQDialog::setWindowTitle(const QString &title)
 {
-#if QT_VERSION >= 0x050000
+#if defined(Q_OS_ANDROID)
+    actionBar->setTitle(title, true);
+#elif QT_VERSION >= 0x050000
     QWidget::setWindowTitle(title);
 #else
     if (title.isEmpty()) {
@@ -93,6 +130,9 @@ int QQDialog::exec()
         resize(parentWidget()->width(), height());
     }
 #endif
+#if defined(Q_OS_ANDROID)
+    showMaximized();
+#endif
     return QDialog::exec();
 }
 
@@ -112,12 +152,18 @@ QDialogButtonBox *QQDialog::addOkCancelButtons(QBoxLayout *layout, bool ok,
     if (ok && cancel) {
         buttons = QDialogButtonBox::Ok | QDialogButtonBox::Cancel;
     }
+#if defined(Q_OS_ANDROID)
+    else {
+        return 0;
+    }
+#else
     else if (ok) {
         buttons = QDialogButtonBox::Ok;
     }
     else {
         buttons = QDialogButtonBox::Cancel;
     }
+#endif
     Qt::Orientation orientation = Qt::Horizontal;
     QBoxLayout::Direction dir = layout->direction();
     if (dir == QBoxLayout::LeftToRight || dir == QBoxLayout::RightToLeft) {
@@ -141,7 +187,7 @@ QDialogButtonBox *QQDialog::addOkCancelButtons(QBoxLayout *layout, bool ok,
  */
 void QQDialog::finishConstruction(int minWidth, int minHeight)
 {
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     QSettings settings;
     dialogClassName = metaObject()->className();
     QString widthName = QString("DialogSizes/%1Width").arg(dialogClassName);
@@ -154,5 +200,46 @@ void QQDialog::finishConstruction(int minWidth, int minHeight)
 #else
     Q_UNUSED(minWidth);
     Q_UNUSED(minHeight);
+#endif
+}
+
+#if defined(Q_OS_ANDROID)
+/**
+ * If Android's back button is pressed, treat it as accepting any changes
+ * made in the dialog.
+ *
+ * @param e A key press event object
+ */
+void QQDialog::keyPressEvent(QKeyEvent *e)
+{
+    if (e->key() == Qt::Key_Back) {
+        if (acceptOnBack) {
+            accept();
+        }
+        else {
+            reject();
+        }
+        return;
+    }
+    QDialog::keyPressEvent(e);
+}
+#endif
+
+/**
+ * Respond to the screen orientation or size changing.  Used on Android to
+ * make sure the dialog width doesn't exceed the screen width.
+ */
+void QQDialog::screenGeometryChanged(const QRect &geometry)
+{
+#if defined(Q_OS_ANDROID)
+    if (actionBar) {
+        actionBar->setMaximumWidth(geometry.width());
+    }
+    if (isVisible()) {
+        setMaximumWidth(geometry.width());
+        setMinimumHeight(geometry.height());
+    }
+#else
+    Q_UNUSED(geometry)
 #endif
 }

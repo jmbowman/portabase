@@ -1,7 +1,7 @@
 /*
  * imageeditor.cpp
  *
- * (c) 2003-2004,2008-2010,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,11 +23,11 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QScrollArea>
-#include <QSpinBox>
 #include <QWidget>
 #include "imageeditor.h"
 #include "imagewidget.h"
-#include "../factory.h"
+#include "../qqutil/qqfactory.h"
+#include "../qqutil/qqspinbox.h"
 
 /**
  * Constructor.
@@ -38,19 +38,19 @@ ImageEditor::ImageEditor(QWidget *parent)
     : PBDialog(tr("Image Editor"), parent), path("")
 {
     paramsRow = new QWidget(this);
-    QHBoxLayout *hbox = Factory::hBoxLayout(paramsRow, true);
+    QHBoxLayout *hbox = QQFactory::hBoxLayout(paramsRow, true);
     vbox->addWidget(paramsRow);
     hbox->addWidget(new QLabel(tr("Width"), paramsRow));
-    widthBox = new QSpinBox(paramsRow);
+    widthBox = new QQSpinBox(paramsRow);
     widthBox->setRange(1, 800);
     hbox->addWidget(widthBox);
     hbox->addWidget(new QLabel(tr("Height"), paramsRow));
-    heightBox = new QSpinBox(paramsRow);
+    heightBox = new QQSpinBox(paramsRow);
     heightBox->setRange(1, 600);
     hbox->addWidget(heightBox);
 
     hbox->addWidget(new QLabel(tr("Rotate"), paramsRow));
-    rotateBox = new QComboBox(paramsRow);
+    rotateBox = QQFactory::comboBox(paramsRow);
     hbox->addWidget(rotateBox);
     rotateBox->addItem("0");
     rotateBox->addItem("90");
@@ -62,6 +62,7 @@ ImageEditor::ImageEditor(QWidget *parent)
     connect(refreshButton, SIGNAL(clicked()), this, SLOT(updateImage()));
 
     QScrollArea *scroll = new QScrollArea(this);
+    QQFactory::configureScrollArea(scroll);
     vbox->addWidget(scroll);
     display = new ImageWidget(scroll);
     scroll->setWidget(display);
@@ -115,8 +116,12 @@ int ImageEditor::edit(const QString &file)
 #if defined(Q_OS_WIN)
     margin += 16;
 #endif
+    int okCancelRowHeight = 0;
+    if (okCancelRow) {
+        okCancelRowHeight = okCancelRow->height();
+    }
     resize(qMax(pm.width() + margin, paramsRow->sizeHint().width() + margin),
-           paramsRow->height() + pm.height() + okCancelRow->height() + margin);
+           paramsRow->height() + pm.height() + okCancelRowHeight + margin);
     return exec();
 }
 

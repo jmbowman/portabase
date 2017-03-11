@@ -1,7 +1,7 @@
 /*
  * calculator.cpp (based on kmymoneycalculator.cpp, by Thomas Baumgart)
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  * (c) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -32,7 +32,7 @@
  * @param parent The dialog's parent widget, if any.
  */
 Calculator::Calculator(QWidget* parent)
-  : PBDialog("", parent, true)
+  : PBDialog(tr("Calculator"), parent, true)
 {
     setSizeGripEnabled(false);
     m_result = "";
@@ -49,6 +49,11 @@ Calculator::Calculator(QWidget* parent)
     QPalette displayPalette(display->palette());
     displayPalette.setColor(QPalette::Window, Qt::white);
     display->setPalette(displayPalette);
+#endif
+#if defined(Q_OS_ANDROID)
+    vbox->addStretch(1);
+    int pixels = Factory::dpToPixels(15);
+    display->setMargin(pixels);
 #endif
 
     display->setFrameStyle(QFrame::Panel | QFrame::Sunken);

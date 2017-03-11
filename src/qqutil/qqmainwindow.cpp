@@ -1,7 +1,7 @@
 /*
  * qqmainwindow.cpp
  *
- * (c) 2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,6 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QMimeData>
-#include <QPrintDialog>
-#include <QPrinter>
-#include <QPrintPreviewDialog>
 #include <QProcess>
 #include <QSettings>
 #include <QStatusBar>
@@ -34,6 +31,16 @@
 #include <QUrl>
 #include "qqmainwindow.h"
 #include "qqmenuhelper.h"
+
+#if QT_VERSION >= 0x050000
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintPreviewDialog>
+#else
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QPrintPreviewDialog>
+#endif
 
 /**
  * Constructor.
@@ -55,7 +62,7 @@ QQMainWindow::QQMainWindow(const QString &fileDescription,
 #if defined(Q_OS_MAC)
     // Set the icon used in the about dialog; doc icon is main window icon
     statusBar()->setWindowIcon(qApp->windowIcon());
-#else
+#elif !defined(Q_OS_ANDROID)
     statusBar();
 #endif
 #endif
@@ -70,9 +77,11 @@ QQMainWindow::~QQMainWindow()
     QSettings settings;
     mh->saveSettings(&settings);
     saveWindowSettings(&settings);
+#ifndef Q_OS_ANDROID
     if (printer) {
         delete printer;
     }
+#endif
 }
 
 /**
@@ -139,9 +148,17 @@ void QQMainWindow::toggleFullscreen()
 {
     if (isFullScreen()) {
         showNormal();
+#if defined(Q_OS_ANDROID)
+        QAction *action = qobject_cast<QAction *>(sender());
+        action->setIcon(QIcon(":/icons/fullscreen.svg"));
+#endif
     }
     else {
         showFullScreen();
+#if defined(Q_OS_ANDROID)
+        QAction *action = qobject_cast<QAction *>(sender());
+        action->setIcon(QIcon(":/icons/fullscreen_exit.svg"));
+#endif
     }
 }
 
@@ -341,6 +358,7 @@ void QQMainWindow::openAt(QAction *action)
  */
 void QQMainWindow::printPreview()
 {
+#ifndef Q_OS_ANDROID
     if (!printer) {
         printer = new QPrinter(QPrinter::HighResolution);
     }
@@ -352,6 +370,7 @@ void QQMainWindow::printPreview()
     connect(&dialog, SIGNAL(paintRequested(QPrinter*)),
             this, SLOT(print(QPrinter*)));
     dialog.exec();
+#endif
 }
 
 /**
@@ -359,6 +378,7 @@ void QQMainWindow::printPreview()
  */
 void QQMainWindow::print()
 {
+#ifndef Q_OS_ANDROID
     if (!printer) {
         printer = new QPrinter(QPrinter::HighResolution);
     }
@@ -374,6 +394,7 @@ void QQMainWindow::print()
     statusBar()->showMessage(tr("Printing") + "...");
     print(printer);
     statusBar()->showMessage(tr("Printing completed"), 2000);
+#endif
 }
 
 /**

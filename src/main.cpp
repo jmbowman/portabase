@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- * (c) 2002-2004,2008-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,9 @@
 #if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
 #include <QDBusConnection>
 #include <QDBusError>
+#elif defined(Q_OS_ANDROID)
+#include <QStyleFactory>
+#include "qqutil/qqandroidstyle.h"
 #endif
 
 /**
@@ -51,6 +54,10 @@ int main(int argc, char **argv) {
     app.setApplicationName("PortaBase");
     app.setApplicationVersion(VERSION_NUMBER);
     app.setWindowIcon(QIcon(":/appicon/PortaBase.png"));
+#if defined(Q_OS_ANDROID)
+    QStyle *style = QStyleFactory::create("Android");
+    QApplication::setStyle(new QQAndroidStyle(style));
+#endif
     QTranslator qtTranslator;
     Factory::translation(&qtTranslator, "Qt", "PORTABASE_QT_QM");
     QTranslator pbTranslator;

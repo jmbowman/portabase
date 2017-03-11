@@ -1,7 +1,7 @@
 /*
  * vieweditor.h
  *
- * (c) 2002-2004,2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
 
 #include <QStringList>
 #include "pbdialog.h"
+#include "qqutil/qqlineedit.h"
 
 class Database;
 class QComboBox;
-class QLineEdit;
 class QTreeWidget;
 class QTreeWidgetItem;
 
@@ -48,7 +48,7 @@ private slots:
     void moveDown();
 
 private:
-    QLineEdit *nameBox; /**< Entry field for the view's name */
+    QQLineEdit *nameBox; /**< Entry field for the view's name */
     QComboBox *sortingBox; /**< Default sorting name selection list */
     QComboBox *filterBox; /**< Default filter name selection list */
     QTreeWidget *table; /**< Display of the list of database columns */

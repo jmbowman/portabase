@@ -1,7 +1,7 @@
 /*
  * filtereditor.h
  *
- * (c) 2002-2004,2008,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,11 +17,11 @@
 #define FILTEREDITOR_H
 
 #include "pbdialog.h"
+#include "qqutil/qqlineedit.h"
 
 class ConditionEditor;
 class Database;
 class Filter;
-class QLineEdit;
 class QListWidget;
 
 /**
@@ -50,7 +50,7 @@ private slots:
     void moveDown();
 
 private:
-    QLineEdit *nameBox; /**< Entry field for the filter's name */
+    QQLineEdit *nameBox; /**< Entry field for the filter's name */
     QListWidget *listWidget; /**< Display of the list of conditions */
     Database *db; /**< The database being edited */
     QString originalName; /**< The initial name of the filter being edited */

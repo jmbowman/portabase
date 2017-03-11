@@ -1,7 +1,7 @@
 /*
  * datewidget.cpp
  *
- * (c) 2002-2004,2008-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ DateWidget::DateWidget(QWidget *parent)
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
 
     QAbstractButton *button = Factory::button(this);
-    button->setIcon(QIcon(":/icons/calendar.png"));
+    button->setIcon(Factory::icon("calendar"));
     connect(button, SIGNAL(clicked()), this, SLOT(launchSelector()));
     layout->addWidget(button);
 

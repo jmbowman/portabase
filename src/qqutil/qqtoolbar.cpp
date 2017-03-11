@@ -1,7 +1,7 @@
 /*
  * qqtoolbar.cpp
  *
- * (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -121,7 +121,7 @@ QMacToolBar *QQToolBar::macToolBar()
  */
 void QQToolBar::add(QAction *action)
 {
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#ifdef MOBILE
     new QQToolBarStretch(toolBar, action);
 #endif
 #if defined (Q_OS_MAC)
@@ -138,7 +138,7 @@ void QQToolBar::add(QAction *action)
 #else
     toolBar->addAction(action);
 #endif
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#ifdef MOBILE
     new QQToolBarStretch(toolBar, action);
 #endif
 }
@@ -199,6 +199,16 @@ void QQToolBar::saveSettings(QSettings *settings)
     settings->endGroup();
 #else
     Q_UNUSED(settings);
+#endif
+}
+
+/**
+ * Hide this tolbar, without making another one visible.
+ */
+void QQToolBar::hide()
+{
+#ifndef Q_OS_MAC
+    toolBar->hide();
 #endif
 }
 

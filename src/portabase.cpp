@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2013,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,6 +43,7 @@
 #include "menuactions.h"
 #include "oldconfig.h"
 #include "passdialog.h"
+#include "pbinputdialog.h"
 #include "portabase.h"
 #include "preferences.h"
 #include "propertiesdialog.h"
@@ -50,6 +51,10 @@
 #include "viewdisplay.h"
 #include "vieweditor.h"
 #include "vsfmanager.h"
+
+#ifdef Q_OS_ANDROID
+#include "qqutil/actionbar.h"
+#endif
 
 /**
  * Constructor.
@@ -84,12 +89,12 @@ PortaBase::PortaBase(QWidget *parent)
     connect(mh, SIGNAL(aboutApplication()), this, SLOT(aboutPortaBase()));
 
     // frequently used menu and toolbar icons
-    QIcon addIcon = QIcon(":/icons/add.png");
-    QIcon editIcon = QIcon(":/icons/edit.png");
-    QIcon deleteIcon = QIcon(":/icons/delete.png");
+    QIcon addIcon = Factory::icon("add");
+    QIcon editIcon = Factory::icon("edit");
+    QIcon deleteIcon = Factory::icon("delete");
 
     // file selector actions
-    importAction = ma->action(MenuActions::Import, QIcon(":/icons/import.png"));
+    importAction = ma->action(MenuActions::Import, Factory::icon("import"));
     connect(importAction, SIGNAL(triggered()), this, SLOT(import()));
 
     // File menu actions
@@ -107,7 +112,7 @@ PortaBase::PortaBase(QWidget *parent)
     connect(editColsAction, SIGNAL(triggered()), this, SLOT(editColumns()));
     manageEnumsAction = ma->action(MenuActions::EditEnums);
     connect(manageEnumsAction, SIGNAL(triggered()), this, SLOT(editEnums()));
-    slideshowAction = ma->action(MenuActions::Slideshow);
+    slideshowAction = ma->action(MenuActions::Slideshow, Factory::icon("image"));
     connect(slideshowAction, SIGNAL(triggered()), viewer, SLOT(slideshow()));
     propsAction = ma->action(MenuActions::Properties);
     connect(propsAction, SIGNAL(triggered()), this, SLOT(viewProperties()));
@@ -139,7 +144,7 @@ PortaBase::PortaBase(QWidget *parent)
     connect(rowEditAction, SIGNAL(triggered()), viewer, SLOT(editRow()));
     rowDeleteAction = ma->action(MenuActions::DeleteRow, deleteIcon);
     connect(rowDeleteAction, SIGNAL(triggered()), this, SLOT(deleteRow()));
-    rowCopyAction = ma->action(MenuActions::CopyRow, QIcon(":/icons/copy_row.png"));
+    rowCopyAction = ma->action(MenuActions::CopyRow, Factory::icon("copy_row"));
     connect(rowCopyAction, SIGNAL(triggered()), this, SLOT(copyRow()));
     rowViewAction = ma->action(MenuActions::Show);
     connect(rowViewAction, SIGNAL(triggered()), viewer, SLOT(viewRow()));
@@ -188,7 +193,7 @@ PortaBase::PortaBase(QWidget *parent)
     connect(sort, SIGNAL(triggered(QAction*)), this, SLOT(changeSorting(QAction*)));
 
     // Filter menu actions
-    findAction = ma->action(MenuActions::QuickFilter, QIcon(":/icons/find.png"));
+    findAction = ma->action(MenuActions::QuickFilter, Factory::icon("find"));
     connect(findAction, SIGNAL(triggered()), this, SLOT(simpleFilter()));
     filterAddAction = ma->action(MenuActions::AddFilter, addIcon);
     connect(filterAddAction, SIGNAL(triggered()), this, SLOT(addFilter()));
@@ -212,18 +217,18 @@ PortaBase::PortaBase(QWidget *parent)
     connect(filter, SIGNAL(triggered(QAction*)), this, SLOT(changeFilter(QAction*)));
 
     // Toolbar-only actions
-    viewsAction = ma->action(MenuActions::Views, QIcon(":/icons/view.png"));
+    viewsAction = ma->action(MenuActions::Views, Factory::icon("view"));
     connect(viewsAction, SIGNAL(triggered()), this, SLOT(changeView()));
-    sortingsAction = ma->action(MenuActions::Sortings, QIcon(":/icons/sort.png"));
+    sortingsAction = ma->action(MenuActions::Sortings, Factory::icon("sort"));
     connect(sortingsAction, SIGNAL(triggered()), this, SLOT(changeSorting()));
-    filtersAction = ma->action(MenuActions::Filters, QIcon(":/icons/filter.png"));
+    filtersAction = ma->action(MenuActions::Filters, Factory::icon("filter"));
     connect(filtersAction, SIGNAL(triggered()), this, SLOT(changeFilter()));
-    fullscreenAction = ma->action(MenuActions::Fullscreen, QIcon(":/icons/fullscreen.png"));
+    fullscreenAction = ma->action(MenuActions::Fullscreen, Factory::icon("fullscreen"));
     fullscreenAction->setCheckable(true);
     connect(fullscreenAction, SIGNAL(triggered()), this, SLOT(toggleFullscreen()));
 
     // Add menus to menubar
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     QAction *helpMenuAction = mh->helpMenu()->menuAction();
     menuBar()->insertMenu(helpMenuAction, row);
     menuBar()->insertMenu(helpMenuAction, view);
@@ -235,7 +240,7 @@ PortaBase::PortaBase(QWidget *parent)
     mh->addToFileSelectorToolBar(importAction);
     mh->addToFileSelectorToolBar(fullscreenAction);
     mh->addToDocumentToolBar(rowAddAction);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     mh->addToDocumentToolBar(rowEditAction);
     mh->addToDocumentToolBar(rowDeleteAction);
     mh->addToDocumentToolBar(rowCopyAction);
@@ -247,10 +252,47 @@ PortaBase::PortaBase(QWidget *parent)
     mh->addToDocumentToolBar(fullscreenAction);
     mh->loadSettings(settings);
 
+#ifdef Q_OS_ANDROID
+    // Populate the action bar
+    ActionBar *dbActionBar = viewer->actionBar();
+    connect(dbActionBar, SIGNAL(up()), mh->action(QQMenuHelper::Close), SIGNAL(triggered()));
+    dbActionBar->addMenuItem(changePassAction);
+    dbActionBar->addMenuItem(dataImportAction);
+    dbActionBar->addMenuItem(exportAction);
+    dbActionBar->addMenuItem(deleteRowsAction);
+    dbActionBar->addMenuItem(editColsAction);
+    dbActionBar->addMenuItem(manageEnumsAction);
+    dbActionBar->addMenuItem(propsAction);
+    dbActionBar->addMenuItem(mh->action(QQMenuHelper::Close));
+    dbActionBar->addButton(mh->action(QQMenuHelper::Save));
+    dbActionBar->addButton(rowAddAction);
+    dbActionBar->addButton(viewsAction);
+    dbActionBar->addButton(filtersAction);
+    dbActionBar->addButton(findAction);
+    dbActionBar->addButton(sortingsAction);
+    dbActionBar->addButton(slideshowAction);
+    dbActionBar->addButton(fullscreenAction);
+    dbActionBar->addButton(mh->action(QQMenuHelper::Preferences));
+#endif
+
     // Main widget when no file is open
-    noFileWidget = new QScrollArea(mainStack);
+#ifdef Q_OS_ANDROID
+    noFileWidget = new QWidget(mainStack);
+    QVBoxLayout *noFileLayout = Factory::vBoxLayout(noFileWidget, true);
+    ActionBar *fsActionBar = new ActionBar(noFileWidget);
+    fsActionBar->addButton(mh->action(QQMenuHelper::Preferences));
+    fsActionBar->addButton(fullscreenAction);
+    fsActionBar->adjustContent();
+    noFileLayout->addWidget(fsActionBar);
+    QScrollArea *scrollArea = new QScrollArea(noFileWidget);
+    Factory::configureScrollArea(scrollArea);
+    noFileLayout->addWidget(scrollArea);
+#else
+    QScrollArea *scrollArea = new QScrollArea(mainStack);
+    noFileWidget = scrollArea;
+#endif
+    scrollArea->setWidgetResizable(true);
     QWidget *buttonPanel = new QWidget();
-    noFileWidget->setWidgetResizable(true);
     QHBoxLayout *hlayout = Factory::hBoxLayout(buttonPanel, true);
     hlayout->addStretch(1);
     QVBoxLayout *vlayout = Factory::vBoxLayout(hlayout);
@@ -270,6 +312,13 @@ PortaBase::PortaBase(QWidget *parent)
                                     buttonPanel);
     connect(importButton, SIGNAL(clicked()), importAction, SIGNAL(triggered()));
     vlayout->addWidget(importButton);
+#if defined(Q_OS_ANDROID)
+    int iconPixels = Factory::dpToPixels(32);
+    QSize size(iconPixels, iconPixels);
+    newButton->setIconSize(size);
+    openButton->setIconSize(size);
+    importButton->setIconSize(size);
+#endif
     recentBox = new QGroupBox(tr("Recently opened files"), buttonPanel);
     recentBox->setAlignment(Qt::AlignHCenter);
     QVBoxLayout *boxLayout = Factory::vBoxLayout(recentBox, true);
@@ -290,7 +339,7 @@ PortaBase::PortaBase(QWidget *parent)
     vlayout->addWidget(recentBox);
     vlayout->addStretch(1);
     hlayout->addStretch(1);
-    noFileWidget->setWidget(buttonPanel);
+    scrollArea->setWidget(buttonPanel);
     mainStack->addWidget(noFileWidget);
 
     setUnifiedTitleAndToolBarOnMac(true);
@@ -368,7 +417,7 @@ void PortaBase::editPreferences()
     Preferences prefs(menuHelper(), this);
     if (prefs.exec()) {
         QFont font = prefs.applyChanges();
-#if !defined(Q_OS_MAC)
+#if !defined(Q_OS_MAC) && !defined(Q_OS_ANDROID)
         setFont(font);
         viewer->updateButtonSizes();
         menuHelper()->fileMenu()->setFont(font);
@@ -432,9 +481,8 @@ void PortaBase::import()
     types.append(tr("XML"));
     types.append(tr("MobileDB"));
     bool ok = false;
-    QString type = QInputDialog::getItem(this, MenuActions::tr("Import"),
-                                         tr("Import from:"),
-                                         types, 0, false, &ok);
+    QString type = PBInputDialog::getItem(this, MenuActions::tr("Import"),
+                                          tr("Import from:"), types, 0, false, &ok);
     if (!ok) {
         return;
     }
@@ -487,6 +535,11 @@ void PortaBase::createFile(ImportDialog::DataSource source,
                              tr("Unable to overwrite existing file"));
     }
     setDocumentPath(f);
+#if defined(Q_OS_ANDROID)
+    QFileInfo info(f);
+    viewer->actionBar()->setTitle(info.baseName(), true);
+    viewer->actionBar()->adjustContent();
+#endif
     bool ok = true;
     Database::OpenResult openResult;
     db = new Database(f, &openResult, encrypted);
@@ -589,6 +642,10 @@ void PortaBase::openFile(const QString &file)
     QFileInfo info(file);
     readOnly = !info.isWritable();
     setDocumentPath(file);
+#if defined(Q_OS_ANDROID)
+    viewer->actionBar()->setTitle(info.baseName(), true);
+    viewer->actionBar()->adjustContent();
+#endif
     if (db) {
         delete db;
     }
@@ -662,7 +719,7 @@ void PortaBase::showFileSelector()
     filter->menuAction()->setVisible(false);
 
     // File menu
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     fileSeparatorAction->setVisible(true);
 #endif
     importAction->setVisible(true);
@@ -710,7 +767,7 @@ void PortaBase::showDataViewer()
     propsAction->setVisible(true);
     fileSeparatorAction->setVisible(false);
     importAction->setVisible(false);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     printPreviewAction->setEnabled(true);
     printPreviewAction->setVisible(true);
     printAction->setEnabled(true);
@@ -719,6 +776,9 @@ void PortaBase::showDataViewer()
     menuHelper()->updateForDocument();
 
     mainStack->setCurrentWidget(viewer);
+#if defined(Q_OS_ANDROID)
+    viewer->actionBar()->adjustContent();
+#endif
     viewer->updateColWidths();
     rebuildViewMenu();
     rebuildSortMenu();
@@ -830,9 +890,8 @@ void PortaBase::dataExport()
     types.append(tr("HTML"));
     types.append(tr("XML"));
     bool ok = false;
-    QString type = QInputDialog::getItem(this, MenuActions::tr("Export"),
-                                         tr("Export to:"),
-                                         types, 0, false, &ok);
+    QString type = PBInputDialog::getItem(this, MenuActions::tr("Export"),
+                                          tr("Export to:"), types, 0, false, &ok);
     if (!ok) {
         return;
     }
@@ -1348,7 +1407,7 @@ void PortaBase::deleteFilter()
  */
 void PortaBase::simpleFilter()
 {
-    ConditionEditor editor(db, this);
+    ConditionEditor editor(db, this, true);
     Condition *condition = db->getCondition("_simple", 0);
     if (editor.edit(condition)) {
         editor.applyChanges(condition);
@@ -1498,7 +1557,11 @@ void PortaBase::print(QPrinter *p)
                          QUrl("icon://image.png"),
                          QPixmap(":/icons/image.png"));
     document.setHtml(viewer->toPrintHTML());
+#if defined(Q_OS_ANDROID)
+    Q_UNUSED(p)
+#else
     document.print(p);
+#endif
 }
 
 /**

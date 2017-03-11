@@ -1,7 +1,7 @@
 /*
  * enumeditor.h
  *
- * (c) 2002-2004,2008-2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 #include <mk4.h>
 #include "pbdialog.h"
+#include "qqutil/qqlineedit.h"
 
 #define ADD_OPTION 0
 #define RENAME_OPTION 1
@@ -25,7 +26,6 @@
 
 class Database;
 class QLabel;
-class QLineEdit;
 class QListWidget;
 class QStackedWidget;
 
@@ -66,7 +66,7 @@ private:
         Ascending = 1,
         Descending = 2
     };
-    QLineEdit *nameBox; /**< Entry field for the enumeration's name */
+    QQLineEdit *nameBox; /**< Entry field for the enumeration's name */
     QStackedWidget *stack; /**< Option data widget stack (option list and "no options" label) */
     QListWidget *listWidget; /**< Display of the enumeration options */
     QLabel *noOptions; /**< "No options" placeholder label */

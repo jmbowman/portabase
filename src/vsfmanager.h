@@ -1,7 +1,7 @@
 /*
  * vsfmanager.h
  *
- * (c) 2010,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,9 +60,6 @@ private:
     PortaBase *portabase; /**< The main application window */
     Database *db; /**< The database in use */
     Subject subject; /**< The type of item being managed */
-    QAction *addAction; /**< The action to add a new item */
-    QAction *editAction; /**< The action to edit the current item */
-    QAction *deleteAction; /**< The action to delete the current item */
     QVBoxLayout *layout; /**< The layout containing the button list */
     QLabel *currentLabel; /**< The "Current..." text label */
     QAbstractButton *editButton; /**< The edit item button */
@@ -70,6 +67,10 @@ private:
     QPushButton *addButton; /**< The add item button */
     QList<QPushButton*> buttonList; /**< The buttons for selecting existing items */
     QRegExp nameFilter; /**< Regular expression for filtering out special cases */
+#if defined(Q_OS_ANDROID)
+    QAction *editButtonAction; /**< Action directly triggered by the edit item button */
+    QAction *deleteButtonAction; /**< Action directly triggered by the delete item button */
+#endif
 };
 
 #endif // VSFMANAGER_H

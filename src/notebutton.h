@@ -1,7 +1,7 @@
 /*
  * notebutton.h
  *
- * (c) 2002,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2009-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * Button which represents a note field.  Displays the beginning of the note
  * text, and launches an editor for the full value when clicked.
  */
-#if defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_MAEMO_5) || defined(ANDROID)
 class NoteButton: public QPushButton
 #else
 class NoteButton: public QToolButton
@@ -42,6 +42,7 @@ protected:
 
 private slots:
     void launchEditor();
+    void screenGeometryChanged(const QRect &geometry);
 
 private:
     QString name; /**< The name of the column the note belongs to */

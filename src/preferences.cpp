@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2004,2009-2012,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QSettings>
-#include <QSpinBox>
+#include <QStandardItemModel>
 #include <QTabWidget>
 #include "color_picker/qtcolorpicker.h"
 #include "factory.h"
@@ -31,6 +31,7 @@
 #include "portabase.h"
 #include "preferences.h"
 #include "qqutil/qqmenuhelper.h"
+#include "qqutil/qqspinbox.h"
 
 #if defined(Q_WS_MAEMO_5)
 #include <QWebSettings>
@@ -101,17 +102,13 @@ void Preferences::addGeneralTab(QSettings *settings)
 
     smallScreen = new QCheckBox(tr("Use small-screen settings on this device"),
                                 generalTab);
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#ifdef MOBILE
     bool smallDefault = true;
 #else
     bool smallDefault = false;
 #endif
     smallScreen->setChecked(settings->value("SmallScreen", smallDefault).toBool());
     layout->addWidget(smallScreen);
-
-    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
-    pagedDisplay->setChecked(settings->value("PagedDisplay", false).toBool());
-    layout->addWidget(pagedDisplay);
 
 #if defined(Q_WS_MAEMO_5)
     autoRotate = new QCheckBox(tr("Auto-rotate to match device orientation"),
@@ -120,18 +117,25 @@ void Preferences::addGeneralTab(QSettings *settings)
     layout->addWidget(autoRotate);
 #endif
 
-    QHBoxLayout *hbox = Factory::hBoxLayout(layout);
+    QHBoxLayout *hbox = 0;
+#if !defined(Q_OS_ANDROID)
+    pagedDisplay = new QCheckBox(tr("Use pages in data viewer"), generalTab);
+    pagedDisplay->setChecked(settings->value("PagedDisplay", false).toBool());
+    layout->addWidget(pagedDisplay);
+
+    hbox = Factory::hBoxLayout(layout);
     hbox->addWidget(new QLabel(tr("Default rows per page"), generalTab));
-    rowsPerPage = new QSpinBox(generalTab);
+    rowsPerPage = new QQSpinBox(generalTab);
     rowsPerPage->setRange(1, 9999);
     rowsPerPage->setValue(settings->value("RowsPerPage", 25).toInt());
     hbox->addWidget(rowsPerPage);
+#endif
 
     hbox = Factory::hBoxLayout(layout);
     noteWrap = new QCheckBox(tr("Wrap Notes"), generalTab);
     noteWrap->setChecked(settings->value("NoteWrap", true).toBool());
     hbox->addWidget(noteWrap);
-    wrapType = new QComboBox(generalTab);
+    wrapType = Factory::comboBox(generalTab);
     wrapType->addItem(tr("at whitespace"));
     wrapType->addItem(tr("anywhere"));
     if (settings->value("WrapAnywhere", false).toBool()) {
@@ -171,7 +175,7 @@ void Preferences::addDateTimeTab(QSettings *settings)
 
     grid->addWidget(new QLabel(tr("Date format"), dateTimeTab), 0, 0);
     QString df = settings->value("ShortDateFormat", "yyyy-MM-dd").toString();
-    dateFormatCombo = new QComboBox(dateTimeTab);
+    dateFormatCombo = Factory::comboBox(dateTimeTab);
     int currentdf = 0;
     dateFormats << "M/d/yyyy" << "d.M.yyyy" << "yyyy-MM-dd" << "d/M/yyyy";
     for (int i = 0; i < 4; i++) {
@@ -188,7 +192,7 @@ void Preferences::addDateTimeTab(QSettings *settings)
 
     QString timeFormat = settings->value("TimeFormat", "hh:mm AP").toString();
     grid->addWidget(new QLabel(tr("Time format"), dateTimeTab), 1, 0);
-    ampmCombo = new QComboBox(dateTimeTab);
+    ampmCombo = Factory::comboBox(dateTimeTab);
     ampmCombo->addItem(tr("24 hour"));
     ampmCombo->addItem(tr("12 hour"));
     int show12hr = timeFormat.contains("AP") ? 1 : 0;
@@ -196,7 +200,7 @@ void Preferences::addDateTimeTab(QSettings *settings)
     grid->addWidget(ampmCombo, 1, 1);
 
     grid->addWidget(new QLabel(tr("Weeks start on"), dateTimeTab), 2, 0);
-    weekStartCombo = new QComboBox(dateTimeTab);
+    weekStartCombo = Factory::comboBox(dateTimeTab);
     weekStartCombo->addItem(tr("Sunday"));
     weekStartCombo->addItem(tr("Monday"));
     int startMonday =  settings->value("MONDAY", false).toBool() ? 1 : 0;
@@ -230,19 +234,19 @@ void Preferences::addAppearanceTab(QSettings *settings)
         appearanceTab = panel;
         layout = static_cast<QVBoxLayout *>(panel->layout());
     }
-#if !defined(Q_OS_MAC)
+#if !defined(Q_OS_MAC) && !defined(Q_OS_ANDROID)
     QGroupBox *fontGroup = new QGroupBox(tr("Font"), appearanceTab);
     layout->addWidget(fontGroup);
     QGridLayout *fontGrid = Factory::gridLayout(fontGroup, true);
 
     fontGrid->addWidget(new QLabel(tr("Name"), fontGroup), 0, 0);
-    fontName = new QComboBox(fontGroup);
+    fontName = Factory::comboBox(fontGroup);
     QStringList fonts = fontdb.families();
     fontName->addItems(fonts);
     fontGrid->addWidget(fontName, 0, 1);
 
     fontGrid->addWidget(new QLabel(tr("Size"), fontGroup), 1, 0);
-    fontSize = new QComboBox(fontGroup);
+    fontSize = Factory::comboBox(fontGroup);
     connect(fontName, SIGNAL(activated(int)), this, SLOT(updateSizes(int)));
     QFont currentFont = qApp->font();
     int fontCount = fonts.count();
@@ -290,20 +294,28 @@ void Preferences::addAppearanceTab(QSettings *settings)
     Q_UNUSED(settings);
     QGroupBox *colorGroup = new QGroupBox(tr("Row Colors"), appearanceTab);
     layout->addWidget(colorGroup);
-    QHBoxLayout *hbox = Factory::hBoxLayout(colorGroup, true);
+    QVBoxLayout *rcLayout = Factory::vBoxLayout(colorGroup, true);
+    QHBoxLayout *hbox = Factory::hBoxLayout(rcLayout);
+#if defined(Q_OS_ANDROID)
+    evenButton = new QtColorPicker(colorGroup, -1, false);
+    oddButton = new QtColorPicker(colorGroup, -1, false);
+#else
     evenButton = new QtColorPicker(colorGroup);
+    oddButton = new QtColorPicker(colorGroup);
+#endif
     configureColorPicker(evenButton);
     evenButton->setCurrentColor(Factory::evenRowColor);
     hbox->addWidget(evenButton);
     hbox->addSpacing(10);
-    oddButton = new QtColorPicker(colorGroup);
     configureColorPicker(oddButton);
     oddButton->setCurrentColor(Factory::oddRowColor);
     hbox->addWidget(oddButton);
-    hbox->addSpacing(10);
+    hbox = Factory::hBoxLayout(rcLayout);
     QPushButton *resetButton = new QPushButton(tr("Reset"), colorGroup);
     connect(resetButton, SIGNAL(clicked()), this, SLOT(resetColors()));
+    hbox->addStretch(1);
     hbox->addWidget(resetButton);
+    hbox->addStretch(1);
 #endif
 
     QPushButton *button = new QPushButton(tr("Clear the recent files list"),
@@ -335,7 +347,6 @@ void Preferences::configureColorPicker(QtColorPicker *picker)
     picker->insertColor(QColor("silver"), tr("Silver"));
     picker->insertColor(QColor("tan"), tr("Tan"));
     picker->insertColor(QColor("thistle"), tr("Thistle"));
-    picker->setColorDialogEnabled(true);
 }
 
 /**
@@ -423,11 +434,13 @@ QFont Preferences::applyChanges()
     settings.beginGroup("General");
     settings.setValue("ConfirmDeletions", confirmDeletions->isChecked());
     settings.setValue("BooleanToggle", booleanToggle->isChecked());
-    settings.setValue("PagedDisplay", pagedDisplay->isChecked());
     settings.setValue("SingleClickShow", singleClickShow->isChecked());
     settings.setValue("NoteWrap", noteWrap->isChecked());
     settings.setValue("WrapAnywhere", wrapType->currentIndex() == 1);
+#if !defined(Q_OS_ANDROID)
+    settings.setValue("PagedDisplay", pagedDisplay->isChecked());
     settings.setValue("RowsPerPage", rowsPerPage->value());
+#endif
     settings.setValue("SmallScreen", smallScreen->isChecked());
     settings.endGroup();
 
@@ -457,7 +470,7 @@ QFont Preferences::applyChanges()
     settings.endGroup();
 #endif
 
-#if !defined(Q_OS_MAC)
+#if !defined(Q_OS_MAC) && !defined(Q_OS_ANDROID)
     settings.beginGroup("Font");
     QString name = fontName->currentText();
     int size = sizes[fontSize->currentIndex()];

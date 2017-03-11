@@ -1,7 +1,7 @@
 /*
  * enumeditor.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,13 +13,12 @@
  * Source file for EnumEditor
  */
 
+#include <QAction>
 #include <QApplication>
 #include <QFile>
-#include <QFileDialog>
 #include <QFileInfo>
 #include <QInputDialog>
 #include <QLabel>
-#include <QLineEdit>
 #include <QListWidget>
 #include <QMessageBox>
 #include <QPushButton>
@@ -31,6 +30,9 @@
 #include "factory.h"
 #include "importdialog.h"
 #include "metakitfuncs.h"
+#include "pbinputdialog.h"
+#include "qqutil/qqfiledialog.h"
+#include "qqutil/qqlineedit.h"
 #include "qqutil/qqmenuhelper.h"
 
 /**
@@ -45,7 +47,7 @@ EnumEditor::EnumEditor(QWidget *parent)
 {
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Enum Name") + " ", this));
-    nameBox = new QLineEdit(this);
+    nameBox = new QQLineEdit(this);
     hbox->addWidget(nameBox);
 
     hbox = Factory::hBoxLayout(vbox);
@@ -73,11 +75,11 @@ EnumEditor::EnumEditor(QWidget *parent)
     stack->setCurrentWidget(noOptions);
 
     addEditButtons();
-    connect(addButton, SIGNAL(clicked()), this, SLOT(addOption()));
-    connect(editButton, SIGNAL(clicked()), this, SLOT(editOption()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteOption()));
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(addAction, SIGNAL(triggered()), this, SLOT(addOption()));
+    connect(editAction, SIGNAL(triggered()), this, SLOT(editOption()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteOption()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
 
     finishLayout();
     nameBox->setFocus();
@@ -202,7 +204,7 @@ void EnumEditor::exportOptions()
 {
     QSettings settings;
     QString lastDir = QQMenuHelper::getLastDir(&settings);
-    QString filename = QFileDialog::getSaveFileName(this,
+    QString filename = QQFileDialog::getSaveFileName(this,
         QQMenuHelper::tr("Choose a filename to save under"), lastDir);
     if (filename.isEmpty()) {
         return;
@@ -231,9 +233,9 @@ void EnumEditor::addOption()
     bool ok = true;
     QString text;
     while (ok) {
-        text = QInputDialog::getText(this, PBDialog::tr("Add"),
-                                     tr("Option text"), QLineEdit::Normal,
-                                     QString::null, &ok);
+        text = PBInputDialog::getText(this, PBDialog::tr("Add"),
+                                      tr("Option text"), QLineEdit::Normal,
+                                      QString::null, &ok);
         if (ok) {
             if (isValidOption(text)) {
                 break;
@@ -263,9 +265,9 @@ void EnumEditor::editOption()
     bool ok = true;
     QString newText;
     while (ok) {
-        newText = QInputDialog::getText(this, PBDialog::tr("Edit"),
-                                        tr("Option text"), QLineEdit::Normal,
-                                        originalText, &ok);
+        newText = PBInputDialog::getText(this, PBDialog::tr("Edit"),
+                                         tr("Option text"), QLineEdit::Normal,
+                                         originalText, &ok);
         if (ok) {
             if (newText == originalText) {
                 // clicked ok but left unchanged
@@ -309,9 +311,9 @@ void EnumEditor::deleteOption()
     if (!originalName.isEmpty()) {
         QStringList options = listCurrentOptions();
         options.removeOne(name);
-        replace = QInputDialog::getItem(this, PBDialog::tr("Delete"),
-                                        tr("Replace where used with:"),
-                                        options, 0, false, &ok);
+        replace = PBInputDialog::getItem(this, PBDialog::tr("Delete"),
+                                         tr("Replace where used with:"),
+                                         options, 0, false, &ok);
     }
     if (ok) {
         int rowIndex = info.Find(eeiIndex [selected]);

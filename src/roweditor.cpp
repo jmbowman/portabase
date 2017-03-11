@@ -1,7 +1,7 @@
 /*
  * roweditor.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,10 +26,10 @@
 #include "datatypes.h"
 #include "datewidget.h"
 #include "dynamicedit.h"
-#include "factory.h"
 #include "formatting.h"
 #include "notebutton.h"
 #include "numberwidget.h"
+#include "qqutil/qqfactory.h"
 #include "roweditor.h"
 #include "timewidget.h"
 
@@ -211,12 +211,17 @@ QStringList RowEditor::getRow(bool doCalcs)
 void RowEditor::addContent(int rowId)
 {
     QScrollArea *sa = new QScrollArea(this);
+    QQFactory::configureScrollArea(sa);
     vbox->addWidget(sa);
     QWidget *grid = new QWidget();
     sa->setWidgetResizable(true);
     colNames = db->listColumns();
     int count = colNames.count();
-    QGridLayout *layout = Factory::gridLayout(grid, true);
+    QGridLayout *layout = QQFactory::gridLayout(grid, true);
+#if defined(Q_OS_ANDROID)
+    int marginPixels = QQFactory::dpToPixels(4);
+    layout->setContentsMargins(marginPixels, marginPixels, marginPixels, marginPixels);
+#endif
     QStringList values;
     if (rowId != -1) {
         values = db->getRow(rowId);
@@ -290,7 +295,7 @@ void RowEditor::addContent(int rowId)
             imageSelectors.append(widget);
         }
         else if (type >= FIRST_ENUM) {
-            QComboBox *combo = new QComboBox(grid);
+            QComboBox *combo = QQFactory::comboBox(grid);
             layout->addWidget(combo, i, 1);
             QStringList options = db->listEnumOptions(type);
             combo->addItems(options);
@@ -324,7 +329,9 @@ void RowEditor::addContent(int rowId)
 void RowEditor::showEvent(QShowEvent *event)
 {
     PBDialog::showEvent(event);
+#if !defined(Q_OS_ANDROID)
     if (initialFocus) {
         initialFocus->setFocus();
     }
+#endif
 }

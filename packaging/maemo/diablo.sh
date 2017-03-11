@@ -16,5 +16,5 @@ cp src/packaging/maemo/diablo_postinst debian/postinst
 if [ "$1" == "--source" ]; then
     dpkg-buildpackage -rfakeroot -sa -S
 else
-    dpkg-buildpackage -rfakeroot -uc -us -sa
+    RANLIB=ranlib dpkg-buildpackage -rfakeroot -uc -us -sa
 fi

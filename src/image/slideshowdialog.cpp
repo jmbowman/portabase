@@ -1,7 +1,7 @@
 /*
  * slideshowdialog.cpp
  *
- * (c) 2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QSettings>
-#include <QSpinBox>
 #include "../factory.h"
+#include "../qqutil/qqspinbox.h"
 #include "../view.h"
 #include "imagewidget.h"
 #include "slideshowdialog.h"
@@ -33,24 +33,31 @@
  * @param parent This dialog's parent widget
  */
 SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent)
-  : PBDialog(tr("Slideshow"), parent, true), fullScreen(0)
+  : PBDialog(tr("Slideshow"), parent, true, false), fullScreen(0)
 {
     currentView = view;
     QGridLayout *grid = Factory::gridLayout(vbox);
+    grid->setColumnStretch(1, 1);
     grid->addWidget(new QLabel(tr("Column"), this), 0, 0);
-    columnList = new QComboBox(this);
+    columnList = Factory::comboBox(this);
     columnList->addItems(columns);
     grid->addWidget(columnList, 0, 1);
 
     grid->addWidget(new QLabel(tr("Delay between images"), this), 1, 0);
-    delayBox = new QSpinBox(this);
+    delayBox = new QQSpinBox(this);
     delayBox->setMinimum(1);
     delayBox->setSuffix(" " + tr("seconds"));
-    grid->addWidget(delayBox, 1, 1);
+#if defined(Q_OS_ANDROID)
+    QQSpinBox::updateStyleSheet(delayBox);
+#endif
+    grid->addWidget(delayBox, 1, 1, Qt::AlignLeft);
     QSettings settings;
     QVariant delay = settings.value("General/SlideshowDelay", 5);
     delayBox->setValue(delay.toInt());
 
+#if defined(Q_OS_ANDROID)
+    vbox->addStretch(1);
+#endif
     finishLayout();
 }
 

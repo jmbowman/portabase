@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2013,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -221,7 +221,7 @@ Crypto *Database::encryption()
 void Database::updatePreferences()
 {
     QSettings settings;
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#ifdef MOBILE
     bool smallDefault = true;
 #else
     bool smallDefault = false;
@@ -379,8 +379,8 @@ void Database::addView(const QString &name, const QStringList &names,
         vcView (colRow) = name.toUtf8();
         vcIndex (colRow) = i;
         vcName (colRow) = names[i].toUtf8();
-        vcWidth (colRow) = 60;
-        vcDeskWidth (colRow) = 120;
+        vcWidth (colRow) = 120;
+        vcDeskWidth (colRow) = 240;
         viewColumns.Add(colRow);
     }
 }
@@ -430,7 +430,9 @@ void Database::renameView(const QString &oldName, const QString &newName)
  * Sets the column widths, in order of appearance, in the current view to be
  * the specified pixel values.  Sets one of two sets of widths, depending on
  * whether the device in use has been specified in the application preferences
- * to have a small screen or not.
+ * to have a small screen or not.  On Android, these are treated as
+ * device-independent pixel counts (so the number of actual pixels that would
+ * be used on a 160 dpi display).
  *
  * @param widths Array of new column widths (in pixels)
  */

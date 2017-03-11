@@ -1,7 +1,7 @@
 /*
  * rowviewer.h
  *
- * (c) 2002-2004,2009-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@ class Database;
 class QComboBox;
 class QKeyEvent;
 class QAbstractButton;
-class QTextEdit;
 class View;
 class ViewDisplay;
 

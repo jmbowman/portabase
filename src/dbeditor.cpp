@@ -1,7 +1,7 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +13,7 @@
  * Source file for DBEditor
  */
 
+#include <QAction>
 #include <QApplication>
 #include <QLabel>
 #include <QLayout>
@@ -34,7 +35,7 @@
  * @param parent This dialog's parent widget.
  */
 DBEditor::DBEditor(QWidget *parent)
-    : PBDialog(tr("Columns Editor"), parent), db(0), ceName("_cename"),
+    : PBDialog(tr("Columns"), parent), db(0), ceName("_cename"),
       ceType("_cetype"), ceDefault("_cedefault"), ceOldIndex("_ceoldindex"),
       ceNewIndex("_cenewindex"), resized(false)
 {
@@ -42,7 +43,15 @@ DBEditor::DBEditor(QWidget *parent)
     vbox->addWidget(stack, 1);
     QString text("<center>%1<br><br>%2</center>");
     text = text.arg(tr("No columns defined"));
-    text = text.arg(tr("Press the \"Add\" button to create one"));
+    QString androidAddText = tr("Press the \"+\" button to create one");
+    QString otherAddText = tr("Press the \"Add\" button to create one");
+#if defined(Q_OS_ANDROID)
+    text = text.arg(androidAddText);
+    Q_UNUSED(otherAddText)
+#else
+    text = text.arg(otherAddText);
+    Q_UNUSED(androidAddText)
+#endif
     noColumns = new QLabel(text, stack);
     stack->addWidget(noColumns);
 
@@ -59,11 +68,11 @@ DBEditor::DBEditor(QWidget *parent)
     stack->setCurrentWidget(noColumns);
 
     addEditButtons();
-    connect(addButton, SIGNAL(clicked()), this, SLOT(addColumn()));
-    connect(editButton, SIGNAL(clicked()), this, SLOT(editColumn()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteColumn()));
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(addAction, SIGNAL(triggered()), this, SLOT(addColumn()));
+    connect(editAction, SIGNAL(triggered()), this, SLOT(editColumn()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteColumn()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
 
     finishLayout();
 }
@@ -413,7 +422,7 @@ void DBEditor::updateTable()
             last->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
         }
         else if (type == NOTE) {
-            last->setIcon(2, QIcon(":/icons/note.png"));
+            last->setIcon(2, Factory::icon("note"));
         }
         else if (type == DATE) {
             if (defaultVal == "0") {

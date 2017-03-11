@@ -1,7 +1,7 @@
 /*
  * vsfmanager.cpp
  *
- * (c) 2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,9 +29,11 @@
  * @param parent The application's main window
  */
 VSFManager::VSFManager(PortaBase *parent)
-    : PBDialog("", parent), portabase(parent), nameFilter("^[^_].*")
+    : PBDialog("", parent), portabase(parent), editButton(0), deleteButton(0),
+      addButton(0), nameFilter("^[^_].*")
 {
     QScrollArea *sa = new QScrollArea(this);
+    Factory::configureScrollArea(sa);
     vbox->addWidget(sa);
     QWidget *content = new QWidget();
     sa->setWidgetResizable(true);
@@ -41,24 +43,44 @@ VSFManager::VSFManager(PortaBase *parent)
     currentLabel = new QLabel("", content);
     hbox->addWidget(currentLabel, 1);
 
+#if defined(Q_OS_ANDROID)
+    currentLabel->setMargin(Factory::dpToPixels(6));
+
+    QAction *addButtonAction = new QAction(Factory::icon("add"), "", this);
+    connect(addButtonAction, SIGNAL(triggered()), this, SLOT(addItem()));
+    PBDialog::addButton(addButtonAction, 0);
+
+    editButtonAction = new QAction(Factory::icon("edit"), "", this);
+    connect(editButtonAction, SIGNAL(triggered()), this, SLOT(editItem()));
+    PBDialog::addButton(editButtonAction, 0);
+
+    deleteButtonAction = new QAction(Factory::icon("delete"), "", this);
+    connect(deleteButtonAction, SIGNAL(triggered()), this, SLOT(deleteItem()));
+    PBDialog::addButton(deleteButtonAction, 0);
+#else
     editButton = Factory::button(content);
-    editButton->setIcon(QIcon(":/icons/edit.png"));
+    editButton->setIcon(Factory::icon("edit"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editItem()));
     hbox->addWidget(editButton);
 
     deleteButton = Factory::button(content);
-    deleteButton->setIcon(QIcon(":/icons/delete.png"));
+    deleteButton->setIcon(Factory::icon("delete"));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteItem()));
     hbox->addWidget(deleteButton);
 
     addButton = new QPushButton(content);
-    addButton->setIcon(QIcon(":/icons/add.png"));
+    addButton->setIcon(Factory::icon("add"));
     connect(addButton, SIGNAL(clicked()), this, SLOT(addItem()));
     layout->addWidget(addButton);
+#endif
 
     QWidget *padding = new QWidget(content);
     layout->addWidget(padding);
+#if defined(Q_OS_ANDROID)
+    layout->addStretch(1);
+#else
     layout->setStretchFactor(padding, 1);
+#endif
     sa->setWidget(content);
 
     finishLayout(false, true, 400, 400);
@@ -80,28 +102,39 @@ void VSFManager::setSubject(Database *database, Subject s)
         setWindowTitle(tr("Views"));
         current = db->currentView();
         label = label.arg(tr("Current View"));
-        addButton->setText(tr("New View"));
+        if (addButton) {
+            addButton->setText(tr("New View"));
+        }
         updateButtonList(db->listViews(), current);
     }
     else if (subject == Sorting) {
         setWindowTitle(tr("Sortings"));
         current = db->currentSorting();
         label = label.arg(tr("Current Sorting"));
-        addButton->setText(tr("New Sorting"));
+        if (addButton) {
+            addButton->setText(tr("New Sorting"));
+        }
         updateButtonList(db->listSortings(), current);
     }
     else if (subject == Filter) {
         setWindowTitle(tr("Filters"));
         current = db->currentFilter();
         label = label.arg(tr("Current Filter"));
-        addButton->setText(tr("New Filter"));
+        if (addButton) {
+            addButton->setText(tr("New Filter"));
+        }
         updateButtonList(db->listFilters(), current);
     }
     bool specialCase;
     QString name = displayedName(current, &specialCase);
     currentLabel->setText(label.arg(name));
+#if defined(Q_OS_ANDROID)
+    editButtonAction->setEnabled(!specialCase);
+    deleteButtonAction->setEnabled(!specialCase);
+#else
     editButton->setEnabled(!specialCase);
     deleteButton->setEnabled(!specialCase);
+#endif
 }
 
 /**
@@ -148,11 +181,13 @@ QString VSFManager::displayedName(const QString &name, bool *specialCase)
 void VSFManager::setActions(QAction *add, QAction *edit, QAction *del)
 {
     addAction = add;
-    addButton->setToolTip(add->toolTip());
     editAction = edit;
-    editButton->setToolTip(edit->toolTip());
     deleteAction = del;
+#if !defined(Q_OS_ANDROID)
+    addButton->setToolTip(add->toolTip());
+    editButton->setToolTip(edit->toolTip());
     deleteButton->setToolTip(del->toolTip());
+#endif
 }
 
 /**
