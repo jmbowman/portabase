@@ -1,0 +1,13 @@
+{
+  "archs": ["x86", "arm"],
+  "targets": [
+    {
+      "path": "../../metakit/unix",
+      "output": "libmk4.a",
+      "c++": true,
+      "configure": [
+        "--enable-threads"
+      ]
+    }
+  ]
+}

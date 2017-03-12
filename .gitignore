@@ -40,3 +40,7 @@ portabase.pro.user
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Editor and IDE artifacts #
+############################
+*~

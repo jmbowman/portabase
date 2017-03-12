@@ -1,7 +1,7 @@
 /*
  * qqtoolbar.h
  *
- * (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,6 +44,7 @@ public:
     void add(QAction *action);
     void loadSettings(QSettings *settings);
     void saveSettings(QSettings *settings);
+    void hide();
     void show();
 #if defined(Q_OS_MAC)
     bool isEnabled(QMacToolBarItem *item);

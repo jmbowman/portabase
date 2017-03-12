@@ -1,7 +1,7 @@
 /*
  * numberwidget.h
  *
- * (c) 2003,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2009,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,7 @@
 #define NUMBERWIDGET_H
 
 #include <QWidget>
-
-class QLineEdit;
+#include "qqutil/qqlineedit.h"
 
 /**
  * An entry widget for numeric values.  On the right side is a button which
@@ -33,13 +32,16 @@ public:
 
     QString getValue();
     void setValue(const QString &value);
+#if defined(Q_OS_ANDROID)
+    void setEnterKeyType(Qt::EnterKeyType type);
+#endif
 
 private slots:
     void launchCalculator();
 
 private:
     int dataType; /**< The type of number to edit, FLOAT or INT */
-    QLineEdit *entryField; /**< The text field holding the current value */
+    QQLineEdit *entryField; /**< The text field holding the current value */
 };
 
 #endif

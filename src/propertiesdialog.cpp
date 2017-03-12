@@ -1,7 +1,7 @@
 /*
  * propertiesdialog.cpp
  *
- * (c) 2011-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2011-2012,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,9 @@
 /**
  * Constructor.
  *
+ * @param filePath The path to the open .pob file
+ * @param db The open database for the current file
+ * @param viewer The data viewer widget
  * @param parent This dialog's parent widget
  */
 PropertiesDialog::PropertiesDialog(const QString &filePath, Database *db,

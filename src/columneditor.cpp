@@ -1,7 +1,7 @@
 /*
  * columneditor.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QStringList>
 #include <QStackedWidget>
@@ -29,6 +28,7 @@
 #include "factory.h"
 #include "notebutton.h"
 #include "numberwidget.h"
+#include "qqutil/qqlineedit.h"
 
 /**
  * Constructor.
@@ -42,11 +42,11 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
 {
     QGridLayout *grid = Factory::gridLayout(vbox);
     grid->addWidget(new QLabel(tr("Name"), this), 0, 0);
-    nameBox = new QLineEdit(this);
+    nameBox = new QQLineEdit(this);
     grid->addWidget(nameBox, 0, 1);
 
     grid->addWidget(new QLabel(tr("Type"), this), 1, 0);
-    typeBox = new QComboBox(this);
+    typeBox = Factory::comboBox(this);
     grid->addWidget(typeBox, 1, 1);
     typeBox->addItem(tr("String"));
     typeBox->addItem(tr("Integer"));
@@ -71,7 +71,7 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     grid->addWidget(defaultStack, 2, 1);
     defaultCheck = new QCheckBox(defaultStack);
     defaultStack->addWidget(defaultCheck);
-    defaultLine = new QLineEdit(defaultStack);
+    defaultLine = new QQLineEdit(defaultStack);
     defaultStack->addWidget(defaultLine);
     defaultNote = new NoteButton(tr("Default Note"), defaultStack);
     defaultStack->addWidget(defaultNote);
@@ -79,15 +79,15 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     defaultStack->addWidget(defaultInteger);
     defaultFloat = new NumberWidget(FLOAT, defaultStack);
     defaultStack->addWidget(defaultFloat);
-    defaultDate = new QComboBox(defaultStack);
+    defaultDate = Factory::comboBox(defaultStack);
     defaultDate->addItem(tr("Today"));
     defaultDate->addItem(tr("None"));
     defaultStack->addWidget(defaultDate);
-    defaultTime = new QComboBox(defaultStack);
+    defaultTime = Factory::comboBox(defaultStack);
     defaultTime->addItem(tr("Now"));
     defaultTime->addItem(tr("None"));
     defaultStack->addWidget(defaultTime);
-    defaultEnum = new QComboBox(defaultStack);
+    defaultEnum = Factory::comboBox(defaultStack);
     defaultStack->addWidget(defaultEnum);
     calcButton = new QPushButton(tr("Edit calculation"), defaultStack);
     defaultStack->addWidget(calcButton);
@@ -98,6 +98,12 @@ ColumnEditor::ColumnEditor(Database *dbase, DBEditor *parent)
     defaultStack->addWidget(defaultBlank);
     defaultStack->setCurrentWidget(defaultLine);
 
+#if defined(Q_OS_ANDROID)
+    defaultLine->setEnterKeyType(Qt::EnterKeyDone);
+    defaultInteger->setEnterKeyType(Qt::EnterKeyDone);
+    defaultFloat->setEnterKeyType(Qt::EnterKeyDone);
+    vbox->addStretch(1);
+#endif
     finishLayout();
 }
 

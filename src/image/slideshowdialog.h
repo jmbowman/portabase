@@ -1,7 +1,7 @@
 /*
  * slideshowdialog.h
  *
- * (c) 2004,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2004,2009-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
 
 #include <QStringList>
 #include "../pbdialog.h"
+#include "../qqutil/qqspinbox.h"
 
 class ImageWidget;
 class QComboBox;
-class QSpinBox;
 class View;
 
 /**
@@ -40,7 +40,7 @@ protected slots:
 
 private:
     QComboBox *columnList; /**< List of the available image columns */
-    QSpinBox *delayBox; /**< The current delay in seconds */
+    QQSpinBox *delayBox; /**< The current delay in seconds */
     View *currentView; /**< The database view currently in use */
     ImageWidget *fullScreen; /**< The widget used to display the slideshow */
 };

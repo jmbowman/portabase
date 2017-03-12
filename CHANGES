@@ -1,3 +1,10 @@
+2017-03-11  JMB  Added Android port
+
+    Added support for running PortaBase on Android 4.4 (KitKat) and above.
+    It works well enough for my own daily use, but I want to go through
+    a short beta testing period before releasing it to the app store; let
+    me know if you're interested in trying it out and providing feedback.
+
 2017-02-04  JMB  Upgraded Metakit to 2.4.9.8
 
     Updated the bundled version of Metakit to the latest code from GitHub

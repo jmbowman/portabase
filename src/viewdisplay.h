@@ -1,7 +1,7 @@
 /*
  * viewdisplay.h
  *
- * (c) 2002-2004,2009-2013 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 #include <QModelIndex>
 #include <QTime>
 #include <QWidget>
+#include "qqutil/qqspinbox.h"
 
 class CSVUtils;
 class Database;
@@ -28,12 +29,15 @@ class QButtonGroup;
 class QKeyEvent;
 class QLabel;
 class QSettings;
-class QSpinBox;
 class QStackedWidget;
 class QString;
 class QToolButton;
 class QTreeView;
 class View;
+#if defined(Q_OS_ANDROID)
+#include <QScroller>
+class ActionBar;
+#endif
 
 #define PAGE_BUTTON_COUNT 5
 
@@ -68,6 +72,9 @@ public:
     int rowCount();
     int columnCount();
     void updatePreferences(QSettings *settings);
+#if defined(Q_OS_ANDROID)
+    ActionBar *actionBar();
+#endif
 
 public slots:
     void addRow();
@@ -102,6 +109,10 @@ private slots:
     void updateButtons(int currentPage, int totalPages);
     void matchNewView(View *view);
     void tableChanged();
+    void screenGeometryChanged(const QRect &geometry);
+#if defined(Q_OS_ANDROID)
+    void scrollerStateChanged(QScroller::State newState);
+#endif
 
 private:
     PortaBase *portabase; /**< The main application window */
@@ -110,7 +121,7 @@ private:
     DataModel *model; /**< The model of the currently displayed data used by the table widget */
     QLabel *noResults; /**< "No results" placeholder label */
     QWidget *buttonRow; /**< Row of results page navigation controls */
-    QSpinBox *rowsPerPage; /**< Records per results page selection widget */
+    QQSpinBox *rowsPerPage; /**< Records per results page selection widget */
     QToolButton *prevButton; /**< "Previous few pages" button */
     QToolButton *nextButton; /**< "Next few pages" button */
     QButtonGroup *buttonGroup; /**< The group of page navigation buttons */
@@ -122,6 +133,9 @@ private:
     bool booleanToggle; /**< True if boolean field values can be toggled by clicking on them in the display */
     bool paged; /**< False if all records in the view are always shown on one scrolling page */
     bool singleClickShow; /**< True if a single click launches the row viewer */
+#if defined(Q_OS_ANDROID)
+    ActionBar *androidActionBar;
+#endif
 };
 
 #endif

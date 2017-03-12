@@ -1,7 +1,7 @@
 /*
  * calcdateeditor.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int
     QRadioButton *colButton = new QRadioButton(tr("Column"), this);
     grid->addWidget(colButton, 0, 0);
     group->addButton(colButton, 0);
-    columnList = new QComboBox(this);
+    columnList = Factory::comboBox(this);
     grid->addWidget(columnList, 0, 1);
     int count = colNames.count();
     int i;

@@ -446,10 +446,6 @@
         <translation>S&amp;cegli</translation>
     </message>
     <message>
-        <source>Directories</source>
-        <translation>Cartelle</translation>
-    </message>
-    <message>
         <source>%1
 Directory not found.
 Please verify the correct directory name was given.</source>

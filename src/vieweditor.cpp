@@ -1,7 +1,7 @@
 /*
  * vieweditor.cpp
  *
- * (c) 2002-2004,2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,14 +13,15 @@
  * Source file for ViewEditor
  */
 
+#include <QAction>
 #include <QComboBox>
 #include <QLabel>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include "database.h"
 #include "factory.h"
+#include "qqutil/qqlineedit.h"
 #include "vieweditor.h"
 
 /**
@@ -33,24 +34,24 @@ ViewEditor::ViewEditor(QWidget *parent)
 {
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("View Name") + " ", this));
-    nameBox = new QLineEdit(this);
+    nameBox = new QQLineEdit(this);
     hbox->addWidget(nameBox);
 
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#ifdef MOBILE
     hbox = Factory::hBoxLayout(vbox);
-    sortingBox = new QComboBox(this);
+    sortingBox = Factory::comboBox(this);
     hbox->addWidget(sortingBox);
-    filterBox = new QComboBox(this);
+    filterBox = Factory::comboBox(this);
     hbox->addWidget(filterBox);
 #else
     hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Default Sorting") + " ", this));
-    sortingBox = new QComboBox(this);
+    sortingBox = Factory::comboBox(this);
     hbox->addWidget(sortingBox, 1);
 
     hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Default Filter") + " ", this));
-    filterBox = new QComboBox(this);
+    filterBox = Factory::comboBox(this);
     hbox->addWidget(filterBox, 1);
 #endif
 
@@ -60,8 +61,8 @@ ViewEditor::ViewEditor(QWidget *parent)
     vbox->addWidget(table);
 
     addEditButtons(true);
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
 
     finishLayout();
     nameBox->setFocus();

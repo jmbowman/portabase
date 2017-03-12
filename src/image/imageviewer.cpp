@@ -1,7 +1,7 @@
 /*
  * imageviewer.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ void ImageViewer::setImage(const QImage &image)
     qApp->processEvents();
     pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
 #endif
 }

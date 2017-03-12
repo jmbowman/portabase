@@ -1,7 +1,7 @@
 /*
  * columninfo.cpp
  *
- * (c) 2011-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2011-2012,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,8 +15,9 @@
 
 #include <QComboBox>
 #include <QLabel>
-#include <QSpinBox>
 #include "columninfo.h"
+#include "factory.h"
+#include "qqutil/qqspinbox.h"
 #include "view.h"
 
 /**
@@ -27,26 +28,23 @@
 ColumnInfoDialog::ColumnInfoDialog(QWidget *parent)
   : PBDialog(tr("Column Statistics"), parent), view(0), edited(false)
 {
-    topRow = new QWidget(this);
-    QHBoxLayout *hbox = Factory::hBoxLayout(topRow);
-    hbox->addWidget(new QLabel(tr("Column") + " ", this));
+    QGridLayout *grid = Factory::gridLayout(vbox);
+    grid->setColumnStretch(1, 1);
+    grid->addWidget(new QLabel(tr("Column") + " ", this), 0, 0);
     columns = new QComboBox(this);
     connect(columns, SIGNAL(currentIndexChanged(int)),
             this, SLOT(columnSelected(int)));
-    hbox->addWidget(columns, 1);
-    vbox->addWidget(topRow);
+    grid->addWidget(columns, 0, 1);
 
-    display = Factory::htmlDisplay(this);
-    vbox->addWidget(display);
-
-    hbox = Factory::hBoxLayout(vbox);
-    hbox->addWidget(new QLabel(tr("Width") + " ", this));
-    colWidth = new QSpinBox(this);
+    grid->addWidget(new QLabel(tr("Width") + " ", this), 1, 0);
+    colWidth = new QQSpinBox(this);
     colWidth->setMaximum(9999);
     connect(colWidth, SIGNAL(valueChanged(int)),
             this, SLOT(widthChanged(int)));
-    hbox->addWidget(colWidth);
-    hbox->addStretch(1);
+    grid->addWidget(colWidth, 1, 1, Qt::AlignLeft);
+
+    display = Factory::htmlDisplay(this);
+    vbox->addWidget(display);
 
     finishLayout();
 }
@@ -66,17 +64,14 @@ bool ColumnInfoDialog::launch(View *currentView, const QString &colName)
     columns->clear();
     columns->addItems(view->getColNames());
     int i;
+    for (i = 0; i < columns->count(); i++) {
+        columns->setItemData(i, view->getColWidth(i));
+    }
     if (colName.isNull()) {
-        topRow->show();
-        for (i = 0; i < columns->count(); i++) {
-            columns->setItemData(i, view->getColWidth(i));
-        }
         colWidth->setValue(view->getColWidth(0));
     }
     else {
-        topRow->hide();
         i = columns->findText(colName);
-        columns->setItemData(i, view->getColWidth(i));
         columns->setCurrentIndex(i);
         colWidth->setValue(view->getColWidth(i));
     }
@@ -106,9 +101,7 @@ void ColumnInfoDialog::columnSelected(int index)
         return;
     }
     QStringList content;
-    QString name = columns->itemText(index);
-    content.append(QString("<html><body><center><b>%1</b></center>").arg(name));
-    content.append("<table cellspacing=0>");
+    content.append("<html><body><table cellspacing=0>");
     content.append(view->getStatistics(index));
     content.append("</table></body></html>");
     display->setHtml(content.join(""));

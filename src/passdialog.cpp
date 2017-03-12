@@ -1,7 +1,7 @@
 /*
  * passdialog.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,12 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QLabel>
-#include <QLineEdit>
 #include <QMessageBox>
 #include "database.h"
 #include "factory.h"
 #include "passdialog.h"
 #include "encryption/crypto.h"
+#include "qqutil/qqlineedit.h"
 
 /**
  * Constructor.
@@ -37,25 +37,33 @@ PasswordDialog::PasswordDialog(Database *dbase, DialogMode dlgMode, QWidget *par
     int currentRow = 0;
     if (mode == ChangePassword) {
         grid->addWidget(new QLabel(tr("Old password") + ":", this), 0, 0);
-        oldPass = new QLineEdit(this);
+        oldPass = new QQLineEdit(this);
         oldPass->setEchoMode(QLineEdit::Password);
         grid->addWidget(oldPass, 0, 1);
         currentRow++;
     }
     QString label((mode == ChangePassword) ? tr("New password") : tr("Password"));
     grid->addWidget(new QLabel(label + ":", this), currentRow, 0);
-    pass = new QLineEdit(this);
+    pass = new QQLineEdit(this);
     pass->setEchoMode(QLineEdit::Password);
     grid->addWidget(pass, currentRow, 1);
     currentRow++;
     if (mode != OpenFile) {
         label = (mode == NewPassword) ? tr("Repeat password") : tr("Repeat new password");
         grid->addWidget(new QLabel(label + ":", this), currentRow, 0);
-        repeatPass = new QLineEdit(this);
+        repeatPass = new QQLineEdit(this);
         repeatPass->setEchoMode(QLineEdit::Password);
         grid->addWidget(repeatPass, currentRow, 1);
-        currentRow++;
     }
+#if defined(Q_OS_ANDROID)
+    if (mode == OpenFile) {
+        pass->setEnterKeyType(Qt::EnterKeyDone);
+    }
+    else {
+        repeatPass->setEnterKeyType(Qt::EnterKeyDone);
+    }
+    vbox->addStretch(1);
+#endif
     finishLayout();
 }
 

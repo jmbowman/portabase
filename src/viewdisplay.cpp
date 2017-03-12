@@ -1,7 +1,7 @@
 /*
  * viewdisplay.cpp
  *
- * (c) 2002-2004,2008-2013,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 #include <QLabel>
 #include <QLayout>
 #include <QMessageBox>
-#include <QSpinBox>
 #include <QStackedWidget>
 #include <QStringList>
 #include <QTimer>
@@ -44,6 +43,15 @@
 #include "viewdisplay.h"
 #include "image/imageviewer.h"
 #include "image/slideshowdialog.h"
+#include "qqutil/qqspinbox.h"
+
+#if QT_VERSION >= 0x050000
+#include <QScreen>
+#endif
+
+#if defined(Q_OS_ANDROID)
+#include "qqutil/actionbar.h"
+#endif
 
 /**
  * Constructor.
@@ -52,11 +60,19 @@
  * @param parent This widget's parent widget
  */
 ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
-    portabase(pbase), propogateColWidths(false), pressedHeader(-1),
-    booleanToggle(false), paged(true), singleClickShow(true)
+    portabase(pbase), propogateColWidths(false), pressedIndex(-1),
+    pressedHeader(-1), booleanToggle(false), paged(true),
+    singleClickShow(true)
 {
     timer.start();
     QVBoxLayout *vbox = Factory::vBoxLayout(this, true);
+#if defined(Q_OS_ANDROID)
+    screenGeometryChanged(qApp->primaryScreen()->availableGeometry());
+    connect(qApp->primaryScreen(), SIGNAL(availableGeometryChanged(const QRect &)),
+            this, SLOT(screenGeometryChanged(const QRect &)));
+    androidActionBar = new ActionBar(this);
+    vbox->addWidget(androidActionBar);
+#endif
     stack = new QStackedWidget(this);
     vbox->addWidget(stack, 1);
     noResults = new QLabel("<center>" + tr("No results") + "</center>", stack);
@@ -67,10 +83,13 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     table->setSortingEnabled(false);
     table->setAllColumnsShowFocus(true);
     table->setRootIsDecorated(false);
-#if defined(Q_WS_HILDON)
+#if defined(Q_OS_ANDROID)
+    Factory::configureAbstractItemView(table);
+    connect(QScroller::scroller(table), &QScroller::stateChanged,
+            this, &ViewDisplay::scrollerStateChanged);
+#elif defined(Q_WS_HILDON)
     table->setIconSize(QSize(24, 24));
-#endif
-#if defined(Q_WS_MAEMO_5)
+#elif defined(Q_WS_MAEMO_5)
     table->setIconSize(QSize(32, 32));
     table->setStyle(new PBMaemo5Style());
 #endif
@@ -108,6 +127,13 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     header->setMovable(false);
     header->setResizeMode(QHeaderView::Interactive);
 #endif
+#if defined(Q_OS_ANDROID)
+    int headerHeight = Factory::dpToPixels(48);
+    int leftPadding = Factory::dpToPixels(4);
+    // Without specifying the color or something like it, the padding isn't
+    // applied; sigh...
+    header->setStyleSheet(QStringLiteral("QHeaderView::section {height: %1px; padding-left: %2px; color: black;}").arg(headerHeight).arg(leftPadding));
+#endif
     connect(header, SIGNAL(sectionPressed(int)), this, SLOT(headerPressed(int)));
     connect(header, SIGNAL(sectionClicked(int)), this, SLOT(headerReleased(int)));
     connect(header, SIGNAL(sectionResized(int, int, int)),
@@ -116,7 +142,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
 
     buttonRow = new QWidget(this);
     QHBoxLayout *hbox = Factory::hBoxLayout(buttonRow, true);
-    rowsPerPage = new QSpinBox(buttonRow);
+    rowsPerPage = new QQSpinBox(buttonRow);
     rowsPerPage->setRange(1, 9999);
     rowsPerPage->setValue(13);
     connect(rowsPerPage, SIGNAL(valueChanged(int)), this,
@@ -154,6 +180,18 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
 
     updateButtonSizes();
 }
+
+#ifdef Q_OS_ANDROID
+/**
+ * Get the android action bar corresponding to the data viewer.
+ *
+ * @return The action bar
+ */
+ActionBar *ViewDisplay::actionBar()
+{
+    return androidActionBar;
+}
+#endif
 
 /**
  * Set whether or not the data records should be split between multiple pages.
@@ -428,9 +466,15 @@ void ViewDisplay::setView(const QString &name, bool applyDefaults)
  */
 void ViewDisplay::matchNewView(View *view)
 {
+#if defined(Q_OS_ANDROID)
+    float pixelsPerDP = qApp->primaryScreen()->physicalDotsPerInch() / 160;
+#else
+    int pixelsPerDP = 1;
+#endif
     int count = view->columnCount();
     for (int i = 0; i < count; i++) {
-        table->setColumnWidth(i, view->getColWidth(i));
+        int pixelWidth = (int)(view->getColWidth(i) * pixelsPerDP);
+        table->setColumnWidth(i, pixelWidth);
     }
     table->setColumnWidth(count, 0);
     rowsPerPage->setValue(view->getRowsPerPage());
@@ -731,6 +775,22 @@ void ViewDisplay::cellReleased(const QModelIndex &index)
     }
 }
 
+#if defined(Q_OS_ANDROID)
+/**
+ * Handler for changes in scrolling status for the data grid.  Ensures that
+ * lifting your finger at the end of a scroll operation doesn't launch the row
+ * viewer.
+ *
+ * @param newState The new state of the data grid's scroller
+ */
+void ViewDisplay::scrollerStateChanged(QScroller::State newState)
+{
+    if (newState == QScroller::Dragging || newState == QScroller::Scrolling) {
+        pressedIndex = -1;
+    }
+}
+#endif
+
 /**
  * Handler for mouse press events on the row of column headers.  Used to
  * determine how long the mouse button was held down before releasing.
@@ -775,7 +835,13 @@ void ViewDisplay::columnResized(int column, int, int newWidth)
 {
     // The last column always resizes to fill available space; ignore it
     if (propogateColWidths && column != model->columnCount() - 1) {
-        model->view()->setColWidth(column, newWidth);
+#if defined(Q_OS_ANDROID)
+        float pixelsPerDP = qApp->primaryScreen()->physicalDotsPerInch() / 160;
+#else
+        int pixelsPerDP = 1;
+#endif
+        int newDP = (int)(newWidth / pixelsPerDP);
+        model->view()->setColWidth(column, newDP);
         setEdited(true);
     }
 }
@@ -871,6 +937,15 @@ void ViewDisplay::updatePreferences(QSettings *settings)
     bool vhr = settings->value("Font/VariableHeightRows", false).toBool();
     (static_cast<PBMaemo5Style*>(table->style()))->setVariableHeightRows(vhr);
 #endif
+}
+
+/**
+ * Respond to the screen orientation or size changing.  Used on Android to
+ * make sure the window width doesn't exceed the screen width.
+ */
+void ViewDisplay::screenGeometryChanged(const QRect &geometry)
+{
+    setMaximumWidth(geometry.width());
 }
 
 /**

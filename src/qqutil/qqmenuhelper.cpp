@@ -1,7 +1,7 @@
 /*
  * qqmenuhelper.cpp
  *
- * (c) 2005-2011,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2005-2011,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
-#include <QFileDialog>
 #include <QFont>
 #include <QLocale>
 #include <QMainWindow>
@@ -29,6 +28,8 @@
 #include <QRegExp>
 #include <QSettings>
 #include <QUrl>
+#include "qqfactory.h"
+#include "qqfiledialog.h"
 #include "qqmenuhelper.h"
 #include "qqtoolbar.h"
 
@@ -71,29 +72,31 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     aboutText = macAboutText;
 #endif
 
+#ifndef Q_OS_ANDROID
     documentToolBar = new QQToolBar(window, "documentToolbar");
     fileSelectorToolBar = new QQToolBar(window, "fileSelectorToolbar");
+#endif
 
     // File menu actions
     QString fileNewText(tr("&New"));
     if (newFileLaunchesDialog) {
       fileNewText += ellipsis;
     }
-    fileNewAction = new QAction(QIcon(":/icons/new.png"), menuText(fileNewText), window);
+    fileNewAction = new QAction(QQFactory::icon("new"), menuText(fileNewText), window);
     fileNewAction->setObjectName("New File");
     fileNewAction->setStatusTip(tr("Create a new file"));
     fileNewAction->setToolTip(fileNewAction->statusTip());
     fileNewAction->setShortcut(QKeySequence::New);
     connect(fileNewAction, SIGNAL(triggered()), this, SLOT(emitNewFile()));
 
-    fileOpenAction = new QAction(QIcon(":/icons/open.png"), menuText(tr("&Open")) + ellipsis, window);
+    fileOpenAction = new QAction(QQFactory::icon("open"), menuText(tr("&Open")) + ellipsis, window);
     fileOpenAction->setObjectName("Open File");
     fileOpenAction->setStatusTip(tr("Open an existing file"));
     fileOpenAction->setToolTip(fileOpenAction->statusTip());
     fileOpenAction->setShortcut(QKeySequence::Open);
     connect(fileOpenAction, SIGNAL(triggered()), this, SLOT(emitOpenFile()));
 
-    quitAction = new QAction(QIcon(":/icons/quit.png"), quitText, window);
+    quitAction = new QAction(QQFactory::icon("quit"), quitText, window);
     quitAction->setStatusTip(tr("Quit the application"));
 #if !defined(Q_WS_HILDON)
     quitAction->setShortcut(QKeySequence::Quit);
@@ -101,7 +104,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     quitAction->setMenuRole(QAction::QuitRole);
     connect(quitAction, SIGNAL(triggered()), this, SIGNAL(quit()));
 
-    fileSaveAction = new QAction(QIcon(":/icons/save.png"), menuText(tr("&Save")), window);
+    fileSaveAction = new QAction(QQFactory::icon("save"), menuText(tr("&Save")), window);
     fileSaveAction->setObjectName("Save");
     fileSaveAction->setStatusTip(tr("Save the current file"));
     fileSaveAction->setToolTip(fileSaveAction->statusTip());
@@ -118,9 +121,11 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     fileSeparatorAction = new QAction(this);
     fileSeparatorAction->setSeparator(true);
 
-    closeAction = new QAction(QIcon(":/icons/close.png"), menuText(tr("&Close")), window);
+    closeAction = new QAction(QQFactory::icon("close"), menuText(tr("&Close")), window);
     closeAction->setStatusTip(tr("Close the current file"));
+#if !defined(Q_OS_ANDROID)
     closeAction->setShortcut(QKeySequence::Close);
+#endif
     connect(closeAction, SIGNAL(triggered()), this, SIGNAL(closeFile()));
 
     prefsAction = new QAction(prefsText, window);
@@ -128,15 +133,19 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
 #if !defined(Q_WS_HILDON)
     prefsAction->setShortcut(QKeySequence::Preferences);
 #endif
+#ifdef Q_OS_ANDROID
+    prefsAction->setIcon(QQFactory::icon("preferences"));
+#endif
     prefsAction->setMenuRole(QAction::PreferencesRole);
     connect(prefsAction, SIGNAL(triggered()), this, SIGNAL(editPreferences()));
 
-#if defined(Q_OS_MAC) || defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#if defined(Q_OS_MAC) || defined(MOBILE)
     fileNewAction->setIconVisibleInMenu(false);
     fileOpenAction->setIconVisibleInMenu(false);
     quitAction->setIconVisibleInMenu(false);
     fileSaveAction->setIconVisibleInMenu(false);
     closeAction->setIconVisibleInMenu(false);
+    prefsAction->setIconVisibleInMenu(false);
 #endif
 #if defined(Q_OS_MAC)
     docIcon = QIcon(":/icons/document_small.png");
@@ -158,7 +167,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     file->addSeparator();
 #endif
     file->addAction(quitAction);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     window->menuBar()->addMenu(file);
 #endif
 
@@ -180,7 +189,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
 
     // Help menu setup
     help = new QMenu(menuText(tr("&Help")), window);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
+#ifndef MOBILE
     help->addAction(helpAction);
 #if !defined(Q_OS_MAC)
     // skip this on the mac, since both "About.." actions get moved elsewhere
@@ -188,6 +197,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
 #endif
     help->addAction(aboutAction);
     help->addAction(aboutQtAction);
+
     window->menuBar()->addMenu(help);
 #endif
 
@@ -230,7 +240,7 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
  */
 QString QQMenuHelper::menuText(QString text)
 {
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MAC) || defined(Q_OS_ANDROID)
     return text.replace(menuRegExp, "").replace("&", "");
 #else
     return text;
@@ -259,7 +269,7 @@ QString QQMenuHelper::menuText(QString text)
  */
 void QQMenuHelper::loadSettings(QSettings *settings)
 {
-#if !defined(Q_OS_MAC)
+#if !defined(Q_OS_MAC) && !defined(Q_OS_ANDROID)
     // Load font settings
     QFont currentFont = qApp->font();
     QString family = currentFont.family().toLower();
@@ -270,8 +280,10 @@ void QQMenuHelper::loadSettings(QSettings *settings)
     qApp->setFont(font);
     mainWindow->setFont(font);
 #endif
+#ifndef Q_OS_ANDROID
     documentToolBar->loadSettings(settings);
     fileSelectorToolBar->loadSettings(settings);
+#endif
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         QString key = QString("Files/Recent%1").arg(i);
         QString path = settings->value(key, "").toString();
@@ -293,8 +305,10 @@ void QQMenuHelper::loadSettings(QSettings *settings)
  */
 void QQMenuHelper::saveSettings(QSettings *settings)
 {
+#ifndef Q_OS_ANDROID
     documentToolBar->saveSettings(settings);
     fileSelectorToolBar->saveSettings(settings);
+#endif
     // Save the list of recently opened files
     QStringList files(recentFiles);
     // Insert blank entries if necessary
@@ -317,7 +331,9 @@ QString QQMenuHelper::getLastDir(QSettings *settings)
 {
     QString lastDir = settings->value("Files/LastDir", "").toString();
     if (lastDir.isEmpty() || !QDir(lastDir).exists()) {
-#if QT_VERSION >= 0x050000
+#if defined(Q_OS_ANDROID)
+        lastDir = QQFileDialog::defaultStoragePath();
+#elif QT_VERSION >= 0x050000
         lastDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)[0];
 #else
         lastDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
@@ -517,7 +533,9 @@ void QQMenuHelper::updateForFileSelector()
     mb->addAction(aboutAction);
 #endif
 
+#ifndef Q_OS_ANDROID
     fileSelectorToolBar->show();
+#endif
 
 #if defined(Q_OS_MAC)
     mainWindow->setWindowIcon(QIcon());
@@ -572,7 +590,9 @@ void QQMenuHelper::updateForDocument()
     mb->addAction(helpAction);
 #endif
 
+#ifndef Q_OS_ANDROID
     documentToolBar->show();
+#endif
 
 #if defined(Q_OS_MAC)
     mainWindow->setWindowIcon(docIcon);
@@ -618,7 +638,11 @@ void QQMenuHelper::addToFileMenu(QAction *action)
  */
 void QQMenuHelper::addToDocumentToolBar(QAction *action)
 {
+#ifdef Q_OS_ANDROID
+    Q_UNUSED(action)
+#else
     documentToolBar->add(action);
+#endif
 }
 
 /**
@@ -626,7 +650,11 @@ void QQMenuHelper::addToDocumentToolBar(QAction *action)
  */
 void QQMenuHelper::addToFileSelectorToolBar(QAction *action)
 {
+#ifdef Q_OS_ANDROID
+    Q_UNUSED(action)
+#else
     fileSelectorToolBar->add(action);
+#endif
 }
 
 /**
@@ -703,7 +731,7 @@ QString QQMenuHelper::createNewFile(const QString &fileDescription,
     QString filter = QString("%1 (*.%2)").arg(desc).arg(ext);
     QSettings settings;
     QString lastDir = getLastDir(&settings);
-    QString filename = QFileDialog::getSaveFileName(mainWindow,
+    QString filename = QQFileDialog::getSaveFileName(mainWindow,
                            tr("Choose a filename to save under"), lastDir,
                            filter);
     if (filename.isEmpty()) {
@@ -740,8 +768,8 @@ void QQMenuHelper::emitOpenFile()
     QSettings settings;
     QString lastDir = getLastDir(&settings);
     QString filter = QString("%1 (*.%2)").arg(description).arg(extension);
-    QString filename = QFileDialog::getOpenFileName(mainWindow,
-                           tr("Choose a file"), lastDir, filter);
+    QString filename = QQFileDialog::getOpenFileName(
+                mainWindow, tr("Choose a file"), lastDir, filter);
     if (filename.isEmpty()) {
         return;
     }

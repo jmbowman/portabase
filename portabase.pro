@@ -71,14 +71,19 @@ HEADERS         = src/calc/calcdateeditor.h \
                   src/oldconfig.h \
                   src/passdialog.h \
                   src/pbdialog.h \
+                  src/pbinputdialog.h \
                   src/pbmaemo5style.h \
                   src/pdbfile.h \
                   src/portabase.h \
                   src/preferences.h \
                   src/propertiesdialog.h \
                   src/qqutil/qqdialog.h \
+                  src/qqutil/qqfactory.h \
+                  src/qqutil/qqfiledialog.h \
+                  src/qqutil/qqlineedit.h \
                   src/qqutil/qqmainwindow.h \
                   src/qqutil/qqmenuhelper.h \
+                  src/qqutil/qqspinbox.h \
                   src/qqutil/qqtoolbar.h \
                   src/qqutil/qqtoolbarstretch.h \
                   src/roweditor.h \
@@ -142,14 +147,19 @@ SOURCES         = src/calc/calcdateeditor.cpp \
                   src/oldconfig.cpp \
                   src/passdialog.cpp \
                   src/pbdialog.cpp \
+                  src/pbinputdialog.cpp \
                   src/pbmaemo5style.cpp \
                   src/pdbfile.cpp \
                   src/portabase.cpp \
                   src/preferences.cpp \
                   src/propertiesdialog.cpp \
                   src/qqutil/qqdialog.cpp \
+                  src/qqutil/qqfactory.cpp \
+                  src/qqutil/qqfiledialog.cpp \
+                  src/qqutil/qqlineedit.cpp \
                   src/qqutil/qqmainwindow.cpp \
                   src/qqutil/qqmenuhelper.cpp \
+                  src/qqutil/qqspinbox.cpp \
                   src/qqutil/qqtoolbar.cpp \
                   src/qqutil/qqtoolbarstretch.cpp \
                   src/roweditor.cpp \
@@ -168,6 +178,36 @@ unix {
     LIBS               += -lm -lmk4
     VERSION             = $$system(cat packaging/version_number)
     COPYRIGHT_YEARS     = $$system(cat packaging/copyright_years)
+}
+
+# Stuff for Android
+android-g++ {
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/packaging/android/apk_template
+    DEFINES            += MOBILE ANDROID
+    DISTFILES += \
+        packaging/android/apk_template/AndroidManifest.xml \
+        packaging/android/apk_template/gradle/wrapper/gradle-wrapper.jar \
+        packaging/android/apk_template/gradlew \
+        packaging/android/apk_template/res/drawable-ldpi/icon.png \
+        packaging/android/apk_template/res/drawable-mdpi/icon.png \
+        packaging/android/apk_template/res/drawable-tvdpi/icon.png \
+        packaging/android/apk_template/res/drawable-hdpi/icon.png \
+        packaging/android/apk_template/res/drawable-xhdpi/icon.png \
+        packaging/android/apk_template/res/drawable-xxhdpi/icon.png \
+        packaging/android/apk_template/res/drawable-xxxhdpi/icon.png \
+        packaging/android/apk_template/res/values/libs.xml \
+        packaging/android/apk_template/build.gradle \
+        packaging/android/apk_template/gradle/wrapper/gradle-wrapper.properties \
+        packaging/android/apk_template/gradlew.bat
+    HEADERS            += src/qqutil/actionbar.h \
+                          src/qqutil/qqandroidstyle.h
+    INCLUDEPATH        += metakit/include
+    LIBS               += -L$$_PRO_FILE_PWD_/build/metakit/current
+    QT                 += androidextras svg
+    RESOURCES           = resources/android.qrc
+    SOURCES            += src/qqutil/actionbar.cpp \
+                          src/qqutil/qqandroidstyle.cpp
+    TARGET              = PortaBase
 }
 
 # Stuff for Mac OS X
@@ -234,6 +274,7 @@ macx {
 # Stuff for Maemo
 maemo5|contains(QT_CONFIG, hildon) {
     CONFIG             += debug qdbus
+    DEFINES            += MOBILE
     LIBS               += -L../../src/metakit/builds
     isEmpty(PREFIX) {
         PREFIX          = /usr/local
@@ -274,7 +315,7 @@ maemo5 {
 }
 
 # Stuff for other Linux/UNIX platforms
-unix:!macx:!maemo5:!contains(QT_CONFIG, hildon) {
+unix:!android-g++:!macx:!maemo5:!contains(QT_CONFIG, hildon) {
     #QMAKE_CXXFLAGS       += -O0 # for valgrind
     CONFIG               += debug
     LIBS                 += -Lmetakit/builds

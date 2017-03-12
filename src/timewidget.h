@@ -1,7 +1,7 @@
 /*
  * timewidget.h
  *
- * (c) 2002,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002,2008-2009,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,9 @@
 #define TIMEWIDGET_H
 
 #include <QWidget>
+#include "qqutil/qqlineedit.h"
 
 class QLabel;
-class QLineEdit;
 class QPushButton;
 
 /**
@@ -41,9 +41,9 @@ private slots:
     void noneToggle();
 
 private:
-    QLineEdit *hourEdit; /**< Hour entry field */
-    QLineEdit *minuteEdit; /**< Minute entry field */
-    QLineEdit *secondEdit; /**< Second entry field */
+    QQLineEdit *hourEdit; /**< Hour entry field */
+    QQLineEdit *minuteEdit; /**< Minute entry field */
+    QQLineEdit *secondEdit; /**< Second entry field */
     bool pm; /**< Is the selected time AM or PM? (if applicable) */
     QPushButton *ampmButton; /**< AM/PM selection button (0 if absent) */
     QPushButton *noneButton; /**< "None" button (for null time selection) */

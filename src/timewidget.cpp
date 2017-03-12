@@ -1,7 +1,7 @@
 /*
  * timewidget.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
 #include <QDateTime>
 #include <QLabel>
 #include <QLayout>
-#include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
 #include "factory.h"
+#include "qqutil/qqlineedit.h"
 #include "timewidget.h"
 
 /**
@@ -33,21 +33,23 @@ TimeWidget::TimeWidget(QWidget *parent)
 {
 #if defined(Q_WS_MAEMO_5)
     int maxWidth = 70;
+#elif defined(Q_OS_ANDROID)
+    int maxWidth = Factory::dpToPixels(52);
 #else
     int maxWidth = 25;
 #endif
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
-    hourEdit = new QLineEdit(this);
+    hourEdit = new QQLineEdit(this);
     hourEdit->setMaxLength(2);
     hourEdit->setMaximumWidth(maxWidth);
     layout->addWidget(hourEdit);
     layout->addWidget(new QLabel(" : ", this));
-    minuteEdit = new QLineEdit(this);
+    minuteEdit = new QQLineEdit(this);
     minuteEdit->setMaxLength(2);
     minuteEdit->setMaximumWidth(maxWidth);
     layout->addWidget(minuteEdit);
     layout->addWidget(new QLabel(" : ", this));
-    secondEdit = new QLineEdit(this);
+    secondEdit = new QQLineEdit(this);
     secondEdit->setMaxLength(2);
     secondEdit->setMaximumWidth(maxWidth);
     layout->addWidget(secondEdit);
@@ -69,6 +71,11 @@ TimeWidget::TimeWidget(QWidget *parent)
     connect(noneButton, SIGNAL(clicked()), this, SLOT(noneToggle()));
     setMaximumHeight(noneButton->sizeHint().height());
     layout->addWidget(new QWidget(this), 1);
+#if QT_VERSION >= 0x050000
+    hourEdit->setInputMethodHints(hourEdit->inputMethodHints()|Qt::ImhFormattedNumbersOnly);
+    minuteEdit->setInputMethodHints(minuteEdit->inputMethodHints()|Qt::ImhFormattedNumbersOnly);
+    secondEdit->setInputMethodHints(secondEdit->inputMethodHints()|Qt::ImhFormattedNumbersOnly);
+#endif
 }
 
 /**

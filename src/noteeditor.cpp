@@ -1,7 +1,7 @@
 /*
  * noteeditor.cpp
  *
- * (c) 2002-2004,2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,10 +13,12 @@
  * Source file for NoteEditor
  */
 
+#include <QAction>
 #include <QFontMetrics>
 #include <QLayout>
 #include <QSettings>
 #include <QTextEdit>
+#include "factory.h"
 #include "noteeditor.h"
 
 /**
@@ -29,7 +31,8 @@
 NoteEditor::NoteEditor(const QString &colName, bool readOnly, QWidget *parent)
   : PBDialog(colName, parent)
 {
-    textBox = new QTextEdit(this);
+    textBox = Factory::textEdit(this);
+    Factory::configureScrollArea(textBox);
     vbox->addWidget(textBox);
     textBox->setAcceptRichText(false);
     textBox->setReadOnly(readOnly);
@@ -48,6 +51,13 @@ NoteEditor::NoteEditor(const QString &colName, bool readOnly, QWidget *parent)
     textBox->setTabStopWidth(metrics.width('x') * 8);
     finishLayout(true, !readOnly, 600, 400);
     textBox->setFocus();
+
+#if defined(Q_OS_ANDROID)
+    // Native text copying from a read-only QTextEdit doesn't work yet
+    QAction *copyTextAction = new QAction(Factory::icon("copy_text"), tr("Copy the selected text"), this);
+    connect(copyTextAction, SIGNAL(triggered()), textBox, SLOT(copy()));
+    addButton(copyTextAction, 0);
+#endif
 }
 
 /**

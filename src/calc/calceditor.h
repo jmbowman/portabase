@@ -1,7 +1,7 @@
 /*
  * calceditor.h
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 #include <QMap>
 #include <QStringList>
 #include "../pbdialog.h"
+#include "../qqutil/qqspinbox.h"
 
 class CalcDateEditor;
 class CalcNode;
@@ -27,7 +28,6 @@ class CalcTimeEditor;
 class Database;
 class QLineEdit;
 class QPushButton;
-class QSpinBox;
 class QTreeWidget;
 class QTreeWidgetItem;
 
@@ -66,7 +66,7 @@ private:
 private:
     Database *db; /**< The database being edited */
     QLineEdit *equation; /**< Display for the calculation formula */
-    QSpinBox *decimalsBox; /**< Field for specifying the number of decimal places to show */
+    QQSpinBox *decimalsBox; /**< Field for specifying the number of decimal places to show */
     QTreeWidget *tree; /**< Tree display of the calculation components */
     NodeMap nodeMap; /**< Mapping of display tree items to calculation nodes */
     CalcNodeEditor *nodeEditor; /**< Sub-dialog for adding new nodes */

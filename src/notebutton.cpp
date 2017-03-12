@@ -1,7 +1,7 @@
 /*
  * notebutton.cpp
  *
- * (c) 2002-2003,2009-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2003,2009-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,11 +13,17 @@
  * Source file for NoteButton
  */
 
+#include <QApplication>
 #include <QFontMetrics>
 #include <QRegExp>
+#include "factory.h"
 #include "notebutton.h"
 #include "noteeditor.h"
 #include "portabase.h"
+
+#if QT_VERSION >= 0x050000
+#include <QScreen>
+#endif
 
 /**
  * Constructor.
@@ -26,14 +32,17 @@
  * @param parent This button's parent widget
  */
 NoteButton::NoteButton(const QString &colName, QWidget *parent)
-#if defined(Q_WS_MAEMO_5)
+#if defined(Q_WS_MAEMO_5) || defined(Q_OS_ANDROID)
     : QPushButton(parent), name(colName)
 #else
     : QToolButton(parent), name(colName)
 #endif
 {
-    setIcon(QIcon(":/icons/note.png"));
-#if !defined(Q_WS_MAEMO_5)
+    setIcon(Factory::icon("note"));
+#if defined (Q_OS_ANDROID)
+    connect(qApp->primaryScreen(), SIGNAL(availableGeometryChanged(QRect)),
+            this, SLOT(screenGeometryChanged(QRect)));
+#elif !defined(Q_WS_MAEMO_5)
     setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
                               QSizePolicy::Fixed, QSizePolicy::ToolButton));
@@ -64,6 +73,8 @@ void NoteButton::setContent(const QString &text)
     QFontMetrics metrics = fontMetrics();
 #if defined(Q_WS_MAEMO_5)
     int available = width() - 90 - metrics.width("...");
+#elif defined(Q_OS_ANDROID)
+    int available = qApp->primaryScreen()->availableSize().width() - x() - metrics.width("...") - Factory::dpToPixels(120);
 #else
     int available = width() - 60 - metrics.width("...");
 #endif
@@ -98,10 +109,22 @@ void NoteButton::launchEditor()
  */
 void NoteButton::resizeEvent(QResizeEvent *event)
 {
-  QAbstractButton::resizeEvent(event);
-  if (isVisible()) {
-      setContent(noteContent);
-  }
+#if defined(Q_WS_MAEMO_5) || defined(Q_OS_ANDROID)
+    QPushButton::resizeEvent(event);
+#else
+    QToolButton::resizeEvent(event);
+#endif
+    setContent(noteContent);
+}
+
+/**
+ * Adjust the button's text accordingly when the screen is rotated.
+ * @param geometry The new screen dimensions in pixels
+ */
+void NoteButton::screenGeometryChanged(const QRect &geometry)
+{
+    Q_UNUSED(geometry)
+    setContent(noteContent);
 }
 
 /**

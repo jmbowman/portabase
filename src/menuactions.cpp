@@ -1,7 +1,7 @@
 /*
  * menuactions.cpp
  *
- * (c) 2003-2004,2009-2010,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2009-2010,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,11 @@
 MenuActions::MenuActions(QObject *parent)
     : QObject(parent)
 {
+#if defined(Q_OS_ANDROID)
+    QString ellipsis("");
+#else
     QChar ellipsis(8230);
+#endif
     textMap.insert(View, tr("&View"));
     textMap.insert(Row, tr("&Row"));
     textMap.insert(Sort, tr("&Sort"));
@@ -36,7 +40,7 @@ MenuActions::MenuActions(QObject *parent)
 
     objectNameMap.insert(Import, "Import");
     textMap.insert(Import, tr("&Import") + ellipsis);
-    toolTipMap.insert(Import, tr("Create a new file from data in another format"));
+    toolTipMap.insert(Import, tr("Import a file from another format"));
 
     textMap.insert(ImportCSV, tr("&Import") + ellipsis);
     toolTipMap.insert(ImportCSV, tr("Import rows from a CSV file"));
@@ -179,7 +183,7 @@ QAction *MenuActions::action(Item item, bool toggle)
 QAction *MenuActions::action(Item item, const QIcon &icon)
 {
     QAction *action = new QAction(icon, menuText(item), parent());
-#if defined(Q_OS_MAC) || defined(Q_WS_HILDON)
+#if defined(Q_OS_MAC) || defined(Q_WS_HILDON) || defined(Q_OS_ANDROID)
     action->setIconVisibleInMenu(false);
 #endif
     prepareAction(item, action);
@@ -202,7 +206,9 @@ void MenuActions::prepareAction(Item item, QAction *action)
         action->setToolTip(text);
         action->setStatusTip(text);
     }
+#if !defined(Q_OS_ANDROID)
     if (shortcutMap.contains(item)) {
         action->setShortcut(shortcutMap[item]);
     }
+#endif
 }

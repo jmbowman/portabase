@@ -1,7 +1,7 @@
 /*
  * conditioneditor.cpp
  *
- * (c) 2002-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 #include <QComboBox>
 #include <QDate>
 #include <QLabel>
-#include <QLineEdit>
 #include <QMessageBox>
 #include <QTime>
 #include <QStackedWidget>
@@ -28,6 +27,7 @@
 #include "factory.h"
 #include "formatting.h"
 #include "numberwidget.h"
+#include "qqutil/qqlineedit.h"
 #include "timewidget.h"
 
 /**
@@ -35,14 +35,16 @@
  *
  * @param dbase The database in use
  * @param parent The dialog's parent widget, if any
+ * @param quickFilter True if the dialog is being used directly from the data
+ *                    viewer, false if it's from a filter editor
  */
-ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
+ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent, bool quickFilter)
   : PBDialog(tr("Condition Editor"), parent), db(dbase), dataType(STRING)
 {
 #if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     vbox->addStretch(1);
 #endif
-    columnList= new QComboBox(this);
+    columnList= Factory::comboBox(this);
     vbox->addWidget(columnList);
     columnList->addItem(tr("Any text column"));
     QStringList tempNames = db->listColumns();
@@ -60,7 +62,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
             this, SLOT(updateDisplay(int)));
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
-    opList = new QComboBox(this);
+    opList = Factory::comboBox(this);
     opList->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     hbox->addWidget(opList);
     stringOpList.append("=");
@@ -92,7 +94,7 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
     constantStack = new QStackedWidget(this);
     constantStack->setMaximumHeight(columnList->sizeHint().height());
     vbox->addWidget(constantStack);
-    constantLine = new QLineEdit(constantStack);
+    constantLine = new QQLineEdit(constantStack);
     constantStack->addWidget(constantLine);
     constantCheck = new QCheckBox(constantStack);
     constantStack->addWidget(constantCheck);
@@ -104,11 +106,22 @@ ConditionEditor::ConditionEditor(Database *dbase, QWidget *parent)
     constantStack->addWidget(constantInteger);
     constantFloat = new NumberWidget(FLOAT, constantStack);
     constantStack->addWidget(constantFloat);
-    constantCombo = new QComboBox(constantStack);
+    constantCombo = Factory::comboBox(constantStack);
     constantStack->addWidget(constantCombo);
     constantStack->setCurrentWidget(constantLine);
+#if defined(Q_OS_ANDROID)
+    Qt::EnterKeyType enterKeyType = Qt::EnterKeyDone;
+    if (quickFilter) {
+        enterKeyType = Qt::EnterKeySearch;
+    }
+    constantLine->setEnterKeyType(enterKeyType);
+    constantInteger->setEnterKeyType(enterKeyType);
+    constantFloat->setEnterKeyType(enterKeyType);
+#else
+    Q_UNUSED(quickFilter)
+#endif
 
-#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#ifdef MOBILE
     vbox->addStretch(1);
 #endif
     finishLayout();

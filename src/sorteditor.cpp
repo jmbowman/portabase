@@ -1,7 +1,7 @@
 /*
  * sorteditor.cpp
  *
- * (c) 2002-2004,2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,15 +13,16 @@
  * Source file for SortEditor
  */
 
+#include <QAction>
 #include <QIcon>
 #include <QLabel>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include "database.h"
 #include "factory.h"
 #include "portabase.h"
+#include "qqutil/qqlineedit.h"
 #include "sorteditor.h"
 
 /**
@@ -34,7 +35,7 @@ SortEditor::SortEditor(QWidget *parent)
 {
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     hbox->addWidget(new QLabel(tr("Sorting Name") + " ", this));
-    nameBox = new QLineEdit(this);
+    nameBox = new QQLineEdit(this);
     hbox->addWidget(nameBox);
 
     QStringList headers;
@@ -47,8 +48,8 @@ SortEditor::SortEditor(QWidget *parent)
             this, SLOT(dataChanged(QModelIndex, QModelIndex)));
 
     addEditButtons(true);
-    connect(upButton, SIGNAL(clicked()), this, SLOT(moveUp()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(moveDown()));
+    connect(upAction, SIGNAL(triggered()), this, SLOT(moveUp()));
+    connect(downAction, SIGNAL(triggered()), this, SLOT(moveDown()));
 
     finishLayout();
     nameBox->setFocus();

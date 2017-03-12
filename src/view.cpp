@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002-2004,2009-2013,2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@
  * @param baseview The main Metakit data table
  * @param colNames Ordered list of names of fields to include in the view
  * @param types Ordered array of field data types
- * @param widths Ordered array of field display widths (in pixels)
+ * @param widths Ordered array of field display widths (in device-independent pixels)
  * @param colIds Ordered list of Metakit main data table field identifiers
  * @param stringColIds Ordered list of Metakit main data table alternate
  *                     string representation field identifiers
@@ -227,7 +227,7 @@ QVariant View::headerData(int section, Qt::Orientation orientation, int role) co
         return columns[section];
     }
     else if (role == Qt::DecorationRole && dataTypes[section] == NOTE) {
-        return QIcon(":/icons/note.png");
+        return Factory::icon("note");
     }
     return QVariant();
 }
@@ -267,7 +267,7 @@ QVariant View::data(const QModelIndex &index, int role) const
             c4_RowRef row = dbview[rowIndex];
             c4_StringProp prop(scIds[colIndex]);
             if (!QString::fromUtf8(prop (row)).isEmpty()) {
-                return QIcon(":/icons/image.png");
+                return Factory::icon("image");
             }
             else {
                 return QVariant();

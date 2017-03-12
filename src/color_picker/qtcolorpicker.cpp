@@ -3,7 +3,7 @@
 ** This file is part of a Qt Solutions component.
 ** 
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** Copyright (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+** Copyright (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
 ** 
 ** Contact:  Qt Software Information (qt-info@nokia.com)
 ** 
@@ -65,7 +65,28 @@
 #include <QMouseEvent>
 #include <math.h>
 
+#if QT_VERSION >= 0x050000
+#include <QScreen>
+#endif
+
 #include "qtcolorpicker.h"
+
+/**
+ * Convert the provided dimension in dp (device-independent pixels) to the
+ * corresponding number of actual pixels on the current display.  Currently
+ * only used on Android.
+ *
+ * @param dp The value in dp to be converted
+ * @return The corresponding number of actual pixels
+ */
+int dpToPixels(int dp)
+{
+#if QT_VERSION >= 0x050000
+    return (dp * qApp->primaryScreen()->physicalDotsPerInch()) / 160;
+#else
+    return dp;
+#endif
+}
 
 /*! \class QtColorPicker
 
@@ -132,122 +153,6 @@
 
     To obtain the color's name, use text().
 */
-
-/*
-    A class  that acts very much  like a QPushButton. It's not styled,
-    so we  can  expect  the  exact  same    look,  feel and   geometry
-    everywhere.     Also,  this  button     always emits   clicked  on
-    mouseRelease, even if the mouse button was  not pressed inside the
-    widget.
-*/
-class ColorPickerButton : public QFrame
-{
-    Q_OBJECT
-
-public:
-    explicit ColorPickerButton(QWidget *parent);
-
-signals:
-    void clicked();
-
-protected:
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void keyPressEvent(QKeyEvent *e);
-    void keyReleaseEvent(QKeyEvent *e);
-    void paintEvent(QPaintEvent *e);
-    void focusInEvent(QFocusEvent *e);
-    void focusOutEvent(QFocusEvent *e);
-};
-
-/*
-    This class represents each "color" or item in the color grid.
-*/
-class ColorPickerItem : public QFrame
-{
-    Q_OBJECT
-
-public:
-    ColorPickerItem(const QColor &color = Qt::white, const QString &text = QString::null,
-		      QWidget *parent = 0);
-    ~ColorPickerItem();
-
-    QColor color() const;
-    QString text() const;
-
-    void setSelected(bool);
-    bool isSelected() const;
-signals:
-    void clicked();
-    void selected();
-
-public slots:
-    void setColor(const QColor &color, const QString &text = QString());
-
-protected:
-    void mousePressEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void paintEvent(QPaintEvent *e);
-
-private:
-    QColor c;
-    QString t;
-    bool sel;
-};
-
-/*
-
-*/
-class ColorPickerPopup : public QFrame
-{
-    Q_OBJECT
-
-public:
-    ColorPickerPopup(int width, bool withColorDialog,
-		       QWidget *parent = 0);
-    ~ColorPickerPopup();
-
-    void insertColor(const QColor &col, const QString &text, int index);
-    void exec();
-
-    void setExecFlag();
-
-    QColor lastSelected() const;
-
-    ColorPickerItem *find(const QColor &col) const;
-    QColor color(int index) const;
-
-signals:
-    void selected(const QColor &);
-    void hid();
-
-public slots:
-    void getColorFromDialog();
-
-protected slots:
-    void updateSelected();
-
-protected:
-    void keyPressEvent(QKeyEvent *e);
-    void showEvent(QShowEvent *e);
-    void hideEvent(QHideEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-
-    void regenerateGrid();
-
-private:
-    QMap<int, QMap<int, QWidget *> > widgetAt;
-    QList<ColorPickerItem *> items;
-    QGridLayout *grid;
-    ColorPickerButton *moreButton;
-    QEventLoop *eventLoop;
-
-    int lastPos;
-    int cols;
-    QColor lastSel;
-};
 
 /*!
     Constructs a QtColorPicker widget. The popup will display a grid
@@ -545,9 +450,16 @@ ColorPickerPopup::ColorPickerPopup(int width, bool withColorDialog,
 
     if (withColorDialog) {
 	moreButton = new ColorPickerButton(this);
+#if defined(Q_OS_ANDROID)
+    moreButton->setFixedWidth(dpToPixels(48));
+    moreButton->setFixedHeight(dpToPixels(42));
+    moreButton->setFrameRect(QRect(dpToPixels(4), dpToPixels(4),
+                                   dpToPixels(40), dpToPixels(34)));
+#else
 	moreButton->setFixedWidth(24);
 	moreButton->setFixedHeight(21);
 	moreButton->setFrameRect(QRect(2, 2, 20, 17));
+#endif
 	connect(moreButton, SIGNAL(clicked()), SLOT(getColorFromDialog()));
     } else {
 	moreButton = 0;
@@ -888,12 +800,24 @@ void ColorPickerPopup::regenerateGrid()
 */
 void ColorPickerPopup::getColorFromDialog()
 {
+#if defined(Q_OS_ANDROID)
+    // This is still almost unusable, but at least it fits on the screen
+    QColorDialog colorDialog(lastSel, parentWidget());
+    colorDialog.showMaximized();
+    if (!colorDialog.exec()) {
+        return;
+    }
+    QColor col = colorDialog.currentColor();
+#elif QT_VERSION >= 0x050000
+    QColor col = QColorDialog::getColor(lastSel, parentWidget());
+#else
     bool ok;
     QRgb rgb = QColorDialog::getRgba(lastSel.rgba(), &ok, parentWidget());
     if (!ok)
 	return;
 
     QColor col = QColor::fromRgba(rgb);
+#endif
     insertColor(col, tr("Custom"), -1);
     lastSel = col;
     emit selected(col);
@@ -908,8 +832,13 @@ ColorPickerItem::ColorPickerItem(const QColor &color, const QString &text,
     : QFrame(parent), c(color), t(text), sel(false)
 {
     setToolTip(t);
+#if defined(Q_OS_ANDROID)
+    setFixedWidth(dpToPixels(48));
+    setFixedHeight(dpToPixels(42));
+#else
     setFixedWidth(24);
     setFixedHeight(21);
+#endif
 }
 
 /*!
@@ -1139,6 +1068,4 @@ void ColorPickerButton::paintEvent(QPaintEvent *e)
     p.end();
 
 }
-
-#include "qtcolorpicker.moc"
 

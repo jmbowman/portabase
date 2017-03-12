@@ -1,7 +1,7 @@
 /*
  * portabase.h
  *
- * (c) 2002-2004,2008-2011,2015-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2011,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -117,7 +117,7 @@ private:
     Database *db; /**< The currently open database, if any */
     bool readOnly; /**< True if the open file is read-only, false otherwise */
     QStackedWidget *mainStack; /**< Main widget stack (data display and "No file selected" label) */
-    QScrollArea *noFileWidget; /**< The main widget shown when no file is open */
+    QWidget *noFileWidget; /**< The main widget shown when no file is open */
     QPushButton *newButton; /**< The button for creating a new file */
     QPushButton *openButton; /**< The button for picking an existing file to open */
     QPushButton *importButton; /**< The button for importing from another format */

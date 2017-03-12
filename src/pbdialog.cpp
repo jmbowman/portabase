@@ -1,7 +1,7 @@
 /*
  * pbdialog.cpp
  *
- * (c) 2003-2004,2008-2010 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,13 +13,17 @@
  * Source file for PBDialog
  */
 
+#include <QAction>
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QMessageBox>
 #include <QPushButton>
-#include "factory.h"
 #include "pbdialog.h"
+#include "qqutil/qqfactory.h"
+#if defined(Q_OS_ANDROID)
+#include "qqutil/actionbar.h"
+#endif
 
 /**
  * Constructor.
@@ -31,17 +35,14 @@
  *               little odd otherwise
  * @param small True if the dialog is small enough that it shouldn't be
  *              maximized on platforms with small screens (like Maemo)
+ * @param backButtonAccepts True if the Android back button applies changes
+ *                          made in the dialog
  */
-PBDialog::PBDialog(QString title, QWidget *parent, bool small)
-    : QQDialog(title, parent, small), addButton(0), editButton(0),
-    deleteButton(0), upButton(0), downButton(0)
+PBDialog::PBDialog(QString title, QWidget *parent, bool small, bool backButtonAccepts)
+    : QQDialog(title, parent, small, backButtonAccepts), addAction(0),
+      editAction(0), deleteAction(0), upAction(0), downAction(0)
 {
-#if defined(Q_WS_MAEMO_5)
-    QHBoxLayout *hbox = Factory::hBoxLayout(this, true);
-    vbox = Factory::vBoxLayout(hbox);
-#else
-    vbox = Factory::vBoxLayout(this, true);
-#endif
+
 }
 
 /**
@@ -62,14 +63,19 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
     okCancelRow = addOkCancelButtons(static_cast<QBoxLayout *>(layout()),
                                      okButton, cancelButton);
 #if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
-    if (addButton) {
-        okCancelRow->addButton(addButton, QDialogButtonBox::ActionRole);
-        okCancelRow->addButton(editButton, QDialogButtonBox::ActionRole);
-        okCancelRow->addButton(deleteButton, QDialogButtonBox::ActionRole);
+    if (addAction) {
+        okCancelRow->addButton(actionButtonMap[addAction],
+                               QDialogButtonBox::ActionRole);
+        okCancelRow->addButton(actionButtonMap[editAction],
+                               QDialogButtonBox::ActionRole);
+        okCancelRow->addButton(actionButtonMap[deleteAction],
+                               QDialogButtonBox::ActionRole);
     }
-    if (upButton) {
-        okCancelRow->addButton(upButton, QDialogButtonBox::ActionRole);
-        okCancelRow->addButton(downButton, QDialogButtonBox::ActionRole);
+    if (upAction) {
+        okCancelRow->addButton(actionButtonMap[upAction],
+                               QDialogButtonBox::ActionRole);
+        okCancelRow->addButton(actionButtonMap[downAction],
+                               QDialogButtonBox::ActionRole);
     }
 #endif
     finishConstruction(minWidth, minHeight);
@@ -79,31 +85,68 @@ QDialogButtonBox *PBDialog::finishLayout(bool okButton, bool cancelButton,
 /**
  * Add the standard buttons used on most list management dialogs: Up, Down,
  * and often Add, Edit, and Delete.  Subclasses are responsible for actually
- * connecting the button clicks to appropriate actions (using this class's
- * button attributes).
+ * connecting the button clicks to appropriate slots (using this class's
+ * action attributes).
  *
  * @param movementOnly True if only the Up and Down buttons are to be added
  */
 void PBDialog::addEditButtons(bool movementOnly)
 {
-    if (!movementOnly) {
-        addButton = new QPushButton(tr("Add"), this);
-        editButton = new QPushButton(tr("Edit"), this);
-        deleteButton = new QPushButton(tr("Delete"), this);
-    }
-    upButton = new QPushButton(tr("Up"), this);
-    downButton = new QPushButton(tr("Down"), this);
-#if !defined(Q_WS_HILDON) && !defined(Q_WS_MAEMO_5)
-    QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
-    if (!movementOnly) {
-        hbox->addWidget(addButton);
-        hbox->addWidget(editButton);
-        hbox->addWidget(deleteButton);
-    }
-    hbox->addWidget(upButton);
-    hbox->addWidget(downButton);
+#ifndef MOBILE
+    QHBoxLayout *hbox = QQFactory::hBoxLayout(vbox);
     // leave a blank space before the OK and Cancel buttons
     vbox->addWidget(new QLabel(" ", this));
+#else
+    QHBoxLayout *hbox = 0;
+#endif
+    if (!movementOnly) {
+        addAction = new QAction(QQFactory::icon("add"), tr("Add"), this);
+        addButton(addAction, hbox);
+        editAction = new QAction(QQFactory::icon("edit"), tr("Edit"), this);
+        addButton(editAction, hbox);
+        deleteAction = new QAction(QQFactory::icon("delete"), tr("Delete"), this);
+        addButton(deleteAction, hbox);
+    }
+    upAction = new QAction(QQFactory::icon("up"), tr("Up"), this);
+    addButton(upAction, hbox);
+    downAction = new QAction(QQFactory::icon("down"), tr("Down"), this);
+    addButton(downAction, hbox);
+}
+
+/**
+ * Add a button that will perform the given dialog action.
+ *
+ * @param action The action for which to create a button
+ * @param hbox The layout row to which the button should be added on
+ *             non-mobile platforms
+ */
+void PBDialog::addButton(QAction *action, QHBoxLayout *hbox)
+{
+#if defined(Q_OS_ANDROID)
+    Q_UNUSED(hbox)
+    actionBar->addButton(action);
+#else
+    QPushButton *button = new QPushButton(action->text(), this);
+    actionButtonMap[action] = button;
+    connect(button, SIGNAL(clicked()), action, SIGNAL(triggered()));
+    connect(action, SIGNAL(changed()), this, SLOT(actionChanged()));
+    if (hbox) {
+        hbox->addWidget(button);
+    }
+#endif
+}
+
+/**
+ * Update the corresponding push button (if any) when one of the standard
+ * dialog actions is enabled or disabled.
+ */
+void PBDialog::actionChanged()
+{
+#if !defined(Q_OS_ANDROID)
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (actionButtonMap.contains(action)) {
+        actionButtonMap[action]->setEnabled(action->isEnabled());
+    }
 #endif
 }
 

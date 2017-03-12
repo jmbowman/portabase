@@ -1,7 +1,7 @@
 /*
  * rowviewer.cpp
  *
- * (c) 2002-2004,2010-2012 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2010-2012,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
  */
 
 #include <QAbstractButton>
+#include <QAction>
 #include <QApplication>
 #include <QComboBox>
 #include <QClipboard>
@@ -24,6 +25,7 @@
 #include <QUrl>
 #include "database.h"
 #include "datatypes.h"
+#include "factory.h"
 #include "formatting.h"
 #include "menuactions.h"
 #include "portabase.h"
@@ -50,33 +52,52 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
 
     QHBoxLayout *hbox = Factory::hBoxLayout(vbox);
     prevButton = Factory::button(this);
-    prevButton->setIcon(QIcon(":/icons/back.png"));
+    prevButton->setIcon(Factory::icon("back"));
     prevButton->setToolTip(tr("Previous row"));
     connect(prevButton, SIGNAL(clicked()), this, SLOT(previousRow()));
     hbox->addWidget(prevButton);
 
+#if defined(Q_OS_ANDROID)
+    QAction *editAction = new QAction(Factory::icon("edit"), tr("Edit this row"), this);
+    connect(editAction, SIGNAL(triggered()), this, SLOT(editRow()));
+    addButton(editAction, 0);
+
+    QAction *copyAction = new QAction(Factory::icon("copy_row"), tr("Copy this row"), this);
+    connect(copyAction, SIGNAL(triggered()), this, SLOT(copyRow()));
+    addButton(copyAction, 0);
+
+    QAction *deleteAction = new QAction(Factory::icon("delete"), tr("Delete this row"), this);
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteRow()));
+    addButton(deleteAction, 0);
+
+    // Native text copying from a read-only QTextEdit doesn't work yet
+    QAction *copyTextAction = new QAction(Factory::icon("copy_text"), tr("Copy the selected text"), this);
+    connect(copyTextAction, SIGNAL(triggered()), hd, SLOT(copy()));
+    addButton(copyTextAction, 0);
+#else
     QAbstractButton *editButton = Factory::button(this);
-    editButton->setIcon(QIcon(":/icons/edit.png"));
+    editButton->setIcon(Factory::icon("edit"));
     editButton->setToolTip(tr("Edit this row"));
     connect(editButton, SIGNAL(clicked()), this, SLOT(editRow()));
     hbox->addWidget(editButton);
 
     QAbstractButton *copyButton = Factory::button(this);
-    copyButton->setIcon(QIcon(":/icons/copy_row.png"));
+    copyButton->setIcon(Factory::icon("copy_row"));
     copyButton->setToolTip(tr("Copy this row"));
     connect(copyButton, SIGNAL(clicked()), this, SLOT(copyRow()));
     hbox->addWidget(copyButton);
 
     QAbstractButton *deleteButton = Factory::button(this);
-    deleteButton->setIcon(QIcon(":/icons/delete.png"));
+    deleteButton->setIcon(Factory::icon("delete"));
     deleteButton->setToolTip(tr("Delete this row"));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteRow()));
     hbox->addWidget(deleteButton);
+#endif
 
     QStringList viewNames = db->listViews();
     viewNames.removeAll("_all");
     viewNames.prepend(MenuActions::tr("All Columns"));
-    viewBox = new QComboBox(this);
+    viewBox = Factory::comboBox(this);
     viewBox->addItems(viewNames);
     connect(viewBox, SIGNAL(activated(int)), this, SLOT(viewChanged(int)));
     hbox->addWidget(viewBox, 1);
@@ -85,24 +106,36 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     PBNetworkAccessManager *manager = new PBNetworkAccessManager(db);
     hd->page()->setNetworkAccessManager(manager);
 #else
+    // Make the boolean value images available in case we need them
+#if defined(Q_OS_ANDROID)
+    int iconPixels = hd->fontMetrics().boundingRect("9").height();
+    QSize iconSize(iconPixels, iconPixels);
+    QIcon checkedIcon = Factory::icon("checked");
+    QPixmap checked = checkedIcon.pixmap(iconSize);
+    QIcon uncheckedIcon = Factory::icon("unchecked");
+    QPixmap unchecked = uncheckedIcon.pixmap(iconSize);
+#else
+    QPixmap checked = QPixmap(":/icons/checked.png");
+    QPixmap unchecked = QPixmap(":/icons/unchecked.png");
+
     // kinetic scrolling takes precedence over text copy on Fremantle
+    // Android puts this button in the action bar, done above
     QAbstractButton *copyTextButton = Factory::button(this);
-    copyTextButton->setIcon(QIcon(":/icons/copy_text.png"));
+    copyTextButton->setIcon(Factory::icon("copy_text"));
     copyTextButton->setToolTip(tr("Copy the selected text"));
     connect(copyTextButton, SIGNAL(clicked()), hd, SLOT(copy()));
     hbox->addWidget(copyTextButton);
-
-    // Make the boolean value images available in case we need them
+#endif
     hd->document()->addResource(QTextDocument::ImageResource,
                                 QUrl("qrc:/icons/checked.png"),
-                                QPixmap(":/icons/checked.png"));
+                                checked);
     hd->document()->addResource(QTextDocument::ImageResource,
                                 QUrl("qrc:/icons/unchecked.png"),
-                                QPixmap(":/icons/unchecked.png"));
+                                unchecked);
 #endif
 
     nextButton = Factory::button(this);
-    nextButton->setIcon(QIcon(":/icons/forward.png"));
+    nextButton->setIcon(Factory::icon("forward"));
     nextButton->setToolTip(tr("Next row"));
     connect(nextButton, SIGNAL(clicked()), this, SLOT(nextRow()));
     hbox->addWidget(nextButton);

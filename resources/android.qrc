@@ -1,0 +1,90 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource prefix="/icons">
+     <file alias="checked.svg">icons/android/ic_check_box_24px.svg</file>
+     <file alias="unchecked.svg">icons/android/ic_check_box_outline_blank_24px.svg</file>
+     <file alias="add.svg">icons/android/ic_add_24px.svg</file>
+     <file alias="app_icon.svg">icons/android/PortaBase.svg</file>
+     <file alias="app_up">icons/android/ic_arrow_back_24px.svg</file>
+     <file alias="app_up_rtl">icons/android/ic_arrow_forward_24px.svg</file>
+     <file alias="back.svg">icons/android/ic_chevron_left_24px.svg</file>
+     <file alias="calculator.svg">icons/android/calculator.svg</file>
+     <file alias="calendar.svg">icons/android/ic_date_range_24px.svg</file>
+     <file alias="close.svg">icons/android/ic_close_24px.svg</file>
+     <file alias="computer.svg">icons/android/ic_phone_iphone_24px.svg</file>
+     <file alias="copy_row.svg">icons/android/content-duplicate.svg</file>
+     <file alias="copy_text.svg">icons/android/ic_content_copy_24px.svg</file>
+     <file alias="delete.svg">icons/android/ic_delete_24px.svg</file>
+     <file alias="down.svg">icons/android/ic_arrow_downward_24px.svg</file>
+     <file alias="drive.svg">icons/android/ic_sd_storage_24px.svg</file>
+     <file alias="edit.svg">icons/android/ic_mode_edit_24px.svg</file>
+     <file alias="file.svg">icons/android/ic_insert_drive_file_24px.svg</file>
+     <file alias="find.svg">icons/android/ic_search_24px.svg</file>
+     <file alias="folder.svg">icons/android/ic_folder_24px.svg</file>
+     <file alias="forward.svg">icons/android/ic_chevron_right_24px.svg</file>
+     <file alias="image.svg">icons/android/ic_image_24px.svg</file>
+     <file alias="import.svg">icons/android/ic_system_update_alt_24px.svg</file>
+     <file alias="menu.svg">icons/android/ic_menu_24px.svg</file>
+     <file alias="new.svg">icons/android/ic_add_box_24px.svg</file>
+     <file alias="note.svg">icons/android/ic_note_24px.svg</file>
+     <file alias="open.svg">icons/android/ic_folder_open_24px.svg</file>
+     <file alias="overflow.svg">icons/android/ic_more_vert_24px.svg</file>
+     <file alias="PortaBase.svg">icons/android/PortaBase.svg</file>
+     <file alias="preferences.svg">icons/android/ic_settings_24px.svg</file>
+     <file alias="quit.svg">icons/android/ic_power_settings_new_24px.svg</file>
+     <file alias="refresh.svg">icons/android/ic_refresh_24px.svg</file>
+     <file alias="save.svg">icons/android/ic_save_24px.svg</file>
+     <file alias="subtract.svg">icons/android/ic_remove_24px.svg</file>
+     <file alias="view.svg">icons/android/ic_view_column_24px.svg</file>
+     <file alias="sort.svg">icons/android/ic_sort_24px.svg</file>
+     <file alias="filter.svg">icons/android/ic_filter_list_24px.svg</file>
+     <file alias="fullscreen.svg">icons/android/ic_fullscreen_24px.svg</file>
+     <file alias="fullscreen_exit.svg">icons/android/ic_fullscreen_exit_24px.svg</file>
+     <file alias="new_folder.svg">icons/android/ic_create_new_folder_24px.svg</file>
+     <file alias="up.svg">icons/android/ic_arrow_upward_24px.svg</file>
+ </qresource>
+ <qresource>
+     <file alias="appicon/PortaBase.png">icons/mac/PortaBase.png</file>
+     <file>templates/export.html</file>
+ </qresource>
+ <qresource lang="en">
+     <file alias="i18n/PortaBase.qm">translations/portabase_en.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_en.qm</file>
+ </qresource>
+ <qresource lang="cs">
+     <file alias="i18n/PortaBase.qm">translations/portabase_cs.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_cs.qm</file>
+ </qresource>
+ <qresource lang="de">
+     <file alias="i18n/PortaBase.qm">translations/portabase_de.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_de.qm</file>
+ </qresource>
+ <qresource lang="es">
+     <file alias="i18n/PortaBase.qm">translations/portabase_es.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_es.qm</file>
+ </qresource>
+ <qresource lang="fr">
+     <file alias="i18n/PortaBase.qm">translations/portabase_fr.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_fr.qm</file>
+ </qresource>
+ <qresource lang="it">
+     <file alias="i18n/PortaBase.qm">translations/portabase_it.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_it.qm</file>
+ </qresource>
+ <qresource lang="ja">
+     <file alias="i18n/PortaBase.qm">translations/portabase_ja.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_ja.qm</file>
+ </qresource>
+ <qresource lang="sk">
+     <file alias="i18n/PortaBase.qm">translations/portabase_sk.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_sk.qm</file>
+ </qresource>
+ <qresource lang="zh_CN">
+     <file alias="i18n/PortaBase.qm">translations/portabase_zh_CN.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_zh_CN.qm</file>
+ </qresource>
+ <qresource lang="zh_TW">
+     <file alias="i18n/PortaBase.qm">translations/portabase_zh_TW.qm</file>
+     <file alias="i18n/Qt.qm">translations/qt_zh_TW.qm</file>
+ </qresource>
+ </RCC>
+ 

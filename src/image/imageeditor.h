@@ -1,7 +1,7 @@
 /*
  * imageeditor.h
  *
- * (c) 2003-2004,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
 
 #include <QImage>
 #include "../pbdialog.h"
+#include "../qqutil/qqspinbox.h"
 
 class ImageWidget;
 class QComboBox;
 class QDialogButtonBox;
-class QSpinBox;
 class QWidget;
 
 /**
@@ -49,8 +49,8 @@ private slots:
 private:
     QWidget *paramsRow; /**< The row of image parameter widgets */
     QDialogButtonBox *okCancelRow; /**< The OK/Cancel buttons row */
-    QSpinBox *widthBox; /**< Image width entry field */
-    QSpinBox *heightBox; /**< Image height entry field */
+    QQSpinBox *widthBox; /**< Image width entry field */
+    QQSpinBox *heightBox; /**< Image height entry field */
     QComboBox *rotateBox; /**< Rotation angle selection widget */
     ImageWidget *display; /**< Widget that displays the current image */
     QImage image; /**< The current image, as last loaded/refreshed */

@@ -1,7 +1,7 @@
 /*
  * importdialog.cpp
  *
- * (c) 2003-2004,2008-2009,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009,2015,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,6 @@
  */
 
 #include <QApplication>
-#include <QFileDialog>
 #include <QFileInfo>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -25,6 +24,8 @@
 #include "csvutils.h"
 #include "database.h"
 #include "importutils.h"
+#include "pbinputdialog.h"
+#include "qqutil/qqfiledialog.h"
 #include "qqutil/qqmenuhelper.h"
 
 /**
@@ -62,7 +63,7 @@ bool ImportDialog::exec()
     }
     QSettings settings;
     QString lastDir = QQMenuHelper::getLastDir(&settings);
-    QString file = QFileDialog::getOpenFileName(parentWidget,
+    QString file = QQFileDialog::getOpenFileName(parentWidget,
                  tr("Choose a file"), lastDir, filter);
     if (file.isEmpty()) {
         return false;
@@ -77,9 +78,9 @@ bool ImportDialog::exec()
         encodings.append("UTF-8");
         encodings.append("Latin-1");
         bool ok;
-        encoding = QInputDialog::getItem(parentWidget, tr("Import"),
-                                         tr("Text encoding") + ":",
-                                         encodings, 0, false, &ok);
+        encoding = PBInputDialog::getItem(parentWidget, tr("Import"),
+                                          tr("Text encoding") + ":",
+                                          encodings, 0, false, &ok);
         if (!ok) {
             return false;
         }
