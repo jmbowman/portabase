@@ -1,7 +1,7 @@
 /*
- * qqmactoolbaritemvalidator.h
+ * qqmactoolbardelegate.h
  *
- * (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,7 @@
  * (at your option) any later version.
  */
 
-/** @file qqutil/qqmactoolbaritemvalidator.h
+/** @file qqutil/qqmactoolbardelegate.h
  * Header file for QQMacToolbarItemValidator
  */
 
