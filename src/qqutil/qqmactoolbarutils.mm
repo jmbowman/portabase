@@ -1,7 +1,7 @@
 /*
- * qqmactoolbar.mm
+ * qqmactoolbarutils.mm
  *
- * (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,7 @@
  * (at your option) any later version.
  */
 
-/** @file qqutil/qqmactoolbar.cpp
+/** @file qqutil/qqmactoolbarutils.mm
  * Source file for QQMacToolBarUtils
  */
 
@@ -96,7 +96,7 @@ QString QQMacToolBarUtils::identifier(QMacToolBarItem *item)
  * Set the display mode of a toolbar.
  *
  * @param toolBar The toolbar to be updated
- * @param sizeMode "iconAndLabel", "iconOnly", "labelOnly" or "default"
+ * @param displayMode "iconAndLabel", "iconOnly", "labelOnly" or "default"
  */
 void QQMacToolBarUtils::setDisplayMode(QMacToolBar *toolBar, const QString &displayMode)
 {

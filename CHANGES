@@ -1,3 +1,8 @@
+2017-03-16  JMB  Updated source code documentation
+
+    Upgraded Doxygen and its configuration files, and fixed some problems
+    it found with the source code documentation comments.
+
 2017-03-11  JMB  Added Android port
 
     Added support for running PortaBase on Android 4.4 (KitKat) and above.

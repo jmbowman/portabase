@@ -1,7 +1,7 @@
 /*
- * qqmactoolbaritemvalidator.mm
+ * qqmactoolbardelegate.mm
  *
- * (c) 2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -9,7 +9,7 @@
  * (at your option) any later version.
  */
 
-/** @file qqutil/qqmactoolbaritemvalidator.mm
+/** @file qqutil/qqmactoolbardelegate.mm
  * Source file for QQMacToolbarItemValidator
  */
 
@@ -25,9 +25,10 @@
 
 /**
  * Get the native toolbar identifier strings for all items in the given list.
+ *
  * @param items The items whose identifiers are to be fetched
  * @param cullUnselectable True if unselectable items should be skipped
- * @return An array o native toolbar item identifiers
+ * @return An array of native toolbar item identifiers
  */
 NSMutableArray *getItemIdentifiers(const QList<QMacToolBarItem *> &items, bool cullUnselectable)
 {

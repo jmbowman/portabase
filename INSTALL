@@ -32,7 +32,7 @@ Doxygen (http://www.stack.nl/~dimitri/doxygen/index.html).  To do so:
 - Install Doxygen on your system
 - Download the version of Qt whose documentation you want to link to (optional)
 - Make sure the TAGFILES line in PortaBase's "Doxyfile" file uses the correct
-  path for the qt.tags file in the Qt documentation you downloaded and
+  paths for the qt*.tags file in the Qt documentation you downloaded and
   references the Qt documentation root you wish to link to; this can be either
   online or local (optional)
 - Install Graphviz (http://www.graphviz.org/) and either make sure that the
