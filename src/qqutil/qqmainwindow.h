@@ -64,7 +64,6 @@ protected slots:
      */
     virtual void print(QPrinter *p) = 0;
     void quit();
-    void toggleFullscreen();
 
 protected:
     void closeEvent(QCloseEvent *e);

@@ -146,7 +146,9 @@ MenuActions::MenuActions(QObject *parent)
 
     objectNameMap.insert(Fullscreen, "Fullscreen");
     textMap.insert(Fullscreen, tr("Fullscreen"));
+    textMap.insert(ExitFullscreen, tr("Exit Fullscreen"));
     toolTipMap.insert(Fullscreen, tr("View PortaBase in fullscreen mode"));
+    toolTipMap.insert(ExitFullscreen, tr("Exit fullscreen mode"));
 }
 
 /**
@@ -158,6 +160,16 @@ MenuActions::MenuActions(QObject *parent)
 QString MenuActions::menuText(Item item)
 {
     return QQMenuHelper::menuText(textMap[item]);
+}
+
+/**
+ * Get the translation for the tooltip of the specified menu or action.
+ *
+ * @param item The identifier of the desired menu or action
+ */
+QString MenuActions::toolTipText(Item item)
+{
+    return toolTipMap[item];
 }
 
 /**

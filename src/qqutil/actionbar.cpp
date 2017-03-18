@@ -31,6 +31,7 @@ ActionBar::ActionBar(QWidget *parent) : QWidget(parent) {
             "* {background:lightGray}"
             "QToolButton {height: %3px; min-width: %2px}"
             "QToolButton QMenu::item {padding: %1px %1px %1px %1px; border: 1px solid transparent}"
+            "QToolButton QMenu::indicator {image: none}"
             "QToolButton QMenu::item::selected {border-color: black}"
             "QToolButton#viewControl {font:bold}"
             "QToolButton::menu-indicator {image: none}").arg(paddingPixels).arg(minWidth);
