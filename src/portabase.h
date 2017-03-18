@@ -99,6 +99,7 @@ private slots:
     void changeView();
     void changeSorting();
     void changeFilter();
+    void toggleFullscreen();
 
 private:
     void createFile(ImportDialog::DataSource source, const QString &file=QString::null);

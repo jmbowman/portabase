@@ -1455,6 +1455,35 @@ void PortaBase::setRowSelected(bool y)
 }
 
 /**
+ * Switch from normal mode to fullscreen or vice versa.
+ */
+void PortaBase::toggleFullscreen()
+{
+    if (isFullScreen()) {
+        showNormal();
+        QAction *action = qobject_cast<QAction *>(sender());
+        action->setText(ma->menuText(MenuActions::Fullscreen));
+        QString toolTip = ma->toolTipText(MenuActions::Fullscreen);
+        action->setToolTip(toolTip);
+        action->setStatusTip(toolTip);
+#if defined(Q_OS_ANDROID)
+        action->setIcon(Factory::icon("fullscreen"));
+#endif
+    }
+    else {
+        showFullScreen();
+        QAction *action = qobject_cast<QAction *>(sender());
+        action->setText(ma->menuText(MenuActions::ExitFullscreen));
+        QString toolTip = ma->toolTipText(MenuActions::ExitFullscreen);
+        action->setToolTip(toolTip);
+        action->setStatusTip(toolTip);
+#if defined(Q_OS_ANDROID)
+        action->setIcon(Factory::icon("fullscreen_exit"));
+#endif
+    }
+}
+
+/**
  * Load the main application settings, already set to read from the
  * top-level "portabase" group.  May be empty if this is the first time
  * running PortaBase in this environment.

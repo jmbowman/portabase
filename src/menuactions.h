@@ -77,7 +77,8 @@ public:
         Views,
         Sortings,
         Filters,
-        Fullscreen
+        Fullscreen,
+        ExitFullscreen
     };
     typedef QMap< Item, QString > PhraseMap;
     typedef QMap< Item, QKeySequence > ShortcutMap;
@@ -85,6 +86,7 @@ public:
     explicit MenuActions(QObject *parent=0);
 
     QString menuText(Item item);
+    QString toolTipText(Item item);
     QAction *action(Item item, bool toggle=false);
     QAction *action(Item item, const QIcon &icon);
 

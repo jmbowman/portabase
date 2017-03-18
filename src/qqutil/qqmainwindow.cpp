@@ -142,27 +142,6 @@ void QQMainWindow::saveWindowSettings(QSettings *settings)
 }
 
 /**
- * Switch from normal mode to fullscreen or vice versa.
- */
-void QQMainWindow::toggleFullscreen()
-{
-    if (isFullScreen()) {
-        showNormal();
-#if defined(Q_OS_ANDROID)
-        QAction *action = qobject_cast<QAction *>(sender());
-        action->setIcon(QIcon(":/icons/fullscreen.svg"));
-#endif
-    }
-    else {
-        showFullScreen();
-#if defined(Q_OS_ANDROID)
-        QAction *action = qobject_cast<QAction *>(sender());
-        action->setIcon(QIcon(":/icons/fullscreen_exit.svg"));
-#endif
-    }
-}
-
-/**
  * Get the path of the currently open document.
  */
 QString QQMainWindow::documentPath()
