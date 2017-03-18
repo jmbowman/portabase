@@ -128,3 +128,5 @@ http://www.portabase.org
 
 ------------------------------------------------------------------------------
 -- Jeremy Bowman <jmbowman@alum.mit.edu>
+
+Join the chat at https://gitter.im/portabase/Lobby
