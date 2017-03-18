@@ -7,10 +7,10 @@ path = %PATH%;C:\Python27;C:\Python27\Scripts
 IF NOT EXIST build\windows MKDIR build\windows
 COPY CHANGES build\windows\CHANGES.txt
 COPY COPYING build\windows\COPYING.txt
-COPY README.txt build\windows
+COPY README.rst build\windows\README.txt
 packaging\windows\UNIX2DOS build\windows\CHANGES.txt
 packaging\windows\UNIX2DOS build\windows\COPYING.txt
-packaging\windows\UNIX2DOS build\windows\README.txt
+packaging\windows\UNIX2DOS build\windows\README.rst
 COPY %mingw_dir%\bin\mingwm10.dll build\windows
 COPY %mingw_dir%\bin\libgcc_s_dw2-1.dll build\windows
 COPY %qt_dir%\bin\QtCore4.dll build\windows
