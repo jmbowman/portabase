@@ -1,3 +1,12 @@
+2017-03-17  JMB  Dynamically update fullscreen action text
+
+    The fullscreen action now changes the text in menus and tooltips
+    appropriately after it has been activated (to say "Exit Fullscreen"
+    instead of "Fullscreen", etc.).  Additionally, I'd overlooked that
+    a small checkbox was been shown next to the text in the menu on
+    Android devices; suppressed that now that the action's text is
+    more appropriate.
+
 2017-03-16  JMB  Updated source code documentation
 
     Upgraded Doxygen and its configuration files, and fixed some problems

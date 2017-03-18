@@ -103,7 +103,7 @@ fi
 # make the disk image for distribution
 mkdir $DIRNAME
 mv PortaBase.app $DIRNAME
-cp ../README.txt $DIRNAME/ReadMe
+cp ../README.rst $DIRNAME/ReadMe
 cp ../CHANGES $DIRNAME/Changes
 cp ../COPYING $DIRNAME/License
 DMGNAME=$DIRNAME.dmg
