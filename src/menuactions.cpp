@@ -40,7 +40,7 @@ MenuActions::MenuActions(QObject *parent)
 
     objectNameMap.insert(Import, "Import");
     textMap.insert(Import, tr("&Import") + ellipsis);
-    toolTipMap.insert(Import, tr("Import a file from another format"));
+    toolTipMap.insert(Import, tr("Import a file"));
 
     textMap.insert(ImportCSV, tr("&Import") + ellipsis);
     toolTipMap.insert(ImportCSV, tr("Import rows from a CSV file"));

@@ -1,3 +1,10 @@
+2017-03-19  JMB  More recent files remembered
+
+    Increased the number of recent files shown in the File menu and on
+    the file selection screen from 5 to 10.  Also abbreviated the text
+    on the file import button to better fit in portrait mode on Android
+    phones.
+
 2017-03-17  JMB  Dynamically update fullscreen action text
 
     The fullscreen action now changes the text in menus and tooltips

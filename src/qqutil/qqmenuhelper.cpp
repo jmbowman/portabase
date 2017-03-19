@@ -215,6 +215,11 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     actions[Recent3] = recentActions[2];
     actions[Recent4] = recentActions[3];
     actions[Recent5] = recentActions[4];
+    actions[Recent6] = recentActions[5];
+    actions[Recent7] = recentActions[6];
+    actions[Recent8] = recentActions[7];
+    actions[Recent9] = recentActions[8];
+    actions[Recent10] = recentActions[9];
     actions[Separator] = fileSeparatorAction;
     actions[Close] = closeAction;
     actions[Preferences] = prefsAction;
