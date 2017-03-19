@@ -336,6 +336,16 @@ PortaBase::PortaBase(QWidget *parent)
             mh->action(QQMenuHelper::Recent4), SIGNAL(triggered()));
     connect(recentButtons[4], SIGNAL(clicked()),
             mh->action(QQMenuHelper::Recent5), SIGNAL(triggered()));
+    connect(recentButtons[5], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent6), SIGNAL(triggered()));
+    connect(recentButtons[6], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent7), SIGNAL(triggered()));
+    connect(recentButtons[7], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent8), SIGNAL(triggered()));
+    connect(recentButtons[8], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent9), SIGNAL(triggered()));
+    connect(recentButtons[9], SIGNAL(clicked()),
+            mh->action(QQMenuHelper::Recent10), SIGNAL(triggered()));
     vlayout->addWidget(recentBox);
     vlayout->addStretch(1);
     hlayout->addStretch(1);
@@ -688,6 +698,11 @@ void PortaBase::updateRecentFileButtons()
     recentFiles << mh->action(QQMenuHelper::Recent3)->text();
     recentFiles << mh->action(QQMenuHelper::Recent4)->text();
     recentFiles << mh->action(QQMenuHelper::Recent5)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent6)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent7)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent8)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent9)->text();
+    recentFiles << mh->action(QQMenuHelper::Recent10)->text();
     for (int i = 0; i < MAX_RECENT_FILES; i++) {
         QString path = recentFiles[i];
         QFileInfo info(path);

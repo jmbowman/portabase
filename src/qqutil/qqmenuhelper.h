@@ -32,7 +32,7 @@ class QMenu;
 class QSettings;
 class QQToolBar;
 
-#define MAX_RECENT_FILES 5
+#define MAX_RECENT_FILES 10
 
 /**
  * Helps create and manage the menus for a typical document-based
@@ -79,13 +79,18 @@ public:
         Recent3 = 5,
         Recent4 = 6,
         Recent5 = 7,
-        Separator = 8,
-        Close = 9,
-        Preferences = 10,
-        Quit = 11,
-        Help = 12,
-        About = 13,
-        AboutQt = 14
+        Recent6 = 8,
+        Recent7 = 9,
+        Recent8 = 10,
+        Recent9 = 11,
+        Recent10 = 12,
+        Separator = 13,
+        Close = 14,
+        Preferences = 15,
+        Quit = 16,
+        Help = 17,
+        About = 18,
+        AboutQt = 19
     };
     QQMenuHelper(QMainWindow *window, const QString &fileDescription,
                  const QString &fileExtension,
@@ -146,7 +151,7 @@ private:
     QAction *fileNewAction; /**< Action for creating a new file */
     QAction *fileOpenAction; /**< Action for opening an existing file */
     QAction *fileSaveAction; /**< Action for saving the current file */
-    QAction* recentActions[5]; /**< Actions for opening recently used files */
+    QAction* recentActions[MAX_RECENT_FILES]; /**< Actions for opening recently used files */
     QList<QAction *> extraFileActions; /**< Additional actions added to the File menu by the application */
     QAction *fileSeparatorAction; /**< Separator that appears before "Close" in the "File" menu */
     QAction *closeAction; /**< Action for closing an open document */
