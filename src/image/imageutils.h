@@ -21,6 +21,7 @@
 #include <QString>
 
 class Database;
+class QImageReader;
 
 /**
  * Utilities for loading and exporting images.
@@ -32,11 +33,12 @@ public:
 
     static QImage load(Database *db, int rowId, const QString &colName,
                        const QString &format);
-    QImage load(const QString &path, bool *resized);
+    QImage load(const QString &path);
     QString getFormat() const;
     QString getErrorMessage() const;
     static QByteArray getImageData(QImage image, const QString &format,
                               const QString &path, bool changed);
+    static QImage readImage(QImageReader *reader);
     void setExportPaths(const QString &filePath);
     QString exportImage(Database *db, int rowId, const QString &columnName,
                         const QString &format);

@@ -22,6 +22,11 @@
 #include "imageutils.h"
 #include "../database.h"
 
+#if QT_VERSION >= 0x050000
+#include <QApplication>
+#include <QScreen>
+#endif
+
 /**
  * Constructor.
  */
@@ -46,20 +51,18 @@ QImage ImageUtils::load(Database *db, int rowId, const QString &colName,
     QBuffer buffer(&data);
     QImageReader reader(&buffer, format.toLower().toLatin1());
     buffer.open(QIODevice::ReadOnly);
-    QImage image = reader.read();
+    QImage image = readImage(&reader);
     buffer.close();
     return image;
 }
 
 /**
  * Load an image from a file, in the process shrinking it if originally
- * larger than about 800 x 600.
+ * larger than the current display resolution.
  *
  * @param path Path to the file to be loaded
- * @param resized Pointer to the boolean which will indicate if the image had
- *                to be resized when loaded
  */
-QImage ImageUtils::load(const QString &path, bool *resized)
+QImage ImageUtils::load(const QString &path)
 {
     QImageReader reader(path);
     format = reader.format().toUpper();
@@ -67,27 +70,30 @@ QImage ImageUtils::load(const QString &path, bool *resized)
         error = ImageEditor::tr("Unsupported image format");
         return QImage();
     }
-    QSize size = reader.size();
-    int width = size.width();
-    int height = size.height();
-    // Scale the image down so as to not swamp devices with limited memory when
-    // loaded (only works for JPEGs, big PNG images will be rejected)
-    int scaleDenom = 1;
-    *resized = false;
-    while (width * height > 800 * 600) {
-        scaleDenom *= 2;
-        // I doubt if many people have 6400 x 4800 images, but it's probably
-        // only a matter of time before digital cameras get there...
-        if (scaleDenom > 8 || format != "JPEG") {
-            error = ImageEditor::tr("Image is too large to import");
-            return QImage();
-        }
-        width /= 2;
-        height /= 2;
-        *resized = true;
+    return readImage(&reader);
+}
+
+/**
+ * Scale the image down while loading so as to not swamp devices with limited
+ * memory.
+ *
+ * @param reader An image reader with a preset data source
+ * @return A loaded image with appropriate dimensions for display
+ */
+QImage ImageUtils::readImage(QImageReader *reader)
+{
+#if QT_VERSION >= 0x050000
+    QSize targetSize = qApp->primaryScreen()->size();
+#else
+    QSize targetSize(800, 600);
+#endif
+    QSize displaySize(reader->size());
+    if (displaySize.width() > targetSize.width() ||
+            displaySize.height() > targetSize.height()) {
+        displaySize.scale(targetSize, Qt::KeepAspectRatio);
+        reader->setScaledSize(displaySize);
     }
-    reader.setScaledSize(QSize(width, height));
-    return reader.read();
+    return reader->read();
 }
 
 /**

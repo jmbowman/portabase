@@ -25,6 +25,7 @@
 #include <QScrollArea>
 #include <QWidget>
 #include "imageeditor.h"
+#include "imageutils.h"
 #include "imagewidget.h"
 #include "../qqutil/qqfactory.h"
 #include "../qqutil/qqspinbox.h"
@@ -42,11 +43,11 @@ ImageEditor::ImageEditor(QWidget *parent)
     vbox->addWidget(paramsRow);
     hbox->addWidget(new QLabel(tr("Width"), paramsRow));
     widthBox = new QQSpinBox(paramsRow);
-    widthBox->setRange(1, 800);
+    widthBox->setRange(1, 10000);
     hbox->addWidget(widthBox);
     hbox->addWidget(new QLabel(tr("Height"), paramsRow));
     heightBox = new QQSpinBox(paramsRow);
-    heightBox->setRange(1, 600);
+    heightBox->setRange(1, 10000);
     hbox->addWidget(heightBox);
 
     hbox->addWidget(new QLabel(tr("Rotate"), paramsRow));
@@ -87,28 +88,12 @@ int ImageEditor::edit(const QString &file)
     oldHeight = size.height();
     int width = oldWidth;
     int height = oldHeight;
-    // Scale the image down so as to not swamp devices with limited memory when
-    // loaded (only works for JPEGs, big PNG images will be rejected)
-    int scaleDenom = 1;
-    while (width * height > 800 * 600) {
-        scaleDenom *= 2;
-        // I doubt if many people have 6400 x 4800 images, but it's probably
-        // only a matter of time before digital cameras get there...
-        if (scaleDenom > 8 || format != "JPEG") {
-            QMessageBox::warning(this, qApp->applicationName(),
-                                 tr("Image is too large to import"));
-            return QDialog::Rejected;
-        }
-        width /= 2;
-        height /= 2;
-    }
     widthBox->setMaximum(width);
     widthBox->setValue(width);
     heightBox->setMaximum(height);
     heightBox->setValue(height);
     rotateBox->setCurrentIndex(0);
-    reader.setScaledSize(QSize(width, height));
-    image = reader.read();
+    image = ImageUtils::readImage(&reader);
     qApp->processEvents();
     QPixmap pm = QPixmap::fromImage(image);
     display->setPixmap(pm);

@@ -1493,14 +1493,13 @@ QString Database::addRow(const QStringList &values, int *rowId,
                     return QObject::tr("Missing file") + ":\n" + value;
                 }
                 ImageUtils utils;
-                bool resized = false;
-                QImage image = utils.load(path, &resized);
+                QImage image = utils.load(path);
                 if (image.isNull()) {
                     return utils.getErrorMessage() + ":\n" + value;
                 }
                 QString format = utils.getFormat();
                 QByteArray data = ImageUtils::getImageData(image, format, path,
-                                                           resized);
+                                                           false);
                 prop (row) = c4_Bytes(data.data(), data.size());
                 stringProp (row) = format.toUtf8();
             }

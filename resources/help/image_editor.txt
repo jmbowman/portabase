@@ -18,5 +18,3 @@ An Image column stores pictures imported from JPEG or PNG image files.  After yo
   Apply the currently displayed settings and update the image preview accordingly.
 
 Click "OK"/"Done" to store the image as it is shown, or cancel out of the dialog to leave the field unchanged.
-
-.. note:: Because memory was limited on the Zaurus PDAs for which PortaBase was originally developed, very large pictures will be rejected.  JPEG images larger than 6400 x 4800 pixels cannot be imported, and ones larger than 800 x 600 will be shrunk to at most that size.  Similarly, PNG images larger than 800 x 600 cannot be imported.  These limitations will be removed in a future version of PortaBase, since it is no longer being developed for the Zaurus.

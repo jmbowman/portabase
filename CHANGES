@@ -1,3 +1,17 @@
+2017-03-20  JMB  Removed image resolution limit
+
+    All of PortaBase's supported platforms now have much more RAM than
+    the original Sharp Zaurus (and Qt has gotten better about downscaling
+    PNG images while loading), so the 800x600 resolution cap no longer
+    makes sense.  The limit has been removed; images smaller than the
+    screen resolution are shown at their actual size, and larger ones are
+    scaled down to fit on the screen.  This means, for example, that digital
+    photos can now be stored in a PortaBase file and (if the file wasn't
+    explicitly altered in the image editor when selecting it) exported out
+    again with no quality loss and all metadata intact.  Note, however,
+    that Metakit's 1 GB file size limit significantly constrains the
+    number of high-resolution photos you can fit in a single PortaBase file.
+
 2017-03-19  JMB  More recent files remembered
 
     Increased the number of recent files shown in the File menu and on
