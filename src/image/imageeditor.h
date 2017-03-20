@@ -28,9 +28,7 @@ class QWidget;
 /**
  * Dialog for editing the properties of an image that will be stored in a
  * %PortaBase file.  The image can be resized and/or rotated before saving
- * it in the database.  Currently a maximum size of 800x600 is enforced (the
- * Sharp Zaurus can't display anything much bigger than that before running
- * out of memory).
+ * it in the database.
  */
 class ImageEditor: public PBDialog
 {

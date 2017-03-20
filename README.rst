@@ -137,8 +137,7 @@ structures, and communication with the operating system.  It also uses:
   (http://beecrypt.sourceforge.net/)
 - A modified version of the calculator widget from KMyMoney
   (https://kmymoney.org/)
-- A modified version of QtActionBar (https://github.com/mbnoimi/QtActionBar)
-  for the Android release
+- QtActionBar (https://github.com/mbnoimi/QtActionBar) for the Android release
 
 Additional software is used to package PortaBase on its various platforms:
 
