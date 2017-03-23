@@ -1475,7 +1475,11 @@ void PortaBase::setRowSelected(bool y)
 void PortaBase::toggleFullscreen()
 {
     if (isFullScreen()) {
+#if defined(MOBILE)
+        showMaximized();
+#else
         showNormal();
+#endif
         QAction *action = qobject_cast<QAction *>(sender());
         action->setText(ma->menuText(MenuActions::Fullscreen));
         QString toolTip = ma->toolTipText(MenuActions::Fullscreen);

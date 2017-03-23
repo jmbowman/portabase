@@ -21,7 +21,44 @@
 #include <QScrollArea>
 #include "imageviewer.h"
 #include "imagewidget.h"
+#include "../qqutil/qqfactory.h"
 #include "../view.h"
+
+/**
+ * The scroll area containing the image.  Responds to clicks outside the
+ * image display by returning from fullscreen mode to normal dialog mode.
+ */
+class ClickableScrollArea: public QScrollArea
+{
+public:
+    ClickableScrollArea(ImageViewer *parent);
+
+protected:
+    void mouseReleaseEvent(QMouseEvent* event);
+};
+
+/**
+ * Constructor.
+ *
+ * @param parent The parent ImageViewer dialog
+ */
+ClickableScrollArea::ClickableScrollArea(ImageViewer *parent)
+    : QScrollArea(parent)
+{
+
+}
+
+/**
+ * Make the parent dialog exit fullscreen mode when the area around the
+ * image is clicked.
+ *
+ * @param event The triggering mouse event
+ */
+void ClickableScrollArea::mouseReleaseEvent(QMouseEvent *event)
+{
+    ImageViewer *viewer = qobject_cast<ImageViewer*>(parentWidget());
+    viewer->showNormal();
+}
 
 /**
  * Constructor.
@@ -32,7 +69,9 @@
 ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent)
     : PBDialog(tr("Image Viewer"), parent), currentView(0), rowIndex(0), colIndex(0)
 {
-    QScrollArea *scroll = new QScrollArea(this);
+    scroll = new ClickableScrollArea(this);
+    QQFactory::configureScrollArea(scroll);
+    setAutoFillBackground(true);
     vbox->addWidget(scroll);
     display = new ImageWidget(scroll);
     QPixmap pm;
@@ -42,6 +81,10 @@ ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent)
     if (allowFullScreen) {
         connect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
     }
+#if defined(Q_WS_MAEMO_5)
+    // Allow the image to auto-rotate
+    setAttribute(Qt::WA_Maemo5AutoOrientation, true);
+#endif
 
     okCancelRow = finishLayout(true, false);
 }
@@ -57,7 +100,9 @@ void ImageViewer::setImage(const QImage &image)
     pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
 #ifndef MOBILE
-    resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
+    if (!isFullScreen()) {
+        resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
+    }
 #endif
 }
 
@@ -81,20 +126,52 @@ void ImageViewer::setView(View *view, int row, int column)
  */
 void ImageViewer::showFullScreen()
 {
-    ImageWidget *fullScreen = new ImageWidget(0);
-    fullScreen->setAttribute(Qt::WA_DeleteOnClose);
-    fullScreen->setView(currentView, rowIndex, colIndex);
-    fullScreen->setAutoFillBackground(true);
-    QPalette fsPalette(fullScreen->palette());
-    fsPalette.setColor(QPalette::Window, Qt::black);
-    fullScreen->setPalette(fsPalette);
-    fullScreen->setPixmap(pm, false);
-    fullScreen->resize(qApp->desktop()->size());
-    hide();
-    connect(fullScreen, SIGNAL(clicked()), this, SLOT(accept()));
-    fullScreen->setFocus(Qt::OtherFocusReason);
-    fullScreen->showFullScreen();
-    connect(fullScreen, SIGNAL(clicked()), fullScreen, SLOT(close()));
+    disconnect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
+    connect(scroll, SIGNAL(clicked()), this, SLOT(showNormal()));
+    connect(display, SIGNAL(clicked()), this, SLOT(showNormal()));
+#if !defined(MOBILE)
+    okCancelRow->hide();
+#endif
+    QPalette scrollPalette(palette());
+    scrollPalette.setColor(QPalette::Window, Qt::black);
+    setPalette(scrollPalette);
+    scroll->setFrameShape(QFrame::NoFrame);
+    PBDialog::showFullScreen();
+}
+
+/**
+ * Exit full-screen mode.
+ */
+void ImageViewer::showNormal()
+{
+    disconnect(scroll, SIGNAL(clicked()), this, SLOT(showNormal()));
+    disconnect(display, SIGNAL(clicked()), this, SLOT(showNormal()));
+    connect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
+    setPalette(parentWidget()->palette());
+    scroll->setFrameShape(QFrame::StyledPanel);
+#if defined(MOBILE)
+    PBDialog::showFullScreen();
+#else
+    okCancelRow->show();
+    PBDialog::showNormal();
+    // Size appropriately for the current image
+    if (!isFullScreen()) {
+        resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
+    }
+#endif
+}
+
+/**
+ * Always exit fullscreen mode before closing.
+ *
+ * @param event The window close event
+ */
+void ImageViewer::reject()
+{
+    if (isFullScreen()) {
+        showNormal();
+    }
+    PBDialog::reject();
 }
 
 /**
