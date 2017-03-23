@@ -22,6 +22,7 @@
 
 class ImageWidget;
 class QDialogButtonBox;
+class QScrollArea;
 class View;
 
 /**
@@ -40,14 +41,19 @@ public:
     void setImage(const QImage &image);
     void setView(View *view, int row, int column);
 
+public slots:
+    void showFullScreen();
+    void showNormal();
+
 protected:
+    void reject();
     void keyReleaseEvent(QKeyEvent *e);
 
 private slots:
-    void showFullScreen();
     void processArrow(int key);
 
 private:
+    QScrollArea *scroll; /**< The scrollable area containing the image */
     ImageWidget *display; /**< The widget which displays the image */
     QPixmap pm; /**< The image currently being shown */
     QDialogButtonBox *okCancelRow; /**< The row of dialog buttons */
