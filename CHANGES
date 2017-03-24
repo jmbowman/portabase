@@ -1,3 +1,8 @@
+2017-03-24  JMB  Better slideshow mode
+
+    Switched over slideshows to use the image viewer dialog which was
+    just refactored.
+
 2017-03-22  JMB  Better image fullscreen mode
 
     PortaBase was still using a hack for fullscreen image display that

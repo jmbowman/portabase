@@ -20,7 +20,6 @@
 #include "../pbdialog.h"
 #include "../qqutil/qqspinbox.h"
 
-class ImageWidget;
 class QComboBox;
 class View;
 
@@ -42,7 +41,6 @@ private:
     QComboBox *columnList; /**< List of the available image columns */
     QQSpinBox *delayBox; /**< The current delay in seconds */
     View *currentView; /**< The database view currently in use */
-    ImageWidget *fullScreen; /**< The widget used to display the slideshow */
 };
 
 #endif
