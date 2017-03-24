@@ -22,7 +22,7 @@
 #include "../factory.h"
 #include "../qqutil/qqspinbox.h"
 #include "../view.h"
-#include "imagewidget.h"
+#include "imageviewer.h"
 #include "slideshowdialog.h"
 
 /**
@@ -33,7 +33,7 @@
  * @param parent This dialog's parent widget
  */
 SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *parent)
-  : PBDialog(tr("Slideshow"), parent, true, false), fullScreen(0)
+  : PBDialog(tr("Slideshow"), parent, true, false)
 {
     currentView = view;
     QGridLayout *grid = Factory::gridLayout(vbox);
@@ -66,27 +66,14 @@ SlideshowDialog::SlideshowDialog(QStringList columns, View *view, QWidget *paren
  */
 void SlideshowDialog::accept()
 {
-    if (!fullScreen) {
-        QStringList columns = currentView->getColNames();
-        int colIndex = columns.indexOf(columnList->currentText());
-        fullScreen = new ImageWidget(0);
-        fullScreen->setAttribute(Qt::WA_DeleteOnClose);
-        fullScreen->setView(currentView, 0, colIndex);
-        QPalette fsPalette(fullScreen->palette());
-        fsPalette.setColor(QPalette::Window, Qt::black);
-        fullScreen->setPalette(fsPalette);
-        fullScreen->slideshow(delayBox->value());
-        fullScreen->resize(qApp->desktop()->size());
-        hide();
-        connect(fullScreen, SIGNAL(clicked()), this, SLOT(accept()));
-        fullScreen->setFocus();
-        fullScreen->showFullScreen();
-        connect(fullScreen, SIGNAL(clicked()), fullScreen, SLOT(close()));
-        int delay = delayBox->value();
-        QSettings settings;
-        settings.setValue("General/SlideshowDelay", delay);
-    }
-    else {
-        QDialog::accept();
-    }
+    QStringList columns = currentView->getColNames();
+    int colIndex = columns.indexOf(columnList->currentText());
+    ImageViewer *fullScreen = new ImageViewer(true, parentWidget());
+    fullScreen->setView(currentView, 0, colIndex);
+    fullScreen->slideshow(delayBox->value());
+    hide();
+    int delay = delayBox->value();
+    QSettings settings;
+    settings.setValue("General/SlideshowDelay", delay);
+    PBDialog::accept();
 }

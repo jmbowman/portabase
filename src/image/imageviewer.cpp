@@ -19,10 +19,17 @@
 #include <QKeyEvent>
 #include <QLayout>
 #include <QScrollArea>
+#include <QTimer>
 #include "imageviewer.h"
 #include "imagewidget.h"
 #include "../qqutil/qqfactory.h"
 #include "../view.h"
+
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+#include <QtDBus>
+#include <mce/mode-names.h>
+#include <mce/dbus-names.h>
+#endif
 
 /**
  * The scroll area containing the image.  Responds to clicks outside the
@@ -56,8 +63,11 @@ ClickableScrollArea::ClickableScrollArea(ImageViewer *parent)
  */
 void ClickableScrollArea::mouseReleaseEvent(QMouseEvent *event)
 {
+    Q_UNUSED(event)
     ImageViewer *viewer = qobject_cast<ImageViewer*>(parentWidget());
-    viewer->showNormal();
+    if (viewer->isFullScreen()) {
+        viewer->showNormal();
+    }
 }
 
 /**
@@ -67,7 +77,8 @@ void ClickableScrollArea::mouseReleaseEvent(QMouseEvent *event)
  * @param parent This dialog's parent widget
  */
 ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent)
-    : PBDialog(tr("Image Viewer"), parent), currentView(0), rowIndex(0), colIndex(0)
+    : PBDialog(tr("Image Viewer"), parent), currentView(0), rowIndex(0),
+      colIndex(0), timer(0), ssTimer(0), slideshowDelay(0)
 {
     scroll = new ClickableScrollArea(this);
     QQFactory::configureScrollArea(scroll);
@@ -87,6 +98,19 @@ ImageViewer::ImageViewer(bool allowFullScreen, QWidget *parent)
 #endif
 
     okCancelRow = finishLayout(true, false);
+}
+
+/**
+ * Destructor.
+ */
+ImageViewer::~ImageViewer()
+{
+    if (timer) {
+        delete timer;
+    }
+    if (ssTimer) {
+        delete ssTimer;
+    }
 }
 
 /**
@@ -140,7 +164,8 @@ void ImageViewer::showFullScreen()
 }
 
 /**
- * Exit full-screen mode.
+ * Exit full-screen mode.  If a slideshow was in progress, stop it and close
+ * the dialog.
  */
 void ImageViewer::showNormal()
 {
@@ -159,6 +184,14 @@ void ImageViewer::showNormal()
         resize(pm.width() + 16, pm.height() + okCancelRow->height() + 8);
     }
 #endif
+    if (ssTimer) {
+        ssTimer->stop();
+    }
+    if (timer) {
+        timer->stop();
+        PBDialog::reject();
+        return;
+    }
 }
 
 /**
@@ -208,6 +241,7 @@ void ImageViewer::processArrow(int key)
     }
     int rowCount = currentView->totalRowCount();
     bool changed = false;
+    bool lastImage = false;
     if (key == Qt::Key_Left || key == Qt::Key_Up) {
         if (rowIndex != 0) {
             rowIndex--;
@@ -219,9 +253,61 @@ void ImageViewer::processArrow(int key)
             rowIndex++;
             changed = true;
         }
+        else {
+            lastImage = true;
+        }
     }
     if (changed) {
         int rowId = currentView->getId(rowIndex);
         setImage(currentView->getImage(rowId, colIndex));
+        if (timer) {
+            timer->start(slideshowDelay * 1000);
+        }
     }
+    if (timer && lastImage) {
+        reject();
+    }
+}
+
+/**
+ * Start a slideshow with the specified delay between images.
+ *
+ * @param delay The number of seconds between images
+ */
+void ImageViewer::slideshow(int delay)
+{
+    slideshowDelay = delay;
+    int rowId = currentView->getId(rowIndex);
+    setImage(currentView->getImage(rowId, colIndex));
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(nextImage()));
+    showFullScreen();
+    timer->start(delay * 1000);
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    ssTimer = new QTimer(this);
+    connect(ssTimer, SIGNAL(timeout()), this, SLOT(keepScreenOn()));
+    ssTimer->start(30 * 1000);
+#endif
+}
+
+/**
+ * Go to the next image in a slideshow.
+ */
+void ImageViewer::nextImage()
+{
+    processArrow(Qt::Key_Right);
+}
+
+/**
+ * Send a D-Bus signal on Maemo to prevent the backlight from turning off.
+ */
+void ImageViewer::keepScreenOn()
+{
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    QDBusConnection::systemBus().call(
+        QDBusMessage::createMethodCall(MCE_SERVICE,
+                                       MCE_REQUEST_PATH,
+                                       MCE_REQUEST_IF,
+                                       MCE_PREVENT_BLANK_REQ));
+#endif
 }

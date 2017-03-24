@@ -1,7 +1,7 @@
 /*
  * imageviewer.h
  *
- * (c) 2003-2004,2008-2009 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003-2004,2008-2009,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 class ImageWidget;
 class QDialogButtonBox;
 class QScrollArea;
+class QTimer;
 class View;
 
 /**
@@ -37,9 +38,11 @@ class ImageViewer: public PBDialog
     Q_OBJECT
 public:
     ImageViewer(bool allowFullScreen, QWidget *parent);
+    ~ImageViewer();
 
     void setImage(const QImage &image);
     void setView(View *view, int row, int column);
+    void slideshow(int delay);
 
 public slots:
     void showFullScreen();
@@ -50,6 +53,8 @@ protected:
     void keyReleaseEvent(QKeyEvent *e);
 
 private slots:
+    void keepScreenOn();
+    void nextImage();
     void processArrow(int key);
 
 private:
@@ -60,6 +65,9 @@ private:
     View *currentView; /**< The view of the database currently in use */
     int rowIndex; /**< Index of the row the shown image is from */
     int colIndex; /**< Index of the column the shown image is from */
+    QTimer *timer; /**< Timer used in slideshows */
+    QTimer *ssTimer; /**< Timer used on Maemo to keep screen on during slideshows */
+    int slideshowDelay; /**< The delay in seconds between images in a slideshow */
 };
 
 #endif
