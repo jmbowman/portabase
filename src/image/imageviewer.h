@@ -52,6 +52,9 @@ protected:
     void reject();
     void keyReleaseEvent(QKeyEvent *e);
 
+protected slots:
+    void screenGeometryChanged(const QRect &geometry);
+
 private slots:
     void keepScreenOn();
     void nextImage();

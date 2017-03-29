@@ -25,6 +25,10 @@
 #include "../qqutil/qqfactory.h"
 #include "../view.h"
 
+#if defined(Q_OS_ANDROID)
+#include "../qqutil/actionbar.h"
+#endif
+
 #if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
 #include <QtDBus>
 #include <mce/mode-names.h>
@@ -156,6 +160,9 @@ void ImageViewer::showFullScreen()
 #if !defined(MOBILE)
     okCancelRow->hide();
 #endif
+#if defined(Q_OS_ANDROID)
+    actionBar->hide();
+#endif
     QPalette scrollPalette(palette());
     scrollPalette.setColor(QPalette::Window, Qt::black);
     setPalette(scrollPalette);
@@ -174,6 +181,9 @@ void ImageViewer::showNormal()
     connect(display, SIGNAL(clicked()), this, SLOT(showFullScreen()));
     setPalette(parentWidget()->palette());
     scroll->setFrameShape(QFrame::StyledPanel);
+#if defined(Q_OS_ANDROID)
+    actionBar->show();
+#endif
 #if defined(MOBILE)
     PBDialog::showFullScreen();
 #else
@@ -310,4 +320,17 @@ void ImageViewer::keepScreenOn()
                                        MCE_REQUEST_IF,
                                        MCE_PREVENT_BLANK_REQ));
 #endif
+}
+
+/**
+ * Respond to the screen orientation or size changing.  Resizes the displayed
+ * image if appropriate.
+ *
+ * @param geometry The new screen dimensions (in pixels)
+ */
+void ImageViewer::screenGeometryChanged(const QRect &geometry)
+{
+    int rowId = currentView->getId(rowIndex);
+    setImage(currentView->getImage(rowId, colIndex));
+    PBDialog::screenGeometryChanged(geometry);
 }

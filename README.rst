@@ -21,7 +21,6 @@ Maemo (Diablo and Fremantle).
 
 The main features PortaBase currently has are:
 
-- One data table per file
 - String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
   Calculation, Sequence, Image, and Enum column types
 - Add, edit, and delete rows of data
@@ -29,21 +28,23 @@ The main features PortaBase currently has are:
 - Filter the displayed rows using sets of conditions
 - Sort the rows by any combination of columns, each in ascending or descending
   order
-- Optional page navigation buttons, with a custom number of rows per page
 - Add, delete, rearrange, and rename columns at any time
 - Specify default values for columns
 - View summary statistics for columns (total, average, min, max, etc.)
+- Data file encryption
+- Slideshows of the images in a column matching the current filter
+- Simple calculator widget for entering numeric data
+- Printing of the currently displayed data (except on mobile devices)
+- Optional fullscreen mode
 - Import data from CSV, XML, and MobileDB files
 - Export data to CSV, HTML, and XML files
 - Command-line format conversions (to and from XML, to and from CSV,
   from MobileDB, to HTML)
-- Data file encryption
 - Unicode support for text columns, and UI translations for 8 different
   languages
 - Pick any available font to use throughout the application (except on
   Mac OS X)
 - User-specified alternating row background colors (except on Fremantle)
-- Simple calculator widget for entering numeric data
 
 See the application's help dialog for more information on features and usage.
 

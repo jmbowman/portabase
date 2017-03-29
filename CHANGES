@@ -1,3 +1,16 @@
+2017-03-28  JMB  Fix image selector/editor on Android
+
+    The image selection/editing dialog hadn't been properly tested on
+    Android yet; made a couple of fixes to make it work correctly.
+
+2017-03-27  JMB  More reliable column resizing
+
+    At least on Android, setting the width of a column from the column
+    statistics dialog triggered a cascade of events which could sometimes
+    inadvertently change the widths of other columns also.  Disabled a signal
+    hander while applying changes from the dialog to prevent this from
+    happening.
+
 2017-03-24  JMB  Better slideshow mode
 
     Switched over slideshows to use the image viewer dialog which was
