@@ -50,6 +50,12 @@ ImageEditor::ImageEditor(QWidget *parent)
     heightBox->setRange(1, 10000);
     hbox->addWidget(heightBox);
 
+#if defined(Q_OS_ANDROID)
+    // Widgets are wide enough on Android to require a second rowv
+    paramsRow = new QWidget(this);
+    hbox = QQFactory::hBoxLayout(paramsRow);
+    vbox->addWidget(paramsRow);
+#endif
     hbox->addWidget(new QLabel(tr("Rotate"), paramsRow));
     rotateBox = QQFactory::comboBox(paramsRow);
     hbox->addWidget(rotateBox);
@@ -93,10 +99,15 @@ int ImageEditor::edit(const QString &file)
     heightBox->setMaximum(height);
     heightBox->setValue(height);
     rotateBox->setCurrentIndex(0);
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
     image = ImageUtils::readImage(&reader);
+#else
+    image = reader.read();
+#endif
     qApp->processEvents();
     QPixmap pm = QPixmap::fromImage(image);
     display->setPixmap(pm);
+#if !defined(MOBILE)
     int margin = 5;
 #if defined(Q_OS_WIN)
     margin += 16;
@@ -107,6 +118,7 @@ int ImageEditor::edit(const QString &file)
     }
     resize(qMax(pm.width() + margin, paramsRow->sizeHint().width() + margin),
            paramsRow->height() + pm.height() + okCancelRowHeight + margin);
+#endif
     return exec();
 }
 
@@ -121,7 +133,11 @@ void ImageEditor::updateImage()
     int angle = rotateBox->currentIndex() * 90;
     QImageReader reader(path);
     reader.setScaledSize(QSize(width, height));
+#if defined(Q_WS_HILDON) || defined(Q_WS_MAEMO_5)
+    image = ImageUtils::readImage(&reader);
+#else
     image = reader.read();
+#endif
     if (angle) {
         QMatrix matrix;
         matrix.rotate(angle);

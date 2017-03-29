@@ -56,8 +56,8 @@ protected:
     ActionBar *actionBar; /**< The Android action bar at the top of the screen */
 #endif
 
-private slots:
-    void screenGeometryChanged(const QRect &geometry);
+protected slots:
+    virtual void screenGeometryChanged(const QRect &geometry);
 
 private:
     QString dialogClassName; /**< The class name of the subclass instance */

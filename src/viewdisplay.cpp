@@ -472,10 +472,16 @@ void ViewDisplay::matchNewView(View *view)
     int pixelsPerDP = 1;
 #endif
     int count = view->columnCount();
+    // Avoid accidentally changing other columns in the process
+    QHeaderView *header = table->header();
+    disconnect(header, SIGNAL(sectionResized(int, int, int)),
+               this, SLOT(columnResized(int, int, int)));
     for (int i = 0; i < count; i++) {
         int pixelWidth = (int)(view->getColWidth(i) * pixelsPerDP);
         table->setColumnWidth(i, pixelWidth);
     }
+    connect(header, SIGNAL(sectionResized(int, int, int)),
+            this, SLOT(columnResized(int, int, int)));
     table->setColumnWidth(count, 0);
     rowsPerPage->setValue(view->getRowsPerPage());
 }

@@ -87,7 +87,7 @@ QImage ImageUtils::readImage(QImageReader *reader)
 #else
     QSize targetSize(800, 600);
 #endif
-    QSize displaySize(reader->size());
+    QSize displaySize(reader->scaledSize());
     if (displaySize.width() > targetSize.width() ||
             displaySize.height() > targetSize.height()) {
         displaySize.scale(targetSize, Qt::KeepAspectRatio);
