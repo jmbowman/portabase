@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="ja">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -132,6 +132,13 @@
     <message>
         <source>Update calculated value</source>
         <translation>更新</translation>
+    </message>
+</context>
+<context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation>電卓</translation>
     </message>
 </context>
 <context>
@@ -315,8 +322,8 @@
 <context>
     <name>DBEditor</name>
     <message>
-        <source>Columns Editor</source>
-        <translation>フォーマット編集</translation>
+        <source>Columns</source>
+        <translation>フォーマット</translation>
     </message>
     <message>
         <source>No columns defined</source>
@@ -325,6 +332,10 @@
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation>フィールドを作成するには「作成」を押して下さい</translation>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
+        <translation>フィールドを作成するには「+」を押して下さい</translation>
     </message>
 </context>
 <context>
@@ -389,8 +400,8 @@ the &quot;Import&quot; button to load lines from a text file</source>
 <context>
     <name>EnumManager</name>
     <message>
-        <source>Enum Manager</source>
-        <translation>列挙管理</translation>
+        <source>Enums</source>
+        <translation>列挙編集</translation>
     </message>
     <message>
         <source>The following columns which
@@ -444,10 +455,6 @@ deleted:</source>
     <message>
         <source>Refresh</source>
         <translation>再読み込み</translation>
-    </message>
-    <message>
-        <source>Image is too large to import</source>
-        <translation>画像は大き過ぎる</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
@@ -606,10 +613,6 @@ deleted:</source>
         <translation>現在のファイルのパスワードを変更します</translation>
     </message>
     <message>
-        <source>Create a new file from data in another format</source>
-        <translation>別の形式のデータから新しいファイルを作成します</translation>
-    </message>
-    <message>
         <source>Import rows from a CSV file</source>
         <translation>CSVファイルからレコードをインポート</translation>
     </message>
@@ -761,6 +764,25 @@ deleted:</source>
         <source>View PortaBase in fullscreen mode</source>
         <translation>PortaBaseをフルスクリーンで見ます</translation>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation>ファイルをインポートする</translation>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation>フルスクリーン終了</translation>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation>フルスクリーン表示を止める</translation>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation>選択したテキストをコピーします</translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -893,8 +915,8 @@ current filter?</source>
         <translation>(c)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>http://portabase.org</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -1125,6 +1147,10 @@ You will not be able to save any changes you make.</source>
         <source>Use alternating row colors if theme has them</source>
         <translation>行の背景に使われる色をテーマから二つ使います</translation>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation>デフォルトに戻す</translation>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1188,16 +1214,8 @@ You will not be able to save any changes you make.</source>
         <translation>%1について</translation>
     </message>
     <message>
-        <source>Preferences</source>
-        <translation>環境設定</translation>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation>%1を終了</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Qtについて</translation>
     </message>
 </context>
 <context>
@@ -1253,6 +1271,25 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Missing file</source>
         <translation>ファイルは存在しません</translation>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation>ファイル名</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>ファイルタイプ</translation>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation>内部共有ストレージ</translation>
+    </message>
+    <message>
+        <source>SD card</source>
+        <translation>SDメモリーカード</translation>
     </message>
 </context>
 <context>

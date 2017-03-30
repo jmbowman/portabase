@@ -1,3 +1,8 @@
+2017-03-30  JMB  Update UI translations, fix them on Android
+
+    Updated the UI translation files, and fixed a configuration bug which was
+    preventing them from being used on Android.
+
 2017-03-29  JMB  Add help action to Android, visual fixes
 
     Added a "Help" action to Android which points to the online help files

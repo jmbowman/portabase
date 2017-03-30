@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_TW" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="zh_TW">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -130,6 +132,13 @@
     <message>
         <source>Update calculated value</source>
         <translation>更新</translation>
+    </message>
+</context>
+<context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -314,7 +323,7 @@
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>欄位編輯器</translation>
+        <translation type="vanished">欄位編輯器</translation>
     </message>
     <message>
         <source>No columns defined</source>
@@ -323,6 +332,14 @@
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation>按增加鈕 來建立新欄</translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished">欄</translation>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -388,7 +405,7 @@ the &quot;Import&quot; button to load lines from a text file</source>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>集合管理員</translation>
+        <translation type="vanished">集合管理員</translation>
     </message>
     <message>
         <source>No enumerated column types defined</source>
@@ -407,6 +424,10 @@ deleted:</source>
     <message>
         <source>Continue?</source>
         <translation>繼續?</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation type="unfinished">集合名稱</translation>
     </message>
 </context>
 <context>
@@ -441,10 +462,6 @@ deleted:</source>
     <message>
         <source>Refresh</source>
         <translation>重新整理</translation>
-    </message>
-    <message>
-        <source>Image is too large to import</source>
-        <translation>影像太大不能輸入</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
@@ -540,7 +557,7 @@ deleted:</source>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation>用不同格式的資料來建新檔</translation>
+        <translation type="vanished">用不同格式的資料來建新檔</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
@@ -758,6 +775,25 @@ deleted:</source>
         <source>All Columns</source>
         <translation>所有欄位</translation>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation>製已選定文字句</translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -928,8 +964,8 @@ current filter?</source>
         <translation>版權所有 (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>網址 http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>網址 http://portabase.org</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -1118,6 +1154,10 @@ current filter?</source>
         <source>Thistle</source>
         <translation>薊色</translation>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1177,20 +1217,12 @@ current filter?</source>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>Preferences</source>
-        <translation>偏好設定</translation>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation>退出%1</translation>
     </message>
     <message>
         <source>About %1</source>
         <translation>約%1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>約Qt</translation>
     </message>
 </context>
 <context>
@@ -1246,6 +1278,25 @@ current filter?</source>
     <message>
         <source>Not a valid MobileDB file</source>
         <translation>不正確的MobileDB檔案</translation>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">名稱</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">型別</translation>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD card</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1639,7 +1690,9 @@ current filter?</source>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation><numerusform>%Ln字，</numerusform></translation>
+        <translation>
+            <numerusform>%Ln字，</numerusform>
+        </translation>
     </message>
     <message>
         <source>Average length</source>
