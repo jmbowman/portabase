@@ -1,7 +1,11 @@
-2017-03-29  JMB  Add help action to Android
+2017-03-29  JMB  Add help action to Android, visual fixes
 
     Added a "Help" action to Android which points to the online help files
     in the appropriate language.
+
+    Changed the default Android alternate row background color to one which
+    is easier to distinguish, and removed some padding on dynamic-height
+    text inputs which was causing the cursor to be mis-positioned.
 
 2017-03-28  JMB  Fix image selector/editor on Android
 

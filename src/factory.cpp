@@ -44,7 +44,12 @@ void Factory::updatePreferences(QSettings *settings)
     QString defaultBase = qApp->palette("QAbstractItemView").color(QPalette::Base).name();
     QString color = settings->value("EvenRows", defaultBase).toString();
     evenRowColor = QColor(color);
+#if defined(Q_OS_ANDROID)
+    // The theme default alternate color is way too close to white
+    QString defaultAlternateBase("lightblue");
+#else
     QString defaultAlternateBase = qApp->palette("QAbstractItemView").color(QPalette::AlternateBase).name();
+#endif
     color = settings->value("OddRows", defaultAlternateBase).toString();
     oddRowColor = QColor(color);
     settings->endGroup();

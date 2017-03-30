@@ -39,7 +39,8 @@ DynamicEdit::DynamicEdit(QWidget *parent)
     Factory::configureScrollArea(this);
 #if defined(Q_OS_ANDROID)
     int pixels = Factory::dpToPixels(6);
-    setStyleSheet(QString("QTextEdit {padding-left:%1px; padding-top:%1px; padding-bottom:%1px; padding-right:%1px}").arg(pixels));
+    // Can't use left padding without making the cursor misaligned
+    setStyleSheet(QString("QTextEdit {padding-top:%1px; padding-bottom:%1px; padding-right:%1px}").arg(pixels));
     setTextInteractionFlags(textInteractionFlags() | Qt::TextSelectableByMouse);
 #endif
 }
