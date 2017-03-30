@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sk" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="sk">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -130,6 +132,13 @@
     <message>
         <source>Update calculated value</source>
         <translation>Aktualizovať výpočet</translation>
+    </message>
+</context>
+<context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -314,7 +323,7 @@
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>Editor stĺpcov</translation>
+        <translation type="vanished">Editor stĺpcov</translation>
     </message>
     <message>
         <source>No columns defined</source>
@@ -323,6 +332,14 @@
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation>Nový stĺpec vytvoríte pomocou tlačidla „Pridať”</translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished">Stĺpce</translation>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
+        <translation>ový stĺpec vytvoríte pomocou tlačidla „+”</translation>
     </message>
 </context>
 <context>
@@ -389,7 +406,7 @@ na tlačidlo „Importovať” načítate riadky z textového súboru</translati
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Správca zoznamov</translation>
+        <translation type="vanished">Správca zoznamov</translation>
     </message>
     <message>
         <source>No enumerated column types defined</source>
@@ -409,6 +426,10 @@ ktoré používajú tento zoznam:</translation>
     <message>
         <source>Continue?</source>
         <translation>Pokračovať?</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation type="unfinished">Zoznamy</translation>
     </message>
 </context>
 <context>
@@ -446,7 +467,7 @@ ktoré používajú tento zoznam:</translation>
     </message>
     <message>
         <source>Image is too large to import</source>
-        <translation>Obrázok je príliš veľký na import</translation>
+        <translation type="vanished">Obrázok je príliš veľký na import</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
@@ -542,7 +563,7 @@ ktoré používajú tento zoznam:</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation>Importovať dáta z iného formátu</translation>
+        <translation type="vanished">Importovať dáta z iného formátu</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
@@ -760,6 +781,25 @@ ktoré používajú tento zoznam:</translation>
         <source>All Columns</source>
         <translation>Všetky stĺpce</translation>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished">Kopírovať zvolený text</translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -935,8 +975,8 @@ aktuálneho filtra?</translation>
         <translation>Autorské práva ©</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Domovská stránka http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>Domovská stránka http://portabase.org</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -1125,6 +1165,10 @@ aktuálneho filtra?</translation>
         <source>Thistle</source>
         <translation>Bodliaková</translation>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1184,20 +1228,12 @@ aktuálneho filtra?</translation>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>Preferences</source>
-        <translation>Nastavenia</translation>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation>Skončiť %1</translation>
     </message>
     <message>
         <source>About %1</source>
         <translation>O %1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>O Qt</translation>
     </message>
 </context>
 <context>
@@ -1253,6 +1289,25 @@ aktuálneho filtra?</translation>
     <message>
         <source>Not a valid MobileDB file</source>
         <translation>Nie je platný súbor MobileDB</translation>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Názov</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD card</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1646,7 +1701,11 @@ aktuálneho filtra?</translation>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation><numerusform>%Ln znak</numerusform><numerusform>%Ln znaky</numerusform><numerusform>%Ln znakov</numerusform></translation>
+        <translation>
+            <numerusform>%Ln znak</numerusform>
+            <numerusform>%Ln znaky</numerusform>
+            <numerusform>%Ln znakov</numerusform>
+        </translation>
     </message>
     <message>
         <source>Average length</source>

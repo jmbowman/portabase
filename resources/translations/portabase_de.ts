@@ -135,6 +135,13 @@
     </message>
 </context>
 <context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
@@ -316,7 +323,7 @@
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>Spalten Editor</translation>
+        <translation type="vanished">Spalten Editor</translation>
     </message>
     <message>
         <source>No columns defined</source>
@@ -324,6 +331,14 @@
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished">Spalten</translation>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -390,7 +405,7 @@ the &quot;Import&quot; button to load lines from a text file</source>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Aufzählungen bearbeiten</translation>
+        <translation type="vanished">Aufzählungen bearbeiten</translation>
     </message>
     <message>
         <source>The following columns which
@@ -411,6 +426,10 @@ werden gelöscht:</translation>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation type="unfinished">Aufzählungen</translation>
     </message>
 </context>
 <context>
@@ -445,10 +464,6 @@ werden gelöscht:</translation>
     <message>
         <source>Refresh</source>
         <translation>Aktualisieren</translation>
-    </message>
-    <message>
-        <source>Image is too large to import</source>
-        <translation>Das Bild ist zu groß für einen Import</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
@@ -607,10 +622,6 @@ werden gelöscht:</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create a new file from data in another format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Import rows from a CSV file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -762,6 +773,25 @@ werden gelöscht:</translation>
         <source>View PortaBase in fullscreen mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -894,8 +924,8 @@ Filter löschen?</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Homepage: http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>Homepage: http://portabase.org</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -1125,6 +1155,10 @@ You will not be able to save any changes you make.</source>
         <source>Use alternating row colors if theme has them</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1188,16 +1222,8 @@ You will not be able to save any changes you make.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preferences</source>
-        <translation type="unfinished">Einstellungen</translation>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation type="unfinished">Über Qt</translation>
     </message>
 </context>
 <context>
@@ -1253,6 +1279,25 @@ You will not be able to save any changes you make.</source>
     <message>
         <source>Missing file</source>
         <translation>Datei fehlt</translation>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Name</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD card</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="it" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="it">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -130,6 +132,13 @@
     <message>
         <source>Update calculated value</source>
         <translation>Aggiorna il valore calcolato</translation>
+    </message>
+</context>
+<context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -314,7 +323,7 @@
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>Editor di colonne</translation>
+        <translation type="vanished">Editor di colonne</translation>
     </message>
     <message>
         <source>No columns defined</source>
@@ -323,6 +332,14 @@
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation>Clicca &quot;Aggiungi&quot; per crearne una</translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished">Colonne</translation>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
+        <translation>Clicca &quot;+&quot; per crearne una</translation>
     </message>
 </context>
 <context>
@@ -388,7 +405,7 @@ the &quot;Import&quot; button to load lines from a text file</source>
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Gestore enum</translation>
+        <translation type="vanished">Gestore enum</translation>
     </message>
     <message>
         <source>No enumerated column types defined</source>
@@ -409,6 +426,10 @@ anch&apos;esse eliminate:</translation>
     <message>
         <source>Continue?</source>
         <translation>Continuo?</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation type="unfinished">Enum</translation>
     </message>
 </context>
 <context>
@@ -443,10 +464,6 @@ anch&apos;esse eliminate:</translation>
     <message>
         <source>Refresh</source>
         <translation>Rinfresca</translation>
-    </message>
-    <message>
-        <source>Image is too large to import</source>
-        <translation>L&apos;immagine è troppo grande per essere importata</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
@@ -542,7 +559,7 @@ anch&apos;esse eliminate:</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation>Crea un nuovo file partendo da un formato diverso</translation>
+        <translation type="vanished">Crea un nuovo file partendo da un formato diverso</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
@@ -760,6 +777,25 @@ anch&apos;esse eliminate:</translation>
         <source>All Columns</source>
         <translation>Tutte le colonne</translation>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation>Copia il testo selezionato</translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -935,8 +971,8 @@ filtro corrente?</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Sito web:  http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>Sito web:  http://portabase.org</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -1125,6 +1161,10 @@ filtro corrente?</translation>
         <source>Thistle</source>
         <translation>Viola</translation>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1184,20 +1224,12 @@ filtro corrente?</translation>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>Preferences</source>
-        <translation>Preferenze</translation>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation>Esci %1</translation>
     </message>
     <message>
         <source>About %1</source>
         <translation>Info su %1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>Info su Qt</translation>
     </message>
 </context>
 <context>
@@ -1253,6 +1285,25 @@ filtro corrente?</translation>
     <message>
         <source>Not a valid MobileDB file</source>
         <translation>File MobileDB non valido</translation>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nome</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tipo</translation>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD card</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1646,7 +1697,10 @@ filtro corrente?</translation>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation><numerusform>%Ln carattere</numerusform><numerusform>%Ln caratteri</numerusform></translation>
+        <translation>
+            <numerusform>%Ln carattere</numerusform>
+            <numerusform>%Ln caratteri</numerusform>
+        </translation>
     </message>
     <message>
         <source>Average length</source>

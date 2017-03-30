@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="fr">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -130,6 +132,13 @@
     <message>
         <source>Update calculated value</source>
         <translation>Mettre à jour la valeur calculée</translation>
+    </message>
+</context>
+<context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -314,7 +323,7 @@
     <name>DBEditor</name>
     <message>
         <source>Columns Editor</source>
-        <translation>Éditeur de colonnes</translation>
+        <translation type="vanished">Éditeur de colonnes</translation>
     </message>
     <message>
         <source>No columns defined</source>
@@ -323,6 +332,14 @@
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
         <translation>Appuyer sur le bouton &quot;Ajouter&quot; pour en créer une</translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished">Colonnes</translation>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
+        <translation>Appuyer sur le bouton &quot;+&quot; pour en créer une</translation>
     </message>
 </context>
 <context>
@@ -389,7 +406,7 @@ sur le bouton &quot;Importer&quot; pour charger des lignes depuis un fichier tex
     <name>EnumManager</name>
     <message>
         <source>Enum Manager</source>
-        <translation>Gestionnaire d&apos;énumération</translation>
+        <translation type="vanished">Gestionnaire d&apos;énumération</translation>
     </message>
     <message>
         <source>No enumerated column types defined</source>
@@ -410,6 +427,10 @@ aussi supprimées :</translation>
     <message>
         <source>Continue?</source>
         <translation>Continuer ?</translation>
+    </message>
+    <message>
+        <source>Enums</source>
+        <translation type="unfinished">Énumérations</translation>
     </message>
 </context>
 <context>
@@ -444,10 +465,6 @@ aussi supprimées :</translation>
     <message>
         <source>Refresh</source>
         <translation>Rafraîchir</translation>
-    </message>
-    <message>
-        <source>Image is too large to import</source>
-        <translation>Image trop grande pour l&apos;import</translation>
     </message>
     <message>
         <source>Unsupported image format</source>
@@ -543,7 +560,7 @@ aussi supprimées :</translation>
     </message>
     <message>
         <source>Create a new file from data in another format</source>
-        <translation>Créer un nouveau fichier à partir de données dans un autre format</translation>
+        <translation type="vanished">Créer un nouveau fichier à partir de données dans un autre format</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
@@ -761,6 +778,25 @@ aussi supprimées :</translation>
         <source>All Columns</source>
         <translation>Toutes les colonnes</translation>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation>Copier le texte sélectionné</translation>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -936,7 +972,7 @@ dans le filtre courant ?</translation>
     </message>
     <message>
         <source>Web site at http://portabase.sourceforge.net</source>
-        <translation>Site web: http://portabase.sourceforge.net</translation>
+        <translation type="vanished">Site web: http://portabase.sourceforge.net</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -945,6 +981,10 @@ dans le filtre courant ?</translation>
     <message>
         <source>No such file exists</source>
         <translation>Un tel fichier n&apos;existe pas</translation>
+    </message>
+    <message>
+        <source>Web site at http://portabase.org</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1125,6 +1165,10 @@ dans le filtre courant ?</translation>
         <source>Thistle</source>
         <translation>Mauve</translation>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1184,20 +1228,12 @@ dans le filtre courant ?</translation>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>Preferences</source>
-        <translation>Préférences</translation>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation>Quitter %1</translation>
     </message>
     <message>
         <source>About %1</source>
         <translation>A propos de %1</translation>
-    </message>
-    <message>
-        <source>About Qt</source>
-        <translation>À propos de Qt</translation>
     </message>
 </context>
 <context>
@@ -1253,6 +1289,25 @@ dans le filtre courant ?</translation>
     <message>
         <source>Not a valid MobileDB file</source>
         <translation>Fichier MobileDB non valide</translation>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Type</translation>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD card</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1646,7 +1701,10 @@ dans le filtre courant ?</translation>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation><numerusform>%Ln caractère</numerusform><numerusform>%Ln caractères</numerusform></translation>
+        <translation>
+            <numerusform>%Ln caractère</numerusform>
+            <numerusform>%Ln caractères</numerusform>
+        </translation>
     </message>
     <message>
         <source>Average length</source>
