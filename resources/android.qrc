@@ -21,6 +21,7 @@
      <file alias="find.svg">icons/android/ic_search_24px.svg</file>
      <file alias="folder.svg">icons/android/ic_folder_24px.svg</file>
      <file alias="forward.svg">icons/android/ic_chevron_right_24px.svg</file>
+     <file alias="help.svg">icons/android/ic_help_black_24px.svg</file>
      <file alias="image.svg">icons/android/ic_image_24px.svg</file>
      <file alias="import.svg">icons/android/ic_system_update_alt_24px.svg</file>
      <file alias="menu.svg">icons/android/ic_menu_24px.svg</file>

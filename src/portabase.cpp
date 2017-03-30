@@ -76,6 +76,10 @@ PortaBase::PortaBase(QWidget *parent)
     // menu and toolbar, shared between file selector and data viewer modes
     ma = new MenuActions(this);
     QQMenuHelper *mh = menuHelper();
+    QStringList helpLocales;
+    helpLocales << "cs" << "en" << "fr" << "ja" << "zh_TW";
+    mh->setHelpLocation("http://portabase.org/help/%1/index.html",
+                        helpLocales);
     connect(mh, SIGNAL(newFile(const QString &)),
             this, SLOT(newFile(const QString &)));
     connect(mh, SIGNAL(openFile(const QString &)),
@@ -273,6 +277,7 @@ PortaBase::PortaBase(QWidget *parent)
     dbActionBar->addButton(slideshowAction);
     dbActionBar->addButton(fullscreenAction);
     dbActionBar->addButton(mh->action(QQMenuHelper::Preferences));
+    dbActionBar->addButton(mh->action(QQMenuHelper::Help));
 #endif
 
     // Main widget when no file is open
@@ -282,6 +287,7 @@ PortaBase::PortaBase(QWidget *parent)
     ActionBar *fsActionBar = new ActionBar(noFileWidget);
     fsActionBar->addButton(mh->action(QQMenuHelper::Preferences));
     fsActionBar->addButton(fullscreenAction);
+    fsActionBar->addButton(mh->action(QQMenuHelper::Help));
     fsActionBar->adjustContent();
     noFileLayout->addWidget(fsActionBar);
     QScrollArea *scrollArea = new QScrollArea(noFileWidget);
@@ -1622,7 +1628,7 @@ void PortaBase::aboutPortaBase()
     QString version = qApp->applicationVersion();
     QString text = appName + " " + version + "\n\n" + tr("Copyright (C)")
                    + " " + COPYRIGHT_YEARS + "\nJeremy Bowman\n\n"
-                   + tr("Web site at http://portabase.sourceforge.net");
+                   + tr("Web site at http://portabase.org");
 #if defined(Q_OS_MAC)
     // Don't use doc icon in about dialog, bypass main window's icon
     QWidget *parent = statusBar();

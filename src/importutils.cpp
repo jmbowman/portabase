@@ -187,7 +187,7 @@ QStringList ImportUtils::convertMobileDBRow(QStringList values, int *types)
 /**
  * Import data from an XML file into a new PortaBase file.  The XML file must
  * be in the format described at
- * http://portabase.sourceforge.net/portabase_xml.html.
+ * http://portabase.org/portabase_xml.html.
  *
  * @param filename The path to the XML file to be imported
  * @param db The PortaBase database to import into
