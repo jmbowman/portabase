@@ -24,7 +24,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
-#include <QProcess>
+#include <QProcessEnvironment>
 #include <QRegExp>
 #include <QSettings>
 #include <QUrl>
@@ -72,7 +72,9 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     aboutText = macAboutText;
 #endif
 
-#ifndef Q_OS_ANDROID
+#if defined(Q_OS_ANDROID)
+    helpText = menuText(tr("&Help"));
+#else
     documentToolBar = new QQToolBar(window, "documentToolbar");
     fileSelectorToolBar = new QQToolBar(window, "fileSelectorToolbar");
 #endif
@@ -174,8 +176,13 @@ QQMenuHelper::QQMenuHelper(QMainWindow *window, const QString &fileDescription,
     // Help menu actions
     helpAction = new QAction(helpText, window);
     helpAction->setStatusTip(helpText);
-    helpAction->setShortcut(QKeySequence::HelpContents);
     connect(helpAction, SIGNAL(triggered()), this, SLOT(showHelp()));
+#if defined(Q_OS_ANDROID)
+    helpAction->setIcon(QQFactory::icon("help"));
+    helpAction->setIconVisibleInMenu(false);
+#else
+    helpAction->setShortcut(QKeySequence::HelpContents);
+#endif
 
     aboutAction = new QAction(aboutText, window);
     aboutAction->setStatusTip(aboutText);
@@ -404,12 +411,30 @@ void QQMenuHelper::setEdited(bool y)
 }
 
 /**
+ * Specify where the main page of the application's help files can be found
+ * online.  Android sends the user here instead of keeping a local copy of
+ * all the help files.
+ *
+ * @param urlTemplate The URL for the main help page, with a "%1" where the locale
+ *                    is to be inserted
+ * @param locales A list of the locales for which the help files have been
+ *                translated (such as "en" or "zh_TW")
+ */
+void QQMenuHelper::setHelpLocation(const QString &urlTemplate,
+                                   const QStringList &locales)
+{
+    helpUrlTemplate = urlTemplate;
+    helpLocales = locales;
+}
+
+/**
  * Show the application's main help file.  This should be an "index.html"
  * file in one of the following locations:
  * <ul>
  * <li>Linux/UNIX: /usr/share/[app_name]/help/[locale]/index.html</li>
  * <li>Mac OS X: [app_bundle]/Contents/Resources/[locale].lproj/index.html</li>
  * <li>Windows: [app_directory]/help/[locale]/index.html</li>
+ * <li>Android: http://portabase.org/help/[locale]/index.html</li>
  * </ul>
  * The "en" locale is used by default if no help files in a more suitable
  * locale are available.  To override the directory path with a custom value
@@ -418,12 +443,10 @@ void QQMenuHelper::setEdited(bool y)
  */
 void QQMenuHelper::showHelp()
 {
-    QStringList env = QProcess::systemEnvironment();
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QString var = QString("%1_HELP").arg(qApp->applicationName().toUpper());
-    QString helpDir;
-    int index = env.indexOf(QRegExp(QString("%1=.*").arg(var)));
-    if (index != -1) {
-        QString helpDir = env[index];
+    QString helpDir = env.value(var);
+    if (!helpDir.isEmpty()) {
         helpDir = helpDir.right(helpDir.length() - var.length() - 1);
     }
     else {
@@ -459,18 +482,27 @@ void QQMenuHelper::showHelp()
 #elif defined(Q_OS_MAC)
         QString path = qApp->applicationDirPath() + "/../Resources/";
         QString suffix = ".lproj/";
-#else
+#elif !defined(Q_OS_ANDROID)
         QString path = QString("/usr/share/%1/help/")
                        .arg(qApp->applicationName().toLower());
         QString suffix = "/";
 #endif
         count = dirNames.count();
         for (i = 0; i < count; i++) {
+#if defined(Q_OS_ANDROID)
+            if (helpLocales.contains(dirNames[i])) {
+                QString path = helpUrlTemplate.arg(dirNames[i]);
+                QUrl url(path);
+                QDesktopServices::openUrl(url);
+                return;
+            }
+#else
             QDir dir(path + dirNames[i] + suffix);
             if (dir.exists()) {
                 helpDir = path + dirNames[i] + suffix;
                 break;
             }
+#endif
         }
     }
     if (!helpDir.isEmpty()) {

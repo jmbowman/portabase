@@ -1,3 +1,8 @@
+2017-03-29  JMB  Add help action to Android
+
+    Added a "Help" action to Android which points to the online help files
+    in the appropriate language.
+
 2017-03-28  JMB  Fix image selector/editor on Android
 
     The image selection/editing dialog hadn't been properly tested on

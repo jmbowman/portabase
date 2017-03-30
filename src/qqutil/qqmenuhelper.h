@@ -105,6 +105,7 @@ public:
     void addToDocumentToolBar(QAction *action);
     void addToFileSelectorToolBar(QAction *action);
     int saveChangesPrompt();
+    void setHelpLocation(const QString &urlTemplate, const QStringList &locales);
     QMenu *createMenu(QMainWindow *mainWindow);
     QMenu *fileMenu();
     QMenu *helpMenu();
@@ -165,6 +166,8 @@ private:
     QMenu *recent; /**< The "Open Recent" menu */
     QMenu *help; /**< The "Help" menu */
     QStringList recentFiles; /**< The most recently opened files */
+    QString helpUrlTemplate; /**< Template for the main help URL, just add locale */
+    QStringList helpLocales; /**< The locales for which the help files have been translated */
     static QRegExp menuRegExp; /**< Regular expression for menu text processing */
 };
 
