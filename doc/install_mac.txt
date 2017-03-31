@@ -24,9 +24,11 @@ Help Pages Generation
 ---------------------
 If you don't already have the "pip" installer for Python packages installed,
 do so by running "sudo easy_install pip".  Then install Sphinx by running
-"sudo pip install Sphinx".  You'll also need GNU gettext to process the help
-file translations; you can download a binary version from
-http://www.ellert.se/twain-sane/ or install it using MacPorts.
+"sudo pip install Sphinx" and install the theme used by the PortaBase
+documentation by running "sudo pip install sphinx_rtd_theme".  You'll also
+need GNU gettext to process the help file translations; you can download a
+binary version from http://www.ellert.se/twain-sane/ or install it using
+MacPorts.
 
 To be able to automatically download the latest help page translations from
 Transifex, also run "sudo pip install transifex-client".  Use the script at

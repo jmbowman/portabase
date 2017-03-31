@@ -13,6 +13,8 @@
 
 import sys, os, re
 
+import sphinx_rtd_theme
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -44,7 +46,7 @@ master_doc = 'index'
 packaging_dir = os.path.join(os.path.dirname(__file__) ,'..', '..', 'packaging')
 years_file = os.path.join(packaging_dir, 'copyright_years')
 f = open(years_file, 'r')
-years = unicode(f.read())
+years = f.read()
 f.close()
 project = u'PortaBase'
 
@@ -99,16 +101,15 @@ locale_dirs = ['translations']
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'agogo'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-html_theme_options = { 'pagewidth': '48em', 'documentwidth': '34em',
-                       'sidebarwidth': '14em' }
+html_theme_options = {}
 
 # Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -119,12 +120,12 @@ html_title = 'PortaBase ' + release
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+html_logo = '_static/portabase.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-#html_favicon = None
+html_favicon = '_static/favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -132,7 +133,7 @@ html_title = 'PortaBase ' + release
 html_static_path = ['_static']
 
 # The style sheet to use for HTML pages.
-html_style = 'portabase.css'
+#html_style = ''
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -403,11 +404,13 @@ language = os.environ.get('HELP_LANG', None)
 pdf_language = language
 if language == 'cs':
     copyright = years + u', Jeremy Bowman & Jaromír Mára'
+elif language == 'fr':
+    copyright = years + u', Jeremy Bowman & Dany Poupard'
+elif language == 'it':
+    copyright = years + u', Jeremy Bowman & Maurizio Codogno'
 elif language == 'ja':
     copyright = years + u', Jeremy Bowman & TSUKAMOTO Makio'
     html_title = u'PortaBase ' + release + u' 説明書'
-    html_theme_options = { 'pagewidth': '48em', 'documentwidth': '34em',
-                           'sidebarwidth': '14em', 'textalign': 'left' }
     latex_docclass = {"manual":"jarticle"}
     pdf_stylesheets = ['sphinx','kerning','a4','ja']
     # Need http://jaist.dl.sourceforge.jp/vlgothic/44715/VLGothic-20091202.zip
@@ -415,8 +418,6 @@ elif language == 'ja':
     pdf_font_path = ['/Users/jeremy/Source/ja-fonts']
 elif language == 'zh_TW':
     copyright = years + u', Jeremy Bowman, Jeng-Ping Lin, & Linda Su'
-    html_theme_options = { 'pagewidth': '48em', 'documentwidth': '34em',
-                           'sidebarwidth': '14em', 'textalign': 'left' }
 else:
     copyright = years + u', Jeremy Bowman'
     html_title = 'PortaBase ' + release + ' Manual'
