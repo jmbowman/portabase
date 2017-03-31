@@ -144,6 +144,8 @@ Additional software is used to package PortaBase on its various platforms:
 
 - The Sphinx documentation generator (http://www.sphinx-doc.org) for creating
   easily-translated help pages from simple text files
+- The Read the Docs Sphinx theme (https://github.com/rtfd/sphinx_rtd_theme)
+  for improving on the default Sphinx output (especially on small screens)
 - The Transifex online translation platform (https://www.transifex.com) for
   managing the UI and help file translations
 - The GNU gettext utilities (http://www.gnu.org/software/gettext) for managing

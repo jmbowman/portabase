@@ -1,7 +1,10 @@
-2017-03-30  JMB  Update UI translations, fix them on Android
+2017-03-30  JMB  Update UI translations, fix them on Android, new help theme
 
     Updated the UI translation files, and fixed a configuration bug which was
     preventing them from being used on Android.
+
+    Also updated the help files to use a different Sphinx theme (from Read the
+    Docs) which works better on small device screens.
 
 2017-03-29  JMB  Add help action to Android, visual fixes
 

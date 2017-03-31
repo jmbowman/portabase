@@ -15,13 +15,13 @@ Help Pages Generation
 ---------------------
 PortaBase's help pages are generated from a simple text-based markup using
 Sphinx (http://sphinx.pocoo.org/).  To create a full PortaBase installation
-package, you'll need Python 2.4 or higher and Sphinx 1.1 or higher.  The
-scripts for building the installer on each platform assume that these are
-present and automatically generate and include the help pages.  If you also
-want to retrieve the latest version of a translation of the help pages from the
-PortaBase Transifex project, you'll probably also want to install
-transifex-client.  See the platform-specific install_*.txt files for more
-information.
+package, you'll need Python 2.4 or higher, Sphinx 1.1 or higher, and
+sphinx_rtd_theme.  The scripts for building the installer on each platform
+assume that these are present and automatically generate and include the help
+pages.  If you also want to retrieve the latest version of a translation of
+the help pages from the PortaBase Transifex project, you'll probably also want
+to install transifex-client.  See the platform-specific install_*.txt files
+for more information.
 
 Code Documentation Generation
 -----------------------------
