@@ -48,4 +48,4 @@ There's also one additional option for ``tocsv``:
 
 -l line_ending  "crlf" to use Windows-style carriage return + newline, default is UNIX/Mac-style (newline only)
 
-For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.sourceforge.net).
+For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.org).
