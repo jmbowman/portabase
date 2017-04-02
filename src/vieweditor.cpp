@@ -210,7 +210,6 @@ void ViewEditor::updateTable()
         item->setTextAlignment(0, Qt::AlignHCenter);
         bool included = oldNames.contains(name);
         item->setCheckState(0, included ? Qt::Checked : Qt::Unchecked);
-        item->setData(0, Qt::UserRole, included);
         item->setText(1, name);
     }
 }
@@ -238,7 +237,7 @@ void ViewEditor::applyChanges()
         QStringList sequence;
         for (int i = 0; i < count; i++) {
             QTreeWidgetItem *item = table->topLevelItem(i);
-            if (item->data(0, Qt::UserRole).toBool()) {
+            if (item->checkState(0) == Qt::Checked) {
                 sequence.append(item->text(1));
             }
         }
