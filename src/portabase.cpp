@@ -590,6 +590,8 @@ void PortaBase::createFile(ImportDialog::DataSource source,
         // if not saved now, file is empty without later save...bad
         save();
         menuHelper()->opened(f);
+        QSettings settings;
+        menuHelper()->saveSettings(&settings);
     }
     else {
         delete db;
@@ -674,6 +676,8 @@ void PortaBase::openFile(const QString &file)
         QMessageBox::information(this, qApp->applicationName(),
                                  tr("This file is read-only.\nYou will not be able to save any changes you make."));
     }
+    QSettings settings;
+    menuHelper()->saveSettings(&settings);
 }
 
 /**
