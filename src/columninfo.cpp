@@ -31,7 +31,7 @@ ColumnInfoDialog::ColumnInfoDialog(QWidget *parent)
     QGridLayout *grid = Factory::gridLayout(vbox);
     grid->setColumnStretch(1, 1);
     grid->addWidget(new QLabel(tr("Column") + " ", this), 0, 0);
-    columns = new QComboBox(this);
+    columns = Factory::comboBox(this);
     connect(columns, SIGNAL(currentIndexChanged(int)),
             this, SLOT(columnSelected(int)));
     grid->addWidget(columns, 0, 1);
