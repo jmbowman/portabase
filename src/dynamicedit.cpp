@@ -40,7 +40,7 @@ DynamicEdit::DynamicEdit(QWidget *parent)
 #if defined(Q_OS_ANDROID)
     int pixels = Factory::dpToPixels(6);
     // Can't use left padding without making the cursor misaligned
-    setStyleSheet(QString("QTextEdit {padding-top:%1px; padding-bottom:%1px; padding-right:%1px}").arg(pixels));
+    setStyleSheet(QString("QTextEdit {padding-bottom:%1px; padding-right:%1px}").arg(pixels));
     setTextInteractionFlags(textInteractionFlags() | Qt::TextSelectableByMouse);
 #endif
 }
@@ -69,7 +69,7 @@ QSize DynamicEdit::sizeHint() const
     // on this platform, need to manually add room for the padding, etc.
     height += 30;
 #elif defined(Q_OS_ANDROID)
-    height += Factory::dpToPixels(12);
+    height += Factory::dpToPixels(6);
 #endif
     return QSize(100, height);
 }
