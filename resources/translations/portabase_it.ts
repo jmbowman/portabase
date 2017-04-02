@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="it">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="it" version="2.0">
 <context>
     <name>CSVErrorDialog</name>
     <message>
         <source>Problematic row</source>
-        <translation>Riga problematica</translation>
+        <translation>Riga con problemi</translation>
     </message>
 </context>
 <context>
@@ -138,7 +136,7 @@
     <name>Calculator</name>
     <message>
         <source>Calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolatore</translation>
     </message>
 </context>
 <context>
@@ -322,10 +320,6 @@
 <context>
     <name>DBEditor</name>
     <message>
-        <source>Columns Editor</source>
-        <translation type="vanished">Editor di colonne</translation>
-    </message>
-    <message>
         <source>No columns defined</source>
         <translation>Nessuna colonna definita</translation>
     </message>
@@ -335,7 +329,7 @@
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished">Colonne</translation>
+        <translation>Colonne</translation>
     </message>
     <message>
         <source>Press the &quot;+&quot; button to create one</source>
@@ -404,10 +398,6 @@ the &quot;Import&quot; button to load lines from a text file</source>
 <context>
     <name>EnumManager</name>
     <message>
-        <source>Enum Manager</source>
-        <translation type="vanished">Gestore enum</translation>
-    </message>
-    <message>
         <source>No enumerated column types defined</source>
         <translation>Nessun tipo di colonna enumerazione definito</translation>
     </message>
@@ -429,7 +419,7 @@ anch&apos;esse eliminate:</translation>
     </message>
     <message>
         <source>Enums</source>
-        <translation type="unfinished">Enum</translation>
+        <translation>Enumerazioni</translation>
     </message>
 </context>
 <context>
@@ -556,10 +546,6 @@ anch&apos;esse eliminate:</translation>
     <message>
         <source>&amp;Import</source>
         <translation>&amp;Importa</translation>
-    </message>
-    <message>
-        <source>Create a new file from data in another format</source>
-        <translation type="vanished">Crea un nuovo file partendo da un formato diverso</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
@@ -779,15 +765,15 @@ anch&apos;esse eliminate:</translation>
     </message>
     <message>
         <source>Import a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa un file</translation>
     </message>
     <message>
         <source>Exit Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Esci da tutto schermo</translation>
     </message>
     <message>
         <source>Exit fullscreen mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Esci dalla modalità tutto schermo</translation>
     </message>
 </context>
 <context>
@@ -971,16 +957,16 @@ filtro corrente?</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.org</source>
-        <translation>Sito web:  http://portabase.org</translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>Note su %1</translation>
     </message>
     <message>
         <source>No such file exists</source>
         <translation>Il file non esiste</translation>
+    </message>
+    <message>
+        <source>Web site at http://portabase.org</source>
+        <translation>Sito web:  http://portabase.org</translation>
     </message>
 </context>
 <context>
@@ -1163,7 +1149,7 @@ filtro corrente?</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
 </context>
 <context>
@@ -1291,19 +1277,19 @@ filtro corrente?</translation>
     <name>QQFileDialog</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Internal storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Memoria interna</translation>
     </message>
     <message>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>scheda SD</translation>
     </message>
 </context>
 <context>
@@ -1697,10 +1683,7 @@ filtro corrente?</translation>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation>
-            <numerusform>%Ln carattere</numerusform>
-            <numerusform>%Ln caratteri</numerusform>
-        </translation>
+        <translation><numerusform>%Ln carattere</numerusform><numerusform>%Ln caratteri</numerusform></translation>
     </message>
     <message>
         <source>Average length</source>

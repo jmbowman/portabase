@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
-# maurizio codogno <dotmaudot@gmail.com>, 2012
+# maurizio codogno <dotmaudot@gmail.com>, 2012,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2017-01-10 05:00+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"PO-Revision-Date: 2017-03-30 14:57+0000\n"
+"Last-Translator: maurizio codogno <dotmaudot@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 # 2cad1e6da55d482fb2210239f12d3ec6
 #: ../../file_selector.txt:4
 msgid "File selector"
-msgstr "File selector"
+msgstr "Selettore file"
 
 # 2eb84e3492814c55933c4c9b1ceb1925
 #: ../../file_selector.txt:6
@@ -29,7 +29,7 @@ msgid ""
 "Unless the program was launched by clicking on a PortaBase file, the first "
 "screen shown will be the file selector.  You may choose one of the following"
 " options from the \"File\" menu, toolbar, or main display buttons:"
-msgstr "A meno che il programma non sia stato lanciato cliccando su un file PortaBase, la prima schermata mostrata sarà il file selector. Puoi scegliere una delle opzioni seguenti dal menu \"File\", dalla toolbar, o dai pulsanti del display principale:"
+msgstr "A meno che il programma non sia stato lanciato cliccando su un file PortaBase, la prima schermata mostrata sarà il selettore file. Puoi scegliere una delle opzioni seguenti dal menu \"File\", dalla toolbar, o dai pulsanti del display principale:"
 
 # 6461c61772d84482993f05df60545a41
 #: ../../file_selector.txt:9
@@ -59,7 +59,7 @@ msgstr "**Apri recenti/Ultimi file aperti**"
 # 81e36a97b0994c26bb58bbc5f91260e1
 #: ../../file_selector.txt:15
 msgid "A list of recently opened files; click on one to open that file."
-msgstr "Lista degli ultimi file aperti; clicca su uno di essi per aprirlo."
+msgstr "Elenco degli ultimi file aperti; clicca su uno di essi per aprirlo."
 
 # 7f1a5165f32646beab64753a2e652622
 #: ../../file_selector.txt:18
@@ -88,14 +88,14 @@ msgstr "Lancia la  :ref:`finestra di dialogo <preferences>`."
 # b6aa01a321d74e25a763a4930b263cc0
 #: ../../file_selector.txt:24
 msgid "**Fullscreen**"
-msgstr "**Fullscreen**"
+msgstr "**Schermata intera**"
 
 # 715c18ea94694aa6826c967c23780010
 #: ../../file_selector.txt:24
 msgid ""
 "Click this toolbar button to switch PortaBase to fullscreen mode or back to "
 "normal display mode."
-msgstr "Clicca su questo pulsante della toolbar per portare la finestra PortaBase a schermata intera oppure riportarlo alla dimensione normale."
+msgstr "Clicca su questo pulsante della toolbar per portare la finestra PortaBase a schermata intera oppure riportarla alla dimensione normale."
 
 # 1c0e46468c0a4990963912a3504456c2
 #: ../../file_selector.txt:26
