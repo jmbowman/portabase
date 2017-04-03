@@ -8,6 +8,9 @@
     * Fixed the spacing on the popup menu for the column statistics dialog's
       column listing.
     * Updated the help file translation templates
+    * Reverted a change in QQMenuHelper that broke compatibility with Qt 4.5
+      (still needed for the Maemo releases)
+    * Updated assorted Maemo packaging files for the upcoming 2.2 release
 
 2017-03-30  JMB  Update UI translations, fix them on Android, new help theme
 

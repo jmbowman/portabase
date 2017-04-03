@@ -12,8 +12,8 @@ Description: An easy-to-use personal database application
  PortaBase is a program for conveniently managing one-table database files.
  It can be used as a shopping list, password manager, media inventory,
  financial tracker, TODO list, address book, photo album, and more. It is
- available for many platforms, including Linux, Mac OS X, Windows, and Maemo.
- Features include:
+ available for many platforms, including Android, Linux, Mac OS X, Windows,
+ and Maemo. Features include:
  .
   * String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
     Calculation, Sequence, Image, and Enum column types;
@@ -30,7 +30,7 @@ Description: An easy-to-use personal database application
   * optional data file encryption.
 XB-Maemo-Display-Name: PortaBase
 XB-Homepage: http://www.portabase.org
-XB-Bugtracker: https://sourceforge.net/p/portabase/bugs/
+XB-Bugtracker: https://github.com/jmbowman/portabase/issues
 XB-Maemo-Icon-26:
  iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
  bWFnZVJlYWR5ccllPAAACm9JREFUeNrsWUtsXNUZ/ubOvfN+244f5OEEB8fQJgYkCgWKoaVERYWg

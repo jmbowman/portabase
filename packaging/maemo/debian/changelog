@@ -1,3 +1,9 @@
+portabase (2.2-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Jeremy Bowman <jmbowman@alum.mit.edu>  Sun, 02 Apr 2017 21:00:46 -0500
+
 portabase (2.1-2) unstable; urgency=low
 
   * Updated application icon data in control file
