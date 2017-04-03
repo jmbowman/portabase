@@ -1,13 +1,13 @@
 # Messages from command_line.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PortaBase 2.1\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -122,7 +122,39 @@ msgid "Apply the named filter before exporting."
 msgstr ""
 
 #: ../../command_line.txt:37
+msgid "The following options can be used with either ``fromcsv`` or ``tocsv``:"
+msgstr ""
+
+#: ../../command_line.txt:39
+msgid "There is or should be a row of column headers"
+msgstr ""
+
+#: ../../command_line.txt:40
+msgid "The field delimiter character (typically 'tab' if not using the default ',')"
+msgstr ""
+
+#: ../../command_line.txt:41
+msgid "Parse or write the CSV file using the specified text encoding (the default is UTF-8)"
+msgstr ""
+
+#: ../../command_line.txt:43
+msgid "There's one additional option for ``fromcsv``:"
+msgstr ""
+
+#: ../../command_line.txt:45
+msgid "Automatically add new enum values encountered"
+msgstr ""
+
+#: ../../command_line.txt:47
+msgid "There's also one additional option for ``tocsv``:"
+msgstr ""
+
+#: ../../command_line.txt:49
+msgid "\"crlf\" to use Windows-style carriage return + newline, default is UNIX/Mac-style (newline only)"
+msgstr ""
+
+#: ../../command_line.txt:51
 # 0af6523a1160474ba4a62dd8d3ffb4f4
-msgid "For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.sourceforge.net)."
+msgid "For more information about the PortaBase XML format and tools for doing useful things with it, see the PortaBase homepage (http://portabase.org)."
 msgstr ""
 

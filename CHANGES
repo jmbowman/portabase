@@ -1,3 +1,14 @@
+2017-04-02  JMB  Release preparation and assorted bugfixes
+
+    * Added the latest Italian translation updates.
+    * Fixed a rather long-standing bug where the view editor failed to save
+      which columns are to be included when first creating a new view.
+    * Removed the top padding for dynamic-height text fields on Android to
+      fully fix the cursor alignment problem.
+    * Fixed the spacing on the popup menu for the column statistics dialog's
+      column listing.
+    * Updated the help file translation templates
+
 2017-03-30  JMB  Update UI translations, fix them on Android, new help theme
 
     Updated the UI translation files, and fixed a configuration bug which was

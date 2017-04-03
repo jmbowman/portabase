@@ -15,4 +15,4 @@ PortaBase data files can be encrypted in order to protect sensitive information 
 
 For security and implementation reasons, the entire content of encrypted files must be held in memory at once; thus encrypted files cannot scale to large sizes as well as non-encrypted files.  Files of a few hundred or a few thousand rows should still perform well, but files containing many thousands of rows of data probably won't (at least on Maemo; desktop computers with lots of memory can handle quite large encrypted files).
 
-For more information about encryption in PortaBase (including details on the algorithms used), see the PortaBase homepage (http://portabase.sourceforge.net).
+For more information about encryption in PortaBase (including details on the algorithms used), see the PortaBase homepage (http://portabase.org).

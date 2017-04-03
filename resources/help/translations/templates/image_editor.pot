@@ -1,13 +1,13 @@
 # Messages from image_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PortaBase 2.1\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Project-Id-Version: PortaBase\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -70,9 +70,3 @@ msgstr ""
 # b94f400f3398469abc82d28724bdebee
 msgid "Click \"OK\"/\"Done\" to store the image as it is shown, or cancel out of the dialog to leave the field unchanged."
 msgstr ""
-
-#: ../../image_editor.txt:22
-# a2edd321360d4e79a296b5fdaa25bbf6
-msgid "Because memory was limited on the Zaurus PDAs for which PortaBase was originally developed, very large pictures will be rejected.  JPEG images larger than 6400 x 4800 pixels cannot be imported, and ones larger than 800 x 600 will be shrunk to at most that size.  Similarly, PNG images larger than 800 x 600 cannot be imported.  These limitations will be removed in a future version of PortaBase, since it is no longer being developed for the Zaurus."
-msgstr ""
-
