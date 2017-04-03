@@ -24,7 +24,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
-#include <QProcessEnvironment>
+#include <QProcess>
 #include <QRegExp>
 #include <QSettings>
 #include <QUrl>
@@ -443,10 +443,12 @@ void QQMenuHelper::setHelpLocation(const QString &urlTemplate,
  */
 void QQMenuHelper::showHelp()
 {
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QStringList env = QProcess::systemEnvironment();
     QString var = QString("%1_HELP").arg(qApp->applicationName().toUpper());
-    QString helpDir = env.value(var);
-    if (!helpDir.isEmpty()) {
+    QString helpDir;
+    int index = env.indexOf(QRegExp(QString("%1=.*").arg(var)));
+    if (index != -1) {
+        QString helpDir = env[index];
         helpDir = helpDir.right(helpDir.length() - var.length() - 1);
     }
     else {
