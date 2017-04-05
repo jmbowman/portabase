@@ -214,7 +214,7 @@ android-g++ {
 macx {
     CONFIG             += c++11 release x86_64
     QMAKE_CXXFLAGS     += -stdlib=libc++ -std=c++11
-    QMAKE_MAC_SDK       = macosx10.11
+    QMAKE_MAC_SDK       = macosx10.12
     QT                 += macextras
     INCLUDEPATH        += /usr/local/include
     LIBS               += -L/usr/local/lib -framework Foundation
