@@ -1,3 +1,11 @@
+2017-04-04  JMB  Fixed code signing for Mac releases
+
+    Updated the code signing for Mac OS X to work with the current app
+    bundle content.  Producing a signed binary that Sierra respects requires
+    it to be signed on OS X 10.11.5 or above.  This should fix the
+    "unidentified developer" warnings that people have started seeing with
+    the previous PortaBase release on newer OS versions.
+
 2017-04-02  JMB  Release preparation and assorted bugfixes
 
     * Added the latest Italian translation updates.
