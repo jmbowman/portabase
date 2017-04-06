@@ -1,15 +1,16 @@
 # Messages from command_line.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
+# jmbowman <jmbowman@alum.mit.edu>, 2017
 # jmbowman <jmbowman@alum.mit.edu>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 06:06+0000\n"
+"PO-Revision-Date: 2017-04-06 12:04+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
 "Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -146,10 +147,47 @@ msgstr "エクスポートの前に指定されたソーティングを適用し
 msgid "Apply the named filter before exporting."
 msgstr "エクスポートの前に指定されたフィルターを適用します。"
 
-# 0af6523a1160474ba4a62dd8d3ffb4f4
 #: ../../command_line.txt:37
 msgid ""
+"The following options can be used with either ``fromcsv`` or ``tocsv``:"
+msgstr "``fromcsv``または``tocsv``とファイル名の間に、以下のオプションを入れることが出来ます："
+
+#: ../../command_line.txt:39
+msgid "There is or should be a row of column headers"
+msgstr "CSVファイルにフィールドラベルのレコードが存在する、または作成されます"
+
+#: ../../command_line.txt:40
+msgid ""
+"The field delimiter character (typically 'tab' if not using the default ',')"
+msgstr "フィールド区切り文字（デフォルトの「,」ではない場合、「tab」を使うことが多い）"
+
+#: ../../command_line.txt:41
+msgid ""
+"Parse or write the CSV file using the specified text encoding (the default "
+"is UTF-8)"
+msgstr "CSVファイルは指定されたテキストエンコーディングを使用します（デフォルトはUTF-8）"
+
+#: ../../command_line.txt:43
+msgid "There's one additional option for ``fromcsv``:"
+msgstr "``fromcsv``とは以下のオプションも使用出来ます："
+
+#: ../../command_line.txt:45
+msgid "Automatically add new enum values encountered"
+msgstr "まだデータベースに入っていない列挙値を自動的に追加します"
+
+#: ../../command_line.txt:47
+msgid "There's also one additional option for ``tocsv``:"
+msgstr "``tocsv``とは以下のオプションも使用出来ます："
+
+#: ../../command_line.txt:49
+msgid ""
+"\"crlf\" to use Windows-style carriage return + newline, default is UNIX"
+"/Mac-style (newline only)"
+msgstr "「crlf」に設定すればウィンドウズの改行コード（キャリッジリターンとラインフィード）を使用します。デフォルトはUNIXの改行コード（ラインフィードのみ）。"
+
+# 0af6523a1160474ba4a62dd8d3ffb4f4
+#: ../../command_line.txt:51
+msgid ""
 "For more information about the PortaBase XML format and tools for doing "
-"useful things with it, see the PortaBase homepage "
-"(http://portabase.sourceforge.net)."
-msgstr "PortaBaseのXMLフォーマットと、これを使った便利な使い方の詳細は、PortaBaseのホームページ(http://portabase.sourceforge.net)をご覧ください。"
+"useful things with it, see the PortaBase homepage (http://portabase.org)."
+msgstr "PortaBaseのXMLフォーマットと、これを使った便利な使い方の詳細は、PortaBaseのホームページ(http://portabase.org)をご覧ください。"

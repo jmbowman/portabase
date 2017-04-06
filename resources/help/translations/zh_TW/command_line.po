@@ -1,5 +1,5 @@
 # Messages from command_line.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-20 03:32+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
+"PO-Revision-Date: 2017-04-02 20:28+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,10 +147,47 @@ msgstr "匯出前先套用指定的排序方式"
 msgid "Apply the named filter before exporting."
 msgstr "匯出前先套用指定的篩選"
 
-# 0af6523a1160474ba4a62dd8d3ffb4f4
 #: ../../command_line.txt:37
 msgid ""
+"The following options can be used with either ``fromcsv`` or ``tocsv``:"
+msgstr ""
+
+#: ../../command_line.txt:39
+msgid "There is or should be a row of column headers"
+msgstr ""
+
+#: ../../command_line.txt:40
+msgid ""
+"The field delimiter character (typically 'tab' if not using the default ',')"
+msgstr ""
+
+#: ../../command_line.txt:41
+msgid ""
+"Parse or write the CSV file using the specified text encoding (the default "
+"is UTF-8)"
+msgstr ""
+
+#: ../../command_line.txt:43
+msgid "There's one additional option for ``fromcsv``:"
+msgstr ""
+
+#: ../../command_line.txt:45
+msgid "Automatically add new enum values encountered"
+msgstr ""
+
+#: ../../command_line.txt:47
+msgid "There's also one additional option for ``tocsv``:"
+msgstr ""
+
+#: ../../command_line.txt:49
+msgid ""
+"\"crlf\" to use Windows-style carriage return + newline, default is UNIX"
+"/Mac-style (newline only)"
+msgstr ""
+
+# 0af6523a1160474ba4a62dd8d3ffb4f4
+#: ../../command_line.txt:51
+msgid ""
 "For more information about the PortaBase XML format and tools for doing "
-"useful things with it, see the PortaBase homepage "
-"(http://portabase.sourceforge.net)."
-msgstr "有關PortaBase的XML格式與相關的工具(比如轉換至HTML)的詳細資訊，請見PortaBase首頁(http://portabase.sourceforge.net)。"
+"useful things with it, see the PortaBase homepage (http://portabase.org)."
+msgstr ""

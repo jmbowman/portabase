@@ -1,5 +1,5 @@
 # Messages from preferences.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-22 01:24+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
+"PO-Revision-Date: 2017-04-02 20:28+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -238,10 +238,13 @@ msgstr "在\"字體\"區的外觀顯現卡你能選取任何可以用的字體�
 msgid ""
 "The \"Row Colors\" section contains two buttons which allow you to choose "
 "the colors which will be used for the backgrounds of rows in the data "
-"viewer, columns editor, view editor, and sorting editor.  Each button shows "
-"one of the current colors; clicking on one launches a color selection dialog"
-" in which you can pick a different color to use."
-msgstr "資料列顏色是用來選取顏色的按鈕，可用來指定資料檢視器、欄位編輯器、景觀編輯器與排序方式編輯器中資料列的背景色。每個按鈕各代表目前的一種顏色；在按 鈕上按一下會出現一個選擇顏色的對話盒供你選取其他的顏色。"
+"viewer, columns editor, view editor, and sorting editor.  The color selected"
+" by the second button is also used as the alternate row color in the row "
+"viewer.  Each button shows one of the current colors; clicking on one "
+"launches a color selection dialog in which you can pick a different color to"
+" use.  There is also a \"Reset\" button to revert to the system's default "
+"colors."
+msgstr ""
 
 # b383bbf6e5b346ca8f711e989f2dbcd9
 #: ../../preferences.txt:73

@@ -971,8 +971,8 @@ dans le filtre courant ?</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation type="vanished">Site web: http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>Site web: http://portabase.org</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -981,10 +981,6 @@ dans le filtre courant ?</translation>
     <message>
         <source>No such file exists</source>
         <translation>Un tel fichier n&apos;existe pas</translation>
-    </message>
-    <message>
-        <source>Web site at http://portabase.org</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

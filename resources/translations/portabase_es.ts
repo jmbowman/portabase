@@ -925,8 +925,8 @@ en el filtro actual?</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation type="vanished">Sitio web en http://portabase.sourceforge.net</translation>
+        <source>Web site at http://portabase.org</source>
+        <translation>Sitio web en http://portabase.org</translation>
     </message>
     <message>
         <source>PortaBase files</source>
@@ -975,10 +975,6 @@ You will not be able to save any changes you make.</source>
     </message>
     <message>
         <source>HTML files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Web site at http://portabase.org</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

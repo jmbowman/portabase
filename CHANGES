@@ -1,3 +1,8 @@
+2017-04-06  JMB  More translation updates
+
+    Updated assorted translation files, mainly due to a few text changes
+    in the help files to reflect recent changes.
+
 2017-04-04  JMB  Fixed code signing for Mac releases
 
     Updated the code signing for Mac OS X to work with the current app
