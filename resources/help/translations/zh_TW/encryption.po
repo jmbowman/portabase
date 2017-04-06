@@ -1,5 +1,5 @@
 # Messages from encryption.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 21:02+0000\n"
+"PO-Revision-Date: 2017-04-02 20:28+0000\n"
 "Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -77,6 +77,5 @@ msgstr "由於安全性與實作上的緣故，加密檔案的整個內容必需
 #: ../../encryption.txt:18
 msgid ""
 "For more information about encryption in PortaBase (including details on the"
-" algorithms used), see the PortaBase homepage "
-"(http://portabase.sourceforge.net)."
-msgstr "有關PortaBase中加密的詳細資訊(包含使用的演算法的細節)，請見PortaBase首頁(http://portabase.sourceforge.net)。"
+" algorithms used), see the PortaBase homepage (http://portabase.org)."
+msgstr ""

@@ -133,6 +133,13 @@
     </message>
 </context>
 <context>
+    <name>Calculator</name>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
@@ -313,15 +320,19 @@
 <context>
     <name>DBEditor</name>
     <message>
-        <source>Columns Editor</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>No columns defined</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>Press the &quot;Add&quot; button to create one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Press the &quot;+&quot; button to create one</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -387,10 +398,6 @@ the &quot;Import&quot; button to load lines from a text file</source>
 <context>
     <name>EnumManager</name>
     <message>
-        <source>Enum Manager</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>No enumerated column types defined</source>
         <translation type="unfinished"/>
     </message>
@@ -406,6 +413,10 @@ deleted:</source>
     </message>
     <message>
         <source>Continue?</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Enums</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -440,10 +451,6 @@ deleted:</source>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Image is too large to import</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -536,10 +543,6 @@ deleted:</source>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Create a new file from data in another format</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -758,6 +761,25 @@ deleted:</source>
         <source>All Columns</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Import a file</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Exit Fullscreen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Exit fullscreen mode</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>NoteEditor</name>
+    <message>
+        <source>Copy the selected text</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>NumberWidget</name>
@@ -928,15 +950,15 @@ current filter?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Web site at http://portabase.sourceforge.net</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>About %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>No such file exists</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Web site at http://portabase.org</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1118,6 +1140,10 @@ current filter?</source>
         <source>Thistle</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>PropertiesDialog</name>
@@ -1177,19 +1203,11 @@ current filter?</source>
 <context>
     <name>QMenuBar</name>
     <message>
-        <source>Preferences</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Quit %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>About Qt</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1245,6 +1263,25 @@ current filter?</source>
     </message>
     <message>
         <source>Not a valid MobileDB file</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>QQFileDialog</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Internal storage</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>SD card</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1639,7 +1676,7 @@ current filter?</source>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message>
         <source>Average length</source>
