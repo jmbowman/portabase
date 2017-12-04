@@ -206,7 +206,7 @@ QString Database::load()
 /**
  * Determine if the database file is encrypted or not.
  *
- @return True if the file is encrypted, false otherwise
+ * @return True if the file is encrypted, false otherwise
  */
 Crypto *Database::encryption()
 {
@@ -214,7 +214,7 @@ Crypto *Database::encryption()
 }
 
 /**
- * Reload the application settings for date and time formatting and screen
+ * Reload the application settings for "Any text column" conditions and screen
  * size.  Called when a file is first opened, and again whenever changes are
  * made in the Preferences dialog.
  */
@@ -226,7 +226,20 @@ void Database::updatePreferences()
 #else
     bool smallDefault = false;
 #endif
+    anyTextIncludesEnums = settings.value("General/AnyTextIncludesEnums", false).toBool();
     smallScreen = settings.value("General/SmallScreen", smallDefault).toBool();
+
+}
+
+/**
+ * Determine "any text column" conditions include enums in addition to string
+ * and note fields.
+ *
+ * @return True if enums are included, false otherwise
+ */
+bool Database::anyTextColumnIncludesEnums()
+{
+    return anyTextIncludesEnums;
 }
 
 /**

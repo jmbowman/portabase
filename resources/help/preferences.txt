@@ -30,6 +30,9 @@ The "General" tab contains the following options:
 **Use small-screen settings on this device**
   When checked, PortaBase uses default values for certain settings (such as column width, rows per page, etc.) which are more appropriate for small displays.  This can usually be guessed based on the operating system in use, but some netbooks and MIDs running PC operating systems might be better off with the small-screen settings.
 
+**Include enums in "Any text column" conditions**
+  When checked, filter conditions using "Any text column" as the subject will also operate on Enum columns in addition to the usual Strings and Notes.
+
 **Auto-rotate to match device orientation** (Maemo Fremantle only)
   When checked, the application will automatically switch between landscape and portrait display, depending on the current orientation of the device.
 

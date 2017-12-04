@@ -133,6 +133,9 @@ c4_View Condition::filter(c4_View dbview)
                 if (type == STRING || type == NOTE) {
                     textCols.append(name);
                 }
+                if (type >= FIRST_ENUM && db->anyTextColumnIncludesEnums()) {
+                    textCols.append(name);
+                }
             }
             count = textCols.count();
         }

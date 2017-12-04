@@ -110,6 +110,10 @@ void Preferences::addGeneralTab(QSettings *settings)
     smallScreen->setChecked(settings->value("SmallScreen", smallDefault).toBool());
     layout->addWidget(smallScreen);
 
+    anyTextIncludesEnums = new QCheckBox(tr("Include enums in \"Any text column\" conditions"));
+    anyTextIncludesEnums->setChecked(settings->value("AnyTextIncludesEnums", false).toBool());
+    layout->addWidget(anyTextIncludesEnums);
+
 #if defined(Q_WS_MAEMO_5)
     autoRotate = new QCheckBox(tr("Auto-rotate to match device orientation"),
                                generalTab);
@@ -442,6 +446,7 @@ QFont Preferences::applyChanges()
     settings.setValue("RowsPerPage", rowsPerPage->value());
 #endif
     settings.setValue("SmallScreen", smallScreen->isChecked());
+    settings.setValue("AnyTextIncludesEnums", anyTextIncludesEnums->isChecked());
     settings.endGroup();
 
 #if defined(Q_WS_MAEMO_5)
