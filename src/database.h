@@ -113,6 +113,7 @@ public:
     void deleteFilterColumn(const QString &filterName, const QString &columnName);
     int getConditionCount(const QString &filterName);
     Condition *getCondition(const QString &filterName, int index);
+    bool anyTextColumnIncludesEnums();
 
     QStringList listEnums();
     QStringList listEnumOptions(int id);
@@ -175,6 +176,7 @@ private:
     void calculateAll(int colId, CalcNode *root, int decimals);
 
 private:
+    bool anyTextIncludesEnums; /**< True if currently including enums in "Any text column" conditions */
     bool smallScreen; /**< True if currently using column widths and rows per page for small-screen devices */
     c4_Storage *file; /**< The data file */
     c4_Storage *storage; /**< The data file if unencrypted, wrapped data otherwise */

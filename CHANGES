@@ -1,3 +1,9 @@
+2017-12-03  JMB  Option to include enums in "Any text column" conditions
+
+    There is now a checkbox in the "General" preferences tab to include
+    enums as well as string and note fields in "Any text column" filter
+    conditions.  The default behavior is as before (enums excluded).
+
 2017-04-06  JMB  More translation updates
 
     Updated assorted translation files, mainly due to a few text changes
