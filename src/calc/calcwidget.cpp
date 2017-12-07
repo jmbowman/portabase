@@ -39,6 +39,7 @@ CalcWidget::CalcWidget(Database *dbase, const QString &calcName, const QStringLi
     QHBoxLayout *layout = Factory::hBoxLayout(this, true);
     display = new QLabel(this);
     layout->addWidget(display);
+    layout->setStretchFactor(display, 1);
     QAbstractButton *button = Factory::button(this);
     button->setIcon(Factory::icon("refresh"));
     button->setToolTip(tr("Update calculated value"));

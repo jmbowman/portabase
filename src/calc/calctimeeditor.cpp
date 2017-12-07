@@ -69,6 +69,9 @@ CalcTimeEditor::CalcTimeEditor(Database *dbase, const QStringList &colNames, int
         colButton->setEnabled(false);
     }
 
+#if defined(Q_OS_ANDROID)
+    vbox->addStretch(1);
+#endif
     finishLayout(parent->width() / 2);
 }
 
