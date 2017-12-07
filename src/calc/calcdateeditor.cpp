@@ -66,6 +66,9 @@ CalcDateEditor::CalcDateEditor(const QStringList &colNames, int *colTypes, QWidg
         colButton->setEnabled(false);
     }
 
+#if defined(Q_OS_ANDROID)
+    vbox->addStretch(1);
+#endif
     finishLayout();
 }
 

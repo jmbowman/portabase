@@ -1,3 +1,9 @@
+2017-12-07  JMB  Calculation editor layout fixes
+
+    Fixed the layout on Android for the dialogs to define and edit calculation
+    columns.  Also fixed the refresh button on calculation fields in the row
+    viewer to be an appropriate width.
+
 2017-12-03  JMB  Option to include enums in "Any text column" conditions
 
     There is now a checkbox in the "General" preferences tab to include

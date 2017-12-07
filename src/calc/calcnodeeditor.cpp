@@ -39,6 +39,7 @@ CalcNodeEditor::CalcNodeEditor(const QStringList &colNames, int *colTypes, bool 
 {
     group = new QButtonGroup(this);
     QGridLayout *grid = Factory::gridLayout(vbox);
+    vbox->setStretchFactor(grid, 1);
     QRadioButton *colButton = new QRadioButton(tr("Column"), this);
     group->addButton(colButton, 0);
     grid->addWidget(colButton, 0, 0);
