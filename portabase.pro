@@ -86,6 +86,7 @@ HEADERS         = src/calc/calcdateeditor.h \
                   src/qqutil/qqspinbox.h \
                   src/qqutil/qqtoolbar.h \
                   src/qqutil/qqtoolbarstretch.h \
+                  src/qqutil/qqtreeview.h \
                   src/roweditor.h \
                   src/rowviewer.h \
                   src/sorteditor.h \
@@ -162,6 +163,7 @@ SOURCES         = src/calc/calcdateeditor.cpp \
                   src/qqutil/qqspinbox.cpp \
                   src/qqutil/qqtoolbar.cpp \
                   src/qqutil/qqtoolbarstretch.cpp \
+                  src/qqutil/qqtreeview.cpp \
                   src/roweditor.cpp \
                   src/rowviewer.cpp \
                   src/sorteditor.cpp \

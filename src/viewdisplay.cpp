@@ -44,12 +44,14 @@
 #include "image/imageviewer.h"
 #include "image/slideshowdialog.h"
 #include "qqutil/qqspinbox.h"
+#include "qqutil/qqtreeview.h"
 
 #if QT_VERSION >= 0x050000
 #include <QScreen>
 #endif
 
 #if defined(Q_OS_ANDROID)
+#include <QInputMethod>
 #include "qqutil/actionbar.h"
 #endif
 
@@ -78,7 +80,7 @@ ViewDisplay::ViewDisplay(PortaBase *pbase, QWidget *parent) : QWidget(parent),
     noResults = new QLabel("<center>" + tr("No results") + "</center>", stack);
     stack->addWidget(noResults);
 
-    table = new QTreeView(stack);
+    table = new QQTreeView(stack);
     table->setUniformRowHeights(true);
     table->setSortingEnabled(false);
     table->setAllColumnsShowFocus(true);
@@ -924,6 +926,20 @@ void ViewDisplay::slideshow()
     }
     SlideshowDialog dialog(imageCols, view, this);
     dialog.exec();
+}
+
+/**
+ * Display the onscreen keyboard on Android to allow incremental search by
+ * typing the first few characters of a value in the left-most column.
+ */
+void ViewDisplay::incrementalSearch()
+{
+#if defined(Q_OS_ANDROID)
+    if (model->rowCount() > 0) {
+        table->setFocus();
+        qApp->inputMethod()->show();
+    }
+#endif
 }
 
 /**

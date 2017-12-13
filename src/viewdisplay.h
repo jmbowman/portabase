@@ -110,6 +110,7 @@ private slots:
     void matchNewView(View *view);
     void tableChanged();
     void screenGeometryChanged(const QRect &geometry);
+    void incrementalSearch();
 #if defined(Q_OS_ANDROID)
     void scrollerStateChanged(QScroller::State newState);
 #endif

@@ -1,3 +1,9 @@
+2017-12-12  JMB  Incremental search on Android
+
+    Added an action bar item to display the software keyboard so the
+    incremental search feature in the data viewer accessed via hardware
+    keyboards on other platforms can also be used on Android.
+
 2017-12-07  JMB  Calculation editor layout fixes
 
     Fixed the layout on Android for the dialogs to define and edit calculation

@@ -14,7 +14,7 @@ This is the main screen of the application, where you can browse the database's 
 Row display and navigation
 --------------------------
 
-Most of the data viewer screen is occupied by a table showing one view of a set of rows in the database.  You can scroll through the entire list of rows passing the current filter; performance stays good because only the data for the rows currently shown in the display is loaded.  Clicking on a row normally launches the :ref:`row viewer <row_viewer>` dialog; if you disabled this in the :ref:`preferences dialog <preferences>`, you can stil launch it by pressing enter/return, space, or Control-R (Command-R on the Mac) while a row is selected.
+Most of the data viewer screen is occupied by a table showing one view of a set of rows in the database.  You can scroll through the entire list of rows passing the current filter; performance stays good because only the data for the rows currently shown in the display is loaded.  Clicking on a row normally launches the :ref:`row viewer <row_viewer>` dialog; if you disabled this in the :ref:`preferences dialog <preferences>`, you can stil launch it by pressing enter/return, space, or Control-R (Command-R on the Mac) while a row is selected.  By typing characters while the data viewer is shown, you can search for the next row whose left-most column starts with that text.
 
 Clicking on a cell in the data display and holding down for 1/2 second or longer before releasing executes special functions.  If you do this on a cell in a Note column, the :ref:`note viewer <note_editor>` is displayed showing the content of that note.  When done on a cell in an Image column, the image contained in that cell is shown in the :ref:`image viewer <image_viewer>`.  If you do it in any other type of column, the :ref:`row editor <row_editor>` for the row you clicked on is launched.
 
@@ -193,6 +193,9 @@ There is a toolbar of buttons that provide quick access to commonly used operati
 
 **Quick Filter**
   Same as "Quick Filter" in the :ref:`Filter menu <filter_menu>`.
+
+**Incremental Search**
+  Show the software keyboard in order to search the left-most column by the entered text.  (Only on Android)
 
 **Fullscreen**
   Click this toolbar button to switch PortaBase to fullscreen mode or back to normal display mode.

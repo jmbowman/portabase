@@ -149,6 +149,8 @@ MenuActions::MenuActions(QObject *parent)
     textMap.insert(ExitFullscreen, tr("Exit Fullscreen"));
     toolTipMap.insert(Fullscreen, tr("View PortaBase in fullscreen mode"));
     toolTipMap.insert(ExitFullscreen, tr("Exit fullscreen mode"));
+
+    textMap.insert(IncrementalSearch, tr("Incremental Search"));
 }
 
 /**
