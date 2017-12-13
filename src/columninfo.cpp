@@ -60,7 +60,6 @@ ColumnInfoDialog::ColumnInfoDialog(QWidget *parent)
 bool ColumnInfoDialog::launch(View *currentView, const QString &colName)
 {
     view = currentView;
-    edited = false;
     columns->clear();
     columns->addItems(view->getColNames());
     int i;
@@ -75,6 +74,7 @@ bool ColumnInfoDialog::launch(View *currentView, const QString &colName)
         columns->setCurrentIndex(i);
         colWidth->setValue(view->getColWidth(i));
     }
+    edited = false;
     if (exec()) {
         if (edited) {
             for (i = 0; i < columns->count(); i++) {
@@ -107,7 +107,9 @@ void ColumnInfoDialog::columnSelected(int index)
     display->setHtml(content.join(""));
     QVariant width = columns->itemData(index);
     if (width.isValid()) {
+        bool oldEdited = edited;
         colWidth->setValue(width.toInt());
+        edited = oldEdited;
     }
 }
 
