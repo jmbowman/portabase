@@ -1,3 +1,11 @@
+2017-12-13  JMB  Fix modification tracking in column statistics dialog
+
+    There was a minor bug in the column statistics dialog where it would
+    consider there to have been a change needing to be saved anytime the
+    "OK" button was clicked, even if no column widths were actually
+    modified.  Fixed to only mark the file as needing to be saved if such
+    a width modification is actually made.
+
 2017-12-12  JMB  Incremental search on Android
 
     Added an action bar item to display the software keyboard so the
@@ -28,6 +36,8 @@
     it to be signed on OS X 10.11.5 or above.  This should fix the
     "unidentified developer" warnings that people have started seeing with
     the previous PortaBase release on newer OS versions.
+
+2017-04-02  ############# PortaBase 2.2 (Android only) #############
 
 2017-04-02  JMB  Release preparation and assorted bugfixes
 
