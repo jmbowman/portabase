@@ -78,7 +78,8 @@ public:
         Sortings,
         Filters,
         Fullscreen,
-        ExitFullscreen
+        ExitFullscreen,
+        IncrementalSearch
     };
     typedef QMap< Item, QString > PhraseMap;
     typedef QMap< Item, QKeySequence > ShortcutMap;

@@ -24,6 +24,7 @@
      <file alias="help.svg">icons/android/ic_help_black_24px.svg</file>
      <file alias="image.svg">icons/android/ic_image_24px.svg</file>
      <file alias="import.svg">icons/android/ic_system_update_alt_24px.svg</file>
+     <file alias="keyboard.svg">icons/android/ic_keyboard_24px.svg</file>
      <file alias="menu.svg">icons/android/ic_menu_24px.svg</file>
      <file alias="new.svg">icons/android/ic_add_box_24px.svg</file>
      <file alias="note.svg">icons/android/ic_note_24px.svg</file>

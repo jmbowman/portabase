@@ -158,6 +158,7 @@ private:
     QAction *sortingsAction; /**< Toolbar "Sortings" action */
     QAction *filtersAction; /**< Toolbar "Filters" action */
     QAction *fullscreenAction; /**< Toolbar "Fullscreen" action */
+    QAction *incrementalSearchAction; /**< Android action bar "Incremental Search" action */
     QMenu *row; /**< "Row" Menu */
     QMenu *view; /**< "View" Menu */
     QMenu *sort; /**< "Sort" Menu */

@@ -230,6 +230,10 @@ PortaBase::PortaBase(QWidget *parent)
     fullscreenAction = ma->action(MenuActions::Fullscreen, Factory::icon("fullscreen"));
     fullscreenAction->setCheckable(true);
     connect(fullscreenAction, SIGNAL(triggered()), this, SLOT(toggleFullscreen()));
+#if defined(Q_OS_ANDROID)
+    incrementalSearchAction = ma->action(MenuActions::IncrementalSearch, Factory::icon("keyboard"));
+    connect(incrementalSearchAction, SIGNAL(triggered(bool)), viewer, SLOT(incrementalSearch()));
+#endif
 
     // Add menus to menubar
 #ifndef MOBILE
@@ -276,6 +280,7 @@ PortaBase::PortaBase(QWidget *parent)
     dbActionBar->addButton(sortingsAction);
     dbActionBar->addButton(slideshowAction);
     dbActionBar->addButton(fullscreenAction);
+    dbActionBar->addButton(incrementalSearchAction);
     dbActionBar->addButton(mh->action(QQMenuHelper::Preferences));
     dbActionBar->addButton(mh->action(QQMenuHelper::Help));
 #endif
