@@ -312,6 +312,7 @@ void QQMenuHelper::loadSettings(QSettings *settings)
  * <li>Updates the list of most recently opened files.</li>
  * <li>Updates the last directory where the application either opened or saved
  * a document file</li>
+ * <li>On macOS, saves the current toolbar configuration</li>
  * </ul>
  * @param settings The QSettings object to be updated.
  */
