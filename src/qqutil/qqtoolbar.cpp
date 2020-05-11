@@ -145,7 +145,7 @@ void QQToolBar::add(QAction *action)
 
 /**
  * Load saved toolbar configuration options.  Primarily called by
- * QQMenuHelper, and currently only does anything on Mac OS X (where it
+ * QQMenuHelper, and currently only does anything on macOS (where it
  * handles icon size, icon and/or text preference, and the set of buttons
  * currently shown).
  *
@@ -188,6 +188,9 @@ void QQToolBar::loadSettings(QSettings *settings)
 void QQToolBar::saveSettings(QSettings *settings)
 {
 #if defined(Q_OS_MAC)
+    if (QQToolBar::currentToolBar != this) {
+        return;
+    }
     settings->beginGroup(identifier);
     settings->setValue("displayMode", QQMacToolBarUtils::displayMode(toolBar));
     settings->setValue("sizeMode", QQMacToolBarUtils::sizeMode(toolBar));
@@ -222,6 +225,8 @@ void QQToolBar::show()
     }
 #if defined(Q_OS_MAC)
     if (QQToolBar::currentToolBar) {
+        QSettings settings;
+        QQToolBar::currentToolBar->saveSettings(&settings);
         QQMacToolBarUtils::copyState(QQToolBar::currentToolBar->toolBar, toolBar);
     }
     toolBar->attachToWindow(mainWindow->window()->windowHandle());
