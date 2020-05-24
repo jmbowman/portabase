@@ -56,15 +56,15 @@
     <name>QApplication</name>
     <message>
         <source>Activate</source>
-        <translation type="unfinished"/>
+        <translation>Attiva</translation>
     </message>
     <message>
         <source>Activates the program&apos;s main window</source>
-        <translation type="unfinished"/>
+        <translation>Attiva la finestra principale del programma</translation>
     </message>
     <message>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
-        <translation>L&apos;eseguibile &apos;%1&apos; richiede Qt %2, trovata Qt %3.</translation>
+        <translation>L&apos;eseguibile &apos;%1&apos; richiede Qt %2, trovato Qt %3.</translation>
     </message>
     <message>
         <source>Incompatible Qt Library Error</source>
@@ -73,22 +73,22 @@
     <message>
         <source>QT_LAYOUT_DIRECTION</source>
         <comment>Translate this string to the string 'LTR' in left-to-right languages or to 'RTL' in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
-        <translation>LTR</translation>
+        <translation>QT_LAYOUT_DIRECTION</translation>
     </message>
 </context>
 <context>
     <name>QCheckBox</name>
     <message>
         <source>Uncheck</source>
-        <translation type="unfinished"/>
+        <translation>Deseleziona</translation>
     </message>
     <message>
         <source>Check</source>
-        <translation type="unfinished"/>
+        <translation>Seleziona</translation>
     </message>
     <message>
         <source>Toggle</source>
-        <translation type="unfinished"/>
+        <translation>Cambia</translation>
     </message>
 </context>
 <context>
@@ -150,22 +150,22 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"/>
+        <translation>Apri</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Chiudi</translation>
     </message>
 </context>
 <context>
     <name>QDialog</name>
     <message>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>Fatto</translation>
     </message>
     <message>
         <source>What&apos;s This?</source>
-        <translation>Che cos&apos;Ã¨?</translation>
+        <translation>Che cos&apos;è?</translation>
     </message>
 </context>
 <context>
@@ -324,7 +324,7 @@
     </message>
     <message>
         <source>No file engine available or engine does not support UnMapExtension</source>
-        <translation type="unfinished"/>
+        <translation>Nessun motore file eseguibile, o il motore non supporta UnMapExtension</translation>
     </message>
 </context>
 <context>
@@ -472,14 +472,14 @@ Verifica che sia stato inserito il nome corretto del file.</translation>
         <translation>Nuova cartella</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
         <translation>&apos;%1&apos; Ã¨ protetto da scrittura.
 Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete &apos;%1&apos;?</source>
-        <translation>Sei sicuro di voler eliminare &apos;%1&apos;?</translation>
+        <source>Are sure you want to delete &apos;%1&apos;?</source>
+        <translation>Vuoi davvero cancellare &apos;%1&apos;?</translation>
     </message>
     <message>
         <source>Could not delete directory.</source>
@@ -518,11 +518,6 @@ Vuoi eliminarlo comunque?</translation>
         <source>Folder</source>
         <comment>All other platforms</comment>
         <translation>Cartella</translation>
-    </message>
-    <message>
-        <source>Alias</source>
-        <comment>OS X Finder</comment>
-        <translation>Alias</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -624,7 +619,6 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Demi</source>
-        <extracomment>The word for &quot;Demi&quot; as in &quot;Demi Bold&quot; used as a pattern for string searches</extracomment>
         <translation>Semi</translation>
     </message>
     <message>
@@ -688,6 +682,10 @@ Vuoi eliminarlo comunque?</translation>
         <translation>Gurmukhi</translation>
     </message>
     <message>
+        <source>Gujarati</source>
+        <translation>Gujarati</translation>
+    </message>
+    <message>
         <source>Oriya</source>
         <translation>Oriya</translation>
     </message>
@@ -717,7 +715,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Lao</source>
-        <translation>Lao</translation>
+        <translation>Laotiano</translation>
     </message>
     <message>
         <source>Tibetan</source>
@@ -775,47 +773,38 @@ Vuoi eliminarlo comunque?</translation>
 <context>
     <name>QFontDialog</name>
     <message>
-        <location filename="../../qtbase/src/widgets/dialogs/qfontdialog.cpp" line="+177"/>
         <source>Select Font</source>
         <translation>Seleziona carattere</translation>
     </message>
     <message>
-        <location line="+594"/>
         <source>&amp;Font</source>
         <translation>&amp;Carattere</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Font st&amp;yle</source>
         <translation>St&amp;ile del carattere</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>&amp;Size</source>
         <translation>Dimen&amp;sione</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Effects</source>
         <translation>Effetti</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Stri&amp;keout</source>
         <translation>Ba&amp;rrato</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>&amp;Underline</source>
         <translation>Sottolineat&amp;o</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Sample</source>
         <translation>Esempio</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Wr&amp;iting System</source>
         <translation>Sistema di scr&amp;ittura</translation>
     </message>
@@ -823,31 +812,22 @@ Vuoi eliminarlo comunque?</translation>
 <context>
     <name>QIODevice</name>
     <message>
-        <location filename="../../qtbase/src/corelib/global/qglobal.cpp" line="+3099"/>
-        <location filename="../../qtbase/src/corelib/kernel/qsystemerror.cpp" line="+116"/>
         <source>Permission denied</source>
         <translation>Permesso negato</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location filename="../../qtbase/src/corelib/kernel/qsystemerror.cpp" line="+3"/>
         <source>Too many open files</source>
         <translation>Troppi file aperti</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location filename="../../qtbase/src/corelib/kernel/qsystemerror.cpp" line="+3"/>
         <source>No such file or directory</source>
         <translation>File o cartella non trovati</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location filename="../../qtbase/src/corelib/kernel/qsystemerror.cpp" line="+3"/>
         <source>No space left on device</source>
         <translation>Spazio esaurito sul dispositivo</translation>
     </message>
     <message>
-        <location filename="../../qtbase/src/corelib/io/qiodevice.cpp" line="+1597"/>
         <source>Unknown error</source>
         <translation>Errore sconosciuto</translation>
     </message>
@@ -855,37 +835,30 @@ Vuoi eliminarlo comunque?</translation>
 <context>
     <name>QLineEdit</name>
     <message>
-        <location filename="../../qtbase/src/widgets/widgets/qlineedit.cpp" line="+2099"/>
         <source>&amp;Undo</source>
         <translation>Ann&amp;ulla</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>&amp;Redo</source>
         <translation>&amp;Rifai</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Taglia</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copia</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>&amp;Paste</source>
         <translation>&amp;Incolla</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Delete</source>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Select All</source>
         <translation>Seleziona tutto</translation>
     </message>
@@ -894,63 +867,55 @@ Vuoi eliminarlo comunque?</translation>
     <name>QMenu</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"/>
+        <translation>Apri</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"/>
+        <translation>Esegui</translation>
     </message>
 </context>
 <context>
     <name>QMenuBar</name>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"/>
+        <translation>Azioni</translation>
     </message>
     <message>
         <source>Corner Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Barra strumenti d&apos;angolo</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../qtbase/src/widgets/dialogs/qmessagebox.cpp" line="-2325"/>
         <source>Show Details...</source>
         <translation>Mostra dettagli...</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Hide Details...</source>
         <translation>Nascondi dettagli...</translation>
     </message>
     <message>
-        <location line="+286"/>
-        <location line="+921"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Help</source>
         <translation>Aiuto</translation>
     </message>
     <message>
-        <location line="+503"/>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Informazioni su Qt&lt;/h3&gt;&lt;p&gt;Questo programma usa la versione %1 di Qt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across all major desktop operating systems. It is also available for embedded Linux and other embedded and mobile operating systems.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 3 or GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 3 is appropriate for the development of Qt&amp;nbsp;applications provided you can comply with the terms and conditions of the GNU LGPL version 3.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt&amp;nbsp;applications provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://%2/&quot;&gt;%2&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) %1 The Qt Company Ltd and other contributors.&lt;/p&gt;&lt;p&gt;Qt and the Qt logo are trademarks of The Qt Company Ltd.&lt;/p&gt;&lt;p&gt;Qt is The Qt Company Ltd product developed as an open source project. See &lt;a href=&quot;http://%3/&quot;&gt;%3&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation></translation>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+30"/>
         <source>About Qt</source>
         <translation>Informazioni su Qt</translation>
     </message>
@@ -969,82 +934,66 @@ Vuoi eliminarlo comunque?</translation>
 <context>
     <name>QPageSetupWidget</name>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qpagesetupwidget.ui"/>
         <source>Form</source>
         <translation>Modulo</translation>
     </message>
     <message>
-        <location/>
         <source>Paper</source>
         <translation>Carta</translation>
     </message>
     <message>
-        <location/>
         <source>Page size:</source>
         <translation>Dimensione della pagina:</translation>
     </message>
     <message>
-        <location/>
         <source>Width:</source>
         <translation>Larghezza:</translation>
     </message>
     <message>
-        <location/>
         <source>Height:</source>
         <translation>Altezza:</translation>
     </message>
     <message>
-        <location/>
         <source>Paper source:</source>
         <translation>Alimentazione della carta:</translation>
     </message>
     <message>
-        <location/>
         <source>Orientation</source>
         <translation>Orientamento</translation>
     </message>
     <message>
-        <location/>
         <source>Portrait</source>
         <translation>Verticale</translation>
     </message>
     <message>
-        <location/>
         <source>Landscape</source>
         <translation>Orizzontale</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse landscape</source>
         <translation>Orizzontale inverso</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse portrait</source>
         <translation>Verticale inverso</translation>
     </message>
     <message>
-        <location/>
         <source>Margins</source>
         <translation>Margini</translation>
     </message>
     <message>
-        <location/>
         <source>top margin</source>
         <translation>margine superiore</translation>
     </message>
     <message>
-        <location/>
         <source>left margin</source>
         <translation>margine sinistro</translation>
     </message>
     <message>
-        <location/>
         <source>right margin</source>
         <translation>margine destro</translation>
     </message>
     <message>
-        <location/>
         <source>bottom margin</source>
         <translation>margine inferiore</translation>
     </message>
@@ -1053,17 +1002,14 @@ Vuoi eliminarlo comunque?</translation>
         <translation>Centimetri (cm)</translation>
     </message>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qpagesetupdialog_unix.cpp" line="+277"/>
         <source>Millimeters (mm)</source>
         <translation>Millimetri (mm)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Inches (in)</source>
         <translation>Pollici (in)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Points (pt)</source>
         <translation>Punti (pt)</translation>
     </message>
@@ -1071,9 +1017,6 @@ Vuoi eliminarlo comunque?</translation>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qabstractprintdialog.cpp" line="+106"/>
-        <location line="+16"/>
-        <location filename="../../qtbase/src/printsupport/dialogs/qprintdialog_win.cpp" line="+258"/>
         <source>Print</source>
         <translation>Stampa</translation>
     </message>
@@ -1346,23 +1289,18 @@ Vuoi eliminarlo comunque?</translation>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+6"/>
-        <location line="+161"/>
         <source>&amp;Options &gt;&gt;</source>
         <translation>&amp;Opzioni &gt;&gt;</translation>
     </message>
     <message>
-        <location line="-156"/>
         <source>&amp;Print</source>
         <translation>Stam&amp;pa</translation>
     </message>
     <message>
-        <location line="+160"/>
         <source>&amp;Options &lt;&lt;</source>
         <translation>&amp;Opzioni &lt;&lt;</translation>
     </message>
     <message>
-        <location line="+211"/>
         <source>Print to File (PDF)</source>
         <translation>Stampa su file (PDF)</translation>
     </message>
@@ -1371,7 +1309,6 @@ Vuoi eliminarlo comunque?</translation>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+48"/>
         <source>Local file</source>
         <translation>File locale</translation>
     </message>
@@ -1380,38 +1317,32 @@ Vuoi eliminarlo comunque?</translation>
         <translation>Scrivi file %1</translation>
     </message>
     <message>
-        <location line="+37"/>
         <source>Print To File ...</source>
         <translation>Stampa su file...</translation>
     </message>
     <message>
-        <location line="+67"/>
         <source>%1 is a directory.
 Please choose a different file name.</source>
         <translation>%1 Ã¨ una cartella.
 Seleziona un nome diverso per il file.</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>File %1 is not writable.
 Please choose a different file name.</source>
         <translation>Il file %1 non Ã¨ scrivibile.
 Seleziona un nome diverso per il file.</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>%1 already exists.
 Do you want to overwrite it?</source>
         <translation>%1 esiste giÃ .
 Vuoi sostituirlo?</translation>
     </message>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qprintdialog_win.cpp" line="+1"/>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
         <translation>Il valore di &quot;Da&quot; non puÃ² essere maggiore del valore di &quot;A&quot;.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -1431,95 +1362,74 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QPrintPreviewDialog</name>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qpagesetupdialog_unix.cpp" line="+295"/>
-        <location line="+8"/>
-        <location filename="../../qtbase/src/printsupport/dialogs/qpagesetupdialog_win.cpp" line="+49"/>
-        <location line="+7"/>
         <source>Page Setup</source>
         <translation>Impostazione pagina</translation>
     </message>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qprintpreviewdialog.cpp" line="+248"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location line="+81"/>
         <source>Print Preview</source>
         <translation>Anteprima di stampa</translation>
     </message>
     <message>
-        <location line="+30"/>
         <source>Next page</source>
         <translation>Pagina successiva</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Previous page</source>
         <translation>Pagina precedente</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>First page</source>
         <translation>Prima pagina</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Last page</source>
         <translation>Ultima pagina</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Fit width</source>
         <translation>Adatta alla larghezza</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Fit page</source>
         <translation>Adatta alla pagina</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Zoom in</source>
         <translation>Ingrandisci</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Zoom out</source>
         <translation>Rimpicciolisci</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Portrait</source>
         <translation>Verticale</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Landscape</source>
         <translation>Orizzontale</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Show single page</source>
         <translation>Mostra pagina singola</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Show facing pages</source>
         <translation>Mostra pagine affiancate</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Show overview of all pages</source>
         <translation>Mostra anteprima di tutte le pagine</translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>Print</source>
         <translation>Stampa</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Page setup</source>
         <translation>Impostazione pagina</translation>
     </message>
@@ -1528,7 +1438,6 @@ Vuoi sostituirlo?</translation>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+147"/>
         <source>Export to PDF</source>
         <translation>Esporta come PDF</translation>
     </message>
@@ -1540,12 +1449,10 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QPrintPropertiesWidget</name>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qprintpropertieswidget.ui"/>
         <source>Form</source>
         <translation>Modulo</translation>
     </message>
     <message>
-        <location/>
         <source>Page</source>
         <translation>Pagina</translation>
     </message>
@@ -1557,102 +1464,82 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QPrintSettingsOutput</name>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qprintsettingsoutput.ui"/>
         <source>Form</source>
         <translation>Modulo</translation>
     </message>
     <message>
-        <location/>
         <source>Copies</source>
         <translation>Copie</translation>
     </message>
     <message>
-        <location/>
         <source>Print range</source>
         <translation>Stampa intervallo</translation>
     </message>
     <message>
-        <location/>
         <source>Print all</source>
         <translation>Stampa tutto</translation>
     </message>
     <message>
-        <location/>
         <source>Pages from</source>
         <translation>Pagine da</translation>
     </message>
     <message>
-        <location/>
         <source>to</source>
         <translation>a</translation>
     </message>
     <message>
-        <location/>
         <source>Current Page</source>
         <translation>Pagina corrente</translation>
     </message>
     <message>
-        <location/>
         <source>Selection</source>
         <translation>Selezione</translation>
     </message>
     <message>
-        <location/>
         <source>Output Settings</source>
         <translation>Impostazioni di uscita</translation>
     </message>
     <message>
-        <location/>
         <source>Copies:</source>
         <translation>Copie:</translation>
     </message>
     <message>
-        <location/>
         <source>Collate</source>
         <translation>Fascicola</translation>
     </message>
     <message>
-        <location/>
         <source>Reverse</source>
         <translation>Ordine inverso</translation>
     </message>
     <message>
-        <location/>
         <source>Options</source>
         <translation>Opzioni</translation>
     </message>
     <message>
-        <location/>
         <source>Color Mode</source>
         <translation>ModalitÃ  colore</translation>
     </message>
     <message>
-        <location/>
         <source>Color</source>
         <translation>Colore</translation>
     </message>
     <message>
-        <location/>
         <source>Grayscale</source>
         <translation>Scala di grigi</translation>
     </message>
     <message>
-        <location/>
         <source>Duplex Printing</source>
         <translation>Stampa fronte/retro</translation>
     </message>
     <message>
-        <location/>
         <source>None</source>
         <translation>Nessuno</translation>
     </message>
     <message>
-        <location/>
         <source>Long side</source>
         <translation>Lato lungo</translation>
     </message>
     <message>
-        <location/>
         <source>Short side</source>
         <translation>Lato corto</translation>
     </message>
@@ -1660,47 +1547,38 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QPrintWidget</name>
     <message>
-        <location filename="../../qtbase/src/printsupport/dialogs/qprintwidget.ui"/>
         <source>Form</source>
         <translation>Modulo</translation>
     </message>
     <message>
-        <location/>
         <source>Printer</source>
         <translation>Stampante</translation>
     </message>
     <message>
-        <location/>
         <source>&amp;Name:</source>
         <translation>&amp;Nome:</translation>
     </message>
     <message>
-        <location/>
         <source>P&amp;roperties</source>
         <translation>P&amp;roprietÃ </translation>
     </message>
     <message>
-        <location/>
         <source>Location:</source>
         <translation>Posizione:</translation>
     </message>
     <message>
-        <location/>
         <source>Preview</source>
         <translation>Anteprima</translation>
     </message>
     <message>
-        <location/>
         <source>Type:</source>
         <translation>Tipo:</translation>
     </message>
     <message>
-        <location/>
         <source>Output &amp;file:</source>
         <translation>&amp;File di output:</translation>
     </message>
     <message>
-        <location/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -1722,67 +1600,54 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QScrollBar</name>
     <message>
-        <location filename="../../qtbase/src/widgets/widgets/qscrollbar.cpp" line="+414"/>
         <source>Scroll here</source>
         <translation>Scorri qui</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Left edge</source>
         <translation>Margine sinistro</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Top</source>
         <translation>Cima</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Right edge</source>
         <translation>Margine destro</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Bottom</source>
         <translation>Fondo</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Page left</source>
         <translation>Pagina a sinistra</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Page up</source>
         <translation>Pagina su</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Page right</source>
         <translation>Pagina a destra</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Page down</source>
         <translation>Pagina giÃ¹</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Scroll left</source>
         <translation>Scorri a sinistra</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Scroll up</source>
         <translation>Scorri in alto</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Scroll right</source>
         <translation>Scorri a destra</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Scroll down</source>
         <translation>Scorri in basso</translation>
     </message>
@@ -1855,12 +1720,10 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QTabBar</name>
     <message>
-        <location filename="../../qtbase/src/widgets/widgets/qtabbar.cpp" line="-2064"/>
         <source>Scroll Left</source>
         <translation>Scorri a sinistra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Scroll Right</source>
         <translation>Scorri a destra</translation>
     </message>
@@ -1934,23 +1797,19 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QUndoGroup</name>
     <message>
-        <location filename="../../qtbase/src/widgets/util/qundogroup.cpp" line="+381"/>
         <source>Undo %1</source>
         <translation>Annulla %1</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Undo</source>
         <comment>Default text for undo action</comment>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location line="+31"/>
         <source>Redo %1</source>
         <translation>Rifai %1</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Redo</source>
         <comment>Default text for redo action</comment>
         <translation>Rifai</translation>
@@ -1959,7 +1818,6 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QUndoModel</name>
     <message>
-        <location filename="../../qtbase/src/widgets/util/qundoview.cpp" line="+93"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;vuoto&gt;</translation>
     </message>
@@ -1967,23 +1825,19 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QUndoStack</name>
     <message>
-        <location filename="../../qtbase/src/widgets/util/qundostack.cpp" line="+875"/>
         <source>Undo %1</source>
         <translation>Annulla %1</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Undo</source>
         <comment>Default text for undo action</comment>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location line="+30"/>
         <source>Redo %1</source>
         <translation>Rifai %1</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Redo</source>
         <comment>Default text for redo action</comment>
         <translation>Rifai</translation>
@@ -1992,57 +1846,46 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QUnicodeControlCharacterMenu</name>
     <message>
-        <location filename="../../qtbase/src/widgets/widgets/qwidgettextcontrol.cpp" line="+3233"/>
         <source>LRM Left-to-right mark</source>
         <translation>LRM indicatore di direzione da sinistra a destra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>RLM Right-to-left mark</source>
         <translation>RLM indicatore di direzione da destra a sinistra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>ZWJ Zero width joiner</source>
         <translation>ZWJ carattere congiungente di ampiezza zero</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>ZWNJ Zero width non-joiner</source>
         <translation>ZWNJ carattere non congiungente di ampiezza zero</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>ZWSP Zero width space</source>
         <translation>ZWSP spazio di ampiezza zero</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>LRE Start of left-to-right embedding</source>
         <translation>LRE inizio incorporamento da sinistra a destra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>RLE Start of right-to-left embedding</source>
         <translation>RLE inizio incorporamento da destra a sinistra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>LRO Start of left-to-right override</source>
         <translation>LRO inizio forzatura da sinistra a destra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>RLO Start of right-to-left override</source>
         <translation>RLO inizio forzatura da destra a sinistra</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>PDF Pop directional formatting</source>
         <translation>PDF ripristina impostazioni di direzione del testo</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Insert Unicode control character</source>
         <translation>Inserisci carattere di controllo Unicode</translation>
     </message>
@@ -2050,7 +1893,6 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <location filename="../../qtbase/src/widgets/kernel/qwhatsthis.cpp" line="+494"/>
         <source>What&apos;s This?</source>
         <translation>Che cos&apos;Ã¨?</translation>
     </message>
@@ -2058,7 +1900,6 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../../qtbase/src/widgets/kernel/qwidget.cpp" line="+6060"/>
         <source>*</source>
         <translation>*</translation>
     </message>
@@ -2066,117 +1907,94 @@ Vuoi sostituirlo?</translation>
 <context>
     <name>QXml</name>
     <message>
-        <location filename="../../qtbase/src/xml/sax/qxml.cpp" line="+52"/>
         <source>no error occurred</source>
         <translation>nessun errore rilevato</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error triggered by consumer</source>
         <translation>errore causato dal consumatore</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>unexpected end of file</source>
         <translation>fine del file inattesa</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>more than one document type definition</source>
         <translation>definizione di piÃ¹ di un tipo di documento</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error occurred while parsing element</source>
         <translation>errore durante l&apos;analisi dell&apos;elemento</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>tag mismatch</source>
         <translation>tag non corrispondente</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error occurred while parsing content</source>
         <translation>errore durante l&apos;analisi del contenuto</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>unexpected character</source>
         <translation>carattere non previsto</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>invalid name for processing instruction</source>
         <translation>nome non valido per l&apos;istruzione di elaborazione</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>version expected while reading the XML declaration</source>
         <translation>prevista versione nella lettura della dichiarazione XML</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>wrong value for standalone declaration</source>
         <translation>valore errato per la dichiarazione standalone</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
         <translation>prevista dichiarazione di codifica o dichiarazione standalone durante la lettura della dichiarazione XML</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>standalone declaration expected while reading the XML declaration</source>
         <translation>prevista dichiarazione standalone durante la lettura della dichiarazione XML</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error occurred while parsing document type definition</source>
         <translation>si Ã¨ verificato un errore nell&apos;analisi della definizione del documento</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>letter is expected</source>
         <translation>lettera prevista</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error occurred while parsing comment</source>
         <translation>errore durante l&apos;analisi del commento</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error occurred while parsing reference</source>
         <translation>errore durante l&apos;analisi del riferimento</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>internal general entity reference not allowed in DTD</source>
         <translation>riferimento all&apos;entitÃ  generale interna non consentito nella DTD</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>external parsed general entity reference not allowed in attribute value</source>
         <translation>riferimento ad entitÃ  esterna generale analizzata non consentito in un valore di attributo</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>external parsed general entity reference not allowed in DTD</source>
         <translation>riferimento a entitÃ  esterna generale analizzata non consetito nella DTD</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>unparsed entity reference in wrong context</source>
         <translation>riferimento ad entitÃ  non analizzato nel contesto errato</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>recursive entities</source>
         <translation>entitÃ  ricorsive</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>error in the text declaration of an external entity</source>
         <translation>errore nella dichiarazione testuale di una entitÃ  esterna</translation>
     </message>

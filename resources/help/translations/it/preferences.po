@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
+# maurizio codogno <dotmaudot@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2017-04-02 20:28+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"PO-Revision-Date: 2017-09-23 12:04+0000\n"
+"Last-Translator: maurizio codogno <dotmaudot@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 # f9252050ecc74ea39a83cb6b96ae95ca
 #: ../../preferences.txt:4
 msgid "Preferences dialog"
-msgstr ""
+msgstr "Finestra di dialogo preferenze"
 
 # 911674ae10de4a69af485d15ebc25260
 #: ../../preferences.txt:6
@@ -28,29 +29,29 @@ msgid ""
 "This dialog allows you to set your preferences for the PortaBase "
 "application.  Click \"OK\"/\"Done\" to accept the current preferences on all"
 " tabs, or cancel out of the dialog to leave them unchanged.  The tabs are:"
-msgstr ""
+msgstr "Questa finestra di dialogo permette di assegnare le preferenze per l'applicazione PortaBase. Clicca \"OK\"/\"Done\" per accettare le preferenze attuali su tutti i tab, oppure cancella la finestra per lasciare tutto com'è. I tab sono:"
 
 # 885b85b40c324598b9837cfbe2a40db1
 #: ../../preferences.txt:12
 msgid ""
 "Maemo Fremantle doesn't use tabs in this dialog; all preferences are shown "
 "in a scrollable list."
-msgstr ""
+msgstr "Maemo Fremantle non usa tab in questa finestra di dialogo; tutte le preferenze sono mostrate in una lista scorrevole."
 
 # ec40c44712d74bbb994f93e51df6ad5d
 #: ../../preferences.txt:17
 msgid "General"
-msgstr ""
+msgstr "Generali"
 
 # 8ddf2764f9004e54abafdf1be8dd5369
 #: ../../preferences.txt:19
 msgid "The \"General\" tab contains the following options:"
-msgstr ""
+msgstr "Il tab \"generali\" contiene le seguenti opzioni:"
 
 # 8d61d5f812bf4a99aae03e6b347821cb
 #: ../../preferences.txt:22
 msgid "**Confirm deletions**"
-msgstr ""
+msgstr "**Conferma eliminazioni**"
 
 # 97885629eff045b8a6bad46a9948783c
 #: ../../preferences.txt:22
@@ -58,12 +59,12 @@ msgid ""
 "Check this to show a confirmation dialog whenever you attempt to delete a "
 "row, view, sorting, or filter.  This makes it less likely that you will "
 "accidentally delete something when you meant to click on something else."
-msgstr ""
+msgstr "Se selezionato, mostra una finestra di dialogo di conferma ogni volta che cerchi di cancellare una riga, vista, ordinamento o filtro. Ciò rende più difficile cancellare per sbaglio qualcosa mentre volevi cliccare qualcos'altro."
 
 # 4abae8964a1d446782dc787b5b3b6813
 #: ../../preferences.txt:25
 msgid "**Allow checkbox edit in data viewer**"
-msgstr ""
+msgstr "**Permetti modifiche delle checkbox nel visualizzatore dati**"
 
 # a0c4c33c281e46d39fa5b0e819c8f00a
 #: ../../preferences.txt:25
@@ -72,7 +73,7 @@ msgid ""
 "viewer <data_viewer>` by clicking on the appropriate cell.  This makes it "
 "more convenient to use PortaBase as a todo list or such, but also makes it "
 "easier to accidentally change a data value."
-msgstr ""
+msgstr "Se selezionato, puoi cambiare i valori booleani mostrati nel :ref:`visualizzatore dati <data_viewer>` cliccando sulla cella appropriata. Questo rende più semplice usare PortaBase come lista di cose da fare, ma aumenta il rischio di modificare per sbaglio un valore."
 
 # f03f4260c3de49cfb473c5e48f3c90f1
 #: ../../preferences.txt:28

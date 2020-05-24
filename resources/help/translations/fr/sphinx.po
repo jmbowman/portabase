@@ -6,6 +6,7 @@
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2013,2015
 # danypoup <dany@poupard.nom.fr>, 2012
 # Larlet David <david@larlet.fr>, 2008
+# a270031086f2a0d3514bc0cb507b48f6, 2019
 # fgallaire <fgallaire@gmail.com>, 2010
 # fgallaire <fgallaire@gmail.com>, 2010
 # François Poirotte <clicky@erebot.net>, 2016
@@ -20,8 +21,8 @@ msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2016-11-06 22:40+0900\n"
-"PO-Revision-Date: 2017-04-05 12:28+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
+"PO-Revision-Date: 2019-06-15 15:14+0000\n"
+"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
 "Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -232,7 +233,7 @@ msgstr "classe"
 
 #: sphinx/domains/cpp.py:4421
 msgid "concept"
-msgstr ""
+msgstr "concept"
 
 #: sphinx/domains/cpp.py:4422
 msgid "enum"
@@ -467,7 +468,7 @@ msgstr "Symboles"
 #: sphinx/ext/autodoc.py:1297
 #, python-format
 msgid "Bases: %s"
-msgstr ""
+msgstr "Bases: %s"
 
 #: sphinx/ext/autodoc.py:1350
 #, python-format
@@ -485,7 +486,7 @@ msgstr "[graphe]"
 
 #: sphinx/ext/imgmath.py:258 sphinx/ext/jsmath.py:39 sphinx/ext/mathjax.py:40
 msgid "Permalink to this equation"
-msgstr ""
+msgstr "Lien permanent vers cette équation"
 
 #: sphinx/ext/intersphinx.py:337
 #, python-format
@@ -499,7 +500,7 @@ msgstr "[source]"
 #: sphinx/ext/mathbase.py:92
 #, python-format
 msgid "duplicate label of equation %s, other instance in %s"
-msgstr ""
+msgstr "doublon étiquette d'équation %s, autre instance dans %s"
 
 #: sphinx/ext/todo.py:56
 msgid "Todo"
@@ -541,7 +542,7 @@ msgstr "<h1>Modules pour lesquels le code est disponible</h1>"
 
 #: sphinx/ext/napoleon/__init__.py:313
 msgid "Keyword Arguments"
-msgstr ""
+msgstr "Arguments de mots clés"
 
 #: sphinx/locale/__init__.py:159
 msgid "Attention"
@@ -721,12 +722,12 @@ msgstr "Copyright"
 #: sphinx/themes/basic/layout.html:186
 #, python-format
 msgid "&#169; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
-msgstr ""
+msgstr "&#169; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
 
 #: sphinx/themes/basic/layout.html:188
 #, python-format
 msgid "&#169; Copyright %(copyright)s."
-msgstr ""
+msgstr "&#169; Copyright %(copyright)s."
 
 #: sphinx/themes/basic/layout.html:192
 #, python-format
@@ -806,12 +807,12 @@ msgstr "Cette page"
 #: sphinx/themes/basic/changes/versionchanges.html:12
 #, python-format
 msgid "Changes in Version %(version)s &#8212; %(docstitle)s"
-msgstr ""
+msgstr "Changements de version%(version)s &#8212; %(docstitle)s"
 
 #: sphinx/themes/basic/changes/rstsource.html:5
 #, python-format
 msgid "%(filename)s &#8212; %(docstitle)s"
-msgstr ""
+msgstr "%(filename)s &#8212; %(docstitle)s"
 
 #: sphinx/themes/basic/changes/versionchanges.html:17
 #, python-format
@@ -901,7 +902,7 @@ msgstr "page"
 #: sphinx/writers/latex.py:528
 #, python-format
 msgid "Unknown configure key: latex_elements[%r] is ignored."
-msgstr ""
+msgstr "Clé de configuration inconnue: latex_elements [% r] est ignoré."
 
 #: sphinx/writers/latex.py:1003 sphinx/writers/manpage.py:238
 #: sphinx/writers/texinfo.py:619

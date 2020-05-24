@@ -1,15 +1,16 @@
 # Messages from import.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
 # 
 # Translators:
+# a270031086f2a0d3514bc0cb507b48f6, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:43+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2019-06-15 14:30+0000\n"
+"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
 "Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 # a0a58e972afa42e98089636dcac56883
 #: ../../import.txt:4
 msgid "CSV import"
-msgstr ""
+msgstr "Importation CSV"
 
 # 66b5cb95c34b4b8aafca80b715e4a1ee
 #: ../../import.txt:6
@@ -28,7 +29,7 @@ msgid ""
 "PortaBase can import rows of data from CSV (Comma-Separated Value) files.  "
 "This allows you to import data exported from a spreadsheet or another "
 "database program.  To do this:"
-msgstr ""
+msgstr "PortaBase peut importer des lignes de données à partir de fichiers CSV (valeurs séparées par des virgules). Cela vous permet d'importer des données exportées à partir d'une feuille de calcul ou d'un autre programme de base de données. Pour faire ça:"
 
 # 52e508ed674c40be8ab885e64c93faf5
 #: ../../import.txt:8
@@ -36,7 +37,7 @@ msgid ""
 "Open the PortaBase file you want to import the data into.  If you wish to "
 "import the data into a new file, create a new file and define a column "
 "structure that matches that of the data to be imported."
-msgstr ""
+msgstr "Ouvrez le fichier PortaBase dans lequel vous souhaitez importer les données. Si vous souhaitez importer les données dans un nouveau fichier, créez un nouveau fichier et définissez une structure de colonnes correspondant à celle des données à importer."
 
 # 4b13298a370146279ecf9904e126f02a
 #: ../../import.txt:10
@@ -50,7 +51,7 @@ msgid ""
 " (which supports text in many languages), but you may also choose Latin-1 "
 "(which is used by most software configured for use primarily with Western "
 "European languages)."
-msgstr ""
+msgstr "Dans le menu \"Fichier\" du: ref: `visualiseur de données <data_viewer>`, choisissez \"Importer\". Une boîte de dialogue de fichier s'ouvrira vous permettant de choisir le fichier CSV à importer. Le fichier CSV doit avoir le même nombre de colonnes que le fichier de base de données ouvert et les valeurs de ces colonnes doivent correspondre aux types de colonnes spécifiés. Vous pouvez spécifier le codage du fichier texte afin d'importer correctement les caractères non-ASCII. La valeur par défaut est UTF-8 (qui prend en charge le texte dans de nombreuses langues), mais vous pouvez également choisir Latin-1 (utilisé par la plupart des logiciels configurés pour être utilisés principalement avec les langues d'Europe occidentale)."
 
 # 5b0373417c3b4c3e8203bd11b97a1a83
 #: ../../import.txt:12
@@ -58,24 +59,24 @@ msgid ""
 "The rows in the imported file are added to the database.  Rows from other "
 "files can be added by repeating this process, or another copy of the same "
 "rows can be added by importing the same file again."
-msgstr ""
+msgstr "Les lignes du fichier importé sont ajoutées à la base de données. Des lignes provenant d'autres fichiers peuvent être ajoutées en répétant ce processus, ou une autre copie des mêmes lignes peut être ajoutée en important à nouveau le même fichier."
 
 # 5a1f73a0a8cc4880abfba9c923e78f31
 #: ../../import.txt:14
 msgid "Notes:"
-msgstr ""
+msgstr "Remarques:"
 
 # 1d0f3ba24ef84f678e32096f35d3e012
 #: ../../import.txt:16
 msgid "Boolean fields must have a value of either 0 or 1."
-msgstr ""
+msgstr "Les champs booléens doivent avoir la valeur 0 ou 1."
 
 # 131affd192604cd990a010e5d8baae67
 #: ../../import.txt:18
 msgid ""
 "Date fields may be formated as YYYYMMDD, YYYY/MM/DD, YYYY-MM-DD, or "
 "YYYY.MM.DD."
-msgstr ""
+msgstr "Les champs de date peuvent être au format AAAAMMJJ, AAAA / MM / JJ, AAAA-MM-JJ ou AAAA.MM.DJ."
 
 # 624916e9ef9d4755805ec1b9c2718b5d
 #: ../../import.txt:20
@@ -83,18 +84,18 @@ msgid ""
 "Time fields may be formated as HH:MM:SS, HH:MM:SS AM, HH:MM, HH:MM AM, or "
 "the number of seconds past midnight.  Blank or -1 values are interpreted as "
 "\"None\"."
-msgstr ""
+msgstr "Les champs de temps peuvent être au format HH: MM: SS, HH: MM: SS AM, HH: MM, HH: MM AM ou le nombre de secondes après minuit. Les valeurs vides ou -1 sont interprétées comme \"Aucune\"."
 
 # 89384c45e09f43c98f4ed49fcaf49af2
 #: ../../import.txt:22
 msgid ""
 "Calculation fields may be left as 0 or whatever; the actual values will be "
 "calculated during import."
-msgstr ""
+msgstr "Les champs de calcul peuvent être laissés à 0 ou peu importe; les valeurs réelles seront calculées lors de l'importation."
 
 # 71cb8b7ee1f943a78e87996aa8859d4d
 #: ../../import.txt:24
 msgid ""
 "Image fields should contain either nothing (for no image loaded) or the "
 "relative or absolute path to a suitable image file."
-msgstr ""
+msgstr "Les champs d'image ne doivent contenir rien (pour aucune image chargée) ni le chemin relatif ou absolu vers un fichier image approprié."
