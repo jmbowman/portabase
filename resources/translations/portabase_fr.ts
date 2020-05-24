@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.0">
 <context>
     <name>CSVErrorDialog</name>
     <message>
@@ -138,7 +136,7 @@
     <name>Calculator</name>
     <message>
         <source>Calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculatrice</translation>
     </message>
 </context>
 <context>
@@ -322,10 +320,6 @@
 <context>
     <name>DBEditor</name>
     <message>
-        <source>Columns Editor</source>
-        <translation type="vanished">Éditeur de colonnes</translation>
-    </message>
-    <message>
         <source>No columns defined</source>
         <translation>Aucune colonne définie</translation>
     </message>
@@ -335,7 +329,7 @@
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished">Colonnes</translation>
+        <translation>Colonnes</translation>
     </message>
     <message>
         <source>Press the &quot;+&quot; button to create one</source>
@@ -405,10 +399,6 @@ sur le bouton &quot;Importer&quot; pour charger des lignes depuis un fichier tex
 <context>
     <name>EnumManager</name>
     <message>
-        <source>Enum Manager</source>
-        <translation type="vanished">Gestionnaire d&apos;énumération</translation>
-    </message>
-    <message>
         <source>No enumerated column types defined</source>
         <translation>Aucun type énuméré défini</translation>
     </message>
@@ -430,7 +420,7 @@ aussi supprimées :</translation>
     </message>
     <message>
         <source>Enums</source>
-        <translation type="unfinished">Énumérations</translation>
+        <translation>Énumérations</translation>
     </message>
 </context>
 <context>
@@ -557,10 +547,6 @@ aussi supprimées :</translation>
     <message>
         <source>&amp;Import</source>
         <translation>&amp;Importer</translation>
-    </message>
-    <message>
-        <source>Create a new file from data in another format</source>
-        <translation type="vanished">Créer un nouveau fichier à partir de données dans un autre format</translation>
     </message>
     <message>
         <source>Import rows from a CSV file</source>
@@ -780,15 +766,15 @@ aussi supprimées :</translation>
     </message>
     <message>
         <source>Import a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer un fichier</translation>
     </message>
     <message>
         <source>Exit Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter le mode plein écran</translation>
     </message>
     <message>
         <source>Exit fullscreen mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter le mode plein écran</translation>
     </message>
 </context>
 <context>
@@ -971,16 +957,16 @@ dans le filtre courant ?</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <source>Web site at http://portabase.org</source>
-        <translation>Site web: http://portabase.org</translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>A propos de %1</translation>
     </message>
     <message>
         <source>No such file exists</source>
         <translation>Un tel fichier n&apos;existe pas</translation>
+    </message>
+    <message>
+        <source>Web site at http://portabase.org</source>
+        <translation>Site Web à http://portabase.org</translation>
     </message>
 </context>
 <context>
@@ -1163,7 +1149,7 @@ dans le filtre courant ?</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
 </context>
 <context>
@@ -1291,19 +1277,19 @@ dans le filtre courant ?</translation>
     <name>QQFileDialog</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>Internal storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Stockage interne</translation>
     </message>
     <message>
         <source>SD card</source>
-        <translation type="unfinished"></translation>
+        <translation>Carte SD</translation>
     </message>
 </context>
 <context>
@@ -1697,10 +1683,7 @@ dans le filtre courant ?</translation>
     </message>
     <message numerus="yes">
         <source>%Ln character(s)</source>
-        <translation>
-            <numerusform>%Ln caractère</numerusform>
-            <numerusform>%Ln caractères</numerusform>
-        </translation>
+        <translation><numerusform>%Ln caractère</numerusform><numerusform>%Ln caractères</numerusform></translation>
     </message>
     <message>
         <source>Average length</source>
