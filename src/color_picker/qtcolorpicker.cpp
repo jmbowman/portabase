@@ -3,7 +3,7 @@
 ** This file is part of a Qt Solutions component.
 ** 
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** Copyright (c) 2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+** Copyright (c) 2016-2017,2020 by Jeremy Bowman <jmbowman@alum.mit.edu>
 ** 
 ** Contact:  Qt Software Information (qt-info@nokia.com)
 ** 
@@ -520,10 +520,8 @@ void ColorPickerPopup::insertColor(const QColor &col, const QString &text, int i
     if (lastSelectedItem) {
         lastSelectedItem->setSelected(false);
     }
-    else {
-        item->setSelected(true);
-        lastSel = col;
-    }
+    item->setSelected(true);
+    lastSel = col;
     item->setFocus();
 
     connect(item, SIGNAL(selected()), SLOT(updateSelected()));
@@ -800,21 +798,23 @@ void ColorPickerPopup::regenerateGrid()
 */
 void ColorPickerPopup::getColorFromDialog()
 {
+#if QT_VERSION >= 0x050000
+    QColorDialog colorDialog(parentWidget());
+    colorDialog.setOption(QColorDialog::ShowAlphaChannel);
+    colorDialog.setCurrentColor(lastSel);
 #if defined(Q_OS_ANDROID)
     // This is still almost unusable, but at least it fits on the screen
-    QColorDialog colorDialog(lastSel, parentWidget());
     colorDialog.showMaximized();
+#endif
     if (!colorDialog.exec()) {
         return;
     }
     QColor col = colorDialog.currentColor();
-#elif QT_VERSION >= 0x050000
-    QColor col = QColorDialog::getColor(lastSel, parentWidget());
 #else
     bool ok;
     QRgb rgb = QColorDialog::getRgba(lastSel.rgba(), &ok, parentWidget());
     if (!ok)
-	return;
+       return;
 
     QColor col = QColor::fromRgba(rgb);
 #endif

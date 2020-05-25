@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# (c) 2010-2016 by Jeremy Bowman <jmbowman@alum.mit.edu>
+# (c) 2010-2016,2020 by Jeremy Bowman <jmbowman@alum.mit.edu>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ rm -rf build/$DIRNAME
 rm -rf resources/help/_build/_static # in case created for Maemo
 
 # compile and make the application bundle
-qmake -spec macx-llvm portabase.pro
+qmake -spec macx-clang portabase.pro
 if [ "$1" == "--sign" ]; then
     SIGN=Yes
     shift 1
