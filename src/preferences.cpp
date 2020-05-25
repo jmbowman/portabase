@@ -1,7 +1,7 @@
 /*
  * preferences.cpp
  *
- * (c) 2002-2004,2009-2012,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2012,2016-2017,2020 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -466,11 +466,15 @@ QFont Preferences::applyChanges()
     if (evenColor == defaultEven && oddColor == defaultOdd) {
         // Don't save the system defaults, match any changes made to them later
         settings.remove("EvenRows");
+        settings.remove("EvenRowsAlpha");
         settings.remove("OddRows");
+        settings.remove("OddRowsAlpha");
     }
     else {
         settings.setValue("EvenRows", evenColor.name());
+        settings.setValue("EvenRowsAlpha", evenColor.alpha());
         settings.setValue("OddRows", oddColor.name());
+        settings.setValue("OddRowsAlpha", oddColor.alpha());
     }
     settings.endGroup();
 #endif

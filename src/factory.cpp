@@ -1,7 +1,7 @@
 /*
  * factory.cpp
  *
- * (c) 2008-2012,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2008-2012,2016-2017,2020 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,17 +41,25 @@ void Factory::updatePreferences(QSettings *settings)
     settings->beginGroup("Colors");
     useAlternatingRowColors = settings->value("UseAlternating",
                                               true).toBool();
-    QString defaultBase = qApp->palette("QAbstractItemView").color(QPalette::Base).name();
-    QString color = settings->value("EvenRows", defaultBase).toString();
-    evenRowColor = QColor(color);
+    if (settings->contains("EvenRows")) {
+        evenRowColor = QColor(settings->value("EvenRows").toString());
+        evenRowColor.setAlpha(settings->value("EvenRowsAlpha", 255).toInt());
+    }
+    else {
+        evenRowColor = qApp->palette("QAbstractItemView").color(QPalette::Base);
+    }
+    if (settings->contains("OddRows")) {
+        oddRowColor = QColor(settings->value("OddRows").toString());
+        oddRowColor.setAlpha(settings->value("OddRowsAlpha", 255).toInt());
+    }
+    else {
 #if defined(Q_OS_ANDROID)
-    // The theme default alternate color is way too close to white
-    QString defaultAlternateBase("lightblue");
+        // The theme default alternate color is way too close to white
+        oddRowColor = defaultAlternateBase("lightblue");
 #else
-    QString defaultAlternateBase = qApp->palette("QAbstractItemView").color(QPalette::AlternateBase).name();
+        oddRowColor = qApp->palette("QAbstractItemView").color(QPalette::AlternateBase);
 #endif
-    color = settings->value("OddRows", defaultAlternateBase).toString();
-    oddRowColor = QColor(color);
+    }
     settings->endGroup();
 }
 
