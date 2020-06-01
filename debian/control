@@ -1,22 +1,22 @@
 Source: portabase
-Section: x11
+Section: database
 Priority: optional
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
-Build-Depends: debhelper (>= 7.4.12), libqt4-dev (>= 4.5.0)
-Standards-Version: 3.8.4
-Vcs-Git: git://git.code.sf.net/p/portabase/code-0
-Vcs-Browser: https://sourceforge.net/p/portabase/code-0/
+Build-Depends: debhelper (>= 9), autotools-dev, python-sphinx (>= 1.0.7+dfsg) | python3-sphinx, python-sphinx-rtd-theme | python3-sphinx-rtd-theme, qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.3
+Vcs-Git: git://github.com/jmbowman/portabase.git
+Vcs-Browser: https://github.com/jmbowman/portabase
 Homepage: http://www.portabase.org
 
 Package: portabase
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${sphinxdoc:Depends}
 Description: An easy-to-use personal database application
  PortaBase is a program for conveniently managing one-table database files.
  It can be used as a shopping list, password manager, media inventory,
  financial tracker, TODO list, address book, photo album, and more. It is
- available for many platforms, including Linux, Mac OS X, Windows, and Maemo.
- Features include:
+ available for many platforms, including Android, Linux, macOS, Windows,
+ and Maemo. Features include:
  .
   * String, Integer, Decimal, Boolean, Note (multi-line text), Date, Time,
     Calculation, Sequence, Image, and Enum column types;

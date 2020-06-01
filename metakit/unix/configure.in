@@ -107,6 +107,7 @@ fi
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_INSTALL
+AC_PROG_RANLIB
 
 # Check for shared building
 AC_MSG_CHECKING([for building as shared lib])

@@ -3,7 +3,7 @@ Linux/UNIX Development Environment
 To compile PortaBase for use as a Linux or UNIX desktop application, you
 will need the following:
 - g++ (any relatively recent version should work)
-- A recent version of Qt 4 (including qmake and development headers)
+- A recent version of Qt 5 (including qmake and development headers)
 - Other packages as needed to satisfy the above requirements or create
   packages for your OS/distribution
 
