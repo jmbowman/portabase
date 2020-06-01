@@ -1,31 +1,32 @@
-Format: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: PortaBase
 Upstream-Contact: Jeremy Bowman <jmbowman@alum.mit.edu>
-Source: http://portabase.git.sourceforge.net/
+Source: https://github.com/jmbowman/portabase
 
-Copyright: 2002-2011 Jeremy Bowman <jmbowman@alum.mit.edu>
+Copyright: 2002-2020 Jeremy Bowman <jmbowman@alum.mit.edu>
 License: GPL-2+
 
-Files: calculator.*
-Copyright: 2002-2004, 2008-2010 Jeremy Bowman <jmbowman@alum.mit.edu>
+Files: src/calculator.*
+Copyright: 2002-2004, 2008-2010, 2015, 2017 Jeremy Bowman <jmbowman@alum.mit.edu>
            2000-2002 Michael Edwardes <mte@users.sourceforge.net>
 License: GPL-2+
 
-Files: color_picker/*
-Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies)
+Files: src/color_picker/*
+Copyright: 2016-2017, 2020 Jeremy Bowman <jmbowman@alum.mit.edu>
+           2009 Nokia Corporation and/or its subsidiary(-ies)
 License: LGPL-2.1 or GPL-3
 
-Files: encryption/blowfish.*
-Copyright: 2008-2010 Jeremy Bowman <jmbowman@alum.mit.edu>
+Files: src/encryption/blowfish.*
+Copyright: 2008-2010, 2015-2016 Jeremy Bowman <jmbowman@alum.mit.edu>
            1999, 2000, 2002, 2005 Beeyond Software Holding BV
 License: LGPL-2.1+
 
-Files: encryption/randomkit/*
+Files: src/encryption/randomkit/*
 Copyright: 2003-2006 Jean-Sebastien Roy <js@jeannot.org>
 License: Expat
 
-Files: image/imagewidget.*
-Copyright: 2003-2004, 2008-2010 Jeremy Bowman <jmbowman@alum.mit.edu>
+Files: src/image/imagewidget.*
+Copyright: 2003-2004, 2008-2010, 2015, 2017 Jeremy Bowman <jmbowman@alum.mit.edu>
            2003 Pierpaolo Di Panfilo <pippo_dp@libero.it>
            2003 Cristian Di Panfilo <cridipan@virgilio.it>
 License: GPL-2+
@@ -33,6 +34,12 @@ License: GPL-2+
 Files: metakit/*
 Copyright: 1996-2007 Jean-Claude Wippler <jcw@equi4.com>
 License: Expat
+
+Files: src/qqutil/actionbar.*
+Copyright: 2017 Jeremy Bowman <jmbowman@alum.mit.edu>
+           2015 by Muhammad Bashir Al-Noimi
+           2014 by Stefan Frings
+License: LGPL-2.1+
 
 License: GPL-2+
  This program is free software; you can redistribute it and/or modify
