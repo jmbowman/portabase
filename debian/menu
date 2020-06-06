@@ -1,3 +1,0 @@
-?package(portabase):needs="X11" section="Applications/Data Management"\
-  title="PortaBase" command="portabase"\
-  icon="/usr/share/pixmaps/portabase.xpm"

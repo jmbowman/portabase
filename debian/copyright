@@ -3,6 +3,7 @@ Upstream-Name: PortaBase
 Upstream-Contact: Jeremy Bowman <jmbowman@alum.mit.edu>
 Source: https://github.com/jmbowman/portabase
 
+Files: *
 Copyright: 2002-2020 Jeremy Bowman <jmbowman@alum.mit.edu>
 License: GPL-2+
 
@@ -88,6 +89,20 @@ License: LGPL-2.1
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  Library General Public License for more details.
+ .
+ On Debian systems, the complete text of the GNU Library General Public License
+ can be found in the file `/usr/share/common-licenses/LGPL-2.1'.
+
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; either version 2.1 of the License, or (at
+ your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
  .
  On Debian systems, the complete text of the GNU Library General Public License
  can be found in the file `/usr/share/common-licenses/LGPL-2.1'.

@@ -1,64 +1,70 @@
-portabase (2.2-1) unstable; urgency=low
+portabase (2.3) unstable; urgency=low
+
+  * New upstream version
+
+ -- Jeremy Bowman <jmbowman@alum.mit.edu>  Sat, 06 Jun 2020 16:07:03 -0500
+
+portabase (2.2) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Sun, 02 Apr 2017 00:41:38 -0500
 
-portabase (2.1-1) unstable; urgency=low
+portabase (2.1) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 08 Sep 2012 12:55:34 -0500
 
-portabase (2.0-1) unstable; urgency=low
+portabase (2.0) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 02 Jun 2010 16:23:17 -0500
 
-portabase (2.0~rc1-1) unstable; urgency=low
+portabase (2.0~rc1) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 27 May 2010 09:49:17 -0500
 
-portabase (2.0~beta2-1) unstable; urgency=low
+portabase (2.0~beta2) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 17 May 2010 08:17:59 -0500
 
-portabase (2.0~beta1-1) unstable; urgency=low
+portabase (2.0~beta1) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 29 Apr 2010 09:45:33 -0500
 
-portabase (1.9-1) unstable; urgency=low
+portabase (1.9) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 29 Mar 2004 22:37:33 -0500
 
-portabase (1.8-1) unstable; urgency=low
+portabase (1.8) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Sun, 31 Aug 2003 17:35:40 -0500
 
-portabase (1.7-1) unstable; urgency=low
+portabase (1.7) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Wed, 11 Jun 2003 22:26:53 -0500
 
-portabase (1.6-1) unstable; urgency=low
+portabase (1.6) unstable; urgency=low
 
   * New upstream version
 
  -- Jeremy Bowman <jmbowman@alum.mit.edu>  Sun, 30 Mar 2003 15:56:53 -0500
 
-portabase (1.5-1) unstable; urgency=low
+portabase (1.5) unstable; urgency=low
 
   * Initial Release.
 

@@ -1,7 +1,15 @@
+Debian Package Building
+-----------------------
+To create a Debian package for the desktop version of PortaBase, first install
+the packages listed in the Build-Depends field of the "debian/control" file.
+Then from the root PortaBase source directory run "packaging/linux/debian.sh".
+The .deb file will be generated in the build/debian directory.  This build
+process should also work on Debian-derived distributions like Ubuntu.
+
 Linux/UNIX Development Environment
 ----------------------------------
-To compile PortaBase for use as a Linux or UNIX desktop application, you
-will need the following:
+To compile PortaBase for use as a Linux or UNIX desktop application for
+a non-Debian-based distribution, you will need the following:
 - g++ (any relatively recent version should work)
 - A recent version of Qt 5 (including qmake and development headers)
 - Other packages as needed to satisfy the above requirements or create
@@ -30,13 +38,6 @@ To be able to automatically download the latest help page translations from
 Transifex, also run "pip install transifex-client". Use the script at
 packaging/generate_help.sh to generate the help files; see the top of the
 script for usage information.
-
-Debian Package Building
------------------------
-To create a Debian package for the desktop version of PortaBase, from the
-root PortaBase source directory run "packaging/linux/debian.sh".  If you have
-all the appropriate development packages installed, the .deb file will be
-generated in the build/debian directory.
 
 PortaBase compilation
 ---------------------

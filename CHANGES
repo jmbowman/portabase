@@ -1,3 +1,30 @@
+2020-06-06  JMB  More Debian package updates
+
+    Fixed all issues reported by lintian for the generated package.
+
+2020-05-31  JMB  Updated Debian packaging
+
+    Updated the Debian packaging to comply with the latest version of the
+    Debian Maintainer's Guide and incorporate much of the work done by
+    Dmitry Smirnov for the official Debian package.
+
+2020-05-25  JMB  Support row colors with alpha, updated Mac build script
+
+    Added support for alternating row colors with an alpha channel for
+    transparency (like the defaults for macOS dark mode), and updated the
+    macOS build scripts to work with recent Qt and Xcode releases.
+
+2020-05-23  JMB  Updated French and Italian translations
+
+    Updated these translations based on recent work done by Dany Poupard
+    and Maurizio Codogno in Transifex.
+
+2020-05-11  JMB  Fixed bug in Mac toolbar customization
+
+    Fixed a bug in saving Mac toolbar content customization that was
+    implemented in 2016.  This never made it into a downloadable Mac
+    binary, so I suspect very few people were affected.
+
 2017-12-13  JMB  Fix modification tracking in column statistics dialog
 
     There was a minor bug in the column statistics dialog where it would

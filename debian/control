@@ -2,8 +2,8 @@ Source: portabase
 Section: database
 Priority: optional
 Maintainer: Jeremy Bowman <jmbowman@alum.mit.edu>
-Build-Depends: debhelper (>= 9), autotools-dev, python-sphinx (>= 1.0.7+dfsg) | python3-sphinx, python-sphinx-rtd-theme | python3-sphinx-rtd-theme, qtbase5-dev, qttools5-dev-tools
-Standards-Version: 3.9.3
+Build-Depends: debhelper (>= 10), python-sphinx (>= 1.0.7+dfsg) | python3-sphinx, python-sphinx-rtd-theme | python3-sphinx-rtd-theme, qtbase5-dev, qttools5-dev-tools
+Standards-Version: 4.0.0
 Vcs-Git: git://github.com/jmbowman/portabase.git
 Vcs-Browser: https://github.com/jmbowman/portabase
 Homepage: http://www.portabase.org
@@ -11,7 +11,7 @@ Homepage: http://www.portabase.org
 Package: portabase
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${sphinxdoc:Depends}
-Description: An easy-to-use personal database application
+Description: easy-to-use personal database application
  PortaBase is a program for conveniently managing one-table database files.
  It can be used as a shopping list, password manager, media inventory,
  financial tracker, TODO list, address book, photo album, and more. It is
