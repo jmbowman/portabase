@@ -2,19 +2,15 @@ Windows Development Environment
 -------------------------------
 To compile PortaBase for use as a Windows desktop application, you will
 need the following:
-- Windows XP, Vista, or 7
-- The latest Qt SDK (from http://qt.nokia.com/downloads).  You'll need this
-  even if it doesn't have the very latest version of the Qt framework, because
-  it's the easiest way to install an appropriate version of the MinGW
-  compiler.  Add both the "bin" directory and the "mingw\bin" directory that
-  come with it to your "Path" environment variable.  If you want to use a
-  version of the Qt framework newer than the one bundled with the SDK,
-  download and install the appropriate version and put its "bin" directory in
-  your path instead of the one from the SDK.
-- MSYS 1.0.11 (http://sourceforge.net/projects/mingw/files/MSYS%20Base%20System/msys-1.0.11/MSYS-1.0.11.exe/download).
-  This emulates a basic UNIX system on Windows, and is the easiest way to
-  compile Metakit with MinGW.  Newer versions are available, but lack a
-  convenient installer; this one should work fine.
+- Windows 7, 8.1, or 10
+- The latest version of Qt (from https://www.qt.io/download-qt-installer)
+  that supports your OS version.  Configure the installer to also install
+  the latest version of the MinGW compiler, if you don't already have it.
+  Add both the "Qt\5.*\mingw*\bin" directory and the "Tools\mingw*\bin"
+  directory that were installed to your "Path" environment variable via
+  Control Panel.
+- MSYS2 (https://www.msys2.org/).  This emulates a basic UNIX system on
+  Windows, and is the easiest way to compile Metakit with MinGW.
 - Inno Setup, if you wish to create the PortaBase installer; available from:
   http://www.jrsoftware.org/isinfo.php
 
@@ -26,45 +22,29 @@ searches and locale-sensitive sorting; the patched version is included in the
 "metakit" directory for convenience (and to support the Debian and Maemo
 autobuilders).
 
-To compile Metakit for Windows, first install the Qt SDK in order to get the
-MinGW compiler.  Then install MSYS as mentioned above; in the postinstallation
-script, you'll be asked for the path of the MinGW installation that came with
-Qt.  Start MSYS from the installed shortcut, and change to the metakit/builds
-directory that is included with the PortaBase source code.  Note that you use
-"cd" to change directories, use "/" as the directory separator, and the C:
-drive is located at "/c".  From the metakit/builds directory, run
-"../unix/configure --enable-threads --disable-shared".  Once that finishes, run
-"make".  You should now have a libmk4.a static library file in that directory.
+To compile Metakit for Windows, first install MSYS2 as mentioned above.  Start
+MSYS 64-bit from the installed shortcut, and run the following command to
+install the tools needed to compile Metakit:
+
+* pacman -S autoconf gcc make
+
+Then change to the metakit/builds directory that is included with the PortaBase
+source code.  Note that you use "cd" to change directories, use "/" as the
+directory separator, and the C: drive is located at "/c".  From the
+metakit/builds directory, run "../unix/configure --enable-threads --disable-shared".
+Once that finishes, run "make".  You should now have a libmk4.a static library
+file in that directory.
 
 Installing Python and Sphinx
 ----------------------------
 If you want to generate the help files and/or a PortaBase installer, you'll
 need to install these if you don't already have them.  Download the latest
-Python 2 installer from http://www.python.org/download/ and run it.  Then
-download the appropriate installer for setuptools from
-http://pypi.python.org/pypi/setuptools/ and run that also.  Open a new DOS
-prompt and run "C:\Python27\Scripts\easy_install pip" (change the path as
-necessary) to install a more capable python package manager.  Running
-"C:\Python27\Scripts\pip install Sphinx" will install Sphinx and all the other
-Python libraries that it depends on.  Run
-"C:\Python27\Scripts\pip install sphinx_rtd_theme" to also install the theme
-used by the documentation.To be able to automatically download the
-latest help page translations from Transifex, also run
-"C:\Python27\Scripts\pip install transifex-client".
-
-Installing gettext
-------------------
-Building the translations of the PortaBase help files into other languages
-requires the GNU gettext utilities.  The easiest way to obtain these is to
-download the following two files:
-
-http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-tools-dev_0.18.1.1-2_win32.zip
-http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies/gettext-runtime_0.18.1.1-2_win32.zip
-
-Change your PATH environment variable so that it includes the bin directory
-from the first download and the lib directory from the second one (or just
-merge the files from those two directories and put the resulting directory in
-your PATH).
+Python 3 installer from http://www.python.org/downloads/ and run it; choose
+the option on the installer's first screen to add Python to your PATH.  Running
+"pip install sphinx_rtd_theme" from PowerShell will install Sphinx, the theme
+used by the documentation, and all the other Python libraries that they depend
+on.  To be able to automatically download the latest help page translations
+from Transifex, also run "pip install transifex-client".
 
 Generating the Help Files
 -------------------------
@@ -84,12 +64,11 @@ PortaBase Compilation and Packaging
 -----------------------------------
 - Compile Metakit as described above.
 - Open a command prompt, and change to the root directory of the downloaded
-  PortaBase source code.  If this isn't at "C:\portabase", you'll have to
-  change the paths for "LIBS" and "INCLUDEPATH" in portabase.pro.
+  PortaBase source code.
 - From that directory run "packaging\windows\build.bat"; this will generate a
   working PortaBase.exe file in the "build" directory.
 - If you want to create an installer for PortaBase, first install Inno Setup,
-  Python, and Sphinx (for the help pages, as described in PortaBase's INSTALL
-  file).  Then run "packaging\windows\installer.bat"; you may need to edit it
-  first in order to adjust the paths to Qt and/or Inno Setup. This will
-  generate an executable installer in the "build/windows" directory.
+  Python, and Sphinx (for the help pages, as described above).  Then run
+  "packaging\windows\installer.bat"; you may need to edit it first in order to
+  adjust the paths to Qt and/or Inno Setup. This will generate an executable
+  installer in the "build/windows" directory.

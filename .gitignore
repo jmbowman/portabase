@@ -29,7 +29,12 @@ _build/
 config.h
 config.status
 Makefile
+Makefile.debug
+Makefile.release
+metakit/builds/*.exe
 metakit/unix/autom4te.cache/
+object_script.Portabase.Debug
+object_script.PortaBase.Release
 portabase.pro.user
 
 # OS generated files #

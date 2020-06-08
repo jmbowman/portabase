@@ -11,11 +11,9 @@ for file in listdir(dir):
     if len(file) < 6 or file[-5:] != '.html':
         continue
     path = join(dir, file)
-    f = open(path, 'r')
-    content = unicode(f.read(), 'utf-8')
-    f.close()
-    content = content.replace(u'_static/translations', u'translations')
-    content = content.replace(u'_static', u'../_static')
-    f = open(path, 'w')
-    f.write(content.encode('utf-8'))
-    f.close()
+    with open(path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    content = content.replace('_static/translations', 'translations')
+    content = content.replace('_static', '../_static')
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(content)
