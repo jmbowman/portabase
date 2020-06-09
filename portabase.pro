@@ -212,7 +212,7 @@ android-g++ {
     TARGET              = PortaBase
 }
 
-# Stuff for Mac OS X
+# Stuff for macOS
 macx {
     CONFIG             += c++11 release x86_64
     QMAKE_CXXFLAGS     += -stdlib=libc++ -std=c++11
@@ -328,9 +328,9 @@ win32 {
     CONFIG                 += release
     TARGET                  = PortaBase
     RESOURCES               = resources/windows.qrc
-    LIBS                   += c:/portabase/metakit/builds/libmk4.a
+    LIBS                   += metakit/builds/libmk4.a
     RC_FILE                 = portabase.rc
-    INCLUDEPATH            += c:/portabase/metakit/include
+    INCLUDEPATH            += metakit/include
     VERSION                 = $$system(type packaging\\version_number)
     COPYRIGHT_YEARS         = $$system(type packaging\\copyright_years)
 }

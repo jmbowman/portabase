@@ -1,6 +1,5 @@
 REM Generate help files for a single language
 
-PATH = %PATH%;C:\Python27;C:\Python27\Scripts
 CD resources\help
 
 :loop
@@ -16,6 +15,7 @@ IF NOT "%1" EQU "" (
         GOTO :loop
     )
     SET HELP_LANG=%1
+    SET SPHINXOPTS=-D language=%1
     SHIFT
     GOTO :loop
 )
@@ -34,9 +34,8 @@ IF EXIST translations\%HELP_LANG% (
     CD translations\%HELP_LANG%
     IF NOT EXIST LC_MESSAGES MD LC_MESSAGES
     FOR /F %%G IN ('DIR /B *.po') DO (
-        msgfmt %%G -o LC_MESSAGES\%%~nG.mo
+        COPY %%G LC_MESSAGES\%%G
     )
-    IF EXIST sphinx.js COPY sphinx.js LC_MESSAGES
     CD ..\..
 )
 CALL .\make html
