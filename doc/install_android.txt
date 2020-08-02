@@ -1,0 +1,31 @@
+Android Development Environment
+-------------------------------
+To set up a development environment capable of building an Android package for
+PortaBase, first install Qt 5.15.0 or above, including Qt Creator.  Then
+follow the instructions at https://doc.qt.io/qtcreator/creator-developing-android.html
+to have Qt Creator do most of the work in setting up an Android development
+environment for you (this is much more tedious if you try to do it manually).
+
+Metakit Compilation
+-------------------
+To configure and compile Metakit for Android, first set the value of the
+NDK_HOME environment to the path of the NDK installation found in the Qt
+Creator settings.  Then run the following command:
+
+packaging/android/build_metakit.sh
+
+By default this compiles a static library for armv7a; for a different
+processor architecture, change the TARGET variable as described in the
+script.
+
+Help Pages Generation
+---------------------
+Follow the instructions in install_linux.txt or install_mac.txt, depending
+on which operating system you're using to compile for Android.
+
+PortaBase Compilation
+---------------------
+Open portabase.pro in Qt Creator.  Select a release build for Android as the
+build target, then click the "Build" button.  You should end up with an
+APK file that you can copy to an android device and install (if your device
+has been configured to allow installation of packages from file).

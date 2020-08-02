@@ -55,7 +55,7 @@ void Factory::updatePreferences(QSettings *settings)
     else {
 #if defined(Q_OS_ANDROID)
         // The theme default alternate color is way too close to white
-        oddRowColor = defaultAlternateBase("lightblue");
+        oddRowColor = QColor("lightblue");
 #else
         oddRowColor = qApp->palette("QAbstractItemView").color(QPalette::AlternateBase);
 #endif
