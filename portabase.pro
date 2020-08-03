@@ -183,7 +183,7 @@ unix {
 }
 
 # Stuff for Android
-android-g++ {
+android-clang {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/packaging/android/apk_template
     DEFINES            += MOBILE ANDROID
     DISTFILES += \
@@ -204,7 +204,7 @@ android-g++ {
     HEADERS            += src/qqutil/actionbar.h \
                           src/qqutil/qqandroidstyle.h
     INCLUDEPATH        += metakit/include
-    LIBS               += -L$$_PRO_FILE_PWD_/build/metakit/current
+    LIBS               += -L$$_PRO_FILE_PWD_/metakit/builds
     QT                 += androidextras svg
     RESOURCES           = resources/android.qrc
     SOURCES            += src/qqutil/actionbar.cpp \
