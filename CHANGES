@@ -1,3 +1,19 @@
+2020-08-04  JMB  Fixed color bugs in dark mode
+
+    Fixed some problems with the row viewer dialog and calculator
+    dialog which made parts of them difficult or impossible to read
+    under certain system themes (like macOS dark mode).
+
+2020-08-02  JMB  Updated Android packaging
+
+    Added support for building PortaBase for Android with Qt 5.15.0, and
+    documented how to do it.
+
+2020-06-08  JMB  Updated Windows packaging
+
+    Updated the Windows build scripts to work with recent versions of
+    Windows, Qt, Inno Setup, and Python.
+
 2020-06-06  JMB  More Debian package updates
 
     Fixed all issues reported by lintian for the generated package.
