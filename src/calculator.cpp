@@ -48,6 +48,7 @@ Calculator::Calculator(QWidget* parent)
     display->setAutoFillBackground(true);
     QPalette displayPalette(display->palette());
     displayPalette.setColor(QPalette::Window, Qt::white);
+    displayPalette.setColor(QPalette::WindowText, Qt::black);
     display->setPalette(displayPalette);
 #endif
 #if defined(Q_OS_ANDROID)
