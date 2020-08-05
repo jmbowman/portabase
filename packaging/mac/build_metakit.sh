@@ -18,5 +18,6 @@ else
 fi
 cd metakit/builds
 ../unix/configure --enable-threads --disable-shared
+make clean
 make
 sudo make install

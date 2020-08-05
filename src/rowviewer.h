@@ -56,6 +56,7 @@ private slots:
     void viewChanged(int index);
 
 private:
+    QColor alphaBlend(QColor base, QColor foreground);
     void updateContent();
     QString prepareString(const QString &content);
 

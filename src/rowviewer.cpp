@@ -16,11 +16,13 @@
 #include <QAbstractButton>
 #include <QAction>
 #include <QApplication>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QClipboard>
 #include <QIcon>
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QPalette>
 #include <QTextDocument>
 #include <QUrl>
 #include "database.h"
@@ -107,17 +109,30 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     hd->page()->setNetworkAccessManager(manager);
 #else
     // Make the boolean value images available in case we need them
-#if defined(Q_OS_ANDROID)
-    int iconPixels = hd->fontMetrics().boundingRect("9").height();
-    QSize iconSize(iconPixels, iconPixels);
-    QIcon checkedIcon = Factory::icon("checked");
-    QPixmap checked = checkedIcon.pixmap(iconSize);
-    QIcon uncheckedIcon = Factory::icon("unchecked");
-    QPixmap unchecked = uncheckedIcon.pixmap(iconSize);
-#else
-    QPixmap checked = QPixmap(":/icons/checked.png");
-    QPixmap unchecked = QPixmap(":/icons/unchecked.png");
+    QCheckBox evenCheckBox;
+    QPalette evenPalette = evenCheckBox.palette();
+    evenPalette.setColor(QPalette::Window, Factory::evenRowColor);
+    evenCheckBox.setPalette(evenPalette);
+    evenCheckBox.setChecked(true);
+    QPixmap checked_even(evenCheckBox.sizeHint());
+    evenCheckBox.render(&checked_even);
+    evenCheckBox.setChecked(false);
+    QPixmap unchecked_even(evenCheckBox.sizeHint());
+    evenCheckBox.render(&unchecked_even);
 
+    QColor altColor = alphaBlend(Factory::evenRowColor, Factory::oddRowColor);
+    QCheckBox oddCheckBox;
+    QPalette oddPalette = oddCheckBox.palette();
+    oddPalette.setColor(QPalette::Window, altColor);
+    oddCheckBox.setPalette(oddPalette);
+    oddCheckBox.setChecked(true);
+    QPixmap checked_odd(oddCheckBox.sizeHint());
+    oddCheckBox.render(&checked_odd);
+    oddCheckBox.setChecked(false);
+    QPixmap unchecked_odd(oddCheckBox.sizeHint());
+    oddCheckBox.render(&unchecked_odd);
+
+#if !defined(Q_OS_ANDROID)
     // kinetic scrolling takes precedence over text copy on Fremantle
     // Android puts this button in the action bar, done above
     QAbstractButton *copyTextButton = Factory::button(this);
@@ -127,11 +142,17 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     hbox->addWidget(copyTextButton);
 #endif
     hd->document()->addResource(QTextDocument::ImageResource,
-                                QUrl("qrc:/icons/checked.png"),
-                                checked);
+                                QUrl("qrc:/icons/checked_even.png"),
+                                checked_even);
     hd->document()->addResource(QTextDocument::ImageResource,
-                                QUrl("qrc:/icons/unchecked.png"),
-                                unchecked);
+                                QUrl("qrc:/icons/unchecked_even.png"),
+                                unchecked_even);
+    hd->document()->addResource(QTextDocument::ImageResource,
+                                QUrl("qrc:/icons/checked_odd.png"),
+                                checked_odd);
+    hd->document()->addResource(QTextDocument::ImageResource,
+                                QUrl("qrc:/icons/unchecked_odd.png"),
+                                unchecked_odd);
 #endif
 
     nextButton = Factory::button(this);
@@ -201,27 +222,34 @@ void RowViewer::updateContent()
 #endif
     int *colTypes = currentView->getColTypes();
     QString str = "<html><body><table cellspacing=0>";
-    QString altColor = Factory::oddRowColor.name();
-    QString altRow = QString("<tr bgcolor=\"%1\">").arg(altColor);
+    QString evenRow = QString("<tr bgcolor=\"%1\">").arg(Factory::evenRowColor.name());
+    QColor oddColor = alphaBlend(Factory::evenRowColor, Factory::oddRowColor);
+    QString oddRow = QString("<tr bgcolor=\"%1\">").arg(oddColor.name());
     int count = colNames.count();
     int imageIndex = 0;
+    QString rowType;
     for (int i = 0; i < count; i++) {
         if (i % 2 == 0) {
-            str += "<tr>";
+            str += evenRow;
+            rowType = "_even";
         }
         else {
-            str += altRow;
+            str += oddRow;
+            rowType = "_odd";
         }
-        str += "<td><font color=#0000ff>";
+#if defined(Q_WS_MAEMO_5)
+        rowType = "";
+#endif
+        str += "<td><b>";
         str += prepareString(colNames[i]);
-        str += ": </font></td><td valign=\"middle\">";
+        str += ": </b></td><td valign=\"middle\">";
         int type = colTypes[i];
         if (type == BOOLEAN) {
             if (values[i].toInt()) {
-                str += "<img src=\"qrc:/icons/checked.png\">";
+                str += QString("<img src=\"qrc:/icons/checked%1.png\">").arg(rowType);
             }
             else {
-                str += "<img src=\"qrc:/icons/unchecked.png\">";
+                str += QString("<img src=\"qrc:/icons/unchecked%1.png\">").arg(rowType);
             }
         }
         else if (type == IMAGE) {
@@ -250,6 +278,23 @@ void RowViewer::updateContent()
     str += "</table></body></html>";
     hd->setHtml(str);
     hd->setFocus();
+}
+
+/**
+ * Combine the given background and foreground colors, taking the foreground's
+ * alpha channel into account, to yield the resulting color without alpha.
+ */
+QColor RowViewer::alphaBlend(QColor base, QColor foreground)
+{
+    int alpha = foreground.alpha();
+    if (alpha == 0) {
+        return foreground;
+    }
+    int complement = 255 - alpha;
+    int red = (base.red() * complement + foreground.red() * alpha) / 255;
+    int green = (base.green() * complement + foreground.green() * alpha) / 255;
+    int blue = (base.blue() * complement + foreground.blue() * alpha) / 255;
+    return QColor(red, green, blue);
 }
 
 /**
