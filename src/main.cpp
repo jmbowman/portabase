@@ -25,7 +25,9 @@
 #include <QDBusConnection>
 #include <QDBusError>
 #elif defined(Q_OS_ANDROID)
+#include <QMessageBox>
 #include <QStyleFactory>
+#include <QtAndroid>
 #include "qqutil/qqandroidstyle.h"
 #endif
 
@@ -54,14 +56,31 @@ int main(int argc, char **argv) {
     app.setApplicationName("PortaBase");
     app.setApplicationVersion(VERSION_NUMBER);
     app.setWindowIcon(QIcon(":/appicon/PortaBase.png"));
-#if defined(Q_OS_ANDROID)
-    QStyle *style = QStyleFactory::create("Android");
-    QApplication::setStyle(new QQAndroidStyle(style));
-#endif
     QTranslator qtTranslator;
     Factory::translation(&qtTranslator, "Qt", "PORTABASE_QT_QM");
     QTranslator pbTranslator;
     Factory::translation(&pbTranslator, "PortaBase", "PORTABASE_QM");
+    QString permissionsMessage = QObject::tr("PortaBase requires file read and write permissions to store your data files in folders you can access, and to allow those files to exist after PortaBase is uninstalled.");
+#if defined(Q_OS_ANDROID)
+    QStyle *style = QStyleFactory::create("Android");
+    QApplication::setStyle(new QQAndroidStyle(style));
+    // Make sure we have the permissions required to read and write files
+    QString readPermission("android.permission.READ_EXTERNAL_STORAGE");
+    QString writePermission("android.permission.WRITE_EXTERNAL_STORAGE");
+    QtAndroid::PermissionResult readResult = QtAndroid::checkPermission(readPermission);
+    QtAndroid::PermissionResult writeResult = QtAndroid::checkPermission(writePermission);
+    if (readResult == QtAndroid::PermissionResult::Denied || writeResult == QtAndroid::PermissionResult::Denied) {
+        if (QtAndroid::shouldShowRequestPermissionRationale(readPermission) || QtAndroid::shouldShowRequestPermissionRationale(writePermission)) {
+            QMessageBox::information(0, "PortaBase", permissionsMessage);
+        }
+        QStringList permissions;
+        permissions << readPermission << writePermission;
+        QtAndroid::PermissionResultMap resultHash = QtAndroid::requestPermissionsSync(permissions);
+        if (resultHash[readPermission] == QtAndroid::PermissionResult::Denied || resultHash[writePermission] == QtAndroid::PermissionResult::Denied) {
+            return 0;
+        }
+    }
+#endif
     QStringList args = app.arguments();
     if ((args.count() > 1 && args[1].startsWith("-")) || args.count() > 2) {
         CommandLine commandLine;

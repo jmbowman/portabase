@@ -1,3 +1,10 @@
+2020-08-17  JMB  More Android build updates
+
+    Got the Android version of PortaBase built by Qt 5.15.0 working.
+    Required updates to the APK template and QQFileDialog, fixing a
+    bug in a recent .pro file update, and adding a runtime permissions
+    request.
+
 2020-08-04  JMB  Fixed color bugs in dark mode
 
     Fixed some problems with the row viewer dialog and calculator
