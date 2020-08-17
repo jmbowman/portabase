@@ -29,3 +29,8 @@ Open portabase.pro in Qt Creator.  Select a release build for Android as the
 build target, then click the "Build" button.  You should end up with an
 APK file that you can copy to an android device and install (if your device
 has been configured to allow installation of packages from file).
+
+If you get an error like "Crunching Cruncher portabase.png failed" near the
+end of the build when Qt Creator runs androddeployqt, try setting
+"Verbose output" in the project settings under "Build Android APK" ->
+"Advanced Actions".  This inexplicably fixed it for me.

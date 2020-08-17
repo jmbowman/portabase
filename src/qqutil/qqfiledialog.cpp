@@ -45,6 +45,7 @@ QQFileDialog::QQFileDialog(QWidget *parent, const QString &caption,
                            const QString &dir, const QString &filter)
     : QFileDialog(parent, caption, dir, filter), pressing(false)
 {
+    setOption(QFileDialog::DontUseNativeDialog);
     QString fileNameText = tr("Name") + ":";
     QString fileTypeText = tr("Type") + ":";
     QString internalStorageText = tr("Internal storage");

@@ -316,7 +316,7 @@ maemo5 {
 }
 
 # Stuff for other Linux/UNIX platforms
-unix:!android-g++:!macx:!maemo5:!contains(QT_CONFIG, hildon) {
+unix:!android-clang:!macx:!maemo5:!contains(QT_CONFIG, hildon) {
     #QMAKE_CXXFLAGS       += -O0 # for valgrind
     CONFIG               += debug
     LIBS                 += -Lmetakit/builds

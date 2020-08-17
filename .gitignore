@@ -29,7 +29,9 @@ _build/
 config.h
 config.status
 Makefile
+Makefile.Debug
 Makefile.debug
+Makefile.Release
 Makefile.release
 metakit/builds/*.exe
 metakit/unix/autom4te.cache/
