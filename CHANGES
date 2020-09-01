@@ -1,3 +1,10 @@
+2020-08-31  JMB  Checkbox and calculation result display tweaks
+
+    Made an improvement to the recent row viewer changes for dark
+    mode support to show checkboxes with an appropriate size on
+    Android.  Also fixed the calculated field display in the row
+    editor to properly localize the value.
+
 2020-08-17  JMB  More Android build updates
 
     Got the Android version of PortaBase built by Qt 5.15.0 working.

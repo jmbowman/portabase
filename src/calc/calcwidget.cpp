@@ -56,7 +56,7 @@ CalcWidget::CalcWidget(Database *dbase, const QString &calcName, const QStringLi
  */
 QString CalcWidget::getValue()
 {
-    return display->text();
+    return Formatting::fromLocalDouble(display->text());
 }
 
 /**
@@ -66,7 +66,7 @@ QString CalcWidget::getValue()
  */
 void CalcWidget::setValue(const QString &value)
 {
-    display->setText(value);
+    display->setText(Formatting::toLocalDouble(value));
 }
 
 /**

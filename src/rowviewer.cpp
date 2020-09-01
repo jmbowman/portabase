@@ -109,27 +109,30 @@ RowViewer::RowViewer(Database *dbase, ViewDisplay *parent)
     hd->page()->setNetworkAccessManager(manager);
 #else
     // Make the boolean value images available in case we need them
+    int cbHeight = hd->fontMetrics().boundingRect("9").height();
     QCheckBox evenCheckBox;
+    evenCheckBox.resize(cbHeight * 2, cbHeight);
     QPalette evenPalette = evenCheckBox.palette();
     evenPalette.setColor(QPalette::Window, Factory::evenRowColor);
     evenCheckBox.setPalette(evenPalette);
     evenCheckBox.setChecked(true);
-    QPixmap checked_even(evenCheckBox.sizeHint());
+    QPixmap checked_even(evenCheckBox.size());
     evenCheckBox.render(&checked_even);
     evenCheckBox.setChecked(false);
-    QPixmap unchecked_even(evenCheckBox.sizeHint());
+    QPixmap unchecked_even(evenCheckBox.size());
     evenCheckBox.render(&unchecked_even);
 
     QColor altColor = alphaBlend(Factory::evenRowColor, Factory::oddRowColor);
     QCheckBox oddCheckBox;
+    oddCheckBox.resize(cbHeight * 2, cbHeight);
     QPalette oddPalette = oddCheckBox.palette();
     oddPalette.setColor(QPalette::Window, altColor);
     oddCheckBox.setPalette(oddPalette);
     oddCheckBox.setChecked(true);
-    QPixmap checked_odd(oddCheckBox.sizeHint());
+    QPixmap checked_odd(oddCheckBox.size());
     oddCheckBox.render(&checked_odd);
     oddCheckBox.setChecked(false);
-    QPixmap unchecked_odd(oddCheckBox.sizeHint());
+    QPixmap unchecked_odd(oddCheckBox.size());
     oddCheckBox.render(&unchecked_odd);
 
 #if !defined(Q_OS_ANDROID)
