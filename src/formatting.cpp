@@ -227,7 +227,7 @@ QString Formatting::timeToString(int time)
     if (time == -1) {
         return "";
     }
-    QTime midnight;
+    QTime midnight(0, 0);
     QTime timeObj = midnight.addSecs(time);
     return timeObj.toString(timeFormat);
 }
@@ -305,7 +305,7 @@ QString Formatting::parseTimeString(const QString &value, bool *ok)
         *ok = false;
         return value;
     }
-    QTime midnight;
+    QTime midnight(0, 0);
     int totalSeconds = midnight.secsTo(time);
     *ok = true;
     return QString::number(totalSeconds);

@@ -90,16 +90,21 @@ cd build
 # sign the binaries if the "--sign" parameter was passed in
 if [ "$SIGN" == "Yes" ]; then
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtCore.framework/Versions/5/QtCore
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtDBus.framework/Versions/5/QtDBus
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtGui.framework/Versions/5/QtGui
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtMacExtras.framework/Versions/5/QtMacExtras
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtPrintSupport.framework/Versions/5/QtPrintSupport
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtSvg.framework/Versions/5/QtSvg
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtWidgets.framework/Versions/5/QtWidgets
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/Frameworks/QtXml.framework/Versions/5/QtXml
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/iconengines/libqsvgicon.dylib
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqgif.dylib
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqico.dylib
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqjpeg.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/imageformats/libqmacheif.dylib
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/platforms/libqcocoa.dylib
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/printsupport/libcocoaprintersupport.dylib
+    codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app/Contents/PlugIns/styles/libqmacstyle.dylib
     codesign -s "Developer ID Application: Jeremy Bowman" PortaBase.app
 fi
 

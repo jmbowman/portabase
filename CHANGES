@@ -1,3 +1,10 @@
+2020-09-20  JMB  Fixed time field display, updated macOS code signing
+
+    Fixed an 11-year-old bug that prevented time fields from being
+    saved or displayed correctly (caused by the Qt 4 port).  Also
+    updated the list of files that need to be signed for macOS
+    packages.
+
 2020-08-31  JMB  Checkbox and calculation result display tweaks
 
     Made an improvement to the recent row viewer changes for dark
