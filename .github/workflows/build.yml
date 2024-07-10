@@ -40,7 +40,7 @@ jobs:
       - name: Accept the NDK license
         run: "yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses"
       - name: Install Qt
-        uses: jurplel/install-qt-action@dff9f6965cfbc52e289eace0d05a9734a2c9920f  # pinned for security, review code for secret leakage when upgrading
+        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
         with:
           version: "5.15.2"
           target: android
@@ -86,7 +86,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install debhelper python3-sphinx python3-sphinx-rtd-theme qtbase5-dev qttools5-dev-tools
+          sudo apt-get install build-essential debhelper python3-sphinx python3-sphinx-rtd-theme qtbase5-dev qttools5-dev-tools
       - name: Build package
         run: packaging/linux/debian.sh
       - name: Archive built package
@@ -113,7 +113,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install Qt
-        uses: jurplel/install-qt-action@dff9f6965cfbc52e289eace0d05a9734a2c9920f  # pinned for security, review code for secret leakage when upgrading
+        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
         with:
           version: "5.15.2"
           cache: true
@@ -147,7 +147,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install Qt
-        uses: jurplel/install-qt-action@dff9f6965cfbc52e289eace0d05a9734a2c9920f  # pinned for security, review code for secret leakage when upgrading
+        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
         with:
           version: "5.15.2"
           arch: "win64_mingw81"
