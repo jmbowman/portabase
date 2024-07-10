@@ -1,7 +1,7 @@
 REM Make sure these paths are appropriate for your system:
 
 SET MINGW_DIR=C:\Qt\Tools\mingw810_64
-SET QTDIR=C:\Qt\5.15.0\mingw81_64
+SET QTDIR=%QT_ROOT_DIR%\mingw81_64
 
 IF NOT EXIST build\windows MKDIR build\windows
 COPY CHANGES build\windows\CHANGES.txt
@@ -18,7 +18,7 @@ COPY %QTDIR%\bin\Qt5PrintSupport.dll build\windows
 COPY %QTDIR%\bin\Qt5Widgets.dll build\windows
 COPY %QTDIR%\bin\Qt5Xml.dll build\windows
 IF NOT EXIST build\windows\imageformats MKDIR build\windows\imageformats
-COPY %QTDIR%\plugins\imageformats\qjpeg.dll build\windows\imageformats
+COPY %QT_PLUGIN_PATH%\imageformats\qjpeg.dll build\windows\imageformats
 
 CALL packaging\windows\generate_all_help.bat
 

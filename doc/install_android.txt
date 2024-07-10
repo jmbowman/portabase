@@ -18,11 +18,6 @@ By default this compiles a static library for armv7a; for a different
 processor architecture, change the TARGET variable as described in the
 script.
 
-Help Pages Generation
----------------------
-Follow the instructions in install_linux.txt or install_mac.txt, depending
-on which operating system you're using to compile for Android.
-
 PortaBase Compilation
 ---------------------
 Open portabase.pro in Qt Creator.  Select a release build for Android as the

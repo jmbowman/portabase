@@ -1,5 +1,5 @@
 TEMPLATE        = app
-CONFIG         += qt warn_on thread
+CONFIG         += qt warn_on
 #DEFINES        += TRACE_ENABLED # enables TRACE macro for crash debugging
 QT             += xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
@@ -184,7 +184,10 @@ unix {
 
 # Stuff for Android
 android-clang {
+    for (abi, ANDROID_ABIS): ANDROID_EXTRA_LIBS += $$PWD/metakit/builds/libmk4_$${abi}.so
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/packaging/android/apk_template
+    ANDROID_TARGET_SDK_VERSION = 34
+    CONFIG             += release
     DEFINES            += MOBILE ANDROID
     DISTFILES += \
         packaging/android/apk_template/AndroidManifest.xml \
@@ -204,7 +207,6 @@ android-clang {
     HEADERS            += src/qqutil/actionbar.h \
                           src/qqutil/qqandroidstyle.h
     INCLUDEPATH        += metakit/include
-    LIBS               += -L$$_PRO_FILE_PWD_/metakit/builds
     QT                 += androidextras svg
     RESOURCES           = resources/android.qrc
     SOURCES            += src/qqutil/actionbar.cpp \

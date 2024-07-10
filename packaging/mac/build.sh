@@ -11,8 +11,9 @@
 # Assumes that we are in the PortaBase source code root directory
 # Takes the parameter to make -j as an argument, for utilizing multiple cores
 
-# This script builds a 64-bit Intel binary; support for PowerPC and 32-bit
-# Intel Macs was dropped with the upgrade to Qt 5
+# This script builds a binary for the build system's native CPU architecture;
+# support for PowerPC and 32-bit Intel Macs was dropped with the upgrade to
+# Qt 5
 
 VERSION=`cat packaging/version_number`
 DIRNAME=PortaBase_$VERSION
