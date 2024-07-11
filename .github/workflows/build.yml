@@ -107,7 +107,7 @@ jobs:
       matrix:
         os: [
           "macos-12",
-          #"macos-13",  # Broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
+          # "macos-13",  # Broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
           "macos-14"
         ]
     steps:
@@ -145,7 +145,7 @@ jobs:
       matrix:
         os: ["windows-2022"]  # windows-2019 doesn't come with Inno Setup, skip for now
     env:
-        msys2bash: "C:\shells\msys2bash.cmd"
+      msys2bash: 'C:\shells\msys2bash.cmd'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
