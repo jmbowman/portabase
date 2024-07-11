@@ -1,5 +1,5 @@
 ---
-name: release
+name: build
 on:
   pull_request:
   push:
@@ -62,7 +62,7 @@ jobs:
         with:
           name: android-aab
           path: build/*.aab
-      - name: Compile PortaBase and build APK package for sideloading
+      - name: Compile PortaBase and build ARM64 APK package for sideloading
         run: make -j$(nproc) apk
       - name: Archive built APK
         uses: actions/upload-artifact@v4
@@ -87,6 +87,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install build-essential debhelper python3-sphinx python3-sphinx-rtd-theme qtbase5-dev qttools5-dev-tools
+      - name: Read the PortaBase version from file
+        id: getversion
+        run: echo "PORTABASE_VERSION=$(cat packaging/version_number)" >> $GITHUB_ENV
       - name: Build package
         run: packaging/linux/debian.sh
       - name: Archive built package
@@ -94,6 +97,8 @@ jobs:
         with:
           name: "${{ matrix.os }}-package"
           path: build/debian/*.deb
+      - name: Verify that package installs cleanly
+        run: sudo apt-get install ./build/debian/portabase-$PORTABASE_VERSION_amd64.deb
 
   mac-build:
     name: macOS build
@@ -102,7 +107,7 @@ jobs:
       matrix:
         os: [
           "macos-12",
-          "macos-13",
+          #"macos-13",  # Broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
           "macos-14"
         ]
     steps:
@@ -139,6 +144,8 @@ jobs:
     strategy:
       matrix:
         os: ["windows-2022"]  # windows-2019 doesn't come with Inno Setup, skip for now
+    env:
+        msys2bash: "C:\shells\msys2bash.cmd"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -153,17 +160,14 @@ jobs:
           arch: "win64_mingw81"
           tools: "tools_mingw,qt.tools.win64_mingw810"
           cache: true
-      - name: Install MSYS2 packages
-        shell: msys2 {0}
-        run: pacman -S autoconf gcc make
+      - name: Install MSYS2 packages for building Metakit
+        run: '${{ env.msys2bash }} -c "pacman -S autoconf gcc make"'
       - name: Configure Metakit
-        shell: msys2 {0}
         working-directory: ./metakit/builds
-        run: ../unix/configure --enable-threads --disable-shared
+        run: '${{ env.msys2bash}} -c "../unix/configure --enable-threads --disable-shared"'
       - name: Compile Metakit
-        shell: msys2 {0}
         working-directory: ./metakit/builds
-        run: make
+        run: '${{ env.msys2bash }} -c "make"'
       - name: Install Sphinx and Read the Docs theme
         run: pip install Sphinx sphinx_rtd_theme
       - name: Compile PortaBase

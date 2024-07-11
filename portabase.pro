@@ -189,6 +189,10 @@ android-clang {
     ANDROID_TARGET_SDK_VERSION = 34
     CONFIG             += release
     DEFINES            += MOBILE ANDROID
+    # Avoid overwriting intermediate files written in parallel for different ABIs
+    OBJECTS_DIR     = build/$$QT_ARCH
+    MOC_DIR         = build/$$QT_ARCH
+    RCC_DIR         = build/$$QT_ARCH
     DISTFILES += \
         packaging/android/apk_template/AndroidManifest.xml \
         packaging/android/apk_template/gradle/wrapper/gradle-wrapper.jar \
