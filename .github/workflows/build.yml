@@ -18,6 +18,7 @@ jobs:
     name: Android build
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [
           "ubuntu-24.04"
@@ -74,6 +75,7 @@ jobs:
     name: Linux build
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [
           "ubuntu-20.04",
@@ -98,17 +100,18 @@ jobs:
           name: "${{ matrix.os }}-package"
           path: build/debian/*.deb
       - name: Verify that package installs cleanly
-        run: sudo apt-get install ./build/debian/portabase-$PORTABASE_VERSION_amd64.deb
+        run: sudo apt-get install ./build/debian/portabase-${{ env.PORTABASE_VERSION }}_amd64.deb
 
   mac-build:
     name: macOS build
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [
           "macos-12",
-          # "macos-13",  # Broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
-          "macos-14"
+          # "macos-13",  # Both of these are broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
+          # "macos-14"
         ]
     steps:
       - name: Check out repository code
@@ -142,8 +145,9 @@ jobs:
     name: Windows build
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: ["windows-2022"]  # windows-2019 doesn't come with Inno Setup, skip for now
+        os: ["windows-2022"]  # windows-2019 runner image doesn't come with Inno Setup, skip for now
     env:
       msys2bash: 'C:\shells\msys2bash.cmd'
     steps:
@@ -161,7 +165,7 @@ jobs:
           tools: "tools_mingw,qt.tools.win64_mingw810"
           cache: true
       - name: Install MSYS2 packages for building Metakit
-        run: '${{ env.msys2bash }} -c "pacman -S autoconf gcc make"'
+        run: '${{ env.msys2bash }} -c "pacman --noconfirm -S autoconf gcc make"'
       - name: Configure Metakit
         working-directory: ./metakit/builds
         run: '${{ env.msys2bash}} -c "../unix/configure --enable-threads --disable-shared"'

@@ -11,19 +11,19 @@ fi
 # Set this to your minSdkVersion.
 export API=21
 
-for TARGET in armeabi-v7a arm64-v8a x86 x86_64
+for ABI in armeabi-v7a arm64-v8a x86 x86_64
 do
-    if [[ "$TARGET" == "armeabi-v7a" ]]; then
+    if [[ "$ABI" == "armeabi-v7a" ]]; then
         export TARGET=armv7a-linux-androideabi
         export BASE_TARGET=arm-linux-androideabi
         export CXXFLAGS="-fPIC"
-    elif [[ "$TARGET" == "arm64-v8a" ]]; then
+    elif [[ "$ABI" == "arm64-v8a" ]]; then
         export TARGET=aarch64-linux-android
         export BASE_TARGET=$TARGET
-    elif [[ "$TARGET" == "x86" ]]; then
+    elif [[ "$ABI" == "x86" ]]; then
         export TARGET=i686-linux-android
         export BASE_TARGET=$TARGET
-    elif [[ "$TARGET" == "x86_64" ]]; then
+    elif [[ "$ABI" == "x86_64" ]]; then
         export TARGET=x86_64-linux-android
         export BASE_TARGET=$TARGET
     fi
@@ -45,6 +45,6 @@ do
     ../unix/configure --enable-threads --host $TARGET
     make
     #abuild -f ../../packaging/android/libraries.json -R
-    mv libmk4.so libmk4_$TARGET.so
+    mv libmk4.so libmk4_$ABI.so
     cd ../..
 done
