@@ -14,6 +14,7 @@ TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_fr.ts \
                   resources/translations/portabase_it.ts \
                   resources/translations/portabase_ja.ts \
+                  resources/translations/portabase_pl.ts \
                   resources/translations/portabase_sk.ts \
                   resources/translations/portabase_zh_CN.ts \
                   resources/translations/portabase_zh_TW.ts
@@ -255,6 +256,9 @@ macx {
     JA_LPROJ.files      = packaging/mac/ja.lproj/InfoPlist.strings \
                           packaging/mac/ja.lproj/locversion.plist
     JA_LPROJ.path       = Contents/Resources/ja.lproj
+    PL_LPROJ.files      = packaging/mac/pl.lproj/InfoPlist.strings \
+                          packaging/mac/pl.lproj/locversion.plist
+    PL_LPROJ.path       = Contents/Resources/pl.lproj
     SK_LPROJ.files      = packaging/mac/sk.lproj/InfoPlist.strings \
                           packaging/mac/sk.lproj/locversion.plist
     SK_LPROJ.path       = Contents/Resources/sk.lproj
@@ -272,6 +276,7 @@ macx {
                           FR_LPROJ \
                           IT_LPROJ \
                           JA_LPROJ \
+                          PL_LPROJ \
                           SK_LPROJ \
                           ZH_HANS_LPROJ \
                           ZH_HANT_LPROJ
