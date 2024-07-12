@@ -184,11 +184,11 @@ unix {
 
 # Stuff for Android
 android-clang {
-    for (abi, ANDROID_ABIS): ANDROID_EXTRA_LIBS += $$PWD/metakit/builds/libmk4_$${abi}.so
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/packaging/android/apk_template
     ANDROID_TARGET_SDK_VERSION = 34
     CONFIG             += release
     DEFINES            += MOBILE ANDROID
+    LIBS               += -L$$PWD/packaging/android/apk_template/libs/$$QT_ARCH
     # Avoid overwriting intermediate files written in parallel for different ABIs
     OBJECTS_DIR     = build/$$QT_ARCH
     MOC_DIR         = build/$$QT_ARCH

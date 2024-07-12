@@ -100,7 +100,7 @@ jobs:
           name: "${{ matrix.os }}-package"
           path: build/debian/*.deb
       - name: Verify that package installs cleanly
-        run: sudo apt-get install ./build/debian/portabase-${{ env.PORTABASE_VERSION }}_amd64.deb
+        run: sudo apt-get install ./build/debian/portabase_${{ env.PORTABASE_VERSION }}_amd64.deb
 
   mac-build:
     name: macOS build
@@ -164,14 +164,8 @@ jobs:
           arch: "win64_mingw81"
           tools: "tools_mingw,qt.tools.win64_mingw810"
           cache: true
-      - name: Install MSYS2 packages for building Metakit
-        run: '${{ env.msys2bash }} -c "pacman --noconfirm -S autoconf gcc make"'
-      - name: Configure Metakit
-        working-directory: ./metakit/builds
-        run: '${{ env.msys2bash}} -c "../unix/configure --enable-threads --disable-shared"'
-      - name: Compile Metakit
-        working-directory: ./metakit/builds
-        run: '${{ env.msys2bash }} -c "make"'
+      - name: Configure and build Metakit
+        run: ${{ env.msys2bash}} -c "packaging/windows/build_metakit.sh '$IQTA_TOOLS\mingw810_64\bin'"
       - name: Install Sphinx and Read the Docs theme
         run: pip install Sphinx sphinx_rtd_theme
       - name: Compile PortaBase

@@ -44,7 +44,6 @@ do
 
     ../unix/configure --enable-threads --host $TARGET
     make
-    #abuild -f ../../packaging/android/libraries.json -R
-    mv libmk4.so libmk4_$ABI.so
+    mv libmk4.so ../../packaging/android/apk_template/libs/$ABI/libmk4.so
     cd ../..
 done
