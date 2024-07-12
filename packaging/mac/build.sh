@@ -14,6 +14,7 @@
 # This script builds a binary for the build system's native CPU architecture;
 # support for PowerPC and 32-bit Intel Macs was dropped with the upgrade to
 # Qt 5
+set -ex
 
 VERSION=`cat packaging/version_number`
 DIRNAME=PortaBase_$VERSION

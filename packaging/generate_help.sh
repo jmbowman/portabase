@@ -9,6 +9,8 @@
 # The main page of the generated output will be at
 # packaging/resources/help/_build/index.html
 
+set -ex
+
 cd resources/help
 if [ "$1" = "--no-clean" ]; then
     shift 1

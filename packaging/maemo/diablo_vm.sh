@@ -3,6 +3,8 @@
 # Script to build the Diablo package for PortaBase from a Mac
 # Run this from the project root, like packaging/maemo/diablo_vm.sh
 
+set -ex
+
 VERSION=`cat packaging/version_number`
 DIABLO_DIR=build/diablo
 DIR_NAME=portabase-$VERSION

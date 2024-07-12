@@ -8,6 +8,8 @@
 # version of Xcode earlier than Xcode 4, or go through some interesting hoops
 # to reinstate support for older compilers and target SDKs.
 
+set -ex
+
 if [ "$1" == "universal" ]; then
     export MACOSX_DEPLOYMENT_TARGET=10.5
     export CXX=g++-4.0

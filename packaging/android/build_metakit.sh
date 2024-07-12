@@ -2,6 +2,8 @@
 
 # Configure and compile Metakit for Android ARM devices
 
+set -ex
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export TOOLCHAIN=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -44,6 +46,7 @@ do
 
     ../unix/configure --enable-threads --host $TARGET
     make
+    mkdir -p ../../packaging/android/apk_template/libs/$ABI
     mv libmk4.so ../../packaging/android/apk_template/libs/$ABI/libmk4.so
     cd ../..
 done

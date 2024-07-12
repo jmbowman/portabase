@@ -3,6 +3,8 @@
 # Script to build the Fremantle package for PortaBase from a Mac
 # Run this from the project root, like packaging/maemo/fremantle_vm.sh
 
+set -ex
+
 VERSION=`cat packaging/version_number`
 FREMANTLE_DIR=build/fremantle
 DIR_NAME=portabase-$VERSION
