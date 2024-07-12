@@ -165,7 +165,7 @@ jobs:
           tools: "tools_mingw,qt.tools.win64_mingw810"
           cache: true
       - name: Configure and build Metakit
-        run: ${{ env.msys2bash}} -c "packaging/windows/build_metakit.sh '$IQTA_TOOLS\mingw810_64\bin'"
+        run: ${{ env.msys2bash}} -c "packaging/windows/build_metakit.sh '$QT_ROOT_DIR\..\..\mingw810_64\bin'"
       - name: Install Sphinx and Read the Docs theme
         run: pip install Sphinx sphinx_rtd_theme
       - name: Compile PortaBase

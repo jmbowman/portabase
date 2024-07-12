@@ -37,6 +37,7 @@ metakit/builds/*.exe
 metakit/unix/autom4te.cache/
 object_script.Portabase.Debug
 object_script.PortaBase.Release
+packaging/android/apk_template/lib/
 portabase.pro.user
 
 # OS generated files #

@@ -42,7 +42,7 @@ do
     cd metakit/builds
 
     # Remove intermediate artifacts from prior build
-    rm *.o demo dump myio
+    rm -f *.o demo dump myio
 
     ../unix/configure --enable-threads --host $TARGET
     make
