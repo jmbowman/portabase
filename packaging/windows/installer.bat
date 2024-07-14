@@ -1,7 +1,7 @@
 REM Make sure these paths are appropriate for your system:
 
 SET MINGW_BIN_DIR=%IQTA_TOOLS%\mingw810_64\bin
-SET QT_LIB_DIR=%QT_ROOT_DIR%\mingw81_64\bin
+SET QT_LIB_DIR=%QT_ROOT_DIR%\bin
 
 IF NOT EXIST build\windows MKDIR build\windows
 COPY CHANGES build\windows\CHANGES.txt

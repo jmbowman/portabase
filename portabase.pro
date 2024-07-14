@@ -186,7 +186,7 @@ unix {
 # Stuff for Android
 android-clang {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/packaging/android/apk_template
-    ANDROID_TARGET_SDK_VERSION = 34
+    ANDROID_TARGET_SDK_VERSION = 33
     CONFIG             += release
     DEFINES            += MOBILE ANDROID
     LIBS               += -L$$PWD/packaging/android/apk_template/libs/$$QT_ARCH
