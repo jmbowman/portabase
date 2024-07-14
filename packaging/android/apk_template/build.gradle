@@ -34,7 +34,7 @@ android {
      * Changing them manually might break the compilation!
      *******************************************************/
 
-    compileSdkVersion androidCompileSdkVersion.toInteger()
+    compileSdkVersion 34 // androidCompileSdkVersion.toInteger() chokes on input like 34-ext12
 
     buildToolsVersion androidBuildToolsVersion
 

@@ -56,20 +56,18 @@ jobs:
         run: qmake portabase.pro
         env:
           QMAKESPEC: android-clang
-      - name: Build AAB package for upload to Google Play
+      - name: Build AAB package for upload to Google Play and an APK for local testing
         run: make -j$(nproc) aab
       - name: Archive built AAB
         uses: actions/upload-artifact@v4
         with:
           name: android-aab
-          path: build/*.aab
-      - name: Compile PortaBase and build ARM64 APK package for sideloading
-        run: make -j$(nproc) apk
+          path: android-build/build/outputs/bundle/release/*.aab
       - name: Archive built APK
         uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: build/*.apk
+          path: android-build/build/outputs/apk/debug/*.apk
 
   linux-build:
     name: Linux build
