@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ex
 
 VERSION=`cat packaging/version_number`
 DEST=build/fremantle/portabase-$VERSION

@@ -18,6 +18,8 @@
 # If you need to re-configure Qt, run "gmake confclean" in Qt source directory
 # first.
 
+set -ex
+
 cd $1
 if [ "$2" == "universal" ]; then
     ./configure -platform macx-g++40 -release -opensource -no-exceptions -no-stl -no-qt3support -no-xmlpatterns -no-multimedia -no-audio-backend -no-phonon -no-phonon-backend -no-svg -no-webkit -no-javascript-jit -no-script -no-scripttools -no-declarative -no-declarative-debug -no-libtiff -no-libmng -no-openssl -nomake examples -nomake demos -no-dbus -no-dwarf2 -no-nis -universal -sdk /Developer/SDKs/MacOSX10.5.sdk # -carbon

@@ -1,4 +1,5 @@
 #!/bin/sh
+set -ex
 
 KEEP_HELP="no"
 if [ "$1" = "--keep-help" ]; then

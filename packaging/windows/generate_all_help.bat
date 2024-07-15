@@ -1,7 +1,7 @@
 REM Generate help files for all languages
 
 CALL packaging\windows\generate_help en
-python packaging\fix_help_paths.py resources\help\_build\html
+python3 packaging\fix_help_paths.py resources\help\_build\html
 CD resources\help\_build
 MOVE html\_static .
 MOVE html en

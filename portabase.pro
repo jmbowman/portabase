@@ -1,5 +1,5 @@
 TEMPLATE        = app
-CONFIG         += qt warn_on thread
+CONFIG         += qt warn_on
 #DEFINES        += TRACE_ENABLED # enables TRACE macro for crash debugging
 QT             += xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
@@ -14,6 +14,7 @@ TRANSLATIONS    = resources/translations/portabase_cs.ts \
                   resources/translations/portabase_fr.ts \
                   resources/translations/portabase_it.ts \
                   resources/translations/portabase_ja.ts \
+                  resources/translations/portabase_pl.ts \
                   resources/translations/portabase_sk.ts \
                   resources/translations/portabase_zh_CN.ts \
                   resources/translations/portabase_zh_TW.ts
@@ -185,7 +186,14 @@ unix {
 # Stuff for Android
 android-clang {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/packaging/android/apk_template
+    ANDROID_TARGET_SDK_VERSION = 33
+    CONFIG             += release
     DEFINES            += MOBILE ANDROID
+    LIBS               += -L$$PWD/packaging/android/apk_template/libs/$$QT_ARCH
+    # Avoid overwriting intermediate files written in parallel for different ABIs
+    OBJECTS_DIR     = build/$$QT_ARCH
+    MOC_DIR         = build/$$QT_ARCH
+    RCC_DIR         = build/$$QT_ARCH
     DISTFILES += \
         packaging/android/apk_template/AndroidManifest.xml \
         packaging/android/apk_template/gradle/wrapper/gradle-wrapper.jar \
@@ -204,7 +212,6 @@ android-clang {
     HEADERS            += src/qqutil/actionbar.h \
                           src/qqutil/qqandroidstyle.h
     INCLUDEPATH        += metakit/include
-    LIBS               += -L$$_PRO_FILE_PWD_/metakit/builds
     QT                 += androidextras svg
     RESOURCES           = resources/android.qrc
     SOURCES            += src/qqutil/actionbar.cpp \
@@ -249,6 +256,9 @@ macx {
     JA_LPROJ.files      = packaging/mac/ja.lproj/InfoPlist.strings \
                           packaging/mac/ja.lproj/locversion.plist
     JA_LPROJ.path       = Contents/Resources/ja.lproj
+    PL_LPROJ.files      = packaging/mac/pl.lproj/InfoPlist.strings \
+                          packaging/mac/pl.lproj/locversion.plist
+    PL_LPROJ.path       = Contents/Resources/pl.lproj
     SK_LPROJ.files      = packaging/mac/sk.lproj/InfoPlist.strings \
                           packaging/mac/sk.lproj/locversion.plist
     SK_LPROJ.path       = Contents/Resources/sk.lproj
@@ -266,6 +276,7 @@ macx {
                           FR_LPROJ \
                           IT_LPROJ \
                           JA_LPROJ \
+                          PL_LPROJ \
                           SK_LPROJ \
                           ZH_HANS_LPROJ \
                           ZH_HANT_LPROJ

@@ -1,3 +1,16 @@
+2024-07-14  JMB  Added GitHub Actions wokflow to build all installers
+
+    This doesn't yet sign any of the installers.  Also:
+
+    * Updated the Android build configuration to target newer SDKs so it can
+      be reactivated in the Google Play app store
+    * Added support for building all Android processor architectures
+    * Use the Qt distribution of MinGW to also compile Metakit on Windows
+    * Updated all shell scripts to avoid continuing even after errors
+    * Included the (still very incomplete) Polish translation
+    * Updated some build instructions and comments
+    * Updated the copyright years
+
 2020-09-20  JMB  Fixed time field display, updated macOS code signing
 
     Fixed an 11-year-old bug that prevented time fields from being

@@ -23,20 +23,22 @@
 # Intermediary build files #
 ############################
 .qmake.stash
+android-build/
+android-PortaBase-deployment-settings.json
 /build/
 _build/
 /doc/html/
 config.h
 config.status
-Makefile
-Makefile.Debug
-Makefile.debug
-Makefile.Release
-Makefile.release
+Makefile*
 metakit/builds/*.exe
+metakit/builds/demo
+metakit/builds/dump
+metakit/builds/myio
 metakit/unix/autom4te.cache/
 object_script.Portabase.Debug
 object_script.PortaBase.Release
+packaging/android/apk_template/libs/
 portabase.pro.user
 
 # OS generated files #

@@ -1,0 +1,181 @@
+---
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      sign:
+        description: "Sign installers?"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  android-build:
+    name: Android build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [
+          "ubuntu-24.04"
+        ]
+    env:
+      # Of these, only ANDROID_NDK_ROOT should be used by Qt, but override the others set by default in the runner just in case
+      ANDROID_NDK: /usr/local/lib/android/sdk/ndk/21.4.7075529
+      ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/21.4.7075529
+      ANDROID_NDK_LATEST_HOME: /usr/local/lib/android/sdk/ndk/21.4.7075529
+      ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/21.4.7075529
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3-sphinx python3-sphinx-rtd-theme
+      - name: Install the NDK version required by Qt 5.15.x
+        run: '$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.4.7075529"'
+      - name: Accept the NDK license
+        run: "yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses"
+      - name: Install Qt
+        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
+        with:
+          version: "5.15.2"
+          target: android
+          cache: true
+      - name: Compile Metakit for all Android ABIs
+        run: packaging/android/build_metakit.sh
+      - name: Generate binary translation files to include in the build
+        run: |
+          lrelease portabase.pro
+          lrelease resources/translations/qt*.ts
+      - name: Generate Makefile
+        run: qmake portabase.pro
+        env:
+          QMAKESPEC: android-clang
+      - name: Build AAB package for upload to Google Play and an APK for local testing
+        run: make -j$(nproc) aab
+      - name: Archive built AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: android-build/build/outputs/bundle/release/*.aab
+      - name: Archive built APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: android-build/build/outputs/apk/debug/*.apk
+
+  linux-build:
+    name: Linux build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [
+          "ubuntu-20.04",
+          "ubuntu-22.04",
+          "ubuntu-24.04"
+        ]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential debhelper python3-sphinx python3-sphinx-rtd-theme qtbase5-dev qttools5-dev-tools
+      - name: Read the PortaBase version from file
+        id: getversion
+        run: echo "PORTABASE_VERSION=$(cat packaging/version_number)" >> $GITHUB_ENV
+      - name: Build package
+        run: packaging/linux/debian.sh
+      - name: Archive built package
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ matrix.os }}-package"
+          path: build/debian/*.deb
+      - name: Verify that package installs cleanly
+        run: sudo apt-get install ./build/debian/portabase_${{ env.PORTABASE_VERSION }}_amd64.deb
+
+  mac-build:
+    name: macOS build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [
+          "macos-12",
+          # "macos-13",  # Both of these are broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
+          # "macos-14"
+        ]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Qt
+        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
+        with:
+          version: "5.15.2"
+          cache: true
+      - name: Build Metakit
+        run: packaging/mac/build_metakit.sh
+      - name: Install Sphinx and Read the Docs theme
+        run: pip install Sphinx sphinx_rtd_theme
+      - if: ${{ ! inputs.signed }}
+        name: Build unsigned installer for testing
+        run: packaging/mac/build.sh
+      - if: ${{ inputs.signed }}
+        name: Build signed installer for release
+        run: packaging/mac/build.sh --sign
+      - name: Archive built installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ matrix.os }}-installer"
+          path: build/*.dmg
+
+  windows-build:
+    name: Windows build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["windows-2022"]  # windows-2019 runner image doesn't come with Inno Setup, skip for now
+    env:
+      msys2bash: 'C:\shells\msys2bash.cmd'
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Qt
+        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
+        with:
+          version: "5.15.2"
+          arch: "win64_mingw81"
+          tools: "tools_mingw,qt.tools.win64_mingw810"
+          cache: true
+      - name: Configure and build Metakit
+        run: ${{ env.msys2bash}} -c "packaging/windows/build_metakit.sh '${{ env.IQTA_TOOLS }}\mingw810_64\bin'"
+      - name: Install Sphinx and Read the Docs theme
+        run: pip install Sphinx sphinx_rtd_theme
+      - name: Compile PortaBase
+        run: packaging\windows\build.bat
+      - if: ${{ ! inputs.signed }}
+        name: Build unsigned installer for testing
+        run: packaging\windows\installer.bat
+      - if: ${{ inputs.signed }}
+        name: Build signed installer for release
+        run: packaging\windows\installer.bat --sign
+      - name: Archive built installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: build/*.dmg

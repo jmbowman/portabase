@@ -1,17 +1,17 @@
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:7.2.2'
     }
 }
 
 repositories {
-    jcenter()
     google()
+    jcenter()
 }
 
 apply plugin: 'com.android.application'
@@ -34,7 +34,7 @@ android {
      * Changing them manually might break the compilation!
      *******************************************************/
 
-    compileSdkVersion androidCompileSdkVersion.toInteger()
+    compileSdkVersion 34 // androidCompileSdkVersion.toInteger() chokes on input like 34-ext12
 
     buildToolsVersion androidBuildToolsVersion
 
@@ -49,6 +49,15 @@ android {
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.incremental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {

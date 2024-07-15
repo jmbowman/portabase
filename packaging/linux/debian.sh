@@ -6,6 +6,8 @@
 # Generates a binary package by default.  To instead create a source package
 # (for example, to upload to an autobuilder), add the "--source" parameter.
 
+set -ex
+
 VERSION=`cat packaging/version_number`
 DEST=build/debian/portabase-$VERSION
 
