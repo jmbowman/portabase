@@ -1,17 +1,20 @@
 # Messages from row_viewer.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:35+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,7 +40,10 @@ msgid ""
 "the left and right arrows at the bottom of the screen or the left and right "
 "arrow keys allows you to navigate between rows in the current view.  There "
 "are a few other buttons buttons at the bottom of the dialog:"
-msgstr "レコード表示画面は1レコード内の全データを閲覧するのに便利なようにデザインされたダイアログです。レコード編集画面と同様、左側にはフィールドラベルが、右側にはその値があります。ただし、値を編集することはできず、折り返し表示されますので横方向にスクロールさせなくても全体を見ることができます。ノートの内容は先頭の数語が表示されるのではなく、全文が表示されます。デフォルトでは、現在のビューに含まれているフィールドだけが（ビューで指定された順番で）表示されます; これ以外のフィールドの組み合わせで見るには、画面下部のドロップリストから適当なものを選択します。画面下部の矢印パッドにある左向き、あるいは右向きの矢印（又は矢印キー）を押すと、現在の表示されているレコードを変更することができます。画面下部に他のボタンもいくすかあります:"
+msgstr ""
+"レコード表示画面は1レコード内の全データを閲覧するのに便利なようにデザインされたダイアログです。レコード編集画面と同様、左側にはフィールドラベルが、右側にはその値があります。ただし、値を編集することはできず、折り返し表示されますので横方向にスクロールさせなくても全体を見ることができます。ノートの内容は先頭の数語が表示されるのではなく、全文が表示されます。デフォルトでは、現在のビューに含まれているフィールドだけが（ビューで指定された順番で）表示されます;"
+" "
+"これ以外のフィールドの組み合わせで見るには、画面下部のドロップリストから適当なものを選択します。画面下部の矢印パッドにある左向き、あるいは右向きの矢印（又は矢印キー）を押すと、現在の表示されているレコードを変更することができます。画面下部に他のボタンもいくすかあります:"
 
 # 10b8ef961b7c458eb4bcf2bef5c5eb1e
 #: ../../row_viewer.txt:9
@@ -50,7 +56,9 @@ msgid ""
 "Launch the :ref:`row editor <row_editor>` for the current row; if you click "
 "\"OK\"/\"Done\" in the row editor you will be taken back to the data viewer,"
 " otherwise you will be returned to the row viewer."
-msgstr "現在のレコードを対象に\\ :ref:`レコード編集画面 <row_editor>`\\ を起動します; \"OK\"をクリックするとデータ表示画面に戻りますし、それ以外であればレコード表示画面に戻ります。"
+msgstr ""
+"現在のレコードを対象に\\ :ref:`レコード編集画面 <row_editor>`\\ を起動します; "
+"\"OK\"をクリックするとデータ表示画面に戻りますし、それ以外であればレコード表示画面に戻ります。"
 
 # 083d945fc0df40af99ac32fb526f7089
 #: ../../row_viewer.txt:12
@@ -63,7 +71,9 @@ msgid ""
 "Launch the row editor with a copy of the current row; if you click "
 "\"OK\"/\"Done\" in the row editor you will be taken back to the data viewer,"
 " otherwise you will be returned to the row viewer."
-msgstr "現在のレコードのコピーを対象にレコード編集画面を起動します; \"OK\"をクリックするとデータ表示画面に戻りますし、それ以外であればレコード表示画面に戻ります。"
+msgstr ""
+"現在のレコードのコピーを対象にレコード編集画面を起動します; "
+"\"OK\"をクリックするとデータ表示画面に戻りますし、それ以外であればレコード表示画面に戻ります。"
 
 # 238c6607f66d441e9a34655246176717
 #: ../../row_viewer.txt:15
@@ -86,4 +96,6 @@ msgid ""
 "Copy the currently selected text (if any) to the clipboard. (Not shown in "
 "Maemo because dragging motions scroll the display rather than selecting "
 "text; copy text from the row editor instead.)"
-msgstr "選択されたテキストをクリップボードにコピーする。（Maemo版でドラッグすればテクスト選択ではなくスクロールするおかげで、このボタンは表示されません; テキストをコピーするにはレコード編集画面を使います）"
+msgstr ""
+"選択されたテキストをクリップボードにコピーする。（Maemo版でドラッグすればテクスト選択ではなくスクロールするおかげで、このボタンは表示されません; "
+"テキストをコピーするにはレコード編集画面を使います）"
