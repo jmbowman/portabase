@@ -1,17 +1,20 @@
 # Messages from import.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 22:50+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/jmbowman/teams/14599/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,7 +54,11 @@ msgid ""
 " (which supports text in many languages), but you may also choose Latin-1 "
 "(which is used by most software configured for use primarily with Western "
 "European languages)."
-msgstr "在\\ :ref:`資料檢視器 <data_viewer>`\\ 中的\"檔案\"選單中，選擇\"匯入\"。接著一個檔案選取器會顯示所有可用的CSV檔; 你可以從中挑選要匯入的檔案。此CSV檔必須與目的資料庫檔擁有相同數目的欄位，而且欄位值也必須符合指定的欄位型別。你可以指定文字檔的編碼方式以便正確的匯入非ASCII的字元; 預設值是UTF-8(此編碼方式支援許多種語言的文字)，不過你也可以選擇Latin-1(此編碼方式多為西歐國家使用)。"
+msgstr ""
+"在\\ :ref:`資料檢視器 <data_viewer>`\\ 中的\"檔案\"選單中，選擇\"匯入\"。接著一個檔案選取器會顯示所有可用的CSV檔;"
+" "
+"你可以從中挑選要匯入的檔案。此CSV檔必須與目的資料庫檔擁有相同數目的欄位，而且欄位值也必須符合指定的欄位型別。你可以指定文字檔的編碼方式以便正確的匯入非ASCII的字元;"
+" 預設值是UTF-8(此編碼方式支援許多種語言的文字)，不過你也可以選擇Latin-1(此編碼方式多為西歐國家使用)。"
 
 # 5b0373417c3b4c3e8203bd11b97a1a83
 #: ../../import.txt:12
@@ -84,7 +91,8 @@ msgid ""
 "Time fields may be formated as HH:MM:SS, HH:MM:SS AM, HH:MM, HH:MM AM, or "
 "the number of seconds past midnight.  Blank or -1 values are interpreted as "
 "\"None\"."
-msgstr "時間欄位格式必須為HH:MM:SS、HH:MM:SS AM、HH:MM、HH:MM AM、或是午夜十二點後所經過的秒數。空白或 -1相當於\"無\"。"
+msgstr ""
+"時間欄位格式必須為HH:MM:SS、HH:MM:SS AM、HH:MM、HH:MM AM、或是午夜十二點後所經過的秒數。空白或 -1相當於\"無\"。"
 
 # 89384c45e09f43c98f4ed49fcaf49af2
 #: ../../import.txt:22

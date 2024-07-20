@@ -1,18 +1,20 @@
 # Messages from data_viewer.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
-# LSU <shinshansu@yahoo.com>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-24 03:29+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/jmbowman/teams/14599/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -48,7 +50,11 @@ msgid ""
 " this in the :ref:`preferences dialog <preferences>`, you can stil launch it"
 " by pressing enter/return, space, or Control-R (Command-R on the Mac) while "
 "a row is selected."
-msgstr "大部分的資料檢示銀幕都被庫表所佔領只展示資料庫一些資料而已。但是你可以利用滾動軸看到整個篩選的表列；性能表現如以前一樣快速因為只有現有顯示裡行列的資料會加載進去。點擊一行通常會啟動:ref:'列檢視器<row_viewer>' 對話；如果你讓他從:ref:'徧好對話<preference>'失去功能,你仍可按進入/返回，空白鍵，或Control-R(在Mac是Command-R) 在你選擇一個你要的一行後。"
+msgstr ""
+"大部分的資料檢示銀幕都被庫表所佔領只展示資料庫一些資料而已。但是你可以利用滾動軸看到整個篩選的表列；性能表現如以前一樣快速因為只有現有顯示裡行列的資料會加載進去。點擊一行通常會啟動:ref:'列檢視器<row_viewer>'"
+" "
+"對話；如果你讓他從:ref:'徧好對話<preference>'失去功能,你仍可按進入/返回，空白鍵，或Control-R(在Mac是Command-R)"
+" 在你選擇一個你要的一行後。"
 
 # c510a40ba03a46bbabbb897fd288332d
 #: ../../data_viewer.txt:19
@@ -60,7 +66,10 @@ msgid ""
 "the image contained in that cell is shown in the :ref:`image viewer "
 "<image_viewer>`.  If you do it in any other type of column, the :ref:`row "
 "editor <row_editor>` for the row you clicked on is launched."
-msgstr "在某個格子上按住不放超過1/2秒時可以執行特殊的功能。如果這個格子位於多行文字項欄位，則會叫出\\ :ref:`多行文字項檢視器 <note_editor>`\\ 來顯示此多行文字項的內容。如果是其他種型別的欄位，則會叫出\\ :ref:`列編輯器 <row_editor>`\\ 來處理該格子所在的那一列。"
+msgstr ""
+"在某個格子上按住不放超過1/2秒時可以執行特殊的功能。如果這個格子位於多行文字項欄位，則會叫出\\ :ref:`多行文字項檢視器 "
+"<note_editor>`\\ 來顯示此多行文字項的內容。如果是其他種型別的欄位，則會叫出\\ :ref:`列編輯器 <row_editor>`\\ "
+"來處理該格子所在的那一列。"
 
 # 863b37bfb2754a539787fcb47932e6bd
 #: ../../data_viewer.txt:21
@@ -76,7 +85,10 @@ msgid ""
 "buttons to go to that page of rows; the button for the current page is shown"
 " pressed.  Click on the arrow buttons at the ends to show the page buttons "
 "for the next or previous five pages."
-msgstr "如果您在偏好對話選擇用分頁顯示:ref:'偏好對話<preference>'，那麼在銀幕最底會增加一行控制列。在旋轉方塊左底邊有說明最多幾行可從展示在在當前檢視窗內；你可以編輯改寫任何一個正整數(設置尺寸小到足以看不在右側的滾動軸，給多一點平行空間；請注意Maemo 沒有滾軸). 在\"每頁行數\"格子的右邊是頁面導航按鈕。點擊在有數字的按鈕能引導休到那頁面的行列；本頁的按鈕會展現已被按下。點擊在後面有箭頭的按鈕會展示前一頁或下一頁的頁面按鈕。"
+msgstr ""
+"如果您在偏好對話選擇用分頁顯示:ref:'偏好對話<preference>'，那麼在銀幕最底會增加一行控制列。在旋轉方塊左底邊有說明最多幾行可從展示在在當前檢視窗內；你可以編輯改寫任何一個正整數(設置尺寸小到足以看不在右側的滾動軸，給多一點平行空間；請注意Maemo"
+" 沒有滾軸). "
+"在\"每頁行數\"格子的右邊是頁面導航按鈕。點擊在有數字的按鈕能引導休到那頁面的行列；本頁的按鈕會展現已被按下。點擊在後面有箭頭的按鈕會展示前一頁或下一頁的頁面按鈕。"
 
 # f641e2dcfbda45dfbe4c7177906cf4b3
 #: ../../data_viewer.txt:26
@@ -94,7 +106,9 @@ msgid ""
 "column in ascending order; clicking it again sorts in descending order.  If "
 "you press a column label and hold it for 1/2 second or more before "
 "releasing, the :ref:`column statistics dialog <column_statistics>` is shown."
-msgstr "在行裡的欄位標籤有許多特色除了告知你每一欄的名稱外。要改變當前檢視窗的欄位寬度，點擊兩欄位標籤中的邊界(或者最後一橍右邊側) 然後拉到你想要的地方即可。點擊欄位標籤可以將在此欄內已篩選過的行列按照上升行列排序；再點擊一次則按下降行列排序。假如你按上一欄的標籤久一點大亼約二分之一秒或更長一點才放開，就可看到欄位統計對話:ref:'欄位統計對話<column_statistics>'."
+msgstr ""
+"在行裡的欄位標籤有許多特色除了告知你每一欄的名稱外。要改變當前檢視窗的欄位寬度，點擊兩欄位標籤中的邊界(或者最後一橍右邊側) "
+"然後拉到你想要的地方即可。點擊欄位標籤可以將在此欄內已篩選過的行列按照上升行列排序；再點擊一次則按下降行列排序。假如你按上一欄的標籤久一點大亼約二分之一秒或更長一點才放開，就可看到欄位統計對話:ref:'欄位統計對話<column_statistics>'."
 
 # c763f794d0964d22904395d8317dc068
 #: ../../data_viewer.txt:33
@@ -123,7 +137,9 @@ msgid ""
 "This option is disabled if no changes have been made since the current "
 "database was opened or last saved. (Not shown in Maemo, use the toolbar "
 "button instead.)"
-msgstr "保存從上回打開或上次保存後的任何被糾正過的檔案。如果你登出PortaBase忘記保存最近糾正過的內容，這些將會遺失(一個對話錄將會警告你如果此事將發生). 這個選項將會被取消，如果沒有任何改變自從上次打開此資料庫或保存後。(沒有在Maemo 系統內顯示，需要用工具欄內的按鈕。)"
+msgstr ""
+"保存從上回打開或上次保存後的任何被糾正過的檔案。如果你登出PortaBase忘記保存最近糾正過的內容，這些將會遺失(一個對話錄將會警告你如果此事將發生)."
+" 這個選項將會被取消，如果沒有任何改變自從上次打開此資料庫或保存後。(沒有在Maemo 系統內顯示，需要用工具欄內的按鈕。)"
 
 # 204b52f5096048a38a3d55de779e8de4
 #: ../../data_viewer.txt:41
@@ -213,7 +229,9 @@ msgid ""
 "Launch a dialog which displays basic statistics about the current file (such"
 " as its size, row count, column count, etc.).  The :ref:`column statistics "
 "dialog <column_statistics>` can also be launched from this dialog."
-msgstr "啟動對話器來展示當前檔案的統計數字(比如它的尺寸，多少行，多少欄，等等。). 這欄位統計數字對話也可在此對話中啟動。:ref:'欄位統計對話<column_statistics>."
+msgstr ""
+"啟動對話器來展示當前檔案的統計數字(比如它的尺寸，多少行，多少欄，等等。). "
+"這欄位統計數字對話也可在此對話中啟動。:ref:'欄位統計對話<column_statistics>."
 
 # 06a142b09b2a48a5be415b7af1c2c473
 #: ../../data_viewer.txt:65
@@ -227,7 +245,8 @@ msgid ""
 "the current data selection would look like.  You can also set from here "
 "certain properties of the output, such as paper size and zoom factor.  (Not "
 "shown in Maemo, which has no printing support.)"
-msgstr "打印預覽對話框啟動，以便看看輸出打印出當前的數據選擇會是什麼樣子。您也可以從這裡設置某些屬性的輸出，如紙張大小和縮放因子。（不顯示在Maemo操作，又沒有打印支持。）"
+msgstr ""
+"打印預覽對話框啟動，以便看看輸出打印出當前的數據選擇會是什麼樣子。您也可以從這裡設置某些屬性的輸出，如紙張大小和縮放因子。（不顯示在Maemo操作，又沒有打印支持。）"
 
 # ff2fff1ddded46f2822f4a79605f2bbf
 #: ../../data_viewer.txt:68
@@ -241,7 +260,8 @@ msgid ""
 "filter in the current sorting order.  Note that you may wish to modify some "
 "settings with the print preview dialog first.  (Not shown in Maemo, which "
 "has no printing support.)"
-msgstr "啟動打印對話框，以打印當前視圖中的數據和過濾器在目前的排序順序。請注意，您可能希望修改某些設置與打印預覽對話框的第一。（不顯示在Maemo操作，又沒有打印支持。）"
+msgstr ""
+"啟動打印對話框，以打印當前視圖中的數據和過濾器在目前的排序順序。請注意，您可能希望修改某些設置與打印預覽對話框的第一。（不顯示在Maemo操作，又沒有打印支持。）"
 
 # 4cb1ae3a7c8d4245bebad327bb2803bb
 #: ../../data_viewer.txt:71
@@ -264,7 +284,9 @@ msgid ""
 "Close the current file; if there are unsaved changes, you will be asked if "
 "you want to save them.  (Not shown in Maemo, use the close button at the top"
 " right of the screen instead; you may need to exit fullscreen mode first.)"
-msgstr "關閉當前的檔案；如果有尚有巳編正但尚未保存者，你會被問是否要保存它們。(但不在Maemo 顯示，而必須用在銀幕最右上方的關閉按鈕；有可能要從全銀幕先退出。)"
+msgstr ""
+"關閉當前的檔案；如果有尚有巳編正但尚未保存者，你會被問是否要保存它們。(但不在Maemo "
+"顯示，而必須用在銀幕最右上方的關閉按鈕；有可能要從全銀幕先退出。)"
 
 # 91903c5fd5de4f76a7ac000abf3dd6ac
 #: ../../data_viewer.txt:79
@@ -356,7 +378,9 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available through the toolbar and :ref:`row "
 "viewer <row_viewer>` buttons."
-msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動列位檢視器時你可以找到同等功能. :ref:'列位檢視器<row_viewer>'按鈕。"
+msgstr ""
+" 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動列位檢視器時你可以找到同等功能. "
+":ref:'列位檢視器<row_viewer>'按鈕。"
 
 # 23ac094a1e7740488cefbfdd8193b425
 #: ../../data_viewer.txt:103
@@ -376,7 +400,9 @@ msgid ""
 "Add a new view to the database file.  Choosing this option launches the "
 ":ref:`view editor <view_editor>` with no name specified and none of the "
 "columns checked."
-msgstr "加入一個新的數據庫視圖到數據庫檔案裡。可以選用這選項來啟動檢視編輯器:ref:'檢視編輯<view_editor>' 沒有特定的名字也沒有特別指定那些欄位。"
+msgstr ""
+"加入一個新的數據庫視圖到數據庫檔案裡。可以選用這選項來啟動檢視編輯器:ref:'檢視編輯<view_editor>' "
+"沒有特定的名字也沒有特別指定那些欄位。"
 
 # af4b1a275c8e48f9aa53951f7015dcd8
 #: ../../data_viewer.txt:111
@@ -408,7 +434,8 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`views dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動檢視對話時你可以找到同等功能. :ref:'檢視對話<vsf_dialogs>'"
+msgstr ""
+" 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動檢視對話時你可以找到同等功能. :ref:'檢視對話<vsf_dialogs>'"
 
 # 33631316cbb24401bca4b4cf502b3b5d
 #: ../../data_viewer.txt:123
@@ -454,7 +481,8 @@ msgid ""
 "configuration you want to use from the menu.  If you just want to sort by a "
 "single column that is displayed in the current view, it is probably faster "
 "to use the \"click on a column label to sort\" feature instead."
-msgstr "在選單下方的是目前資料庫中已定義排序方式的清單，目前排序方式旁邊會有一個選取記號。要更改資料列排序方式的話，直接由選單中選擇要使用的排序方式即可。如果你只要依據目前景觀中的某一欄位來排序，直接在該欄位標籤上按一下會比較快。"
+msgstr ""
+"在選單下方的是目前資料庫中已定義排序方式的清單，目前排序方式旁邊會有一個選取記號。要更改資料列排序方式的話，直接由選單中選擇要使用的排序方式即可。如果你只要依據目前景觀中的某一欄位來排序，直接在該欄位標籤上按一下會比較快。"
 
 # 934ef1ee3996456d98708da81d51f85a
 #: ../../data_viewer.txt:138
@@ -462,7 +490,8 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`sortings dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動排序對話時你可以找到同等功能. :ref:'排序對話<vsf_dialogs>'"
+msgstr ""
+" 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動排序對話時你可以找到同等功能. :ref:'排序對話<vsf_dialogs>'"
 
 # b754369ddea74e69bd41b5b2a84436a8
 #: ../../data_viewer.txt:143
@@ -526,7 +555,8 @@ msgid ""
 "In order to conserve screen space, Maemo does not include this menu; "
 "equivalent functionality is available in the :ref:`filters dialog "
 "<vsf_dialogs>` launched from the toolbar."
-msgstr " 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動篩選對話時你可以找到同等功能. :ref:'篩選對話<vsf_dialogs>'"
+msgstr ""
+" 為了保留銀幕的空間，Maemo 不含此選取項目表；但當你在工具欄內啟動篩選對話時你可以找到同等功能. :ref:'篩選對話<vsf_dialogs>'"
 
 # 3491f7828f984e8c9ef5fea5b8d7fcb7
 #: ../../data_viewer.txt:166
