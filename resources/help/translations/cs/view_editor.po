@@ -1,22 +1,25 @@
 # Messages from view_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 08:26+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 53248ae7f12c4d3a85bacb1f0e626246
 #: ../../view_editor.txt:4
@@ -32,7 +35,13 @@ msgid ""
 "with specified display widths.  Each database has a default \"All Columns\" "
 "view which shows all the columns in the database in the same order as they "
 "appear in the :ref:`row editor <row_editor>`."
-msgstr "Kdykoli prohlížíte obsah databáze v :ref:`Prohlížeči dat <data_viewer>`\\ , používáte k jejich zobrazení určitý \"náhled\". Náhled je podmnožinou sloupců z databáze, které jsou zobrazeny v konkrétním pořadí a šířkách. Každá databáze má jako výchozí náhled \"Všechny sloupce\" kdy jsou zobrazeny všechny sloupce databáze ve stejném pořadí, které používá :ref:`Editor záznamů <row_editor>`\\ ."
+msgstr ""
+"Kdykoli prohlížíte obsah databáze v :ref:`Prohlížeči dat <data_viewer>`\\ , "
+"používáte k jejich zobrazení určitý \"náhled\". Náhled je podmnožinou "
+"sloupců z databáze, které jsou zobrazeny v konkrétním pořadí a šířkách. "
+"Každá databáze má jako výchozí náhled \"Všechny sloupce\" kdy jsou zobrazeny"
+" všechny sloupce databáze ve stejném pořadí, které používá :ref:`Editor "
+"záznamů <row_editor>`\\ ."
 
 # a73ecc0797104afd82c6f0dd18ae97bc
 #: ../../view_editor.txt:8
@@ -52,4 +61,19 @@ msgid ""
 "Click \"OK\"/\"Done\" to accept the currently shown settings, or cancel out "
 "of the dialog to revert to the previous values (or to cancel adding a new "
 "view)."
-msgstr "Náhledy jsou definovány pomocí dialogu Editor náhledů. V horní části dialogu nalezneme pole se jménem náhledu - změnou tohoto údaje lze přejmenovat vybraný náhled. Následují rozbalovací nabídky umožňují výběr pořadí a/nebo filtru, které budou použity pokaždé, přepnete-li na daný náhled; výběrem volby \"Není\" ponecháte stávající pořadí či filtr beze změny (čímž se vyhnete opakovaným výběrům náhledu, pořadí a filtru při častém používání určité kombinace těchto kritérií). Níže je tabulka zobrazující jména všech sloupců databáze s zaškrtávacím polem u každého z nich, které označuje, zda sloupec bude v daném náhledu zahrnut či nikoli. Klepnutím na zaškrtávací pole lze příslušný sloupec zařadit či vyřadit. V dolní části dialogu nalezneme tlačítka \"Posunout nahoru\"; a \"Posunout dolů\", která slouží k posunu vybraného sloupce v tabulce, čímž dojde ke změně v řazení sloupců při použití daného náhledu. Klepnutím na \"OK\" potvrdíte právě zobrazené nastavení, klepnutím na \"Zrušit\" či křížek pro uzavření dialogu se vrátíte k předešlým hodnotám (nebo zrušíte vytvoření nového náhledu)."
+msgstr ""
+"Náhledy jsou definovány pomocí dialogu Editor náhledů. V horní části dialogu"
+" nalezneme pole se jménem náhledu - změnou tohoto údaje lze přejmenovat "
+"vybraný náhled. Následují rozbalovací nabídky umožňují výběr pořadí a/nebo "
+"filtru, které budou použity pokaždé, přepnete-li na daný náhled; výběrem "
+"volby \"Není\" ponecháte stávající pořadí či filtr beze změny (čímž se "
+"vyhnete opakovaným výběrům náhledu, pořadí a filtru při častém používání "
+"určité kombinace těchto kritérií). Níže je tabulka zobrazující jména všech "
+"sloupců databáze s zaškrtávacím polem u každého z nich, které označuje, zda "
+"sloupec bude v daném náhledu zahrnut či nikoli. Klepnutím na zaškrtávací "
+"pole lze příslušný sloupec zařadit či vyřadit. V dolní části dialogu "
+"nalezneme tlačítka \"Posunout nahoru\"; a \"Posunout dolů\", která slouží k "
+"posunu vybraného sloupce v tabulce, čímž dojde ke změně v řazení sloupců při"
+" použití daného náhledu. Klepnutím na \"OK\" potvrdíte právě zobrazené "
+"nastavení, klepnutím na \"Zrušit\" či křížek pro uzavření dialogu se vrátíte"
+" k předešlým hodnotám (nebo zrušíte vytvoření nového náhledu)."
