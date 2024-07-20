@@ -1,22 +1,25 @@
 # Messages from preferences.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# a270031086f2a0d3514bc0cb507b48f6, 2019
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2019-06-15 15:12+0000\n"
-"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # f9252050ecc74ea39a83cb6b96ae95ca
 #: ../../preferences.txt:4
@@ -29,14 +32,20 @@ msgid ""
 "This dialog allows you to set your preferences for the PortaBase "
 "application.  Click \"OK\"/\"Done\" to accept the current preferences on all"
 " tabs, or cancel out of the dialog to leave them unchanged.  The tabs are:"
-msgstr "Cette boîte de dialogue vous permet de définir vos préférences pour l'application PortaBase. Cliquez sur \"OK\" / \"Terminé\" pour accepter les préférences en cours sur tous les onglets ou annulez la boîte de dialogue pour les laisser inchangés. Les onglets sont:"
+msgstr ""
+"Cette boîte de dialogue vous permet de définir vos préférences pour "
+"l'application PortaBase. Cliquez sur \"OK\" / \"Terminé\" pour accepter les "
+"préférences en cours sur tous les onglets ou annulez la boîte de dialogue "
+"pour les laisser inchangés. Les onglets sont:"
 
 # 885b85b40c324598b9837cfbe2a40db1
 #: ../../preferences.txt:12
 msgid ""
 "Maemo Fremantle doesn't use tabs in this dialog; all preferences are shown "
 "in a scrollable list."
-msgstr "Maemo Fremantle n'utilise pas les onglets dans cette boîte de dialogue; toutes les préférences sont affichées dans une liste déroulante."
+msgstr ""
+"Maemo Fremantle n'utilise pas les onglets dans cette boîte de dialogue; "
+"toutes les préférences sont affichées dans une liste déroulante."
 
 # ec40c44712d74bbb994f93e51df6ad5d
 #: ../../preferences.txt:17
@@ -59,12 +68,17 @@ msgid ""
 "Check this to show a confirmation dialog whenever you attempt to delete a "
 "row, view, sorting, or filter.  This makes it less likely that you will "
 "accidentally delete something when you meant to click on something else."
-msgstr "Cochez cette case pour afficher une boîte de dialogue de confirmation chaque fois que vous essayez de supprimer une ligne, une vue, un tri ou un filtre. Cela rend moins probable que vous supprimiez accidentellement quelque chose lorsque vous vouliez cliquer sur quelque chose d'autre."
+msgstr ""
+"Cochez cette case pour afficher une boîte de dialogue de confirmation chaque"
+" fois que vous essayez de supprimer une ligne, une vue, un tri ou un filtre."
+" Cela rend moins probable que vous supprimiez accidentellement quelque chose"
+" lorsque vous vouliez cliquer sur quelque chose d'autre."
 
 # 4abae8964a1d446782dc787b5b3b6813
 #: ../../preferences.txt:25
 msgid "**Allow checkbox edit in data viewer**"
-msgstr "** Autoriser la modification de la case dans la visionneuse de données **"
+msgstr ""
+"** Autoriser la modification de la case dans la visionneuse de données **"
 
 # a0c4c33c281e46d39fa5b0e819c8f00a
 #: ../../preferences.txt:25
@@ -73,7 +87,12 @@ msgid ""
 "viewer <data_viewer>` by clicking on the appropriate cell.  This makes it "
 "more convenient to use PortaBase as a todo list or such, but also makes it "
 "easier to accidentally change a data value."
-msgstr "Cochez cette case pour autoriser le basculement des valeurs booléennes affichées dans le visualiseur de données: ref: ` <data_viewer>` en cliquant sur la cellule appropriée. Cela facilite l’utilisation de PortaBase en tant que liste de tâches ou autre, mais facilite également la modification accidentelle d’une valeur de données."
+msgstr ""
+"Cochez cette case pour autoriser le basculement des valeurs booléennes "
+"affichées dans le visualiseur de données: ref: ` <data_viewer>` en cliquant "
+"sur la cellule appropriée. Cela facilite l’utilisation de PortaBase en tant "
+"que liste de tâches ou autre, mais facilite également la modification "
+"accidentelle d’une valeur de données."
 
 # f03f4260c3de49cfb473c5e48f3c90f1
 #: ../../preferences.txt:28
@@ -86,7 +105,11 @@ msgid ""
 "By default, a single click in the data viewer opens the selected row in the "
 ":ref:`row viewer <row_viewer>`.  Unchecking this option allows rows to be "
 "selected without immediately launching a dialog."
-msgstr "Par défaut, un simple clic dans la visionneuse de données ouvre la ligne sélectionnée dans la visionneuse de lignes: ref: ` <row_viewer>`.  Décocher cette option permet de sélectionner les lignes sans lancer immédiatement une boîte de dialogue."
+msgstr ""
+"Par défaut, un simple clic dans la visionneuse de données ouvre la ligne "
+"sélectionnée dans la visionneuse de lignes: ref: ` <row_viewer>`.  Décocher "
+"cette option permet de sélectionner les lignes sans lancer immédiatement une"
+" boîte de dialogue."
 
 # cd60c1f148004f5082310531399c53bf
 #: ../../preferences.txt:31
@@ -101,19 +124,30 @@ msgid ""
 "displays.  This can usually be guessed based on the operating system in use,"
 " but some netbooks and MIDs running PC operating systems might be better off"
 " with the small-screen settings."
-msgstr "Lorsque cette case est cochée, PortaBase utilise les valeurs par défaut pour certains paramètres (tels que la largeur des colonnes, les lignes par page, etc.), qui conviennent mieux aux petits affichages. Cela peut généralement être deviné en fonction du système d'exploitation utilisé, mais certains netbooks et MID utilisant un système d'exploitation pour PC pourraient être plus avantageux avec les paramètres de petit écran."
+msgstr ""
+"Lorsque cette case est cochée, PortaBase utilise les valeurs par défaut pour"
+" certains paramètres (tels que la largeur des colonnes, les lignes par page,"
+" etc.), qui conviennent mieux aux petits affichages. Cela peut généralement "
+"être deviné en fonction du système d'exploitation utilisé, mais certains "
+"netbooks et MID utilisant un système d'exploitation pour PC pourraient être "
+"plus avantageux avec les paramètres de petit écran."
 
 # 3e9ea74d8de3408b92d4c255266da9b5
 #: ../../preferences.txt:34
 msgid "**Auto-rotate to match device orientation** (Maemo Fremantle only)"
-msgstr "** Rotation automatique pour correspondre à l'orientation de l'appareil ** (Maemo Fremantle uniquement)"
+msgstr ""
+"** Rotation automatique pour correspondre à l'orientation de l'appareil ** "
+"(Maemo Fremantle uniquement)"
 
 # 64c03b22aaa8445b856f6cf79d885e25
 #: ../../preferences.txt:34
 msgid ""
 "When checked, the application will automatically switch between landscape "
 "and portrait display, depending on the current orientation of the device."
-msgstr "Lorsque cette case est cochée, l'application bascule automatiquement entre les modes paysage et portrait, en fonction de l'orientation actuelle du périphérique."
+msgstr ""
+"Lorsque cette case est cochée, l'application bascule automatiquement entre "
+"les modes paysage et portrait, en fonction de l'orientation actuelle du "
+"périphérique."
 
 # 9212f2e57b3e4776ad5d69ffc53a9406
 #: ../../preferences.txt:37
@@ -127,7 +161,12 @@ msgid ""
 " allows you to specify the number of rows per page and navigate between "
 "pages.  If unchecked, the navigation bar is hidden and all rows which pass "
 "the current filter will be shown in one scrollable list."
-msgstr "Cochez cette case pour afficher la barre de navigation au bas de la visionneuse de données, qui vous permet de spécifier le nombre de lignes par page et de naviguer entre les pages. Si cette case est décochée, la barre de navigation est masquée et toutes les lignes qui passent le filtre actuel sont affichées dans une liste déroulante."
+msgstr ""
+"Cochez cette case pour afficher la barre de navigation au bas de la "
+"visionneuse de données, qui vous permet de spécifier le nombre de lignes par"
+" page et de naviguer entre les pages. Si cette case est décochée, la barre "
+"de navigation est masquée et toutes les lignes qui passent le filtre actuel "
+"sont affichées dans une liste déroulante."
 
 # 9a1d4b14011242eda894f3524329aeca
 #: ../../preferences.txt:40
@@ -139,7 +178,9 @@ msgstr "** lignes par défaut par page **"
 msgid ""
 "The default value to use for the maximum number of rows displayed on one "
 "page when creating new databases."
-msgstr "Valeur par défaut à utiliser pour le nombre maximal de lignes affichées sur une page lors de la création de nouvelles bases de données."
+msgstr ""
+"Valeur par défaut à utiliser pour le nombre maximal de lignes affichées sur "
+"une page lors de la création de nouvelles bases de données."
 
 # 50488835e0fa437a93caa8f750452f10
 #: ../../preferences.txt:43
@@ -154,7 +195,14 @@ msgid ""
 " whitespace, but you can change the droplist value to force wrapping at the "
 "end of lines whether spaces are present or not.  (This is particularly "
 "useful for languages like Japanese which tend not to use spaces.)"
-msgstr "Le fait de cocher cette case active le retour automatique au texte dans l'éditeur / visualiseur de notes, évitant ainsi la saisie manuelle des sauts de ligne. Par défaut, le retour à la ligne est limité aux espaces, mais vous pouvez modifier la valeur de la liste de dépôt pour forcer le retour à la ligne à la fin des lignes, que des espaces soient présents ou non. (Ceci est particulièrement utile pour les langues telles que le japonais qui ont tendance à ne pas utiliser d'espaces.)"
+msgstr ""
+"Le fait de cocher cette case active le retour automatique au texte dans "
+"l'éditeur / visualiseur de notes, évitant ainsi la saisie manuelle des sauts"
+" de ligne. Par défaut, le retour à la ligne est limité aux espaces, mais "
+"vous pouvez modifier la valeur de la liste de dépôt pour forcer le retour à "
+"la ligne à la fin des lignes, que des espaces soient présents ou non. (Ceci "
+"est particulièrement utile pour les langues telles que le japonais qui ont "
+"tendance à ne pas utiliser d'espaces.)"
 
 # 526642d8584742c883615eafcc8f0f26
 #: ../../preferences.txt:48
@@ -176,7 +224,9 @@ msgstr "**Format de date**"
 msgid ""
 "The type of formatting to use for date values in the data viewer, row "
 "viewer, etc."
-msgstr "Type de formatage à utiliser pour les valeurs de date dans l'afficheur de données, l'afficheur de lignes, etc."
+msgstr ""
+"Type de formatage à utiliser pour les valeurs de date dans l'afficheur de "
+"données, l'afficheur de lignes, etc."
 
 # 40b7c076928f4039b4bcc6bb92ef08a4
 #: ../../preferences.txt:56
@@ -198,7 +248,9 @@ msgstr "** Les semaines commencent le **"
 msgid ""
 "The first day of the week; this affects the appearance of the date entry "
 "dialog."
-msgstr "Le premier jour de la semaine; cela affecte l'apparence de la boîte de dialogue de saisie de la date."
+msgstr ""
+"Le premier jour de la semaine; cela affecte l'apparence de la boîte de "
+"dialogue de saisie de la date."
 
 # edca41eb10904931a15613bc02e9ac44
 #: ../../preferences.txt:62
@@ -210,7 +262,10 @@ msgstr "** Afficher les secondes pour les temps **"
 msgid ""
 "This lets you choose whether or not to display the number of seconds for "
 "time columns in the data viewer, row viewer, etc."
-msgstr "Cela vous permet de choisir d'afficher ou non le nombre de secondes pour les colonnes de temps dans la visionneuse de données, la visionneuse de lignes, etc."
+msgstr ""
+"Cela vous permet de choisir d'afficher ou non le nombre de secondes pour les"
+" colonnes de temps dans la visionneuse de données, la visionneuse de lignes,"
+" etc."
 
 # 6aaab7b80881418899eb20b965df4bde
 #: ../../preferences.txt:67
@@ -230,7 +285,19 @@ msgid ""
 "UI.)  On Maemo Fremantle, the rows will remain at a finger-friendly height "
 "regardless of font size unless the \"Adjust row height to match font\" "
 "option is checked."
-msgstr "Dans la section \"Police\" de l'onglet Apparence, vous pouvez choisir n'importe quelle police disponible, quelle que soit sa taille. Cette police sera ensuite utilisée pour tout le texte de PortaBase (même après avoir quitté l'application et l'avoir redémarré). jusqu'à ce que vous en choisissiez un autre. Vous pouvez l'utiliser si la police par défaut ne prend pas en charge les caractères Unicode (rare sur les systèmes modernes) ou pour insérer davantage de texte à l'écran. (Cette option n'est pas disponible sur Mac OS X, qui ne semble pas aimer les applications utilisant des polices non standard pour l'interface utilisateur.) Sous Maemo Fremantle, les lignes resteront à une hauteur adaptée au doigt, quelle que soit la taille de la police L'option \"Ajuster la hauteur de la ligne à la police\" est cochée."
+msgstr ""
+"Dans la section \"Police\" de l'onglet Apparence, vous pouvez choisir "
+"n'importe quelle police disponible, quelle que soit sa taille. Cette police "
+"sera ensuite utilisée pour tout le texte de PortaBase (même après avoir "
+"quitté l'application et l'avoir redémarré). jusqu'à ce que vous en "
+"choisissiez un autre. Vous pouvez l'utiliser si la police par défaut ne "
+"prend pas en charge les caractères Unicode (rare sur les systèmes modernes) "
+"ou pour insérer davantage de texte à l'écran. (Cette option n'est pas "
+"disponible sur Mac OS X, qui ne semble pas aimer les applications utilisant "
+"des polices non standard pour l'interface utilisateur.) Sous Maemo "
+"Fremantle, les lignes resteront à une hauteur adaptée au doigt, quelle que "
+"soit la taille de la police L'option \"Ajuster la hauteur de la ligne à la "
+"police\" est cochée."
 
 # 5402968d97534040b21bbfd56d5f5b88
 #: ../../preferences.txt:71
@@ -243,7 +310,16 @@ msgid ""
 "launches a color selection dialog in which you can pick a different color to"
 " use.  There is also a \"Reset\" button to revert to the system's default "
 "colors."
-msgstr "La section \"Couleurs des lignes\" contient deux boutons vous permettant de choisir les couleurs qui seront utilisées pour l’arrière-plan des lignes dans la visionneuse de données, l’éditeur de colonnes, l’éditeur de vues et l’éditeur de tri. La couleur sélectionnée par le deuxième bouton est également utilisée comme couleur de ligne alternative dans l'afficheur de ligne. Chaque bouton affiche l'une des couleurs actuelles. cliquer sur l’une d’elles ouvre une boîte de dialogue de sélection de couleurs dans laquelle vous pouvez choisir une couleur différente à utiliser. Il existe également un bouton \"Réinitialiser\" pour revenir aux couleurs par défaut du système."
+msgstr ""
+"La section \"Couleurs des lignes\" contient deux boutons vous permettant de "
+"choisir les couleurs qui seront utilisées pour l’arrière-plan des lignes "
+"dans la visionneuse de données, l’éditeur de colonnes, l’éditeur de vues et "
+"l’éditeur de tri. La couleur sélectionnée par le deuxième bouton est "
+"également utilisée comme couleur de ligne alternative dans l'afficheur de "
+"ligne. Chaque bouton affiche l'une des couleurs actuelles. cliquer sur l’une"
+" d’elles ouvre une boîte de dialogue de sélection de couleurs dans laquelle "
+"vous pouvez choisir une couleur différente à utiliser. Il existe également "
+"un bouton \"Réinitialiser\" pour revenir aux couleurs par défaut du système."
 
 # b383bbf6e5b346ca8f711e989f2dbcd9
 #: ../../preferences.txt:73
@@ -252,7 +328,12 @@ msgid ""
 "controlled by the system theme.  Instead, there is an option to either use "
 "the alternating row color from the theme or make all rows the same color; "
 "some themes don't have an appropriate color set for this."
-msgstr "Cette option n'est pas disponible sur Maemo Fremantle, où la palette est contrôlée par le thème du système. Au lieu de cela, il existe une option pour utiliser la couleur de rangée alternée du thème ou pour rendre toutes les rangées de la même couleur; certains thèmes n'ont pas de couleur appropriée pour cela."
+msgstr ""
+"Cette option n'est pas disponible sur Maemo Fremantle, où la palette est "
+"contrôlée par le thème du système. Au lieu de cela, il existe une option "
+"pour utiliser la couleur de rangée alternée du thème ou pour rendre toutes "
+"les rangées de la même couleur; certains thèmes n'ont pas de couleur "
+"appropriée pour cela."
 
 # d677f1d055364d6e9ff65abf11296f44
 #: ../../preferences.txt:75
@@ -261,4 +342,8 @@ msgid ""
 "created and opened files, so that none will be listed on the :ref:`file "
 "selection screen <file_selector>`.  Files opened later will be added to the "
 "list as normal."
-msgstr "Le bouton \"Effacer la liste des fichiers récents\" efface l'historique des fichiers récemment créés et ouverts, ainsi aucun fichier ne sera répertorié dans l'écran de sélection de fichier: ref: ` <file_selector>`.  Les fichiers ouverts ultérieurement seront ajoutés à la liste normalement."
+msgstr ""
+"Le bouton \"Effacer la liste des fichiers récents\" efface l'historique des "
+"fichiers récemment créés et ouverts, ainsi aucun fichier ne sera répertorié "
+"dans l'écran de sélection de fichier: ref: ` <file_selector>`.  Les fichiers"
+" ouverts ultérieurement seront ajoutés à la liste normalement."
