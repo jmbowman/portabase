@@ -1,22 +1,25 @@
 # Messages from sorting_editor.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# a270031086f2a0d3514bc0cb507b48f6, 2019
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2019-06-13 14:37+0000\n"
-"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 75575e615edb414fbca3d2af94924af9
 #: ../../sorting_editor.txt:4
@@ -32,7 +35,14 @@ msgid ""
 "groups of the same value of A sort by the content of column B, etc.  To do "
 "this or to sort by a column that isn't shown in the current view, you need "
 "to define a named sorting."
-msgstr "En cliquant sur une étiquette de colonne dans la visionneuse de données est un moyen pratique de trier le contenu de la base de données en une seule colonne. Mais parfois, vous pouvez trier par une combinaison de colonnes; triez par le contenu de la colonne A, au sein de groupes de même valeur de A, par le contenu de la colonne B, etc. Pour ce faire, ou pour trier par une colonne non affichée dans la vue actuelle, vous devez définir une nommé le tri."
+msgstr ""
+"En cliquant sur une étiquette de colonne dans la visionneuse de données est "
+"un moyen pratique de trier le contenu de la base de données en une seule "
+"colonne. Mais parfois, vous pouvez trier par une combinaison de colonnes; "
+"triez par le contenu de la colonne A, au sein de groupes de même valeur de "
+"A, par le contenu de la colonne B, etc. Pour ce faire, ou pour trier par une"
+" colonne non affichée dans la vue actuelle, vous devez définir une nommé le "
+"tri."
 
 # 9b9f07d708524bebb23f258fa8873103
 #: ../../sorting_editor.txt:8
@@ -52,4 +62,22 @@ msgid ""
 " column are sorted by the next highest checked column, etc.  Click "
 "\"OK\"/\"Done\" to accept the currently shown settings or cancel out of the "
 "dialog to revert to the previous values (or to cancel adding a new sorting)."
-msgstr "Le tri est défini à l'aide de la boîte de dialogue de l'éditeur de tri, qui est très similaire à l'éditeur de vue: ref: ` <view_editor>` dialogue. En haut de la boîte de dialogue se trouve une zone de texte contenant le nom du tri; changer cela renomme le tri. En dessous se trouve un tableau indiquant les noms de toutes les colonnes de la base de données, avec une case à cocher à côté de chacune d’elles indiquant si elle doit être triée ou non. Cochez cette case pour ajouter ou supprimer la colonne de l'ensemble des éléments à trier. La troisième colonne du tableau indique \"Ascending\" ou \"Descending\" pour les lignes cochées, indiquant la direction dans laquelle trier; cliquez sur cet indicateur pour le changer à la valeur opposée. La boîte de dialogue comporte des boutons \"Haut\" et \"Bas\" pour déplacer la ligne sélectionnée vers le haut ou le bas du tableau, en modifiant la séquence de tri des colonnes. Les lignes sont d'abord triées par la colonne cochée la plus élevée, les lignes avec la même valeur dans cette colonne sont triées par la colonne cochée la plus haute, etc. Cliquez sur \"OK\" / \"Terminé\" pour accepter les paramètres actuellement affichés ou annuler la boîte de dialogue. pour revenir aux valeurs précédentes (ou pour annuler l'ajout d'un nouveau tri)."
+msgstr ""
+"Le tri est défini à l'aide de la boîte de dialogue de l'éditeur de tri, qui "
+"est très similaire à l'éditeur de vue: ref: ` <view_editor>` dialogue. En "
+"haut de la boîte de dialogue se trouve une zone de texte contenant le nom du"
+" tri; changer cela renomme le tri. En dessous se trouve un tableau indiquant"
+" les noms de toutes les colonnes de la base de données, avec une case à "
+"cocher à côté de chacune d’elles indiquant si elle doit être triée ou non. "
+"Cochez cette case pour ajouter ou supprimer la colonne de l'ensemble des "
+"éléments à trier. La troisième colonne du tableau indique \"Ascending\" ou "
+"\"Descending\" pour les lignes cochées, indiquant la direction dans laquelle"
+" trier; cliquez sur cet indicateur pour le changer à la valeur opposée. La "
+"boîte de dialogue comporte des boutons \"Haut\" et \"Bas\" pour déplacer la "
+"ligne sélectionnée vers le haut ou le bas du tableau, en modifiant la "
+"séquence de tri des colonnes. Les lignes sont d'abord triées par la colonne "
+"cochée la plus élevée, les lignes avec la même valeur dans cette colonne "
+"sont triées par la colonne cochée la plus haute, etc. Cliquez sur \"OK\" / "
+"\"Terminé\" pour accepter les paramètres actuellement affichés ou annuler la"
+" boîte de dialogue. pour revenir aux valeurs précédentes (ou pour annuler "
+"l'ajout d'un nouveau tri)."
