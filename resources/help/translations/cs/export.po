@@ -1,22 +1,25 @@
 # Messages from export.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-19 15:16+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 4edadb88f5f44a25b467791034eb362a
 #: ../../export.txt:4
@@ -30,7 +33,11 @@ msgid ""
 "The inverse of data import, this allows you to move database content into a "
 "spreadsheet, text editor, other database program, etc. for further "
 "manipulation.  To export the current database's contents:"
-msgstr "PortaBase aktuálně podporuje export do tří formátů: CSV, HTML a XML.  Na rozdíl od importu dat exportní funkce umožňuje přenést obsah databáze do tabulkového či textového editoru nebo jiné databázové aplikace k dalšímu zpracování.  Chcete-li provést export databázového obsahu:"
+msgstr ""
+"PortaBase aktuálně podporuje export do tří formátů: CSV, HTML a XML.  Na "
+"rozdíl od importu dat exportní funkce umožňuje přenést obsah databáze do "
+"tabulkového či textového editoru nebo jiné databázové aplikace k dalšímu "
+"zpracování.  Chcete-li provést export databázového obsahu:"
 
 # 471c5c0a21514279bf09836975e65264
 #: ../../export.txt:8
@@ -47,7 +54,15 @@ msgid ""
 "structure (including column definitions, views, filters, etc.) will be "
 "exported; note that the result may be over twice the size of the actual data"
 " file, so make sure you have enough free storage space."
-msgstr "Zvolte z rozbalovacího menu formát do kterého chcete exportovat.  Provádíte-li export do CSV či HTML, budou vyexportovány pouze záznamy vyhovující právě použitému filtru.  Při exportu do HTML budou exportovány jen sloupce zahrnuté v právě použitém náhledu.  Provádíte-li export do XML, bude vyexportována úplná databázová struktura (včetně definic sloupců, náhledů, filtrů atd.).  Ověřte, máte-li dostatek místa pro uložení výsledného souboru, který může přesáhnout i dvojnásobek velikosti původního datového souboru."
+msgstr ""
+"Zvolte z rozbalovacího menu formát do kterého chcete exportovat.  Provádíte-"
+"li export do CSV či HTML, budou vyexportovány pouze záznamy vyhovující právě"
+" použitému filtru.  Při exportu do HTML budou exportovány jen sloupce "
+"zahrnuté v právě použitém náhledu.  Provádíte-li export do XML, bude "
+"vyexportována úplná databázová struktura (včetně definic sloupců, náhledů, "
+"filtrů atd.).  Ověřte, máte-li dostatek místa pro uložení výsledného "
+"souboru, který může přesáhnout i dvojnásobek velikosti původního datového "
+"souboru."
 
 # e08ae0c7b6104329af7be11493f5476d
 #: ../../export.txt:12
@@ -59,4 +74,6 @@ msgstr "Zadejte jméno souboru CSV, HTML či XML, který chcete vytvořit."
 msgid ""
 "Click \"OK\"/\"Done\" to complete the export, or cancel out of the dialog to"
 " abort the operation."
-msgstr "Klepnutím na \"OK\" dokončíte export, klepnutím na \"Zrušit\" či křížek pro uzavření dialogu operaci zrušíte."
+msgstr ""
+"Klepnutím na \"OK\" dokončíte export, klepnutím na \"Zrušit\" či křížek pro "
+"uzavření dialogu operaci zrušíte."
