@@ -1,22 +1,25 @@
 # Messages from enum_manager.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# maurizio codogno <dotmaudot@gmail.com>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2017-01-10 05:00+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Italian (https://app.transifex.com/jmbowman/teams/14599/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # a257cd7b45194d488535312ad5aa202f
 #: ../../enum_manager.txt:4
@@ -30,7 +33,11 @@ msgid ""
 "the column is one of a set of possible string values.  The enum manager "
 "dialog lets you create, edit, delete, and change the listing order of these "
 "enums."
-msgstr "PortaBase supporta il tipo di colonna enum (enumerazione), in cui i valori fanno parte di un insieme di stringhe possibili. La finestra di dialogo gestione enum permette di creare, editare, cancellare e modificare l'ordine in cui questi enum vengono visualizzati."
+msgstr ""
+"PortaBase supporta il tipo di colonna enum (enumerazione), in cui i valori "
+"fanno parte di un insieme di stringhe possibili. La finestra di dialogo "
+"gestione enum permette di creare, editare, cancellare e modificare l'ordine "
+"in cui questi enum vengono visualizzati."
 
 # 9cfd2d1ec7754d61b014ec975438dce4
 #: ../../enum_manager.txt:8
@@ -38,7 +45,10 @@ msgid ""
 "Most of the dialog is occupied by a list of the currently defined enums. "
 "There is a row of buttons identical to those in the :ref:`columns editor "
 "<columns_editor>`:"
-msgstr "La maggior parte della finestra di dialogo contiene la lista degli enum al momento definiti. C'è una fila di pulsanti identici a quelli nell' :ref:`editor di colonne <columns_editor>`:"
+msgstr ""
+"La maggior parte della finestra di dialogo contiene la lista degli enum al "
+"momento definiti. C'è una fila di pulsanti identici a quelli nell' "
+":ref:`editor di colonne <columns_editor>`:"
 
 # 615d8bcd5e4947ca8112bcdbe4c9cfc6
 #: ../../enum_manager.txt:11
@@ -51,7 +61,11 @@ msgid ""
 "Launch the :ref:`enum editor <enum_editor>` to define a new enum.  Note that"
 " the new enum will be added when \"OK\"/\"Done\" is clicked in the editor "
 "dialog, not when the \"OK\"/\"Done\" button is clicked in this dialog."
-msgstr "Lancia l' :ref:`editor di enum <enum_editor>` per definire un nuovo enum.  Nota: il nuovo enum verrà aggiunto quando si clicca \"OK\"/\"Done\" nella finestra di dialogo dell'editor, non quando si clicca il pulsante \"OK\"/\"Done\" button in questa finestra di dialogo."
+msgstr ""
+"Lancia l' :ref:`editor di enum <enum_editor>` per definire un nuovo enum.  "
+"Nota: il nuovo enum verrà aggiunto quando si clicca \"OK\"/\"Done\" nella "
+"finestra di dialogo dell'editor, non quando si clicca il pulsante "
+"\"OK\"/\"Done\" button in questa finestra di dialogo."
 
 # b24535ca505b4238baa9e3416acd559b
 #: ../../enum_manager.txt:14
@@ -64,7 +78,10 @@ msgid ""
 "Launch the enum editor to edit the currently selected enum.  As when adding,"
 " edits are applied as soon as \"OK\"/\"Done\" is clicked in the editor "
 "dialog."
-msgstr "Lancia l'editor di enum per editare l'enum attualmente selezionato.  Come per l'inserimento, le modifiche sono applicate quando si clicca \"OK\"/\"Done\" nella finestra di dialogo dell'editor."
+msgstr ""
+"Lancia l'editor di enum per editare l'enum attualmente selezionato.  Come "
+"per l'inserimento, le modifiche sono applicate quando si clicca "
+"\"OK\"/\"Done\" nella finestra di dialogo dell'editor."
 
 # c299ae09aa7f4bea82f29c09bcda2c35
 #: ../../enum_manager.txt:17
@@ -78,7 +95,12 @@ msgid ""
 " a dialog will warn you that these would also be deleted and ask if you want"
 " to continue.  The enum (and any associated colums) will be deleted "
 "immediately, not when \"OK\"/\"Done\" is clicked."
-msgstr "Elimina l'enum attualmente selezionato. Se ci sono colonne di questo tipo di enum, appare una finestra di dialogo che avvisa che anch'esse saranno cancellate, e chiede se vuoi continuare. L'enum (e tutte le colonne associate) sarà cancellato immediatamente, non quando si clicca su \"OK\"/\"Done\"."
+msgstr ""
+"Elimina l'enum attualmente selezionato. Se ci sono colonne di questo tipo di"
+" enum, appare una finestra di dialogo che avvisa che anch'esse saranno "
+"cancellate, e chiede se vuoi continuare. L'enum (e tutte le colonne "
+"associate) sarà cancellato immediatamente, non quando si clicca su "
+"\"OK\"/\"Done\"."
 
 # 4b2bdb774e2443969c7ca2b54e22bda2
 #: ../../enum_manager.txt:20
@@ -90,7 +112,9 @@ msgstr "**Su**"
 msgid ""
 "Move the currently selected enum up one position in the list (and hence in "
 "the column editor's type list as well)."
-msgstr "Sposta una posizione più in alto nella lista (e quindi nella lista di tipi dell'editor di colonna) l'enum attualmente selezionato."
+msgstr ""
+"Sposta una posizione più in alto nella lista (e quindi nella lista di tipi "
+"dell'editor di colonna) l'enum attualmente selezionato."
 
 # 0bd22fc89bd94fb2afaaaded14cc4008
 #: ../../enum_manager.txt:23
@@ -102,7 +126,9 @@ msgstr "**Giù**"
 msgid ""
 "Move the currently selected enum down one position in the list (and hence in"
 " the column editor's type list as well)."
-msgstr "Sposta una posizione più in basso nella lista (e quindi nella lista di tipi dell'editor di colonna) l'enum attualmente selezionato."
+msgstr ""
+"Sposta una posizione più in basso nella lista (e quindi nella lista di tipi "
+"dell'editor di colonna) l'enum attualmente selezionato."
 
 # 1c44c9d094c0420abe10727d681e2d83
 #: ../../enum_manager.txt:25
@@ -110,4 +136,7 @@ msgid ""
 "Click \"OK\"/\"Done\" to apply any changes made to the enum listing order, "
 "or cancel out of the dialog to leave the sequence unchanged (other than any "
 "added or deleted enums)."
-msgstr "Clicca su \"OK\"/\"Done\" per applicare le modifiche fatte all'ordine della lista degli enum, o chiudi la finestra di dialogo per lasciare la successione intatta (a parte gli enum aggiunti o eliminati)."
+msgstr ""
+"Clicca su \"OK\"/\"Done\" per applicare le modifiche fatte all'ordine della "
+"lista degli enum, o chiudi la finestra di dialogo per lasciare la "
+"successione intatta (a parte gli enum aggiunti o eliminati)."
