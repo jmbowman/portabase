@@ -1,22 +1,25 @@
 # Messages from command_line.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# maurizio codogno <dotmaudot@gmail.com>, 2017
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2017-09-23 12:03+0000\n"
-"Last-Translator: maurizio codogno <dotmaudot@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Italian (https://app.transifex.com/jmbowman/teams/14599/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 4b3e9ac074e14ad885c2478af29b2869
 #: ../../command_line.txt:4
@@ -32,7 +35,13 @@ msgid ""
 "generate, update, or otherwise manipulate PortaBase data files.  Run "
 "``portabase -h`` for usage instructions; in summary, you can do the "
 "following:"
-msgstr "PortaBase può essere usato da un terminale Linux/UNIX o da una finestra DOS per importare o esportare dati senza dover passare dall'interfaccia grafica. Questo può essere particolarmente utile se vuoi creare script che generano, aggiornano o manipolano automaticamente i file di dati PortaBase. Lancia ``portabase -h`` per le istruzioni; in breve, puoi compiere le seguenti operazioni:"
+msgstr ""
+"PortaBase può essere usato da un terminale Linux/UNIX o da una finestra DOS "
+"per importare o esportare dati senza dover passare dall'interfaccia grafica."
+" Questo può essere particolarmente utile se vuoi creare script che generano,"
+" aggiornano o manipolano automaticamente i file di dati PortaBase. Lancia "
+"``portabase -h`` per le istruzioni; in breve, puoi compiere le seguenti "
+"operazioni:"
 
 # 87dc7c3302e948718939c8edfe4a3913
 #: ../../command_line.txt:9
@@ -42,7 +51,8 @@ msgstr ":samp:`portabase {file}`"
 # 32e45eb1f1f9488bb5796dba07f14d95
 #: ../../command_line.txt:9
 msgid "Launch PortaBase and immediately open the named PortaBase data file."
-msgstr "Lancia PortaBase e apre immediatamente il file dati con il nome indicato."
+msgstr ""
+"Lancia PortaBase e apre immediatamente il file dati con il nome indicato."
 
 # 3c8ce4744141449880f31a4332f60aff
 #: ../../command_line.txt:12
@@ -54,7 +64,9 @@ msgstr ":samp:`portabase fromxml {xmlfile pobfile}`"
 msgid ""
 "Create a new PortaBase data file at *pobfile* from the PortaBase-format XML "
 "file located at *xmlfile*."
-msgstr "Crea un nuovo file dati PortaBase a *pobfile*, partendo dal file XML in formato PortaBase trovato a *xmlfile*."
+msgstr ""
+"Crea un nuovo file dati PortaBase a *pobfile*, partendo dal file XML in "
+"formato PortaBase trovato a *xmlfile*."
 
 # f431dc09a08348b58f666445481fd27e
 #: ../../command_line.txt:15
@@ -66,7 +78,9 @@ msgstr ":samp:`portabase fromcsv {csvfile pobfile}`"
 msgid ""
 "Add rows to the existing PortaBase data file at *pobfile* from the CSV file "
 "located at *csvfile*."
-msgstr "Aggiunge righe al file dati PortaBase esistente a *pobfile*, prendendole dal file CSV che si trova a *csvfile*."
+msgstr ""
+"Aggiunge righe al file dati PortaBase esistente a *pobfile*, prendendole dal"
+" file CSV che si trova a *csvfile*."
 
 # e2f949af22ef482987caaadf5cf64486
 #: ../../command_line.txt:18
@@ -78,7 +92,9 @@ msgstr ":samp:`portabase frommobiledb {mdbfile pobfile}`"
 msgid ""
 "Create a new PortaBase data file at *pobfile* from the MobileDB file located"
 " at *mdbfile*."
-msgstr "Crea un nuovo file dati PortaBase a *pobfile*, partendo dal file MobileDB trovato a *mdbfile*."
+msgstr ""
+"Crea un nuovo file dati PortaBase a *pobfile*, partendo dal file MobileDB "
+"trovato a *mdbfile*."
 
 # d04aa8ce8e2e472ca47ff1cf311c5b05
 #: ../../command_line.txt:21
@@ -90,7 +106,9 @@ msgstr ":samp:`portabase toxml {pobfile xmlfile}`"
 msgid ""
 "Create a new XML file at *xmlfile* from the PortaBase data file located at "
 "*pobfile*."
-msgstr "Crea un nuovo file XML a *xmlfile*, partendo dal file dati PortaBase trovato a *pobfile*."
+msgstr ""
+"Crea un nuovo file XML a *xmlfile*, partendo dal file dati PortaBase trovato"
+" a *pobfile*."
 
 # 524f36d5e5fc4e5b90e171ee8a14f68f
 #: ../../command_line.txt:24
@@ -102,7 +120,9 @@ msgstr ":samp:`portabase tocsv {pobfile csvfile}`"
 msgid ""
 "Create a new CSV file at *csvfile* from rows in the PortaBase data file "
 "located at *pobfile*."
-msgstr "Crea un nuovo file CSV a *csvfile*, partendo dalle righe del file dati PortaBase trovato a *pobfile*."
+msgstr ""
+"Crea un nuovo file CSV a *csvfile*, partendo dalle righe del file dati "
+"PortaBase trovato a *pobfile*."
 
 # 76f42311fc1240caab72e60b82e0a78d
 #: ../../command_line.txt:27
@@ -114,7 +134,9 @@ msgstr ":samp:`portabase tohtml {pobfile htmlfile}`"
 msgid ""
 "Create a new HTML file at *htmlfile* from rows in the PortaBase data file "
 "located at *pobfile*."
-msgstr "Crea un nuovo file HTML a *htmlfile*, partendo dalle righe del file dati PortaBase trovato a *pobfile*."
+msgstr ""
+"Crea un nuovo file HTML a *htmlfile*, partendo dalle righe del file dati "
+"PortaBase trovato a *pobfile*."
 
 # 34cdb28b136449d7a023e4b2d0e44e4f
 #: ../../command_line.txt:29
@@ -122,14 +144,19 @@ msgid ""
 "To extract data from, add rows to, or create an encrypted file, type "
 ":samp:`-p {password}` immediately after the conversion command (before the "
 "other options described below)."
-msgstr "Per estrarre dati da, aggiungere righe a, o creare un file crittato, digita :samp:`-p {password}` immediatamente dopo il comando di conversione (prima delle altre opzioni descritte sotto)"
+msgstr ""
+"Per estrarre dati da, aggiungere righe a, o creare un file crittato, digita "
+":samp:`-p {password}` immediatamente dopo il comando di conversione (prima "
+"delle altre opzioni descritte sotto)"
 
 # 47c15e9af058494faa111608d903b5cb
 #: ../../command_line.txt:31
 msgid ""
 "The following options can be used between ``toxml``, ``tocsv``, or "
 "``tohtml`` and the PortaBase file to export from:"
-msgstr "Le opzioni seguenti possono essere usate con ``toxml``, ``tocsv``, o ``tohtml``, e il file PortaBase da cui esportare:"
+msgstr ""
+"Le opzioni seguenti possono essere usate con ``toxml``, ``tocsv``, o "
+"``tohtml``, e il file PortaBase da cui esportare:"
 
 # 5d6b233cd46041e2b0c670906b13fbaa
 #: ../../command_line.txt:33
@@ -149,7 +176,8 @@ msgstr "Applica il filtro indicato prima di esportare."
 #: ../../command_line.txt:37
 msgid ""
 "The following options can be used with either ``fromcsv`` or ``tocsv``:"
-msgstr "Le opzioni seguenti possono essere usate con ``fromcsv`` oppure ``tocsv``:"
+msgstr ""
+"Le opzioni seguenti possono essere usate con ``fromcsv`` oppure ``tocsv``:"
 
 #: ../../command_line.txt:39
 msgid "There is or should be a row of column headers"
@@ -158,13 +186,17 @@ msgstr "C'è o ci dovrebbe essere una riga di header per le colonne"
 #: ../../command_line.txt:40
 msgid ""
 "The field delimiter character (typically 'tab' if not using the default ',')"
-msgstr "Il carattere delimitante i campi (tipicamente 'tab' se non si usa il default ',')"
+msgstr ""
+"Il carattere delimitante i campi (tipicamente 'tab' se non si usa il default"
+" ',')"
 
 #: ../../command_line.txt:41
 msgid ""
 "Parse or write the CSV file using the specified text encoding (the default "
 "is UTF-8)"
-msgstr "Parsifica o scrivi il file CSV usando la codifica di testo specificata (il default è UTF-8)"
+msgstr ""
+"Parsifica o scrivi il file CSV usando la codifica di testo specificata (il "
+"default è UTF-8)"
 
 #: ../../command_line.txt:43
 msgid "There's one additional option for ``fromcsv``:"
@@ -180,13 +212,18 @@ msgstr "C'è un'opzione aggiuntiva per ``tocsv``:"
 
 #: ../../command_line.txt:49
 msgid ""
-"\"crlf\" to use Windows-style carriage return + newline, default is UNIX"
-"/Mac-style (newline only)"
-msgstr "\"crlf\" per usare return + acapo alla Windows: il default è lo stile UNIX/Mac (solo newline)"
+"\"crlf\" to use Windows-style carriage return + newline, default is "
+"UNIX/Mac-style (newline only)"
+msgstr ""
+"\"crlf\" per usare return + acapo alla Windows: il default è lo stile "
+"UNIX/Mac (solo newline)"
 
 # 0af6523a1160474ba4a62dd8d3ffb4f4
 #: ../../command_line.txt:51
 msgid ""
 "For more information about the PortaBase XML format and tools for doing "
 "useful things with it, see the PortaBase homepage (http://portabase.org)."
-msgstr "Per maggiori informazioni sul formato XML in PortaBase e gli strumenti per farci qualcosa di utile, visita la homepage di PortaBase (http://portabase.org)."
+msgstr ""
+"Per maggiori informazioni sul formato XML in PortaBase e gli strumenti per "
+"farci qualcosa di utile, visita la homepage di PortaBase "
+"(http://portabase.org)."

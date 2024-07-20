@@ -1,22 +1,25 @@
 # Messages from export.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# maurizio codogno <dotmaudot@gmail.com>, 2019
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2019-06-16 15:58+0000\n"
-"Last-Translator: maurizio codogno <dotmaudot@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/jmbowman/portabase/language/it/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Italian (https://app.transifex.com/jmbowman/teams/14599/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 4edadb88f5f44a25b467791034eb362a
 #: ../../export.txt:4
@@ -30,7 +33,12 @@ msgid ""
 "The inverse of data import, this allows you to move database content into a "
 "spreadsheet, text editor, other database program, etc. for further "
 "manipulation.  To export the current database's contents:"
-msgstr "Attualmente PortaBase supporta l'esportazione in tre formati: CSV, HTML, e XML. L'opposto dell'importazione dati, essa permette di spostare il contenuto di una base dati in un foglio elettronico, un editor di testo, un'altra base dati, ecc. per ulteriori manipolazioni. Per esportare i contenuti attuali della base dati:"
+msgstr ""
+"Attualmente PortaBase supporta l'esportazione in tre formati: CSV, HTML, e "
+"XML. L'opposto dell'importazione dati, essa permette di spostare il "
+"contenuto di una base dati in un foglio elettronico, un editor di testo, "
+"un'altra base dati, ecc. per ulteriori manipolazioni. Per esportare i "
+"contenuti attuali della base dati:"
 
 # 471c5c0a21514279bf09836975e65264
 #: ../../export.txt:8
@@ -47,7 +55,15 @@ msgid ""
 "structure (including column definitions, views, filters, etc.) will be "
 "exported; note that the result may be over twice the size of the actual data"
 " file, so make sure you have enough free storage space."
-msgstr "Scegli dalla lista a scomparsa il formato in cui vuoi esportare. Se esporti in CSV o HTML, solo le righe che soddisfano il filtro attuale saranno esportate. Inoltre, esportando in HTML solo le colonne comprese nella vista attuale saranno esportate. Se esporti in XML, l'intera struttura della base dati (comprese definizioni delle colonne, viste, filtri, ecc.) sarà esportata; nota che il risultato può avere dimensioni più che doppie rispetto al file di dati, quindi accertati di avere abbastanza spazio libero."
+msgstr ""
+"Scegli dalla lista a scomparsa il formato in cui vuoi esportare. Se esporti "
+"in CSV o HTML, solo le righe che soddisfano il filtro attuale saranno "
+"esportate. Inoltre, esportando in HTML solo le colonne comprese nella vista "
+"attuale saranno esportate. Se esporti in XML, l'intera struttura della base "
+"dati (comprese definizioni delle colonne, viste, filtri, ecc.) sarà "
+"esportata; nota che il risultato può avere dimensioni più che doppie "
+"rispetto al file di dati, quindi accertati di avere abbastanza spazio "
+"libero."
 
 # e08ae0c7b6104329af7be11493f5476d
 #: ../../export.txt:12
@@ -59,4 +75,6 @@ msgstr "Inserisci il nome del file CSV, HTML, o XML che vuoi creare."
 msgid ""
 "Click \"OK\"/\"Done\" to complete the export, or cancel out of the dialog to"
 " abort the operation."
-msgstr "Clicca OK\"/\"Fatto\" per completare l'esportazione, oppure cancella il dialogo per abortire l'operazione."
+msgstr ""
+"Clicca OK\"/\"Fatto\" per completare l'esportazione, oppure cancella il "
+"dialogo per abortire l'operazione."
