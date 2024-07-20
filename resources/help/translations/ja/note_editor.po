@@ -1,17 +1,20 @@
 # Messages from note_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:37+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,7 +40,12 @@ msgid ""
 "showing the current text of the Note.  Click \"OK\"/\"Done\" to accept any "
 "changes you have made, or cancel out of the dialog to revert to the original"
 " content."
-msgstr "\"ノート\"フィールドタイプは（短い１行のテキストにより適する\"文字列\"タイプとは対照に）複数行からなる一かたまりのテキストです。この大きなサイズのカラムの長所はその（とてもシンプルな）ダイアログです。\\ :ref:`レコード編集画面 <row_editor>`\\ とフィールド編集画面のデフォルト値の設定部のどちらでも、ノートの値はノートのアイコンと（納まる分だけの）ノートの内容の先頭部が含まれたボタンとして表示されます。全文を表示または編集するにはボタンを押します; 全画面の記述編集ダイアログが現れ、ノートの現在の記述が表示されます。\"OK\"をクリックして行った変更を適用するか、キャンセルして変更前の状態に戻すことができます。"
+msgstr ""
+"\"ノート\"フィールドタイプは（短い１行のテキストにより適する\"文字列\"タイプとは対照に）複数行からなる一かたまりのテキストです。この大きなサイズのカラムの長所はその（とてもシンプルな）ダイアログです。\\"
+" :ref:`レコード編集画面 <row_editor>`\\ "
+"とフィールド編集画面のデフォルト値の設定部のどちらでも、ノートの値はノートのアイコンと（納まる分だけの）ノートの内容の先頭部が含まれたボタンとして表示されます。全文を表示または編集するにはボタンを押します;"
+" "
+"全画面の記述編集ダイアログが現れ、ノートの現在の記述が表示されます。\"OK\"をクリックして行った変更を適用するか、キャンセルして変更前の状態に戻すことができます。"
 
 # aa91512a347441b7964357bbcd754c9f
 #: ../../note_editor.txt:8
@@ -49,4 +57,6 @@ msgid ""
 "these cells and hold for 1/2 second or longer before releasing, a read-only "
 "version of the Note editor is shown.  Either click \"OK\"/\"Done\" or cancel"
 " out of the dialog to return to the data viewer."
-msgstr "ノートフィールドは\\ :ref:`データ表示画面 <data_viewer>`\\ でも少し特別な扱いがされます。ノートフィールドのフィールドラベルにはこれがただの文字列フィールドではないことを示すノートのアイコンが含まれます。フィールドの各セルは納まる限りのノートの内容を表示します。これらのセルを押し0.5秒かそれ以上そのままにしてから放すと、読取り専用の状態で記述画面が表示されます。\"OK\"をクリックしてもキャンセルしても、これを閉じてデータ表示画面に戻ります。"
+msgstr ""
+"ノートフィールドは\\ :ref:`データ表示画面 <data_viewer>`\\ "
+"でも少し特別な扱いがされます。ノートフィールドのフィールドラベルにはこれがただの文字列フィールドではないことを示すノートのアイコンが含まれます。フィールドの各セルは納まる限りのノートの内容を表示します。これらのセルを押し0.5秒かそれ以上そのままにしてから放すと、読取り専用の状態で記述画面が表示されます。\"OK\"をクリックしてもキャンセルしても、これを閉じてデータ表示画面に戻ります。"
