@@ -1,0 +1,6 @@
+[tools]
+actionlint = "latest"
+
+[tasks.lint-workflows]
+description = "Lint GitHub Actions workflow files"
+run = "actionlint .github/workflows/*.yml"

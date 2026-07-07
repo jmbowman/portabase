@@ -76,7 +76,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [
-          "ubuntu-20.04",
           "ubuntu-22.04",
           "ubuntu-24.04"
         ]
@@ -100,44 +99,48 @@ jobs:
       - name: Verify that package installs cleanly
         run: sudo apt-get install ./build/debian/portabase_${{ env.PORTABASE_VERSION }}_amd64.deb
 
-  mac-build:
-    name: macOS build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [
-          "macos-12",
-          # "macos-13",  # Both of these are broken due to https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3
-          # "macos-14"
-        ]
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install Qt
-        uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
-        with:
-          version: "5.15.2"
-          cache: true
-      - name: Build Metakit
-        run: packaging/mac/build_metakit.sh
-      - name: Install Sphinx and Read the Docs theme
-        run: pip install Sphinx sphinx_rtd_theme
-      - if: ${{ ! inputs.signed }}
-        name: Build unsigned installer for testing
-        run: packaging/mac/build.sh
-      - if: ${{ inputs.signed }}
-        name: Build signed installer for release
-        run: packaging/mac/build.sh --sign
-      - name: Archive built installer
-        uses: actions/upload-artifact@v4
-        with:
-          name: "${{ matrix.os }}-installer"
-          path: build/*.dmg
+  # mac-build is disabled: macos-12 is no longer available as a GitHub-hosted runner image,
+  # and macos-13/macos-14 are broken for Qt 5 builds due to
+  # https://bugreports.qt.io/browse/QTBUG-117225, not fixed until Qt 6.5.3.
+  # No viable runner remains until the Qt 6 upgrade. Uncomment once that's done
+  # (and update the "version" input to the Qt 6.5.3+ version being upgraded to).
+  # mac-build:
+  #   name: macOS build
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [
+  #         "macos-13",
+  #         "macos-14"
+  #       ]
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.11"
+  #     - name: Install Qt
+  #       uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
+  #       with:
+  #         version: "5.15.2"
+  #         cache: true
+  #     - name: Build Metakit
+  #       run: packaging/mac/build_metakit.sh
+  #     - name: Install Sphinx and Read the Docs theme
+  #       run: pip install Sphinx sphinx_rtd_theme
+  #     - if: ${{ ! inputs.sign }}
+  #       name: Build unsigned installer for testing
+  #       run: packaging/mac/build.sh
+  #     - if: ${{ inputs.sign }}
+  #       name: Build signed installer for release
+  #       run: packaging/mac/build.sh --sign
+  #     - name: Archive built installer
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: "${{ matrix.os }}-installer"
+  #         path: build/*.dmg
 
   windows-build:
     name: Windows build
@@ -168,14 +171,14 @@ jobs:
         run: pip install Sphinx sphinx_rtd_theme
       - name: Compile PortaBase
         run: packaging\windows\build.bat
-      - if: ${{ ! inputs.signed }}
+      - if: ${{ ! inputs.sign }}
         name: Build unsigned installer for testing
         run: packaging\windows\installer.bat
-      - if: ${{ inputs.signed }}
+      - if: ${{ inputs.sign }}
         name: Build signed installer for release
         run: packaging\windows\installer.bat --sign
       - name: Archive built installer
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: build/*.dmg
+          path: build/windows/*.exe
