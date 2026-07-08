@@ -1,18 +1,20 @@
 # Messages from vsf_dialogs.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
-# LSU <shinshansu@yahoo.com>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-20 03:07+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/jmbowman/teams/14599/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +61,10 @@ msgid ""
 ":ref:`filter editor <filter_editor>` to modify the currently selected item."
 "  If the edit dialog is accepted, the changes will be immediately applied "
 "and you will be returned to the :ref:`data viewer <data_viewer>`."
-msgstr "這按鈕，在已選的項目名字的右方，發動這：ref:'流灠編輯器<view_editor>', :ref:'排序編輯器＜sorting_editor>',或:ref:'過濾編輯器＜filter_editor>' 用來修飾當前聽所選的項目。如果編輯對話被接受，則你的修改馬上被應用而且你將回到:ref:'數據流灠器＜data_viewer>'."
+msgstr ""
+"這按鈕，在已選的項目名字的右方，發動這：ref:'流灠編輯器<view_editor>', "
+":ref:'排序編輯器＜sorting_editor>',或:ref:'過濾編輯器＜filter_editor>' "
+"用來修飾當前聽所選的項目。如果編輯對話被接受，則你的修改馬上被應用而且你將回到:ref:'數據流灠器＜data_viewer>'."
 
 # bddfa00b33be42f2a6f543269b172328
 #: ../../vsf_dialogs.txt:15
@@ -73,7 +78,8 @@ msgid ""
 "item.  You will be returned to the data viewer with the default item of that"
 " type selected and applied (there is no default sorting, so after deleting a"
 " sorting the rows will not be sorted)."
-msgstr "此按鈕，在右邊的編輯按鈕，刪除當前所選項目。您將返回到數據查看器的默認這種類型的項目選擇和應用（沒有默認排序，所以刪除了一個排序的行不會被排序）。"
+msgstr ""
+"此按鈕，在右邊的編輯按鈕，刪除當前所選項目。您將返回到數據查看器的默認這種類型的項目選擇和應用（沒有默認排序，所以刪除了一個排序的行不會被排序）。"
 
 # 76727b33e7c0488c9f1530f8686273a6
 #: ../../vsf_dialogs.txt:18
@@ -87,7 +93,8 @@ msgid ""
 "view editor, sorting editor, or filter editor in order to create a new item "
 "of the appropriate type.  If such an item is created, it will be set as "
 "current and you will be returned to the data viewer."
-msgstr "這個按鈕，下面的名稱目前選定的項目，啟動景觀編輯器，排序編輯，篩選編輯，以創建一個新的項目適當的類型。如果這樣的項目被創建，它將會被設置為當前和您將返回到數據瀏覽。"
+msgstr ""
+"這個按鈕，下面的名稱目前選定的項目，啟動景觀編輯器，排序編輯，篩選編輯，以創建一個新的項目適當的類型。如果這樣的項目被創建，它將會被設置為當前和您將返回到數據瀏覽。"
 
 # 3bc49ccd2e404855a52598acfce45822
 #: ../../vsf_dialogs.txt:20
@@ -101,4 +108,5 @@ msgid ""
 "appropriate type.  Clicking on one of these will apply it and return you to "
 "the data viewer.  If you wish to edit or delete the item, you can then "
 "launch this dialog again to do so."
-msgstr "下面的\"新建...\"按鈕是一個名單的現有項目的適當的類型。點擊其中一個將適用於它，返回到數據查看器。如果你想修改或刪除的項目，你就可以啟動這一對話再次這樣做。"
+msgstr ""
+"下面的\"新建...\"按鈕是一個名單的現有項目的適當的類型。點擊其中一個將適用於它，返回到數據查看器。如果你想修改或刪除的項目，你就可以啟動這一對話再次這樣做。"

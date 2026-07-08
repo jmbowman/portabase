@@ -1,18 +1,20 @@
 # Messages from file_selector.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
-# LSU <shinshansu@yahoo.com>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-19 20:59+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/jmbowman/teams/14599/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +32,8 @@ msgid ""
 "Unless the program was launched by clicking on a PortaBase file, the first "
 "screen shown will be the file selector.  You may choose one of the following"
 " options from the \"File\" menu, toolbar, or main display buttons:"
-msgstr "除非程式祭啟動方式是點在一個PortaBase 檔案，否則銀幕應該顯示選擇器。你可以從下列選項單裡選岀你要的選項：檔案 ，工具杆 或主要顯示按鈕"
+msgstr ""
+"除非程式祭啟動方式是點在一個PortaBase 檔案，否則銀幕應該顯示選擇器。你可以從下列選項單裡選岀你要的選項：檔案 ，工具杆 或主要顯示按鈕"
 
 # 6461c61772d84482993f05df60545a41
 #: ../../file_selector.txt:9
@@ -74,7 +77,9 @@ msgid ""
 "an XML or MobileDB file.  You will be prompted for the type of file to "
 "import, the file to import, then a name for the new file to create.  See the"
 " PortaBase home page for more information about the XML format used."
-msgstr "由XML或MobileDB格式的檔案來建立新檔(可選擇是否\\ :ref:`加密 <encryption>`\\ )。你必須選擇匯入之檔案格式，欲建立之新檔名稱，以及欲匯入之檔案名稱。有關使用之XML格式請詳見PortaBase網頁。"
+msgstr ""
+"由XML或MobileDB格式的檔案來建立新檔(可選擇是否\\ :ref:`加密 <encryption>`\\ "
+")。你必須選擇匯入之檔案格式，欲建立之新檔名稱，以及欲匯入之檔案名稱。有關使用之XML格式請詳見PortaBase網頁。"
 
 # 2bb2d86f846a474a8cc21c2a3b521c5b
 #: ../../file_selector.txt:21
