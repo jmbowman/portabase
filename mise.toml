@@ -1,6 +1,15 @@
 [tools]
 actionlint = "latest"
+prek = "latest"
 
 [tasks.lint-workflows]
 description = "Lint GitHub Actions workflow files"
 run = "actionlint .github/workflows/*.yml"
+
+[tasks.install-hooks]
+description = "Install prek's git hooks into this checkout"
+run = "prek install"
+
+[tasks.pre-commit]
+description = "Run all prek hooks against the whole repo"
+run = "prek run --all-files"
