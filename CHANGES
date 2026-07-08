@@ -1,3 +1,13 @@
+2026-07-08  JMB  Automate help file translation template updates
+
+    * Updated the Sphinx configuration to work with newer Sphinx versions
+      and suppress message UUIDs that caused churn in the translation files
+    * Added a script to cleanly update the help file translation templates
+      after help file content changes
+    * Call the new script from a pre-commit hook via prek
+    * Run the hook in CI
+    * Updated 3 templates that were already stale
+
 2026-07-07  JMB  Update GitHub Actions workflow
 
     Updated the workflow after nearly 2 years of neglect.

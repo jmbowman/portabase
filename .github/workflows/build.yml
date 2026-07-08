@@ -14,6 +14,23 @@ on:
         default: false
 
 jobs:
+  pre-commit:
+    name: Pre-commit checks
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Install mise-managed tools
+        uses: jdx/mise-action@v4.2.0
+        with:
+          install: true
+      - name: Run prek hooks
+        run: prek run --all-files --show-diff-on-failure
+
   android-build:
     name: Android build
     runs-on: ${{ matrix.os }}

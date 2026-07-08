@@ -1,0 +1,16 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "update-help-translation-templates"
+name = "Update help file translation templates"
+description = "Regenerates resources/help/translations/templates/*.pot from the help source files."
+entry = "packaging/update_help_translation_templates.py"
+language = "python"
+additional_dependencies = ["sphinx", "sphinx_rtd_theme"]
+files = "^resources/help/"
+pass_filenames = false
