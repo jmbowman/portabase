@@ -31,7 +31,7 @@ jobs:
       ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/21.4.7075529
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install build dependencies
         run: |
           sudo apt-get update
@@ -59,12 +59,12 @@ jobs:
       - name: Build AAB package for upload to Google Play and an APK for local testing
         run: make -j$(nproc) aab
       - name: Archive built AAB
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: android-aab
           path: android-build/build/outputs/bundle/release/*.aab
       - name: Archive built APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: android-apk
           path: android-build/build/outputs/apk/debug/*.apk
@@ -81,7 +81,7 @@ jobs:
         ]
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install build dependencies
         run: |
           sudo apt-get update
@@ -92,7 +92,7 @@ jobs:
       - name: Build package
         run: packaging/linux/debian.sh
       - name: Archive built package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: "${{ matrix.os }}-package"
           path: build/debian/*.deb
@@ -116,9 +116,9 @@ jobs:
   #       ]
   #   steps:
   #     - name: Check out repository code
-  #       uses: actions/checkout@v4
+  #       uses: actions/checkout@v7
   #     - name: Set up Python
-  #       uses: actions/setup-python@v5
+  #       uses: actions/setup-python@v6
   #       with:
   #         python-version: "3.11"
   #     - name: Install Qt
@@ -137,7 +137,7 @@ jobs:
   #       name: Build signed installer for release
   #       run: packaging/mac/build.sh --sign
   #     - name: Archive built installer
-  #       uses: actions/upload-artifact@v4
+  #       uses: actions/upload-artifact@v7
   #       with:
   #         name: "${{ matrix.os }}-installer"
   #         path: build/*.dmg
@@ -153,9 +153,9 @@ jobs:
       msys2bash: 'C:\shells\msys2bash.cmd'
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Install Qt
@@ -178,7 +178,7 @@ jobs:
         name: Build signed installer for release
         run: packaging\windows\installer.bat --sign
       - name: Archive built installer
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows-installer
           path: build/windows/*.exe

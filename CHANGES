@@ -3,6 +3,7 @@
     Updated the workflow after nearly 2 years of neglect.
 
     * Fixed the path to the Windows installer to extract as an artifact
+    * Updated action versions
     * Fixed a typo that would have silently disabled signed builds
     * Removed the defunct ubuntu-20.04 and macos-12 runners
     * Disabled macOS builds until the Qt 6 upgrade fixes them
