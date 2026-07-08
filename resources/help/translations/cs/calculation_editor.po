@@ -1,22 +1,25 @@
 # Messages from calculation_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-19 15:18+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 40b424d8183a49ef9d1782f44ac846e8
 #: ../../calculation_editor.txt:4
@@ -33,7 +36,13 @@ msgid ""
 " name of the column, a read-only display of the current calculation written "
 "as a one-line expression, and a spin box that allows you to specify how many"
 " decimal places should be shown for the calculation results."
-msgstr "Tento dialog umožňuje nadefinovat sloupce obsahující hodnoty vypočtené z hodnot jiných sloupců stejného záznamu.  Editor výpočtů lze vyvolat pouze u sloupců typu výpočet v Editoru sloupců po stisku tlačítek \"Editovat\" a následně \"Editovat výpočet\".  V horní části dialogu nalezneme jméno sloupce, needitovatelné jednořádkové zobrazení stávajícího výpočtu a volbu počtu desetinných míst udávajících přesnost výpočtu."
+msgstr ""
+"Tento dialog umožňuje nadefinovat sloupce obsahující hodnoty vypočtené z "
+"hodnot jiných sloupců stejného záznamu.  Editor výpočtů lze vyvolat pouze u "
+"sloupců typu výpočet v Editoru sloupců po stisku tlačítek \"Editovat\" a "
+"následně \"Editovat výpočet\".  V horní části dialogu nalezneme jméno "
+"sloupce, needitovatelné jednořádkové zobrazení stávajícího výpočtu a volbu "
+"počtu desetinných míst udávajících přesnost výpočtu."
 
 # 4f5af6c77ed540b1a56ff00c62751680
 #: ../../calculation_editor.txt:8
@@ -43,7 +52,12 @@ msgid ""
 "represents either the value of another column, a constant value, or the "
 "result of an operation.  To edit the calculation, select a node from the "
 "tree (if any are present) and use the buttons in the dialog:"
-msgstr "Největší část dialogu zabírá zobrazení stromové struktury stávajího výpočtu v podobě známé např. ze souborových správců.  Každá větev stromu představuje buď hodnotu některého sloupce, konstantu nebo výsledek početní operace.  Chcete-li výpočet editovat, vyberte příslušnou větev (je-li dostupná) a použijte tlačítka z dolní části dialogu:"
+msgstr ""
+"Největší část dialogu zabírá zobrazení stromové struktury stávajího výpočtu "
+"v podobě známé např. ze souborových správců.  Každá větev stromu představuje"
+" buď hodnotu některého sloupce, konstantu nebo výsledek početní operace.  "
+"Chcete-li výpočet editovat, vyberte příslušnou větev (je-li dostupná) a "
+"použijte tlačítka z dolní části dialogu:"
 
 # 5931ce55d45b4f4cbe892e8242089f93
 #: ../../calculation_editor.txt:11
@@ -55,7 +69,9 @@ msgstr "**Přidat**"
 msgid ""
 "Add a new node as a child of the currently selected node; a dialog will "
 "appear which allows you to select the type and value of the node."
-msgstr "Přidá novou větev jako podřízenou větve vybrané; objeví se dialog umožňující výběr typu operace a hodnoty."
+msgstr ""
+"Přidá novou větev jako podřízenou větve vybrané; objeví se dialog umožňující"
+" výběr typu operace a hodnoty."
 
 # dd6d91ebe7ae470189743ba74d60c829
 #: ../../calculation_editor.txt:14
@@ -105,24 +121,32 @@ msgid ""
 " their own).  The buttons automatically update when a node is selected in "
 "order to indicate which actions are possible; typical actions not allowed "
 "are:"
-msgstr "Doporučujeme začít výběrem početní operace (např. \"+\") a následným přidáváním jejích argumentů (kterými mohou být i operace s jejich vlastními argumenty).  V závislosti na tom, jaká větev je vybrána, se mění i dostupná tlačítka; typickými nepovolenými akcemi jsou:"
+msgstr ""
+"Doporučujeme začít výběrem početní operace (např. \"+\") a následným "
+"přidáváním jejích argumentů (kterými mohou být i operace s jejich vlastními "
+"argumenty).  V závislosti na tom, jaká větev je vybrána, se mění i dostupná "
+"tlačítka; typickými nepovolenými akcemi jsou:"
 
 # 095e6533d8d844cc97452bf523e9902c
 #: ../../calculation_editor.txt:27
 msgid ""
 "Adding a child node to an operation which already has as many arguments as "
 "it can use"
-msgstr "Přidání podřízené větve operaci s již dosaženým maximálním počtem argumentů"
+msgstr ""
+"Přidání podřízené větve operaci s již dosaženým maximálním počtem argumentů"
 
 # 639c481b219748508194e74343a115c5
 #: ../../calculation_editor.txt:29
 msgid "Editing an operation node; it must be deleted and replaced instead"
-msgstr "Změna typu početní operace; změnu lze provést jen smazáním a nahrazením stávající operace"
+msgstr ""
+"Změna typu početní operace; změnu lze provést jen smazáním a nahrazením "
+"stávající operace"
 
 # 3925a8a965b34204b997add6e8f8af88
 #: ../../calculation_editor.txt:31
 msgid "Moving a node up or down when it cannot move further in that direction"
-msgstr "Posun větve nahoru či dolů, nelze-li již větev daným směrem dále posunovat"
+msgstr ""
+"Posun větve nahoru či dolů, nelze-li již větev daným směrem dále posunovat"
 
 # bd869ee5d20642b4b6b7301c3e1606d5
 #: ../../calculation_editor.txt:33
@@ -136,7 +160,11 @@ msgid ""
 "calculations.  Additionally, Date columns can be used as children of a "
 "\"Days_Between\" operation, and Time columns can be used as children of "
 "\"Seconds_Between\", \"Minutes_Between\", and \"Hours_Between\" operations."
-msgstr "Pro výpočty lze použít jen sloupce typu integer, decimální, sekvence a booleánský.  Navíc je možné použít sloupce typu datum jako podřízené pro operaci  \"Počet_dnů_mezi\" a sloupce typu čas jako podřízené pro operace \"Počet_sekund_mezi\", \"Počet_minut_mezi\" a \"Počet_hodin_mezi\"."
+msgstr ""
+"Pro výpočty lze použít jen sloupce typu integer, decimální, sekvence a "
+"booleánský.  Navíc je možné použít sloupce typu datum jako podřízené pro "
+"operaci  \"Počet_dnů_mezi\" a sloupce typu čas jako podřízené pro operace "
+"\"Počet_sekund_mezi\", \"Počet_minut_mezi\" a \"Počet_hodin_mezi\"."
 
 # cfc636662b1b4ebf82eb2a77a99c407c
 #: ../../calculation_editor.txt:37
@@ -144,7 +172,10 @@ msgid ""
 "Calculation columns cannot be used in other calculations, since this would "
 "introduce a variety of complications.  You can get the same effect by "
 "repeating the definition of a calculation as part of another one."
-msgstr "Sloupce typu výpočet nelze použít pro jiné výpočty z důvodu předcházení nejrůznějším komplikacím.  Stejného výsledku lze dosáhnout opakovaným použitím stejné definice jako součásti jiného výpočtu."
+msgstr ""
+"Sloupce typu výpočet nelze použít pro jiné výpočty z důvodu předcházení "
+"nejrůznějším komplikacím.  Stejného výsledku lze dosáhnout opakovaným "
+"použitím stejné definice jako součásti jiného výpočtu."
 
 # 54e6c32b8e044874af417b6eaaefb9e8
 #: ../../calculation_editor.txt:39
@@ -158,4 +189,6 @@ msgstr "Operace s nedostatkem (či bez) argumentů obvykle vracejí nulu."
 msgid ""
 "If a column is renamed or deleted using the columns editor, any calculations"
 " using it are automatically updated accordingly."
-msgstr "Byl-li sloupec v Editoru sloupců přejmenován či smazán, jsou výpočty, které jej používají, podle toho automaticky zaktualizovány."
+msgstr ""
+"Byl-li sloupec v Editoru sloupců přejmenován či smazán, jsou výpočty, které "
+"jej používají, podle toho automaticky zaktualizovány."

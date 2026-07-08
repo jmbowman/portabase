@@ -1,22 +1,25 @@
 # Messages from image_editor.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2017-04-02 20:28+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 723538d734ca4b2d9765c63c93b372b1
 #: ../../image_editor.txt:4
@@ -30,7 +33,11 @@ msgid ""
 "After you select an image file to import into a field in the database, this "
 "dialog is shown so you can make minor changes to the copy of the image that "
 "will be saved in the database.  The top row contains the following controls:"
-msgstr "Do sloupce typu obrázek lze importovat obrázky ze souborů ve formátu JPEG či PNG.  Po výběru souboru, který má být importován do daného pole databáze, je zobrazen dialog Editoru obrázků. Zde lze s kopií obrázku ukládanou do databáze provést některé změny.  Z horní části dialogu může být změněna:"
+msgstr ""
+"Do sloupce typu obrázek lze importovat obrázky ze souborů ve formátu JPEG či"
+" PNG.  Po výběru souboru, který má být importován do daného pole databáze, "
+"je zobrazen dialog Editoru obrázků. Zde lze s kopií obrázku ukládanou do "
+"databáze provést některé změny.  Z horní části dialogu může být změněna:"
 
 # a5f832b3b80d49aaa228c9263385f6bf
 #: ../../image_editor.txt:9
@@ -61,7 +68,8 @@ msgstr "**Otočení**"
 #: ../../image_editor.txt:15
 msgid ""
 "The angle by which to rotate the image (in degrees): 0, 90, 180, or 270."
-msgstr "Úhel, pod kterým má být obrázek natočen (ve stupních): 0, 90, 180 nebo 270."
+msgstr ""
+"Úhel, pod kterým má být obrázek natočen (ve stupních): 0, 90, 180 nebo 270."
 
 # 009942046379418784898beb423f12ac
 #: ../../image_editor.txt:18
@@ -80,4 +88,6 @@ msgstr "Použije vybrané nastavení a podle něj zaktualizuje náhled obrázku.
 msgid ""
 "Click \"OK\"/\"Done\" to store the image as it is shown, or cancel out of "
 "the dialog to leave the field unchanged."
-msgstr "Klepnutím na \"OK\" uložíte obrázek tak, jak je právě zobrazen, klepnutím na \"Zrušit\" či křížek pro uzavření dialogu ponecháte dané pole beze změny."
+msgstr ""
+"Klepnutím na \"OK\" uložíte obrázek tak, jak je právě zobrazen, klepnutím na"
+" \"Zrušit\" či křížek pro uzavření dialogu ponecháte dané pole beze změny."
