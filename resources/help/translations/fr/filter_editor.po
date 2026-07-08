@@ -1,22 +1,25 @@
 # Messages from filter_editor.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# a270031086f2a0d3514bc0cb507b48f6, 2019
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2019-06-15 14:25+0000\n"
-"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 5aafc9c7d12442c48086f5b34aaf192f
 #: ../../filter_editor.txt:4
@@ -32,7 +35,15 @@ msgid ""
 "chapters > 10, pages <= 400, and instock is checked\".  When you choose a "
 "filter from the \"Filter\" menu, the data viewer is updated to show only the"
 " rows which match the conditions you have defined."
-msgstr "Cette boîte de dialogue vous permet de définir les filtres utilisés pour sélectionner les lignes à afficher dans la visionneuse de données. Un filtre peut être aussi simple que \"count = 1\" ou quelque chose de plus compliqué, comme \"toute colonne de texte contient 'java', des chapitres> 10, des pages <= 400, et l'installateur est coché\". Lorsque vous choisissez un filtre dans le menu \"Filtre\", la visionneuse de données est mise à jour pour afficher uniquement les lignes correspondant aux conditions que vous avez définies."
+msgstr ""
+"Cette boîte de dialogue vous permet de définir les filtres utilisés pour "
+"sélectionner les lignes à afficher dans la visionneuse de données. Un filtre"
+" peut être aussi simple que \"count = 1\" ou quelque chose de plus "
+"compliqué, comme \"toute colonne de texte contient 'java', des chapitres> "
+"10, des pages <= 400, et l'installateur est coché\". Lorsque vous choisissez"
+" un filtre dans le menu \"Filtre\", la visionneuse de données est mise à "
+"jour pour afficher uniquement les lignes correspondant aux conditions que "
+"vous avez définies."
 
 # 25d379f7b6a8406fb19230488b66282d
 #: ../../filter_editor.txt:8
@@ -53,4 +64,23 @@ msgid ""
 "a condition, the row is considered to pass the condition.  Click "
 "\"OK\"/\"Done\" to accept the currently shown settings, or cancel out of the"
 " dialog to revert to the previous values (or to cancel adding a new filter)."
-msgstr "En haut de la boîte de dialogue se trouve une zone de texte contenant le nom du filtre. changer cela renomme le filtre. Ci-dessous se trouve une liste des conditions qui constituent le filtre. une ligne doit satisfaire à toutes ces conditions pour pouvoir passer le filtre. Les boutons \"Ajouter\", \"Modifier\", \"Supprimer\", \"Haut\" et \"Bas\" vous permettent de modifier la liste de conditions de la même manière que l'éditeur de colonnes: ref: `<columns_editor>` travaux. Mais au lieu de la boîte de dialogue de l'éditeur de colonnes, une boîte de dialogue de l'éditeur de conditions est ouverte par les boutons \"Ajouter\" et \"Modifier\". Cette boîte de dialogue vous permet de choisir la colonne dont la valeur doit être comparée, l'opération de comparaison à utiliser et la valeur constante à comparer. Pour les comparaisons de texte, une case à cocher vous permet également d'indiquer si la comparaison doit être sensible à la casse ou non. Au lieu d'une seule colonne, vous pouvez choisir de comparer la valeur de \"Toute colonne de texte\"; Si la valeur d'une colonne String ou Note dans une ligne satisfait à une telle condition, la ligne est considérée comme satisfaisant la condition. Cliquez sur \"OK\" / \"Terminé\" pour accepter les paramètres actuellement affichés ou annulez la boîte de dialogue pour revenir aux valeurs précédentes (ou pour annuler l'ajout d'un nouveau filtre)."
+msgstr ""
+"En haut de la boîte de dialogue se trouve une zone de texte contenant le nom"
+" du filtre. changer cela renomme le filtre. Ci-dessous se trouve une liste "
+"des conditions qui constituent le filtre. une ligne doit satisfaire à toutes"
+" ces conditions pour pouvoir passer le filtre. Les boutons \"Ajouter\", "
+"\"Modifier\", \"Supprimer\", \"Haut\" et \"Bas\" vous permettent de modifier"
+" la liste de conditions de la même manière que l'éditeur de colonnes: ref: "
+"`<columns_editor>` travaux. Mais au lieu de la boîte de dialogue de "
+"l'éditeur de colonnes, une boîte de dialogue de l'éditeur de conditions est "
+"ouverte par les boutons \"Ajouter\" et \"Modifier\". Cette boîte de dialogue"
+" vous permet de choisir la colonne dont la valeur doit être comparée, "
+"l'opération de comparaison à utiliser et la valeur constante à comparer. "
+"Pour les comparaisons de texte, une case à cocher vous permet également "
+"d'indiquer si la comparaison doit être sensible à la casse ou non. Au lieu "
+"d'une seule colonne, vous pouvez choisir de comparer la valeur de \"Toute "
+"colonne de texte\"; Si la valeur d'une colonne String ou Note dans une ligne"
+" satisfait à une telle condition, la ligne est considérée comme satisfaisant"
+" la condition. Cliquez sur \"OK\" / \"Terminé\" pour accepter les paramètres"
+" actuellement affichés ou annulez la boîte de dialogue pour revenir aux "
+"valeurs précédentes (ou pour annuler l'ajout d'un nouveau filtre)."
