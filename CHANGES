@@ -1,3 +1,9 @@
+2026-07-12  JMB  mdbook-lint follow-up
+
+    Added mdbook-lint to the pre-commit hooks and documented some issues
+    encountered while setting it up so they can be worked around and
+    reported upstream.
+
 2026-07-11  JMB  Add agentic development scaffolding
 
     In an attempt to get meaningful PortaBase work done in scraps of free

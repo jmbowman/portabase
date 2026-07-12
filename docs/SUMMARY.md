@@ -5,6 +5,7 @@
 - [Agentic Development Support](wiki/agentic-development-support.md)
 - [Agentic SDLC Wishlist](wiki/agentic_sdlc.md)
 - [LID Feedback](wiki/lid-feedback.md)
+- [mdbook-lint Bugs Encountered](wiki/mdbook-lint-bugs.md)
 
 # Linked-Intent Development
 

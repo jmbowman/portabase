@@ -14,3 +14,12 @@ language = "python"
 additional_dependencies = ["sphinx", "sphinx_rtd_theme"]
 files = "^resources/help/"
 pass_filenames = false
+
+[[repos.hooks]]
+id = "mdbook-lint"
+name = "Lint docs/ markdown"
+description = "Runs mdbook-lint against docs/ (excluding the LID design tree). Routed through `sh -c` so $PWD expands -- MDBOOK005 mis-scopes its orphan-file scan when given a relative path (see docs/wiki/mdbook-lint-bugs.md)."
+entry = "sh -c 'mdbook-lint lint -c docs/.mdbook-lint.toml \"$PWD/docs/SUMMARY.md\" \"$PWD/docs/wiki\" \"$PWD/docs/reference-repos.md\"'"
+language = "system"
+files = "^docs/(SUMMARY\\.md|wiki/|reference-repos\\.md|\\.mdbook-lint\\.toml)"
+pass_filenames = false
