@@ -1,0 +1,17 @@
+name: portabase
+version: 1.0.0
+description: APM project for portabase
+author: Jeremy Bowman
+# Which agent platforms to deploy to.
+# Resolution order: --target flag > this field > auto-detect from filesystem.
+# Accepted values: vscode, agents, copilot, claude, cursor, opencode, codex,
+# gemini, antigravity, windsurf, kiro, agent-skills, all
+targets:
+  - claude
+dependencies:
+  apm:
+    - jszmajda/lid/plugins/linked-intent-dev#v1.3.0
+    - jszmajda/lid/plugins/arrow-maintenance#v1.3.0
+  mcp: []
+includes: auto
+scripts: {}

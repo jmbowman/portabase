@@ -1,0 +1,87 @@
+lockfile_version: '1'
+generated_at: '2026-07-10T03:55:09.982509+00:00'
+apm_version: 0.24.0
+dependencies:
+- repo_url: jszmajda/lid
+  name: arrow-maintenance
+  host: github.com
+  resolved_commit: a3eb947fa639ddb859bdfcf5aaf861dc872461d5
+  resolved_ref: v1.3.0
+  version: 1.2.0
+  virtual_path: plugins/arrow-maintenance
+  is_virtual: true
+  package_type: marketplace_plugin
+  deployed_files:
+  - .claude/commands/arrow-maintenance.md
+  - .claude/commands/map-codebase.md
+  - .claude/skills/arrow-maintenance
+  - .claude/skills/arrow-maintenance/SKILL.md
+  - .claude/skills/arrow-maintenance/evals/evals.json
+  - .claude/skills/arrow-maintenance/references/README-template.md
+  - .claude/skills/arrow-maintenance/references/arrow-doc-template.md
+  - .claude/skills/arrow-maintenance/references/audit-checklist.md
+  - .claude/skills/arrow-maintenance/references/coherence-check.mjs
+  - .claude/skills/arrow-maintenance/references/index-schema.md
+  - .claude/skills/map-codebase
+  - .claude/skills/map-codebase/SKILL.md
+  - .claude/skills/map-codebase/evals/evals.json
+  - .claude/skills/map-codebase/references/brownfield-bootstrap.md
+  - .claude/skills/map-codebase/references/reconciliation-template.md
+  - .claude/skills/map-codebase/references/skeleton-hld-template.md
+  - .claude/skills/map-codebase/references/subagent-sweep-prompt.md
+  deployed_file_hashes:
+    .claude/commands/arrow-maintenance.md: sha256:5d321ff39e4a1b56cf27ee1cb308ed7c9b1e9f9ac32d8527af96d9d0eb0d9381
+    .claude/commands/map-codebase.md: sha256:492537785f70fe8f4d75ea1c31b7cca70554183a71583bc1ef97c652cd184ed9
+    .claude/skills/arrow-maintenance/SKILL.md: sha256:20ba2a1894f0b7924209c9619d6ce0baaace178bc85adff357bb1579ca4ef564
+    .claude/skills/arrow-maintenance/evals/evals.json: sha256:8973236332e3081c1f934212935d2fd0bc9964fb7e22283cf599d374fe922de6
+    .claude/skills/arrow-maintenance/references/README-template.md: sha256:7967674ccda43b9e93aede8c1affd73fc1cdebb16c861660146fd90193c7ccce
+    .claude/skills/arrow-maintenance/references/arrow-doc-template.md: sha256:a2b543b441f538123e0b18d009e56da9e881c91c8ee01634b948c614201c1db2
+    .claude/skills/arrow-maintenance/references/audit-checklist.md: sha256:6e984cda62710ca3132db6635381322715c364afa75f72c2982992bb0c35bd69
+    .claude/skills/arrow-maintenance/references/coherence-check.mjs: sha256:016300b14350fb33b5fda4ea233c3ecaeb3a9f4a17f6c5e20947a62ff55dc010
+    .claude/skills/arrow-maintenance/references/index-schema.md: sha256:970132fffeef5f0304160dc43f30301ee491595d6e0107c94309703ba2e0a2a5
+    .claude/skills/map-codebase/SKILL.md: sha256:d463d0b6d0af602037bda474b80fbbfcffe69603c03f34525be12557c361a070
+    .claude/skills/map-codebase/evals/evals.json: sha256:ee7c9b8fc07fdc2863c1a453aa0156d1696f3f65b45a7b3c78639bd6c502bc08
+    .claude/skills/map-codebase/references/brownfield-bootstrap.md: sha256:ed0ac690f4bbdc66fdada5185e7ddadecd9c9f5768c451c40fa7f70ccd1b32cf
+    .claude/skills/map-codebase/references/reconciliation-template.md: sha256:aaf79e75ef38e978a698a4a30e0eaeefc53bc983aa460f0476970e1a3749badc
+    .claude/skills/map-codebase/references/skeleton-hld-template.md: sha256:6efb8c394e414db4f32b48f2aca288a945561a6d48094682de291a284877c7fa
+    .claude/skills/map-codebase/references/subagent-sweep-prompt.md: sha256:00607fce0d7b7c52cac21278e0fb160909ff92abc47cdce09915d708c86935bc
+  content_hash: sha256:c0831c732b2b83d653b83c538748a5faf5c36e25671ef0c576996f0d910e07a1
+  declared_license: MIT
+- repo_url: jszmajda/lid
+  name: linked-intent-dev
+  host: github.com
+  resolved_commit: a3eb947fa639ddb859bdfcf5aaf861dc872461d5
+  resolved_ref: v1.3.0
+  version: 1.3.0
+  virtual_path: plugins/linked-intent-dev
+  is_virtual: true
+  package_type: marketplace_plugin
+  deployed_files:
+  - .claude/skills/lid-coach
+  - .claude/skills/lid-coach/SKILL.md
+  - .claude/skills/lid-coach/evals/evals.json
+  - .claude/skills/lid-coach/references/lid-faq.md
+  - .claude/skills/linked-intent-dev
+  - .claude/skills/linked-intent-dev/SKILL.md
+  - .claude/skills/linked-intent-dev/references/decision-doc-template.md
+  - .claude/skills/linked-intent-dev/references/ears-syntax.md
+  - .claude/skills/linked-intent-dev/references/hld-template.md
+  - .claude/skills/linked-intent-dev/references/lld-templates.md
+  - .claude/skills/update-lid
+  - .claude/skills/update-lid/SKILL.md
+  - .claude/skills/update-lid/evals/evals.json
+  - .claude/skills/update-lid/references/agents-md-template.md
+  deployed_file_hashes:
+    .claude/skills/lid-coach/SKILL.md: sha256:1096618f9b73be0492c8b658f1104d0e5cbbe1d833cf0c12d068d531ac35204e
+    .claude/skills/lid-coach/evals/evals.json: sha256:d972ffa627f0d9e7ab3dad2ebcca67640434275a7cbee5728598ad46cd2ae5ea
+    .claude/skills/lid-coach/references/lid-faq.md: sha256:9b256e4c46c50b662b379b1dcde21d4600ccf4232755454da78a6a4a98059aa6
+    .claude/skills/linked-intent-dev/SKILL.md: sha256:1ec8b2f5e0e057178cf70721d101fc8aa256e0c42502bb7fcf5e2030f0158edf
+    .claude/skills/linked-intent-dev/references/decision-doc-template.md: sha256:ea775b4e1dbf03b0a772b1d2c78ea6b07aac67bc03f9793b18e6b9e04b5d9869
+    .claude/skills/linked-intent-dev/references/ears-syntax.md: sha256:6e15b0708528805d00309eb1dfdd7a14d76ac64e21d7cdd0d300a5ed0199f904
+    .claude/skills/linked-intent-dev/references/hld-template.md: sha256:f264ed7c67fd6afdbb69da9bc8d49f34473272544fda433ac8366a9d83a34fb6
+    .claude/skills/linked-intent-dev/references/lld-templates.md: sha256:788958fe9e82c61785b2fbcb241f3c8ace7fd46723d4bc540cf0f94253cdac0b
+    .claude/skills/update-lid/SKILL.md: sha256:17e786702888f82b8c3eacb7724d8bb8459f6e508c85650616e9afa9572a97c3
+    .claude/skills/update-lid/evals/evals.json: sha256:efec760816a3241e30aa5abcc976c50a71982f84870f9fc6180bc2c5b6e737bd
+    .claude/skills/update-lid/references/agents-md-template.md: sha256:54ef3733a9c54b566190d289649eecf1b32fcf2c7faa8cc75f93bdff6ed7f130
+  content_hash: sha256:191afdea9b88c5c23ed19662edf496e2004efe69808af2da382aebc5aa9e3a69
+  declared_license: MIT

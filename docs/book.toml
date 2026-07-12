@@ -1,0 +1,11 @@
+[book]
+title = "PortaBase Documentation"
+src = "."
+
+[build]
+build-dir = "book"
+
+# Linting runs separately via `mise run mdbook-lint` (docs/.mdbook-lint.toml),
+# scoped to exclude the LID design tree. Wiring it in here as a preprocessor
+# would re-lint that tree unscoped on every build, and its `error`-severity
+# findings there would hard-fail the build.

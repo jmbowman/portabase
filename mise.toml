@@ -1,5 +1,10 @@
 [tools]
 actionlint = "latest"
+apm = "latest"
+"github:joshrotenberg/mdbook-lint" = "latest"
+mdbook = "latest"
+"pipx:gh2md" = "latest"
+"pipx:vcs2l" = "latest"
 prek = "latest"
 
 [tasks.lint-workflows]
@@ -13,3 +18,31 @@ run = "prek install"
 [tasks.pre-commit]
 description = "Run all prek hooks against the whole repo"
 run = "prek run --all-files"
+
+[tasks.reference-repos-setup]
+description = "Shallow-clone any repos in docs/reference-repos.yaml not already present in .reference-repos/"
+run = "mkdir -p .reference-repos && vcs import --shallow --skip-existing --input docs/reference-repos.yaml .reference-repos"
+
+[tasks.reference-repos-update]
+description = "Fast-forward pull all repos in .reference-repos/"
+run = "vcs pull .reference-repos"
+
+[tasks.reference-repos-regenerate]
+description = "Regenerate docs/reference-repos.yaml from the actual contents of .reference-repos/"
+run = "vcs export .reference-repos > docs/reference-repos.yaml"
+
+[tasks.issues-sync]
+description = "Export GitHub issues/PRs (with comments) to local markdown files in .issues/ for offline agent context"
+run = "mkdir -p .issues && gh2md jmbowman/portabase .issues --multiple-files --idempotent"
+
+[tasks.mdbook-build]
+description = "Render docs/ to a local HTML book at docs/book/ for browsing (not published anywhere)"
+run = "mdbook build docs"
+
+[tasks.mdbook-lint]
+description = "Lint docs/ markdown for mdBook-authoring issues (excludes the LID design tree -- docs/intent/, docs/arrows/, docs/high-level-design.md -- which follows LID's own conventions, not ours)"
+# Must be an absolute path -- MDBOOK005 mis-scopes its orphan-file scan to the
+# cwd instead of the book's src dir when given a relative path (upstream bug,
+# see docs/wiki/mdbook-lint-bugs.md). SUMMARY.md itself stays included so
+# MDBOOK005's orphan-detection still runs.
+run = "mdbook-lint lint -c docs/.mdbook-lint.toml \"$PWD/docs/SUMMARY.md\" \"$PWD/docs/wiki\" \"$PWD/docs/reference-repos.md\""

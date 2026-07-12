@@ -1,0 +1,20 @@
+schema_version: 2
+last_updated: 2026-07-10
+
+taxonomy:
+  data-model: standalone
+
+arrows:
+  column-editing:
+    status: MAPPED
+    parent: null
+    sampled: 2026-07-10
+    audited: null
+    audited_sha: null
+    blocks: []
+    blockedBy: []
+    detail: column-editing.md
+    next: "Root-cause and fix the add-column crash (COL-DB-007); add a regression test once a test suite exists"
+    drift: null
+
+unmapped: {}

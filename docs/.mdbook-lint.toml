@@ -1,0 +1,10 @@
+# mdbook-lint config for docs/. Not auto-discovered by the standalone CLI --
+# the `mdbook-lint` mise task passes it explicitly via -c.
+
+disabled-rules = [
+    "MD013",      # Line length -- this project's docs run long, dense lines by convention
+    "CONTENT001", # "BUG" text found -- several pages exist specifically to document real bugs
+    "CONTENT011", # Future tense -- correct usage in roadmap.md and other forward-looking sections
+    "CONTENT003", # Short chapter -- fires on SUMMARY.md, which is structure, not prose; adding
+                  # body text to satisfy it risks breaking mdBook's strict SUMMARY.md parser
+]
