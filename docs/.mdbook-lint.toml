@@ -7,4 +7,6 @@ disabled-rules = [
     "CONTENT011", # Future tense -- correct usage in roadmap.md and other forward-looking sections
     "CONTENT003", # Short chapter -- fires on SUMMARY.md, which is structure, not prose; adding
                   # body text to satisfy it risks breaking mdBook's strict SUMMARY.md parser
+    "MDBOOK010",  # Inline math block -- counts raw $ chars document-wide, not code-span-aware
+                  # (see docs/wiki/mdbook-lint-bugs.md #5); we don't write math, not worth it
 ]

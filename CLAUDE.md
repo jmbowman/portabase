@@ -35,9 +35,9 @@ Platform-specific build/packaging scripts live under `packaging/{linux,mac,windo
 
 ## Dev tooling
 
-Tool versions are pinned via `mise` (`mise.toml`/`mise.lock`) — run `mise install` to get everything. Currently manages: `actionlint` (lints `.github/workflows/`), `prek` (git hooks, see `prek.toml`), `apm`, `pipx:vcs2l` (reference-repo clone management, see `docs/reference-repos.md`), and `pipx:gh2md` (GitHub issues/PRs mirror, see below). Useful tasks: `mise run lint-workflows`, `mise run pre-commit`, `mise run install-hooks`.
+Tool versions are pinned via `mise` (`mise.toml`/`mise.lock`) — run `mise install` to get everything. Currently manages: `actionlint` (lints `.github/workflows/`), `prek` (git hooks, see `prek.toml`), `apm`, `pipx:vcs2l` (reference-repo clone management, see `docs/reference-repos.md`), `pipx:gh2md` (GitHub issues/PRs mirror, see below), and `mdbook`/`github:joshrotenberg/mdbook-lint` (renders and lints `docs/`, see `docs/wiki/agentic-development-support.md`). Useful tasks: `mise run lint-workflows`, `mise run pre-commit`, `mise run install-hooks`, `mise run mdbook-build`, `mise run mdbook-lint`.
 
-`prek` hooks (defined in `prek.toml`) currently just regenerate help translation templates when `resources/help/` changes; enforced both locally (`mise run install-hooks`) and in CI (`pre-commit` job in `build.yml`).
+`prek` hooks (defined in `prek.toml`) regenerate help translation templates when `resources/help/` changes, and lint `docs/` (excluding the LID design tree) when relevant doc files change; enforced both locally (`mise run install-hooks`) and in CI (`pre-commit` job in `build.yml`).
 
 **`.issues/`** is a gitignored, offline mirror of this repo's GitHub issues/PRs (including comments) for agent context, refreshed via `mise run issues-sync`. It uses `gh2md`, authenticated via a `GITHUB_ACCESS_TOKEN` env var or a token file (`~/.config/gh2md/token`/`~/.github-token`) that the maintainer manages outside of any Claude Code session. **Do not read, cat, echo, or otherwise access that token, its env var, or its file from an agent session** — refreshing `.issues/` is the maintainer's manual step.
 

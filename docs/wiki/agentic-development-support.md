@@ -45,3 +45,5 @@ A small `.claude/skills/context-curation-check/` skill (planned, not yet written
 ## Reference Repos
 
 External repos cloned locally for fast, exact reference answers (e.g. checking how LID actually behaves, or which Qt modules a given `QT +=` line needs) — see `docs/reference-repos.md` for the current list and the `reference-repos` Claude Code skill for the mechanics.
+
+The `reference-repos` skill itself has no PortaBase-specific content and would be a reasonable candidate to extract into a standalone personal-tooling repo, consumed back into projects via APM the same way `jszmajda/lid`'s plugins are today. Deferred deliberately — it's a distraction from PortaBase's own roadmap while this pattern is still unproven. Revisit if it proves successful enough to want elsewhere.
