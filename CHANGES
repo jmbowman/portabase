@@ -1,3 +1,19 @@
+2026-07-11  JMB  Add agentic development scaffolding
+
+    In an attempt to get meaningful PortaBase work done in scraps of free
+    time, added assorted scaffolding to help agentic coding tools (primarily
+    Claude Code at first) understand and improve the project:
+
+    * A reference-repos skill to wrap vcs2l for managing a local cache of
+      related git repositories
+    * Microsoft APM (Agent Package Manager) config to manage plugins &
+      skills
+    * Linked-Intent Development (LID) spec-driven development framework
+    * Some additional background context files, mdbook-lint to lint them,
+      and mdBook to render them for human browsing
+    * gh2md for syncing a local copy of PortaBase GitHub issues
+    * A CLAUDE.md file with agent instructions & key context
+
 2026-07-08  JMB  Automate help file translation template updates
 
     * Updated the Sphinx configuration to work with newer Sphinx versions

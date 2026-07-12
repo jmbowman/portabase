@@ -55,3 +55,27 @@ Thumbs.db
 # Editor and IDE artifacts #
 ############################
 *~
+
+
+# APM dependencies
+apm_modules/
+
+# Files APM deploys into .claude/ (pinned/reproducible via apm.lock.yaml,
+# not vendored -- see apm.yml). Update this list by hand when apm.yml
+# changes; check apm.lock.yaml's deployed_files for the current set.
+/.claude/commands/arrow-maintenance.md
+/.claude/commands/map-codebase.md
+/.claude/skills/arrow-maintenance/
+/.claude/skills/lid-coach/
+/.claude/skills/linked-intent-dev/
+/.claude/skills/map-codebase/
+/.claude/skills/update-lid/
+
+# External repos cloned for reference (see docs/reference-repos.yaml)
+/.reference-repos/
+
+# Local mirror of GitHub issues/PRs for agent context (see CLAUDE.md, `mise run issues-sync`)
+/.issues/
+
+# mdBook HTML output (local browsing only, see `mise run mdbook-build`)
+/docs/book/

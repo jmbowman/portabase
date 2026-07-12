@@ -1,0 +1,37 @@
+repositories:
+  apm:
+    type: git
+    url: https://github.com/microsoft/apm.git
+    version: b915f8d2d94fd33898ae4f51ee308f65529ed0a3
+  lid:
+    type: git
+    url: https://github.com/jszmajda/lid.git
+    version: a3eb947fa639ddb859bdfcf5aaf861dc872461d5
+  mdbook:
+    type: git
+    url: https://github.com/rust-lang/mdBook.git
+    version: 2ea30c00f00647d2b3f4c0f79b3e0e1eabc0b66d
+  mdbook-lint:
+    type: git
+    url: https://github.com/joshrotenberg/mdbook-lint.git
+    version: 3ee3dd0dc815dcfe8b4d11cfef2a411348448bc0
+  mise:
+    type: git
+    url: https://github.com/jdx/mise.git
+    version: e47826c162671248d8a1726d7f3043e9b9c00092
+  qtandroidextras:
+    type: git
+    url: https://github.com/qt/qtandroidextras.git
+    version: 505be55243ba1600f62f47f9be3011a717841096
+  qtbase:
+    type: git
+    url: https://github.com/qt/qtbase.git
+    version: 40143c189b7c1bf3c2058b77d00ea5c4e3be8b28
+  qtmacextras:
+    type: git
+    url: https://github.com/qt/qtmacextras.git
+    version: 65f500c488c593486c6c390f53497dfbce1b58a6
+  qtsvg:
+    type: git
+    url: https://github.com/qt/qtsvg.git
+    version: 52d3788c7b0116ea3db232dccca5f1e3f1e229ac

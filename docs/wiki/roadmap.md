@@ -1,0 +1,45 @@
+# PortaBase Development Revival
+
+PortaBase is an open source portable database application implemented in C++ & Qt, originally written for the Sharp Zaurus Linux PDAs almost 25 years ago.  It became a key part of how I organize information in my life and attracted tens of thousands of users at its peak (although never any other core developers...partially because it's written in C++).  It has been ported to Linux, Windows, macOS, and Android.  Even after all these years, I still haven't found anything else quite like it:
+
+* A really simple but powerful tabular data management system optimized for small screens but perfectly usable on desktops
+* Data files can be treated just like any other document
+* No knowledge of SQL (or any other query language syntax) needed
+* Schema can be changed at any time, and all schema-related artifacts (filters, sortings, calculated fields, etc.) auto-update accordingly
+* Runs on most major operating systems
+
+I still use it actively, but have struggled to make time to work on it consistently, especially after I started a family.  I haven't made a proper release in years, and other people (including longtime PortaBase users) have trouble installing it on modern operating system versions.  Now that I've started using Claude Code at work and seen what it can do, I want to see if I can revitalize PortaBase development using it, even with the scraps of free time normally available to me.
+
+## Roadmap
+
+There's no shortage of improvements I want to make to PortaBase, only a shortage of time to implement them all.  The tentative sequence of improvements I want to make is roughly as follows.
+
+* Prepare the repository for effective AI coding agent usage.
+* Fix things that are currently broken.
+* Make a new release for all currently supported platforms.
+* Improve the code so as to make further feature additions easier.
+* Improve the UI & help files translation process.
+* Add features needed to allow me to solve immediate problems with PortaBase.
+* Look for opportunities to make PortaBase easier for new users to benefit from.
+* Chip away at the backlog of feature requests from other people.
+
+## Tentative Plan
+
+* Add at least a minimal test suite.  I should have done this years ago, but the prospect of writing a comprehensive automated test suite for a fairly substantial, mature application was too daunting.  Claude Code should be able to do this pretty quickly, though.  I'd like to start with a test suite that doesn't require any application code changes (except to fix bugs it discovers), even if that limits the scope of what can be effectively tested.  And as noted below, I'm seriously considering a gradual rewrite of most of PortaBase in Rust; I'd like to consider Rust for most of the test suite unless that significantly limits how well it can work.
+* Fix any existing bugs.  I know there's at least a crashing bug in the latest code on GitHub when applying schema changes to an existing file, and there are probably others that a proper test suite could turn up pretty quickly.  Those should be fixed before changing anything else.
+* Update developer accounts & code signing.  My Windows code signing certificate has expired, my Apple Developer account has lapsed, and I let Google close my Play account because they wouldn't allow me to keep it without publicly publishing my home address (because I had once charged a small fee for Android PortaBase downloads).  All of that will need to be set up again, and this time I want to get the code signing working automatically when I make an actual release on GitHub (but not automatically for all new PRs, as this would generate signed binaries for PRs from unknown contributors).  The Play account setup can wait until after the Qt 6 upgrade below, but the rest should be done at this point.
+* Release the Android version to F-Droid, if this can be done before the Qt 6 upgrade which will be needed for an updated Play Store release.
+* Release working, signed binaries for all currently supported platforms.  This is long overdue, and I owe it to the (probably very few now) longtime PortaBase users to get this done.  Android would be covered by F-Droid and an apk download for now, a full Play Store release will have to wait until after the Qt 6 upgrade below.
+* Update the web site.  It's still hosted on SourceForge even though development moved to GitHub long ago, and it hasn't been updated in many years.  Migrate it to a simple but modern static site generator (I've been having success with mdBook on other projects) and add some content to announce the new release and intended resumption of active development.
+* Fix and merge a recent attempt at adding support for a manual sorting field.  I want this to enable PortaBase to work better as a TODO list, and got pretty far before I decided I really needed automated builds and a test suite to prevent regressions before going further.  I'd like to wrap it up before the code drifts too much from the state at which the draft changes were written.
+* Do some code cleanup.  With a test suite in place to catch regressions, put modern linters in place and fix any existing warnings.  This could help reduce the number of changes that need to be made all at once for the next step.
+* Upgrade to Qt 6.  I believe I can no longer make an Android release to the Google Play store using Qt 5.  Support for Qt 5 applications on other operating systems may be getting spotty as well.
+* Recreate Google Play account, and make a new minor release covering primarily the Qt 6 upgrade, the manual sorting field, and the Play Store release.
+* Revisit architectural choices.  I keep looking for a better UI option than Qt, but as far as I can tell there still isn't one unless I take on the overhead of a custom UI layer for each platform.  I'll probably need to at least add a QML UI option in addition to QWidgets to get a really (close-to-)native UI on all target platforms.  Also look at libraries used, opportunities to leverage new libraries, options for incrementally migrating the codebase to Rust, etc.
+* Simplify the code.  There are some good abstractions already in place, but there are probably still good opportunities for reducing code duplication, especially all the dialogs with similar layout and functionality.  Try to reduce the amount of code that will need to be changed for steps later in the roadmap.
+* Provide a cleaner split between the UI and the application logic.  This may help facilitate the Rust port, and may be needed to support more native look & feel on Android (and later iOS) via a QML UI option.
+* Add support for voice input as rapid record creation.  The idea is to support a toolbar button / menu item which would launch a voice recorder, and when recording stops create a new record with the input stored in the field specified in the current schema as the default for voice input and set all other fields to their default values.  This would enable really fast data entry for new TODO list items, etc.; other fields could be customized later as needed and time allows.
+* Switch to Turso as the new database backend.  Metakit was abandoned long ago and has made it challenging to implement some important features which would be more trivial with a SQL backend.  SQLite only supports encrypted files as a commercial offering which can't be distributed with an open source application.  I long considered SQLCipher as the tentative destination backend, but the OpenSSL dependency was problematic for PortaBase's GPL licensing and Turso seems even more promsing with its Rust implementation, synchronization options, etc.  Metakit will be preserved as an import format for as long as I can keep it working, but new versions after this will only write to Turso files.  It would be nice if the new core database code could be written in Rust, to match the Turso crate.  This boundary between C++ & Rust could then gradually shift so that more things are on the Rust side, until primarily the UI framework is still in C++ (if there still isn't a viable Rust alternative by then).
+* Add support for filters with logical "OR" conditions.  This is one of the things that was a little challenging in Metakit but should be relatively trivial in Turso.  The filter editor would change from being a list of "AND"-ed conditions to a tree of logical operators, more like the calculated field editor.
+* Add support for hierarchical enumerated fields.  Each field value would still be stored as an integer, but the enum editor would support defining a tree of values.  This would for example allow filtering a transactions file for "all Food records", even though the transactions are individually tagged as Breakfast, Lunch, Dinner, Groceries, etc.
+* Implement and release an iOS port.  I've been wanting to do this for years, and my wife and daughter both use iOS.  I just want to make sure to have the new file format in place before doing that release, so new iOS users don't quickly face a breaking migration in file format.

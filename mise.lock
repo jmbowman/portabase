@@ -46,6 +46,121 @@ url = "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_
 url_api = "https://api.github.com/repos/rhysd/actionlint/releases/assets/384924919"
 provenance = "github-attestations"
 
+[[tools.apm]]
+version = "0.24.0"
+backend = "github:microsoft/apm"
+
+[tools.apm."platforms.linux-arm64"]
+checksum = "sha256:4314cadabf78a3776a3b22d276c01c45e1db644498e05d8ea5437015521d6c0b"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124798"
+
+[tools.apm."platforms.linux-arm64-musl"]
+checksum = "sha256:4314cadabf78a3776a3b22d276c01c45e1db644498e05d8ea5437015521d6c0b"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124798"
+
+[tools.apm."platforms.linux-x64"]
+checksum = "sha256:54b58a212d66e0de0b71068e7b3b23169af872183de10bc0fc29e006354d63eb"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-linux-x86_64.tar.gz"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124799"
+
+[tools.apm."platforms.linux-x64-musl"]
+checksum = "sha256:54b58a212d66e0de0b71068e7b3b23169af872183de10bc0fc29e006354d63eb"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-linux-x86_64.tar.gz"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124799"
+
+[tools.apm."platforms.macos-arm64"]
+checksum = "sha256:09a87baa5a527ea14064962bd549e8e6baf4e527bd259b54ce0d25f7757e5baf"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124802"
+
+[tools.apm."platforms.macos-x64"]
+checksum = "sha256:feee0ca5c1f7b25ef7320f1d7ea384bc29771ce21e0ef0d28aa6b5d11cee9c06"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-darwin-x86_64.tar.gz"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124801"
+
+[tools.apm."platforms.windows-x64"]
+checksum = "sha256:68d690b7b582d1f017ba39b295956e60b6e5e06e2ef0f6778392bb4be48a718d"
+url = "https://github.com/microsoft/apm/releases/download/v0.24.0/apm-windows-x86_64.zip"
+url_api = "https://api.github.com/repos/microsoft/apm/releases/assets/467124806"
+
+[[tools."github:joshrotenberg/mdbook-lint"]]
+version = "0.14.4"
+backend = "github:joshrotenberg/mdbook-lint"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.linux-arm64"]
+checksum = "sha256:aa6f7f977378171fc7974333e67b0939a57799e3510505b5e640f2c9e482b87c"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922507"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.linux-arm64-musl"]
+checksum = "sha256:aa6f7f977378171fc7974333e67b0939a57799e3510505b5e640f2c9e482b87c"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922507"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.linux-x64"]
+checksum = "sha256:2f95c82c5fc17ed15e843d2719083523c89cd3e6c99624349bbc06e8d7b10f4c"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922523"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.linux-x64-musl"]
+checksum = "sha256:2f95c82c5fc17ed15e843d2719083523c89cd3e6c99624349bbc06e8d7b10f4c"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922523"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.macos-arm64"]
+checksum = "sha256:d86f6e9bc73065bcf2119bc6e88beda48bdde818b825ae733983aa7b740da104"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922508"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.macos-x64"]
+checksum = "sha256:9f963307b993d54338f5943b8846ecacba5957280c89868238cd50f447da2294"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922510"
+
+[tools."github:joshrotenberg/mdbook-lint"."platforms.windows-x64"]
+checksum = "sha256:0bc5c4f358ec438eb80ae76dac69a7b9b819747f4763354107d05b0659230306"
+url = "https://github.com/joshrotenberg/mdbook-lint/releases/download/v0.14.4/mdbook-lint-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/joshrotenberg/mdbook-lint/releases/assets/436922514"
+
+[[tools.mdbook]]
+version = "0.5.4"
+backend = "aqua:rust-lang/mdBook"
+
+[tools.mdbook."platforms.linux-x64"]
+checksum = "sha256:5222beabd3e37dc5be0d18ff99b79058469354db5c220153a1b92db5ba12be89"
+url = "https://github.com/rust-lang/mdBook/releases/download/v0.5.4/mdbook-v0.5.4-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/rust-lang/mdBook/releases/assets/468209670"
+
+[tools.mdbook."platforms.linux-x64-musl"]
+checksum = "sha256:5222beabd3e37dc5be0d18ff99b79058469354db5c220153a1b92db5ba12be89"
+url = "https://github.com/rust-lang/mdBook/releases/download/v0.5.4/mdbook-v0.5.4-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/rust-lang/mdBook/releases/assets/468209670"
+
+[tools.mdbook."platforms.macos-arm64"]
+checksum = "sha256:a47d7bf0d5d670cff9ee6cce95537cbeb62dc10704d9e7131ffbd13e2b59a5de"
+url = "https://github.com/rust-lang/mdBook/releases/download/v0.5.4/mdbook-v0.5.4-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/rust-lang/mdBook/releases/assets/468210169"
+
+[tools.mdbook."platforms.macos-x64"]
+checksum = "sha256:a47d7bf0d5d670cff9ee6cce95537cbeb62dc10704d9e7131ffbd13e2b59a5de"
+url = "https://github.com/rust-lang/mdBook/releases/download/v0.5.4/mdbook-v0.5.4-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/rust-lang/mdBook/releases/assets/468210169"
+
+[tools.mdbook."platforms.windows-x64"]
+checksum = "sha256:8a6b2421aa522de06d746871d2b8fff9c8d71773467e310a4516d2566e7f2de4"
+url = "https://github.com/rust-lang/mdBook/releases/download/v0.5.4/mdbook-v0.5.4-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/rust-lang/mdBook/releases/assets/468210971"
+
+[[tools."pipx:gh2md"]]
+version = "2.5.1"
+backend = "pipx:gh2md"
+
+[[tools."pipx:vcs2l"]]
+version = "1.1.7"
+backend = "pipx:vcs2l"
+
 [[tools.prek]]
 version = "0.4.8"
 backend = "aqua:j178/prek"
