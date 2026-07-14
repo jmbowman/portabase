@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
+        with:
+          # lint-cpp (packaging/lint_cpp.py) diffs against origin/master, which
+          # a default shallow (depth-1) checkout never has as a resolvable ref.
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
