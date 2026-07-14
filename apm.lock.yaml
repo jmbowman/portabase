@@ -1,7 +1,62 @@
 lockfile_version: '1'
-generated_at: '2026-07-10T03:55:09.982509+00:00'
+generated_at: '2026-07-12T04:42:51.766271+00:00'
 apm_version: 0.24.0
 dependencies:
+- repo_url: TheQtCompanyRnD/agent-skills
+  name: agent-skills
+  host: github.com
+  resolved_commit: 71d6c10da78b9a764468ae11c86ab3bc4ca4921f
+  resolved_ref: 71d6c10da78b9a764468ae11c86ab3bc4ca4921f
+  version: unknown
+  virtual_path: skills/qt-cpp-review
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .claude/skills/qt-cpp-review
+  - .claude/skills/qt-cpp-review/LICENSE.txt
+  - .claude/skills/qt-cpp-review/README.md
+  - .claude/skills/qt-cpp-review/SKILL.md
+  - .claude/skills/qt-cpp-review/platforms/windsurf.md
+  - .claude/skills/qt-cpp-review/references/lint-scripts/qt_review_lint.py
+  - .claude/skills/qt-cpp-review/references/qt-deprecated-classes.md
+  - .claude/skills/qt-cpp-review/references/qt-framework-checklist.md
+  - .claude/skills/qt-cpp-review/references/qt-review-checklist.md
+  deployed_file_hashes:
+    .claude/skills/qt-cpp-review/LICENSE.txt: sha256:886cf7a2a54af4903496fe19ad022766525b7612d8b1adfd59dac7e90a483604
+    .claude/skills/qt-cpp-review/README.md: sha256:31a041823c911239ef18fd0cf3edbb7adb1900692b8d221952005684be914f1d
+    .claude/skills/qt-cpp-review/SKILL.md: sha256:ca52fa54c1ef5862c8b4357c23b56fc58eb5603683aa09196eea0d137e60921d
+    .claude/skills/qt-cpp-review/platforms/windsurf.md: sha256:103c35e3ae13dd99c4ab6885374c1b26160941d5cd21537a03553fdd8f41d06c
+    .claude/skills/qt-cpp-review/references/lint-scripts/qt_review_lint.py: sha256:5b6c1df1aa12562a25c8f191faeee67442d402b7e8447001953ed1e62e7974b9
+    .claude/skills/qt-cpp-review/references/qt-deprecated-classes.md: sha256:67e079f0bd869bd6238dd784786260d2058500915804911e94829d32e265534a
+    .claude/skills/qt-cpp-review/references/qt-framework-checklist.md: sha256:7b461d116705bae11ddd24ddae464fcda4b95119d93f5816612142284526c604
+    .claude/skills/qt-cpp-review/references/qt-review-checklist.md: sha256:60f4e5c6a475067b05ccf2380b656cc97040a390d241d0b74f0f3b979eb38315
+  content_hash: sha256:fbd485ebf211c173f9304ea38235e9fbcfb7801b0e607b10105fb3c647c37892
+- repo_url: cursor/plugins
+  name: thermos
+  host: github.com
+  resolved_commit: a29f5a8ca161b1de4ffc5484454958bebc04eaa5
+  resolved_ref: a29f5a8ca161b1de4ffc5484454958bebc04eaa5
+  version: 1.0.0
+  virtual_path: thermos
+  is_virtual: true
+  package_type: marketplace_plugin
+  deployed_files:
+  - .claude/agents/thermo-nuclear-code-quality-review-subagent.md
+  - .claude/agents/thermo-nuclear-review-subagent.md
+  - .claude/skills/thermo-nuclear-code-quality-review
+  - .claude/skills/thermo-nuclear-code-quality-review/SKILL.md
+  - .claude/skills/thermo-nuclear-review
+  - .claude/skills/thermo-nuclear-review/SKILL.md
+  - .claude/skills/thermos
+  - .claude/skills/thermos/SKILL.md
+  deployed_file_hashes:
+    .claude/agents/thermo-nuclear-code-quality-review-subagent.md: sha256:636800f1e5acf501f339779a8867b95d633396930b3356a2b0c9a0018343f02d
+    .claude/agents/thermo-nuclear-review-subagent.md: sha256:9dfa8ed88d1ea5d775edb5557b8a8ecfa9f2977b904c55c902b0ceb648b563d0
+    .claude/skills/thermo-nuclear-code-quality-review/SKILL.md: sha256:7faca08b51b643b2ddd0836f92af15574444024685dcc1e677dbbb39ae8c9e8f
+    .claude/skills/thermo-nuclear-review/SKILL.md: sha256:5091011c4490932d40658ae958fb55b9aaca8e2bba5196860295ab945180e434
+    .claude/skills/thermos/SKILL.md: sha256:c272effc404b126d34464e8a1dacec30f6757638db39088ca5afc58dd2c1f472
+  content_hash: sha256:71547a01d95289a4613d13e8c5cd7eed66ac83f3b2dcbc0b92894b69fa5fabf7
+  declared_license: MIT
 - repo_url: jszmajda/lid
   name: arrow-maintenance
   host: github.com

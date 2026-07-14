@@ -4,21 +4,21 @@ The "Edit Columns" dialog and the `Database` schema-mutation methods it drives �
 
 ## Status
 
-**MAPPED** — mapped 2026-07-10 (git SHA `4069734`). Brownfield pilot for the agentic-scaffolding roadmap item; not yet audited against tests (none exist yet).
+**MAPPED** — mapped 2026-07-10 (git SHA `4069734`). Brownfield pilot for the agentic-scaffolding roadmap item.
 
 ## References
 
 ### HLD
-- docs/high-level-design.md (not yet written)
+- docs/high-level-design.md (project-level stub; too narrow a scope for project-wide content yet — see that doc's own notes)
 
 ### LLD
-- docs/intent/column-editing/column-editing-design.md (not yet written)
+- docs/intent/column-editing/column-editing-design.md
 
 ### EARS
-- docs/intent/column-editing/column-editing-specs.md (not yet written)
+- docs/intent/column-editing/column-editing-specs.md
 
 ### Tests
-- none exist yet
+- `tests/dbeditor/dbeditor_test.cpp` (QtTest) — add-column-to-existing-file coverage for all base column types (`COL-DB-007`, not yet reproducing the real crash), and `reorderThenDeleteColumn` (`COL-UI-010`)
 
 ### Code
 - src/dbeditor.h, src/dbeditor.cpp (`DBEditor` class, full files)
@@ -35,7 +35,8 @@ The "Edit Columns" dialog and the `Database` schema-mutation methods it drives �
 
 ## Spec Coverage
 
-Not yet generated — specs don't exist yet (next artifact in this pass).
+- **COL-UI** (Edit Columns dialog / staging behavior): COL-UI-001 through COL-UI-010, all `[x]` implemented.
+- **COL-DB** (database schema mutation): COL-DB-001 through COL-DB-006 `[x]` implemented; COL-DB-007 `[ ]` active gap — the known add-column-to-existing-file crash (see Key Findings and Work Required below).
 
 ## Key Findings
 

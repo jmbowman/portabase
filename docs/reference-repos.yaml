@@ -3,6 +3,14 @@ repositories:
     type: git
     url: https://github.com/microsoft/apm.git
     version: b915f8d2d94fd33898ae4f51ee308f65529ed0a3
+  compiledb:
+    type: git
+    url: https://github.com/nickdiego/compiledb.git
+    version: d1adcd11bd67d3cdfee40951aa77bd847c0ca166
+  cursor-plugins:
+    type: git
+    url: https://github.com/cursor/plugins.git
+    version: a29f5a8ca161b1de4ffc5484454958bebc04eaa5
   lid:
     type: git
     url: https://github.com/jszmajda/lid.git
@@ -19,6 +27,14 @@ repositories:
     type: git
     url: https://github.com/jdx/mise.git
     version: e47826c162671248d8a1726d7f3043e9b9c00092
+  prek:
+    type: git
+    url: https://github.com/j178/prek.git
+    version: cccc61bef9310b818a27aaeed1c25ef9917b09f5
+  qt-agent-skills:
+    type: git
+    url: https://github.com/TheQtCompanyRnD/agent-skills.git
+    version: 71d6c10da78b9a764468ae11c86ab3bc4ca4921f
   qtandroidextras:
     type: git
     url: https://github.com/qt/qtandroidextras.git

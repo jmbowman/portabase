@@ -56,7 +56,7 @@ private:
     QString getTypeString(int type);
     bool isValidName(const QString &colName);
     bool isValidDefault(int type, const QString &defaultVal);
-    void selectRow(const QString &colName);
+    Q_INVOKABLE void selectRow(const QString &colName);
     void renameColumnRefs(const QString &oldName, const QString &newName);
     void deleteColumnRefs(const QString &name);
 

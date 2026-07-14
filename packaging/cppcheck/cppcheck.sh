@@ -5,4 +5,4 @@
 
 set -ex
 
-cppcheck --enable=all --inconclusive --suppressions-list=packaging/cppcheck/suppressions.txt -q -isrc/encryption/randomkit src
+cppcheck --enable=all --inconclusive --library=qt --suppressions-list=packaging/cppcheck/suppressions.txt -q -isrc/encryption/randomkit src

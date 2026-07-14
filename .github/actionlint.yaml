@@ -1,0 +1,6 @@
+self-hosted-runner:
+  # Not actually self-hosted -- this is the only way to allow-list a
+  # GitHub-hosted runner label actionlint's built-in list doesn't know yet
+  # (ubuntu-26.04 is preview as of actionlint v1.7.12).
+  labels:
+    - ubuntu-26.04

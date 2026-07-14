@@ -6,6 +6,8 @@
 - [Agentic SDLC Wishlist](wiki/agentic_sdlc.md)
 - [LID Feedback](wiki/lid-feedback.md)
 - [mdbook-lint Bugs Encountered](wiki/mdbook-lint-bugs.md)
+- [compiledb Bugs Encountered](wiki/compiledb-bugs.md)
+- [Column-Editing Code Review Followups](wiki/dbeditor-code-review-followups.md)
 
 # Linked-Intent Development
 

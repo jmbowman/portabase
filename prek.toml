@@ -16,6 +16,15 @@ files = "^resources/help/"
 pass_filenames = false
 
 [[repos.hooks]]
+id = "lint-cpp"
+name = "Lint changed C/C++ files (cppcheck)"
+description = "Runs cppcheck against C/C++ files changed vs. origin/master plus local changes. clang-tidy/clazy are deferred -- see packaging/lint_cpp.py's module docstring."
+entry = "uv run packaging/lint_cpp.py"
+language = "system"
+files = "\\.(cpp|h|c)$"
+pass_filenames = false
+
+[[repos.hooks]]
 id = "mdbook-lint"
 name = "Lint docs/ markdown"
 description = "Runs mdbook-lint against docs/ (excluding the LID design tree). Routed through `sh -c` so $PWD expands -- MDBOOK005 mis-scopes its orphan-file scan when given a relative path (see docs/wiki/mdbook-lint-bugs.md)."

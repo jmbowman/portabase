@@ -11,6 +11,10 @@ prek = "latest"
 description = "Lint GitHub Actions workflow files"
 run = "actionlint .github/workflows/*.yml"
 
+[tasks.lint-cpp]
+description = "cppcheck against C/C++ files changed vs. BASE_REF (default origin/master) plus local changes -- clang-tidy/clazy are deferred, see packaging/lint_cpp.py's module docstring"
+run = "uv run packaging/lint_cpp.py"
+
 [tasks.install-hooks]
 description = "Install prek's git hooks into this checkout"
 run = "prek install"
