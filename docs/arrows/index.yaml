@@ -14,7 +14,7 @@ arrows:
     blocks: []
     blockedBy: []
     detail: column-editing.md
-    next: "Root-cause and fix the add-column crash (COL-DB-007); add a regression test once a test suite exists"
+    next: "Root-cause the add-column crash (COL-DB-007) -- needs a real crashing file, no synthetic fixture has reproduced it yet"
     drift: null
 
 unmapped: {}

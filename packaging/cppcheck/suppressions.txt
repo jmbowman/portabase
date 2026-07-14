@@ -11,3 +11,6 @@ unusedFunction:src/image/imagereply.cpp
 
 // Implementation of the QXmlDefaultHandler interface called by QXmlSimpleReader
 unusedFunction:src/xmlimport.cpp
+
+// QtTest private slots invoked via meta-object reflection, not called directly
+unusedFunction:tests/dbeditor/dbeditor_test.cpp

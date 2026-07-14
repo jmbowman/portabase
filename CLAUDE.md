@@ -45,7 +45,7 @@ Claude Code skills/commands/MCP dependencies sourced from third-party repos (lik
 
 ## Testing
 
-**There is no automated test suite yet.** Adding one is a planned roadmap step, deliberately sequenced after this agentic-scaffolding work and before further feature work. Until then, verify changes by building and exercising the app manually — don't assume test coverage exists for any given code path.
+A QtTest suite has started, currently covering the Columns Editor dialog (`tests/dbeditor/`) — build and run it with `qmake portabase-tests.pro && make`. It isn't wired into CI yet, and coverage is still narrow: don't assume test coverage exists for any given code path, and verify changes by building and exercising the app manually where it doesn't.
 
 ## Known issues
 

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s*)",
+      "Bash(mise registry*)",
+      "Bash(mise run mdbook-lint*)",
+      "Bash(mise exec -- actionlint*)",
+      "Bash(claude plugin list*)",
+      "Bash(find*)",
+      "Bash(QT_QPA_PLATFORM=offscreen ./tests/dbeditor/build/dbeditor_test)"
+    ]
+  }
+}

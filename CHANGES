@@ -1,3 +1,14 @@
+2026-07-13  JMB  More linters, review skills, & started unit test suite
+
+    * Fixed a bug when a column was deleted after re-ordering columns in the
+      same Columns Editor execution
+    * Added a pre-commit hook to run cppcheck
+    * Updated the cppcheck configuration
+    * Added some agentic code review skills from Cursor & Qt Company
+    * Started a QtTest unit test suite, initially focused on the Columns
+      Editor dialog
+    * Documented some follow-up tasks to perform later
+
 2026-07-12  JMB  mdbook-lint follow-up
 
     Added mdbook-lint to the pre-commit hooks and documented some issues

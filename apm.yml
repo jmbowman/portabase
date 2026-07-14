@@ -12,6 +12,8 @@ dependencies:
   apm:
     - jszmajda/lid/plugins/linked-intent-dev#v1.3.0
     - jszmajda/lid/plugins/arrow-maintenance#v1.3.0
+    - cursor/plugins/thermos#a29f5a8ca161b1de4ffc5484454958bebc04eaa5
+    - TheQtCompanyRnD/agent-skills/skills/qt-cpp-review#71d6c10da78b9a764468ae11c86ab3bc4ca4921f
   mcp: []
 includes: auto
 scripts: {}

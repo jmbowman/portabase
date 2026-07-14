@@ -295,6 +295,7 @@ bool DBEditor::isValidDefault(int type, const QString &defaultVal)
 /**
  * Delete the currently selected column definition.
  */
+// @spec COL-UI-010
 void DBEditor::deleteColumn()
 {
     QTreeWidgetItem *item = table->currentItem();
@@ -304,13 +305,18 @@ void DBEditor::deleteColumn()
     QString name = item->text(0);
     int index = info.Find(ceName [name.toUtf8()]);
     int oldIndex = ceOldIndex (info[index]);
+    int deletedPosition = ceNewIndex (info[index]);
     info.RemoveAt(index);
     if (oldIndex != -1) {
         deletedCols.append(originalCols[oldIndex]);
     }
     int size = info.GetSize();
-    for (int i = index; i < size; i++) {
-        ceNewIndex (info[i]) = ceNewIndex (info[i]) - 1;
+    // Decrement all subsequent column indexes by 1
+    for (int i = 0; i < size; i++) {
+        int position = ceNewIndex (info[i]);
+        if (position > deletedPosition) {
+            ceNewIndex (info[i]) = position - 1;
+        }
     }
     if (calcMap.contains(name)) {
         CalcNode *calcRoot = calcMap[name];

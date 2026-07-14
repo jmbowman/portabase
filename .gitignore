@@ -23,9 +23,13 @@
 # Intermediary build files #
 ############################
 .qmake.stash
+/compile_commands.json
+/.lint-build/
 android-build/
 android-PortaBase-deployment-settings.json
 /build/
+/tests/*/build/
+/tests/*/target_wrapper.sh
 _build/
 /doc/html/
 config.h
@@ -65,10 +69,16 @@ apm_modules/
 # changes; check apm.lock.yaml's deployed_files for the current set.
 /.claude/commands/arrow-maintenance.md
 /.claude/commands/map-codebase.md
+/.claude/agents/thermo-nuclear-code-quality-review-subagent.md
+/.claude/agents/thermo-nuclear-review-subagent.md
 /.claude/skills/arrow-maintenance/
 /.claude/skills/lid-coach/
 /.claude/skills/linked-intent-dev/
 /.claude/skills/map-codebase/
+/.claude/skills/qt-cpp-review/
+/.claude/skills/thermo-nuclear-code-quality-review/
+/.claude/skills/thermo-nuclear-review/
+/.claude/skills/thermos/
 /.claude/skills/update-lid/
 
 # External repos cloned for reference (see docs/reference-repos.yaml)

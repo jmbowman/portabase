@@ -11,6 +11,7 @@
 - [x] **COL-UI-007**: When the user deletes a column that is referenced by a calculated column's formula, the system shall clear or invalidate that formula's reference to the deleted column.
 - [x] **COL-UI-008**: When the Edit Columns dialog is confirmed ("OK"/"Done"), the system shall apply all staged changes to the database in this order: deletions, then index/default changes to surviving columns, then renames, then additions, then calculated-column updates.
 - [x] **COL-UI-009**: When the Edit Columns dialog is cancelled, the system shall discard all staged changes and leave the database's column format unmodified.
+- [x] **COL-UI-010**: When a column is deleted from the staged list, the system shall renumber the remaining staged columns' positions to a contiguous sequence starting at zero, based on each column's current staged position, regardless of any reordering ("Up"/"Down") performed earlier in the same dialog session.
 
 ## COL-DB (Database schema mutation)
 
