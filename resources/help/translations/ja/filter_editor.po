@@ -1,17 +1,20 @@
 # Messages from filter_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:40+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +35,10 @@ msgid ""
 "chapters > 10, pages <= 400, and instock is checked\".  When you choose a "
 "filter from the \"Filter\" menu, the data viewer is updated to show only the"
 " rows which match the conditions you have defined."
-msgstr "このダイアログでは、データ表示画面で表示されるレコードを選択するためのフィルターを定義することができます。フィルターは\"count = 1\"のような単純なものも、\"いずれかのテキストフィールドが'java'を含み、chapters > 10、pages <= 400、instockは真\"のようなより複雑なものにもできます。\"フィルター\"メニューからフィルターを選ぶと、データ表示画面は定義された条件にマッチするものレコードを対象とするように表示が更新されます。"
+msgstr ""
+"このダイアログでは、データ表示画面で表示されるレコードを選択するためのフィルターを定義することができます。フィルターは\"count = "
+"1\"のような単純なものも、\"いずれかのテキストフィールドが'java'を含み、chapters > 10、pages <= "
+"400、instockは真\"のようなより複雑なものにもできます。\"フィルター\"メニューからフィルターを選ぶと、データ表示画面は定義された条件にマッチするものレコードを対象とするように表示が更新されます。"
 
 # 25d379f7b6a8406fb19230488b66282d
 #: ../../filter_editor.txt:8
@@ -53,4 +59,11 @@ msgid ""
 "a condition, the row is considered to pass the condition.  Click "
 "\"OK\"/\"Done\" to accept the currently shown settings, or cancel out of the"
 " dialog to revert to the previous values (or to cancel adding a new filter)."
-msgstr "ダイアログの先頭はこのフィルターの名前を含むテキストボックスです; これを変更するとこのフィルター名が変更されます。この下はフィルターを構成する条件のリストです; レコードがフィルターをパスするには、この全ての条件を満たさなければいけません。\"追加\"、\"編集\"、\"削除\"、\"上げる\"、\"下げる\"を使って、基本的には\\ :ref:`フォーマット編集画面 <columns_editor>`\\ と同じ要領で条件を編集することができます。ただし、フィールド編集画面ダイアログの代りに、\"追加\"、\"編集\"ボタンで条件編集ダイアログが起動します。このダイアログでは、比較に使われるフィールド、使用する比較条件、比較する固定値を選択することができます。テキストの比較には、大文字小文字を区別するか否かを表わすチェックボックスもあります。1フィールドで比較する代わりに、\"テキストフィールド\"を選択することもできます; レコード中のいずれかの文字列またはノートフィールドの値が条件を満たしていれば、そのレコードは条件を満たしていると見なされます。\"OK\"をクリックして現在表示されている設定を適用するか、キャンセルして変更前の状態のままにします（あるいは新しいフィルターの追加をキャンセルします）。"
+msgstr ""
+"ダイアログの先頭はこのフィルターの名前を含むテキストボックスです; "
+"これを変更するとこのフィルター名が変更されます。この下はフィルターを構成する条件のリストです; "
+"レコードがフィルターをパスするには、この全ての条件を満たさなければいけません。\"追加\"、\"編集\"、\"削除\"、\"上げる\"、\"下げる\"を使って、基本的には\\"
+" :ref:`フォーマット編集画面 <columns_editor>`\\ "
+"と同じ要領で条件を編集することができます。ただし、フィールド編集画面ダイアログの代りに、\"追加\"、\"編集\"ボタンで条件編集ダイアログが起動します。このダイアログでは、比較に使われるフィールド、使用する比較条件、比較する固定値を選択することができます。テキストの比較には、大文字小文字を区別するか否かを表わすチェックボックスもあります。1フィールドで比較する代わりに、\"テキストフィールド\"を選択することもできます;"
+" "
+"レコード中のいずれかの文字列またはノートフィールドの値が条件を満たしていれば、そのレコードは条件を満たしていると見なされます。\"OK\"をクリックして現在表示されている設定を適用するか、キャンセルして変更前の状態のままにします（あるいは新しいフィルターの追加をキャンセルします）。"
