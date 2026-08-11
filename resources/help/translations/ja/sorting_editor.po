@@ -1,17 +1,20 @@
 # Messages from sorting_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 05:38+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +35,10 @@ msgid ""
 "groups of the same value of A sort by the content of column B, etc.  To do "
 "this or to sort by a column that isn't shown in the current view, you need "
 "to define a named sorting."
-msgstr "データ表示画面のフィールドラベルのクリックは、データベースの内容を一つのフィールドでソートする便利な方法です。しかし、時にはフィールドの組み合わせでソートしたいと思うでしょう; フィールドAの内容でソートし、フィールドAの値が等しいグループ内ではフィールドB、などというように。これをする時や、現在のビューでは表示されていないフィールドでソートするには、ソーティングを定義する必要があります。"
+msgstr ""
+"データ表示画面のフィールドラベルのクリックは、データベースの内容を一つのフィールドでソートする便利な方法です。しかし、時にはフィールドの組み合わせでソートしたいと思うでしょう;"
+" "
+"フィールドAの内容でソートし、フィールドAの値が等しいグループ内ではフィールドB、などというように。これをする時や、現在のビューでは表示されていないフィールドでソートするには、ソーティングを定義する必要があります。"
 
 # 9b9f07d708524bebb23f258fa8873103
 #: ../../sorting_editor.txt:8
@@ -52,4 +58,9 @@ msgid ""
 " column are sorted by the next highest checked column, etc.  Click "
 "\"OK\"/\"Done\" to accept the currently shown settings or cancel out of the "
 "dialog to revert to the previous values (or to cancel adding a new sorting)."
-msgstr "ソーティングは、\\ :ref:`ビュー編集画面 <view_editor>`\\ に非常によく似たソーティング編集ダイアログで定義されます。ダイアログの先頭はこのソーティングの名前を含むテキストボックスです: これを変更するとこのソーティング名が変更されます。この下にはデータベース内の全てのフィールド名が表示されている表で、それぞれの隣にはソート対象であるか否かを示すチェックボックスがあります。このチェックボックスをクリックすることで、それをソート条件のセットに加えたり、セットから削除することができます。チェックがされたセルの、表中の3番目のフィールドはソート順が\"昇順\"か\"降順\"と表示されています; 逆にするにはこの表示をクリックします。表中で選択されている行を上下に動かす\"上げる\"と\"下げる\"のボタンもあり、ソートでこのフィールドが使われる順番を変更できます。チェックされたフィールドの内最上段にあるものでまずソートされ、このフィールドが同じ値のレコードはチェックされたフィールドの内、次に高い位置にあるもので、というふうにソートされます。\"OK\"をクリックして現在表示されている設定を適用するか、キャンセルして元の値に戻します（あるいは新しいソーティングの追加をキャンセルします）。"
+msgstr ""
+"ソーティングは、\\ :ref:`ビュー編集画面 <view_editor>`\\ "
+"に非常によく似たソーティング編集ダイアログで定義されます。ダイアログの先頭はこのソーティングの名前を含むテキストボックスです: "
+"これを変更するとこのソーティング名が変更されます。この下にはデータベース内の全てのフィールド名が表示されている表で、それぞれの隣にはソート対象であるか否かを示すチェックボックスがあります。このチェックボックスをクリックすることで、それをソート条件のセットに加えたり、セットから削除することができます。チェックがされたセルの、表中の3番目のフィールドはソート順が\"昇順\"か\"降順\"と表示されています;"
+" "
+"逆にするにはこの表示をクリックします。表中で選択されている行を上下に動かす\"上げる\"と\"下げる\"のボタンもあり、ソートでこのフィールドが使われる順番を変更できます。チェックされたフィールドの内最上段にあるものでまずソートされ、このフィールドが同じ値のレコードはチェックされたフィールドの内、次に高い位置にあるもので、というふうにソートされます。\"OK\"をクリックして現在表示されている設定を適用するか、キャンセルして元の値に戻します（あるいは新しいソーティングの追加をキャンセルします）。"

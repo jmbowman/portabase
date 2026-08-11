@@ -1,17 +1,20 @@
 # Messages from introduction.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2013-11-19 16:27+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,7 +32,8 @@ msgid ""
 "PortaBase is a small database program for creating, browsing, and editing "
 "custom tables of data.  Typical uses are media inventories, reference "
 "charts, TODO lists, shopping lists, etc.  Notable features include:"
-msgstr "PortaBaseは自分でテーブルを設定し、作成し、表示し、編集することのできる小さなデータベースプログラムです。一般的な用途はメディア一覧、リファレンスチャート、TODOリスト、買い物リスト、などなどです。以下のような機能があります:"
+msgstr ""
+"PortaBaseは自分でテーブルを設定し、作成し、表示し、編集することのできる小さなデータベースプログラムです。一般的な用途はメディア一覧、リファレンスチャート、TODOリスト、買い物リスト、などなどです。以下のような機能があります:"
 
 # 8f9f1193b22d4850b6573ee9980761b6
 #: ../../introduction.txt:8
@@ -97,7 +101,8 @@ msgstr "CSV、HTML、XMLへのデータエクスポート。"
 msgid ""
 "Command-line format conversions (to and from XML, to and from CSV, from "
 "MobileDB, to HTML)"
-msgstr "コマンドラインでの形式変換（XMLとPortaBaseファイルの相互変換、CSVとPortaBaseファイルの相互変換、MobileDBからPortaBaseファイルへの変換、PortaBaseからHTMLファイルへの変換）。"
+msgstr ""
+"コマンドラインでの形式変換（XMLとPortaBaseファイルの相互変換、CSVとPortaBaseファイルの相互変換、MobileDBからPortaBaseファイルへの変換、PortaBaseからHTMLファイルへの変換）。"
 
 # a2443ec58e824e2cb95acafb810b94fd
 #: ../../introduction.txt:32
