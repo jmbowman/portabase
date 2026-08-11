@@ -1,18 +1,20 @@
 # Messages from introduction.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
-# LSU <shinshansu@yahoo.com>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2013-11-19 16:27+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/jmbowman/teams/14599/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +32,8 @@ msgid ""
 "PortaBase is a small database program for creating, browsing, and editing "
 "custom tables of data.  Typical uses are media inventories, reference "
 "charts, TODO lists, shopping lists, etc.  Notable features include:"
-msgstr "PortaBase是一個可以用來新增、瀏覽與編輯任意資料表的小型程式。典型的使用方式包含媒體清單、參考圖表、待辦事項清單、購物清單等等。它包含下列特點："
+msgstr ""
+"PortaBase是一個可以用來新增、瀏覽與編輯任意資料表的小型程式。典型的使用方式包含媒體清單、參考圖表、待辦事項清單、購物清單等等。它包含下列特點："
 
 # 8f9f1193b22d4850b6573ee9980761b6
 #: ../../introduction.txt:8

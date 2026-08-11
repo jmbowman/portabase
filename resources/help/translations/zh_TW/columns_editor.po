@@ -1,18 +1,20 @@
 # Messages from columns_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
-# LSU <shinshansu@yahoo.com>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-20 04:12+0000\n"
-"Last-Translator: LSU <shinshansu@yahoo.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/jmbowman/portabase/language/zh_TW/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/jmbowman/teams/14599/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +37,11 @@ msgid ""
 "dialog by selecting the \"Edit Columns\" menu item (in the :ref:`data viewer"
 " <data_viewer>`, under the \"File\" menu except on Maemo where the menus are"
 " flattened)."
-msgstr "每一個在PortaBase 內的檔案都含有使用考設定的表格式。這些表格式是一連續的數據欄位來決定，每一個格式都有它自己的名稱，數據類型，和默認值。每當建立一個新的PortaBase 檔案，這對話器就會顯示讓你可以設定你的數據欄位表。巳經存在的數據欄位任何時間都可以用此對話器來修訂只要點擊選項裡的 \"編輯欄位\" 即可（在:ref:'數據流灠器＜data_viewer>', 在\"檔案\"項目下面）"
+msgstr ""
+"每一個在PortaBase "
+"內的檔案都含有使用考設定的表格式。這些表格式是一連續的數據欄位來決定，每一個格式都有它自己的名稱，數據類型，和默認值。每當建立一個新的PortaBase"
+" 檔案，這對話器就會顯示讓你可以設定你的數據欄位表。巳經存在的數據欄位任何時間都可以用此對話器來修訂只要點擊選項裡的 \"編輯欄位\" "
+"即可（在:ref:'數據流灠器＜data_viewer>', 在\"檔案\"項目下面）"
 
 # 03a7c33339fd423f9d6863497e9e6d05
 #: ../../columns_editor.txt:8
@@ -43,7 +49,9 @@ msgid ""
 "The current column definitions are displayed as rows in a list, in the order"
 " in which they appear in the :ref:`row editor <row_editor>`.  These column "
 "definitions are manipulated using the buttons in the dialog:"
-msgstr "欄位的定義會依照他們在\\ :ref:`列編輯器 <row_editor>`\\ 中的順序排列成一個清單。這些欄位的定義可利用此對話盒底部的按鈕來加以處理："
+msgstr ""
+"欄位的定義會依照他們在\\ :ref:`列編輯器 <row_editor>`\\ "
+"中的順序排列成一個清單。這些欄位的定義可利用此對話盒底部的按鈕來加以處理："
 
 # 69bd093ac9a84b409b42e545f929684c
 #: ../../columns_editor.txt:11
@@ -60,7 +68,10 @@ msgid ""
 "to add one.)  The default value is what will be entered for this column in "
 "any already existing data rows, and it will appear in the row editor when "
 "adding new rows as well."
-msgstr "在清單尾建立一個新的欄位定義。你可以使用出現的對話盒來輸入新欄位的名稱、資料型別與預設值。(如果你在型別設定選擇\"(新集合)\"，則你可以使用\\ :ref:`集合編輯器 <enum_editor>`\\ 來新增一個集合。) 所有已存在的資料列會自動將此欄位的預設值設定為欄位的內容。同時在列編輯器中新增資料時，預設值會出現在此欄位中。"
+msgstr ""
+"在清單尾建立一個新的欄位定義。你可以使用出現的對話盒來輸入新欄位的名稱、資料型別與預設值。(如果你在型別設定選擇\"(新集合)\"，則你可以使用\\ "
+":ref:`集合編輯器 <enum_editor>`\\ 來新增一個集合。) "
+"所有已存在的資料列會自動將此欄位的預設值設定為欄位的內容。同時在列編輯器中新增資料時，預設值會出現在此欄位中。"
 
 # 9754b7418b504863835965439af12933
 #: ../../columns_editor.txt:14
@@ -120,4 +131,7 @@ msgid ""
 " it was.  If the dialog is cancelled while defining the columns of a new "
 "file, the file creation is aborted; otherwise, exiting the dialog takes you "
 "to the :ref:`data viewer <data_viewer>`."
-msgstr "沒有任何格式表的修改會被應用上直到你點擊\"OK\" 按鈕（在Maemo 系統上是\"Done\"); 如果對話器登出是因為被取消，則所有改變將被丟棄且檔案格式將維持如未被修改前。如果對話被取消時你正在給新檔案設定欄位格式時，則新檔建立將被中止；否則，登出對話將帶你到數據流灠處 :ref:'數據流灠器＜data_viewer>'."
+msgstr ""
+"沒有任何格式表的修改會被應用上直到你點擊\"OK\" 按鈕（在Maemo 系統上是\"Done\"); "
+"如果對話器登出是因為被取消，則所有改變將被丟棄且檔案格式將維持如未被修改前。如果對話被取消時你正在給新檔案設定欄位格式時，則新檔建立將被中止；否則，登出對話將帶你到數據流灠處"
+" :ref:'數據流灠器＜data_viewer>'."
