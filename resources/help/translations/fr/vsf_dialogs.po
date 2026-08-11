@@ -1,22 +1,25 @@
 # Messages from vsf_dialogs.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# a270031086f2a0d3514bc0cb507b48f6, 2019
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2019-06-15 14:27+0000\n"
-"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # ccaddbbf363a4735b4101b24b9cf65a4
 #: ../../vsf_dialogs.txt:4
@@ -30,7 +33,11 @@ msgid ""
 "manage views, sortings, and filters.  These three dialogs are very similar, "
 "differing only in the type of item being managed.  Each one has the "
 "following components:"
-msgstr "La barre d'outils comporte trois boutons permettant de lancer des boîtes de dialogue permettant de sélectionner et de gérer des vues, des tris et des filtres. Ces trois boîtes de dialogue sont très similaires et ne diffèrent que par le type d'élément géré. Chacun a les composants suivants:"
+msgstr ""
+"La barre d'outils comporte trois boutons permettant de lancer des boîtes de "
+"dialogue permettant de sélectionner et de gérer des vues, des tris et des "
+"filtres. Ces trois boîtes de dialogue sont très similaires et ne diffèrent "
+"que par le type d'élément géré. Chacun a les composants suivants:"
 
 # b2177df15f354b5cb11dd5603efc1f1a
 #: ../../vsf_dialogs.txt:9
@@ -43,7 +50,11 @@ msgid ""
 "The name of the currently selected item.  If this is one of the pre-defined "
 "items such as \"All Columns\", \"Selected Column\", \"All Rows\", or \"Quick"
 " Filter\", the edit and delete buttons are disabled."
-msgstr "Le nom de l'élément actuellement sélectionné. S'il s'agit de l'un des éléments prédéfinis tels que \"Toutes les colonnes\", \"Colonne sélectionnée\", \"Toutes les lignes\" ou \"Filtre rapide\", les boutons Modifier et Supprimer sont désactivés."
+msgstr ""
+"Le nom de l'élément actuellement sélectionné. S'il s'agit de l'un des "
+"éléments prédéfinis tels que \"Toutes les colonnes\", \"Colonne "
+"sélectionnée\", \"Toutes les lignes\" ou \"Filtre rapide\", les boutons "
+"Modifier et Supprimer sont désactivés."
 
 # 0c04214346fc4438ab1933bfbdc6e004
 #: ../../vsf_dialogs.txt:12
@@ -58,7 +69,13 @@ msgid ""
 ":ref:`filter editor <filter_editor>` to modify the currently selected item."
 "  If the edit dialog is accepted, the changes will be immediately applied "
 "and you will be returned to the :ref:`data viewer <data_viewer>`."
-msgstr "Ce bouton, à droite du nom de l'élément sélectionné, lance l'éditeur de vues: ref: ` <view_editor>`, : ref: `éditeur de tri<sorting_editor>`, ou: ref: `éditeur de filtres <filter_editor>` pour modifier l'élément actuellement sélectionné. Si la boîte de dialogue d'édition est acceptée, les modifications seront immédiatement appliquées et vous serez renvoyé à la visionneuse de données: ref: ` <data_viewer>`."
+msgstr ""
+"Ce bouton, à droite du nom de l'élément sélectionné, lance l'éditeur de "
+"vues: ref: ` <view_editor>`, : ref: `éditeur de tri<sorting_editor>`, ou: "
+"ref: `éditeur de filtres <filter_editor>` pour modifier l'élément "
+"actuellement sélectionné. Si la boîte de dialogue d'édition est acceptée, "
+"les modifications seront immédiatement appliquées et vous serez renvoyé à la"
+" visionneuse de données: ref: ` <data_viewer>`."
 
 # bddfa00b33be42f2a6f543269b172328
 #: ../../vsf_dialogs.txt:15
@@ -72,7 +89,12 @@ msgid ""
 "item.  You will be returned to the data viewer with the default item of that"
 " type selected and applied (there is no default sorting, so after deleting a"
 " sorting the rows will not be sorted)."
-msgstr "Ce bouton, à droite du bouton Modifier, supprime l’élément actuellement sélectionné. Vous serez renvoyé à la visionneuse de données avec l'élément par défaut de ce type sélectionné et appliqué (il n'y a pas de tri par défaut; ainsi, après la suppression d'un tri, les lignes ne seront pas triées)."
+msgstr ""
+"Ce bouton, à droite du bouton Modifier, supprime l’élément actuellement "
+"sélectionné. Vous serez renvoyé à la visionneuse de données avec l'élément "
+"par défaut de ce type sélectionné et appliqué (il n'y a pas de tri par "
+"défaut; ainsi, après la suppression d'un tri, les lignes ne seront pas "
+"triées)."
 
 # 76727b33e7c0488c9f1530f8686273a6
 #: ../../vsf_dialogs.txt:18
@@ -86,7 +108,11 @@ msgid ""
 "view editor, sorting editor, or filter editor in order to create a new item "
 "of the appropriate type.  If such an item is created, it will be set as "
 "current and you will be returned to the data viewer."
-msgstr "Ce bouton, sous le nom de l'élément actuellement sélectionné, lance l'éditeur de vues, l'éditeur de tri ou l'éditeur de filtres afin de créer un nouvel élément du type approprié. Si un tel élément est créé, il sera défini comme courant et vous serez renvoyé à la visionneuse de données."
+msgstr ""
+"Ce bouton, sous le nom de l'élément actuellement sélectionné, lance "
+"l'éditeur de vues, l'éditeur de tri ou l'éditeur de filtres afin de créer un"
+" nouvel élément du type approprié. Si un tel élément est créé, il sera "
+"défini comme courant et vous serez renvoyé à la visionneuse de données."
 
 # 3bc49ccd2e404855a52598acfce45822
 #: ../../vsf_dialogs.txt:20
@@ -100,4 +126,9 @@ msgid ""
 "appropriate type.  Clicking on one of these will apply it and return you to "
 "the data viewer.  If you wish to edit or delete the item, you can then "
 "launch this dialog again to do so."
-msgstr "Sous le bouton \"Nouveau ...\" se trouve une liste des éléments existants du type approprié. En cliquant sur l'un d'eux, vous l'appliquez et vous revenez à la visionneuse de données. Si vous souhaitez modifier ou supprimer l'élément, vous pouvez alors ouvrir à nouveau cette boîte de dialogue pour le faire."
+msgstr ""
+"Sous le bouton \"Nouveau ...\" se trouve une liste des éléments existants du"
+" type approprié. En cliquant sur l'un d'eux, vous l'appliquez et vous "
+"revenez à la visionneuse de données. Si vous souhaitez modifier ou supprimer"
+" l'élément, vous pouvez alors ouvrir à nouveau cette boîte de dialogue pour "
+"le faire."
