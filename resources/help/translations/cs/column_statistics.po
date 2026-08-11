@@ -1,22 +1,25 @@
 # Messages from column_statistics.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-23 15:33+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 67aaee6df4df4319a347e05a82e24189
 #: ../../column_statistics.txt:4
@@ -36,4 +39,14 @@ msgid ""
 "pixels) of that column in the current view.  If you close the dialog by "
 "clicking \"OK\"/\"Done\", any changes you made to the column widths will be "
 "applied."
-msgstr "Dialog \"Statistika sloupce\", který lze otevřít z dialogu vlastností souboru či dlouhým stiskem na záhlaví sloupce, zobrazuje sumární statistické údaje o datech v daném sloupci.  Pro výpočet těchto údajů se použijí jen data záznamů, které vyhovují aktuálnímu filtru.  Byl-li dialog \"Statistika sloupce\" otevřen z dialogu vlastností souboru, rozbalovací seznam v horní části dialogu umožňuje výběr sloupce, jehož statistiku chcete zobrazit; vybírat lze jen ze sloupců aktuálního náhledu.  V dolní části dialogu je pomůcka umožňující změnit šířku zobrazení daného sloupce v aktuálním náhledu (v pixelech).  Provedené změny šířky sloupce budou použity, jakmile zavřete dialog pomocí \"OK\"/\"Done\"."
+msgstr ""
+"Dialog \"Statistika sloupce\", který lze otevřít z dialogu vlastností "
+"souboru či dlouhým stiskem na záhlaví sloupce, zobrazuje sumární statistické"
+" údaje o datech v daném sloupci.  Pro výpočet těchto údajů se použijí jen "
+"data záznamů, které vyhovují aktuálnímu filtru.  Byl-li dialog \"Statistika "
+"sloupce\" otevřen z dialogu vlastností souboru, rozbalovací seznam v horní "
+"části dialogu umožňuje výběr sloupce, jehož statistiku chcete zobrazit; "
+"vybírat lze jen ze sloupců aktuálního náhledu.  V dolní části dialogu je "
+"pomůcka umožňující změnit šířku zobrazení daného sloupce v aktuálním náhledu"
+" (v pixelech).  Provedené změny šířky sloupce budou použity, jakmile zavřete"
+" dialog pomocí \"OK\"/\"Done\"."

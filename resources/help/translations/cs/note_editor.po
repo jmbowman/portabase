@@ -1,22 +1,25 @@
 # Messages from note_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 08:23+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 5da0d4765da34656a662a8b41095b9ad
 #: ../../note_editor.txt:4
@@ -37,7 +40,18 @@ msgid ""
 "showing the current text of the Note.  Click \"OK\"/\"Done\" to accept any "
 "changes you have made, or cancel out of the dialog to revert to the original"
 " content."
-msgstr "Sloupec typu poznámka je určen zejména pro víceřádkové bloky textu (na rozdíl od sloupce typu řetězec, který je vhodnější pro relativně krátký jednořádkový text). Rozsáhlejší obsah takovéhoto sloupce si zasluhuje vlastní (velmi jednoduchý) dialog. V Editoru záznamů, stejně jako při definování výchozí hodnoty v Editoru sloupců, je hodnota poznámky zobrazena jako tlačítko s ikonou uvozující začátek textu poznámky (kolik jej lze na tlačítku zobrazit). Chcete-li obsah poznámky zobrazit celý nebo chcete-li jej změnit, stiskněte toto tlačítko; objeví se dialog textového editoru zobrazující aktuální obsah poznámky. Klepnutím na tlačítko \"OK\" potvrdíte provedené změny, volbou \"Zrušit\" či křížkem pro uzavření dialogu se vrátíte k původnímu obsahu."
+msgstr ""
+"Sloupec typu poznámka je určen zejména pro víceřádkové bloky textu (na "
+"rozdíl od sloupce typu řetězec, který je vhodnější pro relativně krátký "
+"jednořádkový text). Rozsáhlejší obsah takovéhoto sloupce si zasluhuje "
+"vlastní (velmi jednoduchý) dialog. V Editoru záznamů, stejně jako při "
+"definování výchozí hodnoty v Editoru sloupců, je hodnota poznámky zobrazena "
+"jako tlačítko s ikonou uvozující začátek textu poznámky (kolik jej lze na "
+"tlačítku zobrazit). Chcete-li obsah poznámky zobrazit celý nebo chcete-li "
+"jej změnit, stiskněte toto tlačítko; objeví se dialog textového editoru "
+"zobrazující aktuální obsah poznámky. Klepnutím na tlačítko \"OK\" potvrdíte "
+"provedené změny, volbou \"Zrušit\" či křížkem pro uzavření dialogu se "
+"vrátíte k původnímu obsahu."
 
 # aa91512a347441b7964357bbcd754c9f
 #: ../../note_editor.txt:8
@@ -49,4 +63,12 @@ msgid ""
 "these cells and hold for 1/2 second or longer before releasing, a read-only "
 "version of the Note editor is shown.  Either click \"OK\"/\"Done\" or cancel"
 " out of the dialog to return to the data viewer."
-msgstr "Sloupce typu poznámka se chovají trochu odlišně také v Prohlížeči dat. Jméno sloupce typu poznámka je vždy uvozeno ikonou poznámky upozorňující, že nejde o sloupec obsahující běžný řetězec. U každé buňky sloupce typu poznámka je vidět z obsahu poznámky tolik textu, kolik je z prostorových důvodů možné zobrazit. Stisknete-li v Prohlížeči dat takovouto buňku alespoň půl sekundy, po uvolnění se zobrazí celý text poznámky (bez možnosti editace). Klepnutím na tlačítko \"OK\" či křížek pro uzavření dialogu se vrátíte zpět do Prohlížeče dat."
+msgstr ""
+"Sloupce typu poznámka se chovají trochu odlišně také v Prohlížeči dat. Jméno"
+" sloupce typu poznámka je vždy uvozeno ikonou poznámky upozorňující, že "
+"nejde o sloupec obsahující běžný řetězec. U každé buňky sloupce typu "
+"poznámka je vidět z obsahu poznámky tolik textu, kolik je z prostorových "
+"důvodů možné zobrazit. Stisknete-li v Prohlížeči dat takovouto buňku alespoň"
+" půl sekundy, po uvolnění se zobrazí celý text poznámky (bez možnosti "
+"editace). Klepnutím na tlačítko \"OK\" či křížek pro uzavření dialogu se "
+"vrátíte zpět do Prohlížeče dat."
