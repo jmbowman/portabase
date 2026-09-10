@@ -1,20 +1,31 @@
 schema_version: 2
-last_updated: 2026-07-10
+last_updated: 2026-07-18
 
 taxonomy:
   data-model: standalone
 
 arrows:
   column-editing:
-    status: MAPPED
+    status: OK
     parent: null
     sampled: 2026-07-10
-    audited: null
-    audited_sha: null
+    audited: 2026-07-18
+    audited_sha: 8683673866cb20411b1836f5f52c3a5be593538b
     blocks: []
     blockedBy: []
     detail: column-editing.md
-    next: "Root-cause the add-column crash (COL-DB-007) -- needs a real crashing file, no synthetic fixture has reproduced it yet"
+    next: "All COL-UI/COL-DB specs implemented and covered by tests. Residual (not spec gaps): PortaBase::editColumns display branch is un-spec'd GUI refresh, verify by eye; ViewDisplay/DataModel widget layer untested. Future: row-ID robustness (gap origin -- suspect calc-field handling; deleteRow/load maxId) as a new segment, and the broader row index/ID audit"
+    drift: null
+  integrity-check:
+    status: OK
+    parent: null
+    sampled: 2026-07-13
+    audited: 2026-07-18
+    audited_sha: 8683673866cb20411b1836f5f52c3a5be593538b
+    blocks: []
+    blockedBy: []
+    detail: integrity-check.md
+    next: "check subcommand shipped in the portabase CLI; all CHK specs implemented and tested (CHK-CLI-001 now driven end-to-end via a subprocess test). Only CHK-CORE-009 (encrypted contents) deferred. Possible next: in-app surface, or -p support for encrypted files"
     drift: null
 
 unmapped: {}

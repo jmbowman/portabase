@@ -1,0 +1,28 @@
+# rumdl config. Auto-discovered from the repo root by `rumdl check`.
+#
+# rumdl owns the general-purpose Markdown rules; mdbook-lint runs separately for
+# the book-structure checks nothing else does. See docs/wiki/markdown-linting.md
+# for which tool owns what, and why a rule disabled in one is not disabled here.
+
+[global]
+# Same scope as the mdbook-lint task: skips the LID design tree (docs/intent/,
+# docs/arrows/, docs/high-level-design.md), which follows LID's conventions.
+include = [
+    "docs/SUMMARY.md",
+    "docs/reference-repos.md",
+    "docs/wiki/**/*.md",
+]
+
+disable = [
+    "MD013", # Line length -- this project's docs run long, dense lines by convention
+    "MD064", # Multiple consecutive spaces -- two spaces after a sentence is house style
+]
+
+# Result caching is keyed on the linted file alone, but MD051/MD057 also stat
+# link targets, so adding or removing a linked asset leaves a stale verdict.
+# See docs/wiki/rumdl-bugs.md #1.
+cache = false
+
+[per-file-ignores]
+# mdBook uses repeated level-1 headings in SUMMARY.md as part dividers.
+"docs/SUMMARY.md" = ["MD025"]

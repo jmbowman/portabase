@@ -1,12 +1,30 @@
 # mdbook-lint config for docs/. Not auto-discovered by the standalone CLI --
 # the `mdbook-lint` mise task passes it explicitly via -c.
+#
+# This file scopes mdbook-lint ONLY. rumdl runs as a separate pass and is not
+# affected by anything here; see docs/wiki/markdown-linting.md for which tool
+# owns what. Note both tools implement some of the same markdownlint rule IDs,
+# so an ID disabled below may still be checked -- by rumdl's implementation of
+# it, which is the point.
 
 disabled-rules = [
+    # -- Not wanted from either tool: correct content that these rules misjudge --
     "MD013",      # Line length -- this project's docs run long, dense lines by convention
     "CONTENT001", # "BUG" text found -- several pages exist specifically to document real bugs
-    "CONTENT011", # Future tense -- correct usage in roadmap.md and other forward-looking sections
+    "CONTENT002", # Placeholder text -- keyword scanner, fires on the word "placeholder" in prose
+                  # (see docs/wiki/mdbook-lint-bugs.md #3a)
     "CONTENT003", # Short chapter -- fires on SUMMARY.md, which is structure, not prose; adding
                   # body text to satisfy it risks breaking mdBook's strict SUMMARY.md parser
+    "CONTENT011", # Future tense -- correct usage in roadmap.md and other forward-looking sections
     "MDBOOK010",  # Inline math block -- counts raw $ chars document-wide, not code-span-aware
                   # (see docs/wiki/mdbook-lint-bugs.md #5); we don't write math, not worth it
+
+    # -- Checked by rumdl instead: mdbook-lint's implementation false-positives here --
+    "MD044",      # Proper-name capitalization -- flags tool names like "html-to-markdown"
+    "MD049",      # Emphasis style -- misreads the escaped underscores (\_cindex) that HTML
+                  # conversion leaves in tables as emphasis
+    "CONTENT004", # Heading capitalization -- locks a document's style from its first ambiguous
+                  # heading (see docs/wiki/mdbook-lint-bugs.md #3); rumdl's MD063 replaces it
+    "CONTENT006", # Broken internal link -- not code-span-aware; rumdl's MD057 replaces it
+    "CONTENT010", # Generic link text -- not code-span-aware; rumdl's MD059 replaces it
 ]

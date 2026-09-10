@@ -12,6 +12,27 @@ Portable tabular database application, C++ / Qt (currently Qt 5.15, QWidgets), ~
 
 Check these before doing independent research on project history or direction — the maintainer has often already thought through and documented the "why."
 
+## Comments & explanations
+
+Keep comments in code/config brief — a pointer, not the explanation. When something needs real justification (why this tool version, why this workaround, why this tradeoff), put it in `docs/wiki/` (or a Decision doc under `docs/decisions/` for a contested choice worth recording alternatives for) and reference it by path from a one-line comment. See `docs/wiki/cppcheck-bugs.md` plus its one-line pointer in `.github/workflows/build.yml` for the pattern.
+
+## Copyright headers
+
+Every `.cpp`/`.h` file — application **and** tests — opens with the project's copyright + license header: a leading `/* */` block naming the file, then `(c) <years> by Jeremy Bowman <jmbowman@alum.mit.edu>`, then the GPL-v2-or-later summary (copy the block verbatim from any existing `src/` file). The years are the years the file was actually touched: a **new** file gets the current year; an **edited** file gains the current year appended to its list, collapsing consecutive years into ranges (e.g. `2015-2017,2026`). Maintain this on every create/update — it is easy to forget, especially on test files, which need the header just as much as `src/`. Application source follows the license block with a `/** @file … */` doxygen block; tests need only the license block (no doxygen, and don't repeat the filename in the description comment below it).
+
+## Docstrings
+
+Document with Doxygen `/** … */` blocks, following the existing layout:
+- **Methods**: a full block (with `@param`/`@return`) on the *definition* in the `.cpp`, for every method including trivial accessors — **never** on the `.h` declaration.
+- **Headers (`.h`)**: type-level docs only — a `/** … */` on each class/struct/enum, and a trailing `/**< … */` on each enum value and data member. The declarations themselves stay bare.
+- **`@spec` annotations** (LID) go at the implementation entry point — the `.cpp` definition — not the `.h` declaration.
+
+Test code follows the same rules — including the `.h`-bare/`.cpp`-documented split for the free-function helpers in `tests/common/` — plus one addition: every `QTest` private slot gets a short doc block describing the scenario it sets up and what it asserts, except `initTestCase()` and the `_data()` half of a table-driven pair (document the pair once, on whichever of the two reads better).
+
+## Changelog (`CHANGES`)
+
+The maintainer curates `CHANGES` by hand — don't add or edit entries unless asked. When you are asked, match the existing format: a header line `YYYY-MM-DD  INITIALS  short summary` (two spaces between each field; `INITIALS` is the author's, e.g. `JMB`), a blank line, then a 4-space-indented body — either `* ` bullets or a short prose paragraph — wrapped at ~72 columns. Keep each item a terse, past-tense line; lead with changes that matter to end users, and include only the *major* changes relevant to other developers. No explanations of deferred or future work.
+
 ## Build system
 
 qmake-based, not CMake (except for the vendored `metakit/` library). Typical local build:
@@ -39,6 +60,8 @@ Tool versions are pinned via `mise` (`mise.toml`/`mise.lock`) — run `mise inst
 
 `prek` hooks (defined in `prek.toml`) regenerate help translation templates when `resources/help/` changes, and lint `docs/` (excluding the LID design tree) when relevant doc files change; enforced both locally (`mise run install-hooks`) and in CI (`pre-commit` job in `build.yml`).
 
+Python tooling scripts (e.g. `packaging/lint_cpp.py`) use `uv` with PEP 723 inline script dependencies, not manual `pip install`. `uv` itself is deliberately *not* mise-managed — it's expected to already be globally available on a dev machine; CI provisions it via the `astral-sh/setup-uv` action in `build.yml`.
+
 **`.issues/`** is a gitignored, offline mirror of this repo's GitHub issues/PRs (including comments) for agent context, refreshed via `mise run issues-sync`. It uses `gh2md`, authenticated via a `GITHUB_ACCESS_TOKEN` env var or a token file (`~/.config/gh2md/token`/`~/.github-token`) that the maintainer manages outside of any Claude Code session. **Do not read, cat, echo, or otherwise access that token, its env var, or its file from an agent session** — refreshing `.issues/` is the maintainer's manual step.
 
 Claude Code skills/commands/MCP dependencies sourced from third-party repos (like the LID plugins below) are declared in `apm.yml`/`apm.lock.yaml` and installed via `mise exec -- apm install` — see `docs/wiki/agentic-development-support.md` for details, including the gotcha where plain `owner/repo` silently no-ops for monorepo plugins (needs `owner/repo/path/to/plugin#ref`).
@@ -57,16 +80,23 @@ There's a known crash bug applying schema changes to an existing database from t
 
 ## LID Scope
 
-Piloted on the column-editing subsystem only; not yet adopted project-wide.
+Piloted on the Edit Columns operation (end-to-end, as the user experiences it) and the data-integrity-check feature; not yet adopted project-wide.
 
 Paths in scope:
-- `src/dbeditor.cpp`
-- `src/dbeditor.h`
-- `src/database.cpp` (schema-mutation methods only: `setIndex`, `setDefault`, `addColumn`, `deleteColumn`, `renameColumn`, `updateDataFormat`, `addViewColumn` — not the whole 2696-line file)
+- `src/dbeditor.cpp`, `src/dbeditor.h`
+- `src/columneditor.cpp`, `src/columneditor.h`
+- `src/portabase.cpp` (`PortaBase::editColumns` only — not the rest of the file)
+- `src/database.cpp` (schema-mutation methods: `setIndex`, `setDefault`, `addColumn`, `deleteColumn`, `renameColumn`, `updateDataFormat`; the view-maintenance methods the Edit Columns operation drives: `addViewColumn`, `deleteViewColumn`, `setViewColumnSequence`, `reconcileAllView`, `getView`, `listColumns`, `formatString`; and the calculated-column recalculation the operation triggers on accept: `calculateAll`, `getRow` — not the whole 2696-line file)
 - `src/database.h` (declarations for the above)
+- `src/integritycheck.cpp`, `src/integritycheck.h` (data-integrity checker core)
+- `src/commandline.cpp`, `src/commandline.h` (the `check` subcommand only — not the rest of the CLI)
+- `src/main.cpp` (the CLI-dispatch condition only — routing `check` to the command-line interface)
+- `tests/dbeditor/`, `tests/dbeditor_robustness/`, `tests/integritycheck/`
 
 Paths explicitly excluded:
-- everything else in `src/database.cpp`/`.h` outside the schema-mutation methods listed above
+- everything else in `src/database.cpp`/`.h` outside the methods listed above
+- everything else in `src/commandline.cpp` outside the `check` subcommand
+- everything else in `src/portabase.cpp` outside `PortaBase::editColumns`
 
 ## Linked-Intent Development (MANDATORY, within scope above)
 

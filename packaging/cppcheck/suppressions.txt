@@ -14,3 +14,14 @@ unusedFunction:src/xmlimport.cpp
 
 // QtTest private slots invoked via meta-object reflection, not called directly
 unusedFunction:tests/dbeditor/dbeditor_test.cpp
+unusedFunction:tests/dbeditor_robustness/dbeditor_robustness_test.cpp
+unusedFunction:tests/integritycheck/integritycheck_test.cpp
+
+// Shared test fixture builders, called from the suites above
+unusedFunction:tests/common/testfixtures.cpp
+
+// Qt's own macro, not visible to cppcheck without a full Qt configuration
+unknownMacro:tests/dbeditor_robustness/dbeditor_robustness_test.cpp
+
+// Vendored Metakit, patched but not ours to restructure
+danglingLifetime:metakit/include/mk4.inl

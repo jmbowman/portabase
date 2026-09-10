@@ -19,7 +19,6 @@ Issues and inconsistencies noticed while piloting LID (`jszmajda/lid`, installed
 - **But:** `lld-templates.md` (which `SKILL.md` itself cites as "the standard LLD template") is explicit and detailed: "Every node is a **directory** under `/docs/intent/`... A leaf LLD `foo` is `docs/intent/foo/foo-design.md`, with its EARS beside it as `foo-specs.md`" — a directory-per-node convention, not a flat file.
 - **Also inconsistent with:** `SKILL.md` Phase 5, item 3 itself, which says the EARS spec file goes "beside the segment's design doc" inside `docs/intent/<segment-path>/` — which only makes sense if the design doc is *inside* that same directory, not a sibling flat file one level up.
 - **Resolution used for this pilot:** Trusted `lld-templates.md`'s directory convention (`docs/intent/column-editing/column-editing-design.md`) since it's the more detailed, explicit, and internally consistent source, and because it's needed anyway to support sub-HLD promotion (nodes must be directories to hold children later).
-
 - **Suggested fix:** Update `SKILL.md` Phase 5 item 2's wording to match `lld-templates.md`'s directory convention.
 
 ### 3. `index.yaml` Example in `brownfield-bootstrap.md` Uses a Stale Schema Version

@@ -1,7 +1,7 @@
 /*
  * database.h
  *
- * (c) 2002-2004,2008-2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,6 @@
 #include <QPixmap>
 #include <QStringList>
 #include "datatypes.h"
-
-#define FILE_VERSION 11
 
 class CSVUtils;
 class CalcNode;
@@ -90,6 +88,7 @@ public:
     void deleteViewColumn(const QString &viewName, const QString &columnName);
     void setViewColumnSequence(const QString &viewName,
                                const QStringList &colNames);
+    void reconcileAllView();
     void updateDataFormat();
     QStringList getRow(int rowId, ImageUtils *utils=0);
 

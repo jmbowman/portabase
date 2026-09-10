@@ -17,7 +17,7 @@ Claude Code also has a private, per-developer memory system (not part of this re
 
 ## Agent Skill/Plugin Dependencies: APM (Agent Package Manager)
 
-`.claude/skills/`, `.claude/commands/`, and MCP server dependencies sourced from third-party repos are declared in `apm.yml` and locked in `apm.lock.yaml` (Microsoft's [Agent Package Manager](https://microsoft.github.io/apm/), installed as a pinned `mise` tool). This replaces ad hoc `claude plugin install` — everything a contributor's agent needs is reproducible via `mise exec -- apm install`, the same "declare it in a manifest, get the same setup everywhere" pattern as `mise.toml` for CLI tools.
+`.claude/skills/`, `.claude/commands/`, and MCP server dependencies sourced from third-party repos are declared in `apm.yml` and locked in `apm.lock.yaml` (Microsoft's [Agent Package Manager](https://microsoft.github.io/apm/), installed as a pinned `mise` tool). This replaces ad hoc `claude plugin install` — everything a contributor's agent needs is reproducible via `mise exec -- apm install`, the same "declare it in a manifest, get the same tool versions installed everywhere" pattern as `mise.toml` for CLI tools.
 
 Notes for adding a dependency from a monorepo (like LID below): the shorthand `owner/repo` only works when the plugin/skill lives at the repo root. For a subdirectory, use `owner/repo/path/to/plugin#ref` (or the `git:`/`path:`/`ref:` object form in `apm.yml` directly) — plain `owner/repo` silently fetches the whole repo into `apm_modules/` without deploying anything if there's nothing deployable at the root.
 

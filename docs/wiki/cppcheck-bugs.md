@@ -1,0 +1,14 @@
+# cppcheck Bugs Encountered
+
+**Symptom:** `packaging/lint_cpp.py`'s strict cppcheck pass (`--error-exitcode=1`) failed in CI with `tests/dbeditor/dbeditor_test.cpp:NNN:NN: error: Uninitialized variable: &result [uninitvar]`, pointing at a `Database db(path, &result)` call — but the identical command against the identical commit passed locally with no findings at all.
+
+**Root cause:** a version-specific false positive, not a real bug. `Database::OpenResult result;` is declared, then its address is passed into `Database`'s constructor (`Database db(path, &result)`); the constructor writes `*result` on every code path (`Failure`/`Success`/`NewerVersion`/`Encrypted` — see `Database::Database()`, `database.cpp`) before any read. cppcheck 2.13.0 — the version Ubuntu 24.04's `apt-get install cppcheck` pulls — doesn't trace writes through a user-defined constructor's out-parameter and flags the local as read-before-init. cppcheck 2.19.0 doesn't have this limitation. The pattern recurs at every `Database::OpenResult` call site in the test file, not just one line.
+
+**Fix:** the `pre-commit` GitHub Actions job runs on `ubuntu-26.04` specifically for its newer apt cppcheck (2.19.0, vs. 24.04's 2.13.0) — see `.github/workflows/build.yml`. Two things fell out of that choice:
+
+- `ubuntu-26.04` was still a *preview* GitHub-hosted runner label as of this writing (not yet what `ubuntu-latest` resolves to), and `actionlint` (pinned via `mise.toml`) didn't recognize the label yet either — allow-listed via `.github/actionlint.yaml`'s `self-hosted-runner.labels` (the only mechanism actionlint exposes for an unrecognized runner label, even though this isn't actually self-hosted).
+- A `uninitvar:tests/dbeditor/dbeditor_test.cpp` suppression in `packaging/cppcheck/suppressions.txt` was tried first and then deliberately removed: a file-wide suppression would silently mask a real future uninitialized-variable bug anywhere in that (growing) test file. The runner-version fix addresses the actual root cause instead of papering over one symptom.
+
+**Diagnostic tip:** `packaging/lint_cpp.py`'s strict pass runs with `quiet=True` (its stdout/stderr are suppressed on the assumption that its findings are a subset of the broad pass's visible output) — an assumption this bug broke, since the version gap meant the strict pass had a finding the broad pass' local run never showed. When a hook fails with no visible cppcheck output, pull the real job log: `gh run view --log` returned empty for this repo's runs; `gh api repos/<owner>/<repo>/actions/jobs/<job_id>/logs` reliably returns the full raw log (find `<job_id>` via `gh api repos/<owner>/<repo>/actions/runs/<run_id>/jobs`).
+
+**Minimal reproduction:** any C++ constructor with an out-parameter (`T *result`) that's written unconditionally but never read before the call, invoked with an uninitialized local's address — cppcheck 2.13.0 flags it, 2.19.0 doesn't. Not specific to this project or to `Database`.

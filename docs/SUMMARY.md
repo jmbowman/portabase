@@ -3,11 +3,10 @@
 - [PortaBase Development Revival](wiki/roadmap.md)
 - [Competitive Landscape](wiki/competitive-landscape.md)
 - [Agentic Development Support](wiki/agentic-development-support.md)
-- [Agentic SDLC Wishlist](wiki/agentic_sdlc.md)
-- [LID Feedback](wiki/lid-feedback.md)
-- [mdbook-lint Bugs Encountered](wiki/mdbook-lint-bugs.md)
-- [compiledb Bugs Encountered](wiki/compiledb-bugs.md)
+- [PortaBase File Format](wiki/format.md)
+- [PortaBase XML Format](wiki/portabase_xml.md)
 - [Column-Editing Code Review Followups](wiki/dbeditor-code-review-followups.md)
+- [Integrity-Check Code Review Followups](wiki/integritycheck-code-review-followups.md)
 
 # Linked-Intent Development
 
@@ -15,6 +14,21 @@
 - [Column Editing (Arrow)](arrows/column-editing.md)
 - [Column Editing (Design)](intent/column-editing/column-editing-design.md)
 - [Column Editing (Specs)](intent/column-editing/column-editing-specs.md)
+- [Data Integrity Check (Arrow)](arrows/integrity-check.md)
+- [Data Integrity Check (Design)](intent/integrity-check/integrity-check-design.md)
+- [Data Integrity Check (Specs)](intent/integrity-check/integrity-check-specs.md)
+
+# Development Tools
+
+- [Agentic SDLC Wishlist](wiki/agentic_sdlc.md)
+- [LID Feedback](wiki/lid-feedback.md)
+- [Qt Tips](wiki/qt-tips.md)
+- [Markdown Linting](wiki/markdown-linting.md)
+- [Converting HTML to Markdown](wiki/converting-html-to-markdown.md)
+- [mdbook-lint Bugs Encountered](wiki/mdbook-lint-bugs.md)
+- [rumdl Bugs Encountered](wiki/rumdl-bugs.md)
+- [compiledb Bugs Encountered](wiki/compiledb-bugs.md)
+- [cppcheck Bugs Encountered](wiki/cppcheck-bugs.md)
 
 # Reference
 

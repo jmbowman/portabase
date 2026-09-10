@@ -1,7 +1,7 @@
 /*
  * database.cpp
  *
- * (c) 2002-2004,2008-2013,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015-2017,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -284,20 +284,28 @@ View *Database::getView(const QString &name, bool applyDefaults,
     int *widths = new int[size];
     QStringList colIds;
     QStringList stringColIds;
+    // @spec COL-DB-009
+    int count = 0;
     for (int i = 0; i < size; i++) {
         QString colName = QString::fromUtf8(vcName (cols[i]));
-        names.append(colName);
         int colIndex = columns.Find(cName [colName.toUtf8()]);
-        types[i] = cType (columns[colIndex]);
-        widths[i] = smallScreen ? vcWidth (cols[i]) : vcDeskWidth (cols[i]);
+        if (colIndex == -1) {
+            // stale reference to a column that no longer exists; omit it
+            continue;
+        }
+        names.append(colName);
+        int type = cType (columns[colIndex]);
+        types[count] = type;
+        widths[count] = smallScreen ? vcWidth (cols[i]) : vcDeskWidth (cols[i]);
         int idNum = cId (columns[colIndex]);
-        colIds.append(makeColId(idNum, types[i]));
-        if (types[i] == FLOAT || types[i] == CALC || types[i] == IMAGE) {
+        colIds.append(makeColId(idNum, type));
+        if (type == FLOAT || type == CALC || type == IMAGE) {
             stringColIds.append(makeColId(idNum, STRING));
         }
         else {
             stringColIds.append("");
         }
+        count++;
     }
     if (curView && setAsCurrent) {
         delete curView;
@@ -1785,6 +1793,35 @@ void Database::setViewColumnSequence(const QString &viewName,
 }
 
 /**
+ * Reconcile the "All Columns" view with the current column set: create it if
+ * the file lacks it, drop entries for columns that no longer exist, add
+ * entries for columns it lacks, and order the entries to match the column
+ * positions.  Keeps the mandatory "_all" view consistent with the columns
+ * even on files whose "_all" view is missing or has drifted out of sync.
+ */
+// @spec COL-DB-008
+void Database::reconcileAllView()
+{
+    QStringList finalCols = listColumns();
+    if (views.Find(vName ["_all"]) == -1) {
+        addView("_all", finalCols, "_none", "_none");
+        return;
+    }
+    const QStringList allCols = listViewColumns("_all");
+    for (const QString &name : allCols) {
+        if (!finalCols.contains(name)) {
+            deleteViewColumn("_all", name);
+        }
+    }
+    for (const QString &name : finalCols) {
+        if (!allCols.contains(name)) {
+            addViewColumn("_all", name);
+        }
+    }
+    setViewColumnSequence("_all", finalCols);
+}
+
+/**
  * List the names of all enums defined in the database, in the order in which
  * they appear in the EnumManager dialog.
  *
@@ -2237,6 +2274,7 @@ void Database::calculateAll()
  * @param root The root node of the calculation definition
  * @param decimals The number of decimal places to show for calculated values
  */
+// @spec COL-DB-010
 void Database::calculateAll(int colId, CalcNode *root, int decimals)
 {
     int size = data.GetSize();
@@ -2246,7 +2284,8 @@ void Database::calculateAll(int colId, CalcNode *root, int decimals)
     double value = 0;
     for (int i = 0; i < size; i++) {
         if (root != 0) {
-            QStringList row = getRow(i);
+            // getRow() fetches by row ID, not position index
+            QStringList row = getRow(Id (data[i]));
             value = root->value(row, colNames);
         }
         floatProp (data[i]) = value;

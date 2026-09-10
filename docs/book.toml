@@ -9,3 +9,7 @@ build-dir = "book"
 # scoped to exclude the LID design tree. Wiring it in here as a preprocessor
 # would re-lint that tree unscoped on every build, and its `error`-severity
 # findings there would hard-fail the build.
+
+[output.html]
+# Keeps table-cell images on one line (mdBook makes each image a block); see docs/custom.css
+additional-css = ["custom.css"]

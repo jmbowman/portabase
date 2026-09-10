@@ -1,0 +1,383 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+         xmlns:a="http://www.annotation.org">
+
+  <start>
+    <element name="portabase">
+      <ref name="global"/>
+      <ref name="enums"/>
+      <ref name="enumoptions"/>
+      <ref name="columns"/>
+      <ref name="views"/>
+      <ref name="viewcolumns"/>
+      <ref name="sorts"/>
+      <ref name="sortcolumns"/>
+      <ref name="filters"/>
+      <ref name="filterconditions"/>
+      <optional> <a:comment>only allowed if gversion >= 10</a:comment>
+        <ref name="calcs"/>
+        <ref name="calcnodes"/>
+      </optional>
+      <ref name="data"/>
+    </element>
+  </start>
+
+  <define name="global">
+    <element name="global">
+      <element name="gversion">
+        <data type="integer">
+          <param name="minInclusive">7</param>
+        </data>
+      </element>
+      <element name="gview">
+        <text/>
+      </element>
+      <element name="gsort">
+        <text/>
+      </element>
+      <element name="gfilter">
+        <text/>
+      </element>
+    </element>
+  </define>
+
+  <define name="columns">
+    <element name="columns">
+      <oneOrMore>
+        <element name="column">
+          <element name="cindex">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="cname">
+            <text/>
+          </element>
+          <element name="ctype">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="cdefault">
+            <text/>
+          </element>
+          <element name="cid">
+            <data type="nonNegativeInteger"/>
+          </element>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="views">
+    <element name="views">
+      <oneOrMore>
+        <element name="view">
+          <element name="vname">
+            <text/>
+          </element>
+          <element name="vrpp">
+            <data type="positiveInteger"/>
+          </element>
+          <element name="vdeskrpp">
+            <data type="positiveInteger"/>
+          </element>
+          <optional> <a:comment>only allowed if gversion >= 8</a:comment>
+            <element name="vsort">
+              <text/>
+            </element>
+            <element name="vfilter">
+              <text/>
+            </element>
+          </optional>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="viewcolumns">
+    <element name="viewcolumns">
+      <oneOrMore>
+        <element name="viewcolumn">
+          <element name="vcview">
+            <text/>
+          </element>
+          <element name="vcindex">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="vcname">
+            <text/>
+          </element>
+          <element name="vcwidth">
+            <data type="positiveInteger"/>
+          </element>
+          <element name="vcdeskwidth">
+            <data type="positiveInteger"/>
+          </element>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="sorts">
+    <element name="sorts">
+      <zeroOrMore>
+        <element name="sort">
+          <element name="sname">
+            <text/>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="sortcolumns">
+    <element name="sortcolumns">
+      <zeroOrMore>
+        <element name="sortcolumn">
+          <element name="scsort">
+            <text/>
+          </element>
+          <element name="scindex">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="scname">
+            <text/>
+          </element>
+          <element name="scdesc">
+            <choice>
+              <value>0</value>
+              <value>1</value>
+            </choice>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="filters">
+    <element name="filters">
+      <oneOrMore>
+        <element name="filter">
+          <element name="fname">
+            <text/>
+          </element>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="filterconditions">
+    <element name="filterconditions">
+      <zeroOrMore>
+        <element name="filtercondition">
+          <element name="fcfilter">
+            <text/>
+          </element>
+          <element name="fcposition">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="fccolumn">
+            <text/>
+          </element>
+          <element name="fcoperator">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="fcconstant">
+            <text/>
+          </element>
+          <element name="fccase">
+            <choice>
+              <value>0</value>
+              <value>1</value>
+            </choice>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="enums">
+    <element name="enums">
+      <zeroOrMore>
+        <element name="enum">
+          <element name="eindex">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="ename">
+            <text/>
+          </element>
+          <element name="eid">
+            <data type="integer">
+              <param name="minInclusive">100</param>
+            </data>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="enumoptions">
+    <element name="enumoptions">
+      <zeroOrMore>
+        <element name="enumoption">
+          <element name="eoenum">
+            <data type="integer">
+              <param name="minInclusive">100</param>
+            </data>
+          </element>
+          <element name="eoindex">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="eotext">
+            <text/>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="calcs">
+    <element name="calcs">
+      <zeroOrMore>
+        <element name="calc">
+          <element name="calcid">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="calcdecimals">
+            <data type="nonNegativeInteger"/>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="calcnodes">
+    <element name="calcnodes">
+      <zeroOrMore>
+        <element name="calcnode">
+          <element name="cnid">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="cnnodeid">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="cnparentid">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="cntype">
+            <data type="nonNegativeInteger"/>
+          </element>
+          <element name="cnvalue">
+            <text/>
+          </element>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="data">
+    <element name="data">
+      <zeroOrMore>
+        <element name="r"> <a:comment>r = "row"</a:comment>
+          <ref name="hidden"/>
+          <oneOrMore>
+            <choice>
+              <element name="s"> <a:comment>s = "string"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="string">
+                  <param name="pattern">.*</param>
+                </data>
+              </element>
+              <element name="i"> <a:comment>i = "integer"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="integer"/>
+              </element>
+              <element name="f"> <a:comment>f = "floating point"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="float"/>
+              </element>
+              <element name="b"> <a:comment>b = "boolean"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <choice>
+                  <value>0</value>
+                  <value>1</value>
+                </choice>
+              </element>
+              <element name="n"> <a:comment>n = "note"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <text/>
+              </element>
+              <element name="d"> <a:comment>d = "date"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <ref name="stringRep"/>
+                <data type="integer">
+                  <param name="minInclusive">17520914</param>
+                  <param name="maxInclusive">99991231</param>
+                </data>
+              </element>
+              <element name="t"> <a:comment>t = "time"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <ref name="stringRep"/>
+                <data type="integer">
+                  <param name="minInclusive">-1</param>
+                  <param name="maxInclusive">86399</param>
+                </data>
+              </element>
+              <element name="c"> <a:comment>c = "calculation"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="float"/>
+              </element>
+              <element name="q"> <a:comment>q = "sequence"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="integer"/>
+              </element>
+              <element name="p"> <a:comment>p = "picture" (image)</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="string">
+                  <param name="pattern">.*</param>
+                </data>
+              </element>
+              <element name="e"> <a:comment>e = "enum"</a:comment>
+                <ref name="columnId"/>
+                <ref name="hidden"/>
+                <data type="string">
+                  <param name="pattern">.*</param>
+                </data>
+              </element>
+            </choice>
+          </oneOrMore>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="columnId">
+    <attribute name="c"> <a:comment>c = "column ID" (cid)</a:comment>
+      <data type="nonNegativeInteger"/>
+    </attribute>
+  </define>
+
+  <define name="hidden">
+    <optional>
+      <attribute name="h"> <a:comment>h = "hidden", y = "yes"</a:comment>
+        <value>y</value>
+      </attribute>
+    </optional>
+  </define>
+
+  <define name="stringRep">
+    <optional>
+      <attribute name="s"> <a:comment>s = "string representation"</a:comment>
+        <text/>
+      </attribute>
+    </optional>
+  </define>
+
+</grammar>

@@ -1,7 +1,7 @@
 /*
  * dbeditor.cpp
  *
- * (c) 2002-2004,2008-2010,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2010,2017,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -530,16 +530,28 @@ void DBEditor::applyChanges()
             db->setDefault(oldName, defaultVal);
         }
     }
-    // handle renames of original columns
+    // handle renames of original columns. Rename through unique temporary
+    // names in two passes: a direct sequential rename would mis-target a
+    // name-based rename whenever the staged renames form a cycle (e.g. two
+    // columns swapping names), because renaming the first would transiently
+    // duplicate a name the second then resolves to. The temporary names are
+    // underscore-prefixed, which user column names can never be.
+    // @spec COL-UI-014
+    QList<int> renamedIndexes;
     for (i = 0; i < oldCount; i++) {
-        QString oldName = originalCols[i];
-        QString newName = renamedCols[i];
-        if (oldName != newName) {
-            if (!deletedCols.contains(oldName)) {
-                // hasn't been deleted, go ahead and rename
-                db->renameColumn(oldName, newName);
-            }
+        if (originalCols[i] != renamedCols[i]
+                && !deletedCols.contains(originalCols[i])) {
+            renamedIndexes.append(i);
         }
+    }
+    int renameCount = renamedIndexes.count();
+    for (i = 0; i < renameCount; i++) {
+        db->renameColumn(originalCols[renamedIndexes[i]],
+                         QString("_rename%1").arg(i));
+    }
+    for (i = 0; i < renameCount; i++) {
+        db->renameColumn(QString("_rename%1").arg(i),
+                         renamedCols[renamedIndexes[i]]);
     }
     // add new columns
     c4_View temp = info.Select(ceOldIndex [-1]);
@@ -555,6 +567,7 @@ void DBEditor::applyChanges()
         db->addColumn(index, name, type, defaultVal);
     }
     db->updateDataFormat();
+    db->reconcileAllView();
     // add and update calculations
     NameCalcMap::Iterator iter;
     for (iter = calcMap.begin(); iter != calcMap.end(); ++iter) {

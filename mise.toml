@@ -6,6 +6,7 @@ mdbook = "latest"
 "pipx:gh2md" = "latest"
 "pipx:vcs2l" = "latest"
 prek = "latest"
+rumdl = "latest"
 
 [tasks.lint-workflows]
 description = "Lint GitHub Actions workflow files"
@@ -42,6 +43,14 @@ run = "mkdir -p .issues && gh2md jmbowman/portabase .issues --multiple-files --i
 [tasks.mdbook-build]
 description = "Render docs/ to a local HTML book at docs/book/ for browsing (not published anywhere)"
 run = "mdbook build docs"
+
+[tasks.rumdl-lint]
+description = "Lint docs/ markdown for general-purpose Markdown issues (scope and rule set in .rumdl.toml)"
+run = "rumdl check ."
+
+[tasks.lint-markdown]
+description = "Run both Markdown linters over docs/ -- rumdl for general-purpose rules, mdbook-lint for book structure (see docs/wiki/markdown-linting.md)"
+depends = ["rumdl-lint", "mdbook-lint"]
 
 [tasks.mdbook-lint]
 description = "Lint docs/ markdown for mdBook-authoring issues (excludes the LID design tree -- docs/intent/, docs/arrows/, docs/high-level-design.md -- which follows LID's own conventions, not ours)"

@@ -1,7 +1,7 @@
 /*
  * commandline.h
  *
- * (c) 2003,2008,2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008,2013,2015,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ public:
 private:
     int fromOtherFormat(const QStringList &args);
     int toOtherFormat(const QStringList &args);
+    int checkFiles(const QStringList &args);
     int parseOption(const QString &option, bool takesArgument=true);
     static void printUsage();
     static QString validateEncoding(int argIndex);

@@ -1,7 +1,7 @@
 /*
  * portabase.cpp
  *
- * (c) 2002-2004,2008-2013,2015-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2013,2015-2017,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -384,15 +384,16 @@ bool PortaBase::editColumns()
     int accepted = editor.edit(db);
     if (accepted) {
         viewer->closeView();
+        // applyChanges() reconciles the "_all" view with the column set; a
+        // file with no views at all is a brand-new file whose viewer needs
+        // full initialization, so note that before the view is created.
+        bool hadViews = !db->listViews().isEmpty();
         editor.applyChanges();
-        QStringList views = db->listViews();
-        if (views.count() == 0) {
-            db->addView("_all", db->listColumns(), "_none", "_none");
-            viewer->setDatabase(db);
+        if (hadViews) {
+            viewAllColumns();
         }
         else {
-            db->setViewColumnSequence("_all", db->listColumns());
-            viewAllColumns();
+            viewer->setDatabase(db);
         }
         showDataViewer();
         setEdited(true);
