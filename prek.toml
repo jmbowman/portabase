@@ -32,3 +32,12 @@ entry = "sh -c 'mdbook-lint lint -c docs/.mdbook-lint.toml \"$PWD/docs/SUMMARY.m
 language = "system"
 files = "^docs/(SUMMARY\\.md|wiki/|reference-repos\\.md|\\.mdbook-lint\\.toml)"
 pass_filenames = false
+
+[[repos.hooks]]
+id = "rumdl"
+name = "Lint docs/ markdown (general-purpose rules)"
+description = "Runs rumdl against docs/. Scope and rule set live in .rumdl.toml, so filenames aren't passed -- see docs/wiki/markdown-linting.md for the split with mdbook-lint."
+entry = "rumdl check ."
+language = "system"
+files = "^(docs/(SUMMARY\\.md|wiki/|reference-repos\\.md)|\\.rumdl\\.toml)"
+pass_filenames = false

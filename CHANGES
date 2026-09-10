@@ -1,3 +1,18 @@
+2026-09-10  JMB  Fixed calculated field crash bug, added CLI file check
+
+    * Fixed a crash when editing the columns of a file with a calculated
+      field, when the row IDs had somehow deviated from the expected pattern.
+    * Fixed a bug where swapping the names of 2 columns in the same Columns
+      Editor dialog launch could result in data corruption.
+    * The Columns Editor now repairs a damaged "All Columns" view when
+      changes are applied, instead of leaving it inconsistent.
+    * Added some code to prevent crashes when working with certain kinds of
+      corrupted files.
+    * Added a CLI "check" command for inspecting one or more PortaBase files
+      for various kinds of content corruption (including many never yet
+      observed in real life, just in case).  Problems are reported, but
+      files aren't modified.
+
 2026-07-14  JMB  More linters, review skills, & started unit test suite
 
     * Fixed a bug when a column was deleted after re-ordering columns in the

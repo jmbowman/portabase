@@ -28,6 +28,18 @@ Path: `.reference-repos/mdbook-lint/`
 
 Pinned to `v0.14.4` — the exact version `mise.toml` installs (re-pin if `mise.lock`'s `tools."github:joshrotenberg/mdbook-lint".version` moves). Lints `docs/`'s markdown as an `mdbook` preprocessor. Check here first for rule behavior or `.mdbook-lint.toml` config questions.
 
+### rumdl
+
+Path: `.reference-repos/rumdl/`
+
+Pinned to `v0.2.48`. Rust Markdown linter/formatter (MIT), the general-purpose complement to `mdbook-lint` — it implements all 53 markdownlint rules plus 28 of its own, and fixes most of them. Check here first for rule semantics or `.rumdl.toml` config questions; `docs/` in the clone is the rendered rule reference at rumdl.dev. See `docs/wiki/markdown-linting.md` for how it is used here, and `docs/wiki/rumdl-bugs.md` for known defects.
+
+### html-to-markdown
+
+Path: `.reference-repos/html-to-markdown/`
+
+Pinned to the tip of `main` as of this checkout; the installed CLI is `v3.10.2`. Converts the legacy site's HTML pages to Markdown — see `docs/wiki/converting-html-to-markdown.md` for the recipe. Check here first when output looks wrong and no CLI flag seems to explain it: several behaviors are hardcoded rather than configurable, which is how the unconditional `*`/`_` escaping inside table cells was confirmed (`crates/html-to-markdown/src/converter/text_node.rs`, the `in_table_cell` branch passes `true, true` regardless of the escape options).
+
 ### mise
 
 Path: `.reference-repos/mise/`

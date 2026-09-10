@@ -1,0 +1,7 @@
+/* mdBook wraps every image in a block-level <label> for its click-to-zoom
+   feature, which forces each image in a table cell onto its own line. Keep
+   them inline inside tables only; see docs/wiki/converting-html-to-markdown.md. */
+.content table .checkbox-label {
+    display: inline-block;
+    vertical-align: middle;
+}

@@ -58,6 +58,16 @@ A related quirk in the same word-classification logic (`get_significant_words`):
 
 **Checked for an existing issue:** not exhaustively searched. **Status: not yet filed.**
 
+## 3a. Five More Rules Are Blind to Code Spans
+
+**Symptom:** the same root defect as #5 below, in five more rules. Writing an mdBook include directive inside a backtick-wrapped code span — while *documenting* the directive, with no intent to invoke it — makes MDBOOK012 report "Empty file path in include directive" and MDBOOK008 the equivalent for rustdoc-include. CONTENT006 and CONTENT010 likewise fire on a link written inside a code span as an illustration of a broken link, reporting the unresolvable anchor and the generic link text as if the link were real. Separately, CONTENT002 flags the word "placeholder" appearing in ordinary prose as unreplaced placeholder text.
+
+**Root cause:** not source-read. Inferred from behavior, and consistent with #5: these rules scan raw document text for their trigger patterns without first excluding inline code spans and fenced code blocks. CONTENT002 additionally matches its keyword list against prose that merely discusses placeholders rather than containing one.
+
+**Workaround:** rephrase to describe the construct in words rather than quoting it. Where the rule is redundant with `rumdl` anyway, disable it instead — `docs/.mdbook-lint.toml` does this for CONTENT002, CONTENT006 and CONTENT010, per the division of labor in `docs/wiki/markdown-linting.md`. There is no per-rule inline suppression.
+
+**Checked for an existing issue:** not exhaustively searched. **Status: not yet filed** — worth filing together with #5 as one "rules are not code-span-aware" report.
+
 ## 4. Wiring in as `[preprocessor.lint]` Re-Lints the Whole Tree Unscoped, and Hard-Fails the Build on Any Error-Severity Finding
 
 **Symptom:** adding `[preprocessor.lint]` to `book.toml` makes `mdbook build` invoke mdbook-lint against every file under `src`, with no way to pass the same path-exclusion or `-c <config>` scoping available to the standalone CLI. If any excluded content — in this project's case, the LID design tree — has `error`-severity findings (e.g. `MD052`, `MD003`), `mdbook build` exits non-zero and the whole book fails to build.

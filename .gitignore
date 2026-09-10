@@ -89,3 +89,6 @@ apm_modules/
 
 # mdBook HTML output (local browsing only, see `mise run mdbook-build`)
 /docs/book/
+
+# rumdl lint cache (see docs/wiki/rumdl-bugs.md -- stale across referenced-file changes)
+/.rumdl_cache/

@@ -11,6 +11,10 @@ repositories:
     type: git
     url: https://github.com/cursor/plugins.git
     version: a29f5a8ca161b1de4ffc5484454958bebc04eaa5
+  html-to-markdown:
+    type: git
+    url: https://github.com/xberg-io/html-to-markdown
+    version: main
   lid:
     type: git
     url: https://github.com/jszmajda/lid.git
@@ -51,3 +55,7 @@ repositories:
     type: git
     url: https://github.com/qt/qtsvg.git
     version: 52d3788c7b0116ea3db232dccca5f1e3f1e229ac
+  rumdl:
+    type: git
+    url: https://github.com/rvben/rumdl
+    version: main

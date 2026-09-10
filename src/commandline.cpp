@@ -1,7 +1,7 @@
 /*
  * commandline.cpp
  *
- * (c) 2003,2008-2011,2013,2015 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2003,2008-2011,2013,2015,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 #include "csvutils.h"
 #include "database.h"
 #include "importutils.h"
+#include "integritycheck.h"
 #include "view.h"
 #include "encryption/crypto.h"
 
@@ -50,6 +51,9 @@ int CommandLine::process()
     }
     else if (exportCommands.contains(args[1])) {
         return toOtherFormat(args);
+    }
+    else if (args[1] == "check") {
+        return checkFiles(args);
     }
     else if (args[1] == "-h" || args[1] == "--help") {
         printUsage();
@@ -336,12 +340,37 @@ int CommandLine::toOtherFormat(const QStringList &args)
 }
 
 /**
+ * Check one or more PortaBase files for structural integrity problems.  The
+ * files are opened read-only and are never modified.
+ *
+ * @param args The command line arguments ("check" followed by file paths)
+ * @return 0 if all files are clean, 1 if any produced findings, 2 if any
+ *         could not be read as a PortaBase file
+ */
+// @spec CHK-CLI-001, CHK-CLI-002, CHK-CLI-004
+int CommandLine::checkFiles(const QStringList &args)
+{
+    if (args.count() < 3) {
+        printUsage();
+        return 2;
+    }
+    QList<IntegrityCheck::FileStatus> statuses;
+    for (int i = 2; i < args.count(); i++) {
+        IntegrityCheck check(args[i]);
+        printf("%s", check.report().toLocal8Bit().data());
+        statuses.append(check.status());
+    }
+    return IntegrityCheck::exitCode(statuses);
+}
+
+/**
  * Print usage instructions to the console.
  */
 void CommandLine::printUsage()
 {
     printf("Usage: portabase [-h | --help | file]\n");
     printf("       portabase command [-p password] [options] fromfile tofile\n");
+    printf("       portabase check file [file ...]\n");
     printf("  where command is fromxml, toxml, fromcsv, tocsv, tohtml, or frommobiledb\n");
     printf("  Valid options for toxml, tocsv, and tohtml are:\n");
     printf("    -v viewname (apply this view before exporting)\n");
@@ -356,5 +385,7 @@ void CommandLine::printUsage()
     printf("  Additional option for tocsv:\n");
     printf("    -l line_ending ('crlf' for Windows-style, default is UNIX/Mac-style)\n");
     printf("  When using fromcsv, \"tofile\" must be an existing PortaBase file.\n");
+    printf("  The check command reports structural integrity problems in the named\n");
+    printf("  PortaBase files (opened read-only); it never modifies them.\n");
     printf("  Specify -h or --help to receive this message\n");
 }

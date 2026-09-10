@@ -1,7 +1,7 @@
 /*
  * main.cpp
  *
- * (c) 2002-2004,2008-2012,2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2008-2012,2017,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,7 +82,10 @@ int main(int argc, char **argv) {
     }
 #endif
     QStringList args = app.arguments();
-    if ((args.count() > 1 && args[1].startsWith("-")) || args.count() > 2) {
+    // Route to the command-line interface for options, multi-argument
+    // commands, and "check" (the only command valid with a single argument).
+    if ((args.count() > 1 && (args[1].startsWith("-") || args[1] == "check"))
+            || args.count() > 2) {
         CommandLine commandLine;
         return commandLine.process();
     }

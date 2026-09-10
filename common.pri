@@ -64,6 +64,7 @@ HEADERS         = $$PWD/src/calc/calcdateeditor.h \
                   $$PWD/src/image/slideshowdialog.h \
                   $$PWD/src/importdialog.h \
                   $$PWD/src/importutils.h \
+                  $$PWD/src/integritycheck.h \
                   $$PWD/src/menuactions.h \
                   $$PWD/src/metakitfuncs.h \
                   $$PWD/src/mobiledb.h \
@@ -140,6 +141,7 @@ SOURCES         = $$PWD/src/calc/calcdateeditor.cpp \
                   $$PWD/src/image/slideshowdialog.cpp \
                   $$PWD/src/importdialog.cpp \
                   $$PWD/src/importutils.cpp \
+                  $$PWD/src/integritycheck.cpp \
                   $$PWD/src/menuactions.cpp \
                   $$PWD/src/metakitfuncs.cpp \
                   $$PWD/src/mobiledb.cpp \
