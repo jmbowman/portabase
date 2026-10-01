@@ -1,5 +1,5 @@
 schema_version: 2
-last_updated: 2026-07-18
+last_updated: 2026-09-30
 
 taxonomy:
   data-model: standalone
@@ -26,6 +26,17 @@ arrows:
     blockedBy: []
     detail: integrity-check.md
     next: "check subcommand shipped in the portabase CLI; all CHK specs implemented and tested (CHK-CLI-001 now driven end-to-end via a subprocess test). Only CHK-CORE-009 (encrypted contents) deferred. Possible next: in-app surface, or -p support for encrypted files"
+    drift: null
+  row-lifecycle:
+    status: MAPPED
+    parent: null
+    sampled: 2026-09-30
+    audited: null
+    audited_sha: null
+    blocks: []
+    blockedBy: []
+    detail: row-lifecycle.md
+    next: "LLD drafted and reconciled with the code; no EARS yet. Next: draft ROW-UI/ROW-DB specs for addition, copy and row identity (deletion path's specs follow with that chunk), then tests-first on the four Must Fix items -- maxId derived from the largest stored _id, a guarded deleteRow Find, a no-trace rejected addRow, and RowEditor no longer acting on an unassigned row ID. Then reproduce the ID-gap origin, distinguishing count-derived maxId from compressRowIds' write-while-iterating"
     drift: null
 
 unmapped: {}

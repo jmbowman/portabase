@@ -28,6 +28,13 @@ Issues and inconsistencies noticed while piloting LID (`jszmajda/lid`, installed
 - **Impact:** Minor — same root cause as issue #2, but flagging since it's the third instance of the same pattern (a detailed/authoritative reference doc having moved on from an older walkthrough example that wasn't updated to match).
 - **Suggested fix:** Given this is the third instance of stale-example drift, might be worth a general pass checking whether `brownfield-bootstrap.md`'s worked examples are all still current, rather than fixing these one at a time.
 
+### 4. Phase 6's Structural Coherence Check Cannot Catch a Mislabelled Spec ID
+
+- **What:** the structural checks at the end of Phase 6 — "every `@spec` ID cited exists in a spec file" and "every spec has a test citing it" — are identity checks. They verify that an ID is real and tested, not that the spec's *text* describes the behavior it is attached to.
+- **How it surfaced:** `src/integritycheck.cpp` reported a finding under `CHK-DATA-001` — specified as "each data property required by the column set (per the format's column-ID derivation rules)" — for the case "the `_id` property is missing", which is structural rather than column-derived. Both structural checks passed, because the ID exists and has a test. A later code review caught it; the coherence step never could have.
+- **Why it matters:** check IDs are public contract here — the CLI prints them and tests assert on them — so a mislabelled one is a user-visible defect that the workflow's own verification step is blind to.
+- **Suggested fix:** add a semantic pass to the Phase 6 checklist — for each `@spec` annotation in the diff, read the matching spec line and confirm it describes the behavior at that call site. Cheap, and it closes the one gap the structural checks structurally cannot see.
+
 ## Not Yet Logged as Issues, but Worth the Maintainer Double-Checking
 
 - Nothing else so far — this pilot is still in progress (arrow doc, LLD, EARS specs, and `index.yaml` written for one segment; HLD is the last artifact).

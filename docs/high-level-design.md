@@ -2,7 +2,7 @@
 
 ## Problem
 
-*(not yet specified — scope is too narrow for a project-level problem statement; only one segment has been mapped so far. See `docs/wiki/roadmap.md` and `docs/wiki/competitive-landscape.md` for the existing, non-LID-formatted project context.)*
+*(not yet specified — scope is too narrow for a project-level problem statement; only a few segments have been mapped so far. See `docs/wiki/roadmap.md` and `docs/wiki/competitive-landscape.md` for the existing, non-LID-formatted project context.)*
 
 ## Approach
 
@@ -27,14 +27,17 @@
 
 - **Diagnostic scans stay cheap on clean files.** A checker's normal outcome is "no findings", so its per-record cost should track what is actually wrong rather than the size of the database — build the detail needed to describe a violation only once one is confirmed.
 
+- **Row IDs are internal identity, not a user-visible record number.** A data row's `_id` exists to address that row within the file; it is not a number the user reads, cites, or expects to stay put. Operations are therefore free to renumber rows to keep the ID space compact. A durable, user-facing number is what the Sequence column type provides.
+
 *(Additional tenets to be elicited as more segments are mapped. See `docs/intent/column-editing/column-editing-design.md`'s Decisions & Alternatives for segment-level design principles, e.g. staged edits with atomic apply-on-confirm.)*
 
 ## System Design
 
-*(not yet specified at whole-project level — two segments are mapped so far; see `docs/arrows/index.yaml` for the overlay.)*
+*(not yet specified at whole-project level — three segments are mapped so far; see `docs/arrows/index.yaml` for the overlay.)*
 
 - `column-editing` (`docs/intent/column-editing/`) — the Edit Columns operation end-to-end: the staging dialog, the `Database` schema-mutation methods it drives, and the post-accept view maintenance and refresh.
 - `integrity-check` (`docs/intent/integrity-check/`) — read-only structural validation of `.pob` files against the file-format invariants (the [PortaBase format specification](wiki/format.md)), surfaced as a `check` subcommand of the PortaBase command-line interface.
+- `row-lifecycle` (`docs/intent/row-lifecycle/`) — the lifecycle of a data row: adding one (including copy-as-new), deleting one or many, and the `_id` assignment both depend on. Covers the row editor dialog, the `Database` row-mutation methods, and the data-viewer refresh. The CSV/XML import paths also drive `Database::addRow`, but as a separate operation outside this segment.
 
 ## Key Design Decisions
 

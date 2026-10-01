@@ -1,3 +1,11 @@
+2026-10-01  JMB  Added specs for the row lifecycle
+
+    Added detailed specs for the row create/copy/delete process, uncovering
+    a few bugs along the way.  This will be used to add unit tests for this
+    functionality and resolve those bugs.  Also added some minor
+    optimizations for the agentic development process and captured more
+    feedback on the LID system.
+
 2026-09-10  JMB  Fixed calculated field crash bug, added CLI file check
 
     * Fixed a crash when editing the columns of a file with a calculated
