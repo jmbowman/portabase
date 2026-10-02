@@ -16,6 +16,16 @@ Check these before doing independent research on project history or direction �
 
 Keep comments in code/config brief — a pointer, not the explanation. When something needs real justification (why this tool version, why this workaround, why this tradeoff), put it in `docs/wiki/` (or a Decision doc under `docs/decisions/` for a contested choice worth recording alternatives for) and reference it by path from a one-line comment. See `docs/wiki/cppcheck-bugs.md` plus its one-line pointer in `.github/workflows/build.yml` for the pattern.
 
+When documenting this repo's actual state or conventions, say it directly — don't wrap a decision that has already been made in generic hedging ("this can live wherever the project's conventions dictate", "check before assuming"). Reserve portable phrasing for content genuinely meant to travel unchanged to other repos, such as a skill's general mechanism section.
+
+## Making changes
+
+The bottleneck in this project is the maintainer's review budget, not how fast code gets written. Optimize diffs for being understood.
+
+- **Keep PRs small** — under ~400 lines added or changed where the work divides that way. Don't bundle adjacent value (a new feature, a test-suite expansion) into a bug-fix PR unless that volume was genuinely needed to *find* the bug; when it was, say so.
+- **Match surrounding idioms in files you edit**, even over more modern equivalents. Idiom-consistent, boring diffs clear review fast; novel-but-equivalent patterns force line-by-line scrutiny. An anonymous namespace where the rest of the file uses none, or a fresh loop variable where the method reuses `i`, is the kind of thing that stands out to a human reader and that an agent doesn't think to flag. Reserve modern C++ for brand-new files, where there is no surrounding style to match and so no inconsistency is created.
+- **For an unavoidably large diff**, offer a reviewer's guide — a risk-ordered reading order and a consolidated list of decisions and trade-offs — rather than leaving the reviewer to reconstruct intent from the code. Surface your own low-confidence areas without being asked.
+
 ## Copyright headers
 
 Every `.cpp`/`.h` file — application **and** tests — opens with the project's copyright + license header: a leading `/* */` block naming the file, then `(c) <years> by Jeremy Bowman <jmbowman@alum.mit.edu>`, then the GPL-v2-or-later summary (copy the block verbatim from any existing `src/` file). The years are the years the file was actually touched: a **new** file gets the current year; an **edited** file gains the current year appended to its list, collapsing consecutive years into ranges (e.g. `2015-2017,2026`). Maintain this on every create/update — it is easy to forget, especially on test files, which need the header just as much as `src/`. Application source follows the license block with a `/** @file … */` doxygen block; tests need only the license block (no doxygen, and don't repeat the filename in the description comment below it).
@@ -60,6 +70,8 @@ Tool versions are pinned via `mise` (`mise.toml`/`mise.lock`) — run `mise inst
 
 `prek` hooks (defined in `prek.toml`) regenerate help translation templates when `resources/help/` changes, and lint `docs/` (excluding the LID design tree) when relevant doc files change; enforced both locally (`mise run install-hooks`) and in CI (`pre-commit` job in `build.yml`).
 
+Before running a hook, `prek` stashes unstaged working-tree changes to its own patch cache at `~/.cache/prek/patches/` — **not** a git stash, so `git stash list` shows nothing and the changes look lost. Killing a `prek run` mid-execution can leave them unrestored; recover by `git apply`-ing the most recent patch file there. Worth knowing before reflexively killing a slow-looking prek invocation.
+
 Python tooling scripts (e.g. `packaging/lint_cpp.py`) use `uv` with PEP 723 inline script dependencies, not manual `pip install`. `uv` itself is deliberately *not* mise-managed — it's expected to already be globally available on a dev machine; CI provisions it via the `astral-sh/setup-uv` action in `build.yml`.
 
 **`.issues/`** is a gitignored, offline mirror of this repo's GitHub issues/PRs (including comments) for agent context, refreshed via `mise run issues-sync`. It uses `gh2md`, authenticated via a `GITHUB_ACCESS_TOKEN` env var or a token file (`~/.config/gh2md/token`/`~/.github-token`) that the maintainer manages outside of any Claude Code session. **Do not read, cat, echo, or otherwise access that token, its env var, or its file from an agent session** — refreshing `.issues/` is the maintainer's manual step.
@@ -80,7 +92,7 @@ There's a known crash bug applying schema changes to an existing database from t
 
 ## LID Scope
 
-Piloted on the Edit Columns operation (end-to-end, as the user experiences it) and the data-integrity-check feature; not yet adopted project-wide.
+Piloted on the Edit Columns operation (end-to-end, as the user experiences it), the data-integrity-check feature, and the data-row lifecycle (adding, copying, deleting, and row-ID assignment); not yet adopted project-wide.
 
 Paths in scope:
 - `src/dbeditor.cpp`, `src/dbeditor.h`
@@ -89,6 +101,12 @@ Paths in scope:
 - `src/database.cpp` (schema-mutation methods: `setIndex`, `setDefault`, `addColumn`, `deleteColumn`, `renameColumn`, `updateDataFormat`; the view-maintenance methods the Edit Columns operation drives: `addViewColumn`, `deleteViewColumn`, `setViewColumnSequence`, `reconcileAllView`, `getView`, `listColumns`, `formatString`; and the calculated-column recalculation the operation triggers on accept: `calculateAll`, `getRow` — not the whole 2696-line file)
 - `src/database.h` (declarations for the above)
 - `src/integritycheck.cpp`, `src/integritycheck.h` (data-integrity checker core)
+- `src/roweditor.cpp`, `src/roweditor.h` (`RowEditor::edit` when it creates a row — the add and copy branches; not in-place editing of an existing row)
+- `src/datamodel.cpp`, `src/datamodel.h` (`addRow`, `deleteRow`, `deleteAllRows` only)
+- `src/viewdisplay.cpp`, `src/viewdisplay.h` (`addRow`, `editRow`, `deleteRow`, `deleteAllRows` only)
+- `src/view.cpp` (`View::deleteAllRows` only — not the rest of the file)
+- `src/portabase.cpp` (`PortaBase::deleteRow`, `copyRow`, `deleteAllRows` — the Row menu actions, alongside `editColumns`)
+- `src/database.cpp` (row-lifecycle methods: `addRow`, `deleteRow`, `compressRowIds`, and the `maxId` initialization in `load` — not the rest of `load`)
 - `src/commandline.cpp`, `src/commandline.h` (the `check` subcommand only — not the rest of the CLI)
 - `src/main.cpp` (the CLI-dispatch condition only — routing `check` to the command-line interface)
 - `tests/dbeditor/`, `tests/dbeditor_robustness/`, `tests/integritycheck/`
@@ -96,7 +114,9 @@ Paths in scope:
 Paths explicitly excluded:
 - everything else in `src/database.cpp`/`.h` outside the methods listed above
 - everything else in `src/commandline.cpp` outside the `check` subcommand
-- everything else in `src/portabase.cpp` outside `PortaBase::editColumns`
+- everything else in `src/portabase.cpp` outside `PortaBase::editColumns` and the Row menu actions listed above
+- everything else in `src/view.cpp` outside `View::deleteAllRows`
+- `src/csvutils.cpp`, `src/importutils.cpp` — the CSV/XML import paths drive `Database::addRow` but are a separate operation, outside the row-lifecycle segment
 
 ## Linked-Intent Development (MANDATORY, within scope above)
 
