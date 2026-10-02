@@ -63,8 +63,28 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python3-sphinx python3-sphinx-rtd-theme
+      # A cache hit skips the 1.19GB download entirely, so this is a reliability
+      # measure as much as a speed one; see
+      # docs/wiki/action-cache-download-file-gaps.md.
+      - name: Cache the Android NDK
+        id: cache-ndk
+        uses: actions/cache@v6
+        with:
+          path: ${{ env.ANDROID_NDK_ROOT }}
+          key: android-ndk-r21e-${{ runner.os }}
+      # Fetched directly rather than via sdkmanager so the download can resume
+      # and be checksummed; same doc.
       - name: Install the NDK version required by Qt 5.15.x
-        run: '$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.4.7075529"'
+        if: steps.cache-ndk.outputs.cache-hit != 'true'
+        run: |
+          zip=android-ndk-r21e-linux-x86_64.zip
+          curl --retry 5 --retry-all-errors --continue-at - --connect-timeout 30 \
+               -o "$zip" "https://dl.google.com/android/repository/$zip"
+          echo "c3ebc83c96a4d7f539bd72c241b2be9dcd29bda9  $zip" | sha1sum -c -
+          mkdir -p "$ANDROID_SDK_ROOT/ndk"
+          unzip -q "$zip"
+          mv android-ndk-r21e "$ANDROID_NDK_ROOT"
+          rm "$zip"
       - name: Accept the NDK license
         run: "yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses"
       - name: Install Qt
@@ -72,6 +92,9 @@ jobs:
         with:
           version: "5.15.2"
           target: android
+          # Override the action's "==3.1.*" default: 3.1.x can't parse Qt 6.7.x's
+          # version-folder format, so listing versions crashes. See issue #79.
+          aqtversion: "==3.3.0"
           cache: true
       - name: Compile Metakit for all Android ABIs
         run: packaging/android/build_metakit.sh
@@ -152,6 +175,7 @@ jobs:
   #       uses: jurplel/install-qt-action@f03f05556819ceb3781ee2f455ec44c339d683c0  # pinned for security, review code for secret leakage when upgrading
   #       with:
   #         version: "5.15.2"
+  #         aqtversion: "==3.3.0"  # see issue #79
   #         cache: true
   #     - name: Build Metakit
   #       run: packaging/mac/build_metakit.sh
@@ -191,6 +215,7 @@ jobs:
           version: "5.15.2"
           arch: "win64_mingw81"
           tools: "tools_mingw,qt.tools.win64_mingw810"
+          aqtversion: "==3.3.0"  # see issue #79
           cache: true
       - name: Configure and build Metakit
         run: ${{ env.msys2bash}} -c "packaging/windows/build_metakit.sh '${{ env.IQTA_TOOLS }}\mingw810_64\bin'"

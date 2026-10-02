@@ -1,3 +1,10 @@
+2026-10-02  JMB  Improved GHA build reliability
+
+    * Attempt up to 5 retries of the Android NDK download with resume, in
+      case the first attempt is incomplete.  Also cache it to avoid the need
+      to download it in many runs.
+    * Work around an install-qt-action bug triggered by a recent Qt release.
+
 2026-10-01  JMB  Added specs for the row lifecycle
 
     Added detailed specs for the row create/copy/delete process, uncovering

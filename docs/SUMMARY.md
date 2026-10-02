@@ -27,10 +27,14 @@
 - [Qt Tips](wiki/qt-tips.md)
 - [Markdown Linting](wiki/markdown-linting.md)
 - [Converting HTML to Markdown](wiki/converting-html-to-markdown.md)
+
+# Upstream Issues
+
 - [mdbook-lint Bugs Encountered](wiki/mdbook-lint-bugs.md)
 - [rumdl Bugs Encountered](wiki/rumdl-bugs.md)
 - [compiledb Bugs Encountered](wiki/compiledb-bugs.md)
 - [cppcheck Bugs Encountered](wiki/cppcheck-bugs.md)
+- [action-cache-download-file Feature Gaps](wiki/action-cache-download-file-gaps.md)
 
 # Reference
 
