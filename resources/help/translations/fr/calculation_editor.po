@@ -1,22 +1,25 @@
 # Messages from calculation_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# danypoup <dany@poupard.nom.fr>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-27 14:20+0000\n"
-"Last-Translator: danypoup <dany@poupard.nom.fr>\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 40b424d8183a49ef9d1782f44ac846e8
 #: ../../calculation_editor.txt:4
@@ -33,7 +36,15 @@ msgid ""
 " name of the column, a read-only display of the current calculation written "
 "as a one-line expression, and a spin box that allows you to specify how many"
 " decimal places should be shown for the calculation results."
-msgstr "Cette boite de dialogue vous permet de définir les colonnes qui contiendront des valeurs calculées à partir du contenu d'autres colonnes de la même ligne. Il est lancé en cliquant sur le bouton \"Modifier le calcul\" dans l'éditeur de colonne, lequel apparaît uniquement pour les colonnes de type \"Calcul\". En haut de la boite de dialogue se trouvent le nom de la colonne, l'affichage du calcul courant écrit sous la forme d'une expression sur une seule ligne et une zone de saisie qui vous permet de spécifier combien de décimales doivent être affichées pour le résultat du calcul."
+msgstr ""
+"Cette boite de dialogue vous permet de définir les colonnes qui contiendront"
+" des valeurs calculées à partir du contenu d'autres colonnes de la même "
+"ligne. Il est lancé en cliquant sur le bouton \"Modifier le calcul\" dans "
+"l'éditeur de colonne, lequel apparaît uniquement pour les colonnes de type "
+"\"Calcul\". En haut de la boite de dialogue se trouvent le nom de la "
+"colonne, l'affichage du calcul courant écrit sous la forme d'une expression "
+"sur une seule ligne et une zone de saisie qui vous permet de spécifier "
+"combien de décimales doivent être affichées pour le résultat du calcul."
 
 # 4f5af6c77ed540b1a56ff00c62751680
 #: ../../calculation_editor.txt:8
@@ -43,7 +54,13 @@ msgid ""
 "represents either the value of another column, a constant value, or the "
 "result of an operation.  To edit the calculation, select a node from the "
 "tree (if any are present) and use the buttons in the dialog:"
-msgstr "La plus grande partie de la boit de dialogue est remplie par un composant graphique qui montre le calcul actuel sous forme d'un arbre, similaire à un explorateur de fichiers. Chaque noeud de l'arbre représente soit la valeur d'une autre colonne, soit une valeur constante ou bien le résultat d'une opération. Pour modifier le calcul, sélectionnez un noeud de l'arbre (s'il y en a) et utilisez les boutons de la boite de dialogue :"
+msgstr ""
+"La plus grande partie de la boit de dialogue est remplie par un composant "
+"graphique qui montre le calcul actuel sous forme d'un arbre, similaire à un "
+"explorateur de fichiers. Chaque noeud de l'arbre représente soit la valeur "
+"d'une autre colonne, soit une valeur constante ou bien le résultat d'une "
+"opération. Pour modifier le calcul, sélectionnez un noeud de l'arbre (s'il y"
+" en a) et utilisez les boutons de la boite de dialogue :"
 
 # 5931ce55d45b4f4cbe892e8242089f93
 #: ../../calculation_editor.txt:11
@@ -55,7 +72,10 @@ msgstr "**Ajouter**"
 msgid ""
 "Add a new node as a child of the currently selected node; a dialog will "
 "appear which allows you to select the type and value of the node."
-msgstr "Ajoute un nouveau noeud fils du noeud actuellement sélectionné ; une boite de dialogue s'affichera et vous permettra de sélectionner le type et la valeur du noeud."
+msgstr ""
+"Ajoute un nouveau noeud fils du noeud actuellement sélectionné ; une boite "
+"de dialogue s'affichera et vous permettra de sélectionner le type et la "
+"valeur du noeud."
 
 # dd6d91ebe7ae470189743ba74d60c829
 #: ../../calculation_editor.txt:14
@@ -85,7 +105,8 @@ msgstr "**Monter**"
 # 511b40992bc84acaa6743662bf340342
 #: ../../calculation_editor.txt:20
 msgid "Move the currently selected node up among its siblings."
-msgstr "Déplace le noeud actuellement sélectionné d'une position vers le haut."
+msgstr ""
+"Déplace le noeud actuellement sélectionné d'une position vers le haut."
 
 # 835bed28447f4d5bb5baad0ce9bd0c6e
 #: ../../calculation_editor.txt:23
@@ -105,24 +126,34 @@ msgid ""
 " their own).  The buttons automatically update when a node is selected in "
 "order to indicate which actions are possible; typical actions not allowed "
 "are:"
-msgstr "Habituellement, vous désirez démarrer en ajoutant un noeud opération, tel que \"+\", et ensuite vous ajoutez ses arguments (qui peuvent eux-mêmes être des opérations avec leurs propres arguments). Les boutons se mettent à jour automatiquement quand un noeud est sélectionné afin d'indiquer quelles actions sont possible ; typiquement les actions non permises sont : "
+msgstr ""
+"Habituellement, vous désirez démarrer en ajoutant un noeud opération, tel "
+"que \"+\", et ensuite vous ajoutez ses arguments (qui peuvent eux-mêmes être"
+" des opérations avec leurs propres arguments). Les boutons se mettent à jour"
+" automatiquement quand un noeud est sélectionné afin d'indiquer quelles "
+"actions sont possible ; typiquement les actions non permises sont : "
 
 # 095e6533d8d844cc97452bf523e9902c
 #: ../../calculation_editor.txt:27
 msgid ""
 "Adding a child node to an operation which already has as many arguments as "
 "it can use"
-msgstr "Ajouter un noeud enfant à une opération qui a déjà le maximum d'arguments possible"
+msgstr ""
+"Ajouter un noeud enfant à une opération qui a déjà le maximum d'arguments "
+"possible"
 
 # 639c481b219748508194e74343a115c5
 #: ../../calculation_editor.txt:29
 msgid "Editing an operation node; it must be deleted and replaced instead"
-msgstr "Modifier un noeud opération ; il doit plutôt être supprimé puis recréé"
+msgstr ""
+"Modifier un noeud opération ; il doit plutôt être supprimé puis recréé"
 
 # 3925a8a965b34204b997add6e8f8af88
 #: ../../calculation_editor.txt:31
 msgid "Moving a node up or down when it cannot move further in that direction"
-msgstr "Déplacer un noeud (vers le haut ou le bas) alors qu'il ne peut pas aller plus loin dans cette direction"
+msgstr ""
+"Déplacer un noeud (vers le haut ou le bas) alors qu'il ne peut pas aller "
+"plus loin dans cette direction"
 
 # bd869ee5d20642b4b6b7301c3e1606d5
 #: ../../calculation_editor.txt:33
@@ -136,7 +167,12 @@ msgid ""
 "calculations.  Additionally, Date columns can be used as children of a "
 "\"Days_Between\" operation, and Time columns can be used as children of "
 "\"Seconds_Between\", \"Minutes_Between\", and \"Hours_Between\" operations."
-msgstr "Seules les colonnes de type Entier, Decimal, Séquence et Booléen peuvent être utilisées dans les calculs. De plus, les colonnes de type Date peuvent être utilisées en tant qu'enfant d'une opération \"Days_Between\" et les colonnes de type Heure peuvent être utilisées en tant qu'enfant des opérations \"Seconds_Between\", \"Minutes_Between\" et \"Hours_Between\"."
+msgstr ""
+"Seules les colonnes de type Entier, Decimal, Séquence et Booléen peuvent "
+"être utilisées dans les calculs. De plus, les colonnes de type Date peuvent "
+"être utilisées en tant qu'enfant d'une opération \"Days_Between\" et les "
+"colonnes de type Heure peuvent être utilisées en tant qu'enfant des "
+"opérations \"Seconds_Between\", \"Minutes_Between\" et \"Hours_Between\"."
 
 # cfc636662b1b4ebf82eb2a77a99c407c
 #: ../../calculation_editor.txt:37
@@ -144,18 +180,26 @@ msgid ""
 "Calculation columns cannot be used in other calculations, since this would "
 "introduce a variety of complications.  You can get the same effect by "
 "repeating the definition of a calculation as part of another one."
-msgstr "Les colonnes de type Calcul ne peuvent pas être utilisées dans d'autres calculs puisque cela pourrait introduire une certaine complexité. Vous pouvez obtenir le même effet en répétant la définition du calcul dans un autre."
+msgstr ""
+"Les colonnes de type Calcul ne peuvent pas être utilisées dans d'autres "
+"calculs puisque cela pourrait introduire une certaine complexité. Vous "
+"pouvez obtenir le même effet en répétant la définition du calcul dans un "
+"autre."
 
 # 54e6c32b8e044874af417b6eaaefb9e8
 #: ../../calculation_editor.txt:39
 msgid ""
 "Operations which haven't been given enough (or any) arguments usually return"
 " zero."
-msgstr "Les opérations qui n'ont pas assez d'arguments retournent habituellement zéro."
+msgstr ""
+"Les opérations qui n'ont pas assez d'arguments retournent habituellement "
+"zéro."
 
 # bd26c908e88f400abd83523205f2e548
 #: ../../calculation_editor.txt:41
 msgid ""
 "If a column is renamed or deleted using the columns editor, any calculations"
 " using it are automatically updated accordingly."
-msgstr "Si une colonne est renommée ou supprimée en utilisant l'éditeur de colonnes, tout calcul s'y référant sera mis à jour automatiquement."
+msgstr ""
+"Si une colonne est renommée ou supprimée en utilisant l'éditeur de colonnes,"
+" tout calcul s'y référant sera mis à jour automatiquement."

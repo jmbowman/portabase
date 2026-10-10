@@ -1,22 +1,25 @@
 # Messages from enum_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# danypoup <dany@poupard.nom.fr>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-22 08:17+0000\n"
-"Last-Translator: danypoup <dany@poupard.nom.fr>\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 2faf1ad53f304b97b619f2a7cba74ab3
 #: ../../enum_editor.txt:4
@@ -29,7 +32,11 @@ msgid ""
 "This dialog lets you define the name and list of options for an enum column "
 "type.  It has a list of the enum's options and the same set of buttons as "
 "most of the other editor dialogs:"
-msgstr "Cette boite de dialogue vous permet de définir le nom et la liste des options pour une colonne de type énumération. Elle fournit une liste d'option des énumérations et dispose du même jeu de boutons que la plupart des autres boite de dialogue d'édition :"
+msgstr ""
+"Cette boite de dialogue vous permet de définir le nom et la liste des "
+"options pour une colonne de type énumération. Elle fournit une liste "
+"d'option des énumérations et dispose du même jeu de boutons que la plupart "
+"des autres boite de dialogue d'édition :"
 
 # 3b54bfb53b6d445d97139d74850700db
 #: ../../enum_editor.txt:9
@@ -41,7 +48,9 @@ msgstr "**Ajouter**"
 msgid ""
 "Add a new option; a dialog will appear for you to enter the option text "
 "into."
-msgstr "Ajoute une nouvelle option ; une boite de dialogue s'affichera afin de vous permettre de saisir le texte de l'option."
+msgstr ""
+"Ajoute une nouvelle option ; une boite de dialogue s'affichera afin de vous "
+"permettre de saisir le texte de l'option."
 
 # cedff25428dc4d9bb5a1605317bba4a2
 #: ../../enum_editor.txt:12
@@ -53,7 +62,10 @@ msgstr "**Modifier**"
 msgid ""
 "Change the text of an existing enum option.  All existing uses of this "
 "option will be updated to the new text."
-msgstr "Change le texte d'une option d'énumération existante. Toutes les utilisations existantes de cette option seront mises à jour avec le nouveau texte."
+msgstr ""
+"Change le texte d'une option d'énumération existante. Toutes les "
+"utilisations existantes de cette option seront mises à jour avec le nouveau "
+"texte."
 
 # c7516bb3712b464f98c39e91032ea7ab
 #: ../../enum_editor.txt:15
@@ -65,7 +77,10 @@ msgstr "**Supprimer**"
 msgid ""
 "Delete the currently selected option.  A dialog will ask you to pick the "
 "value to use wherever this option was being used."
-msgstr "Supprime l'option actuellement sélectionnée. Une boite de dialogue s'affichera pour vous demander de choisir la valeur de substitution partout où cette option a été utilisée."
+msgstr ""
+"Supprime l'option actuellement sélectionnée. Une boite de dialogue "
+"s'affichera pour vous demander de choisir la valeur de substitution partout "
+"où cette option a été utilisée."
 
 # 1ab5a21f7c0044d495df992e98037ea0
 #: ../../enum_editor.txt:18
@@ -77,7 +92,10 @@ msgstr "**Monter**"
 msgid ""
 "Move the currently selected option up one position in the list (and hence in"
 " the selection droplist as well)."
-msgstr "Déplace l'option actuellement sélectionnée d'une position vers le haut dans la liste (et par conséquent dans la liste de sélection déroulante également)."
+msgstr ""
+"Déplace l'option actuellement sélectionnée d'une position vers le haut dans "
+"la liste (et par conséquent dans la liste de sélection déroulante "
+"également)."
 
 # 69e5d7eaf4db4ab4baba41b18516cbd2
 #: ../../enum_editor.txt:21
@@ -89,14 +107,19 @@ msgstr "**Descendre**"
 msgid ""
 "Move the currently selected option down one position in the list (and hence "
 "in the selection droplist as well)."
-msgstr "Déplace l'option actuellement sélectionnée d'une position vers le bas dans la liste (et par conséquent dans la liste de sélection déroulante également)."
+msgstr ""
+"Déplace l'option actuellement sélectionnée d'une position vers le bas dans "
+"la liste (et par conséquent dans la liste de sélection déroulante "
+"également)."
 
 # e9c8eb4fd9c340c4b81b8449713845c8
 #: ../../enum_editor.txt:23
 msgid ""
 "Just below the enum name are more buttons which allow you to change the list"
 " of options:"
-msgstr "Juste dessous le nom de l'énumération il y a des boutons supplémentaires qui vous permettent de modifier la liste des options :"
+msgstr ""
+"Juste dessous le nom de l'énumération il y a des boutons supplémentaires qui"
+" vous permettent de modifier la liste des options :"
 
 # fd03cac4281f45cfa947603084582b09
 #: ../../enum_editor.txt:26
@@ -108,7 +131,9 @@ msgstr "**Trier**"
 msgid ""
 "Sort the options in alphabetical order.  Click the button again to reverse "
 "the sorting order."
-msgstr "Trie les options dans l'ordre alphabétique. Recliquez sur le bouton pour inverser l'ordre de tri."
+msgstr ""
+"Trie les options dans l'ordre alphabétique. Recliquez sur le bouton pour "
+"inverser l'ordre de tri."
 
 # 97dd897d76874a028356f92a070b6c1e
 #: ../../enum_editor.txt:29
@@ -121,7 +146,9 @@ msgid ""
 "Add options from a text file; this file should have each option on a "
 "separate line.  Options in the file which are already in the enum will not "
 "be duplicated."
-msgstr "Ajoute des options à partir d'un fichier texte ; dans ce fichier les options doivent être sur des lignes distinctes."
+msgstr ""
+"Ajoute des options à partir d'un fichier texte ; dans ce fichier les options"
+" doivent être sur des lignes distinctes."
 
 # 03944b7ddd7f4436b240958354d0e544
 #: ../../enum_editor.txt:32
@@ -131,11 +158,16 @@ msgstr "**Exporter**"
 # f3b35035b47c45cdb81293ed85937eb2
 #: ../../enum_editor.txt:32
 msgid "Create a text file listing the current enum options, one on each line."
-msgstr "Crée un fichier texte à partir des options de l'énumération courante, une sur chaque ligne."
+msgstr ""
+"Crée un fichier texte à partir des options de l'énumération courante, une "
+"sur chaque ligne."
 
 # 6ca366f6364a471583d3735f8c8f5fa0
 #: ../../enum_editor.txt:34
 msgid ""
 "Click \"OK\"/\"Done\" to accept any changes that were made or cancel out of "
 "the dialog to leave the options unchanged (or cancel adding a new enum)."
-msgstr "Cliquez sur \"OK\"/\"Fait\" pour accepter les modifications ou annuler la boite de dialogue pour laisser les options inchangées (ou annuler en ajoutant une nouvelle énumération)."
+msgstr ""
+"Cliquez sur \"OK\"/\"Fait\" pour accepter les modifications ou annuler la "
+"boite de dialogue pour laisser les options inchangées (ou annuler en "
+"ajoutant une nouvelle énumération)."

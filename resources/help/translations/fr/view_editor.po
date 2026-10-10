@@ -1,22 +1,25 @@
 # Messages from view_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# danypoup <dany@poupard.nom.fr>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-10-21 14:09+0000\n"
-"Last-Translator: danypoup <dany@poupard.nom.fr>\n"
-"Language-Team: French (http://www.transifex.com/jmbowman/portabase/language/fr/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: French (https://app.transifex.com/jmbowman/teams/14599/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 # 53248ae7f12c4d3a85bacb1f0e626246
 #: ../../view_editor.txt:4
@@ -32,7 +35,14 @@ msgid ""
 "with specified display widths.  Each database has a default \"All Columns\" "
 "view which shows all the columns in the database in the same order as they "
 "appear in the :ref:`row editor <row_editor>`."
-msgstr "A chaque fois que vous parcourez une base de données dans le :ref:`visualiseur de données <data_viewer>`, vous utilisez en fait une \"vue\" particulière des données. Une vue est un sous-ensemble des colonnes de la base de la données, affichées dans une ordre particulier et avec des largeurs spécifiques. Chaque base de données a une vue par défaut \"Toutes les colonnes\" qui affiche toutes les colonnes de la base dans le même ordre que dans  :ref:`l'éditeur de ligne <row_editor>`."
+msgstr ""
+"A chaque fois que vous parcourez une base de données dans le "
+":ref:`visualiseur de données <data_viewer>`, vous utilisez en fait une "
+"\"vue\" particulière des données. Une vue est un sous-ensemble des colonnes "
+"de la base de la données, affichées dans une ordre particulier et avec des "
+"largeurs spécifiques. Chaque base de données a une vue par défaut \"Toutes "
+"les colonnes\" qui affiche toutes les colonnes de la base dans le même ordre"
+" que dans  :ref:`l'éditeur de ligne <row_editor>`."
 
 # a73ecc0797104afd82c6f0dd18ae97bc
 #: ../../view_editor.txt:8
@@ -52,4 +62,20 @@ msgid ""
 "Click \"OK\"/\"Done\" to accept the currently shown settings, or cancel out "
 "of the dialog to revert to the previous values (or to cancel adding a new "
 "view)."
-msgstr "Les vues sont définies en utilisant la boite de dialogue éditeur de vue. En haut de cette boite de dialogue, une zone de saisie contenant le nom de la vue permet de renommer la vue. Ensuite, des listes déroulantes vous permettent de choisir un ordre de tri par défaut et/ou un filtre qui sera appliqué à chaque fois que vous basculerez sur cette vue ; sélectionner \"Pas de tri par défaut\" et \"Pas de filtre par défaut\" laisse les paramètres actuels inchangés. (Ceci évite l'obligation de choisir une vue, puis un ordre de tri, puis un filtre si vous utilisez souvent certaines combinaisons de vue/tri/filtre). En-dessous, un tableau affiche le nom de toutes les colonnes de la base de données avec une case à cocher associée qui indique si le champ est inclus dans la vue. Les boutons \"Monter\" et \"Descendre\" permettent de déplacer la ligne sélectionnée dans le tableau, changeant ainsi l'ordre des colonnes dans la vue. Cliquez sur \"OK\"/\"Fait\" pour accepter la configuration ou annulez la boite de dialogue pour restaurer la configuration précédente (ou ajoutez une nouvelle vue pour annuler)."
+msgstr ""
+"Les vues sont définies en utilisant la boite de dialogue éditeur de vue. En "
+"haut de cette boite de dialogue, une zone de saisie contenant le nom de la "
+"vue permet de renommer la vue. Ensuite, des listes déroulantes vous "
+"permettent de choisir un ordre de tri par défaut et/ou un filtre qui sera "
+"appliqué à chaque fois que vous basculerez sur cette vue ; sélectionner "
+"\"Pas de tri par défaut\" et \"Pas de filtre par défaut\" laisse les "
+"paramètres actuels inchangés. (Ceci évite l'obligation de choisir une vue, "
+"puis un ordre de tri, puis un filtre si vous utilisez souvent certaines "
+"combinaisons de vue/tri/filtre). En-dessous, un tableau affiche le nom de "
+"toutes les colonnes de la base de données avec une case à cocher associée "
+"qui indique si le champ est inclus dans la vue. Les boutons \"Monter\" et "
+"\"Descendre\" permettent de déplacer la ligne sélectionnée dans le tableau, "
+"changeant ainsi l'ordre des colonnes dans la vue. Cliquez sur "
+"\"OK\"/\"Fait\" pour accepter la configuration ou annulez la boite de "
+"dialogue pour restaurer la configuration précédente (ou ajoutez une nouvelle"
+" vue pour annuler)."
