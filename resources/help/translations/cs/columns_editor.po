@@ -1,22 +1,25 @@
 # Messages from columns_editor.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-19 15:18+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # 70275c548f364860943f77248e3d62e9
 #: ../../columns_editor.txt:4
@@ -34,7 +37,15 @@ msgid ""
 "dialog by selecting the \"Edit Columns\" menu item (in the :ref:`data viewer"
 " <data_viewer>`, under the \"File\" menu except on Maemo where the menus are"
 " flattened)."
-msgstr "Každý soubor aplikace PortaBase obsahuje jednu tabulku s formátem definovaným uživatelem.  Formát tabulky je určen posloupností datových sloupců, z nichž každý má své vlastní jméno, datový typ a výchozí hodnotu. Při vytváření nového souboru aplikace PortaBase je vždy zobrazen dialog Editoru sloupců umožňující uživateli definovat datové sloupce.  Sloupce již existujícího souboru lze kdykoli změnit výběrem volby \"Editor sloupců\" (v :ref:`Prohlížeči dat <data_viewer>` z menu \"Soubor\" - kromě přístrojů Maemo, kde jsou menu zjednodušena)."
+msgstr ""
+"Každý soubor aplikace PortaBase obsahuje jednu tabulku s formátem "
+"definovaným uživatelem.  Formát tabulky je určen posloupností datových "
+"sloupců, z nichž každý má své vlastní jméno, datový typ a výchozí hodnotu. "
+"Při vytváření nového souboru aplikace PortaBase je vždy zobrazen dialog "
+"Editoru sloupců umožňující uživateli definovat datové sloupce.  Sloupce již "
+"existujícího souboru lze kdykoli změnit výběrem volby \"Editor sloupců\" (v "
+":ref:`Prohlížeči dat <data_viewer>` z menu \"Soubor\" - kromě přístrojů "
+"Maemo, kde jsou menu zjednodušena)."
 
 # 03a7c33339fd423f9d6863497e9e6d05
 #: ../../columns_editor.txt:8
@@ -42,7 +53,10 @@ msgid ""
 "The current column definitions are displayed as rows in a list, in the order"
 " in which they appear in the :ref:`row editor <row_editor>`.  These column "
 "definitions are manipulated using the buttons in the dialog:"
-msgstr "Stávající definice sloupců jsou zde zobrazeny ve stejném pořadí jako v :ref:`Editoru záznamů <row_editor>`.  S definicemi sloupců lze nakládat pomocí tlačítek v dolní části Editoru sloupců:"
+msgstr ""
+"Stávající definice sloupců jsou zde zobrazeny ve stejném pořadí jako v "
+":ref:`Editoru záznamů <row_editor>`.  S definicemi sloupců lze nakládat "
+"pomocí tlačítek v dolní části Editoru sloupců:"
 
 # 69bd093ac9a84b409b42e545f929684c
 #: ../../columns_editor.txt:11
@@ -59,7 +73,14 @@ msgid ""
 "to add one.)  The default value is what will be entered for this column in "
 "any already existing data rows, and it will appear in the row editor when "
 "adding new rows as well."
-msgstr "Vytvoří novou definici sloupce a přidá ji na konec přehledu.  Pomocí zobrazeného dialogu uživatel zadá jméno, datový typ a výchozí hodnotu nového sloupce.  (Vyberete-li jako typ příslušného sloupce v tomto dialogu \"(Nový seznam)\", spustí se :ref:`Editor seznamů <enum_editor>`, který Vám umožní nový seznam vytvořit.)  Výchozí hodnota je údaj, který bude použit v daném sloupci u již existujících záznamů a současně bude použit v Editoru záznamů u nově přidávaných záznamů jako přednastavený údaj."
+msgstr ""
+"Vytvoří novou definici sloupce a přidá ji na konec přehledu.  Pomocí "
+"zobrazeného dialogu uživatel zadá jméno, datový typ a výchozí hodnotu nového"
+" sloupce.  (Vyberete-li jako typ příslušného sloupce v tomto dialogu \"(Nový"
+" seznam)\", spustí se :ref:`Editor seznamů <enum_editor>`, který Vám umožní "
+"nový seznam vytvořit.)  Výchozí hodnota je údaj, který bude použit v daném "
+"sloupci u již existujících záznamů a současně bude použit v Editoru záznamů "
+"u nově přidávaných záznamů jako přednastavený údaj."
 
 # 9754b7418b504863835965439af12933
 #: ../../columns_editor.txt:14
@@ -72,7 +93,11 @@ msgid ""
 "Edit the currently selected column definition.  Note that the data type "
 "cannot be changed.  If the default value is changed, the new default will "
 "appear in the row editor when adding new rows; existing rows are unaffected."
-msgstr "Umožní editaci vybrané definice sloupce.  Jednou zvolený datový typ sloupce však již nelze změnit.  Je-li změněna výchozí hodnota, nově nastavená výchozí hodnota se objeví v Editoru záznamů u nově přidávaných záznamů; již existující záznamy přitom nebudou změnou ovlivněny."
+msgstr ""
+"Umožní editaci vybrané definice sloupce.  Jednou zvolený datový typ sloupce "
+"však již nelze změnit.  Je-li změněna výchozí hodnota, nově nastavená "
+"výchozí hodnota se objeví v Editoru záznamů u nově přidávaných záznamů; již "
+"existující záznamy přitom nebudou změnou ovlivněny."
 
 # 9aa088a18fe943658edb1a63fbf4ffb7
 #: ../../columns_editor.txt:17
@@ -84,7 +109,9 @@ msgstr "**Smazat**"
 msgid ""
 "Delete the currently selected column definition.  All data stored in that "
 "column will be lost."
-msgstr "Smaže vybranou definici sloupce.  Veškeré údaje uchovávané v takovém sloupci budou přitom ztraceny."
+msgstr ""
+"Smaže vybranou definici sloupce.  Veškeré údaje uchovávané v takovém sloupci"
+" budou přitom ztraceny."
 
 # f053506909d54147b0a1666a7a1e3540
 #: ../../columns_editor.txt:20
@@ -96,7 +123,9 @@ msgstr "**Posunout nahoru**"
 msgid ""
 "Move the currently selected column up one position in the list (and hence in"
 " the row editor as well)."
-msgstr "Posune vybraný sloupec v seznamu Editoru sloupců o jednu pozici výše (a současně také v Editoru záznamů)."
+msgstr ""
+"Posune vybraný sloupec v seznamu Editoru sloupců o jednu pozici výše (a "
+"současně také v Editoru záznamů)."
 
 # 7bc960e2ce5140b7b88a2a22023c5a31
 #: ../../columns_editor.txt:23
@@ -108,7 +137,9 @@ msgstr "**Posunout dolů**"
 msgid ""
 "Move the currently selected column down one position in the list (and hence "
 "in the row editor as well)."
-msgstr "Posune vybraný sloupec v seznamu Editoru sloupců o jednu pozici níž (a současně také v Editoru záznamů)."
+msgstr ""
+"Posune vybraný sloupec v seznamu Editoru sloupců o jednu pozici níž (a "
+"současně také v Editoru záznamů)."
 
 # 897e3e701ec7431d8c78dacb327fe880
 #: ../../columns_editor.txt:25
@@ -119,4 +150,11 @@ msgid ""
 " it was.  If the dialog is cancelled while defining the columns of a new "
 "file, the file creation is aborted; otherwise, exiting the dialog takes you "
 "to the :ref:`data viewer <data_viewer>`."
-msgstr "Žádná ze změn ve formátu tabulky není provedena dříve, než ji uživatel potvrdí volbou \"OK\" (\"Done\" na Maemo Fremantle); je-li použita volba \"Zrušit\" či křížek pro uzavření dialogu, veškeré změny jsou zrušeny a původní formát souboru je ponechán beze změny.  Volba \"Zrušit\" či křížek pro uzavření dialogu při definování sloupců nového souboru vytváření souboru zruší. Uzavřením dialogu se přeneseme zpět do :ref:`Prohlížeče dat <data_viewer>`."
+msgstr ""
+"Žádná ze změn ve formátu tabulky není provedena dříve, než ji uživatel "
+"potvrdí volbou \"OK\" (\"Done\" na Maemo Fremantle); je-li použita volba "
+"\"Zrušit\" či křížek pro uzavření dialogu, veškeré změny jsou zrušeny a "
+"původní formát souboru je ponechán beze změny.  Volba \"Zrušit\" či křížek "
+"pro uzavření dialogu při definování sloupců nového souboru vytváření souboru"
+" zruší. Uzavřením dialogu se přeneseme zpět do :ref:`Prohlížeče dat "
+"<data_viewer>`."

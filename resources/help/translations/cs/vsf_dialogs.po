@@ -1,21 +1,25 @@
 # Messages from vsf_dialogs.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-08-19 15:16+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Czech (http://www.transifex.com/jmbowman/portabase/language/cs/)\n"
+"PO-Revision-Date: 2024-07-20 03:30+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/jmbowman/teams/14599/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 # ccaddbbf363a4735b4101b24b9cf65a4
 #: ../../vsf_dialogs.txt:4
@@ -29,7 +33,10 @@ msgid ""
 "manage views, sortings, and filters.  These three dialogs are very similar, "
 "differing only in the type of item being managed.  Each one has the "
 "following components:"
-msgstr "K výběru a správě náhledů, pořadí a filtrů slouží tři tlačítka na tlačítkové liště.  Jimi vyvolané dialogy si jsou velmi podobné, liší se jen typem spravovaných položek.  Každý dialog obsahuje tyto součásti:"
+msgstr ""
+"K výběru a správě náhledů, pořadí a filtrů slouží tři tlačítka na tlačítkové"
+" liště.  Jimi vyvolané dialogy si jsou velmi podobné, liší se jen typem "
+"spravovaných položek.  Každý dialog obsahuje tyto součásti:"
 
 # b2177df15f354b5cb11dd5603efc1f1a
 #: ../../vsf_dialogs.txt:9
@@ -42,7 +49,10 @@ msgid ""
 "The name of the currently selected item.  If this is one of the pre-defined "
 "items such as \"All Columns\", \"Selected Column\", \"All Rows\", or \"Quick"
 " Filter\", the edit and delete buttons are disabled."
-msgstr "Jméno právě vybrané položky.  Jde-li o některou z předdefinovaných položek, např. \"Všechny sloupce\", \"Vybraný sloupec\", \"Všechny záznamy\" či \"Vyhledat\", tlačítka pro editaci a smazání nejsou aktivní."
+msgstr ""
+"Jméno právě vybrané položky.  Jde-li o některou z předdefinovaných položek, "
+"např. \"Všechny sloupce\", \"Vybraný sloupec\", \"Všechny záznamy\" či "
+"\"Vyhledat\", tlačítka pro editaci a smazání nejsou aktivní."
 
 # 0c04214346fc4438ab1933bfbdc6e004
 #: ../../vsf_dialogs.txt:12
@@ -57,7 +67,12 @@ msgid ""
 ":ref:`filter editor <filter_editor>` to modify the currently selected item."
 "  If the edit dialog is accepted, the changes will be immediately applied "
 "and you will be returned to the :ref:`data viewer <data_viewer>`."
-msgstr "Toto tlačítko, které je umístěno vpravo od jména vybrané položky, spustí :ref:`Editor náhledů<view_editor>`, :ref:`Editor pořadí<sorting_editor>` či :ref:`Editor filtrů <filter_editor>` s možností změny právě vybrané položky.  Po odsouhlasení změn v editačním dialogu jsou změny ihned provedeny a uživatel je navrácen do :ref:`Prohlížeče dat <data_viewer>`."
+msgstr ""
+"Toto tlačítko, které je umístěno vpravo od jména vybrané položky, spustí "
+":ref:`Editor náhledů<view_editor>`, :ref:`Editor pořadí<sorting_editor>` či "
+":ref:`Editor filtrů <filter_editor>` s možností změny právě vybrané položky."
+"  Po odsouhlasení změn v editačním dialogu jsou změny ihned provedeny a "
+"uživatel je navrácen do :ref:`Prohlížeče dat <data_viewer>`."
 
 # bddfa00b33be42f2a6f543269b172328
 #: ../../vsf_dialogs.txt:15
@@ -71,7 +86,11 @@ msgid ""
 "item.  You will be returned to the data viewer with the default item of that"
 " type selected and applied (there is no default sorting, so after deleting a"
 " sorting the rows will not be sorted)."
-msgstr "Toto tlačítko, které je umístěno vpravo od tlačítka pro editaci, smaže právě vybranou položku.  Uživatel je navrácen do Prohlížeče dat s vybranou a použitou výchozí položkou daného typu (protože není definováno žádné výchozí pořadí, po smazání požadí zůstanou záznamy neseřazeny)."
+msgstr ""
+"Toto tlačítko, které je umístěno vpravo od tlačítka pro editaci, smaže právě"
+" vybranou položku.  Uživatel je navrácen do Prohlížeče dat s vybranou a "
+"použitou výchozí položkou daného typu (protože není definováno žádné výchozí"
+" pořadí, po smazání požadí zůstanou záznamy neseřazeny)."
 
 # 76727b33e7c0488c9f1530f8686273a6
 #: ../../vsf_dialogs.txt:18
@@ -85,7 +104,11 @@ msgid ""
 "view editor, sorting editor, or filter editor in order to create a new item "
 "of the appropriate type.  If such an item is created, it will be set as "
 "current and you will be returned to the data viewer."
-msgstr "Toto tlačítko, které je umístěno pod jménem právě vybrané položky, spustí Editor náhledů, Editor pořadí či Editor filtrů s možností vytvořit novou položku daného typu.  Je-li nová položka vytvořena, bude nastavena jako aktuální a uživatel bude vrácen do Prohlížeče dat."
+msgstr ""
+"Toto tlačítko, které je umístěno pod jménem právě vybrané položky, spustí "
+"Editor náhledů, Editor pořadí či Editor filtrů s možností vytvořit novou "
+"položku daného typu.  Je-li nová položka vytvořena, bude nastavena jako "
+"aktuální a uživatel bude vrácen do Prohlížeče dat."
 
 # 3bc49ccd2e404855a52598acfce45822
 #: ../../vsf_dialogs.txt:20
@@ -99,4 +122,8 @@ msgid ""
 "appropriate type.  Clicking on one of these will apply it and return you to "
 "the data viewer.  If you wish to edit or delete the item, you can then "
 "launch this dialog again to do so."
-msgstr "Pod tlačítkem \"Nový...\" najdete seznam již existujících položek daného typu.  Klepnutím na některou z nich bude tato použita jako aktuální a uživatel se vrátí do Prohlížeče dat.  Chcete-li položku editovat či smazat, můžete tak učinit po dalším vyvolání tohoto dialogu."
+msgstr ""
+"Pod tlačítkem \"Nový...\" najdete seznam již existujících položek daného "
+"typu.  Klepnutím na některou z nich bude tato použita jako aktuální a "
+"uživatel se vrátí do Prohlížeče dat.  Chcete-li položku editovat či smazat, "
+"můžete tak učinit po dalším vyvolání tohoto dialogu."
