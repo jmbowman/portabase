@@ -1,17 +1,20 @@
 # Messages from enum_manager.txt
-# Copyright (C) 2002-2012, Jeremy Bowman
+# Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
-"Report-Msgid-Bugs-To: https://sourceforge.net/p/portabase/bugs/\n"
+"Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2012-07-28 04:34+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +33,8 @@ msgid ""
 "the column is one of a set of possible string values.  The enum manager "
 "dialog lets you create, edit, delete, and change the listing order of these "
 "enums."
-msgstr "PortaBaseは列挙型のフィールドタイプをサポートしています。このフィールドの値は選択可能な文字列値のセットの内の一つになります。列挙管理ダイアログを使って、列挙型の作成、編集、削除、表示順の変更ができます。"
+msgstr ""
+"PortaBaseは列挙型のフィールドタイプをサポートしています。このフィールドの値は選択可能な文字列値のセットの内の一つになります。列挙管理ダイアログを使って、列挙型の作成、編集、削除、表示順の変更ができます。"
 
 # 9cfd2d1ec7754d61b014ec975438dce4
 #: ../../enum_manager.txt:8
@@ -38,7 +42,9 @@ msgid ""
 "Most of the dialog is occupied by a list of the currently defined enums. "
 "There is a row of buttons identical to those in the :ref:`columns editor "
 "<columns_editor>`:"
-msgstr "ダイアログの大部分は、現在定義されている列挙型の一覧で占められています。画面には、\\ :ref:`フォーマット編集画面 <columns_editor>`\\ と同様のボタンが一行に並んでいます:"
+msgstr ""
+"ダイアログの大部分は、現在定義されている列挙型の一覧で占められています。画面には、\\ :ref:`フォーマット編集画面 "
+"<columns_editor>`\\ と同様のボタンが一行に並んでいます:"
 
 # 615d8bcd5e4947ca8112bcdbe4c9cfc6
 #: ../../enum_manager.txt:11
@@ -51,7 +57,9 @@ msgid ""
 "Launch the :ref:`enum editor <enum_editor>` to define a new enum.  Note that"
 " the new enum will be added when \"OK\"/\"Done\" is clicked in the editor "
 "dialog, not when the \"OK\"/\"Done\" button is clicked in this dialog."
-msgstr ":ref:`列挙編集画面 <enum_editor>`\\ を起動し、列挙型を定義します。新しい列挙型は編集ダイアログで\"OK\"がクリックされた時点で登録されます。ダイアログの\"OK\"ボタンがクリックされなかった場合は登録されませんのでご注意ください。"
+msgstr ""
+":ref:`列挙編集画面 <enum_editor>`\\ "
+"を起動し、列挙型を定義します。新しい列挙型は編集ダイアログで\"OK\"がクリックされた時点で登録されます。ダイアログの\"OK\"ボタンがクリックされなかった場合は登録されませんのでご注意ください。"
 
 # b24535ca505b4238baa9e3416acd559b
 #: ../../enum_manager.txt:14
@@ -78,7 +86,8 @@ msgid ""
 " a dialog will warn you that these would also be deleted and ask if you want"
 " to continue.  The enum (and any associated colums) will be deleted "
 "immediately, not when \"OK\"/\"Done\" is clicked."
-msgstr "選択されている列挙型を削除します。この列挙型を使用しているフィールドがある場合、これらも削除される旨の警告が表示され、続けてよいかと訊ねられます。この列挙型（と関連するフィールド）は\"OK\"がクリックされた時ではなく、即座に削除されます。"
+msgstr ""
+"選択されている列挙型を削除します。この列挙型を使用しているフィールドがある場合、これらも削除される旨の警告が表示され、続けてよいかと訊ねられます。この列挙型（と関連するフィールド）は\"OK\"がクリックされた時ではなく、即座に削除されます。"
 
 # 4b2bdb774e2443969c7ca2b54e22bda2
 #: ../../enum_manager.txt:20
@@ -110,4 +119,5 @@ msgid ""
 "Click \"OK\"/\"Done\" to apply any changes made to the enum listing order, "
 "or cancel out of the dialog to leave the sequence unchanged (other than any "
 "added or deleted enums)."
-msgstr "列挙型の表示順序に行った変更を適用するには\"OK\"をクリック、表示順を（列挙型の追加および削除の分を除いては）変更せずに終わるにはキャンセルします。"
+msgstr ""
+"列挙型の表示順序に行った変更を適用するには\"OK\"をクリック、表示順を（列挙型の追加および削除の分を除いては）変更せずに終わるにはキャンセルします。"

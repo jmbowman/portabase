@@ -1,18 +1,20 @@
 # Messages from command_line.txt
 # Copyright (C) 2002-2017, Jeremy Bowman
 # This file is distributed under the same license as the PortaBase package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# jmbowman <jmbowman@alum.mit.edu>, 2017
-# jmbowman <jmbowman@alum.mit.edu>, 2012
+# jmbowman <jmbowman@alum.mit.edu>, 2024
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PortaBase\n"
 "Report-Msgid-Bugs-To: https://github.com/jmbowman/portabase/issues\n"
 "POT-Creation-Date: 2012-07-27 20:40-0500\n"
-"PO-Revision-Date: 2017-04-06 12:04+0000\n"
-"Last-Translator: jmbowman <jmbowman@alum.mit.edu>\n"
-"Language-Team: Japanese (http://www.transifex.com/jmbowman/portabase/language/ja/)\n"
+"PO-Revision-Date: 2024-07-20 03:31+0000\n"
+"Last-Translator: jmbowman <jmbowman@alum.mit.edu>, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/jmbowman/teams/14599/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,7 +35,9 @@ msgid ""
 "generate, update, or otherwise manipulate PortaBase data files.  Run "
 "``portabase -h`` for usage instructions; in summary, you can do the "
 "following:"
-msgstr "PortaBaseはLinux/UNIXのターミナルやDOSプロンプトから使用し、グラフィカル・インターフェース抜きでデータをインポート/エクスポートすることができます。これは、PortaBaseのデータファイルを生成し、更新し、その他の操作をするようなスクリプトを書く時には非常に便利です。\\ ``portabase -h``\\ を実行すると、使い方の説明が表示されます; 概要としては、以下ができます:"
+msgstr ""
+"PortaBaseはLinux/UNIXのターミナルやDOSプロンプトから使用し、グラフィカル・インターフェース抜きでデータをインポート/エクスポートすることができます。これは、PortaBaseのデータファイルを生成し、更新し、その他の操作をするようなスクリプトを書く時には非常に便利です。\\"
+" ``portabase -h``\\ を実行すると、使い方の説明が表示されます; 概要としては、以下ができます:"
 
 # 87dc7c3302e948718939c8edfe4a3913
 #: ../../command_line.txt:9
@@ -55,7 +59,9 @@ msgstr ":samp:`portabase fromxml {xmlfile pobfile}`"
 msgid ""
 "Create a new PortaBase data file at *pobfile* from the PortaBase-format XML "
 "file located at *xmlfile*."
-msgstr "*xmlfile*\\ で指定されたPortaBase形式のXMLファイルから、\\ *pobfile*\\ で指定された新しいPortaBaseのデータファイルを生成します。"
+msgstr ""
+"*xmlfile*\\ で指定されたPortaBase形式のXMLファイルから、\\ *pobfile*\\ "
+"で指定された新しいPortaBaseのデータファイルを生成します。"
 
 # f431dc09a08348b58f666445481fd27e
 #: ../../command_line.txt:15
@@ -67,7 +73,9 @@ msgstr ":samp:`portabase fromcsv {csvfile pobfile}`"
 msgid ""
 "Add rows to the existing PortaBase data file at *pobfile* from the CSV file "
 "located at *csvfile*."
-msgstr "*csvfile*\\ で指定されたCSVファイルから、\\ *pobfile*\\ で指定された既存のPortaBaseデータファイルにレコードを追加します。"
+msgstr ""
+"*csvfile*\\ で指定されたCSVファイルから、\\ *pobfile*\\ "
+"で指定された既存のPortaBaseデータファイルにレコードを追加します。"
 
 # e2f949af22ef482987caaadf5cf64486
 #: ../../command_line.txt:18
@@ -79,7 +87,9 @@ msgstr ":samp:`portabase frommobiledb {mdbfile pobfile}`"
 msgid ""
 "Create a new PortaBase data file at *pobfile* from the MobileDB file located"
 " at *mdbfile*."
-msgstr "*mdbfile*\\ で指定されたMobileDBファイルから、\\ *pobfile*\\ で指定された新しいPortaBaseのデータファイルを生成します。"
+msgstr ""
+"*mdbfile*\\ で指定されたMobileDBファイルから、\\ *pobfile*\\ "
+"で指定された新しいPortaBaseのデータファイルを生成します。"
 
 # d04aa8ce8e2e472ca47ff1cf311c5b05
 #: ../../command_line.txt:21
@@ -103,7 +113,9 @@ msgstr ":samp:`portabase tocsv {pobfile csvfile}`"
 msgid ""
 "Create a new CSV file at *csvfile* from rows in the PortaBase data file "
 "located at *pobfile*."
-msgstr "*pobfile*\\ で指定されたPortaBaseのデータファイル内のレコードから\\ *csvfile*\\ で指定された新しいCSVファイルを生成します。"
+msgstr ""
+"*pobfile*\\ で指定されたPortaBaseのデータファイル内のレコードから\\ *csvfile*\\ "
+"で指定された新しいCSVファイルを生成します。"
 
 # 76f42311fc1240caab72e60b82e0a78d
 #: ../../command_line.txt:27
@@ -115,7 +127,9 @@ msgstr ":samp:`portabase tohtml {pobfile htmlfile}`"
 msgid ""
 "Create a new HTML file at *htmlfile* from rows in the PortaBase data file "
 "located at *pobfile*."
-msgstr "*pobfile*\\ で指定されたPortaBaseのデータファイル内のレコードから\\ *htmlfile*\\ で指定された新しいHTMLファイルを生成します。"
+msgstr ""
+"*pobfile*\\ で指定されたPortaBaseのデータファイル内のレコードから\\ *htmlfile*\\ "
+"で指定された新しいHTMLファイルを生成します。"
 
 # 34cdb28b136449d7a023e4b2d0e44e4f
 #: ../../command_line.txt:29
@@ -123,14 +137,18 @@ msgid ""
 "To extract data from, add rows to, or create an encrypted file, type "
 ":samp:`-p {password}` immediately after the conversion command (before the "
 "other options described below)."
-msgstr "暗号化済みファイルからのデータの抽出、暗号化済みファイルへのレコード追加、暗号済みファイルの生成には、変換コマンドの直後（以下に示す他のオプションの前）に\\ :samp:`-p {password}`\\ と入力します。"
+msgstr ""
+"暗号化済みファイルからのデータの抽出、暗号化済みファイルへのレコード追加、暗号済みファイルの生成には、変換コマンドの直後（以下に示す他のオプションの前）に\\"
+" :samp:`-p {password}`\\ と入力します。"
 
 # 47c15e9af058494faa111608d903b5cb
 #: ../../command_line.txt:31
 msgid ""
 "The following options can be used between ``toxml``, ``tocsv``, or "
 "``tohtml`` and the PortaBase file to export from:"
-msgstr "``toxml``\\ 、\\ ``tocsv``\\ 、または\\ ``tohtml``\\ とエクスポート元になるPortaBaseファイル名の間に、以下のオプションを入れることができます:"
+msgstr ""
+"``toxml``\\ 、\\ ``tocsv``\\ 、または\\ ``tohtml``\\ "
+"とエクスポート元になるPortaBaseファイル名の間に、以下のオプションを入れることができます:"
 
 # 5d6b233cd46041e2b0c670906b13fbaa
 #: ../../command_line.txt:33
@@ -181,13 +199,15 @@ msgstr "``tocsv``とは以下のオプションも使用出来ます："
 
 #: ../../command_line.txt:49
 msgid ""
-"\"crlf\" to use Windows-style carriage return + newline, default is UNIX"
-"/Mac-style (newline only)"
-msgstr "「crlf」に設定すればウィンドウズの改行コード（キャリッジリターンとラインフィード）を使用します。デフォルトはUNIXの改行コード（ラインフィードのみ）。"
+"\"crlf\" to use Windows-style carriage return + newline, default is "
+"UNIX/Mac-style (newline only)"
+msgstr ""
+"「crlf」に設定すればウィンドウズの改行コード（キャリッジリターンとラインフィード）を使用します。デフォルトはUNIXの改行コード（ラインフィードのみ）。"
 
 # 0af6523a1160474ba4a62dd8d3ffb4f4
 #: ../../command_line.txt:51
 msgid ""
 "For more information about the PortaBase XML format and tools for doing "
 "useful things with it, see the PortaBase homepage (http://portabase.org)."
-msgstr "PortaBaseのXMLフォーマットと、これを使った便利な使い方の詳細は、PortaBaseのホームページ(http://portabase.org)をご覧ください。"
+msgstr ""
+"PortaBaseのXMLフォーマットと、これを使った便利な使い方の詳細は、PortaBaseのホームページ(http://portabase.org)をご覧ください。"
