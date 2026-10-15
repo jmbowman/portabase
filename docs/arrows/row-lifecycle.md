@@ -4,7 +4,7 @@ The lifecycle of a data row — adding one (including copy-as-new), deleting one
 
 ## Status
 
-**MAPPED** — segment opened 2026-09-30 (git SHA `b94bbb9`). The LLD is drafted and reconciled with the code, and the EARS specs for addition, copy, and row identity are drafted. Every ROW-DB spec has a test in `tests/rowlifecycle/`: the implemented ones pass and the four active gaps fail as expected, and one of them reproduced the origin of the ID gaps (`compressRowIds` writes nothing). ROW-UI specs have no tests yet. Not yet audited. Opened to give the row-ID robustness work an arrow to run in, rather than touching `Database`'s row methods unscoped.
+**MAPPED** — segment opened 2026-09-30 (git SHA `b94bbb9`). The LLD is drafted and reconciled with the code, and the EARS specs for addition, copy, and row identity are drafted. Every ROW-DB spec has a test in `tests/rowlifecycle/`: the implemented ones pass and the two remaining active gaps fail as expected. ROW-DB-011's test reproduced the origin of the ID gaps (`compressRowIds` wrote nothing); that fix and ROW-DB-002's (`maxId` from the largest stored ID) have landed. ROW-UI specs have no tests yet. Not yet audited. Opened to give the row-ID robustness work an arrow to run in, rather than touching `Database`'s row methods unscoped.
 
 ## References
 
@@ -44,36 +44,34 @@ The lifecycle of a data row — adding one (including copy-as-new), deleting one
 
 | Facet | Specs | Implemented `[x]` | Active gap `[ ]` | With tests |
 |---|---|---|---|---|
-| ROW-DB | 11 | 7 | 4 (002, 006, 010, 011) | 11 (`tests/rowlifecycle/`) |
+| ROW-DB | 11 | 9 | 2 (006, 010) | 11 (`tests/rowlifecycle/`) |
 | ROW-UI | 10 | 8 | 2 (003, 006) | 0 |
 
-Every ROW-DB spec has a test: the seven `[x]` pass, and the four active gaps fail as expected (ROW-DB-010 by crashing a child process). ROW-UI tests are not yet written; `[x]` there marks behavior the current code exhibits without a test to verify it.
+Every ROW-DB spec has a test: the nine `[x]` pass, and the two active gaps fail as expected (ROW-DB-010 by crashing a child process). ROW-UI tests are not yet written; `[x]` there marks behavior the current code exhibits without a test to verify it.
 
 ## Key Findings
 
-1. **`load` infers `maxId` from the row count, not from the data** (`database.cpp:202`). On a file whose IDs are not a permutation of 0..n−1 — real ones exist, reported by `portabase check` as CHK-DATA-003 — the next `addRow` (`database.cpp:1419`) mints an ID that is already present, after which every `data.Find(Id [id])` resolves to whichever duplicate is physically first and edits or deletes the wrong row.
-2. **`deleteRow` does not check its `Find` result** (`database.cpp:1609`). A miss passes -1 to `RemoveAt`, which crashes the process (reproduced by ROW-DB-010's test).
-3. **`compressRowIds` writes nothing, and is the origin of the ID gaps** (`database.cpp:1631-1640`). It writes through the rows of a `SortOn` view, which Metakit silently ignores (`metakit/src/derived.cpp:257`, an assertion compiled out without `q4_CHECK`). Every bulk delete since `08a6402` (2011) has left the survivors' IDs unchanged while setting `maxId` below them. ROW-DB-011's test reproduces it. Deleting the first 74 rows of a 99-row file leaves exactly `summer_camps.pob`'s IDs 74–98.
-4. **`addRow`'s failure contract is broken at both ends.** The Sequence branch advances the column's stored default mid-loop (`database.cpp:1475-1477`), so a rejection at a later column burns a sequence number with no row added; and `RowEditor::edit` (`roweditor.cpp:73-75`) discards the returned error and reads a row-ID variable that `addRow` never assigns on the failure path, passing an indeterminate value to the image write and the display refresh.
+1. **`load` inferred `maxId` from the row count, not from the data** (fixed; ROW-DB-002). On a file whose IDs have gaps — real ones exist, reported by `portabase check` as CHK-DATA-003 — the next `addRow` minted an ID that was already present, after which every `data.Find(Id [id])` resolved to whichever duplicate was physically first and edited or deleted the wrong row. `load` now takes the largest stored `_id`. Files that already hold duplicate IDs still need the load-time repair (item 7).
+2. **`deleteRow` does not check its `Find` result** (`database.cpp:1618`). A miss passes -1 to `RemoveAt`, which crashes the process (reproduced by ROW-DB-010's test).
+3. **`compressRowIds` wrote nothing, and was the origin of the ID gaps** (fixed; ROW-DB-011). It wrote through the rows of a `SortOn` view, which Metakit silently ignores (`metakit/src/derived.cpp:257`, an assertion compiled out without `q4_CHECK`). Every bulk delete from `08a6402` (2011) until the fix left the survivors' IDs unchanged while setting `maxId` below them. Deleting the first 74 rows of a 99-row file leaves exactly `summer_camps.pob`'s IDs 74–98. It now maps each sorted row back to its `_data` index and writes there.
+4. **`addRow`'s failure contract is broken at both ends.** The Sequence branch advances the column's stored default mid-loop (`database.cpp:1484-1486`), so a rejection at a later column burns a sequence number with no row added; and `RowEditor::edit` (`roweditor.cpp:73-75`) discards the returned error and reads a row-ID variable that `addRow` never assigns on the failure path, passing an indeterminate value to the image write and the display refresh.
 5. **A copied row loses its image data but keeps its format string** (`imageselector.cpp:65-72`, `162-166`). `ImageSelector` treats an untouched field as unchanged and only writes bytes when changed, so copy produces a row whose format string names a format with no bytes behind it — a state no other code path creates, and contrary to the help text's description of copy.
-6. **The code that wrote the known-affected file is still the current code.** `summer_camps.pob` came from a build of `03ad038` (2020-06-06). Since then `src/view.cpp` and `src/roweditor.cpp` last changed in 2017, `src/datamodel.cpp` in 2015, `src/viewdisplay.cpp` in 2017, and `src/database.cpp`'s only changes are in `getView`, `reconcileAllView`, and `calculateAll`. The reproduction in finding 3 therefore describes how that file was produced.
+6. **The code that wrote the known-affected file was unchanged until the ROW-DB-011 fix.** `summer_camps.pob` came from a build of `03ad038` (2020-06-06). Since then `src/view.cpp` and `src/roweditor.cpp` last changed in 2017, `src/datamodel.cpp` in 2015, `src/viewdisplay.cpp` in 2017, and `src/database.cpp`'s only changes are in `getView`, `reconcileAllView`, and `calculateAll`. The reproduction in finding 3 therefore describes how that file was produced.
 
 ## Work Required
 
 ### Must Fix
 
-1. **Write the ROW-UI tests** once items 2–5 have their ROW-DB fixes. The ROW-DB tests are in `tests/rowlifecycle/`. The row editor's half of item 4 (ROW-UI-006) waits for these tests.
-2. **Derive `maxId` from the largest stored `_id`** rather than the row count (finding 1). The robustness fix that stops a pre-existing gap from propagating into duplicate IDs.
-3. **Guard `deleteRow`'s `Find`** so an absent ID leaves `_data` and `maxId` unchanged (finding 2).
-4. **Make a rejected `addRow` leave no trace** and stop `RowEditor::edit` acting on an unassigned row ID (finding 4).
-5. **Make `compressRowIds` write to `_data`** (finding 3), taking the order from the sorted view but not writing through it. This is the fix that stops new gaps from forming.
+1. **Write the ROW-UI tests** once items 2–3 have their ROW-DB fixes. The ROW-DB tests are in `tests/rowlifecycle/`. The row editor's half of item 3 (ROW-UI-006) waits for these tests.
+2. **Guard `deleteRow`'s `Find`** so an absent ID leaves `_data` and `maxId` unchanged (finding 2).
+3. **Make a rejected `addRow` leave no trace** and stop `RowEditor::edit` acting on an unassigned row ID (finding 4).
 
 ### Should Fix
 
-6. **Carry image data into a copied row** (finding 5). Specified as an active gap in the first EARS pass, since the intended behavior is settled; the implementation choice is open — load the source bytes when the field is set, or mark the field for write and defer the load until commit.
-7. **Guard `View::deleteAllRows` against an empty batch**, so a filter matching nothing does not run a full compression pass over every row in the file.
+4. **Carry image data into a copied row** (finding 5). Specified as an active gap in the first EARS pass, since the intended behavior is settled; the implementation choice is open — load the source bytes when the field is set, or mark the field for write and defer the load until commit.
+5. **Guard `View::deleteAllRows` against an empty batch**, so a filter matching nothing does not run a full compression pass over every row in the file.
 
 ### Nice to Have
 
-8. **The broader row index-versus-ID audit** requested after COL-DB-010: `getId`, `getIndex`, `updateRow`, `editRow`, and the model-to-view index mapping have not been checked for the same confusion between a row's position and its identity.
-9. **Open a load-time repair segment** once this one is complete. It would repair a file whose row IDs violate the invariant when the file is opened, and ask the user before saving the fix (direction recorded in the LLD's Deferred item 5). It needs the LID Scope in `CLAUDE.md` expanded to cover `Database::load`, `PortaBase::openFile`, and the CLI's import and export commands.
+6. **The broader row index-versus-ID audit** requested after COL-DB-010: `getId`, `getIndex`, `updateRow`, `editRow`, and the model-to-view index mapping have not been checked for the same confusion between a row's position and its identity.
+7. **Open a load-time repair segment** once this one is complete. It would repair a file whose row IDs violate the invariant when the file is opened, and ask the user before saving the fix (direction recorded in the LLD's Deferred item 5). It needs the LID Scope in `CLAUDE.md` expanded to cover `Database::load`, `PortaBase::openFile`, and the CLI's import and export commands.
