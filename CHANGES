@@ -1,3 +1,10 @@
+2026-10-15  JMB  Fixed "delete all rows in filter" bug
+
+    Fixed a 15-year-old bug in "delete all rows in filter" which left
+    gaps in the set of row IDs that could cause some later operations to
+    trigger a crash (like the one fixed on 2026-09-10). Also made new ID
+    assignment more resilient to existing problems with row ID management.
+
 2026-10-14  JMB  Added DB tests for the row lifecycle
 
     Added unit tests for the database side of the row/create/copy/delete

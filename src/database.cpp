@@ -199,7 +199,16 @@ QString Database::load()
         // added in version 8, but may be out of synch due to an update bug
         addEnumDataIndices();
     }
-    maxId = data.GetSize() - 1;
+    // the largest stored ID, not the row count, in case the IDs have gaps
+    // @spec ROW-DB-002
+    maxId = -1;
+    int size = data.GetSize();
+    for (int i = 0; i < size; i++) {
+        int rowId = Id (data[i]);
+        if (rowId > maxId) {
+            maxId = rowId;
+        }
+    }
     return "";
 }
 
@@ -1627,17 +1636,25 @@ void Database::deleteRow(int id, bool compressRowIds)
  * be needed after a bulk delete operation in which this compacting was
  * explicitly deferred.
  */
+// @spec ROW-DB-011
 void Database::compressRowIds()
 {
+    // rows of a sorted view are read-only, so map them back to the data table
     c4_View sorted = data.SortOn(Id);
     int size = sorted.GetSize();
-    for (int i = 0; i < size; i++) {
-        c4_RowRef row = sorted[i];
+    int *indices = new int[size];
+    int i;
+    for (i = 0; i < size; i++) {
+        indices[i] = data.GetIndexOf(sorted[i]);
+    }
+    for (i = 0; i < size; i++) {
+        c4_RowRef row = data[indices[i]];
         int rowId = Id (row);
         if (rowId > i) {
             Id (row) = i;
         }
     }
+    delete[] indices;
     maxId = size - 1;
 }
 
