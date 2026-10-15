@@ -19,6 +19,7 @@
 - [Data Integrity Check (Specs)](intent/integrity-check/integrity-check-specs.md)
 - [Row Lifecycle (Arrow)](arrows/row-lifecycle.md)
 - [Row Lifecycle (Design)](intent/row-lifecycle/row-lifecycle-design.md)
+- [Row Lifecycle (Specs)](intent/row-lifecycle/row-lifecycle-specs.md)
 
 # Development Tools
 

@@ -1,3 +1,10 @@
+2026-10-14  JMB  Added DB tests for the row lifecycle
+
+    Added unit tests for the database side of the row/create/copy/delete
+    process, which uncovered a bug in deleting all rows in a filter which
+    has been present since 2011 (to be fixed shortly).  Also made a few
+    improvements to coding agent instructions.
+
 2026-10-02  JMB  Improved GHA build reliability
 
     * Attempt up to 5 retries of the Android NDK download with resume, in
