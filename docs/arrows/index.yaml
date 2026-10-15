@@ -1,5 +1,5 @@
 schema_version: 2
-last_updated: 2026-09-30
+last_updated: 2026-10-02
 
 taxonomy:
   data-model: standalone
@@ -36,7 +36,7 @@ arrows:
     blocks: []
     blockedBy: []
     detail: row-lifecycle.md
-    next: "LLD drafted and reconciled with the code; no EARS yet. Next: draft ROW-UI/ROW-DB specs for addition, copy and row identity (deletion path's specs follow with that chunk), then tests-first on the four Must Fix items -- maxId derived from the largest stored _id, a guarded deleteRow Find, a no-trace rejected addRow, and RowEditor no longer acting on an unassigned row ID. Then reproduce the ID-gap origin, distinguishing count-derived maxId from compressRowIds' write-while-iterating"
+    next: "ROW-DB tests written (tests/rowlifecycle/); the four ROW-DB gaps fail as expected. ID-gap origin found: compressRowIds writes through a read-only SortOn view, so it has written nothing since 2011 (ROW-DB-011). Next: code for the ROW-DB gaps against the existing failing tests -- compressRowIds writing to _data (011), maxId from the largest stored _id (002), a guarded deleteRow Find (010), a no-trace rejected addRow (006). Then ROW-UI tests (row editor + display refresh harness) and the ROW-UI gaps, including RowEditor handling a rejection (ROW-UI-006). Load-time repair is deferred to its own segment (LLD Deferred item 5)"
     drift: null
 
 unmapped: {}

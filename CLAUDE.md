@@ -18,6 +18,10 @@ Keep comments in code/config brief — a pointer, not the explanation. When some
 
 When documenting this repo's actual state or conventions, say it directly — don't wrap a decision that has already been made in generic hedging ("this can live wherever the project's conventions dictate", "check before assuming"). Reserve portable phrasing for content genuinely meant to travel unchanged to other repos, such as a skill's general mechanism section.
 
+Never reference the `site/` directory (or paths under it) from anything in `docs/wiki/`. `site/` is temporary local staging for the legacy website's HTML and disappears once its content is ported; `docs/wiki/` pages are durable, so a reference to it becomes a dangling pointer. Write `PAGE.html`, not `site/PAGE.html`, and refer to results by the surviving artifact ("the file-format page") rather than the source file.
+
+Where work and knowledge go — the arrow for intended behavior, GitHub issues for tasks that aren't behavior, `docs/wiki/` for durable reasoning, private agent memory for personal working style — is set out in `docs/wiki/agentic-development-support.md` § Where Knowledge and Work Live.
+
 ## Making changes
 
 The bottleneck in this project is the maintainer's review budget, not how fast code gets written. Optimize diffs for being understood.
@@ -25,6 +29,7 @@ The bottleneck in this project is the maintainer's review budget, not how fast c
 - **Keep PRs small** — under ~400 lines added or changed where the work divides that way. Don't bundle adjacent value (a new feature, a test-suite expansion) into a bug-fix PR unless that volume was genuinely needed to *find* the bug; when it was, say so.
 - **Match surrounding idioms in files you edit**, even over more modern equivalents. Idiom-consistent, boring diffs clear review fast; novel-but-equivalent patterns force line-by-line scrutiny. An anonymous namespace where the rest of the file uses none, or a fresh loop variable where the method reuses `i`, is the kind of thing that stands out to a human reader and that an agent doesn't think to flag. Reserve modern C++ for brand-new files, where there is no surrounding style to match and so no inconsistency is created.
 - **For an unavoidably large diff**, offer a reviewer's guide — a risk-ordered reading order and a consolidated list of decisions and trade-offs — rather than leaving the reviewer to reconstruct intent from the code. Surface your own low-confidence areas without being asked.
+- **Verify against primary sources; don't stop at the first plausible answer.** Read the source, the official docs, or run the thing — don't settle for a secondhand summary or a diagnosis that merely fits. Root-cause over working around, cite file:line or the exact command run, and flag uncertainty explicitly instead of smoothing it over. A plausible explanation from another tool or agent is a lead, not a conclusion. When changing a precedence-ordered chain (a fallback sequence, a lookup order), verify the *order* against the documented constraint that forces it — not just that each branch works alone.
 
 ## Copyright headers
 
@@ -74,7 +79,9 @@ Before running a hook, `prek` stashes unstaged working-tree changes to its own p
 
 Python tooling scripts (e.g. `packaging/lint_cpp.py`) use `uv` with PEP 723 inline script dependencies, not manual `pip install`. `uv` itself is deliberately *not* mise-managed — it's expected to already be globally available on a dev machine; CI provisions it via the `astral-sh/setup-uv` action in `build.yml`.
 
-**`.issues/`** is a gitignored, offline mirror of this repo's GitHub issues/PRs (including comments) for agent context, refreshed via `mise run issues-sync`. It uses `gh2md`, authenticated via a `GITHUB_ACCESS_TOKEN` env var or a token file (`~/.config/gh2md/token`/`~/.github-token`) that the maintainer manages outside of any Claude Code session. **Do not read, cat, echo, or otherwise access that token, its env var, or its file from an agent session** — refreshing `.issues/` is the maintainer's manual step.
+When adopting a new tool or dependency, default to a **scoped trial** — one subsystem, one pilot area — rather than full-repo commitment, and say explicitly which it is. The existing adoptions follow this: LID is piloted on two segments rather than project-wide, and OpenKnowledge was scoped to `docs/wiki/` with MCP registration limited to Claude Code. One early success is not grounds for rolling out everywhere.
+
+**`.issues/`** is a gitignored, offline mirror of this repo's GitHub issues/PRs (including comments) for agent context, refreshed via `mise run issues-sync`. It is only as current as the last sync, so run one before filing anything — a stale mirror makes a duplicate issue easy to file. It uses `gh2md`, authenticated via a `GITHUB_ACCESS_TOKEN` env var or a token file (`~/.config/gh2md/token`/`~/.github-token`) that the maintainer manages outside of any Claude Code session. **Do not read, cat, echo, or otherwise access that token, its env var, or its file from an agent session** — refreshing `.issues/` is the maintainer's manual step.
 
 Claude Code skills/commands/MCP dependencies sourced from third-party repos (like the LID plugins below) are declared in `apm.yml`/`apm.lock.yaml` and installed via `mise exec -- apm install` — see `docs/wiki/agentic-development-support.md` for details, including the gotcha where plain `owner/repo` silently no-ops for monorepo plugins (needs `owner/repo/path/to/plugin#ref`).
 
@@ -109,7 +116,7 @@ Paths in scope:
 - `src/database.cpp` (row-lifecycle methods: `addRow`, `deleteRow`, `compressRowIds`, and the `maxId` initialization in `load` — not the rest of `load`)
 - `src/commandline.cpp`, `src/commandline.h` (the `check` subcommand only — not the rest of the CLI)
 - `src/main.cpp` (the CLI-dispatch condition only — routing `check` to the command-line interface)
-- `tests/dbeditor/`, `tests/dbeditor_robustness/`, `tests/integritycheck/`
+- `tests/dbeditor/`, `tests/dbeditor_robustness/`, `tests/integritycheck/`, `tests/rowlifecycle/`
 
 Paths explicitly excluded:
 - everything else in `src/database.cpp`/`.h` outside the methods listed above
@@ -132,7 +139,7 @@ HLD → LLDs → EARS → Tests → Code
 
 Stop after each phase for user review. **Docs carry current intent, written to be read cold** — write each doc as if authored fresh today, from current intent alone: no narration of how it changed, no meaning that needs the conversation that produced it, no rebuttals to questions only a past discussion raised. Rationale, considered alternatives, and constraints a fresh author would independently write stay; record rejected alternatives and why in the LLD's Decisions & Alternatives table, not as asides in body prose.
 
-**Memory vs. intent.** Before saving durable project knowledge to agent or tool memory, test whether it is project *intent* — would a fresh agent, in any tool, next session, need it to build this system correctly? If yes, record it in the arrow (HLD / LLD / EARS / decision doc), which travels and cascades — not in private, per-tool memory, where intent escapes the arrow. Knowledge about the user or how they like to work stays in memory. **Open question for this project**: general project knowledge that isn't code-behavior-specific (e.g. `docs/wiki/`'s pages) doesn't obviously belong in the arrow either — the boundary between "the arrow" and `docs/wiki/` hasn't been resolved yet; use judgment and flag ambiguous cases to the user rather than silently picking one.
+**Memory vs. intent.** Before saving durable project knowledge to agent or tool memory, test whether it is project *intent* — would a fresh agent, in any tool, next session, need it to build this system correctly? If yes, record it in the arrow (HLD / LLD / EARS / decision doc), which travels and cascades — not in private, per-tool memory, where intent escapes the arrow. Knowledge about the user or how they like to work stays in memory. Knowledge that isn't code-behavior-specific doesn't belong in the arrow either: tasks that aren't system behavior go to GitHub issues, and durable reasoning goes to `docs/wiki/`. See `docs/wiki/agentic-development-support.md` § Where Knowledge and Work Live for the full split, and flag genuinely ambiguous cases rather than silently picking one.
 
 ### Navigation
 

@@ -8,12 +8,24 @@ PortaBase is being revived with heavy use of Claude Code and other AI coding age
 
 [roadmap.md](roadmap.md), [agentic_sdlc.md](agentic_sdlc.md), and [competitive-landscape.md](competitive-landscape.md) were folded in here from the repo root. Rendering `docs/wiki/` through a static-site generator (mdBook is the current front-runner, chosen for build speed and low maintenance overhead) is still an open, undecided future step. Whatever `docs/wiki/` content gets written should stay plain-Markdown-portable (no tool-specific link syntax, no required frontmatter schema) so that move stays easy.
 
-## What Lives in Native Claude Code Memory Instead
+## Where Knowledge and Work Live
 
-Claude Code also has a private, per-developer memory system (not part of this repo — it lives under the developer's own `~/.claude/` directory). The split is:
+Four homes, each with a distinct job. Putting something in the wrong one is how it gets lost or duplicated.
 
-- **Personal working-style notes** (how a specific developer likes to collaborate) stay in that private memory.
-- **Project knowledge** (architecture, rationale, decisions like why no competitor has emerged — see [competitive-landscape.md](competitive-landscape.md)) belongs here in `docs/wiki/` instead, since other contributors and their agents need to see it too.
+- **The arrow** (`docs/high-level-design.md`, `docs/intent/`, `docs/arrows/`) holds *intended system behavior* — what the software should do. Behavior that is wanted but not yet implemented is an EARS spec marked `[ ]`, not a ticket; that is what makes it cascade and what the LID coherence checks verify against. See the LID section below.
+- **GitHub issues** hold *tasks that are not system behavior* — CI and tooling work, cleanup, upstream bug filing, distribution, and bug reports from users. This is the long-standing practice in this repo (see the open issues for test-suite, packaging, and code-signing work), and it is where most contributors will look first.
+- **`docs/wiki/`** holds *durable reasoning* — root causes, investigation records, traces, rejected theories, and the rationale behind a decision. Issue threads are poor at this: append-only, awkward to revise, and not greppable offline. An issue should link to the wiki page rather than restate it, and a wiki page outlives the issue that prompted it.
+- **Claude Code's private per-developer memory** (under the developer's own `~/.claude/`, not part of this repo) holds only *personal working-style notes* — how one developer likes to collaborate. Anything another contributor or their agent would need belongs in one of the three above.
+
+The test for the last one: would a different contributor, on a different machine, need this to work on PortaBase correctly? If yes, it does not belong in private memory. Several notes have already graduated from memory into `CLAUDE.md` and into this page for exactly that reason.
+
+## Working Practices for Agents
+
+**Verify with primary sources; do not stop at the first plausible answer.** Root-cause rather than work around, cite file and line or the exact command run, and flag gaps instead of smoothing them over. A plausible diagnosis from another tool or agent is a lead, not a conclusion — this project has repeatedly found the first explanation to be wrong in a way that changed the fix.
+
+**Treat an absence-claim as a lead, not a fact.** When any tool or subagent reports that something is missing — not installed, no such file, feature absent — check it directly before acting on it. A subagent hits tool friction its caller never sees (an interrupted filesystem scan, a denied permission prompt) and cannot distinguish "not found" from "the check did not finish." One targeted `ls` or `grep` usually settles it.
+
+**Keep portable mechanism separate from project-specific data.** A skill, script, or tool meant to work in any repository should contain no PortaBase specifics, and the project-owned file it reads should contain no general "how this works" instructions. The test: would this exact file make sense unchanged in a different repository? If not, it is project data and belongs in a sibling file the mechanism points at. Correspondingly, never hand-patch vendored or generated content (an installed third-party skill, a regenerated config) — that gets overwritten; record the correction somewhere the project actually owns, such as this page.
 
 ## Agent Skill/Plugin Dependencies: APM (Agent Package Manager)
 
@@ -32,7 +44,7 @@ dependencies:
     - jszmajda/lid/plugins/arrow-maintenance#v1.3.0
 ```
 
-`linked-intent-dev` is the greenfield HLD→LLD→EARS→tests→code workflow; `arrow-maintenance` (with its `map-codebase` command) is the brownfield tool for mapping _existing_ code into that structure bottom-up — the relevant one for PortaBase, since this is a 25-year-old codebase with no test suite yet. First real use: piloting `arrow-maintenance:map-codebase` against `src/dbeditor.cpp`/`.h` and the schema-change path in `src/database.cpp`, chosen because there's a known crash bug there worth surfacing. `lid-experimental` (a third plugin bundling not-yet-promoted techniques) was deliberately left out.
+`linked-intent-dev` is the greenfield HLD→LLD→EARS→tests→code workflow; `arrow-maintenance` (with its `map-codebase` command) is the brownfield tool for mapping *existing* code into that structure bottom-up — the relevant one for PortaBase, since this is a 25-year-old codebase with no test suite yet. First real use: piloting `arrow-maintenance:map-codebase` against `src/dbeditor.cpp`/`.h` and the schema-change path in `src/database.cpp`, chosen because there's a known crash bug there worth surfacing. `lid-experimental` (a third plugin bundling not-yet-promoted techniques) was deliberately left out.
 
 ## Dynamic Workflows
 
