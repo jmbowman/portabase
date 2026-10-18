@@ -14,7 +14,7 @@ Pinned to `v0.24.0` — the exact version `mise.toml` installs (`apm = "latest"`
 
 Path: `.reference-repos/lid/`
 
-Pinned to `v1.3.0` — the exact tag `apm.yml` deploys `linked-intent-dev` and `arrow-maintenance` from. Check here first when a deployed LID skill under `.claude/skills/` behaves unexpectedly, or its rendered docs are unclear — also includes undeployed parts of the plugin repo (tests, design notes) that don't ship with the deployed skill.
+Pinned to `v1.4.0` — the exact tag `apm.yml` deploys `linked-intent-dev` and `arrow-maintenance` from. Check here first when a deployed LID skill under `.claude/skills/` behaves unexpectedly, or its rendered docs are unclear — also includes undeployed parts of the plugin repo (tests, design notes) that don't ship with the deployed skill.
 
 ### mdbook
 

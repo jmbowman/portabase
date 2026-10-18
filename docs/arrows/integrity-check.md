@@ -4,7 +4,7 @@ Read-only structural validation of `.pob` files against the file-format invarian
 
 ## Status
 
-**OK** — greenfield segment designed 2026-07-13; checker core implemented tests-first 2026-07-14; delivered as the `portabase check` subcommand 2026-07-15; audited 2026-07-18 with all CHK specs implemented and tested. Only deferral: `CHK-CORE-009` (encrypted-content checking).
+**OK** — greenfield segment designed 2026-07-13; checker core implemented tests-first 2026-07-14; delivered as the `portabase check` subcommand 2026-07-15; audited 2026-07-18 with all CHK specs implemented and tested; re-audited 2026-10-17 with the suite passing. Only deferral: `CHK-CORE-009` (encrypted-content checking).
 
 ## References
 
@@ -35,7 +35,7 @@ Read-only structural validation of `.pob` files against the file-format invarian
 
 ## Spec Coverage
 
-- **CHK-CORE** (checker engine): 001–008 implemented; 009 (encrypted-content checking) deferred.
+- **CHK-CORE** (checker engine): 001–008 and 010 implemented; 009 (encrypted-content checking) deferred.
 - **CHK-GLOBAL / CHK-COL / CHK-DATA / CHK-VIEW / CHK-SORT / CHK-FILTER / CHK-ENUM / CHK-CALC** (invariant catalog): all implemented.
 - **CHK-CLI** (the `check` subcommand): 001–004 implemented and tested — 001 (the argument loop) by `cliCheckCommand` driving the built binary, the rest via the core's `report()`/`exitCode()`.
 

@@ -26,6 +26,7 @@
 - [Agentic SDLC Wishlist](wiki/agentic_sdlc.md)
 - [LID Feedback](wiki/lid-feedback.md)
 - [Qt Tips](wiki/qt-tips.md)
+- [Metakit Tips](wiki/metakit-tips.md)
 - [Markdown Linting](wiki/markdown-linting.md)
 - [Converting HTML to Markdown](wiki/converting-html-to-markdown.md)
 

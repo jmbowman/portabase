@@ -114,9 +114,8 @@ QString boundedRuns(const IntList &values)
  * Describe how a row-ID set deviates from the expected permutation of
  * 0..n-1: which IDs are present, which are duplicated, which expected IDs are
  * missing, and the largest present. The specifics matter for diagnosing how a
- * file got into this state (and how much addRow's maxId assumption endangers
- * it) -- a file whose IDs all sit outside the expected range says nothing
- * useful if only the absences are listed.
+ * file got into this state -- a file whose IDs all sit outside the expected
+ * range says nothing useful if only the absences are listed.
  *
  * @param ids The row IDs in any order; sorted in place as a side effect
  * @return The description, or an empty string if ids is empty

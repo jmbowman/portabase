@@ -22,12 +22,10 @@
 
 ## Tenets
 
-- **Never trust file-derived state.** Code reading a `.pob` file's internal structures must handle the lookup-miss and invariant-violation cases, even for invariants PortaBase itself is supposed to maintain — files accumulate decades of history across versions, platforms, and past bugs.
-- **Diagnose before repair.** Tools that examine user data report findings; they never mutate a file except by an explicit, separate user action. The application itself, in the course of a user-initiated operation, may auto-repair a format anomaly when the repair path is unambiguous and loses no data — that is invariant maintenance, not repair tooling.
-
-- **Diagnostic scans stay cheap on clean files.** A checker's normal outcome is "no findings", so its per-record cost should track what is actually wrong rather than the size of the database — build the detail needed to describe a violation only once one is confirmed.
-
-- **Row IDs are internal identity, not a user-visible record number.** A data row's `_id` exists to address that row within the file; it is not a number the user reads, cites, or expects to stay put. Operations are therefore free to renumber rows to keep the ID space compact. A durable, user-facing number is what the Sequence column type provides.
+- **Never trust file-derived state.** A `.pob` file can violate even the invariants PortaBase itself maintains; files accumulate decades of history across versions, platforms, and past bugs.
+- **Diagnose before repair.** Tools that examine user data report findings; they never mutate a file except by an explicit, separate user action.
+- **Diagnostic scans stay cheap on clean files.** A checker's normal outcome is "no findings", so its cost should track what is actually wrong rather than the size of the database.
+- **Row IDs are internal identity, not a user-visible record number.** A row's `_id` addresses it within the file, so operations are free to renumber rows to keep the ID space compact.
 
 *(Additional tenets to be elicited as more segments are mapped. See `docs/intent/column-editing/column-editing-design.md`'s Decisions & Alternatives for segment-level design principles, e.g. staged edits with atomic apply-on-confirm.)*
 
@@ -41,7 +39,7 @@
 
 ## Key Design Decisions
 
-*(not yet specified at project level.)*
+- **Invariant maintenance during user-initiated operations.** In the course of an operation the user started, the application may auto-repair a format anomaly when the repair path is unambiguous and loses no data — for example, the Edit Columns operation reconciling the `_all` view (COL-DB-008). This is invariant maintenance, not repair tooling, so *Diagnose before repair* does not apply to it.
 
 ## Success Metrics
 

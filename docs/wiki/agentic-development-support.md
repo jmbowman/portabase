@@ -35,13 +35,13 @@ Notes for adding a dependency from a monorepo (like LID below): the shorthand `o
 
 ## Linked-Intent Development (LID)
 
-[`jszmajda/lid`](https://github.com/jszmajda/lid) — two-way-linked specs (why decisions were made, traced through HLD → LLD → EARS specs → tests → code). Installed via APM, pinned to `v1.3.0`:
+[`jszmajda/lid`](https://github.com/jszmajda/lid) — two-way-linked specs (why decisions were made, traced through HLD → LLD → EARS specs → tests → code). Installed via APM, pinned to `v1.4.0`:
 
 ```yaml
 dependencies:
   apm:
-    - jszmajda/lid/plugins/linked-intent-dev#v1.3.0
-    - jszmajda/lid/plugins/arrow-maintenance#v1.3.0
+    - jszmajda/lid/plugins/linked-intent-dev#v1.4.0
+    - jszmajda/lid/plugins/arrow-maintenance#v1.4.0
 ```
 
 `linked-intent-dev` is the greenfield HLD→LLD→EARS→tests→code workflow; `arrow-maintenance` (with its `map-codebase` command) is the brownfield tool for mapping *existing* code into that structure bottom-up — the relevant one for PortaBase, since this is a 25-year-old codebase with no test suite yet. First real use: piloting `arrow-maintenance:map-codebase` against `src/dbeditor.cpp`/`.h` and the schema-change path in `src/database.cpp`, chosen because there's a known crash bug there worth surfacing. `lid-experimental` (a third plugin bundling not-yet-promoted techniques) was deliberately left out.

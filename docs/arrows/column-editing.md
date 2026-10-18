@@ -4,12 +4,12 @@ The Edit Columns operation end-to-end — the staging dialog, the `Database` sch
 
 ## Status
 
-**OK** — mapped 2026-07-10 (git SHA `4069734`); scope extended 2026-07-13 to the full user-visible operation (`PortaBase::editColumns` and the view-maintenance methods it drives); audited 2026-07-18 with all COL-UI/COL-DB specs implemented and covered by tests. Brownfield pilot for the agentic-scaffolding roadmap item.
+**OK** — mapped 2026-07-10 (git SHA `4069734`); scope extended 2026-07-13 to the full user-visible operation (`PortaBase::editColumns` and the view-maintenance methods it drives); audited 2026-07-18 with all COL-UI/COL-DB specs implemented and covered by tests; re-audited 2026-10-17 with both suites passing. Brownfield pilot for the agentic-scaffolding roadmap item.
 
 ## References
 
 ### HLD
-- docs/high-level-design.md (project-level stub; too narrow a scope for project-wide content yet — see that doc's own notes)
+- docs/high-level-design.md — the `## Tenets` entry *never trust file-derived state*, and the `## Key Design Decisions` entry on invariant maintenance during user-initiated operations (the `_all` reconciliation, COL-DB-008)
 
 ### LLD
 - docs/intent/column-editing/column-editing-design.md
@@ -54,9 +54,10 @@ The Edit Columns operation end-to-end — the staging dialog, the `Database` sch
 (none — all COL-UI and COL-DB specs implemented; the full `tests/dbeditor_robustness/` suite passes.)
 
 ### Should Fix
-1. **Row-ID robustness outside this segment's scope**, likely a new segment with a scope-extension decision: the *origin* of non-consecutive row IDs (maintainer suspects calculated-field handling; the affected file was appended-to, not deletion/import-corrupted), plus `Database::deleteRow`'s renumber-without-removal, `load()`'s `maxId = GetSize() - 1`, and `commit()`'s ignored return values (see `docs/wiki/dbeditor-code-review-followups.md`).
-2. **Broader row index/ID audit**: `getRow()` was audited clean apart from the COL-DB-010 bug; the maintainer requested extending it to all functions taking a row index or ID (`getId`, `getIndex`, `updateRow`, `deleteRow`, `editRow`, model↔view mapping).
-3. **Widget-layer coverage**: the suites drive `Database`/`DBEditor` but not `ViewDisplay`/`DataModel`; the viewer refresh around `updateDataFormat()`'s storage restructure — including the `viewer->setDatabase` vs `viewAllColumns` branch in `PortaBase::editColumns` — is not exercised by the headless tests (no COL spec mandates viewer-display behavior) and is best verified by running the app: create a new file and define its first columns (should show the data view), and edit columns on an existing file (should refresh).
+1. **Widget-layer coverage**: the suites drive `Database`/`DBEditor` but not `ViewDisplay`/`DataModel`; the viewer refresh around `updateDataFormat()`'s storage restructure — including the `viewer->setDatabase` vs `viewAllColumns` branch in `PortaBase::editColumns` — is not exercised by the headless tests (no COL spec mandates viewer-display behavior) and is best verified by running the app: create a new file and define its first columns (should show the data view), and edit columns on an existing file (should refresh).
+2. **`commit()`'s ignored return values** (see `docs/wiki/dbeditor-code-review-followups.md`) — outside every segment's scope so far.
+
+Row-ID robustness and the broader row index-versus-ID audit are tracked in `docs/arrows/row-lifecycle.md`.
 
 ### Nice to Have
 (none)

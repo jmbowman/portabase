@@ -13,6 +13,7 @@ Severities cited below follow the classification principle in `integrity-check-d
 - [x] **CHK-CORE-007**: The checker shall report a WARNING for any stored string property value, in any view, that is not valid UTF-8.
 - [x] **CHK-CORE-008**: The checker shall report an ERROR for each mandatory view absent for the file's format version (`_global`, `_columns`, `_data`, `_views`, `_viewcolumns` always; `_sorts` and `_sortcolumns` at version ≥ 2; `_filters` and `_filterconditions` at version ≥ 3; `_enums` and `_enumoptions` at version ≥ 4; `_calcs` and `_calcnodes` at version ≥ 10), except in encrypted files (see CHK-CORE-004).
 - [D] **CHK-CORE-009**: Where the user supplies the file's password, the checker shall decrypt an encrypted file's contents and run the full invariant catalog against them.
+- [x] **CHK-CORE-010**: When checking a file that satisfies every invariant in the catalog, the checker shall report no findings.
 
 ## CHK-GLOBAL (the `_global` view)
 

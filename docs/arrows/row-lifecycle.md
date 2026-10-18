@@ -4,7 +4,7 @@ The lifecycle of a data row — adding one (including copy-as-new), deleting one
 
 ## Status
 
-**MAPPED** — segment opened 2026-09-30 (git SHA `b94bbb9`). The LLD is drafted and reconciled with the code, and the EARS specs for addition, copy, and row identity are drafted. Every ROW-DB spec has a test in `tests/rowlifecycle/`: the implemented ones pass and the two remaining active gaps fail as expected. ROW-DB-011's test reproduced the origin of the ID gaps (`compressRowIds` wrote nothing); that fix and ROW-DB-002's (`maxId` from the largest stored ID) have landed. ROW-UI specs have no tests yet. Not yet audited. Opened to give the row-ID robustness work an arrow to run in, rather than touching `Database`'s row methods unscoped.
+**AUDITED** — segment opened 2026-09-30 (git SHA `b94bbb9`); audited 2026-10-17. The LLD is drafted and reconciled with the code, and the EARS specs for addition, copy, row identity, and the `Database` side of deletion are drafted. Every ROW-DB spec except the newest, ROW-DB-012, has a test in `tests/rowlifecycle/`: the implemented ones pass and the active gaps fail as expected. ROW-DB-011's test reproduced the origin of the ID gaps (`compressRowIds` wrote nothing); that fix and ROW-DB-002's (`maxId` from the largest stored ID) have landed. ROW-UI specs have no tests yet. Opened to give the row-ID robustness work an arrow to run in, rather than touching `Database`'s row methods unscoped.
 
 ## References
 
@@ -18,7 +18,7 @@ The lifecycle of a data row — adding one (including copy-as-new), deleting one
 - docs/intent/row-lifecycle/row-lifecycle-specs.md — facets `ROW-DB` (`Database` row mutation and ID assignment) and `ROW-UI` (Row menu actions, row editor, display refresh), mirroring the `COL-DB`/`COL-UI` split of the column-editing segment. Covers addition, copy, and row identity, including `deleteRow`'s and `compressRowIds`' renumbering; the deletion path's user-facing specs follow with that chunk of work.
 
 ### Tests
-- tests/rowlifecycle/rowlifecycle_test.cpp — one test per ROW-DB spec. Fixtures come from `PbTest::buildStandardFile`, and `PobCorrupt::setIntAt` renumbers them when a test needs IDs with a gap. ROW-DB-010's crash runs in a child process (`--scenario`), following `tests/dbeditor_robustness/`.
+- tests/rowlifecycle/rowlifecycle_test.cpp — one test per ROW-DB spec, except ROW-DB-012, which has none yet. Fixtures come from `PbTest::buildStandardFile`, and `PobCorrupt::setIntAt` renumbers them when a test needs IDs with a gap. ROW-DB-010's crash runs in a child process (`--scenario`), following `tests/dbeditor_robustness/`.
 - No ROW-UI tests yet; they need a harness that drives `RowEditor` and `DataModel`.
 
 ### Code
@@ -44,10 +44,10 @@ The lifecycle of a data row — adding one (including copy-as-new), deleting one
 
 | Facet | Specs | Implemented `[x]` | Active gap `[ ]` | With tests |
 |---|---|---|---|---|
-| ROW-DB | 11 | 9 | 2 (006, 010) | 11 (`tests/rowlifecycle/`) |
+| ROW-DB | 12 | 9 | 3 (006, 010, 012) | 11 (`tests/rowlifecycle/`) |
 | ROW-UI | 10 | 8 | 2 (003, 006) | 0 |
 
-Every ROW-DB spec has a test: the nine `[x]` pass, and the two active gaps fail as expected (ROW-DB-010 by crashing a child process). ROW-UI tests are not yet written; `[x]` there marks behavior the current code exhibits without a test to verify it.
+Eleven of the twelve ROW-DB specs have a test: the nine `[x]` pass, and ROW-DB-006 and ROW-DB-010 fail as expected (ROW-DB-010 by crashing a child process). ROW-DB-012 has no test yet. ROW-UI tests are not yet written; `[x]` there marks behavior the current code exhibits without a test to verify it.
 
 ## Key Findings
 
@@ -69,7 +69,7 @@ Every ROW-DB spec has a test: the nine `[x]` pass, and the two active gaps fail 
 ### Should Fix
 
 4. **Carry image data into a copied row** (finding 5). Specified as an active gap in the first EARS pass, since the intended behavior is settled; the implementation choice is open — load the source bytes when the field is set, or mark the field for write and defer the load until commit.
-5. **Guard `View::deleteAllRows` against an empty batch**, so a filter matching nothing does not run a full compression pass over every row in the file.
+5. **Guard `View::deleteAllRows` against an empty batch** (ROW-DB-012), so a filter matching nothing leaves the IDs alone instead of running a compression pass that renumbers a file with gaps. Needs its failing test first.
 
 ### Nice to Have
 

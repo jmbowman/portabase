@@ -145,6 +145,7 @@ void TestIntegrityCheck::initTestCase()
  * The structurally valid fixture must scan clean -- the catalog produces no
  * false positives on a healthy current-format file.
  */
+// @spec CHK-CORE-010
 void TestIntegrityCheck::cleanFileHasNoFindings()
 {
     IntegrityCheck check(fixturePath);
