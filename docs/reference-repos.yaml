@@ -18,7 +18,7 @@ repositories:
   lid:
     type: git
     url: https://github.com/jszmajda/lid.git
-    version: a3eb947fa639ddb859bdfcf5aaf861dc872461d5
+    version: 533ceaa3ab4dfc371a38fb13f10d47e8f7123da5
   mdbook:
     type: git
     url: https://github.com/rust-lang/mdBook.git

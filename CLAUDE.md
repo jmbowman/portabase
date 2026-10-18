@@ -87,15 +87,17 @@ Claude Code skills/commands/MCP dependencies sourced from third-party repos (lik
 
 ## Testing
 
-A QtTest suite has started, currently covering the Columns Editor dialog (`tests/dbeditor/`) — build and run it with `qmake portabase-tests.pro && make`. It isn't wired into CI yet, and coverage is still narrow: don't assume test coverage exists for any given code path, and verify changes by building and exercising the app manually where it doesn't.
+There are four QtTest suites, listed in `portabase-tests.pro`: `dbeditor` (the Edit Columns dialog on valid files), `dbeditor_robustness` (Edit Columns on inconsistent or corrupt files), `integritycheck` (the `portabase check` engine), and `rowlifecycle` (adding and deleting rows, and row-ID assignment). Build them all with `qmake portabase-tests.pro && make`, then run a suite from its own directory with `QT_QPA_PLATFORM=offscreen ./build/<suite>_test`. They aren't wired into CI yet, and coverage is still narrow: don't assume test coverage exists for any given code path, and verify changes by building and exercising the app manually where it doesn't.
+
+A new suite needs an `unusedFunction:` entry in `packaging/cppcheck/suppressions.txt`, plus an `unknownMacro:` entry if it uses `QTEST_SET_MAIN_SOURCE_PATH`; otherwise the `lint-cpp` pre-commit hook fails.
 
 ## Known issues
 
-There's a known crash bug applying schema changes to an existing database from the dbeditor dialog (`src/dbeditor.cpp`) — see `docs/wiki/roadmap.md`. Treat schema-change code paths in `dbeditor.cpp`/`database.cpp` with extra care.
+Real `.pob` files can violate the format's invariants, so code that reads them must not assume those invariants hold (HLD tenet *Never trust file-derived state*). In particular, from 2011 until the ROW-DB-011 fix, bulk row deletion left non-consecutive row IDs behind, so files with ID gaps, and sometimes duplicate IDs, exist in the wild; `portabase check` reports them. Many `Database` methods still use a Metakit `Find()` result without checking for a miss; the known sites are listed in `docs/wiki/dbeditor-code-review-followups.md`. Each segment's open spec gaps are in `docs/arrows/index.yaml`.
 
 ## LID
 - Mode: Scoped
-- Version: 1.3.0
+- Version: 1.4.0
 
 ## LID Scope
 
@@ -133,11 +135,10 @@ Paths explicitly excluded:
 HLD → LLDs → EARS → Tests → Code
 ```
 
-- **New features and refactors**: full six-phase workflow (HLD check → LLD check/draft → EARS → intent-narrowing edge audit → tests-first → code).
+- **All changes**: consult the `linked-intent-dev` skill if your harness provides it; otherwise read `docs/lid/workflow.md` before making changes, and if it is missing and `## LID` records no decline, offer the user once to add it from https://raw.githubusercontent.com/jszmajda/lid/v1.4.0/plugins/linked-intent-dev/skills/update-lid/references/workflow-doc.md (on decline, add `- Workflow doc: declined` to `## LID`). The workflow in one line: HLD check → LLD → EARS specs → edge audit → failing tests first → code — inspected at each phase.
 - **Bug fixes**: walk the arrow like any other change — find where behavior diverged from intent and cascade from there. No short-circuit.
-- **If unsure**: use the full workflow.
 
-Stop after each phase for user review. **Docs carry current intent, written to be read cold** — write each doc as if authored fresh today, from current intent alone: no narration of how it changed, no meaning that needs the conversation that produced it, no rebuttals to questions only a past discussion raised. Rationale, considered alternatives, and constraints a fresh author would independently write stay; record rejected alternatives and why in the LLD's Decisions & Alternatives table, not as asides in body prose.
+Each phase's output is inspected — by the user or an inspector they name — before the next begins; ambiguous spec readings go back to the user. **Docs carry current intent, written to be read cold** — write each doc as if authored fresh today, from current intent alone: no narration of how it changed, no meaning that needs the conversation that produced it, no rebuttals to questions only a past discussion raised. Rationale, considered alternatives, and constraints a fresh author would independently write stay; record rejected alternatives and why in the LLD's Decisions & Alternatives table, not as asides in body prose.
 
 **Memory vs. intent.** Before saving durable project knowledge to agent or tool memory, test whether it is project *intent* — would a fresh agent, in any tool, next session, need it to build this system correctly? If yes, record it in the arrow (HLD / LLD / EARS / decision doc), which travels and cascades — not in private, per-tool memory, where intent escapes the arrow. Knowledge about the user or how they like to work stays in memory. Knowledge that isn't code-behavior-specific doesn't belong in the arrow either: tasks that aren't system behavior go to GitHub issues, and durable reasoning goes to `docs/wiki/`. See `docs/wiki/agentic-development-support.md` § Where Knowledge and Work Live for the full split, and flag genuinely ambiguous cases rather than silently picking one.
 

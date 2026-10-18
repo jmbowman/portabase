@@ -1,5 +1,5 @@
 schema_version: 2
-last_updated: 2026-10-15
+last_updated: 2026-10-17
 
 taxonomy:
   data-model: standalone
@@ -9,34 +9,34 @@ arrows:
     status: OK
     parent: null
     sampled: 2026-07-10
-    audited: 2026-07-18
-    audited_sha: 8683673866cb20411b1836f5f52c3a5be593538b
+    audited: 2026-10-17
+    audited_sha: f60f1f92a184361443645a2d21ef3fe58713c9f2
     blocks: []
     blockedBy: []
     detail: column-editing.md
-    next: "All COL-UI/COL-DB specs implemented and covered by tests. Residual (not spec gaps): PortaBase::editColumns display branch is un-spec'd GUI refresh, verify by eye; ViewDisplay/DataModel widget layer untested. Future: row-ID robustness (gap origin -- suspect calc-field handling; deleteRow/load maxId) as a new segment, and the broader row index/ID audit"
+    next: "All COL-UI/COL-DB specs implemented and covered by tests. Residual (not spec gaps): PortaBase::editColumns display branch is un-spec'd GUI refresh, verify by eye; ViewDisplay/DataModel widget layer untested. Row-ID robustness and the row index/ID audit moved to row-lifecycle"
     drift: null
   integrity-check:
     status: OK
     parent: null
     sampled: 2026-07-13
-    audited: 2026-07-18
-    audited_sha: 8683673866cb20411b1836f5f52c3a5be593538b
+    audited: 2026-10-17
+    audited_sha: f60f1f92a184361443645a2d21ef3fe58713c9f2
     blocks: []
     blockedBy: []
     detail: integrity-check.md
     next: "check subcommand shipped in the portabase CLI; all CHK specs implemented and tested (CHK-CLI-001 now driven end-to-end via a subprocess test). Only CHK-CORE-009 (encrypted contents) deferred. Possible next: in-app surface, or -p support for encrypted files"
     drift: null
   row-lifecycle:
-    status: MAPPED
+    status: AUDITED
     parent: null
     sampled: 2026-09-30
-    audited: null
-    audited_sha: null
+    audited: 2026-10-17
+    audited_sha: f60f1f92a184361443645a2d21ef3fe58713c9f2
     blocks: []
     blockedBy: []
     detail: row-lifecycle.md
-    next: "ROW-DB tests written (tests/rowlifecycle/). ID-gap origin found and fixed: compressRowIds wrote through a read-only SortOn view, so it wrote nothing from 2011 until ROW-DB-011 was implemented. load now sets maxId from the largest stored _id (ROW-DB-002). Next: code for the remaining ROW-DB gaps against the existing failing tests -- a guarded deleteRow Find (010), a no-trace rejected addRow (006). Then ROW-UI tests (row editor + display refresh harness) and the ROW-UI gaps, including RowEditor handling a rejection (ROW-UI-006). Load-time repair is deferred to its own segment (LLD Deferred item 5)"
+    next: "ROW-DB tests written (tests/rowlifecycle/). ID-gap origin found and fixed: compressRowIds wrote through a read-only SortOn view, so it wrote nothing from 2011 until ROW-DB-011 was implemented. load now sets maxId from the largest stored _id (ROW-DB-002). Next: code for the remaining ROW-DB gaps against the existing failing tests -- a guarded deleteRow Find (010), a no-trace rejected addRow (006). A failing test, then the View::deleteAllRows empty-batch guard (012). Then ROW-UI tests (row editor + display refresh harness) and the ROW-UI gaps, including RowEditor handling a rejection (ROW-UI-006). Load-time repair is deferred to its own segment (LLD Deferred item 5)"
     drift: null
 
 unmapped: {}

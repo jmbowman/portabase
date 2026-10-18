@@ -84,7 +84,7 @@ Checker tests live in `tests/integritycheck/` (QtTest), one fixture-corruption s
 
 `portabase check <file> [<file>…]` — checks each named file and prints a per-file report: the filename, format version, each finding (severity, check ID, location, message), and a one-line summary. A clean file prints its summary line only. The `check` command is dispatched by `CommandLine` alongside the existing import/export commands, and appears in `portabase --help`.
 
-Exit codes: `0` — all files clean; `1` — at least one finding in at least one file; `2` — at least one file could not be opened or is not a PortaBase file. (`2` dominates `1`.)
+Exit codes distinguish clean files, files with findings, and files that could not be read, with unreadable taking precedence (CHK-CLI-004).
 
 ## Decisions & Alternatives
 

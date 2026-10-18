@@ -1,3 +1,11 @@
+2026-10-17  JMB  Upgraded LID and cleaned up specs & dev docs
+
+    No user-facing changes, just dev tooling updates.  Upgraded LID from
+    1.3.0 to 1.4.0.  The accompanying spec review sweep found a few minor
+    inconsistencies, which have now been fixed.  Also documented a few
+    points for future reference and fixed the issues-sync task to work
+    for updates and not just initial cache creation.
+
 2026-10-15  JMB  Fixed "delete all rows in filter" bug
 
     Fixed a 15-year-old bug in "delete all rows in filter" which left

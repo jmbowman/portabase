@@ -15,6 +15,7 @@
 - [x] **ROW-DB-009**: When a single row is deleted with renumbering requested (`Database::deleteRow` with `compressRowIds` true), the system shall remove the row whose `_id` matches and decrement by one the `_id` of every row whose `_id` is greater, so that a `_data` view satisfying the `_id` invariant before the deletion still satisfies it afterwards.
 - [ ] **ROW-DB-010**: If `Database::deleteRow` is asked to delete an `_id` that no row in `_data` holds, then the system shall leave every row of `_data`, every `_id`, and the `_id` the next added row will receive all unchanged.
 - [x] **ROW-DB-011**: When a batch of rows is deleted with per-row renumbering suppressed and `Database::compressRowIds` is then called, the system shall renumber the surviving rows' `_id` values to 0 through one less than the surviving row count, preserving their relative order, and the next row added shall receive `_id` equal to the surviving row count. This holds whether the `_id` values had gaps before the batch or not, so a bulk delete leaves a file with gaps satisfying the `_id` invariant.
+- [ ] **ROW-DB-012**: If `View::deleteAllRows` is called on a view whose filter matches no rows, then the system shall leave every row of `_data` and every `_id` unchanged, including on a file whose `_id` values have gaps.
 
 ## ROW-UI (Row menu actions, row editor, display refresh)
 

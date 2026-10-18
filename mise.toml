@@ -37,8 +37,9 @@ description = "Regenerate docs/reference-repos.yaml from the actual contents of 
 run = "vcs export .reference-repos > docs/reference-repos.yaml"
 
 [tasks.issues-sync]
-description = "Export GitHub issues/PRs (with comments) to local markdown files in .issues/ for offline agent context"
-run = "mkdir -p .issues && gh2md jmbowman/portabase .issues --multiple-files --idempotent"
+description = "Export GitHub issues/PRs (with comments) to local markdown files in .issues/ for offline agent context, replacing the previous export"
+# gh2md refuses a non-empty output directory, so export fresh and swap in
+run = "tmp=$(mktemp -d) && gh2md jmbowman/portabase \"$tmp/issues\" --multiple-files --idempotent && rm -rf .issues && mv \"$tmp/issues\" .issues && rmdir \"$tmp\""
 
 [tasks.mdbook-build]
 description = "Render docs/ to a local HTML book at docs/book/ for browsing (not published anywhere)"

@@ -33,7 +33,7 @@ Compression reads the rank order from a `data.SortOn(Id)` view but writes the ne
 
 `load` accepts a file whose IDs violate the invariant as it finds it. Such files exist in the wild — `portabase check` reports the condition as CHK-DATA-003. If `maxId` were inferred from the row count, the next `addRow` on such a file would mint an ID that is already present, and every subsequent `data.Find(Id [id])` lookup would resolve to whichever duplicate is physically first, so an edit or a delete would silently land on the wrong row. Deriving `maxId` from the largest `_id` actually stored keeps the cache correct on any file whose IDs are unique, gaps included, and the deletion paths keep it correct from then on. Duplicate IDs are beyond what the cache can protect: once a delete removes one of two rows sharing the largest ID, the decremented `maxId` falls back onto the survivor's ID. Duplicates are left to the load-time repair, which is separate, planned work outside this segment (see *Open Questions & Future Decisions*).
 
-**Current state diverges from that intent in one place**, which assumes the invariant it is meant to maintain: `deleteRow` does not check the result of `data.Find`. A miss passes -1 to `RemoveAt`, which crashes the process. Even if it didn't crash, the method would go on to renumber every ID above the absent one, shifting IDs with no matching removal. A request to delete an ID that is not present must instead leave `_data` and `maxId` exactly as they were.
+**Current state diverges from that intent in one place**, which assumes the invariant it is meant to maintain: `deleteRow` does not check the result of `data.Find`. A miss passes -1 to `RemoveAt`, which crashes the process. Even if it didn't crash, the method would go on to renumber every ID above the absent one, shifting IDs with no matching removal, where ROW-DB-010 requires such a request to change nothing.
 
 ## Adding a Row
 
@@ -53,7 +53,7 @@ Two values are not taken from the dialog as displayed:
 
 A new row is appended physically; where it appears to the user is determined by the current view's sorting and filter, resolved by the display refresh rather than by the insertion.
 
-**A rejected addition must leave nothing behind, and its caller must not treat it as a row.** `addRow` reports failure by returning a message and leaves the file exactly as it was: no row appended, no Sequence value advanced, no enum option added, and the row-ID out-parameter left unwritten. The row editor responds to a rejection the way it responds to its own validation failures — it shows the message and re-shows the dialog with the user's values intact, so the user can correct the value or cancel. **Current state diverges on both halves of that contract.** The Sequence branch advances the column's stored default the moment it reaches that column, and an import that permits new enum options adds each one as its value validates, so a rejection at any later column leaves those changes behind with no row to show for them — the side effects of a failed addition need to be deferred until every value has validated. And `RowEditor::edit` discards the returned message entirely, then reads a row-ID variable that `addRow` never assigned on the failure path, passing an indeterminate value to the image write and on to the display refresh.
+**A rejected addition must leave nothing behind (ROW-DB-006), and its caller must not treat it as a row (ROW-UI-006).** The row editor responds to a rejection the way it responds to its own validation failures, so the user can correct the value or cancel. **Current state diverges on both halves of that contract.** The Sequence branch advances the column's stored default the moment it reaches that column, and an import that permits new enum options adds each one as its value validates, so a rejection at any later column leaves those changes behind with no row to show for them — the side effects of a failed addition need to be deferred until every value has validated. And `RowEditor::edit` discards the returned message entirely, then reads a row-ID variable that `addRow` never assigned on the failure path, passing an indeterminate value to the image write and on to the display refresh.
 
 ## Copying a Row
 
@@ -70,7 +70,7 @@ Two paths, both gated on the `confirmDeletions` preference:
 
 `DataModel::deleteAllRows` wraps the bulk path in a full model reset, while the single-row path removes just the affected row from the model.
 
-A bulk delete whose filter matches nothing should do no work. `DataModel::deleteAllRows` returns early on an empty view, but the guard belongs in `View::deleteAllRows` as well, which otherwise runs a full compression pass — a write over every row in the file — after deleting none.
+A bulk delete whose filter matches nothing changes nothing (ROW-DB-012). `DataModel::deleteAllRows` returns early on an empty view, but `View::deleteAllRows` needs the same guard, because it otherwise runs a full compression pass — a read of every row in the file, which renumbers a file with gaps — after deleting none.
 
 ## Display Refresh
 
@@ -109,7 +109,7 @@ Out of scope: the CSV and XML import paths, which also drive `Database::addRow` 
 
 ### Deferred
 
-1. **EARS for the deletion path are not yet written.** The deletion behavior described above is owned by this segment; only the addition and identity specs have been drafted.
+1. **ROW-UI specs for the deletion path are not yet written.** ROW-DB-009 to ROW-DB-012 cover what deletion does to `_data` and its IDs; the Row menu delete actions, the `confirmDeletions` prompt, and the display refresh after a delete have no specs yet.
 2. **How a copied row should carry its image data across.** That it must is settled — the help text describes copy as pre-filling the editor with the selected row's data, and a row whose format string names a format with no bytes behind it is a state no other path produces — so it is specified as an active gap rather than held open. The implementation choice remains: `ImageSelector` can either load the source row's bytes when its field is set for a copy, or mark the field as needing a write and defer the load until commit.
 3. **A copied row's Sequence field displays the source row's number**, not the number that will be stored — `addRow` allocates a fresh one on commit. Cosmetic, but the dialog shows a value it will not write.
 4. **The broader row index-versus-ID audit** requested after COL-DB-010: `getId`, `getIndex`, `updateRow`, `editRow`, and the model-to-view index mapping have not been checked for the same confusion between a row's position and its identity.

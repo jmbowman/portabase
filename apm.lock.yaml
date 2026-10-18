@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-07-12T04:42:51.766271+00:00'
+generated_at: '2026-10-17T21:52:21.543617+00:00'
 apm_version: 0.24.0
 dependencies:
 - repo_url: TheQtCompanyRnD/agent-skills
@@ -60,9 +60,9 @@ dependencies:
 - repo_url: jszmajda/lid
   name: arrow-maintenance
   host: github.com
-  resolved_commit: a3eb947fa639ddb859bdfcf5aaf861dc872461d5
-  resolved_ref: v1.3.0
-  version: 1.2.0
+  resolved_commit: 533ceaa3ab4dfc371a38fb13f10d47e8f7123da5
+  resolved_ref: v1.4.0
+  version: 1.3.0
   virtual_path: plugins/arrow-maintenance
   is_virtual: true
   package_type: marketplace_plugin
@@ -87,27 +87,27 @@ dependencies:
   deployed_file_hashes:
     .claude/commands/arrow-maintenance.md: sha256:5d321ff39e4a1b56cf27ee1cb308ed7c9b1e9f9ac32d8527af96d9d0eb0d9381
     .claude/commands/map-codebase.md: sha256:492537785f70fe8f4d75ea1c31b7cca70554183a71583bc1ef97c652cd184ed9
-    .claude/skills/arrow-maintenance/SKILL.md: sha256:20ba2a1894f0b7924209c9619d6ce0baaace178bc85adff357bb1579ca4ef564
-    .claude/skills/arrow-maintenance/evals/evals.json: sha256:8973236332e3081c1f934212935d2fd0bc9964fb7e22283cf599d374fe922de6
+    .claude/skills/arrow-maintenance/SKILL.md: sha256:b4a8e8d45fe08b48426b4030265249e3330099c128fc94d388573ddc4bd4f440
+    .claude/skills/arrow-maintenance/evals/evals.json: sha256:018d0bd4dca5f55abf325d1c22d54b7b09568174b06a101a6658956378393ed0
     .claude/skills/arrow-maintenance/references/README-template.md: sha256:7967674ccda43b9e93aede8c1affd73fc1cdebb16c861660146fd90193c7ccce
     .claude/skills/arrow-maintenance/references/arrow-doc-template.md: sha256:a2b543b441f538123e0b18d009e56da9e881c91c8ee01634b948c614201c1db2
-    .claude/skills/arrow-maintenance/references/audit-checklist.md: sha256:6e984cda62710ca3132db6635381322715c364afa75f72c2982992bb0c35bd69
+    .claude/skills/arrow-maintenance/references/audit-checklist.md: sha256:fdcd65ae65ecea0d825064f926c912efc6d2c5037c56e27b58a7a2e34d444a18
     .claude/skills/arrow-maintenance/references/coherence-check.mjs: sha256:016300b14350fb33b5fda4ea233c3ecaeb3a9f4a17f6c5e20947a62ff55dc010
     .claude/skills/arrow-maintenance/references/index-schema.md: sha256:970132fffeef5f0304160dc43f30301ee491595d6e0107c94309703ba2e0a2a5
-    .claude/skills/map-codebase/SKILL.md: sha256:d463d0b6d0af602037bda474b80fbbfcffe69603c03f34525be12557c361a070
+    .claude/skills/map-codebase/SKILL.md: sha256:b75cbed222e042e49361e135863728ff9acacf8d630cda5e6132e88d71af171e
     .claude/skills/map-codebase/evals/evals.json: sha256:ee7c9b8fc07fdc2863c1a453aa0156d1696f3f65b45a7b3c78639bd6c502bc08
     .claude/skills/map-codebase/references/brownfield-bootstrap.md: sha256:ed0ac690f4bbdc66fdada5185e7ddadecd9c9f5768c451c40fa7f70ccd1b32cf
     .claude/skills/map-codebase/references/reconciliation-template.md: sha256:aaf79e75ef38e978a698a4a30e0eaeefc53bc983aa460f0476970e1a3749badc
     .claude/skills/map-codebase/references/skeleton-hld-template.md: sha256:6efb8c394e414db4f32b48f2aca288a945561a6d48094682de291a284877c7fa
-    .claude/skills/map-codebase/references/subagent-sweep-prompt.md: sha256:00607fce0d7b7c52cac21278e0fb160909ff92abc47cdce09915d708c86935bc
-  content_hash: sha256:c0831c732b2b83d653b83c538748a5faf5c36e25671ef0c576996f0d910e07a1
+    .claude/skills/map-codebase/references/subagent-sweep-prompt.md: sha256:d1bca74872ce59a14f0a2f5f5ba3a057db003c470ebe0729cc346b4630868906
+  content_hash: sha256:8b31134cac8da9be726b0bd0b86a8d5e0499240eaa67796b8b5609ee738fec83
   declared_license: MIT
 - repo_url: jszmajda/lid
   name: linked-intent-dev
   host: github.com
-  resolved_commit: a3eb947fa639ddb859bdfcf5aaf861dc872461d5
-  resolved_ref: v1.3.0
-  version: 1.3.0
+  resolved_commit: 533ceaa3ab4dfc371a38fb13f10d47e8f7123da5
+  resolved_ref: v1.4.0
+  version: 1.4.0
   virtual_path: plugins/linked-intent-dev
   is_virtual: true
   package_type: marketplace_plugin
@@ -115,9 +115,14 @@ dependencies:
   - .claude/skills/lid-coach
   - .claude/skills/lid-coach/SKILL.md
   - .claude/skills/lid-coach/evals/evals.json
+  - .claude/skills/lid-coach/references/conversational-guidance.md
+  - .claude/skills/lid-coach/references/follow-up-turns.md
   - .claude/skills/lid-coach/references/lid-faq.md
+  - .claude/skills/lid-coach/references/sampling.md
   - .claude/skills/linked-intent-dev
   - .claude/skills/linked-intent-dev/SKILL.md
+  - .claude/skills/linked-intent-dev/evals/evals.json
+  - .claude/skills/linked-intent-dev/references/capability-flags.md
   - .claude/skills/linked-intent-dev/references/decision-doc-template.md
   - .claude/skills/linked-intent-dev/references/ears-syntax.md
   - .claude/skills/linked-intent-dev/references/hld-template.md
@@ -126,17 +131,24 @@ dependencies:
   - .claude/skills/update-lid/SKILL.md
   - .claude/skills/update-lid/evals/evals.json
   - .claude/skills/update-lid/references/agents-md-template.md
+  - .claude/skills/update-lid/references/workflow-doc.md
   deployed_file_hashes:
-    .claude/skills/lid-coach/SKILL.md: sha256:1096618f9b73be0492c8b658f1104d0e5cbbe1d833cf0c12d068d531ac35204e
-    .claude/skills/lid-coach/evals/evals.json: sha256:d972ffa627f0d9e7ab3dad2ebcca67640434275a7cbee5728598ad46cd2ae5ea
+    .claude/skills/lid-coach/SKILL.md: sha256:873d7e81a8f0bc6cfb05d78897f01de7f295712633dff2603eca6591f1198fba
+    .claude/skills/lid-coach/evals/evals.json: sha256:77ce1bc0c53aedfd5de2987e0dc33160f7061db3201468fdd11abedaaeb3eb19
+    .claude/skills/lid-coach/references/conversational-guidance.md: sha256:ae237b4dcac6c4af05dce6fc12450f7982dc225067cd837c68e5032ad653262b
+    .claude/skills/lid-coach/references/follow-up-turns.md: sha256:0a88a1badc8c4a3206386a36cea3816c7f3af1a4430abda60a0b6a899953b5dd
     .claude/skills/lid-coach/references/lid-faq.md: sha256:9b256e4c46c50b662b379b1dcde21d4600ccf4232755454da78a6a4a98059aa6
-    .claude/skills/linked-intent-dev/SKILL.md: sha256:1ec8b2f5e0e057178cf70721d101fc8aa256e0c42502bb7fcf5e2030f0158edf
-    .claude/skills/linked-intent-dev/references/decision-doc-template.md: sha256:ea775b4e1dbf03b0a772b1d2c78ea6b07aac67bc03f9793b18e6b9e04b5d9869
+    .claude/skills/lid-coach/references/sampling.md: sha256:62cbf65cf218fcc034a356447dadd7b3537c32247ba91e35dbd2fa9ef234e4bc
+    .claude/skills/linked-intent-dev/SKILL.md: sha256:ea2dde2d8b65baca878a9590f818bd99c9717e529aca344bb11730357125ae4a
+    .claude/skills/linked-intent-dev/evals/evals.json: sha256:99c2e779a878b62b9aa6b49c98feb97dbf55e7cecd11337fa1cee0fce0306101
+    .claude/skills/linked-intent-dev/references/capability-flags.md: sha256:99ca53133c8de10563e21eb1afe3efdb63e341bdadd5482ec1c505a24dfad149
+    .claude/skills/linked-intent-dev/references/decision-doc-template.md: sha256:057ffed75e3528afce110da689bfb69b48d1afcb18f3bec546ebe051767cc58e
     .claude/skills/linked-intent-dev/references/ears-syntax.md: sha256:6e15b0708528805d00309eb1dfdd7a14d76ac64e21d7cdd0d300a5ed0199f904
-    .claude/skills/linked-intent-dev/references/hld-template.md: sha256:f264ed7c67fd6afdbb69da9bc8d49f34473272544fda433ac8366a9d83a34fb6
+    .claude/skills/linked-intent-dev/references/hld-template.md: sha256:f06557b1a0cf8831bc00b2fc336eb25fe7d953b39770d293ed4f6b4f1a78b5ca
     .claude/skills/linked-intent-dev/references/lld-templates.md: sha256:788958fe9e82c61785b2fbcb241f3c8ace7fd46723d4bc540cf0f94253cdac0b
-    .claude/skills/update-lid/SKILL.md: sha256:17e786702888f82b8c3eacb7724d8bb8459f6e508c85650616e9afa9572a97c3
-    .claude/skills/update-lid/evals/evals.json: sha256:efec760816a3241e30aa5abcc976c50a71982f84870f9fc6180bc2c5b6e737bd
-    .claude/skills/update-lid/references/agents-md-template.md: sha256:54ef3733a9c54b566190d289649eecf1b32fcf2c7faa8cc75f93bdff6ed7f130
-  content_hash: sha256:191afdea9b88c5c23ed19662edf496e2004efe69808af2da382aebc5aa9e3a69
+    .claude/skills/update-lid/SKILL.md: sha256:c47475501afeead6a2143e410392d8a000f518df00c7a98d9ac51dbe2b2e19be
+    .claude/skills/update-lid/evals/evals.json: sha256:0f354f4e1ddc47b9f358d233b0ee75de5e77e3868b23ca1fdc28bf093e102190
+    .claude/skills/update-lid/references/agents-md-template.md: sha256:972731120f897bee2e3631904a7c68e05f10b07e4634911a69c2e3945d90b460
+    .claude/skills/update-lid/references/workflow-doc.md: sha256:0c0869c4b9ad447b555a7cd32e06226f012c72fb82471439756474d4502a6f39
+  content_hash: sha256:f2b477ecb41db2bf796053c6577da75e23e371ed4911038e2640bc6067e9e96b
   declared_license: MIT
