@@ -39,6 +39,7 @@ metakit/builds/*.exe
 metakit/builds/demo
 metakit/builds/dump
 metakit/builds/myio
+metakit/builds/check/
 metakit/unix/autom4te.cache/
 object_script.Portabase.Debug
 object_script.PortaBase.Release
