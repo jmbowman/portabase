@@ -332,7 +332,12 @@ maemo5 {
 unix:!android-clang:!macx:!maemo5:!contains(QT_CONFIG, hildon) {
     #QMAKE_CXXFLAGS       += -O0 # for valgrind
     CONFIG               += debug
-    LIBS                 += -L$$PWD/metakit/builds
+    # Tests link Metakit built with assertions, see docs/wiki/metakit-tips.md
+    testcase {
+        LIBS             += -L$$PWD/metakit/builds/check
+    } else {
+        LIBS             += -L$$PWD/metakit/builds
+    }
     RESOURCES             = $$PWD/resources/linux.qrc
 }
 

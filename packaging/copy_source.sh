@@ -32,6 +32,7 @@ rm -f $DEST/metakit/builds/*.a
 rm -f $DEST/metakit/builds/*.o
 rm -f $DEST/metakit/builds/config.*
 rm -f $DEST/metakit/builds/Makefile
+rm -rf $DEST/metakit/builds/check
 cp -R packaging $DEST
 cp -R resources $DEST
 rm -f $DEST/resources/translations/*.qm

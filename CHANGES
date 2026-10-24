@@ -1,3 +1,9 @@
+2026-10-23  JMB  Enabled Metakit assertions in unit tests
+
+    Turned on some assertions in Metakit which would have made it easier to
+    find the bug fixed last week.  It didn't reveal any other outstanding
+    bugs, but should help prevent regressions in the future.
+
 2026-10-17  JMB  Upgraded LID and cleaned up specs & dev docs
 
     No user-facing changes, just dev tooling updates.  Upgraded LID from

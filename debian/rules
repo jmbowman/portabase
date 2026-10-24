@@ -29,7 +29,6 @@ override_dh_auto_clean:
 override_dh_auto_configure:
 	chmod -R a-x+X metakit/ resources/ \
 	&& chmod +x metakit/unix/configure
-	cd metakit/builds && ../unix/configure --enable-threads --disable-shared
 
 	## rebuild translations
 	lrelease portabase.pro
@@ -39,7 +38,7 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	## build metakit
-	cd metakit/builds && $(MAKE)
+	packaging/linux/build_metakit.sh
 	mkdir -p build \
 	&& cp metakit/include/mk4.h metakit/include/mk4.inl \
 	        metakit/include/mk4str.h metakit/include/mk4str.inl \

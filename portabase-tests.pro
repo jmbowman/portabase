@@ -1,4 +1,5 @@
 # Entry point for building the test suite. Build with: qmake portabase-tests.pro && make
+# (after packaging/linux/build_metakit.sh --check, see CLAUDE.md's Testing section)
 #
 # - tests/dbeditor: Edit Columns behavior on valid files
 # - tests/dbeditor_robustness: resilience to inconsistent/corrupt file states
