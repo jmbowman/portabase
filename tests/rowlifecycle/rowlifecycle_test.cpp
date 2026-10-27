@@ -25,10 +25,13 @@
 #include <algorithm>
 #include <memory>
 
+#include "condition.h"
 #include "database.h"
 #include "datatypes.h"
+#include "filter.h"
 #include "pobcorruptor.h"
 #include "testfixtures.h"
+#include "view.h"
 
 /**
  * A freshly built fixture file of a given size, opened as the application
@@ -78,13 +81,16 @@ private slots:
     void addRowRejectsWrongValueCount();
     void addRowRejectsInvalidValue();
     void addRowCsvBlankNumberUsesDefault();
+    void rejectedAddRowLeavesNoTrace_data();
     void rejectedAddRowLeavesNoTrace();
     void addRowAllocatesSequenceValue();
     void addRowWritesTypeProperties();
+    void addRowAddsNewEnumOption();
     void deleteRowRenumbersHigherIds();
     void deleteRowIgnoresAbsentId();
     void compressRowIdsAfterBatchDelete_data();
     void compressRowIdsAfterBatchDelete();
+    void deleteAllRowsMatchingNothingChangesNothing();
 
 private:
     /** Valid values for a new row of the standard fixture, in column order. */
@@ -269,16 +275,32 @@ void TestRowLifecycle::addRowCsvBlankNumberUsesDefault()
              7);
 }
 
+void TestRowLifecycle::rejectedAddRowLeavesNoTrace_data()
+{
+    QTest::addColumn<QString>("image");
+    QTest::addColumn<QString>("lastValue");
+    QTest::addColumn<QString>("errorPrefix");
+
+    QTest::newRow("invalid last value") << "" << "abc" << "colLate";
+    QTest::newRow("missing image file") << "missing-image.png" << "7"
+                                        << "Missing file";
+}
+
 /**
  * Add an integer column after the Sequence and enum columns, then pass
  * addRow a row that introduces a new enum option (with new options allowed)
- * but holds an invalid value in that last column: the rejection must leave
- * no row added, the Sequence column's next value unadvanced, the enum's
- * options unchanged, and the row-ID out-parameter unwritten.
+ * but is rejected after the Sequence column: for an invalid value in that
+ * last column, and for an image file that does not exist. The rejection
+ * must leave no row added, the Sequence column's next value unadvanced, the
+ * enum's options unchanged, and the row-ID out-parameter unwritten.
  */
 // @spec ROW-DB-006
 void TestRowLifecycle::rejectedAddRowLeavesNoTrace()
 {
+    QFETCH(QString, image);
+    QFETCH(QString, lastValue);
+    QFETCH(QString, errorPrefix);
+
     RowFile file(2);
     QVERIFY2(file.error.isEmpty(), qPrintable(file.error));
     Database *db = file.db.get();
@@ -289,11 +311,12 @@ void TestRowLifecycle::rejectedAddRowLeavesNoTrace()
     QStringList options = db->listEnumOptions(statusId);
 
     QStringList values = newRowValues("added");
+    values[8] = image;
     values[9] = "Pending";
-    values << "abc";
+    values << lastValue;
     int id = -42;
     QString error = db->addRow(values, &id, false, false, true);
-    QVERIFY2(error.startsWith("colLate"), qPrintable(error));
+    QVERIFY2(error.startsWith(errorPrefix), qPrintable(error));
     QCOMPARE(id, -42);
     QCOMPARE(storedIds(db), idRange(0, 2));
     QCOMPARE(db->getDefault("colSequence"), nextSequence);
@@ -362,6 +385,33 @@ void TestRowLifecycle::addRowWritesTypeProperties()
     c4_StringProp imageFormat(db->getColId("colImage", STRING).toLatin1());
     QCOMPARE(QString::fromUtf8(imageFormat (row)), QString("PNG"));
     QVERIFY(db->getBinaryField(id, "colImage").isEmpty());
+}
+
+/**
+ * Add a row whose enum value is not yet one of the enum's options, with new
+ * options allowed: addRow must append the value to the enum's options and
+ * store the new option's position as the row's option index.
+ */
+// @spec ROW-DB-008
+void TestRowLifecycle::addRowAddsNewEnumOption()
+{
+    RowFile file(2);
+    QVERIFY2(file.error.isEmpty(), qPrintable(file.error));
+    Database *db = file.db.get();
+    int statusId = db->getEnumId("Status");
+    QStringList options = db->listEnumOptions(statusId);
+    QStringList values = newRowValues("added");
+    values[9] = "Pending";
+    int id = -42;
+    QString error = db->addRow(values, &id, false, false, true);
+    QCOMPARE(error, QString());
+
+    QCOMPARE(db->listEnumOptions(statusId), options << "Pending");
+    c4_RowRef row = db->getData()[indexOfId(db, id)];
+    c4_StringProp enumText(db->getColId("colStatus").toLatin1());
+    c4_IntProp enumIndex(db->getColId("colStatus", INTEGER).toLatin1());
+    QCOMPARE(QString::fromUtf8(enumText (row)), QString("Pending"));
+    QCOMPARE((int)enumIndex (row), 2);
 }
 
 /**
@@ -470,6 +520,32 @@ void TestRowLifecycle::compressRowIdsAfterBatchDelete()
     int id = -42;
     QCOMPARE(db->addRow(newRowValues("added"), &id), QString());
     QCOMPARE(id, count);
+}
+
+/**
+ * Apply a filter that matches no rows to a file whose IDs are 74 through
+ * 78, then delete all rows in the filter: every row must remain, in its
+ * original order and with its _id unchanged.
+ */
+// @spec ROW-DB-012
+void TestRowLifecycle::deleteAllRowsMatchingNothingChangesNothing()
+{
+    RowFile file(5, 74);
+    QVERIFY2(file.error.isEmpty(), qPrintable(file.error));
+    Database *db = file.db.get();
+    Filter filter(db, "noneFilter");
+    Condition *condition = new Condition(db);
+    condition->setColName("colInteger");
+    condition->setOperator(Condition::LessThan);
+    condition->setConstant("0");
+    filter.addCondition(condition);
+    db->addFilter(&filter);
+    View *view = db->getView("_all");
+    view->prepareData();
+    QCOMPARE(view->totalRowCount(), 0);
+
+    view->deleteAllRows();
+    QCOMPARE(storedIds(db), idRange(74, 5));
 }
 
 /**

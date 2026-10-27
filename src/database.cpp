@@ -1420,6 +1420,7 @@ Condition *Database::getCondition(const QString &filterName, int index)
  * @return An error message explaining why the row could not be added, or an
  *         empty string if it was added successfully
  */
+// @spec ROW-DB-001, ROW-DB-003, ROW-DB-004, ROW-DB-005, ROW-DB-006, ROW-DB-007, ROW-DB-008
 QString Database::addRow(const QStringList &values, int *rowId,
                          bool acceptSequenceVals, bool fromcsv,
                          bool addNewEnumOptions)
@@ -1445,6 +1446,11 @@ QString Database::addRow(const QStringList &values, int *rowId,
         return error;
     }
     c4_View temp = columns.SortOn(cIndex);
+    // side effects outside the row itself wait until every value is valid
+    QStringList sequenceNames;
+    QList<int> newOptionTypes;
+    QStringList newOptions;
+    QList<QByteArray> newOptionIndexIds;
     for (i = 0; i < count; i++) {
         int type = cType (temp[i]);
         QString name = QString::fromUtf8(cName (temp[i]));
@@ -1455,7 +1461,12 @@ QString Database::addRow(const QStringList &values, int *rowId,
             value = value.replace(QRegExp("-"), "");
             value = value.replace(QRegExp("\\."), "");
         }
-        QString error = isValidValue(type, value, addNewEnumOptions);
+        bool newOption = (type >= FIRST_ENUM && addNewEnumOptions
+                          && !listEnumOptions(type).contains(value));
+        QString error;
+        if (!newOption) {
+            error = isValidValue(type, value);
+        }
         if (!error.isEmpty()) {
             // convert blank numbers in CSV import to the default value
             if (fromcsv && (value.isEmpty())
@@ -1481,9 +1492,8 @@ QString Database::addRow(const QStringList &values, int *rowId,
                 prop (row) = QLocale::system().toInt(value);
             }
             else {
-                int nextValue = getDefault(name).toInt();
-                prop (row) = nextValue;
-                setDefault(name, QString::number(nextValue + 1));
+                prop (row) = getDefault(name).toInt();
+                sequenceNames.append(name);
             }
         }
         else if (type == TIME) {
@@ -1542,7 +1552,24 @@ QString Database::addRow(const QStringList &values, int *rowId,
             c4_IntProp indexProp(indexColId);
             QStringList options = listEnumOptions(type);
             indexProp (row) = options.indexOf(value);
+            if (newOption) {
+                newOptionTypes.append(type);
+                newOptions.append(value);
+                newOptionIndexIds.append(indexColId);
+            }
         }
+    }
+    for (i = 0; i < sequenceNames.count(); i++) {
+        int nextValue = getDefault(sequenceNames[i]).toInt();
+        setDefault(sequenceNames[i], QString::number(nextValue + 1));
+    }
+    for (i = 0; i < newOptions.count(); i++) {
+        int type = newOptionTypes[i];
+        if (!listEnumOptions(type).contains(newOptions[i])) {
+            addEnumOption(getEnumName(type), newOptions[i]);
+        }
+        c4_IntProp indexProp(newOptionIndexIds[i]);
+        indexProp (row) = listEnumOptions(type).indexOf(newOptions[i]);
     }
     data.Add(row);
     maxId++;
@@ -1613,9 +1640,14 @@ void Database::updateRow(int rowId, const QStringList &values)
  * @param compressRowIds True if higher row IDs should be adjusted down now,
  *                    false if compressRowIds() will be called afterwards
  */
+// @spec ROW-DB-009, ROW-DB-010
 void Database::deleteRow(int id, bool compressRowIds)
 {
     int index = data.Find(Id [id]);
+    if (index == -1) {
+        // no row has that ID, so there is nothing to delete or renumber
+        return;
+    }
     data.RemoveAt(index);
     if (!compressRowIds) {
         return;

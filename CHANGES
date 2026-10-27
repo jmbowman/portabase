@@ -1,3 +1,9 @@
+2026-10-27  JMB  Fixed secondary bugs triggered by delete rows bug
+
+    Fixed 3 bugs which could cause crashes or further data corruption in
+    files where the recently fixed "delete all rows in filter" bug had
+    already introduced gaps in the row ID sequence.
+
 2026-10-23  JMB  Enabled Metakit assertions in unit tests
 
     Turned on some assertions in Metakit which would have made it easier to
