@@ -1,7 +1,7 @@
 /*
  * view.cpp
  *
- * (c) 2002-2004,2009-2013,2016-2017 by Jeremy Bowman <jmbowman@alum.mit.edu>
+ * (c) 2002-2004,2009-2013,2016-2017,2026 by Jeremy Bowman <jmbowman@alum.mit.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -485,9 +485,14 @@ int View::getIndex(int rowId)
  * Delete from the database all records that match the currently applied
  * filter.
  */
+// @spec ROW-DB-012
 void View::deleteAllRows()
 {
     int count = dbview.GetSize();
+    if (count == 0) {
+        // nothing to delete
+        return;
+    }
     int *ids = new int[count];
     int i;
     for (i = 0; i < count; i++) {
